@@ -1,0 +1,34 @@
+name: Correction
+description: You read the Greek or Latin and a line of English looks wrong.
+title: "[correction] "
+labels: [correction]
+body:
+  - type: input
+    id: work
+    attributes:
+      label: Work
+      description: Which treatise or homily.
+      placeholder: Homilies on Jeremiah
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: The § number or heading on the site.
+      placeholder: 1.1
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What looks wrong
+      description: Quote the English, and the Greek or Latin if you have it.
+    validations:
+      required: true
+  - type: textarea
+    id: should
+    attributes:
+      label: What you think it should say
+    validations:
+      required: true

@@ -8,18 +8,17 @@ Do **not** copy modern English (FOTC, ACW, ANF, NPNF, blogs, other sites). Trans
 
 ## Humans
 
-Point your AI at **this file**, then paste this command:
+Clone [this repo](https://github.com/sane-apps/translations). Point your AI at **this file**, then paste:
 
 ```bash
-cd ~/SaneApps/clients/translations
 python3 scripts/claims.py start --agent YourName
 ```
 
-(If you cloned GitHub instead: `cd` into that folder first.)
-
 The command takes the next free slice and prints what the AI should do. One slice at a time. Stop when it is done.
 
-Spot a bad English reading and you read Greek or Latin? Open a correction: https://github.com/sane-apps/translations/issues/new
+If you already keep the repo at `~/SaneApps/clients/translations`, `cd` there first.
+
+Spot a bad English reading and you read Greek or Latin? [Submit a correction](https://github.com/sane-apps/translations/issues/new?template=correction.yml).
 
 ---
 
