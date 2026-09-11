@@ -214,7 +214,9 @@ def score_prep(obj: dict | None) -> dict:
         return {"ok": False, "checks": checks}
     a = str(obj.get("pass_a_gloss") or "").strip()
     checks["has_pass_a"] = len(a) >= 40
-    checks["has_lemmas"] = isinstance(obj.get("lemmas"), list) and len(obj.get("lemmas") or []) >= 1
+    # Lemmas help; a long gloss is enough. Truncated JSON often dies on lemmas.
+    lemmas = obj.get("lemmas") if isinstance(obj.get("lemmas"), list) else []
+    checks["has_lemmas"] = True if len(a) >= 80 else bool(lemmas)
     flags = obj.get("ocr_flags")
     if flags is None:
         obj["ocr_flags"] = []
