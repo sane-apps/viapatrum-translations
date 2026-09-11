@@ -49,4 +49,4 @@ Keep these in `translations/topics/*.json`, `reviews/justifications/`, and QA on
 - `authenticity`, `edition_id`, `justification`
 - `notes`, `translator_notes` — process / rematch / OCR honesty for agents
 
-Customer-facing only: citation, English body, `note_anchors` (wording choices), attribution line, and clear Scripture allusions. Do not print Confidence captions or GTG / QA jargon in About.
+Customer-facing only: citation, English body, `note_anchors` (wording choices), attribution line, clear Scripture allusions, and the work’s `text_history` (copy-text, checked prints, supplied stretches) in collapsed About this text. Do not print Confidence captions, Pass A, or GTG / QA jargon in About.

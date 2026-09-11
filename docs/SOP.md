@@ -13,13 +13,28 @@ Write in `books/<slug>/SESSION_HANDOFF.md`:
 - Legal: private study; new English from allowed source text; no modern copyrighted English copy; no public publish unless owner asks.
 - Source URLs / editions and local paths.
 
-### 1. Sources
+### 1. Sources (many witnesses)
+
+Lock **every independent original-language witness** that is public-domain and actually contains the work. One OCR is not enough. Diff them before Pass A. Record disagreements in the justification `variants[]`. The reading text follows the named copy-text; other witnesses are checks, not silent merges.
+
+**Reader disclosure:** the public work page’s collapsed “About this text” names the copy-text, the other prints checked, and every stretch supplied from another witness (`text_history` in `*_meta.json` or the site pack). The reading column stays clean. A one-line italic cue is used only when a whole stretch is supplied from another witness (for example a homily that survives only in Jerome’s Latin). Do not call the result a manuscript. Do not claim a combination that was not actually done. Agent receipts (`variants[]`, Pass A) stay off the page.
+
+For each work, try in this order (skip what does not exist or is still in copyright):
+
+1. Best PD critical edition (GCS, Pusey, Scherer/Witte, Klostermann).
+2. A second scan or transcription of that same edition (PDF + OCR/TEI).
+3. An earlier PD print (Migne PG/PL, Delarue, Huet, Ghislerius).
+4. Ancient versions of the *same* work (Jerome/Rufinus Latin of Origen, Syriac, etc.).
+5. Catena / fragment collections that preserve extra lines.
+6. A second library scan when the first OCR is damaged.
+
+Do **not** lock copyrighted critical editions or modern facing-page English as copy-text (SC, FOTC, Reuss 1957, etc.). Those may be edition-history notes only.
 
 - Fetch and retain raw HTML/PDF/XML under `sources/`.
-- Record SHA256 + URL in `sources/manifest.json` (or equivalent).
+- `sources/manifest.json` lists every witness: edition, language, role (`copy-text` | `check` | `version` | `fragments`), URL, SHA256, local path.
 - Speaker-split carefully (Julian vs Augustine vs quoted authorities). Prefer full-name speaker labels at paragraph start only when the site uses them that way.
 - Keep raw HTML even when a parser cleans JSON — audits need the witness.
-- Output structured Latin/source JSON that translation records can cite by location.
+- Output structured Latin/source JSON that translation records can cite by location. Name which witness each section was read from.
 
 ### 2. Translate (two passes)
 

@@ -4,15 +4,15 @@ New English from locked public-domain Greek and Latin for private study and for 
 
 This is **100% Transparent Code** under [PolyForm Shield](LICENSE). It is **not** a claim that every treatise is complete, and it is **not** permission to copy modern copyrighted English (FOTC, ACW, etc.) or to paste ANF/NPNF as the reading text.
 
-## Contribute (humans + LLMs)
+## Help
 
-1. Read **[`docs/START_HERE.md`](docs/START_HERE.md)** — paste that file into your AI first.
-2. List free slices: `python3 scripts/claims.py free`
-3. Take one: `python3 scripts/claims.py take <claim-id> --agent YourName`
-4. Branch `wip/<claim-id>`, two-pass translation, justifications, then `python3 scripts/ai_promote.py --claim <id> --agent YourName` → `done` (AI cross-check; see `docs/AI_CROSSCHECK.md`).
-5. Do **not** deploy the website or run Logos/`build_book.py` unless the owner asked.
+Four ways: donate, buy a Mac app, point an AI at a slice, or send a Greek/Latin correction. See https://fathers.saneapps.com/contribute/
 
-Site: https://fathers.saneapps.com/contribute/
+Point an AI at [`docs/START_HERE.md`](docs/START_HERE.md), then:
+
+```bash
+python3 scripts/claims.py start --agent YourName
+```
 
 ## Layout
 

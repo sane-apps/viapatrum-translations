@@ -56,17 +56,52 @@ def cmd_list(command: str) -> int:
         return 1
     print_rows(show)
     print(
-        f"\n{len(show)} row(s). Take one with:\n"
-        f"  python3 scripts/claims.py take <claim-id> --agent YourName"
+        f"\n{len(show)} row(s). Take the next free slice with:\n"
+        f"  python3 scripts/claims.py start --agent YourName"
     )
     return 0
 
 
-def cmd_start() -> int:
-    print(START)
-    print("---")
-    print(START.read_text(encoding="utf-8")[:1200])
-    print("\n…(open the full file)…")
+def print_ai_brief(row: dict[str, str], agent: str) -> None:
+    claim_id = row.get("Claim ID") or ""
+    slug = row.get("Book slug") or ""
+    slice_ = row.get("Slice (sections)") or ""
+    print()
+    print("Paste this into your AI:")
+    print()
+    print("-----")
+    print(f"Read docs/START_HERE.md and follow it.")
+    print(f"You have claim {claim_id} ({slice_}) in {slug}.")
+    print("Translate only those sections from the locked Greek or Latin.")
+    print("Do not copy modern English. Do not deploy the site.")
+    print(
+        f"When finished run: python3 scripts/ai_promote.py --claim {claim_id} --agent {agent}"
+    )
+    print("-----")
+
+
+def cmd_start(agent: str) -> int:
+    if not agent.strip() or agent.strip().lower() in {"yourname", "me", "agent"}:
+        print("Copy and run:")
+        print()
+        print("  python3 scripts/claims.py start --agent YourName")
+        print()
+        print("Use your name, not YourName.")
+        print()
+        print(START.read_text(encoding="utf-8"))
+        return 0
+    text = CLAIMS.read_text(encoding="utf-8")
+    free = [r for r in parse_open_table(text) if r.get("Status") == "free"]
+    if not free:
+        print("No free slices right now. Stop. Do not invent work.")
+        return 1
+    row = free[0]
+    claim_id = row.get("Claim ID") or ""
+    rc = cmd_take(claim_id, agent.strip(), quiet=True)
+    if rc != 0:
+        return rc
+    print(f"Took {claim_id} for {agent.strip()}.")
+    print_ai_brief(row, agent.strip())
     return 0
 
 
@@ -85,7 +120,7 @@ def agent_already_claimed(text: str, agent: str) -> str | None:
     return None
 
 
-def cmd_take(claim_id: str, agent: str) -> int:
+def cmd_take(claim_id: str, agent: str, quiet: bool = False) -> int:
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,40}", claim_id):
         print(f"Bad claim id: {claim_id}", file=sys.stderr)
         return 2
@@ -142,10 +177,9 @@ def cmd_take(claim_id: str, agent: str) -> int:
 
     updated = pat.sub(new_line, text, count=1)
     CLAIMS.write_text(updated, encoding="utf-8")
-    print(f"Claimed `{claim_id}` as {agent.strip()}.")
-    print(f"Branch: {branch}")
-    print(f"Lock:   {lock_dir.relative_to(ROOT)}")
-    print("Next: create that branch, read START_HERE + SOP, translate only that slice.")
+    if not quiet:
+        print(f"Claimed `{claim_id}` as {agent.strip()}.")
+        print_ai_brief(row, agent.strip())
     return 0
 
 
@@ -158,14 +192,14 @@ def main() -> int:
         default="free",
     )
     ap.add_argument("claim_id", nargs="?", help="For take: claim id")
-    ap.add_argument("--agent", default="", help="For take: your name")
+    ap.add_argument("--agent", default="", help="Your name")
     args = ap.parse_args()
 
     if args.command == "start":
-        return cmd_start()
+        return cmd_start(args.agent)
     if args.command == "take":
         if not args.claim_id or not args.agent:
-            print("Usage: claims.py take <claim-id> --agent YourName", file=sys.stderr)
+            print("Usage: python3 scripts/claims.py start --agent YourName", file=sys.stderr)
             return 2
         return cmd_take(args.claim_id, args.agent)
     return cmd_list(args.command)

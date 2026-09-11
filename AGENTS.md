@@ -11,11 +11,10 @@ English reading text only in the compiled book; Latin/source files stay in `sour
 
 ## Start here
 
-**Contributors / other LLMs:** open `docs/START_HERE.md` first (paste that file into the model). List free claims, then take one atomically:
+**Contributors / other LLMs:** point the model at `docs/START_HERE.md`, then:
 
 ```bash
-python3 scripts/claims.py free
-python3 scripts/claims.py take <claim-id> --agent YourName
+python3 scripts/claims.py start --agent YourName
 ```
 
 Owner / deep work:
@@ -45,6 +44,7 @@ books/<slug>/      one corpus per book (sources, translations, build)
 - `[[@Headword:…]]` must be its **own paragraph** after a clean heading — never glued into the heading text (pollutes ArticleCache TOC titles).
 - **Fathers site reader (permanent):** when a book ships to `fathers.saneapps.com`, presentation follows `~/SaneApps/websites/fathers.saneapps.com/AGENTS.md` → *Works reader SOP*. Section `title` / `head` must name the **thought**, not the locus (`1.5.16`, `Against Julian 1.5.16`). Consecutive sections that share one thought title are one passage on the site; Contents lists each thought once. Do not invent a one-click-per-section browsing UX.
 - **Two-pass translation (permanent):** `books/ante-nicene-topics/docs/TRANSLATION_QA.md`. Pass A is a literal gloss plus key lemmas from the locked source. Pass B is the reading English and may not add a concept absent from A. Do not copy B into A. A `source_verified` receipt with A==B is not a pass.
+- **Many original-language witnesses (permanent):** for every work, lock as many PD Greek/Latin (and ancient versions) as exist — critical edition + second scan/TEI + earlier print (PG/PL) + catena/version. Diff them. Do not translate from a single OCR. Copyrighted editions are history notes, not copy-text. See `docs/SOP.md` §1. Reader-facing: name copy-text, checks, and supplied stretches in `text_history` (site “About this text”). Do not silently merge recensions or call the reading text a manuscript.
 - Before Logos **Build**: close other open panels of that personal book. Rebuild fails with “Could not remove existing book / close all other open panels.”
 - Open Personal Books via **Tools → Utilities → Personal Books** (or Tools toolbar search). Do **not** use Cmd+K (opens Study Assistant on this install).
 - Never claim Bible-link success from click-return alone. Re-read live UI (screenshot/AX) or get owner confirmation; name what the surface shows.

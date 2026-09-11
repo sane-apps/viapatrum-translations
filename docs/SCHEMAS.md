@@ -53,6 +53,31 @@ Shapes used by Julian and expected for new books. Fields may be added; do not re
 - Pass A does **not** live here. Put it in `reviews/justifications/jeremiah_H_S.json` as `pass_a_gloss` (copy `jeremiah_1_1.json`).
 - Locked Greek: `translations/jeremiah_source.json` (same `section` keys).
 - Do not use the Julian `ad_florum_*` shape for this book.
+- Optional `supplied_from`: one-line reader cue when this section is supplied from another witness (e.g. “This homily survives only in Jerome’s Latin.”). Omit when the section follows the copy-text.
+
+Work-level `translations/<stem>_meta.json` may include `text_history` for the site’s “About this text”:
+
+```json
+{
+  "method": "English follows the named copy-text. Other prints were checked.",
+  "witnesses": [
+    {
+      "name": "Klostermann, Origenes Werke III (GCS, 1901)",
+      "language": "Greek",
+      "role": "copy-text",
+      "coverage": "Homilies 1–2",
+      "url": "https://archive.org/details/origeneswerke03orig"
+    }
+  ],
+  "joins": [
+    {"where": "Homily 1.1", "note": "TEI omits Ἑβραῖον; English follows the GCS page image."}
+  ]
+}
+```
+
+- `witnesses[].role`: `copy-text` | `check` | `version` | `fragments`.
+- `joins`: only combinations actually made. Empty list if none.
+- `publish_homilies` (optional): integers of homilies that may ship; drafts for later homilies in the same JSON stay off the site.
 
 ## Fragment / location-keyed work
 
