@@ -85,7 +85,9 @@ python3 scripts/ai_promote.py --claim <claim-id> --agent YourName
 ### 4. Stop when the slice is done
 
 Do **not** start a second claim until the first is `done`.  
-Do **not** deploy the website, edit `~/SaneApps/websites/fathers.saneapps.com`, run Cloudflare, run `build_book.py`, or compile Logos unless the owner explicitly asked in this thread.
+Do **not** deploy the website, edit `~/SaneApps/websites/fathers.saneapps.com`, run Cloudflare Pages deploy, run `build_book.py`, or compile Logos unless the owner explicitly asked in this thread.
+
+**Logos:** Contributors cannot compile Personal Books into the owner’s library. Leave DOCX/JSON ready; the owner batches Logos Build on the **MacBook Air** when a volume is ready. Overnight/AI lanes stop at corpus `done` (+ optional site rebuild on Mini).
 
 ---
 

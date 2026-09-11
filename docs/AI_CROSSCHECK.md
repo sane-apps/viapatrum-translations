@@ -19,12 +19,29 @@ For every section in the claim:
    Default: `@cf/qwen/qwen3-30b-a3b-fp8` (see `LLM_API_SETUP.md` / shared SOP).
 2. **Structural gate** (local, deterministic): parse JSON, section id, thought title, Pass A ≠ Pass B, length floors, no ANF/archaic smell, no fence leak in fields. Same checks as `llm_bakeoff.py` scorer.
 3. **Checker model A** (different family from draft): given locked Greek + Pass A + Pass B, returns a verdict JSON (`pass` / `fail` + reasons). Must not be the same model id as the draft.  
-   Default: `@cf/meta/llama-3.1-8b-instruct-fp8-fast`.
+   Default: `@cf/google/gemma-4-26b-a4b-it` (Llama 8B is too noisy as a hard gate — false fails and false ANF flags). Boolean flags alone are soft; unexplained `grounded_in_greek: false` still fails closed; ANF smell is verified locally.
 4. **Checker model B** (second independent check): same prompt shape.  
-   Default: `@cf/meta/llama-3.3-70b-instruct-fp8-fast` (oracle) **or**, if CF budget is tight, NVIDIA `nvidia/nemotron-3-super-120b-a12b` with researched kwargs.
+   Default: `@cf/meta/llama-3.3-70b-instruct-fp8-fast` (oracle). NVIDIA `nvidia/nemotron-3-super-120b-a12b` is an alternate when CF is rate-limited (researched kwargs only).
 5. **Promote** only if structural PASS and **both** checkers PASS. Write receipt under `outputs/ai-promote/<stamp>/` and set claim → `done`. Set justification `reviewer` to `ai-crosscheck:<modelA>+<modelB>`.
 
 If either checker fails: keep `claimed` (or set `checking`→`claimed`), apply the checker’s concrete fixes, re-run. Do not “majority vote” a fail away.
+
+## Daily free-quota burn (Mini)
+
+**Cloudflare** free **10k neurons/day** (UTC) + **NVIDIA** free NIM (RPM/latency) run **in parallel** on different claims.
+
+Canonical overnight host: **Mac Mini** (always on). Air orchestrates; Mini holds the live `CLAIMS.md` burn. After a Mini run, sync `docs/CLAIMS.md` + Jeremiah english/justifications back to Air before editing claims locally.
+
+```bash
+# On Mini (LaunchAgent does this daily 21:10 local):
+source ~/.config/nv/env && export CF_TOKEN="$CLOUDFLARE_API_TOKEN"
+python3 scripts/overnight_quota.py --lanes both --agent overnight-mini
+```
+
+Install / refresh agent: `bash scripts/install-mini-overnight-quota.sh`  
+Wrapper: `scripts/run-overnight-quota.sh` (single-instance lock; KeepAlive retries on nonzero exit; resumes stuck `claimed` rows).
+
+Stops CF lane near the free reserve. NVIDIA lane keeps going until max-claims / queue empty. Does not Logos-compile or deploy the site.
 
 ## What checkers must verify
 

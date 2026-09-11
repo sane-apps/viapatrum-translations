@@ -60,6 +60,9 @@ Return ONLY valid JSON (no markdown fences) with this shape:
 Rules:
 - pass_a_gloss must NOT equal the joined english paragraphs.
 - english is reading prose in the author's voice; no idea absent from pass_a_gloss.
+- At most 12 lemmas — pick the load-bearing words only.
+- Finish every english paragraph with a full sentence (period). Never cut mid-clause.
+- Prefer fewer complete paragraphs over many truncated ones.
 - If Greek is broken or gapped, say so in translator_notes; do not invent Greek.
 """
 
@@ -150,6 +153,17 @@ def score(obj: dict | None, raw: str, section: str = "6.1") -> dict:
     checks["no_fence_leak"] = "```" not in payload
     if "```" in (raw or "") and checks["no_fence_leak"]:
         notes.append("markdown fence wrapper stripped")
+    # Truncation: each English para should end like a finished sentence.
+    incomplete = False
+    for para in eng:
+        t = str(para).rstrip()
+        if not t:
+            continue
+        if not re.search(r'[.!?…]["\'»”’)\]]*$', t):
+            incomplete = True
+            notes.append(f"truncated english: …{t[-48:]}")
+            break
+    checks["english_complete"] = not incomplete
     ok = all(checks.values())
     return {"ok": ok, "checks": checks, "notes": notes}
 
@@ -439,6 +453,68 @@ def ollama_call(model: str, messages: list, host: str = "http://127.0.0.1:11434"
         return {"error": str(e), "ms": int((time.time() - t0) * 1000)}
 
 
+def is_nvidia_model(model: str) -> bool:
+    """True for NIM ids (not Workers AI @cf/…)."""
+    m = (model or "").strip()
+    if not m or m.startswith("@cf/"):
+        return False
+    if m.startswith("nvidia:"):
+        return True
+    # org/model NIM shape
+    return "/" in m
+
+
+def normalize_model(model: str) -> str:
+    m = (model or "").strip()
+    if m.startswith("nvidia:"):
+        return m[len("nvidia:") :]
+    return m
+
+
+def vendor_call(
+    model: str,
+    messages: list,
+    *,
+    cf_token: str = "",
+    nv_token: str = "",
+    account: str = DEFAULT_ACCOUNT,
+    max_tokens: int | None = None,
+) -> dict:
+    """Route to Workers AI or NIM using researched profiles."""
+    model = normalize_model(model)
+    if is_nvidia_model(model):
+        if not nv_token:
+            return {"error": "no NV_API_KEY", "ms": 0}
+        prof = nv_profile(model)
+        tok = int(max_tokens if max_tokens else prof.get("max_tokens", 4096))
+        return nvidia_call(
+            model,
+            messages,
+            nv_token,
+            max_tokens=tok,
+            temperature=float(prof.get("temperature", 0.2)),
+            top_p=float(prof.get("top_p", 0.95)),
+            reasoning_effort=prof.get("reasoning_effort"),
+            chat_template_kwargs=prof.get("chat_template_kwargs"),
+            stream=prof.get("stream"),
+        )
+    if not cf_token:
+        return {"error": "no CF_TOKEN", "ms": 0}
+    prof = cf_profile(model)
+    tok = int(max_tokens if max_tokens else prof.get("max_tokens", 1800))
+    return cf_call(
+        model,
+        messages,
+        cf_token,
+        account,
+        max_tokens=tok,
+        temperature=float(prof.get("temperature", 0.0)),
+        enable_thinking=prof.get("enable_thinking"),
+        use_max_completion_tokens=bool(prof.get("use_max_completion_tokens")),
+        api=prof.get("api", "run"),
+    )
+
+
 def cf_profile(model: str) -> dict:
     """Per-model Workers AI kwargs from live schemas + docs/LLM_API_SETUP.md."""
     m = model.lower()
@@ -457,6 +533,9 @@ def cf_profile(model: str) -> dict:
             "max_tokens": 4096,
             "api": "run",
         }
+    if "qwen" in m:
+        # Full Pass A/B JSON (lemmas + multi-para english) truncates at 1800 on longer §§
+        return {"temperature": 0.0, "max_tokens": 4096}
     return {"temperature": 0.0, "max_tokens": 1800}
 
 
