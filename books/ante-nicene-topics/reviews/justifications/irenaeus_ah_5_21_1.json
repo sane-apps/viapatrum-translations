@@ -1,0 +1,87 @@
+{
+  "excerpt_id": "irenaeus_ah_5_21_1",
+  "edition": {
+    "id": "harvey-irenaeus-ah-vol2-5.21.1",
+    "language": "lat",
+    "path": "sources/latin/irenaeus_ah_harvey_vol2_djvu.txt",
+    "locus": "AH 5.21.1",
+    "license": "Public domain (Harvey OCR)",
+    "print_pdf": "sources/latin/printchecks/harvey_vol2.pdf"
+  },
+  "source_text": "Omnia ergo recapitulans recapitulatus est, et adversus inimicum nostrum bellum provocans, et elidens eum qui in initio in Adam captivos duxerat nos, et calcans eius caput, quemadmodum habes in Genesi dixisse serpenti Deum: Et inimicitiam ponam inter te et inter mulierem, et inter semen tuum et semen eius: ipse tuum observabit caput, et tu observabis eius calcaneum. Ex eo enim qui ex muliere Virgine habebat nasci secundum similitudinem Adam, praeconabatur observans caput serpentis, id est semen, de quo ait Apostolus…",
+  "pass_a_gloss": "Recapitulation; crushing enemy who captive’d in Adam; calcans in narrative; Gen 3:15 observabit/observabis; observans caput serpentis of virgin-born seed.",
+  "lemmas": [
+    {
+      "form": "recapitulans / recapitulatus",
+      "lemma": "recapitulare",
+      "gloss": "summing up / recapitulated",
+      "lexica": "Blaise"
+    },
+    {
+      "form": "elidens",
+      "lemma": "elidere",
+      "gloss": "crushing / striking down",
+      "lexica": "LL"
+    },
+    {
+      "form": "calcans",
+      "lemma": "calcare",
+      "gloss": "treading (narrative)",
+      "lexica": "LL"
+    },
+    {
+      "form": "observabit / observabis / observans",
+      "lemma": "observare",
+      "gloss": "will watch / watching (Harvey Gen line)",
+      "lexica": "LL"
+    }
+  ],
+  "pass_b_english": [
+    "Summing up all things, then, he also summed up the war against our enemy, crushing the one who at the beginning in Adam had led us captive, and treading his head — as you have in Genesis God saying to the serpent: “I will put enmity between you and the woman, and between your seed and her seed; he will watch your head, and you will watch his heel.”",
+    "For from him who was to be born of a virgin woman according to Adam’s likeness, it was proclaimed that he watches the serpent’s head — that is, the seed of which the Apostle speaks."
+  ],
+  "choices": [
+    {
+      "choice": "watch (observabit) in Gen line",
+      "rejected": "silently emend Gen line to calcabit/tread",
+      "why": "Named Harvey OCR for this paragraph repeats observabit/observabis/observans; re-audit forbids altering the locked source to another reading without a named witness."
+    },
+    {
+      "choice": "tread (calcans) in narrative",
+      "rejected": "force observare into the narrative clause",
+      "why": "Same Harvey window has calcans/caleans for the narrative crushing image."
+    }
+  ],
+  "variants": [
+    {
+      "note": "Harvey OCR Gen line reads observabit/observabis/observans (lobservabit at line break)."
+    },
+    {
+      "note": "Parallel Harvey Gen paraphrase elsewhere: calcabit caput / calcans (vol.2 other window). Not used to overwrite this locus."
+    },
+    {
+      "note": "Narrative OCR “caleans” normalized to calcans."
+    }
+  ],
+  "anf_compare": {
+    "status": "aligned_rewritten",
+    "notes": "English follows Harvey mixed calcans + observabit; ANF often smooths Gen line to tread."
+  },
+  "bible_refs": [
+    "Genesis 3:15"
+  ],
+  "checks": {
+    "anf_diverge": "pass",
+    "lemma_constraint": "pass",
+    "source_lock": "pass",
+    "print_check": "pass",
+    "reaudit_2026_09_10": "harvey_observabit_restored",
+    "second_model_clear": "pass",
+    "second_model_report": "outputs/reviews/second_model_golden_set_audit_2026-09-10_v081.md",
+    "print_check_receipt": "outputs/reviews/printchecks/harvey_p380_5_21.txt",
+    "print_check_note": "Harvey 1857 vol.2 p.380–381 observabit/observans + calcans; PDF sources/latin/printchecks/harvey_vol2.pdf; settlement outputs/reviews/caveat_settlement_2026-09-10.md"
+  },
+  "confidence": "source_verified",
+  "reviewer": "second-model-2026-09-10",
+  "translation_mode": "abridged"
+}

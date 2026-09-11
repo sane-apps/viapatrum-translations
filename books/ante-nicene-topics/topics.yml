@@ -1,0 +1,295 @@
+# Owned taxonomy — Ante-Nicene Dogmatics (ONE book).
+# Do not copy Bercot. Corpus: all ante-Nicene voices (majors and minors).
+
+version: 2
+mvp: false
+one_book: true
+corpus_policy: all_ante_nicene_voices
+# Builder ships only topics that have excerpts; empty topics stay as map for seeds.
+
+loci:
+  - id: bibliology
+    title: Bibliology, Canon, Hermeneutics
+    mvp: false
+    topics:
+      - id: scripture-inspiration
+        title: Scripture and Inspiration
+        heresies: []
+        development: consensus
+        modern_relevance: "Prophetic Spirit and God-breathed writings before later inerrancy slogans."
+      - id: canon-rule-of-truth
+        title: Canon and the Rule of Truth
+        heresies: [marcionism, gnosticism]
+        development: consensus
+        modern_relevance: "Apostolic deposit and rule of faith against private gospels."
+      - id: old-and-new
+        title: Old and New Continuity
+        heresies: [marcionism]
+        development: consensus
+        modern_relevance: "One God of both Testaments."
+      - id: hermeneutics-types
+        title: Hermeneutics and Types
+        heresies: []
+        development: debate
+        modern_relevance: "Type, allegory, and literal reading — mark development; do not flatten Origen."
+      - id: lxx-and-form
+        title: Form of Scripture They Used
+        heresies: []
+        development: seed
+        modern_relevance: "They quote LXX / Old Latin; do not correct them to NA28/ESV."
+
+  - id: theology-proper
+    title: Theology Proper and Trinity
+    mvp: false
+    topics:
+      - id: one-god-creator
+        title: One God the Creator
+        heresies: [gnosticism, marcionism]
+        development: consensus
+        modern_relevance: "Monotheism against dual creators and fate-gods."
+      - id: father-son-spirit
+        title: Father, Son, and Spirit
+        heresies: [modalism, adoptionism]
+        development: seed
+        modern_relevance: "Pre-Nicene triadic language — honest, not anachronistic slogans."
+      - id: attributes-providence
+        title: Attributes and Providence
+        heresies: [stoic-fate]
+        development: consensus
+        modern_relevance: "Goodness, justice, and providence without coercion."
+      - id: against-idols
+        title: Against Idols
+        heresies: []
+        development: consensus
+        modern_relevance: "Apologetic monotheism for pagan hearers."
+
+  - id: christology
+    title: Christology
+    mvp: false
+    topics:
+      - id: incarnation-word-flesh
+        title: Incarnation — Word Made Flesh
+        heresies: [docetism]
+        development: consensus
+        modern_relevance: "True assumption of human life."
+      - id: two-natures-seed
+        title: True God and True Man
+        heresies: [docetism, ebionitism]
+        development: seed
+        modern_relevance: "Seed language before Chalcedon formulas."
+      - id: virgin-birth
+        title: Virgin Birth
+        heresies: []
+        development: consensus
+        modern_relevance: "Mary and the virgin birth in ante-Nicene witness."
+      - id: passion-resurrection
+        title: Passion and Resurrection
+        heresies: [docetism]
+        development: consensus
+        modern_relevance: "Real death and rising."
+      - id: against-docetism
+        title: Against Docetism
+        heresies: [docetism]
+        development: consensus
+        modern_relevance: "Ignatius and Irenaeus against a phantasm Christ."
+
+  - id: pneumatology
+    title: Pneumatology and Charismata
+    mvp: false
+    topics:
+      - id: spirit-prophecy
+        title: Spirit and Prophecy
+        heresies: []
+        development: consensus
+        modern_relevance: "Spirit in prophets and apostles."
+      - id: spirit-and-baptism
+        title: Spirit and Baptism
+        heresies: []
+        development: consensus
+        modern_relevance: "Spirit with initiation into new life."
+      - id: gifts-and-order
+        title: Gifts and Order
+        heresies: [montanism]
+        development: debate
+        modern_relevance: "Charismata still reported in the churches (healings, prophecy, tongues), tested by life and ordered with bishops/teachers; Montanism labeled as debate over who owns the prophetic Spirit."
+      - id: spirit-sanctifies
+        title: Spirit Who Sanctifies
+        heresies: []
+        development: seed
+        modern_relevance: "Holiness and new life by the Spirit."
+
+  - id: anthropology
+    title: Anthropology, Free Will, Sin
+    mvp: true
+    topics:
+      - id: image-likeness
+        title: Image and Likeness
+        heresies: [gnosticism, valentinianism]
+        development: consensus
+        modern_relevance: "Human dignity and moral agency as creational, not deterministic."
+      - id: free-will
+        title: Free Will
+        heresies: [stoic-fate, gnostic-natures, astrological-determinism]
+        development: consensus
+        modern_relevance: "Pre-Augustinian fathers widely affirm self-determining power against fate."
+      - id: fate-and-foreknowledge
+        title: Fate and Foreknowledge
+        heresies: [stoic-fate]
+        development: consensus
+        modern_relevance: "Prophecy and necessity arguments do not cancel accountability."
+      - id: sin-and-death
+        title: Sin and Death
+        heresies: [gnosticism, marcionism]
+        development: consensus
+        modern_relevance: "Death and corruption as consequence, not a second creator's work."
+      - id: two-ways
+        title: The Two Ways
+        heresies: []
+        development: seed
+        modern_relevance: "Moral catechesis: life vs death, light vs darkness."
+
+  - id: soteriology
+    title: Soteriology
+    mvp: true
+    topics:
+      - id: salvation-by-christ
+        title: Salvation in Christ
+        heresies: [marcionism, ebionitism]
+        development: consensus
+        modern_relevance: "Rescue is through the incarnate Son, not secret knowledge alone."
+      - id: faith-and-obedience
+        title: Faith and Obedience
+        heresies: []
+        development: consensus
+        modern_relevance: "Trust and lived allegiance held together without later slogans."
+      - id: grace-and-assistance
+        title: Grace and Divine Assistance
+        heresies: []
+        development: debate
+        modern_relevance: "God counsels and aids; man is not coerced."
+      - id: atonement-recapitulation
+        title: Recapitulation and Victory
+        heresies: [gnosticism]
+        development: seed
+        modern_relevance: "Christ sums up and restores the human story (Irenaeus)."
+      - id: baptism-and-new-birth
+        title: Baptism and New Birth
+        heresies: []
+        development: consensus
+        modern_relevance: "Initiation into forgiveness and new life; linked to willing faith."
+      - id: reward-and-judgment
+        title: Reward and Judgment
+        heresies: [stoic-fate]
+        development: consensus
+        modern_relevance: "Judgment presupposes real choice."
+      - id: universal-call
+        title: Universal Call and Human Refusal
+        heresies: [gnostic-natures]
+        development: consensus
+        modern_relevance: "God wills gather; some will not (Mt 23)."
+
+  - id: ecclesiology
+    title: Ecclesiology, Ministry, Succession
+    mvp: false
+    topics:
+      - id: one-church
+        title: One Church
+        heresies: [schism]
+        development: consensus
+        modern_relevance: "Unity of the church (Ignatius, Cyprian)."
+      - id: bishops-presbyters
+        title: Bishops and Presbyters
+        heresies: []
+        development: consensus
+        modern_relevance: "Ministry order in the second and third centuries."
+      - id: apostolic-succession
+        title: Apostolic Succession
+        heresies: [gnosticism]
+        development: consensus
+        modern_relevance: "Succession and tradition against secret teachers."
+      - id: discipline-penance
+        title: Discipline and Penance
+        heresies: []
+        development: debate
+        modern_relevance: "Penance and the lapsi — pastoral debate."
+      - id: heresy-schism
+        title: Heresy and Schism
+        heresies: [gnosticism, montanism]
+        development: consensus
+        modern_relevance: "Boundaries of the catholic faith."
+
+  - id: sacraments
+    title: Baptism, Eucharist, Liturgy
+    mvp: false
+    topics:
+      - id: eucharist-thanksgiving
+        title: Eucharist and Thanksgiving
+        heresies: []
+        development: debate
+        modern_relevance: "Flesh and blood language — mark realism vs symbol carefully."
+      - id: liturgy-prayer
+        title: Liturgy and Prayer
+        heresies: []
+        development: seed
+        modern_relevance: "Prayer, fasting, Lord’s day."
+      # Baptism primary under soteriology; cross-ref via registry — one English per locus.
+
+  - id: eschatology
+    title: Eschatology and Chiliasm
+    mvp: false
+    topics:
+      - id: resurrection-body
+        title: Resurrection of the Body
+        heresies: [gnosticism]
+        development: consensus
+        modern_relevance: "Flesh rises."
+      - id: judgment-second-coming
+        title: Judgment and the Second Coming
+        heresies: []
+        development: consensus
+        modern_relevance: "Return and judgment."
+      - id: millennium-debate
+        title: Millennium Debate
+        heresies: []
+        development: debate
+        modern_relevance: "Chiliasm — Justin/Irenaeus/Papias vs other streams; mark debate."
+      - id: heaven-hell-intermediate
+        title: Intermediate State
+        heresies: []
+        development: seed
+        modern_relevance: "Interim language carefully; no later system dump."
+
+  - id: ethics
+    title: Ethics, Martyrdom, Apologetics
+    mvp: false
+    topics:
+      - id: love-neighbor-enemy
+        title: Love of Neighbor and Enemy
+        heresies: []
+        development: consensus
+        modern_relevance: "Moral teaching of the two ways and the sermon tradition."
+      - id: sexual-marriage
+        title: Marriage and Continence
+        heresies: []
+        development: consensus
+        modern_relevance: "Pastoral, not prurient."
+      - id: wealth-alms
+        title: Wealth and Alms
+        heresies: []
+        development: consensus
+        modern_relevance: "Money and mercy."
+      - id: martyrdom-witness
+        title: Martyrdom as Witness
+        heresies: []
+        development: consensus
+        modern_relevance: "Confession under empire."
+      - id: civil-authority
+        title: Civil Authority
+        heresies: []
+        development: debate
+        modern_relevance: "Loyalty limits under pagan rule."
+      - id: apologetic-method
+        title: Apologetic Method
+        heresies: []
+        development: seed
+        modern_relevance: "How they argued with pagans and Jews."

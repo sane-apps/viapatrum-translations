@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.docx.bak
+.venv/
+venv/
+*.docx
+# Heavy edition PDFs / dumps — keep *_source.json locks in git; fetch PDFs via sources/manifest.json
+**/*.pdf
+**/*_djvu.txt
+**/*_djvu.xml
+**/*.djvu
+# Local claim locks are created by `claims.py take` — commit them when claiming so remotes see the lock
+# (do not ignore docs/claim-locks/)
+outputs/
+.claude/
+.firecrawl/
+*.log
+.env
+.env.*
