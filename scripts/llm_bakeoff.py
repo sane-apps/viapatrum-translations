@@ -294,10 +294,24 @@ def _nvidia_read_sse(resp, deadline_s: float) -> tuple[str, dict]:
     chunks: list[str] = []
     reasoning: list[str] = []
     usage: dict = {}
+    sock = None
+    try:
+        sock = resp.fp.raw._sock  # type: ignore[attr-defined]
+    except Exception:  # noqa: BLE001
+        sock = None
     while True:
-        if time.time() > deadline_s:
+        remain = deadline_s - time.time()
+        if remain <= 0:
             break
-        line = resp.readline()
+        if sock is not None:
+            try:
+                sock.settimeout(max(1.0, remain))
+            except OSError:
+                pass
+        try:
+            line = resp.readline()
+        except OSError:
+            break
         if not line:
             break
         s = line.decode(errors="replace").strip()

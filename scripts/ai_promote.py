@@ -211,6 +211,10 @@ def run_checker(
             if "410" in err or "end of life" in err.lower() or "404" in err:
                 return last
             if attempt < retries and is_api_error(err):
+                print(
+                    f"    retry {attempt}/{retries} after API error: {err[:120]}",
+                    flush=True,
+                )
                 time.sleep(min(2.0 * attempt, 6.0))
                 continue
             return last

@@ -5,7 +5,7 @@
   python3 scripts/fathers_overnight_health.py --kill   # only if hung
 
 Hung = a burn child is alive and the overnight log has not grown for --stale-s
-(default 480s, longer than NVIDIA urlopen 180s + a retry).
+(default 900s, longer than NVIDIA urlopen 180s × retries).
 Does not bootout the LaunchAgent. Does not free claims.
 """
 from __future__ import annotations
@@ -56,7 +56,7 @@ def last_log_line() -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stale-s", type=int, default=480)
+    ap.add_argument("--stale-s", type=int, default=900)
     ap.add_argument("--kill", action="store_true")
     args = ap.parse_args()
     procs = pgrep()
