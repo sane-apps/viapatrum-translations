@@ -33,8 +33,7 @@ RESERVE = 800
 SECTION_COST_EST = 160  # Qwen + Gemma + 70B-ish
 
 NV_DRAFT_DEFAULT = "nvidia/nemotron-3-super-120b-a12b"
-NV_CHECKER_A_DEFAULT = "deepseek-ai/deepseek-v4-flash"
-# Keep one CF thrift checker on NV lane only if CF budget allows; default pure NIM:
+NV_CHECKER_A_DEFAULT = "deepseek-ai/deepseek-v4-flash-0731"
 NV_CHECKER_B_DEFAULT = "mistralai/mistral-nemotron"
 
 CF_DRAFT_DEFAULT = "@cf/qwen/qwen3-30b-a3b-fp8"
@@ -139,17 +138,37 @@ def run(cmd: list[str], env: dict) -> int:
     return subprocess.call(cmd, cwd=ROOT, env=env)
 
 
+def english_present(claim_id: str, env: dict) -> bool:
+    """True when every section in the claim already has Pass B english on disk."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from ai_promote import parse_claim_row, sections_from_slice, paths_for_section  # noqa: WPS433
+
+    row = parse_claim_row(claim_id)
+    sections = sections_from_slice(row.get("Slice (sections)") or "")
+    eng_path = ROOT / "books/origen-jeremiah-samuel/translations/jeremiah_english.json"
+    if not eng_path.is_file():
+        return False
+    rows = {str(r.get("section")): r for r in json.loads(eng_path.read_text(encoding="utf-8"))}
+    for section in sections:
+        row_e = rows.get(section)
+        if not row_e or not (row_e.get("english") or []):
+            return False
+        _eng, just = paths_for_section(section)
+        if not just.is_file():
+            return False
+    return True
+
+
 def process_claim(
     claim_id: str,
     *,
     agent: str,
     env: dict,
+    lane: str,
     draft_model: str,
-    checker_a: str,
-    checker_b: str,
     already_claimed: bool,
 ) -> dict:
-    entry: dict = {"claim": claim_id, "ok": False, "lane_agent": agent}
+    entry: dict = {"claim": claim_id, "ok": False, "lane_agent": agent, "lane": lane}
     if not already_claimed:
         rc = run(
             [sys.executable, "scripts/claims.py", "take", claim_id, "--agent", agent],
@@ -161,24 +180,29 @@ def process_claim(
     else:
         print(f"Resume claimed {claim_id} as {agent}", flush=True)
 
-    rc = run(
-        [
-            sys.executable,
-            "scripts/draft_claim.py",
-            "--claim",
-            claim_id,
-            "--agent",
-            agent,
-            "--model",
-            draft_model,
-            "--max-tokens",
-            "4096",
-        ],
-        env,
-    )
-    if rc != 0:
-        entry["error"] = "draft_failed"
-        return entry
+    skip_draft = already_claimed and english_present(claim_id, env)
+    if skip_draft:
+        print(f"Skip draft (english already present) for {claim_id}", flush=True)
+        entry["skipped_draft"] = True
+    else:
+        rc = run(
+            [
+                sys.executable,
+                "scripts/draft_claim.py",
+                "--claim",
+                claim_id,
+                "--agent",
+                agent,
+                "--model",
+                draft_model,
+                "--max-tokens",
+                "4096",
+            ],
+            env,
+        )
+        if rc != 0:
+            entry["error"] = "draft_failed"
+            return entry
 
     rc = run(
         [
@@ -188,23 +212,27 @@ def process_claim(
             claim_id,
             "--agent",
             agent,
+            "--lane",
+            lane,
             "--draft-model",
             draft_model,
-            "--checker-a",
-            checker_a,
-            "--checker-b",
-            checker_b,
         ],
         env,
     )
     entry["ok"] = rc == 0
     entry["promote_rc"] = rc
-    if rc != 0:
+    if rc == 1:
+        entry["error"] = "content_fail"
+    elif rc == 2:
+        entry["error"] = "api_fail"
+    elif rc != 0:
         entry["error"] = "promote_failed"
     return entry
 
 
 def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
+    from llm_lane_config import as_list, load_lane_config  # noqa: WPS433
+
     agent = f"{args.agent}-{lane}"
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     log: dict = {
@@ -214,11 +242,18 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
         "claims": [],
         "stop_reason": None,
     }
+    cfg = load_lane_config(args.config or None)
+    lane_cfg = (cfg.get("lanes") or {}).get(lane) or {}
+    drafts = as_list(lane_cfg.get("draft"))
+    draft = (
+        args.cf_draft
+        if lane == "cf" and args.cf_draft
+        else args.nv_draft
+        if lane == "nv" and args.nv_draft
+        else (drafts[0] if drafts else (CF_DRAFT_DEFAULT if lane == "cf" else NV_DRAFT_DEFAULT))
+    )
 
     if lane == "cf":
-        draft = args.cf_draft
-        checker_a = args.cf_checker_a
-        checker_b = args.cf_checker_b
         token = env.get("CF_TOKEN") or env.get("CLOUDFLARE_API_TOKEN") or ""
         account = env.get("CLOUDFLARE_ACCOUNT_ID") or DEFAULT_ACCOUNT
         if not token:
@@ -231,15 +266,11 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             log["stop_reason"] = "already_at_reserve"
             return log
     else:
-        draft = args.nv_draft
-        checker_a = args.nv_checker_a
-        checker_b = args.nv_checker_b
         if not (env.get("NV_API_KEY") or env.get("NVIDIA_API_KEY")):
             log["stop_reason"] = "missing_nv_key"
             return log
-        print(f"[nv] NIM lane draft={draft} checkers={checker_a}+{checker_b}", flush=True)
+        print(f"[nv] NIM lane draft={draft} (checkers from LLM_LANE_CONFIG)", flush=True)
 
-    # Resume interrupted work first
     queue: list[tuple[str, bool]] = [(c, True) for c in claimed_for_agent(agent)]
     for c in free_jer_claims():
         queue.append((c, False))
@@ -250,6 +281,7 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
         return log
 
     done = 0
+    content_skips = 0
     for claim_id, resume in queue:
         if done >= args.max_claims:
             log["stop_reason"] = "max_claims"
@@ -264,7 +296,6 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
                 log["stop_reason"] = "insufficient_for_next_claim"
                 break
 
-        # Re-check still free/ours (parallel lanes race on free list)
         rows = {r["Claim ID"]: r for r in parse_open_rows()}
         row = rows.get(claim_id)
         if not row:
@@ -283,27 +314,44 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             claim_id,
             agent=agent,
             env=env,
+            lane=lane,
             draft_model=draft,
-            checker_a=checker_a,
-            checker_b=checker_b,
             already_claimed=resume,
         )
         log["claims"].append(entry)
         if entry.get("error") == "take_failed":
             continue
-        if not entry.get("ok"):
-            log["stop_reason"] = entry.get("error") or "promote_failed"
-            # Non-fatal for NV lane: leave claimed for next restart recovery
-            if lane == "cf" and entry.get("error") == "draft_failed":
-                break
-            # promote_failed: keep claimed; next KeepAlive restart will resume
+        if entry.get("ok"):
+            done += 1
+            time.sleep(0.5)
+            continue
+        # Failures: never infinite-loop one claim.
+        err = entry.get("error")
+        if err == "draft_failed":
+            log["stop_reason"] = "draft_failed"
             break
-        done += 1
-        time.sleep(0.5)
+        if err == "content_fail":
+            # Leave claimed for human/fix; move on so overnight still progresses.
+            content_skips += 1
+            print(f"[{lane}] content fail on {claim_id}; leave claimed, next claim", flush=True)
+            continue
+        if err == "api_fail":
+            # One API-exhausted claim: try next; KeepAlive fuse handled in shell wrapper.
+            print(f"[{lane}] API fallbacks exhausted on {claim_id}; next claim", flush=True)
+            continue
+        log["stop_reason"] = err or "promote_failed"
+        break
 
     if not log.get("stop_reason"):
-        log["stop_reason"] = "queue_exhausted" if done else "no_progress"
+        if done:
+            log["stop_reason"] = "queue_exhausted"
+        elif content_skips:
+            log["stop_reason"] = "content_skips_only"
+        else:
+            log["stop_reason"] = "no_progress"
     log["finished"] = datetime.now(timezone.utc).isoformat()
+    log["done_count"] = done
+    log["content_skips"] = content_skips
     if lane == "cf":
         try:
             log["neurons_end"] = neurons_today(token, account)
@@ -318,12 +366,9 @@ def main() -> int:
     ap.add_argument("--lanes", default="both", choices=["cf", "nv", "both"])
     ap.add_argument("--max-claims", type=int, default=12)
     ap.add_argument("--reserve", type=int, default=RESERVE)
-    ap.add_argument("--cf-draft", default=CF_DRAFT_DEFAULT)
-    ap.add_argument("--cf-checker-a", default=CF_CHECKER_A_DEFAULT)
-    ap.add_argument("--cf-checker-b", default=CF_CHECKER_B_DEFAULT)
-    ap.add_argument("--nv-draft", default=NV_DRAFT_DEFAULT)
-    ap.add_argument("--nv-checker-a", default=NV_CHECKER_A_DEFAULT)
-    ap.add_argument("--nv-checker-b", default=NV_CHECKER_B_DEFAULT)
+    ap.add_argument("--config", default="")
+    ap.add_argument("--cf-draft", default="")
+    ap.add_argument("--nv-draft", default="")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -356,13 +401,11 @@ def main() -> int:
     path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2), flush=True)
 
-    # Exit nonzero if any lane had a hard failure worth KeepAlive retry
-    hard = {"draft_failed", "promote_failed", "missing_cf_token", "missing_nv_key"}
+    # KeepAlive only for true infra gaps / draft crash — not content fails or exhausted API chains
+    hard = {"draft_failed", "missing_cf_token", "missing_nv_key"}
     for lane_log in logs.values():
         if lane_log.get("stop_reason") in hard:
-            return 1
-        if any(not c.get("ok") and c.get("error") in hard for c in lane_log.get("claims") or []):
-            return 1
+            return 2
     return 0
 
 

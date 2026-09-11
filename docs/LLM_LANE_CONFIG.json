@@ -1,0 +1,32 @@
+{
+  "api_error_retries_per_model": 2,
+  "checker_timeout_s": 90,
+  "claim_wall_s": 5400,
+  "max_keepalive_fails_per_claim_per_day": 3,
+  "lanes": {
+    "cf": {
+      "draft": ["@cf/qwen/qwen3-30b-a3b-fp8", "@cf/meta/llama-3.1-8b-instruct-fp8-fast"],
+      "checker_a": [
+        "@cf/google/gemma-4-26b-a4b-it",
+        "@cf/meta/llama-3.1-8b-instruct-fp8-fast"
+      ],
+      "checker_b": [
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "@cf/google/gemma-4-26b-a4b-it"
+      ]
+    },
+    "nv": {
+      "draft": ["nvidia/nemotron-3-super-120b-a12b"],
+      "checker_a": [
+        "deepseek-ai/deepseek-v4-flash-0731",
+        "@cf/google/gemma-4-26b-a4b-it",
+        "@cf/meta/llama-3.1-8b-instruct-fp8-fast"
+      ],
+      "checker_b": [
+        "mistralai/mistral-nemotron",
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "@cf/google/gemma-4-26b-a4b-it"
+      ]
+    }
+  }
+}

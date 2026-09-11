@@ -26,7 +26,15 @@ For every section in the claim:
 
 If either checker fails: keep `claimed` (or set `checking`→`claimed`), apply the checker’s concrete fixes, re-run. Do not “majority vote” a fail away.
 
-## Daily free-quota burn (Mini)
+## Checker config + fallbacks
+
+Canonical file: `docs/LLM_LANE_CONFIG.json` (flag: `--config` / `--lane cf|nv`).
+
+- Each lane has **draft** + **checker_a** + **checker_b** ordered lists.
+- On **API** errors (410 EOL, 404, 5xx, timeout): try the next model in that chain.
+- On **content** fail: stop that chain (do not shop for a softer model). Overnight leaves the claim `claimed` and moves on.
+- Promote exit codes: `0` done, `1` content fail, `2` API fallbacks exhausted.
+- Mini LaunchAgent KeepAlive only retries exit `2`, with a **daily fuse** (default 3) so it cannot loop forever.
 
 **Cloudflare** free **10k neurons/day** (UTC) + **NVIDIA** free NIM (RPM/latency) run **in parallel** on different claims.
 
