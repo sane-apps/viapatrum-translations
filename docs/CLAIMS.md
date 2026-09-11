@@ -14,10 +14,11 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
 
-| jer-h5a | claimed | origen-jeremiah-samuel | Homily 5 §§5.1–5.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h5a | Live NVIDIA promote — do not take |
-
-| jer-h5b | free | origen-jeremiah-samuel | Homily 5 §§5.7–5.12 | | | wip/jer-h5b | Middle third only |
-| jer-h5c | free | origen-jeremiah-samuel | Homily 5 §§5.13–5.17 | | | wip/jer-h5c | Final third only |
+| jer-h5a | prepped | origen-jeremiah-samuel | Homily 5 §§5.1–5.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h5a | NVIDIA English on Mini; human Pass B pending |
+| jer-h5b | prepped | origen-jeremiah-samuel | Homily 5 §§5.7–5.12 | overnight-mini-nv | 2026-09-11 | wip/jer-h5b | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h5c | prepped | origen-jeremiah-samuel | Homily 5 §§5.13–5.17 | overnight-mini-nv | 2026-09-11 | wip/jer-h5c | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h11 | prepped | origen-jeremiah-samuel | Homily 11 §§11.1–11.5 | overnight-mini-nv | 2026-09-11 | wip/jer-h11 | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h13 | prepped | origen-jeremiah-samuel | Homily 13 §§13.1–13.3 | overnight-mini-nv | 2026-09-11 | wip/jer-h13 | machine crib (Pass A/lemmas/OCR); not reading English |
 | cyril-rf-lock | free | cyril-alexandria-recta-fide-court | Source lock only: slice Pusey CPG 5219–5220 into `*_source.json` | | | wip/cyril-rf-lock | **No English** — source lane |
 | gifts-mine | free | ante-nicene-topics | Gifts-and-order: one new locked-source excerpt + stance | | | wip/gifts-mine | Topics lane |
 
