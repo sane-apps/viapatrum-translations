@@ -37,7 +37,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | jer-h9 | done | Homily 9 §§9.1–9.4 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/google/gemma-4-26b-a4b-it + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171631Z-jer-h9 |
 | jer-h7 | done | Homily 7 §§7.1–7.3 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/meta/llama-3.1-8b-instruct-fp8-fast + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171301Z-jer-h7 |
 | jer-h6 | done | Homily 6 §§6.1–6.3 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/meta/llama-3.1-8b-instruct-fp8-fast + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171037Z-jer-h6 |
-| jer-h1-4 | done | Homilies 1–4 (27 §§) | 2026-09-11 | Owner lane; on site |
+| jer-h1-4 | done | Homilies 1–4 (27 §§) | 2026-09-11 | Owner lane; Homilies 1–4 two-pass on site |
 
 ## Do not claim these (owner / blocked)
 
