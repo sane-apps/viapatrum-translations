@@ -5,7 +5,7 @@ Accurate, beautiful prose; author voice intact. Do not copy modern translations.
 Ship each finished work to https://fathers.saneapps.com.
 
 **Who is working right now:** `docs/CLAIMS.md` (claim before translating).  
-**How to onboard an AI:** point it at `docs/START_HERE.md`, then `python3 scripts/claims.py start --agent YourName`.
+**How to onboard an AI:** paste `docs/START_HERE.md` into the model.
 
 ## Tier A — start here
 

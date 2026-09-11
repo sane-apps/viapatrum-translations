@@ -82,13 +82,10 @@ def print_ai_brief(row: dict[str, str], agent: str) -> None:
 
 def cmd_start(agent: str) -> int:
     if not agent.strip() or agent.strip().lower() in {"yourname", "me", "agent"}:
-        print("Copy and run:")
+        print(START.read_text(encoding="utf-8").rstrip())
         print()
+        print("Copy that into your AI. To take the next slice yourself:")
         print("  python3 scripts/claims.py start --agent YourName")
-        print()
-        print("Use your name, not YourName.")
-        print()
-        print(START.read_text(encoding="utf-8"))
         return 0
     text = CLAIMS.read_text(encoding="utf-8")
     free = [r for r in parse_open_table(text) if r.get("Status") == "free"]

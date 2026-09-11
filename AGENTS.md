@@ -11,7 +11,7 @@ English reading text only in the compiled book; Latin/source files stay in `sour
 
 ## Start here
 
-**Contributors / other LLMs:** point the model at `docs/START_HERE.md`, then:
+**Contributors / other LLMs:** paste `docs/START_HERE.md` into the model. The model runs:
 
 ```bash
 python3 scripts/claims.py start --agent YourName
