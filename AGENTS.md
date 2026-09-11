@@ -24,6 +24,7 @@ Owner / deep work:
 3. Read `docs/SCHEMAS.md` before writing translation JSON.
 4. For an existing book, read `books/<slug>/SESSION_HANDOFF.md`.
 5. Multi-agent coordination: `docs/CLAIMS.md` + `docs/START_HERE.md` (do not invent a second queue).
+6. AI promote → `done` (no standing human review gate): `docs/AI_CROSSCHECK.md`. Overnight burn is **Mini only**, calendar 21:10 local, flock locks — do not start a second burn while global/claim locks are held (promote exit `3`).
 
 ## Layout
 

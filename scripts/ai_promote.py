@@ -34,6 +34,13 @@ from llm_lane_config import (  # noqa: E402
     is_api_error,
     load_lane_config,
 )
+from fathers_run_lock import (  # noqa: E402
+    acquire_claim,
+    acquire_global,
+    clear_wall_deadline,
+    install_wall_deadline,
+    release_all,
+)
 
 CLAIMS = ROOT / "docs" / "CLAIMS.md"
 OUT = ROOT / "outputs" / "ai-promote"
@@ -376,7 +383,23 @@ def main() -> int:
     args = ap.parse_args()
     mark_done = args.mark_done and not args.no_mark_done
 
+    # Concurrency: claim lock always; global lock only for standalone runs.
+    # Overnight sets SANE_FATHERS_NESTED=1 so CF+NV lanes can promote in parallel.
+    nested = os.environ.get("SANE_FATHERS_NESTED") == "1"
+    if not nested:
+        global_lock = acquire_global(f"ai_promote:{args.agent}:{args.claim}")
+        if global_lock is None:
+            print("Another Fathers burn/promote holds the global lock — exit 3.", flush=True)
+            return 3
+    claim_lock = acquire_claim(args.claim, f"ai_promote:{args.agent}")
+    if claim_lock is None:
+        print(f"Claim {args.claim} already has an active promote — exit 3.", flush=True)
+        release_all()
+        return 3
     cfg = load_lane_config(args.config or None)
+    wall = int(cfg.get("claim_wall_s") or 5400)
+    # Exit 4 ≠ done — overnight must not count wall timeout as success.
+    install_wall_deadline(wall, label=f"ai_promote:{args.claim}", exit_code=4)
     retries = int(cfg.get("api_error_retries_per_model") or 2)
     lane = args.lane
     if not lane:
@@ -490,9 +513,13 @@ def main() -> int:
         code = 2 if any_api_fail else 1
         kind = "api" if any_api_fail else "content"
         print(f"NOT done — exit {code} ({kind}).", flush=True)
+        clear_wall_deadline()
+        release_all()
         return code
     if args.structural_only:
         print("Structural-only OK — not marking done.", flush=True)
+        clear_wall_deadline()
+        release_all()
         return 0
     if mark_done:
         reviewer = f"ai-crosscheck:{used_a or chain_a[0]}+{used_b or chain_b[0]}"
@@ -503,6 +530,8 @@ def main() -> int:
             f"{used_a}+{used_b}; receipt {out_dir.name}",
         )
         print(f"Claim {args.claim} → done ({reviewer})", flush=True)
+    clear_wall_deadline()
+    release_all()
     return 0
 
 

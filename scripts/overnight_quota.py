@@ -221,7 +221,13 @@ def process_claim(
     )
     entry["ok"] = rc == 0
     entry["promote_rc"] = rc
-    if rc == 1:
+    if rc == 3:
+        entry["ok"] = False
+        entry["error"] = "promote_lock_busy"
+    elif rc == 4:
+        entry["ok"] = False
+        entry["error"] = "promote_wall_timeout"
+    elif rc == 1:
         entry["error"] = "content_fail"
     elif rc == 2:
         entry["error"] = "api_fail"
@@ -335,8 +341,17 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             content_skips += 1
             print(f"[{lane}] content fail on {claim_id}; leave claimed, next claim", flush=True)
             continue
+        if err == "promote_lock_busy":
+            print(f"[{lane}] {claim_id} promote lock busy; next claim", flush=True)
+            continue
+        if err == "promote_wall_timeout":
+            print(
+                f"[{lane}] {claim_id} hit claim_wall_s; leave claimed, next claim",
+                flush=True,
+            )
+            continue
         if err == "api_fail":
-            # One API-exhausted claim: try next; KeepAlive fuse handled in shell wrapper.
+            # One API-exhausted claim: try next; wrapper fuse is for true infra only.
             print(f"[{lane}] API fallbacks exhausted on {claim_id}; next claim", flush=True)
             continue
         log["stop_reason"] = err or "promote_failed"
@@ -376,37 +391,60 @@ def main() -> int:
     if env.get("CLOUDFLARE_API_TOKEN") and not env.get("CF_TOKEN"):
         env["CF_TOKEN"] = env["CLOUDFLARE_API_TOKEN"]
     env["PATH"] = "/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:" + env.get("PATH", "")
+    # Children skip global lock so CF+NV can promote different claims in parallel.
+    # Wrapper still holds global-burn; claim locks stop same-claim double promote.
+    env["SANE_FATHERS_NESTED"] = "1"
+
+    from fathers_run_lock import acquire_global, clear_wall_deadline, install_wall_deadline, release_all  # noqa: WPS433
+
+    # Standalone overnight (no wrapper) still single-instances.
+    if os.environ.get("SANE_FATHERS_WRAPPER") != "1":
+        held = acquire_global(f"overnight_quota:{args.agent}")
+        if held is None:
+            print("Another Fathers burn holds the global lock — exit 0.", flush=True)
+            return 0
+    cfg = __import__("llm_lane_config", fromlist=["load_lane_config"]).load_lane_config(
+        args.config or None
+    )
+    # Soft job wall (default 6h): SIGALRM on main thread; lane threads may finish
+    # their current promote (bounded by claim_wall_s). Exit 0 = normal stop.
+    job_wall = int(cfg.get("overnight_wall_s") or 21600)
+    install_wall_deadline(job_wall, label=f"overnight:{args.agent}", exit_code=0)
 
     OUT.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     lanes = ["cf", "nv"] if args.lanes == "both" else [args.lanes]
 
     logs: dict[str, dict] = {}
-    if len(lanes) == 1:
-        logs[lanes[0]] = run_lane(lanes[0], args, env)
-    else:
-        # Parallel CF + NVIDIA — separate claim agents so take locks don't collide
-        with ThreadPoolExecutor(max_workers=2) as pool:
-            futs = {pool.submit(run_lane, lane, args, env): lane for lane in lanes}
-            for fut in as_completed(futs):
-                lane = futs[fut]
-                logs[lane] = fut.result()
+    try:
+        if len(lanes) == 1:
+            logs[lanes[0]] = run_lane(lanes[0], args, env)
+        else:
+            # Parallel CF + NVIDIA — separate claim agents so take locks don't collide
+            with ThreadPoolExecutor(max_workers=2) as pool:
+                futs = {pool.submit(run_lane, lane, args, env): lane for lane in lanes}
+                for fut in as_completed(futs):
+                    lane = futs[fut]
+                    logs[lane] = fut.result()
 
-    summary = {
-        "started": stamp,
-        "lanes": logs,
-        "finished": datetime.now(timezone.utc).isoformat(),
-    }
-    path = OUT / f"{stamp}-dual.json"
-    path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps(summary, indent=2), flush=True)
+        summary = {
+            "started": stamp,
+            "lanes": logs,
+            "finished": datetime.now(timezone.utc).isoformat(),
+        }
+        path = OUT / f"{stamp}-dual.json"
+        path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps(summary, indent=2), flush=True)
 
-    # KeepAlive only for true infra gaps / draft crash — not content fails or exhausted API chains
-    hard = {"draft_failed", "missing_cf_token", "missing_nv_key"}
-    for lane_log in logs.values():
-        if lane_log.get("stop_reason") in hard:
-            return 2
-    return 0
+        # Nonzero only for true infra gaps / draft crash — not content/API/wall/lock.
+        hard = {"draft_failed", "missing_cf_token", "missing_nv_key"}
+        for lane_log in logs.values():
+            if lane_log.get("stop_reason") in hard:
+                return 2
+        return 0
+    finally:
+        clear_wall_deadline()
+        release_all()
 
 
 if __name__ == "__main__":

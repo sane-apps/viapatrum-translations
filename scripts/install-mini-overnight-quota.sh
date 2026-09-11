@@ -36,10 +36,11 @@ data = {
     "StartCalendarInterval": {"Hour": 21, "Minute": 10},
     "RunAtLoad": False,
     "Nice": 10,
-    # Retry when the burn exits nonzero (crash / API blip / promote fail mid-claim).
-    # SuccessfulExit=false means exit 0 does NOT keep restarting.
-    "KeepAlive": {"SuccessfulExit": False},
-    "ThrottleInterval": 120,
+    # Calendar-only. No KeepAlive — that restarted mid-promote after bootout/bootstrap
+    # and stacked duplicate ai_promote runs. Stuck claims resume on the next scheduled
+    # burn (or manual run-overnight-quota.sh when idle). Wrapper still has a fuse if
+    # someone re-enables KeepAlive later.
+    "ThrottleInterval": 300,
     "ProcessType": "Background",
     "WorkingDirectory": str(pathlib.Path(script).resolve().parents[1]),
     "EnvironmentVariables": {
@@ -65,5 +66,6 @@ launchctl enable "gui/$uid/$LABEL" 2>/dev/null || true
 echo "installed $LABEL"
 echo "  plist: $PLIST"
 echo "  schedule: daily 21:10 local (≈01:10 UTC)"
-echo "  KeepAlive on failure; ThrottleInterval 120s"
-echo "  kickstart now: launchctl kickstart -k gui/$uid/$LABEL"
+echo "  calendar-only (no KeepAlive — prevents promote stacking on reinstall)"
+echo "  locks: ~/SaneApps/outputs/fathers-overnight/locks/"
+echo "  Manual recover when idle: $SCRIPT"
