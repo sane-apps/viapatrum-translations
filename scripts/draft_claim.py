@@ -337,10 +337,17 @@ def main() -> int:
         f"{'Prep' if args.prep else 'Drafting'} {args.claim}: {sections} via {model}",
         flush=True,
     )
+    hb = Path.home() / "SaneApps/outputs/fathers-overnight/heartbeat"
+    hb.parent.mkdir(parents=True, exist_ok=True)
+    hb.write_text(f"{args.claim}\n", encoding="utf-8")
 
     failures = 0
     for section in sections:
         print(f"→ {section}", flush=True)
+        try:
+            hb.write_text(f"{args.claim} {section}\n", encoding="utf-8")
+        except OSError:
+            pass
         result = None
         attempts = max(1, args.retries + 1)
         override = args.max_tokens or None

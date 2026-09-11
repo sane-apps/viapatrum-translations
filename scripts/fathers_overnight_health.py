@@ -20,6 +20,7 @@ from pathlib import Path
 
 PATTERNS = ("overnight_quota.py", "draft_claim.py", "ai_promote.py", "fathers_run_lock.py")
 LOG = Path.home() / "Library/Logs/SaneApps/fathers-overnight.out.log"
+HEARTBEAT = Path.home() / "SaneApps/outputs/fathers-overnight/heartbeat"
 
 
 def pgrep() -> list[tuple[int, str]]:
@@ -40,9 +41,13 @@ def pgrep() -> list[tuple[int, str]]:
 
 
 def log_age_s() -> float | None:
-    if not LOG.is_file():
+    ages = []
+    for path in (LOG, HEARTBEAT):
+        if path.is_file():
+            ages.append(max(0.0, time.time() - path.stat().st_mtime))
+    if not ages:
         return None
-    return max(0.0, time.time() - LOG.stat().st_mtime)
+    return min(ages)
 
 
 def last_log_line() -> str:
