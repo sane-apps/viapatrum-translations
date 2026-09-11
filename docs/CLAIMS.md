@@ -19,6 +19,20 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | jer-h5c | prepped | origen-jeremiah-samuel | Homily 5 §§5.13–5.17 | overnight-mini-nv | 2026-09-11 | wip/jer-h5c | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h11 | prepped | origen-jeremiah-samuel | Homily 11 §§11.1–11.5 | overnight-mini-nv | 2026-09-11 | wip/jer-h11 | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h13 | prepped | origen-jeremiah-samuel | Homily 13 §§13.1–13.3 | overnight-mini-nv | 2026-09-11 | wip/jer-h13 | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h12a | prepped | origen-jeremiah-samuel | Homily 12 §§12.1–12.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h12a | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h12b | prepped | origen-jeremiah-samuel | Homily 12 §§12.7–12.12 | overnight-mini-nv | 2026-09-11 | wip/jer-h12b | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h14a | prepped | origen-jeremiah-samuel | Homily 14 §§14.1–14.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h14a | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h14b | prepped | origen-jeremiah-samuel | Homily 14 §§14.7–14.12 | overnight-mini-nv | 2026-09-11 | wip/jer-h14b | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h14c | prepped | origen-jeremiah-samuel | Homily 14 §§14.13–14.18 | overnight-mini-nv | 2026-09-11 | wip/jer-h14c | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h15 | prepped | origen-jeremiah-samuel | Homily 15 §§15.1–15.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h15 | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h16a | prepped | origen-jeremiah-samuel | Homily 16 §§16.1–16.5 | overnight-mini-nv | 2026-09-11 | wip/jer-h16a | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h16b | prepped | origen-jeremiah-samuel | Homily 16 §§16.6–16.10 | overnight-mini-nv | 2026-09-11 | wip/jer-h16b | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h17 | prepped | origen-jeremiah-samuel | Homily 17 §§17.1–17.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h17 | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h18a | prepped | origen-jeremiah-samuel | Homily 18 §§18.1–18.5 | overnight-mini-nv | 2026-09-11 | wip/jer-h18a | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h18b | prepped | origen-jeremiah-samuel | Homily 18 §§18.6–18.10 | overnight-mini-nv | 2026-09-11 | wip/jer-h18b | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h19 | prepped | origen-jeremiah-samuel | Homily 19 §§19.10–19.15 | overnight-mini-nv | 2026-09-11 | wip/jer-h19 | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h20a | prepped | origen-jeremiah-samuel | Homily 20 §§20.1–20.4 | overnight-mini-nv | 2026-09-11 | wip/jer-h20a | machine crib (Pass A/lemmas/OCR); not reading English |
+| jer-h20b | prepped | origen-jeremiah-samuel | Homily 20 §§20.5–20.8 | overnight-mini-nv | 2026-09-11 | wip/jer-h20b | machine crib (Pass A/lemmas/OCR); not reading English |
 | cyril-rf-lock | free | cyril-alexandria-recta-fide-court | Source lock only: slice Pusey CPG 5219–5220 into `*_source.json` | | | wip/cyril-rf-lock | **No English** — source lane |
 | gifts-mine | free | ante-nicene-topics | Gifts-and-order: one new locked-source excerpt + stance | | | wip/gifts-mine | Topics lane |
 
