@@ -43,6 +43,28 @@ TIER_A = [
     "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 ]
 
+PREP_SYS = """You make a crib of early Christian Greek. You are NOT a literary translator.
+
+You may use ONLY the locked Greek paragraphs given. Do not use ANF, NPNF, FOTC,
+web English, or memory of modern translations.
+
+Return ONLY valid JSON (no markdown fences):
+{{
+  "section": "{section}",
+  "pass_a_gloss": "literal English gloss, clause by clause; ugly is fine",
+  "lemmas": [{{"form": "form as printed", "lemma": "…", "gloss": "…"}}],
+  "ocr_flags": ["garbled word, empty slot, or gap you see"],
+  "scripture_guesses": [{{"greek_snip": "quoted Greek", "maybe": "Jer 5:3"}}]
+}}
+
+Rules:
+- Do NOT write reading English or Pass B.
+- Do NOT invent missing Greek. If the print looks gapped, dotted, or junk, put it in ocr_flags.
+- At most 16 lemmas. Use the form as printed even if it looks wrong; note suspicion in ocr_flags.
+- scripture_guesses are guesses from quotation shape. Quote the Greek snip. Skip if unsure.
+"""
+
+
 SYS_TMPL = """You translate early Christian Greek into new English for private study.
 You may use ONLY the locked Greek paragraphs given. Do not use ANF, NPNF, FOTC,
 web English, or memory of modern translations.

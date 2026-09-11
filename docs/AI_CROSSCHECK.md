@@ -54,6 +54,8 @@ Wrapper: `scripts/run-overnight-quota.sh` (kernel flock single-instance; calenda
 
 Stops CF lane near the free reserve. NVIDIA lane keeps going until max-claims / queue empty. Does not Logos-compile or deploy the site.
 
+Overnight **default is `--mode prep`**: Pass A gloss, lemmas, OCR flags, scripture guesses. No reading English, no `ai_promote`, claim marked `prepped`. These models are not trusted for Pass B. `--mode translate` is the old draft+promote path and should not be the Mini calendar job.
+
 ## What checkers must verify
 
 - English is grounded in the locked Greek (no imported ANF/FOTC sense).

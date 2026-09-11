@@ -177,8 +177,9 @@ def process_claim(
     lane: str,
     draft_model: str,
     already_claimed: bool,
+    mode: str = "prep",
 ) -> dict:
-    entry: dict = {"claim": claim_id, "ok": False, "lane_agent": agent, "lane": lane}
+    entry: dict = {"claim": claim_id, "ok": False, "lane_agent": agent, "lane": lane, "mode": mode}
     if not already_claimed:
         rc = run(
             [sys.executable, "scripts/claims.py", "take", claim_id, "--agent", agent],
@@ -189,6 +190,49 @@ def process_claim(
             return entry
     else:
         print(f"Resume claimed {claim_id} as {agent}", flush=True)
+
+    if mode == "prep":
+        if already_claimed and english_present(claim_id, env):
+            print(f"Leave existing English on {claim_id} for human Pass B", flush=True)
+            entry["ok"] = True
+            entry["skipped"] = "has_english"
+            return entry
+        rc = run(
+            [
+                sys.executable,
+                "scripts/draft_claim.py",
+                "--claim",
+                claim_id,
+                "--agent",
+                agent,
+                "--model",
+                draft_model,
+                "--max-tokens",
+                "4096",
+                "--prep",
+            ],
+            env,
+        )
+        if rc != 0:
+            entry["error"] = "prep_failed"
+            return entry
+        rc = run(
+            [
+                sys.executable,
+                "scripts/claims.py",
+                "mark",
+                claim_id,
+                "--status",
+                "prepped",
+                "--agent",
+                agent,
+            ],
+            env,
+        )
+        entry["ok"] = rc == 0
+        if rc != 0:
+            entry["error"] = "mark_prepped_failed"
+        return entry
 
     skip_draft = already_claimed and english_present(claim_id, env)
     if skip_draft:
@@ -333,6 +377,7 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             lane=lane,
             draft_model=draft,
             already_claimed=resume,
+            mode=args.mode,
         )
         log["claims"].append(entry)
         if entry.get("error") == "take_failed":
@@ -395,6 +440,12 @@ def main() -> int:
     ap.add_argument("--cf-draft", default="")
     ap.add_argument("--nv-draft", default="")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument(
+        "--mode",
+        default="prep",
+        choices=["prep", "translate"],
+        help="prep = crib only (default). translate = old Pass B + promote (not trusted).",
+    )
     args = ap.parse_args()
 
     env = os.environ.copy()

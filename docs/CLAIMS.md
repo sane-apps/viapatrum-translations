@@ -6,7 +6,7 @@ Take the next free slice:
 python3 scripts/claims.py start --agent YourName
 ```
 
-That locks the top `free` row. One slice per person. Statuses: `free` → `claimed` → `done`.  
+That locks the top `free` row. One slice per person. Statuses: `free` → `claimed` → `prepped` (machine crib) or `done` (human Pass B).  
 If a `claimed` row is older than 48 hours with no handoff, anyone may set it back to `free`.
 
 ## Open / active claims

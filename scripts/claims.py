@@ -180,16 +180,51 @@ def cmd_take(claim_id: str, agent: str, quiet: bool = False) -> int:
     return 0
 
 
+def cmd_mark(claim_id: str, status: str, agent: str) -> int:
+    status = status.strip().lower()
+    if status not in {"prepped", "free"}:
+        print("Status must be prepped or free.", file=sys.stderr)
+        return 2
+    text = CLAIMS.read_text(encoding="utf-8")
+    rows = {r.get("Claim ID"): r for r in parse_open_table(text)}
+    row = rows.get(claim_id)
+    if not row:
+        print(f"Unknown claim id: {claim_id}", file=sys.stderr)
+        return 1
+    today = date.today().isoformat()
+    if status == "free":
+        new_line = (
+            f"| {claim_id} | free | {row.get('Book slug')} | "
+            f"{row.get('Slice (sections)')} |  |  | "
+            f"{row.get('Branch') or f'wip/{claim_id}'} | {row.get('Notes', '')} |"
+        )
+    else:
+        new_line = (
+            f"| {claim_id} | prepped | {row.get('Book slug')} | "
+            f"{row.get('Slice (sections)')} | {agent.strip() or row.get('Agent') or ''} | "
+            f"{row.get('Started') or today} | {row.get('Branch') or f'wip/{claim_id}'} | "
+            f"machine crib (Pass A/lemmas/OCR); not reading English |"
+        )
+    pat = claim_line_pattern(claim_id)
+    if not pat.search(text):
+        print(f"Could not find row `{claim_id}`.", file=sys.stderr)
+        return 1
+    CLAIMS.write_text(pat.sub(new_line, text, count=1), encoding="utf-8")
+    print(f"Marked `{claim_id}` {status}.")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Translations claim helper")
     ap.add_argument(
         "command",
-        choices=["free", "start", "all", "take"],
+        choices=["free", "start", "all", "take", "mark"],
         nargs="?",
         default="free",
     )
-    ap.add_argument("claim_id", nargs="?", help="For take: claim id")
+    ap.add_argument("claim_id", nargs="?", help="For take/mark: claim id")
     ap.add_argument("--agent", default="", help="Your name")
+    ap.add_argument("--status", default="", help="For mark: prepped or free")
     args = ap.parse_args()
 
     if args.command == "start":
@@ -199,6 +234,14 @@ def main() -> int:
             print("Usage: python3 scripts/claims.py start --agent YourName", file=sys.stderr)
             return 2
         return cmd_take(args.claim_id, args.agent)
+    if args.command == "mark":
+        if not args.claim_id or not args.status:
+            print(
+                "Usage: python3 scripts/claims.py mark <id> --status prepped --agent Name",
+                file=sys.stderr,
+            )
+            return 2
+        return cmd_mark(args.claim_id, args.status, args.agent)
     return cmd_list(args.command)
 
 

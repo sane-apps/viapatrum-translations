@@ -24,6 +24,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from ai_promote import parse_claim_row, sections_from_slice  # noqa: E402
 from llm_bakeoff import (  # noqa: E402
     DEFAULT_ACCOUNT,
+    PREP_SYS,
     SYS_TMPL,
     extract_json,
     is_nvidia_model,
@@ -117,6 +118,86 @@ def write_justification(section: str, obj: dict, agent: str, model: str) -> Path
     return path
 
 
+def write_prep_justification(section: str, obj: dict, agent: str, model: str, fix: dict) -> Path:
+    h, s = section.split(".")
+    path = JUST_DIR / f"jeremiah_{h}_{s}.json"
+    src_rows = json.loads(SOURCE.read_text(encoding="utf-8"))
+    src = next((r for r in src_rows if str(r.get("section")) == section), {})
+    lemmas_in = obj.get("lemmas") or []
+    lemmas = []
+    for item in lemmas_in:
+        if not isinstance(item, dict):
+            continue
+        lemmas.append(
+            {
+                "form": item.get("form") or item.get("greek") or "",
+                "lemma": item.get("lemma") or "",
+                "gloss": item.get("gloss") or "",
+                "lexica": "LSJ",
+            }
+        )
+    guesses = obj.get("scripture_guesses") if isinstance(obj.get("scripture_guesses"), list) else []
+    flags = obj.get("ocr_flags") if isinstance(obj.get("ocr_flags"), list) else []
+    greek = src.get("greek") or []
+    data = {
+        "anf_compare": {
+            "notes": "Machine crib only. Not reading English. Not copied from modern English.",
+            "status": "no_pd_reference",
+        },
+        "apparatus": [],
+        "bible_refs": [
+            {
+                "display": str(g.get("maybe") or ""),
+                "method": "guess",
+                "note": str(g.get("greek_snip") or ""),
+            }
+            for g in guesses
+            if isinstance(g, dict) and (g.get("maybe") or g.get("greek_snip"))
+        ],
+        "checks": {
+            "anf_diverge": "pending",
+            "lemma_constraint": "pending",
+            "placeholders": "pass",
+        },
+        "choices": [],
+        "confidence": "machine_prep",
+        "edition": {
+            "id": "gcs6-klostermann-1901",
+            "language": "grc",
+            "locus": src.get("klostermann") or f"Hom. {section}",
+            "path": "sources/first1k/tlg2042.tlg009.opp-grc1.xml",
+        },
+        "excerpt_id": f"jeremiah_{h}_{s}",
+        "lemmas": lemmas,
+        "ocr_flags": [str(x) for x in flags],
+        "pass_a_gloss": obj.get("pass_a_gloss") or "",
+        "reviewer": f"prep:{model}",
+        "draft_agent": agent,
+        "draft_model": model,
+        "drafted_at": datetime.now(timezone.utc).isoformat(),
+        "source_text": " ".join(str(p) for p in greek),
+        "variants": [],
+    }
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return path
+
+
+def score_prep(obj: dict | None) -> dict:
+    checks = {
+        "parse_json": isinstance(obj, dict),
+        "has_pass_a": False,
+        "has_lemmas": False,
+        "ocr_flags_list": False,
+    }
+    if not isinstance(obj, dict):
+        return {"ok": False, "checks": checks}
+    a = str(obj.get("pass_a_gloss") or "").strip()
+    checks["has_pass_a"] = len(a) >= 40
+    checks["has_lemmas"] = isinstance(obj.get("lemmas"), list) and len(obj.get("lemmas") or []) >= 1
+    checks["ocr_flags_list"] = isinstance(obj.get("ocr_flags"), list)
+    return {"ok": all(checks.values()), "checks": checks}
+
+
 def draft_section(
     section: str,
     model: str,
@@ -125,11 +206,14 @@ def draft_section(
     account: str,
     agent: str,
     max_tokens: int | None = None,
+    *,
+    prep: bool = False,
 ) -> dict:
     model = normalize_model(model)
     fix = load_fixture(section)
+    sys_msg = PREP_SYS if prep else SYS_TMPL
     messages = [
-        {"role": "system", "content": SYS_TMPL.format(section=section)},
+        {"role": "system", "content": sys_msg.format(section=section)},
         {"role": "user", "content": user_prompt(fix)},
     ]
     raw = vendor_call(
@@ -143,7 +227,7 @@ def draft_section(
     if raw.get("error"):
         return {"ok": False, "section": section, "error": raw["error"], "ms": raw.get("ms")}
     obj = extract_json(raw["content"])
-    sc = score(obj, raw["content"], section)
+    sc = score_prep(obj) if prep else score(obj, raw["content"], section)
     if not sc.get("ok") or not obj:
         return {
             "ok": False,
@@ -152,6 +236,20 @@ def draft_section(
             "checks": sc.get("checks"),
             "raw": (raw.get("content") or "")[:2000],
             "ms": raw.get("ms"),
+            "max_tokens": max_tokens,
+        }
+    if prep:
+        jpath = write_prep_justification(section, obj, agent, model, fix)
+        return {
+            "ok": True,
+            "section": section,
+            "prep": True,
+            "ms": raw.get("ms"),
+            "pt": raw.get("pt"),
+            "ct": raw.get("ct"),
+            "justification": str(jpath),
+            "ocr_flags": obj.get("ocr_flags") or [],
+            "checks": sc.get("checks"),
             "max_tokens": max_tokens,
         }
     title = str(obj.get("title") or "").strip()
@@ -180,6 +278,11 @@ def main() -> int:
     ap.add_argument("--section", action="append", default=[], help="Limit to these sections")
     ap.add_argument("--max-tokens", type=int, default=0, help="Override model profile max_tokens")
     ap.add_argument("--retries", type=int, default=2, help="Retries on structural_fail / API error")
+    ap.add_argument(
+        "--prep",
+        action="store_true",
+        help="Crib only: Pass A, lemmas, OCR flags, scripture guesses. No reading English.",
+    )
     args = ap.parse_args()
 
     model = normalize_model(args.model)
@@ -202,7 +305,10 @@ def main() -> int:
     from fathers_run_lock import install_wall_deadline  # noqa: WPS433
 
     install_wall_deadline(wall, label=f"draft_claim:{args.claim}", exit_code=4)
-    print(f"Drafting {args.claim}: {sections} via {model}", flush=True)
+    print(
+        f"{'Prep' if args.prep else 'Drafting'} {args.claim}: {sections} via {model}",
+        flush=True,
+    )
 
     failures = 0
     for section in sections:
@@ -215,7 +321,14 @@ def main() -> int:
             if attempt > 1 and not override:
                 tok = 4096 + (attempt - 1) * 1024
             result = draft_section(
-                section, model, cf_token, nv_token, account, args.agent, max_tokens=tok
+                section,
+                model,
+                cf_token,
+                nv_token,
+                account,
+                args.agent,
+                max_tokens=tok,
+                prep=args.prep,
             )
             if result.get("ok"):
                 break
@@ -227,8 +340,13 @@ def main() -> int:
                 )
                 time.sleep(1.0)
         if result and result.get("ok"):
+            extra = (
+                f"ocr={result.get('ocr_flags')!r}"
+                if result.get("prep")
+                else f"title={result.get('title')!r}"
+            )
             print(
-                f"  PASS  {result.get('ms')}ms  title={result.get('title')!r}  "
+                f"  PASS  {result.get('ms')}ms  {extra}  "
                 f"pt={result.get('pt')} ct={result.get('ct')}",
                 flush=True,
             )
