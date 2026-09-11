@@ -65,6 +65,19 @@ def test_claim_lock_and_nested_global() -> None:
     release_all()
 
 
+def test_run_bounded_timeout() -> None:
+    from fathers_run_lock import run_bounded
+
+    rc = run_bounded(
+        [sys.executable, "-c", "import time; time.sleep(30)"],
+        cwd=ROOT,
+        env=os.environ.copy(),
+        timeout_s=1,
+        label="sleep-test",
+    )
+    assert rc == 4, rc
+
+
 def test_wall_exit_code() -> None:
     from fathers_run_lock import clear_wall_deadline, install_wall_deadline
 
@@ -83,6 +96,8 @@ def main() -> int:
     print("ok flock_busy")
     test_claim_lock_and_nested_global()
     print("ok claim_lock")
+    test_run_bounded_timeout()
+    print("ok run_bounded_timeout")
     test_wall_exit_code()
     print("ok wall_exit_4")
     print("ALL PASS")

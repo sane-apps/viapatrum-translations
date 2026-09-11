@@ -16,7 +16,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import subprocess
 import sys
 import time
 import urllib.request
@@ -133,9 +132,20 @@ def claimed_for_agent(agent: str) -> list[str]:
     ]
 
 
+def _claim_wall_s() -> int:
+    try:
+        cfg = json.loads((ROOT / "docs" / "LLM_LANE_CONFIG.json").read_text(encoding="utf-8"))
+        return int(cfg.get("claim_wall_s") or 5400)
+    except Exception:  # noqa: BLE001
+        return 5400
+
+
 def run(cmd: list[str], env: dict) -> int:
+    from fathers_run_lock import run_bounded  # noqa: WPS433
+
     print("+", " ".join(cmd), flush=True)
-    return subprocess.call(cmd, cwd=ROOT, env=env)
+    label = Path(cmd[1]).name if len(cmd) > 1 else "child"
+    return run_bounded(cmd, cwd=ROOT, env=env, timeout_s=_claim_wall_s(), label=label)
 
 
 def english_present(claim_id: str, env: dict) -> bool:

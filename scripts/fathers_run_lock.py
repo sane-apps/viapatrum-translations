@@ -136,6 +136,42 @@ def install_wall_deadline(
     signal.alarm(seconds)
 
 
+def run_bounded(
+    cmd: list[str],
+    *,
+    cwd: Path,
+    env: dict,
+    timeout_s: int,
+    label: str = "child",
+) -> int:
+    """Run a child in its own session; kill the group if it outlives timeout_s.
+
+    Returns the child's exit code, or 4 on wall timeout (same as claim_wall).
+    """
+    import subprocess
+
+    timeout_s = max(1, int(timeout_s))
+    proc = subprocess.Popen(cmd, cwd=str(cwd), env=env, start_new_session=True)
+    try:
+        return int(proc.wait(timeout=timeout_s))
+    except subprocess.TimeoutExpired:
+        print(f"CHILD_WALL {label} after {timeout_s}s — SIGTERM", flush=True)
+        try:
+            os.killpg(proc.pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+        try:
+            proc.wait(timeout=15)
+        except subprocess.TimeoutExpired:
+            print(f"CHILD_WALL {label} SIGKILL", flush=True)
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            proc.wait(timeout=5)
+        return 4
+
+
 def clear_wall_deadline() -> None:
     try:
         signal.alarm(0)

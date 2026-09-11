@@ -37,6 +37,7 @@ Canonical file: `docs/LLM_LANE_CONFIG.json` (flag: `--config` / `--lane cf|nv`).
 - Mini LaunchAgent is **calendar-only** (daily 21:10 local). No KeepAlive — reinstall/bootstrap used to restart mid-promote and stack duplicates. Optional wrapper fuse: `SANE_FATHERS_MAX_KEEPALIVE` (default 3) if KeepAlive is ever re-enabled.
 - **Concurrency:** kernel `fcntl.flock` on `outputs/fathers-overnight/locks/global-burn.lock` (one burn session) + per-claim `claim-*.lock`. Wrapper holds the global flock via a helper process for the whole burn. Overnight sets `SANE_FATHERS_NESTED=1` so CF+NV can promote different claims in parallel; a second overnight/manual promote exits `3` (lock busy) / wrapper exits `0`. Per-claim wall exits `4`; overnight job wall (`overnight_wall_s`) exits `0` (soft stop on the main thread — in-flight promotes finish under their own `claim_wall_s`).
 - Recover stuck `claimed` rows with `run-overnight-quota.sh` **only when idle** (no `ai_promote` / no held flock). Do not `bootout`/`kickstart` while a burn is live.
+- Child draft/promote is bounded by `claim_wall_s` (process-group kill → exit 4). Health: `python3 scripts/fathers_overnight_health.py` (optional `--kill` only if the log has gone silent).
 
 **Cloudflare** free **10k neurons/day** (UTC) + **NVIDIA** free NIM (RPM/latency) run **in parallel** on different claims.
 

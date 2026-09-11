@@ -194,6 +194,14 @@ def main() -> int:
 
     row = parse_claim_row(args.claim)
     sections = args.section or sections_from_slice(row.get("Slice (sections)") or "")
+    try:
+        cfg = json.loads((ROOT / "docs" / "LLM_LANE_CONFIG.json").read_text(encoding="utf-8"))
+        wall = int(cfg.get("claim_wall_s") or 5400)
+    except Exception:  # noqa: BLE001
+        wall = 5400
+    from fathers_run_lock import install_wall_deadline  # noqa: WPS433
+
+    install_wall_deadline(wall, label=f"draft_claim:{args.claim}", exit_code=4)
     print(f"Drafting {args.claim}: {sections} via {model}", flush=True)
 
     failures = 0
