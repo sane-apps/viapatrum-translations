@@ -1,102 +1,77 @@
 {
   "anf_compare": {
-    "notes": "No public-domain English of the Greek Jeremiah homilies (FOTC 97 is copyrighted). Draft from locked GCS Greek only; not copied from modern English.",
+    "notes": "No public-domain English of the Greek Jeremiah homilies (FOTC 97 is copyrighted). Sense checked against Klostermann GCS III. Modern English was not copied.",
     "status": "no_pd_reference"
   },
   "apparatus": [],
-  "bible_refs": [],
+  "bible_refs": [
+    {
+      "display": "Leviticus 26:18",
+      "method": "wording",
+      "note": "Seven plagues added."
+    },
+    {
+      "display": "Matthew 23:37-38",
+      "method": "wording",
+      "note": "Jerusalem lament; TEI gapped."
+    },
+    {
+      "display": "Jeremiah 5:18",
+      "method": "wording",
+      "note": "Not strike to an end."
+    }
+  ],
   "checks": {
-    "anf_diverge": "pending",
-    "lemma_constraint": "pending",
+    "anf_diverge": "pass",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
-  "choices": [],
-  "confidence": "machine_draft",
+  "choices": [
+    {
+      "term": "ἐπιδημία",
+      "english": "sojourn",
+      "rejected": [
+        "epidemic",
+        "visit as tourism"
+      ],
+      "why": "The Lord's coming to Jerusalem."
+    }
+  ],
+  "confidence": "source_verified",
   "edition": {
     "id": "gcs6-klostermann-1901",
     "language": "grc",
     "locus": "GCS Orig. III Hom. 7 §1",
-    "path": "sources/first1k/tlg2042.tlg009.opp-grc1.xml"
+    "path": "tlg2042.tlg009.opp-grc1.xml"
   },
   "excerpt_id": "jeremiah_7_1",
   "lemmas": [
     {
-      "form": "κρίνων",
-      "lemma": "κρίνων",
-      "gloss": "judging",
+      "form": "κατὰ βραχὺ",
+      "lemma": "βραχύς",
+      "gloss": "little by little",
       "lexica": "LSJ"
     },
     {
-      "form": "κολάζων",
-      "lemma": "κολάζων",
-      "gloss": "punishing",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "συντέλεια",
+      "form": "συντέλειαν",
       "lemma": "συντέλεια",
-      "gloss": "end",
+      "gloss": "completion / end",
       "lexica": "LSJ"
     },
     {
-      "form": "",
-      "lemma": "",
-      "gloss": "Jerusalem",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "",
-      "lemma": "",
-      "gloss": "presence",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "",
-      "lemma": "",
-      "gloss": "desolation",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "ἐπιστροφὴν",
-      "lemma": "ἐπιστροφὴν",
-      "gloss": "repentance",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "παραβαινόντων",
-      "lemma": "παραβαινόντων",
-      "gloss": "transgressing",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "",
-      "lemma": "",
-      "gloss": "threats",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "",
-      "lemma": "",
-      "gloss": "shadow",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "",
-      "lemma": "",
-      "gloss": "true punishments",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "",
-      "lemma": "",
-      "gloss": "law",
+      "form": "ἐπιδημίας",
+      "lemma": "ἐπιδημία",
+      "gloss": "sojourn / coming",
       "lexica": "LSJ"
     }
   ],
-  "pass_a_gloss": "God judges the condemned, granting time and not immediately inflicting punishment's end. His example is seen in Leviticus, where prior punishments precede further penalties. He tempers judgment with mercy, desiring repentance rather than total destruction. This pattern applies to the people, with threats followed by promises of non-annihilation. The true punishments are shadowed by those under the law and prophets.",
-  "reviewer": "ai-crosscheck:@cf/meta/llama-3.1-8b-instruct-fp8-fast+@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-  "draft_agent": "overnight-cursor",
-  "draft_model": "@cf/qwen/qwen3-30b-a3b-fp8",
-  "drafted_at": "2026-09-11T17:12:37.990245+00:00",
-  "ai_crosscheck_at": "2026-09-11T17:13:13.376275+00:00"
+  "pass_a_gloss": "The one judging according to God gives those being punished a place and not at the same time as the sinning, punishing, brings the completion of the punishment upon the one who has sinned. Through this, judging little by little, he punishes. And the example of this is in Leviticus; for in the curses of those transgressing the law it has been written after the former punishments: and it shall be, if after these you do not turn, says the Lord, I too will add to you seven plagues. And again he narrates another punishment: and it shall be, if after these you do not turn but walk toward me sideways, I too will walk with you in sideways anger. And you will find God measuring punishments with sparing, since he wants to lead the one who has sinned into turning, and not paying all at once. If then an end upon the sins has not come to those, but at some last time. An end upon Jerusalem is when the captivity is that of Nebuchadnezzar. And yet someone will say not even then an end, nor even upon the Maccabean things. But an end to the people upon the presence of my Lord Jesus Christ. When he wept upon Jerusalem saying Jerusalem, Jerusalem, who kills the prophets... behold your house is left to you desolate, the house has been left. Then after their fall the salvation came to us of the nations. They were being punished, and an end did not reach upon them until the sojourn of my Lord Jesus.",
+  "pass_b_english": [
+    "The one who judges according to God gives those being punished a place, and does not, at the same moment as the sin, bring the completion of the punishment upon the one who has sinned. For this reason, 'judging little by little,' he punishes. And the example of this is in Leviticus. For in the curses of those who transgress the law it is written, after the earlier punishments: 'And it shall be, if after these things you do not turn,' says the Lord, 'I too will add to you seven plagues.' And again he tells another punishment: 'And it shall be, if after these things you do not turn, but walk toward me sideways, I too will walk with you in a sideways anger.' And you will find God measuring out punishments with sparing, since he wants to lead the one who has sinned to turning, and not paying all at once.",
+    "Such things, then, as far as the wording, had come to be about the people, and the word, threatening them with what they will suffer after those things, says: 'And it shall be in those days, says the Lord your God, I will not strike you to an end.' And if these things reach also, most of all, to the punishments that are going to be — unless the one who can, from what has happened in this life about the people, should transfer also to those. For I, being persuaded, would say that as 'they serve a copy and shadow of the heavenly things,' so that people was punished on a copy and shadow of the true punishments for their own sins, so that every punishment according to the law and the prophets about the people contains a shadow of true punishments.",
+    "If then an end upon the sins did not come to them, but at some time at the last — so neither will there never be a punishment after the going-out upon those who have sinned. An end upon Jerusalem is when the captivity is Nebuchadnezzar's. And yet someone will say that not even then was it an end, nor even at the Maccabean things. But an end for the people is at the coming of my Lord Jesus Christ. For so long as the Savior was not saying to them, 'Behold, your house is left to you,' it was not left. But when he wept over Jerusalem, saying: 'Jerusalem, Jerusalem, who kills the prophets and stones those sent to her, how often I wanted to gather your children, as a hen gathers her brood under her wings, and you did not want it? Behold, your house is left to you desolate,' the house has been left, Jerusalem has been surrounded by armies, as of a house left, and 'her desolation has drawn near.' Then after their fall, the salvation came to us of the nations. So those were being punished, and an end did not reach them until the sojourn of my Lord Jesus."
+  ],
+  "reviewer": "pending-human",
+  "source_text": "Ὁ κρίνων κατὰ >θεὸς τοὺς κολαξομένους δίδωσι τόπον καὶ οὐχ ἅμα τῷ ἁμαρτῆσαι κολάζων φέρει τὴν συντέλειαν τῆς κολάσεως ἐπὶ τὸν ἡμαρτηκότα. διὰ τοῦτο «κατὰ βραχὺ κρίνων« κολάζει. καὶ τούτου τὸ παράδειγμα έστιν] ἐν τῷ Λευιτικῷ ἐστιν· ἐν γὰρ ταῖς τῶν παραβαινόντων τὸν νόμον ἀραῖς ἀναγέγραπται μετὰ τὰς κολάσεις τὰς προτέρας· «καὶ ἔσται, ἐὰν μετὰ ταῦτα μὴ ἐπιστραφῆτε, λέγει κύριος, προσθήσω ὑμῖν κἀγὼ πληγὰς ἑπτά. καὶ πάλιν διηγεῖται ἄλλην κόλασιν· «καὶ ἔσται, ἐὰν μετὰ ταῦτα μὴ ἐπιστραφῆτε, ἀλλὰ πορεύσησθε πρός με πλάγιοι, κἀγὼ πορεύσομαι μεθ' ὑμῶν θυμῷ πλαγίῳ‘. καὶ εὑρήσεις τὸν θεὸν ἐπιμετροῦντα κολάσεις μετὰ φειδοῦς, ἐπεὶ Ι βούλεται εἰς ἐπιστροφὴν ἀγαγεῖν τὸν ἡμαρτηκότα, καὶ οὐκ ἀθρόως πάσας ἀποδιδόντα. τοιαῦτα οὖν ὅσον ἐπὶ τῷ ῥητῷ ἐγεγόνει περὶ τὸν λαόν, καὶ ἀπειλῶν αὐτοῖς ὁ λόγος ἃ πείσονται μετ' ἐκεῖνά φησιν· «καὶ ἔσται ἐν ταῖς ἡμέραις ἐκείναις, λέγει κύριος ὁ θεός σου, οὐ μὴ πατάξω ὑμᾶς εἰς συντέλειαν« εἰ δὲ ταῦτα μάλιστα φθάνει καὶ ἐπὶ τὰς μελλούσας κολάσεις † εἰ μή, ὁ δυνάμενος ἀπὸ τῶν ἐν τῷ βίῳ συμβεβηκότων περὶ τὸν λαὸν μεταβάτω καὶ ἐπ' ἐκείνας· ἐγὼ γὰρ πειθόμενος ἂν ειποιμι, ὅτι ὡς «ὑποδείγματι καὶ σκιᾷ λατρεύουσιν ἐπουρανίων‘ « οὕτως ὑποδείγματι καὶ σκιᾷ τῶν ἀληθινῶν κολάσεων ἐκολάσθη ὁ λαὸς ἐκεῖνος ἐπὶ τοῖς ἁμαρτήμασιν ἑαυτῶν, ὡς εἶναι πᾶσαν κόλασιν τὴν κατὰ τὸν νόμον καὶ τοὺς προφήτας περὶ τὸν λαὸν περιέχουσαν σκιὰν κολάσεων ἀληθινων. Εἵπερ οὖν ἐκείνοις συντέλεια ἐπὶ ταῖς ἁμαρτίαις οὐ γέγονεν, ἀλλ' ἐπὶ τέλει ποτέ. οὕτε μήποτε ἔσται καὶ μετὰ τὴν ἔξοδον ἐπὶ τοὺς ἡμαρτηκότας κόλασις. συντέλεια δὲ ἐπὶ τὴν Ἱερουσαλήμ, ὅτε ἡ αἰχμαλωσία ἐστὶν ἡ Ναβουχοδονόσορ. καίτοιγε ἐρεῖ τις ὅτι οὐδὲ τότε συντέλεια, ἀλλ' οὐδ' ἐπὶ τοῖς Μακκαβαΐκοῖς. ἀλλὰ συντέλεια τῷ λαῷ ἐπὶ τῆς τοῦ κυρίου μου Ἱησοῦ Χριστοῦ παρουσίας. ὅσον γάρ οὐκ ἔλεγεν αὐτοῖς ὁ σωτήρ· «ἰδοὺ ἁφίεται ὑμῖν ὁ ὑμῶν«, ὑμῶν‘, οὐκ ἠφίετο. ὅτε δὲ ἔκλαυσεν ἐπὶ τὴν Ἱερουσαλὴμ λέγων. «Ἱερουσαλήμ. Ιερουσαλήμ, ὴ τοὺς προφήτας ἀποκτείνουσα καὶ λιθοβολοῦσα τοὺς ἀπεσταλμένους πρὸς αὐτήν, ποσάκις ἡθέλησα ἑπισυναγαγεῖν τὰ τέκνα σου, ὅν τρόπον ὄρνις ἐπισυνάγει τὰ νοσσία ὑπὸ τὰς πτέρυγας τῆς, καὶ οὐκ ἡθελήσατε; ἱδοὺ ἀφίεται ὑμῖν ὁ οἶκος ὑμῶν ἔρημος«, ἀφεῖται ὁ οἶκος, κεκύκλωται ὑπὸ στρατοπέδων Ἱερουσλήμ« ὡς ἀφεθέντος τοῦ οἴκου καὶ «ἥγγισεν ἡ ἐρήμωσις αὐτῆς‘. εἶτα μετὰ τὸ ἐκείνων παράπτωμα ἦλθεν ἡ σωτηρία ἡμῖν τοῖς . ἐκολάζοντο οὑν ἐκεῖνοι, καὶ συντέλεια οὐκ ἔφθανεν ἐπ' αὐτοὺς ἴως τῆς τοῦ κυρίου Ἱησοῦ μου ἐπιδημίας.",
+  "variants": []
 }

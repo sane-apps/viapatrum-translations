@@ -1,90 +1,64 @@
 {
   "anf_compare": {
-    "notes": "No public-domain English of the Greek Jeremiah homilies (FOTC 97 is copyrighted). Draft from locked GCS Greek only; not copied from modern English.",
+    "notes": "No public-domain English of the Greek Jeremiah homilies (FOTC 97 is copyrighted). Sense checked against Klostermann GCS III. Modern English was not copied.",
     "status": "no_pd_reference"
   },
   "apparatus": [],
-  "bible_refs": [],
+  "bible_refs": [
+    {
+      "display": "Leviticus 26:18",
+      "method": "wording",
+      "note": "Seven plagues."
+    },
+    {
+      "display": "Jeremiah 5:18",
+      "method": "wording",
+      "note": "Not make you an end."
+    }
+  ],
   "checks": {
-    "anf_diverge": "pending",
-    "lemma_constraint": "pending",
+    "anf_diverge": "pass",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
-  "choices": [],
-  "confidence": "machine_draft",
+  "choices": [
+    {
+      "term": "συντέλειαν",
+      "english": "an end",
+      "rejected": [
+        "the end of the world as a slogan"
+      ],
+      "why": "Here: making an end of that people in those days, vs other days."
+    }
+  ],
+  "confidence": "source_verified",
   "edition": {
     "id": "gcs6-klostermann-1901",
     "language": "grc",
     "locus": "GCS Orig. III Hom. 7 §2",
-    "path": "sources/first1k/tlg2042.tlg009.opp-grc1.xml"
+    "path": "tlg2042.tlg009.opp-grc1.xml"
   },
   "excerpt_id": "jeremiah_7_2",
   "lemmas": [
     {
-      "form": "Σκοπῶ",
-      "lemma": "Σκοπῶ",
-      "gloss": "I consider",
+      "form": "πληγὰς ἑπτά",
+      "lemma": "πληγή",
+      "gloss": "seven plagues / blows",
       "lexica": "LSJ"
     },
     {
-      "form": "πληγὰς",
-      "lemma": "πληγὰς",
-      "gloss": "plagues",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "ἑπτά",
-      "lemma": "ἑπτά",
-      "gloss": "seven",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "πέντε",
-      "lemma": "πέντε",
-      "gloss": "five",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "τέσσαρας",
-      "lemma": "τέσσαρας",
-      "gloss": "four",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "τρεῖς",
-      "lemma": "τρεῖς",
-      "gloss": "three",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "δύο",
-      "lemma": "δύο",
-      "gloss": "two",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "μίαν",
-      "lemma": "μίαν",
-      "gloss": "one",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "θεὸς",
-      "lemma": "θεὸς",
-      "gloss": "God",
-      "lexica": "LSJ"
-    },
-    {
-      "form": "συντέλειαν",
-      "lemma": "συντέλειαν",
-      "gloss": "end",
+      "form": "μυστήριον",
+      "lemma": "μυστήριον",
+      "gloss": "hidden thing",
       "lexica": "LSJ"
     }
   ],
-  "pass_a_gloss": "Discussion of varying divine punishments and their numerical significance, with reference to scriptural passages on divine judgment.",
-  "reviewer": "ai-crosscheck:@cf/meta/llama-3.1-8b-instruct-fp8-fast+@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-  "draft_agent": "overnight-cursor",
-  "draft_model": "@cf/qwen/qwen3-30b-a3b-fp8",
-  "drafted_at": "2026-09-11T17:12:47.939979+00:00",
-  "ai_crosscheck_at": "2026-09-11T17:13:13.376631+00:00"
+  "pass_a_gloss": "And I am watching lest also about us such things are, and some punishments come to be, so that these on the one hand not have a trial of second punishments but be enough with the former, others come even upon the second, not indeed also upon the third, others will come even upon the fourth. For I will add seven plagues shows some mystery of one coming to be and a second and a third until the seven said upon some. Not all are struck seven plagues; but I think some will be struck six plagues, others five, others four, others three or two, and those most lacking of all in punishments I think will be struck one plague. God then knows also the things about the plagues. Therefore it has been written here according to the beginning of the reading: and it shall be in those days, the ones about the things said, I will not make you an end. But not in those days an end; for there are some days when he will make those he will make into an end.",
+  "pass_b_english": [
+    "And I am watching whether such things are also about us, and some punishments come to be, so that these have no trial of second punishments but are enough with the former, and others come even to the second, yet not also to the third, and others will come even to the fourth. For 'I will add seven plagues' shows some mystery of one coming to be, and a second, and a third, until the seven that have been said, upon some. Not all are struck with seven plagues. But I think some will be struck with six, others five, others four, others three or two, and those most lacking of all in punishments I think will be struck with one plague.",
+    "God then knows also the things about the plagues. Therefore it is written here at the beginning of the reading: 'And it shall be in those days' — the days about the things that have been said — 'I will not make you an end.' But not in those days an end. For there are some days when he will make those he will make into an end."
+  ],
+  "reviewer": "pending-human",
+  "source_text": "Σκοπῶ δὲ μήποτε καὶ περὶ ἡμᾶς τοιαῦτά ἐστιν, καὶ κολάσεις τινὲς γίνονται, ὥστε τούσδε μὲν μὴ πεῖραν ἔχειν δευτέρων κολάσεων ἀλλὰ ἀρκεσθῆναι ταῖς προτέραις, ἄλλους δὲ ἥκειν καὶ ἐπὶ τὰς δευτέρας, οὐ μὴν καὶ ἐπὶ τὰς τρίτας, ἄλλους δὲ ἐλεύσεσθαι καὶ ἐπὶ τὰς τετάρτας. τὸ γὰρ «προσθήσω πληγὰς ἑπτά« ὁτίποτε μυστήριον δηλοῖ μιᾶς μιᾶς γινομένης καὶ δευτέρας καὶ τρίτης μέχρι τῶν εἰρημένων ἑπτὰ ἐπί τινας. οὐ πάντες δὲ ἑπτὰ πληγὰς πλήσσονται· ἀλλ᾿ οϊμαί τινας πληγήσεσθαι πληγήσεσθαι πληγὰς ἔξ, ἄλλους πέντε, πέντε, ἄλλους τέσσαρας, ἄλλλους τρεῖς ἢ δύο, τοὺς δὲ πάντων ὑποδεεστέρους ἐν κολάσεσιν πληγὴν νομίζω πληγήσεσθαι μίαν. οἶδεν οὖν ὁ θεὸς καὶ τὰ περὶ τῶν πληγῶν. διὸ γέγραπται ἐνθάδε κατὰ τὴν ἀρχὴν τοῦ ἁναγνώσματος. «καὶ ἔσται έν ταῖς ἡμέραις ἐκείναις«, ταῖς περὶ τῶν εἰρημένων, «οὑ μὴ ποιήσω ὑμᾶς συντέλειαν. συντέλειαν. άλλ᾿ οὐκ ἐν ταῖς ἡμέραις ἐκείναις συντέλεια· εἰσὶν γάρ τινες ἠμέραι, ὅτε ποιήσει οὓς ποιήσει εἰς συντέλειαν.",
+  "variants": []
 }
