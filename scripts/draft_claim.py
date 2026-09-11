@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from datetime import datetime, timezone
@@ -182,6 +183,26 @@ def write_prep_justification(section: str, obj: dict, agent: str, model: str, fi
     return path
 
 
+def salvage_prep_obj(raw: str, section: str) -> dict | None:
+    """Keep a truncated crib if at least pass_a_gloss is intact."""
+    m = re.search(r'"pass_a_gloss"\s*:\s*"((?:\\.|[^"\\])*)"', raw or "")
+    if not m:
+        return None
+    try:
+        gloss = json.loads(f'"{m.group(1)}"')
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(gloss, str) or len(gloss.strip()) < 40:
+        return None
+    return {
+        "section": section,
+        "pass_a_gloss": gloss.strip(),
+        "lemmas": [],
+        "ocr_flags": ["json truncated; salvaged pass_a only"],
+        "scripture_guesses": [],
+    }
+
+
 def score_prep(obj: dict | None) -> dict:
     checks = {
         "parse_json": isinstance(obj, dict),
@@ -194,7 +215,12 @@ def score_prep(obj: dict | None) -> dict:
     a = str(obj.get("pass_a_gloss") or "").strip()
     checks["has_pass_a"] = len(a) >= 40
     checks["has_lemmas"] = isinstance(obj.get("lemmas"), list) and len(obj.get("lemmas") or []) >= 1
-    checks["ocr_flags_list"] = isinstance(obj.get("ocr_flags"), list)
+    flags = obj.get("ocr_flags")
+    if flags is None:
+        obj["ocr_flags"] = []
+        checks["ocr_flags_list"] = True
+    else:
+        checks["ocr_flags_list"] = isinstance(flags, list)
     return {"ok": all(checks.values()), "checks": checks}
 
 
@@ -227,6 +253,8 @@ def draft_section(
     if raw.get("error"):
         return {"ok": False, "section": section, "error": raw["error"], "ms": raw.get("ms")}
     obj = extract_json(raw["content"])
+    if prep and not obj:
+        obj = salvage_prep_obj(raw.get("content") or "", section)
     sc = score_prep(obj) if prep else score(obj, raw["content"], section)
     if not sc.get("ok") or not obj:
         return {

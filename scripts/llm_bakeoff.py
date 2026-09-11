@@ -60,8 +60,10 @@ Return ONLY valid JSON (no markdown fences):
 Rules:
 - Do NOT write reading English or Pass B.
 - Do NOT invent missing Greek. If the print looks gapped, dotted, or junk, put it in ocr_flags.
-- At most 16 lemmas. Use the form as printed even if it looks wrong; note suspicion in ocr_flags.
-- scripture_guesses are guesses from quotation shape. Quote the Greek snip. Skip if unsure.
+- At most 8 lemmas, and only load-bearing nouns/verbs. Do not lemma articles, καί, pronouns, or prepositions.
+- Use the form as printed even if it looks wrong; note suspicion in ocr_flags.
+- Keep pass_a_gloss under ~800 characters. Prefer complete clauses over covering every line.
+- scripture_guesses are guesses from quotation shape. Quote the Greek snip. Skip if unsure. Max 4 guesses.
 """
 
 
