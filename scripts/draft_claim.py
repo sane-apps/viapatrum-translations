@@ -382,6 +382,10 @@ def main() -> int:
             failures += 1
             print(f"  FAIL  {result}", flush=True)
         time.sleep(0.5)
+    # Partial cribs are still useful. Fail the process only if every section failed.
+    if failures and failures < len(sections):
+        print(f"partial prep: {len(sections) - failures}/{len(sections)} sections ok", flush=True)
+        return 0
     return 1 if failures else 0
 
 

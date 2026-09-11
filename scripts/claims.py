@@ -105,7 +105,7 @@ def cmd_start(agent: str) -> int:
 def claim_line_pattern(claim_id: str) -> re.Pattern[str]:
     # Match the whole markdown table row for this free claim.
     return re.compile(
-        rf"^\| {re.escape(claim_id)} \| free \|.*\|$",
+        rf"^\| {re.escape(claim_id)} \| [a-z]+ \|.*\|$",
         re.MULTILINE,
     )
 
