@@ -1,5 +1,8 @@
 # START HERE — for any human or LLM contributing
 
+
+**Repo:** https://github.com/sane-apps/translations  
+**Default LLM draft model (Cloudflare):** `@cf/qwen/qwen3-30b-a3b-fp8` (see `docs/LLM_API_SETUP.md`; drafts stay in claim `review`, never auto-`done`).
 **Paste this file into your AI first.** Then do only what it says.
 
 You are helping translate early Christian (and later Reformer) texts into new English from locked public-domain Greek/Latin, for private study and for https://fathers.saneapps.com. You are not inventing a process.
