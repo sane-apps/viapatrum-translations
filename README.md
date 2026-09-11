@@ -9,10 +9,10 @@ This is **100% Transparent Code** under [PolyForm Shield](LICENSE). It is **not*
 1. Read **[`docs/START_HERE.md`](docs/START_HERE.md)** — paste that file into your AI first.
 2. List free slices: `python3 scripts/claims.py free`
 3. Take one: `python3 scripts/claims.py take <claim-id> --agent YourName`
-4. Branch `wip/<claim-id>`, two-pass translation, justifications, set claim to `review`.
+4. Branch `wip/<claim-id>`, two-pass translation, justifications, then `python3 scripts/ai_promote.py --claim <id> --agent YourName` → `done` (AI cross-check; see `docs/AI_CROSSCHECK.md`).
 5. Do **not** deploy the website or run Logos/`build_book.py` unless the owner asked.
 
-Site contribute page: https://fathers.saneapps.com/contribute/
+Site: https://fathers.saneapps.com/contribute/
 
 ## Layout
 

@@ -2,7 +2,8 @@
 
 
 **Repo:** https://github.com/sane-apps/translations  
-**Default LLM draft model (Cloudflare):** `@cf/qwen/qwen3-30b-a3b-fp8` (see `docs/LLM_API_SETUP.md`; drafts stay in claim `review`, never auto-`done`).
+**Default draft model (Cloudflare):** `@cf/qwen/qwen3-30b-a3b-fp8`  
+**Done gate:** multi-model AI cross-check (`docs/AI_CROSSCHECK.md`) — **no human review queue**.  
 **Paste this file into your AI first.** Then do only what it says.
 
 You are helping translate early Christian (and later Reformer) texts into new English from locked public-domain Greek/Latin, for private study and for https://fathers.saneapps.com. You are not inventing a process.
@@ -11,17 +12,14 @@ Repo root: `~/SaneApps/clients/translations` (same path on every machine).
 
 ---
 
-## Recommended draft engine (2026-09-11 bake)
+## Recommended draft + done path (2026-09-11)
 
-After a controlled bake (`docs/LLM_BAKE_PROTOCOL.md` → `outputs/llm-bakeoff/VERDICT.md`):
+- **Draft:** Cloudflare `@cf/qwen/qwen3-30b-a3b-fp8`
+- **Fallback draft:** `@cf/meta/llama-3.1-8b-instruct-fp8-fast`
+- **Cross-check (required for `done`):** two *other* models judge the draft against locked Greek — defaults Llama 8B + Llama 70B via `python3 scripts/ai_promote.py --claim <id> --agent YourName`
+- Full policy: `docs/AI_CROSSCHECK.md`. There is **no** human Greek reviewer step (would only backlog). Site `/contribute/#corrections` is for later reader fixes.
 
-- **Default (contributors / overnight drafts):** Cloudflare Workers AI `@cf/qwen/qwen3-30b-a3b-fp8`
-- **Fallback:** `@cf/meta/llama-3.1-8b-instruct-fp8-fast`
-- **Oracle (owner):** `@cf/meta/llama-3.3-70b-instruct-fp8-fast`
-- Helper prompt/fixture: `python3 scripts/llm_bakeoff.py --section <H.S> --models '@cf/qwen/qwen3-30b-a3b-fp8'`
-- Drafts still go to claim status **`review`** — never auto-publish.
-
-NVIDIA free NIM is optional research only until it stops truncating/hanging on long JSON.
+NVIDIA free NIM is an optional alternate checker when CF is rate-limited (researched kwargs only).
 
 ---
 
@@ -76,11 +74,17 @@ python3 scripts/claims.py take jer-h6 --agent YourName
   (example: §6.1 → `jeremiah_6_1.json`). **Copy** an existing receipt such as  
   `books/origen-jeremiah-samuel/reviews/justifications/jeremiah_1_1.json` and fill new fields; every new file must include `pass_a_gloss`.
 - Update `books/<slug>/SESSION_HANDOFF.md` when the slice is done.
-- Set your claim to `review` when finished. **`review` does not publish anything** — only the owner merges and rebuilds the site.
+- Run AI promote (structural + two checkers) and set the claim to **`done`**:
+
+```bash
+python3 scripts/ai_promote.py --claim <claim-id> --agent YourName
+```
+
+  Do not leave work in a human `review` queue. Site rebuild publishes `done` slices.
 
 ### 4. Stop when the slice is done
 
-Do **not** start a second claim until the first is `review` or `done`.  
+Do **not** start a second claim until the first is `done`.  
 Do **not** deploy the website, edit `~/SaneApps/websites/fathers.saneapps.com`, run Cloudflare, run `build_book.py`, or compile Logos unless the owner explicitly asked in this thread.
 
 ---
@@ -97,7 +101,7 @@ Do **not** deploy the website, edit `~/SaneApps/websites/fathers.saneapps.com`, 
 | Keep Latin/Greek in source fields / panels | “Scripture connection:” caption dumps |
 | Ask before public publish / purchase / Logos Build | Deploy `fathers.saneapps.com`; touch `websites/`; run `build_book.py` / Logos; change Slice columns |
 
-PRs must stay under `clients/translations` only (no website / Cloudflare / Logos paths). PRs without a matching `claimed`→`review` row and a section-ID-scoped diff will be rejected.
+PRs must stay under `clients/translations` only (no website / Cloudflare / Logos paths). PRs without a matching `claimed`→`done` (via `ai_promote.py`) row and a section-ID-scoped diff will be rejected.
 
 ---
 
@@ -107,18 +111,18 @@ Full detail: `books/ante-nicene-topics/docs/TRANSLATION_QA.md` and `docs/SOP.md`
 
 1. **Pass A** — literal gloss + lemmas in `reviews/justifications/<id>.json` → field `pass_a_gloss` (from locked source only).  
 2. **Pass B** — Reading English in `*_english.json` → `english[]`. Same meaning as A; better prose; author’s voice.  
-3. **Receipt** — that same justification file also holds confidence (`source_verified`) and `reviewer: pending-human` until a human signs off. `pass_a_gloss` must not equal joined Pass B.
+3. **Receipt** — same justification file holds confidence (`source_verified`). After promote, `reviewer` becomes `ai-crosscheck:<modelA>+<modelB>` (not `pending-human`). `pass_a_gloss` must not equal joined Pass B.
 
 ---
 
 ## Done for your claim means
 
-- [ ] Claim row → `review` (and leave the lock under `docs/claim-locks/<id>/` until owner closes it)
 - [ ] Pass B English in `*_english.json` for every section ID on the claim
 - [ ] One justification JSON per section with `pass_a_gloss` (copy `jeremiah_1_1.json` shape for Jeremiah)
 - [ ] Thought titles (not locus labels)
+- [ ] `python3 scripts/ai_promote.py --claim <id> --agent YourName` → **PASS** → claim status **`done`**
 - [ ] `SESSION_HANDOFF.md` updated
-- [ ] No website deploy / Logos / `build_book.py` from you
+- [ ] No website deploy / Logos / `build_book.py` from you unless owner asked
 
 ---
 
@@ -137,4 +141,5 @@ Tell your AI exactly this:
 
 > Open `~/SaneApps/clients/translations/docs/START_HERE.md` and follow it.  
 > Run `python3 scripts/claims.py take <id> --agent YourName` for one free slice (see `python3 scripts/claims.py free`).  
+> Finish with `python3 scripts/ai_promote.py --claim <id> --agent YourName` (two AI checkers; no human review wait).  
 > Do not deploy the site. Do not copy modern or ANF English.

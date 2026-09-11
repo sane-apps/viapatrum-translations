@@ -39,7 +39,7 @@
 1. If ≥1 cheap CF model PASSes on §6.1 **and** §6.2 → **default contributor draft engine** = that model (cheapest among passers). Document in START_HERE + contribute page.  
 2. If only expensive CF (70B) passes → use it as **oracle checker** only; keep hunting cheaper / NVIDIA.  
 3. If all CF fail → run NVIDIA when keyed; if still fail → Air LoRA plan.  
-4. Never auto-`done`; drafts → `review`.
+4. Never leave work in a human `review` queue; promote with `scripts/ai_promote.py` (two checkers) → `done`.
 
 ## Receipts
 
