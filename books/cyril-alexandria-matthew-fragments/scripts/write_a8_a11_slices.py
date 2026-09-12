@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
+from reader_titles import reader_title, scholar_label
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = json.loads((ROOT / "translations/matthew_fragments_source.json").read_text(encoding="utf-8"))
@@ -495,7 +496,8 @@ def main() -> None:
                 "section": n,
                 "edition_fragment": ed,
                 "matthew": src["matthew"],
-                "title": src["head"],
+                "title": reader_title(src.get("matthew")),
+                "scholar_label": scholar_label(fragment=src.get("fragment"), matthew=src.get("matthew"), existing=src.get("head")),
                 "english": PASS_B[n],
                 "notes_covered": [],
                 "added_allusions": ALLUSIONS[n],
