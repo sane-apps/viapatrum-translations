@@ -34,7 +34,7 @@ If staying in Origen after Heraclides + Pascha (Rank 1, no PD English):
 | 5 | `origen-song` | Comm. + 2 homilies on the Song; GCS VIII |
 | 6 | `origen-genesis-homilies` | 16 Genesis homilies; GCS VI (then the rest of the Hexateuch) |
 
-Cross-author Tier A above still inserts Melito then Irenaeus *Demonstration* after Book 2 unless the owner stays in Origen.
+Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if leaving Cyril. Owner currently stays in Cyril *De adoratione* Books 3+.
 
 ## Tier B — later
 
