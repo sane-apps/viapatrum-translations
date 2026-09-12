@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-rf-a10 | done | CPG 5219 Arcadia §§37–40 (Pusey pp.192–195) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a10 + rf_arcadia_37–40; A≠B; no site CSS |
 | cyril-rf-a9 | done | CPG 5219 Arcadia §§33–36 (Pusey pp.187–191) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a9 + rf_arcadia_33–36; A≠B; no site CSS |
 | cyril-rf-a8 | done | CPG 5219 Arcadia §§29–32 (Pusey pp.183–186) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a8 + rf_arcadia_29–32; A≠B; no site CSS |
 | cyril-rf-a7 | done | CPG 5219 Arcadia §§25–28 (Pusey pp.179–182) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a7 + rf_arcadia_25–28; A≠B; no site CSS |
