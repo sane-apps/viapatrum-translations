@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-51-mine | done | De An. 51; death = separation; against souls sticking to corpses; soul does not linger in body | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-42-mine | done | De An. 42; against Epicurus: death dissolves sense — yet it concerns the man who suffers dissolution | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-52-mine | done | De An. 52; death separates flesh/soul; not from nature but from fault — we who know man’s beginnings boldly determine | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-26-mine | done | Oct. 26; Roman auspices/auguries; Clodius/Flaminius/Regulus — birds do not save; leave sortilege | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
