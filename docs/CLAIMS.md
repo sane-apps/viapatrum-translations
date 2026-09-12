@@ -14,11 +14,8 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
 
-| jer-h5a | prepped | origen-jeremiah-samuel | Homily 5 §§5.1–5.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h5a | NVIDIA English on Mini; human Pass B pending |
-| jer-h5b | prepped | origen-jeremiah-samuel | Homily 5 §§5.7–5.12 | overnight-mini-nv | 2026-09-11 | wip/jer-h5b | machine crib (Pass A/lemmas/OCR); not reading English |
-| jer-h5c | prepped | origen-jeremiah-samuel | Homily 5 §§5.13–5.17 | overnight-mini-nv | 2026-09-11 | wip/jer-h5c | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h11 | prepped | origen-jeremiah-samuel | Homily 11 §§11.1–11.5 | overnight-mini-nv | 2026-09-11 | wip/jer-h11 | machine crib (Pass A/lemmas/OCR); not reading English |
-| jer-h13 | prepped | origen-jeremiah-samuel | Homily 13 §§13.1–13.3 | overnight-mini-nv | 2026-09-11 | wip/jer-h13 | machine crib (Pass A/lemmas/OCR); not reading English |
+
 | jer-h12a | prepped | origen-jeremiah-samuel | Homily 12 §§12.1–12.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h12a | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h12b | prepped | origen-jeremiah-samuel | Homily 12 §§12.7–12.12 | overnight-mini-nv | 2026-09-11 | wip/jer-h12b | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h14a | prepped | origen-jeremiah-samuel | Homily 14 §§14.1–14.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h14a | machine crib (Pass A/lemmas/OCR); not reading English |
@@ -48,6 +45,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| jer-h13 | done | Homily 13 §§13.1–13.3 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033948Z-jer-h13 |
+| jer-h5c | done | Homily 5 §§5.13–5.17 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033821Z-jer-h5c |
+| jer-h5b | done | Homily 5 §§5.7–5.12 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033544Z-jer-h5b |
+| jer-h5a | done | Homily 5 §§5.1–5.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/meta/llama-3.1-8b-instruct-fp8-fast+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033224Z-jer-h5a |
 | jer-h8 | done | Homily 8 §§8.1–8.9 | 2026-09-11 | NVIDIA promote on Mini; machine_draft, not shipped |
 | jer-h10 | done | Homily 10 §§10.1–10.8 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/google/gemma-4-26b-a4b-it + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171847Z-jer-h10 |
 | jer-h9 | done | Homily 9 §§9.1–9.4 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/google/gemma-4-26b-a4b-it + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171631Z-jer-h9 |
