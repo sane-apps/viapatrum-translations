@@ -35,7 +35,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a4` | done | entries 13–16 (ed. fr.14–17; Mt 2:20–3:2) |
 | next | free | `cyril-matt-frag-a5` from entry 17 |
 
-Tip SHA: see latest push on `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: `ef0c1db` on `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
