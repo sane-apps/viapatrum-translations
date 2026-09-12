@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| pulcheria-rf-a12 | done | Pulcheria §§45–48 Pass A≠B (end) | 2026-09-12 | greek_clean_a12; rational-soul/life-giving-body/one-Son/faith-sought/one-Lord-doxology; jer-h20b intact |
 | pulcheria-rf-a11 | done | Pulcheria §§41–44 Pass A≠B | 2026-09-12 | greek_clean_a11; receive-authority/exalt-to-own/co-raise temple/baptism-death/Spirit of Jesus/weak-strong; jer-h20b intact |
 | pulcheria-rf-a10 | done | Pulcheria §§37–40 Pass A≠B | 2026-09-12 | greek_clean_a10; own-body offering/weak flesh/right-hand+own blood/not naked Word/Lord of glory; jer-h20b intact |
 | pulcheria-rf-a9 | done | Pulcheria §§33–36 Pass A≠B | 2026-09-12 | greek_clean_a9; baptism-temptation type/high priest-lamb/heavens bodily+divine/Heb5 obedience/we-in-him/anti bare-man; jer-h20b intact |
