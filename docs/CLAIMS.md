@@ -25,6 +25,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-18-mine | done | Adv. Nat. 2.18 arts are earthly necessity inventions—not heaven-dropped soul sciences. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-25-mine | done | Adv. Nat. 2.25 'divine' soul no better than beast until schooled; animals also learn by use. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-22-mine | done | Adv. Nat. 2.22 isolation test falsifies divine immortal soul arriving full of disciplines. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-76-mine | done | Adv. Nat. 2.76 persecution under almighty care; no this-life safety promise. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
