@@ -46,7 +46,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a15` | done | entries 57–60 (ed. fr.66–69; Mt 5:42–6:1) |
 | next | free | `cyril-matt-frag-a16` from entry 61 |
 
-Tip SHA: PENDING_TIP on `main`.
+Tip SHA: 6a4f8bf on `main`.
 
 ## Guards
 
