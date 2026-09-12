@@ -25,6 +25,11 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-55-mine | done | De Anima LV inferi Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| tertullian-de-anima-43-mine | done | De Anima XLIII somnus Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| tertullian-de-anima-21-mine | done | De Anima XXI gratia Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| tertullian-de-anima-20-mine | done | De Anima XX sortes Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| tertullian-de-anima-16-mine | done | De Anima XVI serpens Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-de-anima-58-mine | done | De Anima LVIII inferi Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-de-anima-41-mine | done | De Anima XLI originis uitium Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-de-anima-40-mine | done | De Anima XL in Adam censetur Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
