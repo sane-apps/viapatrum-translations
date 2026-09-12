@@ -25,6 +25,11 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-62-mine | done | Adv. Nat. 2.62 only almighty God can save souls; no magic/Etruscan path | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-12-mine | done | Adv. Nat. 2.12 Christ’s public powers win nations; Rome joins Christian truth | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-5-mine | done | Adv. Nat. 2.5 fear if true; rapid spread; prefer Christ’s friendship under torture | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-78-mine | done | Adv. Nat. 2.78 flee to saving God; commit selves despite unbelief | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-66-mine | done | Adv. Nat. 2.66 immortality prize only by Christ’s gift; hope of salvation | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-35-mine | done | Adv. Nat. 2.35 mid-quality souls made immortal by omnipotent king | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-63-mine | done | Adv. Nat. 2.63 earlier ages; royal mercy ran equally through all | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-36-mine | done | Adv. Nat. 2.36 immortality by Father’s will/gift not nature | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
