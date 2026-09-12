@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-4-21-mine | done | Inst. 4.21: after ordering gospel preaching, a cloud took Him up on day 40 as Daniel showed; disciples go out; Nero/Vespasian fulfill predictions. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-1-mine | done | Inst. 4.1: one age's folly of many gods led to self-ignorance—true God's religion and humanity's reason lost from sight. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-30-mine | done | Inst. 4.30: heresies by demons' goads split the people—set truth in its home; next book on justice. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-6-mine | done | Inst. 4.6: before making the world God begot a holy incorruptible Spirit whom He would name Son; alone first-born of the divine name; used in fabricating the world. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-4-11-mine | done | Inst. 4.11: when Jews rebelled, God filled prophets to rebuke and call to repentance; also so no nation would be denied immortality's hope. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-4-4-mine | done | Inst. 4.4: wisdom and religion are joined—wisdom looks to sons (love), religion to servants (fear); one God is both Father and Lord. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-4-3-mine | done | Inst. 4.3: cult of the gods has no wisdom—subjects divine man to earthy things; no moral inquiry; rite of body not mind. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
