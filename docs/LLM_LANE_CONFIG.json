@@ -27,6 +27,17 @@
         "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
         "@cf/google/gemma-4-26b-a4b-it"
       ]
+    },
+    "gemini": {
+      "enabled": false,
+      "role": "prep_qa_only",
+      "auto_promote": false,
+      "prep": ["gemini-3.5-flash-lite"],
+      "prep_failover": ["gemini-3.1-flash-lite", "gemini-2.5-flash-lite"],
+      "checker_c": ["gemini-3.5-flash-lite"],
+      "artifact_root": "outputs/gemini-prep",
+      "overnight_default_sections": ["6.1", "7.3", "8.1"],
+      "notes": "Optional thin prep / checker-C. Never promote from Gemini alone. CF+NV stay primary."
     }
   }
 }

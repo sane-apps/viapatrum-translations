@@ -56,6 +56,23 @@ Stops CF lane near the free reserve. NVIDIA lane keeps going until max-claims / 
 
 Overnight **default is `--mode prep`**: Pass A gloss, lemmas, OCR flags, scripture guesses. No reading English, no `ai_promote`, claim marked `prepped`. These models are not trusted for Pass B. `--mode translate` is the old draft+promote path and should not be the Mini calendar job.
 
+## Optional Gemini prep / checker-C (never promote alone)
+
+`gemini-3.5-flash-lite` (failover `gemini-3.1-flash-lite` / `gemini-2.5-flash-lite`) is an **optional thin prep / checker-C** lane. It writes only under `outputs/gemini-prep/<stamp>/`. It does **not** mark claims, does **not** write live Pass B, and is **never** a sole promote gate.
+
+Enable without changing the CF/NV calendar default:
+
+```bash
+source ~/.config/nv/env   # GEMINI_API_KEY
+python3 scripts/gemini_prep_lane.py --sections 6.1,7.3
+python3 scripts/gemini_prep_lane.py --checker-c --sections 6.1
+# Beside overnight CF+NV (still primary):
+FATHERS_GEMINI_PREP=1 python3 scripts/overnight_quota.py --lanes both --agent overnight-mini
+# or:  … overnight_quota.py --lanes both --enable-gemini
+```
+
+Config: `docs/LLM_LANE_CONFIG.json` → `lanes.gemini` (`enabled` defaults **false**). Project note: store `docs/gemini-prep-lane.md`.
+
 ## What checkers must verify
 
 - English is grounded in the locked Greek (no imported ANF/FOTC sense).

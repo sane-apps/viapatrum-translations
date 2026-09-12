@@ -5,8 +5,13 @@ Lanes (separate budgets):
   cf — Workers AI draft/check until ~10k neurons/day (UTC) reserve
   nv — NIM draft/check (RPM/latency bound; no CF neuron burn)
 
+Optional (artifact-only, never promotes):
+  gemini — Flash-Lite prep / checker-C under outputs/gemini-prep/
+           Enable: --enable-gemini | FATHERS_GEMINI_PREP=1 | lanes.gemini.enabled
+
   source ~/.config/nv/env && export CF_TOKEN="$CLOUDFLARE_API_TOKEN"
   python3 scripts/overnight_quota.py --lanes both --agent overnight
+  python3 scripts/overnight_quota.py --lanes both --enable-gemini
 
 Recovery: resumes this agent's claimed-but-not-done rows before taking free ones.
 Does NOT Logos-compile or deploy the site.
@@ -430,6 +435,60 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
     return log
 
 
+def run_gemini_side(args: argparse.Namespace, env: dict, cfg: dict) -> dict:
+    """Optional parallel Gemini prep/QA. Artifacts only — never promotes or claims."""
+    from llm_lane_config import as_list, gemini_enabled  # noqa: WPS433
+
+    log: dict = {
+        "lane": "gemini",
+        "role": "prep_qa_only",
+        "auto_promote": False,
+        "started": datetime.now(timezone.utc).isoformat(),
+    }
+    if not gemini_enabled(cfg, force=bool(args.enable_gemini)):
+        log["skipped"] = True
+        log["reason"] = "disabled"
+        return log
+    if args.dry_run:
+        log["skipped"] = True
+        log["reason"] = "dry_run"
+        return log
+    if not (env.get("GEMINI_API_KEY") or "").strip():
+        log["ok"] = False
+        log["stop_reason"] = "missing_gemini_key"
+        return log
+
+    lane = (cfg.get("lanes") or {}).get("gemini") or {}
+    sections = (args.gemini_sections or "").strip()
+    if not sections:
+        sections = ",".join(
+            as_list(lane.get("overnight_default_sections")) or ["6.1", "7.3", "8.1"]
+        )
+    cmd = [
+        sys.executable,
+        "scripts/gemini_prep_lane.py",
+        "--require-enabled",
+        "--sections",
+        sections,
+    ]
+    if args.enable_gemini:
+        cmd.append("--force")
+    if args.gemini_checker_c:
+        cmd.extend(["--prep", "--checker-c"])
+    if args.config:
+        cmd.extend(["--config", args.config])
+
+    print(f"[gemini] artifact prep sections={sections} (no promote)", flush=True)
+    rc = run(cmd, env)
+    log["ok"] = rc == 0
+    log["rc"] = rc
+    log["sections"] = sections
+    log["finished"] = datetime.now(timezone.utc).isoformat()
+    if rc != 0:
+        log["stop_reason"] = "gemini_prep_failed"
+    return log
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--agent", default="overnight")
@@ -446,6 +505,23 @@ def main() -> int:
         choices=["prep", "translate"],
         help="prep = crib only (default). translate = old Pass B + promote (not trusted).",
     )
+    ap.add_argument(
+        "--enable-gemini",
+        action="store_true",
+        help="Also run optional Gemini Flash-Lite prep/QA into outputs/gemini-prep/ "
+        "(never promotes; CF/NV stay primary). Or set FATHERS_GEMINI_PREP=1 / "
+        "lanes.gemini.enabled=true.",
+    )
+    ap.add_argument(
+        "--gemini-sections",
+        default="",
+        help="Comma sections for Gemini side lane (default from LLM_LANE_CONFIG).",
+    )
+    ap.add_argument(
+        "--gemini-checker-c",
+        action="store_true",
+        help="With Gemini side lane, also run checker-C on those sections (artifact-only).",
+    )
     args = ap.parse_args()
 
     env = os.environ.copy()
@@ -457,6 +533,7 @@ def main() -> int:
     env["SANE_FATHERS_NESTED"] = "1"
 
     from fathers_run_lock import acquire_global, clear_wall_deadline, install_wall_deadline, release_all  # noqa: WPS433
+    from llm_lane_config import gemini_enabled, load_lane_config  # noqa: WPS433
 
     # Standalone overnight (no wrapper) still single-instances.
     if os.environ.get("SANE_FATHERS_WRAPPER") != "1":
@@ -464,9 +541,7 @@ def main() -> int:
         if held is None:
             print("Another Fathers burn holds the global lock — exit 0.", flush=True)
             return 0
-    cfg = __import__("llm_lane_config", fromlist=["load_lane_config"]).load_lane_config(
-        args.config or None
-    )
+    cfg = load_lane_config(args.config or None)
     # Soft job wall (default 6h): SIGALRM on main thread; lane threads may finish
     # their current promote (bounded by claim_wall_s). Exit 0 = normal stop.
     job_wall = int(cfg.get("overnight_wall_s") or 21600)
@@ -475,18 +550,18 @@ def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     lanes = ["cf", "nv"] if args.lanes == "both" else [args.lanes]
+    want_gemini = gemini_enabled(cfg, force=bool(args.enable_gemini))
 
     logs: dict[str, dict] = {}
     try:
-        if len(lanes) == 1:
-            logs[lanes[0]] = run_lane(lanes[0], args, env)
-        else:
-            # Parallel CF + NVIDIA — separate claim agents so take locks don't collide
-            with ThreadPoolExecutor(max_workers=2) as pool:
-                futs = {pool.submit(run_lane, lane, args, env): lane for lane in lanes}
-                for fut in as_completed(futs):
-                    lane = futs[fut]
-                    logs[lane] = fut.result()
+        # CF/NV remain the only claim/promote lanes. Gemini is optional side work.
+        with ThreadPoolExecutor(max_workers=3 if want_gemini else 2) as pool:
+            futs = {pool.submit(run_lane, lane, args, env): lane for lane in lanes}
+            if want_gemini:
+                futs[pool.submit(run_gemini_side, args, env, cfg)] = "gemini"
+            for fut in as_completed(futs):
+                lane = futs[fut]
+                logs[lane] = fut.result()
 
         summary = {
             "started": stamp,
@@ -498,8 +573,11 @@ def main() -> int:
         print(json.dumps(summary, indent=2), flush=True)
 
         # Nonzero only for true infra gaps / draft crash — not content/API/wall/lock.
+        # Gemini side-lane failure never fails the overnight job (CF/NV primary).
         hard = {"draft_failed", "missing_cf_token", "missing_nv_key"}
-        for lane_log in logs.values():
+        for name, lane_log in logs.items():
+            if name == "gemini":
+                continue
             if lane_log.get("stop_reason") in hard:
                 return 2
         return 0
