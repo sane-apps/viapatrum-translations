@@ -48,9 +48,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a17` | done | entries 65–68 (ed. fr.75–80; Mt 6:16–25); entry 65 lacuna disclosed |
 | `cyril-matt-frag-a18` | done | entries 69–72 (ed. fr.81–84; Mt 6:25–7:5) |
 | `cyril-matt-frag-a19` | done | entries 73–76 (ed. fr.85–89; Mt 7:7–26) |
-| next | free | `cyril-matt-frag-a20` from entry 77 |
+| `cyril-matt-frag-a20` | done | entries 77–80 (ed. fr.92–96; Mt 8:3–18) |
+| `cyril-matt-frag-a21` | done | entries 81–84 (ed. fr.97–100; Mt 8:18–26) |
+| `cyril-matt-frag-a22` | done | entries 85–88 (ed. fr.101–104; Mt 8:29–9:13); entry 87 <πρός> disclosed |
+| `cyril-matt-frag-a23` | done | entries 89–92 (ed. fr.105–108; Mt 9:11–22) |
+| next | free | `cyril-matt-frag-a24` from entry 93 |
 
-Tip SHA: `ec85659` on branch `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: PENDING_TIP on branch `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
