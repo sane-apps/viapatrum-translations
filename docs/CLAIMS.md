@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-8-mine | done | De An. 8; absurd to strip from bodily census because unlike other bodies — private differences mark the Author’s magnificence | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-6-mine | done | De An. 6; Platonists confuse by subtlety: body animal/inanimate; soul moves body — therefore not non-body | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-5-mine | done | De An. 5; summon Eubulus/Aristotle against soul’s corpulence — yet more claim body for the soul | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-10-mine | done | De An. 10; faith’s stance: determine the soul simple/uniform in substance; some add another natural spirit — living vs breathing not two substances | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
