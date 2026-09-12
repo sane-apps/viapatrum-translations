@@ -25,6 +25,9 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-matt-frag-a4 | done | CPG 5206 entries 13–16 (ed. fr.14–17; Mt 2:20–3:2) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a3 | done | CPG 5206 entries 9–12 (ed. fr.10–13; Mt 2:3–2:9) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a2 | done | CPG 5206 entries 5–8 (ed. fr.5–6,8–9; Mt 1:16–1:24) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a1 | done | CPG 5206 fr.1–4 (Mt 1:1–1:12 heads) Pass A≠B | 2026-09-12 | Air; khazarzar copy-text; IA OCR ignored; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-lock | done | Source lock CPG 5206 → matthew_fragments_source.json (290 fr.) | 2026-09-12 | Air; khazarzar copy-text; matia identical; IA OCR check-only |
 | commodian-carmen-1001-1053-mine | done | Carmen 1001–1053 | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
