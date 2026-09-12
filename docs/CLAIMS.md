@@ -25,6 +25,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-carmen-441-462-mine | done | Carmen 441–462 | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-carmen-401-440-mine | done | Carmen 401–440 | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-carmen-361-400-mine | done | Carmen 361–400 | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-carmen-321-360-mine | done | Carmen 321–360 | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
