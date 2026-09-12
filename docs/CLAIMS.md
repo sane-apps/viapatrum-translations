@@ -25,6 +25,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-matt-frag-a1 | done | CPG 5206 fr.1–4 (Mt 1:1–1:12 heads) Pass A≠B | 2026-09-12 | Air; khazarzar copy-text; IA OCR ignored; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-lock | done | Source lock CPG 5206 → matthew_fragments_source.json (290 fr.) | 2026-09-12 | Air; khazarzar copy-text; matia identical; IA OCR check-only |
 | commodian-carmen-1001-1053-mine | done | Carmen 1001–1053 | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-carmen-961-1000-mine | done | Carmen 961–1000 | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-carmen-921-960-mine | done | Carmen 921–960 | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
