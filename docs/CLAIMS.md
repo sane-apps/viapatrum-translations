@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-1-18-mine | done | Inst. 1.18: those who boast men became gods for virtue, gifts, or arts invent inept praise; God himself gave the way of living and healing herbs. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-13-mine | done | Inst. 3.13: since immortality is the highest good, prove the soul immortal; philosophers failed without divine learning; wisdom feeds the soul. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-7-mine | done | Inst. 2.7: in life's rule, trust own judgment and senses to seek truth; God gave each a share of wisdom—don't swallow others' errors. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-6-mine | done | Inst. 2.6: fools err twice—preferring God's works (elements) to God, then culting human-form images of those elements. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-20-mine | done | Inst. 3.20: Socrates a bit shrewder than those who think nature graspable by talent—but that project is not only foolish but impious; calling him wise is itself insane. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-11-mine | done | Inst. 3.11: consensus that religion must be taken up; error is religion without wisdom or wisdom without religion. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-1-16-mine | done | Inst. 1.16: after striking the head of religions, pursue the rest so people repent; final stroke—if goddesses, they are not gods. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
