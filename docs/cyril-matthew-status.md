@@ -44,9 +44,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a13` | done | entries 49–52 (ed. fr.55–58; Mt 5:25–30) |
 | `cyril-matt-frag-a14` | done | entries 53–56 (ed. fr.59–63; Mt 5:29–35) |
 | `cyril-matt-frag-a15` | done | entries 57–60 (ed. fr.66–69; Mt 5:42–6:1) |
-| next | free | `cyril-matt-frag-a16` from entry 61 |
+| `cyril-matt-frag-a16` | done | entries 61–64 (ed. fr.70–74; Mt 6:2–16) |
+| `cyril-matt-frag-a17` | done | entries 65–68 (ed. fr.75–80; Mt 6:16–25); entry 65 lacuna disclosed |
+| `cyril-matt-frag-a18` | done | entries 69–72 (ed. fr.81–84; Mt 6:25–7:5) |
+| `cyril-matt-frag-a19` | done | entries 73–76 (ed. fr.85–89; Mt 7:7–26) |
+| next | free | `cyril-matt-frag-a20` from entry 77 |
 
-Tip SHA: PENDING_TIP on `main`.
+Tip SHA: PENDING_TIP on branch `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
