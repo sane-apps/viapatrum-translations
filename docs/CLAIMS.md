@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| novatian-trinitate-8-mine | done | De Trinitate VIII apostoli / universal call Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | novatian-trinitate-29-mine | done | De Trinitate XXIX Spiritus Sanctus Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | novatian-trinitate-25-mine | done | De Trinitate XXV mortuus pro nobis Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | novatian-trinitate-24-mine | done | De Trinitate XXIV Filius Dei et filius hominis Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
