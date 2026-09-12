@@ -25,6 +25,11 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-4-43-mine | done | Adv. Marc. 4.43 third-day rise; Emmaus; hands/feet vs phantasm | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
+| tertullian-marcion-5-2-mine | done | Adv. Marc. 5.2 law yields to gospel in Creator’s Christ | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
+| tertullian-marcion-3-7-mine | done | Adv. Marc. 3.7 two advents; humility then glory | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
+| tertullian-marcion-3-19-mine | done | Adv. Marc. 3.19 reign from wood; Ps 21; burial→resurrection | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
+| tertullian-marcion-3-18-mine | done | Adv. Marc. 3.18 cross passion figured; Isaac/Joseph/Moses | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-1-24-mine | done | Adv. Marc. 1.24 imperfect goodness; soul-only half-salvation | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-4-40-mine | done | Adv. Marc. 4.40 Pascha/law figure; bread/wine = true body/blood | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-2-27-mine | done | Adv. Marc. 2.27 nihil dignius quam salus; God little→man great | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
