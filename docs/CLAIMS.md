@@ -873,12 +873,23 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | origen-samuel28-oet | done | Origen Hom. 1 Sam 28 §§1–10 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III lock; after Marcion close `9af4f02`; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed; never Cyril Matthew |
 
+| origen-lamentations-111-118-oet | done | Origen Lam. fr. §§111–118 Pass A≠B OET CLOSEOUT (no previous English) | 2026-09-12 | GCS III; 118/118; OCR disclosed; jer-h20b intact; never Cyril Matthew |
+| origen-lamentations-101-110-oet | done | Origen Lam. fr. §§101–110 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; OCR disclosed; jer-h20b intact; never Cyril Matthew |
+| origen-lamentations-91-100-oet | done | Origen Lam. fr. §§91–100 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; OCR disclosed; jer-h20b intact; never Cyril Matthew |
+| origen-lamentations-81-90-oet | done | Origen Lam. fr. §§81–90 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam71–80; OCR disclosed; jer-h20b intact; never Cyril Matthew |
+| origen-lamentations-71-80-oet | done | Origen Lam. fr. §§71–80 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam61–70; OCR disclosed; jer-h20b intact; never Cyril Matthew |
+| origen-lamentations-61-70-oet | done | Origen Lam. fr. §§61–70 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam51–60; OCR disclosed; jer-h20b intact; never Cyril Matthew |
+| origen-lamentations-51-60-oet | done | Origen Lam. fr. §§51–60 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam41–50; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 | origen-lamentations-41-50-oet | done | Origen Lam. fr. §§41–50 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam31–40; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 | origen-lamentations-31-40-oet | done | Origen Lam. fr. §§31–40 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam21–30; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 | origen-lamentations-21-30-oet | done | Origen Lam. fr. §§21–30 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam11–20; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 | origen-lamentations-11-20-oet | done | Origen Lam. fr. §§11–20 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam1–10 `05515cf`; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 | origen-lamentations-1-10-oet | done | Origen Lam. fr. §§1–10 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Hom8 `2d06c2e`; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 
+
+| cyril-adoration2-17-26-oet | done | Cyril De adoratione Book 2 §§17–26 Pass A≠B OET CLOSEOUT (no previous complete English) | 2026-09-12 | PG 68; 26/26 Book 2; tip `f03141d` after `9253d03`; never Cyril Matthew; jer-h20b intact |
+| cyril-adoration2-9-16-oet | done | Cyril De adoratione Book 2 §§9–16 Pass A≠B OET | 2026-09-12 | PG 68; after tip `dae7765`; never Cyril Matthew; jer-h20b intact |
+| cyril-adoration2-1-8-oet | done | Cyril De adoratione Book 2 §§1–8 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; after Lam closeout `870bed6`; tip `dae7765`; never Cyril Matthew; jer-h20b intact |
 
 ## Do not claim these (owner / blocked)
 
