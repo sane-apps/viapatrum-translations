@@ -9,6 +9,8 @@ python3 scripts/claims.py start --agent YourName
 That locks the top `free` row. One slice per person. Statuses: `free` → `claimed` → `prepped` (machine crib) or `done` (human Pass B).  
 If a `claimed` row is older than 48 hours with no handoff, anyone may set it back to `free`.
 
+**Pass B scripture gate (standing, 2026-09-12):** do **not** mark a claim `done` if the Father quotes or clearly alludes to Scripture and `english[]` lacks an inline parenthetical full-name ref beside the clause. Apparatus / `added_allusions` / `bible_refs` alone fail. No new Adorations densify until the corpus upgrade pass is solid (`docs/scripture-ref-upgrade-pass.md` in the Project store). See `docs/SOP.md`, `TRANSLATION_QA.md` Bible refs, Project store `docs/scripture-refs-inline.md`.
+
 ## Open / active claims
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |

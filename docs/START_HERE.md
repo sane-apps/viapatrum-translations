@@ -19,7 +19,7 @@ Then:
 - Read the book’s `books/<slug>/SESSION_HANDOFF.md`.
 - Translate only the sections on that claim.
 - **Pass A:** literal gloss + lemmas in `reviews/justifications/<id>.json` (`pass_a_gloss`). Copy an existing file in that folder for the shape.
-- **Pass B:** reading English in `translations/*_english.json` → `english[]`. Same meaning as A, in the author’s voice. Do not paste A as B.
+- **Pass B:** reading English in `translations/*_english.json` → `english[]`. Same meaning as A, in the author’s voice. Do not paste A as B. Clear Scripture quotes/allusions need **inline parenthetical refs** in that English (not only `added_allusions` / `bible_refs`).
 - Title the thought, not the section number.
 - Finish with `python3 scripts/ai_promote.py --claim <id> --agent YourName`
 - Stop. Do not take a second slice. Do not deploy the website. Do not run Logos.

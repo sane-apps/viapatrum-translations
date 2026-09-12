@@ -46,6 +46,7 @@ Full bar: `books/ante-nicene-topics/docs/TRANSLATION_QA.md`.
 - English paragraphs only in `english[]` (this is Pass B). No Latin in the reading text.
 - Justification receipt required: `reviews/justifications/<id>.json` with `pass_a_gloss` ≠ joined Pass B.
 - Use `kind` / `translator_notes` / `added_allusions` for editorial material.
+- **Inline scripture refs (hard gate):** whenever the Father quotes or clearly alludes to Scripture, Pass B `english[]` must carry a parenthetical citation beside the clause (full book name + chapter:verse, Julian pattern). `added_allusions` / justification `bible_refs` alone do **not** pass — readers and Logos PBB both need the ref in the reading text. See `docs/LOGOS_MARKUP.md` and Project store `docs/scripture-refs-inline.md`.
 - Forbid placeholders: no `TODO`, `YYYY`, or raw `[n12]` footnote junk in English.
 
 ### 3. Review

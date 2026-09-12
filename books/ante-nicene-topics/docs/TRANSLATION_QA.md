@@ -74,6 +74,8 @@ File: `reviews/justifications/<excerpt_id>.json`
 
 Verify by quotation wording / citation map, not model memory (Hosea 11:1 vs Exodus cases).
 
+**Inline in Pass B (hard gate):** every clear quotation or clear allusion must appear as a parenthetical full-name citation in `english[]` / `pass_b_english` beside the clause (e.g. `“…text…” (Philippians 2:6–8)`). Recording the same ref only in `bible_refs`, `added_allusions`, `notes_covered`, or apparatus is a **fail** — web readers and Logos Personal Books both depend on the reading-column text. Uncertain guesses stay `possible` and may use a short caption; they still should not invent verse numbers.
+
 ## Public label
 
 Until Professional GTG: captions show real confidence.  
