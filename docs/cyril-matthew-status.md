@@ -22,7 +22,7 @@ Updated: 2026-09-12 (Air)
 | not locked | Reuss TU 61 (1957) | Copyrighted |
 
 - Source JSON: 290 fragment heads
-- Section ids = 1-based source-array order (edition fragment numbers can repeat later)
+- Section ids = 1-based source-array order
 
 ## Claims
 
@@ -36,13 +36,17 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a5` | done | entries 17–20 |
 | `cyril-matt-frag-a6` | done | entries 21–24 |
 | `cyril-matt-frag-a7` | done | entries 25–28 |
-| `cyril-matt-frag-a8` | done | entries 29–32 (ed. fr.32–36; Mt 4:3–17) |
-| `cyril-matt-frag-a9` | done | entries 33–36 (ed. fr.37–40; Mt 4:23–5:9) |
-| `cyril-matt-frag-a10` | done | entries 37–40 (ed. fr.41–46; Mt 5:13–18) |
-| `cyril-matt-frag-a11` | done | entries 41–44 (ed. fr.47–50; Mt 5:19–23) |
-| next | free | `cyril-matt-frag-a12` from entry 45 |
+| `cyril-matt-frag-a8` | done | entries 29–32 |
+| `cyril-matt-frag-a9` | done | entries 33–36 |
+| `cyril-matt-frag-a10` | done | entries 37–40 |
+| `cyril-matt-frag-a11` | done | entries 41–44 |
+| `cyril-matt-frag-a12` | done | entries 45–48 (ed. fr.51–54; Mt 5:23–26) |
+| `cyril-matt-frag-a13` | done | entries 49–52 (ed. fr.55–58; Mt 5:25–30) |
+| `cyril-matt-frag-a14` | done | entries 53–56 (ed. fr.59–63; Mt 5:29–35) |
+| `cyril-matt-frag-a15` | done | entries 57–60 (ed. fr.66–69; Mt 5:42–6:1) |
+| next | free | `cyril-matt-frag-a16` from entry 61 |
 
-Tip SHA: `54860de` on `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: PENDING_TIP on `main`.
 
 ## Guards
 
