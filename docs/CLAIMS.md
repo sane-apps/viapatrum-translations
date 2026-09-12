@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| minucius-octavius-31-mine | done | Oct. 31; demons’ coalition lied incest banquet to stain chastity’s glory; Fronto testified as orator not affirmer | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-29-mine | done | Oct. 29; you ascribe a guilty man and his cross to our religion — far from truth’s neighborhood; cross sign natural/common | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-27-mine | done | Oct. 27; impure spirits/demons hide under statues; inspire prophets; fake presence | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-20-mine | done | Oct. 20; philosophers already named one God; providence of one God; leave fables | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
