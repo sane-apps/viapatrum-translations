@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-4-12-mine | done | Lactantius Inst. 4.12 virgin / Emmanuel / two advents Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-13-mine | done | Lactantius Inst. 4.13 double nativity / God-and-man / true temple Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-18-mine | done | Lactantius Inst. 4.18 passion-for-many / true temple Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-14-mine | done | Lactantius Inst. 4.14 aeternum templum Pass A≠B | 2026-09-12 | locked Latin CSEL; chose over 4.18; beyond 2.17/5.18/4.25/4.26/4.10/4.29; Cyprian 465; jer-h20b intact |
