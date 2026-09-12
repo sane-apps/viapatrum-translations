@@ -76,9 +76,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a45` | done | entries 177–180 (ed. fr.2–5; Mt 17:6–15); <τὰ> on 180 disclosed |
 | `cyril-matt-frag-a46` | done | entries 181–184 (ed. fr.6–9; Mt 17:17–23); source fr labels after 200 disclosed |
 | `cyril-matt-frag-a47` | done | entries 185–188 (ed. fr.210–213; Mt 17:22–18:1) |
-| next | free | `cyril-matt-frag-a48` from entry 189 |
+| `cyril-matt-frag-a48` | done | entries 189–192 (ed. fr.214–217; Mt 18:10–25); supplied on 189–190 disclosed |
+| `cyril-matt-frag-a49` | done | entries 193–196 (ed. fr.218–221; Mt 19:17–29); mid-phrase break on 193 disclosed |
+| `cyril-matt-frag-a50` | done | entries 197–200 (ed. fr.222,225–227; Mt 19:29–20:23); ed.fr.223–224 skip; supplied on 199 |
+| `cyril-matt-frag-a51` | done | entries 201–204 (ed. fr.228–231; Mt 21:1–9) |
+| next | free | `cyril-matt-frag-a52` from entry 205 |
 
-Tip SHA: `026c09e` content / cherry `9a5958f` (docs; work `c668238` a44–a47) on `main` via clean branch `cursor/cyril-matthew-clean-1dff`.
+Tip SHA: `TIP_PLACEHOLDER` (clean tip; no Arnobius mix) on branch `cursor/cyril-matthew-clean-1dff`..
 
 ## Guards
 
