@@ -14,11 +14,6 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
 
-| jer-h11 | prepped | origen-jeremiah-samuel | Homily 11 §§11.1–11.5 | overnight-mini-nv | 2026-09-11 | wip/jer-h11 | machine crib (Pass A/lemmas/OCR); not reading English |
-
-| jer-h12a | prepped | origen-jeremiah-samuel | Homily 12 §§12.1–12.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h12a | machine crib (Pass A/lemmas/OCR); not reading English |
-| jer-h12b | prepped | origen-jeremiah-samuel | Homily 12 §§12.7–12.12 | overnight-mini-nv | 2026-09-11 | wip/jer-h12b | machine crib (Pass A/lemmas/OCR); not reading English |
-| jer-h14a | prepped | origen-jeremiah-samuel | Homily 14 §§14.1–14.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h14a | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h14b | prepped | origen-jeremiah-samuel | Homily 14 §§14.7–14.12 | overnight-mini-nv | 2026-09-11 | wip/jer-h14b | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h14c | prepped | origen-jeremiah-samuel | Homily 14 §§14.13–14.18 | overnight-mini-nv | 2026-09-11 | wip/jer-h14c | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h15 | prepped | origen-jeremiah-samuel | Homily 15 §§15.1–15.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h15 | machine crib (Pass A/lemmas/OCR); not reading English |
@@ -45,6 +40,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| jer-h14a | done | Homily 14 §§14.1–14.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T035054Z-jer-h14a |
+| jer-h12b | done | Homily 12 §§12.7–12.12 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T034847Z-jer-h12b |
+| jer-h12a | done | Homily 12 §§12.1–12.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T034641Z-jer-h12a |
+| jer-h11 | done | Homily 11 §§11.1–11.5 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T034450Z-jer-h11 |
 | jer-h13 | done | Homily 13 §§13.1–13.3 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033948Z-jer-h13 |
 | jer-h5c | done | Homily 5 §§5.13–5.17 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033821Z-jer-h5c |
 | jer-h5b | done | Homily 5 §§5.7–5.12 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033544Z-jer-h5b |
