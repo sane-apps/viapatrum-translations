@@ -33,7 +33,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a1` | done | fr.1–4 Pass A≠B |
 | next | free | `cyril-matt-frag-a2` from fr.5 |
 
-Tip SHAs: commit on branch `cursor/cyril-matthew-fragments-1dff` after push (see grind-progress).
+Tip SHA: `452e8f3` (`452e8f3800a2cd96f19ce4c5bd758b010ceac130`) on `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
