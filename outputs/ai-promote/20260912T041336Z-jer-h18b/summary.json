@@ -1,0 +1,441 @@
+{
+  "claim": "jer-h18b",
+  "agent": "StephanMini",
+  "lane": "cf",
+  "sections": [
+    "18.6",
+    "18.7",
+    "18.8",
+    "18.9",
+    "18.10"
+  ],
+  "draft_model": "@cf/qwen/qwen3-30b-a3b-fp8",
+  "checker_a_chain": [
+    "@cf/google/gemma-4-26b-a4b-it"
+  ],
+  "checker_b_chain": [
+    "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+  ],
+  "checker_a_used": "@cf/google/gemma-4-26b-a4b-it",
+  "checker_b_used": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "ok": true,
+  "api_failure": false,
+  "results": [
+    {
+      "section": "18.6",
+      "structural": {
+        "ok": true,
+        "checks": {
+          "parse_json": true,
+          "has_section": true,
+          "thought_title": true,
+          "has_pass_a": true,
+          "has_pass_b": true,
+          "pass_a_ne_pass_b": true,
+          "no_archaic_anf_smell": true,
+          "no_fence_leak": true,
+          "english_complete": true
+        },
+        "notes": []
+      },
+      "checker_a": {
+        "ok": true,
+        "model": "@cf/google/gemma-4-26b-a4b-it",
+        "ms": 1501,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": true,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/google/gemma-4-26b-a4b-it",
+            "ms": 1501,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": true,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      },
+      "checker_b": {
+        "ok": true,
+        "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "ms": 5201,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [
+            "The English translation accurately conveys the sense of the Greek text, with no material invention of ideas or ANF/Victorian paste.",
+            "The translation maintains the same tone and style as the original Greek, without any significant deviations or additions."
+          ],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": true,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+            "ms": 5201,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [
+                "The English translation accurately conveys the sense of the Greek text, with no material invention of ideas or ANF/Victorian paste.",
+                "The translation maintains the same tone and style as the original Greek, without any significant deviations or additions."
+              ],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": true,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      }
+    },
+    {
+      "section": "18.7",
+      "structural": {
+        "ok": true,
+        "checks": {
+          "parse_json": true,
+          "has_section": true,
+          "thought_title": true,
+          "has_pass_a": true,
+          "has_pass_b": true,
+          "pass_a_ne_pass_b": true,
+          "no_archaic_anf_smell": true,
+          "no_fence_leak": true,
+          "english_complete": true
+        },
+        "notes": []
+      },
+      "checker_a": {
+        "ok": true,
+        "model": "@cf/google/gemma-4-26b-a4b-it",
+        "ms": 1340,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": true,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/google/gemma-4-26b-a4b-it",
+            "ms": 1340,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": true,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      },
+      "checker_b": {
+        "ok": true,
+        "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "ms": 1947,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [
+            "The English accurately conveys the sense of the Greek text, with no material invention or ANF/Victorian paste."
+          ],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": false,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+            "ms": 1947,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [
+                "The English accurately conveys the sense of the Greek text, with no material invention or ANF/Victorian paste."
+              ],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": false,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      }
+    },
+    {
+      "section": "18.8",
+      "structural": {
+        "ok": true,
+        "checks": {
+          "parse_json": true,
+          "has_section": true,
+          "thought_title": true,
+          "has_pass_a": true,
+          "has_pass_b": true,
+          "pass_a_ne_pass_b": true,
+          "no_archaic_anf_smell": true,
+          "no_fence_leak": true,
+          "english_complete": true
+        },
+        "notes": []
+      },
+      "checker_a": {
+        "ok": true,
+        "model": "@cf/google/gemma-4-26b-a4b-it",
+        "ms": 1011,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": true,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/google/gemma-4-26b-a4b-it",
+            "ms": 1011,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": true,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      },
+      "checker_b": {
+        "ok": true,
+        "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "ms": 2350,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [
+            "The translation accurately conveys the sense of the Greek text.",
+            "No material invention or ANF/Victorian paste was detected."
+          ],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": true,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+            "ms": 2350,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [
+                "The translation accurately conveys the sense of the Greek text.",
+                "No material invention or ANF/Victorian paste was detected."
+              ],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": true,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      }
+    },
+    {
+      "section": "18.9",
+      "structural": {
+        "ok": true,
+        "checks": {
+          "parse_json": true,
+          "has_section": true,
+          "thought_title": true,
+          "has_pass_a": true,
+          "has_pass_b": true,
+          "pass_a_ne_pass_b": true,
+          "no_archaic_anf_smell": true,
+          "no_fence_leak": true,
+          "english_complete": true
+        },
+        "notes": []
+      },
+      "checker_a": {
+        "ok": true,
+        "model": "@cf/google/gemma-4-26b-a4b-it",
+        "ms": 1216,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": true,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/google/gemma-4-26b-a4b-it",
+            "ms": 1216,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": true,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      },
+      "checker_b": {
+        "ok": true,
+        "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "ms": 2828,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [
+            "The translation accurately conveys the meaning of the Greek text.",
+            "The English text does not invent sense or assert claims with no support in the Greek."
+          ],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": false,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+            "ms": 2828,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [
+                "The translation accurately conveys the meaning of the Greek text.",
+                "The English text does not invent sense or assert claims with no support in the Greek."
+              ],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": false,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      }
+    },
+    {
+      "section": "18.10",
+      "structural": {
+        "ok": true,
+        "checks": {
+          "parse_json": true,
+          "has_section": true,
+          "thought_title": true,
+          "has_pass_a": true,
+          "has_pass_b": true,
+          "pass_a_ne_pass_b": true,
+          "no_archaic_anf_smell": true,
+          "no_fence_leak": true,
+          "english_complete": true
+        },
+        "notes": []
+      },
+      "checker_a": {
+        "ok": true,
+        "model": "@cf/google/gemma-4-26b-a4b-it",
+        "ms": 1363,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": true,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/google/gemma-4-26b-a4b-it",
+            "ms": 1363,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": true,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      },
+      "checker_b": {
+        "ok": true,
+        "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "ms": 3200,
+        "parsed": {
+          "verdict": "pass",
+          "reasons": [
+            "The English accurately conveys the sense of the Greek text, with no material invention or ANF/Victorian paste."
+          ],
+          "grounded_in_greek": true,
+          "pass_b_subset_of_pass_a": true,
+          "title_is_thought": true,
+          "anf_or_archaic_smell": false
+        },
+        "api_error": false,
+        "tried": [
+          {
+            "ok": true,
+            "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+            "ms": 3200,
+            "parsed": {
+              "verdict": "pass",
+              "reasons": [
+                "The English accurately conveys the sense of the Greek text, with no material invention or ANF/Victorian paste."
+              ],
+              "grounded_in_greek": true,
+              "pass_b_subset_of_pass_a": true,
+              "title_is_thought": true,
+              "anf_or_archaic_smell": false
+            },
+            "api_error": false
+          }
+        ]
+      }
+    }
+  ]
+}
