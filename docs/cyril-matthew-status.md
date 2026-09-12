@@ -74,7 +74,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a43` | done | entries 169–172 (ed. fr.194–197; Mt 16:20–17:1); lacunae on 169 disclosed |
 | next | free | `cyril-matt-frag-a44` from entry 173 |
 
-Tip SHA: `TIP_PLACEHOLDER` on branch `cursor/cyril-matthew-fragments-1dff`..
+Tip SHA: `ad1737e` on branch `cursor/cyril-matthew-fragments-1dff`..
 
 ## Guards
 
