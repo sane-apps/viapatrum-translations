@@ -101,6 +101,50 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | novatian-trinitate-15-mine | done | Novatian De Trinitate XV de sursum / immortalitas / ante Abraham / unum sumus | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
 | novatian-trinitate-14-mine | done | Novatian De Trinitate XIV non homo tantum / uerbum caro / de caelo | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
 | novatian-trinitate-9-mine | done | Novatian De Trinitate IX regula / Filium / expectatio gentium | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a59 | done | CPG 5206 entries 233–236 (ed. fr.261–264; Mt 23:35–39) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; stray digits on 236 disclosed |
+| cyril-matt-frag-a58 | done | CPG 5206 entries 229–232 (ed. fr.257–260; Mt 23:22–36) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; stray digits on 232 disclosed |
+| cyril-matt-frag-a57 | done | CPG 5206 entries 225–228 (ed. fr.253–256; Mt 22:43–23:15) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; supplied <τὸ τὰς> on 228 disclosed |
+| cyril-matt-frag-a56 | done | CPG 5206 entries 221–224 (ed. fr.249–252; Mt 22:15–42) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; mid-phrase breaks on 221–222; supplied <εἰπεῖν> on 224 disclosed |
+| cyril-matt-frag-a55 | done | CPG 5206 entries 217–220 (ed. fr.245–248; Mt 22:2–13) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a54 | done | CPG 5206 entries 213–216 (ed. fr.241–244; Mt 21:37–43) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.240 skip |
+| cyril-matt-frag-a53 | done | CPG 5206 entries 209–212 (ed. fr.236–239; Mt 21:17–41) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a52 | done | CPG 5206 entries 205–208 (ed. fr.232–235; Mt 21:9–14) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a51 | done | CPG 5206 entries 201–204 (ed. fr.228–231; Mt 21:1–9) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a50 | done | CPG 5206 entries 197–200 (ed. fr.222,225–227; Mt 19:29–20:23) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.223–224 skip; supplied on 199 disclosed |
+| cyril-matt-frag-a49 | done | CPG 5206 entries 193–196 (ed. fr.218–221; Mt 19:17–29) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; mid-phrase break on 193 disclosed |
+| cyril-matt-frag-a48 | done | CPG 5206 entries 189–192 (ed. fr.214–217; Mt 18:10–25) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; supplied on 189–190 disclosed |
+| cyril-matt-frag-a47 | done | CPG 5206 entries 185–188 (ed. fr.210–213; Mt 17:22–18:1) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a46 | done | CPG 5206 entries 181–184 (ed. fr.6–9; Mt 17:17–23) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; source fr labels 6–9 after fr.200 disclosed |
+| cyril-matt-frag-a45 | done | CPG 5206 entries 177–180 (ed. fr.2–5; Mt 17:6–15) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; <τὰ> on 180 disclosed |
+| cyril-matt-frag-a44 | done | CPG 5206 entries 173–176 (ed. fr.198–200,1; Mt 17:2–5) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; source fr.1 after fr.200 disclosed |
+| cyril-matt-frag-a43 | done | CPG 5206 entries 169–172 (ed. fr.194–197; Mt 16:20–17:1) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; lacunae on 169 disclosed |
+| cyril-matt-frag-a42 | done | CPG 5206 entries 165–168 (ed. fr.189,191–193; Mt 15:34–16:19) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.190 skip |
+| cyril-matt-frag-a41 | done | CPG 5206 entries 161–164 (ed. fr.185–188; Mt 15:17–31) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a40 | done | CPG 5206 entries 157–160 (ed. fr.181–184; Mt 14:27–15:14) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a39 | done | CPG 5206 entries 153–156 (ed. fr.177–180; Mt 14:19–23) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a38 | done | CPG 5206 entries 149–152 (ed. fr.172,174–176; Mt 13:52–14:19) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.173 skip |
+| cyril-matt-frag-a37 | done | CPG 5206 entries 145–148 (ed. fr.167–169,171; Mt 13:16–13:50) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.170 skip |
+| cyril-matt-frag-a36 | done | CPG 5206 entries 141–144 (ed. fr.163–166; Mt 12:43–13:15) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a35 | done | CPG 5206 entries 137–140 (ed. fr.159–162; Mt 12:35–41) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; supplied <εἰ> on 140 disclosed |
+| cyril-matt-frag-a34 | done | CPG 5206 entries 133–136 (ed. fr.155–158; Mt 12:29–35) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a33 | done | CPG 5206 entries 129–132 (ed. fr.150,152–154; Mt 11:30–12:28) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.151 skip |
+| cyril-matt-frag-a32 | done | CPG 5206 entries 125–128 (ed. fr.146–149; Mt 11:27–28) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; supplied stretches on 125 disclosed |
+| cyril-matt-frag-a31 | done | CPG 5206 entries 121–124 (ed. fr.142–145; Mt 11:16–25) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.140–141 skip; supplied <τό> on 121 disclosed |
+| cyril-matt-frag-a30 | done | CPG 5206 entries 117–120 (ed. fr.136–139; Mt 11:11–12) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.135 skip |
+| cyril-matt-frag-a29 | done | CPG 5206 entries 113–116 (ed. fr.130,132–134; Mt 10:40–11:11) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.131 skip; entry 115 break disclosed |
+| cyril-matt-frag-a28 | done | CPG 5206 entries 109–112 (ed. fr.126–129; Mt 10:34–40) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; supplied <τοῦτ'> on 111 disclosed |
+| cyril-matt-frag-a27 | done | CPG 5206 entries 105–108 (ed. fr.122–125; Mt 10:25–32) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; entry 107 copy-text break disclosed |
+| cyril-matt-frag-a26 | done | CPG 5206 entries 101–104 (ed. fr.118–121; Mt 10:19–23) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a25 | done | CPG 5206 entries 97–100 (ed. fr.114–117; Mt 10:7–16) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a24 | done | CPG 5206 entries 93–96 (ed. fr.109,111–113; Mt 9:23–10:6) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a23 | done | CPG 5206 entries 89–92 (ed. fr.105–108; Mt 9:11–22) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a22 | done | CPG 5206 entries 85–88 (ed. fr.101–104; Mt 8:29–9:13) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; entry 87 <πρός> disclosed |
+| cyril-matt-frag-a21 | done | CPG 5206 entries 81–84 (ed. fr.97–100; Mt 8:18–26) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a20 | done | CPG 5206 entries 77–80 (ed. fr.92–96; Mt 8:3–18) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a19 | done | CPG 5206 entries 73–76 (ed. fr.85–89; Mt 7:7–26) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a18 | done | CPG 5206 entries 69–72 (ed. fr.81–84; Mt 6:25–7:5) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a17 | done | CPG 5206 entries 65–68 (ed. fr.75–80; Mt 6:16–25) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; entry 65 lacuna disclosed |
+| cyril-matt-frag-a16 | done | CPG 5206 entries 61–64 (ed. fr.70–74; Mt 6:2–16) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a15 | done | CPG 5206 entries 57–60 (ed. fr.66–69; Mt 5:42–6:1) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a14 | done | CPG 5206 entries 53–56 (ed. fr.59–63; Mt 5:29–35) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a13 | done | CPG 5206 entries 49–52 (ed. fr.55–58; Mt 5:25–30) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
