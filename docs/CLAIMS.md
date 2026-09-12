@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-4-mine | done | Instr. 4 Jupiter; Cretan birth; robbed father; God made heaven first — not Jupiter | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-3-mine | done | Instr. 3 Saturn; aging/devouring sons proves no god; earthly king called himself god | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-18-mine | done | Instr. 18 empty Nemesians; wood Diana; flee shrines of death; you worship priests not gods | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-17-mine | done | Instr. 17 Ammudas and Great God; gold removed god fails; false prophet silent; flee wooden numina | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
