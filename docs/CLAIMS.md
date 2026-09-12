@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| minucius-octavius-6-mine | done | Oct. 6 Caecilius: better to keep ancestral religiones and local gods than judge numina. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| minucius-octavius-7-mine | done | Oct. 7 Caecilius: ancestral auguries/sacra/temples prove gods' presence and true cult. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| minucius-octavius-11-mine | done | Oct. 11 Caecilius mocks world-fire, resurrection, eternal reward/penalty, and election vs will. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| minucius-octavius-5-mine | done | Oct. 5 Caecilius: human mediocrity cannot settle divina; fortuna not providentia rules. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-1-mine | done | Adv. Nat. 2.1 why rage at Christ's name?—He seized no empire, wealth, lust, or arrogant insults. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-69-mine | done | Adv. Nat. 2.69 'new name/religion' charge: medicine/philosophy/arts also began in time. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-49-mine | done | Adv. Nat. 2.49 few good/wise men do not make the human race worthy; part ≠ whole. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
