@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-2-9-mine | done | Inst. 2.9: return to God's world-making from sacred letters; heaven seat, earth founded; how fire/water made only Maker knows. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-12-mine | done | Inst. 1.12: Saturn's past reign and impiety prove he is not God; eternity cannot be 'sated' by years. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-9-mine | done | Inst. 1.9: Hercules famed for virtue yet polluted the world with lusts; slave of vices cannot be divine. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-2-mine | done | Inst. 1.2: illuminating truth need not open with providence-vs-chance, yet nothing can be argued without providence. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-1-mine | done | Inst. 3.1: truth still thought hidden by vulgar superstition and philosophers who muddy it; they were never so truthful as when they confessed ignorance. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-11-mine | done | Inst. 2.11: reject earth-uterus animal birth; God formed the human; how He did it He need not disclose. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-1-19-mine | done | Inst. 1.19: giving equal honor to others means the Maker is not culted; religion is believing Him one and alone. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
