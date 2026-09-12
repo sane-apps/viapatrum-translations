@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-paenitentia-3-mine | done | De Paen. 3; carnal and spiritual delicts equal before God; deed and will; common medicine of repentance | 2026-09-12 | Pass A≠B; Latin Library De Paenitentia lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-paenitentia-1-mine | done | De Paen. 1; blind know repentance as passion; without God miss its ratio; even repent good deeds | 2026-09-12 | Pass A≠B; Latin Library De Paenitentia lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-saeculi-fine-mine | done | Commodian De Saeculi Istius Fine; trumpet; Lord judges unjust in fire; just untouched; Gehenna after thousand years | 2026-09-12 | Pass A≠B; Latin Library De Saeculi lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-20-mine | done | Instr. 20 mountain gods; alien mind swears; leave field-numina for the Lord | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
