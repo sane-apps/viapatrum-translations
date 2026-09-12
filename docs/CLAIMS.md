@@ -14,7 +14,6 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
 
-| jer-h18a | prepped | origen-jeremiah-samuel | Homily 18 §§18.1–18.5 | overnight-mini-nv | 2026-09-11 | wip/jer-h18a | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h18b | prepped | origen-jeremiah-samuel | Homily 18 §§18.6–18.10 | overnight-mini-nv | 2026-09-11 | wip/jer-h18b | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h19 | prepped | origen-jeremiah-samuel | Homily 19 §§19.10–19.15 | overnight-mini-nv | 2026-09-11 | wip/jer-h19 | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h20a | prepped | origen-jeremiah-samuel | Homily 20 §§20.1–20.4 | overnight-mini-nv | 2026-09-11 | wip/jer-h20a | machine crib (Pass A/lemmas/OCR); not reading English |
@@ -34,6 +33,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| jer-h18a | done | Homily 18 §§18.1–18.5 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041056Z-jer-h18a |
 | jer-h17 | done | Homily 17 §§17.1–17.6 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T040832Z-jer-h17 |
 | jer-h16b | done | Homily 16 §§16.6–16.10 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T040531Z-jer-h16b |
 | jer-h16a | done | Homily 16 §§16.1–16.5 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T040247Z-jer-h16a |
