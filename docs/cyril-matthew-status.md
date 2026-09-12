@@ -88,9 +88,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a57` | done | entries 225–228 (ed. fr.253–256; Mt 22:43–23:15); supplied <τὸ τὰς> on 228 |
 | `cyril-matt-frag-a58` | done | entries 229–232 (ed. fr.257–260; Mt 23:22–36); stray digits on 232 |
 | `cyril-matt-frag-a59` | done | entries 233–236 (ed. fr.261–264; Mt 23:35–39); stray digits on 236 |
-| next | free | `cyril-matt-frag-a60` from entry 237 |
+| `cyril-matt-frag-a60` | done | entries 237–240 (ed. fr.265–266,268–269; Mt 24:1–20); ed.fr.267 skip; parallel blocks on 240 |
+| `cyril-matt-frag-a61` | done | entries 241–244 (ed. fr.270–273; Mt 24:28–36); parallel blocks on 244 |
+| `cyril-matt-frag-a62` | done | entries 245–248 (ed. fr.274–277; Mt 24:36–51); mid-phrase break on 248; parallel blocks on 246 |
+| `cyril-matt-frag-a63` | done | entries 249–252 (ed. fr.278–281; Mt 24:51–25:9); mid-phrase seam on 249; parallel blocks on 251 |
+| next | free | `cyril-matt-frag-a64` from entry 253 |
 
-Tip SHA: `04416af` docs / content `b0fb994` (a56–a59) via clean branch `cursor/cyril-matthew-clean-1dff`.
+Tip SHA: `2d07ca1` content / cherry on `main` (a60–a63) via clean branch `cursor/cyril-matthew-clean-1dff`.
 
 ## Guards
 
