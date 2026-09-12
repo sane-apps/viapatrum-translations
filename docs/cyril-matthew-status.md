@@ -98,7 +98,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a67` | done | entries 265–268 (ed. fr.295–298; Mt 26:39–53); supplied on 266; stray digit on 268 |
 | next | free | `cyril-matt-frag-a68` from entry 269 |
 
-Tip SHA: `0cd2c1d` content / cherry on `main` via clean branch `cursor/cyril-matthew-clean-1dff`.
+Tip SHA: `20e7ba4` content / cherry on `main` via clean branch `cursor/cyril-matthew-clean-1dff`.
 
 ## Guards
 
