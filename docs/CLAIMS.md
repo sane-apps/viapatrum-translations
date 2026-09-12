@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-5-mine | done | De An. 5; summon Eubulus/Aristotle against soul’s corpulence — yet more claim body for the soul | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-10-mine | done | De An. 10; faith’s stance: determine the soul simple/uniform in substance; some add another natural spirit — living vs breathing not two substances | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-2-mine | done | De An. 2; philosophers sometimes sense with us; God gifted the soul with public sense; philosophy inflates it for its own glory | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-14-mine | done | De An. 14; soul singular/simple/entire of itself; not composite/divisible — else mortal | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
