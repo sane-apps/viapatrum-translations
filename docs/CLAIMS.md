@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-2-16-mine | done | Adv. Marc. 2.16: seueritas good because just; ira/aemulatio tools of judge like physician’s instruments; not Epicurus’ uncaring god. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-1-26-mine | done | Adv. Marc. 1.26: god who neither rivals nor angers nor damns cannot keep discipline; forbid without avenge = tacit permission. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-2-11-mine | done | Adv. Marc. 2.11: until man’s sin God only good; then judge/severe—prior bonitas by nature, later seueritas by cause. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-5-10-mine | done | Adv. Marc. 5.10: what will they do who are baptized for the dead if dead do not rise?—dead=body; Marcion denies flesh’s rise, saves soul only. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-4-42-mine | done | Adv. Marc. 4.42: before Pilate; Isaiah judgment; Ps 2 nations/kings vs Lord and his Christ—passion fulfills Creator’s script. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-4-38-mine | done | Adv. Marc. 4.38: Christ knew John’s baptism source; if from heaven, not believing him rebuked—John’s sacrament is Creator’s. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-5-9-mine | done | Adv. Marc. 5.9: heretics always deny flesh’s resurrection; apostle refutes by defending what they deny—carnis resurrectio. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
