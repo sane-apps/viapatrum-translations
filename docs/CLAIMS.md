@@ -14,8 +14,6 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
 
-| jer-h14b | prepped | origen-jeremiah-samuel | Homily 14 §§14.7–14.12 | overnight-mini-nv | 2026-09-11 | wip/jer-h14b | machine crib (Pass A/lemmas/OCR); not reading English |
-| jer-h14c | prepped | origen-jeremiah-samuel | Homily 14 §§14.13–14.18 | overnight-mini-nv | 2026-09-11 | wip/jer-h14c | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h15 | prepped | origen-jeremiah-samuel | Homily 15 §§15.1–15.6 | overnight-mini-nv | 2026-09-11 | wip/jer-h15 | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h16a | prepped | origen-jeremiah-samuel | Homily 16 §§16.1–16.5 | overnight-mini-nv | 2026-09-11 | wip/jer-h16a | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h16b | prepped | origen-jeremiah-samuel | Homily 16 §§16.6–16.10 | overnight-mini-nv | 2026-09-11 | wip/jer-h16b | machine crib (Pass A/lemmas/OCR); not reading English |
@@ -40,6 +38,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| jer-h14c | done | Homily 14 §§14.13–14.18 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T035515Z-jer-h14c |
+| jer-h14b | done | Homily 14 §§14.7–14.12 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T035338Z-jer-h14b |
 | jer-h14a | done | Homily 14 §§14.1–14.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T035054Z-jer-h14a |
 | jer-h12b | done | Homily 12 §§12.7–12.12 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T034847Z-jer-h12b |
 | jer-h12a | done | Homily 12 §§12.1–12.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T034641Z-jer-h12a |
