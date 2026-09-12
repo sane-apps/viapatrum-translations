@@ -13,7 +13,7 @@ Ship each finished work to https://fathers.saneapps.com.
 |--------|-------------|-------|-------|
 | **done (site)** | `origen-heraclides-pascha` | Origen, *Dialogue with Heraclides*; *On Pascha* | Both on fathers.saneapps.com. Pascha literary pass 2026-09-11. Logos attach when asked. |
 | **done (site)** | `cyril-alexandria-adoration-1` | Cyril of Alexandria, *De adoratione* Book 1 | Post-Nicene. Book 1 of 17 on fathers.saneapps.com. Next: court treatises. |
-| **in progress** | `origen-jeremiah-samuel` | Homilies on Jeremiah (Greek) + Homily on 1 Kingdoms 28; GCS III | Homilies **1–20** Pass B (Homily **8** literary-polished Air OET tip). **1 Sam 28** English on tip `855673e`. **Lamentations** fr. §§1–40 OET on tip (118 total; continue §§41+). |
+| **in progress** | `origen-jeremiah-samuel` | Homilies on Jeremiah (Greek) + Homily on 1 Kingdoms 28; GCS III | Homilies **1–20** Pass B (Homily **8** literary-polished Air OET tip). **1 Sam 28** English on tip `855673e`. **Lamentations** fr. §§1–50 OET on tip (118 total; continue §§51+). |
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
 | **in progress** | `cyril-alexandria-adoration-1` | *De adoratione* Book 2 (Book 1 already on the site) | Book 2 Greek ingested (26 PG columns). English 1–8 drafted; not shipped until the book is complete. |
 | **in progress** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | Source locked (khazarzar PG 72 extract). `cyril-matt-frag-a1` fr.1–4 Pass A≠B done. Continue from fr.5. CPG 5219/5220 stay closed. |
