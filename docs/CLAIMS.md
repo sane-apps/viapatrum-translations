@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-rf-a19 | done | Arcadia §§73–76 Pass A≠B | 2026-09-12 | greek_clean_a19; grain-glory/hypostasis/right-hand body/lord of dead-living/no longer by flesh; jer-h20b intact |
 | cyril-rf-a18 | done | Arcadia §§69–72 Pass A≠B | 2026-09-12 | greek_clean_a18; blood-redemption/second Adam/Eph near/mediator-impassible; jer-h20b intact |
 | cyril-rf-a17 | done | Arcadia §§65–68 Pass A≠B | 2026-09-12 | greek_clean_a17; 1 John/Jordan/Jairus/Rom 3:25; jer-h20b intact |
 | cyril-rf-a16 | done | Arcadia §§61–64 Pass A≠B | 2026-09-12 | greek_clean_a16; throne/eucharist/last Adam/Life/1 John; jer-h20b intact |
