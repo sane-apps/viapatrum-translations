@@ -33,9 +33,12 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a2` | done | entries 5–8 (ed. fr.5–6,8–9; Mt 1:16–24) |
 | `cyril-matt-frag-a3` | done | entries 9–12 (ed. fr.10–13; Mt 2:3–9) |
 | `cyril-matt-frag-a4` | done | entries 13–16 (ed. fr.14–17; Mt 2:20–3:2) |
-| next | free | `cyril-matt-frag-a5` from entry 17 |
+| `cyril-matt-frag-a5` | done | entries 17–20 (ed. fr.18–21; Mt 3:6–9) |
+| `cyril-matt-frag-a6` | done | entries 21–24 (ed. fr.24–27; Mt 3:10–11) |
+| `cyril-matt-frag-a7` | done | entries 25–28 (ed. fr.28–31; Mt 3:12–4:3) |
+| next | free | `cyril-matt-frag-a8` from entry 29 |
 
-Tip SHA: `970e6e3` on `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: `e7d3ac8` on `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
