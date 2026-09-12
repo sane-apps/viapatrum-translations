@@ -52,9 +52,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a21` | done | entries 81–84 (ed. fr.97–100; Mt 8:18–26) |
 | `cyril-matt-frag-a22` | done | entries 85–88 (ed. fr.101–104; Mt 8:29–9:13); entry 87 <πρός> disclosed |
 | `cyril-matt-frag-a23` | done | entries 89–92 (ed. fr.105–108; Mt 9:11–22) |
-| next | free | `cyril-matt-frag-a24` from entry 93 |
+| `cyril-matt-frag-a24` | done | entries 93–96 (ed. fr.109,111–113; Mt 9:23–10:6) |
+| `cyril-matt-frag-a25` | done | entries 97–100 (ed. fr.114–117; Mt 10:7–16) |
+| `cyril-matt-frag-a26` | done | entries 101–104 (ed. fr.118–121; Mt 10:19–23) |
+| `cyril-matt-frag-a27` | done | entries 105–108 (ed. fr.122–125; Mt 10:25–32); entry 107 break disclosed |
+| next | free | `cyril-matt-frag-a28` from entry 109 |
 
-Tip SHA: `c22ce28` (docs; work tips `ec85659` a16–a19 + `5690aa6` a20–a23) on `main`.
+Tip SHA: `cab32f2` (docs; work tip `c0feb67` a24–a27) on `main`.
 
 ## Guards
 
