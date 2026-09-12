@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-5-2-mine | done | Adv. Marc. 5.2 law yields to gospel in Creator’s Christ | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-3-7-mine | done | Adv. Marc. 3.7 two advents; humility then glory | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-3-19-mine | done | Adv. Marc. 3.19 reign from wood; Ps 21; burial→resurrection | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-3-18-mine | done | Adv. Marc. 3.18 cross passion figured; Isaac/Joseph/Moses | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
