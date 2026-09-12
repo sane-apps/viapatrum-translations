@@ -15,11 +15,11 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done (site)** | `cyril-alexandria-adoration-1` | Cyril of Alexandria, *De adoratione* Book 1 | Post-Nicene. Book 1 of 17 on fathers.saneapps.com. Next: court treatises. |
 | **in progress** | `origen-jeremiah-samuel` | Homilies on Jeremiah (Greek) + Homily on 1 Kingdoms 28; GCS III | Homilies **1–20** Pass B (Homily **8** literary-polished Air OET tip). **1 Sam 28** English on tip `855673e`. **Lamentations** fr. §§1–118 OET COMPLETE (118/118). English on tip; site/Logos when owner asks. |
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
-| **in progress** | `cyril-alexandria-adoration-1` | *De adoratione* Book 2 (Book 1 already on the site) | Book 2 Greek 26 PG columns. English §§1–26 OET COMPLETE (Book 2 closeout tip). OET = no previous complete English. Next earliest OET per queue (Melito *On Pascha* unless owner stays in Cyril Books 3+). **Never Cyril Matthew.** |
+| **in progress** | `cyril-alexandria-adoration-1` | *De adoratione* Books 2–3 (Book 1 already on the site) | Book 2 English §§1–26 OET COMPLETE. Book 3 Greek ingested (21 PG columns). English §§1–10 OET tipped; §§11–21 remain. **Skip Melito.** OET = no previous complete English. **Never Cyril Matthew.** |
 | **in progress** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | Source locked (khazarzar PG 72 extract). `cyril-matt-frag-a1` fr.1–4 Pass A≠B done. Continue from fr.5. CPG 5219/5220 stay closed. |
 | queued | `cyril-alexandria-trinity-dialogue-1` | Trinity Dialogue 1 (CPG 5216) | After the court treatises |
-| queued | (new book or Melito slug) | Melito of Sardis, *On Pascha* | After Origen Book 2 unless staying in Origen/Cyril |
-| queued | (Irenaeus) | Irenaeus, *Demonstration of the Apostolic Preaching* | After Melito |
+| **skipped** | (Melito slug — do not open) | Melito of Sardis, *On Pascha* | Standing rule: **skip Melito**. Do not open that slug. |
+| queued | (Irenaeus) | Irenaeus, *Demonstration of the Apostolic Preaching* | After Melito (**skipped**); next cross-author OET if leaving Cyril Books 3+ |
 
 ## Origen remainder (after Book 2)
 
@@ -34,7 +34,7 @@ If staying in Origen after Heraclides + Pascha (Rank 1, no PD English):
 | 5 | `origen-song` | Comm. + 2 homilies on the Song; GCS VIII |
 | 6 | `origen-genesis-homilies` | 16 Genesis homilies; GCS VI (then the rest of the Hexateuch) |
 
-Cross-author Tier A above still inserts Melito then Irenaeus *Demonstration* after Book 2 unless the owner stays in Origen.
+Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if leaving Cyril. Owner currently stays in Cyril *De adoratione* Books 3+.
 
 ## Tier B — later
 
