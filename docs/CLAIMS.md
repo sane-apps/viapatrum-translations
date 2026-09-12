@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| minucius-octavius-20-mine | done | Oct. 20; philosophers already named one God; providence of one God; leave fables | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-paenitentia-5-mine | done | De Paen. 5; grace-shown repentance recalls to Lord; once known/taken must not be unsealed by repeating delict; contumacy vs fear | 2026-09-12 | Pass A≠B; Latin Library De Paenitentia lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-paenitentia-4-mine | done | De Paen. 4; same God destinés penalty and pledges pardon by repentance; repent and I will save; life before death | 2026-09-12 | Pass A≠B; Latin Library De Paenitentia lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-paenitentia-3-mine | done | De Paen. 3; carnal and spiritual delicts equal before God; deed and will; common medicine of repentance | 2026-09-12 | Pass A≠B; Latin Library De Paenitentia lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
