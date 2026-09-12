@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-matt-frag-a55 | done | CPG 5206 entries 217–220 (ed. fr.245–248; Mt 22:2–13) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a54 | done | CPG 5206 entries 213–216 (ed. fr.241–244; Mt 21:37–43) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.240 skip |
+| cyril-matt-frag-a53 | done | CPG 5206 entries 209–212 (ed. fr.236–239; Mt 21:17–41) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
+| cyril-matt-frag-a52 | done | CPG 5206 entries 205–208 (ed. fr.232–235; Mt 21:9–14) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a51 | done | CPG 5206 entries 201–204 (ed. fr.228–231; Mt 21:1–9) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a50 | done | CPG 5206 entries 197–200 (ed. fr.222,225–227; Mt 19:29–20:23) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.223–224 skip; supplied on 199 disclosed |
 | cyril-matt-frag-a49 | done | CPG 5206 entries 193–196 (ed. fr.218–221; Mt 19:17–29) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; mid-phrase break on 193 disclosed |

@@ -80,9 +80,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a49` | done | entries 193–196 (ed. fr.218–221; Mt 19:17–29); mid-phrase break on 193 disclosed |
 | `cyril-matt-frag-a50` | done | entries 197–200 (ed. fr.222,225–227; Mt 19:29–20:23); ed.fr.223–224 skip; supplied on 199 |
 | `cyril-matt-frag-a51` | done | entries 201–204 (ed. fr.228–231; Mt 21:1–9) |
-| next | free | `cyril-matt-frag-a52` from entry 205 |
+| `cyril-matt-frag-a52` | done | entries 205–208 (ed. fr.232–235; Mt 21:9–14) |
+| `cyril-matt-frag-a53` | done | entries 209–212 (ed. fr.236–239; Mt 21:17–41) |
+| `cyril-matt-frag-a54` | done | entries 213–216 (ed. fr.241–244; Mt 21:37–43); ed.fr.240 skip |
+| `cyril-matt-frag-a55` | done | entries 217–220 (ed. fr.245–248; Mt 22:2–13) |
+| next | free | `cyril-matt-frag-a56` from entry 221 |
 
-Tip SHA: `a804dad` content / cherry on `main` (docs; work `83f591e` a48–a51) via clean branch `cursor/cyril-matthew-clean-1dff`.
+Tip SHA: `TIP_PLACEHOLDER` (clean tip; no Arnobius mix) on branch `cursor/cyril-matthew-clean-1dff`..
 
 ## Guards
 
