@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-4-40-mine | done | Adv. Marc. 4.40 Pascha/law figure; bread/wine = true body/blood | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-2-27-mine | done | Adv. Marc. 2.27 nihil dignius quam salus; God little→man great | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-3-11-mine | done | Adv. Marc. 3.11 putative flesh vs true nativity | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-3-8-mine | done | Adv. Marc. 3.8 phantasma≠caro; mors/resurrectio foundation | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
