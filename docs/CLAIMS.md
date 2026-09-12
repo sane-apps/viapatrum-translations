@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-2-14-mine | done | Inst. 2.14: God sent angels to guard humans; they fell by earth-contagion; demons infest bodies and force recourse to their aids. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-26-mine | done | Inst. 3.26: only caelestis doctrina does what nature demands and philosophy cannot; God's few precepts change the whole man. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-14-mine | done | Inst. 3.14: Lucretius wrongly makes man discover wisdom; philosophy praised to heaven teaches nothing and cannot be virtue's teacher. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-29-mine | done | Inst. 3.29: fortuna per se nihil; philosophers rename chance as god/nature; arm against the true foe. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-18-mine | done | Inst. 2.18: keep man's sacrament; raise mind/eyes to heaven; God above man; upright stance marks heaven-worthy. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-13-mine | done | Inst. 2.13: flood judgment; Noah reserved; nations wandered from God-knowledge; gentile cults not original. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-5-mine | done | Inst. 2.5: omit senseless vanities; look where the true God dwells; world like a house feels nothing and serves its maker. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
