@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-4-9-mine | done | Inst. 4.9: Greeks say Logos better than our Verbum/Sermo—Logos means both speech and reason; He is God's voice and wisdom; even philosophers… | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-7-mine | done | Inst. 4.7: someone may ask who is so powerful, so dear to God, what name He has—whose first birth not only preceded the world but by prudence disposed and by virtue constructed it. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-5-mine | done | Inst. 4.5: since wisdom and religion cannot be pulled apart, discuss them; hard but must dare so truth frees many from error and ruin. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-2-mine | done | Inst. 4.2: called-wise and confessed-fools both failed—seek wisdom elsewhere; it coheres with religion inseparably. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-4-21-mine | done | Inst. 4.21: after ordering gospel preaching, a cloud took Him up on day 40 as Daniel showed; disciples go out; Nero/Vespasian fulfill predictions. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-4-1-mine | done | Inst. 4.1: one age's folly of many gods led to self-ignorance—true God's religion and humanity's reason lost from sight. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-4-30-mine | done | Inst. 4.30: heresies by demons' goads split the people—set truth in its home; next book on justice. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
