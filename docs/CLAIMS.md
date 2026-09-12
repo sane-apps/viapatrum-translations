@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-rf-a22 | done | Arcadia §§85–88 Pass A≠B | 2026-09-12 | greek_clean_a22; sanctify modes/one-from-both/firstborn/own Father/will+hand/David Lord/faith as to God; jer-h20b intact |
 | cyril-rf-a21 | done | Arcadia §§81–84 Pass A≠B | 2026-09-12 | greek_clean_a21; priest-at-right/Jordan-with-flesh/Spirit humanly-baptize divinely/serpent likeness; jer-h20b intact |
 | cyril-rf-a20 | done | Arcadia §§77–80 Pass A≠B | 2026-09-12 | greek_clean_a20; Gal4 Spirit / Eph ascent-descent / Phil kenosis / Col image / Heb radiance+sanctifier; jer-h20b intact |
 | cyril-rf-a19 | done | Arcadia §§73–76 Pass A≠B | 2026-09-12 | greek_clean_a19; grain-glory/hypostasis/right-hand body/lord of dead-living/no longer by flesh; jer-h20b intact |
