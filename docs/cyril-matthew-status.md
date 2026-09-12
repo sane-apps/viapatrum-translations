@@ -58,7 +58,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a27` | done | entries 105–108 (ed. fr.122–125; Mt 10:25–32); entry 107 break disclosed |
 | next | free | `cyril-matt-frag-a28` from entry 109 |
 
-Tip SHA: PENDING_TIP on branch `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: `c0feb67` on branch `cursor/cyril-matthew-fragments-1dff`..
 
 ## Guards
 
