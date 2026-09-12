@@ -26,6 +26,23 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-4-21-mine | done | Lactantius Inst. 4.21 ascensio / fundamenta ecclesiae / apostolorum praedicatio Pass A≠B | 2026-09-12 | locked Latin CSEL; ecc densify apostolic-succession; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-19-mine | done | Lactantius Inst. 4.19 crux / veil / resurrectio / immortalitas Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-15-mine | done | Lactantius Inst. 4.15 baptism / Word-works Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-12-mine | done | Lactantius Inst. 4.12 virgin / Emmanuel / two advents Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-13-mine | done | Lactantius Inst. 4.13 double nativity / God-and-man / true temple Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-18-mine | done | Lactantius Inst. 4.18 passion-for-many / true temple Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-14-mine | done | Lactantius Inst. 4.14 aeternum templum Pass A≠B | 2026-09-12 | locked Latin CSEL; chose over 4.18; beyond 2.17/5.18/4.25/4.26/4.10/4.29; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-29-mine | done | Lactantius Inst. 4.29 una substantia Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10; chose over 4.14/4.18; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-10-mine | done | Lactantius Inst. 4.10 figura hominis Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26; Cyprian 465; jer-h20b intact |
+| lactantius-inst-4-26-mine | done | Lactantius Inst. 4.26 crucis ratio Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25; Cyprian 465; jer-h20b intact |
+| victorinus-fabrica-christ-adam-mine | done | Victorinus Fabrica Christ–Adam days Pass A≠B | 2026-09-12 | locked Latin Migne/Wikisource+OCR; beyond victorinus_creation; Cyprian 404; jer-h20b intact |
+| lactantius-inst-4-25-mine | done | Lactantius Inst. 4.25 deus et homo Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18; Cyprian 404; jer-h20b intact |
+| commodian-instr-26-christ-mine | done | Commodian Instr. 26–27 Christ alive Pass A≠B | 2026-09-12 | locked Latin; beyond instr_1; Cyprian still 404/Unity-only; jer-h20b intact |
+| novatian-trinitate-verbum-caro-mine | done | Novatian Trin. 11 Verbum caro Pass A≠B | 2026-09-12 | restored novatian_trinitate.html; locked Latin; underfilled author; jer-h20b intact |
+| arnobius-nations-2-34-mine | done | Salvation-by-christ: Arnobius Nations 2.34 (`arnobius_nations_2_34`) + immortality powers | 2026-09-12 | Topics lane (StephanAir); locked Latin Pass A≠B; underfilled author; jer-h20b intact |
+| minucius-octavius-32-mine | done | True-worship: Minucius Octavius 32 (`minucius_octavius_32`) + pure-mind sacrifice | 2026-09-12 | Topics lane (StephanAir); locked Latin Pass A≠B; underfilled author; jer-h20b intact |
+| theophilus-autolycus-2-26-mine | done | Sin-and-death: Theophilus Autolycus 2.26 (`theophilus_autolycus_2_26`) + exile/resurrection remaking | 2026-09-12 | Topics lane (StephanAir); locked Greek Pass A≠B; underfilled author; jer-h20b intact |
 | hippolytus-ref-10-34-mine | done | Hippolytus Refutatio 10.34 (`hippolytus_ref_10_34`) + stance salvation-in-christ | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; underfilled author; new locus |
 | methodius-creatis-mine | done | Methodius De Creatis §2 (`methodius_creatis_faith_call`) + stance call-and-refusal | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; new treatise; underfilled expansion |
 | athenagoras-legatio-mine | done | Athenagoras Legatio 12 (`athenagoras_legatio_12_judge`) + stance final-judgment | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; underfilled author; stance explore/stances.json |
