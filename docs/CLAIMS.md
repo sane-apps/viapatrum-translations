@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-17-mine | done | Adv. Nat. 2.17 'rational superiority' fails—humans live irrationally; beasts also build/protect. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-57-mine | done | Adv. Nat. 2.57 rival soul-doctrines all 'probable'—human conjecture not divine certainty. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-46-mine | done | Adv. Nat. 2.46 God who is salus/virtue-head is not author of human misery. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-41-mine | done | Adv. Nat. 2.41 God did not send mild souls for amphitheater gore and luxury vanity. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-73-mine | done | Adv. Nat. 2.73 late Isis/Magna Mater cults; our religio now because Christ sent now. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-67-mine | done | Adv. Nat. 2.67 judge cause of leaving old religion—pagans also changed ancestral rites. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-58-mine | done | Adv. Nat. 2.58 pagans also ignorant of soul-maker/world-origin—suspicion not knowledge. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
