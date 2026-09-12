@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-10-mine | done | Inst. 3.10: summum bonum in sola religione; without religion man casts himself to beast-life. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-16-mine | done | Inst. 2.16: astrology/haruspicy/oracles/magic are demons' inventions; they block knowledge of the true God and invent human sacrifices. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-3-mine | done | Inst. 2.3: even the learned who see religiones' vanity persist; Cicero forbids public debate lest cults fall. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-5-mine | done | Inst. 1.5: omit prophets; cite poets/philosophers against polytheism; truth's force shows one God. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-28-mine | done | Inst. 3.28: life rests on knowing the generating God and pious cult; natura/fortuna names hide ignorance. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-18-mine | done | Inst. 3.18: souls survive after death; philosophers err into transmigration and self-killing. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-4-mine | done | Inst. 2.4: simulacra under human power—fragile, theft/fire/ruin; madness to fear what cannot guard itself. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
