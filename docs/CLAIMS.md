@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-39-mine | done | Instr. 39 life hung on wood; God himself hung for us | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-62-mine | done | Instr. 62 daily war; conquer lust; give from labor; martyrdom not idle | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-59-mine | done | Instr. 59 Christian dress/conduct; serve Christ with hymn; not world pomp | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-56-mine | done | Instr. 56 flee secular shows; do not love the world; world joys remove from Christ’s grace | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
