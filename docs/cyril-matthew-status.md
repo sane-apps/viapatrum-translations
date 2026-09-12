@@ -60,9 +60,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a29` | done | entries 113–116 (ed. fr.130,132–134; Mt 10:40–11:11); entry 115 break disclosed |
 | `cyril-matt-frag-a30` | done | entries 117–120 (ed. fr.136–139; Mt 11:11–12) |
 | `cyril-matt-frag-a31` | done | entries 121–124 (ed. fr.142–145; Mt 11:16–25); <τό> on 121 disclosed |
-| next | free | `cyril-matt-frag-a32` from entry 125 |
+| `cyril-matt-frag-a32` | done | entries 125–128 (ed. fr.146–149; Mt 11:27–28); supplied stretches on 125 disclosed |
+| `cyril-matt-frag-a33` | done | entries 129–132 (ed. fr.150,152–154; Mt 11:30–12:28) |
+| `cyril-matt-frag-a34` | done | entries 133–136 (ed. fr.155–158; Mt 12:29–35) |
+| `cyril-matt-frag-a35` | done | entries 137–140 (ed. fr.159–162; Mt 12:35–41); <εἰ> on 140 disclosed |
+| next | free | `cyril-matt-frag-a36` from entry 141 |
 
-Tip SHA: `68229d3` on branch `cursor/cyril-matthew-fragments-1dff`..
+Tip SHA: PENDING_TIP on branch `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
