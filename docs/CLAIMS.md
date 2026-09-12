@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-26-christ-mine | done | Commodian Instr. 26–27 Christ alive Pass A≠B | 2026-09-12 | locked Latin; beyond instr_1; Cyprian still 404/Unity-only; jer-h20b intact |
 | novatian-trinitate-verbum-caro-mine | done | Novatian Trin. 11 Verbum caro Pass A≠B | 2026-09-12 | restored novatian_trinitate.html; locked Latin; underfilled author; jer-h20b intact |
 | arnobius-nations-2-34-mine | done | Salvation-by-christ: Arnobius Nations 2.34 (`arnobius_nations_2_34`) + immortality powers | 2026-09-12 | Topics lane (StephanAir); locked Latin Pass A≠B; underfilled author; jer-h20b intact |
 | minucius-octavius-32-mine | done | True-worship: Minucius Octavius 32 (`minucius_octavius_32`) + pure-mind sacrifice | 2026-09-12 | Topics lane (StephanAir); locked Latin Pass A≠B; underfilled author; jer-h20b intact |
