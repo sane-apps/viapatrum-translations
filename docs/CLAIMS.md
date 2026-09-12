@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| two-ways-mine | done | Two-ways: Barnabas 18.1-2 (`barnabas_18_two_ways`) + stance two-ways | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
 | grace-assist-mine | done | Grace-and-assistance: Clement Stromata 3.7.57 (`clement_strom_3_7_57_grace`) + stance grace-assists | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
 | image-likeness-mine | done | Image-likeness: Clement Stromata 2.19.97 (`clement_strom_2_19_image_likeness`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
 | baptism-birth-mine | done | Baptism-and-new-birth: Barnabas 11 (`barnabas_11_baptism_new_birth`) + stance baptism-regenerates | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
