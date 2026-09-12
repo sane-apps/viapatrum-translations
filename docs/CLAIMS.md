@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-4-22-mine | done | Lactantius Inst. 4.22 cur deus humilis / passio necessaria ad fidem Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-17-mine | done | Lactantius Inst. 4.17 sabbatum / circumcisio cordis / lex figurata Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-30-mine | done | Lactantius Inst. 4.30 haereses / sola catholica / fons ueritatis Pass A≠B | 2026-09-12 | locked Latin CSEL; ecc densify heresy-schism; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-20-mine | done | Lactantius Inst. 4.20 testamentum / lux gentium / adoptio Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16; Cyprian 465; jer-h20b intact |
