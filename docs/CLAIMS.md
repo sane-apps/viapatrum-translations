@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-rf-a1 | done | CPG 5219 Arcadia §§1–4 (Pusey pp.153–157) Pass A≠B | 2026-09-12 | StephanMini; greek_clean + rf_arcadia_01–04; A≠B; no site CSS |
 | fate-foreknowledge-mine | done | Fate-and-foreknowledge: Tatian Oratio 9 (`tatian_oratio_9_fate`) + stance choice-not-fate | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
 | two-ways-mine | done | Two-ways: Barnabas 18.1-2 (`barnabas_18_two_ways`) + stance two-ways | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
 | grace-assist-mine | done | Grace-and-assistance: Clement Stromata 3.7.57 (`clement_strom_3_7_57_grace`) + stance grace-assists | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |

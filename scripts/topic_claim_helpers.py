@@ -3,13 +3,13 @@ from datetime import date
 
 CLAIMS = Path("docs/CLAIMS.md")
 
-def add_open(cid: str, slice_txt: str, agent: str = "StephanMini") -> None:
+def add_open(cid: str, slice_txt: str, agent: str = "StephanMini", book: str = "ante-nicene-topics", notes: str = "Topics lane") -> None:
     text = CLAIMS.read_text()
     if f"| {cid} |" in text:
         return
     row = (
-        f"| {cid} | claimed | ante-nicene-topics | {slice_txt} | {agent} | "
-        f"{date.today().isoformat()} | wip/{cid} | Topics lane |\n"
+        f"| {cid} | claimed | {book} | {slice_txt} | {agent} | "
+        f"{date.today().isoformat()} | wip/{cid} | {notes} |\n"
     )
     lines = text.splitlines(keepends=True)
     out = []
