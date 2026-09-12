@@ -25,6 +25,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-2-mine | done | Adv. Nat. 2.2 lumen vitae; vias ad caelum; pietatis ianuas. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a31 | done | CPG 5206 entries 121–124 (ed. fr.142–145; Mt 11:16–25) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.140–141 skip; supplied <τό> on 121 disclosed |
 | cyril-matt-frag-a30 | done | CPG 5206 entries 117–120 (ed. fr.136–139; Mt 11:11–12) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.135 skip |
 | cyril-matt-frag-a29 | done | CPG 5206 entries 113–116 (ed. fr.130,132–134; Mt 10:40–11:11) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.131 skip; entry 115 break disclosed |
