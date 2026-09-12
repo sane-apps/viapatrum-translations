@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-1-mine | done | Inst. 3.1: truth still thought hidden by vulgar superstition and philosophers who muddy it; they were never so truthful as when they confessed ignorance. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-11-mine | done | Inst. 2.11: reject earth-uterus animal birth; God formed the human; how He did it He need not disclose. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-19-mine | done | Inst. 1.19: giving equal honor to others means the Maker is not culted; religion is believing Him one and alone. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-4-mine | done | Inst. 1.4: many prophets filled with one God's Spirit proclaim one God; reject dismissing them as merely human voices. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-30-mine | done | Inst. 3.30: philosophers far from truth; one hope remains—religion and wisdom; next book will show which is true. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-3-mine | done | Inst. 3.3: philosophy is knowledge+opinion; proper knowledge is God's; mortal nature receives knowledge from outside; God reckons their wisdom as folly. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-15-mine | done | Inst. 2.15: demons' 'helps' are ceasing to harm; they hurt those who fear them, not God's protected worshipers. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
