@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-73-mine | done | Adv. Nat. 2.73 late Isis/Magna Mater cults; our religio now because Christ sent now. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-67-mine | done | Adv. Nat. 2.67 judge cause of leaving old religion—pagans also changed ancestral rites. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-58-mine | done | Adv. Nat. 2.58 pagans also ignorant of soul-maker/world-origin—suspicion not knowledge. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-28-mine | done | Adv. Nat. 2.28 body-forgetfulness lore fails: embodied memory of decades vs lost prenatal arts. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-18-mine | done | Adv. Nat. 2.18 arts are earthly necessity inventions—not heaven-dropped soul sciences. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-25-mine | done | Adv. Nat. 2.25 'divine' soul no better than beast until schooled; animals also learn by use. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-22-mine | done | Adv. Nat. 2.22 isolation test falsifies divine immortal soul arriving full of disciplines. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
