@@ -32,22 +32,42 @@ def expand_ref(raw: str) -> str | None:
     if book == 'Psalms': book = 'Psalm'
     return f'{book} {loc}'
 
-def collect_refs(section: dict, book_dir: Path) -> list[str]:
-    refs=[]
-    for a in section.get('added_allusions') or []:
-        if a.get('certainty') not in (None,'clear'): continue
-        r=expand_ref(a.get('reference') or '')
-        if r: refs.append(r)
+def justification_path(section: dict, book_dir: Path, stem: str | None = None) -> Path | None:
     jp = section.get('justification')
     if jp:
         jpath = book_dir / jp if not Path(jp).is_absolute() else Path(jp)
         if not jpath.exists() and not str(jp).startswith('reviews/'):
             jpath = book_dir / 'reviews' / 'justifications' / Path(jp).name
         if jpath.exists():
-            j=json.loads(jpath.read_text())
-            for br in j.get('bible_refs') or []:
-                r=expand_ref(br if isinstance(br,str) else (br.get('display') or br.get('reference') or ''))
-                if r: refs.append(r)
+            return jpath
+    # Adorations / similar: reviews/justifications/<stem>_NN.json
+    if stem:
+        sec = section.get('section')
+        if sec is not None:
+            for name in (f'{stem}_{int(sec):02d}.json', f'{stem}_{sec}.json'):
+                cand = book_dir / 'reviews' / 'justifications' / name
+                if cand.exists():
+                    return cand
+    return None
+
+def collect_refs(section: dict, book_dir: Path, stem: str | None = None) -> list[str]:
+    refs=[]
+    for a in section.get('added_allusions') or []:
+        if isinstance(a, str):
+            r=expand_ref(a)
+            if r: refs.append(r)
+            continue
+        cert = a.get('certainty') or a.get('certainty')
+        if cert not in (None, 'clear'):
+            continue
+        r=expand_ref(a.get('reference') or a.get('display') or '')
+        if r: refs.append(r)
+    jpath = justification_path(section, book_dir, stem)
+    if jpath is not None:
+        j=json.loads(jpath.read_text())
+        for br in j.get('bible_refs') or []:
+            r=expand_ref(br if isinstance(br,str) else (br.get('display') or br.get('reference') or ''))
+            if r: refs.append(r)
     out,seen=[],set()
     for r in refs:
         if r not in seen:
@@ -137,11 +157,9 @@ def place_refs(paragraphs, refs):
         out.append(re.sub(r' {2,}',' ', new_p))
     return out
 
-def sync_justification(book_dir, section, new_english):
-    jp=section.get('justification')
-    if not jp: return
-    jpath=book_dir/jp
-    if not jpath.exists(): return
+def sync_justification(book_dir, section, new_english, stem: str | None = None):
+    jpath = justification_path(section, book_dir, stem)
+    if jpath is None: return
     j=json.loads(jpath.read_text())
     j['pass_b_english']=new_english
     jpath.write_text(json.dumps(j, ensure_ascii=False, indent=2)+'\n')
@@ -153,16 +171,22 @@ def main():
     args=ap.parse_args()
     eng_path=Path(args.english_json)
     book_dir=Path(args.book_dir) if args.book_dir else eng_path.parents[1]
+    # stem from filename: adoration2_english.json -> adoration2
+    stem = eng_path.name
+    for suf in ('_english.json', '.json'):
+        if stem.endswith(suf):
+            stem = stem[: -len(suf)]
+            break
     data=json.loads(eng_path.read_text())
     changed=0
     for s in data:
-        refs=collect_refs(s, book_dir)
+        refs=collect_refs(s, book_dir, stem)
         if not refs: continue
         old=list(s.get('english') or [])
         new=place_refs(old, refs)
         if new!=old:
             s['english']=new
-            sync_justification(book_dir, s, new)
+            sync_justification(book_dir, s, new, stem)
             changed+=1
     eng_path.write_text(json.dumps(data, ensure_ascii=False, indent=2)+'\n')
     FULL=re.compile(r'\((?:'+'|'.join(map(re.escape,FULL_NAMES))+r') [^)]*\d+:\d+')
