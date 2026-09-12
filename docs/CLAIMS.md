@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-5-22-mine | done | Lactantius Inst. 5.22 patientia summa / castigatio / deo uiuo Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/5.5/5.7/5.8/5.9/5.13/5.14/5.15/5.19/5.21/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17/4.22/4.23/4.24/4.27/4.28; Cyprian 465; jer-h20b intact |
 | lactantius-inst-5-13-mine | done | Lactantius Inst. 5.13 ueritas ualet / paenitentia fides / ne fidem prodat Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/5.5/5.7/5.8/5.9/5.14/5.15/5.19/5.21/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17/4.22/4.23/4.24/4.27/4.28; Cyprian 465; jer-h20b intact |
 | lactantius-inst-5-9-mine | done | Lactantius Inst. 5.9 iustitia odi / ueritas inuisa / fides sine scelere Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/5.5/5.7/5.8/5.14/5.15/5.19/5.21/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17/4.22/4.23/4.24/4.27/4.28; Cyprian 465; jer-h20b intact |
 | lactantius-inst-5-21-mine | done | Lactantius Inst. 5.21 odium ueritatis / spiritus contaminati / animus uirtute Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/5.5/5.7/5.8/5.14/5.15/5.19/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17/4.22/4.23/4.24/4.27/4.28; Cyprian 465; jer-h20b intact |
