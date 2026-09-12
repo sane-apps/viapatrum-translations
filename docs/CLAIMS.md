@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-5-17-mine | done | Adv. Marc. 5.17: letter to Ephesians (not Laodiceans); recapitulate all in Christ—only Creator of the beginning can sum all to the beginning in Christ. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-4-28-mine | done | Adv. Marc. 4.28: leaven of Pharisees=hypocrisy against Creator father—not unknown god; nothing covered that will not be revealed. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-4-29-mine | done | Adv. Marc. 4.29: care not for food/clothing—only he who already provides (ravens/lilies) can forbid anxious care; little-faith = faith in Creator. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-4-34-mine | done | Adv. Marc. 4.34: Christ forbids divorce; Moses permitted for hardness—not rival gods but same Christ restoring a primordio two-one-flesh. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-3-14-mine | done | Adv. Marc. 3.14: Ps sword on thigh with grace on lips; Apocalypse sword from mouth=sermo diuinus, two testaments—not carnal war. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-12-mine | done | Adv. Marc. 2.12: bonitas+iustitia cannot be split into two gods; Creator from start both good and just—creation separations are justice’s work. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-5-5-mine | done | Adv. Marc. 5.5: grace+peace greeting defends Creator’s gospel; Father=Creator; grace/peace fit the offended God. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
