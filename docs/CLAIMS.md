@@ -25,6 +25,15 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-18-mine | done | Adv. Nat. 2.18 arts are earthly necessity inventions—not heaven-dropped soul sciences. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-25-mine | done | Adv. Nat. 2.25 'divine' soul no better than beast until schooled; animals also learn by use. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-22-mine | done | Adv. Nat. 2.22 isolation test falsifies divine immortal soul arriving full of disciplines. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-76-mine | done | Adv. Nat. 2.76 persecution under almighty care; no this-life safety promise. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-54-mine | done | Adv. Nat. 2.54 not all by God's will—else God authors evils; evils real. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-51-mine | done | Adv. Nat. 2.51 confessing ignorance of soul-origin > pagan suspicion of royal descent. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-27-mine | done | Adv. Nat. 2.27 forgetful embodied souls not immortal-simple; passion gates death. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-68-mine | done | Adv. Nat. 2.68 pagans change rites; Christians may choose greater/certain worship. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-39-mine | done | Adv. Nat. 2.39 reject world-king sending goddess-souls into bodily ruin/idolatry. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-47-mine | done | Adv. Nat. 2.47 deny God as soul-parent without naming alternate maker. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-24-mine | done | Adv. Nat. 2.24 Meno boy != immortal knowing soul; adult fails simple sums. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-29-mine | done | Adv. Nat. 2.29 immortal-soul boast fuels license; need divine judgment fear. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
