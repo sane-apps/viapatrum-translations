@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-22-mine | done | De Anima XXII libera arbitrii Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-paenitentia-11-mine | done | De Paenitentia 11 sacco cineri Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-paenitentia-10-mine | done | De Paenitentia 10 pudoris Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-paenitentia-9-mine | done | De Paenitentia 9 exomologesis Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
