@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| minucius-octavius-33-mine | done | Octavius 33 una domus / deus omnium Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b; Melito skip |
 | novatian-trinitate-31-mine | done | De Trinitate XXXI uoluntas / mediator Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | novatian-trinitate-18-mine | done | De Trinitate XVIII imago Dei Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | novatian-trinitate-23-mine | done | De Trinitate XXIII mediator / destinatum Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
