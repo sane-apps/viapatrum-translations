@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-65-mine | done | Adv. Nat. 2.65 God must not force belief; salvation only Christ’s office | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-14-mine | done | Adv. Nat. 2.14 Gehenna; mid-quality souls; true death by fire | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-5-15-mine | done | Adv. Marc. 5.15 same God of Christ and prophets; body saved | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-5-12-mine | done | Adv. Marc. 5.12 earthly tent; put on incorruption; judged by body | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
