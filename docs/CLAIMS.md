@@ -25,6 +25,9 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| victorinus-fabrica-twelve-angels-mine | done | Fabrica: twelve hours appoint twelve+twelve angels; twenty-four elders witness days/nights before God. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| victorinus-fabrica-seven-signs-mine | done | Fabrica catalog: seven horns/eyes/spirits/lamps/churches/angels/trumpets/seals—Spirit's septenary aid. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| victorinus-fabrica-parasceve-sabbath-mine | done | Fabrica: Friday station for Passion; sabbath carry-over so Sunday bread-thanks; not Judaizing sabbath. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | victorinus-fabrica-eighth-day-mine | done | Fabrica: Ps 6 eighth day = future judgment; true sabbath = seventh millennium with Christ and elect. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | victorinus-fabrica-tetras-mine | done | Fabrica tetras: four elements/seasons/evangelists; Christ seized in a tetrad—grounds Wednesday fast. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | victorinus-fabrica-luminaries-mine | done | Fabrica: twelve-hour day/night for labor-rest; fourth-day sun/moon mark times for worship order. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
