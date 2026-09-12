@@ -874,7 +874,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | origen-lamentations-1-10-oet | done | Origen Lam. fr. §§1–10 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Hom8 `2d06c2e`; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 
 
-| cyril-adoration5-21-26-oet | done | Cyril De adoratione Book 5 §§21–26 Pass A≠B OET CLOSEOUT (no previous complete English) | 2026-09-12 | PG 68; 26/26 Book 5; tip  after ; Melito skipped; never Cyril Matthew; jer-h20b intact | 2026-09-12 | PG 68; after `bb17175`; Melito skipped; never Cyril Matthew; jer-h20b intact |
+| cyril-adoration5-21-26-oet | done | Cyril De adoratione Book 5 §§21–26 Pass A≠B OET CLOSEOUT (no previous complete English) | 2026-09-12 | PG 68; 26/26 Book 5; tip `0532c6c` after `bb17175`; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration5-11-20-oet | done | Cyril De adoratione Book 5 §§11–20 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `bb17175` after `98121d3`; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration5-1-10-oet | done | Cyril De adoratione Book 5 §§1–10 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `98121d3` after Book 4 `5ddd71c`; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration4-21-29-oet | done | Cyril De adoratione Book 4 §§21–29 Pass A≠B OET CLOSEOUT (no previous complete English) | 2026-09-12 | PG 68; 29/29 Book 4; tip `5ddd71c`; Melito skipped; never Cyril Matthew; jer-h20b intact |
