@@ -13,5 +13,57 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
-| grace-assist-mine | claimed | ante-nicene-topics | Grace-and-assistance: one new locked-source excerpt + stance | StephanMini | 2026-09-12 | wip/grace-assist-mine | Topics lane |
 
+## How to claim
+
+```bash
+python3 scripts/claims.py start --agent YourName
+```
+
+Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id> --agent YourName`.
+
+## Done / closed
+
+| Claim ID | Status | Slice | Closed | Notes |
+|----------|--------|-------|--------|-------|
+| grace-assist-mine | done | Grace-and-assistance: Clement Stromata 3.7.57 (`clement_strom_3_7_57_grace`) + stance grace-assists | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
+| image-likeness-mine | done | Image-likeness: Clement Stromata 2.19.97 (`clement_strom_2_19_image_likeness`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
+| baptism-birth-mine | done | Baptism-and-new-birth: Barnabas 11 (`barnabas_11_baptism_new_birth`) + stance baptism-regenerates | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
+| universal-call-mine | done | Universal-call: Diognetus 10.2 (`diognetus_10_2_universal_call`) + stance call-and-refusal | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
+| baptism-birth-mine | done | Baptism-and-new-birth: Barnabas 11 (`barnabas_11_baptism_new_birth`) + stance baptism-regenerates | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
+| image-likeness-mine | done | Image-likeness: Clement Stromata 2.19.97 (`clement_strom_2_19_image_likeness`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
+| cyril-rf-lock | done | Source lock CPG 5219–5220 → `ad_arcadiam_marinamque_source.json` + `ad_pulcheriam_eudociamque_source.json` | 2026-09-12 | StephanMini; Pusey OCR slice; no English |
+| gifts-mine | done | Gifts-and-order: Ignatius To Polycarp 2.2 (`ignatius_polycarp_2_gifts_order`) + stance gifts-with-office | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance in explore/stances.json; ai_promote N/A (Jeremiah-only paths) |
+| jer-h20b | done | Homily 20 §§20.5–20.8 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T042127Z-jer-h20b |
+| jer-h20a | done | Homily 20 §§20.1–20.4 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041856Z-jer-h20a |
+| jer-h19 | done | Homily 19 §§19.10–19.15 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041635Z-jer-h19 |
+| jer-h18b | done | Homily 18 §§18.6–18.10 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041336Z-jer-h18b |
+| jer-h18a | done | Homily 18 §§18.1–18.5 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041056Z-jer-h18a |
+| jer-h17 | done | Homily 17 §§17.1–17.6 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T040832Z-jer-h17 |
+| jer-h16b | done | Homily 16 §§16.6–16.10 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T040531Z-jer-h16b |
+| jer-h16a | done | Homily 16 §§16.1–16.5 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T040247Z-jer-h16a |
+| jer-h15 | done | Homily 15 §§15.1–15.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T035925Z-jer-h15 |
+| jer-h14c | done | Homily 14 §§14.13–14.18 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T035515Z-jer-h14c |
+| jer-h14b | done | Homily 14 §§14.7–14.12 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T035338Z-jer-h14b |
+| jer-h14a | done | Homily 14 §§14.1–14.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T035054Z-jer-h14a |
+| jer-h12b | done | Homily 12 §§12.7–12.12 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T034847Z-jer-h12b |
+| jer-h12a | done | Homily 12 §§12.1–12.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T034641Z-jer-h12a |
+| jer-h11 | done | Homily 11 §§11.1–11.5 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T034450Z-jer-h11 |
+| jer-h13 | done | Homily 13 §§13.1–13.3 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033948Z-jer-h13 |
+| jer-h5c | done | Homily 5 §§5.13–5.17 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033821Z-jer-h5c |
+| jer-h5b | done | Homily 5 §§5.7–5.12 | 2026-09-11 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033544Z-jer-h5b |
+| jer-h5a | done | Homily 5 §§5.1–5.6 | 2026-09-11 | AI cross-check (StephanMini); @cf/meta/llama-3.1-8b-instruct-fp8-fast+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T033224Z-jer-h5a |
+| jer-h8 | done | Homily 8 §§8.1–8.9 | 2026-09-11 | NVIDIA promote on Mini; machine_draft, not shipped |
+| jer-h10 | done | Homily 10 §§10.1–10.8 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/google/gemma-4-26b-a4b-it + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171847Z-jer-h10 |
+| jer-h9 | done | Homily 9 §§9.1–9.4 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/google/gemma-4-26b-a4b-it + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171631Z-jer-h9 |
+| jer-h7 | done | Homily 7 §§7.1–7.3 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/meta/llama-3.1-8b-instruct-fp8-fast + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171301Z-jer-h7 |
+| jer-h6 | done | Homily 6 §§6.1–6.3 | 2026-09-11 | AI cross-check (overnight-cursor); @cf/meta/llama-3.1-8b-instruct-fp8-fast + @cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260911T171037Z-jer-h6 |
+| jer-h1-4 | done | Homilies 1–4 (27 §§) | 2026-09-11 | Owner lane; Homilies 1–4 two-pass on site |
+
+## Do not claim these (owner / blocked)
+
+- Website deploy / Cloudflare Pages / edits under `websites/fathers.saneapps.com`
+- Logos Personal Book compile; `build_book.py` unless owner asked
+- Inventing a new book slug without `docs/WORKS_QUEUE.md` + charter
+- Any modern or ANF English as the reading text
+- Changing Slice columns or merging/splitting claim rows (ask owner)
