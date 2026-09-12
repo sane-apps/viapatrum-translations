@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-23-mine | done | De An. 23; some claim they fell from heavens and will return; Saturninus: man made by angels as worm — against God’s image | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-13-mine | done | De An. 13; principalitas belongs to soul — whole man named by soul; feed souls not minds | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-15-mine | done | De An. 15; there is a highest vital/sapiential grade in the soul — hegemonikon; deny it and the whole soul’s status is endangered | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-12-mine | done | De An. 12; animus/mens/nous = soul’s inborn equipment by which it acts and understands — not another substance | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
