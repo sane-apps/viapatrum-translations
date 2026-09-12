@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-19-mine | done | Inst. 3.19: death not simply good/evil—divinae litterae: souls judged to prize or everlasting penalty. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-12-mine | done | Inst. 3.12: virtue fights soul's vices unto death; prize is immortality, only in religio with hope. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-1-mine | done | Inst. 2.1: expose error's font; know true Parent; crisis cries to one God; upright body for heaven-cult. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-7-mine | done | Inst. 1.7: Apollo/Hermes witness one self-born God; ministers are angels not gods; flee false cults. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | victorinus-fabrica-twelve-angels-mine | done | Fabrica: twelve hours appoint twelve+twelve angels; twenty-four elders witness days/nights before God. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | victorinus-fabrica-seven-signs-mine | done | Fabrica catalog: seven horns/eyes/spirits/lamps/churches/angels/trumpets/seals—Spirit's septenary aid. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | victorinus-fabrica-parasceve-sabbath-mine | done | Fabrica: Friday station for Passion; sabbath carry-over so Sunday bread-thanks; not Judaizing sabbath. | 2026-09-12 | Pass A!=B; Wikisource/Migne lock; OCR support witness; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
