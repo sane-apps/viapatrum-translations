@@ -94,7 +94,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a63` | done | entries 249–252 (ed. fr.278–281; Mt 24:51–25:9); mid-phrase seam on 249; parallel blocks on 251 |
 | next | free | `cyril-matt-frag-a64` from entry 253 |
 
-Tip SHA: `2d07ca1` content / cherry on `main` (a60–a63) via clean branch `cursor/cyril-matthew-clean-1dff`.
+Tip SHA: `1aede80` docs / content `2d07ca1` (a60–a63) via clean branch `cursor/cyril-matthew-clean-1dff`.
 
 ## Guards
 
