@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| hippolytus-ref-10-34-mine | done | Hippolytus Refutatio 10.34 (`hippolytus_ref_10_34`) + stance salvation-in-christ | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; underfilled author; new locus |
 | methodius-creatis-mine | done | Methodius De Creatis §2 (`methodius_creatis_faith_call`) + stance call-and-refusal | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; new treatise; underfilled expansion |
 | athenagoras-legatio-mine | done | Athenagoras Legatio 12 (`athenagoras_legatio_12_judge`) + stance final-judgment | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; underfilled author; stance explore/stances.json |
 | methodius-symposium-mine | done | Methodius Symposium 8 (`methodius_symposium_word_dragon`) + stance salvation-in-christ | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; new treatise; stance explore/stances.json |
