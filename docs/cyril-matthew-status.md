@@ -38,7 +38,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a7` | done | entries 25–28 (ed. fr.28–31; Mt 3:12–4:3) |
 | next | free | `cyril-matt-frag-a8` from entry 29 |
 
-Tip SHA: pending push on `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: `e7d3ac8` on `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
