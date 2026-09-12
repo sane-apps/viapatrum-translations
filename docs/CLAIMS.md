@@ -27,6 +27,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| baptism-birth-mine | done | Baptism-and-new-birth: Barnabas 11 (`barnabas_11_baptism_new_birth`) + stance baptism-regenerates | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
 | image-likeness-mine | done | Image-likeness: Clement Stromata 2.19.97 (`clement_strom_2_19_image_likeness`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
 | cyril-rf-lock | done | Source lock CPG 5219–5220 → `ad_arcadiam_marinamque_source.json` + `ad_pulcheriam_eudociamque_source.json` | 2026-09-12 | StephanMini; Pusey OCR slice; no English |
 | gifts-mine | done | Gifts-and-order: Ignatius To Polycarp 2.2 (`ignatius_polycarp_2_gifts_order`) + stance gifts-with-office | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance in explore/stances.json; ai_promote N/A (Jeremiah-only paths) |
