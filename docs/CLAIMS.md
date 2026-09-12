@@ -858,6 +858,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | cyril-matt-frag-a17 | done | CPG 5206 entries 65–68 (ed. fr.75–80; Mt 6:16–25) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; entry 65 lacuna disclosed |
 | cyril-matt-frag-a16 | done | CPG 5206 entries 61–64 (ed. fr.70–74; Mt 6:2–16) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 
+| origen-samuel28-oet | done | Origen Hom. 1 Sam 28 §§1–10 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III lock; after Marcion close `9af4f02`; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed; never Cyril Matthew |
+
 
 ## Do not claim these (owner / blocked)
 
@@ -866,3 +868,4 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 - Inventing a new book slug without `docs/WORKS_QUEUE.md` + charter
 - Any modern or ANF English as the reading text
 - Changing Slice columns or merging/splitting claim rows (ask owner)
+
