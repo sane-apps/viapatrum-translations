@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-36-mine | done | De An. 36; soul sown in/from the man himself; one seed from the beginning with flesh — against rival opinions | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-35-mine | done | De An. 35; Carpocrates uses metempsychosis — magus/fornicator — souls reincorporated to overturn all divine/human discipline | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-34-mine | done | De An. 34; no heresy today remakes human souls as beasts — but we exclude this species as coherent with prior errors; Homer/Pythagoras retorted | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-33-mine | done | De An. 33; dogma that souls are allotted animal kinds for life/merits — slaughterhouses, slavery, filth vs honors — must be slain | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
