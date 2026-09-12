@@ -14,7 +14,6 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
 
-| jer-h20a | prepped | origen-jeremiah-samuel | Homily 20 §§20.1–20.4 | overnight-mini-nv | 2026-09-11 | wip/jer-h20a | machine crib (Pass A/lemmas/OCR); not reading English |
 | jer-h20b | prepped | origen-jeremiah-samuel | Homily 20 §§20.5–20.8 | overnight-mini-nv | 2026-09-11 | wip/jer-h20b | machine crib (Pass A/lemmas/OCR); not reading English |
 | cyril-rf-lock | free | cyril-alexandria-recta-fide-court | Source lock only: slice Pusey CPG 5219–5220 into `*_source.json` | | | wip/cyril-rf-lock | **No English** — source lane |
 | gifts-mine | free | ante-nicene-topics | Gifts-and-order: one new locked-source excerpt + stance | | | wip/gifts-mine | Topics lane |
@@ -31,6 +30,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| jer-h20a | done | Homily 20 §§20.1–20.4 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041856Z-jer-h20a |
 | jer-h19 | done | Homily 19 §§19.10–19.15 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041635Z-jer-h19 |
 | jer-h18b | done | Homily 18 §§18.6–18.10 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041336Z-jer-h18b |
 | jer-h18a | done | Homily 18 §§18.1–18.5 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T041056Z-jer-h18a |
