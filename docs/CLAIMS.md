@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-17-mine | done | Inst. 3.17: Epicurus more popular for pleasure's name than truth; prone to vice; the maxim of not caring even if burned suits bandits, not the wise. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-8-mine | done | Inst. 3.8: come to the Judge who gives simple quiet wisdom; true highest good for man—not from human strength; hope no good from man / refuse no evil as if self-sufficient. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-21-mine | done | Inst. 1.21: rites/mysteries—Cyprus/Taurian/Gallic/Latin human victims; mysteries as ludicrous madness no sane person should take seriously. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-20-mine | done | Inst. 1.20: Rome's own religions—Romulus's nurse as meretrix-idol; boundary-stone Terminus culted; those who cult stones are themselves stones. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-24-mine | done | Inst. 3.24: those who posit antipodes speak nonsense—enough few errors to show the rest. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-23-mine | done | Inst. 3.23: leading philosophers caught in vanity; pretended contempt of money abandons patrimonies yet still fails wisdom. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-4-mine | done | Inst. 3.4: if nothing can be known (Socrates) and one must not opine (Zeno), philosophy is abolished; Arcesilas still cannot stand. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
