@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| reward-judgment-mine | done | Reward-and-judgment: Didache 16 (`didache_16_judgment`) + stance final-judgment | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | image-likeness-mine3 | done | Image-likeness: Barnabas 6 (`barnabas_6_image`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | cyril-rf-a3 | done | CPG 5219 Arcadia §§9–12 (Pusey pp.162–165) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a3 + rf_arcadia_09–12; A≠B; no site CSS |
 | universal-call-mine2 | done | Universal-call: Justin 1 Apology 40 (`justin_1apol_40_call`) + stance call-and-refusal | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
