@@ -875,6 +875,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 
 | cyril-adoration6-31-37-oet | done | Cyril De adoratione Book 6 §§31–37 CLOSEOUT Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `b11bf5b` after `3939569`; Melito skipped; never Cyril Matthew; jer-h20b intact; Book 6 37/37 |
+| cyril-adoration7-1-10-oet | claimed | Cyril De adoratione Book 7 §§1–10 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; after Book 6 `b11bf5b`; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration6-21-30-oet | done | Cyril De adoratione Book 6 §§21–30 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `3939569` after `fbf66d4`; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration6-11-20-oet | done | Cyril De adoratione Book 6 §§11–20 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `fbf66d4` after `c5f5c3f`; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration6-1-10-oet | done | Cyril De adoratione Book 6 §§1–10 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `c5f5c3f` after Book 5 `0532c6c`; Melito skipped; never Cyril Matthew; jer-h20b intact |
