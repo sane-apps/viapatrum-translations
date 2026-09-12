@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| minucius-octavius-25-mine | done | Oct. 25; superstition allegedly built Rome; early Roman justice began in crime — not true religio | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-24-mine | done | Oct. 24; we learn errors from parents/studies; poets most harm truth; Plato expels Homer from the state | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-12-mine | done | Oct. 12; pagan taunt: you lack, freeze, toil — God allows it; weigh what hangs after death while you live | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-39-mine | done | Oct. 39; hearers stunned; Octavius adorned what is easier to feel than say with arguments/examples/authorities | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
