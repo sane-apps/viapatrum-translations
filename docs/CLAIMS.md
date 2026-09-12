@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| minucius-octavius-1-mine | done | Oct. 1 Octavius, fidelissimus companion, leads from darkness to vera religio. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| minucius-octavius-10-mine | done | Oct. 10 Caecilius: hidden cult without aras/templa; mocks unicus deus and his busy omniscience. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| minucius-octavius-9-mine | done | Oct. 9 Caecilius: monstrous calumnies (ass-head, cross, infant, incest banquet) vs Christian way. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| minucius-octavius-8-mine | done | Oct. 8 Caecilius: firm gentium consensus on immortal gods; Christian faction as lucifuga atheism. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-6-mine | done | Oct. 6 Caecilius: better to keep ancestral religiones and local gods than judge numina. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-7-mine | done | Oct. 7 Caecilius: ancestral auguries/sacra/temples prove gods' presence and true cult. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-11-mine | done | Oct. 11 Caecilius mocks world-fire, resurrection, eternal reward/penalty, and election vs will. | 2026-09-12 | Pass A!=B; Latin Library lock; dual HTML witness on disk; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
