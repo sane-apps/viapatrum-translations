@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-1-22-mine | done | Adv. Marc. 1.22: Marcion’s goodness missing from the beginning; ceased goodness not natural; delay aiding Creator’s harshness = malignitas. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-5-13-mine | done | Adv. Marc. 5.13: gospel=virtus dei unto salvation; ira from heaven of Creator; Christ/gospel his whose law and nature. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-1-27-mine | done | Adv. Marc. 1.27: god who forbids but will not punish has imaginary goodness; Marcionites boast no fear; casting out = damnation. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-2-7-mine | done | Adv. Marc. 2.7: once freedom granted, God holds back praescientia/potentia; intervening would rescind free decision. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-5-16-mine | done | Adv. Marc. 5.16: Lord retributor of both merits; Marcion deletes flame; Creator judges ignorants; truth/salus his. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-5-14-mine | done | Adv. Marc. 5.14: likeness of sinful flesh ≠ phantasm; redeem by true flesh; resurrect mortal bodies; Christ end of law. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-24-mine | done | Adv. Marc. 2.24: God’s “repentance” not improvidence; malitia=judicial evils; divine paenitentia=animi demutatio. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
