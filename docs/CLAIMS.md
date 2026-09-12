@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-71-mine | done | Adv. Nat. 2.71 religion's authority is by deity not age; pagan gods also young by their timeline. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-59-mine | done | Adv. Nat. 2.59 pagans cannot explain rain/stars/creatures/crops—don't demand Christian cosmogony. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-53-mine | done | Adv. Nat. 2.53 mid-quality mortal souls get perpetuity only as gift from God the prince. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-43-mine | done | Adv. Nat. 2.43 first-god offspring would not be ordered into bodies to practice crimes. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-38-mine | done | Adv. Nat. 2.38 world-constitution does not require kings, orators, actors, trades, prostitutes. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-50-mine | done | Adv. Nat. 2.50 philosophers fighting desires prove labile souls; nature-good needs no correction. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-48-mine | done | Adv. Nat. 2.48 denying souls as God's offspring need not name parent; vices show not patrician stock. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
