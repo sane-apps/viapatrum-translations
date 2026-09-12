@@ -25,6 +25,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-37-mine | done | Adv. Nat. 2.37 dominicae prolis; aulam regiam; mundus sine homine. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-31-mine | done | Adv. Nat. 2.31 medietas animarum; periculum ex malis; spes bonas; iustitia. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-15-mine | done | Adv. Nat. 2.15 spes cassas; animas immortales; gradu proximas; ironic perfection. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-4-mine | done | Adv. Nat. 2.4 non impietatem docuisse; Non credimus; spes / salutis amissio. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
