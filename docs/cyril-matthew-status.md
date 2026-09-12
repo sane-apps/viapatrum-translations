@@ -16,24 +16,26 @@ Updated: 2026-09-12 (Air)
 
 | Role | Witness | Usable? |
 |------|---------|---------|
-| **copy-text** | khazarzar / Aegean Digital Patrologia extract of Migne PG 72 (`Commentarii in Matthaeum.pdf` + `.txt`) | Yes — readable Greek |
-| check | matia.gr mirror of same extract | Byte-identical to khazarzar (integrity only) |
-| check only | IA `bim_…_1859_72` DjVu OCR | **Junk OCR — ignore as copy-text**; locus confirmation (~cols 365ff) |
-| not locked | Reuss TU 61 (1957) | Copyrighted; edition-history note only |
+| **copy-text** | khazarzar / Aegean Digital Patrologia extract of Migne PG 72 | Yes |
+| check | matia.gr mirror | Byte-identical |
+| check only | IA bim PG72 DjVu OCR | Junk — not copy-text |
+| not locked | Reuss TU 61 (1957) | Copyrighted |
 
-- Manifest: `books/cyril-alexandria-matthew-fragments/sources/manifest.json`
-- Source JSON: `translations/matthew_fragments_source.json` — **290** fragment heads parsed
-- Diff before Pass A: khazarzar == matia; IA not merged
+- Source JSON: 290 fragment heads
+- Section ids = 1-based source-array order (edition fragment numbers can repeat later)
 
 ## Claims
 
 | Claim ID | Status | Slice |
 |----------|--------|-------|
 | `cyril-matt-frag-lock` | done | Source lock |
-| `cyril-matt-frag-a1` | done | fr.1–4 Pass A≠B |
-| next | free | `cyril-matt-frag-a2` from fr.5 |
+| `cyril-matt-frag-a1` | done | entries 1–4 (ed. fr.1–4) |
+| `cyril-matt-frag-a2` | done | entries 5–8 (ed. fr.5–6,8–9; Mt 1:16–24) |
+| `cyril-matt-frag-a3` | done | entries 9–12 (ed. fr.10–13; Mt 2:3–9) |
+| `cyril-matt-frag-a4` | done | entries 13–16 (ed. fr.14–17; Mt 2:20–3:2) |
+| next | free | `cyril-matt-frag-a5` from entry 17 |
 
-Tip SHA: `3874515` (content lock `452e8f3`) on `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: `970e6e3` on `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
