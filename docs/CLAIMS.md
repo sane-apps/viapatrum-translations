@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| pulcheria-rf-a6 | done | Pulcheria §§21–24 Pass A≠B | 2026-09-12 | greek_clean_a6; Rom/2 Cor/Phil/Heb/John; jer-h20b intact |
 | pulcheria-rf-a5 | done | Pulcheria §§17–20 Pass A≠B | 2026-09-12 | greek_clean_a5; Phil/Col/1 Cor 8:6/Rom 5; jer-h20b intact |
 | pulcheria-rf-a4 | done | Pulcheria §§13–16 Pass A≠B | 2026-09-12 | greek_clean_a4; Matt 24:36; forsaken cry; Phil 2 vs two Christs; jer-h20b intact |
 | pulcheria-rf-a3 | done | Pulcheria §§9–12 Pass A≠B | 2026-09-12 | greek_clean_a3; seed/sent; John 8 lift; not two Christs; Luke growth/kenosis; jer-h20b intact |
