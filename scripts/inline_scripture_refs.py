@@ -32,50 +32,95 @@ def expand_ref(raw: str) -> str | None:
     if book == 'Psalms': book = 'Psalm'
     return f'{book} {loc}'
 
-def justification_path(section: dict, book_dir: Path, stem: str | None = None) -> Path | None:
-    jp = section.get('justification')
+
+def _norm_open(s: str) -> str:
+    return re.sub(r"\s+", " ", (s or "").strip())[:90]
+
+
+def build_justification_index(book_dir: Path) -> dict[str, Path]:
+    """Map normalized Pass B opening line -> justification path."""
+    jdir = book_dir / "reviews" / "justifications"
+    idx: dict[str, Path] = {}
+    if not jdir.exists():
+        return idx
+    for f in jdir.glob("*.json"):
+        try:
+            j = json.loads(f.read_text())
+        except Exception:
+            continue
+        pb = j.get("pass_b_english") or []
+        if not pb:
+            continue
+        opening = pb[0] if isinstance(pb, list) else pb
+        idx[_norm_open(opening)] = f
+    return idx
+
+
+def justification_path(
+    section: dict,
+    book_dir: Path,
+    stem: str | None = None,
+    just_index: dict[str, Path] | None = None,
+) -> Path | None:
+    jp = section.get("justification")
     if jp:
         jpath = book_dir / jp if not Path(jp).is_absolute() else Path(jp)
-        if not jpath.exists() and not str(jp).startswith('reviews/'):
-            jpath = book_dir / 'reviews' / 'justifications' / Path(jp).name
+        if not jpath.exists() and not str(jp).startswith("reviews/"):
+            jpath = book_dir / "reviews" / "justifications" / Path(jp).name
         if jpath.exists():
             return jpath
-    if not stem:
-        return None
-    jdir = book_dir / 'reviews' / 'justifications'
-    if not jdir.exists():
-        return None
-    sec = section.get('section')
+
+    jdir = book_dir / "reviews" / "justifications"
     names: list[str] = []
-    if sec is not None:
+    sec = section.get("section")
+
+    # Explicit stem patterns
+    if stem and sec is not None:
         s = str(sec)
-        names.append(f'{stem}_{s}.json')
-        names.append(f'{stem}_{s.replace(".", "_")}.json')
+        names += [f"{stem}_{s}.json", f"{stem}_{s.replace('.', '_')}.json"]
         if s.isdigit():
-            names.append(f'{stem}_{int(s):02d}.json')
-            names.append(f'{stem}_{int(s)}.json')
-        if re.fullmatch(r'\d+\.\d+', s):
-            a, b = s.split('.')
+            n = int(s)
             names += [
-                f'{stem}_{a}_{b}.json',
-                f'{stem}_{int(a)}_{int(b)}.json',
-                f'{stem}_{int(a)}_{int(b):02d}.json',
+                f"{stem}_{n:02d}.json",
+                f"{stem}_{n:03d}.json",
+                f"{stem}_{n}.json",
             ]
-    if stem == 'samuel' and sec is not None and str(sec).isdigit():
-        names.append(f'samuel_1sam28_{int(sec)}.json')
-    hom = section.get('homily')
-    if stem == 'jeremiah' and hom is not None and sec is not None:
-        part = str(sec).split('.')[-1]
-        names.append(f'jeremiah_{int(hom)}_{part}.json')
-        if part.isdigit():
-            names.append(f'jeremiah_{int(hom)}_{int(part)}.json')
+        if re.fullmatch(r"\d+\.\d+", s):
+            a, b = s.split(".")
+            names += [
+                f"{stem}_{a}_{b}.json",
+                f"{stem}_{int(a)}_{int(b)}.json",
+                f"{stem}_{int(a)}_{int(b):02d}.json",
+            ]
+
+    # Julian Ad Florum: stem like florus_1 + section N -> florus_1_00N.json
+    if stem and stem.startswith("florus_") and sec is not None and str(sec).isdigit():
+        names.append(f"{stem}_{int(sec):03d}.json")
+
+    # Matthew fragments: matt_frag_NN from section number
+    if stem in {"matt_frag", "matthew_fragments", "matthew"} and sec is not None and str(sec).isdigit():
+        names += [f"matt_frag_{int(sec):02d}.json", f"matt_frag_{int(sec)}.json"]
+
+    # Sequential stems with 001 padding (collective/marriage/rome)
+    if stem in {"collective", "marriage", "rome"} and sec is not None and str(sec).isdigit():
+        names.append(f"{stem}_{int(sec):03d}.json")
+
     for name in names:
         cand = jdir / name
         if cand.exists():
             return cand
+
+    # Fallback: match Pass B opening against justification index (Turbantius etc.)
+    if just_index is not None:
+        eng = section.get("english") or []
+        if eng:
+            hit = just_index.get(_norm_open(eng[0]))
+            if hit is not None:
+                return hit
     return None
 
-def collect_refs(section: dict, book_dir: Path, stem: str | None = None) -> list[str]:
+
+def collect_refs(section: dict, book_dir: Path, stem: str | None = None, just_index: dict[str, Path] | None = None) -> list[str]:
     refs=[]
     for a in section.get('added_allusions') or []:
         if isinstance(a, str):
@@ -87,7 +132,7 @@ def collect_refs(section: dict, book_dir: Path, stem: str | None = None) -> list
             continue
         r=expand_ref(a.get('reference') or a.get('display') or '')
         if r: refs.append(r)
-    jpath = justification_path(section, book_dir, stem)
+    jpath = justification_path(section, book_dir, stem, just_index)
     if jpath is not None:
         j=json.loads(jpath.read_text())
         for br in j.get('bible_refs') or []:
@@ -182,8 +227,8 @@ def place_refs(paragraphs, refs):
         out.append(re.sub(r' {2,}',' ', new_p))
     return out
 
-def sync_justification(book_dir, section, new_english, stem: str | None = None):
-    jpath = justification_path(section, book_dir, stem)
+def sync_justification(book_dir, section, new_english, stem: str | None = None, just_index: dict[str, Path] | None = None):
+    jpath = justification_path(section, book_dir, stem, just_index)
     if jpath is None: return
     j=json.loads(jpath.read_text())
     j['pass_b_english']=new_english
@@ -196,22 +241,46 @@ def main():
     args=ap.parse_args()
     eng_path=Path(args.english_json)
     book_dir=Path(args.book_dir) if args.book_dir else eng_path.parents[1]
-    # stem from filename: adoration2_english.json -> adoration2
     stem = eng_path.name
     for suf in ('_english.json', '.json'):
         if stem.endswith(suf):
             stem = stem[: -len(suf)]
             break
+    # Filename stem aliases for justification prefixes
+    aliases = {
+        'ad_florum_1': 'florus_1', 'ad_florum_2': 'florus_2', 'ad_florum_3': 'florus_3',
+        'ad_florum_4': 'florus_4', 'ad_florum_5': 'florus_5', 'ad_florum_6': 'florus_6',
+        'collective_letter': 'collective',
+        'marriage2': 'marriage',
+        'letter_to_rome': 'rome',
+        'matthew_fragments': 'matt_frag',
+        # contra_julianum relies on pass_b index match (turbantius_*)
+        'contra_julianum_1': 'turbantius',
+        'contra_julianum_2': 'turbantius',
+        'contra_julianum_3': 'turbantius',
+        'contra_julianum_4': 'turbantius',
+        'contra_julianum_5': 'turbantius',
+        'contra_julianum_6': 'turbantius',
+    }
+    stem = aliases.get(stem, stem)
+    just_index = build_justification_index(book_dir)
     data=json.loads(eng_path.read_text())
+    # For sequential works lacking numeric section, invent 1-based section for just lookup
+    for i, s in enumerate(data, start=1):
+        if s.get('section') is None:
+            s['_seq'] = i
     changed=0
-    for s in data:
-        refs=collect_refs(s, book_dir, stem)
+    for i, s in enumerate(data, start=1):
+        if s.get('section') is None:
+            s = dict(s)
+            s['section'] = s.get('_seq', i)
+        refs=collect_refs(s, book_dir, stem, just_index)
         if not refs: continue
         old=list(s.get('english') or [])
         new=place_refs(old, refs)
         if new!=old:
-            s['english']=new
-            sync_justification(book_dir, s, new, stem)
+            data[i-1]['english']=new
+            sync_justification(book_dir, s, new, stem, just_index)
             changed+=1
     eng_path.write_text(json.dumps(data, ensure_ascii=False, indent=2)+'\n')
     FULL=re.compile(r'\((?:'+'|'.join(map(re.escape,FULL_NAMES))+r') [^)]*\d+:\d+')
