@@ -25,6 +25,20 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-27-mine | done | Instr. 27 justice leads to life after death; hand yourself to Christ | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-42-mine | done | Instr. 42 end of age; trumpet; Lord judges wicked; just untouched by fire | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-47-mine | done | Instr. 47 faithful beware evil; law of life; baptismal charity; bloodless martyrdoms | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-28-mine | done | Instr. 28 rich unbeliever; God feeds him; believe → live in God’s secrets; tartarus | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-34-mine | done | Instr. 34 Adam/Belial; death by first wood; life by vital wood; turn to Christ | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-52-mine | done | Instr. 52 Christ’s military: leave former deeds; obey the King’s command | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-44-mine | done | Instr. 44 day of judgment; fire for unbelievers; saints’ camp spared | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-43-mine | done | Instr. 43 first resurrection; devoted rise incorrupt; martyrs’ goods | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-48-mine | done | Instr. 48 penitent prayer; stay by mother church; seek physician; ask the King | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-45-mine | done | Instr. 45 believers in Christ leave idols; baptism grants rebirth gifts | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-35-mine | done | Instr. 35 double wood: death then life; believe the Lord’s cross | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-25-mine | done | Instr. 25 reject heavenly discipline; vain joys; future hope; God’s judgments | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| commodian-instr-24-mine | done | Instr. 24 how long refuse to know Christ; time of life for the believer; believe Christ | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-13-mine | done | Adv. Nat. 2.13 hope in the Father; future resurrection; care for souls’ salvation | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-33-mine | done | Adv. Nat. 2.33 cling to him who promises to free from soul-death; no self-deification | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-32-mine | done | Adv. Nat. 2.32 souls near death; long life by prince’s gift; surrender to liberator God | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-11-mine | done | Adv. Nat. 2.11 we believe and rest in Christ as you in Plato | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
