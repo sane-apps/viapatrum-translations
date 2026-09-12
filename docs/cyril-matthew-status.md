@@ -72,9 +72,17 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a41` | done | entries 161–164 (ed. fr.185–188; Mt 15:17–31) |
 | `cyril-matt-frag-a42` | done | entries 165–168 (ed. fr.189,191–193; Mt 15:34–16:19); ed.fr.190 skip |
 | `cyril-matt-frag-a43` | done | entries 169–172 (ed. fr.194–197; Mt 16:20–17:1); lacunae on 169 disclosed |
-| next | free | `cyril-matt-frag-a44` from entry 173 |
+| `cyril-matt-frag-a44` | done | entries 173–176 (ed. fr.198–200,1; Mt 17:2–5); source fr.1 after 200 disclosed |
+| `cyril-matt-frag-a45` | done | entries 177–180 (ed. fr.2–5; Mt 17:6–15); <τὰ> on 180 disclosed |
+| `cyril-matt-frag-a46` | done | entries 181–184 (ed. fr.6–9; Mt 17:17–23); source fr labels after 200 disclosed |
+| `cyril-matt-frag-a47` | done | entries 185–188 (ed. fr.210–213; Mt 17:22–18:1) |
+| next | free | `cyril-matt-frag-a48` from entry 189 |
 
+<<<<<<< HEAD
 Tip SHA: `6e4275f` content / cherry `cd5a679` (docs; work content `ad1737e` a40–a43) on `main`.
+=======
+Tip SHA: `TIP_PLACEHOLDER` on branch `cursor/cyril-matthew-fragments-1dff`..
+>>>>>>> c668238 (feat(cyril-matt): Pass A≠B for frags a44–a47 (entries 173–188))
 
 ## Guards
 
