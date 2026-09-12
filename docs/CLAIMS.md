@@ -25,6 +25,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-47-mine | done | Adv. Nat. 2.47 deny God as soul-parent without naming alternate maker. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-24-mine | done | Adv. Nat. 2.24 Meno boy != immortal knowing soul; adult fails simple sums. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-29-mine | done | Adv. Nat. 2.29 immortal-soul boast fuels license; need divine judgment fear. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-64-mine | done | Adv. Nat. 2.64 equal call/liberation; reward-and-judgment (restored id after 29/64 collision). | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-72-mine | done | Adv. Nat. 2.72 antiquity ≠ truth; first God not new; spes salutis. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
