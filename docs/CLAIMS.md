@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-52-mine | done | De An. 52; death separates flesh/soul; not from nature but from fault — we who know man’s beginnings boldly determine | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-26-mine | done | Oct. 26; Roman auspices/auguries; Clodius/Flaminius/Regulus — birds do not save; leave sortilege | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-25-mine | done | Oct. 25; superstition allegedly built Rome; early Roman justice began in crime — not true religio | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | minucius-octavius-24-mine | done | Oct. 24; we learn errors from parents/studies; poets most harm truth; Plato expels Homer from the state | 2026-09-12 | Pass A≠B; Latin Library Octavius lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
