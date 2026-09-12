@@ -25,6 +25,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-4-39-mine | done | Adv. Marc. 4.39 (dedicated tip): Christ/Jesus names Creator’s; wars/signs/persecutions=Creator prophets; Son of Man/Daniel kingdom; fig-tree⇒Creator’s reign; word abides; temple/Olivet fulfill Hosea/Zechariah/Isaiah. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-3-13-mine | done | Adv. Marc. 3.13: virgin-sign not warrior infant; Magi’s gold/frankincense=Damascus strength; Magi as Samaria spoils vs Herod/Assyria—Creator Christ. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-20-mine | done | Adv. Marc. 2.20: Hebrews’ gold/silver from Egypt is compensation for unpaid slave labor—Creator’s mandate just, not fraud against Marcionite charge. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-3-17-mine | done | Adv. Marc. 3.17: Isaiah’s formless, sheep-to-slaughter Servant and Jesse-flower Spirit rest mark Creator’s Christ—humble, patient, bearing weaknesses—not a rival beauty-Christ. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
