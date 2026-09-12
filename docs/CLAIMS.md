@@ -25,6 +25,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| novatian-trinitate-7-mine | done | Novatian De Trinitate VII spiritum Deum / non substantia / ignis et spiritus figurae | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
 | novatian-trinitate-5-mine | done | Novatian De Trinitate V irae / remedium / impassibilis substantia | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
 | novatian-trinitate-3-mine | done | Novatian De Trinitate III conditor / non praeter me / ex operibus | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
 | novatian-trinitate-2-mine | done | Novatian De Trinitate II continet cuncta / immensus / maior mente | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
