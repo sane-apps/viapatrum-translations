@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-5-16-mine | done | Adv. Marc. 5.16: Lord retributor of both merits; Marcion deletes flame; Creator judges ignorants; truth/salus his. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-5-14-mine | done | Adv. Marc. 5.14: likeness of sinful flesh ≠ phantasm; redeem by true flesh; resurrect mortal bodies; Christ end of law. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-2-24-mine | done | Adv. Marc. 2.24: God’s “repentance” not improvidence; malitia=judicial evils; divine paenitentia=animi demutatio. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-2-6-mine | done | Adv. Marc. 2.6: imago=libertas arbitrii; bonum sponte; merces not for necessitate; lex proves freedom. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-5-6-mine | done | Inst. 5.6: cupiditas from contemptus uerae maiestatis; unjust laws; tyrant ends golden age by turning worship from God; expulsio iustitiae = desertio diuinae religionis. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-5-4-mine | done | Inst. 5.4: took on refuting accusatores iustitiae; Tertullian apologetic ≠ institute; Cyprian vs Demetrianus needed argumenta for ignarus, not sola scriptura. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-5-2-mine | done | Inst. 5.2: lack of able teachers provoked writing against unknown truth; in Bithynia two arose insulting fallen truth—philosopher and persecuting judge. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
