@@ -874,7 +874,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | origen-lamentations-1-10-oet | done | Origen Lam. fr. §§1–10 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Hom8 `2d06c2e`; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 
 
-| cyril-adoration2-17-26-oet | done | Cyril De adoratione Book 2 §§17–26 Pass A≠B OET CLOSEOUT (no previous complete English) | 2026-09-12 | PG 68; 26/26 Book 2; after tip `9253d03`; never Cyril Matthew; jer-h20b intact |
+| cyril-adoration2-17-26-oet | done | Cyril De adoratione Book 2 §§17–26 Pass A≠B OET CLOSEOUT (no previous complete English) | 2026-09-12 | PG 68; 26/26 Book 2; tip `f03141d` after `9253d03`; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration2-9-16-oet | done | Cyril De adoratione Book 2 §§9–16 Pass A≠B OET | 2026-09-12 | PG 68; after tip `dae7765`; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration2-1-8-oet | done | Cyril De adoratione Book 2 §§1–8 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; after Lam closeout `870bed6`; tip `dae7765`; never Cyril Matthew; jer-h20b intact |
 
