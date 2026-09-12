@@ -25,6 +25,16 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-37-mine | done | Adv. Nat. 2.37 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-31-mine | done | Adv. Nat. 2.31 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-30-mine | done | Adv. Nat. 2.30 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-15-mine | done | Adv. Nat. 2.15 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-9-mine | done | Adv. Nat. 2.9 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-7-mine | done | Adv. Nat. 2.7 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-6-mine | done | Adv. Nat. 2.6 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-4-mine | done | Adv. Nat. 2.4 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-3-mine | done | Adv. Nat. 2.3 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-2-mine | done | Adv. Nat. 2.2 | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | novatian-trinitate-7-mine | done | Novatian De Trinitate VII spiritum Deum / non substantia / ignis et spiritus figurae | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
 | novatian-trinitate-5-mine | done | Novatian De Trinitate V irae / remedium / impassibilis substantia | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
 | novatian-trinitate-3-mine | done | Novatian De Trinitate III conditor / non praeter me / ex operibus | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed |
