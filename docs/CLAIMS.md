@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-24-mine | done | Inst. 3.24: those who posit antipodes speak nonsense—enough few errors to show the rest. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-23-mine | done | Inst. 3.23: leading philosophers caught in vanity; pretended contempt of money abandons patrimonies yet still fails wisdom. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-4-mine | done | Inst. 3.4: if nothing can be known (Socrates) and one must not opine (Zeno), philosophy is abolished; Arcesilas still cannot stand. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-10-mine | done | Inst. 1.10: Aesculapius' scandalous birth/death; Jupiter incest—no divine honor. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-21-mine | done | Inst. 3.21: Socrates turned from physics to virtue; Plato saw justice as equity of equal birth—yet humans fight fiercest wars over that claim. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-5-mine | done | Inst. 3.5: nature/use/necessity compel many knowings for life; Arcesilas finishes by stabbing himself with the same sword. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-1-13-mine | done | Inst. 1.13: philosophers' allegories fail; believe a man cut a man—no god fears a co-heir; Saturn later takes royal name. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
