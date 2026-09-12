@@ -78,10 +78,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a47` | done | entries 185–188 (ed. fr.210–213; Mt 17:22–18:1) |
 | next | free | `cyril-matt-frag-a48` from entry 189 |
 
-Tip SHA: `TIP_PLACEHOLDER` on branch `cursor/cyril-matthew-fragments-1dff`..
-=======
-Tip SHA: `c668238` on branch `cursor/cyril-matthew-fragments-1dff`..
->>>>>>> 677ce85 (docs(cyril-matt): tip c668238 for a44-a47)
+Tip SHA: `026c09e` content / cherry `9a5958f` (docs; work `c668238` a44–a47) on `main` via clean branch `cursor/cyril-matthew-clean-1dff`.
 
 ## Guards
 
