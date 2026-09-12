@@ -14,7 +14,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done (site)** | `origen-heraclides-pascha` | Origen, *Dialogue with Heraclides*; *On Pascha* | Both on fathers.saneapps.com. Pascha literary pass 2026-09-11. Logos attach when asked. |
 | **done (site)** | `cyril-alexandria-adoration-1` | Cyril of Alexandria, *De adoratione* Book 1 | Post-Nicene. Book 1 of 17 on fathers.saneapps.com. Next: court treatises. |
 | **in progress** | `origen-jeremiah-samuel` | Homilies on Jeremiah (Greek) + Homily on 1 Kingdoms 28; GCS III | Homilies **1–4** on the site (two-pass). 6–7, 9–10 are CF machine drafts, not shipped. Homily 8 NVIDIA in flight on Mini. Homily 5 and 11–20, 1 Sam 28, Lamentations still to translate. |
-| **in progress** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Pusey 1877 Greek locked. Not yet translated. |
+| **in progress** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Pusey Greek sliced to `*_source.json` (2026-09-12). Not yet translated. |
 | **in progress** | `cyril-alexandria-adoration-1` | *De adoratione* Book 2 (Book 1 already on the site) | Book 2 Greek ingested (26 PG columns). English 1–8 drafted; not shipped until the book is complete. |
 | queued | `cyril-alexandria-trinity-dialogue-1` | Trinity Dialogue 1 (CPG 5216) | After the court treatises |
 | queued | (new book or Melito slug) | Melito of Sardis, *On Pascha* | After Origen Book 2 unless staying in Origen/Cyril |
