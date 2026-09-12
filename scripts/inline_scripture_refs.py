@@ -40,14 +40,39 @@ def justification_path(section: dict, book_dir: Path, stem: str | None = None) -
             jpath = book_dir / 'reviews' / 'justifications' / Path(jp).name
         if jpath.exists():
             return jpath
-    # Adorations / similar: reviews/justifications/<stem>_NN.json
-    if stem:
-        sec = section.get('section')
-        if sec is not None:
-            for name in (f'{stem}_{int(sec):02d}.json', f'{stem}_{sec}.json'):
-                cand = book_dir / 'reviews' / 'justifications' / name
-                if cand.exists():
-                    return cand
+    if not stem:
+        return None
+    jdir = book_dir / 'reviews' / 'justifications'
+    if not jdir.exists():
+        return None
+    sec = section.get('section')
+    names: list[str] = []
+    if sec is not None:
+        s = str(sec)
+        names.append(f'{stem}_{s}.json')
+        names.append(f'{stem}_{s.replace(".", "_")}.json')
+        if s.isdigit():
+            names.append(f'{stem}_{int(s):02d}.json')
+            names.append(f'{stem}_{int(s)}.json')
+        if re.fullmatch(r'\d+\.\d+', s):
+            a, b = s.split('.')
+            names += [
+                f'{stem}_{a}_{b}.json',
+                f'{stem}_{int(a)}_{int(b)}.json',
+                f'{stem}_{int(a)}_{int(b):02d}.json',
+            ]
+    if stem == 'samuel' and sec is not None and str(sec).isdigit():
+        names.append(f'samuel_1sam28_{int(sec)}.json')
+    hom = section.get('homily')
+    if stem == 'jeremiah' and hom is not None and sec is not None:
+        part = str(sec).split('.')[-1]
+        names.append(f'jeremiah_{int(hom)}_{part}.json')
+        if part.isdigit():
+            names.append(f'jeremiah_{int(hom)}_{int(part)}.json')
+    for name in names:
+        cand = jdir / name
+        if cand.exists():
+            return cand
     return None
 
 def collect_refs(section: dict, book_dir: Path, stem: str | None = None) -> list[str]:
