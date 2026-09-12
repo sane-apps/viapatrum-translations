@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from reader_titles import reader_title, scholar_label
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -376,7 +377,8 @@ def main() -> None:
                 "section": n,
                 "fragment": n,
                 "matthew": by[n]["matthew"],
-                "title": by[n]["head"],
+                "title": reader_title(by[n].get("matthew")),
+                "scholar_label": scholar_label(fragment=by[n].get("fragment"), matthew=by[n].get("matthew"), existing=by[n].get("head")),
                 "english": pass_b[n],
                 "notes_covered": [],
                 "added_allusions": allusions[n],
