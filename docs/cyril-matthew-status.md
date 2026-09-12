@@ -64,9 +64,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a33` | done | entries 129–132 (ed. fr.150,152–154; Mt 11:30–12:28) |
 | `cyril-matt-frag-a34` | done | entries 133–136 (ed. fr.155–158; Mt 12:29–35) |
 | `cyril-matt-frag-a35` | done | entries 137–140 (ed. fr.159–162; Mt 12:35–41); <εἰ> on 140 disclosed |
-| next | free | `cyril-matt-frag-a36` from entry 141 |
+| `cyril-matt-frag-a36` | done | entries 141–144 (ed. fr.163–166; Mt 12:43–13:15) |
+| `cyril-matt-frag-a37` | done | entries 145–148 (ed. fr.167–169,171; Mt 13:16–13:50); ed.fr.170 skip |
+| `cyril-matt-frag-a38` | done | entries 149–152 (ed. fr.172,174–176; Mt 13:52–14:19); ed.fr.173 skip |
+| `cyril-matt-frag-a39` | done | entries 153–156 (ed. fr.177–180; Mt 14:19–23) |
+| next | free | `cyril-matt-frag-a40` from entry 157 |
 
-Tip SHA: `527924d` (docs; work tip `376e489` a32–a35) on `main`.
+Tip SHA: `d714197` (work a36–a39) on `main`.
 
 ## Guards
 
