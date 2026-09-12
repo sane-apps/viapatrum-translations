@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-4-21-mine | done | Adv. Marc. 4.21: preach kingdom—whose?; no bag—who but Creator feeding ravens; shake dust in testimony ⇒ judge threatened; crowds still think Creator’s prophets. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-5-20-mine | done | Adv. Marc. 5.20: some preach from love, envy, rivalry—Paul taxes motives not rites; one Christ and one God still announced. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-5-19-mine | done | Adv. Marc. 5.19: hope heard in gospel that reached you as in all the world—prior catholic tradition beats later Marcion. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-4-23-mine | done | Adv. Marc. 4.23: O unbelieving generation—Israel may ask Marcion’s steward who he is; rebuke only fits Creator’s agent among his own. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-4-24-mine | done | Adv. Marc. 4.24: seventy beyond twelve like Elim palms/springs; antithesis is diversity of causes not powers—desert spoils vs city no-staff. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-4-20-mine | done | Adv. Marc. 4.20: who commands winds/sea?—substances know their author as in Exodus/Jordan; Christ not weaker than Creator’s servants. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-5-7-mine | done | Adv. Marc. 5.7: hidden things lit by Christ light of nations; praise from judge; spectacle to world=angels+men under Creator. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
