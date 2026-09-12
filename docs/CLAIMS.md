@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| minucius-octavius-18-mine | done | Octavius 18 providentia / unius imperium Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b; Melito skip |
 | minucius-octavius-37-mine | done | Octavius 37 martyr faith Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b; Melito skip |
 | minucius-octavius-34-mine | done | Octavius 34 reformari Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b; Melito skip |
 | minucius-octavius-22-mine | done | Octavius 22 simulacra Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b; Melito skip |
