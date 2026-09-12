@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-3-14-mine | done | Adv. Marc. 3.14: Ps sword on thigh with grace on lips; Apocalypse sword from mouth=sermo diuinus, two testaments—not carnal war. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-2-12-mine | done | Adv. Marc. 2.12: bonitas+iustitia cannot be split into two gods; Creator from start both good and just—creation separations are justice’s work. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-5-5-mine | done | Adv. Marc. 5.5: grace+peace greeting defends Creator’s gospel; Father=Creator; grace/peace fit the offended God. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-2-9-mine | done | Adv. Marc. 2.9: Greek adflatus not spiritus—soul is breath-image, lesser than Spirit; image ≠ truth so can sin without staining God. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-16-mine | done | Adv. Marc. 2.16: seueritas good because just; ira/aemulatio tools of judge like physician’s instruments; not Epicurus’ uncaring god. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-1-26-mine | done | Adv. Marc. 1.26: god who neither rivals nor angers nor damns cannot keep discipline; forbid without avenge = tacit permission. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-11-mine | done | Adv. Marc. 2.11: until man’s sin God only good; then judge/severe—prior bonitas by nature, later seueritas by cause. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
