@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-4-11-mine | done | Inst. 4.11: when Jews rebelled, God filled prophets to rebuke and call to repentance; also so no nation would be denied immortality's hope. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-4-mine | done | Inst. 4.4: wisdom and religion are joined—wisdom looks to sons (love), religion to servants (fear); one God is both Father and Lord. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-3-mine | done | Inst. 4.3: cult of the gods has no wisdom—subjects divine man to earthy things; no moral inquiry; rite of body not mind. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-4-8-mine | done | Inst. 4.8: we testify He was born twice—first in spirit, then in flesh; Jeremiah; Word in beginning; all made through Him. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-25-mine | done | Inst. 3.25: Plato-imitator thinks philosophy not popular—only docti few can attain it. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-22-mine | done | Inst. 3.22: that sharing ends in adulteries/lusts; virtue needed; concord not found. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-16-mine | done | Inst. 3.16: perpetual idleness, no virtue, life only in speaking—inertes; wisdom needs act. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
