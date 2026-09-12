@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-21-mine | done | Inst. 3.21: Socrates turned from physics to virtue; Plato saw justice as equity of equal birth—yet humans fight fiercest wars over that claim. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-5-mine | done | Inst. 3.5: nature/use/necessity compel many knowings for life; Arcesilas finishes by stabbing himself with the same sword. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-13-mine | done | Inst. 1.13: philosophers' allegories fail; believe a man cut a man—no god fears a co-heir; Saturn later takes royal name. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-6-mine | done | Inst. 1.6: turn to divine testimonies; first a near-divine ancient witness (man enrolled among gods); better refute idolaters by their own gods' testimonies. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-1-18-mine | done | Inst. 1.18: those who boast men became gods for virtue, gifts, or arts invent inept praise; God himself gave the way of living and healing herbs. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-13-mine | done | Inst. 3.13: since immortality is the highest good, prove the soul immortal; philosophers failed without divine learning; wisdom feeds the soul. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-7-mine | done | Inst. 2.7: in life's rule, trust own judgment and senses to seek truth; God gave each a share of wisdom—don't swallow others' errors. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
