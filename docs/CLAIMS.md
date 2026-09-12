@@ -860,6 +860,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | origen-samuel28-oet | done | Origen Hom. 1 Sam 28 §§1–10 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III lock; after Marcion close `9af4f02`; jer-h20b intact; Melito skip; no CSS; CPG 5219/5220 closed; never Cyril Matthew |
 
+| origen-lamentations-81-90-oet | done | Origen Lam. fr. §§81–90 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam71–80; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 | origen-lamentations-71-80-oet | done | Origen Lam. fr. §§71–80 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam61–70; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 | origen-lamentations-61-70-oet | done | Origen Lam. fr. §§61–70 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam51–60; OCR disclosed; jer-h20b intact; never Cyril Matthew |
 | origen-lamentations-51-60-oet | done | Origen Lam. fr. §§51–60 Pass A≠B OET (no previous English) | 2026-09-12 | GCS III; after Lam41–50; OCR disclosed; jer-h20b intact; never Cyril Matthew |
