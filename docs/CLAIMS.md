@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-4-14-mine | done | Lactantius Inst. 4.14 aeternum templum Pass A≠B | 2026-09-12 | locked Latin CSEL; chose over 4.18; beyond 2.17/5.18/4.25/4.26/4.10/4.29; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-29-mine | done | Lactantius Inst. 4.29 una substantia Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10; chose over 4.14/4.18; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-10-mine | done | Lactantius Inst. 4.10 figura hominis Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26; Cyprian 465; jer-h20b intact |
 | lactantius-inst-4-26-mine | done | Lactantius Inst. 4.26 crucis ratio Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25; Cyprian 465; jer-h20b intact |
