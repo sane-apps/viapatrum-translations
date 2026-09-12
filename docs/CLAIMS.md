@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| novatian-trinitate-31-mine | done | De Trinitate XXXI uoluntas / mediator Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-18-mine | done | De Trinitate XVIII imago Dei Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-23-mine | done | De Trinitate XXIII mediator / destinatum Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-16-mine | done | De Trinitate XVI praedestinatio / ante mundum Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | novatian-trinitate-28-mine | done | De Trinitate XXVIII imago Dei Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | novatian-trinitate-21-mine | done | De Trinitate XXI mediator / blood-wash Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | novatian-trinitate-13-mine | done | De Trinitate XIII mutual exchange Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
