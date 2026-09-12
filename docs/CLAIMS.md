@@ -876,7 +876,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | cyril-adoration6-31-37-oet | done | Cyril De adoratione Book 6 §§31–37 CLOSEOUT Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `b11bf5b` after `3939569`; Melito skipped; never Cyril Matthew; jer-h20b intact; Book 6 37/37 |
 | cyril-adoration7-21-28-oet | done | Cyril De adoratione Book 7 §§21–28 CLOSEOUT Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `95a3269` after `9608c98`; Melito skipped; never Cyril Matthew; jer-h20b intact; Book 7 28/28 |
-| cyril-adoration9-11-20-oet | claimed | Cyril De adoratione Book 9 §§11–20 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; after tip `470dee6`; Melito skipped; never Cyril Matthew; jer-h20b intact |
+| cyril-adoration9-21-32-oet | claimed | Cyril De adoratione Book 9 §§21–32 CLOSEOUT Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; after tip `dda14c2`; Melito skipped; never Cyril Matthew; jer-h20b intact |
+| cyril-adoration9-11-20-oet | done | Cyril De adoratione Book 9 §§11–20 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `dda14c2` after `470dee6`; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration9-1-10-oet | done | Cyril De adoratione Book 9 §§1–10 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `470dee6` after Book 8 `fb9dba1`; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | cyril-adoration8-21-28-oet | done | Cyril De adoratione Book 8 §§21–28 CLOSEOUT Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `fb9dba1` after `fe97324`; Melito skipped; never Cyril Matthew; jer-h20b intact; Book 8 28/28 |
 | cyril-adoration8-11-20-oet | done | Cyril De adoratione Book 8 §§11–20 Pass A≠B OET (no previous complete English) | 2026-09-12 | PG 68; tip `fe97324` after `85ee524`; Melito skipped; never Cyril Matthew; jer-h20b intact |
