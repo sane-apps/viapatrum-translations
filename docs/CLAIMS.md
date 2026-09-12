@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-38-mine | done | Adv. Nat. 2.38 world-constitution does not require kings, orators, actors, trades, prostitutes. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-50-mine | done | Adv. Nat. 2.50 philosophers fighting desires prove labile souls; nature-good needs no correction. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-48-mine | done | Adv. Nat. 2.48 denying souls as God's offspring need not name parent; vices show not patrician stock. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-42-mine | done | Adv. Nat. 2.42 God did not send souls for crime, cookery vanity, lewd music, prostitution. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-17-mine | done | Adv. Nat. 2.17 'rational superiority' fails—humans live irrationally; beasts also build/protect. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-57-mine | done | Adv. Nat. 2.57 rival soul-doctrines all 'probable'—human conjecture not divine certainty. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-46-mine | done | Adv. Nat. 2.46 God who is salus/virtue-head is not author of human misery. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
