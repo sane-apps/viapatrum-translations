@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-19-mine | done | Instr. 19 Titans; Mutae/Tacitae under your roof — hush-gods vain | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-14-mine | done | Instr. 14 Hercules; monster-slayer/cattle-thief — strong man not god | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-13-mine | done | Instr. 13 Silvanus; pipe-song rustic not god | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-11-mine | done | Instr. 11 Liber/Bacchus twice-born; India/Jupiter tales; drunken rite not god | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
