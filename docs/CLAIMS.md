@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| methodius-symposium-mine | done | Methodius Symposium 8 (`methodius_symposium_word_dragon`) + stance salvation-in-christ | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; new treatise; stance explore/stances.json |
 | salvation-christ-mine2 | done | Salvation-by-christ: Ignatius Eph 7 (`ignatius_ephesians_7_physician`) + stance salvation-in-christ | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | call-mine2 | done | universal-call: `clement_strom_1_11_51_call` + stance call-and-refusal | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | image-mine2 | done | image-likeness: `tatian_oratio_7_image` + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
