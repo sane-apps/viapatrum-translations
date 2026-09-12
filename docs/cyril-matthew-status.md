@@ -62,7 +62,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a31` | done | entries 121–124 (ed. fr.142–145; Mt 11:16–25); <τό> on 121 disclosed |
 | next | free | `cyril-matt-frag-a32` from entry 125 |
 
-Tip SHA: PENDING_TIP on branch `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: `68229d3` on branch `cursor/cyril-matthew-fragments-1dff`..
 
 ## Guards
 
