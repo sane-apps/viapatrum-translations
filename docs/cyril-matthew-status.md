@@ -96,9 +96,13 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a65` | done | entries 257–260 (ed. fr.287–290; Mt 26:23–28); ed.fr.286 skip; parallel on 260; incomplete locus 26:26– |
 | `cyril-matt-frag-a66` | done | entries 261–264 (ed. fr.291–294; Mt 26:29–38); reader titles On Matthew |
 | `cyril-matt-frag-a67` | done | entries 265–268 (ed. fr.295–298; Mt 26:39–53); supplied on 266; stray digit on 268 |
-| next | free | `cyril-matt-frag-a68` from entry 269 |
+| `cyril-matt-frag-a68` | done | entries 269–272 (ed. fr.299–302; Mt 26:55–27:11); reader titles On Matthew |
+| `cyril-matt-frag-a69` | done | entries 273–276 (ed. fr.303–306; Mt 27:21–32); supplied on 273,275,276 |
+| `cyril-matt-frag-a70` | done | entries 277–280 (ed. fr.307–309,311; Mt 27:33–45); ed.fr.310 skip; supplied on 278–279 |
+| `cyril-matt-frag-a71` | done | entries 281–284 (ed. fr.312–315; Mt 27:46–51); parallel on 283 |
+| next | free | `cyril-matt-frag-a72` from entry 285 |
 
-Tip SHA: `20e7ba4` content / cherry on `main` via clean branch `cursor/cyril-matthew-clean-1dff`.
+Tip SHA: `29e29ac` content / cherry on `main` via clean branch `cursor/cyril-matthew-clean-1dff`.
 
 ## Guards
 
