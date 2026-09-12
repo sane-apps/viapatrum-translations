@@ -100,9 +100,11 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a69` | done | entries 273–276 (ed. fr.303–306; Mt 27:21–32); supplied on 273,275,276 |
 | `cyril-matt-frag-a70` | done | entries 277–280 (ed. fr.307–309,311; Mt 27:33–45); ed.fr.310 skip; supplied on 278–279 |
 | `cyril-matt-frag-a71` | done | entries 281–284 (ed. fr.312–315; Mt 27:46–51); parallel on 283 |
-| next | free | `cyril-matt-frag-a72` from entry 285 |
+| `cyril-matt-frag-a72` | done | entries 285–288 (ed. fr.316–319; Mt 27:54–28:17); reader titles On Matthew; stray digit on 286; mid-phrase on 287 |
+| `cyril-matt-frag-a73` | done | entries 289–290 (ed. fr.320–321; Mt 28:17–18); supplied/brackets on 289 |
+| next | done | **corpus complete** — 290/290 entries; a1–a73 shipped |
 
-Tip SHA: `29e29ac` content / cherry on `main` via clean branch `cursor/cyril-matthew-clean-1dff`.
+Tip SHA: `0a36578` content / cherry on `main` via clean branch `cursor/cyril-matthew-clean-1dff`.
 
 ## Guards
 
