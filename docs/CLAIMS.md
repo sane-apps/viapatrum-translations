@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-rf-a25 | done | Arcadia §§97–100 Pass A≠B (end) | 2026-09-12 | greek_clean_a25; name-faith/Cana-deity/one-God-faith/Sender/Son-of-Man-faith/springs-close; CPG 5219 complete; jer-h20b intact |
 | cyril-rf-a24 | done | Arcadia §§93–96 Pass A≠B | 2026-09-12 | greek_clean_a24; faith-as-to-God/mystery-depth/word-of-faith/manifested-in-flesh/name-faith; jer-h20b intact |
 | cyril-rf-a23 | done | Arcadia §§89–92 Pass A≠B | 2026-09-12 | greek_clean_a23; stumbling-stone/Simeon/end-of-law/confess-Lord/mediator/Emmanuel; jer-h20b intact |
 | cyril-rf-a22 | done | Arcadia §§85–88 Pass A≠B | 2026-09-12 | greek_clean_a22; sanctify modes/one-from-both/firstborn/own Father/will+hand/David Lord/faith as to God; jer-h20b intact |
