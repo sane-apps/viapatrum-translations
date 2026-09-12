@@ -42,7 +42,7 @@ Updated: 2026-09-12 (Air)
 | `cyril-matt-frag-a11` | done | entries 41–44 (ed. fr.47–50; Mt 5:19–23) |
 | next | free | `cyril-matt-frag-a12` from entry 45 |
 
-Tip SHA: pending on `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: `54860de` on `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
