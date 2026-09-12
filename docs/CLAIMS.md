@@ -51,6 +51,18 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | cyril-rf-a15 | done | Arcadia §§57–60 Pass A≠B | 2026-09-12 | greek_clean_a15; Luke infancy/miracles/Isaiah/sea; jer-h20b intact |
 | cyril-rf-a14 | done | Arcadia §§53–56 Pass A≠B | 2026-09-12 | greek_clean_a14; ask-in-name / John17 / locked doors+Spirit / Luke Baptist; jer-h20b intact |
 | cyril-rf-a13 | done | CPG 5219 Arcadia §§49–52 (Pusey pp.205–208) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a13 + rf_arcadia_49–52; A≠B; jer-h20b intact |
+| pulcheria-rf-a12 | done | Pulcheria §§45–48 Pass A≠B (end) | 2026-09-12 | greek_clean_a12; rational-soul/life-giving-body/one-Son/faith-sought/one-Lord-doxology; jer-h20b intact |
+| pulcheria-rf-a11 | done | Pulcheria §§41–44 Pass A≠B | 2026-09-12 | greek_clean_a11; receive-authority/exalt-to-own/co-raise temple/baptism-death/Spirit of Jesus/weak-strong; jer-h20b intact |
+| pulcheria-rf-a10 | done | Pulcheria §§37–40 Pass A≠B | 2026-09-12 | greek_clean_a10; own-body offering/weak flesh/right-hand+own blood/not naked Word/Lord of glory; jer-h20b intact |
+| pulcheria-rf-a9 | done | Pulcheria §§33–36 Pass A≠B | 2026-09-12 | greek_clean_a9; baptism-temptation type/high priest-lamb/heavens bodily+divine/Heb5 obedience/we-in-him/anti bare-man; jer-h20b intact |
+| pulcheria-rf-a8 | done | Pulcheria §§29–32 Pass A≠B | 2026-09-12 | greek_clean_a8; from-one brother/1Tim mystery/Spirit own/receive-give; jer-h20b intact |
+| pulcheria-rf-a7 | done | Pulcheria §§25–28 Pass A≠B | 2026-09-12 | greek_clean_a7; temple-first / anti-two-sons / Father-perfects / death-held nature; jer-h20b intact |
+| pulcheria-rf-a6 | done | Pulcheria §§21–24 Pass A≠B | 2026-09-12 | greek_clean_a6; Rom/2 Cor/Phil/Heb/John; jer-h20b intact |
+| pulcheria-rf-a5 | done | Pulcheria §§17–20 Pass A≠B | 2026-09-12 | greek_clean_a5; Phil/Col/1 Cor 8:6/Rom 5; jer-h20b intact |
+| pulcheria-rf-a4 | done | Pulcheria §§13–16 Pass A≠B | 2026-09-12 | greek_clean_a4; Matt 24:36; forsaken cry; Phil 2 vs two Christs; jer-h20b intact |
+| pulcheria-rf-a3 | done | Pulcheria §§9–12 Pass A≠B | 2026-09-12 | greek_clean_a3; seed/sent; John 8 lift; not two Christs; Luke growth/kenosis; jer-h20b intact |
+| pulcheria-rf-a2 | done | CPG 5220 Pulcheria §§5–8 (Pusey pp.269–274) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a2 + rf_pulcheria_5–8; A≠B; jer-h20b intact |
+| pulcheria-rf-a1 | done | CPG 5220 Pulcheria §§1–4 (Pusey pp.265–268) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a1 + rf_pulcheria_1–4; A≠B; jer-h20b intact; no site CSS |
 | cyril-rf-a12 | done | CPG 5219 Arcadia §§45–48 (Pusey pp.200–204) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a12 + rf_arcadia_45–48; A≠B; no site CSS |
 | cyril-rf-a11 | done | CPG 5219 Arcadia §§41–44 (Pusey pp.196–199) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a11 + rf_arcadia_41–44; A≠B; no site CSS |
 | cyril-rf-a10 | done | CPG 5219 Arcadia §§37–40 (Pusey pp.192–195) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a10 + rf_arcadia_37–40; A≠B; no site CSS |
