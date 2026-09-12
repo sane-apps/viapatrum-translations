@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-12-mine | done | Instr. 12 Invictus from rock; seek the rock’s creator; painted thief not God | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-7-mine | done | Instr. 7 sun and moon; Omnipotent placed them; law forbids adoring them; learn truth from the law | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-5-mine | done | Instr. 5 Jupiter’s thunder; leave infant tales; mortal-born no celestial; Omnipotent not Semele’s lover | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-22-mine | done | Instr. 22 ready everywhere; belly-service; God judges the dead; do not play Rector of heaven | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
