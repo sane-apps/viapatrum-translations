@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-20-mine | done | Inst. 3.20: Socrates a bit shrewder than those who think nature graspable by talent—but that project is not only foolish but impious; calling him wise is itself insane. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-11-mine | done | Inst. 3.11: consensus that religion must be taken up; error is religion without wisdom or wisdom without religion. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-16-mine | done | Inst. 1.16: after striking the head of religions, pursue the rest so people repent; final stroke—if goddesses, they are not gods. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-10-mine | done | Inst. 2.10: after the world, God commands animals of both sexes and gives earth-foods for human use; return to human origin. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-9-mine | done | Inst. 2.9: return to God's world-making from sacred letters; heaven seat, earth founded; how fire/water made only Maker knows. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-1-12-mine | done | Inst. 1.12: Saturn's past reign and impiety prove he is not God; eternity cannot be 'sated' by years. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-1-9-mine | done | Inst. 1.9: Hercules famed for virtue yet polluted the world with lusts; slave of vices cannot be divine. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
