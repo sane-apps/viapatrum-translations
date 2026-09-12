@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-9-mine | done | Instr. 9 Neptune; Saturn’s son with trident; sea creature not god | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-8-mine | done | Instr. 8 Mercury; winged thief painted; invents trade/lyre — not god | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-6-mine | done | Instr. 6 septizonium/stars; ignorance seeks Jupiter; stars do not give fate; Omnipotent orders | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-4-mine | done | Instr. 4 Jupiter; Cretan birth; robbed father; God made heaven first — not Jupiter | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
