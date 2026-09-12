@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| victorinus-fabrica-christ-adam-mine | done | Victorinus Fabrica Christ–Adam days Pass A≠B | 2026-09-12 | locked Latin Migne/Wikisource+OCR; beyond victorinus_creation; Cyprian 404; jer-h20b intact |
 | lactantius-inst-4-25-mine | done | Lactantius Inst. 4.25 deus et homo Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18; Cyprian 404; jer-h20b intact |
 | commodian-instr-26-christ-mine | done | Commodian Instr. 26–27 Christ alive Pass A≠B | 2026-09-12 | locked Latin; beyond instr_1; Cyprian still 404/Unity-only; jer-h20b intact |
 | novatian-trinitate-verbum-caro-mine | done | Novatian Trin. 11 Verbum caro Pass A≠B | 2026-09-12 | restored novatian_trinitate.html; locked Latin; underfilled author; jer-h20b intact |
