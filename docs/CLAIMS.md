@@ -38,6 +38,27 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | baptism-mine2 | done | baptism-and-new-birth: `hermas_sim_9_16_seal` + stance baptism-regenerates | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | sin-death-mine | done | Sin-and-death: Barnabas 5 (`barnabas_5_destroy_death`) + stance death-destroyed | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | two-ways-mine2 | done | Two-ways: Hermas Mandate 6 (`hermas_mand_6_two_angels`) + stance two-ways | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
+| cyril-rf-a25 | done | Arcadia §§97–100 Pass A≠B (end) | 2026-09-12 | greek_clean_a25; name-faith/Cana-deity/one-God-faith/Sender/Son-of-Man-faith/springs-close; CPG 5219 complete; jer-h20b intact |
+| cyril-rf-a24 | done | Arcadia §§93–96 Pass A≠B | 2026-09-12 | greek_clean_a24; faith-as-to-God/mystery-depth/word-of-faith/manifested-in-flesh/name-faith; jer-h20b intact |
+| cyril-rf-a23 | done | Arcadia §§89–92 Pass A≠B | 2026-09-12 | greek_clean_a23; stumbling-stone/Simeon/end-of-law/confess-Lord/mediator/Emmanuel; jer-h20b intact |
+| cyril-rf-a22 | done | Arcadia §§85–88 Pass A≠B | 2026-09-12 | greek_clean_a22; sanctify modes/one-from-both/firstborn/own Father/will+hand/David Lord/faith as to God; jer-h20b intact |
+| cyril-rf-a21 | done | Arcadia §§81–84 Pass A≠B | 2026-09-12 | greek_clean_a21; priest-at-right/Jordan-with-flesh/Spirit humanly-baptize divinely/serpent likeness; jer-h20b intact |
+| cyril-rf-a20 | done | Arcadia §§77–80 Pass A≠B | 2026-09-12 | greek_clean_a20; Gal4 Spirit / Eph ascent-descent / Phil kenosis / Col image / Heb radiance+sanctifier; jer-h20b intact |
+| cyril-rf-a19 | done | Arcadia §§73–76 Pass A≠B | 2026-09-12 | greek_clean_a19; grain-glory/hypostasis/right-hand body/lord of dead-living/no longer by flesh; jer-h20b intact |
+| cyril-rf-a18 | done | Arcadia §§69–72 Pass A≠B | 2026-09-12 | greek_clean_a18; blood-redemption/second Adam/Eph near/mediator-impassible; jer-h20b intact |
+| cyril-rf-a17 | done | Arcadia §§65–68 Pass A≠B | 2026-09-12 | greek_clean_a17; 1 John/Jordan/Jairus/Rom 3:25; jer-h20b intact |
+| cyril-rf-a16 | done | Arcadia §§61–64 Pass A≠B | 2026-09-12 | greek_clean_a16; throne/eucharist/last Adam/Life/1 John; jer-h20b intact |
+| cyril-rf-a15 | done | Arcadia §§57–60 Pass A≠B | 2026-09-12 | greek_clean_a15; Luke infancy/miracles/Isaiah/sea; jer-h20b intact |
+| cyril-rf-a14 | done | Arcadia §§53–56 Pass A≠B | 2026-09-12 | greek_clean_a14; ask-in-name / John17 / locked doors+Spirit / Luke Baptist; jer-h20b intact |
+| cyril-rf-a13 | done | CPG 5219 Arcadia §§49–52 (Pusey pp.205–208) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a13 + rf_arcadia_49–52; A≠B; jer-h20b intact |
+| cyril-rf-a12 | done | CPG 5219 Arcadia §§45–48 (Pusey pp.200–204) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a12 + rf_arcadia_45–48; A≠B; no site CSS |
+| cyril-rf-a11 | done | CPG 5219 Arcadia §§41–44 (Pusey pp.196–199) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a11 + rf_arcadia_41–44; A≠B; no site CSS |
+| cyril-rf-a10 | done | CPG 5219 Arcadia §§37–40 (Pusey pp.192–195) Pass A≠B | 2026-09-12 | StephanAir; greek_clean_a10 + rf_arcadia_37–40; A≠B; no site CSS |
+| cyril-rf-a9 | done | CPG 5219 Arcadia §§33–36 (Pusey pp.187–191) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a9 + rf_arcadia_33–36; A≠B; no site CSS |
+| cyril-rf-a8 | done | CPG 5219 Arcadia §§29–32 (Pusey pp.183–186) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a8 + rf_arcadia_29–32; A≠B; no site CSS |
+| cyril-rf-a7 | done | CPG 5219 Arcadia §§25–28 (Pusey pp.179–182) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a7 + rf_arcadia_25–28; A≠B; no site CSS |
+| cyril-rf-a6 | done | CPG 5219 Arcadia §§21–24 (Pusey pp.175–178) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a6 + rf_arcadia_21–24; A≠B; no site CSS |
+| cyril-rf-a5 | done | CPG 5219 Arcadia §§17–20 (Pusey pp.171–174) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a5 + rf_arcadia_17–20; A≠B; no site CSS |
 | cyril-rf-a4 | done | CPG 5219 Arcadia §§13–16 (Pusey pp.166–170) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a4 + rf_arcadia_13–16; A≠B; no site CSS |
 | reward-judgment-mine | done | Reward-and-judgment: Didache 16 (`didache_16_judgment`) + stance final-judgment | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | image-likeness-mine3 | done | Image-likeness: Barnabas 6 (`barnabas_6_image`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
