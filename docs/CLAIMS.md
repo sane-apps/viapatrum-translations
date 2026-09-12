@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-5-15-mine | done | Lactantius Inst. 5.15 fratres pares / humilitas / exaltatio Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17/4.22/4.23/4.24/4.27/4.28/5.5/5.7/5.14; Cyprian 465; jer-h20b intact |
 | lactantius-inst-5-14-mine | done | Lactantius Inst. 5.14 iustitia speciem stultitiae / pietas dei notio Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17/4.22/4.23/4.24/4.27/4.28/5.5/5.7; Cyprian 465; jer-h20b intact |
 | lactantius-inst-5-7-mine | done | Lactantius Inst. 5.7 nuntius / iustitia reddita / unius dei cultura Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17/4.22/4.23/4.24/4.27/4.28/5.5; Cyprian 465; jer-h20b intact |
 | lactantius-inst-5-5-mine | done | Lactantius Inst. 5.5 iustitia / aureum saeculum / unius dei cultus Pass A≠B | 2026-09-12 | locked Latin CSEL; beyond 2.17/5.18/4.25/4.26/4.10/4.29/4.14/4.18/4.13/4.12/4.15/4.19/4.21/4.16/4.20/4.30/4.17/4.22/4.23/4.24/4.27/4.28; Cyprian 465; jer-h20b intact |
