@@ -26,6 +26,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| universal-call-mine2 | done | Universal-call: Justin 1 Apology 40 (`justin_1apol_40_call`) + stance call-and-refusal | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
+| baptism-birth-mine2 | done | Baptism-and-new-birth: Didache 7 (`didache_7_baptism`) + stance baptism-regenerates | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | atonement-mine | done | Atonement-recapitulation: Irenaeus AH 3.18.7 (`irenaeus_ah_3_18_7`) + stance recap-adam | 2026-09-12 | Topics lane (StephanMini); locked Latin Pass A≠B; stance in explore/stances.json; ai_promote N/A |
 | cyril-rf-a2 | done | CPG 5219 Arcadia §§5–8 (Pusey pp.158–161) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a2 + rf_arcadia_05–08; A≠B; no site CSS |
 | image-likeness-mine2 | done | Image-likeness: Diognetus 10 (`diognetus_10_image`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
