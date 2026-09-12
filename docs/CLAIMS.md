@@ -25,6 +25,16 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| novatian-trinitate-28-mine | done | De Trinitate XXVIII imago Dei Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-21-mine | done | De Trinitate XXI mediator / blood-wash Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-13-mine | done | De Trinitate XIII mutual exchange Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-10-mine | done | De Trinitate X baptisma / flesh restored Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-8-mine | done | De Trinitate VIII apostoli / universal call Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-29-mine | done | De Trinitate XXIX Spiritus Sanctus Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-25-mine | done | De Trinitate XXV mortuus pro nobis Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-24-mine | done | De Trinitate XXIV Filius Dei et filius hominis Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-22-mine | done | De Trinitate XXII forma Dei Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
+| novatian-trinitate-12-mine | done | De Trinitate XII saluabo in Deo Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-de-anima-19-mine | done | De Anima XIX dei flatus Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-de-anima-17-mine | done | De Anima XVII sensus Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
 | tertullian-de-anima-11-mine | done | De Anima XI sola anima Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b intact; Cyprian 465 |
