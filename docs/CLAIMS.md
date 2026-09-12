@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-5-12-mine | done | Adv. Marc. 5.12 earthly tent; put on incorruption; judged by body | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-3-9-mine | done | Adv. Marc. 3.9 angels’ true flesh; only Christ born to die/rise | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-3-20-mine | done | Adv. Marc. 3.20 nations inherit Christ; David’s fruit = Mary’s womb | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | tertullian-marcion-2-4-mine | done | Adv. Marc. 2.4 Creator’s goodness makes world, man, law | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
