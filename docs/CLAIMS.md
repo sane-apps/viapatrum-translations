@@ -27,6 +27,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| image-likeness-mine | done | Image-likeness: Clement Stromata 2.19.97 (`clement_strom_2_19_image_likeness`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B |
 | cyril-rf-lock | done | Source lock CPG 5219–5220 → `ad_arcadiam_marinamque_source.json` + `ad_pulcheriam_eudociamque_source.json` | 2026-09-12 | StephanMini; Pusey OCR slice; no English |
 | gifts-mine | done | Gifts-and-order: Ignatius To Polycarp 2.2 (`ignatius_polycarp_2_gifts_order`) + stance gifts-with-office | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance in explore/stances.json; ai_promote N/A (Jeremiah-only paths) |
 | jer-h20b | done | Homily 20 §§20.5–20.8 | 2026-09-12 | AI cross-check (StephanMini); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260912T042127Z-jer-h20b |
