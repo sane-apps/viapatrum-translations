@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-26-mine | done | Adv. Nat. 2.26 soul not naturally incorporeal-immortal; passibility→corruptible. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-16-mine | done | Adv. Nat. 2.16 humans as animantia; drop divine-peer typhus. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-60-mine | done | Adv. Nat. 2.60 Christus deus; leave vain questions; know God the head. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-70-mine | done | Adv. Nat. 2.70 timed pagan gods; novelty charge recoils. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-45-mine | done | Adv. Nat. 2.45 reject God-made labile souls; not divine peerage. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-55-mine | done | Adv. Nat. 2.55 deus non malorum conditor; nescire; nihil nocens a principe. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-74-mine | done | Adv. Nat. 2.74 sospitator Christus; late advent; virtutes/potestates lock faith. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
