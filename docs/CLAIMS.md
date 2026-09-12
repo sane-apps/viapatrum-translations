@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-27-mine | done | Inst. 3.27: philosophers often near truth but precepts lack divine auctoritas—no one believes equals. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-9-mine | done | Inst. 3.9: true wisdom's highest good is for humans alone, celestial, toward immortality. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-2-mine | done | Inst. 2.2: madness to fear what you fashion; elements not gods; artifex greater than opus. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-1-mine | done | Inst. 1.1: philosophers sought truth but missed; now defend religio with facultas dicendi under Constantine. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-19-mine | done | Inst. 3.19: death not simply good/evil—divinae litterae: souls judged to prize or everlasting penalty. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-12-mine | done | Inst. 3.12: virtue fights soul's vices unto death; prize is immortality, only in religio with hope. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-1-mine | done | Inst. 2.1: expose error's font; know true Parent; crisis cries to one God; upright body for heaven-cult. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
