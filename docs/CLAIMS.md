@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-3-mine | done | De An. 3; heresies needed for the approved; philosophy already shaken truth at Athens; soul’s account battered by philosophized doctrines | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-7-mine | done | De An. 7; gospel shows soul’s bodily-ness: rich man tormented in flame, tongue, finger of cooler soul | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-1-mine | done | De An. 1; after Hermogenes: soul not from matter’s stock but God’s breath; remaining questions vs philosophers | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-53-mine | done | De An. 53; where the stripped soul turns; exits of death; immortality shielded even in dying | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
