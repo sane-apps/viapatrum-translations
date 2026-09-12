@@ -25,6 +25,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-carmen-241-280-mine | done | Carmen 241–280 (cross prophets; cornerstone; Father comes in the Son) | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-carmen-201-240-mine | done | Carmen 201–240 (cut off from age; murdered prophets; Word-healer) | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-carmen-161-200-mine | done | Carmen 161–200 (Babel; two peoples; Sinai; ungrateful Israel) | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-carmen-121-160-mine | done | Carmen 121–160 (resurrection hope; Fall; Noah) | 2026-09-12 | Pass A≠B; Carmen Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
