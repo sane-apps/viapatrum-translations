@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| lactantius-inst-3-30-mine | done | Inst. 3.30: philosophers far from truth; one hope remains—religion and wisdom; next book will show which is true. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-3-3-mine | done | Inst. 3.3: philosophy is knowledge+opinion; proper knowledge is God's; mortal nature receives knowledge from outside; God reckons their wisdom as folly. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-2-15-mine | done | Inst. 2.15: demons' 'helps' are ceasing to harm; they hurt those who fear them, not God's protected worshipers. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| lactantius-inst-1-8-mine | done | Inst. 1.8: many witnesses confirm one God governs the world; Plato on ineffable majesty; later men consecrated dead kings. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-2-14-mine | done | Inst. 2.14: God sent angels to guard humans; they fell by earth-contagion; demons infest bodies and force recourse to their aids. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-26-mine | done | Inst. 3.26: only caelestis doctrina does what nature demands and philosophy cannot; God's few precepts change the whole man. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | lactantius-inst-3-14-mine | done | Inst. 3.14: Lucretius wrongly makes man discover wisdom; philosophy praised to heaven teaches nothing and cannot be virtue's teacher. | 2026-09-12 | Pass A!=B; CSEL TEI chapter lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
