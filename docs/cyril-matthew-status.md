@@ -29,16 +29,20 @@ Updated: 2026-09-12 (Air)
 | Claim ID | Status | Slice |
 |----------|--------|-------|
 | `cyril-matt-frag-lock` | done | Source lock |
-| `cyril-matt-frag-a1` | done | entries 1–4 (ed. fr.1–4) |
-| `cyril-matt-frag-a2` | done | entries 5–8 (ed. fr.5–6,8–9; Mt 1:16–24) |
-| `cyril-matt-frag-a3` | done | entries 9–12 (ed. fr.10–13; Mt 2:3–9) |
-| `cyril-matt-frag-a4` | done | entries 13–16 (ed. fr.14–17; Mt 2:20–3:2) |
-| `cyril-matt-frag-a5` | done | entries 17–20 (ed. fr.18–21; Mt 3:6–9) |
-| `cyril-matt-frag-a6` | done | entries 21–24 (ed. fr.24–27; Mt 3:10–11) |
-| `cyril-matt-frag-a7` | done | entries 25–28 (ed. fr.28–31; Mt 3:12–4:3) |
-| next | free | `cyril-matt-frag-a8` from entry 29 |
+| `cyril-matt-frag-a1` | done | entries 1–4 |
+| `cyril-matt-frag-a2` | done | entries 5–8 |
+| `cyril-matt-frag-a3` | done | entries 9–12 |
+| `cyril-matt-frag-a4` | done | entries 13–16 |
+| `cyril-matt-frag-a5` | done | entries 17–20 |
+| `cyril-matt-frag-a6` | done | entries 21–24 |
+| `cyril-matt-frag-a7` | done | entries 25–28 |
+| `cyril-matt-frag-a8` | done | entries 29–32 (ed. fr.32–36; Mt 4:3–17) |
+| `cyril-matt-frag-a9` | done | entries 33–36 (ed. fr.37–40; Mt 4:23–5:9) |
+| `cyril-matt-frag-a10` | done | entries 37–40 (ed. fr.41–46; Mt 5:13–18) |
+| `cyril-matt-frag-a11` | done | entries 41–44 (ed. fr.47–50; Mt 5:19–23) |
+| next | free | `cyril-matt-frag-a12` from entry 45 |
 
-Tip SHA: `e7d3ac8` on `cursor/cyril-matthew-fragments-1dff`.
+Tip SHA: pending on `cursor/cyril-matthew-fragments-1dff`.
 
 ## Guards
 
