@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-3-8-mine | done | Adv. Marc. 3.8 phantasma≠caro; mors/resurrectio foundation | 2026-09-12 | Pass A≠B; OGL/CSEL TEI lock; jer-h20b; Melito skip; no CSS |
 | minucius-octavius-19-mine | done | Octavius 19 deus mens / philosophi Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b; Melito skip |
 | minucius-octavius-38-mine | done | Octavius 38 vera libertas / vera religio Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b; Melito skip |
 | minucius-octavius-35-mine | done | Octavius 35 eternal fire Pass A≠B | 2026-09-12 | locked Latin Library; jer-h20b; Melito skip |
