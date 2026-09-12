@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-24-mine | done | De An. 24; against Plato’s matheseis/anamnesis — soul not so divine as equal to God; not innate immortal God-equal | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-18-mine | done | De An. 18; Plato separates intellectual from bodily — heretics praise pre-death recognition; body not mere impediment to prudence | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-36-mine | done | De An. 36; soul sown in/from the man himself; one seed from the beginning with flesh — against rival opinions | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-35-mine | done | De An. 35; Carpocrates uses metempsychosis — magus/fornicator — souls reincorporated to overturn all divine/human discipline | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
