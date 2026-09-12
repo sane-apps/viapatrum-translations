@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-67-mine | done | Instr. 67 ministers; keep Master’s commands; devote to God; bow to pastors; proven in Christ | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-66-mine | done | Instr. 66 readers; live as example; flee strife; be like Christ the teacher; Christ’s lamps | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-65-mine | done | Instr. 65 deceitful peace; schism; peace that is persecution; soldiers of another not Christ | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-64-mine | done | Instr. 64 gifts from evil; Altissimus rejects unjust gifts; tears of the oppressed | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
