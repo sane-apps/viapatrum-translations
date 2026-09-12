@@ -25,6 +25,17 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-1-mine | done | Adv. Nat. 2.1 why rage at Christ's name?—He seized no empire, wealth, lust, or arrogant insults. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-69-mine | done | Adv. Nat. 2.69 'new name/religion' charge: medicine/philosophy/arts also began in time. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-49-mine | done | Adv. Nat. 2.49 few good/wise men do not make the human race worthy; part ≠ whole. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-44-mine | done | Adv. Nat. 2.44 souls came sua voluntate—then why did omnipotent Father not prohibit fall into pleasures? | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-20-mine | done | Adv. Nat. 2.20 thought-image of closed chamber: what price is the human you call like superior power? | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-77-mine | done | Adv. Nat. 2.77 persecution asperity is liberation to light; tortures free from flesh-bonds. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-10-mine | done | Adv. Nat. 2.10 philosophers assert by suspicion; unjust to mock Christian fides shared in credulity. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-23-mine | done | Adv. Nat. 2.23 isolation subject cannot sort foods/clothes/tools—mute like beasts. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-40-mine | done | Adv. Nat. 2.40 God did not send souls into farm-toil misery and land-greed. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-21-mine | done | Adv. Nat. 2.21 isolation rearing: silent nurse, one food, no wine—habit not innate soul-science. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| arnobius-nations-2-52-mine | done | Adv. Nat. 2.52 soul-origin question hits animals too; Plato moved human making from highest God. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-71-mine | done | Adv. Nat. 2.71 religion's authority is by deity not age; pagan gods also young by their timeline. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-59-mine | done | Adv. Nat. 2.59 pagans cannot explain rain/stars/creatures/crops—don't demand Christian cosmogony. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | arnobius-nations-2-53-mine | done | Adv. Nat. 2.53 mid-quality mortal souls get perpetuity only as gift from God the prince. | 2026-09-12 | Pass A!=B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
