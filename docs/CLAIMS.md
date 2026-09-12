@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-de-anima-46-mine | done | De Anima 46 (true dreams; demons divert from true divinity) | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-44-mine | done | De Anima 44 (Hermotimus; sleep ≠ soul secession) | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-47-mine | done | De An. 47; most dreams struck by demons — even sometimes true to capture; more often vain/foul; God also promises dream-grace | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-de-anima-45-mine | done | De An. 45; dreams as accidents of sleep; soul busy from perpetual motion — divinity/immortality; body rests, soul uses its own works | 2026-09-12 | Pass A≠B; De Anima Latin lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
