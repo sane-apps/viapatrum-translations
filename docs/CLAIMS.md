@@ -26,6 +26,13 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| call-mine2 | done | universal-call: `clement_strom_1_11_51_call` + stance call-and-refusal | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
+| image-mine2 | done | image-likeness: `tatian_oratio_7_image` + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
+| grace-mine2 | done | grace-and-assistance: `clement_strom_1_7_38_grace` + stance grace-assists | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
+| fate-mine2 | done | fate-and-foreknowledge: `tatian_oratio_7_fate` + stance choice-not-fate | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
+| baptism-mine2 | done | baptism-and-new-birth: `hermas_sim_9_16_seal` + stance baptism-regenerates | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
+| sin-death-mine | done | Sin-and-death: Barnabas 5 (`barnabas_5_destroy_death`) + stance death-destroyed | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
+| two-ways-mine2 | done | Two-ways: Hermas Mandate 6 (`hermas_mand_6_two_angels`) + stance two-ways | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | cyril-rf-a4 | done | CPG 5219 Arcadia §§13–16 (Pusey pp.166–170) Pass A≠B | 2026-09-12 | StephanMini; greek_clean_a4 + rf_arcadia_13–16; A≠B; no site CSS |
 | reward-judgment-mine | done | Reward-and-judgment: Didache 16 (`didache_16_judgment`) + stance final-judgment | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
 | image-likeness-mine3 | done | Image-likeness: Barnabas 6 (`barnabas_6_image`) + stance image-retained | 2026-09-12 | Topics lane (StephanMini); locked Greek Pass A≠B; stance explore/stances.json |
