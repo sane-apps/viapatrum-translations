@@ -25,6 +25,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| arnobius-nations-2-7-mine | done | Adv. Nat. 2.7 nescire; suspiciones; opinio scientiae; Phaedrus/Theaetetus. | 2026-09-12 | Pass A≠B; Latin Library lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a35 | done | CPG 5206 entries 137–140 (ed. fr.159–162; Mt 12:35–41) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; supplied <εἰ> on 140 disclosed |
 | cyril-matt-frag-a34 | done | CPG 5206 entries 133–136 (ed. fr.155–158; Mt 12:29–35) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed |
 | cyril-matt-frag-a33 | done | CPG 5206 entries 129–132 (ed. fr.150,152–154; Mt 11:30–12:28) Pass A≠B | 2026-09-12 | Air; khazarzar; A≠B; Melito skip; no CSS; CPG 5219/5220 closed; ed.fr.151 skip |
