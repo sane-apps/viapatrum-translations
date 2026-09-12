@@ -25,6 +25,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| tertullian-marcion-4-42-mine | done | Adv. Marc. 4.42: before Pilate; Isaiah judgment; Ps 2 nations/kings vs Lord and his Christ—passion fulfills Creator’s script. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-4-38-mine | done | Adv. Marc. 4.38: Christ knew John’s baptism source; if from heaven, not believing him rebuked—John’s sacrament is Creator’s. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-5-9-mine | done | Adv. Marc. 5.9: heretics always deny flesh’s resurrection; apostle refutes by defending what they deny—carnis resurrectio. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+| tertullian-marcion-5-8-mine | done | Adv. Marc. 5.8: caput uiri Christus=auctor; uir dei imago of Creator; no room for another head. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-1-22-mine | done | Adv. Marc. 1.22: Marcion’s goodness missing from the beginning; ceased goodness not natural; delay aiding Creator’s harshness = malignitas. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-5-13-mine | done | Adv. Marc. 5.13: gospel=virtus dei unto salvation; ira from heaven of Creator; Christ/gospel his whose law and nature. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-1-27-mine | done | Adv. Marc. 1.27: god who forbids but will not punish has imaginary goodness; Marcionites boast no fear; casting out = damnation. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
