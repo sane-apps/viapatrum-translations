@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| commodian-instr-52-mine | done | Instr. 52 Christ’s military: leave former deeds; obey the King’s command | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-44-mine | done | Instr. 44 day of judgment; fire for unbelievers; saints’ camp spared | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-43-mine | done | Instr. 43 first resurrection; devoted rise incorrupt; martyrs’ goods | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | commodian-instr-48-mine | done | Instr. 48 penitent prayer; stay by mother church; seek physician; ask the King | 2026-09-12 | Pass A≠B; Latin Library Instructiones lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
