@@ -263,7 +263,14 @@ Gregory ANF densify-lane (not Rank-1 OET): De fide XII, Ad Tatianum de anima, In
 
 Skipped: *De oratione* (Nilus attribution / PD English tradition). Tiny *eis to pipi* skipped.
 Serapion PG40 Fragmenta = Serapion of Antioch → ANF densify-lane.
-Next corpus-wide: Asterius Amasenus uncovered Homiliae (Anderson 1904 only partial PD — tip uncovered / full Greek carefully) or Nemesius *De natura hominis* if no usable PD English; else next Khazarzar early Greek lacking PD English. Melito skipped; never Cyril Matthew densify; ANF densify-lane.
+### Asterius Amasenus PG 40 — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `asterius-homiliae` | Asterius *Homiliae* | **SERIES CLOSEOUT** `15b3f720` (20u). Anderson 1904 only partial PD; Rank-1 on full Greek. Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `asterius-homilia-9` | Asterius *Homilia 9* | **SERIES CLOSEOUT** `c6496135` (1u). Melito skipped; never Cyril Matthew densify. |
+
+Nemesius *De natura hominis* → densify-lane (Wither 1636 PD English).
+Next corpus-wide: further Khazarzar early Greek lacking usable PD English (Didymus / Macarius scraps without PD, etc.). Melito skipped; never Cyril Matthew densify; ANF densify-lane.
+
 
 
 

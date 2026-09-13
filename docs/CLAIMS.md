@@ -26,6 +26,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| asterius-homiliae-series-closeout | done (15b3f720) | Asterius Homiliae SERIES CLOSEOUT (20u) Pass A≠B OET | 2026-09-13 | PG40; Anderson 1904 only partial PD — Rank-1 full Greek corpus; Melito skipped; never Cyril Matthew densify |
+| asterius-homilia-9-series-closeout | done (c6496135) | Asterius Homilia 9 SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | PG40 separate file; Melito skipped; never Cyril Matthew densify |
 | evagrius-ad-eulogium-series-closeout | done (1ab40a36) | Evagrius Tractatus ad Eulogium SERIES CLOSEOUT (4u) Pass A≠B OET | 2026-09-13 | Evagrius PG40 Rank-1; not ANF; Melito skipped; never Cyril Matthew densify; no usable PD English |
 | evagrius-capitula-xxxiii-series-closeout | done (ea722025) | Evagrius Capitula xxxiii SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | Evagrius PG40 Rank-1; not ANF; Melito skipped; never Cyril Matthew densify; no usable PD English |
 | evagrius-de-magistris-series-closeout | done (dd0f8f61) | Evagrius De magistris et discipulis SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | Evagrius PG40 Rank-1; not ANF; Melito skipped; never Cyril Matthew densify; no usable PD English |
