@@ -150,7 +150,15 @@ Fragment/homilia Rank-1 batch CLOSED (Homiliarum `fa58754a` … Pauline Romanos 
 
 ### Origen deferred Pauline — CLOSED (2026-09-13)
 After Cyril Khazarzar Rank-1 EXHAUSTED, locked Khazarzar Origenes PG Pauline PD and tipped SERIES above.
+Next earliest Rank-1 was Fragmenta in Regnorum → now CLOSED; see SERIES rows below.
 Next earliest Rank-1: **Fragmenta in librum primum Regnorum** (≠ De engastrimytho already in `origen-jeremiah-samuel`), then Lamentationes / Job / Proverbs / Psalms Greek leftovers.
+
+
+| **SERIES CLOSEOUT** | `origen-regnorum-fragments` | *Fragmenta in 1 Regnorum* | **SERIES CLOSEOUT** `5882494e` (1u). Distinct from De engastrimytho in `origen-jeremiah-samuel`. Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-lamentationes-fragments` | *Fragmenta in Lamentationes* | **SERIES CLOSEOUT** `dc1f9fde` (5u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+
+### Next Rank-1 after Regnorum/Lamentationes
+Earliest remaining lockable Origen Khazarzar leftovers: Job (Homiliae/Selecta/Enarrationes), Proverbs (Expositio/Fragmenta), Psalms Greek (Excerpta/Fragmenta; ≠ Rufinus), Osee scrap, Acta scrap, Ruth scrap, De Resurrectione, Apocalypse scholia. Skip Melito; never Cyril Matthew densify; skip known PD-English / copyrighted-first-English traps.
 
 ### Khazarzar authentic Rank-1 Cyril — EXHAUSTED (2026-09-13)
 After residual scraps (Psalmum `517bd5ce`, de uno filio `c91ff187`, papyraceum `df474667`) and **Lucam Greek-only** (fragmenta SERIES `f4c28021` / In occursum `bc1344f2` / In transfigurationem `93224b0b`), no further authentic lockable Cyril PG remains on Khazarzar under standing rules.
