@@ -176,7 +176,19 @@ def score(obj: dict | None, raw: str, section: str = "6.1", source: list[str] | 
     checks["pass_a_ne_pass_b"] = bool(pa and pb and re.sub(r"\W+", "", pa).casefold() != re.sub(r"\W+", "", pb).casefold())
     checks["lemmas"] = isinstance(obj.get("lemmas"), list) and bool(obj["lemmas"]) and all(
         isinstance(x, dict) and (x.get("form") or x.get("greek") or x.get("lemma")) and x.get("gloss") for x in obj["lemmas"])
-    checks["no_placeholders"] = re.search(r"(?i)\b(TODO|TBD|YYYY)\b|\[n\d+\]|\b(?:scaffold|placeholder|translation pending)\b", pb + " " + pa) is None
+    # Same scaffold/ops smells as pipeline.check_pass_ab / fathers catalogue gate.
+    try:
+        from pipeline.check_pass_ab import content_errors as _content_errors
+    except ImportError:  # scripts/ cwd variants
+        from check_pass_ab import content_errors as _content_errors  # type: ignore
+    placeholder_notes = _content_errors(pa, "pass_a_gloss") + _content_errors(
+        eng if eng else "", "english"
+    )
+    if source is not None:
+        placeholder_notes += _content_errors(source, "source", source=True)
+    checks["no_placeholders"] = not placeholder_notes
+    if placeholder_notes:
+        notes.extend(placeholder_notes)
     if source is not None:
         checks["source_present"] = isinstance(source, list) and bool(source) and all(isinstance(x, str) and x.strip() for x in source)
         # Only a gross-omission screen; semantic review must check every source clause.

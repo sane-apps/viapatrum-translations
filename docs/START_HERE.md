@@ -23,6 +23,7 @@ Then:
 - Title the thought, not the section number.
 - Check exact author/work/source identity and full declared scope against the raw edition. Preserve all clauses; a tip slice must not replace a chapter. Produce genuine source/English-bound evidence under SOP §3. Missing evidence or uncertainty means fix or hold, never mark done.
 - Finish with `python3 scripts/ai_promote.py --claim <id> --agent YourName`
+- Before SERIES CLOSEOUT / marking a tip done: `python3 scripts/assert_tip_ready.py <stem>_english.json <stem>_source.json` must exit 0 (refuses Lemma-led / Rem * scaffolds and tip ops in source).
 - Stop. Do not take a second slice. Do not deploy the website. Do not run Logos.
 
 If there is no free slice, stop and say so.

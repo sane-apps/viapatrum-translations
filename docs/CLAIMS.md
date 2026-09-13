@@ -2,6 +2,9 @@
 
 Take the next free slice:
 
+**Tip/SERIES closeout gate:** `python3 scripts/assert_tip_ready.py <english.json> <source.json>` must exit 0 before marking done. Scaffold (`Lemma-led` / `Rem early|mid|closeout`) or tip ops in source are refused.
+
+
 ```bash
 python3 scripts/claims.py start --agent YourName
 ```

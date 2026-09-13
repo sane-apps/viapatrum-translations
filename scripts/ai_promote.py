@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT))
 
-from pipeline.check_pass_ab import check_record
+from pipeline.check_pass_ab import check_record, content_errors
 from pipeline.verify_translation_qa import digest, file_digest, validate_semantic_review
 
 from llm_bakeoff import (  # noqa: E402
@@ -253,6 +253,9 @@ def structural_ok(bundle: dict) -> dict:
         errors.append("justification source differs from locked section")
     if not model_families(just.get("draft_model") or ""):
         errors.append("actual draft model family is missing or unknown")
+    # Tip leftovers in the reading text must fail even if justification fields were cleaned.
+    errors.extend(content_errors(row.get("english"), "english"))
+    errors.extend(content_errors(bundle["greek"], "source", source=True))
     result["notes"].extend(errors)
     result["ok"] = result["ok"] and not errors
     return result
