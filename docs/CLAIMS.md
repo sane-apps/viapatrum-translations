@@ -28,6 +28,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-numbers-homilies-h2-1-2-oet | done (2711b7bc) | Origen Numbers Homilia II §§1–2 Pass A≠B OET | 2026-09-13 | after Homilia I tip 2aeec79a; Baehrens GCS 30; Hexateuch continuation; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h1-1-3-oet | done (2aeec79a) | Origen Numbers Homilia I §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Leviticus SERIES CLOSEOUT 63fcac0c; Baehrens GCS 30; Hexateuch continuation; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-leviticus-homilies-h16-1-7-oet | done (63fcac0c) | Origen Leviticus Homilia XVI §§1–7 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
 | origen-leviticus-homilies-h15-1-3-oet | done (4c980a82) | Origen Leviticus Homilia XV §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
 | origen-leviticus-homilies-h14-1-4-oet | done (b52d3341) | Origen Leviticus Homilia XIV §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
