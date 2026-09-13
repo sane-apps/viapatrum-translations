@@ -28,6 +28,12 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-sol-k01-open-oet | done (d12cca63) | Cyril Solutiones K1 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-sol-k09-rem-oet | done (5ca057b2) | Cyril Solutiones K9 rem CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | PG Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-sol-series-closeout | done (5ca057b2) | Cyril Solutiones SERIES CLOSEOUT (9 kephalaia) Pass A≠B OET | 2026-09-13 | PG Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ac-ep-open-oet | done (e47599be) | Cyril Ad Calosyrium open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ac-ep-rem-oet | done (e47599be) | Cyril Ad Calosyrium rem CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | PG Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ac-series-closeout | done (e47599be) | Cyril Ad Calosyrium SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | PG Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
 | cyril-rt-q01-open-oet | done (042f2a1b) | Cyril Responsiones Q1 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 77 CPG 5232 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
 | cyril-rt-q01-rem-oet | done (042f2a1b) | Cyril Responsiones Q1 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 77 CPG 5232 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
 | cyril-rt-q09-open-oet | done (acc41d48) | Cyril Responsiones Q9 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 77 CPG 5232 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
