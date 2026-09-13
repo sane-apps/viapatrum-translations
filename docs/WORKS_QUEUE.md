@@ -27,7 +27,8 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-psalms-rufinus` | Origen Psalms 36–38 Homilies (9) | **DONE** SERIES CLOSEOUT tip `8270d057` (9/9: Ps36×5 + Ps37×2 + Ps38×2). PG 12 Rufinus. Melito skipped. Never Cyril Matthew densify. No Trigg/Prinzivalli/Perrone. |
 | **done** | `origen-romans` | Origen Commentary on Romans (Rufinus, 10 books) | **DONE** SERIES CLOSEOUT tip `3394ac4c` (10/10). PG 14 Rufinus. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
 | **done** | `origen-matthew-later` | Origen Comm. Matthew 15–17 + Series (Latin) | **DONE** SERIES CLOSEOUT tip `ca34b410`. PG 13. Melito skipped. Never Cyril Matthew densify. No Heine. |
-| **active** | `origen-prayer-martyrdom` | Origen *On Prayer* + *Exhortation to Martyrdom* | Opening tip `c3952afa` (after Matthew `ca34b410`). Next: Orat. rem → Martyrdom. GCS 2–3. Melito skipped. Never Cyril Matthew densify. No O'Meara/Greer. |
+| **done** | `origen-prayer-martyrdom` | Origen *On Prayer* + *Exhortation to Martyrdom* | **DONE** SERIES CLOSEOUT tip `d7b9c696` (Orat open `c3952afa` / close `51a68660`; Mart `b83080f9`/`d7b9c696`). GCS 2–3. Melito skipped. Never Cyril Matthew densify. No O’Meara/Greer. |
+| **active** | `origen-contra-celsum` | Origen *Contra Celsum* (8 books) | Opening tip `e6346628` (after prayer-martyrdom SERIES `d7b9c696`). Koetschau GCS 2–3 (1899 PD). Shorter Rank-1 exhausted; promoted from deferred. Melito skipped. Never Cyril Matthew densify. True OET — no ANF Crombie / Chadwick. |
 
 
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
@@ -35,15 +36,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | **DONE** 290/290 CLOSEOUT tip `eb6236c` (a72–a73). OET fragments complete. **Never densify** Cyril Matthew. CPG 5219/5220 stay closed. |
 | queued | `cyril-alexandria-trinity-dialogue-1` | Trinity Dialogue 1 (CPG 5216) | After the court treatises |
 | **skipped** | (Melito slug — do not open) | Melito of Sardis, *On Pascha* | Standing rule: **skip Melito**. Do not open that slug. |
-| **done (densify)** | `irenaeus-demonstration` | Irenaeus, *Demonstration* | densify 100/100 CLOSEOUT (NOT OET — Robinson/Wilson prior PD). Book 17 Pass B rem also CLOSED. Prior OET `origen-song` CLOSEOUT tip 62e34744. Prior OET `origen-genesis-homilies` SERIES CLOSEOUT tip 270ab13a. Prior OET `origen-exodus-homilies` SERIES CLOSEOUT tip 59ea0b75. Prior OET `origen-leviticus-homilies` SERIES CLOSEOUT tip 63fcac0c. Prior OET `origen-numbers-homilies` activated after Leviticus tip `63fcac0c`. Prior OET `origen-numbers-homilies` SERIES CLOSEOUT tip `c57bb75e` (Homilia III title lacuna). Prior OET `origen-joshua-homilies` SERIES CLOSEOUT tip `b1bd7bdb`. Prior OET `origen-judges-homilies` SERIES CLOSEOUT `2f098a5f`. Prior OET `origen-isaiah-ezekiel` SERIES CLOSEOUT tip `ecd5c7c6`. Prior OET `origen-psalms-rufinus` SERIES CLOSEOUT tip `8270d057`. Prior OET `origen-romans` SERIES CLOSEOUT tip `3394ac4c`. Prior OET `origen-matthew-later` SERIES CLOSEOUT tip `ca34b410`. Next Rank-1: `origen-prayer-martyrdom` (GCS; Melito skipped). Jeremiah–Samuel remainder closed. Melito skipped. Never Cyril Matthew densify.
-
-## Origen remainder (after Book 2)
-
-Full inventory: `docs/ORIGEN_CORPUS.md`. “Finish all Origen” is many volumes.
-
-If staying in Origen after Heraclides + Pascha (Rank 1, no PD English):
-
-| # | Slug | Works |
+| **done (densify)** | `irenaeus-demonstration` | Irenaeus, *Demonstration* | densify 100/100 CLOSEOUT (NOT OET — Robinson/Wilson prior PD). Book 17 Pass B rem also CLOSED. Prior OET `origen-song` CLOSEOUT tip 62e34744. Prior OET `origen-genesis-homilies` SERIES CLOSEOUT tip 270ab13a. Prior OET `origen-exodus-homilies` SERIES CLOSEOUT tip 59ea0b75. Prior OET `origen-leviticus-homilies` SERIES CLOSEOUT tip 63fcac0c. Prior OET `origen-numbers-homilies` activated after Leviticus tip `63fcac0c`. Prior OET `origen-numbers-homilies` SERIES CLOSEOUT tip `c57bb75e` (Homilia III title lacuna). Prior OET `origen-joshua-homilies` SERIES CLOSEOUT tip `b1bd7bdb`. Prior OET `origen-judges-homilies` SERIES CLOSEOUT `2f098a5f`. Prior OET `origen-isaiah-ezekiel` SERIES CLOSEOUT tip `ecd5c7c6`. Prior OET `origen-psalms-rufinus` SERIES CLOSEOUT tip `8270d057`. Prior OET `origen-romans` SERIES CLOSEOUT tip `3394ac4c`. Prior OET `origen-matthew-later` SERIES CLOSEOUT tip `ca34b410`. Prior OET `origen-prayer-martyrdom` SERIES CLOSEOUT tip `d7b9c696`. Prior OET `origen-prayer-martyrdom` SERIES CLOSEOUT `d7b9c696`. Active: `origen-contra-celsum`. | # | Slug | Works |
 |---|------|-------|
 | 3 | `origen-jeremiah-samuel` | Homilies on Jeremiah (Greek) + Homily on 1 Kingdoms 28; GCS III |
 | 4 | `origen-john-later` | Comm. John 13, 19, 20, 28, 32; GCS IV |
@@ -58,6 +51,8 @@ If staying in Origen after Heraclides + Pascha (Rank 1, no PD English):
 | 13 | `origen-psalms-rufinus` | Ps 36–38 Rufinus (9); PG 12; **DONE** SERIES `8270d057` |
 | 14 | `origen-romans` | Romans Comm. Rufinus (10); PG 14; **DONE** SERIES `3394ac4c` |
 | 15 | `origen-matthew-later` | Matt 15–17 + Series; PG 13; **DONE** SERIES CLOSEOUT `ca34b410` |
+| 16 | `origen-prayer-martyrdom` | On Prayer + Martyrdom; GCS 2–3; **DONE** SERIES CLOSEOUT `d7b9c696` |
+| 17 | `origen-contra-celsum` | Contra Celsum 8; GCS 2–3; **ACTIVE** e6346628 |
 
 Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if leaving Cyril. Adorations CLOSED tip `9161f43`; now Irenaeus *Demonstration* (Melito skipped).
 
@@ -65,7 +60,6 @@ Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if lea
 
 | Status | Work | Notes |
 |--------|------|-------|
-| deferred | Origen, *Contra Celsum* | Large; ANF 4 exists; after shorter Rank 1 |
 | deferred | Origen, *De Principiis* | Large; ANF 4 exists; after shorter Rank 1 |
 
 ## Done (public site)

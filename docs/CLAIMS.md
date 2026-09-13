@@ -1,3 +1,4 @@
+| origen-contra-celsum-b1-1-2-oet | done (e6346628) | Origen Contra Celsum Book I §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after prayer-martyrdom SERIES d7b9c696; Koetschau GCS 2; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
 # Claims — who is working on what
 
 Take the next free slice:
@@ -28,6 +29,11 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-prayer-martyrdom-orat-5-6-oet | done (4fa72818) | Origen On Prayer §§5–6 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 506a730c; GCS 3; Melito skipped; never Cyril Matthew densify; no O’Meara/Greer |
+| origen-prayer-martyrdom-orat-7-18-oet | done (8f7a5744) | Origen On Prayer §§7–18 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | after 4fa72818; GCS 3; Melito skipped; never Cyril Matthew densify; no O’Meara/Greer |
+| origen-prayer-martyrdom-mart-proem-1-2-oet | done (b83080f9) | Origen Exhortation to Martyrdom proem–§§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after On Prayer 51a68660; GCS 2; Melito skipped; never Cyril Matthew densify; no O’Meara/Greer |
+| origen-prayer-martyrdom-mart-3-51-oet | done (d7b9c696) | Origen Exhortation to Martyrdom §§3–51 CLOSEOUT Pass A≠B OET MARTYRDOM CLOSEOUT SERIES CLOSEOUT | 2026-09-13 | after b83080f9; GCS 2; Melito skipped; never Cyril Matthew densify; no O’Meara/Greer |
+| origen-prayer-martyrdom-orat-19-34-oet | done (51a68660) | Origen On Prayer §§19–34 CLOSEOUT Pass A≠B OET ON PRAYER CLOSEOUT | 2026-09-13 | after 8f7a5744; GCS 3; Melito skipped; never Cyril Matthew densify; no O’Meara/Greer |
 | origen-prayer-martyrdom-orat-3-4-oet | done (506a730c) | Origen On Prayer §§3–4 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | after c3952afa; GCS 3; Melito skipped; never Cyril Matthew densify; no O'Meara/Greer |
 | origen-prayer-martyrdom-orat-1-2-oet | done (c3952afa) | Origen On Prayer §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Matthew SERIES ca34b410; Koetschau GCS 3; Melito skipped; never Cyril Matthew densify; no O'Meara/Greer |
 | origen-matthew-later-series-11-12-oet | done (ca34b410) | Origen Matthew Series §§11–12 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | after aa057d5f; PG 13 Latin Series; Melito skipped; never Cyril Matthew densify; no Heine |
