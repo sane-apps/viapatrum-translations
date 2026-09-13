@@ -28,6 +28,14 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-genesis-homilies-h16-1-6-oet | done (270ab13a) | Origen Genesis Homilia XVI §§1–6 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia XVI 6/6 + series 16/16; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
+| origen-genesis-homilies-h15-1-7-oet | done (19f3597f) | Origen Genesis Homilia XV §§1–7 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia XV 7/7 Joseph sold; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
+| origen-genesis-homilies-h14-1-4-oet | done (3dd4637e) | Origen Genesis Homilia XIV §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia XIV 4/4 Penuel; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
+| origen-genesis-homilies-h13-1-4-oet | done (420fe790) | Origen Genesis Homilia XIII §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia XIII 4/4 Laban; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
+| origen-genesis-homilies-h12-1-5-oet | done (0b1b24d1) | Origen Genesis Homilia XII §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia XII 5/5 ladder; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
+| origen-genesis-homilies-h11-1-3-oet | done (14516993) | Origen Genesis Homilia XI §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia XI 3/3 Gerar; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
+| origen-genesis-homilies-h10-1-5-oet | done (ab1bbfd7) | Origen Genesis Homilia X §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia X 5/5 twins/birthright; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
+| origen-genesis-homilies-h9-1-3-oet | done (2d1a9fe9) | Origen Genesis Homilia IX §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia IX 3/3 Rebecca; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
 | origen-genesis-homilies-h8-1-8-oet | done (8d6875c3) | Origen Genesis Homilia VIII §§1–8 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia VIII 8/8 Akedah; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
 | origen-genesis-homilies-h7-1-5-oet | done (36ac0205) | Origen Genesis Homilia VII §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia VII 5/5 wells; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
 | origen-genesis-homilies-h6-1-6-oet | done (661daf7e) | Origen Genesis Homilia VI §§1–6 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia VI 6/6 Isaac/Hagar; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
