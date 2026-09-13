@@ -28,6 +28,15 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-romans-b1-pref-1-2-oet | done (5047f5d5) | Origen Romans Book I Prefatio + §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Psalms SERIES 8270d057; PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-psalms-rufinus-ps38-h2-1-2-oet | done (8270d057) | Origen Psalms Rufinus Ps 38 Homilia II §§1–2 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 9/9 | 2026-09-13 | after 768df8e8; PG 12 Rufinus; Melito skipped; never Cyril Matthew densify; no Trigg/Prinzivalli/Perrone |
+| origen-psalms-rufinus-ps38-h1-1-2-oet | done (768df8e8) | Origen Psalms Rufinus Ps 38 Homilia I §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 12 Rufinus; Melito skipped; never Cyril Matthew densify |
+| origen-psalms-rufinus-ps37-h2-1-2-oet | done (091b5ed2) | Origen Psalms Rufinus Ps 37 Homilia II §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 12 Rufinus; Melito skipped; never Cyril Matthew densify |
+| origen-psalms-rufinus-ps37-h1-1-2-oet | done (af40bc8a) | Origen Psalms Rufinus Ps 37 Homilia I §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 12 Rufinus; Melito skipped; never Cyril Matthew densify |
+| origen-psalms-rufinus-ps36-h5-1-2-oet | done (b07a2fd2) | Origen Psalms Rufinus Ps 36 Homilia 5 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 12 Rufinus; Melito skipped; never Cyril Matthew densify |
+| origen-psalms-rufinus-ps36-h4-1-2-oet | done (bee77e3c) | Origen Psalms Rufinus Ps 36 Homilia 4 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 12 Rufinus; Melito skipped; never Cyril Matthew densify |
+| origen-psalms-rufinus-ps36-h3-1-2-oet | done (f8d17b8f) | Origen Psalms Rufinus Ps 36 Homilia 3 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 12 Rufinus; Melito skipped; never Cyril Matthew densify |
+| origen-psalms-rufinus-ps36-h2-1-2-oet | done (fceb7cfd) | Origen Psalms Rufinus Ps 36 Homilia 2 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 12 Rufinus; Melito skipped; never Cyril Matthew densify |
 | origen-psalms-rufinus-ps36-h1-1-3-oet | done (890d89d2) | Origen Psalms Rufinus Ps 36 Homilia I §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Isaiah–Ezekiel SERIES ecd5c7c6; PG 12 Rufinus; Melito skipped; never Cyril Matthew densify; no Trigg/Prinzivalli/Perrone |
 | origen-isaiah-ezekiel-ezek-h14-1-2-oet | done (ecd5c7c6) | Origen Ezekiel Homilia 14 §§1–2 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 23/23 (9 Isa + 14 Ezek) | 2026-09-13 | after Ezek H13; Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-isaiah-ezekiel-ezek-h13-1-2-oet | done (13a6194a) | Origen Ezekiel Homilia 13 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
