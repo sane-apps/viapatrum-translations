@@ -1,3 +1,15 @@
+## Rank-1 Gennadius–Theophanes wave
+
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-galatas` | Gennadius of Constantinople Fragmenta in epistulam ad Galatas | **SERIES CLOSEOUT** `c931b076` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-hebraeos` | Gennadius of Constantinople Fragmenta in epistulam ad Hebraeos | **SERIES CLOSEOUT** `82921d4e` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-romanos` | Gennadius of Constantinople Fragmenta in epistulam ad Romanos | **SERIES CLOSEOUT** `ce2a5489` (9u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-corinthios` | Gennadius of Constantinople Fragmenta in epistulam i et ii ad Corinthios | **SERIES CLOSEOUT** `e7049e75` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `gennadius-fragmentum-2thess` | Gennadius of Constantinople Fragmentum in epistulam ii ad Thessalonicenses | **SERIES CLOSEOUT** `afc61cdc` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `nicephorus-bryennius-historiae` | Nicephorus Bryennius Historiae | **SERIES CLOSEOUT** `e6c019fc7` (13u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `nicephorus-phokas-de-velitatione-bellica` | Nicephorus Phokas De velitatione bellica | **SERIES CLOSEOUT** `93c90bad0` (7u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `symeon-magister-chronographia` | Symeon Magister Chronographia | **SERIES CLOSEOUT** `8dcfcb37e` (13u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theophanes-confessor-chronographia` | Theophanes Confessor Chronographia | **SERIES CLOSEOUT** `c4fce4df3` (56u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+
 ## Rank-1 Gennadius/Bryennius/Phokas/Symeon Magister
 
 | **SERIES CLOSEOUT** | `gennadius-fragmenta-galatas` | Fragmenta in epistulam ad Galatas | **SERIES CLOSEOUT** `c931b076` (1u). Melito skipped; never Cyril Matthew densify. |
