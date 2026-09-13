@@ -13,6 +13,8 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| origen-john-later-13-1-10-oet | claimed | origen-john-later | Comm. John 13 §§1–10 | StephanAir | 2026-09-12 | cursor/origen-samuel28-oet-ae07 | Preuschen GCS IV; OET (no ANF); Melito skipped; never Cyril Matthew; jer-h20b intact; inline Bible refs |
+
 ## How to claim
 
 ```bash
