@@ -28,6 +28,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-leviticus-homilies-h1-1-5-oet | done (1ac13aa2) | Origen Leviticus Homilia I §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Exodus SERIES CLOSEOUT 59ea0b75; Baehrens GCS 29; Hexateuch continuation; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
 | origen-exodus-homilies-h13-1-5-oet | done (59ea0b75) | Origen Exodus Homilia XIII §§1–5 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-exodus-homilies-h12-1-4-oet | done (662cfe44) | Origen Exodus Homilia XII §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-exodus-homilies-h11-1-7-oet | done (c9d5e286) | Origen Exodus Homilia XI §§1–7 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
