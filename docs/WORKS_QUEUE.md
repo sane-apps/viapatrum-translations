@@ -460,6 +460,19 @@ Philostorgius HE → densify (Walford PD). Densify: Nemesius/Macarius/ANF.
 | **SERIES CLOSEOUT** | `georges-pisides-in-heraclium-redeuntem` | Georges Pisides *In Heraclium redeuntem* | **SERIES CLOSEOUT** `ac100eb4` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 | **SERIES CLOSEOUT** | `georges-pisides-in-restitutionem-crucis` | Georges Pisides *In restitutionem crucis* | **SERIES CLOSEOUT** `2c468f64` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 
+### Procopius of Gaza PG87 — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `procopius-gaza-catena-canticum` | Procopius of Gaza *Catena in Canticum canticorum* | **SERIES CLOSEOUT** `1d9105c4` (17u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-catena-ecclesiasten` | Procopius of Gaza *Catena in Ecclesiasten* | **SERIES CLOSEOUT** `cdfa2430` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-commentarii-isaiam` | Procopius of Gaza *Commentarii in Isaiam* | **SERIES CLOSEOUT** `e56929d2` (72u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-declamationes` | Procopius of Gaza *Declamationes* | **SERIES CLOSEOUT** `69c09e55` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-descriptio-imaginis` | Procopius of Gaza *Descriptio imaginis* | **SERIES CLOSEOUT** `975f4b01` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-epistula` | Procopius of Gaza *Epistula* | **SERIES CLOSEOUT** `efd4c9ea` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-epistula-altera` | Procopius of Gaza *Epistula_* | **SERIES CLOSEOUT** `46bd1ddc` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-epistulae` | Procopius of Gaza *Epistulae* | **SERIES CLOSEOUT** `1ec847f2` (10u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-horologium` | Procopius of Gaza *Horologium* | **SERIES CLOSEOUT** `6a38be4e` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `procopius-gaza-refutatio-procli` | Procopius of Gaza *Refutatio Procli* | **SERIES CLOSEOUT** `2976e6b9` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+
 Epiphanius densify leftovers: Ancoratus, Panarion, Anacephalaeosis, De mensuris (Dean PD).
 Densify: Nemesius/Macarius/ANF/Philostorgius. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
