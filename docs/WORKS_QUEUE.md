@@ -1,3 +1,9 @@
+## Rank-1 Symeon Junior (paused before Theologica)
+
+| **SERIES CLOSEOUT** | `symeon-junior-catechesae` | Symeon the New Theologian Catechesae | **SERIES CLOSEOUT** `8044c7c3f` (50u). Melito skipped; never Cyril Matthew densify; Theologica not tipped (quality pause). |
+| **SERIES CLOSEOUT** | `symeon-junior-catecheses-et-gratiae` | Symeon the New Theologian Catecheses et Gratiae | **SERIES CLOSEOUT** `02424e15e` (49u). Melito skipped; never Cyril Matthew densify; Theologica not tipped (quality pause). |
+| **SERIES CLOSEOUT** | `symeon-junior-epistulae` | Symeon the New Theologian Epistulae | **SERIES CLOSEOUT** `39b297018` (37u). Melito skipped; never Cyril Matthew densify; Theologica not tipped (quality pause). |
+
 ## Rank-1 Eustathius Thess / Metaphrastes / Kerameus
 
 | **SERIES CLOSEOUT** | `eustathius-thess-de-capta-thessalonica` | Eustathius of Thessalonica De capta Thessalonica | **SERIES CLOSEOUT** `bb9549e13` (12u). Melito skipped; never Cyril Matthew densify. |
