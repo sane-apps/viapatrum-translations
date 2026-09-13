@@ -19,6 +19,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-genesis-homilies` | Origen Genesis Homilies (16) | **DONE** Homiliae I–XVI SERIES CLOSEOUT tip 270ab13a. Baehrens GCS 29. Melito skipped. Never Cyril Matthew densify. No Heine FOTC 71. |
 | **done** | `origen-exodus-homilies` | Origen Exodus Homilies (13) | **DONE** Homiliae I–XIII SERIES CLOSEOUT tip 59ea0b75. Baehrens GCS 29. Melito skipped. Never Cyril Matthew densify. No Heine FOTC 71. |
 | **done** | `origen-leviticus-homilies` | Origen Leviticus Homilies (16) | **DONE** Homiliae I–XVI SERIES CLOSEOUT tip 63fcac0c. Baehrens GCS 29. Melito skipped. Never Cyril Matthew densify. No Barkley FOTC 83. |
+| **in progress** |  | Origen Numbers Homilies (28) | Homilia I §§1–3 CLOSEOUT tip 2aeec79a. Baehrens GCS 30. After Leviticus SERIES. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
 
 
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
@@ -26,7 +27,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | **DONE** 290/290 CLOSEOUT tip `eb6236c` (a72–a73). OET fragments complete. **Never densify** Cyril Matthew. CPG 5219/5220 stay closed. |
 | queued | `cyril-alexandria-trinity-dialogue-1` | Trinity Dialogue 1 (CPG 5216) | After the court treatises |
 | **skipped** | (Melito slug — do not open) | Melito of Sardis, *On Pascha* | Standing rule: **skip Melito**. Do not open that slug. |
-| **done (densify)** | `irenaeus-demonstration` | Irenaeus, *Demonstration* | densify 100/100 CLOSEOUT (NOT OET — Robinson/Wilson prior PD). Book 17 Pass B rem also CLOSED. Prior OET `origen-song` CLOSEOUT tip 62e34744. Prior OET `origen-genesis-homilies` SERIES CLOSEOUT tip 270ab13a. Prior OET `origen-exodus-homilies` SERIES CLOSEOUT tip 59ea0b75. Prior OET `origen-leviticus-homilies` SERIES CLOSEOUT tip 63fcac0c. Active OET: next Rank-1 . Jeremiah–Samuel remainder closed. Melito skipped. Never Cyril Matthew densify.
+| **done (densify)** | `irenaeus-demonstration` | Irenaeus, *Demonstration* | densify 100/100 CLOSEOUT (NOT OET — Robinson/Wilson prior PD). Book 17 Pass B rem also CLOSED. Prior OET `origen-song` CLOSEOUT tip 62e34744. Prior OET `origen-genesis-homilies` SERIES CLOSEOUT tip 270ab13a. Prior OET `origen-exodus-homilies` SERIES CLOSEOUT tip 59ea0b75. Prior OET `origen-leviticus-homilies` SERIES CLOSEOUT tip 63fcac0c. Prior OET  SERIES CLOSEOUT tip 63fcac0c. Active OET:  (Hom. I tip 2aeec79a). Jeremiah–Samuel remainder closed. Melito skipped. Never Cyril Matthew densify.
 
 ## Origen remainder (after Book 2)
 
