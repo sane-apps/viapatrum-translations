@@ -134,3 +134,16 @@ Rank-1 Origen OET queue exhausted after `origen-nt-fragments` SERIES `af9c9531` 
 - **Gifts and Order** (`gifts-and-order`): keep well stocked — charismata, testing prophets, ordered ministry, Montanism as labeled debate. Prefer locked Greek/Latin + new English over ANF seed dumps.
 
 Fragment/homilia Rank-1 batch CLOSED (Homiliarum `fa58754a` … Pauline Romanos `4a392d80` / Hebraeos `55e72d9b` / 1Cor `59aa136b` / 2Cor `5dcc4ff8` / Acta `07e20a31`). Standing skips hold (Collectio florilegium; ascriptus De sancta trinitate; Melito; Pusey Joannem·Quod unus·De incarnatione; never Matthew densify; Lucam caution). Next: remaining authentic lockable Cyril PG scraps if any, else Lucam Greek-only under caution, or cross-author Rank-1.
+
+| **SERIES CLOSEOUT** | `cyril-alexandria-fragmentum-psalmum` | *fragmentum psalmum* | **SERIES CLOSEOUT** `517bd5ce` (1 unit(s)). Khazarzar PG; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; Lucam Greek-only (no Payne Smith densify). |
+| **SERIES CLOSEOUT** | `cyril-alexandria-fragmenta-de-uno-filio` | *fragmenta de uno filio* | **SERIES CLOSEOUT** `c91ff187` (1 unit(s)). Khazarzar PG; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; Lucam Greek-only (no Payne Smith densify). |
+| **SERIES CLOSEOUT** | `cyril-alexandria-fragmentum-papyraceum` | *fragmentum papyraceum* | **SERIES CLOSEOUT** `df474667` (1 unit(s)). Khazarzar PG; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; Lucam Greek-only (no Payne Smith densify). |
+| **SERIES CLOSEOUT** | `cyril-alexandria-lucam-fragmenta` | *lucam fragmenta* | **SERIES CLOSEOUT** `f4c28021` (40 unit(s)). Khazarzar PG; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; Lucam Greek-only (no Payne Smith densify). |
+| **SERIES CLOSEOUT** | `cyril-alexandria-lucam-in-occursum` | *lucam in occursum* | **SERIES CLOSEOUT** `bc1344f2` (1 unit(s)). Khazarzar PG; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; Lucam Greek-only (no Payne Smith densify). |
+| **SERIES CLOSEOUT** | `cyril-alexandria-lucam-in-transfigurationem` | *lucam in transfigurationem* | **SERIES CLOSEOUT** `93224b0b` (1 unit(s)). Khazarzar PG; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; Lucam Greek-only (no Payne Smith densify). |
+
+### Khazarzar authentic Rank-1 Cyril — EXHAUSTED (2026-09-13)
+After residual scraps (Psalmum `517bd5ce`, de uno filio `c91ff187`, papyraceum `df474667`) and **Lucam Greek-only** (fragmenta SERIES `f4c28021` / In occursum `bc1344f2` / In transfigurationem `93224b0b`), no further authentic lockable Cyril PG remains on Khazarzar under standing rules.
+Still skipped (not Rank-1 here): Collectio florilegium; ascriptus De sancta trinitate; Melito; Pusey Joannem / Quod unus / De incarnatione; Matthew densify; pseudo De exitu / Sermones Alexandrinos; Quaestio ad Cyrillum; Oratio in ascensionem (Athanasius-labeled).
+Cross-author: Origen Rank-1 exhausted (`af9c9531`; Pauline deferred until PD locked); Melito skipped; Irenaeus Demonstration densify CLOSED.
+Next: lock PD for deferred Origen Pauline fragments, or promote next corpus outside standing Cyril/Origen queues.
