@@ -18,7 +18,7 @@ def write_homily(num: int, claim: str, prev_tip: str, sections: list[dict]) -> N
 
     wl = [
         f"Origen Isaiah (Isaiam) Homilia {num} — working Latin "
-        "(cleaned/condensed from Baehrens GCS 30 OCR)\n"
+        "(cleaned/condensed from Baehrens GCS 33 OCR)\n"
     ]
     eng: list[dict] = []
     src: list[dict] = []
@@ -33,7 +33,7 @@ def write_homily(num: int, claim: str, prev_tip: str, sections: list[dict]) -> N
         wl.append(f"\n{num}.{sec}\n{latin}\n")
 
         notes = [
-            "Copy-text Baehrens GCS 30 / Origenes Werke VII (1921), Rufinus Latin.",
+            "Copy-text Baehrens GCS 33 / Origenes Werke VIII (1925), Jerome Latin.",
             "True OET: no ANF; do not copy Scheck FOTC Isaiah/Ezekiel (Isaiah).",
             f"After tip {prev_tip}; Homilia {num} CLOSEOUT.",
         ]
@@ -47,7 +47,7 @@ def write_homily(num: int, claim: str, prev_tip: str, sections: list[dict]) -> N
                 "notes_covered": [],
                 "added_allusions": allusions,
                 "translator_notes": notes,
-                "baehrens": f"GCS 30 Isaiam Hom. {num}.{sec}",
+                "baehrens": f"GCS 33 Isaiam Hom. {num}.{sec}",
                 "claim": claim,
             }
         )
@@ -56,18 +56,18 @@ def write_homily(num: int, claim: str, prev_tip: str, sections: list[dict]) -> N
                 "section": sec,
                 "work": "homiliae",
                 "part": f"homilia-{num}",
-                "locus": f"Baehrens GCS 30 Isaiam Hom. {num} §{sec}",
+                "locus": f"Baehrens GCS 33 Isaiam Hom. {num} §{sec}",
                 "head": f"Isaiam Hom. {num}.{sec}",
                 "latin": [latin],
-                "edition": "baehrens-gcs30-1921",
+                "edition": "baehrens-gcs33-1925",
             }
         )
         j = {
             "excerpt_id": f"isa_hom{num}_{sec:02d}",
             "edition": {
-                "id": "baehrens-gcs30-1921",
+                "id": "baehrens-gcs33-1925",
                 "language": "lat",
-                "locus": f"Baehrens GCS 30 Isaiam Hom. {num} {sec}",
+                "locus": f"Baehrens GCS 33 Isaiam Hom. {num} {sec}",
             },
             "source_text": latin,
             "pass_a_gloss": gloss,
@@ -75,16 +75,16 @@ def write_homily(num: int, claim: str, prev_tip: str, sections: list[dict]) -> N
             "notes": [
                 "Pass A ≠ Pass B.",
                 "True OET; no Scheck FOTC Isaiah/Ezekiel.",
-                "Copy-text Baehrens GCS 30 Rufinus Latin.",
+                "Copy-text Baehrens GCS 33 Jerome Latin.",
             ],
             "bible_links": [
                 {"ref": a["reference"], "why": a["reason"]} for a in allusions
             ],
-            "anf_compare": "no ANF for Rufinus Isaiah homilies; do not copy Scheck FOTC Isaiah/Ezekiel",
+            "anf_compare": "no ANF for Jerome Isaiah homilies; do not copy Scheck FOTC Isaiah/Ezekiel",
             "checks": {
                 "pass_a_ne_pass_b": True,
-                "no_fotc_Bruce": True,
-                "edition_lock": "Baehrens GCS 30 / Werke VII (1921)",
+                "no_fotc_Scheck": True,
+                "edition_lock": "Baehrens GCS 33 / Werke VIII (1925)",
             },
             "confidence": "high",
             "reviewer": "Air",
