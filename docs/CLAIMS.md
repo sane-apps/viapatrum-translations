@@ -28,6 +28,14 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-judges-homilies-h9-1-3-oet | done (2f098a5f) | Origen Judges Homilia 9 §§1–3 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 9/9 | 2026-09-13 | after ed68ee0f; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
+| origen-judges-homilies-h8-1-3-oet | done (ed68ee0f) | Origen Judges Homilia 8 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 8e5793df; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
+| origen-judges-homilies-h7-1-3-oet | done (8e5793df) | Origen Judges Homilia 7 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 5bbb67df; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
+| origen-judges-homilies-h6-1-3-oet | done (5bbb67df) | Origen Judges Homilia 6 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after cbfc7bd7; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
+| origen-judges-homilies-h5-1-3-oet | done (cbfc7bd7) | Origen Judges Homilia 5 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 202b5195; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
+| origen-judges-homilies-h4-1-4-oet | done (202b5195) | Origen Judges Homilia 4 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 27d0823b; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
+| origen-judges-homilies-h3-1-4-oet | done (27d0823b) | Origen Judges Homilia 3 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after d4ee1435; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
+| origen-judges-homilies-h2-1-4-oet | done (d4ee1435) | Origen Judges Homilia 2 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 73f81aa4; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
 | origen-judges-homilies-h1-1-4-oet | done (73f81aa4) | Origen Judges Homilia I §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Joshua SERIES CLOSEOUT b1bd7bdb; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
 | origen-joshua-homilies-h26-1-3-oet | done (b1bd7bdb) | Origen Joshua Homilia 26 §§1–3 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 26/26 | 2026-09-13 | after 03703d0b; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h25-1-3-oet | done (03703d0b) | Origen Joshua Homilia 25 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 3758b7e7; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
