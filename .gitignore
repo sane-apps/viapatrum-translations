@@ -1,30 +1,30 @@
+
 __pycache__/
-*.pyc
+.claude/
 .DS_Store
-*.docx.bak
+.env
+.env.*
+.firecrawl/
+.ocr/
 .venv/
-venv/
 *.docx
-# Heavy edition PDFs / dumps — keep *_source.json locks in git; fetch PDFs via sources/manifest.json
-**/*.pdf
+*.docx.bak
+*.log
+*.pyc
 **/*_djvu.txt
 **/*_djvu.xml
 **/*.djvu
-# Local claim locks are created by `claims.py take` — commit them when claiming so remotes see the lock
+**/*.pdf
 # (do not ignore docs/claim-locks/)
-outputs/
-.claude/
-.firecrawl/
-*.log
-.env
-.env.*
-
+# Heavy edition PDFs / dumps — keep *_source.json locks in git; fetch PDFs via sources/manifest.json
 # Large PDFs — keep local only
-books/origen-psalms-rufinus/sources/*.pdf
+# Local claim locks are created by `claims.py take` — commit them when claiming so remotes see the lock
 books/**/sources/*_djvu.txt
-books/**/sources/pg12*.epub
 books/**/sources/pg12_epub/
-
-books/origen-romans/sources/*.pdf
+books/**/sources/pg12*.epub
+books/origen-principiis/sources/koetschau_gcs22_djvu.txt
+books/origen-psalms-rufinus/sources/*.pdf
 books/origen-romans/sources/*_djvu.txt
-.ocr/
+books/origen-romans/sources/*.pdf
+outputs/
+venv/
