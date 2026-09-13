@@ -26,6 +26,12 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-luke-homilies-h1-oet | done (3a197b9b) | Origen Luke Homily 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | after Philocalia SERIES 18ba1926; Rauer GCS 35 Jerome; Melito skipped; never Cyril Matthew densify; no ANF 9 |
+| origen-philocalia-series-closeout | done (18ba1926) | Origen Philocalia §§1–27 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Principiis SERIES 5771df32; Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
+| origen-philocalia-22-27-oet | done (18ba1926) | Origen Philocalia §§22–27 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
+| origen-philocalia-15-21-oet | done (b6966467) | Origen Philocalia §§15–21 CLOSEOUT Pass A≠B OET | 2026-09-13 | Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
+| origen-philocalia-8-14-oet | done (d059ab6b) | Origen Philocalia §§8–14 CLOSEOUT Pass A≠B OET | 2026-09-13 | Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
+| origen-philocalia-2-7-oet | done (66e61331) | Origen Philocalia §§2–7 CLOSEOUT Pass A≠B OET | 2026-09-13 | after opening 7dc6f457; Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
 | origen-philocalia-1-oet | done (7dc6f457) | Origen Philocalia 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | after Principiis SERIES 5771df32; Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
 | origen-principiis-series-closeout | done (5771df32) | Origen De Principiis Books I–IV SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Celsum SERIES 70a9a146; Koetschau GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF Crombie/Butterworth; Rufinus disclosure |
 | origen-principiis-b4-oet | done (5771df32) | Origen De Principiis Book IV CLOSEOUT Pass A≠B OET BOOK IV CLOSEOUT SERIES CLOSEOUT | 2026-09-13 | GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF/Butterworth |
