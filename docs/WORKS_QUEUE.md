@@ -210,3 +210,28 @@ Next: Eustathius *Commentarius in hexaemeron* / other Eustathius lockable Greek 
 | **SERIES CLOSEOUT** | `eustathius-hexaemeron` | Eustathius *Commentarius in hexaemeron* | **SERIES CLOSEOUT** `b6a30ebb` (8u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
 
 Next Eustathius leftovers: remaining PG 18 Greek without usable PD English (Fragmenta varia / De fide / etc.).
+
+
+### Eustathius PG 18 leftovers — SERIES CLOSED (2026-09-13)
+
+| **SERIES CLOSEOUT** | `eustathius-allocutio-constantinum` | Eustathius leftover | **SERIES CLOSEOUT** `5e96b05d` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-commentarius-psalmum` | Eustathius leftover | **SERIES CLOSEOUT** `fcfbd1ad` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-commentarius-psalmum-92` | Eustathius leftover | **SERIES CLOSEOUT** `c728d203` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-de-anima-contra-arianos` | Eustathius leftover | **SERIES CLOSEOUT** `f3400a70` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-de-anima-contra-philosophos` | Eustathius leftover | **SERIES CLOSEOUT** `48d3723c` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-de-fide-contra-arianos` | Eustathius leftover | **SERIES CLOSEOUT** `c22bd1a9` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-de-melchisedech` | Eustathius leftover | **SERIES CLOSEOUT** `eccd01f9` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-fragmenta-varia` | Eustathius leftover | **SERIES CLOSEOUT** `0b878a1a` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-homilia-lazarum` | Eustathius leftover | **SERIES CLOSEOUT** `2718830d` (2u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-in-ecclesiasten` | Eustathius leftover | **SERIES CLOSEOUT** `e28383b8` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-in-genesim-de-creatione` | Eustathius leftover | **SERIES CLOSEOUT** `9d8e290d` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-in-inscriptione-titulorum` | Eustathius leftover | **SERIES CLOSEOUT** `9e37034e` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-in-joseph` | Eustathius leftover | **SERIES CLOSEOUT** `9fff1f9a` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-in-proverbia` | Eustathius leftover | **SERIES CLOSEOUT** `a58c1b22` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-oratio-dominus-creavit` | Eustathius leftover | **SERIES CLOSEOUT** `49565b47` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-oratio-psalmorum-graduum` | Eustathius leftover | **SERIES CLOSEOUT** `083aab78` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eustathius-orationes-contra-arianos` | Eustathius leftover | **SERIES CLOSEOUT** `9aa99535` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
+
+Skipped tiny/weak extracts: De hebraismo, In Samaritanum, Sermo catecheticus, ek tou panekklhsiastou, Commentarius in Joannem (thin). Eustathius PG18 Rank-1 Greek essentially exhausted under standing rules.
+Next corpus-wide: Gregory Thaumaturgus non-ANF scraps (Sententiae / De fide XII / Ad Tatianum / etc.), then other Khazarzar ante-/early-Nicene Greek lacking PD English.
+
