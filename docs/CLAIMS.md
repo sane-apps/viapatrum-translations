@@ -26,6 +26,11 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-luke-homilies-series-closeout | done (8567c6fd) | Origen Luke Homilies 1–39 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Philocalia SERIES 18ba1926; Rauer GCS 35 Jerome; Melito skipped; never Cyril Matthew densify; no ANF 9 |
+| origen-luke-homilies-h31-39-oet | done (8567c6fd) | Origen Luke Homilies 31–39 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | Rauer GCS 35; Melito skipped; never Cyril Matthew densify; no ANF 9 |
+| origen-luke-homilies-h21-30-oet | done (98e69a03) | Origen Luke Homilies 21–30 CLOSEOUT Pass A≠B OET | 2026-09-13 | Rauer GCS 35; Melito skipped; never Cyril Matthew densify; no ANF 9 |
+| origen-luke-homilies-h11-20-oet | done (1e341fb5) | Origen Luke Homilies 11–20 CLOSEOUT Pass A≠B OET | 2026-09-13 | Rauer GCS 35; Melito skipped; never Cyril Matthew densify; no ANF 9 |
+| origen-luke-homilies-h2-10-oet | done (a5fd8e43) | Origen Luke Homilies 2–10 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Hom.1 3a197b9b; Rauer GCS 35; Melito skipped; never Cyril Matthew densify; no ANF 9 |
 | origen-luke-homilies-h1-oet | done (3a197b9b) | Origen Luke Homily 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | after Philocalia SERIES 18ba1926; Rauer GCS 35 Jerome; Melito skipped; never Cyril Matthew densify; no ANF 9 |
 | origen-philocalia-series-closeout | done (18ba1926) | Origen Philocalia §§1–27 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Principiis SERIES 5771df32; Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
 | origen-philocalia-22-27-oet | done (18ba1926) | Origen Philocalia §§22–27 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
