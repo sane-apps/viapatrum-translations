@@ -28,6 +28,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| georgius-cedrenus-compendium-historiarum-series-closeout | done (ba73890b) | Georgius Cedrenus Compendium historiarum SERIES CLOSEOUT (122u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane |
 | georgius-syncellus-ecloga-chronographica-series-closeout | done (9500e3bf) | Georgius Syncellus Ecloga chronographica SERIES CLOSEOUT (49u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; Photius Bibliotheca Freese PD densify |
 | john-malalas-chronographia-series-closeout | done (f17d8853) | John Malalas Chronographia SERIES CLOSEOUT (36u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; Photius Bibliotheca Freese PD densify |
 | john-malalas-chronographia-eclogae-series-closeout | done (5ebb2341) | John Malalas Chronographia eclogae SERIES CLOSEOUT (2u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; Photius Bibliotheca Freese PD densify |

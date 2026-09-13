@@ -531,6 +531,8 @@ Philostorgius HE → densify (Walford PD). Densify: Nemesius/Macarius/ANF.
 | **SERIES CLOSEOUT** | `theodore-studite-homilia-nativitatem-mariae` | Theodore the Studite *Homilia in nativitatem Mariae* | **SERIES CLOSEOUT** `47616d15` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 | **SERIES CLOSEOUT** | `theodore-studite-iambi` | Theodore the Studite *Iambi de variis argumentis* | **SERIES CLOSEOUT** `afc33ace` (3u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 
+| **SERIES CLOSEOUT** | `georgius-cedrenus-compendium-historiarum` | Georgius Cedrenus *Compendium historiarum* | **SERIES CLOSEOUT** `ba73890b` (122u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+
 Epiphanius densify leftovers: Ancoratus, Panarion, Anacephalaeosis, De mensuris (Dean PD).
 Densify: Nemesius/Macarius/ANF/Philostorgius. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
