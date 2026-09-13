@@ -1,3 +1,14 @@
+## Rank-1 Gennadius/Bryennius/Phokas/Symeon Magister
+
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-galatas` | Fragmenta in epistulam ad Galatas | **SERIES CLOSEOUT** `c931b076` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-hebraeos` | Fragmenta in epistulam ad Hebraeos | **SERIES CLOSEOUT** `82921d4e` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-romanos` | Fragmenta in epistulam ad Romanos | **SERIES CLOSEOUT** `ce2a5489` (9u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-corinthios` | Fragmenta in epistulam i et ii ad Corinthios | **SERIES CLOSEOUT** `e7049e75` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gennadius-fragmentum-2thess` | Fragmentum in epistulam ii ad Thessalonicenses | **SERIES CLOSEOUT** `afc61cdc` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `nicephorus-bryennius-historiae` | Historiae | **SERIES CLOSEOUT** `e6c019fc7` (13u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `nicephorus-phokas-de-velitatione-bellica` | De velitatione bellica | **SERIES CLOSEOUT** `93c90bad0` (7u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `symeon-magister-chronographia` | Chronographia | **SERIES CLOSEOUT** `8dcfcb37e` (13u). Melito skipped; never Cyril Matthew densify. |
+
 ## Nicephorus Patriarch Rank-1
 
 | **SERIES CLOSEOUT** | `nicephorus-breviarium-historicum` | Nicephorus of Constantinople *Breviarium historicum de rebus gestis post imperium Mauricii* | **SERIES CLOSEOUT** `44ac4811a` (8u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English. |
