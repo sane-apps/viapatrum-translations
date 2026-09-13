@@ -28,6 +28,13 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-ps-prol-open-oet | done (d41c0520) | Cyril Psalms Prologue open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ps-prol-rem-oet | done (d41c0520) | Cyril Psalms Prologue rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ps-ps001-open-oet | done (290ff6ee) | Cyril Psalms Ps1 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ps-ps001-rem-oet | done (290ff6ee) | Cyril Psalms Ps1 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ps-ps100-open-oet | done (4e5bf489) | Cyril Psalms Ps100 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ps-ps100-rem-oet | done (4e5bf489) | Cyril Psalms Ps100 rem CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-ps-series-closeout | done (4e5bf489) | Cyril Expositio in Psalmos SERIES CLOSEOUT (prol+100) Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
 | cyril-cj-book3-open-oet | done (97dbca66) | Cyril Contra Julianum Book 3 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 76 IA Migne leaf OCR grc; tip 97dbca66; Melito skipped; never Cyril Matthew densify; no SC/GCS English; skip Pusey-PD |
 | cyril-cj-book3-rem-oet | done (97dbca66) | Cyril Contra Julianum Book 3 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 76 IA Migne leaf OCR grc; tip 97dbca66; Melito skipped; never Cyril Matthew densify; no SC/GCS English; skip Pusey-PD |
 | cyril-cj-book4-open-oet | done (2bd3058c) | Cyril Contra Julianum Book 4 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 76 IA Migne leaf OCR grc; tip 2bd3058c; Melito skipped; never Cyril Matthew densify; no SC/GCS English; skip Pusey-PD |
