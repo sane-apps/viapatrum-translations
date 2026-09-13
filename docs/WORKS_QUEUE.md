@@ -56,7 +56,7 @@ If staying in Origen after Heraclides + Pascha (Rank 1, no PD English):
 | 12 | `origen-isaiah-ezekiel` | 9 Isaiah + 14 Ezekiel; GCS VIII; **DONE** SERIES `ecd5c7c6` |
 | 13 | `origen-psalms-rufinus` | Ps 36–38 Rufinus (9); PG 12; **DONE** SERIES `8270d057` |
 | 14 | `origen-romans` | Romans Comm. Rufinus (10); PG 14; **DONE** SERIES `3394ac4c` |
-| 15 | `origen-matthew-later` | Matt 15–17 + Series; PG 13; **ACTIVE** Series through `f2aa69e6` (after XV–XVII; next Series → CLOSEOUT) |
+| 15 | `origen-matthew-later` | Matt 15–17 + Series; PG 13; **ACTIVE** Series through `aa057d5f` (after XV–XVII; next Series → CLOSEOUT) |
 
 Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if leaving Cyril. Adorations CLOSED tip `9161f43`; now Irenaeus *Demonstration* (Melito skipped).
 

@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-matthew-later-series-9-10-oet | done (aa057d5f) | Origen Matthew Series §§9–10 Peter denial CLOSEOUT Pass A≠B OET | 2026-09-13 | after f2aa69e6; PG 13 Latin Series; Melito skipped; never Cyril Matthew densify; no Heine |
 | origen-matthew-later-series-7-8-oet | done (f2aa69e6) | Origen Matthew Series §§7–8 arrest CLOSEOUT Pass A≠B OET | 2026-09-13 | after 8016a088; PG 13 Latin Series; Melito skipped; never Cyril Matthew densify; no Heine |
 | origen-matthew-later-series-5-6-oet | done (8016a088) | Origen Matthew Series §§5–6 Gethsemane CLOSEOUT Pass A≠B OET | 2026-09-13 | after 3601a95d; PG 13 Latin Series; Melito skipped; never Cyril Matthew densify; no Heine |
 | origen-matthew-later-series-3-4-oet | done (3601a95d) | Origen Matthew Series §§3–4 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | after aa8960a4; PG 13 Latin Series; Melito skipped; never Cyril Matthew densify; no Heine |
