@@ -355,7 +355,22 @@ Still densify-lane: Nemesius, Macarius, ANF-covered, Melito skip, never Cyril Ma
 | **SERIES CLOSEOUT** | `hesychius-in-stephanum` | Hesychius *In sanctum Stephanum* | **SERIES CLOSEOUT** `e38a2f42` (2u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
 
 Densify: Nemesius, Macarius, ANF. Melito skipped; never Cyril Matthew densify.
+
+### Gennadius + Cyril Jerusalem leftovers — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-corinthios` | Gennadius *Fragmenta in epistulam i et ii ad Corinthios* | **SERIES CLOSEOUT** `e7049e75` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-galatas` | Gennadius *Fragmenta in epistulam ad Galatas* | **SERIES CLOSEOUT** `c931b076` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-hebraeos` | Gennadius *Fragmenta in epistulam ad Hebraeos* | **SERIES CLOSEOUT** `82921d4e` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gennadius-fragmenta-romanos` | Gennadius *Fragmenta in epistulam ad Romanos* | **SERIES CLOSEOUT** `ce2a5489` (9u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gennadius-fragmentum-2thess` | Gennadius *Fragmentum in epistulam ii ad Thessalonicenses* | **SERIES CLOSEOUT** `afc61cdc` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `cyril-jerusalem-epistula-constantium` | Cyril of Jerusalem *Epistula ad Constantium imperatorem* | **SERIES CLOSEOUT** `e97d1413` (1u). Non-catechetical Rank-1; Catecheses/Mystagogiae densify. Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `cyril-jerusalem-homilia-ego-vado` | Cyril of Jerusalem *Homilia in illud Ego vado ad patrem meum* | **SERIES CLOSEOUT** `3d93988a` (1u). Non-catechetical Rank-1; Catecheses/Mystagogiae densify. Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `cyril-jerusalem-homilia-occursum` | Cyril of Jerusalem *Homilia in occursum domini* | **SERIES CLOSEOUT** `aef0e51f` (1u). Non-catechetical Rank-1; Catecheses/Mystagogiae densify. Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `cyril-jerusalem-homilia-paralyticum` | Cyril of Jerusalem *Homilia in paralyticum juxta piscinam jacentem* | **SERIES CLOSEOUT** `c962ec51` (2u). Non-catechetical Rank-1; Catecheses/Mystagogiae densify. Melito skipped; never Cyril Matthew densify. |
+
+Densify: Nemesius, Macarius, ANF, Cyril Jer Catecheses. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
+
 
 
 
