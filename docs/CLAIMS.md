@@ -13,7 +13,6 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
-| cyril-trinity-d1-open-oet | claimed | cyril-alexandria-trinity-dialogue-1 | prologue + Dial.1 opening through Ps 46:10 | ae07 | 2026-09-13 | cursor/origen-samuel28-oet-ae07 | tip-ready; PG 75 CPG 5216; Melito skipped; never Cyril Matthew densify; no Durand SC / modern English sync |
 
 ## How to claim
 
@@ -27,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-trinity-d1-open-oet | done (94dbb869) | Cyril Trinity Dialogue 1 prologue + opening (Ps 46:10) CLOSEOUT Pass A≠B OET | 2026-09-13 | after Origen Rank-1 exhausted af9c9531; PG 75 CPG 5216; Melito skipped; never Cyril Matthew densify; no Durand SC / modern English sync |
 | origen-nt-fragments-john-open-oet | done (32a0b77f) | Origen NT fragments John catena opening (fr.1–2) CLOSEOUT Pass A≠B OET | 2026-09-13 | after Letters SERIES 23a65bf4; First1K tlg006; Melito skipped; never Cyril Matthew densify |
 | origen-nt-fragments-john-rem-oet | done (1bbafdb5) | Origen NT fragments John catena rem CLOSEOUT Pass A≠B OET | 2026-09-13 | First1K tlg006; Melito skipped; never Cyril Matthew densify |
 | origen-nt-fragments-luke-catena-oet | done (5c3d952e) | Origen NT fragments Luke catena CLOSEOUT Pass A≠B OET | 2026-09-13 | First1K tlg017; Melito skipped; never Cyril Matthew densify |
