@@ -233,5 +233,37 @@ Next Eustathius leftovers: remaining PG 18 Greek without usable PD English (Frag
 | **SERIES CLOSEOUT** | `eustathius-orationes-contra-arianos` | Eustathius leftover | **SERIES CLOSEOUT** `9aa99535` (1u). PG 18 Khazarzar; Melito skipped; never Cyril Matthew densify. |
 
 Skipped tiny/weak extracts: De hebraismo, In Samaritanum, Sermo catecheticus, ek tou panekklhsiastou, Commentarius in Joannem (thin). Eustathius PG18 Rank-1 Greek essentially exhausted under standing rules.
-Next corpus-wide: Gregory Thaumaturgus non-ANF scraps (Sententiae / De fide XII / Ad Tatianum / etc.), then other Khazarzar ante-/early-Nicene Greek lacking PD English.
+### Gregory non-ANF + Marcellus/Theodorus — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `gregory-thaumaturgus-ouden-eidolon` | Gregory Thaumaturgus *Eis to ouden eidolon* | **SERIES CLOSEOUT** `30cd50b6` (1u). Non-ANF scrap. Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gregory-thaumaturgus-sententiae` | Gregory Thaumaturgus *Sententiae* | **SERIES CLOSEOUT** `d112b535` (1u). ≠ ANF Sectional Confession. Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `marcellus-ancyranus-fragmenta` | Marcellus of Ancyra *Fragmenta* | **SERIES CLOSEOUT** `8c5835dd` (5u). Skip Athanasian-titled De incarnatione / Expositio fidei (PD/NPNF lane). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `theodorus-heracleensis-matthew-fragments` | Theodorus of Heraclea *Fragmenta in Matthaeum* | **SERIES CLOSEOUT** `778204ed` (1u). Never Cyril Matthew densify. Melito skipped. |
+
+Gregory ANF densify-lane (not Rank-1 OET): De fide XII, Ad Tatianum de anima, In annuntiationem, Sermo in omnes sanctos, panegyric, Ecclesiastes metaphrase, Epistula canonica.
+
+### Evagrius Ponticus PG 40 — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `evagrius-ad-eulogium` | Evagrius *Tractatus ad Eulogium* | **SERIES CLOSEOUT** `1ab40a36` (4u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-capitula-xxxiii` | Evagrius *Capitula xxxiii* | **SERIES CLOSEOUT** `ea722025` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-de-magistris` | Evagrius *De magistris et discipulis* | **SERIES CLOSEOUT** `dd0f8f61` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-de-malignis-cogitationibus` | Evagrius *De malignis cogitationibus* | **SERIES CLOSEOUT** `4da29f93` (3u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-de-octo-spiritibus` | Evagrius *De octo spiritibus malitiae* | **SERIES CLOSEOUT** `81e04c50` (2u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-de-vitiis` | Evagrius *De vitiis quae opposita sunt virtutibus* | **SERIES CLOSEOUT** `2d0ec28e` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-expositio-proverbia` | Evagrius *Expositio in Proverbia Salomonis* | **SERIES CLOSEOUT** `ebacc83d` (6u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-gnosticus` | Evagrius *Gnosticus* | **SERIES CLOSEOUT** `7a9c0943` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-institutio-monachos` | Evagrius *Institutio sive Paraenesis ad monachos* | **SERIES CLOSEOUT** `8baaf8ef` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-practicus` | Evagrius *Practicus* | **SERIES CLOSEOUT** `ff436005` (3u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-rerum-monachalium` | Evagrius *Rerum monachalium rationes* | **SERIES CLOSEOUT** `74dcb940` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-scholia-ecclesiasten` | Evagrius *Scholia in Ecclesiasten* | **SERIES CLOSEOUT** `21faeca7` (3u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-scholia-proverbia` | Evagrius *Scholia in Proverbia* | **SERIES CLOSEOUT** `9bc6ed76` (7u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-sententiae-monachos` | Evagrius *Sententiae ad monachos* | **SERIES CLOSEOUT** `201bbdab` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-sententiae-virginem` | Evagrius *Sententiae ad virginem* | **SERIES CLOSEOUT** `55d70ba2` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `evagrius-spiritales-sententiae` | Evagrius *Spiritales sententiae per alphabeticum dispositae* | **SERIES CLOSEOUT** `039579b1` (1u). PG 40 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+
+Skipped: *De oratione* (Nilus attribution / PD English tradition). Tiny *eis to pipi* skipped.
+Serapion PG40 Fragmenta = Serapion of Antioch → ANF densify-lane.
+Next corpus-wide: Asterius Amasenus uncovered Homiliae (Anderson 1904 only partial PD — tip uncovered / full Greek carefully) or Nemesius *De natura hominis* if no usable PD English; else next Khazarzar early Greek lacking PD English. Melito skipped; never Cyril Matthew densify; ANF densify-lane.
+
+
 
