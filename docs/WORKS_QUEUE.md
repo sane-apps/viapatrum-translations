@@ -473,6 +473,24 @@ Philostorgius HE → densify (Walford PD). Densify: Nemesius/Macarius/ANF.
 | **SERIES CLOSEOUT** | `procopius-gaza-horologium` | Procopius of Gaza *Horologium* | **SERIES CLOSEOUT** `6a38be4e` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 | **SERIES CLOSEOUT** | `procopius-gaza-refutatio-procli` | Procopius of Gaza *Refutatio Procli* | **SERIES CLOSEOUT** `2976e6b9` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 
+### Oecumenius PG118-119 — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `oecumenius-commentarius-apocalypsin` | Oecumenius *Commentarius in Apocalypsin* | **SERIES CLOSEOUT** `a4976792` (21u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-colossenses` | Oecumenius *Fragmenta in epistulam ad Colossenses* | **SERIES CLOSEOUT** `744d082e` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-ephesios` | Oecumenius *Fragmenta in epistulam ad Ephesios* | **SERIES CLOSEOUT** `21353671` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-galatas` | Oecumenius *Fragmenta in epistulam ad Galatas* | **SERIES CLOSEOUT** `8a8cb186` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-hebraeos` | Oecumenius *Fragmenta in epistulam ad Hebraeos* | **SERIES CLOSEOUT** `3683b7cb` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-philippenses` | Oecumenius *Fragmenta in epistulam ad Philippenses* | **SERIES CLOSEOUT** `4e5c99e8` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-romanos` | Oecumenius *Fragmenta in epistulam ad Romanos* | **SERIES CLOSEOUT** `80c837aa` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-titum` | Oecumenius *Fragmenta in epistulam ad Titum* | **SERIES CLOSEOUT** `3949b9c8` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-1cor` | Oecumenius *Fragmenta in epistulam i ad Corinthios* | **SERIES CLOSEOUT** `815874c5` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-1thess` | Oecumenius *Fragmenta in epistulam i ad Thessalonicenses* | **SERIES CLOSEOUT** `4c0b0029` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-1tim` | Oecumenius *Fragmenta in epistulam i ad Timotheum* | **SERIES CLOSEOUT** `632dcb94` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-2cor` | Oecumenius *Fragmenta in epistulam ii ad Corinthios* | **SERIES CLOSEOUT** `f097b83e` (4u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-2thess` | Oecumenius *Fragmenta in epistulam ii ad Thessalonicenses* | **SERIES CLOSEOUT** `f6272792` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmenta-2tim` | Oecumenius *Fragmenta in epistulam ii ad Timotheum* | **SERIES CLOSEOUT** `f1c0e94e` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `oecumenius-fragmentum-philemonem` | Oecumenius *Fragmentum in epistulam ad Philemonem* | **SERIES CLOSEOUT** `1ce3c1ca` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+
 Epiphanius densify leftovers: Ancoratus, Panarion, Anacephalaeosis, De mensuris (Dean PD).
 Densify: Nemesius/Macarius/ANF/Philostorgius. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
