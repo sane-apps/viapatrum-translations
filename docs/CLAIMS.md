@@ -28,6 +28,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| eustathius-hexaemeron-series-closeout | done (b6a30ebb) | Eustathius Commentarius in hexaemeron SERIES CLOSEOUT (8u) Pass A≠B OET | 2026-09-13 | after engastrimytho 8b4d2ac4; Khazarzar PG; Melito skipped; never Cyril Matthew densify |
 | africanus-cesti-series-closeout | done (c078ca41) | Julius Africanus Cesti fragmenta SERIES CLOSEOUT (6u) Pass A≠B OET | 2026-09-13 | corpus-wide Rank-1 after Cyril/Origen Khazarzar queues; Melito skipped; never Cyril Matthew densify; no usable PD English base |
 | gregory-thaumaturgus-jeremiah-fragments-series-closeout | done (e38d8f6a) | Gregory Thaumaturgus Fragmenta in Jeremiam SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | corpus-wide Rank-1 after Cyril/Origen Khazarzar queues; Melito skipped; never Cyril Matthew densify; no usable PD English base |
 | gregory-thaumaturgus-matthew-fragment-series-closeout | done (88e4f8a7) | Gregory Thaumaturgus Fragmentum in Matthaeum SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | corpus-wide Rank-1 after Cyril/Origen Khazarzar queues; Melito skipped; never Cyril Matthew densify; no usable PD English base |

@@ -206,3 +206,7 @@ Pick: **Julius Africanus Cesti** (ante-Nicene; lockable Greek; no usable PD Engl
 Hippolytus PG 10 on Khazarzar is empty (ANF HTML extras only). Melito skipped.
 Next: Eustathius *Commentarius in hexaemeron* / other Eustathius lockable Greek without PD English; then continue corpus-wide.
 
+
+| **SERIES CLOSEOUT** | `eustathius-hexaemeron` | Eustathius *Commentarius in hexaemeron* | **SERIES CLOSEOUT** `b6a30ebb` (8u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+
+Next Eustathius leftovers: remaining PG 18 Greek without usable PD English (Fragmenta varia / De fide / etc.).
