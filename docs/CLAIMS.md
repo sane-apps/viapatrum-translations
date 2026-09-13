@@ -28,6 +28,17 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-matthew-later-xv-1-2-oet | done (515bbfbd) | Origen Matthew Tomus XV §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Romans SERIES 3394ac4c; PG 13 Greek tesseract; Melito skipped; never Cyril Matthew densify; no Heine |
+| origen-romans-b10-1-2-oet | done (3394ac4c) | Origen Romans Book 10 §§1–2 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 10/10 | 2026-09-13 | after f588dff4; PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b9-1-2-oet | done (f588dff4) | Origen Romans Book 9 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b8-1-2-oet | done (eb68b2ee) | Origen Romans Book 8 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b7-1-2-oet | done (477855f6) | Origen Romans Book 7 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b6-1-2-oet | done (6821ba8d) | Origen Romans Book 6 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b5-1-2-oet | done (8a7db9ac) | Origen Romans Book 5 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b4-1-2-oet | done (6d40f1d2) | Origen Romans Book 4 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b3-1-2-oet | done (237035f4) | Origen Romans Book 3 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b2-1-2-oet | done (23625dc4) | Origen Romans Book 2 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-romans-b1-3-6-oet | done (c5376f7a) | Origen Romans Book I §§3–6 CLOSEOUT Pass A≠B OET BOOK I CLOSEOUT | 2026-09-13 | after Pref tip 5047f5d5; PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-romans-b1-pref-1-2-oet | done (5047f5d5) | Origen Romans Book I Prefatio + §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Psalms SERIES 8270d057; PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-psalms-rufinus-ps38-h2-1-2-oet | done (8270d057) | Origen Psalms Rufinus Ps 38 Homilia II §§1–2 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 9/9 | 2026-09-13 | after 768df8e8; PG 12 Rufinus; Melito skipped; never Cyril Matthew densify; no Trigg/Prinzivalli/Perrone |
 | origen-psalms-rufinus-ps38-h1-1-2-oet | done (768df8e8) | Origen Psalms Rufinus Ps 38 Homilia I §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 12 Rufinus; Melito skipped; never Cyril Matthew densify |
