@@ -26,6 +26,9 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-exodus-homilies-h5-1-5-oet | done (2cfa4506) | Origen Exodus Homilia V §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h4-1-8-oet | done (9e6883c3) | Origen Exodus Homilia IV §§1–8 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h3-1-3-oet | done (acbb2d8c) | Origen Exodus Homilia III §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-exodus-homilies-h2-1-4-oet | done (dd53bd55) | Origen Exodus Homilia II §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Homilia I tip 5b9a8a3c; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-exodus-homilies-h1-1-5-oet | done (5b9a8a3c) | Origen Exodus Homilia I §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Genesis SERIES CLOSEOUT 270ab13a; Baehrens GCS 29; Hexateuch continuation; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-genesis-homilies-h16-1-6-oet | done (270ab13a) | Origen Genesis Homilia XVI §§1–6 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia XVI 6/6 + series 16/16; Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine |
