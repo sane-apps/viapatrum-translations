@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-trinity-d2-rem-oet | done (36292f08) | Cyril Trinity Dialogue 2 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; after Dial.2 open e70f7cc8; Melito skipped; never Cyril Matthew densify |
 | cyril-trinity-d2-open-oet | done (e70f7cc8) | Cyril Trinity Dialogue 2 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; after Dial.1 rem 02fc0008; Melito skipped; never Cyril Matthew densify |
 | cyril-trinity-d1-rem-oet | done (02fc0008) | Cyril Trinity Dialogue 1 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; after open 94dbb869; Melito skipped; never Cyril Matthew densify |
 | cyril-trinity-d1-open-oet | done (94dbb869) | Cyril Trinity Dialogue 1 prologue + opening (Ps 46:10) CLOSEOUT Pass A≠B OET | 2026-09-13 | after Origen Rank-1 exhausted af9c9531; PG 75 CPG 5216; Melito skipped; never Cyril Matthew densify; no Durand SC / modern English sync |
