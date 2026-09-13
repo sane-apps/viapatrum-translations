@@ -503,6 +503,34 @@ Philostorgius HE → densify (Walford PD). Densify: Nemesius/Macarius/ANF.
 | **SERIES CLOSEOUT** | `theophylact-simocatta-historiae` | Theophylact Simocatta *Historiae* | **SERIES CLOSEOUT** `33769ce9` (31u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 | **SERIES CLOSEOUT** | `theophylact-simocatta-quaestiones-physicae` | Theophylact Simocatta *Quaestiones physicae* | **SERIES CLOSEOUT** `22d99be6` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 
+### Photius / Malalas / Syncellus / Studite — SERIES tipped (2026-09-13)
+
+| **densify** | `photius-bibliotheca` | Photius *Bibliotheca* | Densify-lane — Freese PD English. Melito skipped; never Cyril Matthew densify. |
+| **defer** | `photius-lexicon` | Photius *Lexicon* | Deferred (lexicographic / size). |
+| **defer** | `theodore-studite-epistulae` | Theodore Studite *Epistulae* | Deferred (large); Homilia/Iambi tipped. |
+| **SERIES CLOSEOUT** | `georgius-syncellus-ecloga-chronographica` | Georgius Syncellus *Ecloga chronographica* | **SERIES CLOSEOUT** `9500e3bf` (49u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `john-malalas-chronographia` | John Malalas *Chronographia* | **SERIES CLOSEOUT** `f17d8853` (36u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `john-malalas-chronographia-eclogae` | John Malalas *Chronographia eclogae* | **SERIES CLOSEOUT** `5ebb2341` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `john-malalas-chronologica` | John Malalas *Chronologica* | **SERIES CLOSEOUT** `860d000c` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-commentarii-joannem` | Photius of Constantinople *Commentarii in Joannem* | **SERIES CLOSEOUT** `6e67e5bb` (6u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-commentarii-matthaeum` | Photius of Constantinople *Commentarii in Matthaeum* | **SERIES CLOSEOUT** `e345e5cd` (7u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-epigramma` | Photius of Constantinople *Epigramma* | **SERIES CLOSEOUT** `7a002cda` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-1cor` | Photius of Constantinople *Fragmenta in epistulam I ad Corinthios* | **SERIES CLOSEOUT** `100ff2b6` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-1thess` | Photius of Constantinople *Fragmenta in epistulam I ad Thessalonicenses* | **SERIES CLOSEOUT** `699b4031` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-1tim` | Photius of Constantinople *Fragmenta in epistulam i ad Timotheum* | **SERIES CLOSEOUT** `ea741868` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-2cor` | Photius of Constantinople *Fragmenta in epistulam ii ad Corinthios* | **SERIES CLOSEOUT** `ec47c309` (4u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-2thess` | Photius of Constantinople *Fragmenta in epistulam ii ad Thessalonicenses* | **SERIES CLOSEOUT** `c372aaf7` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-colossenses` | Photius of Constantinople *Fragmenta in epistulam ad Colossenses* | **SERIES CLOSEOUT** `abbb9fa6` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-ephesios` | Photius of Constantinople *Fragmenta in epistulam ad Ephesios* | **SERIES CLOSEOUT** `0877c2e0` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-galatas` | Photius of Constantinople *Fragmenta in epistulam ad Galatas* | **SERIES CLOSEOUT** `92459062` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-hebraeos` | Photius of Constantinople *Fragmenta in epistulam ad Hebraeos* | **SERIES CLOSEOUT** `70eaeb67` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-philippenses` | Photius of Constantinople *Fragmenta in epistulam ad Philippenses* | **SERIES CLOSEOUT** `38130a31` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmenta-romanos` | Photius of Constantinople *Fragmenta in epistulam ad Romanos* | **SERIES CLOSEOUT** `513fe958` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmentum-2tim` | Photius of Constantinople *Fragmentum in epistulam ii ad Timotheum* | **SERIES CLOSEOUT** `3350eea8` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `photius-fragmentum-philemonem` | Photius of Constantinople *Fragmentum in epistulam ad Philemonem* | **SERIES CLOSEOUT** `d50092f1` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theodore-studite-homilia-nativitatem-mariae` | Theodore the Studite *Homilia in nativitatem Mariae* | **SERIES CLOSEOUT** `47616d15` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theodore-studite-iambi` | Theodore the Studite *Iambi de variis argumentis* | **SERIES CLOSEOUT** `afc33ace` (3u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+
 Epiphanius densify leftovers: Ancoratus, Panarion, Anacephalaeosis, De mensuris (Dean PD).
 Densify: Nemesius/Macarius/ANF/Philostorgius. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
