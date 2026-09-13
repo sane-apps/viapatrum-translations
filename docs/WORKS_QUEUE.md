@@ -384,7 +384,17 @@ Densify: Nemesius, Macarius, ANF, Cyril Jer Catecheses. Melito skipped; never Cy
 
 Collision note: shared `Fragmenta in *` filenames required author-unique local aliases for Diodorus Rom / Theophilus / Ammonius (re-tipped). Apollinaris extracts OK.
 Densify: Nemesius, Macarius, ANF. Melito skipped; never Cyril Matthew densify.
+
+### Eudocia / Georgius Peccator / John of Antioch — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `eudokia-de-martyrio-cypriani` | *De martyrio sancti Cypriani* | **SERIES CLOSEOUT** `40d3a7de` (3u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `eudokia-homerocentones` | *Homerocentones* | **SERIES CLOSEOUT** `2f9f4967` (2u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `georgius-peccator-hymnus` | *Hymnus* | **SERIES CLOSEOUT** `e55c75e1` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `john-antioch-historia-chronike` | *Historia Chronike* | **SERIES CLOSEOUT** `6623daf5` (22u). Melito skipped; never Cyril Matthew densify. |
+
+Philostorgius HE → densify (Walford PD). Densify: Nemesius/Macarius/ANF.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
+
 
 
 
