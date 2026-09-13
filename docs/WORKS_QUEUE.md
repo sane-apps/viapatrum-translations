@@ -1,3 +1,9 @@
+## Nicephorus Patriarch Rank-1
+
+| **SERIES CLOSEOUT** | `nicephorus-breviarium-historicum` | Nicephorus of Constantinople *Breviarium historicum de rebus gestis post imperium Mauricii* | **SERIES CLOSEOUT** `44ac4811a` (8u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English. |
+| **SERIES CLOSEOUT** | `nicephorus-chronographia-brevis` | Nicephorus of Constantinople *Chronographia brevis* | **SERIES CLOSEOUT** `5681d88cd` (3u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English. |
+| **SERIES CLOSEOUT** | `nicephorus-refutatio-eversio-definitionis` | Nicephorus of Constantinople *Refutatio et eversio definitionis synodalis anni* | **SERIES CLOSEOUT** `6ea8e1630` (34u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English. |
+
 # Ante-Nicene whole-works queue
 
 Priority: (1) no usable public-domain English first, (2) Victorian/copyrighted refresh.  
