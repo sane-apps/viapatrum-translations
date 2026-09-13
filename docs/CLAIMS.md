@@ -26,7 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
-| origen-psalms-rufinus-ps36-h1-1-3-oet | done (PENDING_PS) | Origen Psalms Rufinus Ps 36 Homilia I §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Isaiah–Ezekiel SERIES ecd5c7c6; PG 12 Rufinus; Melito skipped; never Cyril Matthew densify; no Trigg/Prinzivalli/Perrone |
+| origen-psalms-rufinus-ps36-h1-1-3-oet | done (890d89d2) | Origen Psalms Rufinus Ps 36 Homilia I §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Isaiah–Ezekiel SERIES ecd5c7c6; PG 12 Rufinus; Melito skipped; never Cyril Matthew densify; no Trigg/Prinzivalli/Perrone |
 | origen-isaiah-ezekiel-ezek-h14-1-2-oet | done (ecd5c7c6) | Origen Ezekiel Homilia 14 §§1–2 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 23/23 (9 Isa + 14 Ezek) | 2026-09-13 | after Ezek H13; Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-isaiah-ezekiel-ezek-h13-1-2-oet | done (13a6194a) | Origen Ezekiel Homilia 13 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-isaiah-ezekiel-ezek-h12-1-2-oet | done (42f95bcb) | Origen Ezekiel Homilia 12 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
