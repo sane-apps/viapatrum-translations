@@ -28,7 +28,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-romans` | Origen Commentary on Romans (Rufinus, 10 books) | **DONE** SERIES CLOSEOUT tip `3394ac4c` (10/10). PG 14 Rufinus. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
 | **done** | `origen-matthew-later` | Origen Comm. Matthew 15–17 + Series (Latin) | **DONE** SERIES CLOSEOUT tip `ca34b410`. PG 13. Melito skipped. Never Cyril Matthew densify. No Heine. |
 | **done** | `origen-prayer-martyrdom` | Origen *On Prayer* + *Exhortation to Martyrdom* | **DONE** SERIES CLOSEOUT tip `d7b9c696` (Orat open `c3952afa` / close `51a68660`; Mart `b83080f9`/`d7b9c696`). GCS 2–3. Melito skipped. Never Cyril Matthew densify. No O’Meara/Greer. |
-| **active** | `origen-contra-celsum` | Origen *Contra Celsum* (8 books) | Opening tip  (after prayer-martyrdom `d7b9c696`). Koetschau GCS 2–3 (1899 PD). Shorter Rank-1 exhausted; promoted from deferred. Melito skipped. Never Cyril Matthew densify. True OET — do not copy ANF Crombie / Chadwick. |
+| **active** | `origen-contra-celsum` | Origen *Contra Celsum* (8 books) | Opening tip `e6346628` (after prayer-martyrdom SERIES `d7b9c696`). Koetschau GCS 2–3 (1899 PD). Shorter Rank-1 exhausted; promoted from deferred. Melito skipped. Never Cyril Matthew densify. True OET — no ANF Crombie / Chadwick. |
 
 
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
@@ -60,7 +60,6 @@ Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if lea
 
 | Status | Work | Notes |
 |--------|------|-------|
-| **active** (promoted) | `origen-contra-celsum` | Large GCS 2–3; shorter Rank-1 done after `d7b9c696`; true OET (no ANF copy) |
 | deferred | Origen, *De Principiis* | Large; ANF 4 exists; after shorter Rank 1 |
 
 ## Done (public site)
