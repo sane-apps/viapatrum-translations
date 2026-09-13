@@ -26,6 +26,19 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-isaiah-prol-oet | done (7cd77c36) | Cyril Isaiah commentary prologue CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 7cd77c36; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos1-open-oet | done (54a334b6) | Cyril Isaiah Book I Logos 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 54a334b6; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos1-rem-oet | done (54a334b6) | Cyril Isaiah Book I Logos 1 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 54a334b6; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos2-open-oet | done (7a204693) | Cyril Isaiah Book I Logos 2 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 7a204693; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos2-rem-oet | done (7a204693) | Cyril Isaiah Book I Logos 2 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 7a204693; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos3-open-oet | done (1b63badb) | Cyril Isaiah Book I Logos 3 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 1b63badb; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos3-rem-oet | done (1b63badb) | Cyril Isaiah Book I Logos 3 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 1b63badb; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos4-open-oet | done (59e776bd) | Cyril Isaiah Book I Logos 4 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 59e776bd; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos4-rem-oet | done (59e776bd) | Cyril Isaiah Book I Logos 4 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip 59e776bd; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos5-open-oet | done (a9b4040a) | Cyril Isaiah Book I Logos 5 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip a9b4040a; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-logos5-rem-oet | done (a9b4040a) | Cyril Isaiah Book I Logos 5 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip a9b4040a; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-book2-open-oet | done (bb25e73b) | Cyril Isaiah Book II opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip bb25e73b; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
+| cyril-isaiah-book2-rem-oet | done (bb25e73b) | Cyril Isaiah Book II rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 70 CPG 5203; tip bb25e73b; Melito skipped; never Cyril Matthew densify; no Hill; skip Pusey-PD |
 | cyril-glaphyra-noah-ark-open-oet | done (f300fe9c) | Cyril Glaphyra Noah and the ark opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip f300fe9c; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
 | cyril-glaphyra-noah-ark-rem-oet | done (f300fe9c) | Cyril Glaphyra Noah and the ark rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip f300fe9c; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
 | cyril-glaphyra-noah-ham-open-oet | done (ff0265d8) | Cyril Glaphyra Noah's nakedness and Ham opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip ff0265d8; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
