@@ -269,7 +269,30 @@ Serapion PG40 Fragmenta = Serapion of Antioch → ANF densify-lane.
 | **SERIES CLOSEOUT** | `asterius-homilia-9` | Asterius *Homilia 9* | **SERIES CLOSEOUT** `c6496135` (1u). Melito skipped; never Cyril Matthew densify. |
 
 Nemesius *De natura hominis* → densify-lane (Wither 1636 PD English).
-Next corpus-wide: further Khazarzar early Greek lacking usable PD English (Didymus / Macarius scraps without PD, etc.). Melito skipped; never Cyril Matthew densify; ANF densify-lane.
+
+### Didymus the Blind PG 39 — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `didymus-commentarii-ecclesiasten` | Didymus *Commentarii in Ecclesiasten* | **SERIES CLOSEOUT** `8713b2e2` (16u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-commentarii-job` | Didymus *Commentarii in Job* | **SERIES CLOSEOUT** `436aef50` (24u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-commentarii-octateuchum` | Didymus *Commentarii in Octateuchum et Reges* | **SERIES CLOSEOUT** `d4a2177a` (1u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-commentarii-psalmos` | Didymus *Commentarii in Psalmos* | **SERIES CLOSEOUT** `2e156a16` (56u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-commentarii-zacchariam` | Didymus *Commentarii in Zacchariam* | **SERIES CLOSEOUT** `dab8c7f3` (39u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-contra-manichaeos` | Didymus *Contra Manichaeos* | **SERIES CLOSEOUT** `703d23ea` (2u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-de-trinitate` | Didymus *De trinitate* | **SERIES CLOSEOUT** `a29c35af` (19u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-dialexis-montanistae` | Didymus *Dialexis Montanistae et orthodoxi* | **SERIES CLOSEOUT** `2eae0491` (1u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-enarratio-catholicas` | Didymus *In epistulas catholicas brevis enarratio* | **SERIES CLOSEOUT** `c3bd6d00` (3u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-fragmenta-1cor` | Didymus *Fragmenta in epistulam i ad Corinthios* | **SERIES CLOSEOUT** `17b6a903` (1u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-fragmenta-2cor` | Didymus *Fragmenta in epistulam ii ad Corinthios* | **SERIES CLOSEOUT** `68a93ae1` (4u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-fragmenta-joannem` | Didymus *Fragmenta in Joannem* | **SERIES CLOSEOUT** `32fb9a18` (1u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-fragmenta-proverbia` | Didymus *Fragmenta in Proverbia* | **SERIES CLOSEOUT** `fbd4693a` (2u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-fragmenta-psalmos` | Didymus *Fragmenta in Psalmos* | **SERIES CLOSEOUT** `2dd54f21` (64u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-fragmenta-romanos` | Didymus *Fragmenta in epistulam ad Romanos* | **SERIES CLOSEOUT** `8c6a3725` (1u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-fragmentum-hebraeos` | Didymus *Fragmentum in epistulam ad Hebraeos* | **SERIES CLOSEOUT** `4acf8255` (1u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `didymus-in-genesim` | Didymus *In Genesim* | **SERIES CLOSEOUT** `2bfd750d` (25u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
+
+Macarius Spiritual Homilies → densify-lane (PD English). Melito skipped; never Cyril Matthew densify; ANF densify-lane.
+Next corpus-wide: further Khazarzar Greek lacking usable PD English.
+
 
 
 
