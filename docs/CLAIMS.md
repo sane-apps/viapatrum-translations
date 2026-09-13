@@ -26,6 +26,34 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-glaphyra-noah-ark-open-oet | done (f300fe9c) | Cyril Glaphyra Noah and the ark opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip f300fe9c; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-noah-ark-rem-oet | done (f300fe9c) | Cyril Glaphyra Noah and the ark rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip f300fe9c; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-noah-ham-open-oet | done (ff0265d8) | Cyril Glaphyra Noah's nakedness and Ham opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip ff0265d8; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-noah-ham-rem-oet | done (ff0265d8) | Cyril Glaphyra Noah's nakedness and Ham rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip ff0265d8; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-abraham-melchizedek-open-oet | done (eb126132) | Cyril Glaphyra Abraham and Melchizedek opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip eb126132; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-abraham-melchizedek-rem-oet | done (eb126132) | Cyril Glaphyra Abraham and Melchizedek rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip eb126132; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b3-open-oet | done (80f487ee) | Cyril Glaphyra Genesis Book 3 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 80f487ee; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b3-rem-oet | done (80f487ee) | Cyril Glaphyra Genesis Book 3 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 80f487ee; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b4-open-oet | done (494227e3) | Cyril Glaphyra Genesis Book 4 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 494227e3; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b4-rem-oet | done (494227e3) | Cyril Glaphyra Genesis Book 4 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 494227e3; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b5-open-oet | done (76a15f3c) | Cyril Glaphyra Genesis Book 5 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 76a15f3c; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b5-rem-oet | done (76a15f3c) | Cyril Glaphyra Genesis Book 5 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 76a15f3c; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b6-open-oet | done (65822a06) | Cyril Glaphyra Genesis Book 6 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 65822a06; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b6-rem-oet | done (65822a06) | Cyril Glaphyra Genesis Book 6 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 65822a06; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b7-open-oet | done (5c1e5b92) | Cyril Glaphyra Genesis Book 7 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 5c1e5b92; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-gen-b7-rem-oet | done (5c1e5b92) | Cyril Glaphyra Genesis Book 7 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 5c1e5b92; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-exod-b1-open-oet | done (f0711bdb) | Cyril Glaphyra Exodus Book 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip f0711bdb; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-exod-b1-rem-oet | done (f0711bdb) | Cyril Glaphyra Exodus Book 1 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip f0711bdb; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-exod-b2-open-oet | done (af2abc30) | Cyril Glaphyra Exodus Book 2 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip af2abc30; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-exod-b2-rem-oet | done (af2abc30) | Cyril Glaphyra Exodus Book 2 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip af2abc30; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-exod-b3-open-oet | done (99c0548b) | Cyril Glaphyra Exodus Book 3 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 99c0548b; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-exod-b3-rem-oet | done (99c0548b) | Cyril Glaphyra Exodus Book 3 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 99c0548b; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-lev-open-oet | done (a8d5acc5) | Cyril Glaphyra Leviticus opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip a8d5acc5; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-lev-rem-oet | done (a8d5acc5) | Cyril Glaphyra Leviticus rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip a8d5acc5; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-num-open-oet | done (57b0ea82) | Cyril Glaphyra Numbers opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 57b0ea82; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-num-rem-oet | done (57b0ea82) | Cyril Glaphyra Numbers rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 57b0ea82; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-deut-open-oet | done (c2f056c1) | Cyril Glaphyra Deuteronomy SERIES opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip c2f056c1; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-deut-rem-oet | done (c2f056c1) | Cyril Glaphyra Deuteronomy SERIES rem SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip c2f056c1; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
 | cyril-glaphyra-b1-cain-abel-open-oet | done (af72d422) | Cyril Glaphyra Book 1 Cain/Abel opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip af72d422; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
 | cyril-glaphyra-b1-cain-abel-rem-oet | done (af72d422) | Cyril Glaphyra Book 1 Cain/Abel rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip af72d422; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
 | cyril-glaphyra-b1-open-oet | done (62546317) | Cyril Glaphyra Book 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 62546317; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
