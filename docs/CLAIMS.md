@@ -26,6 +26,12 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-cj-prol-open-oet | done (6ec2b6bf) | Cyril Contra Julianum Prologue open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 76 CPG 5233 Khazarzar; tip 6ec2b6bf; Melito skipped; never Cyril Matthew densify; no SC/GCS/Routledge English base; skip Pusey-PD |
+| cyril-cj-prol-rem-oet | done (6ec2b6bf) | Cyril Contra Julianum Prologue rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 76 CPG 5233 Khazarzar; tip 6ec2b6bf; Melito skipped; never Cyril Matthew densify; no SC/GCS/Routledge English base; skip Pusey-PD |
+| cyril-cj-book1-open-oet | done (f2017b91) | Cyril Contra Julianum Book I open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 76 CPG 5233 Khazarzar; tip f2017b91; Melito skipped; never Cyril Matthew densify; no SC/GCS/Routledge English base; skip Pusey-PD |
+| cyril-cj-book1-rem-oet | done (f2017b91) | Cyril Contra Julianum Book I rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 76 CPG 5233 Khazarzar; tip f2017b91; Melito skipped; never Cyril Matthew densify; no SC/GCS/Routledge English base; skip Pusey-PD |
+| cyril-cj-book2-open-oet | done (df12fae5) | Cyril Contra Julianum Book II open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 76 CPG 5233 Khazarzar; tip df12fae5; Melito skipped; never Cyril Matthew densify; no SC/GCS/Routledge English base; skip Pusey-PD |
+| cyril-cj-book2-rem-oet | done (df12fae5) | Cyril Contra Julianum Book II rem CLOSEOUT Pass A≠B OET LOCKABLE Pref+I–II corpus tip | 2026-09-13 | PG 76 CPG 5233 Khazarzar; tip df12fae5; Melito skipped; never Cyril Matthew densify; no SC/GCS/Routledge English base; skip Pusey-PD |
 | cyril-tp-amos-t1-open-oet | done (9fb936b2) | Cyril Twelve Prophets Amos Tomos 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 71–72 CPG 5204; tip 9fb936b2; Melito skipped; never Cyril Matthew densify; no Hill FOTC; skip Pusey-PD |
 | cyril-tp-amos-t1-rem-oet | done (9fb936b2) | Cyril Twelve Prophets Amos Tomos 1 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 71–72 CPG 5204; tip 9fb936b2; Melito skipped; never Cyril Matthew densify; no Hill FOTC; skip Pusey-PD |
 | cyril-tp-amos-t2-open-oet | done (1952543f) | Cyril Twelve Prophets Amos Tomos 2 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 71–72 CPG 5204; tip 1952543f; Melito skipped; never Cyril Matthew densify; no Hill FOTC; skip Pusey-PD |
