@@ -26,8 +26,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
-| cyril-glaphyra-b1-cain-abel-open-oet | done (5f4b23b9) | Cyril Glaphyra Book 1 Cain/Abel opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 5f4b23b9; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
-| cyril-glaphyra-b1-cain-abel-rem-oet | done (5f4b23b9) | Cyril Glaphyra Book 1 Cain/Abel rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 5f4b23b9; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-b1-cain-abel-open-oet | done (af72d422) | Cyril Glaphyra Book 1 Cain/Abel opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip af72d422; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
+| cyril-glaphyra-b1-cain-abel-rem-oet | done (af72d422) | Cyril Glaphyra Book 1 Cain/Abel rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip af72d422; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
 | cyril-glaphyra-b1-open-oet | done (62546317) | Cyril Glaphyra Book 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 62546317; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
 | cyril-glaphyra-b1-adam-open-oet | done (71b48792) | Cyril Glaphyra Book 1 Adam opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 71b48792; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
 | cyril-glaphyra-b1-adam-rem-oet | done (71b48792) | Cyril Glaphyra Book 1 Adam rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5201; tip 71b48792; Melito skipped; never Cyril Matthew densify; no Lunn FOTC |
