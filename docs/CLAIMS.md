@@ -28,6 +28,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-letters-series-closeout | done (23a65bf4) | Origen Letters (Africanus + Gregory) SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Luke SERIES 8567c6fd; First1K Ep. Afr. + Robinson Philoc. 13; Melito skipped; never Cyril Matthew densify; no ANF 4 Crombie |
+| origen-letters-gregory-series-oet | done (23a65bf4) | Origen Letter to Gregory CLOSEOUT Pass A≠B OET GREGORY CLOSEOUT SERIES CLOSEOUT | 2026-09-13 | Robinson Philoc. 13; Melito skipped; never Cyril Matthew densify; no ANF 4 |
+| origen-letters-africanus-rem-oet | done (87aa1561) | Origen Letter to Africanus §§2–18 rem CLOSEOUT Pass A≠B OET AFRICANUS CLOSEOUT | 2026-09-13 | First1K tlg045; Melito skipped; never Cyril Matthew densify; no ANF 4 |
+| origen-letters-open-oet | done (b0aa599f) | Origen Letters opening (Africanus §1 + Gregory greeting) CLOSEOUT Pass A≠B OET | 2026-09-13 | after Luke SERIES 8567c6fd; Melito skipped; never Cyril Matthew densify; no ANF 4 |
 | origen-luke-homilies-series-closeout | done (8567c6fd) | Origen Luke Homilies 1–39 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Philocalia SERIES 18ba1926; Rauer GCS 35 Jerome; Melito skipped; never Cyril Matthew densify; no ANF 9 |
 | origen-luke-homilies-h31-39-oet | done (8567c6fd) | Origen Luke Homilies 31–39 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | Rauer GCS 35; Melito skipped; never Cyril Matthew densify; no ANF 9 |
 | origen-luke-homilies-h21-30-oet | done (98e69a03) | Origen Luke Homilies 21–30 CLOSEOUT Pass A≠B OET | 2026-09-13 | Rauer GCS 35; Melito skipped; never Cyril Matthew densify; no ANF 9 |
