@@ -28,7 +28,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-romans` | Origen Commentary on Romans (Rufinus, 10 books) | **DONE** SERIES CLOSEOUT tip `3394ac4c` (10/10). PG 14 Rufinus. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
 | **done** | `origen-matthew-later` | Origen Comm. Matthew 15–17 + Series (Latin) | **DONE** SERIES CLOSEOUT tip `ca34b410`. PG 13. Melito skipped. Never Cyril Matthew densify. No Heine. |
 | **done** | `origen-prayer-martyrdom` | Origen *On Prayer* + *Exhortation to Martyrdom* | **DONE** SERIES CLOSEOUT tip `d7b9c696` (Orat open `c3952afa` / close `51a68660`; Mart `b83080f9`/`d7b9c696`). GCS 2–3. Melito skipped. Never Cyril Matthew densify. No O’Meara/Greer. |
-| **active** | `origen-contra-celsum` | Origen *Contra Celsum* (8 books) | Opening tip PENDING_CC (after prayer-martyrdom `d7b9c696`). Koetschau GCS 2–3 (1899 PD). Shorter Rank-1 exhausted; promoted from deferred. Melito skipped. Never Cyril Matthew densify. True OET — do not copy ANF Crombie / Chadwick. |
+| **active** | `origen-contra-celsum` | Origen *Contra Celsum* (8 books) | Opening tip  (after prayer-martyrdom `d7b9c696`). Koetschau GCS 2–3 (1899 PD). Shorter Rank-1 exhausted; promoted from deferred. Melito skipped. Never Cyril Matthew densify. True OET — do not copy ANF Crombie / Chadwick. |
 
 
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
@@ -52,7 +52,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | 14 | `origen-romans` | Romans Comm. Rufinus (10); PG 14; **DONE** SERIES `3394ac4c` |
 | 15 | `origen-matthew-later` | Matt 15–17 + Series; PG 13; **DONE** SERIES CLOSEOUT `ca34b410` |
 | 16 | `origen-prayer-martyrdom` | On Prayer + Martyrdom; GCS 2–3; **DONE** SERIES CLOSEOUT `d7b9c696` |
-| 17 | `origen-contra-celsum` | Contra Celsum 8; GCS 2–3; **ACTIVE** PENDING_CC |
+| 17 | `origen-contra-celsum` | Contra Celsum 8; GCS 2–3; **ACTIVE** e6346628 |
 
 Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if leaving Cyril. Adorations CLOSED tip `9161f43`; now Irenaeus *Demonstration* (Melito skipped).
 

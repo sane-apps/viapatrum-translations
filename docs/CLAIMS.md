@@ -1,3 +1,4 @@
+| origen-contra-celsum-b1-1-2-oet | done (e6346628) | Origen Contra Celsum Book I §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after prayer-martyrdom SERIES d7b9c696; Koetschau GCS 2; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
 # Claims — who is working on what
 
 Take the next free slice:
