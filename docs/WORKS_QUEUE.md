@@ -393,7 +393,49 @@ Densify: Nemesius, Macarius, ANF. Melito skipped; never Cyril Matthew densify.
 | **SERIES CLOSEOUT** | `john-antioch-historia-chronike` | *Historia Chronike* | **SERIES CLOSEOUT** `6623daf5` (22u). Melito skipped; never Cyril Matthew densify. |
 
 Philostorgius HE → densify (Walford PD). Densify: Nemesius/Macarius/ANF.
+
+### Olympiodorus PG93 + Epiphanius leftovers — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `olympiodorus-commentarii-baruch` | Olympiodorus *Commentarii in Baruch* | **SERIES CLOSEOUT** `fee1f773` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `olympiodorus-commentarii-ecclesiasten` | Olympiodorus *Commentarii in Ecclesiasten* | **SERIES CLOSEOUT** `9de502dc` (12u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `olympiodorus-commentarii-jeremiae-epistulam` | Olympiodorus *Commentarii in Jeremiae epistulam* | **SERIES CLOSEOUT** `0736b8e0` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `olympiodorus-commentarii-jeremiam` | Olympiodorus *Commentarii in Jeremiam* | **SERIES CLOSEOUT** `1ef1f29b` (7u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `olympiodorus-commentarii-job` | Olympiodorus *Commentarii in Job* | **SERIES CLOSEOUT** `c10e3d3c` (30u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `olympiodorus-commentarii-lamentationes` | Olympiodorus *Commentarii in Lamentationes* | **SERIES CLOSEOUT** `06d3888c` (3u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `olympiodorus-contra-severum` | Olympiodorus *Contra Severum Antiochenum* | **SERIES CLOSEOUT** `5b75f6ba` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `olympiodorus-fragmentum-gaudete` | Olympiodorus *Fragmentum in illud Gaudete in illa die* | **SERIES CLOSEOUT** `4954a617` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-anaphora-graeca` | Epiphanius *Anaphora Graeca* | **SERIES CLOSEOUT** `fd9ce018` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-apophthegmata` | Epiphanius *Apophthegmata* | **SERIES CLOSEOUT** `28e2a4b3` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-appendices-ad-indices-apostolorum-discipulorumque` | Epiphanius *Appendices ad indices apostolorum discipulorumque* | **SERIES CLOSEOUT** `8156767b` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-de-fide` | Epiphanius *De fide* | **SERIES CLOSEOUT** `ca25be7d` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-de-prophetarum-vita-et-obitu` | Epiphanius *De prophetarum vita et obitu* | **SERIES CLOSEOUT** `1eedfd98` (2u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-de-prophetarum-vita-et-obitu-recensio-altera` | Epiphanius *De prophetarum vita et obitu Recensio altera* | **SERIES CLOSEOUT** `da2acf2e` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-de-trinitate` | Epiphanius *De trinitate* | **SERIES CLOSEOUT** `79827bfe` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-de-xii-gemmis` | Epiphanius *De xii gemmis* | **SERIES CLOSEOUT** `2894aa1c` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-de-xii-gemmis-fragmenta` | Epiphanius *De xii gemmis Fragmenta* | **SERIES CLOSEOUT** `0301277c` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-enumeratio-lxxii-prophetarum-et-prophetissarum` | Epiphanius *Enumeratio lxxii prophetarum et prophetissarum* | **SERIES CLOSEOUT** `247f0498` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-epistula-ad-eusebium` | Epiphanius *Epistula ad Eusebium* | **SERIES CLOSEOUT** `3826a535` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-epistula-ad-joannem-hierosolymitanum` | Epiphanius *Epistula ad Joannem Hierosolymitanum* | **SERIES CLOSEOUT** `60182a98` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-epistula-ad-theodosium-imperatorem` | Epiphanius *Epistula ad Theodosium imperatorem* | **SERIES CLOSEOUT** `0526c94f` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-fragmenta-precationis-et-exorcismi` | Epiphanius *Fragmenta precationis et exorcismi* | **SERIES CLOSEOUT** `a6208a1f` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-homilia-in-assumptionem-christi` | Epiphanius *Homilia in assumptionem Christi* | **SERIES CLOSEOUT** `2749c3de` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-homilia-in-christi-resurrectionem` | Epiphanius *Homilia in Christi resurrectionem* | **SERIES CLOSEOUT** `d17c1507` (2u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-homilia-in-divini-corporis-sepulturam` | Epiphanius *Homilia in divini corporis sepulturam* | **SERIES CLOSEOUT** `923a7527` (3u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-homilia-in-festo-palmarum` | Epiphanius *Homilia in festo palmarum* | **SERIES CLOSEOUT** `2f15d3d6` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-homilia-in-laudes-mariae-deiparae` | Epiphanius *Homilia in laudes Mariae deiparae* | **SERIES CLOSEOUT** `100829ad` (2u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-index-apostolorum` | Epiphanius *Index apostolorum* | **SERIES CLOSEOUT** `023d7417` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-index-discipulorum` | Epiphanius *Index discipulorum* | **SERIES CLOSEOUT** `c33b0248` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-liturgia-praesanctificatorum` | Epiphanius *Liturgia praesanctificatorum* | **SERIES CLOSEOUT** `dbf47a07` (2u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-notitiae-episcopatuum` | Epiphanius *Notitiae episcopatuum* | **SERIES CLOSEOUT** `b5815627` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-testamentum-ad-cives` | Epiphanius *Testamentum ad cives* | **SERIES CLOSEOUT** `d98d9fd6` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-testimonia-ex-divinis-et-sacris-scripturis` | Epiphanius *Testimonia ex divinis et sacris scripturis* | **SERIES CLOSEOUT** `5152ad11` (3u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-tractatus-contra-eos-qui-imagines-faciunt` | Epiphanius *Tractatus contra eos qui imagines faciunt* | **SERIES CLOSEOUT** `8bda5103` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `epiphanius-tractatus-de-numerorum-mysteriis` | Epiphanius *Tractatus de numerorum mysteriis* | **SERIES CLOSEOUT** `c7151d5e` (1u). Melito skipped; never Cyril Matthew densify. |
+
+Epiphanius densify leftovers: Ancoratus, Panarion, Anacephalaeosis, De mensuris (Dean PD).
+Densify: Nemesius/Macarius/ANF/Philostorgius. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
+
 
 
 
