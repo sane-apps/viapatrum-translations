@@ -13,6 +13,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| origen-john-later-13-11-20-oet | claimed | origen-john-later | Comm. John 13 §§11–20 | StephanAir | 2026-09-12 | cursor/origen-samuel28-oet-ae07 | Preuschen GCS IV; OET; Melito skipped; never Cyril Matthew; jer-h20b intact |
 
 ## How to claim
 
