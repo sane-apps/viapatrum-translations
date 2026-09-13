@@ -26,6 +26,11 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-nt-fragments-john-open-oet | done (32a0b77f) | Origen NT fragments John catena opening (fr.1–2) CLOSEOUT Pass A≠B OET | 2026-09-13 | after Letters SERIES 23a65bf4; First1K tlg006; Melito skipped; never Cyril Matthew densify |
+| origen-nt-fragments-john-rem-oet | done (1bbafdb5) | Origen NT fragments John catena rem CLOSEOUT Pass A≠B OET | 2026-09-13 | First1K tlg006; Melito skipped; never Cyril Matthew densify |
+| origen-nt-fragments-luke-catena-oet | done (5c3d952e) | Origen NT fragments Luke catena CLOSEOUT Pass A≠B OET | 2026-09-13 | First1K tlg017; Melito skipped; never Cyril Matthew densify |
+| origen-nt-fragments-scholia-series-oet | done (af9c9531) | Origen NT fragments Matt+Luke scholia SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | First1K tlg077/078; Melito skipped; never Cyril Matthew densify |
+| origen-nt-fragments-series-closeout | done (af9c9531) | Origen NT fragments (Gospel catena/scholia) SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Letters SERIES 23a65bf4; First1K tlg006/017/077/078; Pauline Gregg deferred; Melito skipped; never Cyril Matthew densify |
 | origen-letters-series-closeout | done (23a65bf4) | Origen Letters (Africanus + Gregory) SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Luke SERIES 8567c6fd; First1K Ep. Afr. + Robinson Philoc. 13; Melito skipped; never Cyril Matthew densify; no ANF 4 Crombie |
 | origen-letters-gregory-series-oet | done (23a65bf4) | Origen Letter to Gregory CLOSEOUT Pass A≠B OET GREGORY CLOSEOUT SERIES CLOSEOUT | 2026-09-13 | Robinson Philoc. 13; Melito skipped; never Cyril Matthew densify; no ANF 4 |
 | origen-letters-africanus-rem-oet | done (87aa1561) | Origen Letter to Africanus §§2–18 rem CLOSEOUT Pass A≠B OET AFRICANUS CLOSEOUT | 2026-09-13 | First1K tlg045; Melito skipped; never Cyril Matthew densify; no ANF 4 |
