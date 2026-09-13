@@ -28,6 +28,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-job-selecta-series-closeout | done (319dd847) | Selecta in Job SERIES CLOSEOUT (2u) Pass A≠B OET | 2026-09-13 | Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-job-enarrationes-series-closeout | done (390da499) | Enarrationes in Job SERIES CLOSEOUT (4u) Pass A≠B OET | 2026-09-13 | Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-proverbs-expositio-series-closeout | done (22ff6026) | Expositio in Proverbia SERIES CLOSEOUT (7u) Pass A≠B OET | 2026-09-13 | Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-proverbs-fragments-series-closeout | done (78404781) | Fragmenta ex commentariis in Proverbia SERIES CLOSEOUT (2u) Pass A≠B OET | 2026-09-13 | Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-job-homilies-series-closeout | done (05d9223e) | Homiliae in Job SERIES CLOSEOUT (3u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-osee-fragment-series-closeout | done (552a3683) | Fragmentum ex commentariis in Osee SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-acta-homily-scrap-series-closeout | done (5e8379a1) | Fragmentum ex homiliis in Acta apostolorum SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |

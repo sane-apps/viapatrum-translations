@@ -176,3 +176,12 @@ Next: earliest-untranslated Origen Khazarzar leftovers (Regnorum fragments → L
 ### Next after Job-homilies + scraps
 Still open on Khazarzar Origen leftovers: Selecta/Enarrationes in Job; Proverbs Expositio/Fragmenta; Psalms Greek Excerpta/Fragmenta (≠ Rufinus); then re-audit corpus-wide Rank-1.
 
+
+| **SERIES CLOSEOUT** | `origen-job-selecta` | *Selecta in Job* | **SERIES CLOSEOUT** `319dd847` (2u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-job-enarrationes` | *Enarrationes in Job* | **SERIES CLOSEOUT** `390da499` (4u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-proverbs-expositio` | *Expositio in Proverbia* | **SERIES CLOSEOUT** `22ff6026` (7u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-proverbs-fragments` | *Fragmenta in Proverbia* | **SERIES CLOSEOUT** `78404781` (2u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+
+### Next after Job pair + Proverbs
+Still open: Psalms Greek *Excerpta* / *Fragmenta* (≠ Rufinus Latin Psalms already SERIES). Then re-audit corpus-wide Rank-1 outside Origen leftovers.
+
