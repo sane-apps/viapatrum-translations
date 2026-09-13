@@ -26,6 +26,11 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-joshua-homilies-h10-1-3-oet | done (cc8ecf97) | Origen Joshua Homilia 10 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after fd522f38; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h9-1-4-oet | done (fd522f38) | Origen Joshua Homilia 9 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 4bba0251; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h8-1-4-oet | done (4bba0251) | Origen Joshua Homilia 8 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 86dcfab7; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h7-1-4-oet | done (86dcfab7) | Origen Joshua Homilia 7 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 569832cb; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h6-1-4-oet | done (569832cb) | Origen Joshua Homilia 6 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 6fc7532c; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h5-1-4-oet | done (6fc7532c) | Origen Joshua Homilia 5 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after tip 1aff02d3; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h4-1-3-oet | done (1aff02d3) | Origen Joshua Homilia 4 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after tip 9a8a6b76; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h3-1-5-oet | done (9a8a6b76) | Origen Joshua Homilia 3 §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | after tip 389b7cf7; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
