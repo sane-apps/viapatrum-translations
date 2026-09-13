@@ -185,3 +185,12 @@ Still open on Khazarzar Origen leftovers: Selecta/Enarrationes in Job; Proverbs 
 ### Next after Job pair + Proverbs
 Still open: Psalms Greek *Excerpta* / *Fragmenta* (≠ Rufinus Latin Psalms already SERIES). Then re-audit corpus-wide Rank-1 outside Origen leftovers.
 
+
+
+| **SERIES CLOSEOUT** | `origen-psalms-excerpta` | *Excerpta in Psalmos* (Greek) | **SERIES CLOSEOUT** `79f99551` (4u). ≠ Rufinus Latin Psalms. Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-psalms-fragments-greek` | *Fragmenta in Psalmos* (Greek) | **SERIES CLOSEOUT** `8bb53209` (34u). ≠ Rufinus Latin Psalms. Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+
+### Khazarzar Origen Rank-1 leftovers — largely CLOSED (2026-09-13)
+Pauline + Regnorum/Lam + Job trio + Proverbs + scraps + Psalms Greek Excerpta/Fragmenta tipped. Cyril Khazarzar Rank-1 remains EXHAUSTED.
+Next: corpus-wide re-audit for earliest-untranslated Rank-1 outside exhausted Cyril/Origen Khazarzar queues (Melito skip; never Cyril Matthew densify; skip PD-English / copyrighted-first-English traps).
+
