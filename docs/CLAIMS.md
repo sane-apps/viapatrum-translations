@@ -26,6 +26,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-thesaurus-logos1-open-oet | done (7c253775) | Cyril Thesaurus Logos I opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; after prol 704d5e64; Melito skipped; never Cyril Matthew densify |
+| cyril-thesaurus-logos1-rem-oet | done (7c253775) | Cyril Thesaurus Logos I rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; after open 7c253775; Melito skipped; never Cyril Matthew densify |
 | cyril-thesaurus-prol-oet | done (704d5e64) | Cyril Thesaurus prologue CLOSEOUT Pass A≠B OET | 2026-09-13 | after Trinity SERIES 1a34e0e8; PG 75 CPG 5215; Melito skipped; never Cyril Matthew densify; no Greystone/Durand |
 | cyril-trinity-series-closeout | done (1a34e0e8) | Cyril Trinity Dialogues 1–7 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; Dial.7 rem; Melito skipped; never Cyril Matthew densify |
 | cyril-trinity-d7-rem-oet | done (1a34e0e8) | Cyril Trinity Dialogue 7 rem SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75; Holy Spirit God from God; Melito skipped; never Cyril Matthew densify |
