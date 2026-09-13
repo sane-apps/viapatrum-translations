@@ -28,6 +28,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 |----------|--------|-------|--------|-------|
 | origen-song-hom1-1-10-oet | done (7a50ac8) | Origen Song Homilia I §§1–10 Pass A≠B OET | 2026-09-13 | after john-later CLOSEOUT 959ffcc; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-song-hom1-10-closeout-oet | done (eb9e8f2) | Origen Song Homilia I §10 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia I 10/10 couch/Amen coda; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
+| origen-song-comm-prol-1-10-oet | done (924f6253) | Origen Song Comm. Prologus §§1–10 Pass A≠B OET | 2026-09-13 | after Homilia II CLOSEOUT ac293ae5; Baehrens GCS 33 Rufinus; Melito skipped; never Cyril Matthew densify |
 | origen-song-hom2-11-13-oet | done (ac293ae5) | Origen Song Homilia II §§11–13 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia II 13/13; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-song-hom2-1-10-oet | done (bdcd3e9) | Origen Song Homilia II §§1–10 Pass A≠B OET | 2026-09-13 | after Homilia I CLOSEOUT eb9e8f2; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-john-later-13-41-50-oet | done (6c1170b) | Origen Comm. John Book 13 §§41–50 Pass A≠B OET | 2026-09-12 | after §§31–40 tip `63ac47d`; Preuschen GCS IV; Melito skipped; never Cyril Matthew |
