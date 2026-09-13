@@ -14,12 +14,13 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done (site)** | `origen-heraclides-pascha` | Origen, *Dialogue with Heraclides*; *On Pascha* | Both on fathers.saneapps.com. Pascha literary pass 2026-09-11. Logos attach when asked. |
 | **done (site)** | `cyril-alexandria-adoration-1` | Cyril of Alexandria, *De adoratione* Book 1 | Post-Nicene. Book 1 of 17 on fathers.saneapps.com. Next: court treatises. |
 | **done** | `origen-john-later` | Origen Comm. John 13/19/20/28/32 | **DONE** Books 13/19/20/28/32 CLOSEOUT tip `959ffcc`. Melito skipped. Never Cyril Matthew. |
+| **in progress** | `origen-song` | Origen Song Homilies + Commentary | Homilia I §§1–10 Pass A≠B OET tip `TIP_PENDING`. Baehrens GCS 33. Melito skipped. Never Cyril Matthew densify. |
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
 | **done** | `cyril-alexandria-adoration-1` | *De adoratione* Books 2–17 | Books 2–17 COMPLETE; Book 17 CLOSEOUT tip `9161f43` (33/33). Adoration series done. Skip Melito. Never Cyril Matthew. |
-| **in progress** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | Source locked (khazarzar PG 72 extract). `cyril-matt-frag-a1` fr.1–4 Pass A≠B done. Continue from fr.5. CPG 5219/5220 stay closed. |
+| **done** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | **DONE** 290/290 CLOSEOUT tip `eb6236c` (a72–a73). OET fragments complete. **Never densify** Cyril Matthew. CPG 5219/5220 stay closed. |
 | queued | `cyril-alexandria-trinity-dialogue-1` | Trinity Dialogue 1 (CPG 5216) | After the court treatises |
 | **skipped** | (Melito slug — do not open) | Melito of Sardis, *On Pascha* | Standing rule: **skip Melito**. Do not open that slug. |
-| **done (densify)** | `irenaeus-demonstration` | Irenaeus, *Demonstration* | densify 100/100 CLOSEOUT (NOT OET — Robinson/Wilson prior PD). Book 17 Pass B rem also CLOSED. Active OET: `origen-john-later`. Melito skipped. Never Cyril Matthew. |
+| **done (densify)** | `irenaeus-demonstration` | Irenaeus, *Demonstration* | densify 100/100 CLOSEOUT (NOT OET — Robinson/Wilson prior PD). Book 17 Pass B rem also CLOSED. Active OET: `origen-song` (Homilia I §§1–10 tip pending). Melito skipped. Never Cyril Matthew densify. |
 
 ## Origen remainder (after Book 2)
 
