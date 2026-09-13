@@ -27,6 +27,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
 | origen-john-later-13-41-50-oet | done (6c1170b) | Origen Comm. John Book 13 §§41–50 Pass A≠B OET | 2026-09-12 | after §§31–40 tip `63ac47d`; Preuschen GCS IV; Melito skipped; never Cyril Matthew |
+| origen-john-later-13-51-64-oet | done (6f747c8) | Origen Comm. John Book 13 §§51–64 CLOSEOUT Pass A≠B OET | 2026-09-13 | after §§41–50 tip `6c1170b`; Preuschen GCS IV; Book 13 64/64; Melito skipped; never Cyril Matthew |
 | origen-john-later-13-31-40-oet | done (63ac47d) | Origen Comm. John Book 13 §§31–40 Pass A≠B OET | 2026-09-12 | after §§21–30 tip `626a506`; Preuschen GCS IV; Melito skipped; never Cyril Matthew |
 | origen-john-later-13-21-30-oet | done (626a506) | Origen Comm. John Book 13 §§21–30 Pass A≠B OET | 2026-09-12 | after §§11–20 tip `04f4d58`; Preuschen GCS IV; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | origen-john-later-13-11-20-oet | done (04f4d58) | Origen Comm. John Book 13 §§11–20 Pass A≠B OET (no previous complete PD English; ANF lacks these tomoi) | 2026-09-12 | Preuschen GCS IV; after §§1–10 tip `3f2e05d`; Melito skipped; never Cyril Matthew; jer-h20b intact; inline Bible refs |
