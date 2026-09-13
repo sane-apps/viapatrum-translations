@@ -26,6 +26,22 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-joshua-homilies-h26-1-3-oet | done (b1bd7bdb) | Origen Joshua Homilia 26 §§1–3 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 26/26 | 2026-09-13 | after 03703d0b; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h25-1-3-oet | done (03703d0b) | Origen Joshua Homilia 25 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 3758b7e7; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h24-1-3-oet | done (3758b7e7) | Origen Joshua Homilia 24 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 39d1e2ac; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h23-1-3-oet | done (39d1e2ac) | Origen Joshua Homilia 23 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after ef3c40ab; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h22-1-3-oet | done (ef3c40ab) | Origen Joshua Homilia 22 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 56b13539; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h21-1-3-oet | done (56b13539) | Origen Joshua Homilia 21 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 4ded2523; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h20-1-4-oet | done (4ded2523) | Origen Joshua Homilia 20 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 44546246; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h19-1-3-oet | done (44546246) | Origen Joshua Homilia 19 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 7380f3a4; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h18-1-3-oet | done (7380f3a4) | Origen Joshua Homilia 18 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 43528775; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h17-1-3-oet | done (43528775) | Origen Joshua Homilia 17 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 82e50d88; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h16-1-3-oet | done (82e50d88) | Origen Joshua Homilia 16 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 292a0f9e; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h15-1-4-oet | done (292a0f9e) | Origen Joshua Homilia 15 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 21d792ec; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h14-1-3-oet | done (21d792ec) | Origen Joshua Homilia 14 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 71f7129d; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h13-1-3-oet | done (71f7129d) | Origen Joshua Homilia 13 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 4a54a968; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h12-1-3-oet | done (4a54a968) | Origen Joshua Homilia 12 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 527778b6; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
+| origen-joshua-homilies-h11-1-3-oet | done (527778b6) | Origen Joshua Homilia 11 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after cc8ecf97; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h10-1-3-oet | done (cc8ecf97) | Origen Joshua Homilia 10 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after fd522f38; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h9-1-4-oet | done (fd522f38) | Origen Joshua Homilia 9 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 4bba0251; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h8-1-4-oet | done (4bba0251) | Origen Joshua Homilia 8 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 86dcfab7; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
