@@ -14,7 +14,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done (site)** | `origen-heraclides-pascha` | Origen, *Dialogue with Heraclides*; *On Pascha* | Both on fathers.saneapps.com. Pascha literary pass 2026-09-11. Logos attach when asked. |
 | **done (site)** | `cyril-alexandria-adoration-1` | Cyril of Alexandria, *De adoratione* Book 1 | Post-Nicene. Book 1 of 17 on fathers.saneapps.com. Next: court treatises. |
 | **done** | `origen-john-later` | Origen Comm. John 13/19/20/28/32 | **DONE** Books 13/19/20/28/32 CLOSEOUT tip `959ffcc`. Melito skipped. Never Cyril Matthew. |
-| **in progress** | `origen-song` | Origen Song Homilies + Commentary | Homilia I CLOSEOUT tip `eb9e8f2` (10/10); Homilia II §§1–10 tip `bdcd3e9`. Next Homilia II §§11+. Baehrens GCS 33. Melito skipped. Never Cyril Matthew densify. |
+| **in progress** | `origen-song` | Origen Song Homilies + Commentary | Homilia I CLOSEOUT `eb9e8f2`; Homilia II CLOSEOUT tip `ac293ae5` (13/13). Next Commentary. Baehrens GCS 33. Melito skipped. Never Cyril Matthew densify. |
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
 | **done** | `cyril-alexandria-adoration-1` | *De adoratione* Books 2–17 | Books 2–17 COMPLETE; Book 17 CLOSEOUT tip `9161f43` (33/33). Adoration series done. Skip Melito. Never Cyril Matthew. |
 | **done** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | **DONE** 290/290 CLOSEOUT tip `eb6236c` (a72–a73). OET fragments complete. **Never densify** Cyril Matthew. CPG 5219/5220 stay closed. |
