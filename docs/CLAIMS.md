@@ -28,6 +28,11 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-rt-q01-open-oet | done (042f2a1b) | Cyril Responsiones Q1 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 77 CPG 5232 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-rt-q01-rem-oet | done (042f2a1b) | Cyril Responsiones Q1 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 77 CPG 5232 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-rt-q09-open-oet | done (acc41d48) | Cyril Responsiones Q9 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 77 CPG 5232 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-rt-q09-rem-oet | done (acc41d48) | Cyril Responsiones Q9 rem CLOSEOUT Pass A≠B OET SERIES CLOSEOUT | 2026-09-13 | PG 77 CPG 5232 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
+| cyril-rt-series-closeout | done (acc41d48) | Cyril Responsiones ad Tiberium SERIES CLOSEOUT (9q) Pass A≠B OET | 2026-09-13 | PG 77 CPG 5232 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
 | cyril-ps-prol-open-oet | done (d41c0520) | Cyril Psalms Prologue open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
 | cyril-ps-prol-rem-oet | done (d41c0520) | Cyril Psalms Prologue rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
 | cyril-ps-ps001-open-oet | done (290ff6ee) | Cyril Psalms Ps1 open CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 69 CPG 5202 Khazarzar; Melito skipped; never Cyril Matthew densify; skip Pusey-PD / Greystone / Lunn / Hill |
