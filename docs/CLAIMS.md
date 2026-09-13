@@ -15,6 +15,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+
 ## How to claim
 
 ```bash
@@ -27,6 +28,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-john-later-13-1-10-oet | done (3f2e05d) | Origen Comm. John Book 13 §§1–10 Pass A≠B OET (no previous complete PD English; ANF lacks these tomoi) | 2026-09-12 | Preuschen GCS IV; after Book 17 Pass B rem CLOSEOUT; Melito skipped; never Cyril Matthew; jer-h20b intact; inline Bible refs |
 | tertullian-marcion-5-21-mine | done | Adv. Marc. 5.21: Philemon’s brevity escaped Marcion’s falsifying hands; he still cut Timothy/Titus—interpolating even the letter-count; inspector reminded the Pauline case is already proved. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-28-mine | done | Adv. Marc. 2.28: every ‘petty/malignant’ charge against the Creator boomerangs—ignorance, late care, repentance, fraud, talion, Judas, phantom body, killing—truth needs few words. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-26-mine | done | Adv. Marc. 2.26: oath by himself is not vain/perjury but anti-other-gods; ‘let me alone’ draws Moses’ intercession—figure of Christ pleading for the people. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
@@ -40,6 +42,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 | tertullian-marcion-1-12-mine | done | Adv. Marc. 1.12: even if confessed, a workless god is causeless—worthier not to be than to be without cause; faith without works-pledge is shameless and malignant. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-1-9-mine | done | Adv. Marc. 1.9: ‘new by recognition’ = formerly unknown; unknown/uncertain god fails magnitude and goodness tests; uncertain must be proved by the known Creator’s form. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-1-1-mine | done | Adv. Marc. 1.1: work’s editions; Pontus breeding Marcion worse than Scythians; he castrates marriage and gnaws gospels; first faith with us, then novelty—heresy by prescription. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
+
 | tertullian-marcion-1-13-mine | done | Adv. Marc. 1.13: Marcionites scorn the world; if Creator is God the world is not unworthy—philosophers deified elements; even a flower/shell shames ‘sordid maker’ talk. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-22-mine | done | Adv. Marc. 2.22: likeness ban targets idolatry; bronze serpent/cherubim have other causes; sacrifices reclaim from idols—God refuses empty ritual, not sincere honor. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-3-5-mine | done | Adv. Marc. 3.5: Creator’s scriptures must be known by form—futures spoken as done; figures/allegories (Paul’s oxen, rock=Christ, Abraham’s sons, Christ/church). | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
