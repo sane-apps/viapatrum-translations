@@ -26,6 +26,15 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-exodus-homilies-h13-1-5-oet | done (59ea0b75) | Origen Exodus Homilia XIII §§1–5 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h12-1-4-oet | done (662cfe44) | Origen Exodus Homilia XII §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h11-1-7-oet | done (c9d5e286) | Origen Exodus Homilia XI §§1–7 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h10-1-4-oet | done (7ab75a3b) | Origen Exodus Homilia X §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h9-1-4-oet | done (d958c528) | Origen Exodus Homilia IX §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h8-1-6-oet | done (df45045e) | Origen Exodus Homilia VIII §§1–6 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h7-1-8-oet | done (a3879bb3) | Origen Exodus Homilia VII §§1–8 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h6-8-14-oet | done (516ecd65) | Origen Exodus Homilia VI §§8–14 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
+| origen-exodus-homilies-h6-1-7-oet | done (02be33d6) | Origen Exodus Homilia VI §§1–7 Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-exodus-homilies-h5-1-5-oet | done (2cfa4506) | Origen Exodus Homilia V §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-exodus-homilies-h4-1-8-oet | done (9e6883c3) | Origen Exodus Homilia IV §§1–8 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-exodus-homilies-h3-1-3-oet | done (61d5a5e2) | Origen Exodus Homilia III §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
