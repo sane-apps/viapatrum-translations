@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-matthew-later-xv-1-2-oet | done (515bbfbd) | Origen Matthew Tomus XV §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Romans SERIES 3394ac4c; PG 13 Greek tesseract; Melito skipped; never Cyril Matthew densify; no Heine |
 | origen-romans-b10-1-2-oet | done (3394ac4c) | Origen Romans Book 10 §§1–2 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 10/10 | 2026-09-13 | after f588dff4; PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-romans-b9-1-2-oet | done (f588dff4) | Origen Romans Book 9 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-romans-b8-1-2-oet | done (eb68b2ee) | Origen Romans Book 8 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 14 Rufinus tesseract; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |

@@ -26,7 +26,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-isaiah-ezekiel` | Origen Isaiah (9) + Ezekiel (14) | **DONE** SERIES CLOSEOUT tip `ecd5c7c6` (9 Isa + 14 Ezek). Isa IX lacuna end noted. Baehrens GCS 33. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
 | **done** | `origen-psalms-rufinus` | Origen Psalms 36–38 Homilies (9) | **DONE** SERIES CLOSEOUT tip `8270d057` (9/9: Ps36×5 + Ps37×2 + Ps38×2). PG 12 Rufinus. Melito skipped. Never Cyril Matthew densify. No Trigg/Prinzivalli/Perrone. |
 | **done** | `origen-romans` | Origen Commentary on Romans (Rufinus, 10 books) | **DONE** SERIES CLOSEOUT tip `3394ac4c` (10/10). PG 14 Rufinus. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
-| **active** | `origen-matthew-later` | Origen Comm. Matthew 15–17 + Series (Latin) | Opening tip PENDING_MT (after Romans `3394ac4c`). PG 13. Melito skipped. Never Cyril Matthew densify. No Heine. |
+| **active** | `origen-matthew-later` | Origen Comm. Matthew 15–17 + Series (Latin) | Opening tip `515bbfbd` (after Romans `3394ac4c`). Next: XV rem earliest-forward. PG 13. Melito skipped. Never Cyril Matthew densify. No Heine. |
 
 
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
@@ -56,7 +56,7 @@ If staying in Origen after Heraclides + Pascha (Rank 1, no PD English):
 | 12 | `origen-isaiah-ezekiel` | 9 Isaiah + 14 Ezekiel; GCS VIII; **DONE** SERIES `ecd5c7c6` |
 | 13 | `origen-psalms-rufinus` | Ps 36–38 Rufinus (9); PG 12; **DONE** SERIES `8270d057` |
 | 14 | `origen-romans` | Romans Comm. Rufinus (10); PG 14; **DONE** SERIES `3394ac4c` |
-| 15 | `origen-matthew-later` | Matt 15–17 + Series; PG 13; **ACTIVE** PENDING_MT |
+| 15 | `origen-matthew-later` | Matt 15–17 + Series; PG 13; **ACTIVE** opening `515bbfbd` |
 
 Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if leaving Cyril. Adorations CLOSED tip `9161f43`; now Irenaeus *Demonstration* (Melito skipped).
 
