@@ -26,6 +26,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-psalms-excerpta-series-closeout | done (79f99551) | Excerpta in Psalmos (Greek) SERIES CLOSEOUT (4u) Pass A≠B OET | 2026-09-13 | ≠ Rufinus Psalms; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-psalms-fragments-greek-series-closeout | done (8bb53209) | Fragmenta in Psalmos (Greek) SERIES CLOSEOUT (34u) Pass A≠B OET | 2026-09-13 | ≠ Rufinus Psalms; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-job-selecta-series-closeout | done (319dd847) | Selecta in Job SERIES CLOSEOUT (2u) Pass A≠B OET | 2026-09-13 | Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-job-enarrationes-series-closeout | done (390da499) | Enarrationes in Job SERIES CLOSEOUT (4u) Pass A≠B OET | 2026-09-13 | Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-proverbs-expositio-series-closeout | done (22ff6026) | Expositio in Proverbia SERIES CLOSEOUT (7u) Pass A≠B OET | 2026-09-13 | Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
