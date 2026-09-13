@@ -330,7 +330,33 @@ Macarius Spiritual Homilies → densify-lane (PD English). Melito skipped; never
 
 Collision fix: Severianus *In Genesim* / Romans / 2 Cor re-fetched under `Severianus__*` (Didymus same-named extracts had been reused).
 Still densify-lane: Nemesius, Macarius, ANF-covered, Melito skip, never Cyril Matthew densify.
-Next corpus-wide: Hesychius PG 93 homilies (if no usable PD English) or other Khazarzar Greek lacking PD English.
+
+### Hesychius PG 93 — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `hesychius-homilia-i-hypapante` | Hesychius *Homilia i de Hypapante* | **SERIES CLOSEOUT** `9f5e23f9` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-i-lazarum` | Hesychius *Homilia i in sanctum Lazarum* | **SERIES CLOSEOUT** `55bc8cef` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-i-longinum` | Hesychius *Homilia i in sanctum Longinum centurionem* | **SERIES CLOSEOUT** `0ea7c014` (2u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-i-maria-deipara` | Hesychius *Homilia i de sancta Maria deipara* | **SERIES CLOSEOUT** `a78f0628` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-i-pascha` | Hesychius *Homilia i in sanctum pascha* | **SERIES CLOSEOUT** `b28e0ce1` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-ii-hypapante` | Hesychius *Homilia ii de Hypapante* | **SERIES CLOSEOUT** `e187c0e6` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-ii-lazarum` | Hesychius *Homilia ii in sanctum Lazarum* | **SERIES CLOSEOUT** `72a15b05` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-ii-longinum` | Hesychius *Homilia ii in sanctum Longinum centurionem* | **SERIES CLOSEOUT** `20cd60d7` (2u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-ii-maria-deipara` | Hesychius *Homilia ii de sancta Maria deipara* | **SERIES CLOSEOUT** `d8ad6cd8` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-ii-pascha` | Hesychius *Homilia ii in sanctum pascha* | **SERIES CLOSEOUT** `873ba004` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-homilia-jejunio` | Hesychius *Homilia de jejunio* | **SERIES CLOSEOUT** `b0e5f06e` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-andream` | Hesychius *In sanctum Andream* | **SERIES CLOSEOUT** `978834f3` (2u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-antonium` | Hesychius *In sanctum Antonium* | **SERIES CLOSEOUT** `e461cc02` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-conceptionem-praecursoris` | Hesychius *In conceptionem venerabilis praecursoris* | **SERIES CLOSEOUT** `466ea705` (2u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-lazarum-ramos` | Hesychius *In Lazarum et in ramos palmarum* | **SERIES CLOSEOUT** `65ed7e2e` (2u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-lucam` | Hesychius *In sanctum Lucam* | **SERIES CLOSEOUT** `30fd5aa2` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-petrum-paulum` | Hesychius *In sanctos Petrum et Paulum* | **SERIES CLOSEOUT** `8b790ef9` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-procopium` | Hesychius *In sanctum Procopium* | **SERIES CLOSEOUT** `9bdd53c7` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-sanctos-martyres` | Hesychius *In sanctos martyres* | **SERIES CLOSEOUT** `ef74ee88` (1u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `hesychius-in-stephanum` | Hesychius *In sanctum Stephanum* | **SERIES CLOSEOUT** `e38a2f42` (2u). PG 93 Khazarzar (`Hesychius__*`); Melito skipped; never Cyril Matthew densify. |
+
+Densify: Nemesius, Macarius, ANF. Melito skipped; never Cyril Matthew densify.
+Next corpus-wide: further Khazarzar Greek lacking usable PD English.
+
 
 
 
