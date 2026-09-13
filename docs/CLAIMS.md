@@ -13,7 +13,6 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
-| origen-john-later-13-1-10-oet | claimed | origen-john-later | Comm. John 13 §§1–10 | StephanAir | 2026-09-12 | cursor/origen-samuel28-oet-ae07 | Preuschen GCS IV; OET (no ANF); Melito skipped; never Cyril Matthew; jer-h20b intact; inline Bible refs |
 
 ## How to claim
 
@@ -27,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-john-later-13-1-10-oet | done (3f2e05d) | Origen Comm. John Book 13 §§1–10 Pass A≠B OET (no previous complete PD English; ANF lacks these tomoi) | 2026-09-12 | Preuschen GCS IV; after Book 17 Pass B rem CLOSEOUT; Melito skipped; never Cyril Matthew; jer-h20b intact; inline Bible refs |
 | tertullian-marcion-1-13-mine | done | Adv. Marc. 1.13: Marcionites scorn the world; if Creator is God the world is not unworthy—philosophers deified elements; even a flower/shell shames ‘sordid maker’ talk. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-2-22-mine | done | Adv. Marc. 2.22: likeness ban targets idolatry; bronze serpent/cherubim have other causes; sacrifices reclaim from idols—God refuses empty ritual, not sincere honor. | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
 | tertullian-marcion-3-5-mine | done | Adv. Marc. 3.5: Creator’s scriptures must be known by form—futures spoken as done; figures/allegories (Paul’s oxen, rock=Christ, Abraham’s sons, Christ/church). | 2026-09-12 | Pass A!=B; OGL/CSEL TEI section lock; jer-h20b; Melito skip; no CSS; CPG 5219/5220 closed |
