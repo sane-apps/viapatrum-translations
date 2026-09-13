@@ -22,7 +22,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from ai_promote import parse_claim_row, sections_from_slice  # noqa: E402
+from ai_promote import atomic_text, file_digest, parse_claim_row, require_supported_claim, sections_from_slice
+from pipeline.check_pass_ab import check_record  # noqa: E402
 from llm_bakeoff import (  # noqa: E402
     DEFAULT_ACCOUNT,
     PREP_SYS,
@@ -39,6 +40,9 @@ from llm_bakeoff import (  # noqa: E402
 ENG = ROOT / "books/origen-jeremiah-samuel/translations/jeremiah_english.json"
 JUST_DIR = ROOT / "books/origen-jeremiah-samuel/reviews/justifications"
 SOURCE = ROOT / "books/origen-jeremiah-samuel/translations/jeremiah_source.json"
+RAW_SOURCE = ROOT / "books/origen-jeremiah-samuel/sources/origeneswerke03orig.pdf"
+XML_SOURCE = RAW_SOURCE.parent / "first1k/tlg2042.tlg009.opp-grc1.xml"
+SOURCE_MANIFEST = RAW_SOURCE.parent / "manifest.json"
 DRAFT_DEFAULT = "@cf/qwen/qwen3-30b-a3b-fp8"
 
 
@@ -66,64 +70,48 @@ def upsert_english(section: str, title: str, english: list, notes: list, homily:
     if not replaced:
         rows.append(row)
     rows.sort(key=lambda r: section_sort_key(str(r.get("section"))))
-    ENG.write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    atomic_text(ENG, json.dumps(rows, indent=2, ensure_ascii=False) + "\n")
 
 
-def write_justification(section: str, obj: dict, agent: str, model: str) -> Path:
+def justification_data(section: str, obj: dict, agent: str, model: str, fix: dict) -> dict:
+    """Preserve supplied evidence; never synthesize choices or claim a lexicon was checked."""
     h, s = section.split(".")
-    path = JUST_DIR / f"jeremiah_{h}_{s}.json"
-    src_rows = json.loads(SOURCE.read_text(encoding="utf-8"))
-    src = next((r for r in src_rows if str(r.get("section")) == section), {})
-    lemmas_in = obj.get("lemmas") or []
-    lemmas = []
-    for item in lemmas_in:
-        if not isinstance(item, dict):
-            continue
-        lemmas.append(
-            {
-                "form": item.get("greek") or item.get("form") or "",
-                "lemma": item.get("lemma") or item.get("greek") or "",
-                "gloss": item.get("gloss") or "",
-                "lexica": item.get("lexica") or "LSJ",
-            }
-        )
     data = {
-        "anf_compare": {
-            "notes": "No public-domain English of the Greek Jeremiah homilies (FOTC 97 is copyrighted). Draft from locked GCS Greek only; not copied from modern English.",
-            "status": "no_pd_reference",
-        },
-        "apparatus": [],
-        "bible_refs": [],
-        "checks": {
-            "anf_diverge": "pending",
-            "lemma_constraint": "pending",
-            "placeholders": "pass",
-        },
-        "choices": [],
-        "confidence": "machine_draft",
-        "edition": {
-            "id": "gcs6-klostermann-1901",
-            "language": "grc",
-            "locus": src.get("klostermann") or f"Hom. {section}",
-            "path": "sources/first1k/tlg2042.tlg009.opp-grc1.xml",
-        },
-        "excerpt_id": f"jeremiah_{h}_{s}",
-        "lemmas": lemmas,
-        "pass_a_gloss": obj.get("pass_a_gloss") or "",
-        "reviewer": f"pending-ai-crosscheck:{model}",
-        "draft_agent": agent,
-        "draft_model": model,
-        "drafted_at": datetime.now(timezone.utc).isoformat(),
+        "anf_compare": {"status": "not_checked", "notes": "Machine draft from the supplied Greek; independent review pending."},
+        "apparatus": [], "bible_refs": obj.get("bible_refs") or [],
+        "checks": {"lemma_constraint": "pending", "placeholders": "pass"},
+        "choices": obj.get("choices"), "confidence": "machine_draft",
+        "edition": {"id": "gcs6-klostermann-1901", "language": "grc",
+                    "locus": fix.get("klostermann") or f"Hom. {section}",
+                    "path": fix["raw_source_path"],
+                    "sha256": fix["raw_source_sha256"], "checks": fix["raw_checks"]},
+        "excerpt_id": f"jeremiah_{h}_{s}", "lemmas": obj.get("lemmas"),
+        "pass_a_gloss": obj.get("pass_a_gloss"), "pass_b_english": obj.get("english"),
+        "source_text": " ".join(fix["greek"]), "variants": obj.get("variants") or [],
+        "source_normalizations": fix.get("ocr_normalizations") or [],
+        "reviewer": f"pending-ai-crosscheck:{model}", "draft_agent": agent,
+        "draft_model": model, "drafted_at": datetime.now(timezone.utc).isoformat(),
     }
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    errors = check_record(data)
+    for key, fields in (("choices", ("term", "english", "why")), ("lemmas", ("form", "lemma", "gloss"))):
+        for item in data.get(key) or []:
+            if not isinstance(item, dict) or any(not isinstance(item.get(f), str) or not item[f].strip() for f in fields):
+                errors.append(f"{key}: model must supply real {', '.join(fields)}")
+    if errors:
+        raise ValueError("Missing draft evidence; retain prep and request a complete draft: " + "; ".join(errors))
+    return data
+
+
+def write_justification(section: str, data: dict) -> Path:
+    path = JUST_DIR / f"jeremiah_{section.replace('.', '_')}.json"
+    atomic_text(path, json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     return path
 
 
 def write_prep_justification(section: str, obj: dict, agent: str, model: str, fix: dict) -> Path:
     h, s = section.split(".")
     path = JUST_DIR / f"jeremiah_{h}_{s}.json"
-    src_rows = json.loads(SOURCE.read_text(encoding="utf-8"))
-    src = next((r for r in src_rows if str(r.get("section")) == section), {})
+    src = fix
     lemmas_in = obj.get("lemmas") or []
     lemmas = []
     for item in lemmas_in:
@@ -134,7 +122,7 @@ def write_prep_justification(section: str, obj: dict, agent: str, model: str, fi
                 "form": item.get("form") or item.get("greek") or "",
                 "lemma": item.get("lemma") or "",
                 "gloss": item.get("gloss") or "",
-                "lexica": "LSJ",
+                **({"lexica": item["lexica"]} if item.get("lexica") else {}),
             }
         )
     guesses = obj.get("scripture_guesses") if isinstance(obj.get("scripture_guesses"), list) else []
@@ -166,7 +154,8 @@ def write_prep_justification(section: str, obj: dict, agent: str, model: str, fi
             "id": "gcs6-klostermann-1901",
             "language": "grc",
             "locus": src.get("klostermann") or f"Hom. {section}",
-            "path": "sources/first1k/tlg2042.tlg009.opp-grc1.xml",
+            "path": fix["raw_source_path"],
+            "sha256": fix["raw_source_sha256"], "checks": fix["raw_checks"],
         },
         "excerpt_id": f"jeremiah_{h}_{s}",
         "lemmas": lemmas,
@@ -177,9 +166,10 @@ def write_prep_justification(section: str, obj: dict, agent: str, model: str, fi
         "draft_model": model,
         "drafted_at": datetime.now(timezone.utc).isoformat(),
         "source_text": " ".join(str(p) for p in greek),
+        "source_normalizations": fix.get("ocr_normalizations") or [],
         "variants": [],
     }
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    atomic_text(path, json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     return path
 
 
@@ -239,6 +229,19 @@ def draft_section(
 ) -> dict:
     model = normalize_model(model)
     fix = load_fixture(section)
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    witnesses = []
+    for path in dict.fromkeys((RAW_SOURCE, XML_SOURCE)):
+        sha = file_digest(path)
+        manifest_key = path.relative_to(SOURCE_MANIFEST.parent).as_posix()
+        if manifest.get("files", {}).get(manifest_key, {}).get("sha256") != sha:
+            return {"ok": False, "section": section, "error": "raw_source_does_not_match_locked_manifest"}
+        witnesses.append({"path": path.relative_to(JUST_DIR.parent.parent).as_posix(), "sha256": sha})
+    fix["raw_source_path"], fix["raw_source_sha256"] = witnesses[0]["path"], witnesses[0]["sha256"]
+    fix["raw_checks"] = witnesses[1:]
+    prior = JUST_DIR / f"jeremiah_{section.replace('.', '_')}.json"
+    if prep and prior.is_file() and json.loads(prior.read_text()).get("pass_b_english"):
+        return {"ok": False, "section": section, "error": "existing_translation_preserved; prep must not overwrite reading-text evidence"}
     sys_msg = PREP_SYS if prep else SYS_TMPL
     messages = [
         {"role": "system", "content": sys_msg.format(section=section)},
@@ -257,7 +260,11 @@ def draft_section(
     obj = extract_json(raw["content"])
     if prep and not obj:
         obj = salvage_prep_obj(raw.get("content") or "", section)
-    sc = score_prep(obj) if prep else score(obj, raw["content"], section)
+    current = load_fixture(section)
+    if (current["greek"] != fix["greek"] or current.get("ocr_normalizations") != fix.get("ocr_normalizations")
+            or any(file_digest(JUST_DIR.parent.parent / w["path"]) != w["sha256"] for w in witnesses)):
+        return {"ok": False, "section": section, "error": "source_changed_during_draft"}
+    sc = score_prep(obj) if prep else score(obj, raw["content"], section, source=fix["greek"])
     if not sc.get("ok") or not obj:
         return {
             "ok": False,
@@ -282,11 +289,15 @@ def draft_section(
             "checks": sc.get("checks"),
             "max_tokens": max_tokens,
         }
+    try:
+        evidence = justification_data(section, obj, agent, model, fix)
+    except ValueError as exc:
+        return {"ok": False, "section": section, "error": "missing_draft_evidence", "detail": str(exc)}
     title = str(obj.get("title") or "").strip()
     english = obj.get("english") if isinstance(obj.get("english"), list) else []
     notes = obj.get("translator_notes") if isinstance(obj.get("translator_notes"), list) else []
-    upsert_english(section, title, [str(x) for x in english], [str(x) for x in notes], fix.get("homily"))
-    jpath = write_justification(section, obj, agent, model)
+    jpath = write_justification(section, evidence)
+    upsert_english(section, title, english, notes, fix.get("homily"))
     return {
         "ok": True,
         "section": section,
@@ -326,7 +337,11 @@ def main() -> int:
         raise SystemExit("Need CF_TOKEN / CLOUDFLARE_API_TOKEN")
 
     row = parse_claim_row(args.claim)
-    sections = args.section or sections_from_slice(row.get("Slice (sections)") or "")
+    require_supported_claim(row)
+    claimed_sections = sections_from_slice(row.get("Slice (sections)") or "")
+    if args.section and not set(args.section) <= set(claimed_sections):
+        raise SystemExit("Requested sections are outside the claim; refusing writes")
+    sections = args.section or claimed_sections
     try:
         cfg = json.loads((ROOT / "docs" / "LLM_LANE_CONFIG.json").read_text(encoding="utf-8"))
         wall = int(cfg.get("claim_wall_s") or 5400)
@@ -392,7 +407,7 @@ def main() -> int:
             print(f"  FAIL  {result}", flush=True)
         time.sleep(0.5)
     # Partial cribs are still useful. Fail the process only if every section failed.
-    if failures and failures < len(sections):
+    if args.prep and failures and failures < len(sections):
         print(f"partial prep: {len(sections) - failures}/{len(sections)} sections ok", flush=True)
         return 0
     return 1 if failures else 0

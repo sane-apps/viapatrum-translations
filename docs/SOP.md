@@ -15,7 +15,7 @@ Write in `books/<slug>/SESSION_HANDOFF.md`:
 
 ### 1. Sources (many witnesses)
 
-Lock **every independent original-language witness** that is public-domain and actually contains the work. One OCR is not enough. Diff them before Pass A. Record disagreements in the justification `variants[]`. The reading text follows the named copy-text; other witnesses are checks, not silent merges.
+Lock the exact permitted copy-text and compare every additional witness actually used. Identify the work, author, printed page/locus and surviving scope against the raw print or document before translating. A second scan of the same edition checks OCR; it is not an independent textual witness. Record which comparisons were done and disagreements in `variants[]`. Do not invent missing witnesses or call generated source JSON a source lock.
 
 **Reader disclosure:** the public work page’s collapsed “About this text” names the copy-text, the other prints checked, and every stretch supplied from another witness (`text_history` in `*_meta.json` or the site pack). The reading column stays clean. A one-line italic cue is used only when a whole stretch is supplied from another witness (for example a homily that survives only in Jerome’s Latin). Do not call the result a manuscript. Do not claim a combination that was not actually done. Agent receipts (`variants[]`, Pass A) stay off the page.
 
@@ -34,7 +34,7 @@ Do **not** lock copyrighted critical editions or modern facing-page English as c
 - `sources/manifest.json` lists every witness: edition, language, role (`copy-text` | `check` | `version` | `fragments`), URL, SHA256, local path.
 - Speaker-split carefully (Julian vs Augustine vs quoted authorities). Prefer full-name speaker labels at paragraph start only when the site uses them that way.
 - Keep raw HTML even when a parser cleans JSON — audits need the witness.
-- Output structured Latin/source JSON that translation records can cite by location. Name which witness each section was read from.
+- Output structured Latin/source JSON that translation records can cite by location. Name which witness each section was read from. Declare expected section IDs from the edition and preserve every source paragraph. A matching chapter number does not authorize a short tip slice to replace the whole chapter.
 
 ### 2. Translate (two passes)
 
@@ -51,9 +51,26 @@ Full bar: `books/ante-nicene-topics/docs/TRANSLATION_QA.md`.
 
 ### 3. Review
 
-- Scripture pass: wording of quotations wins over misaligned source footnote maps; record corrections in `*_scripture_review.json`.
-- Source audit for fragment corpora: include/exclude decisions in `*_sourceaudit.json`.
-- Second-pass meaning review when the corpus is large.
+- Check all records structurally: nonempty source/English, no scaffold or operational prose, distinct Pass A/Pass B, exact declared section coverage and current file hashes. These checks cannot certify meaning.
+- Compare first/last plus seeded and risk-selected passages against actual raw source pages. Record the sampled scope. Prioritize negation, agency, modality, doctrinal terms, quotations, lacunae and suspiciously short output.
+- Every new or changed published passage needs a source-backed semantic review of **every clause** in that passage. Approving five sampled passages does not approve the rest of a work.
+- Review author/work/locus identity, completeness, negation, agency, modality, doctrine and Scripture explicitly. Each source paragraph needs a coverage entry and concrete evidence notes. Uncertainty or missing evidence blocks approval; never prefer pass when unsure.
+- Scripture wording controls the target, not a shifted footnote list. Verify each explicit quotation and clear allusion. Distinguish Hebrew/modern and LXX/Vulgate Psalm numbering; label possible allusions as uncertain. Record corrections in the existing scripture review.
+- Source audit for fragments must distinguish the author's words, the opponent's reply and indirect reports. Preserve lacunae and lost material; no invented connective argument.
+- Bind review to exact author/work identity, source/English files, raw witnesses and scope. Any source, English, attribution or scope edit invalidates affected review. Do not copy old reviewer stamps forward.
+- Use `pipeline.verify_translation_qa` to create and validate packets; `pipeline.check_pass_ab` checks justifications. `ai_promote.py` handles supported independent-model promotion. No standing human approval queue is required; the reviewing agent/model still must inspect the actual source.
+- The website consumer independently checks evidence. A claim marked `done`, two model names, a nonempty file or `source_verified` alone is insufficient. The site's provisional legacy hash baseline is not certification and must never be refreshed to bypass review.
+- Preserve held files. Repair one source/translation family at a time and review changes before release. Never expand the catalogue to meet a volume target.
+
+Example packet generation (run on Mini; use actual paths):
+
+```bash
+python3 -m pipeline.verify_translation_qa --english <english.json> --source <source.json> \
+  --raw-source <edition.pdf> --identity <identity.json> --expected-sections <section-ids.json> \
+  --seed 20260913 --sample-size 5 --packet-out <packet.json>
+```
+
+Generation reports structural status only. A current passing receipt is a separate artifact from the review itself; consume it with `--receipt <receipt.json>` or the shared validation API.
 
 ### 4. Build DOCX
 

@@ -13,7 +13,7 @@ edition-locked source
   → Pass B (literary, lemma-constrained, voice card)
   → re-diff + optional back-translation
   → justification JSON
-  → human clear on flags/variants
+  → independent source-backed review; unresolved flags block publication
   → source_verified
 ```
 
@@ -55,7 +55,7 @@ File: `reviews/justifications/<excerpt_id>.json`
   "bible_refs": [{"display": "…", "method": "wording_or_map", "note": ""}],
   "checks": {"anf_diverge": "pass", "lemma_constraint": "pass"},
   "confidence": "source_verified",
-  "reviewer": "pending-human"
+  "reviewer": "pending-independent-review"
 }
 ```
 
@@ -74,9 +74,10 @@ File: `reviews/justifications/<excerpt_id>.json`
 
 Verify by quotation wording / citation map, not model memory (Hosea 11:1 vs Exodus cases).
 
-**Inline in Pass B (hard gate):** every clear quotation or clear allusion must appear as a parenthetical full-name citation in `english[]` / `pass_b_english` beside the clause (e.g. `“…text…” (Philippians 2:6–8)`). Recording the same ref only in `bible_refs`, `added_allusions`, `notes_covered`, or apparatus is a **fail** — web readers and Logos Personal Books both depend on the reading-column text. Uncertain guesses stay `possible` and may use a short caption; they still should not invent verse numbers.
+**Inline in Pass B (hard gate):** every clear quotation or clear allusion must appear as a parenthetical full-name citation in `english[]` / `pass_b_english` beside the clause (e.g. `“…text…” (Philippians 2:6–8)`). Recording the same ref only in `bible_refs`, `added_allusions`, `notes_covered`, or apparatus is a **fail** — web readers and Logos Personal Books both depend on the reading-column text. Uncertain allusions stay explicitly possible in translator notes; never invent verse numbers or emit repeated Scripture-connection captions.
 
-## Public label
+## Evidence and public claims
 
-Until Professional GTG: captions show real confidence.  
-After: “Translated from named editions with justification receipts; corrections welcome.”
+Use `docs/SOP.md` §3 and `pipeline.verify_translation_qa` for current source/English packets. Explicit author/work/locus identity, declared scope and raw witness hashes are required; generated source JSON cannot verify itself. Source or English edits invalidate old reviews.
+
+No confidence badges on topic cards. Work intros disclose AI-assisted study status and actual sources. A provisional legacy screen is not a complete edition audit. Never claim first English from absence in ANF or absence of a public-domain English edition.

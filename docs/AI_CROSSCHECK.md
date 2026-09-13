@@ -1,6 +1,6 @@
 # AI cross-check → done (no human review gate)
 
-**Owner ruling 2026-09-11:** There is no standing human Greek/Latin reviewer. A human `review` queue would only backlog work. Finished text ships when **independent models** agree, not when a person who cannot read the source rubber-stamps it.
+**Owner ruling 2026-09-11:** There is no standing human Greek/Latin reviewer. A human `review` queue would only backlog work. Independent model agreement is one review requirement. Publication also requires current source identity, complete declared scope, explicit semantic checks and receipts bound to exact content. A model agreement flag alone never authorizes publication.
 
 Site readers can later **submit a correction** (see `/contribute/#corrections`). That is opt-in quality improvement, not a gate before publish.
 
@@ -15,20 +15,30 @@ Site readers can later **submit a correction** (see `/contribute/#corrections`).
 
 For every section in the claim:
 
-1. **Draft model** produces Pass A (`pass_a_gloss` + lemmas) + Pass B (`english[]`) + thought title from locked Greek/Latin only.  
+1. **Draft model** produces Pass A (`pass_a_gloss` + lemmas) + Pass B (`english[]`) + thought title from locked Greek/Latin only.
    Default: `@cf/qwen/qwen3-30b-a3b-fp8` (see `LLM_API_SETUP.md` / shared SOP).
 2. **Structural gate** (local, deterministic): parse JSON, section id, thought title, Pass A ≠ Pass B, length floors, no ANF/archaic smell, no fence leak in fields. Same checks as `llm_bakeoff.py` scorer.
-3. **Checker model A** (different family from draft): given locked Greek + Pass A + Pass B, returns a verdict JSON (`pass` / `fail` + reasons). Must not be the same model id as the draft.  
-   Default: `@cf/google/gemma-4-26b-a4b-it` (Llama 8B is too noisy as a hard gate — false fails and false ANF flags). Boolean flags alone are soft; unexplained `grounded_in_greek: false` still fails closed; ANF smell is verified locally.
-4. **Checker model B** (second independent check): same prompt shape.  
+3. **Checker model A** (different family from draft): given locked Greek + Pass A + Pass B, returns a verdict JSON (`pass` / `fail` + reasons). Must not share the draft's model family.
+   Selection follows configured fallback order, skipping the draft family. Every required semantic flag must explicitly pass with evidence and full source-paragraph coverage; missing, false or uncertain flags fail closed.
+4. **Checker model B** (second independent check): same prompt shape; its family must differ from both draft and checker A.
    Default: `@cf/meta/llama-3.3-70b-instruct-fp8-fast` (oracle). NVIDIA `nvidia/nemotron-3-super-120b-a12b` is an alternate when CF is rate-limited (researched kwargs only).
 5. **Promote** only if structural PASS and **both** checkers PASS. Write receipt under `outputs/ai-promote/<stamp>/` and set claim → `done`. Set justification `reviewer` to `ai-crosscheck:<modelA>+<modelB>`.
 
 If either checker fails: keep `claimed` (or set `checking`→`claimed`), apply the checker’s concrete fixes, re-run. Do not “majority vote” a fail away.
 
+## Content and provenance guard
+
+The canonical draft writer records the actual source block, raw witness SHA256, genuine model-supplied lemmas/choices, Pass B snapshot, draft identity and any print-verified OCR corrections. Missing evidence leaves existing files unchanged. Never invent lexicon citations or decisions to satisfy a schema.
+
+Promotion rejects unsupported book claims before mutation; the current automated bundle loader is Jeremiah-specific. Other books use the shared source-review packet/publication path until a real source adapter exists. All review stamps are tied to current source, English and justification content. Default overnight prep remains prep; it is not a translation approval.
+
+The site additionally verifies current semantic/source receipts for each new or changed passage and its declared work scope. Manual claim-board changes cannot bypass that gate. Review uncertainty requires correction or withholding, not a softer checker or majority vote. The full review protocol is in `docs/SOP.md` §3.
+
 ## Checker config + fallbacks
 
 Canonical file: `docs/LLM_LANE_CONFIG.json` (flag: `--config` / `--lane cf|nv`).
+
+The CF checker-A chain starts with the existing Qwen model so each configured draft family has two distinct checker families available in the configuration; overnight prep remains the default.
 
 - Each lane has **draft** + **checker_a** + **checker_b** ordered lists.
 - On **API** errors (410 EOL, 404, 5xx, timeout): try the next model in that chain.
@@ -49,7 +59,7 @@ source ~/.config/nv/env && export CF_TOKEN="$CLOUDFLARE_API_TOKEN"
 python3 scripts/overnight_quota.py --lanes both --agent overnight-mini
 ```
 
-Install / refresh agent: `bash scripts/install-mini-overnight-quota.sh`  
+Install / refresh agent: `bash scripts/install-mini-overnight-quota.sh`
 Wrapper: `scripts/run-overnight-quota.sh` (kernel flock single-instance; calendar agent; resumes stuck `claimed` rows).
 
 Stops CF lane near the free reserve. NVIDIA lane keeps going until max-claims / queue empty. Does not Logos-compile or deploy the site.

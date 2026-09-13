@@ -26,6 +26,12 @@ Owner / deep work:
 5. Multi-agent coordination: `docs/CLAIMS.md` + `docs/START_HERE.md` (do not invent a second queue).
 6. AI promote → `done` (no standing human review gate): `docs/AI_CROSSCHECK.md`. Overnight burn is **Mini only**, calendar 21:10 local, flock locks — do not start a second burn while global/claim locks are held (promote exit `3`).
 
+## Quality incident and required evidence — 2026-09-13
+
+The site audit found generated scaffold prose, condensed whole-work claims, false first-English flags and unscoped tip overlays replacing complete chapters. Do not restore them to increase catalogue counts.
+Follow SOP §3: raw edition identity and declared scope first; every changed/new published passage gets a current source-backed semantic review. Review negation, agency, modality, doctrine, omissions and Scripture targets explicitly. Frozen legacy hashes and old `done`/`source_verified` flags are not fidelity certificates. Publication consumes current receipts, not the claim board. Preserve raw sources and record exact corrections.
+A source check corrected Jeremiah6.1 love/agency/Scripture errors; fuller evidence is in the existing handoff and audit outputs. Do not restore stale reviewer stamps.
+
 ## Layout
 
 ```

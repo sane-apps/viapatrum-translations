@@ -76,7 +76,10 @@ Return ONLY valid JSON (no markdown fences) with this shape:
   "section": "{section}",
   "title": "short name of the thought (not a locus like Homily {section})",
   "pass_a_gloss": "literal sense gloss of the whole section",
-  "lemmas": [{{"greek": "…", "gloss": "…"}}],
+  "lemmas": [{{"form": "source spelling", "lemma": "dictionary form", "gloss": "sense here"}}],
+  "choices": [{{"term": "source expression", "english": "chosen rendering", "why": "specific grammatical or contextual reason", "rejected": ["alternative"]}}],
+  "bible_refs": [{{"display": "Full Book chapter:verse", "method": "wording", "note": "quoted source words"}}],
+  "variants": [],
   "english": ["Pass B paragraph 1", "Pass B paragraph 2"],
   "translator_notes": ["OCR or uncertainty notes, or empty list"]
 }}
@@ -84,16 +87,20 @@ Return ONLY valid JSON (no markdown fences) with this shape:
 Rules:
 - pass_a_gloss must NOT equal the joined english paragraphs.
 - english is reading prose in the author's voice; no idea absent from pass_a_gloss.
-- At most 12 lemmas — pick the load-bearing words only.
+- At most 12 lemmas — pick the load-bearing words only. Supply at least one real translation choice with source term, rendering, and reason; never invent lexicon citations.
+- Put each clear Bible quotation/allusion reference beside its clause in english, not only bible_refs. Record uncertainty honestly; do not invent verse numbers.
 - Finish every english paragraph with a full sentence (period). Never cut mid-clause.
-- Prefer fewer complete paragraphs over many truncated ones.
+- Translate every supplied clause and paragraph. Never summarize, omit repetitions, or shorten the source to fit a token budget; an incomplete translation fails review.
 - If Greek is broken or gapped, say so in translator_notes; do not invent Greek.
 """
 
 
 def load_fixture(section: str = "6.1") -> dict:
     rows = json.loads(SOURCE.read_text(encoding="utf-8"))
-    for row in rows:
+    matches = [r for r in rows if str(r.get("section")) == section]
+    if len(matches) > 1:
+        raise SystemExit(f"Duplicate source section {section} in {SOURCE}")
+    for row in matches:
         if str(row.get("section")) == section:
             greek = row.get("greek") or []
             if isinstance(greek, str):
@@ -103,6 +110,7 @@ def load_fixture(section: str = "6.1") -> dict:
                 "homily": row.get("homily"),
                 "klostermann": row.get("klostermann"),
                 "greek": greek,
+                "ocr_normalizations": row.get("ocr_normalizations") or [],
             }
     raise SystemExit(f"Section {section} not found in {SOURCE}")
 
@@ -112,6 +120,7 @@ def user_prompt(fix: dict) -> str:
     return (
         f"Section {fix['section']} ({fix.get('klostermann')}).\n"
         f"Locked Greek:\n{paras}\n\n"
+        f"Source editor notes: {json.dumps(fix.get('ocr_normalizations') or [], ensure_ascii=False)}\n"
         "Produce the JSON now."
     )
 
@@ -145,10 +154,10 @@ def extract_json(text: str) -> dict | None:
     return None
 
 
-def score(obj: dict | None, raw: str, section: str = "6.1") -> dict:
+def score(obj: dict | None, raw: str, section: str = "6.1", source: list[str] | None = None) -> dict:
     checks: dict[str, bool] = {}
     notes: list[str] = []
-    if not obj:
+    if not isinstance(obj, dict) or not obj:
         return {"ok": False, "checks": {"parse_json": False}, "notes": ["no JSON"]}
     checks["parse_json"] = True
     checks["has_section"] = str(obj.get("section", "")) == section
@@ -163,8 +172,16 @@ def score(obj: dict | None, raw: str, section: str = "6.1") -> dict:
         eng = []
     pb = " ".join(str(x) for x in eng).strip()
     checks["has_pass_a"] = len(pa) >= 40
-    checks["has_pass_b"] = len(eng) >= 1 and len(pb) >= 40
-    checks["pass_a_ne_pass_b"] = bool(pa and pb and pa != pb)
+    checks["has_pass_b"] = bool(eng) and all(isinstance(x, str) and x.strip() for x in eng) and len(pb) >= 40
+    checks["pass_a_ne_pass_b"] = bool(pa and pb and re.sub(r"\W+", "", pa).casefold() != re.sub(r"\W+", "", pb).casefold())
+    checks["lemmas"] = isinstance(obj.get("lemmas"), list) and bool(obj["lemmas"]) and all(
+        isinstance(x, dict) and (x.get("form") or x.get("greek") or x.get("lemma")) and x.get("gloss") for x in obj["lemmas"])
+    checks["no_placeholders"] = re.search(r"(?i)\b(TODO|TBD|YYYY)\b|\[n\d+\]|\b(?:scaffold|placeholder|translation pending)\b", pb + " " + pa) is None
+    if source is not None:
+        checks["source_present"] = isinstance(source, list) and bool(source) and all(isinstance(x, str) and x.strip() for x in source)
+        # Only a gross-omission screen; semantic review must check every source clause.
+        source_words = len(" ".join(source).split()) if checks["source_present"] else 0
+        checks["not_grossly_abridged"] = source_words > 0 and len(pb.split()) >= source_words * 0.45
     smell = re.search(
         r"(?i)\b(thou|thee|thy|hast|doth|brethren,?\s+beloved|Ante-Nicene)\b",
         pb + " " + pa,

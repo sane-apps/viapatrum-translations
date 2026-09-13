@@ -24,7 +24,7 @@ Shapes used by Julian and expected for new books. Fields may be added; do not re
 ```
 
 - `english`: non-empty strings; no `TODO` / `YYYY` / raw `[n12]`.
-- `added_allusions[].certainty`: `clear` | `possible` (builder labels “Scripture connection” vs “Possible allusion”).
+- `added_allusions[].certainty`: `clear` | `possible`. Clear references belong inline beside the clause; possible allusions stay explicitly uncertain in translator notes. Never emit repeated “Scripture connection” captions.
 - Builder skips an allusion caption when the same reference already appears inline (unless certainty is `possible`).
 
 ## Origen Jeremiah (homily sections)
@@ -213,3 +213,16 @@ Optional short captions for topics where Explore should teach a break:
   "body": "Earlier writers in this library generally treat the will as capable of choosing. Augustine’s late teaching on grace and the will sits notably apart from that earlier pattern."
 }
 ```
+
+## Current source review artifacts
+
+`pipeline.verify_translation_qa` owns the `translation-audit-v1` packet and receipt schema.
+Packets bind author/work identity, declared section scope, actual English/source files and raw witnesses.
+Use the shared generator and validator rather than hand-writing packet hashes.
+Each reviewed section needs explicit source identity, completeness, negation, agency, modality,
+doctrine and Scripture checks, full source-paragraph coverage, no unresolved uncertainty and evidence notes.
+A sample receipt approves only its selected passages.
+
+The website stores references to current corpus packets/receipts in its publication review index.
+That index cannot change a packet's author/work identity, expand its scope or substitute different text.
+The provisional legacy baseline is an audit freeze, never a semantic approval.
