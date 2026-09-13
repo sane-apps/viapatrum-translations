@@ -369,7 +369,23 @@ Densify: Nemesius, Macarius, ANF. Melito skipped; never Cyril Matthew densify.
 | **SERIES CLOSEOUT** | `cyril-jerusalem-homilia-paralyticum` | Cyril of Jerusalem *Homilia in paralyticum juxta piscinam jacentem* | **SERIES CLOSEOUT** `c962ec51` (2u). Non-catechetical Rank-1; Catecheses/Mystagogiae densify. Melito skipped; never Cyril Matthew densify. |
 
 Densify: Nemesius, Macarius, ANF, Cyril Jer Catecheses. Melito skipped; never Cyril Matthew densify.
+
+### Apollinaris / Diodorus / Theophilus Alex / Ammonius — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `apollinaris-fragmenta-joannem` | *Fragmenta in Joannem* | **SERIES CLOSEOUT** `69021c45` (6u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `apollinaris-fragmenta-matthaeum` | *Fragmenta in Matthaeum* | **SERIES CLOSEOUT** `dea2f09f` (5u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `apollinaris-fragmenta-psalmos` | *Fragmenta in Psalmos* | **SERIES CLOSEOUT** `042bb76d` (10u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `apollinaris-fragmenta-romanos` | *Fragmenta in epistulam ad Romanos* | **SERIES CLOSEOUT** `1285f5f1` (5u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `diodorus-fragmenta` | *Fragmenta* | **SERIES CLOSEOUT** `cfc409f1` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `diodorus-fragmenta-romanos` | *Fragmenta in epistulam ad Romanos* | **SERIES CLOSEOUT** `fa817e22` (4u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `theophilus-alex-fragmenta-joannem` | *Fragmenta in Joannem* | **SERIES CLOSEOUT** `999c852b` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `theophilus-alex-fragmenta-matthaeum` | *Fragmenta in Matthaeum* | **SERIES CLOSEOUT** `b715d0cb` (1u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `ammonius-fragmenta-joannem` | *Fragmenta in Joannem* | **SERIES CLOSEOUT** `54a04d7b` (10u). Melito skipped; never Cyril Matthew densify. |
+
+Collision note: shared `Fragmenta in *` filenames required author-unique local aliases for Diodorus Rom / Theophilus / Ammonius (re-tipped). Apollinaris extracts OK.
+Densify: Nemesius, Macarius, ANF. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
+
 
 
 
