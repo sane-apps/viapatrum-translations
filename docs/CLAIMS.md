@@ -26,6 +26,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-regnorum-fragments-series-closeout | done (5882494e) | Fragmenta in librum primum Regnorum SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Pauline closeout; ≠ De engastrimytho already in origen-jeremiah-samuel; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-lamentationes-fragments-series-closeout | done (dc1f9fde) | Fragmenta in Lamentationes SERIES CLOSEOUT (5u) Pass A≠B OET | 2026-09-13 | after Regnorum 5882494e; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-ephesians-fragments-series-closeout | done (dc2096b1) | Fragmenta ex commentariis in epistulam ad Ephesios SERIES CLOSEOUT (7u) Pass A≠B OET | 2026-09-13 | after Cyril Khazarzar Rank-1 EXHAUSTED; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; distinct from Rufinus Romans where applicable |
 | origen-1-corinthians-fragments-series-closeout | done (30aea2e0) | Fragmenta ex commentariis in epistulam i ad Corinthios SERIES CLOSEOUT (10u) Pass A≠B OET | 2026-09-13 | after Cyril Khazarzar Rank-1 EXHAUSTED; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; distinct from Rufinus Romans where applicable |
 | origen-hebrews-homily-scrap-series-closeout | done (7aec66dc) | Ex homiliis in epistulam ad Hebraeos SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Cyril Khazarzar Rank-1 EXHAUSTED; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; distinct from Rufinus Romans where applicable |
