@@ -26,6 +26,9 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-song-comm-lib3-11-20-oet | done (4b75518a) | Origen Song Comm. Liber III §§11–20 CLOSEOUT Pass A≠B OET | 2026-09-13 | Liber III 20/20; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
+| origen-song-comm-lib4-1-10-oet | done (22169c33) | Origen Song Comm. Liber IV §§1–10 Pass A≠B OET | 2026-09-13 | after Liber III CLOSEOUT 4b75518a; editorial Quartus Surge+; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
+| origen-song-comm-lib4-11-20-oet | done (62e34744) | Origen Song Comm. Liber IV §§11–20 CLOSEOUT Pass A≠B OET | 2026-09-13 | Liber IV 20/20; surviving Rufinus Comm. Cant. Amen Song 2:15; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-song-hom1-1-10-oet | done (7a50ac8) | Origen Song Homilia I §§1–10 Pass A≠B OET | 2026-09-13 | after john-later CLOSEOUT 959ffcc; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-song-hom1-10-closeout-oet | done (eb9e8f2) | Origen Song Homilia I §10 CLOSEOUT Pass A≠B OET | 2026-09-13 | Homilia I 10/10 couch/Amen coda; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-song-comm-prol-1-10-oet | done (924f6253) | Origen Song Comm. Prologus §§1–10 Pass A≠B OET | 2026-09-13 | after Homilia II CLOSEOUT ac293ae5; Baehrens GCS 33 Rufinus; Melito skipped; never Cyril Matthew densify |
