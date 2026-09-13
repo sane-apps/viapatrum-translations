@@ -1,3 +1,9 @@
+## Rank-1 Eustathius Thess / Metaphrastes / Kerameus
+
+| **SERIES CLOSEOUT** | `eustathius-thess-de-capta-thessalonica` | Eustathius of Thessalonica De capta Thessalonica | **SERIES CLOSEOUT** `bb9549e13` (12u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `symeon-metaphrastes-chronicon-breve` | Symeon Metaphrastes Chronicon breve | **SERIES CLOSEOUT** `23f779973` (2u). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `theophanes-kerameus-chronographia` | Theophanes Kerameus Chronographia | **SERIES CLOSEOUT** `eb10e3958` (44u). Melito skipped; never Cyril Matthew densify. |
+
 ## Rank-1 Gennadius–Theophanes wave
 
 | **SERIES CLOSEOUT** | `gennadius-fragmenta-galatas` | Gennadius of Constantinople Fragmenta in epistulam ad Galatas | **SERIES CLOSEOUT** `c931b076` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
