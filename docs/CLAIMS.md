@@ -28,6 +28,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-genesis-homilies-h1-1-10-oet | done (0dab6c96) | Origen Genesis Homilia I §§1–10 Pass A≠B OET | 2026-09-13 | after song CLOSEOUT 62e34744; Baehrens GCS 29; jeremiah-samuel remainder closed; densify clear; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-song-comm-lib3-11-20-oet | done (4b75518a) | Origen Song Comm. Liber III §§11–20 CLOSEOUT Pass A≠B OET | 2026-09-13 | Liber III 20/20; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-song-comm-lib4-1-10-oet | done (22169c33) | Origen Song Comm. Liber IV §§1–10 Pass A≠B OET | 2026-09-13 | after Liber III CLOSEOUT 4b75518a; editorial Quartus Surge+; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-song-comm-lib4-11-20-oet | done (62e34744) | Origen Song Comm. Liber IV §§11–20 CLOSEOUT Pass A≠B OET | 2026-09-13 | Liber IV 20/20; surviving Rufinus Comm. Cant. Amen Song 2:15; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
