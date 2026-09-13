@@ -28,6 +28,12 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-job-homilies-series-closeout | done (05d9223e) | Homiliae in Job SERIES CLOSEOUT (3u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-osee-fragment-series-closeout | done (552a3683) | Fragmentum ex commentariis in Osee SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-acta-homily-scrap-series-closeout | done (5e8379a1) | Fragmentum ex homiliis in Acta apostolorum SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-ruth-scrap-series-closeout | done (e4ffd07c) | In Ruth SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-de-resurrectione-scrap-series-closeout | done (4e4079d9) | De Resurrectione SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
+| origen-apocalypse-scholia-scrap-series-closeout | done (4c0a3e0d) | Scholia in Apocalypsem SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Regnorum/Lam; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-regnorum-fragments-series-closeout | done (5882494e) | Fragmenta in librum primum Regnorum SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | after Pauline closeout; ≠ De engastrimytho already in origen-jeremiah-samuel; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-lamentationes-fragments-series-closeout | done (dc1f9fde) | Fragmenta in Lamentationes SERIES CLOSEOUT (5u) Pass A≠B OET | 2026-09-13 | after Regnorum 5882494e; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-ephesians-fragments-series-closeout | done (dc2096b1) | Fragmenta ex commentariis in epistulam ad Ephesios SERIES CLOSEOUT (7u) Pass A≠B OET | 2026-09-13 | after Cyril Khazarzar Rank-1 EXHAUSTED; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify; skip Pusey-PD; distinct from Rufinus Romans where applicable |

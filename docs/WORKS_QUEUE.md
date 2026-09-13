@@ -165,3 +165,14 @@ After residual scraps (Psalmum `517bd5ce`, de uno filio `c91ff187`, papyraceum `
 Still skipped (not Rank-1 here): Collectio florilegium; ascriptus De sancta trinitate; Melito; Pusey Joannem / Quod unus / De incarnatione; Matthew densify; pseudo De exitu / Sermones Alexandrinos; Quaestio ad Cyrillum; Oratio in ascensionem (Athanasius-labeled).
 Cross-author: Origen Gospel NT fragments `af9c9531`; **deferred Pauline now CLOSED** (Eph `dc2096b1` / 1Cor `30aea2e0` / Heb `7aec66dc` / Rom-catena `6e744e38`). Melito skipped; Irenaeus Demonstration densify CLOSED.
 Next: earliest-untranslated Origen Khazarzar leftovers (Regnorum fragments → Lamentationes → Job/Proverbs/Psalms Greek scraps); skip De engastrimytho (already in origen-jeremiah-samuel).
+
+| **SERIES CLOSEOUT** | `origen-job-homilies` | *Homiliae in Job* | **SERIES CLOSEOUT** `05d9223e` (3u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-osee-fragment` | *Fragmentum in Osee* | **SERIES CLOSEOUT** `552a3683` (1u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-acta-homily-scrap` | *Fragmentum in Acta* | **SERIES CLOSEOUT** `5e8379a1` (1u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-ruth-scrap` | *In Ruth* | **SERIES CLOSEOUT** `e4ffd07c` (1u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-de-resurrectione-scrap` | *De Resurrectione* | **SERIES CLOSEOUT** `4e4079d9` (1u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `origen-apocalypse-scholia-scrap` | *Scholia in Apocalypsem* | **SERIES CLOSEOUT** `4c0a3e0d` (1u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+
+### Next after Job-homilies + scraps
+Still open on Khazarzar Origen leftovers: Selecta/Enarrationes in Job; Proverbs Expositio/Fragmenta; Psalms Greek Excerpta/Fragmenta (≠ Rufinus); then re-audit corpus-wide Rank-1.
+
