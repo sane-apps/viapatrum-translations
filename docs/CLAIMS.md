@@ -13,6 +13,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| origen-john-later-13-31-40-oet | claimed | origen-john-later | Comm. John 13 §§31–40 | StephanAir | 2026-09-12 | cursor/origen-samuel28-oet-ae07 | Preuschen GCS IV; OET; Melito skipped; never Cyril Matthew |
 
 ## How to claim
 
@@ -26,7 +27,6 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
-| origen-john-later-13-31-40-oet | done (6b1e4ef) | Origen Comm. John Book 13 §§31–40 Pass A≠B OET | 2026-09-12 | after §§21–30 tip `626a506`; Preuschen GCS IV; Melito skipped; never Cyril Matthew |
 | origen-john-later-13-21-30-oet | done (626a506) | Origen Comm. John Book 13 §§21–30 Pass A≠B OET | 2026-09-12 | after §§11–20 tip `04f4d58`; Preuschen GCS IV; Melito skipped; never Cyril Matthew; jer-h20b intact |
 | origen-john-later-13-11-20-oet | done (04f4d58) | Origen Comm. John Book 13 §§11–20 Pass A≠B OET (no previous complete PD English; ANF lacks these tomoi) | 2026-09-12 | Preuschen GCS IV; after §§1–10 tip `3f2e05d`; Melito skipped; never Cyril Matthew; jer-h20b intact; inline Bible refs |
 | origen-john-later-13-1-10-oet | done (3f2e05d) | Origen Comm. John Book 13 §§1–10 Pass A≠B OET (no previous complete PD English; ANF lacks these tomoi) | 2026-09-12 | Preuschen GCS IV; after Book 17 Pass B rem CLOSEOUT; Melito skipped; never Cyril Matthew; jer-h20b intact; inline Bible refs |
