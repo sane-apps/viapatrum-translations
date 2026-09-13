@@ -28,6 +28,12 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-philocalia-1-oet | done (7dc6f457) | Origen Philocalia 1 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | after Principiis SERIES 5771df32; Robinson 1893; Melito skipped; never Cyril Matthew densify; no Lewis 1911 |
+| origen-principiis-series-closeout | done (5771df32) | Origen De Principiis Books I–IV SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after Celsum SERIES 70a9a146; Koetschau GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF Crombie/Butterworth; Rufinus disclosure |
+| origen-principiis-b4-oet | done (5771df32) | Origen De Principiis Book IV CLOSEOUT Pass A≠B OET BOOK IV CLOSEOUT SERIES CLOSEOUT | 2026-09-13 | GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF/Butterworth |
+| origen-principiis-b3-oet | done (33361ff9) | Origen De Principiis Book III CLOSEOUT Pass A≠B OET BOOK III CLOSEOUT | 2026-09-13 | GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF/Butterworth |
+| origen-principiis-b2-oet | done (8fca9ac9) | Origen De Principiis Book II CLOSEOUT Pass A≠B OET BOOK II CLOSEOUT | 2026-09-13 | GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF/Butterworth |
+| origen-principiis-b1-2-8-oet | done (4ebc1af6) | Origen De Principiis Book I §§2–8 CLOSEOUT Pass A≠B OET BOOK I CLOSEOUT | 2026-09-13 | after pref+I.1 0193d59d; GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF/Butterworth |
 | origen-principiis-pref-i1-oet | done (0193d59d) | Origen De Principiis Pref + I.1 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Celsum SERIES 70a9a146; Koetschau GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF Crombie/Butterworth; Rufinus disclosure |
 | origen-contra-celsum-b1-1-2-oet | done (e6346628) | Origen Contra Celsum Book I §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after prayer-martyrdom SERIES d7b9c696; Koetschau GCS 2; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
 | origen-contra-celsum-series-closeout | done (70a9a146) | Origen Contra Celsum Books I–VIII SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after prayer-martyrdom SERIES d7b9c696; Koetschau GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |

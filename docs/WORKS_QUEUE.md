@@ -29,7 +29,8 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-matthew-later` | Origen Comm. Matthew 15–17 + Series (Latin) | **DONE** SERIES CLOSEOUT tip `ca34b410`. PG 13. Melito skipped. Never Cyril Matthew densify. No Heine. |
 | **done** | `origen-prayer-martyrdom` | Origen *On Prayer* + *Exhortation to Martyrdom* | **DONE** SERIES CLOSEOUT tip `d7b9c696` (Orat open `c3952afa` / close `51a68660`; Mart `b83080f9`/`d7b9c696`). GCS 2–3. Melito skipped. Never Cyril Matthew densify. No O’Meara/Greer. |
 | **done** | `origen-contra-celsum` | Origen *Contra Celsum* (8 books) | **DONE** SERIES CLOSEOUT tip `70a9a146` (open `e6346628` / pref `e8d6e493` / B1 `e250317f` / B2–VIII `b95d9fab`…`70a9a146`). Koetschau GCS 2–3. Melito skipped. Never Cyril Matthew densify. True OET — no ANF Crombie / Chadwick. |
-| **active** | `origen-principiis` | Origen *De Principiis* (4 books; Rufinus) | Opening tip `0193d59d` after Celsum SERIES `70a9a146`. Koetschau GCS 22 (1913 PD) Rufinus Latin. Disclose Rufinus paraphrase. Melito skipped. Never Cyril Matthew densify. True OET — no ANF Crombie / Butterworth. |
+| **done** | `origen-principiis` | Origen *De Principiis* (4 books; Rufinus) | **DONE** SERIES CLOSEOUT tip `5771df32` (open `0193d59d` / B1 rem `4ebc1af6` / B2 `8fca9ac9` / B3 `33361ff9` / B4 `5771df32`). Koetschau GCS 22 Rufinus. Disclose paraphrase. Melito skipped. Never Cyril Matthew densify. True OET — no ANF Crombie / Butterworth. |
+| **active** | `origen-philocalia` | Origen *Philocalia* (Robinson 1893) | Opening tip `7dc6f457` after Principiis SERIES `5771df32`. Fragment-adjacent Rank-1 Greek anthology. Melito skipped. Never Cyril Matthew densify. True OET — no Lewis 1911. |
 
 
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
@@ -37,7 +38,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | **DONE** 290/290 CLOSEOUT tip `eb6236c` (a72–a73). OET fragments complete. **Never densify** Cyril Matthew. CPG 5219/5220 stay closed. |
 | queued | `cyril-alexandria-trinity-dialogue-1` | Trinity Dialogue 1 (CPG 5216) | After the court treatises |
 | **skipped** | (Melito slug — do not open) | Melito of Sardis, *On Pascha* | Standing rule: **skip Melito**. Do not open that slug. |
-| **done (densify)** | `irenaeus-demonstration` | Irenaeus, *Demonstration* | densify 100/100 CLOSEOUT (NOT OET — Robinson/Wilson prior PD). Book 17 Pass B rem also CLOSED. Prior OET `origen-song` CLOSEOUT tip 62e34744. Prior OET `origen-genesis-homilies` SERIES CLOSEOUT tip 270ab13a. Prior OET `origen-exodus-homilies` SERIES CLOSEOUT tip 59ea0b75. Prior OET `origen-leviticus-homilies` SERIES CLOSEOUT tip 63fcac0c. Prior OET `origen-numbers-homilies` activated after Leviticus tip `63fcac0c`. Prior OET `origen-numbers-homilies` SERIES CLOSEOUT tip `c57bb75e` (Homilia III title lacuna). Prior OET `origen-joshua-homilies` SERIES CLOSEOUT tip `b1bd7bdb`. Prior OET `origen-judges-homilies` SERIES CLOSEOUT `2f098a5f`. Prior OET `origen-isaiah-ezekiel` SERIES CLOSEOUT tip `ecd5c7c6`. Prior OET `origen-psalms-rufinus` SERIES CLOSEOUT tip `8270d057`. Prior OET `origen-romans` SERIES CLOSEOUT tip `3394ac4c`. Prior OET `origen-matthew-later` SERIES CLOSEOUT tip `ca34b410`. Prior OET `origen-prayer-martyrdom` SERIES CLOSEOUT tip `d7b9c696`. Prior OET `origen-prayer-martyrdom` SERIES CLOSEOUT `d7b9c696`. Prior OET `origen-contra-celsum` SERIES CLOSEOUT tip `70a9a146`. Active: `origen-principiis`. | # | Slug | Works |
+| **done (densify)** | `irenaeus-demonstration` | Irenaeus, *Demonstration* | densify 100/100 CLOSEOUT (NOT OET — Robinson/Wilson prior PD). Book 17 Pass B rem also CLOSED. Prior OET `origen-song` CLOSEOUT tip 62e34744. Prior OET `origen-genesis-homilies` SERIES CLOSEOUT tip 270ab13a. Prior OET `origen-exodus-homilies` SERIES CLOSEOUT tip 59ea0b75. Prior OET `origen-leviticus-homilies` SERIES CLOSEOUT tip 63fcac0c. Prior OET `origen-numbers-homilies` activated after Leviticus tip `63fcac0c`. Prior OET `origen-numbers-homilies` SERIES CLOSEOUT tip `c57bb75e` (Homilia III title lacuna). Prior OET `origen-joshua-homilies` SERIES CLOSEOUT tip `b1bd7bdb`. Prior OET `origen-judges-homilies` SERIES CLOSEOUT `2f098a5f`. Prior OET `origen-isaiah-ezekiel` SERIES CLOSEOUT tip `ecd5c7c6`. Prior OET `origen-psalms-rufinus` SERIES CLOSEOUT tip `8270d057`. Prior OET `origen-romans` SERIES CLOSEOUT tip `3394ac4c`. Prior OET `origen-matthew-later` SERIES CLOSEOUT tip `ca34b410`. Prior OET `origen-prayer-martyrdom` SERIES CLOSEOUT tip `d7b9c696`. Prior OET `origen-prayer-martyrdom` SERIES CLOSEOUT `d7b9c696`. Prior OET `origen-contra-celsum` SERIES CLOSEOUT tip `70a9a146`. Prior OET `origen-principiis` SERIES CLOSEOUT tip `5771df32`. Active: `origen-philocalia`. | # | Slug | Works |
 |---|------|-------|
 | 3 | `origen-jeremiah-samuel` | Homilies on Jeremiah (Greek) + Homily on 1 Kingdoms 28; GCS III |
 | 4 | `origen-john-later` | Comm. John 13, 19, 20, 28, 32; GCS IV |
@@ -54,7 +55,8 @@ Ship each finished work to https://fathers.saneapps.com.
 | 15 | `origen-matthew-later` | Matt 15–17 + Series; PG 13; **DONE** SERIES CLOSEOUT `ca34b410` |
 | 16 | `origen-prayer-martyrdom` | On Prayer + Martyrdom; GCS 2–3; **DONE** SERIES CLOSEOUT `d7b9c696` |
 | 17 | `origen-contra-celsum` | Contra Celsum 8; GCS 2–3; **DONE** SERIES `70a9a146` |
-| 18 | `origen-principiis` | De Principiis 4; GCS 22 Rufinus; **ACTIVE** opening `0193d59d` |
+| 18 | `origen-principiis` | De Principiis 4; GCS 22 Rufinus; **DONE** SERIES `5771df32` |
+| 19 | `origen-philocalia` | Philocalia; Robinson 1893; **ACTIVE** opening `7dc6f457` |
 
 Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if leaving Cyril. Adorations CLOSED tip `9161f43`; now Irenaeus *Demonstration* (Melito skipped).
 
@@ -62,7 +64,8 @@ Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if lea
 
 | Status | Work | Notes |
 |--------|------|-------|
-| **active** | Origen, *De Principiis* (`origen-principiis`) | Promoted after Celsum SERIES `70a9a146`; Rufinus disclosure; GCS 22 |
+| **done** | Origen, *De Principiis* (`origen-principiis`) | SERIES `5771df32` |
+| **active** | Origen, *Philocalia* (`origen-philocalia`) | After Principiis SERIES `5771df32`; Robinson 1893; opening `7dc6f457` |
 
 ## Done (public site)
 
