@@ -13,6 +13,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| cyril-thesaurus-prol-oet | claimed | cyril-alexandria-thesaurus | Thesaurus prologue | ae07 | 2026-09-13 | cursor/origen-samuel28-oet-ae07 | tip-ready; PG 75 CPG 5215; after Trinity SERIES 1a34e0e8; Melito skipped; never Cyril Matthew densify; no Greystone/Durand |
 
 ## How to claim
 
