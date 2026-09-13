@@ -26,6 +26,44 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-thesaurus-logos2-open-oet | done (ba275050) | Cyril Thesaurus Logos 2 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip ba275050; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos2-rem-oet | done (ba275050) | Cyril Thesaurus Logos 2 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip ba275050; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos3-open-oet | done (ed449a31) | Cyril Thesaurus Logos 3 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip ed449a31; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos3-rem-oet | done (ed449a31) | Cyril Thesaurus Logos 3 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip ed449a31; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos4-open-oet | done (464877c9) | Cyril Thesaurus Logos 4 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 464877c9; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos4-rem-oet | done (464877c9) | Cyril Thesaurus Logos 4 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 464877c9; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos5-open-oet | done (35570a59) | Cyril Thesaurus Logos 5 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 35570a59; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos5-rem-oet | done (35570a59) | Cyril Thesaurus Logos 5 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 35570a59; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos6-open-oet | done (aaec48ff) | Cyril Thesaurus Logos 6 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip aaec48ff; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos6-rem-oet | done (aaec48ff) | Cyril Thesaurus Logos 6 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip aaec48ff; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos7-open-oet | done (ca07f0b7) | Cyril Thesaurus Logos 7 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip ca07f0b7; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos7-rem-oet | done (ca07f0b7) | Cyril Thesaurus Logos 7 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip ca07f0b7; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos8-open-oet | done (21bd0144) | Cyril Thesaurus Logos 8 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 21bd0144; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos8-rem-oet | done (21bd0144) | Cyril Thesaurus Logos 8 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 21bd0144; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos9-open-oet | done (8a9cc20c) | Cyril Thesaurus Logos 9 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 8a9cc20c; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos9-rem-oet | done (8a9cc20c) | Cyril Thesaurus Logos 9 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 8a9cc20c; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos10-open-oet | done (fc4c2b39) | Cyril Thesaurus Logos 10 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip fc4c2b39; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos10-rem-oet | done (fc4c2b39) | Cyril Thesaurus Logos 10 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip fc4c2b39; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos11-open-oet | done (f5922010) | Cyril Thesaurus Logos 11 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip f5922010; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos11-rem-oet | done (f5922010) | Cyril Thesaurus Logos 11 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip f5922010; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos12-open-oet | done (0c5c20d0) | Cyril Thesaurus Logos 12 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 0c5c20d0; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos12-rem-oet | done (0c5c20d0) | Cyril Thesaurus Logos 12 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 0c5c20d0; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos13-open-oet | done (16b27030) | Cyril Thesaurus Logos 13 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 16b27030; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos13-rem-oet | done (16b27030) | Cyril Thesaurus Logos 13 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 16b27030; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos14-open-oet | done (720487fb) | Cyril Thesaurus Logos 14 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 720487fb; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos14-rem-oet | done (720487fb) | Cyril Thesaurus Logos 14 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 720487fb; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos15-open-oet | done (6e1ab919) | Cyril Thesaurus Logos 15 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 6e1ab919; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos15-rem-oet | done (6e1ab919) | Cyril Thesaurus Logos 15 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 6e1ab919; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos16-open-oet | done (4d4b7566) | Cyril Thesaurus Logos 16 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 4d4b7566; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos16-rem-oet | done (4d4b7566) | Cyril Thesaurus Logos 16 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 4d4b7566; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos17-open-oet | done (0b993a43) | Cyril Thesaurus Logos 17 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 0b993a43; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos17-rem-oet | done (0b993a43) | Cyril Thesaurus Logos 17 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 0b993a43; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos18-open-oet | done (cb3b7363) | Cyril Thesaurus Logos 18 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip cb3b7363; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos18-rem-oet | done (cb3b7363) | Cyril Thesaurus Logos 18 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip cb3b7363; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos19-open-oet | done (0f58ada8) | Cyril Thesaurus Logos 19 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 0f58ada8; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos19-rem-oet | done (0f58ada8) | Cyril Thesaurus Logos 19 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip 0f58ada8; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos20-open-oet | done (d573f6d5) | Cyril Thesaurus Logos 20 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip d573f6d5; Melito skipped; never Cyril Matthew densify; no Greystone |
+| cyril-thesaurus-logos20-rem-oet | done (d573f6d5) | Cyril Thesaurus Logos 20 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; tip d573f6d5; Melito skipped; never Cyril Matthew densify; no Greystone |
 | cyril-thesaurus-logos1-open-oet | done (7c253775) | Cyril Thesaurus Logos I opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; after prol 704d5e64; Melito skipped; never Cyril Matthew densify |
 | cyril-thesaurus-logos1-rem-oet | done (7c253775) | Cyril Thesaurus Logos I rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5215; after open 7c253775; Melito skipped; never Cyril Matthew densify |
 | cyril-thesaurus-prol-oet | done (704d5e64) | Cyril Thesaurus prologue CLOSEOUT Pass A≠B OET | 2026-09-13 | after Trinity SERIES 1a34e0e8; PG 75 CPG 5215; Melito skipped; never Cyril Matthew densify; no Greystone/Durand |
