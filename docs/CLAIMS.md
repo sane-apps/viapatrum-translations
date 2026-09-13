@@ -26,6 +26,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| africanus-cesti-series-closeout | done (c078ca41) | Julius Africanus Cesti fragmenta SERIES CLOSEOUT (6u) Pass A≠B OET | 2026-09-13 | corpus-wide Rank-1 after Cyril/Origen Khazarzar queues; Melito skipped; never Cyril Matthew densify; no usable PD English base |
+| gregory-thaumaturgus-jeremiah-fragments-series-closeout | done (e38d8f6a) | Gregory Thaumaturgus Fragmenta in Jeremiam SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | corpus-wide Rank-1 after Cyril/Origen Khazarzar queues; Melito skipped; never Cyril Matthew densify; no usable PD English base |
+| gregory-thaumaturgus-matthew-fragment-series-closeout | done (88e4f8a7) | Gregory Thaumaturgus Fragmentum in Matthaeum SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | corpus-wide Rank-1 after Cyril/Origen Khazarzar queues; Melito skipped; never Cyril Matthew densify; no usable PD English base |
+| eustathius-engastrimytho-series-closeout | done (8b4d2ac4) | Eustathius De engastrimytho contra Origenem SERIES CLOSEOUT (6u) Pass A≠B OET | 2026-09-13 | corpus-wide Rank-1 after Cyril/Origen Khazarzar queues; Melito skipped; never Cyril Matthew densify; no usable PD English base |
 | origen-psalms-excerpta-series-closeout | done (79f99551) | Excerpta in Psalmos (Greek) SERIES CLOSEOUT (4u) Pass A≠B OET | 2026-09-13 | ≠ Rufinus Psalms; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-psalms-fragments-greek-series-closeout | done (8bb53209) | Fragmenta in Psalmos (Greek) SERIES CLOSEOUT (34u) Pass A≠B OET | 2026-09-13 | ≠ Rufinus Psalms; Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
 | origen-job-selecta-series-closeout | done (319dd847) | Selecta in Job SERIES CLOSEOUT (2u) Pass A≠B OET | 2026-09-13 | Khazarzar PG footer-safe; Melito skipped; never Cyril Matthew densify |
