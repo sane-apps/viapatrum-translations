@@ -26,6 +26,17 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| cyril-trinity-series-closeout | done (1a34e0e8) | Cyril Trinity Dialogues 1–7 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; Dial.7 rem; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d7-rem-oet | done (1a34e0e8) | Cyril Trinity Dialogue 7 rem SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75; Holy Spirit God from God; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d7-open-oet | done (efa6c055) | Cyril Trinity Dialogue 7 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d6-rem-oet | done (9e2f549d) | Cyril Trinity Dialogue 6 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75; economy with flesh; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d6-open-oet | done (fda0de55) | Cyril Trinity Dialogue 6 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d5-rem-oet | done (1cd39f48) | Cyril Trinity Dialogue 5 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75; deity properties in Son; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d5-open-oet | done (25a21e18) | Cyril Trinity Dialogue 5 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d4-rem-oet | done (c25b53ab) | Cyril Trinity Dialogue 4 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75; not creature; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d4-open-oet | done (94758039) | Cyril Trinity Dialogue 4 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d3-rem-oet | done (20d4ef09) | Cyril Trinity Dialogue 3 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75; true God as Father; Melito skipped; never Cyril Matthew densify |
+| cyril-trinity-d3-open-oet | done (a5a2dd86) | Cyril Trinity Dialogue 3 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; Melito skipped; never Cyril Matthew densify |
 | cyril-trinity-d2-rem-oet | done (36292f08) | Cyril Trinity Dialogue 2 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; after Dial.2 open e70f7cc8; Melito skipped; never Cyril Matthew densify |
 | cyril-trinity-d2-open-oet | done (e70f7cc8) | Cyril Trinity Dialogue 2 opening CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; after Dial.1 rem 02fc0008; Melito skipped; never Cyril Matthew densify |
 | cyril-trinity-d1-rem-oet | done (02fc0008) | Cyril Trinity Dialogue 1 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | PG 75 CPG 5216; after open 94dbb869; Melito skipped; never Cyril Matthew densify |
