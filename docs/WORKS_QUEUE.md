@@ -491,6 +491,18 @@ Philostorgius HE → densify (Walford PD). Densify: Nemesius/Macarius/ANF.
 | **SERIES CLOSEOUT** | `oecumenius-fragmenta-2tim` | Oecumenius *Fragmenta in epistulam ii ad Timotheum* | **SERIES CLOSEOUT** `f1c0e94e` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 | **SERIES CLOSEOUT** | `oecumenius-fragmentum-philemonem` | Oecumenius *Fragmentum in epistulam ad Philemonem* | **SERIES CLOSEOUT** `1ce3c1ca` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
 
+### Chronicon Paschale / Agathias / Theophylact Simocatta — SERIES tipped (2026-09-13)
+
+| **densify** | `cosmas-indicopleustes-topographia` | Cosmas *Topographia Christiana* | Densify-lane — McCrindle 1897 PD English. Melito skipped; never Cyril Matthew densify. |
+| **densify** | `paulus-silentarius-descriptio-sanctae-sophiae` | Paulus Silentarius *Descriptio Sanctae Sophiae* | Densify-lane — Lethaby/Swainson 1894 PD English. Melito skipped; never Cyril Matthew densify. |
+| **densify** | `paulus-silentarius-descriptio-ambonis` | Paulus Silentarius *Descriptio ambonis* | Densify-lane with Sophia ekphrasis PD English tradition. Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `chronicon-paschale` | Chronicon Paschale *Chronicon paschale* | **SERIES CLOSEOUT** `5313d1fd` (45u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `agathias-historiae` | Agathias Scholasticus *Historiae* | **SERIES CLOSEOUT** `8ea1c9d2` (25u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theophylact-simocatta-de-vitae-termino` | Theophylact Simocatta *De vitae termino* | **SERIES CLOSEOUT** `c9441bc9` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theophylact-simocatta-epistulae` | Theophylact Simocatta *Epistulae* | **SERIES CLOSEOUT** `7c1361fb` (5u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theophylact-simocatta-historiae` | Theophylact Simocatta *Historiae* | **SERIES CLOSEOUT** `33769ce9` (31u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theophylact-simocatta-quaestiones-physicae` | Theophylact Simocatta *Quaestiones physicae* | **SERIES CLOSEOUT** `22d99be6` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+
 Epiphanius densify leftovers: Ancoratus, Panarion, Anacephalaeosis, De mensuris (Dean PD).
 Densify: Nemesius/Macarius/ANF/Philostorgius. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
