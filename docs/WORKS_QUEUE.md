@@ -194,3 +194,15 @@ Still open: Psalms Greek *Excerpta* / *Fragmenta* (≠ Rufinus Latin Psalms alre
 Pauline + Regnorum/Lam + Job trio + Proverbs + scraps + Psalms Greek Excerpta/Fragmenta tipped. Cyril Khazarzar Rank-1 remains EXHAUSTED.
 Next: corpus-wide re-audit for earliest-untranslated Rank-1 outside exhausted Cyril/Origen Khazarzar queues (Melito skip; never Cyril Matthew densify; skip PD-English / copyrighted-first-English traps).
 
+
+
+| **SERIES CLOSEOUT** | `africanus-cesti` | Julius Africanus *Cesti* fragmenta | **SERIES CLOSEOUT** `c078ca41` (6u). Earliest corpus-wide Rank-1 after Cyril/Origen Khazarzar exhaustion. No usable PD English of Cesti body (ANF letters only). Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gregory-thaumaturgus-jeremiah-fragments` | Gregory Thaumaturgus *Fragmenta in Jeremiam* | **SERIES CLOSEOUT** `e38d8f6a` (1u). Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `gregory-thaumaturgus-matthew-fragment` | Gregory Thaumaturgus *Fragmentum in Matthaeum* | **SERIES CLOSEOUT** `88e4f8a7` (1u). Not Cyril Matthew densify. Melito skipped. |
+| **SERIES CLOSEOUT** | `eustathius-engastrimytho` | Eustathius *De engastrimytho contra Origenem* | **SERIES CLOSEOUT** `8b4d2ac4` (6u). ≠ Origen De engastrimytho. Khazarzar PG; Melito skipped; never Cyril Matthew densify. |
+
+### Corpus-wide Rank-1 after Cyril/Origen Khazarzar (2026-09-13)
+Pick: **Julius Africanus Cesti** (ante-Nicene; lockable Greek; no usable PD English body), then Gregory Thaumaturgus Jer/Matt scraps, then Eustathius engastrimytho.
+Hippolytus PG 10 on Khazarzar is empty (ANF HTML extras only). Melito skipped.
+Next: Eustathius *Commentarius in hexaemeron* / other Eustathius lockable Greek without PD English; then continue corpus-wide.
+
