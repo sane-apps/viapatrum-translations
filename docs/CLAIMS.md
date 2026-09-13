@@ -1,4 +1,3 @@
-| origen-contra-celsum-b1-1-2-oet | done (e6346628) | Origen Contra Celsum Book I §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after prayer-martyrdom SERIES d7b9c696; Koetschau GCS 2; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
 # Claims — who is working on what
 
 Take the next free slice:
@@ -29,6 +28,18 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-principiis-pref-i1-oet | done (0193d59d) | Origen De Principiis Pref + I.1 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Celsum SERIES 70a9a146; Koetschau GCS 22 Rufinus; Melito skipped; never Cyril Matthew densify; no ANF Crombie/Butterworth; Rufinus disclosure |
+| origen-contra-celsum-b1-1-2-oet | done (e6346628) | Origen Contra Celsum Book I §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after prayer-martyrdom SERIES d7b9c696; Koetschau GCS 2; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-series-closeout | done (70a9a146) | Origen Contra Celsum Books I–VIII SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | after prayer-martyrdom SERIES d7b9c696; Koetschau GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-b8-oet | done (70a9a146) | Origen Contra Celsum Book VIII CLOSEOUT Pass A≠B OET BOOK VIII CLOSEOUT SERIES CLOSEOUT | 2026-09-13 | GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-b7-oet | done (a7adb07d) | Origen Contra Celsum Book VII CLOSEOUT Pass A≠B OET | 2026-09-13 | GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-b6-oet | done (dd62d2c5) | Origen Contra Celsum Book VI CLOSEOUT Pass A≠B OET | 2026-09-13 | GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-b5-oet | done (9c4eb52c) | Origen Contra Celsum Book V CLOSEOUT Pass A≠B OET | 2026-09-13 | GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-b4-oet | done (1bc56d90) | Origen Contra Celsum Book IV CLOSEOUT Pass A≠B OET | 2026-09-13 | GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-b3-oet | done (59816547) | Origen Contra Celsum Book III CLOSEOUT Pass A≠B OET | 2026-09-13 | GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-b2-oet | done (b95d9fab) | Origen Contra Celsum Book II CLOSEOUT Pass A≠B OET | 2026-09-13 | GCS 2–3; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-b1-2-71-oet | done (e250317f) | Origen Contra Celsum Book I §§2–71 CLOSEOUT Pass A≠B OET BOOK I CLOSEOUT | 2026-09-13 | after pref e8d6e493; GCS 2; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
+| origen-contra-celsum-pref-2-6-oet | done (e8d6e493) | Origen Contra Celsum Preface §§2–6 CLOSEOUT Pass A≠B OET PREFACE CLOSEOUT | 2026-09-13 | after opening e6346628; GCS 2; Melito skipped; never Cyril Matthew densify; no ANF/Chadwick |
 | origen-prayer-martyrdom-orat-5-6-oet | done (4fa72818) | Origen On Prayer §§5–6 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 506a730c; GCS 3; Melito skipped; never Cyril Matthew densify; no O’Meara/Greer |
 | origen-prayer-martyrdom-orat-7-18-oet | done (8f7a5744) | Origen On Prayer §§7–18 rem CLOSEOUT Pass A≠B OET | 2026-09-13 | after 4fa72818; GCS 3; Melito skipped; never Cyril Matthew densify; no O’Meara/Greer |
 | origen-prayer-martyrdom-mart-proem-1-2-oet | done (b83080f9) | Origen Exhortation to Martyrdom proem–§§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | after On Prayer 51a68660; GCS 2; Melito skipped; never Cyril Matthew densify; no O’Meara/Greer |
