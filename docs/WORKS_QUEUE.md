@@ -64,7 +64,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | 21 | `origen-letters` | Africanus + Gregory; **DONE** SERIES `23a65bf4` |
 | 22 | `origen-nt-fragments` | NT Gospel catena/scholia; **DONE** SERIES `af9c9531` |
 
-Rank-1 Origen OET queue exhausted after `origen-nt-fragments` SERIES `af9c9531` (Pauline fragment volumes deferred until PD locked). Cross-author next earliest Rank-1 OET: **`cyril-alexandria-trinity-dialogue-1`** (CPG 5216; PG 75) — Melito skipped; Irenaeus *Demonstration* densify already CLOSED; never Cyril Matthew densify. Adorations CLOSED tip `9161f43`.
+Rank-1 Origen OET queue exhausted after `origen-nt-fragments` SERIES `af9c9531` (Pauline fragment volumes deferred until PD locked). Cyril Trinity Dialogues SERIES `1a34e0e8` done. Cross-author: Melito skipped; Irenaeus *Demonstration* densify CLOSED; never Cyril Matthew densify. Next earliest Rank-1 OET across corpus: audit (Tier A / remaining lockable PD).
 
 ## Tier B — later
 
@@ -74,6 +74,7 @@ Rank-1 Origen OET queue exhausted after `origen-nt-fragments` SERIES `af9c9531` 
 | **done** | Origen, *Philocalia* (`origen-philocalia`) | SERIES `18ba1926` |
 | **done** | Origen, *Homilies on Luke* (`origen-luke-homilies`) | SERIES `8567c6fd` |
 | **done** | Origen, *Letters* (`origen-letters`) | SERIES `23a65bf4` |
+| **done** | Cyril, *Trinity Dialogues* (`cyril-alexandria-trinity-dialogue-1`) | SERIES `1a34e0e8` |
 | **done** | Origen, *NT fragments* (`origen-nt-fragments`) | SERIES `af9c9531` (Pauline deferred) |
 
 ## Done (public site)
