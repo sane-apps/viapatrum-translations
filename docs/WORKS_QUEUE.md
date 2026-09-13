@@ -27,7 +27,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-psalms-rufinus` | Origen Psalms 36–38 Homilies (9) | **DONE** SERIES CLOSEOUT tip `8270d057` (9/9: Ps36×5 + Ps37×2 + Ps38×2). PG 12 Rufinus. Melito skipped. Never Cyril Matthew densify. No Trigg/Prinzivalli/Perrone. |
 | **done** | `origen-romans` | Origen Commentary on Romans (Rufinus, 10 books) | **DONE** SERIES CLOSEOUT tip `3394ac4c` (10/10). PG 14 Rufinus. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
 | **done** | `origen-matthew-later` | Origen Comm. Matthew 15–17 + Series (Latin) | **DONE** SERIES CLOSEOUT tip `ca34b410`. PG 13. Melito skipped. Never Cyril Matthew densify. No Heine. |
-| **active** | `origen-prayer-martyrdom` | Origen *On Prayer* + *Exhortation to Martyrdom* | Opening tip `c3952afa` (after Matthew `ca34b410`). Next: Orat. rem → Martyrdom. GCS 2–3. Melito skipped. Never Cyril Matthew densify. No O'Meara/Greer. |
+| **active** | `origen-prayer-martyrdom` | Origen *On Prayer* + *Exhortation to Martyrdom* | On Prayer CLOSEOUT `51a68660` (open `c3952afa`). Next: Exhortation to Martyrdom → SERIES CLOSEOUT. GCS 2–3. Melito skipped. Never Cyril Matthew densify. No O’Meara/Greer. |
 
 
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
