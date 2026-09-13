@@ -432,6 +432,34 @@ Philostorgius HE → densify (Walford PD). Densify: Nemesius/Macarius/ANF.
 | **SERIES CLOSEOUT** | `epiphanius-tractatus-contra-eos-qui-imagines-faciunt` | Epiphanius *Tractatus contra eos qui imagines faciunt* | **SERIES CLOSEOUT** `8bda5103` (1u). Melito skipped; never Cyril Matthew densify. |
 | **SERIES CLOSEOUT** | `epiphanius-tractatus-de-numerorum-mysteriis` | Epiphanius *Tractatus de numerorum mysteriis* | **SERIES CLOSEOUT** `c7151d5e` (1u). Melito skipped; never Cyril Matthew densify. |
 
+### Nonnos / Eusebius Emesa / Alexander / Arethas / Theodorus PG86a / Georges Pisides — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `nonnos-scholia-mythologica` | Nonnos *Scholia mythologica* | **SERIES CLOSEOUT** `a7578051` (8u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `eusebius-emesa-fragmenta-galatas` | Eusebius of Emesa *Fragmenta in Galatas* | **SERIES CLOSEOUT** `564b9944` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `eusebius-emesa-fragmenta-romanos` | Eusebius of Emesa *Fragmenta in Romanos* | **SERIES CLOSEOUT** `11737097` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `eusebius-emesa-fragmentum-1cor` | Eusebius of Emesa *Fragmentum in 1 Cor* | **SERIES CLOSEOUT** `a4654d64` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `alexander-monachus-inventio-crucis` | Alexander Monachus *Inventio crucis* | **SERIES CLOSEOUT** `84fcd501` (5u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `alexander-monachus-inventio-crucis-epitome` | Alexander Monachus *Inventio crucis epitome* | **SERIES CLOSEOUT** `71bed788` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `alexander-monachus-laudatio-barnabae` | Alexander Monachus *Laudatio Barnabae* | **SERIES CLOSEOUT** `e2aef85d` (3u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `arethas-epigrammata` | Arethas *Epigrammata* | **SERIES CLOSEOUT** `4931b341` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `arethas-fragmenta-romanos` | Arethas *Fragmenta in Romanos* | **SERIES CLOSEOUT** `76bcd955` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `arethas-fragmenta-1cor` | Arethas *Fragmenta in 1 Cor* | **SERIES CLOSEOUT** `1a3cc4ef` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `arethas-fragmenta-2cor` | Arethas *Fragmenta in 2 Cor* | **SERIES CLOSEOUT** `8aec347f` (4u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `arethas-scholia-cyrilli-apologiam` | Arethas *Scholia in Cyrilli apologiam* | **SERIES CLOSEOUT** `27865854` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theodorus-pg86a-fragmenta-joannem` | Theodorus PG86a *Fragmenta in Joannem* | **SERIES CLOSEOUT** `b23b8381` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theodorus-pg86a-fragmenta-matthaeum` | Theodorus PG86a *Fragmenta in Matthaeum* | **SERIES CLOSEOUT** `0578fb5e` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theodorus-pg86a-fragmenta-hebraeos` | Theodorus PG86a *Fragmenta in Hebraeos* | **SERIES CLOSEOUT** `2eca41d4` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theodorus-pg86a-fragmenta-romanos` | Theodorus PG86a *Fragmenta in Romanos* | **SERIES CLOSEOUT** `a13906c0` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theodorus-pg86a-fragmenta-1cor` | Theodorus PG86a *Fragmenta in 1 Cor* | **SERIES CLOSEOUT** `b19cef12` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `theodorus-pg86a-fragmenta-2cor` | Theodorus PG86a *Fragmenta in 2 Cor* | **SERIES CLOSEOUT** `79347a2e` (4u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `georges-pisides-bellum-avaricum` | Georges Pisides *Bellum Avaricum* | **SERIES CLOSEOUT** `26ba37d5` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `georges-pisides-de-expeditione-persica` | Georges Pisides *De expeditione Persica* | **SERIES CLOSEOUT** `f9b35a62` (3u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `georges-pisides-heracliadis-fragmenta` | Georges Pisides *Heracliadis fragmenta* | **SERIES CLOSEOUT** `5e978660` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `georges-pisides-heraclias` | Georges Pisides *Heraclias* | **SERIES CLOSEOUT** `aaf54656` (2u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `georges-pisides-in-bonum-patricium` | Georges Pisides *In Bonum patricium* | **SERIES CLOSEOUT** `3c334d55` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `georges-pisides-in-heraclium-redeuntem` | Georges Pisides *In Heraclium redeuntem* | **SERIES CLOSEOUT** `ac100eb4` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+| **SERIES CLOSEOUT** | `georges-pisides-in-restitutionem-crucis` | Georges Pisides *In restitutionem crucis* | **SERIES CLOSEOUT** `2c468f64` (1u). Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane. |
+
 Epiphanius densify leftovers: Ancoratus, Panarion, Anacephalaeosis, De mensuris (Dean PD).
 Densify: Nemesius/Macarius/ANF/Philostorgius. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
