@@ -19,7 +19,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **in progress** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | Source locked (khazarzar PG 72 extract). `cyril-matt-frag-a1` fr.1–4 Pass A≠B done. Continue from fr.5. CPG 5219/5220 stay closed. |
 | queued | `cyril-alexandria-trinity-dialogue-1` | Trinity Dialogue 1 (CPG 5216) | After the court treatises |
 | **skipped** | (Melito slug — do not open) | Melito of Sardis, *On Pascha* | Standing rule: **skip Melito**. Do not open that slug. |
-| **in progress** | `irenaeus-demonstration` | Irenaeus, *Demonstration of the Apostolic Preaching* | §§1–10 tip `15ae83f`; claimed §§11–20. Melito skipped. Robinson/Wilson check-only. |
+| **in progress** | `irenaeus-demonstration` | Irenaeus, *Demonstration of the Apostolic Preaching* | §§1–10 tip `15ae83f`; §§11–20 tip `a477be4` (NOT OET — prior Robinson/Wilson). Claimed §§21–30 densify. Next true OET: see status note. Melito skipped. |
 
 ## Origen remainder (after Book 2)
 
