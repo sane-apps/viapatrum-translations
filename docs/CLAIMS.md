@@ -28,6 +28,29 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-psalms-rufinus-ps36-h1-1-3-oet | done (890d89d2) | Origen Psalms Rufinus Ps 36 Homilia I §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Isaiah–Ezekiel SERIES ecd5c7c6; PG 12 Rufinus; Melito skipped; never Cyril Matthew densify; no Trigg/Prinzivalli/Perrone |
+| origen-isaiah-ezekiel-ezek-h14-1-2-oet | done (ecd5c7c6) | Origen Ezekiel Homilia 14 §§1–2 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 23/23 (9 Isa + 14 Ezek) | 2026-09-13 | after Ezek H13; Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h13-1-2-oet | done (13a6194a) | Origen Ezekiel Homilia 13 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h12-1-2-oet | done (42f95bcb) | Origen Ezekiel Homilia 12 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h11-1-2-oet | done (ae056641) | Origen Ezekiel Homilia 11 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h10-1-2-oet | done (b29daee9) | Origen Ezekiel Homilia 10 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h9-1-2-oet | done (14ed2e4b) | Origen Ezekiel Homilia 9 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h8-1-2-oet | done (f27bab21) | Origen Ezekiel Homilia 8 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h7-1-2-oet | done (12e8abe9) | Origen Ezekiel Homilia 7 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h6-1-2-oet | done (8f4465f3) | Origen Ezekiel Homilia 6 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h5-1-2-oet | done (0b18e6a9) | Origen Ezekiel Homilia 5 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h4-1-2-oet | done (7293a2cf) | Origen Ezekiel Homilia 4 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h3-1-2-oet | done (a6ff2ae8) | Origen Ezekiel Homilia 3 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h2-1-2-oet | done (12a77929) | Origen Ezekiel Homilia 2 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-ezek-h1-1-2-oet | done (ceecfec0) | Origen Ezekiel Homilia 1 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-isa-h9-1-2-oet | done (5ad104fd) | Origen Isaiah Homilia 9 §§1–2 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT Isaiah 9/9 (lacuna end noted) | 2026-09-13 | after Isa H8; Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-isa-h8-1-2-oet | done (54c27b49) | Origen Isaiah Homilia 8 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-isa-h7-1-3-oet | done (37807a9a) | Origen Isaiah Homilia 7 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-isa-h6-1-3-oet | done (2525faca) | Origen Isaiah Homilia 6 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-isa-h5-1-2-oet | done (a01579f8) | Origen Isaiah Homilia 5 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-isa-h4-1-4-oet | done (32f95af9) | Origen Isaiah Homilia 4 §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-isa-h3-1-3-oet | done (637e94d7) | Origen Isaiah Homilia 3 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-isaiah-ezekiel-isa-h2-1-2-oet | done (e54b8bea) | Origen Isaiah Homilia 2 §§1–2 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-isaiah-ezekiel-isa-h1-1-3-oet | done (19a2e1e6) | Origen Isaiah Homilia I §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Judges SERIES 2f098a5f; Baehrens GCS 33 Jerome; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-judges-homilies-h9-1-3-oet | done (2f098a5f) | Origen Judges Homilia 9 §§1–3 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 9/9 | 2026-09-13 | after ed68ee0f; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
 | origen-judges-homilies-h8-1-3-oet | done (ed68ee0f) | Origen Judges Homilia 8 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 8e5793df; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
