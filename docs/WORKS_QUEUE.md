@@ -25,7 +25,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-judges-homilies` | Origen Judges Homilies (9) | **DONE** Homiliae I–IX SERIES CLOSEOUT tip `2f098a5f`. Baehrens GCS 30. Melito skipped. Never Cyril Matthew densify. |
 | **done** | `origen-isaiah-ezekiel` | Origen Isaiah (9) + Ezekiel (14) | **DONE** SERIES CLOSEOUT tip `ecd5c7c6` (9 Isa + 14 Ezek). Isa IX lacuna end noted. Baehrens GCS 33. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
 | **done** | `origen-psalms-rufinus` | Origen Psalms 36–38 Homilies (9) | **DONE** SERIES CLOSEOUT tip `8270d057` (9/9: Ps36×5 + Ps37×2 + Ps38×2). PG 12 Rufinus. Melito skipped. Never Cyril Matthew densify. No Trigg/Prinzivalli/Perrone. |
-| **active** | `origen-romans` | Origen Commentary on Romans (Rufinus, 10 books) | Book I tip PENDING_ROM (after Psalms `8270d057`). PG 14 Rufinus. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
+| **active** | `origen-romans` | Origen Commentary on Romans (Rufinus, 10 books) | Book I tip 5047f5d5 (after Psalms `8270d057`). PG 14 Rufinus. Melito skipped. Never Cyril Matthew densify. No Scheck FOTC. |
 
 
 | **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
@@ -54,7 +54,7 @@ If staying in Origen after Heraclides + Pascha (Rank 1, no PD English):
 | 11 | `origen-judges-homilies` | 9 Judges; GCS VII; **DONE** SERIES CLOSEOUT `2f098a5f` |
 | 12 | `origen-isaiah-ezekiel` | 9 Isaiah + 14 Ezekiel; GCS VIII; **DONE** SERIES `ecd5c7c6` |
 | 13 | `origen-psalms-rufinus` | Ps 36–38 Rufinus (9); PG 12; **DONE** SERIES `8270d057` |
-| 14 | `origen-romans` | Romans Comm. Rufinus (10); PG 14; **ACTIVE** Book I PENDING_ROM |
+| 14 | `origen-romans` | Romans Comm. Rufinus (10); PG 14; **ACTIVE** Book I 5047f5d5 |
 
 Cross-author Tier A: **Melito skipped**; Irenaeus *Demonstration* is next if leaving Cyril. Adorations CLOSED tip `9161f43`; now Irenaeus *Demonstration* (Melito skipped).
 
