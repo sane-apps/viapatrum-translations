@@ -291,7 +291,47 @@ Nemesius *De natura hominis* → densify-lane (Wither 1636 PD English).
 | **SERIES CLOSEOUT** | `didymus-in-genesim` | Didymus *In Genesim* | **SERIES CLOSEOUT** `2bfd750d` (25u). PG 39 Khazarzar; not ANF; Melito skipped; never Cyril Matthew densify. |
 
 Macarius Spiritual Homilies → densify-lane (PD English). Melito skipped; never Cyril Matthew densify; ANF densify-lane.
-Next corpus-wide: further Khazarzar Greek lacking usable PD English.
+
+### Amphilochius PG 39 + Severianus PG 65 — SERIES tipped (2026-09-13)
+
+| **SERIES CLOSEOUT** | `amphilochius-contra-haereticos` | Amphilochius *Contra haereticos* | **SERIES CLOSEOUT** `a1bb5e84` (5u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-de-recens-baptizatis` | Amphilochius *De recens baptizatis* | **SERIES CLOSEOUT** `812cbba0` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-epistula-synodalis` | Amphilochius *Epistula synodalis* | **SERIES CLOSEOUT** `876b0a20` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-iambi-seleucum` | Amphilochius *Iambi ad Seleucum* | **SERIES CLOSEOUT** `79f7deda` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-in-illud-non-potest` | Amphilochius *In illud Non potest* | **SERIES CLOSEOUT** `01728194` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-in-illud-pater` | Amphilochius *In illud Pater* | **SERIES CLOSEOUT** `d5aa2f64` (2u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-in-lazarum` | Amphilochius *In Lazarum* | **SERIES CLOSEOUT** `ad0f6df1` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-in-mulierem-peccatricem` | Amphilochius *In mulierem peccatricem* | **SERIES CLOSEOUT** `53917b53` (2u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-in-natalitia-domini` | Amphilochius *In natalitia domini* | **SERIES CLOSEOUT** `f14deee6` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-in-occursum-domini` | Amphilochius *In occursum domini* | **SERIES CLOSEOUT** `c558c663` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-in-sabbati-sancti` | Amphilochius *In diem sabbati sancti* | **SERIES CLOSEOUT** `c1dac9b0` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-in-zacchaeum` | Amphilochius *In Zacchaeum* | **SERIES CLOSEOUT** `0e3b4c47` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `amphilochius-oratio-resurrectionem` | Amphilochius *Oratio in resurrectionem domini* | **SERIES CLOSEOUT** `5f2c6109` (1u). PG 39; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-de-caeco-nato` | Severianus *De caeco nato* | **SERIES CLOSEOUT** `28150b29` (3u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-de-caeco-zacchaeo` | Severianus *De caeco et Zacchaeo* | **SERIES CLOSEOUT** `bb7cf0ea` (3u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-de-tribus-pueris` | Severianus *De tribus pueris* | **SERIES CLOSEOUT** `3ec07cbb` (2u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-1thess` | Severianus *Fragmenta in epistulam i ad Thessalonicenses* | **SERIES CLOSEOUT** `8afca3ff` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-1tim` | Severianus *Fragmenta in epistulam i ad Timotheum* | **SERIES CLOSEOUT** `87ea2b28` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-2cor` | Severianus *Fragmenta in epistulam ii ad Corinthios* | **SERIES CLOSEOUT** `36d8a011` (2u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-2thess` | Severianus *Fragmenta in epistulam ii ad Thessalonicenses* | **SERIES CLOSEOUT** `6521a5a7` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-2tim` | Severianus *Fragmenta in epistulam ii ad Timotheum* | **SERIES CLOSEOUT** `c01ec240` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-colossenses` | Severianus *Fragmenta in epistulam ad Colossenses* | **SERIES CLOSEOUT** `eece0f74` (2u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-ephesios` | Severianus *Fragmenta in epistulam ad Ephesios* | **SERIES CLOSEOUT** `84c07fe9` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-galatas` | Severianus *Fragmenta in epistulam ad Galatas* | **SERIES CLOSEOUT** `0760dbd8` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-hebraeos` | Severianus *Fragmenta in epistulam ad Hebraeos* | **SERIES CLOSEOUT** `ae2c9e06` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-philippenses` | Severianus *Fragmenta in epistulam ad Philippenses* | **SERIES CLOSEOUT** `8e18faf4` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-romanos` | Severianus *Fragmenta in epistulam ad Romanos* | **SERIES CLOSEOUT** `689068ef` (2u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmenta-titum` | Severianus *Fragmenta in epistulam ad Titum* | **SERIES CLOSEOUT** `6f32b7a4` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-fragmentum-philemonem` | Severianus *Fragmentum in epistulam ad Philemonem* | **SERIES CLOSEOUT** `fb7a9958` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-in-1cor` | Severianus *In epistulam i ad Corinthios* | **SERIES CLOSEOUT** `a3f38b18` (6u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-in-genesim` | Severianus *In Genesim* | **SERIES CLOSEOUT** `d69218f4` (1u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-in-illud-quando` | Severianus *In illud Quando ipsi subiciet omnia* | **SERIES CLOSEOUT** `fe8c4f62` (2u). PG 65; Melito skipped; never Cyril Matthew densify. |
+| **SERIES CLOSEOUT** | `severianus-in-job` | Severianus *In Job* | **SERIES CLOSEOUT** `80121ac8` (5u). PG 65; Melito skipped; never Cyril Matthew densify. |
+
+Collision fix: Severianus *In Genesim* / Romans / 2 Cor re-fetched under `Severianus__*` (Didymus same-named extracts had been reused).
+Still densify-lane: Nemesius, Macarius, ANF-covered, Melito skip, never Cyril Matthew densify.
+Next corpus-wide: Hesychius PG 93 homilies (if no usable PD English) or other Khazarzar Greek lacking PD English.
+
 
 
 
