@@ -26,6 +26,10 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| eudokia-de-martyrio-cypriani-series-closeout | done (40d3a7de) | De martyrio sancti Cypriani SERIES CLOSEOUT (3u) Pass A≠B OET | 2026-09-13 | Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF densify-lane |
+| eudokia-homerocentones-series-closeout | done (2f9f4967) | Homerocentones SERIES CLOSEOUT (2u) Pass A≠B OET | 2026-09-13 | Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF densify-lane |
+| georgius-peccator-hymnus-series-closeout | done (e55c75e1) | Hymnus SERIES CLOSEOUT (1u) Pass A≠B OET | 2026-09-13 | Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF densify-lane |
+| john-antioch-historia-chronike-series-closeout | done (6623daf5) | Historia Chronike SERIES CLOSEOUT (22u) Pass A≠B OET | 2026-09-13 | Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF densify-lane |
 | apollinaris-fragmenta-joannem-series-closeout | done (69021c45) | Fragmenta in Joannem SERIES CLOSEOUT (6u) Pass A≠B OET | 2026-09-13 | Author-prefixed/aliased extract; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF densify-lane |
 | apollinaris-fragmenta-matthaeum-series-closeout | done (dea2f09f) | Fragmenta in Matthaeum SERIES CLOSEOUT (5u) Pass A≠B OET | 2026-09-13 | Author-prefixed/aliased extract; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF densify-lane; Matthew fragments of this author ≠ Cyril Matthew densify |
 | apollinaris-fragmenta-psalmos-series-closeout | done (042bb76d) | Fragmenta in Psalmos SERIES CLOSEOUT (10u) Pass A≠B OET | 2026-09-13 | Author-prefixed/aliased extract; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF densify-lane |
