@@ -26,6 +26,27 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-numbers-homilies-h28-1-3-oet | done (c57bb75e) | Origen Numbers Homilia XXVIII §§1–3 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h27-1-4-oet | done (1d76a485) | Origen Numbers Homilia XXVII §§1–4 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h26-1-3-oet | done (826b84fd) | Origen Numbers Homilia XXVI §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h25-1-3-oet | done (b0b12a11) | Origen Numbers Homilia XXV §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h24-1-3-oet | done (23795002) | Origen Numbers Homilia XXIV §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h23-1-3-oet | done (6b98230f) | Origen Numbers Homilia XXIII §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h22-1-3-oet | done (73014883) | Origen Numbers Homilia XXII §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h21-1-3-oet | done (136e6494) | Origen Numbers Homilia XXI §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h20-1-3-oet | done (6dbbdbdc) | Origen Numbers Homilia XX §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h19-1-3-oet | done (62da578e) | Origen Numbers Homilia XIX §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h18-1-3-oet | done (9e57449c) | Origen Numbers Homilia XVIII §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h17-1-3-oet | done (4fd4c16b) | Origen Numbers Homilia XVII §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h16-1-3-oet | done (f5db1cd1) | Origen Numbers Homilia XVI §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h15-1-3-oet | done (fc9acde7) | Origen Numbers Homilia XV §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h14-1-3-oet | done (bd891c4a) | Origen Numbers Homilia XIV §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h13-1-3-oet | done (08fec0a2) | Origen Numbers Homilia XIII §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h12-1-3-oet | done (c6524ac3) | Origen Numbers Homilia XII §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h11-1-3-oet | done (9813bcbd) | Origen Numbers Homilia XI §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h10-1-2-oet | done (12285306) | Origen Numbers Homilia X §§1–2 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h9-1-3-oet | done (aa03f034) | Origen Numbers Homilia IX §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
+| origen-numbers-homilies-h8-1-3-oet | done (84d4b104) | Origen Numbers Homilia VIII §§1–3 Pass A≠B OET | 2026-09-13 | Baehrens GCS 30; Hexateuch; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-numbers-homilies-h7-1-4-oet | done (ced8c601) | Origen Numbers Homilia VII §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Homilia VI tip 99a0cd83; Baehrens GCS 30; title soft; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-numbers-homilies-h6-1-3-oet | done (99a0cd83) | Origen Numbers Homilia VI §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Homilia V tip 048a0071; Baehrens GCS 30; title soft; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
 | origen-numbers-homilies-h5-1-3-oet | done (048a0071) | Origen Numbers Homilia V §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Homilia IV tip 1644956f; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Scheck FOTC |
