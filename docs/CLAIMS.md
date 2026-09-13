@@ -26,6 +26,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-judges-homilies-h1-1-4-oet | done (73f81aa4) | Origen Judges Homilia I §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Joshua SERIES CLOSEOUT b1bd7bdb; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify |
 | origen-joshua-homilies-h26-1-3-oet | done (b1bd7bdb) | Origen Joshua Homilia 26 §§1–3 CLOSEOUT Pass A≠B OET SERIES CLOSEOUT 26/26 | 2026-09-13 | after 03703d0b; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h25-1-3-oet | done (03703d0b) | Origen Joshua Homilia 25 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 3758b7e7; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
 | origen-joshua-homilies-h24-1-3-oet | done (3758b7e7) | Origen Joshua Homilia 24 §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | after 39d1e2ac; Baehrens GCS 30; Melito skipped; never Cyril Matthew densify; no Bruce FOTC 105 |
