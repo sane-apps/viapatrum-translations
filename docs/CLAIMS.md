@@ -26,6 +26,24 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-leviticus-homilies-h16-1-7-oet | done (63fcac0c) | Origen Leviticus Homilia XVI §§1–7 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h15-1-3-oet | done (4c980a82) | Origen Leviticus Homilia XV §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h14-1-4-oet | done (b52d3341) | Origen Leviticus Homilia XIV §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h13-1-4-oet | done (4a0427ba) | Origen Leviticus Homilia XIII §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h12-1-7-oet | done (7afd1938) | Origen Leviticus Homilia XII §§1–7 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h11-1-3-oet | done (f185098a) | Origen Leviticus Homilia XI §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h10-1-3-oet | done (f686e755) | Origen Leviticus Homilia X §§1–3 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h9-7-11-oet | done (2496be95) | Origen Leviticus Homilia IX §§7–11 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h9-1-6-oet | done (0e0cc6e1) | Origen Leviticus Homilia IX §§1–6 Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h8-7-11-oet | done (19e489a9) | Origen Leviticus Homilia VIII §§7–11 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h8-1-6-oet | done (a9bff89d) | Origen Leviticus Homilia VIII §§1–6 Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h7-1-7-oet | done (f62a966f) | Origen Leviticus Homilia VII §§1–7 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h6-1-6-oet | done (6a11bfd7) | Origen Leviticus Homilia VI §§1–6 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h5-7-12-oet | done (ddd96f00) | Origen Leviticus Homilia V §§7–12 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h5-1-6-oet | done (6b37c421) | Origen Leviticus Homilia V §§1–6 Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h4-1-10-oet | done (cf0034be) | Origen Leviticus Homilia IV §§1–10 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h3-1-8-oet | done (f30b2397) | Origen Leviticus Homilia III §§1–8 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
+| origen-leviticus-homilies-h2-1-5-oet | done (b7f7143a) | Origen Leviticus Homilia II §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
 | origen-leviticus-homilies-h1-1-5-oet | done (1ac13aa2) | Origen Leviticus Homilia I §§1–5 CLOSEOUT Pass A≠B OET | 2026-09-13 | after Exodus SERIES CLOSEOUT 59ea0b75; Baehrens GCS 29; Hexateuch continuation; Melito skipped; never Cyril Matthew densify; no Barkley FOTC 83 |
 | origen-exodus-homilies-h13-1-5-oet | done (59ea0b75) | Origen Exodus Homilia XIII §§1–5 SERIES CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
 | origen-exodus-homilies-h12-1-4-oet | done (662cfe44) | Origen Exodus Homilia XII §§1–4 CLOSEOUT Pass A≠B OET | 2026-09-13 | Baehrens GCS 29; Melito skipped; never Cyril Matthew densify; no Heine FOTC 71 |
