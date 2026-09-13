@@ -28,6 +28,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| origen-song-hom1-1-10-oet | done (7a50ac8) | Origen Song Homilia I §§1–10 Pass A≠B OET | 2026-09-13 | after john-later CLOSEOUT 959ffcc; Baehrens GCS 33; Melito skipped; never Cyril Matthew densify |
 | origen-john-later-13-41-50-oet | done (6c1170b) | Origen Comm. John Book 13 §§41–50 Pass A≠B OET | 2026-09-12 | after §§31–40 tip `63ac47d`; Preuschen GCS IV; Melito skipped; never Cyril Matthew |
 | origen-john-later-13-51-64-oet | done (6f747c8) | Origen Comm. John Book 13 §§51–64 CLOSEOUT Pass A≠B OET | 2026-09-13 | after §§41–50 tip `6c1170b`; Preuschen GCS IV; Book 13 64/64; Melito skipped; never Cyril Matthew |
 | origen-john-later-19-1-10-oet | done (3361b3a) | Origen Comm. John Book 19 §§1–10 Pass A≠B OET (acephalous) | 2026-09-13 | after Book 13 CLOSEOUT `6f747c8`; Preuschen GCS IV; Melito skipped; never Cyril Matthew |
