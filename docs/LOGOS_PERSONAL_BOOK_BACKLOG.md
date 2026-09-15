@@ -35,3 +35,4 @@ Tip-shipped on fathers.saneapps.com; awaiting Logos compile (cover art, descript
 Compile checklist: docs/LOGOS_MARKUP.md + SOP Personal Books (Tools -> Utilities -> Personal Books).
 | `le-blanc-theses-theologicae` | Louis Le Blanc: Theological Theses (De Theologia I-VII tip) | `books/le-blanc-theses-theologicae/le-blanc-theses-theologicae.docx` | https://fathers.saneapps.com/works/le-blanc-theses-theologicae/ | 2026-09-15 | pending (Air) |
 | `davenant-dissertationes-duae` | John Davenant: Dissertationes duae (De morte Christi Cap. 1 tip) | `books/davenant-dissertationes-duae/davenant-dissertationes-duae.docx` | https://fathers.saneapps.com/works/davenant-dissertationes-duae/ | 2026-09-15 | pending (Air) |
+- Crocius Syntagma Liber I Cap. 1 tip (`crocius-syntagma`) — Air Logos Build after live ship

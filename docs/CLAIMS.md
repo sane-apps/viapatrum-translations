@@ -50,6 +50,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| crocius-liber1-definition-tip | done (4bc5219b7) | Crocius Liber I Cap. 1 tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #3; Villerian 1636 PD Latin (SLUB); Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no modern English |
 | davenant-morte-christi-tip | done (3d3cb9a52) | Davenant De morte Christi Cap. 1 tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #2; Daniel 1650 PD Latin; Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no Allport English |
 | le-blanc-theologia-tip | done (7f85305a3) | Le Blanc De Theologia I-VII tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #1; Pitt 1675 PD Latin; Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no 2024 English |
 | symeon-junior-catechesae-series-closeout | done (8044c7c3f) | Symeon the New Theologian Catechesae SERIES CLOSEOUT (50u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English (Golitzin modern); underscore duplicate scans skipped; Theologica NOT tipped (pause) |
