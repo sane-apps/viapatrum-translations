@@ -50,5 +50,5 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
-| strimesius-prefatio-si-tip | done (PENDING) | Strimesius Prefatio section I tip ready; GB 3epYAAAAcAAJ 1708 PD Latin Francofurti ad Viadrum; Pass A≠B; Philippians 2:1-4 inline; tip only not SERIES CLOSEOUT | 2026-09-15 | Reformed retrieval #6 Frankfurt (Oder)/Viadrina; sister Arminianismum Halle queued |
+| strimesius-prefatio-si-tip | done (5fbe207dd) | Strimesius Prefatio section I tip ready; GB 3epYAAAAcAAJ 1708 PD Latin Francofurti ad Viadrum; Pass A≠B; Philippians 2:1-4 inline; tip only not SERIES CLOSEOUT | 2026-09-15 | Reformed retrieval #6 Frankfurt (Oder)/Viadrina; sister Arminianismum Halle queued |
 |
