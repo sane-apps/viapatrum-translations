@@ -11,7 +11,7 @@ Motivating sense: The Reformed tradition would be in a healthier and stronger th
 | 3 | **tipped** | `crocius-syntagma` | Ludwig Crocius, *Syntagma sacrae theologiae* | Bremen: Villerian, 1636. SLUB http://digital.slub-dresden.de/id335860389 (PD Mark 1.0). Tip: Liber I Cap. 1 LIVE. |
 | 4 | **tip-ready (ship paused)** | `baron-philosophia-theologiae-ancillans` | Robert Baron, *Philosophia theologiae ancillans* | Oxford 1658 corrected reprint locked IA `bim_early-english-books-1641-1700_philosophia-theologi-an_baron-robert_1658` (Wing B887). Tip Exercitatio Prima Art. I–II. Ship held for CoS English-first H1 UX. |
 | 5 | **tip-ready (ship paused)** | `placeus-de-imputatione` | Josué de la Place (Placeus), *De imputatione primi peccati Adami* — Caput Primum tip | Locked PD Latin: Salmurii, Ioannes Lesnerius, 1661. IA `deimputationepri00lapl` https://archive.org/details/deimputationepri00lapl. Tip Cap. 1 (Charenton decree + framing). Amyraut French *Brief traité* not used. Ship held for CoS UX. |
-| 6 | **queued** | `strimesius-in-arminianismum` | Samuel Strimesius, *Ingenua in Arminianismum inquisitio* | Frankfurt (Oder) faculty, 1702/03. DDB/ULB PD Mark 1.0; DOI 10.25673/65287. |
+| 6 | **tip shipping** | `strimesius-in-controversias-evangelicorum` | Samuel Strimesius, *Ingenua in Controversias Evangelicorum* — Prefatio tip | Frankfurt (Oder) / Viadrina, 1708 Schrey & Hartmann. GB `3epYAAAAcAAJ` (ONB). Sister *Ingenua in Arminianismum* (Halle DOI 10.25673/65287) remains queued (Anubis-blocked bulk download). |
 
 ---
 
