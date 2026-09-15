@@ -33,7 +33,6 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | epiphanius-panarion-densify | prepped | epiphanius-panarion | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-panarion-densify | machine crib (Pass A/lemmas/OCR); not reading English |
 | epiphanius-anaceph-densify | prepped | epiphanius-anacephalaeosis | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-anaceph-densify | machine crib (Pass A/lemmas/OCR); not reading English |
 | epiphanius-de-mensuris-densify | prepped | epiphanius-de-mensuris | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-de-mensuris-densify | machine crib (Pass A/lemmas/OCR); not reading English |
-| le-blanc-theologia-tip | claimed | le-blanc-theses-theologicae | De Theologia I-VII tip (Pitt 1675 Latin) | Scribe | 2026-09-15 | wip/le-blanc-theologia-tip | Reformed retrieval #1; PD Latin IA bub_gb_eOkHAW4G0-wC; no 2024 English |
 | photius-bibliotheca-densify | free | photius-bibliotheca | Full work densify (Freese PD English) |  |  |  | Rank-2 densify; Freese PD English exists; new English from Greek |
 | cosmas-topographia-densify | free | cosmas-topographia | Full work densify (McCrindle 1897 PD English) |  |  |  | Rank-2 densify; McCrindle PD English exists; new English from Greek |
 | paulus-silentarius-sophia-densify | free | paulus-silentarius-sophia | Full work densify (Lethaby PD English) |  |  |  | Rank-2 densify; Lethaby PD English exists; new English from Greek |
@@ -51,6 +50,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| le-blanc-theologia-tip | done (7f85305a3) | Le Blanc De Theologia I-VII tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #1; Pitt 1675 PD Latin; Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no 2024 English |
 | symeon-junior-catechesae-series-closeout | done (8044c7c3f) | Symeon the New Theologian Catechesae SERIES CLOSEOUT (50u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English (Golitzin modern); underscore duplicate scans skipped; Theologica NOT tipped (pause) |
 | symeon-junior-catecheses-et-gratiae-series-closeout | done (02424e15e) | Symeon the New Theologian Catecheses et Gratiae SERIES CLOSEOUT (49u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English (Golitzin modern); underscore duplicate scans skipped; Theologica NOT tipped (pause) |
 | symeon-junior-epistulae-series-closeout | done (39b297018) | Symeon the New Theologian Epistulae SERIES CLOSEOUT (37u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English (Golitzin modern); underscore duplicate scans skipped; Theologica NOT tipped (pause) |
