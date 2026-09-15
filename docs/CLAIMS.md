@@ -33,7 +33,6 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | epiphanius-panarion-densify | prepped | epiphanius-panarion | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-panarion-densify | machine crib (Pass A/lemmas/OCR); not reading English |
 | epiphanius-anaceph-densify | prepped | epiphanius-anacephalaeosis | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-anaceph-densify | machine crib (Pass A/lemmas/OCR); not reading English |
 | epiphanius-de-mensuris-densify | prepped | epiphanius-de-mensuris | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-de-mensuris-densify | machine crib (Pass A/lemmas/OCR); not reading English |
-| davenant-morte-christi-tip | claimed | davenant-dissertationes-duae | De morte Christi Cap. 1 origin + Thesis 1 tip (Daniel 1650 Latin) | Scribe | 2026-09-15 | wip/davenant-morte-christi-tip | Reformed retrieval #2; PD Latin IA bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650; no Allport English |
 | photius-bibliotheca-densify | free | photius-bibliotheca | Full work densify (Freese PD English) |  |  |  | Rank-2 densify; Freese PD English exists; new English from Greek |
 | cosmas-topographia-densify | free | cosmas-topographia | Full work densify (McCrindle 1897 PD English) |  |  |  | Rank-2 densify; McCrindle PD English exists; new English from Greek |
 | paulus-silentarius-sophia-densify | free | paulus-silentarius-sophia | Full work densify (Lethaby PD English) |  |  |  | Rank-2 densify; Lethaby PD English exists; new English from Greek |
@@ -51,6 +50,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
+| davenant-morte-christi-tip | done (3d3cb9a52) | Davenant De morte Christi Cap. 1 tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #2; Daniel 1650 PD Latin; Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no Allport English |
 | le-blanc-theologia-tip | done (7f85305a3) | Le Blanc De Theologia I-VII tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #1; Pitt 1675 PD Latin; Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no 2024 English |
 | symeon-junior-catechesae-series-closeout | done (8044c7c3f) | Symeon the New Theologian Catechesae SERIES CLOSEOUT (50u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English (Golitzin modern); underscore duplicate scans skipped; Theologica NOT tipped (pause) |
 | symeon-junior-catecheses-et-gratiae-series-closeout | done (02424e15e) | Symeon the New Theologian Catecheses et Gratiae SERIES CLOSEOUT (49u) Pass A≠B OET | 2026-09-13 | Rank-1; Melito skipped; never Cyril Matthew densify; Nemesius/Macarius/ANF/Philostorgius densify-lane; no usable complete PD English (Golitzin modern); underscore duplicate scans skipped; Theologica NOT tipped (pause) |
