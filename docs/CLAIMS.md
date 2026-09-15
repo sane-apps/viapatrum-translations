@@ -18,6 +18,26 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| nemesius-de-natura-hominis-densify | prepped | nemesius-de-natura-hominis | Full work densify (Wither 1636 PD English) | Owner | 2026-09-14 | wip/nemesius-de-natura-hominis-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| macarius-spiritual-homilies-densify | prepped | macarius-spiritual-homilies | Full work densify (PD English exists) | Owner | 2026-09-14 | wip/macarius-spiritual-homilies-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| philostorgius-he-densify | prepped | philostorgius-he | Full work densify (Walford PD English) | Owner | 2026-09-15 | wip/philostorgius-he-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| greg-thaum-fide-xii-densify | prepped | gregory-thaumaturgus-de-fide-xii | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/greg-thaum-fide-xii-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| greg-thaum-ad-tatianum-densify | prepped | gregory-thaumaturgus-ad-tatianum-de-anima | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/greg-thaum-ad-tatianum-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| greg-thaum-annuntiationem-densify | prepped | gregory-thaumaturgus-in-annuntiationem | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/greg-thaum-annuntiationem-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| greg-thaum-sermo-omnes-densify | prepped | gregory-thaumaturgus-sermo-in-omnes-sanctos | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/greg-thaum-sermo-omnes-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| greg-thaum-panegyricus-densify | prepped | gregory-thaumaturgus-panegyricus | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/greg-thaum-panegyricus-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| greg-thaum-eccl-metaphrase-densify | prepped | gregory-thaumaturgus-ecclesiastes-metaphrase | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/greg-thaum-eccl-metaphrase-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| greg-thaum-epistula-can-densify | prepped | gregory-thaumaturgus-epistula-canonica | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/greg-thaum-epistula-can-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| serapion-fragmenta-densify | prepped | serapion-antioch-fragmenta | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/serapion-fragmenta-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| epiphanius-ancoratus-densify | prepped | epiphanius-ancoratus | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-ancoratus-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| epiphanius-panarion-densify | prepped | epiphanius-panarion | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-panarion-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| epiphanius-anaceph-densify | prepped | epiphanius-anacephalaeosis | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-anaceph-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| epiphanius-de-mensuris-densify | prepped | epiphanius-de-mensuris | Full work densify (ANF 4 exists) | Owner | 2026-09-15 | wip/epiphanius-de-mensuris-densify | machine crib (Pass A/lemmas/OCR); not reading English |
+| le-blanc-theologia-tip | claimed | le-blanc-theses-theologicae | De Theologia I-VII tip (Pitt 1675 Latin) | Scribe | 2026-09-15 | wip/le-blanc-theologia-tip | Reformed retrieval #1; PD Latin IA bub_gb_eOkHAW4G0-wC; no 2024 English |
+| photius-bibliotheca-densify | free | photius-bibliotheca | Full work densify (Freese PD English) |  |  |  | Rank-2 densify; Freese PD English exists; new English from Greek |
+| cosmas-topographia-densify | free | cosmas-topographia | Full work densify (McCrindle 1897 PD English) |  |  |  | Rank-2 densify; McCrindle PD English exists; new English from Greek |
+| paulus-silentarius-sophia-densify | free | paulus-silentarius-sophia | Full work densify (Lethaby PD English) |  |  |  | Rank-2 densify; Lethaby PD English exists; new English from Greek |
+| paulus-silentarius-ambonis-densify | free | paulus-silentarius-ambonis | Full work densify (Lethaby/Swainson PD English) |  |  |  | Rank-2 densify; Lethaby/Swainson PD English exists; new English from Greek |
 
 ## How to claim
 
@@ -1908,4 +1928,3 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 - Inventing a new book slug without `docs/WORKS_QUEUE.md` + charter
 - Any modern or ANF English as the reading text
 - Changing Slice columns or merging/splitting claim rows (ask owner)
-

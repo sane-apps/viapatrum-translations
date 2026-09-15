@@ -1,3 +1,20 @@
+# Reformed retrieval lane (parallel to Fathers Rank-1)
+
+Charter: `docs/REFORMED_RETRIEVAL.md`. Same SOP; PD Latin preferred; no copyrighted English as copy-text. Not a lift of the Greek Rank-1 quality pause.
+
+Motivating sense: The Reformed tradition would be in a healthier and stronger theological place if the major publishing houses were promoting and retrieving more works from men like John Davenant, Ludwig Crocius, Louis Le Blanc, Robert Baron, the theologians of Saumur, and the late 17th century Frankfurt (Oder) faculty, rather than continually recycling the same handful of stricter voices (Owen, Turretin, et al.) The breadth of the Reformed tradition deserves to be represented.
+
+| Rank | Status | Slug | Work | Notes |
+|------|--------|------|------|-------|
+| 1 | **tip in progress** | `le-blanc-theses-theologicae` | Louis Le Blanc, *Theses theologicae* — *De Theologia* I-VII | Locked PD Latin: London, Moses Pitt, 1675. IA `bub_gb_eOkHAW4G0-wC` https://archive.org/details/bub_gb_eOkHAW4G0-wC (PD Mark 1.0). ESTC R17887 / Wing L802. No 2024 English. |
+| 2 | **needs Latin lock** | `davenant-dissertationes-duae` | John Davenant, *Dissertationes duae* (*De morte Christi*; *De praedestinatione*) | Cambridge: Roger Daniel, 1650 (Wing D317). No clean IA Latin scan 2026-09-15. Do not use Allport 1831 English as copy-text. |
+| 3 | **queued** | `crocius-syntagma` | Ludwig Crocius, *Syntagma sacrae theologiae* | Bremen: Villerian, 1636. SLUB http://digital.slub-dresden.de/id335860389 (PD Mark 1.0). |
+| 4 | **queued** | `baron-philosophia-theologiae-ancillans` | Robert Baron, *Philosophia theologiae ancillans* | St Andrews: Rabanus, 1621; 1658 reprint. Latin. Lock IA/Hathi id before tip. |
+| 5 | **queued** | `saumur-theologians` | Amyraut / Placeus / Cameron | Amyraut *Brief traité* 1658 is French (IA `brieftraitdela00amyr`). Prefer Placeus Latin *De imputatione* if a PD scan locks. |
+| 6 | **queued** | `strimesius-in-arminianismum` | Samuel Strimesius, *Ingenua in Arminianismum inquisitio* | Frankfurt (Oder) faculty, 1702/03. DDB/ULB PD Mark 1.0; DOI 10.25673/65287. |
+
+---
+
 ## Rank-1 Symeon Junior (paused before Theologica)
 
 | **SERIES CLOSEOUT** | `symeon-junior-catechesae` | Symeon the New Theologian Catechesae | **SERIES CLOSEOUT** `8044c7c3f` (50u). Melito skipped; never Cyril Matthew densify; Theologica not tipped (quality pause). |
