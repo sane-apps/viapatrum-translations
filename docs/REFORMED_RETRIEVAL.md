@@ -19,7 +19,7 @@ The Reformed tradition would be in a healthier and stronger theological place if
 See also the table at the top of `docs/WORKS_QUEUE.md`.
 
 1. **Louis Le Blanc de Beaulieu** — *Theses theologicae* (London: Moses Pitt, 1675). **#1 locked.** Slug `le-blanc-theses-theologicae`. IA https://archive.org/details/bub_gb_eOkHAW4G0-wC (`bub_gb_eOkHAW4G0-wC`), PD Mark 1.0. ESTC R17887 / Wing L802. Tip: *De Theologia* I-VII.
-2. **John Davenant** — *Dissertationes duae: prima de morte Christi … altera de praedestinatione et reprobatione* (Cambridge: Roger Daniel, 1650; Wing D317 / ESTC R5446). Preferred next Latin lock. No clean IA Latin scan found 2026-09-15. Allport 1831 Colossians English is PD English, not copy-text. 1683 Cambridge reprint of *De morte Christi* exists in EEBO, not locked here.
+2. **John Davenant** — *Dissertationes duae* (Cambridge: Roger Daniel, 1650; Wing D317 / ESTC R5446). **#2 locked.** Slug `davenant-dissertationes-duae`. IA https://archive.org/details/bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650 (`bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650`). Tip: *De morte Christi* Cap. 1 origin + Thesis 1. Allport 1831 Colossians English is not copy-text. 1683 reprint is history only.
 3. **Ludwig Crocius** — *Syntagma sacrae theologiae quatuor libris adornatum* (Bremen: B. Villerian, 1636). SLUB Dresden digital: http://digital.slub-dresden.de/id335860389 (PD Mark 1.0). No IA copy located.
 4. **Robert Baron** — *Philosophia theologiae ancillans* (St Andrews: Eduardus Rabanus, 1621; later 1658). EEBO A04826 / ESTC. Latin; 1658 scan circulates via Internet Archive-derived copies. Lock a concrete IA/Hathi id before tipping.
 5. **Saumur theologians**

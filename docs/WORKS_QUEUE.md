@@ -7,7 +7,7 @@ Motivating sense: The Reformed tradition would be in a healthier and stronger th
 | Rank | Status | Slug | Work | Notes |
 |------|--------|------|------|-------|
 | 1 | **tip in progress** | `le-blanc-theses-theologicae` | Louis Le Blanc, *Theses theologicae* — *De Theologia* I-VII | Locked PD Latin: London, Moses Pitt, 1675. IA `bub_gb_eOkHAW4G0-wC` https://archive.org/details/bub_gb_eOkHAW4G0-wC (PD Mark 1.0). ESTC R17887 / Wing L802. No 2024 English. |
-| 2 | **needs Latin lock** | `davenant-dissertationes-duae` | John Davenant, *Dissertationes duae* (*De morte Christi*; *De praedestinatione*) | Cambridge: Roger Daniel, 1650 (Wing D317). No clean IA Latin scan 2026-09-15. Do not use Allport 1831 English as copy-text. |
+| 2 | **tip in progress** | `davenant-dissertationes-duae` | John Davenant, *Dissertationes duae* — *De morte Christi* Cap. 1 origin + Thesis 1 | Locked PD Latin: Cambridge, Roger Daniel, 1650. IA `bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650` https://archive.org/details/bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650 (1650 Latin PD). ESTC R5446 / Wing D317. Allport 1831 English not copy-text. |
 | 3 | **queued** | `crocius-syntagma` | Ludwig Crocius, *Syntagma sacrae theologiae* | Bremen: Villerian, 1636. SLUB http://digital.slub-dresden.de/id335860389 (PD Mark 1.0). |
 | 4 | **queued** | `baron-philosophia-theologiae-ancillans` | Robert Baron, *Philosophia theologiae ancillans* | St Andrews: Rabanus, 1621; 1658 reprint. Latin. Lock IA/Hathi id before tip. |
 | 5 | **queued** | `saumur-theologians` | Amyraut / Placeus / Cameron | Amyraut *Brief traité* 1658 is French (IA `brieftraitdela00amyr`). Prefer Placeus Latin *De imputatione* if a PD scan locks. |
