@@ -2,11 +2,9 @@
 
 ## Fathers public UX (standing)
 
-If your claim touches `fathers.saneapps.com` presentation or a tip ship, read first:
+If your claim touches fathers.saneapps.com presentation or a tip ship, read first the site repo AGENTS.md section **Standing UX rules**.
 
-`~/SaneApps/websites/fathers.saneapps.com/AGENTS.md` → **Standing UX rules**
-
-Acknowledge English-first H1s, no fake-link title underlines, Author accordion bios, always-on mobile nav, and tip-only closeout labeling in your working notes before editing.
+Acknowledge in working notes before editing: English-first H1s; no fake-link title underlines; Author accordion bios; always-on mobile nav; tip-only closeout labeling when partial.
 
 Copy this whole file into your AI.
 
