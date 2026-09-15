@@ -4,7 +4,7 @@
 
 If your claim touches fathers.saneapps.com presentation or a tip ship, read first the site repo AGENTS.md section **Standing UX rules**.
 
-Acknowledge in working notes before editing: English-first H1s; no fake-link title underlines; Author accordion bios; always-on mobile nav; tip-only closeout labeling when partial.
+Acknowledge in working notes before editing: English-first titles everywhere public-facing; author dates on Authors index; no fake-link underlines; Author accordion bios; always-on mobile nav; tip-only closeout labeling when partial.
 
 Copy this whole file into your AI.
 

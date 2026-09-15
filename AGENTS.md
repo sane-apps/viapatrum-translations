@@ -34,11 +34,12 @@ Before any Fathers reader/UI work or tip ship, read and acknowledge in working n
 
 Summary (full text lives on the site repo):
 
-1. English-first public H1 + breadcrumbs; Latin secondary only.
-2. Semiotics: nothing looks interactive unless it is (no fake title underlines).
-3. Author sidebar expands like About this text with short researched bios (`data/author-bios.json`).
-4. Mobile top nav always visible.
-5. Tip→ship: spot-check + visual QA; tip-only closeout labeling when partial.
+1. English-first EVERYWHERE public-facing (H1, breadcrumbs, Works/Authors lists); Latin secondary only; no Latin-only work titles in lists.
+2. Author dates (lifespan/floruit) required next to every Authors-index name (`data/author-dates.json`).
+3. Semiotics: nothing looks interactive unless it is (no fake title/author-name underlines).
+4. Author sidebar expands like About this text with short researched bios (`data/author-bios.json`).
+5. Mobile top nav always visible.
+6. Tip→ship: spot-check + visual QA; tip-only closeout labeling when partial.
 
 OpenCode/Nemotron and every agent must note these rules at session start. Do not invent a second reader UX.
 
