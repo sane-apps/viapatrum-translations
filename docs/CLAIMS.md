@@ -50,7 +50,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 | Claim ID | Status | Slice | Closed | Notes |
 |----------|--------|-------|--------|-------|
-| baron-ente-art1-2-tip | done (local tip-ready; ship paused) | Baron Exercitatio Prima Art. I-II tip ready; IA 1658 PD Latin; Pass A≠B; tip only not SERIES CLOSEOUT; ship held for CoS English-first H1 UX | 2026-09-15 | Reformed retrieval #4; Wing B887; no modern English |
+| baron-ente-art1-2-tip | done (653cdb212; ship paused) | Baron Exercitatio Prima Art. I-II tip ready; IA 1658 PD Latin; Pass A≠B; tip only not SERIES CLOSEOUT; ship held for CoS English-first H1 UX | 2026-09-15 | Reformed retrieval #4; Wing B887; no modern English |
 | crocius-liber1-definition-tip | done (c54e8167a) | Crocius Liber I Cap. 1 tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #3; Villerian 1636 PD Latin (SLUB); Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no modern English |
 | davenant-morte-christi-tip | done (3d3cb9a52) | Davenant De morte Christi Cap. 1 tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #2; Daniel 1650 PD Latin; Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no Allport English |
 | le-blanc-theologia-tip | done (7f85305a3) | Le Blanc De Theologia I-VII tip LIVE on fathers.saneapps.com | 2026-09-15 | Reformed retrieval #1; Pitt 1675 PD Latin; Pass A≠B; Logos Bible tags; tip only not SERIES CLOSEOUT; no 2024 English |
