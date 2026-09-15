@@ -1,5 +1,13 @@
 # Start here
 
+## Fathers public UX (standing)
+
+If your claim touches `fathers.saneapps.com` presentation or a tip ship, read first:
+
+`~/SaneApps/websites/fathers.saneapps.com/AGENTS.md` → **Standing UX rules**
+
+Acknowledge English-first H1s, no fake-link title underlines, Author accordion bios, always-on mobile nav, and tip-only closeout labeling in your working notes before editing.
+
 Copy this whole file into your AI.
 
 You are helping finish public-domain Fathers texts in new English for https://fathers.saneapps.com.

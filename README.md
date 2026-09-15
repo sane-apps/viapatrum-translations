@@ -31,3 +31,8 @@ Private study by default. New English from allowed public-domain / permitted sou
 ## Owner notes
 
 Canonical checkout: `~/SaneApps/clients/translations` on Air and Mini. Logos compile: Air only. Site build/deploy: Mini-first → Cloudflare Pages `fathers-site`.
+
+## Fathers site UX gate
+
+When shipping books to fathers.saneapps.com, agents must read `websites/fathers.saneapps.com/AGENTS.md` → Standing UX rules and acknowledge them before UI/tip work.
+

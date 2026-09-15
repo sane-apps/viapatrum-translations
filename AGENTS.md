@@ -26,6 +26,22 @@ Owner / deep work:
 5. Multi-agent coordination: `docs/CLAIMS.md` + `docs/START_HERE.md` (do not invent a second queue).
 6. AI promote → `done` (no standing human review gate): `docs/AI_CROSSCHECK.md`. Overnight burn is **Mini only**, calendar 21:10 local, flock locks — do not start a second burn while global/claim locks are held (promote exit `3`).
 
+## Fathers site standing UX (when shipping to fathers.saneapps.com)
+
+Before any Fathers reader/UI work or tip ship, read and acknowledge in working notes:
+
+`~/SaneApps/websites/fathers.saneapps.com/AGENTS.md` → **Standing UX rules**.
+
+Summary (full text lives on the site repo):
+
+1. English-first public H1 + breadcrumbs; Latin secondary only.
+2. Semiotics: nothing looks interactive unless it is (no fake title underlines).
+3. Author sidebar expands like About this text with short researched bios (`data/author-bios.json`).
+4. Mobile top nav always visible.
+5. Tip→ship: spot-check + visual QA; tip-only closeout labeling when partial.
+
+OpenCode/Nemotron and every agent must note these rules at session start. Do not invent a second reader UX.
+
 ## Quality incident and required evidence — 2026-09-13
 
 The site audit found generated scaffold prose, condensed whole-work claims, false first-English flags and unscoped tip overlays replacing complete chapters. Do not restore them to increase catalogue counts.
