@@ -153,6 +153,15 @@ class BibleLinker:
         return ", ".join(chunks)
 
     def bible_text(self, text: str, key=None, label=None, note: bool = False) -> str:
+        if note:
+            # Captions and notes (for example "Possible allusion:" lines) stay
+            # plain text. They never become clickable Bible links and are never
+            # recorded in the receipt. A possible link with no quotation or echo
+            # in the source text is padding, and saying so honestly in the label
+            # does not make it a link. Returning the text unchanged means a
+            # passage with no real Scripture fails the at-least-one-link check,
+            # which is the honest outcome: the Logos build stays on hold.
+            return text
         def replace(m: re.Match) -> str:
             prefix = text[max(0, m.start() - 22) : m.start()]
             old = bool(OLD_PREFIX.search(prefix))

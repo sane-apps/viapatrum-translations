@@ -24,7 +24,7 @@ Shapes used by Julian and expected for new books. Fields may be added; do not re
 ```
 
 - `english`: non-empty strings; no `TODO` / `YYYY` / raw `[n12]`.
-- `added_allusions[].certainty`: `clear` | `possible`. Clear references belong inline beside the clause; possible allusions stay explicitly uncertain in translator notes. Never emit repeated “Scripture connection” captions.
+- `added_allusions[].certainty`: `clear` | `possible`. Clear references belong inline beside the clause; possible allusions stay explicitly uncertain in translator notes as plain-text words, never as clickable Bible links. Mark an allusion `clear` only when the fixed source text quotes or echoes the verse; a thematic resemblance on its own is not an allusion. There is no `none` value: if there is no quotation, echo, or plausible connection, delete the entry instead (a translator note may record why it was considered and rejected). A leftover `none` entry would be rendered as a link by builders, which is exactly the padding this rule exists to prevent. Never emit repeated “Scripture connection” captions.
 - Builder skips an allusion caption when the same reference already appears inline (unless certainty is `possible`).
 
 ## Origen Jeremiah (homily sections)

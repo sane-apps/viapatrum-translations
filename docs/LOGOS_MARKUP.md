@@ -20,6 +20,9 @@ Rules used in production:
 - Ranges keep an en-dash or hyphen consistently in the target after normalization to `-`.
 - **Inline first.** Clear Bible quotations and allusions belong in the reading paragraphs as `[[… >> Bible:…]]` (often a short parenthetical after the clause). Do **not** dump every `added_allusion` as a separate “Scripture connection:” caption under the section — Logos readers see a useless chunk at the bottom, and most English prose never had verse numbers to auto-link.
 - Short captions are allowed only for **possible / uncertain** allusions (e.g. lacuna guesses), labeled `Possible allusion:`.
+- A Bible link tells the reader that the author is quoting or echoing that passage. A verse the passage merely resembles in theme is not an allusion to that verse.
+- If the fixed source text (the Greek or Latin recorded in `translations/*_source.json` and `sources/manifest.json`) contains no quotation or echo of the verse, the most you may do is mention the resemblance in a translator note. You must never turn it into a `[[... >> Bible:...]]` link, not even inside a `Possible allusion:` caption. Writing `certainty: possible` and admitting there is no textual basis does not make it acceptable; that combination is padding.
+- Caption lines are always plain text and do not count toward the requirement that a book contain at least one Bible link. When a passage genuinely cites no Scripture, the book honestly has zero Bible links: the website tip may still ship, but the Logos book build stays on hold. That is the tip exemption.
 
 Auto-tagging (“Tag References as Hyperlinks” in Advanced) is optional; this pipeline emits explicit tags so receipts are auditable.
 

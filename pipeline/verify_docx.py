@@ -47,7 +47,12 @@ def verify_docx(path: Path) -> list[str]:
 
     # Word stores >> as &gt;&gt; inside document.xml
     if not re.search(r"&gt;&gt;\s*Bible:|>>\s*Bible:", xml):
-        errors.append("no Bible datatype links found ([[… >> Bible:…]])")
+        errors.append(
+            "no Bible datatype links found ([[… >> Bible:…]]). If the passage "
+            "genuinely cites no Scripture, that is the honest result: leave the "
+            "Logos book build on hold (this is the tip exemption). Do not invent "
+            "possible or thematic links just to satisfy this check"
+        )
     if "[[@Headword:" not in xml and "Headword:" not in xml:
         errors.append("no Headword milestones found")
 
@@ -58,6 +63,16 @@ def verify_docx(path: Path) -> list[str]:
         errors.append(
             f"{len(dump_hits)} 'Scripture connection:' captions (max {_SCRIPTURE_DUMP_MAX}) — "
             "put clear allusions inline in the English; captions only for possible/uncertain links."
+        )
+
+    padded = re.findall(r"Possible allusion:[^[]*\[\[[^]]*>>\s*Bible:", plain, re.I)
+    if padded:
+        errors.append(
+            f"{len(padded)} 'Possible allusion' caption(s) written as clickable "
+            "Bible links. Possible allusions must stay plain text because the "
+            "author does not actually cite the passage; a truthful label does "
+            "not turn padding into a real link. Render these captions as plain "
+            "text instead"
         )
 
     if "logosres:" in plain.lower():
