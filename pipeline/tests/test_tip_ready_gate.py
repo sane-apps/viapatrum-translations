@@ -126,6 +126,38 @@ class TipReadyGateTest(unittest.TestCase):
                 any("operational" in e or "temporary" in e.lower() or "English/operational" in e for e in errors)
             )
 
+    def test_julian_shaped_source_rows_pass(self) -> None:
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            eng = Path(tmp) / "en.json"
+            src = Path(tmp) / "src.json"
+            eng.write_text(
+                json.dumps(
+                    [
+                        {
+                            "section": "50",
+                            "english": ["The judge will stir all things."],
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            src.write_text(
+                json.dumps(
+                    [
+                        {
+                            "book": 1,
+                            "section": 50,
+                            "julian": ["examinator cunctorum in ultimo die."],
+                            "augustine": ["Respondit Augustinus ita."],
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            self.assertEqual(check_translation_files(eng, src), [])
+
     def test_placeholder_regex_matches_catalogue_smells(self) -> None:
         self.assertTrue(PLACEHOLDER.search("Lemma-led open — X"))
         self.assertTrue(PLACEHOLDER.search("Rem mid: Unit 2"))

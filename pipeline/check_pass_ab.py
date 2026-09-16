@@ -139,6 +139,12 @@ def check_source_rows(rows: list) -> list[str]:
             body = row.get("latin") if row.get("latin") not in (None, [], "") else None
         if body is None:
             body = row.get("source_text")
+        if body is None:
+            # Julian-style rows carry the author's Latin under "julian"
+            # (Augustine's replies ride along under "augustine" and are not
+            # the translation source). Without this fallback every Julian
+            # row fails as empty text.
+            body = row.get("julian")
         for err in content_errors(body, "source", source=True):
             errors.append(f"section {sec}: {err}")
     return errors
