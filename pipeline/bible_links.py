@@ -97,6 +97,16 @@ def _expand_comma_verses(book: str, loc: str) -> list[str]:
     return out or [loc]
 
 
+
+def _existing_markup_spans(text: str) -> list[tuple[int, int]]:
+    """Byte spans already inside [[...]] so we do not re-link Bible targets."""
+    return [(m.start(), m.end()) for m in re.finditer(r"\[\[.*?\]\]", text, flags=re.DOTALL)]
+
+
+def _span_inside(spans: list[tuple[int, int]], start: int, end: int) -> bool:
+    return any(start >= a and end <= b for a, b in spans)
+
+
 class BibleLinker:
     """Stateful linker that accumulates receipts and scripture-index entries."""
 
@@ -165,7 +175,12 @@ class BibleLinker:
                 return f"[[{m.group()} >> Bible:{target}]]"
             return self._link_markup(m.group(), book, loc, key=key, label=label, note=note)
 
-        replacements = [(m.start(), m.end(), replace(m)) for m in REF.finditer(text)]
+        _spans = _existing_markup_spans(text)
+        replacements = [
+            (m.start(), m.end(), replace(m))
+            for m in REF.finditer(text)
+            if not _span_inside(_spans, m.start(), m.end())
+        ]
         old_pattern = re.compile(
             r"(LXX(?:/Vulgate)?|Vulgate)\s+(" + POINT + r"(?:\s*[,;]\s*" + CONT + r")*)"
         )

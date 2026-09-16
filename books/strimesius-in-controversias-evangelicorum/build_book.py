@@ -242,7 +242,16 @@ def main() -> None:
             doc.add_paragraph(linked)
             n_paras += 1
 
-        notes = [n.strip() for n in (entry.get("translator_notes") or []) if (n or "").strip()]
+        notes_raw = entry.get("translator_notes") or []
+        notes = []
+        for n in notes_raw:
+            if isinstance(n, dict):
+                t = n.get("text") or n.get("note") or ""
+            else:
+                t = str(n)
+            t = t.strip()
+            if t:
+                notes.append(t)
         if notes and n_paras:
             marks = []
             for note in notes:
@@ -279,7 +288,7 @@ def main() -> None:
         add_heading_with_headword(doc, bookmarks, "Translator notes", 1, "translation_notes")
         doc.add_paragraph(
             "Numbered marks in the chapters open these notes. They flag lacunae, "
-            "wording choices, and rough passages — not Baron's text."
+            "wording choices, and rough passages — not Strimesius's text."
         )
         for rec in tn_records:
             hw = rec["headword"]
@@ -291,7 +300,7 @@ def main() -> None:
     doc.save(OUT_DOCX)
 
     receipt = {
-        "title": "Robert Baron: Philosophia theologiae ancillans (New English tip)",
+        "title": "Samuel Strimesius: A Candid Inquiry into the Controversies among Evangelicals (New English tip)",
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),
