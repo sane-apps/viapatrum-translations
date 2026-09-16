@@ -33,7 +33,7 @@ Tip-shipped on fathers.saneapps.com; awaiting Logos compile (cover art, descript
 | `origen-numbers-homilies` | Origen: Homilies on Numbers (I–II, IV–XXVIII; III lacuna) | `books/origen-numbers-homilies/origen-numbers-homilies.docx` | N/A (Logos; per-homily site tips exist) | 2026-09-15 | pending (Air) — nest-fix promote |
 | `julian-of-eclanum` | Julian of Eclanum: Surviving Arguments Preserved by Augustine (rebuild) | `books/julian-of-eclanum/Julian of Eclanum English.docx` | N/A (private study; no public ship) | 2026-09-15 | pending (Air) — promote after Ad Florum 2§69 cite fix |
 
-| `cyril-alexandria-recta-fide-court` | Cyril of Alexandria: On the True Faith to the Imperial Women | `books/cyril-alexandria-recta-fide-court/cyril-alexandria-recta-fide-court English.docx` | N/A | 2026-09-15 | **REJECT** — TN ops leaks (Pass A/claim paths); not Logos-ready |
+| `cyril-alexandria-recta-fide-court` | Cyril of Alexandria: On the True Faith to the Imperial Women | `books/cyril-alexandria-recta-fide-court/cyril-alexandria-recta-fide-court English.docx` | N/A (private study; no site ship this turn) | 2026-09-15 | pending (Air) — TN ops cleaned; verify_docx+PBB OK; promote-gate clear |
 
 | `baron-philosophia-theologiae-ancillans` | Robert Baron: Philosophy the Handmaid of Theology (Art. I–II tip) | `books/baron-philosophia-theologiae-ancillans/baron-philosophia-theologiae-ancillans.docx` | https://fathers.saneapps.com/works/baron-philosophia-theologiae-ancillans/ | 2026-09-15 | **hold Logos** (0 Bible after padding removal; verify_docx fails); site tip LIVE |
 

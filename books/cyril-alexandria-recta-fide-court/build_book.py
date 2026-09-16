@@ -39,7 +39,7 @@ FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Greek (Pusey 1877, PG 76). No modern copyrighted translation has been copied. King FC 129 covers ad Theodosium only and was used as a style check only.",
     "Scope: two court treatises — De recta fide ad dominas (CPG 5219, §§1–100) and De recta fide ad augustas (CPG 5220, §§1–48). The treatise ad Theodosium (CPG 5218) is excluded as it has a modern English in King FC 129.",
     "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-    "Pass A ≠ Pass B. First English of these treatises. True OET.",
+    "First English of these two court treatises from the locked Pusey 1877 Greek.",
 ]
 
 # Logos-visible superscripts for TN headword links (not Word footnotes).
