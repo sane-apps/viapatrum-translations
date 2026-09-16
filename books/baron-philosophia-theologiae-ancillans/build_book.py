@@ -8,6 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+from pipeline.book_meta import load_book_meta
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
 from pipeline.docx_helpers import (
     BookmarkStore,
@@ -17,6 +18,8 @@ from pipeline.docx_helpers import (
 )
 
 BOOK_DIR = Path(__file__).resolve().parent
+
+BOOK_META = load_book_meta(BOOK_DIR)  # title/author live in book.yml
 OUT_DOCX = BOOK_DIR / "baron-philosophia-theologiae-ancillans.docx"
 RECEIPT = BOOK_DIR / "build_receipt.json"
 
@@ -185,13 +188,13 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
 
 def main() -> None:
     doc = setup_document(
-        title="Louis Le Blanc: Theological Theses (New English)",
-        author="Louis Le Blanc de Beaulieu",
+        title=f"{BOOK_META['title']} (New English)",
+        author=BOOK_META["author"],
         subject="New English rendering for private Logos study",
-        keywords="Le Blanc, Theses theologicae, Sedan, Reformed, De Theologia",
+        keywords=f"{BOOK_META['author']}, {BOOK_META['title']}",
     )
     linker = BibleLinker()
-    doc.add_paragraph("Louis Le Blanc de Beaulieu: Theological Theses", style="Title")
+    doc.add_paragraph(f"{BOOK_META['author']}: {BOOK_META['title']}", style="Title")
     doc.add_paragraph("A new English rendering for private study", style="Subtitle")
     for para in FRONT_MATTER:
         doc.add_paragraph(linker.bible_text(para, key="front", label="Front matter"))

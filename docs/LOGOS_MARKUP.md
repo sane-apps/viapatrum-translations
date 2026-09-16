@@ -60,6 +60,28 @@ Later:     Heading 3  TN 4
 - First Heading 1 can become the document title in some Liberonix-era docs; Julian uses Title/Subtitle styles for the cover and Heading 1 for major parts.
 - Internal Word bookmarks + hyperlinks support TOC jumps and Scripture-index back-links inside the DOCX; Logos Headwords handle resource lookup after compile.
 
+## Covers, descriptions, and document identity (all mandatory per book)
+
+A book is not done until it has all three: cover art, a description, and
+correct document identity. Missing any one of them holds the Logos upload.
+
+- Covers follow one series design: same layout, typography, and palette on
+  every book. Each cover shows the author name, the English title, and the
+  original-language subtitle. Keep a high-resolution master at
+  `books/<slug>/assets/cover.*`; export whatever size Logos asks for at
+  compile time.
+- Descriptions follow `docs/LOGOS_DESCRIPTION_TEMPLATE.md`: plain sentences
+  saying what the work is, its scope, the locked source it was rendered
+  from, and that the English is new. No hype, no jargon, no claims the
+  review does not support.
+- Document identity (DOCX properties, title page, receipt title) comes from
+  `book.yml` through `pipeline.book_meta`. Never hardcode another book's
+  strings into a builder; five books once shipped titled as another
+  author's work, which is why this rule exists.
+- The Air compile checklist in the template verifies all three before
+  upload: DOCX properties match `book.yml`, description pasted, series
+  cover attached.
+
 ## External links
 
 Ordinary Word hyperlinks are fine for “Source witness” URLs to retained Latin pages. Prefer stable archive URLs when possible.
