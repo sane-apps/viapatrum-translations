@@ -30,7 +30,7 @@ WORKS = [
 ]
 
 FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Greek (Migne PG 68). No modern copyrighted translation has been copied. A modern version may have been consulted only as a sense or style check.",
+    "New English rendering for private study, prepared with AI assistance from the Greek text (Migne PG 68). No modern copyrighted translation has been copied. A modern version may have been consulted only as a sense or style check.",
     "Scope: Book 1 only of Cyril of Alexandria’s On Adoration and Worship in Spirit and Truth (CPG 5200). Books 2–17 are not in this volume. This is not Cyril of Jerusalem.",
     "Cyril wrote in the early fifth century (patriarch 412–444). This is a post-Nicene work.",
     "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",

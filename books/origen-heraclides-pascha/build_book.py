@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses, link_heading_verses
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -36,7 +36,7 @@ WORKS = [
 ]
 
 FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Greek. No modern copyrighted translation has been copied. A modern version may have been consulted only as a sense or style check.",
+    "New English rendering for private study, prepared with AI assistance from the Greek text. No modern copyrighted translation has been copied. A modern version may have been consulted only as a sense or style check.",
     "Scope: Dialogue with Heraclides and On Pascha — Toura-papyrus recoveries that lack a public-domain English version. Prayer and Martyrdom are in a separate book. Contra Celsum and De Principiis are out of scope here.",
     "Bible quotations and clear allusions are linked inline in the reading text. Possible or lacuna-tied connections stay as short captions. Translator notes use numbered Headword marks (hover/click opens the matching note) — Logos Personal Books do not compile Word footnotes.",
     "Damaged papyrus is marked [lacuna]. Editorial fillings are not treated as Origen’s text.",
@@ -254,7 +254,14 @@ def main() -> None:
             section = entry["section"]
             label = section_label(work_title, section, entry.get("title"))
             key = f"{key_prefix}-{section}"
-            add_heading_with_headword(doc, bookmarks, label, 2, key)
+            add_heading_with_headword(
+                doc,
+                bookmarks,
+                link_heading_verses(label, linker, key=key, label=label),
+                2,
+                key,
+                headword_source=label,
+            )
 
             enriched, possible = inject_refs_into_paragraphs(
                 list(entry.get("english") or []),

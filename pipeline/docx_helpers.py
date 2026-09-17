@@ -110,11 +110,26 @@ def logos_safe_headword(text: str) -> str:
     return hw
 
 
-def add_heading_with_headword(doc: Document, bookmarks: BookmarkStore, text: str, level: int, key: str):
-    """Clean heading text + separate Headword paragraph (Logos ArticleCache-safe)."""
+def add_heading_with_headword(
+    doc: Document,
+    bookmarks: BookmarkStore,
+    text: str,
+    level: int,
+    key: str,
+    *,
+    headword_source: str | None = None,
+):
+    """Clean heading text + separate Headword paragraph (Logos ArticleCache-safe).
+
+    ``text`` is the displayed heading — plain dot-form verse refs only, never
+    ``[[… >> Bible:…]]`` (headings with Bible links warn at compile; see
+    ``pipeline.bible_links.link_heading_verses``). The Headword milestone is
+    built from ``headword_source`` (default: ``text``) so display text never
+    leaks into ArticleCache titles.
+    """
     p = doc.add_heading(text, level)
     bookmarks.add(p, key)
-    doc.add_paragraph(f"[[@Headword:{logos_safe_headword(text)}]]")
+    doc.add_paragraph(f"[[@Headword:{logos_safe_headword(headword_source or text)}]]")
     return p
 
 

@@ -217,6 +217,27 @@ class BibleLinker:
         return text
 
 
+def link_heading_verses(text: str, linker: "BibleLinker", key=None, label=None) -> str:
+    """Strip Bible link markup out of headings; raw dot-form stays.
+
+    PROVEN 2026-09-17 (PBB Logs): an attached ``[[D >> Bible:T]]`` link inside
+    a Heading paragraph compiles to a Bible milestone with no attached
+    content (``: =d~bible.24.1.1 is specified, but it is not attached to
+    anything``) — one warning per linked heading (Jeremiah 27, Heraclides 8).
+    Raw dot-form refs (``Jeremiah 1.1``) in headings do NOT warn: the
+    pre-markup builds were clean on headings. So headings keep plain
+    dot-form display text and the verse milestone lives in the body
+    paragraph links instead. ``linker``/``key``/``label`` are kept so existing
+    call sites do not change.
+    """
+    pat = re.compile(r"\[\[(?P<display>[^\]]+?)\s*>>\s*Bible:[^\]]+?\]\]")
+
+    def fix(m: re.Match) -> str:
+        return m["display"]
+
+    return pat.sub(fix, text)
+
+
 def index_book_heading(ref: str) -> str:
     """Book name for scripture-index headings.
 
