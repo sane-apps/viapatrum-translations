@@ -7,7 +7,9 @@ import unittest
 from pipeline.check_pass_ab import check_file, check_record, main as pass_main
 from pipeline.verify_translation_qa import (
     SEMANTIC_CHECKS, check_excerpts, check_justifications, digest, file_digest,
-    make_audit_packet, validate_audit_receipt, validate_semantic_review, reviewed_section_errors,
+    indexed, load_rows, make_audit_packet, reference_overlap_errors,
+    validate_audit_receipt, validate_semantic_review, reviewed_section_errors,
+    main as qa_main,
 )
 
 
@@ -252,6 +254,83 @@ class TranslationQATests(unittest.TestCase):
         with self.assertRaises(ValueError):
             make_audit_packet(codex_en, codex_src, raw_sources=[self.raw],
                               identity=self.identity, selected_sections=["1"])
+
+    def test_reference_only_verbatim_copy_fails(self):
+        # Photius 2026-09-18: 8 English rows shipped as near-verbatim Freese
+        # with cosmetic deltas (added "I", dropped diacritics). That pattern
+        # must fail the originality gate.
+        ref = self.root / "witness.txt"
+        ref.write_text("Read the History of Nonnosus, in which Caïsus chief of the "
+                       "Saracens received Abrames the second time, and the whole "
+                       "assembly kept complete peace for two full months together.")
+        self.write(self.english, [
+            {"section": "1", "english": [
+                "I read the History of Nonnosus, in which Caisus chief of the "
+                "Saracens received Abrames the second time, and the whole "
+                "assembly kept complete peace for two full months together."]}])
+        errors = reference_overlap_errors(indexed(load_rows(self.english), "English"), [ref])
+        self.assertEqual(len(errors), 1)
+        self.assertIn("verbatim run", errors[0])
+
+    def test_reference_only_paraphrase_and_short_phrase_pass(self):
+        ref = self.root / "witness.txt"
+        ref.write_text("Read the History of Nonnosus, in which Caïsus chief of the "
+                       "Saracens received Abrames the second time, and the whole "
+                       "assembly kept complete peace for two full months together.")
+        self.write(self.english, [
+            {"section": "1", "english": [
+                "Nonnosus recounts a Saracen gathering under Caisus where Abrames "
+                "arrived twice as envoy and every tribe observed two months of "
+                "unbroken truce."]},
+            {"section": "2", "english": ["I read the History of ships and tides."]}])
+        errors = reference_overlap_errors(indexed(load_rows(self.english), "English"), [ref])
+        self.assertEqual(errors, [])
+
+    def test_reference_only_short_section_copy_fails(self):
+        # Cod. 15 pattern: 44-word section, 21-word verbatim run. Absolute
+        # run length catches it; proportional rules alone would miss it.
+        ref = self.root / "witness.txt"
+        ref.write_text("Read the Acts of the first council in three volumes for "
+                       "the record of Gelasius and the bishops gathered there.")
+        self.write(self.english, [
+            {"section": "15", "english": [
+                "I read the Acts of the first council in three volumes for "
+                "the record of Gelasius and the bishops gathered there in "
+                "holy session assembled from every province far and wide."]}])
+        errors = reference_overlap_errors(indexed(load_rows(self.english), "English"), [ref])
+        self.assertEqual(len(errors), 1)
+        self.assertIn("verbatim run", errors[0])
+
+    def test_reference_only_shared_opener_passes(self):
+        # Cod. 13 pattern: one shared 17-word opening clause, otherwise an
+        # independent abridgement. Must not fail.
+        ref = self.root / "witness.txt"
+        ref.write_text("Read two books of the Refutation and Defence, and a second "
+                       "edition of the same, which differs widely in style and "
+                       "sentiment from the first in every passage.")
+        self.write(self.english, [
+            {"section": "13", "english": [
+                "I read two books of the Refutation and Defence, and a second "
+                "edition of the same, condensed here to a bare summary notice "
+                "for the catalogue without further detail."]}])
+        errors = reference_overlap_errors(indexed(load_rows(self.english), "English"), [ref])
+        self.assertEqual(errors, [])
+
+    def test_reference_only_cli_flag_fails_packet(self):
+        ref = self.root / "witness.txt"
+        words = ("alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu "
+                 "xi omicron pi rho sigma tau upsilon phi chi psi omega extra")
+        ref.write_text("Read the record wherein " + words + " end of witness.")
+        self.write(self.english, [{"section": str(i), "english": [
+            "I read the record wherein " + words + " end of section."]}
+            for i in range(1, 9)])
+        ident = self.root / "identity.json"
+        self.write(ident, self.identity)
+        code = qa_main(["--english", str(self.english), "--source", str(self.source),
+                        "--raw-source", str(self.raw), "--identity", str(ident),
+                        "--seed", "42", "--sample-size", "5",
+                        "--reference-only", str(ref)])
+        self.assertEqual(code, 1)
 
     def test_raw_witness_and_source_contamination_fail_closed(self):
         packet = make_audit_packet(self.english, self.source, identity=self.identity)

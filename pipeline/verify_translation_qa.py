@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import re
 import sys
+import unicodedata
 
 from pipeline.check_pass_ab import check_record, content_errors, join_b, normalized
 
@@ -350,6 +351,71 @@ def reviewed_section_errors(packet: dict, receipt: dict, section,
     return errors
 
 
+REFERENCE_NGRAM = 8
+# Calibrated 2026-09-18 on Photius/Freese: 10 copied rows run 21-206 words,
+# 7 independently rendered rows run 0-17 (top clean: one shared 17-word opener).
+REFERENCE_MAX_VERBATIM_RUN = 20  # words; independent translations never sustain this
+REFERENCE_MAX_COVERAGE = 0.50  # fraction of section 8-grams found in a reference
+
+
+def folded_words(text: str) -> list[str]:
+    """Lowercased alphanumeric words with diacritics folded (copy detection)."""
+    text = unicodedata.normalize("NFKD", text).casefold()
+    text = "".join(c for c in text if not unicodedata.combining(c))
+    return re.findall(r"[^\W_]+", text, re.UNICODE)
+
+
+def reference_ngrams(path: Path, n: int = REFERENCE_NGRAM) -> set[tuple[str, ...]]:
+    words = folded_words(path.read_text(encoding="utf-8"))
+    return {tuple(words[i:i + n]) for i in range(len(words) - n + 1)}
+
+
+def verbatim_run_stats(words: list[str], ref: set[tuple[str, ...]],
+                       n: int = REFERENCE_NGRAM) -> tuple[int, float]:
+    """Longest verbatim word-run and 8-gram coverage of words against ref."""
+    if len(words) < n or not ref:
+        return 0, 0.0
+    hits = [tuple(words[i:i + n]) in ref for i in range(len(words) - n + 1)]
+    best = run = 0
+    for hit in hits:
+        run = run + 1 if hit else 0
+        best = max(best, run)
+    longest_words = best + n - 1 if best else 0
+    return longest_words, sum(hits) / len(hits)
+
+
+def reference_overlap_errors(english: dict[str, dict], reference_paths) -> list[str]:
+    """Fail English sections copied from reference-only witnesses (Freese rule).
+
+    A lock header marking a witness "reference only -- do not copy" is a
+    project rule, not a suggestion; near-verbatim English fails here instead
+    of reaching review. Short shared phrases pass; only sustained verbatim
+    runs or majority coverage fail.
+    """
+    errors = []
+    refs = []
+    for raw in reference_paths or []:
+        path = Path(raw)
+        try:
+            refs.append((str(path), reference_ngrams(path)))
+        except OSError as exc:
+            errors.append(f"unreadable reference {path}: {exc}")
+    for key, row in english.items():
+        body = join_b(row.get("english"))
+        if not body.strip():
+            continue
+        words = folded_words(body)
+        for name, ref in refs:
+            longest, coverage = verbatim_run_stats(words, ref)
+            if longest >= REFERENCE_MAX_VERBATIM_RUN:
+                errors.append(
+                    f"{key}: {longest}-word verbatim run from reference-only {name}")
+            elif coverage >= REFERENCE_MAX_COVERAGE:
+                errors.append(
+                    f"{key}: {coverage:.0%} 8-gram coverage of reference-only {name}")
+    return errors
+
+
 def anf_diverge_heuristic(ours: str, anf: str) -> str:
     """Legacy diagnostic only: no observed conflict is not semantic approval."""
     free = any(w in anf.lower() for w in ("free choice", "free will", "power of", "own power", "voluntarily"))
@@ -364,6 +430,8 @@ def main(argv=None) -> int:
     parser.add_argument("--english", type=Path)
     parser.add_argument("--source", type=Path)
     parser.add_argument("--raw-source", action="append", type=Path, default=[])
+    parser.add_argument("--reference-only", action="append", type=Path, default=[],
+                        help="Reference-only witness English must not copy (repeatable)")
     parser.add_argument("--expected-sections", type=Path, help="JSON array declaring edition scope")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--sample-size", type=int, default=5)
@@ -389,6 +457,9 @@ def main(argv=None) -> int:
                 args.packet_out.parent.mkdir(parents=True, exist_ok=True)
                 args.packet_out.write_text(json.dumps(packet, ensure_ascii=False, indent=2) + "\n")
             errors = list(packet["structural_errors"])
+            if args.reference_only:
+                english_rows = indexed(load_rows(args.english), "English")
+                errors += reference_overlap_errors(english_rows, args.reference_only)
             if args.receipt:
                 errors += validate_audit_receipt(packet, json.loads(args.receipt.read_text()))
             print(f"packet={packet['packet_id']} sampled={len(packet['sections'])} scope=selected_passages_only")
