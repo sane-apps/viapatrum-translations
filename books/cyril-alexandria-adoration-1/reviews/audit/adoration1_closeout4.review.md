@@ -2,7 +2,7 @@
 
 Book: `cyril-alexandria-adoration-1`
 Packet: `books/cyril-alexandria-adoration-1/reviews/audit/adoration1_closeout4.packet.json`
-Packet sha256: `80da3f6df4b9fd27bcb90cb2f8db814a49ec88a515547a03916a2f5c8f20295a`
+Packet sha256: `02dfe7c382060e6ffe52eb69a04838e01280793a59e58c2cd47642abc145a304` (corrected 14:35; note originally quoted a pre-final hash)
 Scope: 33 at-risk sections (4,5,6,8-27,29-35,37,39). Packet gaps 7, 28, 36
 read from book files only to close boundary crossings.
 
