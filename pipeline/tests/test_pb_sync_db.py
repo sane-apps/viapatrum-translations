@@ -1,5 +1,6 @@
 import importlib.util
 import os
+import sqlite3
 import tempfile
 import time
 
@@ -42,6 +43,55 @@ def test_resolve_pb_db_prefers_newest():
             else:
                 os.environ["HOME"] = prev
         assert old != new
+
+
+def _books_schema(cur):
+    cur.execute(
+        "CREATE TABLE Books (Id integer primary key autoincrement,"
+        "ResourceId text not null,SourceFilePaths text,Title text,"
+        "Authors text,Description text,Language text,Copyright text,"
+        "ResourceType text,CoverImage blob,LastCompiled text,"
+        "ModifiedDate text not null,SyncRevision integer,"
+        "SyncState int not null,IsDeleted bool not null)"
+    )
+
+
+def _sample_row(cover):
+    return {
+        "src": "/tmp/x.docx", "title": "T", "authors": "A",
+        "description": "D", "language": "en", "copyright": "C",
+        "resource_type": "text.monograph", "cover": cover,
+        "now": "2026-09-18T00:00:00-04:00",
+    }
+
+
+def test_insert_book_row_writes_cover():
+    pb_sync = _load_pb_sync()
+    con = sqlite3.connect(":memory:")
+    cur = con.cursor()
+    _books_schema(cur)
+    pb_sync.insert_book_row(cur, "PBB:cover", _sample_row(b"JPEGDATA"))
+    got = cur.execute(
+        "SELECT Title,length(CoverImage),ResourceType FROM Books"
+    ).fetchone()
+    assert got == ("T", 8, "text.monograph")
+    con.close()
+
+
+def test_update_book_row_writes_cover():
+    pb_sync = _load_pb_sync()
+    con = sqlite3.connect(":memory:")
+    cur = con.cursor()
+    _books_schema(cur)
+    pb_sync.insert_book_row(cur, "PBB:cover", _sample_row(None))
+    bid = cur.lastrowid
+    pb_sync.update_book_row(cur, bid, _sample_row(b"NEWDATA!"))
+    got = cur.execute(
+        "SELECT Title,length(CoverImage),ResourceType FROM Books WHERE Id=?",
+        (bid,),
+    ).fetchone()
+    assert got == ("T", 8, "text.monograph")
+    con.close()
 
 
 def test_resolve_pb_db_missing_exits():

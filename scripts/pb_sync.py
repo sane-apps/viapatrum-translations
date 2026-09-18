@@ -145,6 +145,31 @@ def backfill_yml(path, resource_id, book_id):
         f.write(text)
 
 
+def insert_book_row(cur, new_rid, row):
+    """INSERT a new Books row, including the cover blob (regression:
+    2026-09-18 the INSERT omitted CoverImage, failing verify for new rows)."""
+    cur.execute(
+        "INSERT INTO Books (ResourceId,SourceFilePaths,Title,Authors,"
+        "Description,Language,Copyright,ResourceType,CoverImage,"
+        "LastCompiled,ModifiedDate,SyncRevision,SyncState,IsDeleted)"
+        " VALUES (?,?,?,?,?,?,?,?,?,NULL,?,NULL,0,0)",
+        (new_rid, row["src"], row["title"], row["authors"],
+         row["description"], row["language"], row["copyright"],
+         row["resource_type"], row["cover"], row["now"]),
+    )
+
+
+def update_book_row(cur, bid, row):
+    cur.execute(
+        "UPDATE Books SET SourceFilePaths=?,Title=?,Authors=?,"
+        "Description=?,Language=?,Copyright=?,ResourceType=?,"
+        "CoverImage=?,ModifiedDate=? WHERE Id=?",
+        (row["src"], row["title"], row["authors"],
+         row["description"], row["language"], row["copyright"],
+         row["resource_type"], row["cover"], row["now"], bid),
+    )
+
+
 def book_row(slug, yml, yml_path):
     docx_name = yml.get("docx") or ""
     docx_path = os.path.join(REPO, "books", slug, docx_name)
@@ -250,27 +275,12 @@ def main():
         row, bid, yml_path, yml, backfill_rid = item
         if bid is None:
             new_rid = "PBB:" + uuid.uuid4().hex
-            cur.execute(
-                "INSERT INTO Books (ResourceId,SourceFilePaths,Title,Authors,"
-                "Description,Language,Copyright,ResourceType,LastCompiled,"
-                "ModifiedDate,SyncRevision,SyncState,IsDeleted)"
-                " VALUES (?,?,?,?,?,?,?,?,NULL,?,NULL,0,0)",
-                (new_rid, row["src"], row["title"], row["authors"],
-                 row["description"], row["language"], row["copyright"],
-                 row["resource_type"], row["now"]),
-            )
+            insert_book_row(cur, new_rid, row)
             bid = cur.lastrowid
             backfill_yml(yml_path, new_rid, bid)
             print(f"{slug}: INSERTED Id={bid} {new_rid} (book.yml backfilled)")
         else:
-            cur.execute(
-                "UPDATE Books SET SourceFilePaths=?,Title=?,Authors=?,"
-                "Description=?,Language=?,Copyright=?,ResourceType=?,"
-                "CoverImage=?,ModifiedDate=? WHERE Id=?",
-                (row["src"], row["title"], row["authors"],
-                 row["description"], row["language"], row["copyright"],
-                 row["resource_type"], row["cover"], row["now"], bid),
-            )
+            update_book_row(cur, bid, row)
             if backfill_rid or not yml.get("resource_id"):
                 rid = cur.execute(
                     "SELECT ResourceId FROM Books WHERE Id=?", (bid,)
