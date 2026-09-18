@@ -31,20 +31,28 @@ def file_digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+ROW_ID_KEYS = ("id", "fragment_id", "section", "location", "codex")
+
+
 def load_rows(path: Path) -> list[dict]:
     data = json.loads(path.read_text(encoding="utf-8"))
     if isinstance(data, dict):
-        data = data.get("sections", data.get("excerpts"))
+        if "sections" in data or "excerpts" in data:
+            data = data.get("sections", data.get("excerpts"))
+        elif any(data.get(key) is not None for key in ROW_ID_KEYS):
+            data = [data]  # Single-row file (e.g. one Photius codex per file).
+        else:
+            data = None
     if not isinstance(data, list) or not data or any(not isinstance(x, dict) for x in data):
         raise ValueError(f"{path}: expected a nonempty list of records")
     return data
 
 
 def row_id(row: dict) -> str:
-    for key in ("id", "fragment_id", "section", "location"):
+    for key in ROW_ID_KEYS:
         if row.get(key) is not None:
             return str(row[key])
-    raise ValueError("record has no id, fragment_id, section or location")
+    raise ValueError("record has no id, fragment_id, section, location or codex")
 
 
 def source_paragraphs(row: dict) -> list[str]:

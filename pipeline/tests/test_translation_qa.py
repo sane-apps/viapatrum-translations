@@ -234,6 +234,25 @@ class TranslationQATests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.packet()
 
+    def test_codex_rows_and_single_row_source_file(self):
+        codex_en = self.root / "codex_1_english.json"
+        codex_src = self.root / "codex_1_source.json"
+        self.write(codex_en, [{"codex": 1, "english": ["I read the discourse of Theodore."]}])
+        self.write(codex_src, {"codex": 1, "greek": "Ἀνέγνων τὸν τοῦ Θεοδώρου λόγον."})
+        packet = make_audit_packet(codex_en, codex_src, raw_sources=[self.raw],
+                                   identity=self.identity, selected_sections=["1"])
+        self.assertEqual([s["section"] for s in packet["sections"]], ["1"])
+        self.assertEqual(packet["sections"][0]["source_text"],
+                         ["Ἀνέγνων τὸν τοῦ Θεοδώρου λόγον."])
+        self.assertEqual(validate_audit_receipt(packet, self.receipt(packet)), [])
+        self.write(codex_src, {"codex": 1, "greek": "Different Greek."})
+        self.assertTrue(validate_audit_receipt(packet, self.receipt(packet)))
+        # A dict with no id-like key is still malformed, not a single row.
+        self.write(codex_src, {"greek": "No codex key."})
+        with self.assertRaises(ValueError):
+            make_audit_packet(codex_en, codex_src, raw_sources=[self.raw],
+                              identity=self.identity, selected_sections=["1"])
+
     def test_raw_witness_and_source_contamination_fail_closed(self):
         packet = make_audit_packet(self.english, self.source, identity=self.identity)
         self.assertTrue(packet["structural_errors"])
