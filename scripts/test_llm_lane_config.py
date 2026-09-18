@@ -22,19 +22,19 @@ class GeminiLaneConfigTests(unittest.TestCase):
         for k in ("FATHERS_GEMINI_PREP", "FATHERS_ENABLE_GEMINI"):
             os.environ.pop(k, None)
 
-    def test_load_has_gemini_lane_disabled(self) -> None:
+    def test_load_has_gemini_lane_enabled_prep_qa_only(self) -> None:
         cfg = self.mod.load_lane_config()
         self.assertIn("cf", cfg["lanes"])
         self.assertIn("nv", cfg["lanes"])
         gem = cfg["lanes"]["gemini"]
-        self.assertFalse(gem.get("enabled"))
+        self.assertTrue(gem.get("enabled"))
         self.assertFalse(gem.get("auto_promote"))
         self.assertEqual(gem.get("role"), "prep_qa_only")
         self.assertIn("gemini-3.5-flash-lite", gem.get("prep") or [])
 
     def test_gemini_enabled_force_and_env(self) -> None:
         cfg = self.mod.load_lane_config()
-        self.assertFalse(self.mod.gemini_enabled(cfg))
+        self.assertTrue(self.mod.gemini_enabled(cfg))
         self.assertTrue(self.mod.gemini_enabled(cfg, force=True))
         os.environ["FATHERS_GEMINI_PREP"] = "1"
         self.assertTrue(self.mod.gemini_enabled(cfg))

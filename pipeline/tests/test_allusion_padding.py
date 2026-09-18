@@ -73,6 +73,23 @@ class AllusionPaddingTest(unittest.TestCase):
             docx = make_docx(Path(tmp) / "good.docx", [HEADWORD, GENUINE_INLINE])
             self.assertEqual(verify_docx(docx), [])
 
+    def test_verify_caption_check_is_paragraph_scoped(self) -> None:
+        # A plain caption in one paragraph must not span forward into the next
+        # paragraph's legitimate inline cite (julian-of-eclanum false positive:
+        # 20 hits over whole-document text, zero clickable captions present).
+        plain_caption = (
+            "Possible allusion: Exodus 3:14 \u2014 Thematic affinity; "
+            "no explicit quotation in text"
+        )
+        with TemporaryDirectory() as tmp:
+            docx = make_docx(
+                Path(tmp) / "scoped.docx", [HEADWORD, plain_caption, GENUINE_INLINE]
+            )
+            errs = verify_docx(docx)
+            self.assertFalse(
+                [e for e in errs if "Possible allusion" in e], errs
+            )
+
     def test_verify_zero_links_still_fails(self) -> None:
         with TemporaryDirectory() as tmp:
             docx = make_docx(Path(tmp) / "bare.docx", [HEADWORD, "Plain metaphysics."])

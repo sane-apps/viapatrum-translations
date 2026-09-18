@@ -65,7 +65,16 @@ def verify_docx(path: Path) -> list[str]:
             "put clear allusions inline in the English; captions only for possible/uncertain links."
         )
 
-    padded = re.findall(r"Possible allusion:[^[]*\[\[[^]]*>>\s*Bible:", plain, re.I)
+    # Scope the caption check to a single <w:p> paragraph: matching over the
+    # whole document lets a plain caption span forward into the next record's
+    # legitimate inline cite (false positive; julian-of-eclanum 2026-09-16).
+    padded = []
+    for para in re.findall(r"<w:p[ >].*?</w:p>", xml, re.S):
+        text = re.sub(r"<[^>]+>", " ", para)
+        text = text.replace("&gt;", ">").replace("&lt;", "<").replace("&amp;", "&")
+        padded.extend(
+            re.findall(r"Possible allusion:[^[]*\[\[[^]]*>>\s*Bible:", text, re.I)
+        )
     if padded:
         errors.append(
             f"{len(padded)} 'Possible allusion' caption(s) written as clickable "

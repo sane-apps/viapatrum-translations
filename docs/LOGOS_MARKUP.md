@@ -93,7 +93,13 @@ Ordinary Word hyperlinks are fine for “Source witness” URLs to retained Lati
 2. Tools → Utilities → Personal Books (never Cmd+K on this install).
 3. Body file = latest DOCX.
 4. `python3 -m pipeline.verify_docx books/<slug>/*.docx` must be green (runs `check_pbb_guards` too).
+5. Metadata (Add field): Copyright "© 2026 SaneApps — new English; source text public domain"; Publisher "SaneApps"; Publication Date = build date. Series "Fathers of the Church — SaneApps English" for multi-volume sets.
 5. Cursor Write/Edit on `books/*/build_book.py` is blocked if it introduces `FootnoteStore` or `"Scripture connection"`.
 5. Build → Finished; re-read UI for errors/warnings.
 6. Open book → clean breadcrumb titles → Bible link click with Bible pane → re-read destination.
 7. Hover a TN mark → must open `TN n`, not the book blurb.
+
+## Standing notes
+
+- Resource type stays Monograph for Fathers translations (never Bible Commentary): automated Logos reports do not recognize Personal Books as commentaries either way, and Monograph keeps the type honest.
+- Word-footnote ban rests on the 2026-09-10 empirical result (hover falls back to blurb); re-test annually.

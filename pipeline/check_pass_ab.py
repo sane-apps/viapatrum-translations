@@ -104,8 +104,19 @@ def check_file(path: Path) -> list[str]:
         return [f"cannot read justification: {exc}"]
 
 
+def _row_key(row: dict) -> str:
+    sec = row.get("section")
+    if sec is None:
+        # Codex-keyed rows (Photius Bibliotheca) identify by codex, not section.
+        sec = row.get("codex")
+    return str(sec)
+
+
 def _load_rows(path: Path) -> list[dict]:
     data = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(data, dict):
+        # Codex-keyed books (Photius Bibliotheca) keep one source object per file.
+        return [data]
     if not isinstance(data, list):
         raise ValueError(f"{path}: expected a JSON list of section rows")
     return data
@@ -163,8 +174,8 @@ def check_translation_files(english_path: Path, source_path: Path) -> list[str]:
         return [f"source: {exc}"]
     errors.extend(check_english_rows(english_rows))
     errors.extend(check_source_rows(source_rows))
-    eng_secs = {str(r.get("section")) for r in english_rows if isinstance(r, dict)}
-    src_secs = {str(r.get("section")) for r in source_rows if isinstance(r, dict)}
+    eng_secs = {_row_key(r) for r in english_rows if isinstance(r, dict)}
+    src_secs = {_row_key(r) for r in source_rows if isinstance(r, dict)}
     if eng_secs != src_secs:
         errors.append(
             f"section set mismatch: english={sorted(eng_secs)} source={sorted(src_secs)}"

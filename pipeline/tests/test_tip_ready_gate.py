@@ -158,6 +158,51 @@ class TipReadyGateTest(unittest.TestCase):
             )
             self.assertEqual(check_translation_files(eng, src), [])
 
+    def test_photius_shaped_source_dict_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            eng = Path(tmp) / "en.json"
+            src = Path(tmp) / "src.json"
+            eng.write_text(
+                json.dumps(
+                    [
+                        {
+                            "codex": 8,
+                            "title": "Origen, De Principiis",
+                            "english": ["I read the four books On First Principles."],
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            src.write_text(
+                json.dumps(
+                    {
+                        "codex": 8,
+                        "title_greek": "\u1f08\u03bd\u03ad\u03b3\u03bd\u03c9\u03bd \u03c4\u1f70 \u03c4\u1f73\u03c3\u03c3\u03b1\u03c1\u03b1 \u03b2\u03b9\u03b2\u03bb\u03af\u03b1 \u1f68\u03c1\u03b9\u03b3\u1f73\u03bd\u03bf\u03c5\u03c2 \u03a0\u03b5\u03c1\u1f76",
+                        "greek": "\u1f08\u03bd\u03ad\u03b3\u03bd\u03c9\u03bd \u03c4\u1f70 \u03c4\u1f73\u03c3\u03c3\u03b1\u03c1\u03b1 \u03b2\u03b9\u03b2\u03bb\u03af\u03b1 \u1f68\u03c1\u03b9\u03b3\u1f73\u03bd\u03bf\u03c5\u03c2 \u03a0\u03b5\u03c1\u1f76 \u1f08\u03c1\u03c7\u1ff6\u03bd.",
+                        "bekker_page": "8",
+                        "notes": "test",
+                    }
+                ),
+                encoding="utf-8",
+            )
+            self.assertEqual(check_translation_files(eng, src), [])
+
+    def test_photius_codex_mismatch_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            eng = Path(tmp) / "en.json"
+            src = Path(tmp) / "src.json"
+            eng.write_text(
+                json.dumps([{"codex": 8, "english": ["I read the four books."]}]),
+                encoding="utf-8",
+            )
+            src.write_text(
+                json.dumps({"codex": 9, "greek": "test"}),
+                encoding="utf-8",
+            )
+            errors = check_translation_files(eng, src)
+            self.assertTrue(any("section set mismatch" in e for e in errors))
+
     def test_placeholder_regex_matches_catalogue_smells(self) -> None:
         self.assertTrue(PLACEHOLDER.search("Lemma-led open — X"))
         self.assertTrue(PLACEHOLDER.search("Rem mid: Unit 2"))

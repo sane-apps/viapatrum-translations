@@ -34,6 +34,11 @@ English was copied. Disclose if a PD English already exists.
 3. Body = latest DOCX (`python3 -m pipeline.verify_docx` green).
 4. Paste short description; attach the series cover (required); confirm
    DOCX title/author properties match `book.yml`.
+5. Metadata (Add field): Copyright "© 2026 SaneApps — new English; source
+   text public domain"; Publisher "SaneApps"; Publication Date = build date.
+   Series "Fathers of the Church — SaneApps English" for multi-volume sets
+   (Origen homilies, Gregory, Epiphanius, Cyril) so volumes group in Library.
+6. Record the accepted cover dimensions back into this template.
 5. Build → Finished; spot-check TOC, Bible click, TN hover.
 6. Record resource_id in book.yml; update docs/LOGOS_BACKLOG.md.
 ```
