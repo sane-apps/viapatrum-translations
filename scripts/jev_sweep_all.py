@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Full-corpus Jev certainty sweep. Every filed added_allusion gets an
 independent verdict; results append as JSONL. Advisory only: nothing is
-changed. Usage: python3 scripts/jev_sweep_all.py [--out PATH]
+changed. Usage: python3 scripts/jev_sweep_all.py [--out PATH] [--glob PATTERN]
+--glob filters book slugs by fnmatch (e.g. '[k-z]*' for a remainder sweep)
+so a resumed run cannot duplicate already-swept slugs.
 Needs TYPESAFE_API_KEY in the environment."""
 from __future__ import annotations
 
+import fnmatch
 import glob
 import json
 import sys
@@ -29,13 +32,23 @@ def window(text, needle, radius=1200, fallback=1500):
     return text[:fallback]
 
 
+def iter_english_files(root, pattern=None):
+    """Yield (path, slug) for each book English JSON, optionally fnmatch-filtered."""
+    for ef in sorted(glob.glob(str(Path(root) / "books/*/translations/*_english.json"))):
+        slug = ef.split("/books/")[1].split("/")[0]
+        if pattern and not fnmatch.fnmatch(slug, pattern):
+            continue
+        yield ef, slug
+
+
 def main(argv):
     out = Path(argv[argv.index("--out") + 1]) if "--out" in argv else (
         ROOT / "outputs" / f"jev-sweep-{datetime.now().strftime('%Y%m%d')}.jsonl"
     )
+    pattern = argv[argv.index("--glob") + 1] if "--glob" in argv else None
     total_in = total_out = checked = mismatches = errors = 0
     with open(out, "a", encoding="utf-8") as fh:
-        for ef in sorted(glob.glob(str(ROOT / "books/*/translations/*_english.json"))):
+        for ef, slug in iter_english_files(ROOT, pattern):
             try:
                 data = json.load(open(ef, encoding="utf-8"))
             except Exception:
@@ -49,7 +62,6 @@ def main(argv):
                 src_map = {str(s.get("section")): s for s in srows if isinstance(s, dict)}
             except Exception:
                 pass
-            slug = ef.split("/books/")[1].split("/")[0]
             for row in rows:
                 if not isinstance(row, dict):
                     continue
