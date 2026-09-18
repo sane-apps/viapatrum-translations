@@ -36,11 +36,24 @@ import urllib.parse
 import uuid
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PB_DB = os.path.expanduser(
-    "~/Library/Application Support/Logos4/Documents"
-    "/adcocvnb.nzw/PersonalBooks/PersonalBookManager.db"
-)
 BACKUP_DIR = os.path.join(REPO, "outputs", "pb-db-backups")
+
+
+def resolve_pb_db():
+    """Machine-portable PersonalBookManager.db (profile dir differs per Mac)."""
+    base = os.path.expanduser(
+        "~/Library/Application Support/Logos4/Documents"
+    )
+    cands = sorted(
+        glob.glob(
+            os.path.join(base, "*", "PersonalBooks", "PersonalBookManager.db")
+        ),
+        key=os.path.getmtime,
+        reverse=True,
+    )
+    if not cands:
+        fail(f"No PersonalBookManager.db under {base}")
+    return cands[0]
 
 LANG_MAP = {"English": "en"}
 FALLBACK_TYPES = {
@@ -180,7 +193,9 @@ def main():
     if args.apply and logos_running() and not args.force:
         fail("Logos is running. Quit it first (Cmd+Q), then re-run.")
 
-    con = sqlite3.connect(PB_DB, timeout=30)
+    db_path = resolve_pb_db()
+    print(f"db: {db_path}")
+    con = sqlite3.connect(db_path, timeout=30)
     cur = con.cursor()
     existing = {
         r[0]: r
@@ -223,10 +238,10 @@ def main():
     backup = os.path.join(BACKUP_DIR, f"PersonalBookManager-{stamp}.db")
     con.commit()
     con.close()
-    shutil.copy2(PB_DB, backup)
+    shutil.copy2(db_path, backup)
     print(f"backup: {backup}")
 
-    con = sqlite3.connect(PB_DB, timeout=30)
+    con = sqlite3.connect(db_path, timeout=30)
     cur = con.cursor()
     wrote = []  # (slug, Id, want_title, want_cover_len, want_type)
     for slug, action, item in plan:
