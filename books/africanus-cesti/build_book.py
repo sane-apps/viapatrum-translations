@@ -26,7 +26,7 @@ META_FILE = "cesti_u01_open_meta.json"
 
 FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Greek. No modern copyrighted translation has been copied.",
-    "Scope: tip of Julius Africanus, Cesti book 7 — table of contents, proem, On arming (complete), On the destruction of enemies, and Athletic contest. The rest of the surviving fragments are not in this volume.",
+    "Scope: tip of Julius Africanus, Cesti book 7 through military hunting (7.14). River and wall measure, theft of sound, staying awake, elephants, farming paradoxes, and the missile seal are not in this volume.",
     "Editorial note: Greek copy-text is PG 10 Cesti fragmenta (Khazarzar). No public-domain English of the Cesti body is known; ANF translates the letters only.",
     "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
 ]
