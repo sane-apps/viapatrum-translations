@@ -26,7 +26,7 @@ META_FILE = "cesti_u01_open_meta.json"
 
 FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Greek. No modern copyrighted translation has been copied.",
-    "Scope: tip of Julius Africanus, Cesti book 7 through the opening of the farming paradoxes (7.19 wine, vinegar, oil, garum). The rest of that chapter and the missile seal are not in this volume.",
+    "Scope: tip of Julius Africanus, Cesti book 7 through the missile seal and colophon (7.20). Appendix after the colophon and the pinax of book 2 are not in this volume.",
     "Editorial note: Greek copy-text is PG 10 Cesti fragmenta (Khazarzar). No public-domain English of the Cesti body is known; ANF translates the letters only.",
     "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
 ]
