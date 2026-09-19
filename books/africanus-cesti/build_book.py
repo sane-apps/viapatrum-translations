@@ -26,7 +26,7 @@ META_FILE = "cesti_u01_open_meta.json"
 
 FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Greek. No modern copyrighted translation has been copied.",
-    "Scope: tip of Julius Africanus, Cesti book 7 through the colophon, plus book 2.1–2.12. Book-2 pinax, the book-7 appendix, and book 3 onward are not in this volume.",
+    "Scope: tip of Julius Africanus, Cesti book 7 through the colophon, book 2.1–2.12, and book 3.1–3.3. Book-2 pinax, the book-7 appendix, and book 3.4 onward are not in this volume.",
     "Editorial note: Greek copy-text is PG 10 Cesti fragmenta (Khazarzar). No public-domain English of the Cesti body is known; ANF translates the letters only.",
     "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
 ]
