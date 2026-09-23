@@ -29,7 +29,7 @@ META_FILE = "ente_art1_2_meta.json"
 
 FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Latin. No modern copyrighted translation has been copied.",
-    "Scope: tip — Exercitatio Prima Art. I-III De Ente & Essentia (necessary being; being by essence; actus purus) from the 1658 Oxford Latin. Remainder of Philosophia theologiae ancillans remains.",
+    "Scope: densify toward FULL Exercitatio Prima — Art. I-VII De Ente & Essentia (necessary being; being by essence; actus purus; modes of existing; Ens/essence/existence; created suppositum vs singular nature) from the 1658 Oxford Latin. Art. VIII+ of the first exercise, and the remainder of Philosophia theologiae ancillans (213 pp), remain.",
     "Editorial note: Latin copy-text is Baron, Philosophia theologiae ancillans (Oxford: T. Robinson & R. Davis, 1658; Editi priori correctior), IA bim_early-english-books-1641-1700_philosophia-theologi-an_baron-robert_1658. Wing B887. Public domain. First edition St Andrews 1621.",
     "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
 ]

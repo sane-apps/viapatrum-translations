@@ -4,6 +4,8 @@
 
 Modern literary English (CSB/ESV narrative level) that remains **accurate** to the Father’s sense and **recognizably his voice**.
 
+**Balance (permanent):** Pass A carries fidelity (every clause, lemmas, no silent drops). Pass B carries beauty (sentences a reader can say aloud, disputant voice for scholastic Latin). Neither lane may swallow the other — a near-copy gloss is not prose, and polished English that adds or drops a claim is not a translation.
+
 ## Chronology (book order)
 
 Inside each topic, authors are grouped earliest → latest using `authors.json` (`dates_display` + `sort_year`). Anonymous works use floruit of the text. Dates are approximate scholarly consensus (`c.` / `fl.` / `d.`), not exact civil records. Excerpts under one author stay together, sorted by work period then locus.
@@ -17,9 +19,11 @@ Inside each topic, authors are grouped earliest → latest using `authors.json` 
 
 ## Two lanes (never one pass)
 
-1. Sense / fidelity draft  
-2. Literary polish  
-3. Re-diff vs sense — polish loses if meaning moved  
+1. Sense / fidelity draft: every clause, in normal English, not Latin notes and not hyphenated interlinear.
+2. Literary polish: sentences a reader can say aloud. Latin or Greek word order is not the literary pass.
+3. Re-diff vs sense. Polish loses if a claim was added or dropped. A gloss copied into the reading text, with the commas changed, loses too.
+
+Scholastic Latin (Davenant, Placeus, Le Blanc, Strimesius, and the like) keeps a clear disputant voice: technical terms in ordinary sentences, not King James and not a blog.
 
 ## Voice cards
 
