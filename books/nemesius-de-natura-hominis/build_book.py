@@ -1,4 +1,4 @@
-"""Build Nemesius De natura hominis Logos Personal Book DOCX."""
+"""Build Nemesius On the Nature of Man Logos Personal Book DOCX."""
 from __future__ import annotations
 
 import json
@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -25,11 +26,8 @@ ENGLISH_FILE = "nature_hominis_english.json"
 SOURCE_FILE = "nature_hominis_source.json"
 META_FILE = "nature_hominis_meta.json"
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Greek. No modern copyrighted translation has been copied.",
-    "Scope: Nemesius of Emesa, De natura hominis (On Human Nature). Source edition to be declared in meta.json.",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
 _STOP = {
@@ -45,7 +43,7 @@ def tn_mark(n: int) -> str:
     return "".join(_SUP[int(ch)] for ch in str(n))
 
 def section_label(section: str, title: str | None = None) -> str:
-    base = f"De natura hominis {section}"
+    base = f"On the Nature of Man {section}"
     titled = (title or "").strip()
     if titled:
         return f"{base} — {titled}"
@@ -184,16 +182,14 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
     return paras, leftovers
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Nemesius: De natura hominis (New English)",
-        author="Nemesius of Emesa",
-        subject="New English rendering for private Logos study",
-        keywords="Nemesius, De natura hominis, anthropology",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
+        keywords="Nemesius, On the Nature of Man, anthropology",
     )
-    doc.add_paragraph("Nemesius: De natura hominis", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(BOOK_DIR))
 
     # Load meta for edition line
     meta_path = BOOK_DIR / "translations" / META_FILE
@@ -225,7 +221,7 @@ def main() -> None:
         src_rows = json.loads(src_path.read_text())
         src_map = {str(s.get("section")): s for s in src_rows if isinstance(s, dict)}
 
-    add_heading_with_headword(doc, bookmarks, "De natura hominis", 1, "nature-work")
+    add_heading_with_headword(doc, bookmarks, "On the Nature of Man", 1, "nature-work")
     doc.add_paragraph(edition_line, style="Caption")
 
     for entry in entries:
@@ -293,7 +289,7 @@ def main() -> None:
     doc.save(OUT_DOCX)
 
     receipt = {
-        "title": "Nemesius: De natura hominis (New English)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

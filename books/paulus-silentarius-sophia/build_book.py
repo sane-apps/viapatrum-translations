@@ -1,4 +1,4 @@
-"""Build Paulus Silentarius: Descriptio Sanctae Sophiae Logos Personal Book DOCX."""
+"""Build Paulus Silentarius Description of Hagia Sophia Logos Personal Book DOCX."""
 from __future__ import annotations
 
 import json
@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -26,12 +27,8 @@ CODEX_FILES = [
     "sophia_part3_english.json",
 ]
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Greek (PG 86b / Friedländer 1912). No modern copyrighted translation has been copied. Lethaby & Swainson 1894 (Hakluyt Society) used as PD English reference only.",
-    "Scope: Paul the Silentiary's Ekphrasis of Hagia Sophia (1046 hexameter verses), recited at the rededication of Hagia Sophia, 24 December 563 AD. Three parts: (1) The Dome and Nave, (2) The Exedras and Piers, (3) The Ambo and Conclusion.",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-    "Pass A ≠ Pass B. First English from Greek for this ekphrasis. True OET.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 # Logos-visible superscripts for TN headword links (not Word footnotes).
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
@@ -202,16 +199,14 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
 
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Paulus Silentarius: Descriptio Sanctae Sophiae (New English)",
-        author="Paulus Silentarius",
-        subject="New English rendering for private Logos study",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
         keywords="Paulus Silentarius, Hagia Sophia, Ekphrasis, 6th century",
     )
-    doc.add_paragraph("Paulus Silentarius: Descriptio Sanctae Sophiae", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(BOOK_DIR))
 
     linker = BibleLinker()
     bookmarks = BookmarkStore()
@@ -227,7 +222,7 @@ def main() -> None:
         if not entries:
             continue
         if not work_heading_added:
-            add_heading_with_headword(doc, bookmarks, "Descriptio Sanctae Sophiae", 1, "sophia-work")
+            add_heading_with_headword(doc, bookmarks, "Description of Hagia Sophia", 1, "sophia-work")
             doc.add_paragraph("Paul the Silentiary, Ekphrasis of Hagia Sophia (563 AD). Greek locked from PG 86b / Friedländer 1912.", style="Caption")
             work_heading_added = True
 
@@ -300,7 +295,7 @@ def main() -> None:
         raise SystemExit("no English JSON yet — translate first")
 
     receipt = {
-        "title": "Paulus Silentarius: Descriptio Sanctae Sophiae (New English)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

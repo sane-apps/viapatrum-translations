@@ -10,6 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses, sort_ref_key
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -24,11 +25,8 @@ RECEIPT = ROOT / "build_receipt.json"
 
 SEQUENCE = (141, 236, 216, 136, 64, 41)
 
-FRONT_MATTER = [
-    "Private study edition. New AI-assisted translation from Latin, 2026.",
-    "Scope: Julian's six books To Florus (preserved in Augustine's Unfinished Work Against Julian), fragments To Turbantius, extracts in On Marriage and Concupiscence, Letter to Rome, and Collective Letter to Thessalonica.",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 # Logos-visible superscripts for TN headword links (not Word footnotes).
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
@@ -192,19 +190,14 @@ def load(name):
 
 
 def main() -> None:
+    fm = load_frontmatter(str(ROOT))
     doc = setup_document(
-        title="Julian of Eclanum: Surviving Arguments Preserved by Augustine",
-        author="Julian of Eclanum",
+        title=fm["title"],
+        author=fm["author"],
         subject="English translation with Scripture links and source references",
         keywords="Julian of Eclanum; Augustine; original sin; free will; grace; Logos Personal Book",
-        comments="Private study edition. New AI-assisted translation from Latin, 2026.",
     )
-    doc.add_paragraph("Julian of Eclanum", style="Title")
-    doc.add_paragraph("Surviving Arguments Preserved by Augustine", style="Subtitle")
-    doc.add_paragraph("An English study edition with Scripture links")
-    doc.add_paragraph("New AI-assisted translation from the surviving Latin\nPrepared for private study in 2026")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(ROOT))
 
     linker = BibleLinker()
     bookmarks = BookmarkStore()
@@ -290,7 +283,7 @@ def main() -> None:
         "This is an edition of the material gathered from the Augustinian witnesses listed below. It is not a complete collection of every work attributed to Julian: his separately transmitted biblical commentaries are outside its scope. Ancient transmission can leave gaps or uncertain attributions that no translation can repair. The working Latin sources are retained with the project files; the reading text is English only."
     )
     para(
-        "The translation aims at clear contemporary English while keeping the argument, qualifications, and polemical force of the Latin. Long sentences are sometimes divided. Bible quotations follow Julian's wording rather than being replaced with a modern English Bible. Brackets and translation notes flag supplied wording, textual problems, and uncertain interpretations. This is a new AI-assisted private-study translation, checked against the available source texts; it has not received independent specialist publication review and should not be cited as an established critical edition."
+        "The translation aims at clear contemporary English while keeping the argument, qualifications, and polemical force of the Latin. Long sentences are sometimes divided. Bible quotations follow Julian's wording rather than being replaced with a modern English Bible. Brackets and translation notes flag supplied wording, textual problems, and uncertain interpretations. This is a new AI-assisted translation, checked against the available source texts; it has not received independent specialist publication review and should not be cited as an established critical edition."
     )
     heading("Reading and citing", 2, "reading")
     para(
@@ -377,7 +370,7 @@ def main() -> None:
 
     heading("Sources and editorial method", 1, "sources")
     para(
-        "Base witnesses: Augustine, Unfinished Work Against Julian, Books One through Six; Against Julian, Books One through Six; On Marriage and Concupiscence, Book Two; Against Two Letters of the Pelagians, Books One through Four. Latin texts and accompanying source notes were consulted in the Augustinus.it electronic edition and retained locally. References use that edition's divisions. The electronic site is not described here as an openly licensed publication; this compilation is prepared for private study."
+        "Base witnesses: Augustine, Unfinished Work Against Julian, Books One through Six; Against Julian, Books One through Six; On Marriage and Concupiscence, Book Two; Against Two Letters of the Pelagians, Books One through Four. Latin texts and accompanying source notes were consulted in the Augustinus.it electronic edition and retained locally. References use that edition's divisions. The electronic site is not described here as an openly licensed publication."
     )
     p = doc.add_paragraph()
     hyperlink(p, "Augustinus.it Latin works of Augustine", "https://www.augustinus.it/latino/index.htm")
@@ -444,7 +437,7 @@ def main() -> None:
     doc.save(OUT)
 
     receipt = {
-        "title": "Julian of Eclanum: Surviving Arguments Preserved by Augustine",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

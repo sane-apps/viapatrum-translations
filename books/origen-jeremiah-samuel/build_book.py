@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses, link_heading_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -35,11 +36,8 @@ WORKS = [
     ),
 ]
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from the Greek text (Klostermann, Origenes Werke III, GCS 6, 1901). No modern copyrighted translation has been copied. A modern version may have been consulted only as a sense or style check.",
-    "Scope: the twenty Greek Homilies on Jeremiah and the Homily on 1 Samuel 28. This file currently has Homilies 1–2 (Jeremiah 1:2–10 and 2:21–22). Two further Jeremiah homilies survive only in Jerome’s Latin and are not here yet. Lamentations fragments are a later slice of the same volume.",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 # Logos-visible superscripts for TN headword links (not Word footnotes).
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
@@ -224,16 +222,14 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
 
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Origen: Homilies on Jeremiah and on 1 Samuel 28 (New English)",
-        author="Origen of Alexandria",
-        subject="New English rendering for private Logos study",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
         keywords="Origen, Jeremiah, Samuel, GCS",
     )
-    doc.add_paragraph("Origen: Homilies on Jeremiah and on 1 Samuel 28", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(BOOK_DIR))
 
     linker = BibleLinker()
     bookmarks = BookmarkStore()
@@ -329,7 +325,7 @@ def main() -> None:
         raise SystemExit("no English JSON yet — translate Jeremiah Homily 1 first")
 
     receipt = {
-        "title": "Origen: Homilies on Jeremiah and on 1 Samuel 28 (New English)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

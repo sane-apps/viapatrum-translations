@@ -1,4 +1,4 @@
-"""Build Epiphanius Ancoratus Logos Personal Book DOCX."""
+"""Build Epiphanius The Anchor of Faith Logos Personal Book DOCX."""
 from __future__ import annotations
 
 import json
@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -24,12 +25,8 @@ ENGLISH_FILE = "ancoratus_english.json"
 SOURCE_FILE = "ancoratus_source.json"
 META_FILE = "ancoratus_meta.json"
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Greek. No modern copyrighted translation has been copied. Prior English consulted only as sense/style check.",
-    "Scope: Ancoratus. Tip covers Cap. II from locked PG 43 Greek (Spirit given to seekers; Peter confession; Trinity in unity); remainder remains.",
-    "Editorial note: Greek copy-text is PG 43 Ancoratus Cap. II from page-image OCR (tesseract grc+eng).",
-    "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
 _STOP = {
@@ -184,17 +181,15 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
     return paras, leftovers
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Epiphanius: Ancoratus (New English)",
-        author="Epiphanius of Salamis",
-        subject="New English rendering for private Logos study",
-        keywords="Epiphanius, Ancoratus, Trinity, Spirit",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
+        keywords="Epiphanius, Anchor of Faith, Trinity, Spirit",
     )
+    add_docx_frontmatter(doc, str(BOOK_DIR))
     linker = BibleLinker()
-    doc.add_paragraph("Epiphanius: Ancoratus", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(linker.bible_text(para, key="front", label="Front matter"))
 
     meta_path = BOOK_DIR / "translations" / META_FILE
     edition_line = "Edition TBD"
@@ -223,7 +218,7 @@ def main() -> None:
         src_rows = json.loads(src_path.read_text())
         src_map = {str(s.get("section")): s for s in src_rows if isinstance(s, dict)}
 
-    add_heading_with_headword(doc, bookmarks, "Ancoratus", 1, "ancoratus-work")
+    add_heading_with_headword(doc, bookmarks, "The Anchor of Faith", 1, "ancoratus-work")
     doc.add_paragraph(edition_line, style="Caption")
 
     for entry in entries:
@@ -291,7 +286,7 @@ def main() -> None:
     doc.save(OUT_DOCX)
 
     receipt = {
-        "title": "Epiphanius: Ancoratus (New English)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

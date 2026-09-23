@@ -1,4 +1,4 @@
-"""Build Crocius Syntagma Logos Personal Book DOCX."""
+"""Build Crocius System of Sacred Theology Logos Personal Book DOCX."""
 from __future__ import annotations
 
 import json
@@ -8,8 +8,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from pipeline.book_meta import load_book_meta
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -19,7 +19,6 @@ from pipeline.docx_helpers import (
 
 BOOK_DIR = Path(__file__).resolve().parent
 
-BOOK_META = load_book_meta(BOOK_DIR)  # title/author live in book.yml
 OUT_DOCX = BOOK_DIR / "crocius-syntagma.docx"
 RECEIPT = BOOK_DIR / "build_receipt.json"
 
@@ -27,12 +26,8 @@ ENGLISH_FILE = "liber1_cap1_english.json"
 SOURCE_FILE = "liber1_cap1_source.json"
 META_FILE = "liber1_cap1_meta.json"
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Latin. No modern copyrighted translation has been copied.",
-    "Scope: tip only — Liber Primus Caput Primum De Theologiae definitione (definition + name-scholion + sacred/practical opening) from the 1636 Bremen Villerian Latin. Remainder of the Syntagma remains.",
-    "Editorial note: Latin copy-text is Crocius, Syntagma sacrae theologiae (Bremen: Berthold Villerian, 1636), SLUB id335860389 / VD17 14:684303C. Public Domain Mark 1.0.",
-    "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
 _STOP = {
@@ -187,17 +182,15 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
     return paras, leftovers
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title=f"{BOOK_META['title']} (New English)",
-        author=BOOK_META["author"],
-        subject="New English rendering for private Logos study",
-        keywords=f"{BOOK_META['author']}, {BOOK_META['title']}",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
+        keywords="Ludwig Crocius, System of Sacred Theology, dogmatics",
     )
+    add_docx_frontmatter(doc, str(BOOK_DIR))
     linker = BibleLinker()
-    doc.add_paragraph(f"{BOOK_META['author']}: {BOOK_META['title']}", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(linker.bible_text(para, key="front", label="Front matter"))
 
     meta_path = BOOK_DIR / "translations" / META_FILE
     edition_line = "Edition TBD"
@@ -226,7 +219,7 @@ def main() -> None:
         src_rows = json.loads(src_path.read_text())
         src_map = {str(s.get("section")): s for s in src_rows if isinstance(s, dict)}
 
-    add_heading_with_headword(doc, bookmarks, "Theses on Theology", 1, "theologia-work")
+    add_heading_with_headword(doc, bookmarks, "System of Sacred Theology", 1, "theologia-work")
     doc.add_paragraph(edition_line, style="Caption")
 
     for entry in entries:
@@ -294,7 +287,7 @@ def main() -> None:
     doc.save(OUT_DOCX)
 
     receipt = {
-        "title": f"{BOOK_META['author']}: {BOOK_META['title']} (New English tip)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

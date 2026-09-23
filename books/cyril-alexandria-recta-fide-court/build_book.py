@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -35,13 +36,8 @@ WORKS = [
     ),
 ]
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from the Greek text (Pusey 1877 edition of Cyril; Migne PG 76 reprint lineage). No modern copyrighted translation has been copied. King FC 129 covers ad Theodosium only and was used as a style check only.",
-    "Scope: two court treatises — De recta fide ad dominas (CPG 5219, §§1–100) and De recta fide ad augustas (CPG 5220, §§1–48). The treatise ad Theodosium (CPG 5218) is excluded as it has a modern English in King FC 129. This is not Cyril of Jerusalem, and not the complete Cyril corpus.",
-    "Cyril of Alexandria wrote in the early fifth century (patriarch 412–444). These are post-Nicene court treatises on the one Christ against division into two sons.",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-    "First English of these two court treatises from the locked Pusey 1877 Greek.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 # Logos-visible superscripts for TN headword links (not Word footnotes).
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
@@ -234,16 +230,14 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
 
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Cyril of Alexandria: On the True Faith to the Imperial Women (New English)",
-        author="Cyril of Alexandria",
-        subject="New English rendering for private Logos study",
-        keywords="Cyril of Alexandria, Arcadia, Marina, Pulcheria, Eudocia, CPG 5219, CPG 5220, De recta fide, post-Nicene",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
+        keywords="Cyril of Alexandria, Arcadia, Marina, Pulcheria, Eudocia, CPG 5219, CPG 5220, On the True Faith, post-Nicene",
     )
-    doc.add_paragraph("Cyril of Alexandria: On the True Faith to the Imperial Women", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(BOOK_DIR))
 
     linker = BibleLinker()
     bookmarks = BookmarkStore()
@@ -330,7 +324,7 @@ def main() -> None:
         raise SystemExit("no English JSON yet — translate the court treatises first")
 
     receipt = {
-        "title": "Cyril of Alexandria: On the True Faith to the Imperial Women (New English)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

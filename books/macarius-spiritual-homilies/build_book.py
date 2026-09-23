@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -24,11 +25,8 @@ ENGLISH_FILE = "spiritual_homilies_english.json"
 SOURCE_FILE = "spiritual_homilies_source.json"
 META_FILE = "spiritual_homilies_meta.json"
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Greek. No modern copyrighted translation has been copied. Prior English (e.g., Luibheid 1992) consulted only as sense/style check.",
-    "Scope: The 50 Spiritual Homilies attributed to Macarius the Egyptian. Source edition to be declared in meta.json.",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
 _STOP = {
@@ -183,16 +181,14 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
     return paras, leftovers
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Macarius: The Spiritual Homilies (New English)",
-        author="Macarius the Egyptian",
-        subject="New English rendering for private Logos study",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
         keywords="Macarius, Spiritual Homilies, monasticism",
     )
-    doc.add_paragraph("Macarius: The Spiritual Homilies", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(BOOK_DIR))
 
     meta_path = BOOK_DIR / "translations" / META_FILE
     edition_line = "Edition TBD"
@@ -290,7 +286,7 @@ def main() -> None:
     doc.save(OUT_DOCX)
 
     receipt = {
-        "title": "Macarius: The Spiritual Homilies (New English)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -23,174 +24,170 @@ RECEIPT = BOOK_DIR / "build_receipt.json"
 WORKS = [
     (
         "num_hom1_english.json",
-        "Homilies on Numbers — Homilia I",
+        "Homilies on Numbers — Homily 1",
         "num1",
-        "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921). Homilia I–III; Homilia III title unrecoverable in this witness.",
+        "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921). Homily 1–3; Homily 3 title unrecoverable in this witness.",
     ),
     (
         "num_hom2_english.json",
-        "Homilies on Numbers — Homilia II",
+        "Homilies on Numbers — Homily 2",
         "num2",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom4_english.json",
-        "Homilies on Numbers — Homilia IV",
+        "Homilies on Numbers — Homily 4",
         "num4",
-        "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921). Homilia III title unrecoverable — next titled unit is Homilia IV.",
+        "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921). Homily 3 title unrecoverable — next titled unit is Homily 4.",
     ),
     (
         "num_hom5_english.json",
-        "Homilies on Numbers — Homilia V",
+        "Homilies on Numbers — Homily 5",
         "num5",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom6_english.json",
-        "Homilies on Numbers — Homilia VI",
+        "Homilies on Numbers — Homily 6",
         "num6",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom7_english.json",
-        "Homilies on Numbers — Homilia VII",
+        "Homilies on Numbers — Homily 7",
         "num7",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom8_english.json",
-        "Homilies on Numbers — Homilia VIII",
+        "Homilies on Numbers — Homily 8",
         "num8",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom9_english.json",
-        "Homilies on Numbers — Homilia IX",
+        "Homilies on Numbers — Homily 9",
         "num9",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom10_english.json",
-        "Homilies on Numbers — Homilia X",
+        "Homilies on Numbers — Homily 10",
         "num10",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom11_english.json",
-        "Homilies on Numbers — Homilia XI",
+        "Homilies on Numbers — Homily 11",
         "num11",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom12_english.json",
-        "Homilies on Numbers — Homilia XII",
+        "Homilies on Numbers — Homily 12",
         "num12",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom13_english.json",
-        "Homilies on Numbers — Homilia XIII",
+        "Homilies on Numbers — Homily 13",
         "num13",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom14_english.json",
-        "Homilies on Numbers — Homilia XIV",
+        "Homilies on Numbers — Homily 14",
         "num14",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom15_english.json",
-        "Homilies on Numbers — Homilia XV",
+        "Homilies on Numbers — Homily 15",
         "num15",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom16_english.json",
-        "Homilies on Numbers — Homilia XVI",
+        "Homilies on Numbers — Homily 16",
         "num16",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom17_english.json",
-        "Homilies on Numbers — Homilia XVII",
+        "Homilies on Numbers — Homily 17",
         "num17",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom18_english.json",
-        "Homilies on Numbers — Homilia XVIII",
+        "Homilies on Numbers — Homily 18",
         "num18",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom19_english.json",
-        "Homilies on Numbers — Homilia XIX",
+        "Homilies on Numbers — Homily 19",
         "num19",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom20_english.json",
-        "Homilies on Numbers — Homilia XX",
+        "Homilies on Numbers — Homily 20",
         "num20",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom21_english.json",
-        "Homilies on Numbers — Homilia XXI",
+        "Homilies on Numbers — Homily 21",
         "num21",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom22_english.json",
-        "Homilies on Numbers — Homilia XXII",
+        "Homilies on Numbers — Homily 22",
         "num22",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom23_english.json",
-        "Homilies on Numbers — Homilia XXIII",
+        "Homilies on Numbers — Homily 23",
         "num23",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom24_english.json",
-        "Homilies on Numbers — Homilia XXIV",
+        "Homilies on Numbers — Homily 24",
         "num24",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom25_english.json",
-        "Homilies on Numbers — Homilia XXV",
+        "Homilies on Numbers — Homily 25",
         "num25",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom26_english.json",
-        "Homilies on Numbers — Homilia XXVI",
+        "Homilies on Numbers — Homily 26",
         "num26",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom27_english.json",
-        "Homilies on Numbers — Homilia XXVII",
+        "Homilies on Numbers — Homily 27",
         "num27",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
     (
         "num_hom28_english.json",
-        "Homilies on Numbers — Homilia XXVIII",
+        "Homilies on Numbers — Homily 28",
         "num28",
         "Homilies on Numbers. Baehrens, Origenes Werke VII (GCS 30, 1921).",
     ),
 ]
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Latin (Baehrens, GCS 30, 1921). No modern copyrighted translation has been copied. Scheck FOTC is not the reading text.",
-    "Scope: Numbers Homiliae I–II and IV–XXVIII in Rufinus's Latin as printed in Baehrens GCS 30 (Origenes Werke VII, 1921). Homilia III is absent from this build: the Baehrens OCR/scan has an unrecoverable title lacuna (running headers jump II→IV) and no Homilia III translation file is included. Do not present this Personal Book as 28/28 complete text.",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-    "Pass A ≠ Pass B. True OET: no ANF; do not copy Scheck FOTC.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 # Logos-visible superscripts for TN headword links (not Word footnotes).
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
@@ -375,16 +372,14 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
 
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Origen: Homilies on Numbers (New English)",
-        author="Origen of Alexandria",
-        subject="New English rendering for private Logos study",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
         keywords="Origen, Numbers, GCS 30",
     )
-    doc.add_paragraph("Origen: Homilies on Numbers", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(BOOK_DIR))
 
     linker = BibleLinker()
     bookmarks = BookmarkStore()
@@ -470,10 +465,10 @@ def main() -> None:
     doc.save(OUT_DOCX)
 
     if not records:
-        raise SystemExit("no English JSON yet — translate Numbers Homilia 1 first")
+        raise SystemExit("no English JSON yet — translate Numbers Homily 1 first")
 
     receipt = {
-        "title": "Origen: Homilies on Numbers (New English)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

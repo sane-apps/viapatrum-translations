@@ -1,4 +1,4 @@
-"""Build Photius: Bibliotheca (Myriobiblon) Logos Personal Book DOCX."""
+"""Build Photius The Library Logos Personal Book DOCX."""
 from __future__ import annotations
 
 import json
@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -41,12 +42,8 @@ CODEX_FILES = [
     "bibl_codex_17_english.json",
 ]
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Greek (Bekker 1824). Freese 1920 (PD English, codices 1-165) used as reference only — not copied. No modern copyrighted translation has been copied.",
-    "Scope: tip densify — first 17 codices of 279 (Theodore on Dionysius through the Acts of Chalcedon).",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-    "Pass A ≠ Pass B. First English from Greek for these codices. True OET for these sections.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 # Logos-visible superscripts for TN headword links (not Word footnotes).
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
@@ -217,23 +214,21 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
 
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Photius: Bibliotheca (Myriobiblon) — Densify (Codices 1–17)",
-        author="Photius of Constantinople",
-        subject="New English rendering for private Logos study",
-        keywords="Photius, Bibliotheca, Myriobiblon, Byzantine, codices",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
+        keywords="Photius, Library, Byzantine, codices",
     )
-    doc.add_paragraph("Photius: Bibliotheca (Myriobiblon)", style="Title")
-    doc.add_paragraph("A new English rendering for private study — Tip: Codices 1–17", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(BOOK_DIR))
 
     linker = BibleLinker()
     bookmarks = BookmarkStore()
     tn_records: list[dict] = []
     records: list[dict] = []
 
-    add_heading_with_headword(doc, bookmarks, "Bibliotheca (Myriobiblon) — Codices 1–17", 1, "bibl-work")
+    add_heading_with_headword(doc, bookmarks, "The Library — Codices 1–17", 1, "bibl-work")
     doc.add_paragraph("Photius of Constantinople, 9th century. Greek locked from Bekker 1824 / PG 103.", style="Caption")
 
     for fname in CODEX_FILES:
@@ -312,7 +307,7 @@ def main() -> None:
         raise SystemExit("no English JSON yet — translate first")
 
     receipt = {
-        "title": "Photius: Bibliotheca (Myriobiblon) — Tip (Codices 1–17)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

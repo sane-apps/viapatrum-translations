@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -29,12 +30,8 @@ WORKS = [
     ),
 ]
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from the Greek text (Migne PG 68). No modern copyrighted translation has been copied. A modern version may have been consulted only as a sense or style check.",
-    "Scope: Book 1 only of Cyril of Alexandria’s On Adoration and Worship in Spirit and Truth (CPG 5200). Books 2–17 are not in this volume. This is not Cyril of Jerusalem.",
-    "Cyril wrote in the early fifth century (patriarch 412–444). This is a post-Nicene work.",
-    "Bible quotations and clear allusions are linked inline in the reading text. Possible connections stay as short captions. Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 # Logos-visible superscripts for TN headword links (not Word footnotes).
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
@@ -219,19 +216,14 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
 
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Cyril of Alexandria: On Adoration and Worship in Spirit and Truth, Book 1",
-        author="Cyril of Alexandria",
-        subject="New English rendering for private Logos study",
-        keywords="Cyril of Alexandria, De adoratione, post-Nicene",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
+        keywords="Cyril of Alexandria, On Adoration and Worship, post-Nicene",
     )
-    doc.add_paragraph(
-        "Cyril of Alexandria: On Adoration and Worship in Spirit and Truth, Book 1",
-        style="Title",
-    )
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(para)
+    add_docx_frontmatter(doc, str(BOOK_DIR))
 
     linker = BibleLinker()
     bookmarks = BookmarkStore()
@@ -320,7 +312,7 @@ def main() -> None:
         raise SystemExit("no English JSON yet — translate Adoration Book 1 first")
 
     receipt = {
-        "title": "Cyril of Alexandria: On Adoration and Worship in Spirit and Truth, Book 1",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),

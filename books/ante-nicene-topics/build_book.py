@@ -14,6 +14,7 @@ REPO = ROOT.parents[1]
 sys.path.insert(0, str(REPO))
 
 from pipeline.bible_links import REF, BibleLinker, sort_ref_key  # noqa: E402
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter  # noqa: E402
 from pipeline.docx_helpers import (  # noqa: E402
     BookmarkStore,
     assert_internal_links,
@@ -34,11 +35,11 @@ BOOK_META = {
         "Modern English excerpts from the ante-Nicene fathers, arranged by the main "
         "topics of Christian teaching — God, Christ, Scripture, Spirit, church, "
         "sacraments, salvation, human will, last things, and the Christian life. "
-        "One Logos encyclopedia for private study. Famous voices and lesser-known "
+        "One Logos encyclopedia. Famous voices and lesser-known "
         "ones appear together under each topic, earliest to latest. Not a complete "
         "dogmatics and not a critical edition of the Greek or Latin."
     ),
-    "copyright": "Ancient texts; new English topical library prepared for private study, 2026.",
+    "copyright": "Ancient texts; new English topical library, 2026.",
     "authors": "Ante-Nicene Fathers (topical library)",
 }
 AUTHORS_PATH = ROOT / "authors.json"
@@ -226,12 +227,13 @@ def main():
     for x in excerpts:
         by_topic[x["topic"]].append(x)
 
+    fm = load_frontmatter(str(ROOT))
     doc = setup_document(
-        title=BOOK_META["title"],
-        author=BOOK_META["authors"],
+        title=fm["title"],
+        author=fm["author"],
         subject=BOOK_META["subtitle"],
         keywords="Ante-Nicene; dogmatics; theology; Christology; soteriology; Logos Encyclopedia",
-        comments="Private study edition. One Logos encyclopedia. Not a critical edition.",
+        comments="One Logos encyclopedia. Not a critical edition.",
     )
     linker = BibleLinker()
     bookmarks = BookmarkStore()
@@ -255,9 +257,7 @@ def main():
         doc.add_paragraph(f"[[@Headword:{hw}]]")
         return p
 
-    doc.add_paragraph(BOOK_META["title"], style="Title")
-    para(BOOK_META["subtitle"], style="Subtitle")
-    para("Private study edition · 2026")
+    add_docx_frontmatter(doc, str(ROOT))
 
     heading("About this edition", 1, "about", headword="About this edition")
     para(BOOK_META["description"])
@@ -280,6 +280,7 @@ def main():
         p = doc.add_paragraph()
         hyperlink(p, title, f"topic_{tid}", internal=True)
 
+    first_bookmark: dict[str, str] = {}
     for tid, title in TOPICS_ORDER:
         items = by_topic.get(tid, [])
         if not items:
@@ -310,7 +311,9 @@ def main():
                 key = x["id"]
                 label = excerpt_heading_label(x)
                 citation = x.get("citation") or label
-                heading(label, 3, key, headword=label)
+                # Topic-scoped bookmark: one excerpt may appear under two topics.
+                first_bookmark.setdefault(key, f"{tid}_{key}")
+                heading(label, 3, f"{tid}_{key}", headword=label)
                 # confidence / authenticity / edition_id / notes / translator_notes
                 # stay in translations JSON + QA — never in the customer DOCX.
 
@@ -344,9 +347,14 @@ def main():
                 p_attr.add_run(attr)
 
                 for a in x.get("added_allusions", []):
+                    # Two lane schemas: {reference, reason} and {ref, why}.
+                    ref = (a.get("reference") or a.get("ref") or "").strip()
+                    if not ref:
+                        continue
+                    reason = (a.get("reason") or a.get("why") or "").strip()
                     certainty = "Possible allusion" if a.get("certainty") == "possible" else "Cf."
                     para(
-                        f"{certainty} {a['reference']}" + (f" — {a['reason']}" if a.get("reason") else ""),
+                        f"{certainty} {ref}" + (f" — {reason}" if reason else ""),
                         style="Caption",
                         key=key,
                         label=citation,
@@ -397,7 +405,7 @@ def main():
         for i, (key, label) in enumerate(entries):
             if i:
                 p.add_run("; ")
-            hyperlink(p, label, key, internal=True)
+            hyperlink(p, label, first_bookmark.get(key, key), internal=True)
 
     assert_internal_links(doc, bookmarks.ids)
     assert len(records) >= 20, len(records)
@@ -420,7 +428,7 @@ def main():
         author_order_by_topic=author_order_receipt,
         authors=sorted({r["author"] for r in records}),
         desktop_copy=str(DESKTOP_OUT),
-        title=BOOK_META["title"],
+        title=fm["title"],
         subtitle=BOOK_META["subtitle"],
     )
     (ROOT / "build_receipt.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n")

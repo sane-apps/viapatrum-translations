@@ -1,4 +1,4 @@
-"""Build Epiphanius De mensuris Logos Personal Book DOCX."""
+"""Build Epiphanius On Weights and Measures Logos Personal Book DOCX."""
 from __future__ import annotations
 
 import json
@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pipeline.bible_links import BibleLinker, REF, _expand_comma_verses
+from pipeline.book_frontmatter import add_docx_frontmatter, load_frontmatter
 from pipeline.docx_helpers import (
     BookmarkStore,
     add_heading_with_headword,
@@ -24,12 +25,8 @@ ENGLISH_FILE = "mensuris_english.json"
 SOURCE_FILE = "mensuris_source.json"
 META_FILE = "mensuris_meta.json"
 
-FRONT_MATTER = [
-    "New English rendering for private study, prepared with AI assistance from locked Greek. No modern copyrighted translation has been copied. Prior English (Dean PD) consulted only as sense/style check.",
-    "Scope: De mensuris et ponderibus. Tip covers Cap. I from locked PG 43 Greek (measures/weights; prophetic genres; signs); remainder remains.",
-    "Editorial note: Greek copy-text is PG 43 De mensuris Cap. I from page-image OCR (tesseract grc+eng).",
-    "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
-]
+# Front matter (title page, license, Introduction) comes from the shared
+# pipeline.book_frontmatter module reading book.yml + intro.md.
 
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
 _STOP = {
@@ -184,17 +181,15 @@ def inject_refs_into_paragraphs(paragraphs: list[str], allusions: list) -> tuple
     return paras, leftovers
 
 def main() -> None:
+    fm = load_frontmatter(str(BOOK_DIR))
     doc = setup_document(
-        title="Epiphanius: De mensuris et ponderibus (New English)",
-        author="Epiphanius of Salamis",
-        subject="New English rendering for private Logos study",
-        keywords="Epiphanius, De mensuris, weights, measures",
+        title=fm["title"],
+        author=fm["author"],
+        subject="New English translation for Logos",
+        keywords="Epiphanius, On Weights and Measures, weights, measures",
     )
+    add_docx_frontmatter(doc, str(BOOK_DIR))
     linker = BibleLinker()
-    doc.add_paragraph("Epiphanius: De mensuris et ponderibus", style="Title")
-    doc.add_paragraph("A new English rendering for private study", style="Subtitle")
-    for para in FRONT_MATTER:
-        doc.add_paragraph(linker.bible_text(para, key="front", label="Front matter"))
 
     meta_path = BOOK_DIR / "translations" / META_FILE
     edition_line = "Edition TBD"
@@ -223,7 +218,7 @@ def main() -> None:
         src_rows = json.loads(src_path.read_text())
         src_map = {str(s.get("section")): s for s in src_rows if isinstance(s, dict)}
 
-    add_heading_with_headword(doc, bookmarks, "De mensuris et ponderibus", 1, "mensuris-work")
+    add_heading_with_headword(doc, bookmarks, "On Weights and Measures", 1, "mensuris-work")
     doc.add_paragraph(edition_line, style="Caption")
 
     for entry in entries:
@@ -291,7 +286,7 @@ def main() -> None:
     doc.save(OUT_DOCX)
 
     receipt = {
-        "title": "Epiphanius: De mensuris et ponderibus (New English)",
+        "title": fm["title"],
         "section_count": len(records),
         "paragraph_count": sum(r["paragraphs"] for r in records),
         "bookmark_count": len(bookmarks.ids),
