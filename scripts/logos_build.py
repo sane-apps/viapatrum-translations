@@ -329,19 +329,30 @@ def click_edit_if_present():
     return False
 
 
-def open_edit(title, docx_base):
+def unique_needle(title, others):
+    """Shortest leading word run (5+) of title in no other title."""
+    words = " ".join(title.split()).split()
+    for n in range(5, min(len(words), 10) + 1):
+        cand = " ".join(words[:n])
+        if not any(cand in " ".join(o.split()) for o in others):
+            return cand
+    return " ".join(words)
+
+
+def open_edit(title, docx_base, others=()):
     """Scroll-search the PB list for title, click it, verify edit view.
 
+    others: all other books' titles (for unique needle computation).
     Returns (opened, matched): matched=True means the title row was
     visible and clicked but the edit never opened (expanded-result rows
     go click-dead until relaunch; caller may restart and retry).
     """
     words = " ".join(title.split()).split()
-    # Contiguous first-5-words substring: unique across all 31 titles
-    # (verified; 4 words collide on the two "Cyril ... On" books),
-    # short enough to survive AX truncation, contiguous so mid-title
-    # AX newlines past word 5 cannot break the match.
-    needle = " ".join(words[:5])
+    # Shortest word-prefix (min 5 words) unique across all other
+    # titles: contiguous so mid-title AX newlines cannot break the
+    # match, short enough to survive AX truncation. Recomputed from
+    # live titles so retitles cannot silently collide.
+    needle = unique_needle(title, others)
     run(["open", "-a", "Logos"], timeout=30)
     time.sleep(2)
     matched = False
@@ -418,7 +429,7 @@ def open_edit(title, docx_base):
     return False, matched
 
 
-def open_with_retry(title, docx_base, state):
+def open_with_retry(title, docx_base, state, others=()):
     """open_edit plus relaunch-retries for click-dead rows.
 
     state is a dict with 'since_restart' (books done since the last
@@ -428,7 +439,7 @@ def open_with_retry(title, docx_base, state):
     Callers also restart proactively (see FRESH_EVERY) because each
     build/upload expands its row and sessions degrade past ~6.
     """
-    opened, matched = open_edit(title, docx_base)
+    opened, matched = open_edit(title, docx_base, others)
     if not opened and matched and state["relaunches"] < 6:
         state["relaunches"] += 1
         state["since_restart"] = 0
@@ -436,7 +447,7 @@ def open_with_retry(title, docx_base, state):
             "and retrying" % state["relaunches"])
         quit_logos()
         launch_pb_tool()
-        opened, _matched2 = open_edit(title, docx_base)
+        opened, _matched2 = open_edit(title, docx_base, others)
     return opened
 
 
@@ -563,10 +574,19 @@ def main():
     ap.add_argument("--build-only", action="store_true")
     ap.add_argument("--upload-only", action="store_true")
     ap.add_argument("--book", default=None)
+    ap.add_argument("--force", action="store_true",
+                    help="rebuild and re-upload everything in scope "
+                    "(metadata-only changes such as retitles)")
     args = ap.parse_args()
     if args.build_only and args.upload_only:
         fail("pick at most one of --build-only / --upload-only")
 
+    rc, out = run([sys.executable,
+                     os.path.join(REPO, "scripts", "check_research.py")],
+                    timeout=120)
+    log(out.strip().splitlines()[-1] if out.strip() else "no output")
+    if rc != 0:
+        fail("check_research.py failed: intros/research receipts incomplete")
     if os.path.exists(LOCK_PATH):
         fail("lock exists: %s (another run active?)" % LOCK_PATH)
     if not args.dry_run:
@@ -598,6 +618,9 @@ def main():
                 if not rec or parse_lc(lc) > parse_lc(rec):
                     need_upload.append(slug)
         # Books built this run will also need upload; decided after phase 3.
+        if args.force:
+            need_build = sorted(inv)
+            need_upload = sorted(s for s in inv if inv[s]["last_compiled"])
         log("inventory: %d docx books; need_build=%d need_upload(known)=%d"
             % (len(inv), len(need_build), len(need_upload)))
         if args.dry_run:
@@ -638,7 +661,9 @@ def main():
                     receipt["failures"].append(
                         {"slug": slug, "phase": "build",
                          "error": "still no DB row after sync"})
-                elif open_with_retry(e["title"], e["docx_base"], restate):
+                elif open_with_retry(
+                        e["title"], e["docx_base"], restate,
+                        [t["title"] for s, t in inv.items() if s != slug]):
                     if ax_click_button("Build book"):
                         new_lc = poll_build(e["bid"], prev)
                         if new_lc:
@@ -683,9 +708,10 @@ def main():
                     continue
                 log("UPLOAD %s" % slug)
                 maybe_refresh(restate)
-                if open_with_retry(e["title"], e["docx_base"],
-                                   restate) and \
-                        ax_click_button("Upload"):
+                if open_with_retry(
+                        e["title"], e["docx_base"], restate,
+                        [t["title"] for s, t in inv.items() if s != slug]) \
+                        and ax_click_button("Upload"):
                     ok, msg = wait_upload_ok()
                     if ok:
                         restate["since_restart"] += 1
