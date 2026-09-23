@@ -80,6 +80,24 @@ def main() -> int:
             continue
         tail = ((proc.stdout or "") + (proc.stderr or ""))[-800:]
         print(f"[publish] {slug}: docx rc={proc.returncode}\n{tail}", flush=True)
+    # Logos metadata sync when safe: only while Logos is down (never --force).
+    # The in-app "Build book" click stays manual until GUI automation lands.
+    try:
+        logos_up = subprocess.run(["pgrep", "-x", "Logos"], capture_output=True).returncode == 0
+    except Exception:  # noqa: BLE001
+        logos_up = True
+    if logos_up:
+        print("[publish] Logos running; pb_sync deferred (close Logos to sync)", flush=True)
+    else:
+        cmd = [sys.executable, "scripts/pb_sync.py", "--apply"]
+        print(f"[publish] + {' '.join(cmd)}", flush=True)
+        try:
+            proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=1200)
+        except subprocess.TimeoutExpired:
+            print("[publish] pb_sync TIMEOUT", flush=True)
+        else:
+            tail = ((proc.stdout or "") + (proc.stderr or ""))[-800:]
+            print(f"[publish] pb_sync rc={proc.returncode}\n{tail}", flush=True)
     ship = SITE / "scripts/ship.sh"
     if not ship.is_file():
         print("[publish] ship.sh missing; site not shipped", flush=True)
