@@ -26,10 +26,11 @@ META_FILE = "theses_theologia_meta.json"
 
 FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Latin. No modern copyrighted translation has been copied. The 2024 AI English of the 1683 text was not used.",
-    "Scope: tip only — Theses de Theologia I-VII from the 1675 London Pitt folio. Remainder of the collected Theses remains.",
-    "Editorial note: Latin copy-text is Le Blanc, Theses theologicae (London: Moses Pitt, 1675), IA bub_gb_eOkHAW4G0-wC, Public Domain Mark 1.0.",
+    "Scope: densify De Theologia I-XLIII plus De Fide I-XXII from the 1675 London Pitt folio (18 sections). De Fide XXIII+ and later Index disputations remain. Not the collected folio.",
+    "Editorial note: Latin copy-text is Le Blanc, Theses theologicae (London: Moses Pitt, 1675), IA bub_gb_eOkHAW4G0-wC, Public Domain Mark 1.0. Reader order keeps De Theologia first for URL stability; Index folio order places De Fide first.",
     "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
 ]
+
 
 _SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
 _STOP = {

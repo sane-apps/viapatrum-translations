@@ -29,8 +29,8 @@ META_FILE = "prefatio_si_tip_meta.json"
 
 FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Latin. No modern copyrighted translation has been copied.",
-    "Scope: tip only — Prefatio Pacifico-Apologetica section I (ad Lectorem Benevolum) from the 1708 Frankfurt an der Oder Latin. Remainder of Ingenua in Controversias Evangelicorum remains.",
-    "Editorial note: Latin copy-text is Strimesius, Ingenua in Controversias Evangelicorum (Francofurti ad Viadrum: Jer. Schrey & J. C. Hartmann, 1708), Google Books 3epYAAAAcAAJ. Public domain. Frankfurt (Oder) / Viadrina Reformed faculty. No Colloquia Scholastica AI English used.",
+    "Scope: Prefatio Pacifico-Apologetica §I–II + Crimina heads + Crimina defenses through Crimina III (Sandomierz) + Part I Protheoria through Cassel Art. III–V and Controversiae Obices/Officia/Historia Diffidii/Varii gradus from the 1708 Frankfurt an der Oder Latin. Prefatio silence reasons, Hexades theses, and remainder of Controversiae / folio remain.",
+    "Editorial note: Latin copy-text is Strimesius, Ingenua in Controversias Evangelicorum (Francofurti ad Viadrum: Jer. Schrey & J. C. Hartmann, 1708), Google Books 3epYAAAAcAAJ. Public domain. Frankfurt (Oder) / Viadrina Reformed faculty. No Colloquia Scholastica AI English used. Sister Ingenua in Arminianismum (Halle) still Anubis-blocked — skipped.",
     "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
 ]
 

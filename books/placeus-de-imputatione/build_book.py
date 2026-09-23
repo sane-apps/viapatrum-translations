@@ -29,7 +29,7 @@ META_FILE = "cap1_tip_meta.json"
 
 FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Latin. No modern copyrighted translation has been copied.",
-    "Scope: tip only — Caput Primum (Charenton National Synod decree + Placeus framing) from the 1661 Saumur Latin. Remainder of De imputatione primi peccati Adami remains.",
+    "Scope: Capita I–VII tip — Caput Primum, Caput II seven probable arguments, Caput III necessary arguments, Caput IV through Drelincourt, Caput V Distributio, Caput VI Maresius arguments I–VIII, and Caput VII tip (Garissoles manuscripts + digression + Rivetus) from the 1661 Saumur Latin. Remainder of Cap. VII and later Capita of De imputatione remain.",
     "Editorial note: Latin copy-text is Placeus, De imputatione primi peccati Adami (Salmurii: Apud Ioannem Lesnerium, 1661), IA deimputationepri00lapl. Public domain. Saumur faculty / Amyraldian circle; Amyraut French Brief traité not used.",
     "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
 ]

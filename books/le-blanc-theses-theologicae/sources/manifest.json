@@ -6,7 +6,7 @@
     {
       "file": "_le_blanc_theologia_latin_lock.txt",
       "format": "locked Latin tip",
-      "source": "Le Blanc, Theses theologicae (London: Moses Pitt, 1675) — De Theologia I-VII reconstructed from IA OCR",
+      "source": "Le Blanc, Theses theologicae (London: Moses Pitt, 1675) — De Theologia I-XLIII reconstructed from IA PDF/OCR",
       "archive_org_id": "bub_gb_eOkHAW4G0-wC",
       "url": "https://archive.org/details/bub_gb_eOkHAW4G0-wC",
       "license": "Public Domain Mark 1.0",
@@ -14,9 +14,9 @@
       "imprint": "Londini: Prostant venales apud Mosem Pitt, ad insigne Angeli in Coemeterio D. Pauli",
       "estc": "R17887",
       "wing": "L802",
-      "sha256": "4fdbe93407da36f6e8727ba33ac58d5577dc6dcfd4083fc002f74025fed6172d",
+      "sha256": "a418e57b7570034ccfeae312d9c84836f13363f17fb9aa50378af1686d8b9b6d",
       "role": "copy-text",
-      "notes": "Tip De Theologia I-VII only. OCR long-s/ligature noise corrected; no 2024 English used."
+      "notes": "De Theologia I-XLIII. OCR corrected from IA PDF+DjVu+tesseract; no 2024 English used."
     },
     {
       "file": "le_blanc_theses_1675_djvu.txt",
@@ -28,11 +28,35 @@
       "sha256": "837470c76535bdf9dfb5df42550e313a4cfef3b5818896e245a0e3905d4637b9",
       "role": "check",
       "notes": "Same edition scan used to check the locked reconstruction. Not an independent textual witness."
+    },
+    {
+      "file": "le_blanc_theses_1675.pdf",
+      "format": "PDF",
+      "source": "Same 1675 Pitt folio, Internet Archive PDF",
+      "archive_org_id": "bub_gb_eOkHAW4G0-wC",
+      "url": "https://archive.org/download/bub_gb_eOkHAW4G0-wC/bub_gb_eOkHAW4G0-wC.pdf",
+      "license": "Public Domain Mark 1.0",
+      "sha256": "da52c7bddcea289f249850b27ccce41bdcfd77117ebd0df763a7784397d245ac",
+      "role": "check",
+      "notes": "Page images for densify VIII-XV; not an independent textual witness."
+    },
+    {
+      "file": "le_blanc_theologia_pages_pdftotext.txt",
+      "format": "pdftotext",
+      "source": "pdftotext of De Theologia pages from IA PDF",
+      "archive_org_id": "bub_gb_eOkHAW4G0-wC",
+      "url": "https://archive.org/details/bub_gb_eOkHAW4G0-wC",
+      "license": "Public Domain Mark 1.0",
+      "sha256": "abafc5c641f2dc9ced17cf32cb0c003f972028c5522e0038476a19f30bc86e0b",
+      "role": "check",
+      "notes": "Check witness for densify reconstruction."
     }
   ],
   "preferred_copy_text": "_le_blanc_theologia_latin_lock.txt",
   "check_witnesses": [
-    "le_blanc_theses_1675_djvu.txt"
+    "le_blanc_theses_1675_djvu.txt",
+    "le_blanc_theses_1675.pdf",
+    "le_blanc_theologia_pages_pdftotext.txt"
   ],
   "pd_english_exists": false,
   "pd_english_note": "No complete public-domain English of the 1675 Latin was locked. A 2024 AI English of the 1683 third edition exists online; it is modern and must not be copy-text or a wording source."

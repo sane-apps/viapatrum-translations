@@ -29,7 +29,7 @@ META_FILE = "morte_christi_meta.json"
 
 FRONT_MATTER = [
     'New English rendering for private study, prepared with AI assistance from locked Latin. No modern copyrighted translation has been copied. Allport 1831 Colossians English was not used.',
-    'Scope: tip only — De morte Christi Cap. 1 (controversy origin + Thesis 1) from the 1650 Cambridge Daniel Latin. Remainder of Dissertationes duae remains.',
+    'Scope: partial — De morte Christi Cap. 1 (controversy origin + Thesis 1 scriptural proof), Cap. 2 Ratios 1 through ultima, Cap. 3 Satisfit preface through Obj. 17 (Cap. 3 close), Cap. 4 Thesis 2 tip through Mem. 1 close, Cap. 4 Mem. 2 through Mem. 3 tip, Cap. 4 Mem. 3 possible-faith remainder through Thesis 2 close, Cap. 5 Thesis 3 tip through Mem. 2 Scripture close, Cap. 5 Mem. 2 Rat. 1-4, and Cap. 5 Mem. 2 Fathers tip from the 1650 Cambridge Daniel Latin. Cap. 5 Mem. 2 objections through Cap. 11 and De praedestinatione remain.
     'Editorial note: Latin copy-text is Davenant, Dissertationes duae (Cambridge: Roger Daniel, 1650), IA bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650. Wing D317 / ESTC R5446. 1650 Latin is public domain.',
     'Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.',
 ]
