@@ -53,3 +53,16 @@ backward; do not decorate first.
 - A passage with no Scripture honestly has no Bible links
   (tip exemption); the book waits rather than padding.
 - Free compute is supervised compute (`docs/SUPERVISED_COMPUTE.md`).
+
+## Lanes and priority governance (operational addendum, 2026-09-23)
+
+Not the owner's words above; the operating rules that implement them.
+Full registry: docs/WORK_LANES.md, machine-readable docs/work-lanes.json.
+
+- Work lanes (rank1/reformed/densify/topics/latin) are distinct from
+  compute lanes (cf/nv/gemini model lanes).
+- Oldest first governs within every lane and across lanes for new work.
+- rank1 is PAUSED since 2026-09-13 (owner quality review). No lane, agent,
+  or script lifts it; resume criteria live in docs/WORK_LANES.md.
+- Reformed/densify/topics are active with budget shares 60/25/15.
+- The Latin Fathers lane is defined but unopened (no books yet).

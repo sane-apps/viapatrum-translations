@@ -34,6 +34,30 @@ import yaml
 
 BACKFILL = json.loads((ROOT / "docs/author-dates-backfill.json").read_text())
 
+
+def ccel_by_repo_author():
+    """repo author -> sorted CCEL volumes (cited prior English)."""
+    ccel_path = ROOT / "docs/ccel-english.json"
+    map_path = ROOT / "docs/ccel-author-map.json"
+    if not (ccel_path.is_file() and map_path.is_file()):
+        return {}
+    ccel = json.loads(ccel_path.read_text())
+    amap = json.loads(map_path.read_text())
+    out = {}
+    for key, entry in amap.items():
+        if key.startswith("_") or not isinstance(entry, dict):
+            continue
+        repo_author = entry.get("repo_author")
+        if not repo_author:
+            continue
+        if key in ccel.get("authors", {}):
+            vols = sorted({v for e in ccel["authors"][key]["works"].values()
+                           for v in e["volumes"]})
+        else:
+            vols = sorted(entry.get("ccel_volumes", []))
+        out.setdefault(repo_author, set()).update(vols)
+    return {a: sorted(v) for a, v in out.items()}
+
 COMPLETE = {"series-closeout", "series-closed", "done", "verified"}
 
 REFRESH_RES = [
@@ -171,6 +195,7 @@ def cell(value, width):
 
 def main():
     per_book, n_live, n_held, conflicts = book_site_status()
+    ccel_map = ccel_by_repo_author()
     rows = []
     for path in sorted(BOOKS.iterdir()):
         meta_path = path / "book.yml"
@@ -196,6 +221,7 @@ def main():
             "status": status,
             "complete": status in COMPLETE,
             "lineage": lineage(notes),
+            "ccel": ccel_map.get(author, []),
             "site": site_st,
             "site_works": sorted(site_slugs),
             "logos": meta.get("logos_book_id") or "",
@@ -254,15 +280,16 @@ def main():
                   % (y, r["author"], cell(r["title"], 70),
                      r["slug"], r["status"], r["lineage"]))
     md.append("\n## Full catalog (oldest first)\n")
-    md.append("| # | Year | Author | Work | Slug | Transl | Lineage | Site | Logos | Edition |")
-    md.append("|---|---|---|---|---|---|---|---|---|---|")
+    md.append("| # | Year | Author | Work | Slug | Transl | Lineage | CCEL | Site | Logos | Edition |")
+    md.append("|---|---|---|---|---|---|---|---|---|---|---|")
     for i, r in enumerate(rows, 1):
         y = "?" if r["year"] == 9999 else r["year"]
         t = "done" if r["complete"] else r["status"]
         s = r["site"] + ("(%d)" % len(r["site_works"]) if len(r["site_works"]) > 1 else "")
-        md.append("| %d | %s | %s | %s | `%s` | %s | %s | %s | %s | %s |"
+        c = ",".join(r["ccel"]) if r["ccel"] else "-"
+        md.append("| %d | %s | %s | %s | `%s` | %s | %s | %s | %s | %s | %s |"
                   % (i, y, cell(r["author"], 28), cell(r["title"], 52), r["slug"],
-                     t, r["lineage"], s, r["logos"], cell(r["edition"], 44)))
+                     t, r["lineage"], c, s, r["logos"], cell(r["edition"], 44)))
     md.append("\n## Data gaps\n")
     md.append("- Undated authors (%d): %s" % (len(undated), ", ".join(undated) if undated else "none"))
     if unlisted_edition:

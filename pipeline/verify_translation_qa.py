@@ -189,13 +189,26 @@ def make_audit_packet(english_path: Path, source_path: Path, *, raw_sources=(),
     english_path, source_path = Path(english_path).resolve(), Path(source_path).resolve()
     english = indexed(load_rows(english_path), "English")
     source = indexed(load_rows(source_path), "source")
+    declared_scope = expected_sections is not None
     expected = list(source) if expected_sections is None else [str(x) for x in expected_sections]
     if not expected or len(expected) != len(set(expected)):
         raise ValueError("expected sections must be nonempty and unique")
     errors = []
-    for name, rows in (("English", english), ("source", source)):
-        missing = sorted(set(expected) - rows.keys())
-        extra = sorted(rows.keys() - set(expected))
+    extra_english = sorted(set(english) - set(expected))
+    extra_source = sorted(set(source) - set(expected))
+    if declared_scope:
+        # Declared scope freezes the reviewed set: rows added later in both
+        # files are unreviewed tail (never published), not packet breakage.
+        # English without any source row stays a structural error.
+        unreviewed_extra = sorted((set(extra_english) & set(extra_source)) |
+                                  (set(extra_source) - set(extra_english)))
+        english_only = sorted(set(extra_english) - set(extra_source))
+    else:
+        unreviewed_extra = []
+        english_only = extra_english
+    for name, missing, extra in (("English", sorted(set(expected) - set(english)), english_only),
+                                 ("source", sorted(set(expected) - set(source)),
+                                  [] if declared_scope else extra_source)):
         if missing:
             errors.append(f"{name}: missing expected sections {missing}")
         if extra:
@@ -256,10 +269,12 @@ def make_audit_packet(english_path: Path, source_path: Path, *, raw_sources=(),
     packet = {
         "identity": identity, "publication_scope": publication_scope,
         "explicit_selected_sections": selected_sections,
+        "declared_scope": declared_scope, "unreviewed_extra": unreviewed_extra,
         "schema": "translation-audit-v1", "seed": seed, "sample_size": sample_size,
         "scope": "selected_passages_only", "expected_sections": expected,
         "files": bindings, "raw_source_paths": raw, "structural_errors": errors,
-        "coverage": {"expected": len(expected), "english": len(english), "source": len(source)},
+        "coverage": {"expected": len(expected), "english": len(english), "source": len(source),
+                     "unreviewed_extra": len(unreviewed_extra)},
         "sections": [{**candidates[k], "raw_source_paths": raw} for k in selected],
         "limits": "Sampling and structural checks do not prove whole-work fidelity or completeness.",
     }
@@ -275,23 +290,62 @@ def validate_audit_receipt(packet: dict, receipt: dict) -> list[str]:
         return ["packet requires translation-audit-v1 and raw witnesses"]
     # Recreate from current files so a self-consistent digest cannot detach the
     # selected text from the actual files it claims to bind.
+    append_tolerant = False
     try:
         bindings = packet["files"]
+        legacy = "declared_scope" not in packet
         current = make_audit_packet(Path(bindings[0]["path"]), Path(bindings[1]["path"]),
                                     raw_sources=packet["raw_source_paths"],
-                                    expected_sections=packet["expected_sections"],
+                                    expected_sections=(packet["expected_sections"]
+                                                       if packet.get("declared_scope") else None),
                                     seed=packet["seed"], sample_size=packet["sample_size"],
                                     identity=packet["identity"],
                                     selected_sections=packet.get("explicit_selected_sections"),
                                     publication_scope=packet.get("publication_scope"))
-        if current != packet:
+        if legacy:
+            # Packets made before declared scopes existed: compare old shape
+            # to old shape so unchanged files still validate (migration-safe).
+            current = {k: v for k, v in current.items()
+                       if k not in {"declared_scope", "unreviewed_extra"}}
+            current["coverage"] = {k: v for k, v in current["coverage"].items()
+                                   if k != "unreviewed_extra"}
+        # Append tolerance applies only to full-selection declared packets:
+        # every declared section is individually hash-bound, so whole-file
+        # drift can only be unreviewed tail. Sampling packets keep the legacy
+        # whole-file binding (an unselected edit must still invalidate).
+        append_tolerant = (packet.get("declared_scope") and
+                           set(packet.get("expected_sections", [])) ==
+                           {s["section"] for s in packet.get("sections", [])} and
+                           bool(packet.get("expected_sections")))
+        if append_tolerant:
+            # Declared scope freezes the reviewed set: file-level bindings and
+            # coverage legitimately move as unreviewed tail is appended. Compare
+            # everything else (identity, scope, declared sections and hashes).
+            # Packets without the flag keep the legacy whole-packet comparison.
+            ignore = {"files", "coverage", "packet_id", "unreviewed_extra"}
+            old = {k: v for k, v in packet.items() if k not in ignore}
+            new = {k: v for k, v in current.items() if k not in ignore}
+            if new != old:
+                errors.append("packet does not match regenerated current source and English")
+        elif legacy:
+            # Legacy ids were computed without the newer keys: compare content
+            # only (the packet_id self-integrity check below still applies).
+            old = {k: v for k, v in packet.items() if k != "packet_id"}
+            new = {k: v for k, v in current.items() if k != "packet_id"}
+            if new != old:
+                errors.append("packet does not match regenerated current source and English")
+        elif current != packet:
             errors.append("packet does not match regenerated current source and English")
     except (OSError, ValueError, TypeError, KeyError, IndexError) as exc:
         return errors + [f"packet cannot be regenerated: {exc}"]
     if packet.get("packet_id") != digest({k: v for k, v in packet.items() if k != "packet_id"}):
         errors.append("packet contents changed")
-    for binding in packet.get("files", []):
+    for pos, binding in enumerate(packet.get("files", [])):
         try:
+            if append_tolerant and pos < 2:
+                # english/source files: declared sections are hash-bound
+                # individually above; whole-file drift is the unreviewed tail.
+                continue
             if file_digest(Path(binding["path"])) != binding["sha256"]:
                 errors.append(f"stale snapshot: {binding['path']}")
         except (OSError, KeyError) as exc:

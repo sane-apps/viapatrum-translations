@@ -432,6 +432,36 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
     for c in free_auto_claims():
         queue.append((c, False))
 
+    # Work-lane governance (docs/WORK_LANES.md): paused lanes yield no new
+    # rows (in-flight resume rows still complete); free rows run oldest
+    # book first within active lanes.
+    try:
+        from work_lanes import book_lane, book_year, is_active, lane_share
+    except ImportError:
+        book_lane = book_year = is_active = lane_share = None
+    lane_skipped: list[dict] = []
+    if book_lane is not None:
+        rows0 = {r["Claim ID"]: r for r in parse_open_rows()}
+
+        def lane_of(cid: str) -> tuple[str, str]:
+            slug = (rows0.get(cid) or {}).get("Book slug", "")
+            return book_lane(slug), slug
+
+        kept: list[tuple[str, bool]] = []
+        for c, r in queue:
+            wlane, wslug = lane_of(c)
+            if not r and not is_active(wlane):
+                lane_skipped.append({"claim": c, "lane": wlane, "book": wslug})
+                continue
+            kept.append((c, r))
+        resume_rows = [(c, r) for c, r in kept if r]
+        free_rows = [(c, r) for c, r in kept if not r]
+        free_rows.sort(key=lambda cr: book_year((rows0.get(cr[0]) or {}).get("Book slug", "")))
+        queue = resume_rows + free_rows
+        if lane_skipped:
+            print(f"[{lane}] work-lane pause skips: {len(lane_skipped)}", flush=True)
+    log["lane_skipped"] = lane_skipped
+
     if not queue:
         log["stop_reason"] = "queue_empty"
         log["queue"] = []
@@ -447,6 +477,10 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
     done = 0
     content_skips = 0
     consec_api_fail = 0
+    lane_spent: dict[str, int] = {}
+    lane_capped = 0
+    prev_used = used_start
+    last_lane: str | None = None
     for claim_id, resume in queue:
         if done >= args.max_claims:
             log["stop_reason"] = "max_claims"
@@ -454,6 +488,10 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
         if cf_metered:
             used = neurons_today(token, account)
             spent = used - used_start
+            if last_lane is not None:
+                lane_spent[last_lane] = lane_spent.get(last_lane, 0) + max(0, used - prev_used)
+            prev_used = used
+            last_lane = None
             if account_cap and used >= account_cap - args.reserve:
                 log["stop_reason"] = "hit_reserve"
                 break
@@ -478,6 +516,13 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             if st != "free":
                 continue
 
+        claim_lane = book_lane(row.get("Book slug", "")) if book_lane else "unknown"
+        if cf_metered and not resume and lane_share is not None:
+            if lane_spent.get(claim_lane, 0) >= lane_share(claim_lane) * fathers_budget:
+                lane_capped += 1
+                print(f"[{lane}] {claim_id} skipped: work lane {claim_lane} share spent", flush=True)
+                continue
+
         entry = process_claim(
             claim_id,
             agent=agent,
@@ -489,6 +534,8 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             rounds=args.rounds,
         )
         log["claims"].append(entry)
+        entry["work_lane"] = claim_lane
+        last_lane = claim_lane
         if entry.get("error") == "take_failed":
             continue
         if entry.get("ok"):
@@ -533,13 +580,19 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
     log["finished"] = datetime.now(timezone.utc).isoformat()
     log["done_count"] = done
     log["content_skips"] = content_skips
+    log["lane_capped"] = lane_capped
     log["held_count"] = sum(1 for r in load_hold().values() if r.get("held"))
     if cf_metered:
         try:
             log["neurons_end"] = neurons_today(token, account)
             log["neurons_spent"] = log["neurons_end"] - used_start
+            if last_lane is not None:
+                lane_spent[last_lane] = lane_spent.get(last_lane, 0) + max(
+                    0, log["neurons_end"] - prev_used
+                )
         except Exception as exc:  # noqa: BLE001
             log["neurons_end_error"] = str(exc)
+    log["lane_spent"] = lane_spent
     return log
 
 
@@ -683,8 +736,9 @@ def main() -> int:
             "lanes": logs,
             "finished": datetime.now(timezone.utc).isoformat(),
         }
-        path = OUT / f"{stamp}-dual.json"
-        path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+        if not args.dry_run:
+            path = OUT / f"{stamp}-dual.json"
+            path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(summary, indent=2), flush=True)
 
         # Nonzero only for true infra gaps / draft crash — not content/API/wall/lock.

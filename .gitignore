@@ -26,7 +26,11 @@ books/origen-principiis/sources/koetschau_gcs22_djvu.txt
 books/origen-psalms-rufinus/sources/*.pdf
 books/origen-romans/sources/*_djvu.txt
 books/origen-romans/sources/*.pdf
-outputs/
+outputs/*
+# ...except durable cross-agent ledgers (upload record, triage queues).
+!outputs/logos_uploads.json
+!outputs/edition-backfill-*.json
+!outputs/lineage-triage-*.json
 venv/
 books/origen-luke-homilies/sources/rauer_gcs35_djvu.txt
 books/**/sources/*.png

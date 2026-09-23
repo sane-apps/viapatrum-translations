@@ -11,6 +11,7 @@ New English from locked public-domain Greek and Latin for private study and for 
 - Point an AI at a claim slice via [docs/START_HERE.md](docs/START_HERE.md)
 - Spot-check Greek/Latin and open a correction: [new issue](https://github.com/sane-apps/translations/issues/new?template=correction.yml)
 - Pick a work: [docs/CORPUS_CATALOG.md](docs/CORPUS_CATALOG.md) — every tracked work oldest-first with status (regenerate: `python3 scripts/build_corpus_catalog.py`)
+- What's missing: [docs/CORPUS_AUTHORITY.md](docs/CORPUS_AUTHORITY.md) — outside cross-check (CCEL, Migne, datings) with the charter queue
 
 This repo does **not** claim every treatise is complete. It is **not** permission to copy modern copyrighted English (FOTC, ACW, etc.) or to paste ANF/NPNF as the reading text. Those are usage notes about source text, not license restrictions.
 

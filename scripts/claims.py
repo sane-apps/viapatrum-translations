@@ -13,6 +13,20 @@ CLAIMS = ROOT / "docs" / "CLAIMS.md"
 START = ROOT / "docs" / "START_HERE.md"
 LOCKS = ROOT / "docs" / "claim-locks"
 
+try:
+    from work_lanes import book_lane, is_active
+except ImportError:
+    book_lane = is_active = None
+
+
+def row_lane(row: dict[str, str]) -> str:
+    if book_lane is None:
+        return "?"
+    try:
+        return book_lane(row.get("Book slug") or "")
+    except Exception:
+        return "?"
+
 
 def parse_open_table(text: str) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
@@ -41,9 +55,11 @@ def parse_open_table(text: str) -> list[dict[str, str]]:
 
 def print_rows(rows: list[dict[str, str]]) -> None:
     for r in rows:
+        lane = row_lane(r)
+        flag = "" if (is_active is None or lane == "?" or is_active(lane)) else " [PAUSED]"
         print(
-            f"{r.get('Claim ID'):12}  {r.get('Status'):8}  "
-            f"{r.get('Book slug')}  ::  {r.get('Slice (sections)')}"
+            f"{r.get('Claim ID'):12}  {r.get('Status'):8}  {lane:8}  "
+            f"{r.get('Book slug')}  ::  {r.get('Slice (sections)')}{flag}"
         )
 
 
@@ -80,7 +96,7 @@ def print_ai_brief(row: dict[str, str], agent: str) -> None:
     print("-----")
 
 
-def cmd_start(agent: str) -> int:
+def cmd_start(agent: str, include_paused: bool = False) -> int:
     if not agent.strip() or agent.strip().lower() in {"yourname", "me", "agent"}:
         print(START.read_text(encoding="utf-8").rstrip())
         print()
@@ -92,6 +108,15 @@ def cmd_start(agent: str) -> int:
     if not free:
         print("No free slices right now. Stop. Do not invent work.")
         return 1
+    if not include_paused and is_active is not None:
+        runnable = [r for r in free if is_active(row_lane(r))]
+        if len(runnable) != len(free):
+            print(f"Skipping {len(free) - len(runnable)} free slice(s) in paused lanes "
+                  f"(docs/WORK_LANES.md; --include-paused overrides).")
+        free = runnable
+        if not free:
+            print("No free slices in active lanes. Stop. Do not invent work.")
+            return 1
     row = free[0]
     claim_id = row.get("Claim ID") or ""
     rc = cmd_take(claim_id, agent.strip(), quiet=True)
@@ -143,6 +168,10 @@ def cmd_take(claim_id: str, agent: str, quiet: bool = False) -> int:
     if row.get("Status") != "free":
         print(f"`{claim_id}` is not free (status={row.get('Status')}).", file=sys.stderr)
         return 1
+    lane = row_lane(row)
+    if is_active is not None and lane != "?" and not is_active(lane):
+        print(f"WARNING: `{claim_id}` is in paused work lane {lane} "
+              f"(docs/WORK_LANES.md). Proceeding by direct take.", file=sys.stderr)
 
     LOCKS.mkdir(parents=True, exist_ok=True)
     lock_dir = LOCKS / claim_id
@@ -232,10 +261,12 @@ def main() -> int:
     ap.add_argument("claim_id", nargs="?", help="For take/mark: claim id")
     ap.add_argument("--agent", default="", help="Your name")
     ap.add_argument("--status", default="", help="For mark: prepped or free")
+    ap.add_argument("--include-paused", action="store_true",
+                    help="For start: also consider paused-lane free rows")
     args = ap.parse_args()
 
     if args.command == "start":
-        return cmd_start(args.agent)
+        return cmd_start(args.agent, include_paused=args.include_paused)
     if args.command == "take":
         if not args.claim_id or not args.agent:
             print("Usage: python3 scripts/claims.py start --agent YourName", file=sys.stderr)

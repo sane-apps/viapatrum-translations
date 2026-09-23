@@ -4,7 +4,6 @@ Take the next free slice:
 
 **Tip/SERIES closeout gate:** `python3 scripts/assert_tip_ready.py <english.json> <source.json>` must exit 0 before marking done. Scaffold (`Lemma-led` / `Rem early|mid|closeout`) or tip ops in source are refused.
 
-
 ```bash
 python3 scripts/claims.py start --agent YourName
 ```
@@ -18,6 +17,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+
 | nemesius-de-natura-hominis-densify | prepped | nemesius-de-natura-hominis | Full work densify (Wither 1636 PD English) | Owner | 2026-09-14 | wip/nemesius-de-natura-hominis-densify | machine crib (Pass A/lemmas/OCR); not reading English |
 | macarius-spiritual-homilies-densify | prepped | macarius-spiritual-homilies | Full work densify (PD English exists) | Owner | 2026-09-14 | wip/macarius-spiritual-homilies-densify | machine crib (Pass A/lemmas/OCR); not reading English |
 | philostorgius-he-densify | prepped | philostorgius-he | Full work densify (Walford PD English) | Owner | 2026-09-15 | wip/philostorgius-he-densify | machine crib (Pass A/lemmas/OCR); not reading English |
@@ -38,15 +38,16 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | paulus-silentarius-sophia-densify | prepped | paulus-silentarius-sophia | Full work densify (Lethaby PD English) | OpenCode | 2026-09-15 | wip/paulus-silentarius-sophia-densify | machine crib (Pass A/lemmas/OCR); not reading English |
 | paulus-silentarius-ambonis-densify | prepped | paulus-silentarius-ambonis | Full work densify (Lethaby/Swainson PD English) | OpenCode | 2026-09-15 | wip/paulus-silentarius-ambonis-densify | machine crib (Pass A/lemmas/OCR); not reading English |
 | crocius-syntagma-densify | claimed | crocius-syntagma | Full work densify (Syntagma 4 books; 1636 Latin) | OpenCode | 2026-09-16 | wip/crocius-syntagma-densify | Reformed lane; SLUB Villerian 1636 PD Latin; new English from Latin |
-| davenant-dissertationes-densify | free | davenant-dissertationes-duae | Full work densify (Dissertationes duae; 1650 Latin) |  |  |  | Reformed lane; Daniel 1650 PD Latin; new English from Latin |
-| baron-philosophia-densify | free | baron-philosophia-theologiae-ancillans | Full work densify (Philosophia theologiae ancillans; 1658 Latin) |  |  |  | Reformed lane; Oxford 1658 PD Latin; new English from Latin |
-| placeus-de-imputatione-densify | free | placeus-de-imputatione | Full work densify (De imputatione; 1661 Latin) |  |  |  | Reformed lane; Lesnerius 1661 PD Latin; new English from Latin |
-| le-blanc-theses-densify | free | le-blanc-theses-theologicae | Full work densify (Theses theologicae; 1675 Latin) |  |  |  | Reformed lane; Pitt 1675 PD Latin; new English from Latin |
-| strimesius-in-controversias-densify | free | strimesius-in-controversias-evangelicorum | Full work densify (In controversias evangelicorum; 1708 Latin) |  |  |  | Reformed lane; Francofurti ad Viadrum 1708 PD Latin; new English from Latin |
+| davenant-dissertationes-densify | claimed | davenant-dissertationes-duae | Full work densify (Dissertationes duae; 1650 Latin) | scribe-davenant | 2026-09-22 | wip/davenant-dissertationes-densify | Reformed lane; Daniel 1650 PD Latin; new English from Latin |
+| baron-philosophia-densify | claimed | baron-philosophia-theologiae-ancillans | Exercitatio Prima densify Art. I–VII live (Art. VIII+ remain; not whole 213 pp) | Scribe | 2026-09-21 | wip/baron-philosophia-densify | Reformed lane; Oxford 1658 PD Latin; new English from Latin |
+| placeus-de-imputatione-densify | claimed | placeus-de-imputatione | Full work densify (De imputatione; 1661 Latin) | scribe-placeus | 2026-09-22 | wip/placeus-de-imputatione-densify | Reformed lane; Lesnerius 1661 PD Latin; new English from Latin |
+| le-blanc-theses-densify | claimed | le-blanc-theses-theologicae | Full work densify (Theses theologicae; 1675 Latin) | scribe-leblanc | 2026-09-22 | wip/le-blanc-theses-densify | Reformed lane; Pitt 1675 PD Latin; new English from Latin |
+| strimesius-in-controversias-densify | claimed | strimesius-in-controversias-evangelicorum | Full work densify (In controversias evangelicorum; 1708 Latin) | scribe-strimesius | 2026-09-22 | wip/strimesius-in-controversias-densify | Reformed lane; Francofurti ad Viadrum 1708 PD Latin; new English from Latin |
 
 | cyr-isa-prologue | free | cyril-alexandria-isaiah | prologue |  |  | wip/cyr-isa-prologue | auto queue |
 | cyr-isa-logos1-open | free | cyril-alexandria-isaiah | logos1-open |  |  | wip/cyr-isa-logos1-open | auto queue |
 | cyr-isa-logos1-rem-early | free | cyril-alexandria-isaiah | logos1-rem-early |  |  | wip/cyr-isa-logos1-rem-early | auto queue |
+
 | cyr-isa-logos1-rem-close | free | cyril-alexandria-isaiah | logos1-rem-close |  |  | wip/cyr-isa-logos1-rem-close | auto queue |
 | cyr-isa-logos2-open | claimed | cyril-alexandria-isaiah | logos2-open | goliveNV-nv | 2026-09-23 | wip/cyr-isa-logos2-open | auto queue |
 | cyr-isa-logos2-rem-early | free | cyril-alexandria-isaiah | logos2-rem-early |  |  |  | auto queue |
@@ -145,7 +146,6 @@ Archived: older done rows now live in `docs/CLAIMS_ARCHIVE.md` (1871 rows, full 
 Keep this file lean: when a claim closes, move its row to the archive instead of letting this section grow.
 
 | cyr-isa-tomos2-open | done | book2-tomos2-open | 2026-09-22 | AI cross-check (verify); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260923T034046048669Z-cyr-isa-tomos2-open |
-| cyr-isa-logos1-rem-mid | done | logos1-rem-mid | 2026-09-23 | AI cross-check (golive5-cf); @cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash; receipt 20260923T054356295735Z-cyr-isa-logos1-rem-mid |
 ## Do not claim these (owner / blocked)
 
 - Website deploy / Cloudflare Pages / edits under `websites/fathers.saneapps.com`
@@ -153,3 +153,4 @@ Keep this file lean: when a claim closes, move its row to the archive instead of
 - Inventing a new book slug without `docs/WORKS_QUEUE.md` + charter
 - Any modern or ANF English as the reading text
 - Changing Slice columns or merging/splitting claim rows (ask owner)
+| cyr-isa-logos1-rem-mid | done | logos1-rem-mid | 2026-09-23 | AI cross-check (golive5-cf); @cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash; receipt 20260923T054356295735Z-cyr-isa-logos1-rem-mid |

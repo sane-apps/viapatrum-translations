@@ -86,12 +86,15 @@ STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 echo "[$STAMP] fathers overnight start host=$(hostname -s) fuse=$fails/$MAX_KEEPALIVE" | tee -a "$OUT/runner.log"
 
 set +e
+# Tee full lane output per night: launchd stdout is not reliably
+# persisted, and runner.log only keeps start/end lines. pipefail keeps
+# RC as the quota exit (tee succeeding does not mask it).
 nice -n 10 /usr/bin/python3 scripts/overnight_quota.py \
   --lanes both \
   --agent overnight-mini \
   --max-claims 12 \
-  --reserve 800 --mode auto
-RC=$?
+  --reserve 800 --mode auto 2>&1 | tee -a "$OUT/nightly-$DAY.log"
+RC=${PIPESTATUS[0]:-$?}
 set -e
 
 echo "[$(date -u +%Y%m%dT%H%M%SZ)] fathers overnight end rc=$RC" | tee -a "$OUT/runner.log"

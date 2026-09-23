@@ -1,42 +1,463 @@
-# Logos Personal Book backlog
+# Logos Personal Books backlog (generated - do not hand-edit)
 
-Updated: 2026-09-15 16:57 UTC (Mini audit). Owner compiles on **Air** only (SOP §5). Agents do not ship site from this file.
+Regenerated: 2026-09-23T16:57-04:00 by scripts/logos_backlog.py from the live
+Mini PersonalBookManager.db + repo books/*/book.yml + upload receipts.
+Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 
-Queue: tip-shipped / live works with a DOCX body that still need Air Personal Book steps (cover art, description, upload/compile).
+## Summary
 
-Related:
-- Markup rules: `docs/LOGOS_MARKUP.md`
-- Process: `docs/SOP.md` §4–6
-- Description template: `docs/LOGOS_DESCRIPTION_TEMPLATE.md`
+- Compiled in Logos: **31**
+- Metadata row exists, never compiled: **0**
+- DOCX exists, no Logos row yet: **0**
+- No DOCX (needs build_book.py or per-slice builder): **406**
 
-## Awaiting Air Logos (pending)
+## Compiled (title | book Id | LastCompiled | uploaded)
 
-| slug | title | docx path | site URL | Logos status | notes |
-| --- | --- | --- | --- | --- | --- |
-| `nemesius-de-natura-hominis` | Nemesius: De natura hominis | `books/nemesius-de-natura-hominis/nemesius-de-natura-hominis.docx` | https://fathers.saneapps.com/works/nemesius-de-natura-hominis/ | **pending** | Tip densify 1.1–3.1 live (HTTP 200). verify_docx OK 2026-09-15; inline Bible×2; TN 1–24 Headword; no footnotes.xml/logosres. Description stub: books/.../reviews/audit/logos_description.md. Cover art + Air upload/compile still needed. Site already live — no re-ship required for Logos markup (DOCX unchanged this audit). |
-| `origen-heraclides-pascha` | Origen — Dialogue with Heraclides and On Pascha | `books/origen-heraclides-pascha/origen-heraclides-pascha.docx` | https://fathers.saneapps.com/works/origen-dialogue-heraclides/ (+ /works/origen-on-pascha/) | **pending** | Live tip pages present; DOCX exists; resource_id empty. Needs Logos description stub + cover + Air compile. Re-run verify_docx before Build. |
-| `origen-jeremiah-samuel` | Origen: Homilies on Jeremiah and on 1 Samuel 28 | `books/origen-jeremiah-samuel/origen-jeremiah-samuel.docx` | https://fathers.saneapps.com/works/origen-homilies-jeremiah/ (+ /works/origen-homily-1samuel-28/) | **pending** | Live tip pages present; DOCX exists; resource_id empty. Needs description stub + cover + Air compile. |
-| `cyril-alexandria-adoration-1` | Cyril of Alexandria: On Adoration (tip pack / live adoration pages) | `books/cyril-alexandria-adoration-1/cyril-alexandria-adoration-1.docx` | https://fathers.saneapps.com/works/cyril-adoration-1/ (… through cyril-adoration-17 on site) | **pending** | Live adoration tip pages on site; local DOCX is adoration-1 pack — confirm body coverage vs live slugs before PBB. Description + cover + Air compile pending. |
+- 'De imputatione primi peccati Adami (Cap. I–VII tip: probable + necessary args | Id 30 | 2026-09-23T13:37:45-04:00 | 2026-09-23T14:45:11-04:00
+- Ante-Nicene Dogmatics | Id 6 | 2026-09-23T13:33:32-04:00 | 2026-09-23T14:03:08-04:00
+- Cyril of Alexandria: Commentary on Isaiah | Id 34 | 2026-09-23T13:18:25-04:00 | 2026-09-23T14:04:37-04:00
+- Cyril of Alexandria: On Adoration and Worship in Spirit and Truth, Book 1 | Id 7 | 2026-09-18T15:16:04-04:00 | 2026-09-23T14:04:10-04:00
+- Cyril of Alexandria: On the True Faith to the Imperial Women | Id 11 | 2026-09-18T11:47:09-04:00 | 2026-09-23T14:23:08-04:00
+- Dissertationes duae (De morte Christi Cap. 1-4 partial) | Id 12 | 2026-09-23T13:34:00-04:00 | 2026-09-23T14:23:36-04:00
+- Epiphanius: Ancoratus | Id 13 | 2026-09-18T11:51:04-04:00 | 2026-09-23T14:24:03-04:00
+- Epiphanius: De mensuris | Id 14 | 2026-09-18T11:51:24-04:00 | 2026-09-23T14:24:34-04:00
+- Epiphanius: Panarion | Id 15 | 2026-09-18T11:51:44-04:00 | 2026-09-23T14:54:11-04:00
+- Gregory Thaumaturgus: Ecclesiastes metaphrase | Id 17 | 2026-09-18T11:52:48-04:00 | 2026-09-23T14:54:43-04:00
+- Gregory Thaumaturgus: Epistula canonica | Id 18 | 2026-09-18T12:05:38-04:00 | 2026-09-23T15:03:48-04:00
+- Gregory Thaumaturgus: In annuntiationem | Id 19 | 2026-09-18T12:06:07-04:00 | 2026-09-23T14:11:41-04:00
+- Gregory Thaumaturgus: Panegyricus | Id 20 | 2026-09-18T12:06:40-04:00 | 2026-09-23T14:29:11-04:00
+- Gregory Thaumaturgus: Sermo in omnes sanctos | Id 21 | 2026-09-18T12:07:15-04:00 | 2026-09-23T14:13:06-04:00
+- Gregory Thaumaturgus: Twelve Chapters on the Faith | Id 16 | 2026-09-18T12:07:54-04:00 | 2026-09-23T14:26:19-04:00
+- Ingenua in Controversias Evangelicorum (Prefatio + Crimina defenses + Part I Protheoria through Coena Domini, Post Lutherum Controv. III–XIII + XV Tolerantia tip, and Hexades Annotationum Prooemium H.I–§.III + Annotatio I §.I–§.VIII tip) | Id 32 | 2026-09-23T14:16:30-04:00 | 2026-09-23T14:47:18-04:00
+- Julian of Eclanum: Surviving Arguments Preserved by Augustine | Id 5 | 2026-09-18T15:17:04-04:00 | 2026-09-23T15:33:14-04:00
+- Macarius: The Spiritual Homilies | Id 23 | 2026-09-18T12:09:31-04:00 | 2026-09-23T15:43:54-04:00
+- Nemesius: De natura hominis | Id 24 | 2026-09-18T12:11:29-04:00 | 2026-09-23T15:51:58-04:00
+- Origen — Dialogue with Heraclides and On Pascha | Id 9 | 2026-09-18T15:13:08-04:00 | 2026-09-23T14:38:08-04:00
+- Origen: Homilies on Jeremiah and on 1 Samuel 28 | Id 8 | 2026-09-18T15:14:22-04:00 | 2026-09-23T16:05:24-04:00
+- Origen: Homilies on Numbers | Id 25 | 2026-09-18T12:12:39-04:00 | 2026-09-23T16:16:27-04:00
+- Origen: On Prayer and Exhortation to Martyrdom | Id 4 | 2026-09-18T15:15:39-04:00 | 2026-09-23T16:29:15-04:00
+- Paulus Silentarius: Descriptio Ambonis | Id 26 | 2026-09-18T12:13:54-04:00 | 2026-09-23T16:39:26-04:00
+- Paulus Silentarius: Descriptio Sanctae Sophiae | Id 27 | 2026-09-18T12:15:11-04:00 | 2026-09-23T14:43:18-04:00
+- Philostorgius: Ecclesiastical History | Id 28 | 2026-09-18T12:16:34-04:00 | 2026-09-23T16:46:42-04:00
+- Photius: Bibliotheca (Myriobiblon) | Id 29 | 2026-09-23T13:52:00-04:00 | 2026-09-23T13:54:30-04:00
+- Serapion of Antioch: Fragmenta | Id 31 | 2026-09-18T12:19:30-04:00 | 2026-09-23T16:56:56-04:00
+- Syntagma sacrae theologiae (Liber I Cap. 1 tip) | Id 10 | 2026-09-18T12:21:02-04:00 | 2026-09-23T14:03:43-04:00
+- The Cesti (fragments of books 7, 2, 3, 4, 8, 9, and 13) | Id 33 | 2026-09-23T13:26:34-04:00 | 2026-09-23T14:53:43-04:00
+- Theological Theses (De Theologia I-XLIII; De Fide I-XXII) | Id 22 | 2026-09-23T13:55:33-04:00 | 2026-09-23T14:14:37-04:00
 
-## Already compiled (reference)
+## Pending build (row exists, LastCompiled NULL)
 
-| slug | docx | resource_id | notes |
-| --- | --- | --- | --- |
-| `julian-of-eclanum` | `books/julian-of-eclanum/Julian of Eclanum English.docx` | `PBB:49ea9d72e8d7414782017dd81625e605` | verified — SOP reference compile |
-| `origen-prayer-martyrdom` | `books/origen-prayer-martyrdom/origen-prayer-martyrdom.docx` | `PBB:4f41cb276f014e1aa7ee22103e299a76` | done — already compiled |
+- (none)
 
-## Excluded this pass
+## DOCX exists, no Logos row (pb_sync will INSERT on next build run)
 
-- **Macarius** (`macarius-spiritual-homilies`): another agent owns those files — do not edit; not listed as actionable here even if a DOCX exists.
-- **OpenCode:** leave alone.
-- Draft/series-closeout books with DOCX but **not** tip-live on fathers.saneapps.com are out of this tip backlog (add later if tip-shipped).
+- (none)
 
-## Nemesius audit snapshot (2026-09-15)
+## No DOCX (Logos-blocked until a builder exists)
 
-- Read SOP §Logos + `LOGOS_MARKUP.md` fully.
-- Live tip DOCX + english JSON audited: **pass** (no rebuild).
-- English has parenthetical `(Genesis 2:2)` / `(John 5:17)`; builder emits `[[… >> Bible:…]]` in DOCX.
-- Headword TN (not Word footnotes); headings OK; no `logosres:`.
-- **Site re-ship:** not required for Logos markup (no DOCX change). Site already serves the work URL above.
-- Description stub ready under `books/nemesius-de-natura-hominis/reviews/audit/logos_description.md`.
-
+- agathias-historiae | Historiae
+- alexander-monachus-inventio-crucis | Inventio crucis
+- alexander-monachus-inventio-crucis-epitome | Inventio crucis epitome
+- alexander-monachus-laudatio-barnabae | Laudatio Barnabae apostoli
+- ammonius-fragmenta-joannem | Fragmenta in Joannem
+- amphilochius-contra-haereticos | Contra haereticos
+- amphilochius-de-recens-baptizatis | De recens baptizatis
+- amphilochius-epistula-synodalis | Epistula synodalis
+- amphilochius-iambi-seleucum | Iambi ad Seleucum
+- amphilochius-in-illud-non-potest | In illud Non potest
+- amphilochius-in-illud-pater | In illud Pater
+- amphilochius-in-lazarum | In Lazarum
+- amphilochius-in-mulierem-peccatricem | In mulierem peccatricem
+- amphilochius-in-natalitia-domini | In natalitia domini
+- amphilochius-in-occursum-domini | In occursum domini
+- amphilochius-in-sabbati-sancti | In diem sabbati sancti
+- amphilochius-in-zacchaeum | In Zacchaeum
+- amphilochius-oratio-resurrectionem | Oratio in resurrectionem domini
+- apollinaris-fragmenta-joannem | Fragmenta in Joannem
+- apollinaris-fragmenta-matthaeum | Fragmenta in Matthaeum
+- apollinaris-fragmenta-psalmos | Fragmenta in Psalmos
+- apollinaris-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- arethas-epigrammata | Epigrammata
+- arethas-fragmenta-1cor | Fragmenta in epistulam i ad Corinthios
+- arethas-fragmenta-2cor | Fragmenta in epistulam ii ad Corinthios
+- arethas-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- arethas-scholia-cyrilli-apologiam | Scholia Arethae in Cyrilli apologiam xii anathematismorum
+- asterius-homilia-9 | Homilia 9 (in sanctum Phocam)
+- asterius-homiliae | Homiliae
+- baron-philosophia-theologiae-ancillans | Philosophia theologiae ancillans (Exercitatio Prima Art. I-XII)
+- chronicon-paschale | Chronicon paschale
+- cosmas-topographia | Cosmas Indicopleustes: Topographia Christiana
+- cyril-alexandria-ad-calosyrium | Ad Calosyrium
+- cyril-alexandria-ad-carthaginiense | Ad Carthaginiense concilium
+- cyril-alexandria-ad-episcopos-libyae | Ad episcopos Libyae et Pentapoleos
+- cyril-alexandria-ad-optimum | Ad Optimum episcopum
+- cyril-alexandria-ad-xystum | Ad Xystum episcopum Romae
+- cyril-alexandria-contra-julianum | Cyril of Alexandria: Against Julian
+- cyril-alexandria-de-synagogae-defectu | De synagogae defectu
+- cyril-alexandria-dialogus-nestorio | Dialogus cum Nestorio
+- cyril-alexandria-encomium-maria | Encomium in sanctam Mariam Deiparam
+- cyril-alexandria-epistula-domnum | Epistula canonica ad Domnum
+- cyril-alexandria-epistula-photium | Epistula ad Photium presbyterum
+- cyril-alexandria-epistula-theodosium | Epistula ad Theodosium imperatorem
+- cyril-alexandria-festal-letters | Cyril of Alexandria: Festal Letters (Paschal Homilies)
+- cyril-alexandria-fragmenta-1-corinthios | Fragmenta in epistulam i ad Corinthios
+- cyril-alexandria-fragmenta-2-corinthios | Fragmenta in epistulam ii ad Corinthios
+- cyril-alexandria-fragmenta-acta-catholicas | Fragmenta in Acta et epistulas catholicas
+- cyril-alexandria-fragmenta-canticum | Fragmenta in Canticum canticorum
+- cyril-alexandria-fragmenta-contra-diodorum | Fragmenta ex libro contra Diodorum Tarsensem
+- cyril-alexandria-fragmenta-contra-theodorum-2 | Fragmenta ex libro ii contra Theodorum Mopsuestenum
+- cyril-alexandria-fragmenta-contra-theodorum-3 | Fragmenta ex libro iii contra Theodorum Mopsuestenum
+- cyril-alexandria-fragmenta-cyri-joannis | Fragmenta de translatione reliquiarum Cyri et Joannis
+- cyril-alexandria-fragmenta-danielem | Fragmenta in Danielem
+- cyril-alexandria-fragmenta-de-uno-filio | Fragmenta homiliae de uno filio
+- cyril-alexandria-fragmenta-ezechielem | Fragmenta in Ezechielem
+- cyril-alexandria-fragmenta-hebraeos | Fragmenta in epistulam ad Hebraeos
+- cyril-alexandria-fragmenta-homiliae-unus | Fragmenta homiliae quod unus est Christus
+- cyril-alexandria-fragmenta-jeremiam | Fragmenta in Jeremiam
+- cyril-alexandria-fragmenta-numeros | Fragmenta duo in Numeros
+- cyril-alexandria-fragmenta-regum | Fragmenta in libros Regum
+- cyril-alexandria-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- cyril-alexandria-fragmentum-baruch | Fragmentum in librum Baruch
+- cyril-alexandria-fragmentum-papyraceum | Fragmentum incertum papyraceum
+- cyril-alexandria-fragmentum-proverbia | Fragmentum in Proverbia
+- cyril-alexandria-fragmentum-psalmum | Fragmentum in Psalmum
+- cyril-alexandria-glaphyra | Cyril of Alexandria: Glaphyra on the Pentateuch
+- cyril-alexandria-homilia-cyrini | Homilia habita in ecclesia Cyrini
+- cyril-alexandria-homiliarum-incertarum | Homiliarum incertarum fragmenta
+- cyril-alexandria-in-parabolam-vineae | In parabolam vineae
+- cyril-alexandria-lucam-fragmenta | Commentarii in Lucam (Greek fragments)
+- cyril-alexandria-lucam-in-occursum | Homilia in occursum domini (Lucam)
+- cyril-alexandria-lucam-in-transfigurationem | Homilia in transfigurationem (Lucam)
+- cyril-alexandria-matthew-fragments | Cyril of Alexandria: Fragments on Matthew
+- cyril-alexandria-psalms | Cyril of Alexandria: Exposition on the Psalms
+- cyril-alexandria-responsiones-tiberium | Cyril of Alexandria: Responsiones ad Tiberium
+- cyril-alexandria-sermo-trium-puerorum | Sermo de obitu sanctorum trium puerorum
+- cyril-alexandria-solutiones | Solutiones
+- cyril-alexandria-solutiones-vat-447 | Solutiones Vat. 447 fragment
+- cyril-alexandria-thesaurus | Cyril of Alexandria: Thesaurus on the Holy and Consubstantial Trinity
+- cyril-alexandria-trinity-dialogue-1 | Cyril of Alexandria: Dialogues on the Holy and Consubstantial Trinity (Dialogue 1)
+- cyril-alexandria-twelve-prophets | Cyril of Alexandria: Commentary on the Twelve Prophets
+- cyril-jerusalem-epistula-constantium | Epistula ad Constantium imperatorem
+- cyril-jerusalem-homilia-ego-vado | Homilia in illud Ego vado ad patrem meum
+- cyril-jerusalem-homilia-occursum | Homilia in occursum domini
+- cyril-jerusalem-homilia-paralyticum | Homilia in paralyticum juxta piscinam jacentem
+- didymus-commentarii-ecclesiasten | Commentarii in Ecclesiasten
+- didymus-commentarii-job | Commentarii in Job
+- didymus-commentarii-octateuchum | Commentarii in Octateuchum et Reges
+- didymus-commentarii-psalmos | Commentarii in Psalmos
+- didymus-commentarii-zacchariam | Commentarii in Zacchariam
+- didymus-contra-manichaeos | Contra Manichaeos
+- didymus-de-trinitate | De trinitate
+- didymus-dialexis-montanistae | Dialexis Montanistae et orthodoxi
+- didymus-enarratio-catholicas | In epistulas catholicas brevis enarratio
+- didymus-fragmenta-1cor | Fragmenta in epistulam i ad Corinthios
+- didymus-fragmenta-2cor | Fragmenta in epistulam ii ad Corinthios
+- didymus-fragmenta-joannem | Fragmenta in Joannem
+- didymus-fragmenta-proverbia | Fragmenta in Proverbia
+- didymus-fragmenta-psalmos | Fragmenta in Psalmos
+- didymus-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- didymus-fragmentum-hebraeos | Fragmentum in epistulam ad Hebraeos
+- didymus-in-genesim | In Genesim
+- diodorus-fragmenta | Fragmenta
+- diodorus-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- epiphanius-anacephalaeosis | Epiphanius: Anacephalaeosis
+- epiphanius-anaphora-graeca | Anaphora Graeca
+- epiphanius-apophthegmata | Apophthegmata
+- epiphanius-appendices-ad-indices-apostolorum-discipulorumque | Appendices ad indices apostolorum discipulorumque
+- epiphanius-de-fide | De fide
+- epiphanius-de-prophetarum-vita-et-obitu | De prophetarum vita et obitu
+- epiphanius-de-prophetarum-vita-et-obitu-recensio-altera | De prophetarum vita et obitu Recensio altera
+- epiphanius-de-trinitate | De trinitate
+- epiphanius-de-xii-gemmis | De xii gemmis
+- epiphanius-de-xii-gemmis-fragmenta | De xii gemmis Fragmenta
+- epiphanius-enumeratio-lxxii-prophetarum-et-prophetissarum | Enumeratio lxxii prophetarum et prophetissarum
+- epiphanius-epistula-ad-eusebium | Epistula ad Eusebium
+- epiphanius-epistula-ad-joannem-hierosolymitanum | Epistula ad Joannem Hierosolymitanum
+- epiphanius-epistula-ad-theodosium-imperatorem | Epistula ad Theodosium imperatorem
+- epiphanius-fragmenta-precationis-et-exorcismi | Fragmenta precationis et exorcismi
+- epiphanius-homilia-in-assumptionem-christi | Homilia in assumptionem Christi
+- epiphanius-homilia-in-christi-resurrectionem | Homilia in Christi resurrectionem
+- epiphanius-homilia-in-divini-corporis-sepulturam | Homilia in divini corporis sepulturam
+- epiphanius-homilia-in-festo-palmarum | Homilia in festo palmarum
+- epiphanius-homilia-in-laudes-mariae-deiparae | Homilia in laudes Mariae deiparae
+- epiphanius-index-apostolorum | Index apostolorum
+- epiphanius-index-discipulorum | Index discipulorum
+- epiphanius-liturgia-praesanctificatorum | Liturgia praesanctificatorum
+- epiphanius-notitiae-episcopatuum | Notitiae episcopatuum
+- epiphanius-testamentum-ad-cives | Testamentum ad cives
+- epiphanius-testimonia-ex-divinis-et-sacris-scripturis | Testimonia ex divinis et sacris scripturis
+- epiphanius-tractatus-contra-eos-qui-imagines-faciunt | Tractatus contra eos qui imagines faciunt
+- epiphanius-tractatus-de-numerorum-mysteriis | Tractatus de numerorum mysteriis
+- eudokia-de-martyrio-cypriani | De martyrio sancti Cypriani
+- eudokia-homerocentones | Homerocentones
+- eusebius-emesa-fragmenta-galatas | Fragmenta in epistulam ad Galatas
+- eusebius-emesa-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- eusebius-emesa-fragmentum-1cor | Fragmentum in epistulam i ad Corinthios
+- eustathius-allocutio-constantinum | Allocutio ad imperatorem Constantinum
+- eustathius-commentarius-psalmum | Commentarius in Psalmum
+- eustathius-commentarius-psalmum-92 | Commentarius in Psalmum 92
+- eustathius-de-anima-contra-arianos | De anima contra Arianos
+- eustathius-de-anima-contra-philosophos | De anima contra philosophos
+- eustathius-de-fide-contra-arianos | De fide contra Arianos
+- eustathius-de-melchisedech | De Melchisedech
+- eustathius-engastrimytho | De engastrimytho contra Origenem
+- eustathius-fragmenta-varia | Fragmenta varia
+- eustathius-hexaemeron | Commentarius in hexaemeron
+- eustathius-homilia-lazarum | Homilia christologica in Lazarum
+- eustathius-in-ecclesiasten | In Ecclesiasten
+- eustathius-in-genesim-de-creatione | In Genesim de creatione
+- eustathius-in-inscriptione-titulorum | In inscriptione titulorum
+- eustathius-in-joseph | In Joseph
+- eustathius-in-proverbia | In Proverbia
+- eustathius-oratio-dominus-creavit | Oratio in illud Dominus creavit me
+- eustathius-oratio-psalmorum-graduum | Oratio in inscriptione psalmorum graduum
+- eustathius-orationes-contra-arianos | Orationes contra Arianos
+- eustathius-thess-de-capta-thessalonica | De capta Thessalonica
+- evagrius-ad-eulogium | Tractatus ad Eulogium
+- evagrius-capitula-xxxiii | Capitula xxxiii
+- evagrius-de-magistris | De magistris et discipulis
+- evagrius-de-malignis-cogitationibus | De malignis cogitationibus
+- evagrius-de-octo-spiritibus | De octo spiritibus malitiae
+- evagrius-de-vitiis | De vitiis quae opposita sunt virtutibus
+- evagrius-expositio-proverbia | Expositio in Proverbia Salomonis
+- evagrius-gnosticus | Gnosticus
+- evagrius-institutio-monachos | Institutio sive Paraenesis ad monachos
+- evagrius-practicus | Practicus
+- evagrius-rerum-monachalium | Rerum monachalium rationes
+- evagrius-scholia-ecclesiasten | Scholia in Ecclesiasten
+- evagrius-scholia-proverbia | Scholia in Proverbia
+- evagrius-sententiae-monachos | Sententiae ad monachos
+- evagrius-sententiae-virginem | Sententiae ad virginem
+- evagrius-spiritales-sententiae | Spiritales sententiae per alphabeticum dispositae
+- gennadius-fragmenta-corinthios | Fragmenta in epistulam i et ii ad Corinthios
+- gennadius-fragmenta-galatas | Fragmenta in epistulam ad Galatas
+- gennadius-fragmenta-hebraeos | Fragmenta in epistulam ad Hebraeos
+- gennadius-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- gennadius-fragmentum-2thess | Fragmentum in epistulam ii ad Thessalonicenses
+- georges-pisides-bellum-avaricum | Bellum Avaricum
+- georges-pisides-de-expeditione-persica | De expeditione Persica
+- georges-pisides-heracliadis-fragmenta | Heracliadis iii acroaseos fragmenta
+- georges-pisides-heraclias | Heraclias
+- georges-pisides-in-bonum-patricium | In Bonum patricium
+- georges-pisides-in-heraclium-redeuntem | In Heraclium ex Africa redeuntem
+- georges-pisides-in-restitutionem-crucis | In restitutionem sanctae crucis
+- georgius-cedrenus-compendium-historiarum | Compendium historiarum
+- georgius-peccator-hymnus | Hymnus
+- georgius-syncellus-ecloga-chronographica | Ecloga chronographica
+- gregory-thaumaturgus-ad-tatianum-de-anima | Gregory Thaumaturgus: On the Soul, to Tatian
+- gregory-thaumaturgus-jeremiah-fragments | Fragmenta in Jeremiam
+- gregory-thaumaturgus-matthew-fragment | Fragmentum in evangelium Matthaei
+- gregory-thaumaturgus-ouden-eidolon | Eis to ouden eidolon en kosmo
+- gregory-thaumaturgus-sententiae | Sententiae
+- hesychius-homilia-i-hypapante | Homilia i de Hypapante
+- hesychius-homilia-i-lazarum | Homilia i in sanctum Lazarum
+- hesychius-homilia-i-longinum | Homilia i in sanctum Longinum centurionem
+- hesychius-homilia-i-maria-deipara | Homilia i de sancta Maria deipara
+- hesychius-homilia-i-pascha | Homilia i in sanctum pascha
+- hesychius-homilia-ii-hypapante | Homilia ii de Hypapante
+- hesychius-homilia-ii-lazarum | Homilia ii in sanctum Lazarum
+- hesychius-homilia-ii-longinum | Homilia ii in sanctum Longinum centurionem
+- hesychius-homilia-ii-maria-deipara | Homilia ii de sancta Maria deipara
+- hesychius-homilia-ii-pascha | Homilia ii in sanctum pascha
+- hesychius-homilia-jejunio | Homilia de jejunio
+- hesychius-in-andream | In sanctum Andream
+- hesychius-in-antonium | In sanctum Antonium
+- hesychius-in-conceptionem-praecursoris | In conceptionem venerabilis praecursoris
+- hesychius-in-lazarum-ramos | In Lazarum et in ramos palmarum
+- hesychius-in-lucam | In sanctum Lucam
+- hesychius-in-petrum-paulum | In sanctos Petrum et Paulum
+- hesychius-in-procopium | In sanctum Procopium
+- hesychius-in-sanctos-martyres | In sanctos martyres
+- hesychius-in-stephanum | In sanctum Stephanum
+- irenaeus-demonstration | Irenaeus of Lyons: Demonstration of the Apostolic Preaching
+- john-antioch-historia-chronike | Historia Chronike
+- john-damascus-commentarii-in-epistulas-pauli | Commentarii in epistulas Pauli
+- john-damascus-contra-jacobitas | Contra Jacobitas
+- john-damascus-contra-manichaeos | Contra Manichaeos
+- john-damascus-contra-nestorianos | Contra Nestorianos
+- john-damascus-contra-severianos | Contra Severianos
+- john-damascus-de-animato | De animato
+- john-damascus-de-azymis | De azymis
+- john-damascus-de-duabus-in-christo-voluntatibus | De duabus in Christo voluntatibus
+- john-damascus-de-fide-contra-nestorianos | De fide contra Nestorianos
+- john-damascus-de-haeresibus | De haeresibus
+- john-damascus-de-immaculato-corpore | De immaculato corpore
+- john-damascus-de-mensibus-macedonicis | De mensibus Macedonicis
+- john-damascus-de-natura-composita | De natura composita
+- john-damascus-de-octo-spiritibus-nequitiae | De octo spiritibus nequitiae
+- john-damascus-de-partibus-animae | De partibus animae
+- john-damascus-de-sacris-jejuniis | De sacris jejuniis
+- john-damascus-de-sancta-trinitate | De sancta trinitate
+- john-damascus-de-theologia | De theologia
+- john-damascus-de-unione | De unione
+- john-damascus-de-virtutibus-et-vitiis | De virtutibus et vitiis
+- john-damascus-deprecationes | Deprecationes
+- john-damascus-dialectica-recensio-brevior | Dialectica Recensio brevior
+- john-damascus-dialectica-recensio-fusior | Dialectica Recensio fusior
+- john-damascus-dialectica-sive-capita-philosophica | Dialectica sive Capita philosophica
+- john-damascus-disputatio-christiani-et-saraceni | Disputatio Christiani et Saraceni
+- john-damascus-encomium-in-sanctum-joannem-chrysostomum | Encomium in sanctum Joannem Chrysostomum
+- john-damascus-epistula-ad-theophilum-imperatorem-de-sanctis-et-venerandi | Epistula ad Theophilum imperatorem de sanctis et venerandi
+- john-damascus-epistula-de-hymno-trisagio | Epistula de hymno trisagio
+- john-damascus-ex-thesauro-orthodoxiae-nicetae-choniatae | Ex thesauro orthodoxiae Nicetae Choniatae
+- john-damascus-fragmenta-in-lucam | Fragmenta in Lucam
+- john-damascus-fragmenta-in-matthaeum | Fragmenta in Matthaeum
+- john-damascus-fragmenta-philosophica | Fragmenta philosophica
+- john-damascus-homilia-in-ficum-arefactam | Homilia in ficum arefactam
+- john-damascus-homilia-in-sabbatum-sanctum | Homilia in sabbatum sanctum
+- john-damascus-homilia-in-transfigurationem-domini | Homilia in transfigurationem domini
+- john-damascus-institutio-elementaris | Institutio elementaris
+- john-damascus-laudatio-sanctae-barbarae | Laudatio sanctae Barbarae
+- john-damascus-oratio-de-his-qui-in-fide-dormierunt | Oratio de his qui in fide dormierunt
+- john-damascus-passio-sancti-artemii | Passio sancti Artemii
+- john-damascus-qua-ratione-homo-imago-dei | Qua ratione homo imago dei
+- john-damascus-quid-est-homo | Quid est homo
+- john-damascus-sermo-in-annuntiationem-mariae | Sermo in annuntiationem Mariae
+- john-malalas-chronographia | Chronographia
+- john-malalas-chronographia-eclogae | Chronographia eclogae
+- john-malalas-chronologica | Chronologica
+- marcellus-ancyranus-fragmenta | Fragmenta
+- maximus-pg91-tomos-10 | PG 91 Tomos part 10
+- maximus-pg91-tomos1-agi | PG 91 Tomos 1 (Mystagogia; Capita de caritate; Liber asceticus; Capita theologica)
+- maximus-pg91-tomos2-a1 | PG 91 Tomos 2 part A1 (Erotapokriseis etc.)
+- maximus-pg91-tomos2-a2 | PG 91 Tomos 2 part A2
+- maximus-pg91-tomos2-a3 | PG 91 Tomos 2 part A3
+- maximus-pg91-tomos2-a4 | PG 91 Tomos 2 part A4
+- maximus-pg91-tomos2-a5 | PG 91 Tomos 2 part A5
+- maximus-pg91-tomos2-a6 | PG 91 Tomos 2 part A6
+- maximus-pg91-tomos2-a7 | PG 91 Tomos 2 part A7
+- maximus-pg91-tomos2-a8 | PG 91 Tomos 2 part A8
+- maximus-pg91-tomos2-a9 | PG 91 Tomos 2 part A9
+- maximus-vita | Vita Maximi Confessoris
+- nicephorus-breviarium-historicum | Breviarium historicum de rebus gestis post imperium Mauricii
+- nicephorus-bryennius-historiae | Historiae
+- nicephorus-chronographia-brevis | Chronographia brevis
+- nicephorus-phokas-de-velitatione-bellica | De velitatione bellica
+- nicephorus-refutatio-eversio-definitionis | Refutatio et eversio definitionis synodalis anni
+- nonnos-scholia-mythologica | Scholia mythologica
+- oecumenius-commentarius-apocalypsin | Commentarius in Apocalypsin
+- oecumenius-fragmenta-1cor | Fragmenta in epistulam i ad Corinthios
+- oecumenius-fragmenta-1thess | Fragmenta in epistulam i ad Thessalonicenses
+- oecumenius-fragmenta-1tim | Fragmenta in epistulam i ad Timotheum
+- oecumenius-fragmenta-2cor | Fragmenta in epistulam ii ad Corinthios
+- oecumenius-fragmenta-2thess | Fragmenta in epistulam ii ad Thessalonicenses
+- oecumenius-fragmenta-2tim | Fragmenta in epistulam ii ad Timotheum
+- oecumenius-fragmenta-colossenses | Fragmenta in epistulam ad Colossenses
+- oecumenius-fragmenta-ephesios | Fragmenta in epistulam ad Ephesios
+- oecumenius-fragmenta-galatas | Fragmenta in epistulam ad Galatas
+- oecumenius-fragmenta-hebraeos | Fragmenta in epistulam ad Hebraeos
+- oecumenius-fragmenta-philippenses | Fragmenta in epistulam ad Philippenses
+- oecumenius-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- oecumenius-fragmenta-titum | Fragmenta in epistulam ad Titum
+- oecumenius-fragmentum-philemonem | Fragmentum in epistulam ad Philemonem
+- olympiodorus-commentarii-baruch | Commentarii in Baruch
+- olympiodorus-commentarii-ecclesiasten | Commentarii in Ecclesiasten
+- olympiodorus-commentarii-jeremiae-epistulam | Commentarii in Jeremiae epistulam
+- olympiodorus-commentarii-jeremiam | Commentarii in Jeremiam
+- olympiodorus-commentarii-job | Commentarii in Job
+- olympiodorus-commentarii-lamentationes | Commentarii in Lamentationes
+- olympiodorus-contra-severum | Contra Severum Antiochenum
+- olympiodorus-fragmentum-gaudete | Fragmentum in illud Gaudete in illa die
+- origen-1-corinthians-fragments | Fragmenta ex commentariis in epistulam i ad Corinthios
+- origen-acta-homily-scrap | Fragmentum ex homiliis in Acta apostolorum
+- origen-apocalypse-scholia-scrap | Scholia in Apocalypsem
+- origen-contra-celsum | Origen: Contra Celsum
+- origen-de-resurrectione-scrap | De Resurrectione
+- origen-ephesians-fragments | Fragmenta ex commentariis in epistulam ad Ephesios
+- origen-exodus-homilies | Origen: Homilies on Exodus
+- origen-genesis-homilies | Origen: Homilies on Genesis
+- origen-hebrews-homily-scrap | Ex homiliis in epistulam ad Hebraeos
+- origen-isaiah-ezekiel | Origen: Homilies on Isaiah and Ezekiel
+- origen-job-enarrationes | Enarrationes in Job
+- origen-job-homilies | Homiliae in Job
+- origen-job-selecta | Selecta in Job
+- origen-john-later | Origen: Commentary on John (later books 13, 19, 20, 28, 32)
+- origen-joshua-homilies | Origen: Homilies on Joshua
+- origen-judges-homilies | Origen: Homilies on Judges
+- origen-lamentationes-fragments | Fragmenta in Lamentationes
+- origen-letters | Origen: Letters (Africanus; Gregory)
+- origen-leviticus-homilies | Origen: Homilies on Leviticus
+- origen-luke-homilies | Origen: Homilies on Luke
+- origen-matthew-later | Origen: Commentary on Matthew 15–17 + Series
+- origen-nt-fragments | Origen: NT Catena / Scholia Fragments
+- origen-osee-fragment | Fragmentum ex commentariis in Osee
+- origen-philocalia | Origen: Philocalia
+- origen-principiis | Origen: De Principiis (Peri Archon)
+- origen-proverbs-expositio | Expositio in Proverbia
+- origen-proverbs-fragments | Fragmenta ex commentariis in Proverbia
+- origen-psalms-excerpta | Excerpta in Psalmos
+- origen-psalms-fragments-greek | Fragments on the Psalms (Greek)
+- origen-psalms-rufinus | Origen: Homilies on Psalms 36–38 (Rufinus)
+- origen-regnorum-fragments | Fragmenta in librum primum Regnorum
+- origen-romans | Origen: Commentary on Romans (Rufinus)
+- origen-romans-catena | Commentarii in epistulam ad Romanos (catena Greek)
+- origen-ruth-scrap | In Ruth
+- origen-song | Origen: Homilies and Commentary on the Song of Songs
+- photius-commentarii-joannem | Commentarii in Joannem
+- photius-commentarii-matthaeum | Commentarii in Matthaeum
+- photius-epigramma | Epigramma
+- photius-fragmenta-1cor | Fragmenta in epistulam I ad Corinthios
+- photius-fragmenta-1thess | Fragmenta in epistulam I ad Thessalonicenses
+- photius-fragmenta-1tim | Fragmenta in epistulam i ad Timotheum
+- photius-fragmenta-2cor | Fragmenta in epistulam ii ad Corinthios
+- photius-fragmenta-2thess | Fragmenta in epistulam ii ad Thessalonicenses
+- photius-fragmenta-colossenses | Fragmenta in epistulam ad Colossenses
+- photius-fragmenta-ephesios | Fragmenta in epistulam ad Ephesios
+- photius-fragmenta-galatas | Fragmenta in epistulam ad Galatas
+- photius-fragmenta-hebraeos | Fragmenta in epistulam ad Hebraeos
+- photius-fragmenta-philippenses | Fragmenta in epistulam ad Philippenses
+- photius-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- photius-fragmentum-2tim | Fragmentum in epistulam ii ad Timotheum
+- photius-fragmentum-philemonem | Fragmentum in epistulam ad Philemonem
+- procopius-gaza-catena-canticum | Catena in Canticum canticorum
+- procopius-gaza-catena-ecclesiasten | Catena in Ecclesiasten
+- procopius-gaza-commentarii-isaiam | Commentarii in Isaiam
+- procopius-gaza-declamationes | Declamationes
+- procopius-gaza-descriptio-imaginis | Descriptio imaginis
+- procopius-gaza-epistula | Epistula
+- procopius-gaza-epistula-altera | Epistula_
+- procopius-gaza-epistulae | Epistulae
+- procopius-gaza-horologium | Horologium
+- procopius-gaza-refutatio-procli | Refutatio Procli
+- severianus-de-caeco-nato | De caeco nato
+- severianus-de-caeco-zacchaeo | De caeco et Zacchaeo
+- severianus-de-tribus-pueris | De tribus pueris
+- severianus-fragmenta-1thess | Fragmenta in epistulam i ad Thessalonicenses
+- severianus-fragmenta-1tim | Fragmenta in epistulam i ad Timotheum
+- severianus-fragmenta-2cor | Fragmenta in epistulam ii ad Corinthios
+- severianus-fragmenta-2thess | Fragmenta in epistulam ii ad Thessalonicenses
+- severianus-fragmenta-2tim | Fragmenta in epistulam ii ad Timotheum
+- severianus-fragmenta-colossenses | Fragmenta in epistulam ad Colossenses
+- severianus-fragmenta-ephesios | Fragmenta in epistulam ad Ephesios
+- severianus-fragmenta-galatas | Fragmenta in epistulam ad Galatas
+- severianus-fragmenta-hebraeos | Fragmenta in epistulam ad Hebraeos
+- severianus-fragmenta-philippenses | Fragmenta in epistulam ad Philippenses
+- severianus-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- severianus-fragmenta-titum | Fragmenta in epistulam ad Titum
+- severianus-fragmentum-philemonem | Fragmentum in epistulam ad Philemonem
+- severianus-in-1cor | In epistulam i ad Corinthios
+- severianus-in-genesim | In Genesim
+- severianus-in-illud-quando | In illud Quando ipsi subiciet omnia
+- severianus-in-job | In Job
+- symeon-junior-catechesae | Catechesae
+- symeon-junior-catecheses-et-gratiae | Catecheses et Gratiae
+- symeon-junior-epistulae | Epistulae
+- symeon-magister-chronographia | Chronographia
+- symeon-metaphrastes-chronicon-breve | Chronicon breve
+- theodore-studite-homilia-nativitatem-mariae | Homilia in nativitatem Mariae
+- theodore-studite-iambi | Iambi de variis argumentis
+- theodorus-heracleensis-matthew-fragments | Fragmenta in Matthaeum
+- theodorus-pg86a-fragmenta-1cor | Fragmenta in epistulam i ad Corinthios
+- theodorus-pg86a-fragmenta-2cor | Fragmenta in epistulam ii ad Corinthios
+- theodorus-pg86a-fragmenta-hebraeos | Fragmenta in epistulam ad Hebraeos
+- theodorus-pg86a-fragmenta-joannem | Fragmenta in Joannem
+- theodorus-pg86a-fragmenta-matthaeum | Fragmenta in Matthaeum
+- theodorus-pg86a-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- theophanes-confessor-chronographia | Chronographia
+- theophanes-kerameus-chronographia | Chronographia
+- theophilus-alex-fragmenta-joannem | Fragmenta in Joannem
+- theophilus-alex-fragmenta-matthaeum | Fragmenta in Matthaeum
+- theophylact-simocatta-de-vitae-termino | De vitae termino
+- theophylact-simocatta-epistulae | Epistulae
+- theophylact-simocatta-historiae | Historiae
+- theophylact-simocatta-quaestiones-physicae | Quaestiones physicae

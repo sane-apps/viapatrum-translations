@@ -6,10 +6,10 @@ Motivating sense: The Reformed tradition would be in a healthier and stronger th
 
 | Rank | Status | Slug | Work | Notes |
 |------|--------|------|------|-------|
-| 1 | **tip LIVE** | `le-blanc-theses-theologicae` | Louis Le Blanc, *Theses theologicae* — *De Theologia* I-VII | Locked PD Latin: London, Moses Pitt, 1675. IA `bub_gb_eOkHAW4G0-wC` https://archive.org/details/bub_gb_eOkHAW4G0-wC (PD Mark 1.0). ESTC R17887 / Wing L802. No 2024 English. |
+| 1 | **LIVE densify I–XV (4 secs)** | `le-blanc-theses-theologicae` | Louis Le Blanc, *Theses theologicae* — *De Theologia* I–XV | LIVE https://fathers.saneapps.com/works/le-blanc-theses-theologicae/ . Pitt 1675 IA. Not whole De Theologia (XVI+) nor folio. No 2024 English. |
 | 2 | **tip LIVE** | `davenant-dissertationes-duae` | John Davenant, *Dissertationes duae* — *De morte Christi* Cap. 1 origin + Thesis 1 | Locked PD Latin: Cambridge, Roger Daniel, 1650. IA `bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650` https://archive.org/details/bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650 (1650 Latin PD). ESTC R5446 / Wing D317. Allport 1831 English not copy-text. |
 | 3 | **tipped** | `crocius-syntagma` | Ludwig Crocius, *Syntagma sacrae theologiae* | Bremen: Villerian, 1636. SLUB http://digital.slub-dresden.de/id335860389 (PD Mark 1.0). Tip: Liber I Cap. 1 LIVE. |
-| 4 | **LIVE tip** | `baron-philosophia-theologiae-ancillans` | Robert Baron, *Philosophia theologiae ancillans* | Oxford 1658 corrected reprint locked IA `bim_early-english-books-1641-1700_philosophia-theologi-an_baron-robert_1658` (Wing B887). Tip Exercitatio Prima Art. I–II. LIVE https://fathers.saneapps.com/works/baron-philosophia-theologiae-ancillans/ (English H1). Logos DOCX hold after padding removal. |
+| 4 | **LIVE densify Art. I–VII (7 secs)** | `baron-philosophia-theologiae-ancillans` | Robert Baron, *Philosophia* — Exercitatio Prima Art. I–V tip→expand | Oxford 1658 IA. LIVE https://fathers.saneapps.com/works/baron-philosophia-theologiae-ancillans/ . Not whole Philosophia (213 pp). Art. VIII+ next. |
 | 5 | **tip LIVE** | `placeus-de-imputatione` | Josué de la Place (Placeus), *De imputatione primi peccati Adami* — Caput Primum tip | Locked PD Latin: Salmurii, Ioannes Lesnerius, 1661. IA `deimputationepri00lapl`. Tip Cap. 1 LIVE https://fathers.saneapps.com/works/placeus-de-imputatione/ (CoS UX pause lifted 2026-09-15). Amyraut French not used. |
 | 6 | **tip LIVE** | `strimesius-in-controversias-evangelicorum` | Samuel Strimesius, *Ingenua in Controversias Evangelicorum* — Prefatio tip | Frankfurt (Oder) / Viadrina, 1708 Schrey & Hartmann. GB `3epYAAAAcAAJ` (ONB). Sister *Ingenua in Arminianismum* (Halle DOI 10.25673/65287) remains queued (Anubis-blocked bulk download). |
 
@@ -258,13 +258,6 @@ Epiphanius densify leftovers: Ancoratus, Panarion, Anacephalaeosis, De mensuris 
 Densify: Nemesius/Macarius/ANF/Philostorgius. Melito skipped; never Cyril Matthew densify.
 Next corpus-wide: further Khazarzar Greek lacking usable PD English.
 
+---
 
-
-
-
-
-
-
-
-
-
+Work-lane registry (statuses, budget shares, pause rules): docs/WORK_LANES.md.

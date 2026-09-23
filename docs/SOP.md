@@ -92,33 +92,37 @@ Required in the DOCX:
 - `build_receipt.json` with section counts and bible link receipts.
 - `python3 -m pipeline.verify_docx` green (fails on `footnotes.xml`, Scripture-connection dumps, and PBB build-script guards).
 
-### 5. Logos compile (Air only)
+### 5. Logos compile + upload (Mini-automated; Air GUI retired 2026-09-23)
 
-1. Close other open panels of this personal book (required or Build fails).
-2. Open **Tools → Utilities → Personal Books** (not Cmd+K).
-3. Create/edit the draft: title, author, type Monograph, English.
-4. Add / replace the body file with the new DOCX.
-5. **Build**. Wait for Finished. Re-read UI: “0 errors, 0 warnings” or name the blocker.
-6. Open the book. Spot-check TOC titles (no raw `[[@Headword:`).
-7. Click a Bible link with a Bible open; re-read the Bible panel location. Screenshot via Terminal-hosted capture if remote.
+The weekly driver does the whole loop — metadata sync, build, upload to
+all owner libraries. Full spec: `docs/LOGOS_PIPELINE.md`.
 
 ```bash
+python3 scripts/logos_build.py --dry-run   # what would build/upload
+python3 scripts/logos_build.py --book <slug>  # one book, build + upload
 python3 -m pipeline.verify_logos_db --title-substr "<Title fragment>"
 ```
+
+Manual fallback (only if the driver reports a per-book failure it cannot
+clear): open `logos4:PersonalBooks` on the Mini, click the row, check the
+body file, click **Build book**, wait for `LastCompiled` to flip, then
+click **Upload** and wait for `Upload successful.` Never type metadata
+into the GUI — `books/*/book.yml` is the source of truth and
+`pb_sync.py --apply` writes it. After any manual fix, record the upload
+in `outputs/logos_uploads.json` and re-run the driver.
 
 ### 6. Handoff
 
 Update `books/<slug>/SESSION_HANDOFF.md` and repo `SESSION_HANDOFF.md` with LastCompiled, receipt counts, verification evidence, next moves.
 
-## Air GUI capture path
+## Mini GUI verification path
 
-Direct SSH Peekaboo often lacks Screen Recording. Working route:
-
-```bash
-osascript -e 'tell application "Terminal" to do script "…peekaboo or screencapture…"'
-```
-
-Same idea as SaneMaster `--terminal-host`. After every GUI mutation, poll screenshot/AX and name what the surface shows.
+AX over SSH works on the Mini (proven 2026-09-23): System Events can
+enumerate Logos windows and click by button description, and `cliclick`
+handles row clicks. Screen capture is NOT needed — verify by outcome:
+`LastCompiled` flips in `PersonalBookManager.db` for builds,
+`Upload successful.` text for uploads. After every GUI mutation, poll
+the AX tree or DB and name what the surface shows.
 
 ## Anti-patterns
 

@@ -104,6 +104,74 @@ class TranslationQATests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.packet()
 
+    def declared_packet(self):
+        # Full-selection declared packet (the densify book-packet shape).
+        return make_audit_packet(self.english, self.source, raw_sources=[self.raw],
+                                 expected_sections=[str(i) for i in range(1, 9)],
+                                 selected_sections=[str(i) for i in range(1, 9)],
+                                 seed=42, sample_size=5, identity=self.identity)
+
+    def test_declared_scope_survives_appends(self):
+        packet = self.declared_packet()
+        self.assertTrue(packet["declared_scope"])
+        receipt = self.receipt(packet)
+        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+        eng = json.loads(self.english.read_text())
+        src = json.loads(self.source.read_text())
+        eng.append({"section": "9", "english": ["A later appended passage, not yet reviewed."]})
+        src.append({"section": "9", "locus": "Work 9", "latin": ["Postea additum est."]})
+        self.write(self.english, eng)
+        self.write(self.source, src)
+        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+        current = make_audit_packet(self.english, self.source, raw_sources=[self.raw],
+                                    expected_sections=packet["expected_sections"],
+                                    seed=packet["seed"], sample_size=packet["sample_size"],
+                                    identity=packet["identity"],
+                                    selected_sections=packet.get("explicit_selected_sections"),
+                                    publication_scope=packet.get("publication_scope"))
+        self.assertEqual(current["unreviewed_extra"], ["9"])
+
+    def test_declared_scope_edits_and_raw_changes_still_fail(self):
+        packet = self.declared_packet()
+        receipt = self.receipt(packet)
+        eng = json.loads(self.english.read_text())
+        eng[2]["english"] = ["Silently edited English."]
+        self.write(self.english, eng)
+        self.assertTrue(any("regenerated" in e or "mismatch" in e or "match" in e
+                            for e in validate_audit_receipt(packet, receipt)))
+        self.write(self.english, [{"section": str(i), "english": [
+            f"Choice is voluntary, never forced by necessity. Passage {i}."]}
+            for i in range(1, 9)])
+        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+        self.raw.write_text("Changed print")
+        self.assertTrue(any("stale" in e for e in validate_audit_receipt(packet, receipt)))
+
+    def test_declared_sampling_append_still_fails(self):
+        packet = make_audit_packet(self.english, self.source, raw_sources=[self.raw],
+                                   expected_sections=[str(i) for i in range(1, 9)],
+                                   seed=42, sample_size=5, identity=self.identity)
+        receipt = self.receipt(packet)
+        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+        eng = json.loads(self.english.read_text())
+        src = json.loads(self.source.read_text())
+        eng.append({"section": "9", "english": ["A later appended passage."]})
+        src.append({"section": "9", "locus": "Work 9", "latin": ["Postea additum est."]})
+        self.write(self.english, eng)
+        self.write(self.source, src)
+        self.assertTrue(validate_audit_receipt(packet, receipt))
+
+    def test_undeclared_append_still_fails(self):
+        packet = self.packet()
+        receipt = self.receipt(packet)
+        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+        eng = json.loads(self.english.read_text())
+        src = json.loads(self.source.read_text())
+        eng.append({"section": "9", "english": ["A later appended passage."]})
+        src.append({"section": "9", "locus": "Work 9", "latin": ["Postea additum est."]})
+        self.write(self.english, eng)
+        self.write(self.source, src)
+        self.assertTrue(validate_audit_receipt(packet, receipt))
+
     def test_receipt_cannot_approve_other_or_partial_packet(self):
         packet = self.packet()
         receipt = self.receipt(packet)
