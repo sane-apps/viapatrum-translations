@@ -210,6 +210,13 @@ def cmd_mark(claim_id: str, status: str, agent: str) -> int:
         print(f"Could not find row `{claim_id}`.", file=sys.stderr)
         return 1
     CLAIMS.write_text(pat.sub(new_line, text, count=1), encoding="utf-8")
+    if status == "free":
+        lock_dir = LOCKS / claim_id
+        try:
+            (lock_dir / "agent.txt").unlink(missing_ok=True)
+            lock_dir.rmdir()
+        except OSError:
+            pass
     print(f"Marked `{claim_id}` {status}.")
     return 0
 

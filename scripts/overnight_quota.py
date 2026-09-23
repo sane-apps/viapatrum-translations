@@ -34,10 +34,11 @@ CLAIMS = ROOT / "docs" / "CLAIMS.md"
 DEFAULT_ACCOUNT = "2c267ab06352ba2522114c3081a8c5fa"
 FREE_NEURONS = 10_000
 RESERVE = 800
+FATHERS_CF_BUDGET = 10_000  # our delta/night; account is shared/granted
 SECTION_COST_EST = 160  # Qwen + Gemma + 70B-ish
 
 NV_DRAFT_DEFAULT = "nvidia/nemotron-3-super-120b-a12b"
-NV_CHECKER_A_DEFAULT = "deepseek-ai/deepseek-v4-flash-0731"
+NV_CHECKER_A_DEFAULT = "mistralai/mistral-nemotron"
 NV_CHECKER_B_DEFAULT = "mistralai/mistral-nemotron"
 
 CF_DRAFT_DEFAULT = "@cf/qwen/qwen3-30b-a3b-fp8"
@@ -118,12 +119,19 @@ def parse_open_rows() -> list[dict[str, str]]:
     return rows
 
 
-def free_jer_claims() -> list[str]:
-    return [
-        r["Claim ID"]
-        for r in parse_open_rows()
-        if r.get("Status") == "free" and str(r.get("Claim ID", "")).startswith("jer-h")
-    ]
+def free_auto_claims() -> list[str]:
+    hold = load_hold()
+    out = []
+    for r in parse_open_rows():
+        cid = str(r.get("Claim ID", ""))
+        if r.get("Status") != "free":
+            continue
+        if not cid.startswith(AUTO_PREFIXES):
+            continue
+        if hold.get(cid, {}).get("held"):
+            continue
+        out.append(cid)
+    return out
 
 
 def claimed_for_agent(agent: str) -> list[str]:
@@ -133,7 +141,8 @@ def claimed_for_agent(agent: str) -> list[str]:
         for r in parse_open_rows()
         if r.get("Status") in {"claimed", "checking", "review"}
         and r.get("Agent", "").strip() == agent
-        and str(r.get("Claim ID", "")).startswith("jer-h")
+        and str(r.get("Claim ID", "")).startswith(AUTO_PREFIXES)
+        and not load_hold().get(str(r.get("Claim ID", "")), {}).get("held")
     ]
 
 
@@ -143,6 +152,56 @@ def _claim_wall_s() -> int:
         return int(cfg.get("claim_wall_s") or 5400)
     except Exception:  # noqa: BLE001
         return 5400
+
+
+HOLD_PATH = OUT / "HOLD.jsonl"
+AUTO_PREFIXES = ("jer-h", "cyr-isa-")
+
+
+def _auto_wall_s() -> int:
+    try:
+        cfg = json.loads((ROOT / "docs" / "LLM_LANE_CONFIG.json").read_text(encoding="utf-8"))
+        return int(cfg.get("auto_wall_s") or 10800)
+    except Exception:  # noqa: BLE001
+        return 10800
+
+
+def load_hold() -> dict:
+    if not HOLD_PATH.is_file():
+        return {}
+    data = {}
+    for line in HOLD_PATH.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            row = json.loads(line)
+        except ValueError:
+            continue
+        if row.get("claim"):
+            data[row["claim"]] = row
+    return data
+
+
+def record_claim_fail(claim: str, reason: str) -> dict:
+    hold = load_hold()
+    row = hold.get(claim) or {"claim": claim, "fails": 0}
+    row["fails"] = int(row.get("fails") or 0) + 1
+    row["reason"] = reason
+    row["updated"] = datetime.now(timezone.utc).isoformat()
+    if row["fails"] >= 2:
+        row["held"] = True
+    hold[claim] = row
+    HOLD_PATH.write_text("\n".join(json.dumps(hold[c]) for c in sorted(hold)) + "\n", encoding="utf-8")
+    return row
+
+
+def run_wall(cmd: list[str], env: dict, timeout_s: int) -> int:
+    from fathers_run_lock import run_bounded  # noqa: WPS433
+
+    print("+", " ".join(cmd), flush=True)
+    label = Path(cmd[1]).name if len(cmd) > 1 else "child"
+    return run_bounded(cmd, cwd=ROOT, env=env, timeout_s=timeout_s, label=label)
 
 
 def run(cmd: list[str], env: dict) -> int:
@@ -183,6 +242,7 @@ def process_claim(
     draft_model: str,
     already_claimed: bool,
     mode: str = "prep",
+    rounds: int = 2,
 ) -> dict:
     entry: dict = {"claim": claim_id, "ok": False, "lane_agent": agent, "lane": lane, "mode": mode}
     if not already_claimed:
@@ -195,6 +255,29 @@ def process_claim(
             return entry
     else:
         print(f"Resume claimed {claim_id} as {agent}", flush=True)
+
+    if mode == "auto":
+        rc = run_wall(
+            [sys.executable, "scripts/auto_section.py", "--claim", claim_id,
+             "--agent", agent, "--rounds", str(rounds),
+             "--model", draft_model],
+            env, _auto_wall_s(),
+        )
+        entry["promote_rc"] = rc
+        if rc == 0:
+            entry["ok"] = True
+        elif rc == 2:
+            entry["error"] = "api_fail"
+        elif rc == 4:
+            entry["error"] = "promote_wall_timeout"
+        else:
+            entry["error"] = "hold"
+        if not entry.get("ok"):
+            # Release the row: one-slice rule would otherwise block the night.
+            # HOLD.jsonl keeps the fail count; resume only matters on kill -9.
+            run([sys.executable, "scripts/claims.py", "mark", claim_id,
+                 "--status", "free", "--agent", agent], env)
+        return entry
 
     if mode == "prep":
         if already_claimed and english_present(claim_id, env):
@@ -318,27 +401,43 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
         else (drafts[0] if drafts else (CF_DRAFT_DEFAULT if lane == "cf" else NV_DRAFT_DEFAULT))
     )
 
+    used_start = 0
+    fathers_budget = FATHERS_CF_BUDGET
+    account_cap = 0
+    token = env.get("CF_TOKEN") or env.get("CLOUDFLARE_API_TOKEN") or ""
+    account = env.get("CLOUDFLARE_ACCOUNT_ID") or DEFAULT_ACCOUNT
     if lane == "cf":
-        token = env.get("CF_TOKEN") or env.get("CLOUDFLARE_API_TOKEN") or ""
-        account = env.get("CLOUDFLARE_ACCOUNT_ID") or DEFAULT_ACCOUNT
         if not token:
             log["stop_reason"] = "missing_cf_token"
-            return log
-        used = neurons_today(token, account)
-        left = FREE_NEURONS - used
-        print(f"[cf] neurons today used={used} left≈{left} reserve={args.reserve}", flush=True)
-        if left <= args.reserve:
-            log["stop_reason"] = "already_at_reserve"
             return log
     else:
         if not (env.get("NV_API_KEY") or env.get("NVIDIA_API_KEY")):
             log["stop_reason"] = "missing_nv_key"
             return log
         print(f"[nv] NIM lane draft={draft} (checkers from LLM_LANE_CONFIG)", flush=True)
+    # Every lane can spend CF neurons via checker/draft fallbacks: meter all.
+    cf_metered = bool(token)
+    if cf_metered:
+        fathers_budget = int(cfg.get("fathers_cf_budget") or FATHERS_CF_BUDGET)
+        account_cap = int(cfg.get("cf_account_cap") or 0)
+        used_start = neurons_today(token, account)
+        log["neurons_start"] = used_start
+        log["fathers_cf_budget"] = fathers_budget
+        print(f"[{lane}] account neurons today={used_start} fathers_budget={fathers_budget} cap={account_cap or 'none'}", flush=True)
+        if account_cap and used_start >= account_cap - args.reserve:
+            log["stop_reason"] = "already_at_reserve"
+            return log
 
     queue: list[tuple[str, bool]] = [(c, True) for c in claimed_for_agent(agent)]
-    for c in free_jer_claims():
+    for c in free_auto_claims():
         queue.append((c, False))
+
+    if not queue:
+        log["stop_reason"] = "queue_empty"
+        log["queue"] = []
+        log["finished"] = datetime.now(timezone.utc).isoformat()
+        print(f"[{lane}] no auto claims left", flush=True)
+        return log
 
     if args.dry_run:
         log["stop_reason"] = "dry_run"
@@ -347,17 +446,21 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
 
     done = 0
     content_skips = 0
+    consec_api_fail = 0
     for claim_id, resume in queue:
         if done >= args.max_claims:
             log["stop_reason"] = "max_claims"
             break
-        if lane == "cf":
+        if cf_metered:
             used = neurons_today(token, account)
-            left = FREE_NEURONS - used
-            if left <= args.reserve:
+            spent = used - used_start
+            if account_cap and used >= account_cap - args.reserve:
                 log["stop_reason"] = "hit_reserve"
                 break
-            if left < args.reserve + 3 * SECTION_COST_EST:
+            if spent >= fathers_budget:
+                log["stop_reason"] = "hit_budget"
+                break
+            if spent + 3 * SECTION_COST_EST > fathers_budget:
                 log["stop_reason"] = "insufficient_for_next_claim"
                 break
 
@@ -383,12 +486,14 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             draft_model=draft,
             already_claimed=resume,
             mode=args.mode,
+            rounds=args.rounds,
         )
         log["claims"].append(entry)
         if entry.get("error") == "take_failed":
             continue
         if entry.get("ok"):
             done += 1
+            consec_api_fail = 0
             time.sleep(0.5)
             continue
         # Failures: never infinite-loop one claim.
@@ -396,23 +501,24 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
         if err == "draft_failed":
             log["stop_reason"] = "draft_failed"
             break
-        if err == "content_fail":
-            # Leave claimed for human/fix; move on so overnight still progresses.
+        if err in {"content_fail", "hold"}:
+            row = record_claim_fail(claim_id, err)
             content_skips += 1
-            print(f"[{lane}] content fail on {claim_id}; leave claimed, next claim", flush=True)
+            print(f"[{lane}] {err} on {claim_id} (fails={row['fails']} held={bool(row.get('held'))}); next claim", flush=True)
             continue
         if err == "promote_lock_busy":
             print(f"[{lane}] {claim_id} promote lock busy; next claim", flush=True)
             continue
         if err == "promote_wall_timeout":
-            print(
-                f"[{lane}] {claim_id} hit claim_wall_s; leave claimed, next claim",
-                flush=True,
-            )
+            row = record_claim_fail(claim_id, err)
+            print(f"[{lane}] {claim_id} hit wall (fails={row['fails']} held={bool(row.get('held'))}); next claim", flush=True)
             continue
         if err == "api_fail":
-            # One API-exhausted claim: try next; wrapper fuse is for true infra only.
-            print(f"[{lane}] API fallbacks exhausted on {claim_id}; next claim", flush=True)
+            consec_api_fail += 1
+            print(f"[{lane}] API fallbacks exhausted on {claim_id} (consec={consec_api_fail}); next claim", flush=True)
+            if consec_api_fail >= 3:
+                log["stop_reason"] = "consecutive_failures"
+                break
             continue
         log["stop_reason"] = err or "promote_failed"
         break
@@ -427,9 +533,11 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
     log["finished"] = datetime.now(timezone.utc).isoformat()
     log["done_count"] = done
     log["content_skips"] = content_skips
-    if lane == "cf":
+    log["held_count"] = sum(1 for r in load_hold().values() if r.get("held"))
+    if cf_metered:
         try:
             log["neurons_end"] = neurons_today(token, account)
+            log["neurons_spent"] = log["neurons_end"] - used_start
         except Exception as exc:  # noqa: BLE001
             log["neurons_end_error"] = str(exc)
     return log
@@ -461,9 +569,15 @@ def run_gemini_side(args: argparse.Namespace, env: dict, cfg: dict) -> dict:
     lane = (cfg.get("lanes") or {}).get("gemini") or {}
     sections = (args.gemini_sections or "").strip()
     if not sections:
-        sections = ",".join(
-            as_list(lane.get("overnight_default_sections")) or ["6.1", "7.3", "8.1"]
-        )
+        defaults = as_list(lane.get("overnight_default_sections"))
+        if not defaults:
+            log["ok"] = True
+            log["skipped"] = True
+            log["reason"] = "no_sections"
+            log["finished"] = datetime.now(timezone.utc).isoformat()
+            print("[gemini] skip: no sections configured", flush=True)
+            return log
+        sections = ",".join(defaults)
     cmd = [
         sys.executable,
         "scripts/gemini_prep_lane.py",
@@ -494,6 +608,7 @@ def main() -> int:
     ap.add_argument("--agent", default="overnight")
     ap.add_argument("--lanes", default="both", choices=["cf", "nv", "both"])
     ap.add_argument("--max-claims", type=int, default=12)
+    ap.add_argument("--rounds", type=int, default=2)
     ap.add_argument("--reserve", type=int, default=RESERVE)
     ap.add_argument("--config", default="")
     ap.add_argument("--cf-draft", default="")
@@ -502,8 +617,8 @@ def main() -> int:
     ap.add_argument(
         "--mode",
         default="prep",
-        choices=["prep", "translate"],
-        help="prep = crib only (default). translate = old Pass B + promote (not trusted).",
+        choices=["prep", "translate", "auto"],
+        help="prep = crib only (default). translate = old Pass B + promote (not trusted). auto = auto_section draft-promote-revise-done.",
     )
     ap.add_argument(
         "--enable-gemini",

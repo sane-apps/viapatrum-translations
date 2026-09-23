@@ -44,6 +44,93 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 | le-blanc-theses-densify | free | le-blanc-theses-theologicae | Full work densify (Theses theologicae; 1675 Latin) |  |  |  | Reformed lane; Pitt 1675 PD Latin; new English from Latin |
 | strimesius-in-controversias-densify | free | strimesius-in-controversias-evangelicorum | Full work densify (In controversias evangelicorum; 1708 Latin) |  |  |  | Reformed lane; Francofurti ad Viadrum 1708 PD Latin; new English from Latin |
 
+| cyr-isa-prologue | free | cyril-alexandria-isaiah | prologue |  |  | wip/cyr-isa-prologue | auto queue |
+| cyr-isa-logos1-open | free | cyril-alexandria-isaiah | logos1-open |  |  | wip/cyr-isa-logos1-open | auto queue |
+| cyr-isa-logos1-rem-early | free | cyril-alexandria-isaiah | logos1-rem-early |  |  | wip/cyr-isa-logos1-rem-early | auto queue |
+| cyr-isa-logos1-rem-close | free | cyril-alexandria-isaiah | logos1-rem-close |  |  | wip/cyr-isa-logos1-rem-close | auto queue |
+| cyr-isa-logos2-open | claimed | cyril-alexandria-isaiah | logos2-open | goliveNV-nv | 2026-09-23 | wip/cyr-isa-logos2-open | auto queue |
+| cyr-isa-logos2-rem-early | free | cyril-alexandria-isaiah | logos2-rem-early |  |  |  | auto queue |
+| cyr-isa-logos2-rem-mid | free | cyril-alexandria-isaiah | logos2-rem-mid |  |  |  | auto queue |
+| cyr-isa-logos2-rem-close | free | cyril-alexandria-isaiah | logos2-rem-close |  |  |  | auto queue |
+| cyr-isa-logos3-open | free | cyril-alexandria-isaiah | logos3-open |  |  |  | auto queue |
+| cyr-isa-logos3-rem-early | free | cyril-alexandria-isaiah | logos3-rem-early |  |  |  | auto queue |
+| cyr-isa-logos3-rem-mid | free | cyril-alexandria-isaiah | logos3-rem-mid |  |  |  | auto queue |
+| cyr-isa-logos3-rem-close | free | cyril-alexandria-isaiah | logos3-rem-close |  |  |  | auto queue |
+| cyr-isa-logos4-open | free | cyril-alexandria-isaiah | logos4-open |  |  |  | auto queue |
+| cyr-isa-logos4-rem-early | free | cyril-alexandria-isaiah | logos4-rem-early |  |  |  | auto queue |
+| cyr-isa-logos4-rem-mid | free | cyril-alexandria-isaiah | logos4-rem-mid |  |  |  | auto queue |
+| cyr-isa-logos4-rem-close | free | cyril-alexandria-isaiah | logos4-rem-close |  |  |  | auto queue |
+| cyr-isa-logos5-open | free | cyril-alexandria-isaiah | logos5-open |  |  |  | auto queue |
+| cyr-isa-logos5-rem-early | free | cyril-alexandria-isaiah | logos5-rem-early |  |  |  | auto queue |
+| cyr-isa-logos5-rem-mid | free | cyril-alexandria-isaiah | logos5-rem-mid |  |  |  | auto queue |
+| cyr-isa-logos5-rem-close | free | cyril-alexandria-isaiah | logos5-rem-close |  |  |  | auto queue |
+| cyr-isa-book2-open | free | cyril-alexandria-isaiah | book2-open |  |  |  | auto queue |
+| cyr-isa-book2-rem-early | free | cyril-alexandria-isaiah | book2-rem-early |  |  |  | auto queue |
+| cyr-isa-book2-rem-mid | free | cyril-alexandria-isaiah | book2-rem-mid |  |  |  | auto queue |
+| cyr-isa-book2-rem-close | free | cyril-alexandria-isaiah | book2-rem-close |  |  |  | auto queue |
+| cyr-isa-book2-tomos2-rem-early | free | cyril-alexandria-isaiah | book2-tomos2-rem-early |  |  |  | auto queue |
+| cyr-isa-book2-tomos2-rem-mid | free | cyril-alexandria-isaiah | book2-tomos2-rem-mid |  |  |  | auto queue |
+| cyr-isa-book2-tomos2-rem-close | free | cyril-alexandria-isaiah | book2-tomos2-rem-close |  |  |  | auto queue |
+| cyr-isa-book2-tomos3-open | free | cyril-alexandria-isaiah | book2-tomos3-open |  |  |  | auto queue |
+| cyr-isa-book2-tomos3-rem-early | free | cyril-alexandria-isaiah | book2-tomos3-rem-early |  |  |  | auto queue |
+| cyr-isa-book2-tomos3-rem-mid | free | cyril-alexandria-isaiah | book2-tomos3-rem-mid |  |  |  | auto queue |
+| cyr-isa-book2-tomos3-rem-close | free | cyril-alexandria-isaiah | book2-tomos3-rem-close |  |  |  | auto queue |
+| cyr-isa-book2-tomos4-open | free | cyril-alexandria-isaiah | book2-tomos4-open |  |  |  | auto queue |
+| cyr-isa-book2-tomos4-rem-early | free | cyril-alexandria-isaiah | book2-tomos4-rem-early |  |  |  | auto queue |
+| cyr-isa-book2-tomos4-rem-mid | free | cyril-alexandria-isaiah | book2-tomos4-rem-mid |  |  |  | auto queue |
+| cyr-isa-book2-tomos4-rem-close | free | cyril-alexandria-isaiah | book2-tomos4-rem-close |  |  |  | auto queue |
+| cyr-isa-book2-tomos5-open | free | cyril-alexandria-isaiah | book2-tomos5-open |  |  |  | auto queue |
+| cyr-isa-book2-tomos5-rem-early | free | cyril-alexandria-isaiah | book2-tomos5-rem-early |  |  |  | auto queue |
+| cyr-isa-book2-tomos5-rem-mid | free | cyril-alexandria-isaiah | book2-tomos5-rem-mid |  |  |  | auto queue |
+| cyr-isa-book2-tomos5-rem-close | free | cyril-alexandria-isaiah | book2-tomos5-rem-close |  |  |  | auto queue |
+| cyr-isa-book3-tomos1-open | free | cyril-alexandria-isaiah | book3-tomos1-open |  |  |  | auto queue |
+| cyr-isa-book3-tomos1-rem-early | free | cyril-alexandria-isaiah | book3-tomos1-rem-early |  |  |  | auto queue |
+| cyr-isa-book3-tomos1-rem-mid | free | cyril-alexandria-isaiah | book3-tomos1-rem-mid |  |  |  | auto queue |
+| cyr-isa-book3-tomos1-rem-close | free | cyril-alexandria-isaiah | book3-tomos1-rem-close |  |  |  | auto queue |
+| cyr-isa-book3-tomos2-open | free | cyril-alexandria-isaiah | book3-tomos2-open |  |  |  | auto queue |
+| cyr-isa-book3-tomos2-rem-early | free | cyril-alexandria-isaiah | book3-tomos2-rem-early |  |  |  | auto queue |
+| cyr-isa-book3-tomos2-rem-mid | free | cyril-alexandria-isaiah | book3-tomos2-rem-mid |  |  |  | auto queue |
+| cyr-isa-book3-tomos2-rem-close | free | cyril-alexandria-isaiah | book3-tomos2-rem-close |  |  |  | auto queue |
+| cyr-isa-book3-tomos3-open | free | cyril-alexandria-isaiah | book3-tomos3-open |  |  |  | auto queue |
+| cyr-isa-book3-tomos3-rem-early | free | cyril-alexandria-isaiah | book3-tomos3-rem-early |  |  |  | auto queue |
+| cyr-isa-book3-tomos3-rem-mid | free | cyril-alexandria-isaiah | book3-tomos3-rem-mid |  |  |  | auto queue |
+| cyr-isa-book3-tomos3-rem-close | free | cyril-alexandria-isaiah | book3-tomos3-rem-close |  |  |  | auto queue |
+| cyr-isa-book3-tomos4-open | free | cyril-alexandria-isaiah | book3-tomos4-open |  |  |  | auto queue |
+| cyr-isa-book3-tomos4-rem-early | free | cyril-alexandria-isaiah | book3-tomos4-rem-early |  |  |  | auto queue |
+| cyr-isa-book3-tomos4-rem-mid | free | cyril-alexandria-isaiah | book3-tomos4-rem-mid |  |  |  | auto queue |
+| cyr-isa-book3-tomos4-rem-close | free | cyril-alexandria-isaiah | book3-tomos4-rem-close |  |  |  | auto queue |
+| cyr-isa-book3-tomos5-open | free | cyril-alexandria-isaiah | book3-tomos5-open |  |  |  | auto queue |
+| cyr-isa-book3-tomos5-rem-early | free | cyril-alexandria-isaiah | book3-tomos5-rem-early |  |  |  | auto queue |
+| cyr-isa-book3-tomos5-rem-mid | free | cyril-alexandria-isaiah | book3-tomos5-rem-mid |  |  |  | auto queue |
+| cyr-isa-book3-tomos5-rem-close | free | cyril-alexandria-isaiah | book3-tomos5-rem-close |  |  |  | auto queue |
+| cyr-isa-book4-logos1-open | free | cyril-alexandria-isaiah | book4-logos1-open |  |  |  | auto queue |
+| cyr-isa-book4-logos1-rem-early | free | cyril-alexandria-isaiah | book4-logos1-rem-early |  |  |  | auto queue |
+| cyr-isa-book4-logos1-rem-mid | free | cyril-alexandria-isaiah | book4-logos1-rem-mid |  |  |  | auto queue |
+| cyr-isa-book4-logos1-rem-close | free | cyril-alexandria-isaiah | book4-logos1-rem-close |  |  |  | auto queue |
+| cyr-isa-book4-logos2-open | free | cyril-alexandria-isaiah | book4-logos2-open |  |  |  | auto queue |
+| cyr-isa-book4-logos2-rem-early | free | cyril-alexandria-isaiah | book4-logos2-rem-early |  |  |  | auto queue |
+| cyr-isa-book4-logos2-rem-mid | free | cyril-alexandria-isaiah | book4-logos2-rem-mid |  |  |  | auto queue |
+| cyr-isa-book4-logos2-rem-close | free | cyril-alexandria-isaiah | book4-logos2-rem-close |  |  |  | auto queue |
+| cyr-isa-book4-logos3-open | free | cyril-alexandria-isaiah | book4-logos3-open |  |  |  | auto queue |
+| cyr-isa-book4-logos3-rem-early | free | cyril-alexandria-isaiah | book4-logos3-rem-early |  |  |  | auto queue |
+| cyr-isa-book4-logos3-rem-mid | free | cyril-alexandria-isaiah | book4-logos3-rem-mid |  |  |  | auto queue |
+| cyr-isa-book4-logos3-rem-close | free | cyril-alexandria-isaiah | book4-logos3-rem-close |  |  |  | auto queue |
+| cyr-isa-book4-logos4-open | free | cyril-alexandria-isaiah | book4-logos4-open |  |  |  | auto queue |
+| cyr-isa-book4-logos4-rem-early | free | cyril-alexandria-isaiah | book4-logos4-rem-early |  |  |  | auto queue |
+| cyr-isa-book4-logos4-rem-mid | free | cyril-alexandria-isaiah | book4-logos4-rem-mid |  |  |  | auto queue |
+| cyr-isa-book4-logos4-rem-close | free | cyril-alexandria-isaiah | book4-logos4-rem-close |  |  |  | auto queue |
+| cyr-isa-book4-logos5-open | free | cyril-alexandria-isaiah | book4-logos5-open |  |  |  | auto queue |
+| cyr-isa-book4-logos5-rem-early | free | cyril-alexandria-isaiah | book4-logos5-rem-early |  |  |  | auto queue |
+| cyr-isa-book4-logos5-rem-mid | free | cyril-alexandria-isaiah | book4-logos5-rem-mid |  |  |  | auto queue |
+| cyr-isa-book4-logos5-rem-close | free | cyril-alexandria-isaiah | book4-logos5-rem-close |  |  |  | auto queue |
+| cyr-isa-book5-part1-open | free | cyril-alexandria-isaiah | book5-part1-open |  |  |  | auto queue |
+| cyr-isa-book5-part1-rem-early | free | cyril-alexandria-isaiah | book5-part1-rem-early |  |  |  | auto queue |
+| cyr-isa-book5-part1-rem-mid | free | cyril-alexandria-isaiah | book5-part1-rem-mid |  |  |  | auto queue |
+| cyr-isa-book5-part1-rem-close | free | cyril-alexandria-isaiah | book5-part1-rem-close |  |  |  | auto queue |
+| cyr-isa-book5-part2-open | free | cyril-alexandria-isaiah | book5-part2-open |  |  |  | auto queue |
+| cyr-isa-book5-part2-rem-early | free | cyril-alexandria-isaiah | book5-part2-rem-early |  |  |  | auto queue |
+| cyr-isa-book5-part2-rem-mid | free | cyril-alexandria-isaiah | book5-part2-rem-mid |  |  |  | auto queue |
+| cyr-isa-book5-part2-rem-close | free | cyril-alexandria-isaiah | book5-part2-rem-close |  |  |  | auto queue |
 ## How to claim
 
 ```bash
@@ -57,6 +144,8 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 Archived: older done rows now live in `docs/CLAIMS_ARCHIVE.md` (1871 rows, full commit history preserved). Do not read the archive for routine work.
 Keep this file lean: when a claim closes, move its row to the archive instead of letting this section grow.
 
+| cyr-isa-tomos2-open | done | book2-tomos2-open | 2026-09-22 | AI cross-check (verify); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260923T034046048669Z-cyr-isa-tomos2-open |
+| cyr-isa-logos1-rem-mid | done | logos1-rem-mid | 2026-09-23 | AI cross-check (golive5-cf); @cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash; receipt 20260923T054356295735Z-cyr-isa-logos1-rem-mid |
 ## Do not claim these (owner / blocked)
 
 - Website deploy / Cloudflare Pages / edits under `websites/fathers.saneapps.com`

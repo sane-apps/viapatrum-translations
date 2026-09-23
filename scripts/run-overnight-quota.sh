@@ -90,13 +90,15 @@ nice -n 10 /usr/bin/python3 scripts/overnight_quota.py \
   --lanes both \
   --agent overnight-mini \
   --max-claims 12 \
-  --reserve 800
+  --reserve 800 --mode auto
 RC=$?
 set -e
 
 echo "[$(date -u +%Y%m%dT%H%M%SZ)] fathers overnight end rc=$RC" | tee -a "$OUT/runner.log"
 
 if [[ "$RC" -eq 0 ]]; then
+  # Publish only on promotions; never trips the fuse (epilogue exits 0).
+  nice -n 10 /usr/bin/python3 scripts/nightly_publish.py 2>&1 | tee -a "$OUT/runner.log" || true
   exit 0
 fi
 

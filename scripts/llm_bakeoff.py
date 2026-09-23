@@ -25,6 +25,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+import sys as _sys
+_sys.path.insert(0, str(ROOT))
+_sys.path.insert(0, str(ROOT / "scripts"))
 SOURCE = (
     ROOT
     / "books/origen-jeremiah-samuel/translations/jeremiah_source.json"
@@ -92,6 +95,8 @@ Rules:
 - Finish every english paragraph with a full sentence (period). Never cut mid-clause.
 - Translate every supplied clause and paragraph. Never summarize, omit repetitions, or shorten the source to fit a token budget; an incomplete translation fails review.
 - If Greek is broken or gapped, say so in translator_notes; do not invent Greek.
+- Skip edition headers (like ΤΟΜΟΣ Β΄ plus number), stray digits standing alone, and
+  obvious OCR debris; never translate them as content. Record each skip in translator_notes.
 """
 
 
@@ -117,10 +122,19 @@ def load_fixture(section: str = "6.1") -> dict:
 
 def user_prompt(fix: dict) -> str:
     paras = "\n\n".join(f"[p{i+1}]\n{p}" for i, p in enumerate(fix["greek"]))
+    chunked = (
+        "\nChunked source: the Greek may begin/end mid-sentence or mid-word "
+        "(corpus slices, not authorial units). Translate edge fragments "
+        "literally as fragments; mark a cut sentence end with a trailing …; "
+        "omit untranslatable partial letters at an edge; never complete or "
+        "invent the missing words; note each edge cut in translator_notes.\n"
+        if fix.get("chunked_source") else ""
+    )
     return (
-        f"Section {fix['section']} ({fix.get('klostermann')}).\n"
+        f"Section {fix['section']} ({fix.get('klostermann') or fix.get('locus') or 'no locus'}).\n"
         f"Locked Greek:\n{paras}\n\n"
         f"Source editor notes: {json.dumps(fix.get('ocr_normalizations') or [], ensure_ascii=False)}\n"
+        f"{chunked}"
         "Produce the JSON now."
     )
 
@@ -207,11 +221,17 @@ def score(obj: dict | None, raw: str, section: str = "6.1", source: list[str] | 
     if "```" in (raw or "") and checks["no_fence_leak"]:
         notes.append("markdown fence wrapper stripped")
     # Truncation: each English para should end like a finished sentence.
+    # Required inline citations trail the final period; judge the sentence.
     incomplete = False
     for para in eng:
         t = str(para).rstrip()
         if not t:
             continue
+        t = re.sub(r"(\s*\([^()]*\))+$", "", t).rstrip()
+        if not t:
+            incomplete = True
+            notes.append(f"citation-only paragraph: …{str(para)[-48:]}")
+            break
         if not re.search(r'[.!?…]["\'»”’)\]]*$', t):
             incomplete = True
             notes.append(f"truncated english: …{t[-48:]}")
@@ -318,6 +338,7 @@ def cf_call(
                     "ms": ms,
                     "pt": usage.get("prompt_tokens") or 0,
                     "ct": usage.get("completion_tokens") or 0,
+                    "neurons": usage.get("neurons") or 0,
                 }
             if not data.get("success"):
                 msg = json.dumps(data.get("errors") or data)[:240]
@@ -335,6 +356,7 @@ def cf_call(
                 "ms": ms,
                 "pt": usage.get("prompt_tokens") or 0,
                 "ct": usage.get("completion_tokens") or 0,
+                "neurons": usage.get("neurons") or 0,
             }
         except Exception as e:  # noqa: BLE001
             last_err = e

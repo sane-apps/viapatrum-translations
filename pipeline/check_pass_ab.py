@@ -73,6 +73,20 @@ def content_errors(value, label="english", *, source=False) -> list[str]:
     return errors
 
 
+LATIN_FUNCTION = {
+    "cum", "ut", "quod", "quia", "enim", "autem", "sunt", "neque", "quasi",
+    "etiam", "tamen", "igitur", "ergo", "atque", "sive", "nisi", "eius",
+    "eorum", "quae", "quam", "quo", "qua", "nec", "sed", "est", "sit",
+}
+LATIN_ENDING = re.compile(r"(?:ibus|ntur|tur|tionis|tatem|tate|us|um|ae)$")
+ENGLISH_FUNCTION = {
+    "the", "a", "of", "and", "to", "that", "is", "in", "for", "not", "we",
+    "he", "his", "this", "from", "by", "or", "as", "with", "which", "be",
+    "are", "was", "were", "their", "it", "but", "if", "than", "who", "an",
+    "on", "at", "they", "them", "she", "her", "our", "your",
+}
+
+
 def check_record(j: dict) -> list[str]:
     if not isinstance(j, dict):
         return ["justification must be an object"]
@@ -81,15 +95,56 @@ def check_record(j: dict) -> list[str]:
     errors += content_errors(j.get("pass_b_english"), "pass_b_english")
     errors += content_errors(j.get("source_text"), "source_text", source=True)
     na, nb = normalized(a), normalized(b)
+    a_words, b_words = na.split(), nb.split()
     if na and nb:
         if na == nb:
             errors.append("Pass A copies Pass B (including formatting-only differences)")
-        elif min(len(na.split()), len(nb.split())) >= 8:
+        elif min(len(a_words), len(b_words)) >= 8:
             smaller, larger = sorted((na, nb), key=len)
-            if smaller in larger or SequenceMatcher(None, na.split(), nb.split(), autojunk=False).ratio() >= 0.90:
-                errors.append("Pass A and Pass B are near-copies; independent gloss needs review")
+            ratio = SequenceMatcher(None, a_words, b_words, autojunk=False).ratio()
+            if smaller in larger or ratio >= 0.82:
+                errors.append(
+                    "Pass A and Pass B are near-copies; Pass B is still the gloss in source "
+                    "word order. Rewrite the sentences without adding or dropping a claim"
+                )
+    if len(b_words) >= 40 and len(a_words) < 0.45 * len(b_words):
+        errors.append("Pass A is too short to constrain Pass B; gloss every clause in English")
+    if a_words:
+        latin = sum(1 for w in a_words if w in LATIN_FUNCTION or LATIN_ENDING.search(w))
+        english = sum(1 for w in a_words if w in ENGLISH_FUNCTION)
+        if latin / len(a_words) >= 0.12 and english / len(a_words) < 0.20:
+            errors.append("Pass A is a Latin note, not an English sense gloss")
+    if len(re.findall(r"[A-Za-z]-[A-Za-z]", a)) >= 8:
+        errors.append("Pass A is an interlinear hyphen gloss; write a normal English sense gloss")
     if normalized(src) and normalized(src) == nb:
         errors.append("Pass B copies source text")
+    # Literary Pass B (STYLE.md): accurate sense in readable prose — not gloss residue.
+    if b_words:
+        if len(re.findall(r"[A-Za-z]-[A-Za-z]", b)) >= 8:
+            errors.append(
+                "Pass B is still an interlinear hyphen gloss; write literary English sentences"
+            )
+        # Ignore Scripture / cited quotations; flag archaic diction in the translator's own prose.
+        b_unquoted = re.sub(r'["\u201c\u201d][^"\u201c\u201d]{0,400}["\u201c\u201d]', " ", b)
+        b_unquoted = re.sub(r"'[^']{0,200}'", " ", b_unquoted)
+        if re.search(
+            r"\b(?:hath|wherefore|thereof|\bye\b|thou|thee|\bthy\b|hast|doth|saith)\b",
+            b_unquoted,
+            re.I,
+        ):
+            errors.append(
+                "Pass B uses archaic King James diction outside quotations; use modern literary English"
+            )
+        # Greek/Latin genitive calques that survived the literary pass
+        if len(re.findall(r"\bthe of (?:the|a|an)\b", b, re.I)) >= 2:
+            errors.append(
+                "Pass B keeps source-word-order calques (the of the…); rewrite as English prose"
+            )
+        # Gloss left in place: almost no sentence punctuation on a long reading text
+        if len(b_words) >= 60 and b.count(".") + b.count("?") + b.count("!") < 2:
+            errors.append(
+                "Pass B lacks sentence shape; polish into readable prose without adding claims"
+            )
     for key in ("lemmas", "choices"):
         rows = j.get(key)
         if not isinstance(rows, list) or not rows or any(not isinstance(x, dict) or not x for x in rows):
