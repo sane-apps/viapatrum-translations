@@ -1,1 +1,63 @@
-{"_note":"Work-lane registry (translate direction). Distinct from compute lanes (cf/nv/gemini model lanes in LLM_LANE_CONFIG.json). budget_share_pct splits fathers CF-neuron spend per overnight run; resume rows (in-flight) are exempt from both pause skips and share caps. default_lane catches books with no explicit lane and no book.yml lane: field.","default_lane":"rank1","lanes":{"densify":{"books":["cosmas-topographia","irenaeus-demonstration","macarius-spiritual-homilies","nemesius-de-natura-hominis","paulus-silentarius-ambonis","paulus-silentarius-sophia","philostorgius-he","photius-bibliotheca"],"budget_share_pct":25,"description":"Refresh lane: new reading English over dated public-domain English (NOT OET). Same SOP, disclosed base.","dynamic":"any book whose catalog lineage is refresh also counts as densify","status":"active"},"latin":{"books":[],"budget_share_pct":0,"description":"Latin Fathers, oldest first (Tertullian onward). Unopened: no books assigned yet; seed with first locked Latin edition, then set active with a share.","status":"unopened"},"rank1":{"books":[],"budget_share_pct":0,"description":"Greek first-English wave, oldest first within lane. Default lane for unassigned books.","paused_since":"2026-09-13","resume_criteria":["Owner completes the 2026-09-13 quality review of tipped Rank-1 work","Symeon Junior Theologica decision recorded (tip or defer)","Owner sets rank1 status back to active in this file with a budget share"],"status":"paused"},"reformed":{"books":["baron-philosophia-theologiae-ancillans","crocius-syntagma","davenant-dissertationes-duae","le-blanc-theses-theologicae","placeus-de-imputatione","strimesius-in-controversias-evangelicorum"],"budget_share_pct":60,"description":"Reformed retrieval (docs/REFORMED_RETRIEVAL.md): 17th-c Latin retrieval. Active; does not lift the Rank-1 pause.","status":"active"},"topics":{"books":["ante-nicene-topics"],"budget_share_pct":15,"description":"Site topics layer (excerpts, stances, timelines). Parallel to whole-work lanes.","status":"active"}}}
+{
+ "_note": "Work-lane registry (translate direction). Distinct from compute lanes (cf/nv/gemini model lanes in LLM_LANE_CONFIG.json). budget_share_pct splits fathers CF-neuron spend per overnight run; resume rows (in-flight) are exempt from both pause skips and share caps. default_lane catches books with no explicit lane and no book.yml lane: field.",
+ "default_lane": "rank1",
+ "lanes": {
+  "densify": {
+   "books": [
+    "cosmas-topographia",
+    "irenaeus-demonstration",
+    "macarius-spiritual-homilies",
+    "nemesius-de-natura-hominis",
+    "paulus-silentarius-ambonis",
+    "paulus-silentarius-sophia",
+    "philostorgius-he",
+    "photius-bibliotheca"
+   ],
+   "budget_share_pct": 15,
+   "description": "Refresh lane: new reading English over dated public-domain English (NOT OET). Same SOP, disclosed base.",
+   "dynamic": "any book whose catalog lineage is refresh also counts as densify",
+   "status": "active"
+  },
+  "latin": {
+   "books": [],
+   "budget_share_pct": 0,
+   "description": "Latin Fathers, oldest first (Tertullian onward). Unopened: no books assigned yet; seed with first locked Latin edition, then set active with a share.",
+   "status": "unopened"
+  },
+  "rank1": {
+   "books": [],
+   "budget_share_pct": 40,
+   "description": "Greek first-English wave, oldest first within lane. Default lane for unassigned books.",
+   "paused_since": "2026-09-13",
+   "resume_criteria": [
+    "Owner completes the 2026-09-13 quality review of tipped Rank-1 work",
+    "Symeon Junior Theologica decision recorded (tip or defer)",
+    "Owner sets rank1 status back to active in this file with a budget share"
+   ],
+   "status": "active",
+   "resumed": "2026-09-23",
+   "resume_basis": "owner directive 2026-09-23: delegated review, keep moving, no wait (criteria 1-2 executed by agent, this flip is criterion 3)"
+  },
+  "reformed": {
+   "books": [
+    "baron-philosophia-theologiae-ancillans",
+    "crocius-syntagma",
+    "davenant-dissertationes-duae",
+    "le-blanc-theses-theologicae",
+    "placeus-de-imputatione",
+    "strimesius-in-controversias-evangelicorum"
+   ],
+   "budget_share_pct": 35,
+   "description": "Reformed retrieval (docs/REFORMED_RETRIEVAL.md): 17th-c Latin retrieval. Active; does not lift the Rank-1 pause.",
+   "status": "active"
+  },
+  "topics": {
+   "books": [
+    "ante-nicene-topics"
+   ],
+   "budget_share_pct": 10,
+   "description": "Site topics layer (excerpts, stances, timelines). Parallel to whole-work lanes.",
+   "status": "active"
+  }
+ }
+}

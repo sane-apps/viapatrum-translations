@@ -261,3 +261,7 @@ Next corpus-wide: further Khazarzar Greek lacking usable PD English.
 ---
 
 Work-lane registry (statuses, budget shares, pause rules): docs/WORK_LANES.md.
+
+## 2026-09-23 rank1 resume + Symeon Theologica defer (owner-delegated)
+- rank1 active again (owner directive 2026-09-23: review delegated, keep moving, no wait). Shares now rank1 40 / reformed 35 / densify 15 / topics 10.
+- Symeon Junior Theologica: DEFERRED (reversible). 85 older auto slices (Cyril Isaiah, 5th c.) queue ahead of unstarted 10th-c. Symeon work under oldest-first. Revisit when cyr-isa drains.
