@@ -642,6 +642,9 @@ def run_gemini_side(args: argparse.Namespace, env: dict, cfg: dict) -> dict:
         cmd.append("--force")
     if args.gemini_checker_c:
         cmd.extend(["--prep", "--checker-c"])
+    if args.gemini_book:
+        cmd.extend(["--book", args.gemini_book])
+        log["book"] = args.gemini_book
     if args.config:
         cmd.extend(["--config", args.config])
 
@@ -689,6 +692,11 @@ def main() -> int:
         "--gemini-checker-c",
         action="store_true",
         help="With Gemini side lane, also run checker-C on those sections (artifact-only).",
+    )
+    ap.add_argument(
+        "--gemini-book",
+        default="",
+        help="Book slug for Gemini --sections (default origen-jeremiah-samuel).",
     )
     args = ap.parse_args()
 
