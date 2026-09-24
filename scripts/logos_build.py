@@ -440,7 +440,12 @@ def open_with_retry(title, docx_base, state, others=()):
     build/upload expands its row and sessions degrade past ~6.
     """
     opened, matched = open_edit(title, docx_base, others)
-    if not opened and matched and state["relaunches"] < 6:
+    # Per-book reactive budget (was: global cap shared with proactive
+    # restarts, which starved long runs and cascaded every later book
+    # to failure once the UI went click-dead permanently).
+    tries = 0
+    while not opened and matched and tries < 2:
+        tries += 1
         state["relaunches"] += 1
         state["since_restart"] = 0
         log("row visible but click-dead; restarting Logos (#%d) "
