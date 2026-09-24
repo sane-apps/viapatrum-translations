@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from ai_promote import parse_claim_row, sections_from_slice  # noqa: E402
+from book_adapter import JEREMIAH_SLUG, get_adapter  # noqa: E402
 from llm_bakeoff import PREP_SYS, extract_json, load_fixture, user_prompt  # noqa: E402
 from llm_lane_config import (  # noqa: E402
     as_list,
@@ -85,7 +86,7 @@ Return ONLY valid JSON (no markdown fences):
 """
 
 
-def score_prep(obj, raw, section: str) -> dict:
+def score_prep(obj, raw, section: str, source_len: int = 0) -> dict:
     checks: dict[str, bool] = {}
     notes: list[str] = []
     if not obj:
@@ -111,7 +112,9 @@ def score_prep(obj, raw, section: str) -> dict:
     checks["no_fence_leak"] = fence not in payload
     if fence in (raw or "") and checks["no_fence_leak"]:
         notes.append("markdown fence wrapper stripped")
-    checks["pass_a_bounded"] = len(pa) <= 1200
+    cap = max(1200, 2 * (source_len or 0))
+    checks["pass_a_bounded"] = len(pa) <= cap
+    notes.append(f"pass_a {len(pa)} chars vs cap {cap} (source {source_len})")
     return {
         "ok": all(checks.values()),
         "checks": checks,
@@ -173,24 +176,29 @@ def gemini_call(model: str, key: str, system: str, user: str, max_output: int = 
         }
 
 
-def call_with_failover(models: list[str], key: str, system: str, user: str) -> dict:
+def _is_retriable(blob: str) -> bool:
+    return any(s in blob for s in ("429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE"))
+
+
+def call_with_failover(models: list[str], key: str, system: str, user: str,
+                       *, retries_per_model: int = 2, sleep=time.sleep) -> dict:
     last: dict = {"ok": False, "error": "no_models"}
     for i, model in enumerate(models):
-        r = gemini_call(model, key, system, user)
-        if r.get("ok"):
-            if i:
-                r["failover_from"] = models[0]
-            return r
-        last = r
-        blob = str(r.get("error", "")) + str(r.get("body", ""))
-        if "429" in blob or "RESOURCE_EXHAUSTED" in blob:
-            time.sleep(2)
-            continue
-        # Non-quota failures: still try failover once, then stop.
+        for attempt in range(max(1, retries_per_model)):
+            r = gemini_call(model, key, system, user)
+            if r.get("ok"):
+                if model != models[0]:
+                    r["failover_from"] = models[0]
+                return r
+            last = dict(r)
+            last["attempts"] = attempt + 1
+            blob = str(r.get("error", "")) + str(r.get("body", ""))
+            if _is_retriable(blob) and attempt + 1 < max(1, retries_per_model):
+                sleep(2 * (attempt + 1))
+                continue
+            break
         if i + 1 < len(models):
-            time.sleep(0.5)
-            continue
-        break
+            sleep(0.5)
     return last
 
 
@@ -222,7 +230,8 @@ def resolve_sections(args: argparse.Namespace) -> list[str]:
     sections: list[str] = []
     if args.claim:
         row = parse_claim_row(args.claim)
-        sections.extend(sections_from_slice(row.get("Slice (sections)") or ""))
+        book = args.book or row.get("Book slug") or JEREMIAH_SLUG
+        sections.extend(sections_from_slice(row.get("Slice (sections)") or "", book))
     if args.sections:
         for part in args.sections.split(","):
             s = part.strip()
@@ -233,7 +242,15 @@ def resolve_sections(args: argparse.Namespace) -> list[str]:
     return sections
 
 
-def load_justification(section: str) -> dict | None:
+def load_justification(section: str, book: str = JEREMIAH_SLUG) -> dict | None:
+    if book != JEREMIAH_SLUG:
+        try:
+            path = get_adapter(book).justification_path(section)
+        except (KeyError, SystemExit):
+            return None
+        if not path.is_file():
+            return None
+        return json.loads(path.read_text(encoding="utf-8"))
     h, _, s = section.partition(".")
     if not s:
         return None
@@ -243,6 +260,12 @@ def load_justification(section: str) -> dict | None:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_fix(section: str, book: str = JEREMIAH_SLUG) -> dict:
+    if book != JEREMIAH_SLUG:
+        return get_adapter(book).load_source_row(section)
+    return load_fixture(section)
+
+
 def run_prep(
     section: str,
     *,
@@ -250,6 +273,7 @@ def run_prep(
     key: str,
     out: Path,
     language: str = "grc",
+    book: str = JEREMIAH_SLUG,
 ) -> dict:
     if language == "lat":
         fix = load_latin_tertullian()
@@ -257,12 +281,13 @@ def run_prep(
         sys_msg = PREP_LATIN.format(section=section)
         user = latin_user(fix)
     else:
-        fix = load_fixture(section)
+        fix = load_fix(section, book)
         sys_msg = PREP_SYS.format(section=section)
         user = user_prompt(fix)
     r = call_with_failover(models, key, sys_msg, user)
     obj = extract_json(r.get("raw") or "") if r.get("ok") else None
-    sc = score_prep(obj, r.get("raw") or "", section)
+    src_len = sum(len(g) for g in (fix.get("greek") or []))
+    sc = score_prep(obj, r.get("raw") or "", section, src_len)
     entry = {
         "section": section,
         "language": language,
@@ -291,8 +316,9 @@ def run_checker_c(
     models: list[str],
     key: str,
     out: Path,
+    book: str = JEREMIAH_SLUG,
 ) -> dict:
-    just = load_justification(section)
+    just = load_justification(section, book)
     if not just:
         entry = {
             "section": section,
@@ -304,7 +330,7 @@ def run_checker_c(
             json.dumps(entry, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
         )
         return entry
-    fix = load_fixture(section)
+    fix = load_fix(section, book)
     paras = "\n\n".join(f"[p{i+1}]\n{p}" for i, p in enumerate(fix["greek"]))
     pb = just.get("pass_b_english") or []
     pb_txt = "\n".join(str(x) for x in pb) if isinstance(pb, list) else str(pb)
@@ -341,7 +367,7 @@ def gemini_models_from_cfg(cfg: dict) -> tuple[list[str], list[str]]:
     prep = as_list(lane.get("prep")) or ["gemini-3.5-flash-lite"]
     failover = as_list(lane.get("prep_failover")) or [
         "gemini-3.1-flash-lite",
-        "gemini-2.5-flash-lite",
+        "gemini-flash-lite-latest",
     ]
     # Dedupe while preserving order: primary then failover.
     seen: set[str] = set()
@@ -359,7 +385,12 @@ def main() -> int:
         description="Gemini Flash-Lite prep/QA — artifact-only, never promotes."
     )
     ap.add_argument("--sections", default="", help="Comma list, e.g. 6.1,7.3")
-    ap.add_argument("--claim", default="", help="Claim id (Jeremiah slice → sections)")
+    ap.add_argument("--claim", default="", help="Claim id (slice → sections; book from claim row)")
+    ap.add_argument(
+        "--book",
+        default="",
+        help="Book slug for --sections (default: claim row book, else origen-jeremiah-samuel).",
+    )
     ap.add_argument(
         "--prep",
         action="store_true",
@@ -436,7 +467,11 @@ def main() -> int:
         print(json.dumps(receipt, indent=2), flush=True)
         return 2
 
+    if args.claim and not args.book:
+        args.book = parse_claim_row(args.claim).get("Book slug") or ""
+    book = args.book or JEREMIAH_SLUG
     sections = resolve_sections(args)
+    receipt["book"] = book
     # Modes: prep (default), checker-c only, or both when --prep + --checker-c.
     want_checker = bool(args.checker_c)
     want_prep = bool(args.prep) or (not want_checker)
@@ -445,7 +480,7 @@ def main() -> int:
 
     if want_prep:
         for sec in sections:
-            entry = run_prep(sec, models=models, key=key, out=out, language="grc")
+            entry = run_prep(sec, models=models, key=key, out=out, language="grc", book=book)
             receipt["sections"].append(
                 {k: entry[k] for k in ("section", "language", "call", "score")}
             )
@@ -479,7 +514,7 @@ def main() -> int:
 
     if want_checker:
         for sec in sections:
-            entry = run_checker_c(sec, models=checker_models, key=key, out=out)
+            entry = run_checker_c(sec, models=checker_models, key=key, out=out, book=book)
             receipt["checker_c"].append(
                 {
                     "section": entry.get("section"),

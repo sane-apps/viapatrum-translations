@@ -51,7 +51,7 @@ JSON Mode (`response_format`) is **not** universal on CF. Do not assume Qwen/GLM
 | Model | Role here | Notes |
 |-------|-----------|--------|
 | `gemini-3.5-flash-lite` | Primary thin prep + checker-C | Proven on Mini probe 2026-09-12 (`outputs/gemini-prep-probe/…`) |
-| `gemini-3.1-flash-lite` / `gemini-2.5-flash-lite` | Failover | Configured in `lanes.gemini.prep_failover` |
+| `gemini-3.1-flash-lite` / `gemini-flash-lite-latest` | Failover | Configured in `lanes.gemini.prep_failover` |
 
 Auth: `GEMINI_API_KEY` from `~/.config/nv/env`. Script: `scripts/gemini_prep_lane.py`. **Never** promote from Gemini alone; CF+NV stay primary overnight. See `docs/AI_CROSSCHECK.md` § Optional Gemini.
 

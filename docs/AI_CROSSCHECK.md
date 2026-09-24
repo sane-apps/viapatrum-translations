@@ -68,7 +68,7 @@ Overnight **default is `--mode prep`**: Pass A gloss, lemmas, OCR flags, scriptu
 
 ## Optional Gemini prep / checker-C (never promote alone)
 
-`gemini-3.5-flash-lite` (failover `gemini-3.1-flash-lite` / `gemini-2.5-flash-lite`) is an **optional thin prep / checker-C** lane. It writes only under `outputs/gemini-prep/<stamp>/`. It does **not** mark claims, does **not** write live Pass B, and is **never** a sole promote gate.
+`gemini-3.5-flash-lite` (failover `gemini-3.1-flash-lite` / `gemini-flash-lite-latest`) is an **optional thin prep / checker-C** lane. It writes only under `outputs/gemini-prep/<stamp>/`. It does **not** mark claims, does **not** write live Pass B, and is **never** a sole promote gate.
 
 Enable without changing the CF/NV calendar default:
 
