@@ -102,8 +102,16 @@ def main() -> int:
         rc, out = run(revise_cmd, CLAIM_WALL_DEFAULT)
         print(out[-1500:], flush=True)
         if rc != 0:
-            print("[auto] HOLD: revise failed", flush=True)
-            return 1
+            print("[auto] revise failed; trying constrained redraft", flush=True)
+            redraft_cmd = [sys.executable, "scripts/redraft_b.py",
+                           "--claim", args.claim, "--agent", args.agent]
+            if args.model:
+                redraft_cmd += ["--model", args.model]
+            rc, out = run(redraft_cmd, CLAIM_WALL_DEFAULT)
+            print(out[-1500:], flush=True)
+            if rc != 0:
+                print("[auto] HOLD: revise failed", flush=True)
+                return 1
 
     mark_cmd = [sys.executable, "scripts/ai_promote.py",
                 "--claim", args.claim, "--agent", args.agent]
