@@ -63,7 +63,8 @@ ARBITER_DEFAULTS = [
     "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
     # Fourth family on CF: production draft+checkers already span qwen,
     # gemma, and llama. NV entries below stay as fallback only.
-    "@cf/openai/gpt-oss-20b",
+    # gpt-oss-20b removed 2026-09-24: confabulated fail verdicts
+    # (receipt 20260924T234501669364Z); too weak for final veto.
     "@cf/zai-org/glm-4.7-flash",
     "nvidia/nemotron-3-super-120b-a12b",
     "mistralai/mistral-nemotron",
@@ -387,6 +388,32 @@ def run_checker(
     return last or {"ok": False, "error": "checker_failed", "model": model, "api_error": True}
 
 
+def _failed_checks(check: dict) -> list[str]:
+    parsed = check.get("parsed") or {}
+    checks = parsed.get("checks") or {}
+    return sorted(k for k, v in checks.items() if v is not True)
+
+
+def build_arbiter_note(check_a: dict, check_b: dict) -> str:
+    """Split summary without either side narrative.
+
+    Verdict narratives anchor the arbiter (receipt 20260924T234501669364Z:
+    arbiter parroted a provably false omission claim). Checks-only focuses
+    re-judgment without transplanting claims.
+    """
+    lines = []
+    for label, check in (("Checker A", check_a), ("Checker B", check_b)):
+        parsed = check.get("parsed") or {}
+        verdict = parsed.get("verdict", "unreadable")
+        failed = _failed_checks(check)
+        lines.append(f"{label} ({check.get('model') or 'none'}) said {verdict}; "
+                     f"failed checks: {', '.join(failed) if failed else 'none'}.")
+    lines.append("Re-judge the bundle independently from the source. Do not assume "
+                 "either side is correct; verify every disputed claim against the "
+                 "supplied Greek and English yourself.")
+    return "\n".join(lines)
+
+
 def verdict_degenerate(parsed) -> bool:
     """A verdict without any reasoning is not a judgment.
 
@@ -677,14 +704,7 @@ def main() -> int:
             print(f"  {section} → arbiter unavailable (no usable models); split stands", flush=True)
         if split and arb_chain:
             print(f"  {section} → arbiter (split decision)", flush=True)
-            note = (
-                f"Checker A ({check_a.get('model')}) said "
-                f"{(check_a.get('parsed') or {}).get('verdict')}: "
-                f"{(check_a.get('parsed') or {}).get('notes')}\n"
-                f"Checker B ({check_b.get('model')}) said "
-                f"{(check_b.get('parsed') or {}).get('verdict')}: "
-                f"{(check_b.get('parsed') or {}).get('notes')}"
-            )
+            note = build_arbiter_note(check_a, check_b)
             arb = run_checker_chain(
                 arb_chain,
                 dict(bundle, arbiter_note=note),

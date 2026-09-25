@@ -236,6 +236,29 @@ class PromotionTests(unittest.TestCase):
             self.assertEqual(json.loads(path.read_text()), {'ok': False})
             self.assertEqual(list(Path(tmp).iterdir()), [path])
 
+    def test_arbiter_note_checks_only_no_narrative(self):
+        a = {'model': 'm-a', 'parsed': {'verdict': 'pass',
+             'notes': 'A narrative with a quoted claim.',
+             'checks': {'completeness': True, 'scripture': True}}}
+        b = {'model': 'm-b', 'parsed': {'verdict': 'fail',
+             'notes': 'B narrative: omits the giant passage.',
+             'checks': {'completeness': False, 'scripture': True}}}
+        note = promote.build_arbiter_note(a, b)
+        self.assertIn('m-a', note)
+        self.assertIn('completeness', note)
+        self.assertNotIn('giant passage', note)
+        self.assertNotIn('quoted claim', note)
+        self.assertIn('independently', note)
+
+    def test_arbiter_note_handles_unreadable(self):
+        note = promote.build_arbiter_note({}, {'model': 'm-b'})
+        self.assertIn('unreadable', note)
+        self.assertIn('none', note)
+
+    def test_gpt_oss_out_of_arbiter_defaults(self):
+        self.assertNotIn('@cf/openai/gpt-oss-20b', promote.ARBITER_DEFAULTS)
+
+
 
 if __name__ == '__main__':
     unittest.main()
