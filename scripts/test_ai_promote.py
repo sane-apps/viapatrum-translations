@@ -259,6 +259,55 @@ class PromotionTests(unittest.TestCase):
         self.assertNotIn('@cf/openai/gpt-oss-20b', promote.ARBITER_DEFAULTS)
 
 
+    def _override_bundle_entry(self):
+        bundle = {'section': 's1', 'book': 'b', 'greek': ['g1'],
+                  'justification': {'draft_model': 'm-d'}, 'english_row': {}}
+        good = {'model': 'm-x', 'ok': True,
+                'parsed': {'verdict': 'pass', 'checks': {},
+                           'pass_a_fidelity': True, 'title_is_thought': True,
+                           'covered_source_paragraphs': [1], 'uncertainties': []}}
+        return bundle, good
+
+    def test_arbiter_promote_excuses_single_dissent(self):
+        bundle, good = self._override_bundle_entry()
+        bad = dict(good, model='m-y', ok=False)
+        arb = dict(good, model='m-z', decision='PROMOTE')
+        entry = {'section': 's1', 'binding': 'B', 'draft_model': 'm-d',
+                 'checker_a': good, 'checker_b': bad, 'arbiter': arb}
+        with patch.object(promote, 'structural_ok', return_value={'ok': True}), \
+             patch.object(promote, 'bundle_binding', return_value='B'), \
+             patch.object(promote, 'model_families',
+                          side_effect=lambda m: {m}), \
+             patch.object(promote, 'checker_verdict_ok', return_value=True):
+            self.assertTrue(promote.review_is_current(bundle, entry, 'm-d'))
+
+    def test_arbiter_hold_keeps_veto(self):
+        bundle, good = self._override_bundle_entry()
+        bad = dict(good, model='m-y', ok=False)
+        arb = dict(good, model='m-z', ok=False, decision='HOLD')
+        entry = {'section': 's1', 'binding': 'B', 'draft_model': 'm-d',
+                 'checker_a': good, 'checker_b': bad, 'arbiter': arb}
+        with patch.object(promote, 'structural_ok', return_value={'ok': True}), \
+             patch.object(promote, 'bundle_binding', return_value='B'), \
+             patch.object(promote, 'model_families',
+                          side_effect=lambda m: {m}), \
+             patch.object(promote, 'checker_verdict_ok', return_value=True):
+            self.assertFalse(promote.review_is_current(bundle, entry, 'm-d'))
+
+    def test_two_fails_no_override(self):
+        bundle, good = self._override_bundle_entry()
+        bad_a = dict(good, model='m-x', ok=False)
+        bad_b = dict(good, model='m-y', ok=False)
+        entry = {'section': 's1', 'binding': 'B', 'draft_model': 'm-d',
+                 'checker_a': bad_a, 'checker_b': bad_b}
+        with patch.object(promote, 'structural_ok', return_value={'ok': True}), \
+             patch.object(promote, 'bundle_binding', return_value='B'), \
+             patch.object(promote, 'model_families',
+                          side_effect=lambda m: {m}), \
+             patch.object(promote, 'checker_verdict_ok', return_value=True):
+            self.assertFalse(promote.review_is_current(bundle, entry, 'm-d'))
+
+
 
 if __name__ == '__main__':
     unittest.main()

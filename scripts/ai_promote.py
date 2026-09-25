@@ -162,14 +162,26 @@ def review_is_current(bundle: dict, entry: dict, draft_model: str) -> bool:
     keys = ["checker_a", "checker_b"]
     if "arbiter" in entry:
         keys.append("arbiter")
+    fails: list[str] = []
     for key in keys:
         check = entry.get(key) or {}
         candidate = model_families(check.get("model") or "")
         if (not candidate or candidate & families or check.get("ok") is not True
                 or not checker_verdict_ok(check.get("parsed") or {}, len(bundle["greek"]))):
-            return False
+            fails.append(key)
         families |= candidate
-    return True
+    if not fails:
+        return True
+    # A passing arbiter breaks a one-sided split; the dissent stays recorded
+    # in the receipt but no longer vetoes. Two fails, or a failed arbiter,
+    # still hold. (Without this the arbiter path could never change an
+    # outcome: every split held at this gate. See receipt
+    # 20260925T000424203621Z.)
+    if (len(fails) == 1 and "arbiter" in entry
+            and "arbiter" not in fails
+            and entry["arbiter"].get("decision") == "PROMOTE"):
+        return True
+    return False
 
 
 def require_supported_claim(row: dict) -> None:
