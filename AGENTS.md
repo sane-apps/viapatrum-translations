@@ -34,7 +34,7 @@ Before any Fathers reader/UI work or tip ship, read and acknowledge in working n
 
 Summary (full text lives on the site repo):
 
-1. English-first EVERYWHERE public-facing (H1, breadcrumbs, Works/Authors lists); Latin secondary only; no Latin-only work titles in lists.
+1. Public titles are plain English a reader would search (H1, breadcrumbs, Works cards, author rows, search). Latin or Greek is the subtitle only. Do not leave Anaphora, Praktikos, Scholia, Hexaemeron, Cesti, or a raw De/In/Homilia form in the title.
 2. Author dates (lifespan/floruit) required next to every Authors-index name (`data/author-dates.json`).
 3. Semiotics: nothing looks interactive unless it is (no fake title/author-name underlines).
 4. Author sidebar expands like About this text with short researched bios (`data/author-bios.json`).
