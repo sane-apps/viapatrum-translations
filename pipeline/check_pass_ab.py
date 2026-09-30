@@ -70,6 +70,15 @@ def content_errors(value, label="english", *, source=False) -> list[str]:
         errors.append(f"{label}: English/operational token in source")
     if not source and text and greek_ratio(visible_text(text)) > 0.25:
         errors.append(f"{label}: copied Greek needs review; expected English")
+    visible = visible_text(text)
+    if not source and _repeated_phrase(visible):
+        errors.append(f"{label}: repeated phrase; the same words run three times in a row")
+    if not source and _latin_bleed(visible):
+        errors.append(f"{label}: Latin left in the English")
+    if not source and (_debris_text(visible) or _bare_debris(value)):
+        errors.append(f"{label}: printer, page, or footnote debris")
+    if source and _failed_greek_scan(text):
+        errors.append(f"{label}: source is betacode or a broken Greek scan")
     return errors
 
 
@@ -85,6 +94,91 @@ ENGLISH_FUNCTION = {
     "are", "was", "were", "their", "it", "but", "if", "than", "who", "an",
     "on", "at", "they", "them", "she", "her", "our", "your",
 }
+
+_GLUED = re.compile(r"\b[A-Za-z]{4,}\d{2,}\b")
+_SIGNATURE = re.compile(r"\b[A-Z][ij]{2,4}\b")
+_PHYS = re.compile(r"\bPHYS\b")
+_DENSIFY = re.compile(r"\bdensify\s+complete\b", re.I)
+_BLEED_EXTRA = {"et", "non"}
+
+
+def _tokens(text: str) -> list[str]:
+    text = unicodedata.normalize("NFKC", visible_text(text)).casefold()
+    return re.findall(r"[^\W_]+", text, re.UNICODE)
+
+
+def _repeated_phrase(text: str) -> bool:
+    """Same 4 to 8 word run, three times, with no words between the copies.
+
+    A verse list such as Romans 5:15 repeated by the scripture linker is mostly
+    digits, so it does not count. One-word refrains do not count either.
+    """
+    words = _tokens(text)
+    for n in range(4, 9):
+        need = n * 3
+        if len(words) < need:
+            continue
+        for i in range(0, len(words) - need + 1):
+            phrase = words[i:i + n]
+            if phrase != words[i + n:i + 2 * n] or phrase != words[i + 2 * n:i + 3 * n]:
+                continue
+            if len(set(phrase)) < 2:
+                continue
+            if sum(w.isdigit() for w in phrase) * 2 >= len(phrase):
+                continue
+            return True
+    return False
+
+
+def _latin_bleed(text: str) -> bool:
+    """A stretch of Latin function words inside an English reading."""
+    words = [w for w in _tokens(text) if w.isascii()]
+    if len(words) < 8:
+        return False
+    for i in range(0, len(words) - 7):
+        chunk = words[i:i + 12]
+        if len(chunk) < 8:
+            break
+        latin = sum((w in LATIN_FUNCTION or w in _BLEED_EXTRA) for w in chunk)
+        english = sum(w in ENGLISH_FUNCTION for w in chunk)
+        if latin >= 6 and english <= 1:
+            return True
+    return False
+
+
+def _debris_text(text: str) -> bool:
+    if _GLUED.search(text) or _PHYS.search(text) or _DENSIFY.search(text):
+        return True
+    for match in _SIGNATURE.finditer(text):
+        if match.group(0).casefold() != "dii":
+            return True
+    return False
+
+
+def _bare_debris(value) -> bool:
+    parts = value if isinstance(value, list) else [value]
+    for part in parts:
+        if not isinstance(part, str):
+            continue
+        stripped = part.strip()
+        if re.fullmatch(r"\d{1,4}", stripped):
+            return True
+        if re.fullmatch(r"[A-Z][ij]{2,4}", stripped) and stripped.casefold() != "dii":
+            return True
+    return False
+
+
+def _failed_greek_scan(text: str) -> bool:
+    """Betacode, or a Greek scan that collapsed into backslash codes.
+
+    A Latin lock, even a short gloss with few function words, stays legal.
+    Marginal marks the lock never stored cannot be reconstructed here.
+    """
+    if greek_ratio(text) >= 0.15 or sum(c.isalpha() for c in text) < 80:
+        return False
+    return text.count("\\") >= 8
+
+
 
 
 def check_record(j: dict) -> list[str]:

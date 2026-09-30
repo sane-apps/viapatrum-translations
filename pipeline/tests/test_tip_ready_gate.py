@@ -210,5 +210,67 @@ class TipReadyGateTest(unittest.TestCase):
         self.assertTrue(check_record({"pass_a_gloss": "x", "pass_b_english": ["Lemma-led open — y"], "source_text": "z", "lemmas": [], "choices": []}))
 
 
+
+    def test_folio_debris_and_stuck_phrase_fail(self) -> None:
+        loop = (
+            "grace abounded to many grace abounded to many grace abounded to many "
+            "and the sentence then continues in ordinary English."
+        )
+        self.assertTrue(any("repeated phrase" in e for e in content_errors(loop)))
+        citation = (
+            "neither sin nor eternal death is transmitted through Adam "
+            "(compare Romans 5:15; Revelation 20:14) (Romans 5:15) "
+            "(Revelation 20:14) (Romans 5:15; Revelation 20:14)."
+        )
+        self.assertEqual(content_errors(citation), [])
+        latin = (
+            "The margin then runs et quod cum enim autem sunt sed est quo quae "
+            "before the English resumes its course."
+        )
+        self.assertTrue(any("Latin left" in e for e in content_errors(latin)))
+        self.assertEqual(
+            content_errors("He answers sed contra and moves on to the next question about grace."),
+            [],
+        )
+        self.assertTrue(any("debris" in e for e in content_errors(
+            "The note reads desperate32 28 is a plague upon the page.")))
+        self.assertTrue(any("debris" in e for e in content_errors(
+            "The quire mark Aij was read as a word in the sentence about grace.")))
+        self.assertEqual(
+            content_errors("Plural Dii on the calves tracks Hebrew idiom, not a pantheon."),
+            [],
+        )
+        self.assertTrue(any("debris" in e for e in content_errors(
+            "Cap. 10 complete. Next begins PHYS 323.")))
+        self.assertTrue(any("debris" in e for e in content_errors("Densify COMPLETE for this chapter.")))
+        self.assertTrue(any("debris" in e for e in content_errors(["The prayer ends here.", "28"])))
+        self.assertTrue(any("debris" in e for e in content_errors(["The prayer ends here.", "Ciiij"])))
+        self.assertEqual(
+            content_errors("There is one Physician, both flesh and spirit, born and unborn."),
+            [],
+        )
+        greek = (
+            "Ἴσως μὲν ἂν ἔδοξέ σοι τὸν περὶ τῆς Σαμαρείτιδος λόγον μὴ διακοπῆναι "
+            "ἐν τῷ μέσῳ τῆς ἐξηγήσεως ταύτης καὶ πάλιν ὁ αὐτὸς λόγος πρόεισιν."
+        )
+        self.assertEqual(content_errors(greek, "source", source=True), [])
+        latin_source = (
+            "Sicut mysteria paschae, quae in testamento ueteri celebrabantur, "
+            "et quod cum enim autem sunt figurae noui testamenti, non est dubium."
+        )
+        self.assertEqual(content_errors(latin_source, "source", source=True), [])
+        gloss = (
+            "Tertiam prophetiam Balaam tractamus. Balac putat locum defuisse maledictioni; "
+            "ducit eum in verticem Phogor, et populus manet in campis."
+        )
+        self.assertEqual(content_errors(gloss, "source", source=True), [])
+        betacode = (
+            r"kainou\j de\ ou)ranou\j kai\ kainh\n gh=n kai\ ta\ e)pagge/lmata "
+            r"au)tou= prosdokw\men katallagh\n kai\ th\n a)polutrwsin"
+        )
+        self.assertTrue(any("broken Greek scan" in e for e in content_errors(
+            betacode, "source", source=True)))
+
+
 if __name__ == "__main__":
     unittest.main()
