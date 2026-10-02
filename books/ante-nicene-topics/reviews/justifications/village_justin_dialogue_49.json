@@ -1,0 +1,141 @@
+{
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
+ "drafter": "claude-orchestrator",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "variants": [],
+ "use": "Fathers Village saying (game); not a topic excerpt",
+ "anf_compare": {
+  "status": "diverges",
+  "notes": "Replaces ANF-derived game wording."
+ },
+ "excerpt_id": "village_justin_dialogue_49",
+ "edition": {
+  "id": "first1k-justin-dialogue",
+  "language": "grc",
+  "path": "sources/greek/justin_dialogue.xml",
+  "locus": "Dialogue with Trypho 49",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "καὶ ἡμεῖς τοῦτο ἐπιστάμεθα γενησόμενον, ὅταν μέλλῃ ἐν δόξῃ ἐξ οὐρανῶν παραγίνεσθαι ὁ ἡμέτερος κύριος Ἰησοῦς Χριστός, οὗ καὶ τῆς πρώτης φανερώσεως κῆρυξ προῆλθε τὸ ἐν Ἡλίᾳ γενόμενον πνεῦμα τοῦ θεοῦ, ἐν Ἰωάννῃ, τῷ γενομένῳ ἐν τῷ γένει ὑμῶν προφήτῃ, μεθ᾿ ὃν οὐδεὶς ἕτερος λοιπὸν παρ᾿ ὑμῖν ἐφάνη προφήτης·",
+ "thought_title": "Elijah's Spirit heralds both comings",
+ "pass_a_gloss": "And we know that this will happen when our Lord Jesus Christ is about to arrive in glory from the heavens, of whose first manifestation also the Spirit of God that had been in Elijah went forth as herald, in John, the prophet who arose in your race, after whom no other prophet has appeared among you any longer;",
+ "pass_b_english": [
+  "And we know this will happen when our Lord Jesus Christ is about to come from heaven in glory. His first appearing, too, had a herald: the Spirit of God that had been in Elijah went before him in John (Luke 1:17), the prophet who arose among your people, after whom no other prophet has appeared among you."
+ ],
+ "lemmas": [
+  {
+   "form": "ἐπιστάμεθα",
+   "lemma": "ἐπίσταμαι",
+   "gloss": "know"
+  },
+  {
+   "form": "δόξῃ",
+   "lemma": "δόξα",
+   "gloss": "glory"
+  },
+  {
+   "form": "φανερώσεως",
+   "lemma": "φανέρωσις",
+   "gloss": "manifestation, appearing"
+  },
+  {
+   "form": "κῆρυξ",
+   "lemma": "κῆρυξ",
+   "gloss": "herald"
+  },
+  {
+   "form": "πνεῦμα",
+   "lemma": "πνεῦμα",
+   "gloss": "Spirit"
+  },
+  {
+   "form": "γένει",
+   "lemma": "γένος",
+   "gloss": "race, people"
+  }
+ ],
+ "choices": [
+  {
+   "term": "τὸ ἐν Ἡλίᾳ γενόμενον πνεῦμα τοῦ θεοῦ, ἐν Ἰωάννῃ",
+   "english": "the Spirit of God that had been in Elijah went before him in John",
+   "why": "Justin's point: one Spirit, Elijah then John, heralds the first coming as Elijah will the second",
+   "rejected": [
+    "omit Elijah and John"
+   ]
+  },
+  {
+   "term": "τοῦτο",
+   "english": "this",
+   "why": "Elijah's coming before the second coming (preceding context)",
+   "rejected": []
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Luke 1:17",
+   "method": "wording",
+   "note": "ἐν πνεύματι καὶ δυνάμει Ἠλίου; the source margin marks cf. Luke 1:17"
+  }
+ ],
+ "notes": [
+  "Lake/First1K margin notes [cf. LUC, I, 17] and folio markers stripped from source_text."
+ ],
+ "crosscheck": {
+  "at": "20261002T052809Z",
+  "content_sha256": "07fbd1c328487460e8f79365365e7262909f3e4ccd4b80038cd0f561cb23b6eb",
+  "pass": true,
+  "a": {
+   "model": "grok-4.7",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "P1 'καὶ ἡμεῖς τοῦτο ἐπιστάμεθα γενησόμενον, ὅταν μέλλῃ ἐν δόξῃ ἐξ οὐρανῶν παραγίνεσθαι ὁ ἡμέτερος κύριος Ἰησοῦς Χριστός' matches A 'we know that this will happen when our Lord Jesus Christ is about to arrive in glory from the heavens' and B 'we know this will happen when our Lord Jesus Christ is about to come from heaven in glory'. 'οὗ καὶ τῆς πρώτης φανερώσεως κῆρυξ προῆλθε τὸ ἐν Ἡλίᾳ γενόμενον πνεῦμα τοῦ θεοῦ, ἐν Ἰωάννῃ, τῷ γενομένῳ ἐν τῷ γένει ὑμῶν προφήτῃ' keeps the Spirit (not John alone) as herald of the first appearing, in John the prophet of your race/people. Negation 'μεθ᾿ ὃν οὐδεὶς ἕτερος λοιπὸν παρ᾿ ὑμῖν ἐφάνη προφήτης' is in A as 'any longer'; B 'after whom no other prophet has appeared among you' does not reverse μεθ᾿ ὅν or οὐδεὶς. '(Luke 1:17)' matches the supplied margin cf., not a false verse. Title names the Elijah-Spirit thought, not a bare locus.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Source identity: Greek is Dialogue with Trypho 49, single locked witness. Completeness: all clauses from paragraph [1] rendered in Pass A and B. Negation: 'οὐδεὶς ἕτερος λοιπὸν παρ᾿ ὑμῖν ἐφάνη προφήτης' translated as 'no other prophet has appeared among you any longer' and 'no other prophet has appeared among you'—negation preserved. Agency: Spirit of God as herald, John as prophet, Christ as Lord—roles clear. Modality: μέλλῃ ἐν δόξῃ ἐξ οὐρανῶν παραγίνεσθαι rendered as 'is about to arrive in glory from the heavens' and 'is about to come from heaven in glory'—future intention preserved. Doctrine: Justin's typology of Elijah/John as one heralding Spirit for both comings maintained. Scripture: Pass B adds Luke 1:17 as supplied in bible_refs; margin note confirms cf. Luke 1:17—added identification is correct, not wrong. Title 'Elijah's Spirit heralds both comings' names the thought. Notes disclose OCR damage: Lake/First1K margin notes and folio markers stripped. All checks pass.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
+ "drafter": "claude-orchestrator",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "variants": [],
+ "use": "Fathers Village saying (game); not a topic excerpt",
+ "anf_compare": {
+  "status": "diverges",
+  "notes": "Replaces ANF-derived game wording."
+ },
+ "excerpt_id": "village_tatian_oratio_7_fate",
+ "edition": {
+  "id": "first1k-tatian-oratio",
+  "language": "grc",
+  "path": "sources/greek/tatian_oratio.xml",
+  "locus": "Oratio ad Graecos 7",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Ἡ δὲ τοῦ λόγου δύναμις ἔχουσα παρ᾿ ἑαυτῇ προγνωστικὸν τὸ μέλλον ἀποβαίνειν, οὐ καθ᾿ εἱμαρμένην, τῇ δὲ τῶν αἱρουμένων αὐτεξουσίων γνώμῃ, τῶν μελλόντων προὔλεγε τὰς ἀποβάσεις·",
+ "thought_title": "The Word foresees, but does not force",
+ "pass_a_gloss": "And the power of the Word, having in itself foreknowledge of what is going to come about, not according to fate but by the judgment of those who choose with self-determining power, was foretelling the outcomes of the things to come.",
+ "pass_b_english": [
+  "The power of the Word, holding within itself the foreknowledge of what was going to happen, would foretell how future things would turn out: not according to fate, but according to the free decision of those who choose for themselves."
+ ],
+ "lemmas": [
+  {
+   "form": "λόγου",
+   "lemma": "λόγος",
+   "gloss": "Word (divine Logos)"
+  },
+  {
+   "form": "προγνωστικὸν",
+   "lemma": "προγνωστικός",
+   "gloss": "foreknowing, prescient"
+  },
+  {
+   "form": "εἱμαρμένην",
+   "lemma": "εἱμαρμένη",
+   "gloss": "fate"
+  },
+  {
+   "form": "αὐτεξουσίων",
+   "lemma": "αὐτεξούσιος",
+   "gloss": "self-determining, free"
+  },
+  {
+   "form": "γνώμῃ",
+   "lemma": "γνώμη",
+   "gloss": "judgment, decision"
+  },
+  {
+   "form": "προὔλεγε",
+   "lemma": "προλέγω",
+   "gloss": "foretell"
+  }
+ ],
+ "choices": [
+  {
+   "term": "τῶν αἱρουμένων αὐτεξουσίων",
+   "english": "those who choose for themselves",
+   "why": "αὐτεξούσιος is self-determining choice; plain English keeps the anti-fate point",
+   "rejected": [
+    "free choosers"
+   ]
+  },
+  {
+   "term": "προὔλεγε",
+   "english": "would foretell",
+   "why": "imperfect of repeated foretelling",
+   "rejected": [
+    "foretold once"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "notes": [
+  "Repair: τῇ… αὐτεξουσίων γνώμῃ made explicit as 'free decision'."
+ ],
+ "crosscheck": {
+  "at": "20261002T053223Z",
+  "content_sha256": "d9b10866a9a094ab5ff3362fcddc0faea551baeb80c68a3a3e17b3d7807ac958",
+  "pass": true,
+  "a": {
+   "model": "grok-4.7",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Checked p1 only. Source 'οὐ καθ᾿ εἱμαρμένην, τῇ δὲ τῶν αἱρουμένων αὐτεξουσίων γνώμῃ, τῶν μελλόντων προὔλεγε τὰς ἀποβάσεις' is kept in A as 'not according to fate but by the judgment of those who choose with self-determining power, was foretelling the outcomes of the things to come' and in B as 'not according to fate, but according to the free decision of those who choose for themselves.' Foreknowledge stays with 'τοῦ λόγου δύναμις'; self-determination stays with the choosers; imperfect προὔλεγε is not a one-time past. No scripture clause is quoted.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Source identity confirmed: Greek matches Tatian's Oratio ad Graecos 7. Completeness: all clauses present—power of Word, foreknowledge, not according to fate, judgment of self-determining, foretelling outcomes. Negation: 'οὐ καθ᾿ εἱμαρμένην' correctly rendered as 'not according to fate' in both Pass A and B. Agency: 'τῶν αἱρουμένων αὐτεξουσίων γνώμῃ' properly attributed to those who choose with self-determining power. Modality: imperfect 'προὔλεγε' rendered as 'was foretelling' (A) and 'would foretell' (B), preserving ongoing action. Doctrine: anti-fate, pro-free will distinction preserved. Scripture: no inline citations; none required. Pass A fidelity: senses match. B adds no contradiction. Title 'The Word foresees, but does not force' captures the thought. Covered source paragraphs: [1]. No uncertainties.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}

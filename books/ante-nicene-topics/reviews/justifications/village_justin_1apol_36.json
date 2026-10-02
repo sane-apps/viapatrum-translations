@@ -1,0 +1,137 @@
+{
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
+ "drafter": "claude-orchestrator",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "variants": [],
+ "use": "Fathers Village saying (game); not a topic excerpt",
+ "anf_compare": {
+  "status": "diverges",
+  "notes": "Replaces ANF-derived game wording."
+ },
+ "excerpt_id": "village_justin_1apol_36",
+ "edition": {
+  "id": "first1k-justin-1apology",
+  "language": "grc",
+  "path": "sources/greek/justin_1apology.xml",
+  "locus": "First Apology 36",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Ὅπερ μὴ νοήσαντες οἱ ἔχοντες τὰς βίβλους τῶν προφητῶν Ἰουδαῖοι οὐκ ἐγνώρισαν οὐδὲ παραγενόμενον τὸν Χριστόν, ἀλλὰ καὶ ἡμᾶς τοὺς λέγοντας παραγεγενῆσθαι αὐτὸν καί, ὡς προεκεκήρυκτο, ἀποδεικνύντας ἐσταυρῶσθαι ὑπ᾿ αὐτῶν μισοῦσιν.",
+ "thought_title": "They had the prophets but missed the Christ",
+ "pass_a_gloss": "Not having understood this, the Jews who have the books of the prophets did not recognize the Christ even when he had come, but they also hate us, who say that he has come and who demonstrate that, as had been proclaimed beforehand, he was crucified by them.",
+ "pass_b_english": [
+  "Because they did not grasp this, the Jews who hold the books of the prophets failed to recognize the Christ even when he came. More than that, they hate us, because we say that he has come, and we show that he was crucified by them, just as had been proclaimed beforehand."
+ ],
+ "lemmas": [
+  {
+   "form": "νοήσαντες",
+   "lemma": "νοέω",
+   "gloss": "understand, perceive"
+  },
+  {
+   "form": "ἐγνώρισαν",
+   "lemma": "γνωρίζω",
+   "gloss": "recognize, know"
+  },
+  {
+   "form": "παραγενόμενον",
+   "lemma": "παραγίνομαι",
+   "gloss": "arrive, come"
+  },
+  {
+   "form": "προεκεκήρυκτο",
+   "lemma": "προκηρύσσω",
+   "gloss": "proclaim beforehand"
+  },
+  {
+   "form": "ἀποδεικνύντας",
+   "lemma": "ἀποδείκνυμι",
+   "gloss": "demonstrate, prove"
+  },
+  {
+   "form": "μισοῦσιν",
+   "lemma": "μισέω",
+   "gloss": "hate"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Ὅπερ μὴ νοήσαντες",
+   "english": "Because they did not grasp this",
+   "why": "'this' = that the prophets speak in different persons (the preceding argument)",
+   "rejected": [
+    "Not understanding"
+   ]
+  },
+  {
+   "term": "ἐσταυρῶσθαι ὑπ᾿ αὐτῶν",
+   "english": "crucified by them",
+   "why": "Justin's own claim; render faithfully, no resurrection clause (not in this sentence)",
+   "rejected": [
+    "crucified and rose"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "notes": [
+  "The old game wording added 'and rose', which is not in this sentence; removed."
+ ],
+ "crosscheck": {
+  "at": "20261002T052809Z",
+  "content_sha256": "564d3683c2fb42e6d0ac272147a7e3445d4c525c4fc57421edf447f9489cd619",
+  "pass": true,
+  "a": {
+   "model": "grok-4.7",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Checked [p1] in full. Ὅπερ μὴ νοήσαντες οἱ ἔχοντες τὰς βίβλους τῶν προφητῶν Ἰουδαῖοι οὐκ ἐγνώρισαν οὐδὲ παραγενόμενον τὸν Χριστόν is kept in Pass A as 'Not having understood this, the Jews who have the books of the prophets did not recognize the Christ even when he had come' and in Pass B as 'Because they did not grasp this, the Jews who hold the books of the prophets failed to recognize the Christ even when he came.' ἀλλὰ καὶ ἡμᾶς τοὺς λέγοντας παραγεγενῆσθαι αὐτὸν καί, ὡς προεκεκήρυκτο, ἀποδεικνύντας ἐσταυρῶσθαι ὑπ᾿ αὐτῶν μισοῦσιν is kept in A as 'but they also hate us, who say that he has come and who demonstrate that, as had been proclaimed beforehand, he was crucified by them' and in B as 'they hate us, because we say that he has come, and we show that he was crucified by them, just as had been proclaimed beforehand.' Negation (οὐκ/μή), Jewish agency of non-recognition and hatred, and crucifixion ὑπ᾿ αὐτῶν are preserved; no resurrection clause is added. Pass B's 'because' makes the ground of hatred explicit without reversing who hates, who speaks, or what is proved. No quoted scripture clause is present, so no citation is missing or false. Title names the thought.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Source paragraph 1: Locked Greek 'Ὅπερ μὴ νοήσαντες οἱ ἔχοντες τὰς βίβλους τῶν προφητῶν Ἰουδαῖοι οὐκ ἐγνώρισαν οὐδὲ παραγενόμενον τὸν Χριστόν, ἀλλὰ καὶ ἡμᾶς τοὺς λέγοντας παραγεγενῆσθαι αὐτὸν καί, ὡς προεκεκήρυκτο, ἀποδεικνύντας ἐσταυρῶσθαι ὑπ᾿ αὐτῶν μισοῦσιν.' matches named locus First Apology 36. Pass A gloss conveys 'Not having understood this, the Jews who have the books of the prophets did not recognize the Christ even when he had come, but they also hate us, who say that he has come and who demonstrate that, as had been proclaimed beforehand, he was crucified by them.' Pass B English renders: 'Because they did not grasp this, the Jews who hold the books of the prophets failed to recognize the Christ even when he came. More than that, they hate us, because we say that he has come, and we show that he was crucified by them, just as had been proclaimed beforehand.' All clauses present, no omissions, qualifications, or repetitions lost. Negation: οὐκ ἐγνώρισαν rendered 'did not recognize'/'failed to recognize'; οὐδὲ rendered 'but they also hate' (via 'but they also' in A, 'More than that, they hate' in B). Agency: Jews as subject of not recognizing/hating; Christians as subject of saying/showing; Christ as object of crucifixion by Jews (ἐσταυρῶσθαι ὑπ᾿ αὐτῶν). Modality: none beyond indicative. Doctrine: preserves Justin's distinction that Jews had prophets but missed Christ's coming and crucifixion. Scripture: no inline citations; none required. Title 'They had the prophets but missed the Christ' names the thought. Notes disclose old game wording removed. Covered source paragraphs: [1]. No uncertainties. All checks passed.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}

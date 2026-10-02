@@ -1,0 +1,139 @@
+{
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
+ "drafter": "claude-orchestrator",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "variants": [],
+ "use": "Fathers Village saying (game); not a topic excerpt",
+ "anf_compare": {
+  "status": "diverges",
+  "notes": "Replaces ANF-derived game wording."
+ },
+ "excerpt_id": "village_justin_1apol_35",
+ "edition": {
+  "id": "first1k-justin-1apology",
+  "language": "grc",
+  "path": "sources/greek/justin_1apology.xml",
+  "locus": "First Apology 35",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Καὶ ὅτι ῥητῶς καθεσθησόμενος ἐπὶ πῶλον ὄνου καὶ εἰσελευσόμενος εἰς τὰ Ἱεροσόλυμα προεπεφήτευτο, ἑτέρου προφήτου τοῦ Σοφονίου τας τῆς προφητείας λέξεις ἐροῦμεν. Εἰσὶ δὲ αὗται· „Χαῖρε σφόδρα, θύγατερ Σιών, κήρυσσε, θύγατερ Ἱερουσαλήμ· ἰδοὺ ὁ βασιλεύς σου ἔρχεται σοι πρᾶος, ἐπιβεβηκὼς ἐπὶ ὄνον καὶ πῶλον υἱὸν ὑποζυγίου“.",
+ "thought_title": "The King foretold on a donkey's colt",
+ "pass_a_gloss": "And that he had been expressly prophesied as going to sit upon a donkey's colt and enter Jerusalem, we will state the words of the prophecy of another prophet, Zephaniah. These are they: 'Rejoice greatly, daughter of Zion; proclaim, daughter of Jerusalem; behold, your king comes to you gentle, mounted upon a donkey and a colt, son of a beast of burden.'",
+ "pass_b_english": [
+  "It was also expressly prophesied that he would sit on a donkey's colt and enter Jerusalem, and we will give the words of the prophecy of another prophet, Zephaniah. They are these: \"Rejoice greatly, daughter of Zion! Proclaim it, daughter of Jerusalem! Look, your King comes to you, gentle, mounted on a donkey and a colt, the son of a beast of burden\" (Zechariah 9:9)."
+ ],
+ "lemmas": [
+  {
+   "form": "ῥητῶς",
+   "lemma": "ῥητῶς",
+   "gloss": "expressly, in so many words"
+  },
+  {
+   "form": "πῶλον",
+   "lemma": "πῶλος",
+   "gloss": "colt, foal"
+  },
+  {
+   "form": "προεπεφήτευτο",
+   "lemma": "προφητεύω",
+   "gloss": "prophesy beforehand"
+  },
+  {
+   "form": "πρᾶος",
+   "lemma": "πρᾶος",
+   "gloss": "gentle, meek"
+  },
+  {
+   "form": "ὑποζυγίου",
+   "lemma": "ὑποζύγιον",
+   "gloss": "beast of burden"
+  }
+ ],
+ "choices": [
+  {
+   "term": "τοῦ Σοφονίου",
+   "english": "Zephaniah",
+   "why": "Justin names Zephaniah; the words are Zechariah 9:9. Keep Justin's attribution and cite the true verse",
+   "rejected": [
+    "silently correcting to Zechariah"
+   ]
+  },
+  {
+   "term": "κήρυσσε",
+   "english": "Shout it out",
+   "why": "herald's proclamation; LXX κήρυσσε",
+   "rejected": [
+    "preach"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Zechariah 9:9",
+   "method": "wording",
+   "note": "Χαῖρε σφόδρα, θύγατερ Σιών… πρᾶος, ἐπιβεβηκὼς ἐπὶ ὑποζύγιον καὶ πῶλον νέον"
+  }
+ ],
+ "notes": [
+  "Justin attributes the quotation to Zephaniah (Σοφονίου); the text is Zechariah 9:9. Rendered as Justin wrote; the inline reference gives the actual verse.",
+  "Repair per checker a: 'enter', 'These are they', 'a donkey and a colt, son of a beast of burden'."
+ ],
+ "crosscheck": {
+  "at": "20261002T053223Z",
+  "content_sha256": "ff63b7b5195f5224e302c0ca33c0d2eebdccde6e03201fba2fe5cad53621bc8d",
+  "pass": true,
+  "a": {
+   "model": "grok-4.7",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "p1 checked. Locked 'Καὶ ὅτι ῥητῶς καθεσθησόμενος ἐπὶ πῶλον ὄνου καὶ εἰσελευσόμενος εἰς τὰ Ἱεροσόλυμα προεπεφήτευτο' is kept in Pass A as 'expressly prophesied as going to sit upon a donkey's colt and enter Jerusalem' and in Pass B as 'expressly prophesied that he would sit on a donkey's colt and enter Jerusalem'. 'ἑτέρου προφήτου τοῦ Σοφονίου' stays Zephaniah in both; 'ἐροῦμεν' is 'we will state'/'we will give'. Quotation 'Χαῖρε σφόδρα, θύγατερ Σιών, κήρυσσε, θύγατερ Ἱερουσαλήμ' through 'ἐπιβεβηκὼς ἐπὶ ὄνον καὶ πῶλον υἱὸν ὑποζυγίου' is fully rendered, not silently corrected. Inline (Zechariah 9:9) matches the supplied wording identification. Title names the foretold king on a colt.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Source paragraph 1 matches the Greek of Justin's First Apology 35. Pass A gloss correctly renders all clauses: 'expressly prophesied as going to sit upon a donkey's colt and enter Jerusalem' (Καὶ ὅτι ῥητῶς καθεσθησόμενος ἐπὶ πῶλον ὄνου καὶ εἰσελευσόμενος εἰς τὰ Ἱεροσόλυμα προεπεφήτευτο), 'we will state the words of the prophecy of another prophet, Zephaniah' (ἑτέρου προφήτου τοῦ Σοφονίου τας τῆς προφητείας λέξεις ἐροῦμεν), and the quotation with 'Rejoice greatly, daughter of Zion; proclaim, daughter of Jerusalem; behold, your king comes to you gentle, mounted upon a donkey and a colt, son of a beast of burden' (the quoted Greek). Pass B English preserves all meaning, adds the required inline citation (Zechariah 9:9) as per notes, and does not contradict Pass A or the Greek. Title names the thought ('The King foretold on a donkey's colt'). All checks passed: source identity, completeness, negation (none present), agency (God as implicit source of prophecy, Justin as speaker), modality (future indicatives preserved), doctrine (messianic prophecy), scripture (citation added correctly per notes). No uncertainties.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}

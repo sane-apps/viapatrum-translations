@@ -1,0 +1,142 @@
+{
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
+ "drafter": "claude-orchestrator",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "variants": [],
+ "use": "Fathers Village saying (game); not a topic excerpt",
+ "anf_compare": {
+  "status": "diverges",
+  "notes": "Replaces ANF-derived game wording."
+ },
+ "excerpt_id": "village_tatian_oratio_9_fate",
+ "edition": {
+  "id": "first1k-tatian-oratio",
+  "language": "grc",
+  "path": "sources/greek/tatian_oratio.xml",
+  "locus": "Oratio ad Graecos 9",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Ἡμεῖς δὲ καὶ εἱμαρμένης ἐσμὲν ἀνώτεροι, καὶ ἀντὶ πλανητῶν δαιμόνων ἕνα τὸν ἀπλανῆ δεσπότην μεμαθήκαμεν, καὶ οὐ καθ᾿ εἱμαρμένην ἀγόμενοι τοὺς ταύτης νομοθέτας παρῃτήμεθα.",
+ "thought_title": "Above fate, under one unwandering Master",
+ "pass_a_gloss": "But we are even higher than fate, and in place of wandering demons we have learned the one Master who does not wander, and not being led according to fate we have rejected its lawgivers.",
+ "pass_b_english": [
+  "We, though, stand above fate itself. In place of wandering demons we have come to know one Master who never wanders; and because fate does not lead us, we have turned away the ones who made its laws."
+ ],
+ "lemmas": [
+  {
+   "form": "εἱμαρμένης",
+   "lemma": "εἱμαρμένη",
+   "gloss": "fate, destiny"
+  },
+  {
+   "form": "ἀνώτεροι",
+   "lemma": "ἀνώτερος",
+   "gloss": "higher, above"
+  },
+  {
+   "form": "πλανητῶν",
+   "lemma": "πλανήτης",
+   "gloss": "wandering; planet"
+  },
+  {
+   "form": "ἀπλανῆ",
+   "lemma": "ἀπλανής",
+   "gloss": "not wandering, fixed"
+  },
+  {
+   "form": "δεσπότην",
+   "lemma": "δεσπότης",
+   "gloss": "master, lord"
+  },
+  {
+   "form": "νομοθέτας",
+   "lemma": "νομοθέτης",
+   "gloss": "lawgiver"
+  },
+  {
+   "form": "παρῃτήμεθα",
+   "lemma": "παραιτέομαι",
+   "gloss": "refuse, reject"
+  }
+ ],
+ "choices": [
+  {
+   "term": "πλανητῶν δαιμόνων… ἀπλανῆ",
+   "english": "wandering demons… never wanders",
+   "why": "Tatian's pun: the planets ('wanderers') are demons; God is the fixed one",
+   "rejected": [
+    "planetary demons"
+   ]
+  },
+  {
+   "term": "παρῃτήμεθα",
+   "english": "we have turned away",
+   "why": "refusal of allegiance, not mere disagreement",
+   "rejected": [
+    "we have abandoned"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "notes": [
+  "Context: Tatian has just attacked astrology (the zodiac as the demons' handiwork)."
+ ],
+ "crosscheck": {
+  "at": "20261002T052809Z",
+  "content_sha256": "65bce27800ad15b73fd2c52b2d697a5cc2497e0a58f252470ec60a9cb7d49735",
+  "pass": true,
+  "a": {
+   "model": "grok-4.7",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Checked p1 in full. ‘Ἡμεῖς δὲ καὶ εἱμαρμένης ἐσμὲν ἀνώτεροι’ matches A ‘But we are even higher than fate’ and B ‘We, though, stand above fate itself’. ‘ἀντὶ πλανητῶν δαιμόνων ἕνα τὸν ἀπλανῆ δεσπότην μεμαθήκαμεν’ matches A ‘in place of wandering demons we have learned the one Master who does not wander’ and B ‘In place of wandering demons we have come to know one Master who never wanders’. ‘οὐ καθ᾿ εἱμαρμένην ἀγόμενοι τοὺς ταύτης νομοθέτας παρῃτήμεθα’ matches A ‘not being led according to fate we have rejected its lawgivers’; B ‘because fate does not lead us, we have turned away the ones who made its laws’ keeps the denial and the rejection of fate’s lawgivers. No scripture quoted. Title names the thought, not a bare locus.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Source: Tatian, Oratio ad Graecos 9 (single locked witness). Greek: 'Ἡμεῖς δὲ καὶ εἱμαρμένης ἐσμὲν ἀνώτεροι, καὶ ἀντὶ πλανητῶν δαιμόνων ἕνα τὸν ἀπλανῆ δεσπότην μεμαθήκαμεν, καὶ οὐ καθ᾿ εἱμαρμένην ἀγόμενοι τοὺς ταύτης νομοθέτας παρῃτήμεθα.' Pass A gloss: 'But we are even higher than fate, and in place of wandering demons we have learned the one Master who does not wander, and not being led according to fate we have rejected its lawgivers.' Pass B English: ['We, though, stand above fate itself. In place of wandering demons we have come to know one Master who never wanders; and because fate does not lead us, we have turned away the ones who made its laws.'] All checks passed: source identity confirmed (Tatian, Oratio 9), completeness preserved (all clauses present: superiority to fate, substitution of one fixed Master for wandering demons, non-subjection to fate, rejection of its lawgivers), negation correctly rendered ('οὐ καθ᾿ εἱμαρμένην ἀγόμενοι' → 'not being led according to fate'), agency clear (subject 'we' performs learning and rejecting), modality preserved (indicative mood for factual claims), doctrine consistent (rejection of astrological fate in favor of sovereign Master), scripture not applicable (no biblical citations in source). Title 'Above fate, under one unwandering Master' names the thought. Notes disclose contextual attack on astrology. No uncertainties. Covered source paragraphs: [1].",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}

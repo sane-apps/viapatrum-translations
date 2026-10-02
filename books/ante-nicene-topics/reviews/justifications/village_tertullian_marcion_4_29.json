@@ -1,0 +1,154 @@
+{
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
+ "drafter": "claude-orchestrator",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "variants": [],
+ "use": "Fathers Village saying (game); not a topic excerpt",
+ "anf_compare": {
+  "status": "diverges",
+  "notes": "Replaces ANF-derived game wording."
+ },
+ "excerpt_id": "village_tertullian_marcion_4_29",
+ "edition": {
+  "id": "kroymann-csel47-adv-marc",
+  "language": "lat",
+  "path": "sources/latin/tertullian_adversus_marcionem.xml",
+  "locus": "Against Marcion 4.29",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Quis nollet curam nos agere animae de uictu et corpori de uestitu, nisi qui ista homini ante prospexit et exinde praestans merito curam eorum tamquam aemulam liberalitatis suae prohibet,",
+ "thought_title": "Why the Provider forbids our anxiety",
+ "pass_a_gloss": "Who would be unwilling for us to take care for the soul about food and for the body about clothing, except the one who foresaw these things for man beforehand, and from then on, supplying them, rightly forbids care about them as if it were a rival to his own generosity,",
+ "pass_b_english": [
+  "Who would not want us to care for the soul about food and for the body about clothing, except the one who foresaw these things for man beforehand, and who therefore, as the one supplying them, rightly forbids our anxiety over them as a rival to his own generosity (Luke 12:22–23)?"
+ ],
+ "lemmas": [
+  {
+   "form": "nollet",
+   "lemma": "nolo",
+   "gloss": "be unwilling"
+  },
+  {
+   "form": "curam",
+   "lemma": "cura",
+   "gloss": "care, anxiety"
+  },
+  {
+   "form": "uictu",
+   "lemma": "uictus",
+   "gloss": "food, living"
+  },
+  {
+   "form": "uestitu",
+   "lemma": "uestitus",
+   "gloss": "clothing"
+  },
+  {
+   "form": "prospexit",
+   "lemma": "prospicio",
+   "gloss": "foresee, provide for"
+  },
+  {
+   "form": "praestans",
+   "lemma": "praesto",
+   "gloss": "supplying, furnishing"
+  },
+  {
+   "form": "aemulam",
+   "lemma": "aemulus",
+   "gloss": "rivaling, competing"
+  },
+  {
+   "form": "liberalitatis",
+   "lemma": "liberalitas",
+   "gloss": "generosity"
+  }
+ ],
+ "choices": [
+  {
+   "term": "curam",
+   "english": "worry / anxiety",
+   "why": "Luke 12:22 context: μὴ μεριμνᾶτε; Tertullian's cura here is anxious care",
+   "rejected": [
+    "take care for"
+   ]
+  },
+  {
+   "term": "tamquam aemulam liberalitatis suae",
+   "english": "as though it were competing with his generosity",
+   "why": "keeps Tertullian's sharp image",
+   "rejected": [
+    "as an insult to his bounty"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Luke 12:22–23",
+   "method": "wording",
+   "note": "anima/esca, corpus/uestimentum; Tertullian is expounding Luke 12:22-28"
+  }
+ ],
+ "notes": [
+  "Sentence continues in the source (ravens, lilies, Solomon); this saying ends at prohibet, so the excerpt closes the clause there.",
+  "Repair per checker a: homini kept; soul/food and body/clothing pairing kept; exinde praestans and prohibet inside the nisi qui clause."
+ ],
+ "crosscheck": {
+  "at": "20261002T053223Z",
+  "content_sha256": "195290a9ecd6df9012e407e7e5d8dc0449c430574720d07cd012783b8769ec6f",
+  "pass": true,
+  "a": {
+   "model": "grok-4.7",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "p1 'Quis nollet curam nos agere animae de uictu et corpori de uestitu, nisi qui ista homini ante prospexit et exinde praestans merito curam eorum tamquam aemulam liberalitatis suae prohibet' is kept in Pass A 'Who would be unwilling for us to take care for the soul about food and for the body about clothing, except the one who foresaw these things for man beforehand, and from then on, supplying them, rightly forbids care about them as if it were a rival to his own generosity' and Pass B 'Who would not want us to care for the soul about food and for the body about clothing, except the one who foresaw these things for man beforehand, and who therefore, as the one supplying them, rightly forbids our anxiety over them as a rival to his own generosity (Luke 12:22–23)'. nollet, nos versus qui...prohibet, homini, merito, and the soul/food and body/clothing pairing hold; 'therefore'/'anxiety'/'as a rival' do not reverse exinde praestans, cura, or tamquam aemulam. Inline Luke 12:22–23 matches the supplied wording note. Title names the thought.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "Source paragraph [1] fully present. Pass A gloss matches Greek: 'quis nollet curam nos agere animae de uictu et corpori de uestitu' → 'Who would be unwilling for us to take care for the soul about food and for the body about clothing'. Negation 'nollet' correctly rendered as 'unwilling'. Agency: 'quis' (who) as subject of 'nollet', object 'nos' (us) with 'curam agere'. Modality: conditional force of 'nisi qui' preserved. Doctrine: 'prospexit et exinde praestans' → 'foresaw... and from then on supplying' accurately reflects providential care. Scripture: Pass B cites Luke 12:22–23 via added identification in notes/bible_refs; Greek contains no direct quote but Tertullian expounds the passage, so added citation is required and correct per rules. Title 'Why the Provider forbids our anxiety' names the thought (divine providence vs. anxiety), not just locus. Completeness: all clauses, qualifications ('tamquam aemulam liberalitatis suae'), and conclusion ('prohibet') covered. No omissions, contradictions, or false citations. Choices and lemmas align: 'curam' as 'care/anxiety' justified by Luke 12 context; 'tamquam aemulam liberalitatis suae' rendered as rival to generosity. Notes disclose excerpt ends at 'prohibet' per source continuity. All checks passed.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}
