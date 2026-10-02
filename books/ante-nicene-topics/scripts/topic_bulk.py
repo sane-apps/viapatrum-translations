@@ -295,8 +295,9 @@ translation, or memory of one. Return ONLY valid JSON (no markdown fences):
   "notes": ["OCR or uncertainty notes, or empty"]
 }}
 Rules:
-- pass_a_gloss is ACCURACY: a literal crib that follows the source's word order and sentence breaks as
-  closely as English allows (awkward is fine), every clause in order, keeping each clause's force exactly
+- pass_a_gloss is a literal English gloss, clause by clause; ugly is fine. Follow the source's word order and
+  sentence breaks as closely as English allows; do NOT polish it into readable prose. Every clause in order,
+  keeping each clause's force exactly
   (commands incl. third-person "let him", wishes, purpose "so that... may", questions, tense, who does what,
   small words like also/even/for/therefore/anything). Not hyphenated interlinear; not Latin/Greek notes.
 - Capitalize divine names and titles referring to God: God, Father, Son, Lord, Christ, Spirit, Holy Spirit, Word.
@@ -450,13 +451,19 @@ def process(e: dict, rounds: int) -> str:
           "name": loc.get("edition_name") or loc["path"],
           "locus": f"{e.get('work')} {loc['book'] + '.' if loc['book'] else ''}{loc['chapter']}",
           "span": how, "witness_note": "Single locked witness in repo; second witness not yet locked."}
-    feedback = ""
+    feedback, obj, rephrase = "", None, False
     for attempt in range(rounds + 1):
         try:
-            obj = draft(e, src, loc["lang"], feedback)
+            if rephrase and obj:
+                # Near-copy: keep the literal Pass A, recast only the reading English.
+                obj["pass_b_english"] = write_pass_b(e, src, loc["lang"], obj, feedback)
+            else:
+                obj = draft(e, src, loc["lang"], feedback)
         except Exception as ex:  # noqa: BLE001
             feedback = f"- Return valid JSON only. ({ex})"
+            rephrase = False
             continue
+        rephrase = False
         j = {"excerpt_id": eid, "edition": ed, "source_text": src, **{k: obj.get(k) for k in (
             "thought_title", "pass_a_gloss", "lemmas", "choices", "bible_refs", "pass_b_english", "notes")},
             "anf_compare": {"status": "not_compared", "notes": "Drafted from source only; ANF not shown to drafter."},
@@ -469,7 +476,13 @@ def process(e: dict, rounds: int) -> str:
         path.write_text(json.dumps(j, ensure_ascii=False, indent=1) + "\n")
         ok, out = gate(path)
         if not ok:
-            feedback = "- Deterministic gate failed: " + out.replace("\n", " ")[:500]
+            if "near-copies" in out:
+                rephrase = True
+                feedback = ("- Your English reuses the gloss's wording and word order. Recast EVERY sentence the way "
+                            "a modern English writer would: change sentence structure, split or join sentences, use "
+                            "natural idiom. Keep every claim and its force; add nothing.")
+            else:
+                feedback = "- Deterministic gate failed: " + out.replace("\n", " ")[:500]
             continue
         cc = crosscheck(j)
         j["crosscheck"] = cc

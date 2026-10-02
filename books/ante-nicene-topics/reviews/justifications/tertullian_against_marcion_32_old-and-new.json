@@ -1,0 +1,170 @@
+{
+ "excerpt_id": "tertullian_against_marcion_32_old-and-new",
+ "edition": {
+  "id": "repo:latin/tertullian_adversus_marcionem.xml",
+  "language": "lat",
+  "path": "sources/latin/tertullian_adversus_marcionem.xml",
+  "name": "latin/tertullian_adversus_marcionem.xml",
+  "locus": "Against Marcion 4.32",
+  "span": "whole chapter",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Ouem et drachmam perditam quis requirit? nonne qui perdidit? quis autem perdidit? nonne qui habuit? quis uero habuit? nonne cuius fuit? si igitur homo non alterius est res quam creatoris, is eum habuit, cuius fuit, is perdidit, qui habuit, is requisiuit, qui perdidit, is inuenit, qui quaesiuit, is exultauit, qui inuenit. ita utriusque parabolae argumentum uacat circa eum, cuius non est ouis neque drachma, id est homo. non enim perdidit, quia non habuit, nec requisiuit, quia non perdidit, nec inuenit, quia nec requisiuit, nec exultauit, quia non inuenit. atque adeo exultare illius est de paenitentia peccatoris, id est de perditi recuperatione, qui se professus est olim malle peccatoris paenitentiam quam mortem.",
+ "thought_title": "The Lost Sheep and Coin",
+ "pass_a_gloss": "And who requires the lost sheep and the drachma? Is it not the one who lost it? And who lost it? Is it not the one who had it? And who had it? Is it not the one whose it was? If therefore a man is not another's property, but the Creator's, the one whose it was had it, the one who had it lost it, the one who lost it required it, the one who required it found it, the one who found it rejoiced. So the argument of both parables is vacant concerning the one who is not the owner of the sheep or the drachma, that is, man. For he did not lose it, because he did not have it, nor did he require it, because he did not lose it, nor did he find it, because he did not require it, nor did he rejoice, because he did not find it. And therefore to rejoice is His, concerning the repentance of the sinner, that is, the recovery of the lost one, who once declared that he preferred the repentance of the sinner to his death.",
+ "lemmas": [
+  {
+   "form": "perditam",
+   "gloss": "to lose",
+   "lemma": "perdere"
+  },
+  {
+   "form": "requirit",
+   "gloss": "to require",
+   "lemma": "requirere"
+  },
+  {
+   "form": "habuit",
+   "gloss": "to have",
+   "lemma": "habere"
+  },
+  {
+   "form": "cuius",
+   "gloss": "whose",
+   "lemma": "cuius"
+  },
+  {
+   "form": "creatoris",
+   "gloss": "Creator",
+   "lemma": "creator"
+  },
+  {
+   "form": "exultauit",
+   "gloss": "to rejoice",
+   "lemma": "exultare"
+  },
+  {
+   "form": "paenitentia",
+   "gloss": "repentance",
+   "lemma": "paenitentia"
+  },
+  {
+   "form": "peccatoris",
+   "gloss": "sinner",
+   "lemma": "peccator"
+  },
+  {
+   "form": "professus",
+   "gloss": "to declare",
+   "lemma": "profiteri"
+  },
+  {
+   "form": "malle",
+   "gloss": "to prefer",
+   "lemma": "malle"
+  },
+  {
+   "form": "recuperatione",
+   "gloss": "recovery",
+   "lemma": "recuperatio"
+  },
+  {
+   "form": "perditi",
+   "gloss": "lost one",
+   "lemma": "perditus"
+  }
+ ],
+ "choices": [
+  {
+   "english": "who declared himself",
+   "rejected": [
+    "the One who declared"
+   ],
+   "term": "qui se professus est",
+   "why": "subject-verb agreement"
+  },
+  {
+   "english": "once preferred",
+   "rejected": [
+    "once declared that He preferred"
+   ],
+   "term": "olim malle",
+   "why": "correct translation of 'olim' and 'malle'"
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Who goes looking for a lost sheep or a lost coin? The one who lost it, obviously. And who lost it? The one who owned it. And who owned it? The one it belonged to. So if a human being isn't someone else's property but the Creator's, then the One it belonged to had it, the One who had it lost it, the One who lost it went looking for it, the One who looked found it, and the One who found it rejoiced. That makes the point of both parables miss the mark entirely when applied to the one who isn't the owner of the sheep or the coin — that is, humanity. We didn't lose it, because we never had it; we didn't go looking, because we didn't lose it; we didn't find it, because we never looked; we didn't rejoice, because we never found it. The rejoicing over a sinner's repentance — that is, over the recovery of the lost — belongs to the One who once declared that he preferred a sinner's repentance to his death."
+ ],
+ "notes": [],
+ "anf_compare": {
+  "status": "not_compared",
+  "notes": "Drafted from source only; ANF not shown to drafter."
+ },
+ "variants": [],
+ "checks": {},
+ "confidence": "source_draft",
+ "reviewer": "pending-independent-review",
+ "drafter": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+passB:nvidia/nemotron-3-ultra-550b-a55b",
+ "bulk": true,
+ "crosscheck": {
+  "at": "20261002T070516Z",
+  "content_sha256": "74a5882bb72f03bf9ffe92e6072db198df66237d809c36ff3fc10162f3db98b3",
+  "pass": false,
+  "a": {
+   "model": "@cf/google/gemma-4-26b-a4b-it",
+   "review": {
+    "verdict": "fail",
+    "reviewer": "model",
+    "notes": "Pass B fails to maintain the agency and subject of the final sentence. The Latin 'exultare illius est de paenitentia peccatoris' (the rejoicing of him [the Creator] is concerning the repentance of the sinner) is rendered in Pass B as 'The rejoicing... belongs to the One who once declared...', which is acceptable, but the subsequent clause 'who once declared that he preferred a sinner's repentance to his death' in Pass B attributes the declaration to the 'One' (the Creator), whereas the Latin 'qui se professus est olim malle peccatoris paenitentiam quam mortem' refers to the sinner ('peccatoris') who declared his preference for repentance over death. Pass B reverses the agency of the declaration.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": false,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": [
+     "Pass B reverses the agency of the final clause: 'who once declared that he preferred a sinner's repentance to his death' (Pass B) vs 'qui se professus est olim malle peccatoris paenitentiam quam mortem' (Latin), where the sinner is the one who declared his preference, not the Creator."
+    ]
+   },
+   "gate_errors": [
+    "semantic verdict is not pass",
+    "semantic check agency is not explicitly true"
+   ]
+  },
+  "b": {
+   "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "source: 'Ouem et drachmam perditam quis requirit? nonne qui perdidit? quis autem perdidit? nonne qui habuit? quis uero habuit? nonne cuius fuit? si igitur homo non alterius est res quam creatoris, is eum habuit, cuius fuit, is perdidit, qui habuit, is requisiuit, qui perdidit, is inuenit, qui quaesiuit, is exultauit, qui inuenit.', english: 'And who requires the lost sheep and the drachma? Is it not the one who lost it? And who lost it? Is it not the one who had it? And who had it? Is it not the one whose it was? If therefore a man is not another's property, but the Creator's, the one whose it was had it, the one who had it lost it, the one who lost it required it, the one who required it found it, the one who found it rejoiced.'",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}

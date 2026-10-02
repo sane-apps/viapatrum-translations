@@ -1,0 +1,167 @@
+{
+ "excerpt_id": "arnobius_nat_1_one",
+ "edition": {
+  "id": "repo:chapters/arnobius-against-the-heathen.json",
+  "language": "lat",
+  "path": "sources/chapters/arnobius-against-the-heathen.json",
+  "name": "Migne, Patrologia Latina 5 (1844), Arnobius, Disputationes adversus gentes, Liber I, via Latin Wikisource (Corpus Corporum TEI)",
+  "locus": "Against the Heathen 1.44",
+  "span": "whole chapter",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Atqui constitit Christum sine ullis adminiculis rerum, sine ullius ritus observatione, vel lege, omnia illa, quae fecit, nominis sui possibilitate fecisse. Et quod proprium, consentaneum, dignum Deo fuerat vero, nihil nocens, aut noxium, sed opiferum, sed salutare, sed auxiliaribus plenum bonis potestatis munificae liberalitate donasse.",
+ "thought_title": "Christ's Power",
+ "pass_a_gloss": "But it is established that Christ, without any supports of things, without observation of any rite, or law, did all those things which He did, by the possibility of His name. And what was proper, consistent, worthy of God, truly, nothing harmful, or injurious, but beneficial, but salutary, but full of auxiliary goods, He gave by the liberality of munificent power.",
+ "lemmas": [
+  {
+   "form": "constitit",
+   "gloss": "it is established",
+   "lemma": "constare"
+  },
+  {
+   "form": "adminiculis",
+   "gloss": "supports",
+   "lemma": "adminiculum"
+  },
+  {
+   "form": "nominis",
+   "gloss": "name",
+   "lemma": "nomen"
+  },
+  {
+   "form": "possibilitate",
+   "gloss": "possibility",
+   "lemma": "possibilitas"
+  },
+  {
+   "form": "proprium",
+   "gloss": "proper",
+   "lemma": "proprius"
+  },
+  {
+   "form": "Deo",
+   "gloss": "God",
+   "lemma": "Deus"
+  },
+  {
+   "form": "nocens",
+   "gloss": "harmful",
+   "lemma": "nocens"
+  },
+  {
+   "form": "opiferum",
+   "gloss": "beneficial",
+   "lemma": "opifer"
+  },
+  {
+   "form": "salutare",
+   "gloss": "salutary",
+   "lemma": "salutaris"
+  },
+  {
+   "form": "munificae",
+   "gloss": "munificent",
+   "lemma": "munificus"
+  },
+  {
+   "form": "liberalitate",
+   "gloss": "liberality",
+   "lemma": "liberalitas"
+  },
+  {
+   "form": "potestatis",
+   "gloss": "power",
+   "lemma": "potestas"
+  }
+ ],
+ "choices": [
+  {
+   "english": "without any supports of things",
+   "rejected": [
+    "without any material help"
+   ],
+   "term": "sine ullis adminiculis rerum",
+   "why": "literal translation"
+  },
+  {
+   "english": "by the possibility of His name",
+   "rejected": [
+    "through His own power"
+   ],
+   "term": "nominis sui possibilitate",
+   "why": "emphasizing Christ's name"
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "It is established that Christ accomplished everything He did by the sheer possibility inherent in His name, without any external supports, without observing any rite or law. What was proper, consistent, and truly worthy of God, He bestowed through the generosity of His munificent power—nothing harmful or injurious, but beneficial, salutary, and full of helpful blessings."
+ ],
+ "notes": [],
+ "anf_compare": {
+  "status": "not_compared",
+  "notes": "Drafted from source only; ANF not shown to drafter."
+ },
+ "variants": [],
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:gemma-4-26b-a4b-it+qwen3-30b-a3b-fp8",
+ "drafter": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+passB:nvidia/nemotron-3-ultra-550b-a55b",
+ "bulk": true,
+ "crosscheck": {
+  "at": "20261002T075806Z",
+  "content_sha256": "947ced456019e306ec139001df7f96d7313c2924750202ac0ef3065f10511b82",
+  "pass": true,
+  "a": {
+   "model": "@cf/google/gemma-4-26b-a4b-it",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "The translation accurately reflects the Latin text. Pass A provides a faithful clause-by-clause rendering. Pass B provides a fluent English version that preserves all semantic content, including the distinctions between 'nocens/noxium' (harmful/injurious) and 'opiferum/salutare/auxiliaribus plenum bonis' (beneficial/salutary/full of helpful blessings).",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+   "review": {
+    "checks": {
+     "agency": true,
+     "completeness": true,
+     "doctrine": true,
+     "modality": true,
+     "negation": true,
+     "scripture": true,
+     "source_identity": true
+    },
+    "covered_source_paragraphs": [
+     1
+    ],
+    "notes": "source: 'Atqui constitit Christum sine ullis adminiculis rerum, sine ullius ritus observatione, vel lege, omnia illa, quae fecit, nominis sui possibilitate fecisse.', english: 'by the possibility of His name'",
+    "pass_a_fidelity": true,
+    "reasons": [],
+    "reviewer": "model",
+    "title_is_thought": true,
+    "uncertainties": [],
+    "verdict": "pass"
+   },
+   "gate_errors": []
+  }
+ }
+}

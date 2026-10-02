@@ -1,0 +1,122 @@
+{
+ "excerpt_id": "lactantius_divine_institutes_2_9_apologetic-met",
+ "edition": {
+  "id": "repo:latin/lactantius_divinae_institutiones.xml",
+  "language": "lat",
+  "path": "sources/latin/lactantius_divinae_institutiones.xml",
+  "name": "latin/lactantius_divinae_institutiones.xml",
+  "locus": "Divine Institutes 2.9",
+  "span": "sentences 53-53 of 59",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "horum alterum nobis commune cum ceteris animalibus est, alterum soli homini datum.",
+ "thought_title": "Human and Animal Traits",
+ "pass_a_gloss": "of these one is common to us with the other animals, the other one is given to man alone",
+ "lemmas": [
+  {
+   "form": "commune",
+   "gloss": "common",
+   "lemma": "communis"
+  },
+  {
+   "form": "animalibus",
+   "gloss": "animals",
+   "lemma": "animal"
+  },
+  {
+   "form": "datum",
+   "gloss": "given",
+   "lemma": "do"
+  }
+ ],
+ "choices": [
+  {
+   "english": "to us",
+   "rejected": [
+    "us"
+   ],
+   "term": "nobis",
+   "why": "dative of indirect object"
+  },
+  {
+   "english": "to man alone",
+   "rejected": [
+    "only to humans"
+   ],
+   "term": "soli homini",
+   "why": "dative of indirect object with emphasis on exclusivity"
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "We share one of these capacities with the other animals; the other belongs to human beings alone."
+ ],
+ "notes": [],
+ "anf_compare": {
+  "status": "not_compared",
+  "notes": "Drafted from source only; ANF not shown to drafter."
+ },
+ "variants": [],
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:gemma-4-26b-a4b-it+qwen3-30b-a3b-fp8",
+ "drafter": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+passB:nvidia/nemotron-3-ultra-550b-a55b",
+ "bulk": true,
+ "crosscheck": {
+  "at": "20261002T075650Z",
+  "content_sha256": "f06b0c5b866f11a818ea2279bc20ad0d70ff0f2ff71102ecf9ec396976cd8e3d",
+  "pass": true,
+  "a": {
+   "model": "@cf/google/gemma-4-26b-a4b-it",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "The translation accurately reflects the Latin sentence structure and meaning. Pass A captures the literal sense of 'nobis commune' (common to us) and 'soli homini datum' (given to man alone). Pass B provides a fluent English rendering that preserves the distinction between shared and unique traits without adding or contradicting the source.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+   "review": {
+    "checks": {
+     "agency": true,
+     "completeness": true,
+     "doctrine": true,
+     "modality": true,
+     "negation": true,
+     "scripture": true,
+     "source_identity": true
+    },
+    "covered_source_paragraphs": [
+     1
+    ],
+    "notes": "source: 'horum alterum nobis commune cum ceteris animalibus est, alterum soli homini datum.' english: 'of these one is common to us with the other animals, the other one is given to man alone'",
+    "pass_a_fidelity": true,
+    "reasons": [],
+    "reviewer": "model",
+    "title_is_thought": true,
+    "uncertainties": [],
+    "verdict": "pass"
+   },
+   "gate_errors": []
+  }
+ }
+}

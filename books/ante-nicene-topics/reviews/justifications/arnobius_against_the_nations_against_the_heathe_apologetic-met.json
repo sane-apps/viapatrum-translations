@@ -1,0 +1,162 @@
+{
+ "excerpt_id": "arnobius_against_the_nations_against_the_heathe_apologetic-met",
+ "edition": {
+  "id": "repo:chapters/arnobius-against-the-nations.json",
+  "language": "lat",
+  "path": "sources/chapters/arnobius-against-the-nations.json",
+  "name": "Migne, Patrologia Latina 5 (1844), Arnobius, Disputationes adversus gentes, Liber I, via Latin Wikisource (Corpus Corporum TEI)",
+  "locus": "Against the Nations 1",
+  "span": "sentences 1-3 of 719",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Quoniam comperi nonnullos, qui se plurimum sapere suis persuasionibus credunt, insanire, bacchari, et velut quiddam promptum ex oraculo dicere: postquam esse in mundo christiana gens coepit, terrarum orbem periisse, multiformibus malis affectum esse genus humanum; ipsos etiam coelites, derelictis curis solemnibus, quibus quondam solebant invisere res nostras, terrarum ab regionibus exterminatos:",
+ "thought_title": "Christianity and World Decay",
+ "pass_a_gloss": "Since I have found some people, who believe their own persuasions to be very wise, to be raving, to be frenzied, and to say something ready as if from an oracle: that since the Christian nation began to exist in the world, the orb of the earth has perished, the human race has been affected by many evils; and that even the heavenly ones, having abandoned their solemn cares, by which they were once accustomed to visit our things, have been exterminated from the regions of the earth:",
+ "lemmas": [
+  {
+   "form": "comperi",
+   "gloss": "I have found",
+   "lemma": "comperio"
+  },
+  {
+   "form": "persuasionibus",
+   "gloss": "persuasions",
+   "lemma": "persuasio"
+  },
+  {
+   "form": "insanire",
+   "gloss": "to be raving",
+   "lemma": "insanio"
+  },
+  {
+   "form": "bacchari",
+   "gloss": "to be frenzied",
+   "lemma": "bacchor"
+  },
+  {
+   "form": "oraculo",
+   "gloss": "oracle",
+   "lemma": "oraculum"
+  },
+  {
+   "form": "christiana gens",
+   "gloss": "Christian nation",
+   "lemma": "gens"
+  },
+  {
+   "form": "periisse",
+   "gloss": "to have perished",
+   "lemma": "perio"
+  },
+  {
+   "form": "multiformibus malis",
+   "gloss": "many evils",
+   "lemma": "malum"
+  },
+  {
+   "form": "coelites",
+   "gloss": "heavenly ones",
+   "lemma": "coelites"
+  },
+  {
+   "form": "curis solemnibus",
+   "gloss": "solemn cares",
+   "lemma": "cura"
+  },
+  {
+   "form": "exterminatos",
+   "gloss": "to have been exterminated",
+   "lemma": "extermino"
+  }
+ ],
+ "choices": [
+  {
+   "english": "to be frenzied",
+   "rejected": [
+    "to be drunk"
+   ],
+   "term": "bacchari",
+   "why": "bacchari is a rare verb meaning to be frenzied or ecstatic"
+  },
+  {
+   "english": "heavenly ones",
+   "rejected": [
+    "sky dwellers"
+   ],
+   "term": "coelites",
+   "why": "coelites refers to heavenly beings or gods"
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "I have discovered certain people who think their own opinions make them supremely wise, yet they rave, they rant, and they pronounce verdicts as if they were oracles. They claim that ever since the Christian nation appeared in the world, the earth has been ruined and the human race has been afflicted with countless evils. They even assert that the heavenly powers have abandoned their solemn duties — duties by which they once used to visit our affairs — and have been driven from the regions of the earth."
+ ],
+ "notes": [],
+ "anf_compare": {
+  "status": "not_compared",
+  "notes": "Drafted from source only; ANF not shown to drafter."
+ },
+ "variants": [],
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:gemma-4-26b-a4b-it+qwen3-30b-a3b-fp8",
+ "drafter": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+passB:nvidia/nemotron-3-ultra-550b-a55b",
+ "bulk": true,
+ "crosscheck": {
+  "at": "20261002T075652Z",
+  "content_sha256": "17ae4bda4e56c5595b0623fdb5144ac8f1a5d6146f33b2ccbfd0782277a64930",
+  "pass": true,
+  "a": {
+   "model": "@cf/google/gemma-4-26b-a4b-it",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "The translation accurately captures the Latin text. Pass A maintains the complex subordinate structure of the original sentence, while Pass B provides a fluent rendering that preserves all semantic content, including the nuances of 'bacchari' (to rant/rave) and 'exterminatos' (driven from/exterminated).",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "source: 'Quoniam comperi nonnullos, qui se plurimum sapere suis persuasionibus credunt, insanire, bacchari, et velut quiddam promptum ex oraculo dicere: postquam esse in mundo christiana gens coepit, terrarum orbem periisse, multiformibus malis affectum esse genus humanum; ipsos etiam coelites, derelictis curis solemnibus, quibus quondam solebant invisere res nostras, terrarum ab regionibus exterminatos:', english: 'Since I have found some people, who believe their own persuasions to be very wise, to be raving, to be frenzied, and to say something ready as if from an oracle: that since the Christian nation began to exist in the world, the orb of the earth has perished, the human race has been affected by many evils; and that even the heavenly ones, having abandoned their solemn cares, by which they were once accustomed to visit our things, have been exterminated from the regions of the earth:'",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}

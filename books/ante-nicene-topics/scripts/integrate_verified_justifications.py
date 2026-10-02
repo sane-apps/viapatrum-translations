@@ -44,6 +44,45 @@ ATTRIBUTION = {
 }
 
 
+# Mislabels found while locking sources (2026-10-02). Keyed by the chapters
+# file the excerpt's source came from; fn(excerpt, unit) returns field fixes.
+def _baptism_or_scorpiace(e, unit):
+    if str(unit).startswith("Scorpiace"):
+        n = str(unit).split()[-1]
+        return {"work": "Scorpiace", "locus": n, "citation": f"Tertullian — Scorpiace {n}"}
+    return {}
+
+
+def _hermas_sim(e, unit):
+    if str(unit).startswith("Sim.") and "Mand" in str(e.get("locus", "")):
+        n = str(unit)[4:]
+        return {"locus": f"Sim. {n}", "citation": f"Hermas — Shepherd, Similitude {n}"}
+    return {}
+
+
+CHAPTER_FIXES = {
+    "tertullian-against-praxeas.json": lambda e, u: {
+        "work": "On Baptism", "citation": f"Tertullian — On Baptism {e.get('locus', '')}".strip()},
+    "tertullian-on-baptism.json": _baptism_or_scorpiace,
+    "tertullian-on-the-soul.json": lambda e, u: {
+        "work": "On the Flesh of Christ", "citation": f"Tertullian — On the Flesh of Christ {u}"},
+    "origen-epistula-ad-africanum.json": lambda e, u: {
+        "work": "Letter to Africanus", "citation": f"Origen — Letter to Africanus {u}"},
+    "hermas-shepherd.json": _hermas_sim,
+}
+_units: dict | None = None
+
+
+def chapter_unit(eid: str):
+    global _units
+    if _units is None:
+        _units = {}
+        for f in (BOOK / "sources/chapters").glob("*.json"):
+            for k, v in (json.loads(f.read_text()).get("excerpt_map") or {}).items():
+                _units[k] = (f.name, v)
+    return _units.get(eid)
+
+
 def current_hash(j: dict) -> str:
     return hashlib.sha256(json.dumps(
         {k: j.get(k) for k in ("source_text", "pass_a_gloss", "pass_b_english")},
@@ -117,6 +156,9 @@ def apply_to(d: dict, ready: dict) -> list:
         if fix:
             locus = e.get("locus", "")
             e.update({k: v.format(locus=locus) for k, v in fix.items()})
+        cu = chapter_unit(e["id"]) if "chapters/" in str(ed.get("path", "")) else None
+        if cu and cu[0] in CHAPTER_FIXES:
+            e.update(CHAPTER_FIXES[cu[0]](e, cu[1]))
         applied.append(e["id"])
     return applied
 

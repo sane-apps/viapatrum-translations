@@ -1,0 +1,177 @@
+{
+ "excerpt_id": "theophilus_autol_2_15",
+ "edition": {
+  "id": "repo:greek/theophilus_autolycus.xml",
+  "language": "grc",
+  "path": "sources/greek/theophilus_autolycus.xml",
+  "name": "greek/theophilus_autolycus.xml",
+  "locus": "To Autolycus 2.15",
+  "span": "sentences 5-6 of 11",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Ὡσαύτως καὶ αἱ τρεῖς ἡμέραι πρὸ τῶν φωστήρων γεγονυῖαι τύποι εἰσὶν τῆς τριάδος, τοῦ θεοῦ καὶ τοῦ λόγου αὐτοῦ καὶ τῆς σοφίας αὐτοῦ. Τετάρτῳ δὲ τύπῳ ἐστὶν ἄνθρωπος ὁ προσδεὴς τοῦ φωτός, ἵνα ᾖ θεός, λόγος, σοφία, ἄνθρωπος.",
+ "thought_title": "Trinity Type",
+ "pass_a_gloss": "Similarly also the three days which have come into being before the lights are types of the trinity, of God and of His Word and of His wisdom. On the fourth day, however, the type is the human being who needs light, so that He may be God, Word, Wisdom, human being.",
+ "lemmas": [
+  {
+   "form": "Ὡσαύτως",
+   "gloss": "similarly",
+   "lemma": "ὡσαύτως"
+  },
+  {
+   "form": "τρεῖς",
+   "gloss": "three",
+   "lemma": "τρεῖς"
+  },
+  {
+   "form": "ἡμέραι",
+   "gloss": "days",
+   "lemma": "ἡμερα"
+  },
+  {
+   "form": "φωστήρων",
+   "gloss": "lights",
+   "lemma": "φωστήρ"
+  },
+  {
+   "form": "τύποι",
+   "gloss": "types",
+   "lemma": "τύπους"
+  },
+  {
+   "form": "τριάδος",
+   "gloss": "trinity",
+   "lemma": "τριάδος"
+  },
+  {
+   "form": "θεοῦ",
+   "gloss": "God",
+   "lemma": "θεός"
+  },
+  {
+   "form": "λόγου",
+   "gloss": "Word",
+   "lemma": "λόγος"
+  },
+  {
+   "form": "σοφίας",
+   "gloss": "wisdom",
+   "lemma": "σοφία"
+  },
+  {
+   "form": "ἄνθρωπος",
+   "gloss": "human being",
+   "lemma": "ἄνθρωπος"
+  },
+  {
+   "form": "προσδεὴς",
+   "gloss": "needing",
+   "lemma": "προσδεής"
+  },
+  {
+   "form": "φωτός",
+   "gloss": "light",
+   "lemma": "φῶς"
+  }
+ ],
+ "choices": [
+  {
+   "english": "who needs light",
+   "rejected": [
+    "who is in need of light"
+   ],
+   "term": "τὸν προσδεὴς τοῦ φωτός",
+   "why": "faithful rendering of the Greek phrase"
+  },
+  {
+   "english": "so that He may be",
+   "rejected": [
+    "so that he is"
+   ],
+   "term": "ἵνα ᾖ",
+   "why": "correct rendering of the subjunctive mood"
+  },
+  {
+   "english": "God, Word, Wisdom, human being",
+   "rejected": [
+    "God, Word, Wisdom and human being"
+   ],
+   "term": "θεός, λόγος, σοφία, ἄνθρωπος",
+   "why": "faithful rendering of the Greek list"
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "The three days that existed before the lights were created serve as types of the Trinity: God, His Word, and His Wisdom. The fourth day presents humanity as the type that needs light so that God, Word, Wisdom, and human being may all be present."
+ ],
+ "notes": [],
+ "anf_compare": {
+  "status": "not_compared",
+  "notes": "Drafted from source only; ANF not shown to drafter."
+ },
+ "variants": [],
+ "checks": {},
+ "confidence": "source_draft",
+ "reviewer": "pending-independent-review",
+ "drafter": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+passB:nvidia/nemotron-3-ultra-550b-a55b",
+ "bulk": true,
+ "crosscheck": {
+  "at": "20261002T073922Z",
+  "content_sha256": "352fe9033ca86c0d063b9efcb7d462f8485c604b4e7a2e5e329ae427c62afde9",
+  "pass": false,
+  "a": {
+   "model": "@cf/google/gemma-4-26b-a4b-it",
+   "review": {
+    "verdict": "fail",
+    "reviewer": "model",
+    "notes": "Pass B introduces an addition/interpretation not present in the Greek or Pass A: 'so that God, Word, Wisdom, and human being may all be present'. The Greek 'ἵνα ᾖ θεός, λόγος, σοφία, ἄνθρωπος' (so that He may be God, Word, Wisdom, human being) describes the ontological state or identity of the subject, not the 'presence' of the four entities.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": [
+     "Pass B deviates from the Greek and Pass A by adding 'may all be present' to the final clause, whereas the Greek 'ἵνα ᾖ θεός, λόγος, σοφία, ἄνθρωπος' specifies the identity/being of the subject ('so that He may be...')."
+    ]
+   },
+   "gate_errors": [
+    "semantic verdict is not pass"
+   ]
+  },
+  "b": {
+   "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+   "review": {
+    "checks": {
+     "agency": true,
+     "completeness": true,
+     "doctrine": true,
+     "modality": true,
+     "negation": true,
+     "scripture": true,
+     "source_identity": true
+    },
+    "covered_source_paragraphs": [
+     1
+    ],
+    "notes": "greek/theophilus_autolycus.xml: 'Ὡσαύτως καὶ αἱ τρεῖς ἡμέραι πρὸ τῶν φωστήρων γεγονυῖαι τύποι εἰσὶν τῆς τριάδος, τοῦ θεοῦ καὶ τοῦ λόγου αὐτοῦ καὶ τῆς σοφίας αὐτοῦ. Τετάρτῳ δὲ τύπῳ ἐστὶν ἄνθρωπος ὁ προσδεὴς τοῦ φωτός, ἵνα ᾖ θεός, λόγος, σοφία, ἄνθρωπος.', Pass A: 'Similarly also the three days which have come into being before the lights are types of the trinity, of God and of His Word and of His wisdom. On the fourth day, however, the type is the human being who needs light, so that He may be God, Word, Wisdom, human being.', Pass B: 'The three days that existed before the lights were created serve as types of the Trinity: God, His Word, and His Wisdom. The fourth day presents humanity as the type that needs light so that God, Word, Wisdom, and human being may all be present.'",
+    "pass_a_fidelity": true,
+    "reasons": [],
+    "reviewer": "model",
+    "title_is_thought": true,
+    "uncertainties": [],
+    "verdict": "pass"
+   },
+   "gate_errors": []
+  }
+ }
+}

@@ -1,0 +1,173 @@
+{
+ "excerpt_id": "commodian_instructions_liii_judgment-secon",
+ "edition": {
+  "id": "repo:chapters/commodian-instructions.json",
+  "language": "lat",
+  "path": "sources/chapters/commodian-instructions.json",
+  "name": "Migne, Patrologia Latina 5 (1844), via Latin Wikisource",
+  "locus": "Instructions LIII",
+  "span": "whole chapter",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Militiae nomen cum dederis, freno teneris. Incipe tunc ergo dimittere pristina gesta: Luxurias vita, quoniam labor imminet armis. Imperio regis omni virtute parendum, Tempora postrema si vis pertingere laeta. Ille bonus miles, semper exspecta fruenda; Blandire noli tibi, desidias omnino mitte, Ut tuo praeposito cottidie praesto sis, ante Solicitus esto, matutinus signa revise. Cum videris bellum, agonia sume propinqua. Haec gloria regis, militem videre paratum; Rex adest, optato propter spem dominicaturum. Ille parat dona, ille pro victoria laetus Suspicit, et proprium satellem dedicat esse. Tu tibi praeterea in Belian parcere noli: Impiger esto magis, ut reddat famam pro morte.",
+ "thought_title": "The Good Soldier",
+ "pass_a_gloss": "When you have given the name of military service, you are held by a bridle. Begin then to dismiss former deeds: a life of luxury, since labor with arms is imminent. To the command of the King, obedience is to be given with all virtue, if you wish to reach the last times joyful. He is a good soldier, who always expects things to be enjoyed; do not flatter yourself, completely dismiss idleness, so that you may be present daily to your commander, be solicitous beforehand, revise the signals at dawn. When you see war, take up nearby agony. This is the glory of the King, to see the soldier prepared; the King is present, who will dominate because of the hoped-for hope. He prepares gifts, he is joyful for victory, suspects, and dedicates his own attendant to be. You, moreover, do not spare yourself in respect to Belial: be more energetic, so that he may give fame in exchange for death.",
+ "lemmas": [
+  {
+   "form": "militiae",
+   "gloss": "military service",
+   "lemma": "militia"
+  },
+  {
+   "form": "freno",
+   "gloss": "bridle",
+   "lemma": "frenum"
+  },
+  {
+   "form": "pristina",
+   "gloss": "former",
+   "lemma": "pristinus"
+  },
+  {
+   "form": "luxurias",
+   "gloss": "luxury",
+   "lemma": "luxuria"
+  },
+  {
+   "form": "imperio",
+   "gloss": "command",
+   "lemma": "imperium"
+  },
+  {
+   "form": "regis",
+   "gloss": "King",
+   "lemma": "rex"
+  },
+  {
+   "form": "virtute",
+   "gloss": "virtue",
+   "lemma": "virtus"
+  },
+  {
+   "form": "blandire",
+   "gloss": "to flatter",
+   "lemma": "blandior"
+  },
+  {
+   "form": "desidias",
+   "gloss": "idleness",
+   "lemma": "desidia"
+  },
+  {
+   "form": "praeposito",
+   "gloss": "commander",
+   "lemma": "praepositus"
+  },
+  {
+   "form": "solicitus",
+   "gloss": "solicitous",
+   "lemma": "solicitus"
+  },
+  {
+   "form": "satellem",
+   "gloss": "attendant",
+   "lemma": "satelles"
+  }
+ ],
+ "choices": [
+  {
+   "english": "the King is present",
+   "rejected": [
+    "The King comes"
+   ],
+   "term": "Rex adest",
+   "why": "literal translation"
+  },
+  {
+   "english": "dedicates his own attendant to be",
+   "rejected": [
+    "dedicates his own attendant to serve"
+   ],
+   "term": "dedicat esse proprium satellem",
+   "why": "corrected to capture the sense of appointment"
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Once you take the name of military service, you are held by a bridle. So begin by casting off your former deeds: your life of luxury, since labor with arms is imminent. You must obey the King's command with every virtue, if you wish to reach the last times in joy. A good soldier always looks for the rewards to come; do not flatter yourself, but utterly dismiss idleness, so that you may stand ready daily before your commander. Be vigilant beforehand; review the signals at dawn. When you see war, take up the agony close at hand. This is the King's glory: to see the soldier prepared. The King is present, and he will reign because of the hoped-for hope. He prepares gifts; he rejoices in victory; he appoints his own attendant to serve. As for you, do not spare yourself against Belial. Be all the more energetic, so that he may give you fame in exchange for death."
+ ],
+ "notes": [],
+ "anf_compare": {
+  "status": "not_compared",
+  "notes": "Drafted from source only; ANF not shown to drafter."
+ },
+ "variants": [],
+ "checks": {},
+ "confidence": "source_draft",
+ "reviewer": "pending-independent-review",
+ "drafter": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+passB:nvidia/nemotron-3-ultra-550b-a55b",
+ "bulk": true,
+ "crosscheck": {
+  "at": "20261002T075152Z",
+  "content_sha256": "2c752938101ceab841a749c6f8a9f0c7ad39b749c643a9020085f9fbcfa42644",
+  "pass": false,
+  "a": {
+   "model": "@cf/google/gemma-4-26b-a4b-it",
+   "review": {
+    "verdict": "fail",
+    "reviewer": "model",
+    "notes": "Pass A fails to translate 'Suspicit' correctly, rendering it as 'suspects' (which is a literal but contextually incorrect reading of the Latin in this sentence) and failing to connect it to the subject. More critically, Pass B fails the fidelity test against Pass A and the Latin regarding the clause 'Suspicit, et proprium satellem dedicat esse'. Pass A translates this as 'suspects, and dedicates his own attendant to be', which is a broken English construction. Pass B attempts to fix it with 'he appoints his own attendant to serve', but Pass A's failure to provide a coherent sense for 'Suspicit' (which in this context likely means 'looks up to' or 'looks upon') combined with the garbled syntax in Pass A makes the translation chain unreliable. Furthermore, Pass A's translation of 'Rex adest, optato propter spem dominicaturum' as 'the King is present, who will dominate because of the hoped-for hope' is a redundant and poor rendering of 'optato propter spem' (the hoped-for one because of hope).",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": false,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [
+     "The meaning of 'Suspicit' in this context is poorly handled by Pass A ('suspects') and changed in Pass B."
+    ],
+    "reasons": [
+     "Pass A renders 'Suspicit, et proprium satellem dedicat esse' as 'suspects, and dedicates his own attendant to be', which is syntactically broken and fails to preserve the sense of the Latin clause.",
+     "Pass A's translation of 'optato propter spem' as 'because of the hoped-for hope' is a tautological error."
+    ]
+   },
+   "gate_errors": [
+    "semantic verdict is not pass",
+    "semantic uncertainties missing or unresolved"
+   ]
+  },
+  "b": {
+   "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+   "review": {
+    "checks": {
+     "agency": true,
+     "completeness": true,
+     "doctrine": true,
+     "modality": true,
+     "negation": true,
+     "scripture": true,
+     "source_identity": true
+    },
+    "covered_source_paragraphs": [
+     1
+    ],
+    "notes": "source: 'Militiae nomen cum dederis, freno teneris. Incipe tunc ergo dimittere pristina gesta: Luxurias vita, quoniam labor imminet armis. Imperio regis omni virtute parendum, Tempora postrema si vis pertingere laeta. Ille bonus miles, semper exspecta fruenda; Blandire noli tibi, desidias omnino mitte, Ut tuo praeposito cottidie praesto sis, ante Solicitus esto, matutinus signa revise. Cum videris bellum, agonia sume propinqua. Haec gloria regis, militem videre paratum; Rex adest, optato propter spem dominicaturum. Ille parat dona, ille pro victoria laetus Suspicit, et proprium satellem dedicat esse. Tu tibi praeterea in Belian parcere noli: Impiger esto magis, ut reddat famam pro morte.' english: 'Once you take the name of military service, you are held by a bridle. So begin by casting off your former deeds: your life of luxury, since labor with arms is imminent. You must obey the King's command with every virtue, if you wish to reach the last times in joy. A good soldier always looks for the rewards to come; do not flatter yourself, but utterly dismiss idleness, so that you may stand ready daily before your commander. Be vigilant beforehand; review the signals at dawn. When you see war, take up the agony close at hand. This is the King's glory: to see the soldier prepared. The King is present, and he will reign because of the hoped-for hope. He prepares gifts; he rejoices in victory; he appoints his own attendant to serve. As for you, do not spare yourself against Belial. Be all the more energetic, so that he may give you fame in exchange for death.'",
+    "pass_a_fidelity": true,
+    "reasons": [],
+    "reviewer": "model",
+    "title_is_thought": true,
+    "uncertainties": [],
+    "verdict": "pass"
+   },
+   "gate_errors": []
+  }
+ }
+}

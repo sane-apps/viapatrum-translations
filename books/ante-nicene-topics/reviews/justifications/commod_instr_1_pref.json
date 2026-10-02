@@ -1,0 +1,167 @@
+{
+ "excerpt_id": "commod_instr_1_pref",
+ "edition": {
+  "id": "repo:chapters/commodian-instructions.json",
+  "language": "lat",
+  "path": "sources/chapters/commodian-instructions.json",
+  "name": "Migne, Patrologia Latina 5 (1844), via Latin Wikisource",
+  "locus": "Instructions I",
+  "span": "whole chapter",
+  "witness_note": "Single locked witness in repo; second witness not yet locked."
+ },
+ "source_text": "Praefatio nostra viam erranti demonstrat; Respectumque bonum, cum venerit saeculi meta; Aeternum fieri: quod discredunt inscia corda: Ego similiter erravi tempore multo, Fana prosequendo, parentibus insciis ipsis. Abstuli me tandem inde, legendo de Lege. Testificor Dominum; doleo: pro civica turba! Inscia quod perdit, pergens deos quaerere vanos. Ob ea perdoctus, ignaros instruo verum.",
+ "thought_title": "Introduction to the Instructions",
+ "pass_a_gloss": "Our introduction shows the way to the one who is erring; and a good regard, when the end of the age will have come; to be made eternal: which unknowing hearts disbelieve: I similarly erred for a long time, following idols, with my parents being unknowing themselves. I finally withdrew from there, reading from the Law. I testify to the Lord; I grieve for the civic crowd! Because it is unknowing, it is being destroyed, going to seek vain gods. On account of these things, having been thoroughly taught, I instruct the unknowing in the truth.",
+ "lemmas": [
+  {
+   "form": "Praefatio",
+   "gloss": "introduction",
+   "lemma": "praefatio"
+  },
+  {
+   "form": "erranti",
+   "gloss": "to err",
+   "lemma": "errare"
+  },
+  {
+   "form": "Respectumque",
+   "gloss": "regard",
+   "lemma": "respectus"
+  },
+  {
+   "form": "saeculi",
+   "gloss": "age",
+   "lemma": "saeculum"
+  },
+  {
+   "form": "Aeternum",
+   "gloss": "eternal",
+   "lemma": "aeternus"
+  },
+  {
+   "form": "discredunt",
+   "gloss": "to disbelieve",
+   "lemma": "discredere"
+  },
+  {
+   "form": "inscia",
+   "gloss": "unknowing",
+   "lemma": "inscius"
+  },
+  {
+   "form": "Fana",
+   "gloss": "idol",
+   "lemma": "fanum"
+  },
+  {
+   "form": "Legendo",
+   "gloss": "reading",
+   "lemma": "legere"
+  },
+  {
+   "form": "Lege",
+   "gloss": "Law",
+   "lemma": "lex"
+  },
+  {
+   "form": "Testificor",
+   "gloss": "to testify",
+   "lemma": "testificari"
+  },
+  {
+   "form": "Dominum",
+   "gloss": "Lord",
+   "lemma": "Dominus"
+  }
+ ],
+ "choices": [
+  {
+   "english": "civic crowd",
+   "rejected": [
+    "city mob"
+   ],
+   "term": "civica turba",
+   "why": "turba can mean crowd or mob, and civica suggests a connection to the city or civic life"
+  },
+  {
+   "english": "going to seek vain gods",
+   "rejected": [
+    "seeking false gods"
+   ],
+   "term": "pergens deos quaerere vanos",
+   "why": "pergens is a present participle indicating ongoing action, and vanos means vain or empty"
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "This preface points the wanderer toward the right path, and toward a favorable outcome when the age reaches its end: becoming eternal, a truth that ignorant hearts refuse to believe. I myself wandered for a long time in the same way, chasing after idols, while my own parents were equally ignorant. I finally pulled myself out of that life by reading the Law. I call the Lord as my witness; I grieve for the city crowd! Because they do not know, they are perishing, chasing after empty gods. Since I have been thoroughly taught by these things, I now instruct the ignorant in the truth."
+ ],
+ "notes": [],
+ "anf_compare": {
+  "status": "not_compared",
+  "notes": "Drafted from source only; ANF not shown to drafter."
+ },
+ "variants": [],
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:gemma-4-26b-a4b-it+qwen3-30b-a3b-fp8",
+ "drafter": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+passB:nvidia/nemotron-3-ultra-550b-a55b",
+ "bulk": true,
+ "crosscheck": {
+  "at": "20261002T075325Z",
+  "content_sha256": "04f6d7ef739a7daa95adda05a4e9904d74b444f013d1af498b27d3f87342c983",
+  "pass": true,
+  "a": {
+   "model": "@cf/google/gemma-4-26b-a4b-it",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "The translation accurately reflects the Latin text. Pass A and Pass B both correctly handle the nuances of 'inscia corda' (unknowing/ignorant hearts), 'Fana prosequendo' (following/chasing idols), and 'pergens deos quaerere vanos' (going to seek/chasing after vain/empty gods).",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "source: 'Praefatio nostra viam erranti demonstrat; Respectumque bonum, cum venerit saeculi meta; Aeternum fieri: quod discredunt inscia corda: Ego similiter erravi tempore multo, Fana prosequendo, parentibus insciis ipsis. Abstuli me tandem inde, legendo de Lege. Testificor Dominum; doleo: pro civica turba! Inscia quod perdit, pergens deos quaerere vanos. Ob ea perdoctus, ignaros instruo verum.', english: 'Our introduction shows the way to the one who is erring; and a good regard, when the end of the age will have come; to be made eternal: which unknowing hearts disbelieve: I similarly erred for a long time, following idols, with my parents being unknowing themselves. I finally withdrew from there, reading from the Law. I testify to the Lord; I grieve for the civic crowd! Because it is unknowing, it is being destroyed, going to seek vain gods. On account of these things, having been thoroughly taught, I instruct the unknowing in the truth.'",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  }
+ }
+}
