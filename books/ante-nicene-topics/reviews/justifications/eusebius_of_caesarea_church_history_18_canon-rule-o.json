@@ -127,9 +127,66 @@
   "notes": "Drafted from source only; ANF not shown to drafter."
  },
  "variants": [],
- "checks": {},
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:gemma-4-26b-a4b-it+qwen3-30b-a3b-fp8",
  "drafter": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+passB:nvidia/nemotron-3-ultra-550b-a55b",
- "bulk": true
+ "bulk": true,
+ "crosscheck": {
+  "at": "20261002T080807Z",
+  "content_sha256": "1b16802ffe8b52125cdd488bb04cc25c33fa351be3348e0eeee0298535d460c9",
+  "pass": true,
+  "a": {
+   "model": "@cf/google/gemma-4-26b-a4b-it",
+   "review": {
+    "verdict": "pass",
+    "reviewer": "model",
+    "notes": "The translation accurately captures the Greek text. Pass A and Pass B both correctly identify the various works of Origen mentioned (Address to Antoninus, Apology, Refutation, Monarchy of God, Psalter, On the Soul). Pass B provides a slightly more fluid rendering of 'ἐκ τῶν παρ’ ἡμῖν γραφῶν' as 'from our own Scriptures' which is a valid theological interpretation of 'our writings' in this context. All clauses, including the complex final sentence regarding the 'On the Soul' treatise, are preserved.",
+    "checks": {
+     "source_identity": true,
+     "completeness": true,
+     "negation": true,
+     "agency": true,
+     "modality": true,
+     "doctrine": true,
+     "scripture": true
+    },
+    "pass_a_fidelity": true,
+    "title_is_thought": true,
+    "covered_source_paragraphs": [
+     1
+    ],
+    "uncertainties": [],
+    "reasons": []
+   },
+   "gate_errors": []
+  },
+  "b": {
+   "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+   "review": {
+    "checks": {
+     "agency": true,
+     "completeness": true,
+     "doctrine": true,
+     "modality": true,
+     "negation": true,
+     "scripture": true,
+     "source_identity": true
+    },
+    "covered_source_paragraphs": [
+     1
+    ],
+    "notes": "The Greek text is correctly identified as Eusebius of Caesarea's Church History 4.18. The translation accurately reflects the content of the source text, preserving the meaning, structure, and key terms. All citations and references are correctly matched to the source. No omissions, additions, or distortions are present.",
+    "pass_a_fidelity": true,
+    "reasons": [],
+    "reviewer": "model",
+    "title_is_thought": true,
+    "uncertainties": [],
+    "verdict": "pass"
+   },
+   "gate_errors": []
+  }
+ }
 }
