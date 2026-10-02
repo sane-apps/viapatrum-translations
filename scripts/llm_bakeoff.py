@@ -641,7 +641,9 @@ def nv_profile(model: str) -> dict:
             "stream": True,
             "chat_template_kwargs": None,  # extra ctk false can hang — do not send
         }
-    if "nemotron-3-super" in m or "nemotron-3.5" in m:
+    if "nemotron-3-super" in m or "nemotron-3.5" in m or "nemotron-3-ultra" in m:
+        # Ultra card (2026-10-02): reasoning_effort "none" = enable_thinking false;
+        # without it Ultra thinks aloud and returns prose instead of JSON.
         return {
             "reasoning_effort": "none",
             "temperature": 1.0,
