@@ -287,6 +287,8 @@ def cf_call(
     enable_thinking: bool | None = None,
     use_max_completion_tokens: bool = False,
     api: str = "run",
+    reasoning_effort: str | None = None,
+    timeout: int = 120,
 ) -> dict:
     """Workers AI call. See docs/LLM_API_SETUP.md — Gemma/GLM thinking defaults ON."""
     if api == "chat":
@@ -310,6 +312,9 @@ def cf_call(
     # Gemma/GLM: enable_thinking defaults true — burns budget into reasoning prose
     if enable_thinking is not None:
         payload["chat_template_kwargs"] = {"enable_thinking": enable_thinking}
+    # Kimi K2.6 ignores enable_thinking=false; its switch is reasoning_effort "none".
+    if reasoning_effort is not None:
+        payload["reasoning_effort"] = reasoning_effort
     body = json.dumps(payload).encode()
     last_err = None
     for attempt in range(3):
@@ -324,7 +329,7 @@ def cf_call(
             method="POST",
         )
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
                 data = json.loads(resp.read().decode())
             ms = int((time.time() - t0) * 1000)
             # OpenAI-compat path returns choices at top level (no success wrapper)
@@ -601,12 +606,26 @@ def vendor_call(
         enable_thinking=prof.get("enable_thinking"),
         use_max_completion_tokens=bool(prof.get("use_max_completion_tokens")),
         api=prof.get("api", "run"),
+        reasoning_effort=prof.get("reasoning_effort"),
+        timeout=int(prof.get("timeout", 120)),
     )
 
 
 def cf_profile(model: str) -> dict:
     """Per-model Workers AI kwargs from live schemas + docs/LLM_API_SETUP.md."""
     m = model.lower()
+    if any(k in m for k in ("deepseek-v4", "kimi-k2", "glm-5.2", "qwen3.8", "nemotron-3-120b")):
+        # Live schemas 2026-10-02: chat_template_kwargs.enable_thinking defaults
+        # true on all five; false turns reasoning off. (glm-5.3 cannot disable
+        # thinking and is excluded.) Long-context work-level reads need room.
+        return {
+            "enable_thinking": False,
+            "reasoning_effort": "none" if ("kimi" in m or "deepseek" in m or "glm-5.2" in m) else None,
+            "temperature": 0.2,
+            "max_tokens": 8000,
+            "use_max_completion_tokens": True,
+            "timeout": 600,
+        }
     if "glm" in m or "gemma" in m:
         # Live schema: chat_template_kwargs.enable_thinking default true
         return {
