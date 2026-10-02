@@ -233,6 +233,11 @@ def locate(e: dict):
     if hit:
         f, d, unit = hit
         text = d["units"][unit]
+        if d.get("language") not in (None, "grc", "lat"):
+            return None, f"language {d.get('language')} needs a specialist pass (free models not trusted)"
+        words = re.findall(r"[A-Za-zäöüß]+", text.lower())
+        if words and sum(w in ("und", "der", "die", "das", "nicht", "ist", "ein", "zu") for w in words) > 0.06 * len(words):
+            return None, "unit is a modern German rendering, not the original language"
         greek = len(re.findall(r"[\u0370-\u03ff\u1f00-\u1fff]", text)) > 0.3 * max(1, len(re.findall(r"[^\W\d_]", text)))
         return {"path": f"chapters/{f.name}", "lang": "grc" if greek else "lat", "book": None, "chapter": unit,
                 "text": re.sub(r"\s+", " ", re.sub(r"\[\s*[A-Z][A-Za-z.]{0,12}\.?,?\s*[IVXLCDM\d][^\]]{0,30}\]", "", d["units"][unit])).strip(),

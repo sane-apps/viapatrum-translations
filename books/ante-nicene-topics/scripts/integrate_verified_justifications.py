@@ -14,6 +14,11 @@ citation, via ATTRIBUTION below.
 
   python3 books/ante-nicene-topics/scripts/integrate_verified_justifications.py [--apply] [--stage-from-head] [ID ...]
 
+--labels-only [--label-file F]: apply ONLY attribution corrections (CHAPTER_FIXES
+for every excerpt mapped in sources/chapters, plus an optional JSON file of
+{id: {author, work, locus, citation}}) to all excerpts, verified or not.
+English and confidence are untouched.
+
 --stage-from-head (with --apply): the repo often holds other agents'
 uncommitted edits in the same topic files. This stages HEAD's version of each
 touched file plus only these excerpt changes, so a commit carries just this
@@ -107,6 +112,10 @@ def main() -> int:
                 and cc.get("content_sha256") == current_hash(j)):
             ready[j["excerpt_id"]] = j
     stage = "--stage-from-head" in sys.argv
+    if "--labels-only" in sys.argv:
+        lf = sys.argv[sys.argv.index("--label-file") + 1] if "--label-file" in sys.argv else None
+        extra = json.loads(Path(lf).read_text()) if lf else {}
+        return fix_labels(extra, apply, stage)
     changed_files, applied = 0, []
     for f in sorted(glob.glob(str(BOOK / "translations/topics/*.json"))):
         d = json.loads(Path(f).read_text())
@@ -133,6 +142,49 @@ def main() -> int:
           + (" (staged from HEAD)" if apply and stage else ""))
     if missing:
         print("verified but not found in any topic file:", missing)
+    return 0
+
+
+def label_fixes_for(e: dict, extra: dict) -> dict:
+    fix = {}
+    cu = chapter_unit(e["id"])
+    if cu and cu[0] in CHAPTER_FIXES:
+        fix.update(CHAPTER_FIXES[cu[0]](e, cu[1]))
+    fix.update({k: v for k, v in (extra.get(e["id"]) or {}).items() if k in ("author", "work", "locus", "citation")})
+    return {k: v for k, v in fix.items() if e.get(k) != v}
+
+
+def fix_labels(extra: dict, apply: bool, stage: bool) -> int:
+    changed = []
+    for f in sorted(glob.glob(str(BOOK / "translations/topics/*.json"))):
+        d = json.loads(Path(f).read_text())
+        if not isinstance(d, dict):
+            continue
+        hits = [(e, label_fixes_for(e, extra)) for e in d.get("excerpts", [])]
+        hits = [(e, x) for e, x in hits if x]
+        if not hits:
+            continue
+        for e, x in hits:
+            changed.append((e["id"], x))
+            e.update(x)
+        if apply:
+            Path(f).write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n")
+            if stage:
+                rel = str(Path(f).relative_to(REPO))
+                head = json.loads(subprocess.run(["git", "-C", str(REPO), "show", f"HEAD:{rel}"],
+                                                 capture_output=True, text=True, check=True).stdout)
+                for e in head.get("excerpts", []):
+                    x = label_fixes_for(e, extra)
+                    if x:
+                        e.update(x)
+                blob = subprocess.run(["git", "-C", str(REPO), "hash-object", "-w", "--stdin"],
+                                      input=json.dumps(head, ensure_ascii=False, indent=2) + "\n",
+                                      capture_output=True, text=True, check=True).stdout.strip()
+                subprocess.run(["git", "-C", str(REPO), "update-index", "--cacheinfo", f"100644,{blob},{rel}"],
+                               check=True)
+    print(f"{'APPLIED' if apply else 'DRY RUN'} labels: {len(changed)} excerpts")
+    for i, x in changed[:12]:
+        print("  ", i[:50], x)
     return 0
 
 
