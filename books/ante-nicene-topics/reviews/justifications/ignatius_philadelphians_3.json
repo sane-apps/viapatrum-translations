@@ -93,9 +93,9 @@
   }
  ],
  "pass_b_english": [
-  "Stay clear of the bad weeds. Jesus Christ does not tend them, for they are not the Father's planting (Matthew 15:13). I do not say I found division among you. I found a sifting.",
-  "All who belong to God and to Jesus Christ are with the bishop. And all who repent and enter the unity of the church will belong to God as well, so that they live by Jesus Christ.",
-  "Make no mistake, my brothers: whoever follows a man who splits the church will not inherit the kingdom of God (1 Corinthians 6:9–10). Whoever walks by a foreign mind does not consent to the Passion."
+  "Stay clear of the bad weeds. Jesus Christ does not tend them, for they are not the Father's planting (Matthew 15:13). Not that I found division among you; I found a sifting.",
+  "All who are God's and Jesus Christ's are with the bishop. And all who repent and enter the unity of the church will be God's too, so that they may live according to Jesus Christ.",
+  "Do not be deceived, my brothers: if anyone follows a man who splits the church, he does not inherit the kingdom of God (1 Corinthians 6:9–10). If anyone walks in an alien mind, he does not consent to the Passion."
  ],
  "choices": [
   {
@@ -145,27 +145,29 @@
   "Source shows 'ὰποδιῡλισμόν' with odd diacritics (for ἀποδιϋλισμόν) and 'παῤ' for παρ’; reproduced as supplied.",
   "αὐτούς is masculine though βοτανῶν is feminine: the weeds are people."
  ],
- "checks": {},
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-subagent",
  "crosscheck": {
-  "at": "20261002T035228Z",
-  "content_sha256": "d322ce1e088a251c3f12e4e9ec3c87aad1b2637eedd6fde56b30bb41eeee9349",
-  "pass": false,
+  "at": "20261002T041635Z",
+  "content_sha256": "26c62ef7477c9b71fd38ed82e6e0d2240c7138b511c722fe2e7712dd6d940909",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Paragraph [1] is the named Philadelphians 3 locus. Pass A keeps the clauses, including 'Not that I found division among you, but rather a filtering out' for 'οὐχ ὅτι παῤ ὑμῖν μερισμὸν εὗρον, ἀλλ’ ὰποδιῡλισμόν', 'Do not be deceived, my brothers' for 'μὴ πλανᾶσθε, ἀδελφοί μου', and 'so that they may be living according to Jesus Christ' for 'ἵνα ὦσιν κατὰ Ἰησοῦν Χριστὸν ζῶντες'. Pass B has 'I do not say I found division among you. I found a sifting.', 'Make no mistake, my brothers', and 'so that they live by Jesus Christ'. Citations (Matthew 15:13) and (1 Corinthians 6:9–10) match the supplied wording notes and are not wrong. Title 'The Father's Planting' names the thought. Odd diacritics on 'ὰποδιῡλισμόν' and 'παῤ' are disclosed.",
+    "notes": "Paragraph [1] checked clause by clause. Ἀπέχεσθε τῶν κακῶν βοτανῶν, ἅστινας οὐ γεωργεῖ Ἰησοῦς Χριστός, διὰ τὸ μὴ εἶναι αὐτοὺς φυτείαν πατρός is A 'Keep away from the evil weeds, which Jesus Christ does not cultivate, because they are not the Father's planting' and B 'Stay clear of the bad weeds. Jesus Christ does not tend them, for they are not the Father's planting (Matthew 15:13)'. οὐχ ὅτι παῤ ὑμῖν μερισμὸν εὗρον, ἀλλ’ ὰποδιῡλισμόν is A 'Not that I found division among you, but rather a filtering out' and B 'Not that I found division among you; I found a sifting' (εὗρον understood). ὅσοι γὰρ θεοῦ εἰσιν καὶ Ἰησοῦ Χριστοῦ, οὗτοι μετὰ τοῦ ἐπισκόπου εἰσίν and ὅσοι ἂν μετανοήσαντες ἔλθωσιν ἐπὶ τὴν ἑνότητα τῆς ἐκκλησίας, καὶ οὗτοι θεοῦ ἔσονται, ἵνα ὦσιν κατὰ Ἰησοῦν Χριστὸν ζῶντες keep bishop, repentance, future belonging, and purpose in both. μὴ πλανᾶσθε, ἀδελφοί μου: εἴ τις σχίζοντι ἀκολουθεῖ. βασιλείαν θεοῦ οὐ κληρονομεῖ and οὗτος τῷ πάθει οὐ συγκατατίθεται keep both negations; B's (1 Corinthians 6:9–10) sits on the kingdom clause named in the supplied bible_refs. Title 'The Father's Planting' names the thought; odd diacritics on ὰποδιῡλισμόν are disclosed.",
     "checks": {
      "source_identity": true,
      "completeness": true,
-     "negation": false,
-     "agency": false,
+     "negation": true,
+     "agency": true,
      "modality": true,
-     "doctrine": false,
+     "doctrine": true,
      "scripture": true
     },
     "pass_a_fidelity": true,
@@ -174,25 +176,16 @@
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Negation is moved onto a speech-act. Greek 'οὐχ ὅτι παῤ ὑμῖν μερισμὸν εὗρον, ἀλλ’ ὰποδιῡλισμόν' and Pass A 'Not that I found division among you, but rather a filtering out' deny the finding of division; Pass B adds 'I do not say I found division among you. I found a sifting.'",
-     "Agency of the warning changes. Greek 'μὴ πλανᾶσθε, ἀδελφοί μου' and Pass A 'Do not be deceived, my brothers' keep passive deception; Pass B 'Make no mistake, my brothers' makes the brothers the agents of a mistake.",
-     "The conformity clause is not kept. Greek 'ἵνα ὦσιν κατὰ Ἰησοῦν Χριστὸν ζῶντες' and Pass A 'so that they may be living according to Jesus Christ' are accordance with Christ; Pass B has 'so that they live by Jesus Christ'."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check negation is not explicitly true",
-    "semantic check agency is not explicitly true",
-    "semantic check doctrine is not explicitly true"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Source paragraph 1: Locked Greek matches Ignatius Philadelphians 3. Pass A gloss preserves all clauses: 'Keep away from the evil weeds...' corresponds to Ἀπέχεσθε τῶν κακῶν βοτανῶν..., 'Not that I found division...' to οὐχ ὅτι παῤ ὑμῖν μερισμὸν εὗρον..., etc. Negation (οὐχ, οὐ) preserved in 'does not cultivate', 'he does not inherit', 'does not agree'. Agency clear: Jesus Christ as subject of cultivation, schismatic as subject of following, alien opinion walker as subject. Modality: indicative statements preserved. Doctrine: Father's planting, unity with bishop, repentance leading to belonging to God, kingdom inheritance denied to schismatics, assent to Passion preserved. Scripture: Pass B adds Matthew 15:13 correctly alongside 'Father's planting' (φυτείαν πατρός), and 1 Corinthians 6:9–10 alongside 'does not inherit the kingdom of God', matching the biblical allusions in notes. Title 'The Father's Planting' names the thought (φυτείαν πατρός). Notes disclose OCR issues: 'ὰποδιῡλισμόν' with odd diacritics and 'παῤ' for παρ’. No contradictions between Pass A and B; B adds scripture citations as required. All checks pass.",
+    "notes": "Source paragraph 1 fully covered. Greek identity confirmed: Ignatius, Philadelphians 3 via Lake 1912 Loeb. Pass A renders all clauses: evil weeds not cultivated by Christ (φυτείαν πατρός), not division but filtering (ἀποδιϋλισμόν), belonging to God/Christ with bishop, repentant return to unity, living per Christ, warning against deceit, schismatic followers not inheriting kingdom (βασιλείαν θεοῦ οὐ κληρονομεῖ), alien opinion not assenting to Passion (τῷ πάθει οὐ συγκατατίθεται). Pass B matches: 'bad weeds... not the Father's planting (Matthew 15:13)', 'I found a sifting' (for ἀποδιϋλισμόν), 'All who are God's and Jesus Christ's are with the bishop', 'repent and enter unity... live according to Jesus Christ', 'Do not be deceived... follows a man who splits... does not inherit kingdom (1 Cor 6:9–10)', 'walks in alien mind... does not consent to the Passion'. All checks pass: source identity, completeness, negation (οὐχ, οὐ, οὐκ, οὗτος... οὐ), agency (Christ does not cultivate, one follows, one walks), modality (will be, may live), doctrine (schism excludes from kingdom, unity with bishop), scripture citations (Matt 15:13 for φυτεία; 1 Cor 6:9–10 for βασιλείαν... κληρονομεῖ) correctly added per apparatus. Title 'The Father's Planting' names the thought (φυτείαν πατρός). Notes explain OCR: 'ὰποδιῡλισμόν' for ἀποδιϋλισμόν, 'παῤ' for παρ’, and αὐτούς masculine despite βοτανῶν feminine (weeds as people). No uncertainties.",
     "checks": {
      "source_identity": true,
      "completeness": true,

@@ -83,8 +83,8 @@
   }
  ],
  "pass_b_english": [
-  "You too must not presume on your bishop's youth. Give him every mark of respect, as befits the power of God the Father. I know your holy presbyters have done just that. They have not exploited his young standing, as it looks to the eye. They are wise in God, and they defer to him. Or rather, not to him, but to the Father of Jesus Christ, the Bishop of all.",
-  "So, to honor the One who has desired us, obey without pretense. Whoever plays false here does not fool this bishop whom he can see; he tries to cheat the Bishop he cannot see. In such a case his account is not with a man of flesh but with God, who knows what is hidden."
+  "You too must not presume on your bishop's youth. According to the power of God the Father, render him every mark of respect. I know that the holy presbyters also have not presumed on his rank, young as it appears. As men wise in God they defer to him; not to him, though, but to the Father of Jesus Christ, the Bishop of all.",
+  "To honor the One who has desired us, then, it is fitting to obey without any pretense. For a man does not deceive this bishop who is seen; he cheats the Bishop who is unseen. In such a case the reckoning is not with flesh but with God, who knows what is hidden."
  ],
  "choices": [
   {
@@ -106,7 +106,7 @@
   },
   {
    "term": "παραλογίζεται",
-   "english": "tries to cheat",
+   "english": "cheats",
    "why": "A reckoning word (false accounting), matched by 'his account' below for ὁ λόγος.",
    "rejected": [
     "mocks",
@@ -131,27 +131,29 @@
  "notes": [
   "'God, who knows the hidden things' may echo Romans 2:16 or Psalm 44:21; not cited inline because the wording is general."
  ],
- "checks": {},
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-subagent",
  "crosscheck": {
-  "at": "20261002T035228Z",
-  "content_sha256": "5316343c86f36f7b9852da7e8ab1b1a0e006561751c1f1f2b3a390a6a6c204e2",
-  "pass": false,
+  "at": "20261002T041635Z",
+  "content_sha256": "f07d063f893b33b98d69db2c6df7d27c376a6ea8f2eebcc1eb5b61c1e14cf1c0",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Paragraph 1 was checked clause by clause. Pass A tracks the Greek: μὴ συγχρᾶσθαι τῇ ἡλικίᾳ, κατὰ δύναμιν θεοῦ πατρὸς πᾶσαν ἐντροπὴν αὐτῷ ἀπονέμειν, οὐ προσειληφότας τὴν φαινομένην νεωτερικὴν τάξιν, ὡς φρονίμους ἐν θεῷ συγχωροῦντας αὐτῷ, οὐκ αὐτῷ δέ, ἀλλὰ τῷ πατρὶ Ἰησοῦ Χριστοῦ, τῷ πάντων ἐπισκόπῳ, εἰς τιμὴν οὖν ἐκείνου τοῦ θελήσαντος ἡμᾶς πρέπον ἐστὶν ἐπακούειν, οὐχ ὅτι ... πλανᾷ τις, ἀλλὰ τὸν ἀόρατον παραλογίζεται, οὐ πρὸς σάρκα ὁ λόγος. Pass B adds and shifts: 'I know your holy presbyters have done just that' is not in καθὼς ἔγνων καὶ τοὺς ἁγίους πρεσβυτέρους οὐ προσειληφότας; 'as befits the power of God the Father' is not κατὰ δύναμιν; 'he tries to cheat' is not παραλογίζεται; 'a man of flesh' is not πρὸς σάρκα; 'obey without pretense' drops πρέπον ἐστίν. Title names the seen/unseen contrast. No false scripture citation; the note correctly leaves a general echo uncited.",
+    "notes": "p1 checked in full. 'Καὶ ὑμῖν δὲ πρέπει μὴ συγχρᾶσθαι τῇ ἡλικίᾳ τοῦ ἐπισκόπου' matches A 'it is fitting for you too not to take advantage of the bishop's youth' and B 'You too must not presume on your bishop's youth'; 'ἀλλὰ κατὰ δύναμιν θεοῦ πατρὸς πᾶσαν ἐντροπὴν αὐτῷ ἀπονέμειν' is kept as respect according to the Father's power. 'καθὼς ἔγνων καὶ τοὺς ἁγίους πρεσβυτέρους οὐ προσειληφότας τὴν φαινομένην νεωτερικὴν τάξιν' and 'οὐκ αὐτῷ δέ, ἀλλὰ τῷ πατρὶ Ἰησοῦ Χριστοῦ, τῷ πάντων ἐπισκόπῳ' are preserved (A 'yet not to him, but to the Father of Jesus Christ, the bishop of all'; B 'not to him, though, but to the Father of Jesus Christ, the Bishop of all'). 'ἐπεὶ οὐχ ὅτι τὸν ἐπίσκοπον τοῦτον τὸν βλεπόμενον πλανᾷ τις, ἀλλὰ τὸν ἀόρατον παραλογίζεται' keeps the seen/unseen contrast and the τις-agent (A 'it is not that a person deceives this bishop who is seen, but he cheats the one who is unseen'). 'τὸ δὲ τοιοῦτον οὐ πρὸς σάρκα ὁ λόγος, ἀλλὰ πρὸς θεὸν τὸν τὰ κρύφια εἰδότα' matches both reckoning clauses. No inline citation is present to mismatch; the note withholds a verse because the wording is general. Title names the young/unseen contrast, not only the locus.",
     "checks": {
      "source_identity": true,
-     "completeness": false,
+     "completeness": true,
      "negation": true,
      "agency": true,
-     "modality": false,
-     "doctrine": false,
+     "modality": true,
+     "doctrine": true,
      "scripture": true
     },
     "pass_a_fidelity": true,
@@ -160,27 +162,16 @@
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Pass B adds a claim the Greek does not make: 'I know your holy presbyters have done just that' against 'καθὼς ἔγνων καὶ τοὺς ἁγίους πρεσβυτέρους οὐ προσειληφότας' and Pass A 'just as I know that the holy presbyters too have not taken advantage'.",
-     "Pass B 'as befits the power of God the Father' contradicts 'κατὰ δύναμιν θεοῦ πατρὸς πᾶσαν ἐντροπὴν' and Pass A 'according to the power of God the Father'.",
-     "Pass B 'he tries to cheat the Bishop he cannot see' adds conative modality against 'ἀλλὰ τὸν ἀόρατον παραλογίζεται' and Pass A 'but he cheats the one who is unseen'.",
-     "Pass B 'his account is not with a man of flesh' adds a man and narrows 'οὐ πρὸς σάρκα ὁ λόγος, ἀλλὰ πρὸς θεὸν', which Pass A keeps as 'the reckoning is not with flesh but with God'.",
-     "Pass B 'obey without pretense' drops the qualification in 'πρέπον ἐστὶν ἐπακούειν κατὰ μηδεμίαν ὑπόκρισιν', which Pass A keeps as 'it is fitting to obey without any hypocrisy'."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check completeness is not explicitly true",
-    "semantic check modality is not explicitly true",
-    "semantic check doctrine is not explicitly true"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Source paragraph 1 matches Ignatius Magnesians 3.1-2 (Lake 1912 Loeb). Pass A renders all clauses: 'not take advantage of the bishop's youth', 'give him all respect according to the power of God the Father', 'holy presbyters have not taken advantage of his apparently youthful rank', 'as men wise in God, they yield to him; yet not to him, but to the Father of Jesus Christ, the bishop of all', 'for the honor of him who desired us, it is fitting to obey without any hypocrisy', 'since it is not that a person deceives this bishop who is seen, but he cheats the one who is unseen', 'the reckoning is not with flesh but with God, who knows the hidden things'. Pass B conveys same meaning: 'You too must not presume on your bishop's youth. Give him every mark of respect...', 'holy presbyters have not exploited his young standing...', 'They are wise in God, and they defer to him. Or rather, not to him, but to the Father of Jesus Christ, the Bishop of all.', 'So, to honor the One who has desired us, obey without pretense. Whoever plays false here does not fool this bishop whom he can see; he tries to cheat the Bishop he cannot see. In such a case his account is not with a man of flesh but with God, who knows what is hidden.' No omission, negation, agency, modality, or doctrine errors. Scripture: no inline citations in Greek, so none required. Title 'Young Bishop, Unseen Bishop' names the thought. Notes disclose OCR uncertainty absent here. All checks pass.",
+    "notes": "Paragraph 1: Locked Greek contains two sentences. Pass A renders 'καὶ ὑμῖν δὲ πρέπει μὴ συγχρᾶσθαι τῇ ἡλικίᾳ τοῦ ἐπισκόπου' as 'And it is fitting for you too not to take advantage of the bishop's youth', which matches the sense. Pass B renders it as 'You too must not presume on your bishop's youth', which is synonymous and adds no contradiction. The clause 'κατὰ δύναμιν θεοῦ πατρὸς πᾶσαν ἐντροπὴν αὐτῷ ἀπονέμειν' is translated in Pass A as 'to give him all respect according to the power of God the Father' and in Pass B as 'According to the power of God the Father, render him every mark of respect' — both preserve agency (God the Father as source of power) and modality (obligation). The relative clause 'καθὼς ἔγνων καὶ τοὺς ἁγίους πρεσβυτέρους οὐ προσειληφότας τὴν φαινομένην νεωτερικὴν τάξιν, ἀλλ’ ὡς φρονίμους ἐν θεῷ συγχωροῦντας αὐτῷ, οὐκ αὐτῷ δέ, ἀλλὰ τῷ πατρὶ Ἰησοῦ Χριστοῦ, τῷ πάντων ἐπισκόπῳ' is rendered in Pass A as 'just as I know that the holy presbyters too have not taken advantage of his apparently youthful rank, but, as men wise in God, they yield to him; yet not to him, but to the Father of Jesus Christ, the bishop of all' and in Pass B as 'I know that the holy presbyters also have not presumed on his rank, young as it appears. As men wise in God they defer to him; not to him, though, but to the Father of Jesus Christ, the Bishop of all' — both preserve the negation (οὐ προσειληφότας), the agency (presbyters yielding), the contrast (not to him but to the Father), and the title (τῷ πάντων ἐπισκόπῳ as 'bishop of all' / 'Bishop of all'). The second sentence begins 'εἰς τιμὴν οὖν ἐκείνου τοῦ θελήσαντος ἡμᾶς πρέπον ἐστὶν ἐπακούειν κατὰ μηδεμίαν ὑπόκρισιν' — Pass A: 'So, for the honor of him who desired us, it is fitting to obey without any hypocrisy', Pass B: 'To honor the One who has desired us, then, it is fitting to obey without any pretense' — both preserve the purpose (honor), the agent (the One who desired us), the obligation (πρέπον ἐστὶν), and the negation (μηδεμίαν ὑπόκρισιν → 'without any hypocrisy/pretense'). The clause 'ἐπεὶ οὐχ ὅτι τὸν ἐπίσκοπον τοῦτον τὸν βλεπόμενον πλανᾷ τις, ἀλλὰ τὸν ἀόρατον παραλογίζεται' is rendered in Pass A as 'since it is not that a person deceives this bishop who is seen, but he cheats the one who is unseen' and in Pass B as 'For a man does not deceive this bishop who is seen; he cheats the Bishop who is unseen' — both preserve the negation (οὐχ ὅτι ... πλανᾷ τις), the agency (a person deceives / cheats), the contrast (seen vs. unseen bishop), and the verb choice (παραλογίζεται → 'cheats' per lemmas). The final clause 'τὸ δὲ τοιοῦτον οὐ πρὸς σάρκα ὁ λόγος, ἀλλὰ πρὸς θεὸν τὸν τὰ κρύφια εἰδότα' is rendered in Pass A as 'In such a case the reckoning is not with flesh but with God, who knows the hidden things' and in Pass B as 'In such a case the reckoning is not with flesh but with God, who knows what is hidden' — both preserve the negation (οὐ πρὸς σάρκα), the contrast (not with flesh but with God), and the agency (God as knower of hidden things). No omissions, additions, or contradictions. Scripture: no inline citations in source, so check passes. Title 'Young Bishop, Unseen Bishop' names the thought (the contrast between seen and unseen bishop), not just locus. Notes mention OCR/variants: none reported, and the note about Romans/Psalm is correctly treated as non-inline allusion. All checks pass.",
     "checks": {
      "source_identity": true,
      "completeness": true,

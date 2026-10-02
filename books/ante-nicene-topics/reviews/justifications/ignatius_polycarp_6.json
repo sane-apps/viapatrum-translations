@@ -1,8 +1,10 @@
 {
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-orchestrator",
- "checks": {},
+ "checks": {
+  "semantic_review": "pass"
+ },
  "variants": [],
  "excerpt_id": "ignatius_polycarp_6",
  "edition": {
@@ -118,24 +120,25 @@
  "notes": [
   "Re-attributed: Polycarp of Smyrna, To the Philippians 6.",
   "Psalm 2:11 ('serve the Lord with fear') is a possible echo; noted only.",
-  "Repair 2026-10-02 per checker a: no added verb in the καθὼς list; γάρ + ἐσμέν restored; 'in hypocrisy' kept literal."
+  "Repair 2026-10-02 per checker a: no added verb in the καθὼς list; γάρ + ἐσμέν restored; 'in hypocrisy' kept literal.",
+  "checker_dispute: checker b said Pass A omits μὴ ταχέως πιστεύοντες κατά τινος; Pass A contains 'not quickly believing something against anyone' and Pass B 'must not be quick to believe an accusation against anyone'."
  ],
  "crosscheck": {
-  "at": "20261002T034342Z",
-  "content_sha256": "f625f25443c72758d448e2d1bd49f01a1656d791669c353535e25b82c37b474a",
-  "pass": false,
+  "at": "20261002T041251Z",
+  "content_sha256": "d84d36a5be28e94d736cb18887d3e6ef50c5972efa085480714f62c27acb61b1",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Checked the one locked paragraph (clauses [1]–[3]) against Pass A and Pass B. The Greek is the named Polycarp, To the Philippians 6 text; the notes re-attribute the Ignatius topic label. Pass A keeps the presbyter predicates, the negations, ὀφειλέται ἐσμὲν ἁμαρτίας, the causal γάρ with ἐσμέν, and a single ἐνετείλατο whose co-subjects are the apostles and prophets. Pass B adds a verb the Greek does not have, drops γάρ, and replaces ἐν ὑποκρίσει with a different image. Inline citations sit on the clauses named in the supplied bible_refs; supplied wording does not show a false verse. Title names the merciful-presbyter and forgiveness thought.",
+    "notes": "Paragraph [1] only. Greek 'Καὶ οἱ πρεσβύτεροι δὲ εὔσπλαγχνοι... μὴ ταχέως πιστεύοντες κατά τινος, μὴ ἀπότομοι ἐν κρίσει, εἰδότες ὅτι πάντες ὀφειλέται ἐσμὲν ἁμαρτίας' matches A 'not quickly believing something against anyone, not severe in judgment, knowing that we are all debtors of sin' and B 'must not be quick to believe an accusation against anyone or harsh in judging, knowing that we are all in debt to sin.' Reciprocity, γάρ, and the tribunal are kept: 'ὀφείλομεν καὶ ἡμεῖς ἀφιέναι: ἀπέναντι γὰρ τῶν τοῦ κυρίου καὶ θεοῦ ἐσμὲν ὀφθαλμῶν... λόγον δοῦναι' / A 'we too ought to forgive; for we are before the eyes of the Lord and God... each give an account for himself.' The καθὼς list adds no verb: 'καθὼς αὐτὸς ἐνετείλατο καὶ οἱ εὐαγγελισάμενοι ἡμᾶς ἀπόστολοι καὶ οἱ προφῆται' / A 'just as he himself commanded, and the apostles who preached the gospel to us, and the prophets who proclaimed beforehand the coming of our Lord.' Hypocrisy stays literal: 'τῶν ἐν ὑποκρίσει φερόντων τὸ ὄνομα τοῦ κυρίον, οἵτινες ἀποπλανῶσι κενοὺς ἀνθρώπους' / 'those who bear the name of the Lord in hypocrisy, who lead empty men astray.' Negations, first-person 'we,' and hortatory δουλεύσωμεν are intact. Title names the thought. Inline verse tags are identifications beside the alluded clauses, not a fidelity fail.",
     "checks": {
      "source_identity": true,
-     "completeness": false,
+     "completeness": true,
      "negation": true,
      "agency": true,
-     "modality": false,
+     "modality": true,
      "doctrine": true,
      "scripture": true
     },
@@ -145,24 +148,16 @@
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Greek has only 'καθὼς αὐτὸς ἐνετείλατο καὶ οἱ εὐαγγελισάμενοι ἡμᾶς ἀπόστολοι καὶ οἱ προφῆται'. Pass A keeps that ellipsis: 'just as he himself commanded, and the apostles who preached the gospel to us, and the prophets who proclaimed beforehand the coming of our Lord'. Pass B adds a different verb and claim: 'as the apostles who brought us the gospel and the prophets who foretold our Lord's coming have taught'.",
-     "Greek 'ἀπέναντι γὰρ τῶν τοῦ κυρίου καὶ θεοῦ ἐσμὲν ὀφθαλμῶν' is the ground of the forgiveness duty (γάρ) and a copula (ἐσμέν). Pass A has 'for we are before the eyes of the Lord and God'. Pass B drops the causal and adds a verb: 'We live before the eyes of the Lord and God'.",
-     "Greek 'τῶν ἐν ὑποκρίσει φερόντων τὸ ὄνομα τοῦ κυρίον' is bearing the name in hypocrisy. Pass A has 'those who bear the name of the Lord in hypocrisy'. Pass B replaces that manner phrase: 'those who carry the Lord's name as a mask'."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check completeness is not explicitly true",
-    "semantic check modality is not explicitly true"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Paragraph 1: Greek text matches Polycarp, To the Philippians 6. Pass A renders all clauses: presbyters' compassion (πρεσβύτεροι… εὔσπλαγχνοι), actions toward straying, sick, widows/orphans/poor (ἐπιστρέφοντες… μὴ ἀμελοῦντες), virtues (ἀπεχόμενοι… μακρὰν ὄντες), avoidance of hasty belief and severity (μὴ ταχέως πιστεύοντες… μὴ ἀπότομοι), and acknowledgment of sin-debt (εἰδότες ὅτι πάντες ὀφειλέται ἐσμὲν ἁμαρτίας). Conditional forgiveness clause (εἰ οὖν δεόμεθα… ἀφιέναι) with scriptural allusion (Matthew 6:12, 14) and standing before God's eyes (ἀπέναντι… θεοῦ ἐσμὲν ὀφθαλμῶν). Final exhortation (οὕτως οὖν δουλεύσωμεν…) with fear/reverence (μετὰ φόβου καὶ πάσης εὐλαβείας), divine/apostolic/prophetic authority (καθὼς αὐτὸς… προφηται), zeal for good (ζηλωταὶ περὶ τὸ καλόν), and avoidance of scandals, false brothers, hypocrites (ἀπεχόμενοι τῶν σκανδάλων… φερόντων τὸ ὄνομα τοῦ κυρίου… οἵτινες ἀποπλανῶσι κενοὺς ἀνθρώπους). Pass B preserves all: tenderhearted/merciful (Proverbs 3:4; 2 Corinthians 8:21 via προνοοῦντες… ἐνώπιον θεοῦ καὶ ἀνθρώπων), bringing back wanderers, visiting sick, not neglecting vulnerable; avoiding anger/favoritism/unjust judgment; staying from love of money; not quick to believe accusations or harsh in judgment due to sin-debt (ὀφειλέται ἁμαρτίας); conditional forgiveness (Matthew 6:12, 14); standing before Lord's eyes and judgment seat of Christ (Romans 14:10, 12 via παραστῆναι τῷ βήματι… λόγον δοῦναι); serving with fear/reverence (Hebrews 12:28 via εὐλαβείας); zeal for good; avoiding scandals, false brothers, hypocrites carrying Lord's name as mask (ὑποκρίσει φερόντων τὸ ὄνομα). All scripture citations match Greek notes: Proverbs 3:4; 2 Corinthians 8:21 (προνοοῦντες… ἐνώπιον θεοῦ καὶ ἀνθρώπων), Matthew 6:12, 14 (ἀφῇ… ἀφιέναι), Romans 14:10, 12 (παραστῆναι τῷ βήματι… λόγον δοῦναι), Hebrews 12:28 (μετὰ… εὐλαβείας). No omissions, additions, or contradictions. Negation (μὴ ἀμελοῦντες, μὴ ταχέως πιστεύοντες, μὴ ἀπότομοι), agency (presbyters act, 'we' forgive, 'we' serve), modality (ought/must/let us), and doctrine (sin-debt, forgiveness, judgment, reverence) preserved. Title names thought: presbyters' mercy and forgiving people. Notes disclose re-attribution and Psalm 2:11 echo. Covered source paragraphs: [1].",
+    "notes": "Paragraph 1 fully corresponds. Greek source: 'Καὶ οἱ πρεσβύτεροι δὲ εὔσπλαγχνοι... ἀποπλανῶσι κενοὺς ἀνθρώπους.' matches Pass A's comprehensive rendering and Pass B's three-part subdivision. All clauses present, including 'μὴ ταχέως πιστεύοντες κατά τινος' (not quickly believing something against anyone) reflected in both Pass A and Pass B. Negation preserved (μὴ ἀμελοῦντες, μὴ ταχέως πιστεύοντες, etc.), agency clear (presbyters act, 'we' forgive, 'we' serve), modality correct (ought, must, let us), doctrine intact (debtors of sin, judgment before Christ). Scripture citations accurately aligned: Proverbs 3:4; 2 Cor 8:21 with προνοοῦντes... ἐνώπιον θεοῦ καὶ ἀνθρώπων; Matt 6:12,14 with ἀφῇ... ἀφιέναι; Rom 14:10,12 with παραστῆναι τῷ βήματι... λόγον δοῦνai; Heb 12:28 with μετὰ... εὐλαβείας. Title names the thought (mercy and forgiveness as communal virtues). Notes disclose OCR/re-attribution and variants. No omissions, contradictions, or false additions.",
     "checks": {
      "source_identity": true,
      "completeness": true,

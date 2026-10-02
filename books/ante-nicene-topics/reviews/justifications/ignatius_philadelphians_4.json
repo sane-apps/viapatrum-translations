@@ -103,26 +103,28 @@
   "Source accent on συνδούλοις kept as supplied.",
   "Repair 2026-10-02 per checker a: ἵνα clause rendered as purpose of 'use one Eucharist' (Greek order: σπουδάσατε… εὐχαριστίᾳ χρῆσθαι… ἵνα… πράσσητε), not a wish."
  ],
- "checks": {},
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-subagent",
  "crosscheck": {
-  "at": "20261002T035320Z",
-  "content_sha256": "6f073e7b943829146a8abc83db9cb1d0d517718a2943097d498dcc3313ec0860",
-  "pass": false,
+  "at": "20261002T040546Z",
+  "content_sha256": "a5dc0edfed4ac6f58a03010f6ac23da75cab1355e9236106ad538e803339540c",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Paragraph 1 matches Philadelphians 4 and Pass A keeps each clause: one Eucharist, one flesh of our Lord Jesus Christ, one cup for union with his blood, one altar, one bishop together with the presbytery and the deacons who are my fellow slaves. Greek 'ἵνα, ὃ ἐὰν πράσσητε, κατὰ θεὸν πράσσητε' is purpose. Pass A has 'in order that whatever you may do, you may do according to God'. Pass B 'And so, whatever you do, may you do it God's way.' makes an inverted wish and drops that purpose link. No false citation is present to fail.",
+    "notes": "Checked paragraph 1 only. «Σπουδάσατε οὖν μιᾷ εὐχαριστίᾳ χρῆσθαι» = A «Therefore be diligent to make use of a single Eucharist» / B «Be eager, then, to use one Eucharist». «μία γὰρ σὰρξ τοῦ κυρίου ἡμῶν Ἰησοῦ Χριστοῦ καὶ ἓν ποτήριον εἰς ἕνωσιν τοῦ αἵματος αὐτοῦ, ἓν θυσιαστήριον, ὡς εἷς ἐπίσκοπος ἅμα τῷ πρεσβυτερίῳ καὶ διακόνοις τοῖς συνδούλοις μου» is kept in full: A «the flesh of our Lord Jesus Christ is one, and the cup for union with his blood is one, the altar is one, as the bishop is one together with the presbytery and the deacons who are my fellow slaves»; B «one flesh of our Lord Jesus Christ, and one cup for union with his blood… one altar, just as there is one bishop, with the presbytery and the deacons, my fellow slaves». «ἵνα, ὃ ἐὰν πράσσητε, κατὰ θεὸν πράσσητε» remains purpose, not a wish: A «in order that whatever you may do, you may do according to God»; B «so that whatever you do, you do it God's way» (disclosed reading equivalent; fronting does not reverse γάρ or ἵνα). No negation invented; no wrong inline citation (1 Cor recall only noted). Title names the thought.",
     "checks": {
      "source_identity": true,
      "completeness": true,
      "negation": true,
      "agency": true,
-     "modality": false,
+     "modality": true,
      "doctrine": true,
      "scripture": true
     },
@@ -132,21 +134,16 @@
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Pass B contradicts the purpose force of Greek 'ἵνα, ὃ ἐὰν πράσσητε, κατὰ θεὸν πράσσητε' and of Pass A 'in order that whatever you may do, you may do according to God' by writing 'And so, whatever you do, may you do it God's way.'"
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check modality is not explicitly true"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Paragraph 1: Greek source is Ignatius Philadelphians 4 (Lake 1912 Loeb). Pass A gloss: 'Therefore be diligent to make use of a single Eucharist...' correctly translates Σπουδάσατε οὖν μιᾷ εὐχαριστίᾳ χρῆσθαι:..., preserving sense of urgency (Σπουδάσατε), means (χρῆσθαι), and grounds (μία γὰρ σὰρξ... ἓν ποτήριον... ἓν θυσιαστήριον... ὡς εἷς ἐπίσκοπος ἅμα τῷ πρεσβυτερίῳ καὶ διακόνοις). Pass B: 'Be eager, then, to use one Eucharist...' matches Pass A in sense and does not add or contradict; 'Be eager' renders Σπουδάσατε appropriately, 'use one Eucharist' for μιᾷ εὐχαριστίᾳ χρῆσθαι, and the causal/parallel structure (For..., There is..., just as..., And so...) reflects Greek syntax. Scripture note: 1 Corinthians 10:16-17 allusion is correctly noted as not inline, so no citation required. Title 'One Eucharist, One Altar' names the thought. Negation: none present. Agency: subjects preserved (you, bishop, presbytery, deacons). Modality: imperative (Σπουδάσατε) rendered as 'be diligent'/'Be eager'; purpose clauses (εἰς ἕνωσιν, ἵνα) translated with 'for union', 'in order that'. Doctrine: unity of flesh, cup, altar, bishopric upheld. Completeness: all clauses covered; no omission of κατὰ θεόν ('according to God' vs Pass B 'God's way' — both acceptable, Pass B choice justified). No uncertainties.",
+    "notes": "Source paragraph 1: Greek text matches Ignatius Philadelphians 4 locus. Pass A gloss renders 'Σπουδάσατε οὖν μιᾷ εὐχαριστίᾳ χρῆσθαι' as 'Therefore be diligent to make use of a single Eucharist', preserving sense and agency. Pass B: 'Be eager, then, to use one Eucharist' matches Greek σπουδάσατε and μιᾷ εὐχαριστίᾳ χρῆσθαι; 'so that whatever you do, you do it God's way' corresponds to ἵνα, ὃ ἐὰν πράσσητε, κατὰ θεὸν πράσσητε. Completeness: all clauses covered—no omissions of 'μία γὰρ σὰρξ τοῦ κυρίου ἡμῶν Ἰησοῦ Χριστοῦ καὶ ἓν ποτήριον εἰς ἕνωσιν τοῦ αἵματος αὐτοῦ, ἓν θυσιαστήριον, ὡς εἷς ἐπίσκοπος ἅμα τῷ πρεσβυτερίῳ καὶ διακόνοις τοῖς συνδούλοις μου'. Negation: none present. Agency: 'whatever you may do' (πράσσητε) preserved in both Pass A/B. Modality: 'be diligent' (σπουδάσατε) → 'be eager' (Pass B) acceptable; 'you may do' (πράσσητε) → 'you do it' (Pass B) preserves voluntariness. Doctrine: unity of flesh, cup, altar, bishop/presbytery/deacons maintained. Scripture: Notes correctly state 1 Corinthians 10:16-17 is not inline; no false citation added. Title 'One Eucharist, One Altar' names the thought. No uncertainties; all checks passed.",
     "checks": {
      "source_identity": true,
      "completeness": true,

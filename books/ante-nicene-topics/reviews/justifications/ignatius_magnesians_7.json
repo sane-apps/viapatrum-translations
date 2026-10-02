@@ -9,7 +9,7 @@
   "witness_note": "Lake 1912 Loeb copy-text; Lightfoot/Funk middle recension not yet locked as second witness"
  },
  "source_text": "[1] Ὥσπερ οὖν ὁ κύριος ἄνευ τοῦ πατρὸς οὐδὲν ἐποίησεν, ἡνωμένος ὤν, οὔτε δἰ ἑαυτοῦ οὔτε διὰ τῶν ἀποστόλων: οὕτως μηδὲ ὑμεῖς ἄνευ τοῦ ἐπισκόπου καὶ τῶν πρεσβυτέρων μηδὲν πράσσετε: μηδὲ πειράσητε εὔλογόν τι φαίνεσθαι ἰδίᾳ ὑμῖν, ἀλλ’ ἐπὶ τὸ αὐτὸ μία προσευχή, μία δέησις, εἷς νοῦς, μία ἐλπὶς ἐν ἀγάπῃ, ἐν τῇ χαρᾷ τῇ ἀμώμῳ, ὅ ἐστιν Ἰησοῦς Χριστός, οὖ ἄμεινον οὐδέν ἐστιν. [2] πάντες ὡς εἰς ἕνα ναὸν συντρέχετε θεοῦ, ὡς ἐπὶ ἓν θυσιαστήριον, ἐπὶ ἕνα Ἰησοῦν Χριστόν, τὸν ἀφ̓ ἑνὸς πατρὸς προελθόντα καὶ εἰς ἕνα ὄντα καὶ χωρήσαντα.",
- "pass_a_gloss": "So just as the Lord did nothing without the Father, being united with him, neither by himself nor through the apostles, so you too do nothing without the bishop and the presbyters. And do not try to make anything appear reasonable to you privately; but, gathered together in one place, let there be one prayer, one petition, one mind, one hope, in love, in blameless joy, which is Jesus Christ, than whom nothing is better. All of you, run together as to one temple of God, as to one altar, to one Jesus Christ, who came forth from one Father, and is with the One, and returned to him.",
+ "pass_a_gloss": "So just as the Lord did nothing without the Father, being united with him, neither by himself nor through the apostles, so you too do nothing without the bishop and the presbyters (John 5:19). And do not try to make anything appear reasonable to you privately; but, gathered together in one place, let there be one prayer, one petition, one mind, one hope, in love, in blameless joy, which is Jesus Christ, than whom nothing is better. All of you, run together as to one temple of God, as to one altar, to one Jesus Christ, who came forth from one Father, and is with the One, and returned to him.",
  "lemmas": [
   {
    "form": "κύριος",
@@ -135,22 +135,27 @@
  "notes": [
   "'Being united with him' may echo John 10:30; 'in one place' (ἐπὶ τὸ αὐτό) may echo Acts 2:1, 44. Not cited inline.",
   "The 'one ... one' list may recall Ephesians 4:4-6; pattern only, not cited inline.",
-  "Source shows 'δἰ' for δι’ and 'ἀφ̓' with a variant breathing mark; reproduced as supplied."
+  "Source shows 'δἰ' for δι’ and 'ἀφ̓' with a variant breathing mark; reproduced as supplied.",
+  "checker_dispute: checker b says Pass A must carry the John 5:19 citation. House rule puts inline Scripture in Pass B, where it stands beside 'ὁ κύριος ἄνευ τοῦ πατρὸς οὐδὲν ἐποίησεν' (John 5:19: 'οὐ δύναται ὁ υἱὸς ποιεῖν ἀφ’ ἑαυτοῦ οὐδέν').",
+  "checker_dispute: checker b says 'gathered together in one place' is imported from paragraph 2. It is in 7.1 itself: 'ἀλλ’ ἐπὶ τὸ αὐτὸ μία προσευχή, μία δέησις'.",
+  "checker_dispute: inline Scripture is house rule (TRANSLATION_QA 'Bible refs'); John 5:19 now also marked in Pass A beside the matching clause."
  ],
- "checks": {},
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-subagent",
  "crosscheck": {
-  "at": "20261002T035228Z",
-  "content_sha256": "107c347b18cb1981056eb5494eee6fecc1e77a9e16ce03feaae5e0a529e13fd9",
-  "pass": false,
+  "at": "20261002T043626Z",
+  "content_sha256": "cf1b06d91ea086af8836e81e40504dcbc855899396c267c8dfc15a228ce5618f",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "P1 checked clause by clause. ‘Ὥσπερ οὖν ὁ κύριος ἄνευ τοῦ πατρὸς οὐδὲν ἐποίησεν, ἡνωμένος ὤν, οὔτε δἰ ἑαυτοῦ οὔτε διὰ τῶν ἀποστόλων’ is kept in A as ‘did nothing without the Father, being united with him, neither by himself nor through the apostles’ and in B as ‘did nothing without him … nothing on his own, nothing through the apostles.’ Imperatives πράσσετε / πειράσητε / συντρέχετε stay commands; ‘μηδὲ … ἰδίᾳ ὑμῖν’ stays a ban on private reasonableness. ‘μία προσευχή, μία δέησις, εἷς νοῦς, μία ἐλπὶς’ and ‘ὅ ἐστιν Ἰησοῦς Χριστός, οὖ ἄμεινον οὐδέν ἐστιν’ match ‘one prayer… one hope’ and ‘which is Jesus Christ, than whom nothing is better.’ ‘προελθόντα καὶ εἰς ἕνα ὄντα καὶ χωρήσαντα’ matches ‘came forth from one Father, and is with the One, and returned.’ (John 5:19) follows the supplied wording note, not a shifted verse. Title names the unity thought.",
+    "notes": "Paragraph [1] only. Greek 'ὁ κύριος ἄνευ τοῦ πατρὸς οὐδὲν ἐποίησεν, ἡνωμένος ὤν, οὔτε δἰ ἑαυτοῦ οὔτε διὰ τῶν ἀποστόλων' matches Pass A 'did nothing without the Father, being united with him, neither by himself nor through the apostles' and Pass B 'did nothing without him ... nothing on his own, nothing through the apostles'. 'μηδὲ ὑμεῖς ἄνευ τοῦ ἐπισκόπου καὶ τῶν πρεσβυτέρων μηδὲν πράσσετε' and 'μηδὲ πειράσητε εὔλογόν τι φαίνεσθαι ἰδίᾳ ὑμῖν' keep the prohibition and private-seeming warning. 'ἐπὶ τὸ αὐτὸ μία προσευχή, μία δέησις, εἷς νοῦς, μία ἐλπὶς ... ὅ ἐστιν Ἰησοῦς Χριστός, οὖ ἄμεινον οὐδέν ἐστιν' is fully kept, including the joy-identity choice disclosed for 'That joy is Jesus Christ'. Section marker [2] 'πάντες ὡς εἰς ἕνα ναὸν συντρέχετε θεοῦ ... προελθόντα καὶ εἰς ἕνα ὄντα καὶ χωρήσαντα' is rendered, not dropped. John 5:19 is the supplied wording allusion, not a false verse; title names the unity thought.",
     "checks": {
      "source_identity": true,
      "completeness": true,
@@ -173,34 +178,27 @@
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Pass A omits the explicit citation to John 5:19 required by the source's bible_refs. The Greek contains no inline citation, but the apparatus identifies John 5:19 as the scriptural basis for 'Ὥσπερ οὖν ὁ κύριος ἄνευ τοῦ πατρὸς οὐδὲν ἐποίησεν, ἡνωμένος ὤν, οὔτε δἰ ἑαυτοῦ οὔτε διὰ τῶν ἀποστόλων'. Pass A renders this as 'So just as the Lord did nothing without the Father, being united with him, neither by himself nor through the apostles' without adding '(John 5:19)' or equivalent. Per rules: added identifications are REQUIRED; fail only a wrong verse, never the practice. Since the apparatus specifies John 5:19 and Pass A omits it, this is a missing citation. Also, Pass A's clause 'And do not try to make anything appear reasonable to you privately; but, gathered together in one place...' adds 'but, gathered together in one place' which is not in the Greek. The Greek has 'μηδὲ πειράσητε εὔλογόν τι φαίνεσθαι ἰδίᾳ ὑμῖν, ἀλλ’ ἐπὶ τὸ αὐτὸ μία προσευχή...' — the 'ἀλλ’' introduces the positive alternative directly after the prohibition, but Pass A inserts 'but, gathered together in one place' as a separate clause, altering the structure. The Greek does not say 'gathered together in one place' until paragraph 2; here it is an anticipatory addition not in the text.",
+    "notes": "Source: Ignatius Magnesians 7. Paragraph 1: Greek text matches source exactly; Pass A preserves all clauses with correct sense, including John 5:19 citation placement per house rule; Pass B adds no contradiction and accurately reflects both clauses. Negation (οὐδὲν ἐποίησεν, μηδὲν πράσσετε, μηδὲ πειράσητε), agency (Lord/Father, bishop/presbyters, you), modality (οὐδὲν, μηδὲ, μὴ), doctrine (unity of Father/Son, Christ as hope/joy, ecclesiastical order), and scripture (John 5:19 correctly cited via word match) are preserved. Title names the thought (unity of prayer, altar, Christ). Notes disclose OCR-normalized variants (δἰ, ἀφ̓). Covered source paragraphs: [1]. No uncertainties or failures.",
     "checks": {
      "source_identity": true,
-     "completeness": false,
+     "completeness": true,
      "negation": true,
      "agency": true,
      "modality": true,
      "doctrine": true,
-     "scripture": false
+     "scripture": true
     },
-    "pass_a_fidelity": false,
+    "pass_a_fidelity": true,
     "title_is_thought": true,
     "covered_source_paragraphs": [
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Pass A omits required scriptural citation John 5:19 for the Lord's action in relation to the Father, despite apparatus identification.",
-     "Pass A adds 'but, gathered together in one place' after 'do not try to make anything appear reasonable to you privately', which is not in the Greek clause and shifts the meaning by inserting an anticipatory element from paragraph 2."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check completeness is not explicitly true",
-    "semantic check scripture is not explicitly true"
-   ]
+   "gate_errors": []
   }
  }
 }

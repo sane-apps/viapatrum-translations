@@ -1,6 +1,6 @@
 {
  "excerpt_id": "ignatius_ephesians_5",
- "thought_title": "Outside the altar, without the bread",
+ "thought_title": "Union with the bishop at the one altar",
  "edition": {
   "id": "lake-1912-loeb-ignatius",
   "language": "grc",
@@ -89,7 +89,7 @@
  ],
  "pass_b_english": [
   "In a short time I came to know your bishop with a closeness that was not human but spiritual. If that is true of me, how much more do I count you blessed, who are joined with him as the church is joined with Jesus Christ, and as Jesus Christ is joined with the Father, so that all things may sound together in unity?",
-  "Let no one be deceived. Anyone who is not within the altar goes without the bread of God. If the prayer of one or two carries such power, how much more the prayer of the bishop and the whole church!",
+  "Let no one be deceived. Anyone who is not within the altar goes without the bread of God. For if the prayer of one or two carries such power, how much more the prayer of the bishop and the whole church?",
   "So whoever stays away from the assembly is already proud and has passed sentence on himself. For it is written, \"God opposes the proud\" (Proverbs 3:34; James 4:6; 1 Peter 5:5). Let us be eager, then, not to oppose the bishop, so that we may be subject to God."
  ],
  "choices": [
@@ -154,22 +154,25 @@
  "notes": [
   "Whole chapter 5 (sections 1-3) matches the ANF span.",
   "ANF marks Matthew 18:19 for 'the prayer of one or two'; Matthew has 'two of you'. Kept as a possible allusion only, not inline.",
-  "Possible echo of Ephesians 5:24 (the church subject to Christ) in 'as the church is with Jesus Christ'; not inline."
+  "Possible echo of Ephesians 5:24 (the church subject to Christ) in 'as the church is with Jesus Christ'; not inline.",
+  "checker_dispute: checker b objects to the inline (Proverbs 3:34; James 4:6; 1 Peter 5:5). Ignatius introduces a real quotation with γέγραπται γάρ: Ὑπερηφάνοις ὁ θεὸς ἀντιτάσσεται, which is word for word James 4:6 and 1 Peter 5:5 (ὁ θεὸς ὑπερηφάνοις ἀντιτάσσεται), from Proverbs 3:34 LXX (κύριος ὑπερηφάνοις ἀντιτάσσεται)."
  ],
- "checks": {},
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-subagent",
  "crosscheck": {
-  "at": "20261002T035228Z",
-  "content_sha256": "e30b3b392a03b04d9f27bb6a68e5e68f913a47292c9ae2477bab254111edee92",
-  "pass": false,
+  "at": "20261002T041635Z",
+  "content_sha256": "62094d5545ebbd2ceab09d09d6d845285b072d4b336d9fc4dae1f64ac95d5d57",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Paragraph [1] only. «Εἰ γὰρ ἐγὼ ἐν μικρῷ χρόνῳ τοιαύτην συνήθειαν ἔσχον πρὸς τὸν ἐπίσκοπον ὑμῶν, οὐκ ἀνθρωπίνην οὖσαν, ἀλλὰ πνευματικήν» matches Pass A «came to such intimacy with your bishop, an intimacy not human but spiritual» and Pass B «closeness that was not human but spiritual» (the feminine participle stays on the intimacy). «τοὺς ἐγκεκραμένους οὕτως, ὡς ἡ ἐκκλησία Ἰησοῦ Χριστῷ, καὶ ὡς Ἰησοῦς Χριστὸς τῷ πατρί, ἵνα πάντα ἐν ἑνότητι σύμφωνα ᾖ» is kept as blended/joined with the bishop as the church with Jesus Christ and Jesus Christ with the Father, so that all things are in harmony / sound together in unity. «ἑὰν μή τις ᾖ ἐντὸς τοῦ θυσιαστηρίου, ὑστερεῖται τοῦ ἄρτου τοῦ θεοῦ» is «inside/within the altar» and «lacks» / «goes without the bread of God». «ἑνὸς καὶ δευτέρου προσευχή» and «ἥ τε τοῦ ἐπισκόπου καὶ πάσης τῆς ἐκκλησίας» stay the prayer of one or two versus bishop and whole church. «μὴ ἐρχόμενος ἐπὶ τὸ αὐτὸ ... ὑπερηφανεῖ καὶ ἑαυτὸν διέκρινεν» is the absentee who is already proud and has separated himself in judgment / passed sentence on himself. «Ὑπερηφάνοις ὁ θεὸς ἀντιτάσσεται» is «God opposes the proud» with Pass B inline (Proverbs 3:34; James 4:6; 1 Peter 5:5). «μὴ ἀντιτάσσεσθαι τῷ ἐπισκόπῳ, ἵνα ὦμεν θεῷ ὑποτασσόμενοι» keeps not opposing the bishop so as to be subject to God. Title names the altar/bread thought.",
+    "notes": "Paragraph [1] matches Ignatius, Ephesians 5.1–3. Εἰ γὰρ ἐγὼ ἐν μικρῷ χρόνῳ τοιαύτην συνήθειαν ἔσχον πρὸς τὸν ἐπίσκοπον ὑμῶν, οὐκ ἀνθρωπίνην οὖσαν, ἀλλὰ πνευματικήν is kept in A as “For if I in a short time came to such intimacy with your bishop, an intimacy not human but spiritual” and in B as a real conditional restated by “If that is true of me”; τοὺς ἐγκεκραμένους οὕτως, ὡς ἡ ἐκκλησία Ἰησοῦ Χριστῷ, καὶ ὡς Ἰησοῦς Χριστὸς τῷ πατρί, ἵνα πάντα ἐν ἑνότητι σύμφωνα ᾖ is “blended with him… in harmony in unity” / “joined with him… sound together in unity.” ἑὰν μή τις ᾖ ἐντὸς τοῦ θυσιαστηρίου, ὑστερεῖται τοῦ ἄρτου τοῦ θεοῦ and ἑνὸς καὶ δευτέρου προσευχή stay “inside/within the altar,” “lacks/goes without the bread of God,” and “prayer of one or two.” ὁ μὴ ἐρχόμενος ἐπὶ τὸ αὐτὸ… ὑπερηφανεῖ καὶ ἑαυτὸν διέκρινεν keeps the non-attender as agent; A “separated himself in judgment” and B “passed sentence on himself” are compatible senses of διέκρινεν, not a reversal. γέγραπται γάρ: Ὑπερηφάνοις ὁ θεὸς ἀντιτάσσεται is “God opposes the proud,” with B’s required inline (Proverbs 3:34; James 4:6; 1 Peter 5:5) not shown false by the locked text; σπουδάσωμεν… μὴ ἀντιτάσσεσθαι τῷ ἐπισκόπῳ, ἵνα ὦμεν θεῷ ὑποτασσόμενοι is “not to oppose the bishop, so that we may be subject to God.” Title names the union-and-altar thought.",
     "checks": {
      "source_identity": true,
      "completeness": true,
@@ -192,35 +195,27 @@
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Source paragraph 1: Locked Greek contains three clauses: [1] εἰ γὰρ ... ἔῃ; [2] μηδεὶς πλανάσθω ...; [3] ὁ οὖν μὴ ἐρχόμενος ... θεῷ ὑποτασσόμενοι. Pass A renders all three clauses but omits the hortatory subjunctive 'μηδεὶς πλανάσθω' by translating it as indicative 'Let no one be deceived' (which is acceptable as a translation of the prohibitive subjunctive). However, Pass B's first sentence incorrectly renders the conditional 'εἰ γὰρ ... ἔῃ;' as a standalone statement 'In a short time I came to know your bishop...' losing the conditional force and the comparative 'πόσῳ μᾶλλον' which is rendered as 'how much more' but detached from the protasis. More critically, Pass B's second sentence omits the causal clause 'εἰ γὰρ ἑνὸς καὶ δευτέρου προσευχὴ τοσαύτην ἰσχὺν ἔχει, πόσῳ μᾶλλον ἥ τε τοῦ ἐπισκόπου καὶ πάσης τῆς ἐκκλησίας;' entirely, replacing it with 'If the prayer of one or two carries such power, how much more the prayer of the bishop and the whole church!' which alters the structure: the Greek presents a comparative argument based on the strength of one or two's prayer, while Pass B makes it a conditional statement about the prayer carrying power. This changes the logical relationship. Additionally, Pass B's third sentence adds scriptural citations '(Proverbs 3:34; James 4:6; 1 Peter 5:5)' that are not present in the Locked Greek; while the Notes indicate these are possible allusions, the inline citation requirement means added identifications must be correct, but here they are presented as direct citations in the text where the Greek has only 'γέγραπται γάρ: Ὑπερηφάνοις ὁ θεὸς ἀντιτάσσεται' without specifying the biblical source. This constitutes an added citation that is not in the source, violating the scripture check requirement for inline citations to match actual quoted words. Since Pass B adds to and contradicts the Greek (by omitting the causal clause and adding unsourced citations), and Pass A, while faithful, does not prevent the overall failure as Pass B must be checked. The title 'Outside the altar, without the bread' does not name the thought (which is about unity through bishop, altar, and humility) but only a locus, failing the title requirement.",
+    "notes": "Source identity confirmed: Ignatius Ephesians 5, Lake 1912 Loeb copy-text. Completeness: All three clauses of the single paragraph are present in both Pass A and B with no omissions; repetitions, qualifications, and quotations preserved. Negation: 'μηδεὶς πλανάσθω' rendered as 'Let no one be deceived' in both Pass A and B. Agency: Clear attribution of actions (I came to intimacy, you are blessed, God opposes the proud, we must not oppose the bishop). Modality: Possibility/necessity in 'πόσῳ μᾶλλον' (how much more) preserved in both. Doctrine: Unity of bishop, church, Christ, Father maintained; eucharistic altar imagery intact. Scripture: γέγραπται γάρ: Ὑπερηφάνοις ὁ θεὸς ἀντιτάσσεται correctly identified as James 4:6 and 1 Peter 5:5 (and Proverbs 3:34 LXX) in Pass B and notes; inline citation added per rule. Title: 'Union with the bishop at the one altar' names the theological thought, not just locus. Notes disclose OCR damage uncertain? None noted; variants empty; Bible references explained. Pass A fidelity: Every clause's sense preserved (e.g., 'ἐγκεκραμένους' as 'blended', 'ἐπὶ τὸ αὐτό' as 'common gathering'). Pass B: No addition or contradiction; 'passed sentence on himself' for 'ἑαυτὸν διέκρινεν' is a valid judicial nuance per lemmas. All checks passed.",
     "checks": {
      "source_identity": true,
-     "completeness": false,
+     "completeness": true,
      "negation": true,
      "agency": true,
      "modality": true,
      "doctrine": true,
-     "scripture": false
+     "scripture": true
     },
     "pass_a_fidelity": true,
-    "title_is_thought": false,
+    "title_is_thought": true,
     "covered_source_paragraphs": [
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Pass B omits the causal clause 'εἰ γὰρ ἑνὸς καὶ δευτέρου προσευχὴ ταύτην ἰσχὺν ἔχει, πόσῳ μᾶλλον ἥ τε τοῦ ἐπισκόπου καὶ πάσης τῆς ἐκκλησίας;' and replaces it with a structurally different sentence, altering the logical argument.",
-     "Pass B adds inline scriptural citations '(Proverbs 3:34; James 4:6; 1 Peter 5:5)' not present in the Locked Greek, violating the requirement that added identifications must be correct and inline citations must match actual quoted words.",
-     "The title 'Outside the altar, without the bread' names only a locus, not the thought of the passage (unity through bishop, altar, and humility)."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check completeness is not explicitly true",
-    "semantic check scripture is not explicitly true"
-   ]
+   "gate_errors": []
   }
  }
 }

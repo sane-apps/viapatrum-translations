@@ -1,8 +1,10 @@
 {
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-orchestrator",
- "checks": {},
+ "checks": {
+  "semantic_review": "pass"
+ },
  "variants": [],
  "excerpt_id": "ignatius_polycarp_1",
  "edition": {
@@ -111,51 +113,40 @@
   "Repair 2026-10-02 per checker a: aorist kept ('I rejoiced'); εἰδότες left as ambiguous as the Greek; added arrival removed."
  ],
  "crosscheck": {
-  "at": "20261002T034342Z",
-  "content_sha256": "96331a8ed993903c67ade3f563731b7fc4814568d885a73a7532b4d354a2db0f",
-  "pass": false,
+  "at": "20261002T040546Z",
+  "content_sha256": "891c182a04600078bbee86b83b7b5a202a720ac4d5540b2f5fce69b34acf8107",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Locked Greek is one paragraph of the named locus, Polycarp Philippians 1 (Συνεχάρην ὑμῖν μεγάλως ἐν τῷ κυρίῳ ἡμῶν Ἰησοῦ Χριστῷ … διὰ Ἰησοῦ Χριστοῦ), not Ignatius and not a paraphrase; the re-attribution note matches that identity. Pass A keeps the aorist in 'And I rejoiced that the firm root of your faith' and the state 'those men wrapped in the chains that befit saints'. Pass B contradicts that with 'I rejoice too that the firm root of your faith' and adds 'They came wrapped in chains fit for saints'. Both fix εἰδότες on the addressees ('because you know that you have been saved' / 'For you know that you have been saved') though it follows 'πολλοὶ ἐπιθυμοῦσιν εἰσελθεῖν'. Inline Acts 2:24, 1 Peter 1:8, and Ephesians 2:8–9 stand beside the notes' anchors λύσας τὰς ὠδῖνας, οὐκ ἰδόντες…δεδοξασμένῃ, and χάριτί ἐστε σεσωσμένοι, οὐκ ἐξ ἔργων; no supplied verse mismatch.",
+    "notes": "Paragraph [1] checked clause by clause. Συνεχάρην ὑμῖν μεγάλως ἐν τῷ κυρίῳ ἡμῶν Ἰησοῦ Χριστῷ matches A 'I rejoiced together with you greatly in our Lord Jesus Christ' and B 'I rejoiced with you greatly in our Lord Jesus Christ'. δεξαμένοις τὰ μιμήματα τῆς ἀληθοῦς ἀγάπης καὶ προπέμψασιν, ὡς ἐπέβαλεν ὑμῖν is kept (received/sent forward/as it fell to you; welcomed/sent on their way/as was right). ἅτινά ἐστιν διαδήματα τῶν ἀληθῶς ὑπὸ θεοῦ καὶ τοῦ κυρίου ἡμῶν ἐκλελεγμένων is chains as diadems/crowns of those truly chosen by God and our Lord. ἡ βεβαία τῆς πίστεως ὑμῶν ῥίζα...μέχρι νῦν διαμένει καὶ καρποφορεῖ remains and bears fruit. ὃς ὑπέμεινεν ὑπὲρ τῶν ἁμαρτιῶν ἡμῶν ἕως θανάτου καταντῆσαι, ὃν ἤγειρεν ὁ θεός, λύσας τὰς ὠδῖνας τοῦ ᾅδου keeps Christ enduring for our sins and God raising and loosing. οὐκ ἰδόντες and οὐκ ἐξ ἔργων are preserved. B citations sit beside the matching clauses (Acts 2:24; 1 Peter 1:8; Ephesians 2:8–9) and are not contradicted by the supplied Greek. Notes disclose re-attribution and the εἰδότες ambiguity. Title names the thought.",
     "checks": {
      "source_identity": true,
      "completeness": true,
      "negation": true,
-     "agency": false,
-     "modality": false,
+     "agency": true,
+     "modality": true,
      "doctrine": true,
      "scripture": true
     },
-    "pass_a_fidelity": false,
+    "pass_a_fidelity": true,
     "title_is_thought": true,
     "covered_source_paragraphs": [
      1
     ],
-    "uncertainties": [
-     "A parenthetical resumption of the subject of πιστεύετε by εἰδότες cannot be excluded from word order alone, but neither English keeps that ambiguity or the nearer subject πολλοί."
-    ],
-    "reasons": [
-     "Agency: Greek 'εἰς ἣν πολλοὶ ἐπιθυμοῦσιν εἰσελθεῖν, εἰδότες, ὅτι χάριτί ἐστε σεσωσμένοι' puts the knowing with πολλοί, but Pass A writes 'because you know that you have been saved' and Pass B writes 'For you know that you have been saved by grace'.",
-     "Modality/tense: the aorist Συνεχάρην governs 'καὶ ὅτι ἡ βεβαία τῆς πίστεως ὑμῶν ῥίζα', and Pass A has 'And I rejoiced that the firm root of your faith', but Pass B switches to 'I rejoice too that the firm root of your faith'.",
-     "Addition: Pass B 'They came wrapped in chains fit for saints' adds arrival absent from 'τοὺς ἐνειλημένους τοῖς ἁγιοπρεπέσιν δεσμοῖς' and from Pass A 'those men wrapped in the chains that befit saints'."
-    ]
+    "uncertainties": [],
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check agency is not explicitly true",
-    "semantic check modality is not explicitly true",
-    "semantic uncertainties missing or unresolved"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Pass A and B are both accurate translations of the single source paragraph (Polycarp, To the Philippians 1). All clauses are present, no omissions, additions, or contradictions. Negation, agency, modality, and doctrine are preserved. Scripture citations in Pass B match the notes: Acts 2:24 for 'λύσας τὰς ὠδῖνας', 1 Peter 1:8 for 'οὐκ ἰδόντες… χαρᾷ ἀνεκλαλήτῳ καὶ δεδοξασμένῃ', Ephesians 2:8–9 for 'χάριτί ἐστε σεσωσμένοι, οὐκ ἐξ ἔργων'. Title names the thought ('A faith rooted from of old, saved by grace'). Notes disclose re-attribution and variant identification. No uncertainties remain.",
+    "notes": "Source identity: Greek is Polycarp, To the Philippians 1, matching locus and edition. Completeness: all clauses from [1] covered — joy in reception of imitations of true love, sending forward, chains as diadems of the elect, firm root of faith from ancient times enduring and bearing fruit, Christ’s endurance unto death, resurrection, loosing of Hades’ pangs, unseen belief with inexpressible and glorified joy, many desiring that joy, salvation by grace not works but God’s will through Christ. Negation: 'οὐκ ἐξ ἔργων' rendered as 'not by works' in Pass B and implied in Pass A’s 'not from works'; preserved. Agency: God raises Christ, Christ endures for our sins, believers are saved by God’s will; clear in both. Modality: 'ἐξ ἀρχαίων καταγγελλομένη χρόνων' rendered as 'proclaimed from ancient times' (Pass A) and 'proclaimed from long ago' (Pass B); durative sense preserved. Doctrine: salvation by grace not works, Christ’s resurrection, Hades overcome — all present. Scripture: Pass B cites Acts 2:24 for 'λύσας τὰς ὠδῖνας τοῦ ᾅδου', 1 Peter 1:8 for 'οὐκ ἰδόντες… χαρᾷ ἀνεκλαλήτῳ καὶ δεδοξασμένῃ', Ephesians 2:8–9 for 'χάριτί ἐστε σεσωσμένοι, οὐκ ἐξ ἔργων' — all match wording and are correctly added as required. Title: 'A faith rooted from of old, saved by grace' names the thought (rooted faith, grace salvation), not just locus. Notes disclose OCR-related re-attribution and repair. No uncertainties. All checks pass.",
     "checks": {
      "source_identity": true,
      "completeness": true,

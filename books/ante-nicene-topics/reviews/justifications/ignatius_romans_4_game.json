@@ -1,8 +1,10 @@
 {
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-orchestrator",
- "checks": {},
+ "checks": {
+  "semantic_review": "pass"
+ },
  "variants": [],
  "use": "game (Ten Leopards); not a topic excerpt",
  "excerpt_id": "ignatius_romans_4_game",
@@ -115,22 +117,22 @@
   "Repair 2026-10-02 per checker a: ἑκών 'willingly'; ἐάνπερ condition; ἵνα μή purpose; future ὄψεται."
  ],
  "crosscheck": {
-  "at": "20261002T034342Z",
-  "content_sha256": "87509dcdf7295d0ad94675eea7dd4b0c922ebcf7cef83d491b900935e9e1a5ef",
-  "pass": false,
+  "at": "20261002T040546Z",
+  "content_sha256": "1c2e7bbf06108adc7721d269c5fdefc0f3ee7267376e31867d3cb216b7290688",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Checked paragraph [1] in full against Pass A and Pass B. Pass A keeps ἑκών, both ἵνα clauses, and οὐδέ: 'I die willingly on behalf of God, if indeed you do not hinder it'; 'so that having fallen asleep I may not become heavy to anyone'; 'when the world will not even see my body'. Pass B contradicts those clauses with 'I die for God gladly, unless you stand in my way', 'and when I fall asleep I am a burden to no one', and 'when the world no longer sees even my body'. Title names the wheat image. No inline citation is attached to a quoted clause; the 1 Cor 7:22 echo is only noted as possible.",
+    "notes": "Checked the single locked paragraph against Pass A and Pass B. Ἐγὼ γράφω πάσαις ταῖς ἐκκλησίαις, καὶ ἐντέλλομαι πᾶσιν, ὅτι ἐγὼ ἑκὼν ὑπὲρ θεοῦ ἀποθνήσκω, ἐάνπερ ὑμεῖς μὴ κωλύσητε is kept as writing/instructing all, dying willingly for God, if indeed they do not hinder. μὴ εὔνοια ἄκαιρος γένησθέ μοι, ἄφετέ με θηρίων εἶναι βοράν, and σῖτός εἰμι θεοῦ … ἀλήθομαι, ἵνα καθαρὸς ἄρτος εὑρεθῶ stay as untimely goodwill/kindness, food of beasts, and wheat ground so as to be found pure bread. μᾶλλον κολακεύσατε … ἵνα μὴ κοιμηθεὶς βαρύς τινι γένωμαι and ὅτε οὐδὲ τὸ σῶμά μου ὁ κόσμος ὄψεται keep purpose, negation, and future. οὐχ ὡς Πέτρος καὶ Παῦλος διατάσσομαι ὑμῖν … ἀπελεύθερος γενήσομαι Ἰησοῦ Χριστοῦ καὶ ἀναστήσομαι ἐν αὐτῷ ἐλεύθερος and νῦν μανθάνω δεδεμένος μηδὲν ἐπιθυμεῖν keep the apostle/condemned and free/slave contrast, conditional suffering, freedman-of-Christ (not set free by), rising in him, and learning while bound to desire nothing. B does not add or reverse A. Title names the wheat-and-beasts thought. No inline citation in A or B to mismatch.",
     "checks": {
      "source_identity": true,
      "completeness": true,
-     "negation": false,
+     "negation": true,
      "agency": true,
-     "modality": false,
-     "doctrine": false,
+     "modality": true,
+     "doctrine": true,
      "scripture": true
     },
     "pass_a_fidelity": true,
@@ -139,25 +141,16 @@
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Pass B changes what is denied and the future: Greek 'ὅτε οὐδὲ τὸ σῶμά μου ὁ κόσμος ὄψεται' and Pass A 'when the world will not even see my body' versus Pass B 'when the world no longer sees even my body'.",
-     "Pass B drops purpose and the subjunctive of becoming: Greek 'ἵνα μὴ κοιμηθεὶς βαρύς τινι γένωμαι' and Pass A 'so that having fallen asleep I may not become heavy to anyone' versus Pass B 'and when I fall asleep I am a burden to no one'.",
-     "Pass B replaces voluntary death and the emphatic condition: Greek 'ἐγὼ ἑκὼν ὑπὲρ θεοῦ ἀποθνήσκω, ἐάνπερ ὑμεῖς μὴ κωλύσητε' and Pass A 'I die willingly on behalf of God, if indeed you do not hinder it' versus Pass B 'I die for God gladly, unless you stand in my way'."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check negation is not explicitly true",
-    "semantic check modality is not explicitly true",
-    "semantic check doctrine is not explicitly true"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "All source clauses accounted for. Source identity: Ignatius, Romans 4 per Lake 1912 Loeb. Completeness: every clause from Locked Greek p1 rendered; no omissions. Negation: μὴ κωλύσητε rendered 'unless you stand in my way' (B1); μὴ εὔνοια ἄκαιρος γένησθέ μοι rendered 'do not be a kindness at the wrong time to me' (B1, matches lemma choice). Agency: ἑκὼν ὑπὲρ θεοῦ ἀποθνήσκω rendered 'I die for God gladly' (B1); δἰ ὦν ἔνεστιν θεοῦ ἐπιτυχεῖν rendered 'through them I can reach God' (B1); σῖτός εἰμι θεοῦ rendered 'I am God's wheat' (B1, matches lemma choice); δἰ ὀδόντων θηρίων ἀλήθομαι rendered 'I am being ground by the teeth of beasts' (B1); ἀπελεύθερος γενήσομαι Ἰησοῦ Χριστοῦ rendered 'I will become Jesus Christ's freedman' (B3, matches lemma choice). Modality: ἐάνπερ rendered 'unless' (B1); ἵνα clauses rendered with purpose ('so that', 'that') throughout. Doctrine: contrasts free/apostle vs condemned/slave preserved (B3); rising in Christ free preserved. Scripture: no explicit scripture citations in Locked Greek; bible_refs empty; note on 1 Cor 7:22 echo is commentary, not required citation. Title 'God's wheat, ground by the beasts' names the thought (σῖτός... ἀλήθομαι). Covered source paragraphs: [1]. No uncertainties.",
+    "notes": "Source paragraph 1 fully covered. Pass A and B preserve all clauses: willingness (ἑκὼν), condition (ἐάνπερ), purpose clauses (ἵνα), agency (Ignatius as willing victim), negation (μὴ κωλύσητε), modality (ἐπιτυχεῖν, δύναται), doctrine (slave to freedman via Christ), and scripture allusion (1 Cor 7:22 noted). No omissions, additions, or contradictions. Title reflects metaphorical thought. Notes disclose OCR repair and abridged selection.",
     "checks": {
      "source_identity": true,
      "completeness": true,

@@ -100,7 +100,7 @@
  "pass_b_english": [
   "If anyone explains Judaism to you, do not listen to him. Better to hear Christianity from a circumcised man than Judaism from an uncircumcised one. But if neither speaks of Jesus Christ, to me they are grave markers and tombs of the dead, carved with nothing but human names.",
   "So run from the tricks and ambushes of the ruler of this age, or his schemes may press you hard and your love grow weak. Come together, all of you, with an undivided heart.",
-  "I thank my God that my conscience is clear toward you. No one can boast, privately or publicly, that I ever weighed on anyone, in a small matter or a great one. And for all those I spoke to, I pray that it will not become a testimony against them."
+  "I thank my God that my conscience is clear toward you. No one can boast, privately or publicly, that I weighed on anyone, in a small matter or a great one. And for all among whom I have spoken, I pray that they may not acquire it as a testimony against them."
  ],
  "choices": [
   {
@@ -147,25 +147,27 @@
   "'Burden' may echo 2 Corinthians 11:9; not cited inline.",
   "Source shows 'ἐφ̓' with a variant breathing mark; reproduced as supplied."
  ],
- "checks": {},
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-subagent",
  "crosscheck": {
-  "at": "20261002T035228Z",
-  "content_sha256": "843b67eb7b87367b3e5eb28660713de1a4b8679ad3f43792b6c67523cebb330a",
-  "pass": false,
+  "at": "20261002T041635Z",
+  "content_sha256": "7f90fce4e11d79d5f1a4fe8d39a1f2f602ba4d02082e41d2f8ec9e373140a416",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Paragraph [1] is Ignatius, Philadelphians 6: Judaism/Christianity, steles, the ruler, conscience, burden, and the prayer are all represented. Pass A keeps 'ἐφ̓ οἷς γέγραπται μόνον ὀνόματα ἀνθρώπων' as 'on which only the names of men are written' and 'ἵνα μὴ εἰς μαρτύριον αὐτὸ κτήσωνται' as hearers who 'may not come to have it'. Pass B 'carved with nothing but human names' is idiomatic for an inscribed στήλη and is not the fail. No inline citation is wrong; the notes rightly leave the stock echoes uncited. Title names the stele thought, not only the locus.",
+    "notes": "Paragraph [1] only. «Ἐὰν δέ τις ἰουδαϊσμὸν ἑρμηνεύῃ ὑμῖν, μὴ ἀκούετε αὐτοῦ» = A «But if anyone expounds Judaism to you, do not listen to him» and B «If anyone explains Judaism to you, do not listen to him». «ἄμεινον γάρ ἐστιν παρὰ ἀνδρὸς περιτομὴν ἔχοντος χριστιανισμὸν ἀκούειν, ἢ παρὰ ἀκροβύστου ἰουδαῖσμόν» is kept as hearing Christianity from a circumcised man rather than Judaism from an uncircumcised one. «ἀμφότεροι περὶ Ἰησοῦ Χριστοῦ μὴ λαλῶσιν» is «neither ... speaks» in both, not both speaking. «οὗτοι ἐμοὶ στῆλαί εἰσιν καὶ τάφοι νεκρῶν, ἐφ̓ οἷς γέγραπται μόνον ὀνόματα ἀνθρώπων» matches A «they are to me tombstones and graves of the dead, on which only the names of men are written» and B «to me they are grave markers and tombs of the dead, carved with nothing but human names». «φεύγετε οὖν ... μήποτε θλιβέντες τῇ γνώμῃ αὐτοῦ ἐξασθενήσετε ἐν τῇ ἀγάπῃ» and «πάντες ἐπὶ τὸ αὐτὸ γίνεσθε ἐν ἀμερίστῳ καρδίᾳ» stay imperatives with the lest-clause and undivided heart. «εὐσυνείδητός εἰμι ἐν ὑμῖν», «οὐκ ἔχει τις καυχήσασθαι οὔτε λάθρα οὔτε φανερῶς», «ἐβάρησά τινα ἐν μικρῷ ἢ ἐν μεγάλῳ», and «ἵνα μὴ εἰς μαρτύριον αὐτὸ κτήσωνται» are preserved in both, including the prayer that they not acquire it as testimony. No inline citation is false; notes mark stock echoes as not cited. Title «Grave Markers with Names» names the stelae thought, not only the locus.",
     "checks": {
      "source_identity": true,
      "completeness": true,
      "negation": true,
-     "agency": false,
+     "agency": true,
      "modality": true,
      "doctrine": true,
      "scripture": true
@@ -176,22 +178,16 @@
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Pass B reverses agency in the prayer. Locked Greek 'ἵνα μὴ εἰς μαρτύριον αὐτὸ κτήσωνται' has the hearers as subject of κτήσωνται (they must not acquire it as a testimony). Pass A preserves that: 'they may not come to have it as a testimony against them'. Pass B 'it will not become a testimony against them' makes 'it' the subject and replaces acquiring with becoming.",
-     "The same clause shifts the relative. Greek 'καὶ πᾶσι δέ, ἐν οἷς ἐλάλησα, εὔχομαι' and Pass A 'And I pray for all among whom I spoke' mean among whom (ἐν οἷς); Pass B 'And for all those I spoke to, I pray' changes that to address."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check agency is not explicitly true"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Source paragraph 1: Greek text matches Ignatius Philadelphians 6 (Lake 1912 Loeb). Pass A and B convey all clauses without omission, addition, or contradiction. Negation (μὴ ἀκούετε), agency (τις ἑρμηνεύῃ, ἀκούειν, λαλῶσιν), modality (ἔστιν, μὴ λαλῶσιν, εὔχομαι), and doctrine (contrast of circumcision/uncircumcised in Christ) preserved. Scripture: no inline citations in Greek, so none required; notes correctly identify possible allusions as unwritten. Title 'Grave Markers with Names' reflects thought of στῆλαι καὶ τάφοι νεκρῶν with γέγραπται μόνον ὀνόματα ἀνθρώπων. Covered source paragraphs: [1]. No uncertainties; all checks pass.",
+    "notes": "Source paragraph 1: Greek text matches Ignatius Philadelphians 6. Pass A renders all clauses: Judaism expounded (ἑρμηνεύῃ), circumcision/uncircumcision contrast, tombstone metaphor (στῆλαι ... τάφοι νεκρῶν), flee evil arts (κακοτεχνίας) and traps (ἐνέδρας) of ruler (ἄρχοντος) of age (αἰῶνος), undivided heart (ἀμερίστῳ καρδίᾳ), clear conscience (εὐσυνείδητος), no burden (ἐβάρησα), prayer against testimony (μαρτύριον). Pass B preserves sense without addition or contradiction: 'explains' for ἑρμηνεύῃ, 'grave markers and tombs of the dead' for στῆλαι ... τάφοι νεκρῶν, 'his schemes may press you hard' for θλιβέντες τῇ γνώμῃ αὐτοῦ, 'weighed on' for ἐβάρησα. No omitted qualifications, repetitions, or quotations. No scripture citations in source, so no checking needed. Title 'Grave Markers with Names' names the thought (στῆλαι ... τάφοι νεκρῶν). Notes disclose OCR damage ('ἐφ̓' with variant breathing mark). Covered source paragraphs: [1].",
     "checks": {
      "source_identity": true,
      "completeness": true,

@@ -1,8 +1,10 @@
 {
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-orchestrator",
- "checks": {},
+ "checks": {
+  "semantic_review": "pass"
+ },
  "variants": [],
  "excerpt_id": "ignatius_polycarp_5",
  "edition": {
@@ -137,22 +139,22 @@
   "Repair 2026-10-02 per checker a: 'became' (ἐγένετο), office-genitive kept, καθὼς/ὅτι restored, προνοοῦντες rendered."
  ],
  "crosscheck": {
-  "at": "20261002T034342Z",
-  "content_sha256": "4adaa39f2db5ca1a814ae16e078502ad12f9c217163be7ad69a6ed6102bfced6",
-  "pass": false,
+  "at": "20261002T040546Z",
+  "content_sha256": "853bd1d0d7e005fac0eafdbb378e368d5457feddbd9945d93974b4c3833de89c",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Pass A tracks p1: 'Εἰδότες, οὖν, ὅτι θεὸς οὐ μυκτηρίζεται' through 'τὰς παρθένους ἐν ἀμώμῳ καὶ ἁγνῇ συνειδήσει περιπατεῖν'. Pass B contradicts it at 'who made himself the servant of all' (Greek 'ὃς ἐγένετο διάκονος πάντων'; A 'who became servant of all'), 'since they serve God and Christ, not people' (Greek 'ὡς θεοῦ καὶ Χριστοῦ διάκονοι καὶ οὐκ ἀνθρώπων'; A 'as deacons of God and Christ and not of men'), and 'He promised to raise us from the dead, and if we live as citizens worthy of him' (drops καθὼς and ὅτι). 'guard their purity' is not 'προνοοῦντες ἁγνείας'. Inline cites match the supplied bible_refs; title names the thought.",
+    "notes": "Checked paragraph 1 in full against Pass A and Pass B. Greek 'Εἰδότες, οὖν, ὅτι θεὸς οὐ μυκτηρίζεται, ὀφείλομεν ἀξίως τῆς ἐντολῆς αὐτοῦ καὶ δόξης περιπατεῖν' matches A 'Knowing therefore that God is not mocked, we ought to walk worthily of his commandment and glory'. Negations hold: 'οὐκ ἀνθρώπων' / 'not of men', 'μὴ διάβολοι, μὴ δίλογοι' / 'not slanderers, not double-tongued', and 'οὔτε πόρνοι οὔτε μαλακοὶ οὔτε ἀρσενοκοῖται βασιλείαν θεοῦ κληρονομήσουσιν, οὔτε οἱ ποιοῦντες τὰ ἄτοπα' remain a fourfold exclusion. Agency and modality hold: 'ἐὰν εὐαρεστήσωμεν' / 'If we please him', 'ἀποληψόμεθα' / 'we will receive', 'ἐὰν πολιτευσώμεθα ἀξίως αὐτοῦ, καὶ συμβασιλεύσομεν αὐτῷ, εἴγε πιστεύομεν' / 'if we conduct ourselves as citizens worthily of him, we will also reign with him, if indeed we believe', and 'ὃς ἐγένετο διάκονος πάντων' / 'who became servant of all'. Younger men, abstention, submission 'τοῖς πρεσβυτέροις καὶ διακόνοις ὡς θεῷ καὶ Χριστῷ', and 'τὰς παρθένους ἐν ἀμώμῳ καὶ ἁγνῇ συνειδήσει περιπατεῖν' are all in A and B. Inline cites track the supplied wording notes and are not contradicted by any supplied Greek. Title names the hortatory thought; locus is the named Polycarp, To the Philippians 5.",
     "checks": {
      "source_identity": true,
-     "completeness": false,
+     "completeness": true,
      "negation": true,
-     "agency": false,
+     "agency": true,
      "modality": true,
-     "doctrine": false,
+     "doctrine": true,
      "scripture": true
     },
     "pass_a_fidelity": true,
@@ -161,26 +163,16 @@
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Pass B 'who made himself the servant of all' adds reflexive agency against Locked Greek 'ὃς ἐγένετο διάκονος πάντων' and Pass A 'who became servant of all'.",
-     "Pass B 'since they serve God and Christ, not people' recasts 'ὡς θεοῦ καὶ Χριστοῦ διάκονοι καὶ οὐκ ἀνθρώπων' and Pass A 'as deacons of God and Christ and not of men' from an office-genitive into a cause that they do not serve people.",
-     "Pass B 'He promised to raise us from the dead, and if we live as citizens worthy of him' omits καθὼς and ὅτι from 'καθὼς ὑπέσχετο ἡμῖν ἐγεῖραι ἡμᾶς ἐκ νεκρῶν, καὶ ὅτι ἐὰν πολιτευσώμεθα ἀξίως αὐτοῦ', kept in Pass A 'as he promised us to raise us from the dead, and that if we conduct ourselves as citizens worthily of him'.",
-     "Pass B 'Above all they should guard their purity' does not render 'πρὸ παντὸς προνοοῦντες ἁγνείας' or Pass A 'taking forethought above all for purity'."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check completeness is not explicitly true",
-    "semantic check agency is not explicitly true",
-    "semantic check doctrine is not explicitly true"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Source identity: Locked Greek matches Polycarp, To the Philippians 5 (Lake 1912 Loeb). Completeness: All three clauses from the single Greek paragraph are fully rendered in both Pass A and Pass B; no omissions, additions, or loss of qualifications. Negation: 'οὐ μυκτηρίζεται' → 'is not mocked' (Pass A, B); 'μὴ διάβολοι, μὴ δίλογοι' → 'not slanderers, not double-tongued' preserved. Agency: Subjects clear—deacons, younger men, virgins; God/Christ as object of service; believers as agents of conduct. Modality: 'ὀφείλομεν', 'δεόν', 'ἐὰν' → 'ought', 'necessary', conditional 'if' correctly conveyed. Doctrine: Eschatological reward tied to present conduct and belief; sexual ethics grounded in 1 Cor 6:9–10 echo; Christ as 'διάκονος πάντων' upheld. Scripture: All inline citations in Pass B match supplied bible_refs: Galatians 6:7 (θεὸς οὐ μυκτηρίζεται), 1 Timothy 3:8 (μὴ δίλογοι), Mark 9:35 (διάκονος πάντων), 2 Timothy 2:12 (συμβασιλεύσομεν), 1 Peter 2:11 (στρατεύεται), 1 Corinthians 6:9–10 (βασιλείαν θεοῦ κληρονομήσουσιν). Pass A lacks citations but does not contradict; Pass B adds them correctly per lemma/gloss data. Title names the thought (groups: deacons, young men, virgins). Notes disclose OCR/re-attribution. No uncertainties. All checks pass.",
+    "notes": "The Greek source (Polycarp, To the Philippians 5) is correctly identified. Pass A and B both reflect full completeness: no clauses omitted, repeated, or summarized. Negation (οὐ μυκτηρίζεται, μὴ διάβολοι, etc.), agency (θεός, Χριστός, διάκονοι, νεώτεροι), modality (ὀφείλομεν, δέον, ἀποληψόμεθα, συμβασιλεύσομεν), and doctrinal distinctions (e.g., deacons 'not of men', future reign conditioned on belief) are preserved. Scripture citations in Pass B are accurately matched to Greek clauses: Galatians 6:7 to θεὸς οὐ μυκτηρίζεται, 1 Timothy 3:8 to μὴ δίλογοι, Mark 9:35 to διάκονος πάντων, 2 Timothy 2:12 to συμβασιλεύσομεν, 1 Peter 2:11 to στρατεύεται, and 1 Corinthians 6:9–10 to βασιλείαν θεοῦ κληρονομήσουσιν. All added identifications are correct and required. Title names the thought (deacons, young men, virgins) not just locus. Notes disclose OCR-related uncertainty (none present here) and editorial corrections. No check fails; no uncertainty remains.",
     "checks": {
      "source_identity": true,
      "completeness": true,

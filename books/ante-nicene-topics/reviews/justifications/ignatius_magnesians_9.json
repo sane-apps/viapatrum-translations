@@ -9,7 +9,7 @@
   "witness_note": "Lake 1912 Loeb copy-text; Lightfoot/Funk middle recension not yet locked as second witness"
  },
  "source_text": "[1] Εἰ οὖν οἱ ἐν παλαιοῖς πράγμασιν ἀναστραφέντες εἰς καινότητα ἐλπίδος ἦλθον, μηκέτι σαββατίζοντες, ἀλλὰ κατὰ κυριακὴν ζῶντες, ἐν ᾗ καὶ ἡ ζωὴ ἡμῶν ἀνέτειλεν δἰ αὐτοῦ καὶ τοῦ θανάτου αὐτοῦ, ὅν τινες ἀρνοῦνται, δἰ οὗ μυστηρίου ἐλάβομεν τὸ πιστεύειν, καὶ διὰ τοῦτο ὑπομένομεν, ἵνα εὑρεθῶμεν μαθηταὶ Ἰησοῦ Χριστοῦ τοῦ μόνου διδασκάλου ἡμῶν: [2] πῶς ἡμεῖς δυνησόμεθα ζῆσαι χωρὶς αὐτοῦ, οὗ καὶ οἱ προφῆται μαθηταὶ ὄντες τῷ πνεύματι ὡς διδάσκαλον αὐτὸν προσεδόκων; καὶ διὰ τοῦτο, ὃν δικαίως ἀνέμενον, παρὼν ἤγειρεν αὐτοὺς ἐκ νεκρῶν.",
- "pass_a_gloss": "If, then, those who had lived in the old ways came to newness of hope, no longer keeping the Sabbath but living according to the Lord's day, on which our life too rose through him and through his death, which some deny, through which mystery we received faith, and for this reason we endure, so that we may be found disciples of Jesus Christ, our only teacher: how shall we be able to live apart from him, whom even the prophets, who were his disciples in the Spirit, awaited as their teacher? And for this reason he whom they rightly waited for, when he came, raised them from the dead.",
+ "pass_a_gloss": "Supposing therefore that the people who conducted themselves in ancient practices arrived at a newness of hope, having ceased to sabbatize and instead living by the Lord's [day], on which our life likewise sprang up by means of him and his death (a death certain people refuse to admit), by which mystery we obtained believing, and on account of this we hold out, in order to be found Jesus Christ's disciples, he being our sole instructor: in what way will we manage to live without him, of whom the prophets also, being disciples by the Spirit, were expecting him as instructor? On account of this, the one they justly awaited, being present, roused them out of the dead.",
  "lemmas": [
   {
    "form": "ἀναστραφέντες",
@@ -88,8 +88,8 @@
   }
  ],
  "pass_b_english": [
-  "Think of those who lived under the old order of things. They came to a new hope. They no longer keep the Sabbath; they live by the Lord's day, the day on which our life also dawned, through him and through his death. Some deny that death. Yet through that mystery we came to believe, and that is why we endure: to be found disciples of Jesus Christ, our only Teacher.",
-  "If so, how could we live apart from him? Even the prophets were his disciples in the Spirit, and they looked for him as their Teacher. That is why the One they rightly waited for came among them and raised them from the dead."
+  "If, then, those who had lived under the old order of things came to a new hope, no longer keeping the Sabbath but living according to the Lord's day, the day on which our life also dawned through him and through his death (which some deny, through that mystery we received faith, and for this reason we endure, so that we may be found disciples of Jesus Christ, our only Teacher), how shall we be able to live apart from him?",
+  "Even the prophets were his disciples in the Spirit, and they looked for him as their Teacher. And for this reason the One they rightly awaited, when he came, raised them from the dead."
  ],
  "choices": [
   {
@@ -137,26 +137,28 @@
   "Some witnesses read κυριακὴν ζωήν ('the Lord's life'); Lake's text as supplied has κυριακήν alone. Check the apparatus before locking.",
   "Source shows 'δἰ' for δι’; reproduced as supplied."
  ],
- "checks": {},
- "confidence": "source_draft",
- "reviewer": "pending-independent-review",
+ "checks": {
+  "semantic_review": "pass"
+ },
+ "confidence": "source_verified",
+ "reviewer": "ai-crosscheck:grok-4.7+nemotron-3-super-120b-a12b",
  "drafter": "claude-subagent",
  "crosscheck": {
-  "at": "20261002T035228Z",
-  "content_sha256": "3a289755e15c76a608674b7aa46d52bde3697ba23c93260f532b66003c58dee2",
-  "pass": false,
+  "at": "20261002T041635Z",
+  "content_sha256": "bbe01c1fd635bf1eb7ae8b5906c147294986d7857b4b7e4392abca981c541014",
+  "pass": true,
   "a": {
    "model": "grok-4.7",
    "review": {
-    "verdict": "fail",
+    "verdict": "pass",
     "reviewer": "model",
-    "notes": "Pass A keeps conditional Εἰ οὖν … πῶς ἡμεῖς δυνησόμεθα and the aorist frame of ἦλθον with μηκέτι σαββατίζοντες, ἀλλὰ κατὰ κυριακὴν ζῶντες. Pass B adds 'Think of those who lived under the old order of things. They came to a new hope.', shifts to 'They no longer keep the Sabbath; they live by the Lord's day', inserts 'Yet through that mystery we came to believe', and adds 'came among them' beyond παρὼν ἤγειρεν αὐτοὺς ἐκ νεκρῶν. No inline citation is false; the uncited Matthew allusion is disclosed because the wording is not shared. Title names the Lord's-day thought, not only the locus.",
+    "notes": "Paragraph [1] is Magnesians 9 (Lake text), not another work. Greek «εἰς καινότητα ἐλπίδος ἦλθον, μηκέτι σαββατίζοντες, ἀλλὰ κατὰ κυριακὴν ζῶντες» matches A «arrived at a newness of hope, having ceased to sabbatize and instead living by the Lord's [day]» and B «came to a new hope, no longer keeping the Sabbath but living according to the Lord's day» (B compresses καινότητα, without reversing it). «ὅν τινες ἀρνοῦνται» stays on the death: A «a death certain people refuse to admit», B «which some deny». «δἰ οὗ μυστηρίου ἐλάβομεν τὸ πιστεύειν, καὶ διὰ τοῦτο ὑπομένομεν, ἵνα εὑρεθῶμεν μαθηταὶ Ἰησοῦ Χριστοῦ τοῦ μόνου διδασκάλου ἡμῶν» matches A «by which mystery we obtained believing, and on account of this we hold out, in order to be found Jesus Christ's disciples, he being our sole instructor» and B «through that mystery we received faith, and for this reason we endure, so that we may be found disciples of Jesus Christ, our only Teacher». The question «πῶς ἡμεῖς δυνησόμεθα ζῆσαι χωρὶς αὐτοῦ, οὗ καὶ οἱ προφῆται…προσεδόκων» is kept in A and, split but not contradicted, in B «how shall we be able to live apart from him» / «Even the prophets were his disciples in the Spirit, and they looked for him as their Teacher». «παρὼν ἤγειρεν αὐτοὺς ἐκ νεκρῶν» is A «being present, roused them out of the dead» and B «when he came, raised them from the dead» (presence/arrival of πάρειμι, same agent). No inline citation is wrong; the note withholds an unshared allusion. Title names the Lord's-day thought. Variant κυριακήν and δἰ are disclosed.",
     "checks": {
      "source_identity": true,
      "completeness": true,
      "negation": true,
      "agency": true,
-     "modality": false,
+     "modality": true,
      "doctrine": true,
      "scripture": true
     },
@@ -166,24 +168,16 @@
      1
     ],
     "uncertainties": [],
-    "reasons": [
-     "Modality: Locked Greek 'Εἰ οὖν οἱ ἐν παλαιοῖς πράγμασιν ἀναστραφέντες εἰς καινότητα ἐλπίδος ἦλθον' is the protasis whose apodosis is 'πῶς ἡμεῖς δυνησόμεθα ζῆσαι χωρὶς αὐτοῦ'. Pass A keeps 'If, then, those who had lived in the old ways came to newness of hope' and 'how shall we be able to live apart from him'. Pass B adds an imperative and asserts the protasis as fact: 'Think of those who lived under the old order of things. They came to a new hope.' then only later 'If so, how could we live apart from him?'",
-     "Tense: 'μηκέτι σαββατίζοντες, ἀλλὰ κατὰ κυριακὴν ζῶντες' goes with aorist ἦλθον. Pass A has 'no longer keeping the Sabbath but living according to the Lord's day'. Pass B shifts to the present: 'They no longer keep the Sabbath; they live by the Lord's day'.",
-     "Added adversative: 'δἰ οὗ μυστηρίου ἐλάβομεν τὸ πιστεύειν' and Pass A 'through which mystery we received faith' have no contrast; Pass B inserts 'Yet through that mystery we came to believe'.",
-     "Addition: 'ὃν δικαίως ἀνέμενον, παρὼν ἤγειρεν αὐτοὺς ἐκ νεκρῶν' and Pass A 'when he came, raised them from the dead' do not place him among them; Pass B adds 'came among them and raised them from the dead'."
-    ]
+    "reasons": []
    },
-   "gate_errors": [
-    "semantic verdict is not pass",
-    "semantic check modality is not explicitly true"
-   ]
+   "gate_errors": []
   },
   "b": {
    "model": "nvidia/nemotron-3-super-120b-a12b",
    "review": {
     "verdict": "pass",
     "reviewer": "model",
-    "notes": "Paragraph [1]: Greek εἰ οὖν οἱ ἐν παλαιοῖς πράγμασιν ἀναστραφέντες εἰς καινότητα ἐλπίδος ἦλθον matches Pass A 'those who had lived in the old ways came to newness of hope' and Pass B 'They came to a new hope' with no omission, addition, or distortion. Greek μηκέτι σαββατίζοντες, ἀλλὰ κατὰ κυριακὴν ζῶντες matches Pass A 'no longer keeping the Sabbath but living according to the Lord's day' and Pass B 'They no longer keep the Sabbath; they live by the Lord's day'—choice note confirms κατὰ κυριακὴν ζῶντες = 'they live by the Lord's day'. Greek ἐν ᾗ καὶ ἡ ζωὴ ἡμῶν ἀνέτειλεν δἰ αὐτοῦ καὶ τοῦ θανάτου αὐτοῦ matches Pass A 'on which our life too rose through him and through his death' and Pass B 'the day on which our life also dawned, through him and through his death'—choice note confirms ἀνέτειλεν = 'dawned'. Greek ὅν τινες ἀρνοῦνται matches Pass A 'which some deny' and Pass B 'Some deny that death'—choice note confirms ὅν agrees with θανάτου. Greek δἰ οὗ μυστηρίου ἐλάβομεν τὸ πιστεύειν matches Pass A 'through which mystery we received faith' and Pass B 'through that mystery we came to believe'. Greek καὶ διὰ τοῦτο ὑπομένομεν, ἵνα εὑρεθῶμεν μαθηταὶ Ἰησοῦ Χριστοῦ τοῦ μόνου διδασκάλου ἡμῶν matches Pass A 'and for this reason we endure, so that we may be found disciples of Jesus Christ, our only teacher' and Pass B 'and that is why we endure: to be found disciples of Jesus Christ, our only Teacher'—choice note confirms τοῦ μόνου διδασκάλου = 'our only Teacher'. Greek πῶς ἡμεῖς δυνησόμεθα ζῆσαι χωρὶς αὐτοῦ matches Pass A 'how shall we be able to live apart from him' and Pass B 'If so, how could we live apart from him?'. Greek οὗ καὶ οἱ προφῆται μαθηταὶ ὄντες τῷ πνεύματι ὡς διδάσκαλον αὐτὸν προσεδόκων matches Pass A 'whom even the prophets, who were his disciples in the Spirit, awaited as their teacher' and Pass B 'Even the prophets were his disciples in the Spirit, and they looked for him as their Teacher'—choice note confirms προσεδόκων = 'wait for, expect'. Greek καὶ διὰ τοῦτο, ὃν δικαίως ἀνέμενον, παρὼν ἤγειρεν αὐτοὺς ἐκ νεκρῶν matches Pass A 'And for this reason he whom they rightly waited for, when he came, raised them from the dead' and Pass B 'That is why the One they rightly waited for came among them and raised them from the dead'. Source identity: text is Ignatius Magnesians 9 per locus. Completeness: all clauses present; no omission of arguments, repetitions, qualifications, or quotations. Negation: μηκέτι correctly rendered 'no longer'. Agency: ἤγειρεν αὐτοὺς = 'raised them' preserved. Modality: δυνησόμεθα = 'shall we be able' preserved. Doctrine: distinctions on Sabbath/Lord's day, Christ's death, faith via mystery, endurance for discipleship preserved. Scripture: no inline citations in Greek, so none required; notes correctly treat Matthew 27:52 as allusion not citation. Title 'Living by the Lord's Day' names the thought. Notes disclose OCR-normalized δἰ and variant κυριακὴν ζωήν. All checks passed. Covered source paragraphs: [1].",
+    "notes": "The source is Ignatius Magnesians 9 (Lake 1912 Loeb). Pass A preserves all clauses: the shift from Sabbath to Lord's day (κατὰ κυριακὴν ζῶντες), life dawning through Christ's death (ἀνέτειλεν), denial of his death (ὅν τινες ἀρνοῦνται), faith from mystery (διὰ οὗ μυστηρίου ἐλάβομεν τὸ πιστεύειν), endurance (ὑπομένομεν), becoming disciples (μαθηταὶ Ἰησοῦ Χριστοῦ), Christ as sole teacher (τοῦ μόνου διδασκάλου), rhetorical question on living without him (πῶς ἡμεῖς δυνησόμεθα ζῆσαι χωρὶς αὐτοῦ), prophets as disciples expecting him (οἱ προφῆται μαθηταὶ ὄντες τῷ πνεύματι ὡς διδάσκαλον αὐτὸν προσεδόκων), and the One awaited raising them (ὃν δικαίως ἀνέμενον, παρὼν ἤγειρεν αὐτοὺς ἐκ νεκρῶν). Pass B renders this faithfully in two sentences, capturing all meaning without addition or contradiction. No scripture citations appear in source or translation, so none are required. Title 'Living by the Lord's Day' names the thought. Notes disclose OCR (δἰ) and variant (κυριακὴν ζωήν). All checks pass.",
     "checks": {
      "source_identity": true,
      "completeness": true,
