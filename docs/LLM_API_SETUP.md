@@ -31,7 +31,7 @@ Sources checked 2026-09-11:
 |-------|--------------------------------------|--------|
 | `nvidia/nemotron-3-super-120b-a12b` | `reasoning_effort: "none"`. Card: temp **1.0**, top_p **0.95**, large `max_tokens`. Fixture PASS with ≥180s timeout. | `temperature: 0` alone; 60s client timeout |
 | `deepseek-ai/deepseek-v4-flash-0731` (EOL 2026-09-21, retired) | Official: `reasoning_effort` defaults **high**; use **`none`**. **Must `stream: true`** on this free NIM path — non-stream hung 45–90s in every probe. | Non-stream; `chat_template_kwargs` false on top of `none` (hung); unbounded waits without stream |
-| `mistralai/mistral-nemotron` | Standard chat; smoke OK; strip markdown fences | Assume every catalog ID is enabled |
+| `mistralai/mistral-nemotron` | **EOL 2026-09-28** (HTTP 410 Gone). Remove from checker chains; use Nemotron Super or a CF family | Keep it in fallback lists |
 | `nvidia/nemotron-3.5-lightning-*` | Still timing out here after probes | Unbounded waits |
 
 ## Cloudflare Workers AI
