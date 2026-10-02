@@ -25,7 +25,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from ai_promote import atomic_text, file_digest, parse_claim_row, require_supported_claim, sections_from_slice
 from book_adapter import JEREMIAH_SLUG, get_adapter
 from pipeline_autonomy import SplitRefused, chunk_paragraphs, merge_chunk_drafts, parse_or_repair, split_guard
-from pipeline.check_pass_ab import check_record  # noqa: E402
+from pipeline.check_pass_ab import check_record, output_guard_errors  # noqa: E402
 from llm_bakeoff import (  # noqa: E402
     DEFAULT_ACCOUNT,
     PREP_SYS,
@@ -445,6 +445,10 @@ def draft_section(
     title = str(obj.get("title") or "").strip()
     english = obj.get("english") if isinstance(obj.get("english"), list) else []
     notes = obj.get("translator_notes") if isinstance(obj.get("translator_notes"), list) else []
+    guard = output_guard_errors(english)
+    if guard:
+        # Stuttered or cut-off model output never replaces existing text.
+        return {"ok": False, "section": section, "error": "output_guard", "detail": guard[:5]}
     jpath = write_justification(section, evidence, just_path)
     if jeremiah:
         upsert_english(section, title, english, notes, fix.get("homily"))
@@ -732,6 +736,10 @@ def revise_section(
         "from_receipt": receipt, "notes_addressed": len(notes),
     }]
     evidence["reviewer"] = f"pending-ai-crosscheck:{model}"
+    guard = output_guard_errors(obj.get("english"))
+    if guard:
+        # A revision that stutters or stops mid-clause must not overwrite text.
+        return {"ok": False, "section": section, "error": "output_guard", "detail": guard[:5]}
     write_justification(section, evidence, just_path)
     if jeremiah:
         upsert_english(section, obj["title"], obj["english"], obj["translator_notes"], fix.get("homily"))

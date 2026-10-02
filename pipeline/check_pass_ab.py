@@ -130,6 +130,46 @@ def _repeated_phrase(text: str) -> bool:
     return False
 
 
+# Save-time output guard (2026-10-02). Model drafts sometimes stutter
+# ("many.many.many"), double words, or stop mid-clause. Drafting scripts call
+# output_guard_errors() BEFORE writing so damaged text never replaces good
+# text. Deliberately not part of content_errors(): the publish gate stays as
+# it was, so already-live passages are not newly blocked.
+_GLUED_STUTTER = re.compile(r"\b([A-Za-z]{2,})(?:[.,;:\-]?\1){2,}\b", re.I)
+# Same word four times, separated only by spaces/commas (no verse digits):
+# "Genesis 1:1; Genesis 2:3" lists and "Holy, holy, holy" stay legal.
+_WORD_RUN = re.compile(r"\b([A-Za-z]+)\b(?:[ ,]+\1\b){3,}", re.I)
+# Doubled function words with only a space between are model stutter;
+# "Lord, Lord" / "Amen, amen" (punctuated) are Scripture and stay legal.
+_DOUBLED = re.compile(r"\b(the|a|an|and|of|to|in|for|with|by|from|on|at|is|was|but|or)\s+\1\b", re.I)
+_END_OK = re.compile(r"[.!?…:;”’\"')\]—]\s*$")
+
+
+def output_guard_errors(english, *, require_full_stop: bool = False) -> list[str]:
+    """Reject damaged model output before it is saved.
+
+    require_full_stop: also reject a paragraph that stops mid-clause. Leave it
+    off for chunked sources, whose slices legitimately end mid-sentence.
+    """
+    paras = [english] if isinstance(english, str) else list(english or [])
+    errors = []
+    for i, para in enumerate(paras, 1):
+        text = visible_text(str(para or "")).strip()
+        if not text:
+            errors.append(f"paragraph {i}: empty")
+            continue
+        for rx, what in ((_GLUED_STUTTER, "stuttered word fragment"), (_WORD_RUN, "word repeated four times"),
+                         (_DOUBLED, "doubled word")):
+            m = rx.search(text)
+            if m:
+                errors.append(f"paragraph {i}: {what} ({m.group(0)[:40]})")
+        if _repeated_phrase(text):
+            errors.append(f"paragraph {i}: repeated phrase")
+        if require_full_stop and not _END_OK.search(text):
+            errors.append(f"paragraph {i}: stops mid-sentence ('...{text[-30:]}')")
+    return errors
+
+
 def _latin_bleed(text: str) -> bool:
     """A stretch of Latin function words inside an English reading."""
     words = [w for w in _tokens(text) if w.isascii()]
