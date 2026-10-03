@@ -1,0 +1,55 @@
+{
+ "slug": "epiphanius-epistula-ad-joannem-hierosolymitanum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 223,
+   "moved_start": "ὁ δὲ\nθεὸς τῆς εἰρήνης ποιήσει μεθ' ἡμῶν κατὰ τὴν αὑτοῦ φιλαν"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 395,
+   "moved_start": "Ἐπεὶ δὲ\nἤκουσα ὅτι τινὲς ἐγόγγυσαν καθ' ἡμῶν, ὅτι ἐν τῷ διαβ"
+  }
+ ],
+ "brief_sha256": "b02c9bb081a5b75a33d37e7f349f980fd34078865c0a991a699dd04942504f9f",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T09:08:59Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "4066c98269ecd2b40be0d04e770bc7d81a315288a025a104baca4654ced4eb37",
+   "english_sha256": "b54bc776620d0b070c18fdad3eee1e078facb2a5d8a36593eed9ca5268c1ccff",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "00832cdf2504813e68f949d3e46986b4527a654cea0afdb424315ea2183c4c91",
+   "english_sha256": "91f94d6ab73b5c74726ad070220fbf6284571ff247c6a4e2c0f1cf638bff344f",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "dc9bfedfa6f569e1890c2d02e208c5514f06a22f654aceb5e4538c9a87ad76ab",
+   "english_sha256": "68fc11437702c8fb08b5efaefaebe764b91aabfb7822742fc7927c79adebfca1",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "29d220a4876dc0e0505610265c9745de06cbb2b8c09468feabe7c3e2fa93e9eb",
+   "english_sha256": "c535335992efb34c47e8221acf2226d320d8975bd16eacdf109b976d897d377d",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}
