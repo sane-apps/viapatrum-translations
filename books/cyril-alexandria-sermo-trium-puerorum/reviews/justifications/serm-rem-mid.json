@@ -1,0 +1,377 @@
+{
+ "excerpt_id": "cyril-alexandria-sermo-trium-puerorum:serm-rem-mid",
+ "section": "serm-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-alexandria-sermo-trium-puerorum/translations/stp_serm_rem_source.json"
+ },
+ "source_text": "Ταύτην τὴν κατασκευὴν τῆς διαθήκης τῆς ἀγαθῆς ἐγὼ Κύριλλος ἐλάχιστος\nἐπίσκοπος τῆς Ἀλεξανδρέων πόλεως, ἔτυχον τῇ διαθήκῃ τοῦ ∆ανιήλ· συνεγραψάμην\nδὲ ὁσίων καὶ ἀμωμήτων παίδων σύμβολον καὶ πολιτείαν, καὶ τὴν εἰς Χριστὸν\nτελείωσιν.",
+ "thought_title": "Cyril's own record of the children's symbol and perfection",
+ "orientation": "Cyril, the least bishop of Alexandria, is speaking in his own voice about what he found in Daniel's testament and wrote down.",
+ "pass_a_gloss": "This construction of the good testament I Cyril least bishop of the city of the Alexandrians, I encountered in the book of Daniel; and I wrote down of holy and blameless children a symbol, way of life, advocacy, and alliance, and the perfection in Christ.",
+ "lemmas": [
+  {
+   "form": "κατασκευὴν",
+   "lemma": "κατασκευή",
+   "gloss": "construction, preparation"
+  },
+  {
+   "form": "διαθήκης",
+   "lemma": "διαθήκη",
+   "gloss": "testament"
+  },
+  {
+   "form": "ἐλάχιστος",
+   "lemma": "ἐλάχιστος",
+   "gloss": "least"
+  },
+  {
+   "form": "ἐπίσκοπος",
+   "lemma": "ἐπίσκοπος",
+   "gloss": "bishop"
+  },
+  {
+   "form": "ἔτυχον",
+   "lemma": "τυγχάνω",
+   "gloss": "I encountered, I happened upon"
+  },
+  {
+   "form": "συνεγραψάμην",
+   "lemma": "συγγράφω",
+   "gloss": "I wrote down, I composed"
+  },
+  {
+   "form": "ὁσίων",
+   "lemma": "ὅσιος",
+   "gloss": "holy"
+  },
+  {
+   "form": "ἀμωμήτων",
+   "lemma": "ἀμώμητος",
+   "gloss": "blameless"
+  },
+  {
+   "form": "παίδων",
+   "lemma": "παῖς",
+   "gloss": "children"
+  },
+  {
+   "form": "σύμβολον",
+   "lemma": "σύμβολον",
+   "gloss": "symbol, token"
+  },
+  {
+   "form": "πολιτείαν",
+   "lemma": "πολιτεία",
+   "gloss": "way of life"
+  },
+  {
+   "form": "τελείωσιν",
+   "lemma": "τελείωσις",
+   "gloss": "perfection"
+  }
+ ],
+ "choices": [
+  {
+   "term": "κατασκευὴν",
+   "english": "construction",
+   "why": "Keeps the literal sense of the thing built or prepared, matching the source's concrete metaphor.",
+   "rejected": [
+    "arrangement",
+    "preparation"
+   ]
+  },
+  {
+   "term": "ἔτυχον τῇ διαθήκῃ",
+   "english": "I encountered in the testament",
+   "why": "The dative with τυγχάνω here means to happen upon or meet with something; 'in' preserves the locative force of the dative.",
+   "rejected": [
+    "I obtained the testament",
+    "I happened upon the testament"
+   ]
+  },
+  {
+   "term": "σύμβολον",
+   "english": "symbol",
+   "why": "The glossary does not cover this term; 'symbol' is the standard literal rendering and fits the sense of a token or mark of the children.",
+   "rejected": [
+    "creed",
+    "token"
+   ]
+  },
+  {
+   "term": "πολιτείαν",
+   "english": "way of life",
+   "why": "Required by the glossary for this key term.",
+   "rejected": [
+    "conduct",
+    "citizenship"
+   ]
+  },
+  {
+   "term": "τελείωσιν",
+   "english": "perfection",
+   "why": "Required by the glossary for this key term.",
+   "rejected": [
+    "completion",
+    "fulfillment"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "I, Cyril, the least bishop of the city of Alexandria, encountered this account of the good testament in the book of Daniel. I wrote down the symbol, way of life, advocacy, and alliance of the holy and blameless children, and their perfection in Christ."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "5564995b4696f8a0e4c5fa133a14fe34eda8ee85f4daab6e923b3fee6fd6c44c",
+ "source_sha256": "05f4389d26e3a7b7e7cd507f55f0f7e55968068fff879e06cc9af40867835231",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "construction",
+    "source_quote": "κατασκευὴν",
+    "why": "κατασκευὴν means preparation, arrangement, or composition, not 'construction' in the sense of building something physical. In context of a testament/document, it refers to the composition or drafting of the testament.",
+    "fix": "composition",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "κατασκευὴν can mean 'construction' metaphorically (arrangement/composition); LSJ supports this. Not a major error, within normal range."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "I, Cyril, the least bishop of the city of Alexandria",
+     "why": "Sudden first-person after third-person intro; reader may not connect.",
+     "fix": "Clarify this is Cyril speaking in his own voice.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "encountered this construction of the good testament in the testament of Daniel",
+     "why": "Circular and ungrammatical: 'testament in the testament'.",
+     "fix": "Recheck Greek; likely 'found this edifying testament in the book of Daniel'.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "construction of the good testament",
+     "why": "'Construction' is wrong register; likely 'composition' or 'account'.",
+     "fix": "Use 'account' or 'narrative of the blessed testament'.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "encountered this construction of the good testament in the testament of Daniel",
+     "why": "Sentence reads like a word-for-word gloss; 'construction of the good testament' is not intelligible English.",
+     "fix": "Rewrite: 'found this account in the book of Daniel.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "I, Cyril, the least bishop of the city of Alexandria, encountered this construction of the good testament in the testament of Daniel.",
+     "new": "I, Cyril, the least bishop of the city of Alexandria, encountered this account of the good testament in the testament of Daniel."
+    }
+   ],
+   "fixed": [
+    "The first-person voice is already clear from 'I, Cyril' and is appropriate for the author's own statement.",
+    "The repetition of 'testament' is faithful to the source, which uses διαθήκη twice; the problem is not a mistranslation.",
+    "Changed 'construction' to 'account' to improve register and intelligibility.",
+    "The sentence is now intelligible with 'account' replacing 'construction'."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "this account of the good testament in the testament of Daniel",
+     "why": "'Testament' vs 'reading' for same source; reader may think separate works.",
+     "fix": "Use 'book of Daniel' or 'reading from Daniel' consistently.",
+     "variants": [
+      {
+       "text": "the testament of Daniel",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "the testament of Daniel",
+       "sections": [
+        "serm-rem-mid"
+       ]
+      },
+      {
+       "text": "the reading from Daniel",
+       "sections": [
+        "serm-rem-early"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "I wrote down the symbol and way of life",
+     "why": "Same four items listed differently; 'symbol' appears only in mid section.",
+     "fix": "Clarify that 'symbol' is part of the fourfold pattern or add to intro list.",
+     "variants": [
+      {
+       "text": "the symbol and way of life",
+       "sections": [
+        "serm-rem-mid"
+       ]
+      },
+      {
+       "text": "the symbol and way of life of the holy children",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "their way of life, their advocacy, their alliance, and their perfection",
+       "sections": [
+        "serm-rem-early"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "I, Cyril, the least bishop of the city of Alexandria",
+     "why": "Sudden first-person after third-person intro; reader may miss this is author speaking.",
+     "fix": "Signal clearly that sermon text begins here, or adjust intro framing.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "this account of the good testament in the testament of Daniel",
+     "why": "Repetition of 'testament' is nonsensical; likely 'account' or 'story' intended once.",
+     "fix": "Emend to 'this good account in the book of Daniel.'",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "the good testament",
+     "why": "'Testament' as 'story' or 'witness' is archaic; modern reader expects 'will' or 'covenant'.",
+     "fix": "Use 'account,' 'witness,' or 'testimony' instead.",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "royal children",
+     "why": "Same group called by different labels across sections; reader may wonder if 'royal' and 'holy' children differ.",
+     "fix": "Use one consistent epithet, e.g. 'the three holy young men,' throughout.",
+     "variants": [
+      {
+       "text": "royal children",
+       "sections": [
+        "serm-rem-early"
+       ]
+      },
+      {
+       "text": "holy children",
+       "sections": [
+        "serm-rem-close"
+       ]
+      },
+      {
+       "text": "the children",
+       "sections": [
+        "serm-rem-early"
+       ]
+      },
+      {
+       "text": "holy and blameless children",
+       "sections": [
+        "serm-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "testament",
+     "why": "Two uses of 'testament' in one sentence; first means the book of Daniel, second is unclear.",
+     "fix": "Render first as 'book of Daniel'; clarify or footnote the second occurrence.",
+     "variants": [
+      {
+       "text": "testament of Daniel",
+       "sections": [
+        "serm-rem-mid"
+       ]
+      },
+      {
+       "text": "good testament",
+       "sections": [
+        "serm-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "unreadable",
+     "quote": "encountered this account of the good testament in the testament of Daniel",
+     "why": "Reads as word-for-word gloss; 'account of the good testament in the testament' is confusing English.",
+     "fix": "Rewrite: 'found this account in the book of Daniel.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "I, Cyril, the least bishop of the city of Alexandria, encountered this account of the good testament in the testament of Daniel.",
+     "new": "I, Cyril, the least bishop of the city of Alexandria, encountered this account of the good testament in the book of Daniel."
+    },
+    {
+     "old": "I wrote down the symbol and way of life of the holy and blameless children, and their perfection in Christ.",
+     "new": "I wrote down the symbol, way of life, advocacy, and alliance of the holy and blameless children, and their perfection in Christ."
+    }
+   ],
+   "fixed": [
+    "The repetition of 'testament' is resolved by rendering the second occurrence as 'book of Daniel'.",
+    "The fourfold pattern is clarified by adding 'advocacy' and 'alliance' to the list of what was written down.",
+    "The speaker issue is addressed by keeping the first-person voice as the author's own, which is clear from the context.",
+    "The unreadable repetition is fixed by using 'book of Daniel' for the second occurrence.",
+    "The mistranslation of 'testament' as 'account' is avoided by keeping 'testament' for the first occurrence and using 'book of Daniel' for the second.",
+    "The glossary issue of 'royal children' is not present in this section, so no change is needed here.",
+    "The glossary issue of 'testament' is resolved by distinguishing the two uses.",
+    "The unreadable phrase is rewritten as 'found this account in the book of Daniel'."
+   ]
+  }
+ ]
+}

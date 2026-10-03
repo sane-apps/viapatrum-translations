@@ -1,0 +1,218 @@
+{
+ "excerpt_id": "cyril-alexandria-fragmentum-papyraceum:frag-rem-close",
+ "section": "frag-rem-close",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-alexandria-fragmentum-papyraceum/translations/fip_frag_rem_source.json"
+ },
+ "source_text": "\n[····]μα̣τευω[ ] [ ]ι̣σ̣νο[/ ] [ ]··[ ] ε̣[ ] ·[ ] μ̣[ ] α̣·[ ] ταυτ̣[ ]ως δογμ̣[ ]· τηκα[ ]υ η̣μ̣·[\nἡγου]μαι κατακεκρι[σθαι·] φ̣υσεων γαρ και μ̣[ο]ρ̣φων/\n\n1\nΕπιτρέπεται η ελεύθερη χρήση του υλικού µε αναφορά στην πηγή προέλευσής του.\n",
+ "thought_title": "Condemnation of those who disturb the church",
+ "orientation": "Cyril is closing his fragment by condemning those who disturb the church and its Christ-loving people, and he appears to be stating that he considers them condemned, with a broken phrase about natures and forms.",
+ "pass_a_gloss": "[damaged] ... I consider [them] to have been condemned; for of natures and of forms ...",
+ "lemmas": [
+  {
+   "form": "ἡγου]μαι",
+   "lemma": "ἡγέομαι",
+   "gloss": "I consider"
+  },
+  {
+   "form": "κατακεκρι[σθαι]",
+   "lemma": "κατακρίνω",
+   "gloss": "to have been condemned"
+  },
+  {
+   "form": "φυσεων",
+   "lemma": "φύσις",
+   "gloss": "of natures"
+  },
+  {
+   "form": "μορφων",
+   "lemma": "μορφή",
+   "gloss": "of forms"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἡγου]μαι",
+   "english": "I consider",
+   "why": "The verb is restored from the context of the fragment's first-person voice; it expresses Cyril's judgment.",
+   "rejected": [
+    "I think",
+    "I believe"
+   ]
+  },
+  {
+   "term": "κατακεκρι[σθαι]",
+   "english": "to have been condemned",
+   "why": "The perfect passive infinitive conveys a completed judgment against those who disturb the church.",
+   "rejected": [
+    "to be condemned",
+    "to have been judged"
+   ]
+  },
+  {
+   "term": "φυσεων",
+   "english": "of natures",
+   "why": "The glossary specifies 'natures' for φυσεων, and the genitive plural fits the broken phrase.",
+   "rejected": [
+    "of essences",
+    "of kinds"
+   ]
+  },
+  {
+   "term": "μορφων",
+   "english": "of forms",
+   "why": "The glossary specifies 'forms' for μορφων, and the genitive plural parallels φυσεων.",
+   "rejected": [
+    "of appearances",
+    "of shapes"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "I consider them to have been condemned, for [they speak] of natures and of forms . . . [the papyrus breaks off]"
+ ],
+ "notes": [
+  "The source text is heavily damaged at the beginning of this section. Only the restored phrase 'ἡγου]μαι κατακεκρι[σθαι·] φυσεων γαρ και μ[ο]ρφων' is legible. The gloss reflects only the legible and restored text; no text has been invented beyond the bracketed restorations."
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "f1448404a3cb61a36aafa5507f2d6eade9dc544f0c5f5aa5fa4e9d14b3f2a450",
+ "source_sha256": "37f7bd5be897d6e770c77a6ba8a832cb10404226eb4005c5e3fe0ca32f84979e",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "for of natures and of forms . . .",
+     "why": "Incomplete sentence; no predicate, hanging prepositional phrase.",
+     "fix": "Mark as fragment; possibly 'for [they speak] of natures and of forms'",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "for of natures and of forms . . .",
+     "why": "Fragmentary sentence breaks off mid-thought; reader has no way to complete the argument.",
+     "fix": "Note this as a fragmentary break; the sentence is incomplete in the papyrus.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "I consider them to have been condemned, for of natures and of forms . . .",
+     "new": "I consider them to have been condemned, for [they speak] of natures and of forms . . ."
+    }
+   ],
+   "fixed": [
+    "The English already marks the break with ellipsis, but the sentence lacks a predicate; adding '[they speak]' clarifies the incomplete thought while preserving the fragmentary nature."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "I consider them to have been condemned, for [they speak] of natures and of forms",
+     "why": "Bracketed insertion breaks flow; 'condemned' by whom? Speaking of natures was standard theology, not obviously heretical.",
+     "fix": "Note editorial reconstruction; explain why 'natures and forms' is here condemned.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "I consider them to have been condemned, for [they speak] of natures and of forms . . .",
+     "new": "I consider them to have been condemned, for of natures and of forms . . ."
+    }
+   ],
+   "fixed": [
+    "Removed the bracketed insertion '[they speak]' to match the source, which has only 'for of natures and of forms'. The fragment is damaged and the English now reflects the literal source without editorial expansion."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "for of natures and of forms . . .",
+     "why": "Fragment breaks mid-phrase; no predicate or completion.",
+     "fix": "Mark as untranslatable lacuna or supply ellipsis without 'for'.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "for of natures and of forms . . .",
+     "why": "Fragmentary sentence with no verb or completion; reader cannot determine what is being said about natures and forms.",
+     "fix": "Mark as fragmentary; note the papyrus breaks off mid-sentence.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "I consider them to have been condemned, for of natures and of forms . . .",
+     "new": "I consider them to have been condemned, for of natures and of forms . . . [the papyrus breaks off]"
+    }
+   ],
+   "fixed": [
+    "The English already marks the fragmentary nature with ellipsis; added an explicit note that the papyrus breaks off to address the lack of predicate or completion."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "for of natures and of forms . . . [the papyrus breaks off]",
+     "why": "Incomplete sentence with no main verb; reader cannot follow argument.",
+     "fix": "Note fragmentary state; possibly 'for [they speak] of natures and of forms'.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "I consider them to have been condemned, for of natures and of forms . . . [the papyrus breaks off]",
+     "new": "I consider them to have been condemned, for [they speak] of natures and of forms . . . [the papyrus breaks off]"
+    }
+   ],
+   "fixed": []
+  }
+ ]
+}

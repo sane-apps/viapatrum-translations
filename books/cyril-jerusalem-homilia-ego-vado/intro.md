@@ -1,0 +1,5 @@
+Cyril of Jerusalem (c. 313–386) wrote this homily to explain a saying of Christ from the Gospel of John: “I am going to my Father; and whatever you ask in my name, this I will do, so that the Father may be glorified in the Son.” The homily addresses how the same “I” can be used of both Christ’s divinity and his humanity.
+
+The occasion is the Gospel saying itself. Cyril explains that when Christ says “I am going to my Father,” the pronoun “I” is used of both the divine and the human natures. The meaning of the words is shown by their context, while the distinction of the natures is shown by the difference in what is said. Because Christ speaks in both cases as of one person, the text signifies the union of the person.
+
+A reader will meet Cyril of Jerusalem as the author and Christ as the speaker of the quoted Gospel saying. The homily expounds the unity of Christ’s person while distinguishing his two natures. The surviving text quotes John 14:12b–13 in a form close to the Greek Gospel text. Psalm numbering and Old Testament book names are not used in the surviving text.

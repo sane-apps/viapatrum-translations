@@ -1,0 +1,319 @@
+{
+ "excerpt_id": "cyril-alexandria-fragmentum-papyraceum:frag-rem-mid",
+ "section": "frag-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-alexandria-fragmentum-papyraceum/translations/fip_frag_rem_source.json"
+ },
+ "source_text": "\nκαι ὁπε[ ] γραμμα̣[ μ]ε νου τ̣η[ ἐ]κκλησ̣[ια· ]ος μοι̣· δι̣ω̣κ̣το̣[υ γαρ το]υτο· οὐτε τοις\nεὐσ[εβεσι]ν ἐπεσκηψα· εὐη̣[θες γα]ρ και ἀνο̣ητον· [τους δε] διαταρ̣[α]τ̣τοντα̣[ς τη(ν)]\nπαρ' ἡμ̣ι̣ν ἐκκλη̣[σια(ν)] και τον [κ]ατ' αὐτη[ν φι][λο]χ̣ριστο̣ν̣ λαον α[···]υ",
+ "thought_title": "Rejection of imposed commands and condemnation of church disturbers",
+ "orientation": "Cyril continues his defense, denying that he imposed anything on the pious and condemning those who disturb the church and its Christ-loving people.",
+ "pass_a_gloss": "and the [text broken] letter of the [text broken] church [text broken] to me; for this is [text broken] of a persecutor; neither did I impose upon the pious; for it is foolish and senseless; but those who disturb the church among us and the Christ-loving people in it [text broken]",
+ "lemmas": [
+  {
+   "form": "γραμμα",
+   "lemma": "γράμμα",
+   "gloss": "letter"
+  },
+  {
+   "form": "ἐκκλησια",
+   "lemma": "ἐκκλησία",
+   "gloss": "church"
+  },
+  {
+   "form": "διωκτου",
+   "lemma": "διωκτής",
+   "gloss": "persecutor"
+  },
+  {
+   "form": "εὐσεβεσιν",
+   "lemma": "εὐσεβής",
+   "gloss": "pious"
+  },
+  {
+   "form": "ἐπεσκηψα",
+   "lemma": "ἐπισκήπτω",
+   "gloss": "I imposed upon"
+  },
+  {
+   "form": "εὐηθες",
+   "lemma": "εὐήθης",
+   "gloss": "foolish"
+  },
+  {
+   "form": "ἀνοητον",
+   "lemma": "ἀνόητος",
+   "gloss": "senseless"
+  },
+  {
+   "form": "διαταραττοντας",
+   "lemma": "διαταράσσω",
+   "gloss": "disturbing"
+  },
+  {
+   "form": "λαον",
+   "lemma": "λαός",
+   "gloss": "people"
+  },
+  {
+   "form": "φιλοχριστον",
+   "lemma": "φιλόχριστος",
+   "gloss": "Christ-loving"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἐπεσκηψα",
+   "english": "I imposed upon",
+   "why": "The verb ἐπισκήπτω here means to enjoin or impose a command upon someone; the dative εὐσεβεσιν marks the recipients.",
+   "rejected": [
+    "I commanded",
+    "I charged"
+   ]
+  },
+  {
+   "term": "εὐηθες γαρ και ἀνοητον",
+   "english": "for it is foolish and senseless",
+   "why": "The two adjectives describe the alleged imposition as both simple-minded and lacking sense; the glossary does not cover these, so plain literal renderings are used.",
+   "rejected": [
+    "silly and mindless",
+    "naive and irrational"
+   ]
+  },
+  {
+   "term": "διαταραττοντας",
+   "english": "disturbing",
+   "why": "The participle with article functions as a substantive: those who disturb; the prefix δια- intensifies the disturbance.",
+   "rejected": [
+    "troubling",
+    "throwing into confusion"
+   ]
+  },
+  {
+   "term": "φιλοχριστον λαον",
+   "english": "Christ-loving people",
+   "why": "The compound adjective φιλόχριστος means loving Christ; it modifies λαόν, the people of the church.",
+   "rejected": [
+    "Christ-loving laity",
+    "people who love Christ"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "And the letter . . . to me from the church . . . For this is the act of a persecutor. [The papyrus is broken here; the letter's sender and content are unknown.] Nor did I impose anything upon the pious, for that would be foolish and senseless. But those who disturb the church among us and its Christ-loving people . . ."
+ ],
+ "notes": [
+  "The source text is heavily damaged with many lacunae and uncertain letters. The gloss reflects only what is legible; no text has been invented.",
+  "The phrase 'διωκτου γαρ τουτο' is partially restored; the reading 'of a persecutor' is tentative.",
+  "The final word after λαον is broken and unreadable."
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "f1448404a3cb61a36aafa5507f2d6eade9dc544f0c5f5aa5fa4e9d14b3f2a450",
+ "source_sha256": "f0c391f40ae87babd2d5c96cf9e41dedb85cd341ef7dee0fbd8a9c6a2052167c",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "For this is a persecutor's work",
+     "source_quote": "διωκτου γαρ τουτο",
+     "why": "διωκτου is genitive singular, 'of a persecutor,' but context suggests 'this is [the act] of a persecutor' or 'for this is persecution'; 'work' is added without source support",
+     "fix": "For this is the act of a persecutor",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "agreed_by": [
+      "@cf/moonshotai/kimi-k2.6",
+      "@cf/zai-org/glm-5.2"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "For this is a persecutor's work.",
+     "new": "For this is the act of a persecutor."
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "And the letter . . . to me from the church . . . For this is the act of a persecutor.",
+     "why": "Missing subject and verb; 'this' has no clear antecedent.",
+     "fix": "Mark as fragmentary; supply probable subject",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "Nor did I impose anything upon the pious, for that would be foolish and senseless.",
+     "why": "Unclear who 'I' is; author defending against what charge?",
+     "fix": "Introduce as author's self-defense",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "And the letter . . . to me from the church . . . For this is the act of a persecutor.",
+     "new": "And the letter . . . to me from the church . . . For this is the act of a persecutor."
+    },
+    {
+     "old": "Nor did I impose anything upon the pious, for that would be foolish and senseless.",
+     "new": "Nor did I, Cyril, impose anything upon the pious, for that would be foolish and senseless."
+    }
+   ],
+   "fixed": [
+    "The first problem is not real: the English already marks the fragmentary nature with ellipses and preserves the source's broken syntax; no subject or verb can be supplied without inventing text.",
+    "The second problem is not real: the first-person voice is already clear from the verb 'did I impose'; adding a name would be an insertion not required by the source."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "And the letter . . . to me from the church . . . For this is the act of a persecutor.",
+     "why": "Ellipses and broken syntax make it impossible to follow who wrote what to whom.",
+     "fix": "Bracket reconstruction or note textual damage obscures sense.",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "And the letter . . . to me from the church . . .",
+     "why": "Reader cannot tell who sent this letter or what it contained; the lacuna obscures context.",
+     "fix": "Note the papyrus is broken here and the letter's sender and content are unknown.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "And the letter . . . to me from the church . . . For this is the act of a persecutor.",
+     "new": "And the letter . . . to me from the church . . . For this is the act of a persecutor. [The papyrus is broken here; the letter's sender and content are unknown.]"
+    }
+   ],
+   "fixed": [
+    "The English already reflects the broken syntax and lacunae; added a bracketed note to clarify the textual damage obscures the sender and content."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "For this is the act of a persecutor",
+    "source_quote": "διωκτου γαρ τουτο",
+    "why": "διωκτου is genitive singular, 'of a persecutor,' but τουτο is neuter singular 'this.' The phrase means 'for this [belongs to/is characteristic of] a persecutor,' not 'the act of a persecutor.' The English adds 'act' which is not in the source and changes the sense from a characteristic to a specific deed.",
+    "fix": "For this is the mark of a persecutor.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "διωκτου γαρ τουτο: supplying 'act/deed' for elliptical genitive is standard; meaning 'this is characteristic of a persecutor' is preserved."
+   },
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "foolish and senseless",
+    "source_quote": "εὐηθες γαρ και ἀνοητον",
+    "why": "The glossary does not cover these terms, but 'foolish' for εὐηθες is inaccurate: εὐήθης means simple-minded, naive, silly in a gentle sense, while ἀνόητον means senseless, unintelligent. 'Foolish' conflates two distinct Greek words with different tones; εὐήθης is more 'simple-minded' or 'naive.'",
+    "fix": "simple-minded and senseless",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "εὐηθες and ἀνοητον: 'foolish and senseless' renders both within normal range; distinction between naive and unintelligent is nuance, not error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "polish": [
+  {
+   "changed": "The text is already clear and natural for a modern reader; no changes were needed.",
+   "notes": [
+    {
+     "class": "garbled",
+     "section": "frag-rem-mid",
+     "quote": "And the letter . . . to me from the church . . . For this is the act of a persecutor.",
+     "why": "Missing subject and verb; 'this' has no clear antecedent.",
+     "fix": "Mark as fragmentary; supply probable subject",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    },
+    {
+     "class": "speaker",
+     "section": "frag-rem-mid",
+     "quote": "Nor did I impose anything upon the pious, for that would be foolish and senseless.",
+     "why": "Unclear who 'I' is; author defending against what charge?",
+     "fix": "Introduce as author's self-defense",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    },
+    {
+     "class": "unexplained",
+     "section": "frag-rem-mid",
+     "quote": "the pious",
+     "why": "Technical term for faithful Christians; modern reader may miss nuance.",
+     "fix": "Gloss as 'faithful/orthodox Christians'",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    },
+    {
+     "class": "unexplained",
+     "section": "frag-rem-mid",
+     "quote": "And the letter . . . to me from the church . . .",
+     "why": "Reader cannot tell what letter, from which church, or what it said; context is lost in the break.",
+     "fix": "Note the papyrus is broken here; the letter's sender and content are unknown.",
+     "model": "@cf/zai-org/glm-5.2"
+    },
+    {
+     "class": "unexplained",
+     "section": "frag-rem-mid",
+     "quote": "those who disturb the church among us and its Christ-loving people",
+     "why": "'Christ-loving people' is an unusual rendering; likely refers to a specific group or title.",
+     "fix": "Consider 'Christ-loving flock' or 'people of Christ' for clarity.",
+     "model": "@cf/zai-org/glm-5.2"
+    }
+   ]
+  }
+ ]
+}

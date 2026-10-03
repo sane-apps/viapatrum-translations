@@ -1,0 +1,222 @@
+{
+ "excerpt_id": "cyril-alexandria-fragmentum-proverbia:frag-rem-close",
+ "section": "frag-rem-close",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-alexandria-fragmentum-proverbia/translations/cyril-fpr_frag_rem_source.json"
+ },
+ "source_text": "ην πηγή προέλευσής του.\n\n1\n",
+ "thought_title": "The source of his procession",
+ "orientation": "Cyril is closing his fragment on Proverbs 8:22, speaking about the source from which Wisdom proceeds.",
+ "pass_a_gloss": "was the source from which it goes forth.",
+ "lemmas": [
+  {
+   "form": "ην",
+   "lemma": "εἰμί",
+   "gloss": "was"
+  },
+  {
+   "form": "πηγή",
+   "lemma": "πηγή",
+   "gloss": "source"
+  },
+  {
+   "form": "προέλευσής",
+   "lemma": "προέλευσις",
+   "gloss": "procession"
+  },
+  {
+   "form": "του",
+   "lemma": "ὁ",
+   "gloss": "of him"
+  }
+ ],
+ "choices": [
+  {
+   "term": "πηγή",
+   "english": "source",
+   "why": "The literal sense of a spring or fountain, used metaphorically for origin; 'source' keeps the metaphor without over-interpreting.",
+   "rejected": [
+    "fountain",
+    "origin"
+   ]
+  },
+  {
+   "term": "προέλευσής",
+   "english": "procession",
+   "why": "The noun denotes a going forth or proceeding; 'procession' preserves the theological nuance of origin without adding a verb.",
+   "rejected": [
+    "going forth",
+    "emanation"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "It was the source from which it goes forth. [Fragmentary remnant; its connection to the argument is lost.]"
+ ],
+ "notes": [
+  "The fragment is extremely short and appears to be the tail end of a sentence; the preceding text is lost."
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "e2b2f089b5d86c51ef969049fc9e4a8c92435628961d1af3ea04a47a5e353319",
+ "source_sha256": "29a91cc72a23088ca0ddb4104360227ae88446904e6fbf5acc974c137bb14d8f",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "It was the source of his procession.",
+     "source_quote": "ην πηγή προέλευσής του.",
+     "why": "προέλευσις means 'going forth, origin' not liturgical 'procession'; 'his' for του is wrong referent.",
+     "fix": "It was the source from which it goes forth.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "προέλευσις means 'origin/going forth,' not liturgical 'procession'; του likely refers to the subject, not 'his'"
+    }
+   ],
+   "edits": [
+    {
+     "old": "It was the source of his procession.",
+     "new": "It was the source from which it goes forth."
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "It was the source from which it goes forth.",
+     "why": "Antecedents of 'it' and 'source' unclear; sentence hangs without context.",
+     "fix": "Supply subject: 'The Father was the source from which the Son goes forth.'",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "It was the source from which it goes forth.",
+     "why": "Pronoun 'it' has no clear referent; sentence is opaque.",
+     "fix": "Clarify what 'it' refers to",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "It was the source from which it goes forth.",
+     "new": "The Father was the source from which the Son goes forth."
+    }
+   ],
+   "fixed": [
+    "Supplied subject 'The Father' and clarified 'the Son' as the one going forth, resolving the unclear antecedents."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "The Father was the source from which the Son goes forth.",
+     "why": "No attribution; unclear if this is the author's conclusion, a patristic citation, or an editor's heading.",
+     "fix": "Attribute the statement or mark it as the author's summary thesis.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "The Father was the source from which the Son goes forth.",
+     "new": "It was the source from which it goes forth."
+    }
+   ],
+   "fixed": [
+    "The attribution problem is not real: the English already says exactly what the source says, so no change is needed."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "It was the source from which it goes forth.",
+     "why": "Fragmentary sentence with no clear subject; 'it' and 'his procession' unexplained.",
+     "fix": "Mark as fragmentary; possibly refers to Wisdom's eternal generation from the Father.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "It was the source from which it goes forth.",
+     "why": "Fragmentary sentence with no clear subject or context; reader cannot connect it to the argument.",
+     "fix": "Note this is a fragmentary remnant; its connection to the main argument is lost.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "It was the source from which it goes forth.",
+     "new": "It was the source from which it goes forth. [Fragmentary remnant; its connection to the argument is lost.]"
+    }
+   ],
+   "fixed": []
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "from which it goes forth",
+    "source_quote": "προέλευσής",
+    "why": "προέλευσις means 'coming forth' or 'origin'; 'goes forth' is present tense, source is a noun.",
+    "fix": "It was the source of its coming forth.",
+    "model": "@cf/zai-org/glm-5.2",
+    "rejected_by": "@cf/moonshotai/kimi-k2.6",
+    "ruling": "προέλευσις = 'origin/coming forth'; 'source from which it goes forth' captures meaning adequately."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

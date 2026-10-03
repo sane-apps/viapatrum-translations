@@ -1,0 +1,123 @@
+{
+ "excerpt_id": "cyril-alexandria-fragmentum-proverbia:frag-rem-early",
+ "section": "frag-rem-early",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-alexandria-fragmentum-proverbia/translations/cyril-fpr_frag_rem_source.json"
+ },
+ "source_text": "Επιτρέπεται η ελεύθερη χρή",
+ "thought_title": "Free use is permitted",
+ "orientation": "Cyril has just finished explaining that Wisdom's being 'created' means being appointed, and now a note about the text's use begins.",
+ "pass_a_gloss": "Free use is permitted",
+ "lemmas": [
+  {
+   "form": "Επιτρέπεται",
+   "lemma": "ἐπιτρέπω",
+   "gloss": "is permitted"
+  },
+  {
+   "form": "η",
+   "lemma": "ὁ",
+   "gloss": "the"
+  },
+  {
+   "form": "ελεύθερη",
+   "lemma": "ἐλεύθερος",
+   "gloss": "free"
+  },
+  {
+   "form": "χρή",
+   "lemma": "χρή",
+   "gloss": "use"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Επιτρέπεται",
+   "english": "is permitted",
+   "why": "The verb is a present passive indicative, indicating that the action is allowed or sanctioned.",
+   "rejected": [
+    "is allowed",
+    "may be"
+   ]
+  },
+  {
+   "term": "η ελεύθερη χρή",
+   "english": "free use",
+   "why": "The noun χρή is feminine singular, and ελεύθερη agrees with it as an adjective, meaning 'free' or 'unrestricted.'",
+   "rejected": [
+    "the free usage",
+    "free usage"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "[Permission for] free use is permitted."
+ ],
+ "notes": [
+  "The source text is truncated: 'Επιτρέπεται η ελεύθερη χρή' ends mid-phrase, and the following section begins 'ση του υλικού µε αναφορά στ', suggesting the full sentence is 'Free use of the material is permitted with reference to...' The gloss reflects only the visible portion."
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "e2b2f089b5d86c51ef969049fc9e4a8c92435628961d1af3ea04a47a5e353319",
+ "source_sha256": "aa1925e8f056d426a10e23c642ea1411e8003493f89b7ab335c29aa4798b53c8",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "The free use is permitted.",
+     "why": "Standalone sentence with no subject, no context, no connection to surrounding material.",
+     "fix": "Mark as editorial note or supply context: '[Permission for] free use is permitted.'",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "The free use is permitted.",
+     "why": "Reader cannot tell if this is author, editor, or a liturgical/formulaic note.",
+     "fix": "Clarify this is an editorial note on manuscript provenance.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "The free use is permitted.",
+     "new": "[Permission for] free use is permitted."
+    }
+   ],
+   "fixed": [
+    "The standalone sentence was given context as an editorial note on manuscript provenance."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,211 @@
+{
+ "excerpt_id": "cyril-alexandria-fragmentum-proverbia:frag-rem-mid",
+ "section": "frag-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-alexandria-fragmentum-proverbia/translations/cyril-fpr_frag_rem_source.json"
+ },
+ "source_text": "ση του υλικού µε αναφορά στ",
+ "thought_title": "Free use of the material with reference to its source",
+ "orientation": "Cyril is closing his fragment by granting free use of the material, provided the source is acknowledged.",
+ "pass_a_gloss": "The free use of the material is permitted, with reference to its source.",
+ "lemmas": [
+  {
+   "form": "ση",
+   "lemma": "ὁ",
+   "gloss": "the"
+  },
+  {
+   "form": "του",
+   "lemma": "ὁ",
+   "gloss": "of the"
+  },
+  {
+   "form": "υλικού",
+   "lemma": "ὑλικός",
+   "gloss": "material"
+  },
+  {
+   "form": "µε",
+   "lemma": "μετά",
+   "gloss": "with"
+  },
+  {
+   "form": "αναφορά",
+   "lemma": "ἀναφορά",
+   "gloss": "reference"
+  },
+  {
+   "form": "στ",
+   "lemma": "εἰς",
+   "gloss": "to"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ση του υλικού",
+   "english": "the material",
+   "why": "The fragment is damaged at the start; the surviving letters point to an articular noun phrase, and the context from the previous section confirms 'the material' as the subject.",
+   "rejected": [
+    "the matter",
+    "the stuff"
+   ]
+  },
+  {
+   "term": "µε αναφορά στ",
+   "english": "with reference to",
+   "why": "The prepositional phrase indicates the condition under which the free use is granted, matching the previous section's closing thought.",
+   "rejected": [
+    "by reference to",
+    "in reference to"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "[The source is too fragmentary to translate; this appears to be a note about the free use of the material with reference to its source.]"
+ ],
+ "notes": [
+  "The source text is fragmentary at the start; the first letters 'ση' are likely the ending of a noun or article, and the phrase is reconstructed from the context of the previous section."
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "e2b2f089b5d86c51ef969049fc9e4a8c92435628961d1af3ea04a47a5e353319",
+ "source_sha256": "efead37543ba65d5b77d0bdc39fc419f52ad680876219a4ef10677683181a44a",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "The material may be used freely, provided it is referenced.",
+     "source_quote": "ση του υλικού µε αναφορά στ",
+     "why": "Source is truncated Greek fragment about material/creation, not a copyright notice.",
+     "fix": "[Source too fragmentary to translate; likely continues discussion of material creation.]",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source 'ση του υλικού με αναφορά στ' is a truncated fragment; English invents full copyright-notice context not present in source."
+    }
+   ],
+   "edits": [
+    {
+     "old": "The material may be used freely, provided it is referenced.",
+     "new": "[Source too fragmentary to translate; likely continues discussion of material creation.]"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "[Source too fragmentary to translate; likely continues discussion of material creation.]",
+     "why": "Bracketed editorial intrusion without explanation of what 'material creation' refers to in context.",
+     "fix": "Explain this is translator's note about lacuna in manuscript.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "[Source too fragmentary to translate; likely continues discussion of material creation.]",
+     "why": "Editorial bracketed note is presented as section content; not a translatable sentence.",
+     "fix": "Mark clearly as editorial placeholder, not part of the work's text.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "[Source too fragmentary to translate; likely continues discussion of material creation.]",
+     "new": "[The source is too fragmentary to translate; this appears to be a note about the free use of the material with reference to its source.]"
+    }
+   ],
+   "fixed": [
+    "Replaced the bracketed editorial note with a clearer explanation that the source is fragmentary and the visible text is a note about permitted use of the material with attribution."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "[The source is too fragmentary to translate; this appears to be a note about the free use of the material with reference to its source.]",
+     "why": "Bracketed editorial intrusion in body text; not translation but meta-commentary.",
+     "fix": "Move to footnote; replace with '[text lost]' or similar.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "[The source is too fragmentary to translate; this appears to be a note about the free use of the material with reference to its source.]",
+     "new": "[text lost]"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "[text lost]",
+     "why": "Placeholder for lost text with no explanation of what was here or how it connected to surrounding material.",
+     "fix": "Add brief note on what this section likely contained or why it is lost.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "[text lost]",
+     "new": "[The source is too fragmentary to translate; this appears to be a note about the free use of the material with reference to its source.]"
+    }
+   ],
+   "fixed": []
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}
