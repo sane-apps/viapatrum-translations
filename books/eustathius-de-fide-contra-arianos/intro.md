@@ -1,0 +1,5 @@
+Eustathius of Antioch (c. 320–337) wrote this treatise in defense of the full divinity of Christ.
+
+The controversy concerned the Arian claim that the Son of God was mutable and convertible, not from the Father's own substance, with a temporal beginning and birth from nothing. Eustathius wrote out of love for the catholic faith and initially gave the work to a friend to read, who then had it transcribed. He asked that it be circulated anonymously at first to learned and prudent men so that it could be emended by the counsel of many if anything seemed excessive or deficient.
+
+The surviving fragment interprets Christ's saying 'I am the way and the truth and the life' from John 14:6. Eustathius argues that the name 'way' signifies the manhood of Christ, his human, bodily, visible covering, since a way is a portion of earth and a perceptible ground. The names 'truth' and 'life' signify the nature of the Father, because truth is an intelligible reality that falls under neither sight nor touch. The key terms to follow are 'way,' 'truth,' 'life,' 'the manhood of Christ,' 'covering,' 'paradise,' and 'pasture.'

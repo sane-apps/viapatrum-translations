@@ -1,0 +1,282 @@
+{
+ "excerpt_id": "epiphanius-testamentum-ad-cives:u01-rem-early",
+ "section": "u01-rem-early",
+ "edition": {
+  "language": "grc",
+  "path": "books/epiphanius-testamentum-ad-cives/translations/epi23_u01_rem_source.json"
+ },
+ "source_text": "Testamentum ad cives\n∆ιαθήκη πρὸς τοὺς πολίτας.\n31 προτείνουσι δ' οὖν ὅμως διαθήκην πρὸς τοὺς πολίτας διατεταγμένην, καθ'\nἣν μὴ ἀναφέρειν εἰκόνας ἐπ' ἐκκλησίας ἢ ἐν κοιμητηρίοις παρεγγυᾷ.",
+ "thought_title": "The testament's first command against images",
+ "orientation": "Epiphanius is issuing a binding testament to the citizens, and this section states its first command: not to bring images into churches or cemeteries.",
+ "pass_a_gloss": "They put forward, then, nevertheless, a testament to the citizens, an ordered testament, according to which he urges not to bring images up onto churches or in cemeteries.",
+ "lemmas": [
+  {
+   "form": "προτείνουσι",
+   "lemma": "προτείνω",
+   "gloss": "they put forward"
+  },
+  {
+   "form": "διαθήκην",
+   "lemma": "διαθήκη",
+   "gloss": "testament"
+  },
+  {
+   "form": "πολίτας",
+   "lemma": "πολίτης",
+   "gloss": "citizens"
+  },
+  {
+   "form": "διατεταγμένην",
+   "lemma": "διατάσσω",
+   "gloss": "ordered, arranged"
+  },
+  {
+   "form": "ἀναφέρειν",
+   "lemma": "ἀναφέρω",
+   "gloss": "to bring up"
+  },
+  {
+   "form": "εἰκόνας",
+   "lemma": "εἰκών",
+   "gloss": "images"
+  },
+  {
+   "form": "ἐκκλησίας",
+   "lemma": "ἐκκλησία",
+   "gloss": "churches"
+  },
+  {
+   "form": "κοιμητηρίοις",
+   "lemma": "κοιμητήριον",
+   "gloss": "cemeteries"
+  },
+  {
+   "form": "παρεγγυᾷ",
+   "lemma": "παρεγγυάω",
+   "gloss": "he urges, commands"
+  }
+ ],
+ "choices": [
+  {
+   "term": "διαθήκη",
+   "english": "testament",
+   "why": "The glossary requires 'testament' for διαθήκη, preserving the binding legal force of the term.",
+   "rejected": [
+    "covenant",
+    "decree",
+    "ordinance"
+   ]
+  },
+  {
+   "term": "εἰκόνας",
+   "english": "images",
+   "why": "The glossary requires 'images' for εἰκόνας, avoiding terms that imply idolatry or later icon terminology.",
+   "rejected": [
+    "effigies",
+    "icons",
+    "idols"
+   ]
+  },
+  {
+   "term": "κοιμητηρίοις",
+   "english": "cemeteries",
+   "why": "The glossary requires 'cemeteries' for κοιμητηρίοις, avoiding euphemistic or overly literal renderings.",
+   "rejected": [
+    "dormitories",
+    "resting places",
+    "sleeping places"
+   ]
+  },
+  {
+   "term": "ἀναφέρειν",
+   "english": "to bring up",
+   "why": "The verb ἀναφέρω has the sense of carrying or bringing something up to a place; 'bring up' preserves the directional force.",
+   "rejected": [
+    "to offer",
+    "to dedicate",
+    "to set up"
+   ]
+  },
+  {
+   "term": "παρεγγυᾷ",
+   "english": "he urges",
+   "why": "παρεγγυάω means to give a command or instruction; 'urges' captures the exhortative force without overstating it as a legal decree.",
+   "rejected": [
+    "he commands",
+    "he enjoins",
+    "he orders"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "They put forward, then, a testament to the citizens, in which it urges that images not be brought into churches or into the cemeteries."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "539fbc8e4d858e3c08b2b0543814c73f7ec47c1d7853ba7fb0c8e17c309c75a7",
+ "source_sha256": "5d25487bc6746d40c57fde46e605160a0eee40f5a0b26f32c6bb3c0fa6058936",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "agency",
+     "severity": "major",
+     "quote": "They put forward, then, a testament directed to the citizens, in which he urges",
+     "source_quote": "προτείνουσι δ' οὖν ὅμως διαθήκην πρὸς τοὺς πολίτας διατεταγμένην, καθ' ἣν μὴ ἀναφέρειν εἰκόνας ἐπ' ἐκκλησίας ἢ ἐν κοιμητηρίοις παρεγγυᾷ",
+     "why": "Subject switches from 'they' to 'he' with no antecedent; source uses third-person throughout.",
+     "fix": "They put forward, then, a testament directed to the citizens, in which it urges that images not be brought into churches or into the cemeteries.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "παρεγγυᾷ is singular third person; 'they put forward' then 'he urges' lacks antecedent, misleading reader on agency."
+    }
+   ],
+   "edits": [
+    {
+     "old": "in which he urges",
+     "new": "in which it urges"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "a testament to the citizens",
+     "why": "Intro says 'citizens' are recipients; text shifts between 'to' and 'directed to'",
+     "fix": "Consistent phrasing: 'testament to the citizens'",
+     "variants": [
+      {
+       "text": "a testament to the citizens",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "a testament directed to the citizens",
+       "sections": [
+        "u01-rem-early"
+       ]
+      },
+      {
+       "text": "the citizens",
+       "sections": [
+        "intro"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "in which it urges",
+     "why": "Antecedent of 'it' unclear—testament? Epiphanius? shifts from 'they'",
+     "fix": "Change 'it' to 'he' for Epiphanius",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "They put forward, then, a testament directed to the citizens, in which it urges",
+     "why": "'They' is unexplained; reader cannot identify who is putting forward the testament.",
+     "fix": "Replace 'They' with 'The text' or 'Epiphanius'.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "They put forward, then, a testament directed to the citizens, in which it urges",
+     "new": "Epiphanius puts forward, then, a testament to the citizens, in which he urges"
+    }
+   ],
+   "fixed": [
+    "Changed 'They' to 'Epiphanius' to identify the speaker, and 'directed to' to 'to' for consistent phrasing with the intro.",
+    "Changed 'it' to 'he' to refer to Epiphanius."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "Epiphanius puts forward, then, a testament",
+     "why": "Third-person narration intrudes without warning; rest is first-person speech.",
+     "fix": "Frame consistently as Epiphanius's own words or add editorial markers.",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "Epiphanius puts forward, then, a testament to the citizens",
+     "why": "Reader cannot tell if this is Epiphanius speaking of himself or an editor narrating about him.",
+     "fix": "Mark editorial narration distinctly from the text of the testament itself.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "Epiphanius puts forward, then, a testament to the citizens, in which he urges",
+     "new": "They put forward, then, a testament to the citizens, in which it urges"
+    }
+   ],
+   "fixed": [
+    "The source has no explicit subject for 'put forward'; the English supplied 'Epiphanius' and 'he', which created the speaker confusion. Restoring the impersonal 'They put forward... in which it urges' matches the source's third-person frame without intruding into the testament's first-person voice."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "agency",
+    "severity": "major",
+    "quote": "in which it urges",
+    "source_quote": "καθ' ἣν μὴ ἀναφέρειν εἰκόνας ἐπ' ἐκκλησίας ἢ ἐν κοιμητηρίοις παρεγγυᾷ",
+    "why": "Subject 'it' obscures agent; source has active verb with author as subject.",
+    "fix": "in which he urges that images not be brought into churches or into the cemeteries.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "παρεγγυᾷ active verb with 'testament' as antecedent of καθ' ἥν; 'it' correctly refers to the testament, not obscuring agency."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

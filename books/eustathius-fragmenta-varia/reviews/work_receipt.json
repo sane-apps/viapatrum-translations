@@ -1,0 +1,55 @@
+{
+ "slug": "eustathius-fragmenta-varia",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-rem-early",
+   "to": "frag-rem-mid",
+   "moved_chars": 96,
+   "moved_start": "Ἐξεῦρε πᾶσαν ὁδὸν ἐπιστήμης καὶ ἔδωκεν αὐτὴν Ἰακὼβ τῶι παιδὶ"
+  },
+  {
+   "from": "frag-rem-mid",
+   "to": "frag-rem-close",
+   "moved_chars": 13,
+   "moved_start": "90 Εἰ γὰρ τὰς"
+  }
+ ],
+ "brief_sha256": "d3836f9d5d4de80b6c41c6352209a3cc58b217cf9fa94633a796ae076beabed5",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T06:14:38Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "3b4e5d48dc15eee22b4eef0e8d7497f3d27f4d6090f433add4fb491e23b7700a",
+   "english_sha256": "84d36a167db384768569bc06ee6cd4657c6a66e31ee61a096a39cb773755494d",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "a65a0075aa10ed3c53eef6ef943ab67de4aefdfddad2bb766e8f956564bacc4b",
+   "english_sha256": "0c408b1a8487448fbd1d759bac3e3448a2bb4435732c450543658191d7f6dc49",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "af967b9c2fa05d7224aea8912f8533ee4938b70445b00772ff8f28fb4dcbe3ef",
+   "english_sha256": "a1ed71e7bd769f0189e498b7e63bab0125499be036eaf67681c4f6e2ffde0676",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "abf40ada324d5766e7936eab22f81f37deb6e83c7b2ccca75cce7a46027fab9d",
+   "english_sha256": "e75c20728eb01ebc95929ae55431726f4b6e0026c2613ac44486159b4817a7fa",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "slug": "epiphanius-testamentum-ad-cives",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 87,
+   "moved_start": "32 προσέχετε\nἑαυτοῖς καὶ κρατεῖτε τὰς παραδόσεις ἃς παρελάβε"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 53,
+   "moved_start": "ἀλλ' οὔτε κατ' οἶκον κοινόν· οὐκ ἔξεστι γὰρ Χριστιανῷ"
+  }
+ ],
+ "brief_sha256": "539fbc8e4d858e3c08b2b0543814c73f7ec47c1d7853ba7fb0c8e17c309c75a7",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T06:16:34Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "ad0ef226613148931d68b881357fbfd7fc1a94c4f9c79dfdebcc2a33ff14c926",
+   "english_sha256": "65d42133fd807a14d84b4599387535bfe386e5a1b956374390d5a1dc41946514",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "5d25487bc6746d40c57fde46e605160a0eee40f5a0b26f32c6bb3c0fa6058936",
+   "english_sha256": "856a9b2a5465e1cd4720480a54dbc9ce0576077f3d882b3dcca4ca3e9a375374",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "8e9d41acb62cc5cfe120b6bb1a9a05af75aae72ab712192e1de9fc574d35789a",
+   "english_sha256": "308600ca8f33295bd06fc81c4ac32feccf6f90e51a67511ede6629818bd170af",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "96f9b235516b8da18374c83e840e70180ce616782611bf8df6b53aede0ed1ed1",
+   "english_sha256": "046150a807692650a4a6bd921dd6f45491a58bc254faa40b32cc31736302f53c",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

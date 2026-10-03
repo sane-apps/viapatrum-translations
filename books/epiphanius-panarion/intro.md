@@ -1,5 +1,5 @@
-Epiphanius of Salamis (c. 310/320–403), bishop of Salamis in Cyprus, devoted his life to naming and answering false teaching. Jerome, who knew him, called him his father in the faith.
+Epiphanius of Salamis (c. 310/320–403) wrote this treatise in Koine Greek, beginning in 374 or 375 and issuing it about three years later. He was bishop of Salamis on Cyprus from about 367 until 402, and before that had practiced monasticism in Egypt and founded a monastery at Besanduk.
 
-The Panarion — the "medicine chest" (374–377) — is his vast antidote to heresy: sect after sect described and refuted in turn, from the beginnings of error to the controversies of his own day.
+The title Panarion means 'Medicine Chest' or 'bread basket,' referring to a stock of remedies against the poisons of heresy. Epiphanius opens by arguing that the catholic and holy Church existed from the beginning, before Judaism, heresy, or idolatry, so that his later refutations can present heresies as deviations from an original faith.
 
-This volume opens at the beginning: Heresy I, chapter V, where no heresy has yet appeared — Adam as prophet of Father, Son, and Spirit.
+In the opening section a reader will meet Adam, described as an uncircumcised prophet who knew Father, Son, and Holy Spirit, and then Abel, Seth, Enosh, Enoch, Methuselah, Noah, and Eber as early figures who shared the original faith. The text breaks off with the note that one must discuss up to Abraham. Scripture references follow the Septuagint, so the book is cited as Genesis.

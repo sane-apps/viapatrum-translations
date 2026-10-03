@@ -1,0 +1,229 @@
+{
+ "excerpt_id": "eustathius-fragmenta-varia:frag-rem-early",
+ "section": "frag-rem-early",
+ "edition": {
+  "language": "grc",
+  "path": "books/eustathius-fragmenta-varia/translations/efv_frag_rem_source.json"
+ },
+ "source_text": "Fragmenta varia 88 Τὸ μὴ μόνον ἄνθρωπον, ἀλλὰ καὶ Θεόν, καθὼς καὶ Ἱερεμίας ὁ προφήτης λέγει· οὗτος ὁ Θεὸς ἡμῶν, οὐ λογισθήσεται ἕτερος πρὸς αὐτόν.",
+ "thought_title": "Not only human but also God",
+ "orientation": "Eustathius opens a fragment by stating the claim he will defend: the one who appeared on earth is not only human but also God, as Jeremiah the prophet says.",
+ "pass_a_gloss": "The claim that he is not only a human being, but also God, just as Jeremiah the prophet also says: this is our God; no other will be reckoned beside him.",
+ "lemmas": [
+  {
+   "form": "Τὸ",
+   "lemma": "ὁ",
+   "gloss": "the (article introducing the claim)"
+  },
+  {
+   "form": "μὴ",
+   "lemma": "μή",
+   "gloss": "not"
+  },
+  {
+   "form": "μόνον",
+   "lemma": "μόνον",
+   "gloss": "only"
+  },
+  {
+   "form": "ἄνθρωπον",
+   "lemma": "ἄνθρωπος",
+   "gloss": "human being"
+  },
+  {
+   "form": "ἀλλὰ",
+   "lemma": "ἀλλά",
+   "gloss": "but"
+  },
+  {
+   "form": "καὶ",
+   "lemma": "καί",
+   "gloss": "also"
+  },
+  {
+   "form": "Θεόν",
+   "lemma": "Θεός",
+   "gloss": "God"
+  },
+  {
+   "form": "καθὼς",
+   "lemma": "καθώς",
+   "gloss": "just as"
+  },
+  {
+   "form": "Ἱερεμίας",
+   "lemma": "Ἱερεμίας",
+   "gloss": "Jeremiah"
+  },
+  {
+   "form": "ὁ",
+   "lemma": "ὁ",
+   "gloss": "the"
+  },
+  {
+   "form": "προφήτης",
+   "lemma": "προφήτης",
+   "gloss": "prophet"
+  },
+  {
+   "form": "λέγει",
+   "lemma": "λέγω",
+   "gloss": "says"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Τὸ μὴ μόνον ἄνθρωπον, ἀλλὰ καὶ Θεόν",
+   "english": "The claim that he is not only a human being, but also God",
+   "why": "The articular infinitive phrase states the thesis; supplying 'the claim that he is' makes the fragment's opening assertion clear in English while preserving the contrast between human being and God.",
+   "rejected": [
+    "Not only a human being, but also God",
+    "That he is not only human, but also God"
+   ]
+  },
+  {
+   "term": "οὐ λογισθήσεται ἕτερος πρὸς αὐτόν",
+   "english": "no other will be reckoned beside him",
+   "why": "The future passive of λογίζομαι with πρὸς αὐτόν means no other will be counted or reckoned in comparison to him; 'beside him' preserves the comparative force of πρὸς αὐτόν.",
+   "rejected": [
+    "no other will be counted against him",
+    "no other will be considered with him"
+   ]
+  },
+  {
+   "term": "καθὼς καὶ Ἱερεμίας ὁ προφήτης λέγει",
+   "english": "just as Jeremiah the prophet also says",
+   "why": "The καὶ after καθὼς adds emphasis ('also says'); rendering it as 'also' preserves the author's appeal to the prophet as an additional witness.",
+   "rejected": [
+    "as Jeremiah the prophet says",
+    "even as Jeremiah the prophet says"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Baruch 3:36",
+   "method": "wording",
+   "note": "οὗτος ὁ Θεὸς ἡμῶν, οὐ λογισθήσεται ἕτερος πρὸς αὐτόν"
+  }
+ ],
+ "pass_b_english": [
+  "The one who appeared on earth and lived among human beings is not only a human being but also God, just as Jeremiah the prophet says: “This is our God; no other will be reckoned beside him” (Jeremiah)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "d3836f9d5d4de80b6c41c6352209a3cc58b217cf9fa94633a796ae076beabed5",
+ "source_sha256": "a65a0075aa10ed3c53eef6ef943ab67de4aefdfddad2bb766e8f956564bacc4b",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Baruch 3:36",
+     "source_quote": "Ἱερεμίας ὁ προφήτης",
+     "why": "Source attributes quote to Jeremiah, not Baruch.",
+     "fix": "Jeremiah (or omit parenthetical citation).",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source says Ἱερεμίας ὁ προφήτης (Jeremiah the prophet); adding 'Baruch 3:36' misleads reader on attribution."
+    }
+   ],
+   "edits": [
+    {
+     "old": "(Baruch 3:36)",
+     "new": "(Jeremiah)"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "Jeremiah the prophet",
+     "why": "Same prophet called full title then just 'Jeremiah'",
+     "fix": "Use consistent attribution throughout",
+     "variants": [
+      {
+       "text": "Jeremiah the prophet",
+       "sections": [
+        "frag-open",
+        "frag-rem-early"
+       ]
+      },
+      {
+       "text": "Jeremiah",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "wrong_scripture",
+     "quote": "\"This is our God; no other will be reckoned beside him\" (Jeremiah)",
+     "why": "Cited as 'Jeremiah' but is Baruch 3:35-36, not canonical Jeremiah",
+     "fix": "Correct to Baruch 3:35-36 or explain Jeremiah attribution",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "just as Jeremiah the prophet also says:",
+     "new": "just as Jeremiah the prophet says:"
+    },
+    {
+     "old": "\"This is our God; no other will be reckoned beside him\" (Jeremiah)",
+     "new": "\"This is our God; no other will be reckoned beside him\" (Baruch 3:35-36)"
+    }
+   ],
+   "fixed": [
+    "Removed 'also' to make the attribution consistent with the source's single mention of Jeremiah the prophet.",
+    "Corrected the scripture citation from Jeremiah to Baruch 3:35-36, as the quoted text is from Baruch, not canonical Jeremiah."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}
