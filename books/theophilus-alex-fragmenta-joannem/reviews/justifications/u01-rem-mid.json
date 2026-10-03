@@ -1,0 +1,521 @@
+{
+ "excerpt_id": "theophilus-alex-fragmenta-joannem:u01-rem-mid",
+ "section": "u01-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/theophilus-alex-fragmenta-joannem/translations/thalfj_u01_rem_source.json"
+ },
+ "source_text": "\n<μένειν>, ποτὲ δὲ οἰκείων ἁμαρτημάτων χάριν σώμασι συμπλέκεσθαι καὶ τότε κατὰ\nγαστρὸς ἔχειν τὴν γυναῖκα δύνασθαι ὅτε τις ψυχὴ ἁμαρτάνῃ, ἀναιρῶν τὴν τοιαύτην",
+ "thought_title": "The error of souls joined to bodies for sins",
+ "orientation": "Theophilus is describing the unlawful doctrine that Christ overturned, explaining how its adherents thought souls relate to bodies.",
+ "pass_a_gloss": "to pre-exist, but sometimes as punishment for their own sins to be joined to bodies, and then the woman to be able to have in the womb whenever some soul sins, destroying such",
+ "lemmas": [
+  {
+   "form": "μένειν",
+   "lemma": "μένω",
+   "gloss": "to remain"
+  },
+  {
+   "form": "ποτὲ",
+   "lemma": "ποτέ",
+   "gloss": "sometimes"
+  },
+  {
+   "form": "οἰκείων",
+   "lemma": "οἰκεῖος",
+   "gloss": "their own"
+  },
+  {
+   "form": "ἁμαρτημάτων",
+   "lemma": "ἁμάρτημα",
+   "gloss": "sins"
+  },
+  {
+   "form": "χάριν",
+   "lemma": "χάρις",
+   "gloss": "for the sake of"
+  },
+  {
+   "form": "σώμασι",
+   "lemma": "σῶμα",
+   "gloss": "with bodies"
+  },
+  {
+   "form": "συμπλέκεσθαι",
+   "lemma": "συμπλέκω",
+   "gloss": "to be intertwined"
+  },
+  {
+   "form": "γαστρὸς",
+   "lemma": "γαστήρ",
+   "gloss": "in the womb"
+  },
+  {
+   "form": "ἔχειν",
+   "lemma": "ἔχω",
+   "gloss": "to have"
+  },
+  {
+   "form": "γυναῖκα",
+   "lemma": "γυνή",
+   "gloss": "the woman"
+  },
+  {
+   "form": "δύνασθαι",
+   "lemma": "δύναμαι",
+   "gloss": "to be able"
+  },
+  {
+   "form": "ἁμαρτάνῃ",
+   "lemma": "ἁμαρτάνω",
+   "gloss": "sins"
+  }
+ ],
+ "choices": [
+  {
+   "term": "συμπλέκεσθαι",
+   "english": "to be intertwined with",
+   "why": "The verb suggests close joining or entanglement of soul with body, matching the physical metaphor of the doctrine.",
+   "rejected": [
+    "to be joined",
+    "to be bound",
+    "to be united"
+   ]
+  },
+  {
+   "term": "κατὰ γαστρὸς ἔχειν",
+   "english": "to have in the womb",
+   "why": "This is the standard Greek idiom for pregnancy, and the literal rendering preserves the bodily focus of the argument.",
+   "rejected": [
+    "to conceive",
+    "to be pregnant"
+   ]
+  },
+  {
+   "term": "οἰκείων ἁμαρτημάτων χάριν",
+   "english": "for the sake of their own sins",
+   "why": "The possessive force of 'their own' is important because the doctrine ties each soul's embodiment to its own prior sins.",
+   "rejected": [
+    "because of sins",
+    "on account of sins"
+   ]
+  },
+  {
+   "term": "ἀναιρῶν",
+   "english": "destroying",
+   "why": "The participle continues the main clause from the previous section, showing Christ's action against the error; 'destroying' matches the glossary's sense of Christ overturning it.",
+   "rejected": [
+    "removing",
+    "abolishing",
+    "refuting"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Sometimes the soul pre-exists by itself, and at other times it is joined to bodies as punishment for its own sins, so that a woman can conceive only when some soul sins. Christ destroys this error."
+ ],
+ "notes": [
+  "The source text begins mid-clause with <μένειν>, continuing from the previous section's description of the soul pre-existing by itself. The participle ἀναιρῶν at the end continues into the following section where Christ's quotation begins."
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "46b143e28e01b001a23fedee9c8f999b9c382f80837429e6dadfcf94be7cfab8",
+ "source_sha256": "e660599c075627afb78c4f9c7de9d100f8ab220ca0d20d285e8ec6c89ab5754b",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "omission",
+     "severity": "major",
+     "quote": "And sometimes the soul is intertwined",
+     "source_quote": "<μένειν>, ποτὲ δὲ",
+     "why": "Missing 'sometimes...pre-existing' clause: source has 'at one time pre-existing, at another time...'",
+     "fix": "At one time pre-existing, at another intertwined with bodies for its own sins...",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "agreed_by": [
+      "@cf/moonshotai/kimi-k2.6",
+      "@cf/zai-org/glm-5.2"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "And sometimes the soul is intertwined with bodies for the sake of its own sins",
+     "new": "At one time pre-existing, at another time the soul is intertwined with bodies for the sake of its own sins"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "At one time pre-existing",
+     "source_quote": "<μένειν>, ποτὲ δὲ",
+     "why": "Source has 'remaining' not 'pre-existing'; ποτὲ δὲ means 'at another time' not 'at one time'",
+     "fix": "At one time remaining, at another time the soul is intertwined with bodies for the sake of its own sins",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "μένειν means 'to remain,' not 'pre-exist'; ποτὲ δὲ = 'at another time,' not 'at one time'"
+    },
+    {
+     "class": "omission",
+     "severity": "major",
+     "quote": "At one time pre-existing",
+     "source_quote": "<μένειν>, ποτὲ δὲ",
+     "why": "Missing 'remaining' (μένειν), which contrasts with 'intertwined with bodies'",
+     "fix": "At one time remaining, at another time the soul is intertwined with bodies for the sake of its own sins",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "μένειν ('remaining') is omitted; it contrasts with συμπλέκεσθαι ('intertwined with bodies')"
+    },
+    {
+     "class": "speaker",
+     "severity": "major",
+     "quote": "Christ was destroying this error",
+     "source_quote": "ἀναιρῶν τὴν τοιαύτην",
+     "why": "Greek participle ἀναιρῶν lacks subject; Christ not named until later in source",
+     "fix": "destroying this error, when asked, Christ said...",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "ἀναιρῶν is a participle with no explicit subject; 'Christ' is not named in source text here"
+    }
+   ],
+   "edits": [
+    {
+     "old": "At one time pre-existing, at another time the soul is intertwined with bodies for the sake of its own sins",
+     "new": "At one time remaining, at another time the soul is intertwined with bodies for the sake of its own sins"
+    },
+    {
+     "old": "Christ was destroying this error",
+     "new": "destroying this error"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "have a child in her womb",
+     "source_quote": "κατὰ γαστρὸς ἔχειν τὴν γυναῖκα",
+     "why": "Source says 'conceive' (hold in womb), not 'have a child'. The doctrine concerns conception, not childbirth.",
+     "fix": "conceive",
+     "model": "@cf/zai-org/glm-5.2",
+     "upheld_by": "@cf/moonshotai/kimi-k2.6",
+     "ruling": "κατὰ γαστρὸς ἔχειν means 'conceive' (hold in womb), not 'have a child'; doctrine concerns conception timing."
+    },
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "destroying this error",
+     "source_quote": "ἀναιρῶν τὴν τοιαύτην",
+     "why": "Dangling participle with wrong subject; Christ destroys the error, not the doctrine itself.",
+     "fix": "Christ destroys this error",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "ἀναιρῶν τὴν τοιαύτην [πλάνην] = 'destroying this [error/heresy]'; dangling participle loses subject reference."
+    }
+   ],
+   "edits": [
+    {
+     "old": "so that a woman can have a child in her womb only when some soul sins.",
+     "new": "so that a woman can conceive only when some soul sins."
+    },
+    {
+     "old": "destroying this error",
+     "new": "Christ destroys this error"
+    }
+   ],
+   "fixed": [
+    "Changed 'have a child in her womb' to 'conceive' to match the source's sense of conception.",
+    "Changed 'destroying this error' to 'Christ destroys this error' to clarify the subject."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "sinning souls are sent from heaven into a body",
+     "why": "Same concept rendered as 'remains pre-existing' vs 'remaining' and 'sent from heaven' vs 'intertwined'",
+     "fix": "Use consistent terms: 'pre-exists' and 'is joined to'",
+     "variants": [
+      {
+       "text": "sinning souls are sent from heaven into a body",
+       "sections": [
+        "u01-open",
+        "u01-rem-early"
+       ]
+      },
+      {
+       "text": "the soul is intertwined with bodies",
+       "sections": [
+        "u01-open",
+        "u01-rem-mid"
+       ]
+      },
+      {
+       "text": "the soul remains pre-existing by itself",
+       "sections": [
+        "u01-open",
+        "u01-rem-early"
+       ]
+      },
+      {
+       "text": "remaining",
+       "sections": [
+        "u01-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "for the sake of punishment",
+     "why": "Punishment and sins are different concepts; reader may think two different doctrines",
+     "fix": "Clarify 'punishment for its own sins' throughout",
+     "variants": [
+      {
+       "text": "for the sake of punishment",
+       "sections": [
+        "u01-open",
+        "u01-rem-early"
+       ]
+      },
+      {
+       "text": "for the sake of its own sins",
+       "sections": [
+        "u01-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "unreadable",
+     "quote": "At one time remaining, at another time the soul is intertwined",
+     "why": "Incomplete sentence; 'At one time remaining' lacks subject and verb",
+     "fix": "Supply 'the soul is' before 'remaining'",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "At one time remaining, at another time the soul is intertwined with bodies for the sake of its own sins",
+     "why": "Sentence fragment; 'remaining' dangles without subject or context.",
+     "fix": "Reword: 'Sometimes the soul remains apart; at other times it is intertwined with bodies...'",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "Christ destroys this error",
+     "why": "Sentence cuts off mid-thought with no punctuation; reader cannot tell if it continues.",
+     "fix": "Add period or connect to following section's quotation.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "At one time remaining, at another time the soul is intertwined with bodies for the sake of its own sins",
+     "new": "Sometimes the soul pre-exists by itself, and at other times it is joined to bodies for the sake of its own sins"
+    },
+    {
+     "old": "Christ destroys this error",
+     "new": "Christ destroys this error."
+    }
+   ],
+   "fixed": [
+    "Glossary consistency: replaced 'remaining' with 'pre-exists' and 'intertwined' with 'joined to' to match the work brief's terminology.",
+    "Punishment clarification: the phrase 'for the sake of its own sins' already conveys the concept of punishment for sins; no change needed beyond the glossary alignment.",
+    "Incomplete sentence: supplied 'the soul pre-exists by itself' to give the clause a subject and verb.",
+    "Sentence fragment: reworded to 'Sometimes the soul pre-exists by itself, and at other times it is joined to bodies...' to remove the dangling participle.",
+    "Speaker: added a period after 'Christ destroys this error' to close the sentence."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "sent from heaven into a body for the sake of punishment",
+     "why": "Three different phrases describe the same supposed mechanism; reader may think they differ.",
+     "fix": "Use consistent phrase: 'as punishment for its sins'.",
+     "variants": [
+      {
+       "text": "for the sake of punishment",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "for punishment",
+       "sections": [
+        "u01-rem-early"
+       ]
+      },
+      {
+       "text": "for the sake of its own sins",
+       "sections": [
+        "u01-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "intertwined with bodies",
+     "why": "Same concept; 'intertwined' and 'joined' may seem like different doctrines.",
+     "fix": "Use 'joined to bodies' throughout.",
+     "variants": [
+      {
+       "text": "intertwined with bodies",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "joined to bodies",
+       "sections": [
+        "u01-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "Destroying this error, Christ",
+     "why": "Same action, different grammatical constructions; not confusing but unnecessary variation.",
+     "fix": "Standardize to 'Christ destroyed this error'.",
+     "variants": [
+      {
+       "text": "Destroying this error, Christ",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "Christ destroys this error",
+       "sections": [
+        "u01-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "intertwined with bodies",
+     "why": "Same concept rendered differently across parallel passages.",
+     "fix": "Use one verb consistently.",
+     "variants": [
+      {
+       "text": "intertwined with bodies",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "joined to bodies",
+       "sections": [
+        "u01-rem-mid"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "Sometimes the soul pre-exists by itself, and at other times it is joined to bodies for the sake of its own sins, so that a woman can conceive only when some soul sins. Christ destroys this error.",
+     "new": "Sometimes the soul pre-exists by itself, and at other times it is joined to bodies as punishment for its own sins, so that a woman can conceive only when some soul sins. Christ destroys this error."
+    }
+   ],
+   "fixed": [
+    "Standardized 'for the sake of its own sins' to 'as punishment for its own sins' to match the consistent punishment terminology.",
+    "Confirmed 'joined to bodies' is already used consistently.",
+    "Confirmed 'Christ destroys this error' is already standardized.",
+    "Confirmed 'joined to bodies' is already used consistently."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "referee": "@cf/qwen/qwen3.8-27b",
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 3,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 2,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 3,
+    "confirmed": 1,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "refereed": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Christ destroys this error",
+    "source_quote": "ἀναιρῶν τὴν τοιαύτην",
+    "why": "Greek participle ἀναιρῶν refers back to Christ from previous clause, but English 'Christ destroys' makes it a new finite verb, disrupting the syntax and attribution.",
+    "fix": "destroying this error",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "upheld_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἀναιρῶν is a participle 'destroying'; adding 'Christ' as subject and finite verb misattributes and changes syntax."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 3,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 2,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 3,
+   "confirmed": 1,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}
