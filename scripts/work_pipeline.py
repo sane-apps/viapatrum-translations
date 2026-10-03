@@ -1115,6 +1115,12 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
     background it explains (old Bible book names, the medium, the addressee)
     is not counted as unexplained on every page."""
     results = {}
+    words = sum(len(" ".join(p["source"]).split()) for p in pairs)
+    # Keep the best passing text (sweep 2026-10-03): rounds go on after a pass
+    # to fix findings, and reader scores swing about half a point on near-equal
+    # text, so 11 of 119 works passed a round and then lost it in a later one.
+    # The snapshot is the text that passing read saw, so its scores stay bound.
+    best_pass = None  # (average, results, {section file: text})
     for rnd in range(3):
         light = reader_view(slug, pairs, intro)
         secs = staged_sections(slug, pairs)
@@ -1147,7 +1153,11 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
                    "last_followability": scores, "all_rounds": rounds_seen, "fixable": len(fixable),
                    "text_sha256": view_sha(light), "reader_unavailable": len(scores) < 2}
         log(slug, f"read round {rnd}: followability {scores} fixable {len(fixable)}")
-        ok = follow_ok(scores, sum(len(" ".join(p["source"]).split()) for p in pairs))
+        ok = follow_ok(scores, words)
+        if ok:
+            avg = sum(scores) / len(scores)
+            if best_pass is None or avg >= best_pass[0]:
+                best_pass = (avg, results, {s["_file"]: s["_file"].read_text() for s in secs if s["_file"].exists()})
         if ok and not fixable:
             break
         if rnd == 2:
@@ -1229,6 +1239,14 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
                 s_["_file"].write_text(json.dumps(new, indent=1, ensure_ascii=False))
             with ThreadPoolExecutor(WORKERS) as ex:
                 list(ex.map(polish_one, targets))
+    if best_pass and not follow_ok(results["followability"], words):
+        _, kept, files = best_pass
+        for f, txt in files.items():
+            f.write_text(txt)
+        log(slug, f"read: round {results['round']} {results['followability']} fell below the bar; "
+                  f"restored the text of round {kept['round']} {kept['followability']}")
+        results = {**kept, "restored_from_round": kept["round"], "all_rounds": results["all_rounds"],
+                   "best_followability": results["best_followability"]}
     (STAGE / slug / "read.json").write_text(json.dumps(results, indent=1, ensure_ascii=False))
     return results
 

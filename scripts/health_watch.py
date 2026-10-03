@@ -56,6 +56,11 @@ snap["certified"] = sum(1 for v in q.values() if v.get("result") == "certified")
 if prev and now - prev.get("progress_t", now) > 3 * 3600 and done <= prev.get("queue_done", 0):
     alerts.append("no lane finished a work in 3 hours")
 snap["progress_t"] = now if done > prev.get("queue_done", -1) else prev.get("progress_t", now)
+# Lanes finishing but nothing certifying is a stall too (2026-10-03: every run
+# held for hours on readability scores while lanes looked busy).
+snap["cert_t"] = now if snap["certified"] > prev.get("certified", -1) else prev.get("cert_t", now)
+if prev and now - snap["cert_t"] > 3 * 3600:
+    alerts.append(f"no work certified in {int((now - snap['cert_t']) // 3600)} h (all runs held?)")
 
 # throttles
 thr = 0
@@ -99,7 +104,8 @@ if ship:
 holders = sh(f"lsof -t '{SITE}/outputs/ship.lock' 2>/dev/null").split()
 if holders and not ship:
     alerts.append("ship lock held with no ship running (orphan pid " + ",".join(holders) + ")")
-for lg in (SITE / "outputs/ship-beliefs.log", H / "SaneApps/outputs/fathers-overnight/ship-auto.log"):
+ship_logs = sorted((SITE / "outputs").glob("ship-*.log"), key=lambda f: f.stat().st_mtime)[-1:]
+for lg in ship_logs:
     if lg.exists() and now - lg.stat().st_mtime < 1800:
         tail = sh(f"tail -c 4000 '{lg}'")
         if re.search(r"BLOCKED|Traceback|AssertionError|FAILED", tail) and "SHIP OK" not in tail:

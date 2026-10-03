@@ -601,11 +601,11 @@ class ReadBindingTests(unittest.TestCase):
                 mock.patch.object(W, "rebalance", return_value=[]), mock.patch.object(W, "intro_problems", return_value=[]),
                 mock.patch.object(W.work_read, "verify", return_value=([], []))]
 
-    def run_read(self, stage, pairs, rounds, polish=None):
+    def run_read(self, stage, pairs, rounds, polish=None, extra=()):
         seq = iter(rounds)
         from contextlib import ExitStack
         with ExitStack() as es:
-            for p in self.patches(stage, pairs):
+            for p in [*self.patches(stage, pairs), *extra]:
                 es.enter_context(p)
             es.enter_context(mock.patch.object(W, "read_two", side_effect=lambda t, l: next(seq)))
             es.enter_context(mock.patch.object(W, "polish_section", side_effect=polish or (lambda *a: None)))
@@ -624,6 +624,28 @@ class ReadBindingTests(unittest.TestCase):
         self.assertEqual(res["best_followability"], [2, 5])
         self.assertEqual(res["followability"], [3, 2])
         self.assertEqual(st["followability"], [3, 2])
+
+    def test_passing_text_restored_when_later_round_falls(self):
+        a, b = W.JUDGES
+        finding = {"class": "garbled", "section": "1", "quote": "Old", "why": "w", "fix": "f"}
+        with tempfile.TemporaryDirectory() as d:
+            stage, pairs = self.setup(d)
+            rounds = [{a: {"followability": 3}, b: {"followability": 4}},
+                      {a: {"followability": 2}, b: {"followability": 3}},
+                      {a: {"followability": 2}, b: {"followability": 3}}]
+            clean = {"confirmed": [], "rejected": []}
+            extra = [mock.patch.object(W.work_read, "verify", return_value=([finding], [])),
+                     mock.patch.object(W, "repair_section", return_value={"_status": "pass", "pass_b_english": ["Fixed text."]}),
+                     mock.patch.object(W, "section_gate", return_value=[]),
+                     mock.patch.object(W, "check_section", return_value=clean),
+                     mock.patch.object(W, "baseline_check", return_value=clean),
+                     mock.patch.object(W, "remember_check")]
+            res, st = self.run_read(stage, pairs, rounds, extra=extra)
+            text = json.loads((stage / "s" / "sections" / "1.json").read_text())["pass_b_english"]
+        self.assertEqual(text, ["Old text."])
+        self.assertEqual(res["restored_from_round"], 0)
+        self.assertEqual(res["all_rounds"], [[3, 4], [2, 3], [2, 3]])
+        self.assertEqual(st["followability"], [3, 4])
 
     def test_one_reader_cannot_certify(self):
         a, b = W.JUDGES
