@@ -1,0 +1,247 @@
+{
+ "excerpt_id": "oecumenius-fragmenta-titum:u01-rem-mid",
+ "section": "u01-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/oecumenius-fragmenta-titum/translations/oectit_u01_rem_source.json"
+ },
+ "source_text": "καὶ τοῦτό ἐστι\nτὸ θεὸν ὁμολογοῦσιν εἰδέναι, τοῖς δὲ ἔργοις ἀρνοῦνται. Tit 2,3 Ἔδειξεν ὅτι εἰς\nκλῆρον τὰς γυναῖκας καλεῖ· οὐ γὰρ ἂν ἱεροπρεπεῖς εἶπεν.",
+ "thought_title": "Confessing God but denying him by deeds",
+ "orientation": "Oecumenius is commenting on Titus 1:16 and 2:3, explaining that those who profess to know God but deny him by their deeds are impure, and that Paul's mention of reverent behavior shows women are called to an inheritance.",
+ "pass_a_gloss": "And this is the meaning: they profess to know God, but by their deeds they deny him. Tit 2:3 He showed that he calls women to an inheritance; for he would not have said reverent.",
+ "lemmas": [
+  {
+   "form": "ὁμολογοῦσιν",
+   "lemma": "ὁμολογέω",
+   "gloss": "they profess"
+  },
+  {
+   "form": "εἰδέναι",
+   "lemma": "οἶδα",
+   "gloss": "to know"
+  },
+  {
+   "form": "ἀρνοῦνται",
+   "lemma": "ἀρνέομαι",
+   "gloss": "they deny"
+  },
+  {
+   "form": "ἔργοις",
+   "lemma": "ἔργον",
+   "gloss": "deeds"
+  },
+  {
+   "form": "Ἔδειξεν",
+   "lemma": "δείκνυμι",
+   "gloss": "he showed"
+  },
+  {
+   "form": "κλῆρον",
+   "lemma": "κλῆρος",
+   "gloss": "inheritance"
+  },
+  {
+   "form": "γυναῖκας",
+   "lemma": "γυνή",
+   "gloss": "women"
+  },
+  {
+   "form": "καλεῖ",
+   "lemma": "καλέω",
+   "gloss": "he calls"
+  },
+  {
+   "form": "ἱεροπρεπεῖς",
+   "lemma": "ἱεροπρεπής",
+   "gloss": "reverent"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ὁμολογοῦσιν εἰδέναι",
+   "english": "they profess to know",
+   "why": "The verb ὁμολογέω means to confess or acknowledge openly; 'profess' captures the public claim contrasted with the denial by deeds.",
+   "rejected": [
+    "they confess to know",
+    "they acknowledge knowing"
+   ]
+  },
+  {
+   "term": "τοῖς δὲ ἔργοις ἀρνοῦνται",
+   "english": "but by their deeds they deny him",
+   "why": "The dative of instrument τοῖς ἔργοις indicates the means of denial; the pronoun 'him' is supplied from the context of denying God.",
+   "rejected": [
+    "but in their works they deny",
+    "but deny by works"
+   ]
+  },
+  {
+   "term": "εἰς κλῆρον",
+   "english": "to an inheritance",
+   "why": "The preposition εἰς with accusative κλῆρον indicates destination or goal; κλῆρος in biblical usage refers to the allotted inheritance of the saints.",
+   "rejected": [
+    "to a lot",
+    "into a portion"
+   ]
+  },
+  {
+   "term": "ἱεροπρεπεῖς",
+   "english": "reverent",
+   "why": "The glossary mandates 'reverent' for this term, which describes behavior befitting a sacred calling.",
+   "rejected": [
+    "holy in behavior",
+    "fitting for sacred service"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Titus 1:16",
+   "method": "wording",
+   "note": "θεὸν ὁμολογοῦσιν εἰδέναι, τοῖς δὲ ἔργοις ἀρνοῦνται"
+  },
+  {
+   "display": "Titus 2:3",
+   "method": "wording",
+   "note": "ἱεροπρεπεῖς"
+  }
+ ],
+ "pass_b_english": [
+  "And this is what it means to profess to know God while denying him by their deeds (Titus 1:16). Paul showed that women are called to an inheritance, for he would not have called them reverent (Titus 2:3)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "28fb685858f05f6c4beebe5363d7ecf9211fc548d69a61cc21bc65bf5217ce55",
+ "source_sha256": "d020e7abfd63551b9ab48d15b5c39e86d2e8baa0f7b206752e2b43f5fa62615e",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Titus 1:16",
+     "source_quote": "τοῦτό ἐστι τὸ θεὸν ὁμολογοῦσιν εἰδέναι, τοῖς δὲ ἔργοις ἀρνοῦνται. Tit 2,3",
+     "why": "The citation 'Tit 2,3' in source follows immediately after the deeds-denying clause, but the English assigns Titus 1:16 to the first clause and Titus 2:3 to the second. The source has 'Tit 2,3' after the first clause, not 1:16.",
+     "fix": "And this is what it means to profess to know God while denying him by their deeds (Titus 2:3). He showed that women are called to an inheritance, for he would not have called them reverent.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source has 'Tit 2,3' after ἀρνοῦνται, but English labels that clause 'Titus 1:16', changing the reference."
+    }
+   ],
+   "edits": [
+    {
+     "old": "And this is what it means to profess to know God while denying him by their deeds (Titus 1:16).",
+     "new": "And this is what it means to profess to know God while denying him by their deeds (Titus 2:3)."
+    }
+   ],
+   "fixed": [
+    "Changed Titus 1:16 to Titus 2:3 to match the source citation."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "(Titus 2:3)",
+     "source_quote": "τοῖς δὲ ἔργοις ἀρνοῦνται. Tit 2,3 Ἔδειξεν",
+     "why": "First citation Titus 2:3 is wrong; the quote 'profess to know God while denying him by deeds' is Titus 1:16, not 2:3.",
+     "fix": "(Titus 1:16). He showed that women are called to an inheritance, for he would not have called them reverent (Titus 2:3).",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "agreed_by": [
+      "@cf/moonshotai/kimi-k2.6",
+      "@cf/zai-org/glm-5.2"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "And this is what it means to profess to know God while denying him by their deeds (Titus 2:3).",
+     "new": "And this is what it means to profess to know God while denying him by their deeds (Titus 1:16)."
+    }
+   ],
+   "fixed": [
+    "Corrected the first scripture citation from Titus 2:3 to Titus 1:16, since the quoted phrase 'profess to know God while denying him by their deeds' is from Titus 1:16."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "He showed that women are called to an inheritance",
+     "why": "Ambiguous 'He'—Paul or God? Context suggests Paul, but break from prior section confuses",
+     "fix": "Specify 'Paul showed'",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "He showed that women are called to an inheritance",
+     "why": "Reader cannot tell if 'He' is Paul or Oecumenius across the section break.",
+     "fix": "Replace 'He' with 'Paul' to clarify the referent.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "He showed that women are called to an inheritance",
+     "new": "Paul showed that women are called to an inheritance"
+    }
+   ],
+   "fixed": []
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

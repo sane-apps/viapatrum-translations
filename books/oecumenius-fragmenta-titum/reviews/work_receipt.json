@@ -1,0 +1,61 @@
+{
+ "slug": "oecumenius-fragmenta-titum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 151,
+   "moved_start": "Tit 1,13b Ἐπειδὴ πολλάκις ἐπαινῶν ἐπιείκειαν ἐκδιδάσκει, εὗρ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 14,
+   "moved_start": "καὶ τοῦτό ἐστι"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 25,
+   "moved_start": "Tit 2,7 Τὸ τῆς ἀδιαφορίας"
+  }
+ ],
+ "brief_sha256": "28fb685858f05f6c4beebe5363d7ecf9211fc548d69a61cc21bc65bf5217ce55",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T02:01:07Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "52d901af95ba1fea472c89c37e8d0d15bec88174f72d7a2ed57ed8983c32f124",
+   "english_sha256": "1f886e32d23b990f32307fdce399613c08d396df34dbffd3275348e627ae9938",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "3069c33b1ada7d9522b9b5c8882611116ad1c846da93cf81ce92ca8b3308e7de",
+   "english_sha256": "a6bb9c0e942f811bea14a4dc67879630f9786928a31379da738753818cd386f6",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "d020e7abfd63551b9ab48d15b5c39e86d2e8baa0f7b206752e2b43f5fa62615e",
+   "english_sha256": "a942e4da80d3e3f32b65c75c60dc5d04abb041ced32d848d888ac0af706fefbd",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "ef4c088e19b896852861a5a3124cca8163373d82ea58dbd32f6bd36009ce0958",
+   "english_sha256": "ce050caeb95d3355a3cb66a7da1db35c9f251b66ee2ac725ff5d2b2e4c6c524e",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

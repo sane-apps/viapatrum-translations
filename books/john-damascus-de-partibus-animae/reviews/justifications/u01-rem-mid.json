@@ -1,0 +1,162 @@
+{
+ "excerpt_id": "john-damascus-de-partibus-animae:u01-rem-mid",
+ "section": "u01-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/john-damascus-de-partibus-animae/translations/jod14_u01_rem_source.json"
+ },
+ "source_text": "Τῆς ψυχῆς εἰσι δυνάμεις πέντε· νοῦς, διάνοια, δόξα, φαντασία,\nαἴσθησις. Νοῦς ἐστι νοερὰ αἴσθησις τῆς ψυχῆς, καθ' ἣν δύναται αὐτοπτικῶς ὁρᾷν τὰ\nπράγματα, καὶ δίχα ζητήσεων.",
+ "thought_title": "The soul's five powers, starting with intellect",
+ "orientation": "The treatise has just finished dividing the appetitive part into three kinds and now begins listing the soul's five powers, starting with the intellect.",
+ "pass_a_gloss": "Of the soul there are five powers: intellect, discursive thought, opinion, imagination, sense perception. Intellect is the intellectual sense perception of the soul, according to which it is able to see things directly, and without investigations.",
+ "lemmas": [
+  {
+   "form": "δυνάμεις",
+   "lemma": "δύναμις",
+   "gloss": "powers"
+  },
+  {
+   "form": "νοῦς",
+   "lemma": "νοῦς",
+   "gloss": "intellect"
+  },
+  {
+   "form": "διάνοια",
+   "lemma": "διάνοια",
+   "gloss": "discursive thought"
+  },
+  {
+   "form": "δόξα",
+   "lemma": "δόξα",
+   "gloss": "opinion"
+  },
+  {
+   "form": "φαντασία",
+   "lemma": "φαντασία",
+   "gloss": "imagination"
+  },
+  {
+   "form": "αἴσθησις",
+   "lemma": "αἴσθησις",
+   "gloss": "sense perception"
+  },
+  {
+   "form": "νοερὰ",
+   "lemma": "νοερός",
+   "gloss": "intellectual"
+  },
+  {
+   "form": "αὐτοπτικῶς",
+   "lemma": "αὐτοπτικός",
+   "gloss": "directly, by direct vision"
+  },
+  {
+   "form": "ὁρᾷν",
+   "lemma": "ὁράω",
+   "gloss": "to see"
+  },
+  {
+   "form": "πράγματα",
+   "lemma": "πρᾶγμα",
+   "gloss": "things"
+  },
+  {
+   "form": "δίχα",
+   "lemma": "δίχα",
+   "gloss": "without, apart from"
+  },
+  {
+   "form": "ζητήσεων",
+   "lemma": "ζήτησις",
+   "gloss": "investigations, inquiries"
+  }
+ ],
+ "choices": [
+  {
+   "term": "νοερὰ αἴσθησις",
+   "english": "intellectual sense perception",
+   "why": "Keeps the paradox of the Greek: the intellect is a kind of perception, but intellectual, not material. The glossary requires 'intellect' for νοῦς and 'sense perception' for αἴσθησις, so this compound preserves both terms.",
+   "rejected": [
+    "intellectual perception",
+    "noetic sensation",
+    "mental perception"
+   ]
+  },
+  {
+   "term": "αὐτοπτικῶς",
+   "english": "directly",
+   "why": "The adverb means seeing with one's own eyes, by direct vision, without mediation. 'Directly' captures the immediacy and avoids the awkward 'autoptically'.",
+   "rejected": [
+    "autoptically",
+    "with its own eyes",
+    "immediately"
+   ]
+  },
+  {
+   "term": "δίχα ζητήσεων",
+   "english": "without investigations",
+   "why": "The phrase contrasts with discursive thought, which works through reasoning and inquiry. 'Without investigations' keeps the plural and the sense of searching or inquiry.",
+   "rejected": [
+    "apart from inquiries",
+    "without searching",
+    "without questioning"
+   ]
+  },
+  {
+   "term": "δυνάμεις",
+   "english": "powers",
+   "why": "The standard rendering for faculties or capacities of the soul in this treatise. 'Powers' is plain and consistent with the following definitions.",
+   "rejected": [
+    "faculties",
+    "capacities",
+    "abilities"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "The soul has five powers: intellect, discursive thought, opinion, imagination, and sense perception. The intellect is the soul's intellectual sense perception, by which it can see things directly, without investigations."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "628ffb0a5eb4a4e67525a3ee7a62ab8b4b7919aa9085631829b8b5f48a7dc464",
+ "source_sha256": "a1e0249aadee0121d5c698174acfaa30473d4fbae7482af3ea1996972f1ebc22",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "sense perception",
+    "source_quote": "αἴσθησις",
+    "why": "Glossary bans 'perception' for αἴσθησις; must use 'sense perception'.",
+    "fix": "sense perception",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English already uses 'sense perception' for αἴσθησις, so the glossary requirement is met; no error exists."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

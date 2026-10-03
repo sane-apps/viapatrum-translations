@@ -1,0 +1,55 @@
+{
+ "slug": "oecumenius-fragmenta-philippenses",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 157,
+   "moved_start": "ἐάν τε γὰρ ἀπολογοῦμαι ἐγκαλούμενος διὰ τοὺς πιστεύοντας ων"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 141,
+   "moved_start": "οτε λοιπὸν ἐπαύσατο μὲν ἡ καλάμη τοῦ νόμου, ωσπερ δὲ σκύβα"
+  }
+ ],
+ "brief_sha256": "cea49c2eba8031c1ae76515ba5290d8f0eb7f75cb324b453646957b30cc7074f",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-03T09:20:46Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "7894fc264a49d96e308e3b69ed743cf155034310c775fc7b7820f13ff10cb546",
+   "english_sha256": "8492384e0b4c9dcd92c701ccbe6d6d1788d6108b2d36ebacc6d60ce66221a29b",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "7e7f5072c8d35e49f53fb901b5ce1f4c5a8a8a7a777295bb22d752823c830f0c",
+   "english_sha256": "e2241189752de2da864adc2da646bf224738f635df978924fbe0e48a6de15be0",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "64ad8ae12ba9615cc810c3cb6eb48060c9c77a43c67591df851e44561eea9530",
+   "english_sha256": "273bf5f13c8edb83f5819f64b4ddceba50f715701581c7ee3db9929433b35373",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "b5697cf0361eb59a7f1fc6a5c3ccad1230053104726e89f41519ede12c353db8",
+   "english_sha256": "7d4dfd3e542d953447f6c92e8b51b6f571eb6a535608622b6d4449e4531e9bd5",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

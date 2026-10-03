@@ -1,0 +1,121 @@
+{
+ "excerpt_id": "john-damascus-fragmenta-in-lucam:u01-rem-early",
+ "section": "u01-rem-early",
+ "edition": {
+  "language": "grc",
+  "path": "books/john-damascus-fragmenta-in-lucam/translations/jod29_u01_rem_source.json"
+ },
+ "source_text": "Fragmenta in Lucam\nΤοῦ ∆αμασκηνοῦ.\n95.233 Καὶ ἐπὶ τοὺς ἀποστόλους τὸ Πνεῦμα κάτεισι. Θεὸς γάρ ἐστιν· ὁ δὲ Θεὸς πῦρ\nκαταναλίσκον ἐστί.",
+ "thought_title": "The Spirit descends on the apostles; God is consuming fire",
+ "orientation": "John of Damascus opens a brief exegetical note by stating that the Spirit descends upon the apostles and identifying the Spirit as God, who is a consuming fire.",
+ "pass_a_gloss": "And upon the apostles the Spirit comes down. For he is God; and God is a consuming fire.",
+ "lemmas": [
+  {
+   "form": "ἀποστόλους",
+   "lemma": "ἀπόστολος",
+   "gloss": "apostles"
+  },
+  {
+   "form": "Πνεῦμα",
+   "lemma": "πνεῦμα",
+   "gloss": "Spirit"
+  },
+  {
+   "form": "κάτεισι",
+   "lemma": "κάτειμι",
+   "gloss": "comes down"
+  },
+  {
+   "form": "Θεὸς",
+   "lemma": "θεός",
+   "gloss": "God"
+  },
+  {
+   "form": "ἐστιν",
+   "lemma": "εἰμί",
+   "gloss": "is"
+  },
+  {
+   "form": "πῦρ",
+   "lemma": "πῦρ",
+   "gloss": "fire"
+  },
+  {
+   "form": "καταναλίσκον",
+   "lemma": "καταναλίσκω",
+   "gloss": "consuming"
+  }
+ ],
+ "choices": [
+  {
+   "term": "τὸ Πνεῦμα",
+   "english": "the Spirit",
+   "why": "The glossary English for Πνεῦμα is 'Spirit', and the article is retained to mark the subject.",
+   "rejected": [
+    "Holy Spirit"
+   ]
+  },
+  {
+   "term": "κάτεισι",
+   "english": "comes down",
+   "why": "The verb κάτειμι means 'go down' or 'come down'; the present tense is kept.",
+   "rejected": [
+    "descends"
+   ]
+  },
+  {
+   "term": "πῦρ καταναλίσκον",
+   "english": "a consuming fire",
+   "why": "The glossary English for πῦρ καταναλίσκον is 'consuming fire'; the indefinite article is added for natural English.",
+   "rejected": [
+    "devouring fire"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "The Spirit also comes down upon the apostles. For the Spirit is God, and God is a consuming fire."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "551d0cf512c9586255b05a7ac1e1cb6baa6c0a4b54877577bed9aed2cc95c714",
+ "source_sha256": "a90ca61ee8f52dd9bac94c168931dd3cfe4c950269e47c450f223a2ddd8497b4",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "addition",
+    "severity": "major",
+    "quote": "For the Spirit is God",
+    "source_quote": "Θεὸς γάρ ἐστιν",
+    "why": "Source says 'For [the Spirit] is God' with no article, but English adds 'the Spirit' as subject where source has implied subject from prior clause.",
+    "fix": "For he is God, and God is a consuming fire.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Greek 'Θεὸς γάρ ἐστιν' naturally carries forward 'τὸ Πνεῦμα' as implied subject; supplying 'the Spirit' is standard, not addition."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

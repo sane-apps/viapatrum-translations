@@ -1,0 +1,61 @@
+{
+ "slug": "origen-acta-homily-scrap",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-open",
+   "to": "frag-rem-early",
+   "moved_chars": 87,
+   "moved_start": "Πῶς οὖν, εἰ\nὁ Σωτήρ ἐστιν ὁ ταῦτα λέγων, φησὶν ὁ Πέτρος· Ἔδε"
+  },
+  {
+   "from": "frag-rem-early",
+   "to": "frag-rem-mid",
+   "moved_chars": 132,
+   "moved_start": "Προσωποποιεῖ τὸ Πνεῦμα τὸ ἅγιον ἐν τοῖς προφήταις· καὶ\nἐὰν π"
+  },
+  {
+   "from": "frag-rem-mid",
+   "to": "frag-rem-close",
+   "moved_chars": 5,
+   "moved_start": "Οὕτω,"
+  }
+ ],
+ "brief_sha256": "b1a9bec970c30c857668f2d54bee641a067609af3ca3cd08f5b4f943d8f683ea",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T04:39:04Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "a7a223ce603e5cf763fcead0f6968f47ab656f85924de2dc09ca31ff833030f5",
+   "english_sha256": "2bcd74452dff222cc2c2de5a0ef1176ba3d3865c32520a5d8bbfbb2ed4c71e8c",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "1e138e025e7f41ed67c43aaab9ea927b4cf690ed346bc9211e74b82264175025",
+   "english_sha256": "f8f0a66fa64376b25af0cc87fd2219a88293256bf0a10a0d68e295244941da46",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "3e3bab96da51c9feef65dd15154bb5796b39540930393918ed11234224c7f618",
+   "english_sha256": "a1d0e3e1a9ba2042ee69df198753847c4ea7d503af5827788fbfae9170ecac25",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "44b4e61f611ee2b18e436e2868ee3b119dafb19890fea14c78f4d806e9d88240",
+   "english_sha256": "291746c3bc6e7e477a6afccba7de956356d46e5597243c9013609c8df7b2172e",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ]
+}
