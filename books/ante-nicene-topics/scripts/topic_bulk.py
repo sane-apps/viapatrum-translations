@@ -59,6 +59,9 @@ from llm_vendor_gate import require_llm_receipt  # noqa: E402
 
 DRAFTER = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"   # Pass A
 WRITER = "nvidia/nemotron-3-ultra-550b-a55b"           # Pass B (+ span alignment)
+# Pass B writers rotate across repair attempts so one model's habit (e.g.
+# echoing the gloss) does not sink a passage. All differ from both checkers.
+WRITERS = [WRITER, "@cf/zai-org/glm-4.7-flash", DRAFTER]
 CHECK_A = "@cf/google/gemma-4-26b-a4b-it"
 CHECK_B = "@cf/qwen/qwen3-30b-a3b-fp8"
 T = "{http://www.tei-c.org/ns/1.0}"
@@ -163,6 +166,7 @@ def clean(el) -> str:
             out.append(e.tail)
     walk(el)
     s = "".join(out)
+    s = s.replace("\\'", "'").replace("\\", "")  # digitization backslashes (Kroymann TEI: sua,\\')
     s = re.sub(r"\[(?:cf\.|fol\.)[^\]]*\]", "", s)
     # Editor's bracketed references like [Sag., II, 12] or [Is., LIII, 2-3]:
     # an abbreviation plus Roman/Arabic numerals. Not the author's words.
@@ -358,7 +362,7 @@ Put each listed Scripture reference in parentheses beside its clause, e.g. (John
 ends with a full sentence. Return ONLY JSON: {{"pass_b_english": ["paragraph", "..."]}}"""
 
 
-def draft(e: dict, source_text: str, lang: str, feedback: str = "") -> dict:
+def draft(e: dict, source_text: str, lang: str, feedback: str = "", writer: str = WRITER) -> dict:
     langname = "Greek" if lang == "grc" else "Latin"
     sys_p = DRAFT_SYS.format(langname=langname, voice=VOICE.get(e.get("author"), "the author's own voice"))
     user = (f"{e.get('author')}, {e.get('work')} {e.get('locus')}.\nLocked {langname}:\n{source_text}\n\n"
@@ -369,11 +373,11 @@ def draft(e: dict, source_text: str, lang: str, feedback: str = "") -> dict:
     obj = parse_obj(raw)
     if not obj or not obj.get("pass_a_gloss"):
         raise RuntimeError(f"unparseable Pass A: {raw[:160]}")
-    obj["pass_b_english"] = write_pass_b(e, source_text, lang, obj, feedback)
+    obj["pass_b_english"] = write_pass_b(e, source_text, lang, obj, feedback, writer)
     return obj
 
 
-def write_pass_b(e: dict, source_text: str, lang: str, obj: dict, feedback: str = "") -> list:
+def write_pass_b(e: dict, source_text: str, lang: str, obj: dict, feedback: str = "", writer: str = WRITER) -> list:
     langname = "Greek" if lang == "grc" else "Latin"
     sys_p = PASSB_SYS.format(langname=langname, voice=VOICE.get(e.get("author"), "the author's own voice"))
     refs = ", ".join(r.get("display", "") for r in (obj.get("bible_refs") or []) if isinstance(r, dict))
@@ -381,7 +385,7 @@ def write_pass_b(e: dict, source_text: str, lang: str, obj: dict, feedback: str 
             f"Scripture references to place inline: {refs or 'none'}\n\n"
             + (f"The previous version failed review. Fix exactly these points:\n{feedback}\n\n" if feedback else "")
             + "JSON now.")
-    raw = call(WRITER, [{"role": "system", "content": sys_p}, {"role": "user", "content": user}], max_tokens=2500)
+    raw = call(writer, [{"role": "system", "content": sys_p}, {"role": "user", "content": user}], max_tokens=2500)
     b = (parse_obj(raw) or {}).get("pass_b_english")
     if isinstance(b, str):
         b = [b]
@@ -498,11 +502,12 @@ def process(e: dict, rounds: int) -> str:
     feedback, obj, rephrase = "", None, False
     for attempt in range(rounds + 1):
         try:
+            writer = WRITERS[attempt % len(WRITERS)]
             if rephrase and obj:
                 # Near-copy: keep the literal Pass A, recast only the reading English.
-                obj["pass_b_english"] = write_pass_b(e, src, loc["lang"], obj, feedback)
+                obj["pass_b_english"] = write_pass_b(e, src, loc["lang"], obj, feedback, writer)
             else:
-                obj = draft(e, src, loc["lang"], feedback)
+                obj = draft(e, src, loc["lang"], feedback, writer)
         except Exception as ex:  # noqa: BLE001
             feedback = f"- Return valid JSON only. ({ex})"
             rephrase = False
@@ -512,7 +517,7 @@ def process(e: dict, rounds: int) -> str:
             "thought_title", "pass_a_gloss", "lemmas", "choices", "bible_refs", "pass_b_english", "notes")},
             "anf_compare": {"status": "not_compared", "notes": "Drafted from source only; ANF not shown to drafter."},
             "variants": [], "checks": {}, "confidence": "source_draft", "reviewer": "pending-independent-review",
-            "drafter": f"{DRAFTER}+passB:{WRITER}", "bulk": True}
+            "drafter": f"{DRAFTER}+passB:{writer}", "bulk": True}
         guard = output_guard_errors(j["pass_b_english"], require_full_stop=True)
         if guard:
             feedback = "- " + "\n- ".join(guard[:4])
@@ -548,8 +553,13 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--rounds", type=int, default=2)
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--ids-file", help="JSON list (or {group: [ids]}) of excerpt ids to process")
     a = ap.parse_args()
     rows = seed_excerpts(a.author)
+    if a.ids_file:
+        raw = json.loads(Path(a.ids_file).read_text())
+        want = set(raw if isinstance(raw, list) else [i for v in raw.values() for i in v])
+        rows = [e for e in rows if e["id"] in want]
     if a.limit:
         rows = rows[:a.limit]
     if a.cmd == "locate":
@@ -574,6 +584,7 @@ def main() -> int:
     global CF, NV
     require_llm_receipt([DRAFTER], receipt_path=os.environ.get("SANE_RECEIPT_DRAFT"), purpose="translate")
     require_llm_receipt([WRITER], receipt_path=os.environ.get("SANE_RECEIPT_PASSB"), purpose="translate")
+    require_llm_receipt([WRITERS[1]], receipt_path=os.environ.get("SANE_RECEIPT_GLM"), purpose="translate")
     require_llm_receipt([WRITER], receipt_path=os.environ.get("SANE_RECEIPT_ALIGN"), purpose="translation-qa")
     require_llm_receipt([CHECK_A], receipt_path=os.environ.get("SANE_RECEIPT_GEMMA"), purpose="translation-qa")
     require_llm_receipt([CHECK_B], receipt_path=os.environ.get("SANE_RECEIPT_QWEN"), purpose="translation-qa")
