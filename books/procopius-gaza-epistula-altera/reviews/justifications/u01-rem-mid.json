@@ -1,0 +1,326 @@
+{
+ "excerpt_id": "procopius-gaza-epistula-altera:u01-rem-mid",
+ "section": "u01-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/procopius-gaza-epistula-altera/translations/pgzep2_u01_rem_source.json"
+ },
+ "source_text": "ὡς \"οὐκ\n\nἔστιν λόγων ἅμα καὶ χρημάτων πλουτεῖν· ὅθεν\" φησὶν \"ὑπεξείων δὲ τοὺς βότρυς,\nὅπως αὐτῷ μᾶλλον ἐπασκήσω τὴν γλῶτταν· ἐπεὶ καὶ οἱ τέττιγες μόνῃ τῇ δρόσῳ",
+ "thought_title": "Wealth of words and wealth of money cannot coexist",
+ "orientation": "Procopius is now quoting the imagined speech of Dionysus, who explains why he withheld the grape clusters from the poor man.",
+ "pass_a_gloss": "As: \"It is not possible to be rich in words and in money at the same time; therefore,\" he says, \"I was withdrawing the grape clusters, so that I might cultivate his tongue more; since also the cicadas, fed on dew alone—\"",
+ "lemmas": [
+  {
+   "form": "ἔστιν",
+   "lemma": "εἰμί",
+   "gloss": "it is possible"
+  },
+  {
+   "form": "λόγων",
+   "lemma": "λόγος",
+   "gloss": "words"
+  },
+  {
+   "form": "ἅμα",
+   "lemma": "ἅμα",
+   "gloss": "at the same time"
+  },
+  {
+   "form": "χρημάτων",
+   "lemma": "χρῆμα",
+   "gloss": "money"
+  },
+  {
+   "form": "πλουτεῖν",
+   "lemma": "πλουτέω",
+   "gloss": "to be rich"
+  },
+  {
+   "form": "ὅθεν",
+   "lemma": "ὅθεν",
+   "gloss": "therefore"
+  },
+  {
+   "form": "φησὶν",
+   "lemma": "φημί",
+   "gloss": "he says"
+  },
+  {
+   "form": "ὑπεξείων",
+   "lemma": "ὑπεξαιρέω",
+   "gloss": "I was withdrawing"
+  },
+  {
+   "form": "βότρυς",
+   "lemma": "βότρυς",
+   "gloss": "grape clusters"
+  },
+  {
+   "form": "ὅπως",
+   "lemma": "ὅπως",
+   "gloss": "so that"
+  },
+  {
+   "form": "ἐπασκήσω",
+   "lemma": "ἐπασκέω",
+   "gloss": "I might cultivate"
+  },
+  {
+   "form": "γλῶτταν",
+   "lemma": "γλῶττα",
+   "gloss": "tongue"
+  }
+ ],
+ "choices": [
+  {
+   "term": "λόγων ἅμα καὶ χρημάτων πλουτεῖν",
+   "english": "to be rich in words and in money at the same time",
+   "why": "Keeps the parallel structure of the two genitives with πλουτεῖν, preserving the contrast between verbal and monetary wealth.",
+   "rejected": [
+    "to be wealthy in both speech and money",
+    "to have riches of both words and money"
+   ]
+  },
+  {
+   "term": "ὑπεξείων",
+   "english": "I was withdrawing",
+   "why": "The imperfect tense conveys ongoing or repeated action in the past, matching the explanatory tone of Dionysus's defense.",
+   "rejected": [
+    "I withdrew",
+    "I was taking away"
+   ]
+  },
+  {
+   "term": "ἐπασκήσω",
+   "english": "I might cultivate",
+   "why": "The verb suggests careful training or exercise, fitting the agricultural metaphor of tending the tongue as one would a plant.",
+   "rejected": [
+    "I might train",
+    "I might exercise"
+   ]
+  },
+  {
+   "term": "μόνῃ τῇ δρόσῳ",
+   "english": "on dew alone",
+   "why": "The dative with μόνῃ emphasizes the exclusive source of nourishment, matching the Greek word order and emphasis.",
+   "rejected": [
+    "only on dew",
+    "on dew by itself"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "\"It is not possible,\" he says, \"to be rich in words and in money at the same time. Therefore, paradoxical as it seems, I was withdrawing the grape clusters, so that I might cultivate his tongue more. For even the cicadas, feeding on dew alone, hold the Muses within themselves.\""
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "661573f31a9a43beba5b07efa44500db2a0be8e7c3c87c84558a5e65e84de1f8",
+ "source_sha256": "37ecab0e000ce6f3eac0af1c7c9b5747b5db0d01f38eea1452eb5dce1296fc03",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "grape clusters",
+    "source_quote": "τοὺς βότρυς",
+    "why": "Brief glosses βότρυς as 'new wine'; 'grape clusters' is not the fixed glossary rendering.",
+    "fix": "new wine",
+    "model": "@cf/zai-org/glm-5.2",
+    "rejected_by": "@cf/moonshotai/kimi-k2.6",
+    "ruling": "βότρυς means 'cluster of grapes'; 'grape clusters' is correct, 'new wine' would be wrong."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "I was withdrawing",
+    "source_quote": "ὑπεξείων",
+    "why": "ὑπεξείων is present participle, not imperfect; 'withdrawing' implies ongoing past action, but Greek shows concurrent or general present action.",
+    "fix": "I withdraw the grape clusters",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ὑπεξείων is present participle; 'was withdrawing' renders concurrent aspect adequately within normal range, not a major error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "a man who is poor",
+     "why": "No clear antecedent; reader may think Dionysus or someone else.",
+     "fix": "Name or clearly identify the poor man earlier.",
+     "variants": [
+      {
+       "text": "a man who is poor",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "his",
+       "sections": [
+        "u01-rem-early",
+        "u01-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "\"It is not possible,\" he says",
+     "why": "Unclear if 'he' is Dionysus or Procopius; quotation marks help but attribution is muddy.",
+     "fix": "Clarify 'Dionysus says' at start of speech.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "I was withdrawing the grape clusters, so that I might cultivate his tongue more",
+     "why": "Dionysus as god of wine would not withdraw grapes; paradox needs highlighting.",
+     "fix": "Add note that this is paradoxical divine economy.",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "Dionysus",
+     "why": "Dionysus is called 'the son of Semele' without explanation; a reader may not connect the two.",
+     "fix": "Add 'Dionysus, the son of Semele,' or gloss 'son of Semele' as Dionysus.",
+     "variants": [
+      {
+       "text": "Dionysus",
+       "sections": [
+        "intro",
+        "u01-open",
+        "u01-rem-early",
+        "u01-rem-mid"
+       ]
+      },
+      {
+       "text": "the son of Semele",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "Dionysus",
+       "sections": [
+        "u01-rem-early",
+        "u01-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "It is not possible",
+     "why": "The quotation marks signal Dionysus's speech, but the closing quotation mark placement is ambiguous across the section break.",
+     "fix": "Clarify where Dionysus's speech ends relative to the next section.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "\"It is not possible,\" he says, \"to be rich in words and in money at the same time.",
+     "new": "\"It is not possible,\" Dionysus says, \"to be rich in words and in money at the same time."
+    },
+    {
+     "old": "Therefore I was withdrawing the grape clusters, so that I might cultivate his tongue more.",
+     "new": "Therefore, paradoxical as it seems, I was withdrawing the grape clusters, so that I might cultivate his tongue more."
+    }
+   ],
+   "fixed": [
+    "The poor man is already identified in the preceding section as the man devoted to the Muses and Graces; no change needed.",
+    "Changed 'he says' to 'Dionysus says' to clarify the speaker.",
+    "Added 'paradoxical as it seems' to highlight the divine economy.",
+    "The work brief names 'the son of Semele' as Dionysus; the English already uses 'Dionysus' consistently.",
+    "The quotation marks in the English clearly open and close Dionysus's speech within this section; no change needed."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "\"It is not possible,\" Dionysus says",
+     "why": "Clear here, but prior section lacks transition into direct speech.",
+     "fix": "Mark speech beginning explicitly in u01-rem-early.",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "the Muses",
+     "why": "'The whole Muses' is unidiomatic; reader may think it differs from 'the Muses.'",
+     "fix": "Use 'the Muses' consistently; 'whole' is a Greek idiom.",
+     "variants": [
+      {
+       "text": "the Muses",
+       "sections": [
+        "u01-open",
+        "u01-rem-mid"
+       ]
+      },
+      {
+       "text": "the whole Muses",
+       "sections": [
+        "u01-rem-close"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "Do you want to learn what Dionysus says to all this?",
+     "why": "Reader may not realize the next section is Dionysus's direct speech until partway through.",
+     "fix": "Add opening quotation mark before 'It is not possible' or signal the speech.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "\"It is not possible,\" Dionysus says, \"to be rich in words and in money at the same time.",
+     "new": "\"It is not possible,\" he says, \"to be rich in words and in money at the same time."
+    },
+    {
+     "old": "For even the cicadas, feeding on dew alone, hold the Muses within themselves.",
+     "new": "For even the cicadas, feeding on dew alone, hold the Muses within themselves."
+    }
+   ],
+   "fixed": [
+    "The speaker attribution is already clear in the English; the source uses φησὶν, which is rendered as 'he says' in the literal gloss, and the English already identifies Dionysus as the speaker.",
+    "The English already uses 'the Muses' consistently; no change is needed.",
+    "The English already signals the direct speech with quotation marks and the speaker attribution; no change is needed."
+   ]
+  }
+ ]
+}

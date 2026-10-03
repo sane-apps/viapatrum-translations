@@ -1,5 +1,5 @@
-Serapion of Antioch (fl. c. 190–211) led the church of Antioch at the turn of the third century. Little survives of his writings beyond what Eusebius chose to quote.
+Serapion of Antioch (fl. c. 190–211) wrote this letter to the church at Rhossus. He addresses a community he had visited and had earlier permitted to read a gospel attributed to Peter. He now writes to correct that permission after learning the gospel was being used to support Docetic teaching.
 
-His most famous hour came at Rhossus, where Christians were reading the so-called Gospel of Peter. Serapion first permitted the book, then read it, found heresy, and wrote to warn them — a second-century lesson in pastoral discernment, preserved in Eusebius's history (6.12).
+Serapion affirms that he and the church receive Peter and the other apostles as they receive Christ, but reject writings falsely attributed to them. He recalls that during his visit he had allowed the reading of the gospel bearing Peter's name, assuming the community held right faith. After learning that their mind was harboring heresy, specifically the self-contradictory teaching of Marcion, he now plans to return quickly.
 
-This volume holds the Gospel of Peter fragment addressed to Rhossus; the remaining scraps will follow.
+Serapion explains that he obtained the gospel from others who had studied it, namely the successors of those who had originated it, whom we call Docetists. He found that most of it agrees with the true teaching of the Savior, but some things have been added, which he lists for them. A reader should know that "forgeries" here means writings falsely attributed to an apostle, "right faith" means correct Christian belief, and "additions" means passages added to the gospel beyond the true teaching.

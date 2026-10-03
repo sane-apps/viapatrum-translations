@@ -1,0 +1,55 @@
+{
+ "slug": "procopius-gaza-epistula-altera",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 85,
+   "moved_start": "Εἰς\nμικρὸν εἶχε τὸ γῄδιον, ὦ ∆ιόνυσε, καὶ ταῖς ἐντεῦθεν ἐπαν"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 7,
+   "moved_start": "ὡς \"οὐκ"
+  }
+ ],
+ "brief_sha256": "661573f31a9a43beba5b07efa44500db2a0be8e7c3c87c84558a5e65e84de1f8",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-03T05:20:59Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "e4f4b9db0ffedd94aa9050dc615f5de4bd510b17d27b573314dac2daf24d5942",
+   "english_sha256": "c25990378de591f3a7243f67660091b7dc86d080725ae15482f75878cc7749be",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "37509435fc509f3b6d13be289a9056b1f172237538fba46e317b12181e028c3d",
+   "english_sha256": "10c7fddcd1e760c8064898e00d59ba5228fb569e703c8580d97f21aa16d7a5fe",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "37ecab0e000ce6f3eac0af1c7c9b5747b5db0d01f38eea1452eb5dce1296fc03",
+   "english_sha256": "3e1526df88c8c9075309ce3ca5d756faad60245dab3490ba095ae7921bf92a0a",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "a8c0c5c9c5ee6316892d672ff1de22cc81afac3446ae98b800191d4f42611371",
+   "english_sha256": "95ab58974f20cab7f058c602c0baa1ec41f70d8628504cfecc0ce28584e55d4f",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}
