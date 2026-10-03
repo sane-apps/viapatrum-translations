@@ -16,9 +16,17 @@ their verdicts released 70 sections. This makes that sweep a weekly job.
           justification), originals go to <dir>/archive/, and the book's queue
           row is reopened so a lane runs the whole-work read and certification.
 
+  publish write held/<book>/<section>.json in the repo for every section a
+          review kept held, so outside contributors (people or their AI
+          assistants, via GitHub issues labelled held-section) can fix them
+  import  release held sections whose English a merged pull request changed
+          in held/ on origin/main (gate-checked; lanes then re-read and certify)
+
 Usage (Mini, translations root):
-  python3 scripts/held_review.py run                     # export + judge + apply, new dated dir
+  python3 scripts/held_review.py run                     # import + export + judge + apply, new dated dir
   python3 scripts/held_review.py apply --dir outputs/held-sweep [--dry-run]
+  python3 scripts/held_review.py publish --dir outputs/held-sweep
+  python3 scripts/held_review.py import [--dry-run]
 """
 from __future__ import annotations
 
@@ -175,6 +183,161 @@ def judge(d: Path, workers: int = 3) -> int:
     return n
 
 
+def release(p: Path, j: dict, english: list[str], by: str, record: dict, archive: Path, dry_run: bool) -> list[str]:
+    """Mark a held section pass with new English. Returns gate errors (and
+    changes nothing) when the English fails section_gate."""
+    book = p.parts[-3]
+    new = dict(j)
+    new["pass_b_english"] = english
+    brief = load_brief(book)
+    errs = W.section_gate(new, brief) if brief is not None else ["no brief"]
+    if errs:
+        return errs
+    new["_status"] = "pass"
+    new.pop("_why", None)
+    new.pop("open_findings", None)
+    new["confidence"] = "source_verified"
+    new["reviewer"] = f"{j.get('reviewer', 'work_pipeline')}+{by}"
+    new["sweep"] = record
+    if not dry_run:
+        arch = archive / book / p.name
+        arch.parent.mkdir(parents=True, exist_ok=True)
+        arch.write_text(p.read_text())
+        p.write_text(json.dumps(new, indent=1, ensure_ascii=False))
+        tries = p.with_suffix(".retries")
+        if tries.exists():
+            tries.unlink()
+    return []
+
+
+def reopen(books) -> None:
+    """Queue rows of books with released sections go to 'reopened' so a lane
+    re-reads and certifies them; a book a lane is running picks them up itself."""
+    rows = W.update_log("", {}) if W.QUEUE_LOG.exists() else {}
+    for book in sorted(books):
+        if W.prev_running(rows, book):
+            continue
+        row = W.update_log(book, {}).get(book) or {}
+        if row.get("result") != "reopened":
+            W.update_log(book, {**row, "result": "reopened", "attempts": 0})
+
+
+HELD_DIR = "held"  # in the repo: one file per held section for outside contributors
+HELD_README = """# Held sections: help wanted
+
+Each file here is one section of a translation that is held from publication:
+automated checkers and a Claude review could not settle it. Most sit on a
+corrupt or ambiguous Greek or Latin source, or need a judgment a careful reader
+should make.
+
+How to fix one (people and AI assistants alike):
+1. Pick a file (or its GitHub issue, labelled `held-section`).
+2. Read `source` (the locked Greek or Latin) and `english` (the current text),
+   then `findings`: what the checkers objected to and the reviewer's note.
+3. Edit only the `english` list in that file. Faithful AND readable modern
+   English: every claim, negation and Scripture reference kept, nothing added.
+   Where the source is corrupt, translate what is there and mark a guess with
+   square brackets, e.g. "[perhaps: set them free]".
+4. Explain your reading in the pull request (cite the source words).
+Do not edit `source`, and do not copy any existing English translation.
+
+After a maintainer merges the pull request, the pipeline imports the new
+English, checks it, and re-reads the whole work before anything is published.
+"""
+
+
+def git(*args: str) -> str:
+    return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, timeout=120).stdout
+
+
+def publish(d: Path) -> list[dict]:
+    """Write <repo>/held/<book>/<section>.json for every section a review kept
+    held (kept_held.json), with source, English, findings and the judge's note."""
+    kept = json.loads((d / "kept_held.json").read_text())
+    findings: dict[str, list] = {}
+    for line in (d / "findings.jsonl").read_text().splitlines():
+        if line.strip():
+            f = json.loads(line)
+            findings.setdefault(f"{f['book']}/{f['section']}", []).append(f)
+    notes = {}
+    if (d / "verdicts.jsonl").exists():
+        for line in (d / "verdicts.jsonl").read_text().splitlines():
+            if line.strip():
+                v = json.loads(line)
+                notes[v["id"]] = v
+    out = []
+    for sid, why in kept:
+        book, sec = sid.split("/", 1)
+        p = W.STAGE / book / "sections" / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', sec)}.json"
+        if not p.exists():
+            continue
+        j = json.loads(p.read_text())
+        if j.get("_status") != "hold":
+            continue
+        src = j.get("source_text")
+        rec = {"book": book, "section": sec, "held_because": why,
+               "source": "\n".join(src) if isinstance(src, list) else src,
+               "english": j.get("pass_b_english") or [],
+               "findings": [{"class": f.get("class"), "quote": f.get("quote"), "source_quote": f.get("source_quote"),
+                             "checker_says": f.get("why"),
+                             "reviewer_verdict": (notes.get(f["id"]) or {}).get("verdict"),
+                             "reviewer_note": (notes.get(f["id"]) or {}).get("note")}
+                            for f in findings.get(sid, [])]}
+        dest = ROOT / HELD_DIR / book / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', sec)}.json"
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n")
+        out.append({**rec, "path": str(dest.relative_to(ROOT))})
+    (ROOT / HELD_DIR / "README.md").write_text(HELD_README)
+    print(f"publish: {len(out)} held sections -> {HELD_DIR}/", flush=True)
+    return out
+
+
+def import_held(dry_run: bool = False, ref: str = "origin/main") -> dict:
+    """Release held sections whose English a merged pull request changed in
+    held/ on origin/main (read with git show; the working tree is untouched)."""
+    git("fetch", "-q", "origin")
+    rows = W.update_log("", {}) if W.QUEUE_LOG.exists() else {}
+    stats, books = {"imported": 0, "unchanged": 0, "gate": 0, "not_held": 0, "running": 0}, {}
+    for path in git("ls-tree", "-r", "--name-only", ref, HELD_DIR + "/").split():
+        if not path.endswith(".json"):
+            continue
+        try:
+            rec = json.loads(git("show", f"{ref}:{path}"))
+        except ValueError:
+            continue
+        book, sec = rec.get("book", ""), str(rec.get("section", ""))
+        p = W.STAGE / book / "sections" / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', sec)}.json"
+        if not p.exists():
+            continue
+        j = json.loads(p.read_text())
+        eng = [str(x).strip() for x in rec.get("english") or [] if str(x).strip()]
+        if j.get("_status") != "hold":
+            stats["not_held"] += 1
+            continue
+        if not eng or eng == j.get("pass_b_english"):
+            stats["unchanged"] += 1
+            continue
+        if W.prev_running(rows, book):
+            stats["running"] += 1
+            continue
+        commit = git("log", "-1", "--format=%h %an", ref, "--", path).strip()
+        by = f"contributor ({commit})"
+        record = {"by": by, "held_why": j.get("_why"), "imported_from": f"{ref}:{path}",
+                  "previous_english": j.get("pass_b_english")}
+        errs = release(p, j, eng, by, record, ROOT / "outputs/held-import/archive", dry_run)
+        if errs:
+            stats["gate"] += 1
+            print(f"import {book}/{sec}: gate {errs[:2]}", flush=True)
+            continue
+        stats["imported"] += 1
+        books.setdefault(book, []).append(sec)
+        print(f"import {book}/{sec}: released ({by})", flush=True)
+    if not dry_run:
+        reopen(books)
+    print(json.dumps(stats), flush=True)
+    return stats
+
+
 def apply(d: Path, dry_run: bool) -> dict:
     verdicts = {}
     for line in (d / "verdicts.jsonl").read_text().splitlines():
@@ -241,46 +404,21 @@ def apply(d: Path, dry_run: bool) -> dict:
             uniq.append(s)
         for k, start, end, fix, _, _ in sorted(uniq, key=lambda s: (s[0], -s[1])):
             paras[k] = paras[k][:start] + fix + paras[k][end:]
-        new = dict(j)
-        new["pass_b_english"] = paras
-        brief = load_brief(book)
-        errs = W.section_gate(new, brief) if brief is not None else ["no brief"]
+        record = {"by": judge_name, "held_why": j.get("_why"),
+                  "fixed": [{"quote": f.get("quote"), "fix": fix, "class": f.get("class"), "note": v.get("note")}
+                            for _, _, _, fix, f, v in uniq],
+                  "dismissed": [{"quote": f.get("quote"), "class": f.get("class"), "why": f.get("why"),
+                                 "note": v.get("note")} for f, v in found if v["verdict"] == "noise"]}
+        errs = release(p, j, paras, judge_name, record, d / "archive", dry_run)
         if errs:
             stats["kept_gate"] += 1
             kept.append((sid, "gate: " + "; ".join(errs[:2])))
             continue
-        new["_status"] = "pass"
-        new.pop("_why", None)
-        new.pop("open_findings", None)
-        new["confidence"] = "source_verified"
-        new["reviewer"] = f"{j.get('reviewer', 'work_pipeline')}+{judge_name}"
-        new["sweep"] = {"by": judge_name, "held_why": j.get("_why"),
-                        "fixed": [{"quote": f.get("quote"), "fix": fix, "class": f.get("class"), "note": v.get("note")}
-                                  for _, _, _, fix, f, v in uniq],
-                        "dismissed": [{"quote": f.get("quote"), "class": f.get("class"), "why": f.get("why"),
-                                       "note": v.get("note")} for f, v in found if v["verdict"] == "noise"]}
         stats["fixes"] += len(uniq)
         stats["released_fixed" if uniq else "released_noise"] += 1
         books.setdefault(book, []).append(j.get("section"))
-        if not dry_run:
-            arch = d / "archive" / book / p.name
-            arch.parent.mkdir(parents=True, exist_ok=True)
-            arch.write_text(p.read_text())
-            p.write_text(json.dumps(new, indent=1, ensure_ascii=False))
-            tries = p.with_suffix(".retries")
-            if tries.exists():
-                tries.unlink()
     if not dry_run:
-        # Every book with a released section, including an earlier interrupted
-        # run's; a book a lane is running picks its sections up itself.
-        archived = {x.name for x in (d / "archive").iterdir()} if (d / "archive").exists() else set()
-        rows = W.update_log("", {}) if W.QUEUE_LOG.exists() else {}
-        for book in sorted(set(books) | archived):
-            if W.prev_running(rows, book):
-                continue
-            row = W.update_log(book, {}).get(book) or {}
-            if row.get("result") != "reopened" and book in books:
-                W.update_log(book, {**row, "result": "reopened", "attempts": 0})
+        reopen(books)
         (d / "kept_held.json").write_text(json.dumps(kept, indent=1, ensure_ascii=False))
     for sid, why in kept:
         print("KEPT", sid, "|", why)
@@ -291,11 +429,20 @@ def apply(d: Path, dry_run: bool) -> dict:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("cmd", choices=["run", "export", "judge", "apply"])
+    ap.add_argument("cmd", choices=["run", "export", "judge", "apply", "publish", "import"])
     ap.add_argument("--dir", default="", help="review folder (default: outputs/held-review/<date> for run/export)")
-    ap.add_argument("--dry-run", action="store_true", help="apply: report only")
+    ap.add_argument("--dry-run", action="store_true", help="apply/import: report only")
     a = ap.parse_args()
     d = ROOT / (a.dir or f"outputs/held-review/{time.strftime('%Y-%m-%d')}")
+    if a.cmd == "publish":
+        publish(d)
+        return 0
+    if a.cmd in ("run", "import"):
+        # Contributor fixes merged on GitHub come in first, so the review does
+        # not judge findings their English already settled.
+        import_held(a.dry_run)
+        if a.cmd == "import":
+            return 0
     if a.cmd in ("run", "judge"):
         why = preflight()
         if why:

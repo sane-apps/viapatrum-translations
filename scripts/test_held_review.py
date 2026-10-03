@@ -97,5 +97,52 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(st["kept_unjudged"], 1)
 
 
+class ImportTests(unittest.TestCase):
+    def run_import(self, d, english, gate=()):
+        root = Path(d)
+        stage = root / "outputs/work-pipeline"
+        sec = stage / "bk/sections/1.json"
+        sec.parent.mkdir(parents=True)
+        sec.write_text(json.dumps({"section": "1", "_status": "hold", "_why": "corrupt", "pass_b_english": ["Old."]}))
+        merged = json.dumps({"book": "bk", "section": "1", "english": english})
+
+        def git(*args):
+            if args[0] == "ls-tree":
+                return "held/README.md\nheld/bk/1.json\n"
+            if args[0] == "show":
+                return merged
+            if args[0] == "log":
+                return "abc123 A Contributor\n"
+            return ""
+        with mock.patch.object(H, "ROOT", root), mock.patch.object(H.W, "STAGE", stage), \
+                mock.patch.object(H.W, "QUEUE_LOG", stage / "queue.json"), \
+                mock.patch.object(H.W, "update_log", return_value={}), mock.patch.object(H, "git", side_effect=git), \
+                mock.patch.object(H, "load_brief", return_value={}), \
+                mock.patch.object(H.W, "section_gate", return_value=list(gate)):
+            st = H.import_held()
+        return st, json.loads(sec.read_text())
+
+    def test_changed_english_released(self):
+        with tempfile.TemporaryDirectory() as d:
+            st, j = self.run_import(d, ["New [perhaps: reading]."])
+        self.assertEqual(st["imported"], 1)
+        self.assertEqual(j["_status"], "pass")
+        self.assertEqual(j["pass_b_english"], ["New [perhaps: reading]."])
+        self.assertEqual(j["sweep"]["previous_english"], ["Old."])
+        self.assertIn("abc123", j["sweep"]["by"])
+
+    def test_unchanged_english_left_held(self):
+        with tempfile.TemporaryDirectory() as d:
+            st, j = self.run_import(d, ["Old."])
+        self.assertEqual(st["unchanged"], 1)
+        self.assertEqual(j["_status"], "hold")
+
+    def test_gate_failure_left_held(self):
+        with tempfile.TemporaryDirectory() as d:
+            st, j = self.run_import(d, ["and and"], gate=["doubled word"])
+        self.assertEqual(st["gate"], 1)
+        self.assertEqual(j["_status"], "hold")
+
+
 if __name__ == "__main__":
     unittest.main()

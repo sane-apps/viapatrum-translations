@@ -6,6 +6,7 @@ Same four ways as https://fathers.saneapps.com/contribute/
 2. [Buy a Mac app](https://saneapps.com) — one-time purchase, no subscription
 3. [Point an AI at a slice](docs/START_HERE.md) — copy that file into your AI
 4. [Spot-check the Greek or Latin](https://github.com/sane-apps/translations/issues/new?template=correction.yml)
+5. [Fix a held section](held/README.md): sections held from publication because the checkers could not settle them (often a corrupt source). One file per section; edit its English and open a pull request. Open tasks are GitHub issues labelled `held-section`.
 
 ## Research SOP (intros, bios, dates)
 

@@ -34,4 +34,6 @@ Then:
 
 If there is no free slice, stop and say so.
 
+No free slice, or you would rather fix than translate? Take one GitHub issue labelled `held-section` and follow `held/README.md`: edit only the `english` of that one file, explain your reading in the pull request, and stop.
+
 More detail: `docs/SOP.md`.
