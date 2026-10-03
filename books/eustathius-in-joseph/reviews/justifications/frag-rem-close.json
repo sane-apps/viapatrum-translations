@@ -1,0 +1,316 @@
+{
+ "excerpt_id": "eustathius-in-joseph:frag-rem-close",
+ "section": "frag-rem-close",
+ "edition": {
+  "language": "grc",
+  "path": "books/eustathius-in-joseph/translations/eijo_frag_rem_source.json"
+ },
+ "source_text": "ἰχνευτικῶς, οὕτω δὲ τολμηροὶ καὶ προπετεῖς ἦσαν ἄνδρες ὥστε μόνοι τοὺς Σικιμίτας ἀπέσφαζον ἐθνηδόν.",
+ "thought_title": "The boldness of Simeon and Levi in slaughtering the Shechemites",
+ "orientation": "Eustathius is contrasting Joseph's self-control with the murderous boldness of his brothers Simeon and Levi, who slaughtered the Shechemites.",
+ "pass_a_gloss": "In a tracking manner, and so bold and reckless were the men that alone they were slaughtering the Shechemites nation by nation.",
+ "lemmas": [
+  {
+   "form": "ἰχνευτικῶς",
+   "lemma": "ἰχνευτικός",
+   "gloss": "in a tracking manner, like hunters on a scent"
+  },
+  {
+   "form": "τολμηροὶ",
+   "lemma": "τολμηρός",
+   "gloss": "bold, daring"
+  },
+  {
+   "form": "προπετεῖς",
+   "lemma": "προπετής",
+   "gloss": "reckless, headlong, rash"
+  },
+  {
+   "form": "ἄνδρες",
+   "lemma": "ἀνήρ",
+   "gloss": "men"
+  },
+  {
+   "form": "μόνοι",
+   "lemma": "μόνος",
+   "gloss": "alone, by themselves"
+  },
+  {
+   "form": "Σικιμίτας",
+   "lemma": "Σικιμίτης",
+   "gloss": "Shechemites"
+  },
+  {
+   "form": "ἀπέσφαζον",
+   "lemma": "ἀποσφάζω",
+   "gloss": "were slaughtering, were butchering"
+  },
+  {
+   "form": "ἐθνηδόν",
+   "lemma": "ἐθνηδόν",
+   "gloss": "nation by nation, by whole peoples"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἰχνευτικῶς",
+   "english": "in a tracking manner",
+   "why": "Preserves the adverbial force and the hunting imagery of following a scent, which connects to the previous sentence's 'savory smells'.",
+   "rejected": [
+    "like trackers",
+    "by scent"
+   ]
+  },
+  {
+   "term": "προπετεῖς",
+   "english": "reckless",
+   "why": "Captures the headlong, rash quality of their violence, distinct from mere boldness.",
+   "rejected": [
+    "rash",
+    "headstrong"
+   ]
+  },
+  {
+   "term": "ἀπέσφαζον",
+   "english": "were slaughtering",
+   "why": "The imperfect tense conveys ongoing or repeated action, matching the habitual violence described in the previous sentence.",
+   "rejected": [
+    "slaughtered",
+    "butchered"
+   ]
+  },
+  {
+   "term": "ἐθνηδόν",
+   "english": "nation by nation",
+   "why": "The rare adverb emphasizes the scale and totality of the killing, treating whole peoples as units of slaughter.",
+   "rejected": [
+    "by peoples",
+    "wholesale"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Genesis 34:25",
+   "method": "wording",
+   "note": "Simeon and Levi slaughtering the Shechemites"
+  }
+ ],
+ "pass_b_english": [
+  "They were such bold and reckless men that, like hunters on a scent, they slaughtered the Shechemites by themselves, nation by nation (Genesis 34:25-26)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "036a18b15e3e2c96a3e6323c1c807111c1585bdedb1216fb88490b38bda9816e",
+ "source_sha256": "bfa71c8c4ace6962264aed59835a9985af8e8f88bc9e7bf7fb15c6d8d5348812",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "by themselves, nation by nation",
+     "source_quote": "μόνοι...ἐθνηδόν",
+     "why": "μόνοι means 'alone' (only Simeon and Levi), not 'by themselves'; ἐθνηδόν means 'like a nation/people' (collectively), not 'nation by nation'.",
+     "fix": "all alone, like a nation unto themselves",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "agreed_by": [
+      "@cf/moonshotai/kimi-k2.6",
+      "@cf/zai-org/glm-5.2"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "they slaughtered the Shechemites by themselves, nation by nation",
+     "new": "they slaughtered the Shechemites all alone, like a nation unto themselves"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "like a nation unto themselves",
+     "source_quote": "ἐθνηδόν",
+     "why": "ἐθνηδόν means 'nation by nation' or 'tribe by tribe' (slaughtering them group by group), not 'like a nation unto themselves'.",
+     "fix": "they slaughtered the Shechemites all alone, tribe by tribe (Genesis 34:25).",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "agreed_by": [
+      "@cf/moonshotai/kimi-k2.6",
+      "@cf/zai-org/glm-5.2"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "they slaughtered the Shechemites all alone, like a nation unto themselves (Genesis 34:25).",
+     "new": "they slaughtered the Shechemites all alone, tribe by tribe (Genesis 34:25)."
+    }
+   ],
+   "fixed": [
+    "Changed 'like a nation unto themselves' to 'tribe by tribe' to match ἐθνηδόν."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "quote": "Genesis 34:25",
+     "why": "Genesis 34:25 says Simeon and Levi killed males, not 'tribe by tribe' slaughter.",
+     "fix": "Cite Genesis 34:25-26 or note hyperbolic expansion.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "tribe by tribe",
+     "why": "Simeon and Levi acted alone, not tribe by tribe; likely mistranslation of a phrase meaning 'by themselves.'",
+     "fix": "Render as 'by themselves' or 'on their own.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "they slaughtered the Shechemites all alone, tribe by tribe (Genesis 34:25).",
+     "new": "they slaughtered the Shechemites all alone, nation by nation (Genesis 34:25-26)."
+    }
+   ],
+   "fixed": [
+    "The scripture citation was updated to Genesis 34:25-26 to reflect the broader slaughter context.",
+    "The phrase 'tribe by tribe' was corrected to 'nation by nation' to match the source's 'ἐθνηδόν'."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "they slaughtered the Shechemites all alone, nation by nation",
+     "why": "'All alone' contradicts 'Simeon and Levi and their company' and Genesis 34:25 'each man his sword.'",
+     "fix": "Emend to 'by themselves' meaning without Jacob's approval, or 'alone' as 'single-handedly'.",
+     "variants": null
+    },
+    {
+     "class": "wrong_scripture",
+     "quote": "Genesis 34:25-26",
+     "why": "Cited verses mention swords and killing, but 'nation by nation' and 'all alone' do not match Genesis 34.",
+     "fix": "Note that citation covers the slaughter, though author's phrasing paraphrases freely.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "they slaughtered the Shechemites all alone, nation by nation (Genesis 34:25-26).",
+     "new": "they slaughtered the Shechemites by themselves, nation by nation (Genesis 34:25-26)."
+    }
+   ],
+   "fixed": [
+    "The scripture citation Genesis 34:25-26 is appropriate for the slaughter of the Shechemites, even though the author's phrasing paraphrases freely."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 2,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 0,
+    "rejected": 4,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "tribe by tribe",
+    "source_quote": "ἐθνηδόν",
+    "why": "ἐθνηδόν means 'after the manner of nations/tribes' or 'like gentiles,' not 'tribe by tribe.'",
+    "fix": "like a tribe",
+    "model": "@cf/zai-org/glm-5.2",
+    "rejected_by": "@cf/moonshotai/kimi-k2.6",
+    "ruling": "ἐθνηδόν (ethnēdon) is adverbial from ἔθνος; 'tribe by tribe' captures distributive slaughter by kinship groups, standard rendering."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "like hunters on a scent",
+    "source_quote": "ἰχνευτικῶς",
+    "why": "ἰχνευτικῶς means 'trackingly/investigatively,' not 'like hunters on a scent.'",
+    "fix": "They tracked them down so boldly and recklessly that they alone slaughtered the Shechemites, tribe by tribe.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἰχνευτικῶς derives from ἰχνεύω (track/follow scent); 'hunters on a scent' is valid figurative rendering."
+   },
+   {
+    "class": "addition",
+    "severity": "major",
+    "quote": "all alone",
+    "source_quote": "μόνοι",
+    "why": "μόνοι modifies the brothers (they alone did it), not 'all alone' as manner.",
+    "fix": "they alone slaughtered the Shechemites, tribe by tribe",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "μόνοι naturally reads 'they alone slaughtered'; 'all alone' conveys same meaning adequately."
+   },
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Genesis 34:25",
+    "source_quote": "",
+    "why": "The source cites no scripture reference; this is an editorial addition.",
+    "fix": "Remove '(Genesis 34:25)' or mark as editorial.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Scripture references are standard editorial aids; not a translation error of source meaning."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 0,
+   "rejected": 4,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

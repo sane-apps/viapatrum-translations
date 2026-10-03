@@ -1,0 +1,173 @@
+{
+ "excerpt_id": "eustathius-in-joseph:frag-rem-mid",
+ "section": "frag-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/eustathius-in-joseph/translations/eijo_frag_rem_source.json"
+ },
+ "source_text": "Οἱ γὰρ ἀμφὶ τὸν\nΣυμεῶνα καὶ τὸν Λευῒ, οὐ μετρίως ἀπογευσάμενοι τῆς ἀνδροφονίας, ἐν συνηθείᾳ μὲν ἤδη ποτὲ τοῦ πράγματος ἐγεγόνεισαν, ἕρπειν δὲ περὶ τὰς τοιαύτας ὠρέγοντο κνίσας",
+ "thought_title": "Simeon and Levi's taste for murder",
+ "orientation": "Eustathius is contrasting Joseph's self-control with the violent habits of his brothers Simeon and Levi.",
+ "pass_a_gloss": "For those around Simeon and Levi, having tasted murder not moderately, had already at some time come to be in a habit of the deed, and they desired to creep around such savory smells.",
+ "lemmas": [
+  {
+   "form": "ἀμφὶ",
+   "lemma": "ἀμφί",
+   "gloss": "around, concerning"
+  },
+  {
+   "form": "ἀπογευσάμενοι",
+   "lemma": "ἀπογεύω",
+   "gloss": "having tasted"
+  },
+  {
+   "form": "ἀνδροφονίας",
+   "lemma": "ἀνδροφονία",
+   "gloss": "murder"
+  },
+  {
+   "form": "συνηθείᾳ",
+   "lemma": "συνήθεια",
+   "gloss": "habit"
+  },
+  {
+   "form": "ἐγεγόνεισαν",
+   "lemma": "γίγνομαι",
+   "gloss": "had become"
+  },
+  {
+   "form": "ἕρπειν",
+   "lemma": "ἕρπω",
+   "gloss": "to creep"
+  },
+  {
+   "form": "ὠρέγοντο",
+   "lemma": "ὀρέγω",
+   "gloss": "they desired"
+  },
+  {
+   "form": "κνίσας",
+   "lemma": "κνῖσα",
+   "gloss": "savory smells"
+  }
+ ],
+ "choices": [
+  {
+   "term": "οἱ ἀμφὶ τὸν Συμεῶνα καὶ τὸν Λευΐ",
+   "english": "those around Simeon and Levi",
+   "why": "The phrase 'οἱ ἀμφὶ' can mean 'the followers of' or 'the party of,' but here it likely refers to Simeon and Levi themselves and their associates; rendering literally as 'those around' preserves the Greek idiom without overinterpreting.",
+   "rejected": [
+    "Simeon and Levi's men",
+    "the company of Simeon and Levi"
+   ]
+  },
+  {
+   "term": "οὐ μετρίως ἀπογευσάμενοι",
+   "english": "having tasted not moderately",
+   "why": "The litotes 'not moderately' is kept literal to preserve the understatement and the force of the Greek adverb.",
+   "rejected": [
+    "having tasted excessively",
+    "having tasted immoderately"
+   ]
+  },
+  {
+   "term": "ἐν συνηθείᾳ μὲν ἤδη ποτὲ τοῦ πράγματος ἐγεγόνεισαν",
+   "english": "had already at some time come to be in a habit of the deed",
+   "why": "The pluperfect 'ἐγεγόνεισαν' with 'ἐν συνηθείᾳ' is rendered literally to show the completed state of habituation; 'ἤδη ποτέ' is kept as 'already at some time' to preserve the temporal nuance.",
+   "rejected": [
+    "had already become accustomed to the deed",
+    "were already in the habit of the deed"
+   ]
+  },
+  {
+   "term": "ἕρπειν δὲ περὶ τὰς τοιαύτας ὠρέγοντο κνίσας",
+   "english": "and they desired to creep around such savory smells",
+   "why": "The metaphor of creeping around savory smells (κνίσας) is vivid and unusual; keeping it literal preserves the sensory image of being drawn to the scent of murder.",
+   "rejected": [
+    "and they longed to crawl toward such odors",
+    "and they craved to slink around such fumes"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "For Simeon and Levi and their company had tasted murder in no small measure, and by now they had made a settled habit of the deed; they even longed to go creeping around the scent of blood."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "036a18b15e3e2c96a3e6323c1c807111c1585bdedb1216fb88490b38bda9816e",
+ "source_sha256": "7998fb4370c7b77c4de85663e8a3fc4d153d52c2a0627ed2286e0ff8b35eca6b",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "savory smells",
+    "source_quote": "κνίσας",
+    "why": "Glossary requires 'murder' for ἀνδροφονία; 'savory smells' obscures the metaphor's referent to murder.",
+    "fix": "they even longed to go creeping around such scents of murder",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "κνίσας correctly rendered as 'savory smells'; glossary issue is spurious since ἀνδροφονίας is already translated 'murder'."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "savory smells",
+    "source_quote": "κνίσας",
+    "why": "κνίσας means 'sacrificial smoke/smell' but metaphorically refers back to murder, not literal food smells.",
+    "fix": "such scents of murder",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "κνίσας means savory smell of roasting meat; 'savory smells' captures the word and metaphor without needing explicit glossing."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "they even longed to go creeping around such savory smells",
+     "why": "Odd metaphor for murder; likely a hunting/blood-scent image mistranslated as food.",
+     "fix": "Render as 'the scent of blood' or similar hunting imagery.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "they even longed to go creeping around such savory smells",
+     "new": "they even longed to go creeping around the scent of blood"
+    }
+   ],
+   "fixed": []
+  }
+ ]
+}
