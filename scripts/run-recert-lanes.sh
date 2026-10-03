@@ -53,6 +53,10 @@ if [ -z "$NVR" ] || [ $(( $(date +%s) - $(stat -f %m "$NVR") )) -ge 10800 ]; the
     && echo "$(date +%T) receipt refreshed nemotron-3-ultra" || echo "$(date +%T) receipt FAILED nemotron-3-ultra"
 fi
 
+# Re-gate held sections offline each tick (no LLM): gate fixes release false
+# holds once no lane is on the book (2026-10-03 stall fixes).
+timeout 300 python3 scripts/regate_held.py >> "$OUT/regate.log" 2>&1 || true
+
 lane() {  # name args...
   local name="$1"; shift
   local pidf="$OUT/lane-$name.pid"
