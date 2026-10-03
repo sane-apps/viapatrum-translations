@@ -1125,7 +1125,9 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
     # to fix findings, and reader scores swing about half a point on near-equal
     # text, so 11 of 119 works passed a round and then lost it in a later one.
     # The snapshot is the text that passing read saw, so its scores stay bound.
-    best_pass = None  # (average, results, {section file: text})
+    best_pass = None  # (average, results, {section or intro file: text})
+    intro_path = STAGE / slug / "intro.json"
+    intro_redone = False
     for rnd in range(3):
         light = reader_view(slug, pairs, intro)
         secs = staged_sections(slug, pairs)
@@ -1162,11 +1164,29 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
         if ok:
             avg = sum(scores) / len(scores)
             if best_pass is None or avg >= best_pass[0]:
-                best_pass = (avg, results, {s["_file"]: s["_file"].read_text() for s in secs if s["_file"].exists()})
+                files = {s["_file"]: s["_file"].read_text() for s in secs if s["_file"].exists()}
+                if intro_path.exists():
+                    files[intro_path] = intro_path.read_text()
+                best_pass = (avg, results, files)
         if ok and not fixable:
             break
         if rnd == 2:
             break
+        # Terms the readers could not place go to the introduction, which the
+        # next round reads first (once per run; the last round never edits).
+        terms, seen = [], set()
+        for r in reads.values():
+            for f in r.get("findings", []):
+                k = (f.get("quote") or "").strip().lower()
+                if f["class"] == "unexplained" and k and k not in seen:
+                    seen.add(k)
+                    terms.append(f)
+        if terms and intro is not None and not intro_redone:
+            intro_redone = True
+            new_intro = make_intro(slug, brief, pairs, terms=terms[:12])
+            changed = (new_intro or {}).get("paragraphs") != intro.get("paragraphs")
+            log(slug, f"intro: {len(terms[:12])} unexplained terms; intro {'redrafted' if changed else 'unchanged'}")
+            intro = new_intro
         by_sec: dict[str, list] = {}
         for f in fixable:
             ids = [f.get("section")] if f["class"] != "term_drift" else sorted({s for v in f.get("variants", []) for s in v.get("sections", [])})
@@ -1401,14 +1421,23 @@ def research_text(res: dict) -> str:
     return "\n".join(f"- {c['text']} [{', '.join(c['sources'])}]" for c in (res or {}).get("claims") or [])
 
 
-def make_intro(slug: str, brief: dict, pairs: list[dict]) -> dict:
+def make_intro(slug: str, brief: dict, pairs: list[dict], terms: list[dict] | None = None) -> dict:
+    """terms: reader 'unexplained' findings (owner 2026-10-03: the largest
+    reader class, 688 findings, never reached a fix; only the introduction can
+    explain a technical term without adding to the translation). With terms,
+    the intro is redrafted to explain the ones the brief, background facts or
+    source support; the intro checker vets every sentence, and a redraft that
+    fails its checks leaves the old intro in place."""
     path = STAGE / slug / "intro.json"
+    old = None
     if path.exists():
         cached = json.loads(path.read_text())
         cached["unsupported"] = real_flags(cached.get("unsupported") or [])
         if not cached["unsupported"] and not intro_problems(slug, cached.get("paragraphs") or []):
-            path.write_text(json.dumps(cached, indent=1, ensure_ascii=False))
-            return cached
+            if not terms:
+                path.write_text(json.dumps(cached, indent=1, ensure_ascii=False))
+                return cached
+            old = cached
     feedback = ""
     res = {}
     author, dates = author_dates(slug)
@@ -1419,6 +1448,11 @@ def make_intro(slug: str, brief: dict, pairs: list[dict]) -> dict:
             "with exactly those dates; paragraph 2 the occasion and context; paragraph 3 the contents and what a "
             "reader needs to follow it. Use no other years.") if dates else (
             "\n\nSITE RULES: paragraph 1 the author, paragraph 2 occasion and context, paragraph 3 the contents. Use no years.")
+    if terms:
+        rule += ("\n\nREADERS OF THE WHOLE TRANSLATION COULD NOT PLACE THESE TERMS. In paragraph 3, briefly explain the ones "
+                 "the brief, the background facts or the source itself explain, in plain words; skip any you cannot support "
+                 "from them, and keep paragraph 3 short:\n"
+                 + "\n".join(f"- \"{t.get('quote', '')}\": {t.get('why', '')}" for t in terms))
     for attempt in range(4):
         ctx = f"\n\nVERIFIED BACKGROUND FACTS (web-sourced, checked; use them to explain the context):\n{facts}" if facts else ""
         obj = call(DRAFTER, INTRO_SYS, f"VERIFIED WORK BRIEF:\n{brief_text(brief)}{ctx}{rule}{feedback}\n\nReturn the JSON now.", max_tokens=3000,
@@ -1455,6 +1489,11 @@ def make_intro(slug: str, brief: dict, pairs: list[dict]) -> dict:
                 paras.append(p)
         if len(dropped) == len(res["unsupported"]) and not intro_problems(slug, paras):
             res = {**res, "paragraphs": paras, "unsupported": [], "dropped": dropped, "form": []}
+    if old is not None and (res.get("unsupported") or res.get("form") or len(res.get("paragraphs") or []) != 3):
+        log(slug, "intro: redraft for unexplained terms failed its checks; kept the old intro")
+        return old
+    if terms:
+        res["explained_terms"] = [t.get("quote", "") for t in terms]
     path.write_text(json.dumps(res, indent=1, ensure_ascii=False))
     return res
 

@@ -647,6 +647,53 @@ class ReadBindingTests(unittest.TestCase):
         self.assertEqual(res["all_rounds"], [[3, 4], [2, 3], [2, 3]])
         self.assertEqual(st["followability"], [3, 4])
 
+    def test_unexplained_terms_redraft_intro_before_next_read(self):
+        a, b = W.JUDGES
+        term = {"class": "unexplained", "section": "1", "quote": "intelligent natures", "why": "w"}
+        old = {"paragraphs": ["P1.", "P2.", "P3."], "unsupported": []}
+        new = {"paragraphs": ["P1.", "P2.", "P3 explains intelligent natures."], "unsupported": []}
+        seen = []
+        with tempfile.TemporaryDirectory() as d:
+            stage, pairs = self.setup(d)
+            (stage / "s" / "intro.json").write_text(json.dumps(old))
+
+            def mk(slug, brief, prs, terms=None):
+                seen.append([t["quote"] for t in terms or []])
+                (stage / "s" / "intro.json").write_text(json.dumps(new))
+                return new
+            views = []
+
+            def read(t, light):
+                views.append(light[0]["text"])
+                return {a: {"followability": 2}, b: {"followability": 3}}
+            from contextlib import ExitStack
+            with ExitStack() as es:
+                for p in [*self.patches(stage, pairs),
+                          mock.patch.object(W.work_read, "verify", return_value=([term], [])),
+                          mock.patch.object(W, "make_intro", side_effect=mk),
+                          mock.patch.object(W, "read_two", side_effect=read),
+                          mock.patch.object(W, "polish_section", return_value=None)]:
+                    es.enter_context(p)
+                res = W.read_and_fix("s", pairs, {}, "Greek", old)
+        self.assertEqual(seen, [["intelligent natures"]])  # once per run
+        self.assertEqual(views, ["P1.\n\nP2.\n\nP3.", "P1.\n\nP2.\n\nP3 explains intelligent natures.",
+                                 "P1.\n\nP2.\n\nP3 explains intelligent natures."])
+        self.assertEqual(res["round"], 2)
+
+    def test_failed_intro_redraft_keeps_old(self):
+        old = {"paragraphs": ["P1.", "P2.", "P3."], "unsupported": []}
+        with tempfile.TemporaryDirectory() as d:
+            stage = Path(d)
+            (stage / "s").mkdir()
+            (stage / "s" / "intro.json").write_text(json.dumps(old))
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "intro_problems", return_value=[]), \
+                    mock.patch.object(W, "author_dates", return_value=("A", "")), \
+                    mock.patch.object(W, "research", return_value={}), mock.patch.object(W, "research_text", return_value=""), \
+                    mock.patch.object(W, "call", return_value=None):
+                got = W.make_intro("s", {}, [], terms=[{"quote": "x", "why": "w"}])
+            self.assertEqual(got["paragraphs"], old["paragraphs"])
+            self.assertEqual(json.loads((stage / "s" / "intro.json").read_text()), old)
+
     def test_one_reader_cannot_certify(self):
         a, b = W.JUDGES
         with tempfile.TemporaryDirectory() as d:
