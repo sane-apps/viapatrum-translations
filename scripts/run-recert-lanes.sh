@@ -35,7 +35,6 @@ refresh() {  # model purpose [kwargs]
 refresh @cf/deepseek-ai/deepseek-v4-pro-0813 translate
 for m in @cf/moonshotai/kimi-k2.6 @cf/zai-org/glm-5.2 @cf/qwen/qwen3.8-27b; do refresh "$m" translation-qa; done
 refresh @cf/openai/gpt-oss-120b translation-qa '{}'
-refresh @cf/zai-org/glm-5.3 translation-qa
 # Checker pairs rotate across lanes (2026-10-03). Workers AI caps paid-access
 # models (GLM-5.x, Kimi, DeepSeek) at about 20 requests/min per model, and
 # open models such as GPT-OSS-120B at 300/min. GLM-5.2 shared by all lanes
@@ -43,7 +42,10 @@ refresh @cf/zai-org/glm-5.3 translation-qa
 # fewer false alarms) is in every pair and the paid checkers each take a
 # third. llm_bakeoff.rate_acquire paces every call under the caps, so lanes
 # wait for a slot instead of getting throttled.
-PAIRS=("@cf/openai/gpt-oss-120b,@cf/moonshotai/kimi-k2.6" "@cf/openai/gpt-oss-120b,@cf/zai-org/glm-5.2" "@cf/openai/gpt-oss-120b,@cf/zai-org/glm-5.3")
+# GLM-5.3 out (spend audit 2026-10-03): never benched as a checker, the defect
+# bench rejected it, 27% of its billed calls returned nothing (~\$70/day), and a
+# failed call fell back to an unbenched model or counted a finding as confirmed.
+PAIRS=("@cf/openai/gpt-oss-120b,@cf/moonshotai/kimi-k2.6" "@cf/openai/gpt-oss-120b,@cf/zai-org/glm-5.2")
 NLANE=0
 # NVIDIA referee (third family): same 3 h freshness rule, NIM provider.
 NVR=$(ls -t "$RECEIPTS"/*-nvidia-nvidia_nemotron-3-ultra-550b-a55b.json 2>/dev/null | head -1)

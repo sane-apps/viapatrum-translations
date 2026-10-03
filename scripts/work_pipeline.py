@@ -1237,7 +1237,14 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
                     for sid in ([f.get("section")] if f["class"] != "term_drift" else
                                 sorted({x for v in f.get("variants", []) for x in v.get("sections", [])})):
                         notes_by.setdefault(str(sid), []).append(f)
-            targets = [sid for sid in notes_by if sid in idx] or [p["id"] for p in pairs]
+            # Spend audit 2026-10-03: polish only sections the readers flagged
+            # (the old fallback polished every section), and not when the mean
+            # read is under 3.0, where polish almost never crossed the bar; 7 of
+            # 8 crossings came from 3.0-3.49.
+            mean = sum(scores) / len(scores) if scores else 0
+            targets = [sid for sid in notes_by if sid in idx] if mean >= 3.0 else []
+            if not targets:
+                log(slug, f"polish skipped (readers {scores}, flagged sections {len(notes_by)})")
             secs_now = staged_sections(slug, pairs)
 
             def polish_one(sid: str) -> None:

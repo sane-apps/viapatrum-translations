@@ -694,6 +694,19 @@ class ReadBindingTests(unittest.TestCase):
             self.assertEqual(got["paragraphs"], old["paragraphs"])
             self.assertEqual(json.loads((stage / "s" / "intro.json").read_text()), old)
 
+    def test_polish_skips_low_reads_and_unflagged(self):
+        a, b = W.JUDGES
+        flagged = {"class": "garbled", "section": "1", "quote": "Old", "why": "w", "fix": "f"}
+        for scores, findings, want in (([2, 3], [flagged], 0), ([2.5, 4], [], 0), ([2.5, 4], [flagged], 2)):
+            calls = []
+            with tempfile.TemporaryDirectory() as d:
+                stage, pairs = self.setup(d)
+                rounds = [{a: {"followability": scores[0]}, b: {"followability": scores[1]}}] * 3
+                extra = [mock.patch.object(W.work_read, "verify", return_value=(findings, [])),
+                         mock.patch.object(W, "repair_section", return_value=None)]
+                self.run_read(stage, pairs, rounds, polish=lambda *x: calls.append(1), extra=extra)
+            self.assertEqual(len(calls), want, (scores, findings))
+
     def test_one_reader_cannot_certify(self):
         a, b = W.JUDGES
         with tempfile.TemporaryDirectory() as d:
