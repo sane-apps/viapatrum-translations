@@ -1807,7 +1807,10 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
     import book_era
     started = time.time()
     restart_flag = STAGE / "lanes.restart"
+    # Reopened books go first (owner 2026-10-03, spend cut to 6 lanes): their
+    # sections already pass, so certifying them costs only a re-read.
     for words, book in sorted(site_books(unpublished), key=lambda wb: (
+            log_rows.get(wb[1], {}).get("result") != "reopened",
             not book_era.is_early(wb[1]), book_era.book_year(wb[1]) or 9999, wb[0])):
         if done >= limit:
             break

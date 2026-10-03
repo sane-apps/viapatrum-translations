@@ -73,11 +73,14 @@ lane() {  # name args...
 # translated ones. Untranslated get 8 lanes (E covers works over 20k words,
 # which had no lane before); re-checks of live works get 7. Every lane takes
 # the earliest writer first (work_pipeline.queue).
-for n in 1 2 3 4 5 6; do lane C$n --unpublished --limit 500 --max-words 20000; done
-for n in 1 2; do lane E$n --unpublished --limit 500 --min-words 20000; done
-for n in 1 2; do lane A$n --limit 500 --max-words 2000; done
-for n in 1 2 3; do lane B$n --limit 500 --min-words 2000 --max-words 20000; done
-for n in 1 2; do lane D$n --limit 500 --min-words 20000; done
+# Owner 2026-10-03 evening: spend cut from 15 lanes to 6 (~$600/day of credits
+# bought 45 small certifications). One lane per size/state group, two for small
+# unpublished works; reopened books go first (work_pipeline.queue).
+for n in 1 2; do lane C$n --unpublished --limit 500 --max-words 20000; done
+for n in 1; do lane E$n --unpublished --limit 500 --min-words 20000; done
+for n in 1; do lane A$n --limit 500 --max-words 2000; done
+for n in 1; do lane B$n --limit 500 --min-words 2000 --max-words 20000; done
+for n in 1; do lane D$n --limit 500 --min-words 20000; done
 
 # Owner status site (private Pages project viapatrum-status behind Cloudflare
 # Access, owner email only): rebuild from the audit log and deploy each tick.
