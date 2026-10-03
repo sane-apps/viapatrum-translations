@@ -1,0 +1,180 @@
+{
+ "excerpt_id": "gregory-thaumaturgus-ouden-eidolon:frag-open",
+ "section": "frag-open",
+ "edition": {
+  "language": "grc",
+  "path": "books/gregory-thaumaturgus-ouden-eidolon/translations/gou_frag_open_source.json"
+ },
+ "source_text": "ἡ μὲν εἰς θεὸν τὸν ὄντως ὄντα τιμὴ πάντως που καὶ αὐτοῦ τοῦ τιμῶντός ἐστι τιμή, ἡ δὲ εἰς τὸν οὐκ ὄντα θεὸν τιμὴ ἐξ ἐναντίας αὐτοῦ τοῦ τιμῶντός ἐστιν ἀτιμία.",
+ "thought_title": "Two directions of honor",
+ "orientation": "The work opens with a general statement about honor given to the God who truly is versus honor given to a god who does not exist.",
+ "pass_a_gloss": "The honor toward the God who truly is is surely, I suppose, also an honor of the very one who honors; but the honor toward the god who does not exist is, in reverse, a dishonor of the very one who honors.",
+ "lemmas": [
+  {
+   "form": "τιμή",
+   "lemma": "τιμή",
+   "gloss": "honor directed toward a deity"
+  },
+  {
+   "form": "θεόν",
+   "lemma": "θεός",
+   "gloss": "god"
+  },
+  {
+   "form": "ὄντως",
+   "lemma": "ὄντως",
+   "gloss": "truly, really"
+  },
+  {
+   "form": "ὄντα",
+   "lemma": "εἰμί",
+   "gloss": "being, existing"
+  },
+  {
+   "form": "τιμῶντός",
+   "lemma": "τιμάω",
+   "gloss": "one who honors"
+  },
+  {
+   "form": "ἐξ ἐναντίας",
+   "lemma": "ἐναντίος",
+   "gloss": "in reverse, from the opposite direction"
+  },
+  {
+   "form": "ἀτιμία",
+   "lemma": "ἀτιμία",
+   "gloss": "dishonor"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ὁ ὄντως ὤν",
+   "english": "the God who truly is",
+   "why": "Glossary English for the God who truly exists; keeps the participial force of ὤν as 'is' rather than 'exists' per the decided glossary form.",
+   "rejected": [
+    "the God who truly exists",
+    "the real God"
+   ]
+  },
+  {
+   "term": "ὁ οὐκ ὤν θεός",
+   "english": "the god who does not exist",
+   "why": "Glossary English; preserves the negative participle with 'does not exist' and the article with 'the god'.",
+   "rejected": [
+    "a god who does not exist",
+    "a false god",
+    "a nonexistent god"
+   ]
+  },
+  {
+   "term": "ἐξ ἐναντίας",
+   "english": "in reverse",
+   "why": "Glossary English; captures the reversal of direction by which honor becomes dishonor.",
+   "rejected": [
+    "from the opposite direction",
+    "on the contrary"
+   ]
+  },
+  {
+   "term": "τιμή",
+   "english": "honor",
+   "why": "Glossary English; used consistently for both occurrences.",
+   "rejected": [
+    "reverence",
+    "worship"
+   ]
+  },
+  {
+   "term": "ἀτιμία",
+   "english": "dishonor",
+   "why": "Glossary English; the direct opposite of honor.",
+   "rejected": [
+    "disgrace",
+    "shame"
+   ]
+  },
+  {
+   "term": "πάντως που",
+   "english": "surely, I suppose",
+   "why": "Renders the combined force of πάντως ('in every way, surely') and που ('I suppose, perhaps') as a hedged assertion, preserving the author's cautious tone.",
+   "rejected": [
+    "certainly",
+    "no doubt",
+    "in every way"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Honor directed toward the God who truly is, is surely, I suppose, itself an honor to the one who gives it. But honor directed toward the god who does not exist is, in reverse, dishonor to the one who gives it."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "e2e05323a4a8f7183511d0a2346cbba980787e81888d1cea93cbec704e24bff8",
+ "source_sha256": "e7533f9e72e3e5a1ccdbc55780975daac6fe89eca02e82f0fefd24435e2efbb4",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "gate",
+     "quote": "",
+     "why": "paragraph 1: doubled word (is is)",
+     "fix": ""
+    },
+    {
+     "class": "gate",
+     "quote": "",
+     "why": "lint output_guard: doubled word (is is) ('is is')",
+     "fix": ""
+    }
+   ],
+   "edits": [
+    {
+     "old": "the God who truly is is surely",
+     "new": "the God who truly is surely"
+    }
+   ],
+   "fixed": [
+    "Removed the doubled word 'is' in the English."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "the god who does not exist",
+    "source_quote": "τὸν οὐκ ὄντα θεὸν",
+    "why": "Brief glossary requires 'a god who does not exist', not 'the god'.",
+    "fix": "a god who does not exist",
+    "model": "@cf/zai-org/glm-5.2",
+    "rejected_by": "@cf/moonshotai/kimi-k2.6",
+    "ruling": "τὸν is the definite article; 'the god' is grammatically correct, not 'a god'."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}
