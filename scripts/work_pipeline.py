@@ -72,12 +72,16 @@ DRAFTER = "@cf/deepseek-ai/deepseek-v4-pro-0813"
 # Two blind checkers from different families; override with WP_CHECKERS=a,b
 # for bench A/B (keep the pipeline default on the bench winner).
 CHECKERS = os.environ.get("WP_CHECKERS", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2").split(",")
+# Readers, brief fact check and glossary votes (2026-10-03): GPT-OSS-120B
+# scored readability 2 in 20 of 21 rounds and stalled certification; it stays a
+# source checker only. Override with WP_JUDGES=a,b.
+JUDGES = os.environ.get("WP_JUDGES", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2").split(",")
 FALLBACK = "@cf/qwen/qwen3.8-27b"  # used only when a checker errors out
 # Third-family referee for disputed residue (owner 2026-10-02: use NV too).
 # NVIDIA Nemotron 3 Ultra 550B; falls back to FALLBACK if NIM is unavailable.
 REFEREE = os.environ.get("WP_REFEREE", "nvidia/nemotron-3-ultra-550b-a55b")
 FAMILY = {DRAFTER: "deepseek", FALLBACK: "qwen"}
-for _m in CHECKERS:
+for _m in CHECKERS + JUDGES:
     FAMILY[_m] = next((f for f in ("kimi", "glm", "gpt-oss", "llama", "mistral", "gemma", "nemotron", "qwen") if f in _m), _m)
 MAX_REPAIR_ROUNDS = 3
 MAX_FULL_REDRAFTS = 3   # full redrafts after the first draft for structural gate failures
@@ -343,7 +347,7 @@ def vote_glossary(slug: str, terms: list[dict], context: str, langname: str) -> 
     Free-form 'fix the brief' loops oscillated (2026-10-02), so this is a vote."""
     listing = json.dumps([{k: t.get(k) for k in ("source_term", "sense", "candidates")} for t in terms], ensure_ascii=False)
     votes = {}
-    for m in CHECKERS:
+    for m in JUDGES:
         obj = call(m, VOTE_SYS.format(langname=langname), f"{context}\n\nKEY TERMS:\n{listing}\n\nReturn the JSON now.", max_tokens=4000,
                    expect=("votes",)) or {}
         votes[m] = {norm(v.get("source_term", "")): v for v in obj.get("votes", []) if isinstance(v, dict)}
@@ -351,7 +355,7 @@ def vote_glossary(slug: str, terms: list[dict], context: str, langname: str) -> 
     for t in terms:
         key = norm(t.get("source_term", ""))
         first = (t.get("candidates") or [""])[0]
-        picks = [first] + [votes[m].get(key, {}).get("choice", "") for m in CHECKERS]
+        picks = [first] + [votes[m].get(key, {}).get("choice", "") for m in JUDGES]
         tally: dict[str, int] = {}
         for pk in picks:
             if pk:
@@ -363,10 +367,10 @@ def vote_glossary(slug: str, terms: list[dict], context: str, langname: str) -> 
         sense = norm(t.get("sense") or "")
         # A rendering the entry's own sense uses ("also called the Black One")
         # is a real alternative name, never banned (Barnabas, 2026-10-03).
-        banned = sorted({b for m in CHECKERS for b in (votes[m].get(key, {}).get("banned") or [])
+        banned = sorted({b for m in JUDGES for b in (votes[m].get(key, {}).get("banned") or [])
                          if b and norm(b) != best[0] and norm(b) not in sense})
         entry = {"source_term": t.get("source_term"), "sense": t.get("sense"), "banned": banned,
-                 "votes": {"drafter": first, **{FAMILY[m]: votes[m].get(key, {}).get("choice", "") for m in CHECKERS}}}
+                 "votes": {"drafter": first, **{FAMILY[m]: votes[m].get(key, {}).get("choice", "") for m in JUDGES}}}
         unanimous = len(tally) == 1 and sum(tally.values()) == len(picks)
         if best[1] >= 2 or unanimous:
             win = best[0] if best[1] >= 2 else next(iter(tally))
@@ -409,7 +413,7 @@ def make_brief(slug: str, pairs: list[dict], lang: str, meta: dict) -> dict:
             log(slug, f"brief: drafter returned nothing (attempt {attempt + 1})")
             continue
         brief = cand
-        chk = call(CHECKERS[0], BRIEF_CHECK_SYS.format(langname=langname),
+        chk = call(JUDGES[0], BRIEF_CHECK_SYS.format(langname=langname),
                    head + "\n\nBRIEF:\n" + json.dumps({k: v for k, v in brief.items() if k != "key_terms"}, ensure_ascii=False)
                    + "\n\nReturn the JSON now.", max_tokens=6000, expect=("problems", "missing")) or {}
         problems = [p for p in chk.get("problems", []) if isinstance(p, dict)]
@@ -428,7 +432,7 @@ def make_brief(slug: str, pairs: list[dict], lang: str, meta: dict) -> dict:
     brief["glossary"], brief["open_terms"] = vote_glossary(slug, brief.get("key_terms") or [], ctx, langname)
     log(slug, f"glossary vote: {len(brief['glossary'])} fixed, {len(brief['open_terms'])} open")
     brief["names"] = {k: v for k, v in (brief.get("names") or {}).items() if k and v and norm(k) != norm(v)}
-    brief["_models"] = {"drafter": DRAFTER, "fact_checker": CHECKERS[0], "glossary_voters": CHECKERS}
+    brief["_models"] = {"drafter": DRAFTER, "fact_checker": JUDGES[0], "glossary_voters": JUDGES}
     brief["_source_sha256"] = sha(src)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(brief, indent=1, ensure_ascii=False))
@@ -1051,8 +1055,8 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
         secs = staged_sections(slug, pairs)
         light = front + [{k: s[k] for k in ("id", "title", "text")} for s in secs]
         reads = {}
-        with ThreadPoolExecutor(len(CHECKERS)) as ex:
-            futs = {m: ex.submit(work_read.read_with, m, brief.get("title_en") or slug, light, TOKENS) for m in CHECKERS}
+        with ThreadPoolExecutor(len(JUDGES)) as ex:
+            futs = {m: ex.submit(work_read.read_with, m, brief.get("title_en") or slug, light, TOKENS) for m in JUDGES}
             for m, fu in futs.items():
                 obj = fu.result()
                 if "_error" in obj:
@@ -1638,9 +1642,16 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
     # Writers who died by 450 come first, earliest writer first; later
     # writers follow, also in date order. Size only breaks ties.
     import book_era
+    started = time.time()
+    restart_flag = STAGE / "lanes.restart"
     for words, book in sorted(site_books(unpublished), key=lambda wb: (
             not book_era.is_early(wb[1]), book_era.book_year(wb[1]) or 9999, wb[0])):
         if done >= limit:
+            break
+        # Graceful restart: finish the current work, then exit so the next tick
+        # starts this lane on new code (never kill a lane mid-work).
+        if restart_flag.exists() and restart_flag.stat().st_mtime > started:
+            print(f"queue: restart requested; exiting between works after {done}", flush=True)
             break
         if (max_words and words > max_words) or words < min_words:
             continue
