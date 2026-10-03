@@ -46,6 +46,7 @@ import argparse
 import glob
 import hashlib
 import json
+import math
 import os
 import re
 import sys
@@ -62,7 +63,7 @@ from llm_bakeoff import vendor_call  # noqa: E402
 from llm_vendor_gate import require_llm_receipt  # noqa: E402
 from pipeline.check_pass_ab import check_record, output_guard_errors  # noqa: E402
 import work_read  # noqa: E402
-from pipeline.work_lint import lint_work  # noqa: E402
+from pipeline.work_lint import applicable_glossary, lint_work  # noqa: E402
 
 BOOKS = ROOT / "books"
 STAGE = ROOT / "outputs" / "work-pipeline"
@@ -100,8 +101,12 @@ FRAGMENT_WORDS = 1000   # under this, readers lack context; require min only
 
 
 def follow_ok(scores, words: int = 0) -> bool:
-    nums = [s for s in scores or [] if isinstance(s, (int, float))]
-    if not nums or min(nums) < FOLLOW_MIN:
+    # Two readers must have scored (2026-10-03): when one read failed, the
+    # other alone used to certify.
+    # Finite only (review 2026-10-03): a NaN compares False to every bar, so a
+    # fragment with a "NaN" score passed min() and the fragment shortcut.
+    nums = [s for s in scores or [] if isinstance(s, (int, float)) and not isinstance(s, bool) and math.isfinite(s)]
+    if len(nums) < 2 or min(nums) < FOLLOW_MIN:
         return False
     return (words and words < FRAGMENT_WORDS) or sum(nums) / len(nums) >= FOLLOW_AVG
 CHUNK_WORDS = 900       # draft long sections in source chunks of about this size
@@ -533,17 +538,22 @@ def section_gate(j: dict, brief: dict) -> list[str]:
     open_start = bool(src) and src[0].isalpha() and src[0].islower()
     errs += output_guard_errors(b, require_full_stop=not open_end)
     low = b.lower()
-    for g in brief.get("glossary") or []:
+    # Bans apply only where this section's source has the glossary term, and
+    # never to a phrase another entry fixes or that renders a common source
+    # word present here (2026-10-03: "the soul" banned for Ἱερουσαλήμ held 64
+    # sections of Origen; "two ways" held Barnabas, who says it himself).
+    gloss = applicable_glossary(brief, src)
+    for g in gloss:
         for bad in g.get("banned") or []:
             # hard gate only for distinctive calques; single words go to checkers
             if bad and ("-" in bad or " " in bad.strip()) and re.search(rf"\b{re.escape(bad.lower())}\b", low) \
                     and bad.lower() not in (g.get("english") or "").lower():
                 errs.append(f"glossary: banned rendering '{bad}' (use '{g.get('english')}')")
-    sec = [{"id": j.get("section", "?"), "title": j.get("thought_title", ""), "text": b}]
+    sec = [{"id": j.get("section", "?"), "title": j.get("thought_title", ""), "text": b, "source": src}]
     # Single banned words ("devil", "story") have honest uses elsewhere; only
     # distinctive calques are hard-gated. Checkers enforce the rest in context.
     lint_brief = {**brief, "glossary": [{**g, "banned": [x for x in (g.get("banned") or []) if "-" in x or " " in x.strip()]}
-                                        for g in brief.get("glossary") or []]}
+                                        for g in gloss]}
     errs += [f"lint {f['rule']}: {f['why']} ('{f['quote'][:60]}')" for f in lint_work(sec, lint_brief) if f["severity"] == "error"
              and not (f["rule"] == "boundary" and ((open_end and "ends without" in f["why"])
                                                     or (open_start and "starts with a lowercase" in f["why"])))]
@@ -1041,6 +1051,63 @@ def polish_section(j: dict, sec: dict, notes: list[dict], brief: dict, langname:
     return out
 
 
+def reader_view(slug: str, pairs: list[dict], intro: dict | None) -> list[dict]:
+    """What the readers read: the checked intro, then every staged section."""
+    front = []
+    if intro and intro.get("paragraphs") and not intro.get("unsupported"):
+        front = [{"id": "intro", "title": "Introduction", "text": "\n\n".join(intro["paragraphs"])}]
+    return front + [{k: s[k] for k in ("id", "title", "text")} for s in staged_sections(slug, pairs)]
+
+
+def view_sha(light: list[dict]) -> str:
+    return sha(json.dumps(light, ensure_ascii=False, sort_keys=True))
+
+
+def reader_score(obj: dict | None):
+    """The numeric followability of one read, or None (failed / no score)."""
+    if not isinstance(obj, dict) or "_error" in obj:
+        return None
+    v = obj.get("followability")
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, (int, float)):
+        return v if math.isfinite(v) else None
+    try:
+        f = float(str(v).strip())
+    except (TypeError, ValueError):
+        return None
+    return f if math.isfinite(f) else None  # "nan" / "inf" are no score
+
+
+def read_two(title: str, light: list[dict]) -> dict:
+    """Two scored reads from two different models (2026-10-03).
+
+    A read that fails or returns no score is retried once with the same model;
+    if it still fails, FALLBACK reads in its place (once per round, so the two
+    scores always come from two models). Returns {model: raw obj}; a model
+    whose read failed maps to an object with '_error'."""
+    def one(m: str) -> dict:
+        obj = work_read.read_with(m, title, light, TOKENS)
+        if reader_score(obj) is None:
+            obj = work_read.read_with(m, title, light, TOKENS)
+        return obj
+    with ThreadPoolExecutor(len(JUDGES)) as ex:
+        got = dict(zip(JUDGES, ex.map(one, JUDGES)))
+    out, fallback_free = {}, FALLBACK not in JUDGES
+    for m in JUDGES:
+        obj = got[m]
+        if reader_score(obj) is None:
+            if fallback_free:
+                fallback_free = False
+                fb = work_read.read_with(FALLBACK, title, light, TOKENS)
+                if reader_score(fb) is not None:
+                    out[FALLBACK] = {**fb, "_replaces": m}
+                    continue
+            obj = {"_error": (obj or {}).get("_error") or "no followability score"}
+        out[m] = obj
+    return out
+
+
 def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro: dict | None = None) -> dict:
     """Whole-work read by both checkers; confirmed fixable findings go to repair.
 
@@ -1048,22 +1115,18 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
     background it explains (old Bible book names, the medium, the addressee)
     is not counted as unexplained on every page."""
     results = {}
-    front = []
-    if intro and intro.get("paragraphs") and not intro.get("unsupported"):
-        front = [{"id": "intro", "title": "Introduction", "text": "\n\n".join(intro["paragraphs"])}]
     for rnd in range(3):
+        light = reader_view(slug, pairs, intro)
         secs = staged_sections(slug, pairs)
-        light = front + [{k: s[k] for k in ("id", "title", "text")} for s in secs]
         reads = {}
-        with ThreadPoolExecutor(len(JUDGES)) as ex:
-            futs = {m: ex.submit(work_read.read_with, m, brief.get("title_en") or slug, light, TOKENS) for m in JUDGES}
-            for m, fu in futs.items():
-                obj = fu.result()
-                if "_error" in obj:
-                    reads[m] = {"error": obj["_error"]}
-                    continue
-                kept, _ = work_read.verify(obj, light, m)
-                reads[m] = {"followability": obj.get("followability"), "summary": obj.get("summary"), "findings": kept}
+        for m, obj in read_two(brief.get("title_en") or slug, light).items():
+            if reader_score(obj) is None:
+                reads[m] = {"error": obj.get("_error") or "no followability score"}
+                continue
+            kept, _ = work_read.verify(obj, light, m)
+            reads[m] = {"followability": reader_score(obj), "summary": obj.get("summary"), "findings": kept}
+            if obj.get("_replaces"):
+                reads[m]["replaces"] = obj["_replaces"]
         scores = [r.get("followability") for r in reads.values() if "error" not in r]
         fixable = []
         for m, r in reads.items():
@@ -1074,11 +1137,15 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
         best = scores if (not prev_best or sum(x for x in scores if isinstance(x, (int, float)))
                           > sum(x for x in prev_best if isinstance(x, (int, float)))) else prev_best
         rounds_seen = results.get("all_rounds", []) + [scores]
-        # Reader scores vary by about one point on the same text; text changes
-        # between rounds only by fixes that added no source problem, so the
-        # best round stands (every round is kept for audit).
-        results = {"round": rnd, "reads": reads, "followability": best, "best_followability": best,
-                   "last_followability": scores, "all_rounds": rounds_seen, "fixable": len(fixable)}
+        # Certify on the scores of the text that will ship (2026-10-03). Every
+        # fix and polish is followed by another read, and the last round never
+        # edits, so this round always read the final text; the best round may
+        # have read older text. text_sha256 binds the scores to what was read,
+        # and status() drops them if the text changed since. best_followability
+        # stays for audit only.
+        results = {"round": rnd, "reads": reads, "followability": scores, "best_followability": best,
+                   "last_followability": scores, "all_rounds": rounds_seen, "fixable": len(fixable),
+                   "text_sha256": view_sha(light), "reader_unavailable": len(scores) < 2}
         log(slug, f"read round {rnd}: followability {scores} fixable {len(fixable)}")
         ok = follow_ok(scores, sum(len(" ".join(p["source"]).split()) for p in pairs))
         if ok and not fixable:
@@ -1465,10 +1532,41 @@ def run(slug: str, attempt: int | None = None) -> int:
     held = held_with_retries(slug, pairs) if attempt == 1 else 0
     if held:
         log(slug, f"read skipped: {held} held")
+        # Mark the skip so status, queue.json and the audit log never carry an
+        # older read's scores as this run's (2026-10-03).
+        rpath = STAGE / slug / "read.json"
+        try:
+            old = json.loads(rpath.read_text()) if rpath.exists() else {}
+        except ValueError:
+            old = {}
+        rpath.parent.mkdir(parents=True, exist_ok=True)
+        rpath.write_text(json.dumps({"skipped": f"read skipped: {held} held section(s) retry next attempt",
+                                     "followability": None,
+                                     "previous_followability": old.get("followability", old.get("previous_followability"))},
+                                    indent=1, ensure_ascii=False))
     else:
         read_and_fix(slug, pairs, brief, langname, intro)
     status(slug)
     return 0
+
+
+def read_scores(slug: str, pairs: list[dict], read: dict, intro: dict) -> tuple[list | None, str]:
+    """(scores, note) a certification may use from read.json. Scores are None
+    when the read was skipped, or was not of the text staged now (text changed
+    after it, or a read written before reads were bound to their text)."""
+    if not read:
+        return None, ""
+    if read.get("skipped"):
+        return None, str(read["skipped"])
+    if not read.get("text_sha256"):
+        return None, "read not bound to the current text; re-read needed"
+    if read["text_sha256"] != view_sha(reader_view(slug, pairs, intro)):
+        return None, "text changed after the read; re-read needed"
+    scores = read.get("followability")
+    nums = [s for s in scores or [] if isinstance(s, (int, float)) and not isinstance(s, bool)]
+    if read.get("reader_unavailable") or len(nums) < 2:
+        return scores, "held: reader unavailable"
+    return scores, ""
 
 
 def status(slug: str) -> dict:
@@ -1479,9 +1577,12 @@ def status(slug: str) -> dict:
     c = Counter(s["_j"].get("_status", "not started") for s in secs)
     read = json.loads((STAGE / slug / "read.json").read_text()) if (STAGE / slug / "read.json").exists() else {}
     intro = json.loads((STAGE / slug / "intro.json").read_text()) if (STAGE / slug / "intro.json").exists() else {}
-    out = {"slug": slug, "sections": dict(c), "followability": read.get("followability"),
+    follow, note = read_scores(slug, pairs, read, intro)
+    out = {"slug": slug, "sections": dict(c), "followability": follow,
            "read_fixable_left": read.get("fixable"), "intro_ok": bool(intro.get("paragraphs")) and not real_flags(intro.get("unsupported") or [])
            and not intro_problems(slug, intro.get("paragraphs") or [])}
+    if note:
+        out["read_note"] = note
     print(json.dumps(out))
     return out
 
@@ -1681,12 +1782,14 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
         attempts = (log_rows.get(book, {}).get("attempts", 0) or 0) + 1
         log_rows[book] = {"attempts": attempts, "result": result, "words": words, "minutes": round((time.time() - t0) / 60, 1),
                           "status": st, "at": time.strftime("%Y-%m-%dT%H:%M:%S")}
+        if result == "held" and st.get("read_note"):
+            log_rows[book]["why"] = st["read_note"]  # e.g. "held: reader unavailable"
         update_log(book, log_rows[book])
         try:
             import audit_log
             kind = {"certified": "translated" if unpublished else "certified", "held": "held"}.get(result, "note")
-            audit_log.record(book, kind, f"Re-certification {result}: sections {st.get('sections')}, readers {st.get('followability')}, "
-                             f"intro ok {st.get('intro_ok')}", ref=f"outputs/work-pipeline/{book}/run.log",
+            audit_log.record(book, kind, f"Re-certification {result}: sections {st.get('sections')}, readers {st.get('followability')}"
+                             + (f" ({st['read_note']})" if st.get("read_note") else "") + f", intro ok {st.get('intro_ok')}", ref=f"outputs/work-pipeline/{book}/run.log",
                              minutes=log_rows[book]["minutes"], words=words)
         except Exception as e:  # the log must never stop the queue
             print(f"audit log failed: {e}", flush=True)

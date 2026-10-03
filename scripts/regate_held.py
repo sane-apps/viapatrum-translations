@@ -4,6 +4,10 @@
 Why (efficiency sweep 2026-10-03): section_gate's old substring names test
 held sections for 'Sion' inside 'vision' and similar. work_lint's whole-word,
 case-sensitive names rule now does that job, so some gate holds were false.
+Likewise the glossary banned-rendering gate (2026-10-03) now applies a ban only
+where the section's source has the glossary's source term, and never to a phrase
+another entry fixes or that renders a common source word present there ("the
+soul" for Ἱερουσαλήμ, "two ways" in Barnabas); those holds reopen here too.
 This re-gates every section held BY THE GATE (_why "gate: ...") with today's
 section_gate and the work's resolved brief. No LLM call is made.
 

@@ -446,5 +446,264 @@ class RegateTests(unittest.TestCase):
             self.assertEqual((row["result"], row["attempts"], row["words"]), ("reopened", 0, 10))
 
 
+# ---------------------------------------------------------------- stall fixes (2026-10-03)
+
+JER = {"source_term": "Ἱερουσαλήμ", "english": "Jerusalem", "banned": ["the Church", "the soul"]}
+CHURCH = {"source_term": "ἐκκλησία", "english": "church", "banned": ["assembly"]}
+WAY = {"source_term": "ὁδὸς τοῦ φωτός / ὁδὸς τοῦ σκότους", "english": "way of light",
+       "banned": ["path of light", "two ways"]}
+
+
+def rec(src, text):
+    return {"section": "1", "source_text": src, "pass_b_english": [text]}
+
+
+class BannedSourcePresenceTests(unittest.TestCase):
+    def test_ban_skipped_when_term_not_in_section_source(self):
+        errs = gate_only(rec("καὶ εἶπεν ὁ θεὸς πρὸς αὐτόν.", "Then the soul rejoiced."), {"glossary": [JER]})
+        self.assertEqual(errs, [])
+
+    def test_ban_holds_when_term_in_source_any_accent_or_case(self):
+        for src in ("ἀνέβη εἰς Ἰερουσαλὴμ ἡ πόλις.", "ΙΕΡΟΥΣΑΛΗΜ ΠΟΛΙΣ.", "τῆς Ἱερουσαλὴμ λέγει."):
+            errs = gate_only(rec(src, "He went up to the soul."), {"glossary": [JER]})
+            self.assertTrue(any("banned rendering 'the soul'" in e for e in errs), (src, errs))
+
+    def test_ban_dropped_where_common_source_word_present(self):
+        src = "ἡ Ἱερουσαλὴμ καὶ ἡ ψυχὴ αὐτοῦ."
+        self.assertEqual(gate_only(rec(src, "Jerusalem and the soul."), {"glossary": [JER]}), [])
+
+    def test_ban_equal_to_other_entry_english_dropped(self):
+        src = "ἡ Ἱερουσαλὴμ καὶ ἡ ἐκκλησία."
+        brief = {"glossary": [JER, CHURCH]}
+        self.assertEqual(gate_only(rec(src, "Jerusalem, that is, the Church."), brief), [])
+        # without the church entry the ban still stands where Jerusalem is named
+        errs = gate_only(rec("ἡ Ἱερουσαλὴμ πόλις.", "the Church."), {"glossary": [JER]})
+        self.assertTrue(any("the Church" in e for e in errs), errs)
+
+    def test_multiword_source_term_any_content_word(self):
+        errs = gate_only(rec("ἡ τοῦ φωτὸς ἐστίν.", "This is the path of light."), {"glossary": [WAY]})
+        self.assertTrue(any("path of light" in e for e in errs), errs)
+        self.assertEqual(gate_only(rec("καὶ εἶπεν ὁ θεός.", "This is the path of light."), {"glossary": [WAY]}), [])
+
+    def test_two_ways_allowed_where_source_says_two_ways(self):
+        src = "Ὁδοὶ δύο εἰσὶν διδαχῆς, ἥ τε τοῦ φωτὸς καὶ ἡ τοῦ σκότους."
+        self.assertEqual(gate_only(rec(src, "There are two ways of teaching."), {"glossary": [WAY]}), [])
+
+    def test_lint_rule_glossary_uses_section_source(self):
+        from pipeline import work_lint as wl
+        brief = {"glossary": [JER]}
+        with_src = wl.lint_work([{"id": "1", "text": "The soul is glad.", "source": "ὁ θεὸς λέγει."}], brief)
+        self.assertFalse([f for f in with_src if f["rule"] == "glossary"])
+        no_src = wl.lint_work([{"id": "1", "text": "The soul is glad."}], brief)
+        self.assertTrue([f for f in no_src if f["rule"] == "glossary"])  # whole-work CLI: old rule
+
+    def test_stems(self):
+        from pipeline import work_lint as wl
+        self.assertTrue(wl.term_in_source("μετάνοια", "εἰς μετανοίας ἦλθεν"))
+        self.assertFalse(wl.term_in_source("μετάνοια", "εἰς τὴν πόλιν"))
+        self.assertIsNone(wl.term_in_source("μετάνοια", ""))
+        self.assertEqual(wl.phrase_key("The Churches"), "church")
+
+    def test_short_headword_stem_finds_inflected_forms(self):
+        # review 2026-10-03: σάρξ missed σαρκός, so 'human nature' was not gated
+        from pipeline import work_lint as wl
+        for term, src in (("σάρξ", "ἐν τῇ σαρκὶ αὐτοῦ"), ("πατήρ", "τοῦ πατρὸς"), ("εἰκών", "κατ' εἰκόνα")):
+            self.assertTrue(wl.term_in_source(term, src), term)
+        flesh = {"source_term": "σάρξ", "english": "flesh", "banned": ["human nature"]}
+        errs = gate_only(rec("ὁ λόγος σὰρξ ἐγένετο καὶ τῆς σαρκὸς αὐτοῦ.", "the lowliness of human nature"),
+                         {"glossary": [flesh]})
+        self.assertTrue(any("human nature" in e for e in errs), errs)
+        errs = gate_only(rec("διὰ τῆς σαρκὸς αὐτοῦ.", "the lowliness of human nature"), {"glossary": [flesh]})
+        self.assertTrue(any("human nature" in e for e in errs), errs)
+
+    def test_common_phrase_words_must_stand_together(self):
+        # θεοῦ elsewhere in the section is not βασιλεία τοῦ θεοῦ
+        heaven = {"source_term": "βασιλεία τῶν οὐρανῶν", "english": "kingdom of heaven", "banned": ["kingdom of God"]}
+        apart = "ἡ βασιλεία τῶν οὐρανῶν ἐστιν ὡς κόκκος σινάπεως, καὶ πολλοὶ ἐδόξαζον τὸν θεόν."
+        errs = gate_only(rec(apart, "The kingdom of God is like a mustard seed."), {"glossary": [heaven]})
+        self.assertTrue(any("kingdom of God" in e for e in errs), errs)
+        both = "ἡ βασιλεία τῶν οὐρανῶν, ἣν καὶ βασιλείαν τοῦ θεοῦ καλεῖ."
+        self.assertEqual(gate_only(rec(both, "The kingdom of God is near."), {"glossary": [heaven]}), [])
+
+    def test_regate_dry_run_picks_up_false_ban_holds(self):
+        import regate_held as RG
+        with tempfile.TemporaryDirectory() as d:
+            stage = Path(d)
+            sec = stage / "bk" / "sections"
+            sec.mkdir(parents=True)
+            (stage / "bk" / "brief.json").write_text(json.dumps({"glossary": [JER]}, ensure_ascii=False))
+            why = "gate: glossary: banned rendering 'the soul' (use 'Jerusalem')"
+            (sec / "1.json").write_text(json.dumps({**rec("ὁ θεὸς λέγει.", "The soul is glad."),
+                                                    "_status": "hold", "_why": why}, ensure_ascii=False))
+            (sec / "2.json").write_text(json.dumps({**rec("εἰς Ἰερουσαλήμ.", "The soul is glad."), "section": "2",
+                                                    "_status": "hold", "_why": why}, ensure_ascii=False))
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "QUEUE_LOG", stage / "queue.json"), \
+                    mock.patch.object(W, "check_record", return_value=[]), \
+                    mock.patch.object(W, "output_guard_errors", return_value=[]):
+                st = RG.regate(True)
+            self.assertEqual((st["held_by_gate"], st["reopened"], st["still_fail"]), (2, 1, 1))
+
+
+class TwoReaderTests(unittest.TestCase):
+    def test_follow_ok_needs_two_scores(self):
+        self.assertFalse(W.follow_ok([5]))
+        self.assertFalse(W.follow_ok([5, None]))
+        self.assertFalse(W.follow_ok([True, 5]))
+        self.assertTrue(W.follow_ok([4, 4]))
+        self.assertFalse(W.follow_ok([5], words=100))
+
+    def reads(self, script):
+        calls = []
+
+        def fake(m, title, light, tokens):
+            calls.append(m)
+            seq = script[m]
+            return seq.pop(0) if seq else {"_error": "down"}
+        with mock.patch.object(W.work_read, "read_with", side_effect=fake):
+            out = W.read_two("t", [])
+        return out, calls
+
+    def test_failed_read_retried_once(self):
+        a, b = W.JUDGES
+        out, calls = self.reads({a: [{"_error": "x"}, {"followability": 4}], b: [{"followability": 5}], W.FALLBACK: []})
+        self.assertEqual(calls.count(a), 2)
+        self.assertNotIn(W.FALLBACK, calls)
+        self.assertEqual({m: W.reader_score(o) for m, o in out.items()}, {a: 4, b: 5})
+
+    def test_no_score_counts_as_failure_then_fallback(self):
+        a, b = W.JUDGES
+        out, calls = self.reads({a: [{"summary": "x"}, {"followability": "n/a"}], b: [{"followability": 4}],
+                                 W.FALLBACK: [{"followability": 3}]})
+        self.assertEqual(calls.count(a), 2)
+        self.assertEqual(out[W.FALLBACK]["_replaces"], a)
+        self.assertEqual(sorted(W.reader_score(o) for o in out.values()), [3, 4])
+
+    def test_both_fail_one_fallback_only(self):
+        a, b = W.JUDGES
+        out, calls = self.reads({a: [], b: [], W.FALLBACK: [{"followability": 5}]})
+        self.assertEqual(calls.count(W.FALLBACK), 1)
+        scored = [o for o in out.values() if W.reader_score(o) is not None]
+        self.assertEqual(len(scored), 1)
+
+
+class ReadBindingTests(unittest.TestCase):
+    """B1 + B2 + B5: certification uses two scores of the text that ships."""
+
+    def setup(self, d):
+        stage = Path(d)
+        (stage / "s" / "sections").mkdir(parents=True)
+        (stage / "s" / "sections" / "1.json").write_text(json.dumps({"_status": "pass", "pass_b_english": ["Old text."]}))
+        pairs = [{"id": "1", "title": "", "source": ["x"], "english": [], "lang": "grc", "src_file": None}]
+        return stage, pairs
+
+    def patches(self, stage, pairs):
+        return [mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "load_pairs", return_value=pairs),
+                mock.patch.object(W, "rebalance", return_value=[]), mock.patch.object(W, "intro_problems", return_value=[]),
+                mock.patch.object(W.work_read, "verify", return_value=([], []))]
+
+    def run_read(self, stage, pairs, rounds, polish=None):
+        seq = iter(rounds)
+        from contextlib import ExitStack
+        with ExitStack() as es:
+            for p in self.patches(stage, pairs):
+                es.enter_context(p)
+            es.enter_context(mock.patch.object(W, "read_two", side_effect=lambda t, l: next(seq)))
+            es.enter_context(mock.patch.object(W, "polish_section", side_effect=polish or (lambda *a: None)))
+            res = W.read_and_fix("s", pairs, {}, "Greek", None)
+            st = W.status("s")
+        return res, st
+
+    def test_last_round_scores_not_best(self):
+        a, b = W.JUDGES
+        with tempfile.TemporaryDirectory() as d:
+            stage, pairs = self.setup(d)
+            rounds = [{a: {"followability": 2}, b: {"followability": 5}},
+                      {a: {"followability": 2}, b: {"followability": 2}},
+                      {a: {"followability": 3}, b: {"followability": 2}}]
+            res, st = self.run_read(stage, pairs, rounds)
+        self.assertEqual(res["best_followability"], [2, 5])
+        self.assertEqual(res["followability"], [3, 2])
+        self.assertEqual(st["followability"], [3, 2])
+
+    def test_one_reader_cannot_certify(self):
+        a, b = W.JUDGES
+        with tempfile.TemporaryDirectory() as d:
+            stage, pairs = self.setup(d)
+            res, st = self.run_read(stage, pairs, [{a: {"followability": 5}, b: {"_error": "down"}}] * 3)
+        self.assertTrue(res["reader_unavailable"])
+        self.assertEqual(st["read_note"], "held: reader unavailable")
+        self.assertFalse(W.follow_ok(st["followability"]))
+
+    def test_text_changed_after_read_drops_scores(self):
+        a, b = W.JUDGES
+        with tempfile.TemporaryDirectory() as d:
+            stage, pairs = self.setup(d)
+            res, st = self.run_read(stage, pairs, [{a: {"followability": 5}, b: {"followability": 5}}])
+            self.assertEqual(st["followability"], [5, 5])
+            (stage / "s" / "sections" / "1.json").write_text(json.dumps({"_status": "pass", "pass_b_english": ["New."]}))
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "load_pairs", return_value=pairs), \
+                    mock.patch.object(W, "rebalance", return_value=[]), mock.patch.object(W, "intro_problems", return_value=[]):
+                st2 = W.status("s")
+        self.assertIsNone(st2["followability"])
+        self.assertIn("text changed", st2["read_note"])
+
+    def test_unbound_old_read_not_used(self):
+        with tempfile.TemporaryDirectory() as d:
+            stage, pairs = self.setup(d)
+            (stage / "s" / "read.json").write_text(json.dumps({"followability": [5, 5]}))
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "load_pairs", return_value=pairs), \
+                    mock.patch.object(W, "rebalance", return_value=[]), mock.patch.object(W, "intro_problems", return_value=[]):
+                st = W.status("s")
+        self.assertIsNone(st["followability"])
+
+    def test_skipped_read_clears_stale_scores(self):
+        with tempfile.TemporaryDirectory() as d:
+            stage, pairs = self.setup(d)
+            (stage / "s" / "sections" / "1.json").write_text(json.dumps({"_status": "hold"}))
+            (stage / "s" / "read.json").write_text(json.dumps({"followability": [5, 5], "text_sha256": "x"}))
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "load_pairs", return_value=pairs), \
+                    mock.patch.object(W, "book_meta", return_value={}), mock.patch.object(W, "rebalance", return_value=[]), \
+                    mock.patch.object(W, "make_brief", return_value={}), mock.patch.object(W, "process_section"), \
+                    mock.patch.object(W, "make_intro", return_value={}), mock.patch.object(W, "read_and_fix") as rf, \
+                    mock.patch.object(W, "intro_problems", return_value=[]), mock.patch.object(W, "log"):
+                W.run("s", attempt=1)
+                st = W.status("s")
+            read = json.loads((stage / "s" / "read.json").read_text())
+        rf.assert_not_called()
+        self.assertIsNone(st["followability"])
+        self.assertIn("read skipped", st["read_note"])
+        self.assertEqual(read["previous_followability"], [5, 5])
+
+
+class ReviewAccuracyTests(unittest.TestCase):
+    """Accuracy review 2026-10-03: paths where the new rules let text through."""
+
+    def test_other_entry_english_drops_ban_only_where_its_word_is(self):
+        brief = {"glossary": [JER, CHURCH]}
+        errs = gate_only(rec("ἀνέβη εἰς Ἱερουσαλὴμ ἡ πόλις.", "He went up to the Church."), brief)
+        self.assertTrue(any("the Church" in e for e in errs), errs)
+        self.assertEqual(gate_only(rec("ἡ Ἱερουσαλὴμ καὶ ἡ ἐκκλησία.", "Jerusalem, the Church."), brief), [])
+
+    def test_greek_term_over_latin_source_is_unknown_not_absent(self):
+        from pipeline import work_lint as wl
+        src = "Et ascendit in civitatem sanctam, et dixit ad eos verbum Domini."
+        self.assertIsNone(wl.term_in_source("Ἱερουσαλήμ", src))
+        errs = gate_only(rec(src, "He went up to the soul."), {"glossary": [JER]})
+        self.assertTrue(any("the soul" in e for e in errs), errs)
+
+    def test_forms_a_prefix_cannot_reach(self):
+        from pipeline import work_lint as wl
+        for term, src in (("θεός", "τῷ θεῷ δόξα"), ("υἱός", "τῷ υἱῷ αὐτοῦ"), ("ἀνήρ", "τοῦ ἀνδρὸς αὐτῆς"),
+                          ("rex", "ad regem venit"), ("lux", "in lucem mundi"), ("deus", "verbum dei manet"),
+                          ("caro", "verbum carnem factum")):
+            self.assertTrue(wl.term_in_source(term, src), term)
+
+    def test_nan_or_inf_score_cannot_certify(self):
+        self.assertIsNone(W.reader_score({"followability": "nan"}))
+        self.assertIsNone(W.reader_score({"followability": float("inf")}))
+        self.assertFalse(W.follow_ok([float("nan"), 5], words=10))
+        self.assertFalse(W.follow_ok([float("nan"), float("nan")], words=10))
+
+
 if __name__ == "__main__":
     unittest.main()

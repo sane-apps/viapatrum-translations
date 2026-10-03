@@ -23,6 +23,7 @@ import json
 import random
 import re
 import sys
+import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -315,6 +316,153 @@ def rule_term_drift(sections, brief):
 
 # ---- glossary / names (brief-driven) ---------------------------------------
 
+def fold(s: str) -> str:
+    """Accent- and case-free form: strip combining marks, final sigma -> sigma."""
+    s = unicodedata.normalize("NFD", str(s or ""))
+    s = "".join(c for c in s if not unicodedata.combining(c)).casefold()
+    return s.replace("ς", "σ")
+
+
+# Function words never count as the source term's content words.
+_SRC_STOP = set(fold(w) for w in (
+    "ὁ ἡ τό το τοῦ τῆς τῷ τῇ τόν τήν τῶν τοῖς ταῖς τούς τάς οἱ αἱ τά καί δέ τε γάρ μέν οὖν ἐν εἰς ἐκ ἐξ "
+    "ἀπό πρός διά κατά μετά περί ὑπό ὑπέρ ἐπί παρά σύν ὡς οὐ οὐκ οὐχ μή "
+    "et in de ad cum per ex est non qui quae quod a ab e atque sed").split())
+
+
+def source_stems(term: str) -> list[str]:
+    """Stems of the source term's content words: the first max(3, len-2) letters.
+    Minimum 3, not 4 (review 2026-10-03): a 4-5 letter headword kept its ending,
+    so σάρξ missed σαρκός, πατήρ πατρός, εἰκών εἰκόνα, and the ban was dropped
+    in sections that have the word (2 Ammonius holds wrongly reopened)."""
+    words = [w for w in re.findall(r"\w+", fold(term)) if not w.isdigit()]
+    out = []
+    for w in words:
+        if w in _SRC_STOP:
+            continue
+        out.append(w[:max(3, len(w) - 2)])
+        # Forms the prefix cannot reach (review 2026-10-03, accuracy): θεός/υἱός
+        # dative θεῷ/υἱῷ, rex regis, lux lucis, ἀνήρ ἀνδρός, deus dei.
+        if len(w) == 4 and w.endswith("οσ"):
+            out.append(w[:2] + "ω")
+        if len(w) > 2 and w.endswith("x"):
+            out += [w[:-1] + "c", w[:-1] + "g"]
+        out += _SRC_IRREG.get(w, [])
+    return out
+
+
+_SRC_IRREG = {"ανηρ": ["ανδρ"], "γυνη": ["γυναι"], "deus": ["dei", "deo", "deum"], "caro": ["carn"]}
+_GREEK = re.compile(r"[\u0370-\u03ff]")
+_LATIN = re.compile(r"[a-z]")
+SCRIPT_MIN = 20  # letters (or 30% of a short source) before it counts as written in a script
+
+
+def term_in_source(term: str, source: str) -> bool | None:
+    """Does any content word of the source term occur (by stem, at a word start)
+    in this source text? None when it cannot be told (no source, no stems)."""
+    stems = source_stems(term)
+    if not stems or not str(source or "").strip():
+        return None
+    fsrc = fold(source)
+    # A headword in a script the source is not written in cannot be looked for:
+    # it is unknown, not absent, so the ban still applies (review 2026-10-03:
+    # Cyril on Proverbs has Greek headwords over Latin section sources).
+    n_gr, n_la = len(_GREEK.findall(fsrc)), len(_LATIN.findall(fsrc))
+    need = min(SCRIPT_MIN, 0.3 * (n_gr + n_la))
+    usable = [st for st in stems if (n_gr if _GREEK.search(st) else n_la) >= max(need, 1)]
+    if not usable:
+        return None
+    toks = set(re.findall(r"\w+", fsrc))
+    return any(t.startswith(st) for st in usable for t in toks)
+
+
+def phrase_key(s: str) -> str:
+    """Compare English renderings: folded, no leading article, last word singular."""
+    words = re.findall(r"\w+", fold(s))
+    if words and words[0] in ("the", "a", "an"):
+        words = words[1:]
+    w = words[-1] if words else ""
+    if len(w) > 4 and w.endswith(("ches", "shes", "sses", "xes")):
+        words[-1] = w[:-2]
+    elif len(w) > 3 and w.endswith("s") and not w.endswith("ss"):
+        words[-1] = w[:-1]
+    return " ".join(words)
+
+
+# Standard renderings of common source words (phrase_key -> alternatives; every
+# stem of one alternative must start a source word). A banned rendering of one
+# term is never applied where the source has the word it normally translates:
+# "eternal life" banned for ζωή is still right for ζωὴ αἰώνιος (2026-10-03).
+COMMON_RENDERINGS = {
+    "soul": (("ψυχ",), ("anim",)),
+    "eternal life": (("ζω", "αιων"), ("vit", "aetern")),
+    "life": (("ζω",), ("vita", "vitae", "vivi")),
+    "holy spirit": (("πνευμ", "αγι"), ("spirit", "sanct")),
+    "spirit": (("πνευμ",), ("spirit",)),
+    "church": (("εκκλησ",), ("eccles",)),
+    "two way": (("δυο", "οδ"), ("duae", "via")),
+    "turning back": (("επιστρ",), ("conver",), ("revert",)),
+    "kingdom of god": (("βασιλ", "θεο"), ("regn", "dei")),
+    "kingdom of heaven": (("βασιλ", "ουραν"), ("regn", "cael")),
+}
+
+
+COMMON_WINDOW = 4  # a multi-word source phrase: its words at most this many tokens apart
+
+
+def _common_word_in_source(bad: str, toks: list) -> bool:
+    """Does the source have the common phrase `bad` normally renders? The words of
+    a multi-word phrase must stand together (review 2026-10-03): θεοῦ anywhere in
+    a section is not βασιλεία τοῦ θεοῦ, so "kingdom of God" banned for βασιλεία
+    τῶν οὐρανῶν must not drop just because θεός occurs somewhere else."""
+    for alt in COMMON_RENDERINGS.get(phrase_key(bad)) or ():
+        hits = [[i for i, t in enumerate(toks) if t.startswith(st)] for st in alt]
+        if not all(hits):
+            continue
+        if len(alt) == 1 or any(all(any(abs(j - i) <= COMMON_WINDOW for j in h) for h in hits[1:]) for i in hits[0]):
+            return True
+    return False
+
+
+def applicable_banned(entry: dict, glossary: list, source: str | None = None) -> list[str]:
+    """The banned renderings of one glossary entry that apply to this section.
+
+    - Never ban a phrase another entry of the same brief fixes as its English
+      ("the Church" banned for Judah while ἐκκλησία -> "church").
+    - With the section's source: apply only when the entry's source term occurs
+      in it, and never where the source has the common word the phrase normally
+      renders. Without a source (whole-work CLI lint) the old rule stands."""
+    own = phrase_key(entry.get("english") or "")
+    others: dict = {}
+    for g in glossary or []:
+        k = phrase_key(g.get("english") or "") if isinstance(g, dict) and g is not entry else ""
+        if k and k != own:
+            others.setdefault(k, []).append(g)
+
+    def fixed_by_other(b: str) -> bool:
+        # With a source, only where the other entry's word is (or may be) in it
+        # (review 2026-10-03): "the Church" for Jerusalem in a section with no
+        # ἐκκλησία is still the banned calque, not the church entry's English.
+        hits = others.get(phrase_key(b)) or []
+        if source is None:
+            return bool(hits)
+        return any(term_in_source(g.get("source_term") or "", source) is not False for g in hits)
+
+    banned = [b for b in entry.get("banned") or [] if b and not fixed_by_other(b)]
+    if source is None or not banned:
+        return banned
+    present = term_in_source(entry.get("source_term") or "", source)
+    if present is False:
+        return []
+    toks = re.findall(r"\w+", fold(source))
+    return [b for b in banned if not _common_word_in_source(b, toks)]
+
+
+def applicable_glossary(brief: dict | None, source: str | None = None) -> list[dict]:
+    gl = [g for g in (brief or {}).get("glossary") or [] if isinstance(g, dict)]
+    return [{**g, "banned": applicable_banned(g, gl, source)} for g in gl]
+
+
 def rule_glossary(sec, brief):
     out = []
     text = sec["text"]
@@ -325,7 +473,9 @@ def rule_glossary(sec, brief):
     if not brief:
         return out
     text = sec["text"]
-    for entry in brief.get("glossary") or []:
+    # A section's own source (when given) decides which bans apply: a banned
+    # rendering of Ἱερουσαλήμ means nothing in a section without Jerusalem.
+    for entry in applicable_glossary(brief, sec.get("source")):
         for bad in entry.get("banned") or []:
             if not bad:
                 continue
@@ -431,7 +581,9 @@ SECTION_RULES = (rule_boundary, rule_bracket_filler, rule_citation_style, rule_a
 def lint_work(sections: list[dict], brief: dict | None = None) -> list[dict]:
     findings: list[Finding] = []
     for sec in sections:
-        sec = {"id": str(sec.get("id")), "title": sec.get("title", ""), "text": sec.get("text") or ""}
+        src = sec.get("source")
+        sec = {"id": str(sec.get("id")), "title": sec.get("title", ""), "text": sec.get("text") or "",
+               "source": (" ".join(src) if isinstance(src, list) else src) if src is not None else None}
         for rule in SECTION_RULES:
             findings.extend(rule(sec, brief))
     clean = [{"id": str(s.get("id")), "title": s.get("title", ""), "text": s.get("text") or ""} for s in sections]
