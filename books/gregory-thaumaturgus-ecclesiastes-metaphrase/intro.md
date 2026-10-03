@@ -1,5 +1,5 @@
-Gregory Thaumaturgus ("the Wonderworker," c. 213–c. 270), Origen's pupil and bishop of Neocaesarea in Pontus, carried his teacher's learning into a lifetime of pastoral work on the Black Sea coast.
+Gregory Thaumaturgus (c. 213–c. 270) wrote this paraphrase of Ecclesiastes for the whole Church of God. He was a third-century Christian bishop, born in Neocaesarea in Pontus to a wealthy pagan family and originally named Theodore.
 
-His Paraphrase of Ecclesiastes retells Solomon's book as a single flowing meditation: human affairs are empty, nothing is new under the sun, and wisdom lies in fearing God.
+The work is a paraphrase, not a commentary, presenting the teaching of Ecclesiastes in Gregory's own Greek. Gregory speaks in his own voice when he says he is addressing the Church and has given these matters sufficient thought.
 
-This volume holds the opening of Chapter I: Solomon's address to the church on the vanity of earthly things.
+A reader will meet Solomon, King David, and Gregory himself. The argument is that all human affairs and pursuits are empty and useless, because people are defeated by temporal things and refuse to look above the stars with the noble eye of the soul. Human life wears away like winter torrents pouring into the boundless deep. What God has established remains fixed, but human words and deeds have no measure, and idle talk brings no profit. Nothing new ever happens; what seems new was already known to the ancients, and both past and present fade into oblivion. The work paraphrases Ecclesiastes, so readers should use the Septuagint book name and numbering, cited as Ecclesiastes (LXX).

@@ -1,0 +1,5 @@
+Gregory Thaumaturgus (c. 213–c. 270) wrote this brief exposition of a saying from the Gospel of Matthew. It is addressed to no named recipient and survives only as a fragment. He wrote to explain the meaning of Jesus' words about the eye as the lamp of the body, applying them to the difference between sincere and pretended love.
+
+The passage under discussion is Matthew 6:22-23, where Jesus says that if the eye is sound, the whole body is full of light, but if the eye is evil, the whole body is full of darkness.
+
+A reader should know that Gregory interprets the 'sound eye' as sincere love, through which a person's outward words match inward thoughts. The 'evil eye' is pretended love, which he equates with hypocrisy. Such hypocrites are wolves who have put on sheep's clothing, washing only the outside of the cup and dish while leaving the inside unclean. The Savior convicts them by asking: if the light in you is darkness, how great is the darkness? Gregory explains this as meaning that if what you think is love is actually a work deserving darkness because of hidden hypocrisy, your open transgressions are far worse.

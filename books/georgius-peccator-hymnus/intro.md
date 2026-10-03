@@ -1,0 +1,5 @@
+Georgius Peccator wrote this hymn, addressing it to Christ. He identifies himself as a sinner and a servant of Christ, and the poem is a brief metrical prayer. The occasion is personal: the poet asks Christ for purification and for the vision of divine light so that he may sing praise to the Father and the Holy Spirit.
+
+The hymn opens by invoking Christ as the Son of the high-ruling God and asking him to remember the sinful servant who wrote these lines. The speaker prays for release from heart-bred passions that grow in his impure soul. He then asks to see Christ's holy radiance, so that, appearing in that light, he may sing a healing song for souls and limbs to the Father and the Holy Spirit.
+
+A reader should know that the poet calls himself a sinner, using the Greek term that means sinful or wicked. The phrase rendered here as heart-bred passions refers to inner afflictions bred in the heart. The holy radiance is the divine light of Christ. The song the poet hopes to sing is described as healing. No biblical quotations or scriptural book names appear in this hymn.
