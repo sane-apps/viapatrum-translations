@@ -4,7 +4,12 @@
 For each added_allusion in a book's English JSON, asks Jev whether the locked
 source quotes, echoes, or merely resembles the verse, and reports agreement
 with the filed certainty. Advisory only: mismatches go to a stronger reviewer,
-never auto-decide. Needs TYPESAFE_API_KEY in the environment.
+never auto-decide.
+
+Routing: Cloudflare Workers AI (`typesafe/jev`) first so Jev rides existing
+CF usage instead of separate TypeSafe spend; direct api.typesafe.ai only as
+fallback when TYPESAFE_API_KEY is set (one stderr note per process).
+Needs CF_TOKEN/CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID for the CF path.
 
 Usage: python3 scripts/jev_review.py <book-slug> [--all] [--max N]
 Exit 0 with a MISMATCHES count line; prints one verdict line per allusion.
@@ -19,20 +24,70 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 API = "https://api.typesafe.ai/v1/systemone"
+# Override with JEV_MODEL=@cf/cloudflare/clef (Jev-compatible, 2026-10-01) to A/B.
+CF_MODEL = os.environ.get("JEV_MODEL", "typesafe/jev")
+DEFAULT_ACCOUNT = "2c267ab06352ba2522114c3081a8c5fa"
 TIMEOUT = 25
 
+_fallback_noted = False
 
-def jev(state, questions):
-    key = os.environ.get("TYPESAFE_API_KEY", "")
-    if not key:
-        raise SystemExit("TYPESAFE_API_KEY not set")
+
+def _post(url, payload, token):
     req = urllib.request.Request(
-        API,
-        data=json.dumps({"model": "jev-latest", "state": state, "questions": questions}).encode(),
-        headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
+        url,
+        data=json.dumps(payload).encode(),
+        headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"},
     )
     with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
         return json.loads(resp.read().decode())
+
+
+def _cf_jev(state, questions):
+    token = os.environ.get("CF_TOKEN") or os.environ.get("CLOUDFLARE_API_TOKEN", "")
+    account = os.environ.get("CLOUDFLARE_ACCOUNT_ID", DEFAULT_ACCOUNT)
+    if not token or not account:
+        raise RuntimeError("CF Jev credentials missing")
+    body = _post(
+        "https://api.cloudflare.com/client/v4/accounts/%s/ai/run" % account,
+        {"model": CF_MODEL, "input": {"state": state, "questions": questions}},
+        token,
+    )
+    # Workers AI wraps once; the gateway wraps again
+    # ({result: {state, result: {answers}}}). Unwrap until answers show.
+    for _ in range(3):
+        if (isinstance(body, dict) and "answers" not in body
+                and isinstance(body.get("result"), dict)):
+            body = body["result"]
+        else:
+            break
+    if not isinstance(body, dict) or "answers" not in body:
+        raise RuntimeError("CF Jev bad shape: %s" % str(body)[:160])
+    return body
+
+
+def _direct_jev(state, questions):
+    key = os.environ.get("TYPESAFE_API_KEY", "")
+    if not key:
+        raise SystemExit("TYPESAFE_API_KEY not set")
+    return _post(
+        API,
+        {"model": "jev-latest", "state": state, "questions": questions},
+        key,
+    )
+
+
+def jev(state, questions):
+    global _fallback_noted
+    try:
+        return _cf_jev(state, questions)
+    except Exception as e:  # noqa: BLE001 - CF path may lack balance/scopes
+        cf_err = e
+    if not os.environ.get("TYPESAFE_API_KEY"):
+        raise SystemExit("CF Jev failed (%s); TYPESAFE_API_KEY not set" % cf_err)
+    if not _fallback_noted:
+        print("JEV-DIRECT-FALLBACK: %s" % cf_err, file=sys.stderr)
+        _fallback_noted = True
+    return _direct_jev(state, questions)
 
 
 CERTAINTY_Q = {
@@ -47,6 +102,41 @@ CERTAINTY_Q = {
         "none": "Neither quotation, echo, nor meaningful connection.",
     },
 }
+
+WINDOW_FULL = 6000
+WINDOW_EDGE = 3000
+WINDOW_SNIP = "\n[... snip ...]\n"
+
+
+def excerpt_window(text):
+    """Full text up to WINDOW_FULL; head+tail with a snip marker beyond.
+
+    A blind [:1500] head-clip once hid quoted verses living past the
+    cut and produced confident false 'none' verdicts.
+    """
+    text = text or ""
+    if len(text) <= WINDOW_FULL:
+        return text
+    return text[:WINDOW_EDGE] + WINDOW_SNIP + text[-WINDOW_EDGE:]
+
+
+# Filed certainty vocab is wider than Jev's {clear, possible, none}.
+# Normalize to bands for verdicts; receipts keep the raw filed value.
+CERTAINTY_NORM = {
+    "quotation": "clear",
+    "clear": "clear",
+    "probable": "possible",
+    "allusion": "possible",
+    "allusive": "possible",
+    "possible": "possible",
+    "none": "none",
+}
+
+
+def normalize_certainty(filed):
+    """Map a filed certainty to Jev's band; unknown values pass through."""
+    key = (filed or "").strip().lower()
+    return CERTAINTY_NORM.get(key, key)
 
 
 def main(argv):
@@ -87,17 +177,7 @@ def main(argv):
                 sec = str(row.get("section"))
                 src = src_map.get(sec, {})
                 full_en = " ".join(row.get("english") or [])
-                ref = al.get("reference") or ""
-                # Center the English window on the citation itself: a blind
-                # head-clip once cut off the very clause under review.
-                idx = full_en.find(ref)
-                if idx < 0:
-                    short = ref.split("\u2013")[0].split("-")[0].strip()
-                    idx = full_en.find(short) if len(short) > 3 else -1
-                if idx >= 0:
-                    english_excerpt = full_en[max(0, idx - 1200):idx + 1200]
-                else:
-                    english_excerpt = full_en[:1500]
+                english_excerpt = excerpt_window(full_en)
                 state = {
                     "source_excerpt": str(src.get("latin") or src.get("greek") or "")[:3000],
                     "english_excerpt": english_excerpt,
@@ -112,7 +192,7 @@ def main(argv):
                     return 3
                 ans = body["answers"]["certainty"]
                 filed = (al.get("certainty") or "").strip().lower()
-                verdict = "AGREE" if ans["choice"] == filed else "MISMATCH"
+                verdict = "AGREE" if ans["choice"] == normalize_certainty(filed) else "MISMATCH"
                 if verdict == "MISMATCH":
                     mismatches += 1
                 checked += 1

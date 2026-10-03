@@ -626,6 +626,10 @@ def cf_profile(model: str) -> dict:
             "use_max_completion_tokens": True,
             "timeout": 600,
         }
+    if "glm-5.3" in m:
+        # Thinking cannot be disabled on glm-5.3 (live schema 2026-10-02):
+        # leave it on and give room so reasoning does not truncate the JSON.
+        return {"temperature": 0.2, "max_tokens": 16000, "use_max_completion_tokens": True, "timeout": 900}
     if "glm" in m or "gemma" in m:
         # Live schema: chat_template_kwargs.enable_thinking default true
         return {
@@ -638,8 +642,9 @@ def cf_profile(model: str) -> dict:
         # Schema default max_tokens=256 / temperature=0.6; do NOT invent thinking kwargs
         return {
             "temperature": 0.6,
-            "max_tokens": 4096,
+            "max_tokens": 12000 if "120b" in m else 4096,   # checker JSON + reasoning
             "api": "run",
+            "timeout": 600,
         }
     if "qwen" in m:
         # Full Pass A/B JSON (lemmas + multi-para english) truncates at 1800 on longer §§

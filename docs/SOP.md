@@ -134,3 +134,70 @@ the AX tree or DB and name what the surface shows.
 - Shipping Word footnotes (`FootnoteStore` / `footnotes.xml`) in a Personal Book.
 - Dumping `added_allusions` as repeated “Scripture connection:” captions instead of inline Bible links.
 - Emitting `logosres:` links that prompt other users’ libraries.
+
+## 2026-09-26 overnight stall fixes (4-critic review + live E2E proof)
+
+Root causes of the daily stall, all proven against receipts before patching:
+
+- Coverage validator flipped honest passes to fail: judges saw one
+  [p1] block and invented [1..9]/[1,2]/[1..5]; exact-match then
+  rejected the pass AND suppressed the arbiter (no split, no tiebreak).
+  Fix: prompt states the exact paragraph count; a pass-shaped but
+  malformed verdict gets a bounded same-model retry. Validator unchanged.
+- Arbiter chain collapse: draft+revise history saturates qwen+llama, and
+  excluding draft+checker families left glm as the sole eligible arbiter;
+  one flake then held the claim. Fix: arbiter retries 2->3, a warning
+  when fewer than 2 models stay eligible, SOP rule below. Independence
+  semantics unchanged.
+- gpt-oss-20b was banned from judging but still drafted text (default
+  draft/revise fallback) and produced pure confabulation (receipt
+  20260926T011739517488Z). Fix: banned from draft_claim + redraft_b
+  defaults (DRAFT_FALLBACK_DEFAULTS constants, test-enforced).
+- HOLD latch races + crash bug: record_claim_fail is now lock-guarded;
+  hold_reconcile keep-path NameError fixed; wrapper auto-runs
+  hold_reconcile --apply nightly (fail-closed, never trips the fuse).
+- Lane shares normalize over lanes with queued work (fixed total still
+  binds); receipts now embed the judged English+Greek snapshot;
+  revise prompt verifies notes against the locked text first.
+
+Rules going forward:
+
+- Manual --arbiter chains must span at least 3 model families, or the
+  family filter may leave zero eligible judges (silent hold).
+- Never re-add gpt-oss-20b to any chain without a new bakeoff receipt.
+- Held rows release only with written evidence (claim, receipt refs,
+  fixed cause); the claim must still pass full promote. No blanket
+  clears.
+- After stashing another lane's work to ship, pop the stash before
+  deploying (2026-09-26: a ship stash reverted the live Explore
+  redesign until restored + reshipped).
+
+## Fathers Watch (self-monitoring, 2026-09-28)
+
+No human should have to poke the system to learn it is broken. Three
+scheduled pieces replace the manual watch:
+
+- Mini `com.saneapps.fathers-watch` (every 15 min): runs
+  `scripts/fathers_watch.py` — burn idle/healthy/hung, quota freshness
+  (nightly 21:10; warn >26h, fail >50h), fathers job exits, fresh HOLD
+  pileup (>5 in 48h), e2e receipt, logos lock, disk GB (warn <8G,
+  fail <4G; percent is meaningless on APFS), JEV queue depth.
+  Writes `outputs/fathers-watch/status.json` (alerts carry stable ids
+  + first_seen) and appends `alerts.log`. Bounded self-heal only:
+  kill a twice-confirmed hung burn child (once per episode), remove a
+  PID-dead logos lock older than 30 min. Never touches gates, books,
+  or deploys.
+- Mini `com.saneapps.fathers-e2e` (daily 02:30): runs the site
+  `scripts/fathers_e2e.sh` — full `ship.sh --dry-run` (build + gates +
+  browser checks, never deploys). Skips while a ship holds the release
+  lock; stashes + restores a recorded visual review so a mid-flight
+  ship is never invalidated. Receipt: site `outputs/e2e/LATEST.json`.
+- Air `com.saneapps.fathers-watch-notify` (every 15 min): runs
+  `scripts/fathers_watch_notify.py` — fetches Mini status.json over
+  ssh, posts a macOS notification ONLY on new alert ids and on
+  recovery. Silent when green. `... --status` prints the one-line
+  summary any time. State: `~/.local/state/fathers_watch_notified.json`.
+
+Conventions: single-instance via atomic mkdir locks; Nice 10; logs
+under each repo's `outputs/`. Unload: `launchctl bootout
+gui/$(id -u)/<label>` on the owning machine.

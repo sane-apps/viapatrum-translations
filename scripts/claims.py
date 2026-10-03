@@ -143,7 +143,7 @@ def agent_already_claimed(text: str, agent: str) -> str | None:
 
 
 def cmd_take(claim_id: str, agent: str, quiet: bool = False) -> int:
-    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,40}", claim_id):
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,160}", claim_id):
         print(f"Bad claim id: {claim_id}", file=sys.stderr)
         return 2
     if not agent.strip() or agent.strip().lower() in {"yourname", "me", "agent"}:

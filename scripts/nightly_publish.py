@@ -34,6 +34,10 @@ def latest_summary() -> dict:
 
 
 def book_for_claim(claim_id: str) -> str | None:
+    if "--" in claim_id:
+        slug = claim_id.split("--", 1)[0]
+        if (ROOT / "books" / slug / "book.yml").is_file():
+            return slug
     from book_adapter import get_adapter  # noqa: E402
     for slug in ("origen-jeremiah-samuel", "cyril-alexandria-isaiah"):
         try:
@@ -102,16 +106,21 @@ def main() -> int:
     if not ship.is_file():
         print("[publish] ship.sh missing; site not shipped", flush=True)
         return 0
-    print("[publish] + scripts/ship.sh", flush=True)
-    try:
-        proc = subprocess.run([str(ship)], cwd=SITE, capture_output=True,
-                              text=True, timeout=1800,
-                              env={**os.environ, "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:" + os.environ.get("PATH", "")})
-    except subprocess.TimeoutExpired:
-        print("[publish] ship.sh TIMEOUT; site unchanged", flush=True)
-        return 0
-    tail = ((proc.stdout or "") + (proc.stderr or ""))[-1500:]
-    print(f"[publish] ship.sh rc={proc.returncode}\n{tail}", flush=True)
+    print("[publish] + scripts/ship.sh (background, translation does not wait)", flush=True)
+    log_path = Path.home() / "SaneApps/outputs/fathers-overnight/ship-auto.log"
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    logf = open(log_path, "a", encoding="utf-8")
+    logf.write("\n[publish] background ship\n")
+    logf.flush()
+    proc = subprocess.Popen(
+        ["/bin/bash", str(ship)],
+        cwd=str(SITE),
+        stdout=logf,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,
+        env={**os.environ, "PATH": "/opt/homebrew/opt/node@24/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:" + os.environ.get("PATH", "")},
+    )
+    print("[publish] ship pid %s log %s" % (proc.pid, log_path), flush=True)
     return 0
 
 

@@ -1,49 +1,50 @@
 # Logos Personal Books backlog (generated - do not hand-edit)
 
-Regenerated: 2026-09-23T16:57-04:00 by scripts/logos_backlog.py from the live
+Regenerated: 2026-10-01T12:57-04:00 by scripts/logos_backlog.py from the live
 Mini PersonalBookManager.db + repo books/*/book.yml + upload receipts.
 Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 
 ## Summary
 
-- Compiled in Logos: **31**
+- Compiled in Logos: **32**
 - Metadata row exists, never compiled: **0**
 - DOCX exists, no Logos row yet: **0**
 - No DOCX (needs build_book.py or per-slice builder): **406**
 
 ## Compiled (title | book Id | LastCompiled | uploaded)
 
-- 'De imputatione primi peccati Adami (Cap. I–VII tip: probable + necessary args | Id 30 | 2026-09-23T13:37:45-04:00 | 2026-09-23T14:45:11-04:00
-- Ante-Nicene Dogmatics | Id 6 | 2026-09-23T13:33:32-04:00 | 2026-09-23T14:03:08-04:00
-- Cyril of Alexandria: Commentary on Isaiah | Id 34 | 2026-09-23T13:18:25-04:00 | 2026-09-23T14:04:37-04:00
-- Cyril of Alexandria: On Adoration and Worship in Spirit and Truth, Book 1 | Id 7 | 2026-09-18T15:16:04-04:00 | 2026-09-23T14:04:10-04:00
-- Cyril of Alexandria: On the True Faith to the Imperial Women | Id 11 | 2026-09-18T11:47:09-04:00 | 2026-09-23T14:23:08-04:00
-- Dissertationes duae (De morte Christi Cap. 1-4 partial) | Id 12 | 2026-09-23T13:34:00-04:00 | 2026-09-23T14:23:36-04:00
-- Epiphanius: Ancoratus | Id 13 | 2026-09-18T11:51:04-04:00 | 2026-09-23T14:24:03-04:00
-- Epiphanius: De mensuris | Id 14 | 2026-09-18T11:51:24-04:00 | 2026-09-23T14:24:34-04:00
-- Epiphanius: Panarion | Id 15 | 2026-09-18T11:51:44-04:00 | 2026-09-23T14:54:11-04:00
-- Gregory Thaumaturgus: Ecclesiastes metaphrase | Id 17 | 2026-09-18T11:52:48-04:00 | 2026-09-23T14:54:43-04:00
-- Gregory Thaumaturgus: Epistula canonica | Id 18 | 2026-09-18T12:05:38-04:00 | 2026-09-23T15:03:48-04:00
-- Gregory Thaumaturgus: In annuntiationem | Id 19 | 2026-09-18T12:06:07-04:00 | 2026-09-23T14:11:41-04:00
-- Gregory Thaumaturgus: Panegyricus | Id 20 | 2026-09-18T12:06:40-04:00 | 2026-09-23T14:29:11-04:00
-- Gregory Thaumaturgus: Sermo in omnes sanctos | Id 21 | 2026-09-18T12:07:15-04:00 | 2026-09-23T14:13:06-04:00
-- Gregory Thaumaturgus: Twelve Chapters on the Faith | Id 16 | 2026-09-18T12:07:54-04:00 | 2026-09-23T14:26:19-04:00
-- Ingenua in Controversias Evangelicorum (Prefatio + Crimina defenses + Part I Protheoria through Coena Domini, Post Lutherum Controv. III–XIII + XV Tolerantia tip, and Hexades Annotationum Prooemium H.I–§.III + Annotatio I §.I–§.VIII tip) | Id 32 | 2026-09-23T14:16:30-04:00 | 2026-09-23T14:47:18-04:00
-- Julian of Eclanum: Surviving Arguments Preserved by Augustine | Id 5 | 2026-09-18T15:17:04-04:00 | 2026-09-23T15:33:14-04:00
-- Macarius: The Spiritual Homilies | Id 23 | 2026-09-18T12:09:31-04:00 | 2026-09-23T15:43:54-04:00
-- Nemesius: De natura hominis | Id 24 | 2026-09-18T12:11:29-04:00 | 2026-09-23T15:51:58-04:00
-- Origen — Dialogue with Heraclides and On Pascha | Id 9 | 2026-09-18T15:13:08-04:00 | 2026-09-23T14:38:08-04:00
-- Origen: Homilies on Jeremiah and on 1 Samuel 28 | Id 8 | 2026-09-18T15:14:22-04:00 | 2026-09-23T16:05:24-04:00
-- Origen: Homilies on Numbers | Id 25 | 2026-09-18T12:12:39-04:00 | 2026-09-23T16:16:27-04:00
-- Origen: On Prayer and Exhortation to Martyrdom | Id 4 | 2026-09-18T15:15:39-04:00 | 2026-09-23T16:29:15-04:00
-- Paulus Silentarius: Descriptio Ambonis | Id 26 | 2026-09-18T12:13:54-04:00 | 2026-09-23T16:39:26-04:00
-- Paulus Silentarius: Descriptio Sanctae Sophiae | Id 27 | 2026-09-18T12:15:11-04:00 | 2026-09-23T14:43:18-04:00
-- Philostorgius: Ecclesiastical History | Id 28 | 2026-09-18T12:16:34-04:00 | 2026-09-23T16:46:42-04:00
-- Photius: Bibliotheca (Myriobiblon) | Id 29 | 2026-09-23T13:52:00-04:00 | 2026-09-23T13:54:30-04:00
-- Serapion of Antioch: Fragmenta | Id 31 | 2026-09-18T12:19:30-04:00 | 2026-09-23T16:56:56-04:00
-- Syntagma sacrae theologiae (Liber I Cap. 1 tip) | Id 10 | 2026-09-18T12:21:02-04:00 | 2026-09-23T14:03:43-04:00
-- The Cesti (fragments of books 7, 2, 3, 4, 8, 9, and 13) | Id 33 | 2026-09-23T13:26:34-04:00 | 2026-09-23T14:53:43-04:00
-- Theological Theses (De Theologia I-XLIII; De Fide I-XXII) | Id 22 | 2026-09-23T13:55:33-04:00 | 2026-09-23T14:14:37-04:00
+- Ante-Nicene Dogmatics | Id 6 | 2026-09-23T22:16:18-04:00 | 2026-09-24T00:19:32-04:00
+- Cyril of Alexandria: Commentary on Isaiah | Id 34 | 2026-09-25T01:05:30-04:00 | 2026-09-25T01:06:58-04:00
+- Cyril of Alexandria: On Adoration and Worship in Spirit and Truth, Book 1 | Id 7 | 2026-09-27T04:30:00-04:00 | 2026-09-27T04:53:08-04:00
+- Cyril of Alexandria: On the True Faith to the Imperial Women | Id 11 | 2026-09-27T04:30:38-04:00 | 2026-09-27T04:53:55-04:00
+- Epiphanius of Salamis: On Weights and Measures | Id 14 | 2026-09-23T22:23:12-04:00 | 2026-09-24T00:30:26-04:00
+- Epiphanius of Salamis: The Anchor of Faith | Id 13 | 2026-09-23T22:21:59-04:00 | 2026-09-24T00:27:19-04:00
+- Epiphanius of Salamis: The Panarion (Against Heresies) | Id 15 | 2026-09-23T22:23:50-04:00 | 2026-09-24T00:31:13-04:00
+- Gregory Thaumaturgus: Canonical Letter | Id 18 | 2026-09-23T22:26:58-04:00 | 2026-09-24T00:36:16-04:00
+- Gregory Thaumaturgus: Homilies on the Annunciation | Id 19 | 2026-09-23T18:32:30-04:00 | 2026-09-23T20:59:45-04:00
+- Gregory Thaumaturgus: Paraphrase of Ecclesiastes | Id 17 | 2026-09-23T22:25:45-04:00 | 2026-09-24T00:34:54-04:00
+- Gregory Thaumaturgus: Sermon on All Saints | Id 21 | 2026-09-23T18:45:11-04:00 | 2026-09-24T00:43:57-04:00
+- Gregory Thaumaturgus: Thanksgiving Address to Origen | Id 20 | 2026-09-23T18:41:37-04:00 | 2026-09-24T00:41:48-04:00
+- Gregory Thaumaturgus: Twelve Chapters on the Faith | Id 16 | 2026-09-23T22:25:08-04:00 | 2026-09-24T00:32:39-04:00
+- John Davenant: Two Dissertations (selections) | Id 12 | 2026-09-23T22:21:23-04:00 | 2026-09-24T00:26:32-04:00
+- John Wesley: Sermons | Id 35 | 2026-10-01T12:55:42-04:00 | 2026-10-01T12:57:14-04:00
+- Josué de la Place: On the Imputation of Adam's First Sin (selections) | Id 30 | 2026-09-25T01:46:03-04:00 | 2026-09-25T01:47:35-04:00
+- Julian of Eclanum: Surviving Arguments Preserved by Augustine | Id 5 | 2026-09-27T04:31:57-04:00 | 2026-09-27T04:55:23-04:00
+- Julius Africanus: The Cesti (selected fragments) | Id 33 | 2026-09-23T22:15:36-04:00 | 2026-09-24T00:18:45-04:00
+- Louis Le Blanc de Beaulieu: Theological Theses (selections) | Id 22 | 2026-09-25T01:16:14-04:00 | 2026-09-25T01:17:46-04:00
+- Ludwig Crocius: System of Sacred Theology, Book 1 (selections) | Id 10 | 2026-09-23T22:17:35-04:00 | 2026-09-24T00:21:04-04:00
+- Macarius the Egyptian: The Spiritual Homilies | Id 23 | 2026-09-23T22:43:21-04:00 | 2026-09-24T01:03:56-04:00
+- Nemesius of Emesa: On the Nature of Man | Id 24 | 2026-09-23T22:53:22-04:00 | 2026-09-24T01:12:28-04:00
+- Origen of Alexandria: Dialogue with Heraclides and On Pascha | Id 9 | 2026-09-25T01:19:04-04:00 | 2026-09-25T01:20:43-04:00
+- Origen of Alexandria: Homilies on Jeremiah and on 1 Samuel 28 | Id 8 | 2026-09-27T04:38:13-04:00 | 2026-09-27T05:03:49-04:00
+- Origen of Alexandria: Homilies on Numbers | Id 25 | 2026-09-23T23:08:46-04:00 | 2026-09-24T01:40:09-04:00
+- Origen of Alexandria: On Prayer and Exhortation to Martyrdom | Id 4 | 2026-09-27T04:51:40-04:00 | 2026-09-27T05:14:11-04:00
+- Paul the Silentiary: Description of Hagia Sophia | Id 27 | 2026-09-23T23:37:51-04:00 | 2026-09-24T02:08:06-04:00
+- Paul the Silentiary: Description of the Pulpit of Hagia Sophia | Id 26 | 2026-09-23T23:26:00-04:00 | 2026-09-24T01:57:46-04:00
+- Philostorgius: Ecclesiastical History | Id 28 | 2026-09-23T23:46:51-04:00 | 2026-09-24T02:20:17-04:00
+- Photius of Constantinople: The Library (selections) | Id 29 | 2026-09-23T23:51:14-04:00 | 2026-09-24T02:32:57-04:00
+- Samuel Strimesius: Candid Examination of the Gospel Controversies (selections) | Id 32 | 2026-09-25T01:49:14-04:00 | 2026-09-25T01:51:00-04:00
+- Serapion of Antioch: Fragments | Id 31 | 2026-09-24T00:09:48-04:00 | 2026-09-24T03:01:02-04:00
 
 ## Pending build (row exists, LastCompiled NULL)
 
@@ -84,7 +85,7 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - arethas-scholia-cyrilli-apologiam | Scholia Arethae in Cyrilli apologiam xii anathematismorum
 - asterius-homilia-9 | Homilia 9 (in sanctum Phocam)
 - asterius-homiliae | Homiliae
-- baron-philosophia-theologiae-ancillans | Philosophia theologiae ancillans (Exercitatio Prima Art. I-XII)
+- baron-philosophia-theologiae-ancillans | Philosophia theologiae ancillans (Exercitatio Prima Art. I-XII + Secunda Art. I-XV + Tertia Art. I-XXX)
 - chronicon-paschale | Chronicon paschale
 - cosmas-topographia | Cosmas Indicopleustes: Topographia Christiana
 - cyril-alexandria-ad-calosyrium | Ad Calosyrium

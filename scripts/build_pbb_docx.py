@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -37,6 +38,28 @@ from pipeline.docx_helpers import setup_document  # noqa: E402
 from pipeline.verify_docx import verify_docx  # noqa: E402
 
 _SUPER = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
+
+PENDING_ENGLISH = "[English pending.]"
+
+_SCAFFOLD_LEADS = (
+    re.compile(r"Rem (?:early|mid|CLOSEOUT):"),
+    re.compile(r"Lemma-led\b"),
+    re.compile(r"ZU [A-Z]{2,}"),
+)
+
+
+def is_scaffold_english(paras) -> bool:
+    """True when the row is untranslated scaffold, not content.
+
+    Rem/Lemma/ZU scaffold rows carry working labels as their English text;
+    shipping them paints labels as translation (cyril-isaiah.docx Sep 2026).
+    """
+    for para in paras or []:
+        text = str(para).strip()
+        if not text:
+            continue
+        return any(rx.match(text) for rx in _SCAFFOLD_LEADS)
+    return False
 
 
 def _slice_title(stem: str) -> str:
@@ -63,11 +86,14 @@ def collect_sections(book_dir: Path, only: set[str] | None) -> list[dict]:
             if only is not None and section not in only:
                 continue
             erow = eng_rows[i] if i < len(eng_rows) else {}
+            english = list(erow.get("english") or [])
+            if is_scaffold_english(english):
+                english = [PENDING_ENGLISH]
             sections.append({
                 "slice": src.stem.replace("_source", ""),
                 "section": section,
                 "title": str(erow.get("title") or srow.get("head") or section),
-                "english": list(erow.get("english") or []),
+                "english": english,
                 "translator_notes": list(erow.get("translator_notes") or []),
             })
     if only:
@@ -83,18 +109,35 @@ def build_docx(book: str, out: Path, only: set[str] | None) -> dict:
     book_dir = ROOT / "books" / book
     meta = load_book_meta(book_dir)
     sections = collect_sections(book_dir, only)
+    _drop_raw = str(meta.get("logos_drop_titles") or "").strip()
+    # load_book_meta returns strings; accept ["a", "b"] or a bare title.
+    if _drop_raw.startswith("["):
+        _drop_raw = _drop_raw[1:]
+    if _drop_raw.endswith("]"):
+        _drop_raw = _drop_raw[:-1]
+    drop = {t.strip().strip(chr(34)).strip(chr(39)) for t in _drop_raw.split(",") if t.strip()}
+    if drop:
+        sections = [s for s in sections if s["title"] not in drop]
     linker = BibleLinker()
     doc = setup_document(
         title=meta["title"],
         author=meta["author"],
         subject=meta.get("edition", ""),
         keywords=meta.get("slug", book),
-        comments=meta.get("blurb", meta.get("description", "")),
+        # OOXML core properties cap at 255 chars; keep the full text on the cover page.
+        comments=(lambda s: s if len(s) <= 252 else s[:252] + "…")(
+            str(meta.get("logos_blurb") or meta.get("blurb") or meta.get("description", ""))),
     )
     doc.add_paragraph(meta["title"], style="Title")
     doc.add_paragraph(meta["author"], style="Subtitle")
     if meta.get("edition"):
         doc.add_paragraph(str(meta["edition"]), style="Subtitle")
+    if meta.get("logos_intro") and (book_dir / "intro.md").is_file():
+        doc.add_heading("Introduction", level=1)
+        intro_text = (book_dir / "intro.md").read_text(encoding="utf-8").strip()
+        for para in intro_text.split("\n\n"):
+            if para.strip():
+                doc.add_paragraph(para.strip())
 
     tn_counter = 0
     tn_articles: list[tuple[int, str]] = []

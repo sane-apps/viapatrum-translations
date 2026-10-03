@@ -12,6 +12,9 @@ from pathlib import Path
 _SCRIPTURE_DUMP = re.compile(r"Scripture connection\s*:", re.I)
 # Soft limit: a few residual captions can be editorial; dozens means a dump.
 _SCRIPTURE_DUMP_MAX = 8
+# Scaffold rows must never ship: collect_sections maps them to pending, and
+# this gate refuses any artifact that still contains them (cyril-isaiah 2026-09).
+_SCAFFOLD_XML = re.compile(r"Rem (?:early|mid|CLOSEOUT):|Lemma-led|ZU [A-Z]{2,}")
 
 
 def verify_docx(path: Path) -> list[str]:
@@ -63,6 +66,12 @@ def verify_docx(path: Path) -> list[str]:
         errors.append(
             f"{len(dump_hits)} 'Scripture connection:' captions (max {_SCRIPTURE_DUMP_MAX}) — "
             "put clear allusions inline in the English; captions only for possible/uncertain links."
+        )
+    scaffold_hits = _SCAFFOLD_XML.findall(plain)
+    if scaffold_hits:
+        errors.append(
+            f"{len(scaffold_hits)} scaffold-text hit(s) (Rem/Lemma-led/ZU) — "
+            "untranslated rows must render as [English pending.], never ship labels."
         )
 
     # Scope the caption check to a single <w:p> paragraph: matching over the

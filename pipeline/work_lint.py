@@ -317,6 +317,10 @@ def rule_term_drift(sections, brief):
 
 def rule_glossary(sec, brief):
     out = []
+    # Owner rule 2026-10-03: cite the book as "Wisdom of Solomon", never bare "Wisdom".
+    for m in re.finditer(r"\bWisdom(?! of Solomon)(?=\s+\d+[:.]\d+)", text):
+        out.append(_f("glossary", "error", sec, m.group(0) + text[m.end():m.end() + 8],
+                      "write the book as 'Wisdom of Solomon'"))
     if not brief:
         return out
     text = sec["text"]
@@ -328,7 +332,14 @@ def rule_glossary(sec, brief):
                 out.append(_f("glossary", "error", sec, m.group(0),
                               f"banned rendering of {entry.get('source_term', '?')}; use '{entry.get('english', '?')}'"))
     for old, modern in (brief.get("names") or {}).items():
-        for m in re.finditer(r"(?<!\w)" + re.escape(old) + r"(?!\w)", text, re.I):
+        # A short form of the modern name ("Wisdom" for Wisdom of Solomon) is the
+        # library's own citation style (91 "Wisdom N:N" vs 1 long form, owner
+        # 2026-10-03): only real renames (Sion -> Zion) are flagged, and only
+        # capitalized, so "wisdom" the virtue is never taken for the book.
+        if old.lower() in modern.lower():
+            continue
+        pat = r"(?<!\w)" + re.escape(old) + r"(?!\w)"
+        for m in re.finditer(pat, text):
             if re.search(r"(?<!\w)" + re.escape(modern) + r"(?!\w)", text, re.I):
                 continue
             out.append(_f("glossary", "error", sec, m.group(0),

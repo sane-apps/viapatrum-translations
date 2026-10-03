@@ -634,6 +634,10 @@ def main():
             receipt["dry_run"] = True
             return
 
+        if not need_build and not need_upload:
+            log("nothing to compile or upload; leaving Logos alone")
+            return
+
         if not args.upload_only or need_build:
             quit_logos()
             log("pb_sync --apply")
@@ -659,6 +663,13 @@ def main():
             for slug in need_build:
                 e = inv[slug]
                 log("BUILD %s (Id %s)" % (slug, e["bid"]))
+                _assets = os.path.join(REPO, "books", slug, "assets")
+                _has_cover = any(os.path.exists(os.path.join(_assets, f)) for f in ("cover.jpg", "cover.png"))
+                if not _has_cover:
+                    log("WARN %s: no assets/cover.jpg|png; shipping coverless" % slug)
+                _intro = os.path.join(REPO, "books", slug, "intro.md")
+                if not os.path.exists(_intro):
+                    log("WARN %s: no intro.md; book opens cold" % slug)
                 maybe_refresh(restate)
                 prev = e["last_compiled"]
                 ok = False

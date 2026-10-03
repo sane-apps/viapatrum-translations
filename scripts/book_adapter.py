@@ -111,7 +111,7 @@ class JeremiahAdapter(BookAdapter):
     def edition_dict(self, fix: dict, witnesses: list[dict]) -> dict:
         return {
             "id": "gcs6-klostermann-1901", "language": "grc",
-            "locus": fix.get("klostermann") or f"Hom. {fix["section"]}",
+            "locus": fix.get("klostermann") or f"Hom. {fix['section']}",
             "path": witnesses[0]["path"], "sha256": witnesses[0]["sha256"],
             "checks": witnesses[1:],
         }
@@ -245,6 +245,122 @@ class CyrilIsaiahAdapter(BookAdapter):
         return self.book_dir / path
 
 
+def _yml_value(book_dir: Path, key: str) -> str:
+    prefix = key + ":"
+    yml = book_dir / "book.yml"
+    if not yml.is_file():
+        return ""
+    for line in yml.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith(prefix):
+            return line.split(":", 1)[1].strip().strip("\"'")
+    return ""
+
+
+class JsonBookAdapter(BookAdapter):
+    """One section file layout: translations/*_source.json. Jeremiah and Isaiah stay on their own adapters."""
+
+    chunked_source = True
+
+    def __init__(self, slug: str):
+        self.slug = slug
+        self.book_dir = ROOT / "books" / slug
+        self.trans_dir = self.book_dir / "translations"
+        self.just_dir = self.book_dir / "reviews" / "justifications"
+        self.work_title = _yml_value(self.book_dir, "title") or slug
+        self.claim_re = re.escape(slug) + r"--[A-Za-z0-9][A-Za-z0-9._-]*"
+        language = _yml_value(self.book_dir, "language").casefold()
+        if language.startswith("latin"):
+            self.source_language = "lat"
+        elif language.startswith("greek"):
+            self.source_language = "grc"
+        else:
+            self.source_language = "und"
+        self._index = None
+
+    def _source_index(self):
+        if self._index is None:
+            index = {}
+            for path in sorted(self.trans_dir.glob("*_source.json")):
+                rows = json.loads(path.read_text(encoding="utf-8"))
+                for i, row in enumerate(rows if isinstance(rows, list) else [rows]):
+                    section = str(row.get("section") or "")
+                    if not section:
+                        continue
+                    if section in index:
+                        raise SystemExit("Duplicate %s section %s" % (self.slug, section))
+                    index[section] = (path, i, row)
+            self._index = index
+        return self._index
+
+    def _located(self, section: str):
+        index = self._source_index()
+        if section not in index:
+            raise SystemExit("Unknown %s section %r" % (self.slug, section))
+        return index[section]
+
+    def sections_from_slice(self, slice_text: str) -> list[str]:
+        sections = [s for s in re.split(r"[,\s]+", slice_text.strip()) if s]
+        if not sections:
+            raise SystemExit("Cannot parse slice sections from: %r" % (slice_text,))
+        for section in sections:
+            self._located(section)
+        return sections
+
+    def load_source_row(self, section: str) -> dict:
+        _path, _i, row = self._located(section)
+        greek = row.get("greek") or ""
+        paras = [greek] if isinstance(greek, str) else [str(g) for g in greek]
+        return {
+            "section": section, "homily": None, "klostermann": None,
+            "locus": row.get("locus") or _pretty_locus(section), "greek": paras,
+            "ocr_normalizations": row.get("ocr_normalizations") or [],
+            "chunked_source": True,
+        }
+
+    def english_path_for_section(self, section: str) -> Path:
+        path, _i, _row = self._located(section)
+        return path.with_name(path.name.replace("_source.json", "_english.json"))
+
+    def english_row_index(self, section: str) -> int:
+        _path, i, _row = self._located(section)
+        return i
+
+    def justification_path(self, section: str) -> Path:
+        self._located(section)
+        return self.just_dir / (section.replace("-", "_") + ".json")
+
+    def excerpt_id(self, section: str) -> str:
+        return section
+
+    def witness_files(self, section: str) -> list[Path]:
+        path, _i, _row = self._located(section)
+        return [path]
+
+    def manifest_path(self) -> Path | None:
+        # The locked text is the section JSON. A sibling PG manifest pins other
+        # files and must not fail this draft. The justification still records
+        # the witness hash, and promote checks that hash again.
+        return None
+
+    def edition_dict(self, fix: dict, witnesses: list[dict]) -> dict:
+        return {
+            "id": self.slug, "language": self.source_language,
+            "locus": fix.get("locus") or fix["section"],
+            "path": witnesses[0]["path"] if witnesses else "",
+            "sha256": witnesses[0]["sha256"] if witnesses else "",
+            "checks": witnesses[1:],
+        }
+
+    def checker_title(self, section: str) -> str:
+        return "%s, %s" % (self.work_title, section)
+
+    def resolve_source_path(self, rel: str) -> Path:
+        path = Path(rel)
+        if path.is_absolute():
+            return path
+        return self.book_dir / path
+
+
 _ADAPTERS = {
     JEREMIAH_SLUG: JeremiahAdapter(),
     CYRIL_ISAIAH_SLUG: CyrilIsaiahAdapter(),
@@ -255,10 +371,23 @@ def supported_slugs() -> list[str]:
     return sorted(_ADAPTERS)
 
 
+def _json_book_ready(slug: str) -> bool:
+    if not slug or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+        return False
+    trans = ROOT / "books" / slug / "translations"
+    if not trans.is_dir():
+        return False
+    return any(trans.glob("*_source.json"))
+
+
 def get_adapter(slug: str) -> BookAdapter:
-    try:
-        return _ADAPTERS[slug]
-    except KeyError:
-        raise SystemExit(
-            f"Unsupported book {slug!r} (supported: " + ", ".join(supported_slugs()) + "); refusing"
-        ) from None
+    adapter = _ADAPTERS.get(slug)
+    if adapter is not None:
+        return adapter
+    if _json_book_ready(slug):
+        adapter = JsonBookAdapter(slug)
+        _ADAPTERS[slug] = adapter
+        return adapter
+    raise SystemExit(
+        "Unsupported book %r (supported: " % (slug,) + ", ".join(supported_slugs()) + "); refusing"
+    ) from None

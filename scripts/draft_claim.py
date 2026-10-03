@@ -24,8 +24,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from ai_promote import atomic_text, file_digest, parse_claim_row, require_supported_claim, sections_from_slice
 from book_adapter import JEREMIAH_SLUG, get_adapter
-from pipeline_autonomy import SplitRefused, chunk_paragraphs, merge_chunk_drafts, parse_or_repair, split_guard
-from pipeline.check_pass_ab import check_record, output_guard_errors  # noqa: E402
+from pipeline_autonomy import (
+    SplitRefused, chunk_paragraphs, concrete_omission_note, merge_chunk_drafts,
+    parse_or_repair, receipt_structural_only, refute_confabulated_clauses,
+    split_guard, unsatisfied_repair_notes, unsupported_pass_b_quotes,
+)
+from pipeline.check_pass_ab import check_record, content_errors, output_guard_errors  # noqa: E402
 from llm_bakeoff import (  # noqa: E402
     DEFAULT_ACCOUNT,
     PREP_SYS,
@@ -46,6 +50,7 @@ RAW_SOURCE = ROOT / "books/origen-jeremiah-samuel/sources/origeneswerke03orig.pd
 XML_SOURCE = RAW_SOURCE.parent / "first1k/tlg2042.tlg009.opp-grc1.xml"
 SOURCE_MANIFEST = RAW_SOURCE.parent / "manifest.json"
 DRAFT_DEFAULT = "@cf/qwen/qwen3-30b-a3b-fp8"
+DRAFT_FALLBACK_DEFAULTS = "@cf/meta/llama-3.3-70b-instruct-fp8-fast,@cf/zai-org/glm-4.7-flash"
 
 
 def section_sort_key(section: str):
@@ -143,6 +148,13 @@ def justification_data(section: str, obj: dict, agent: str, model: str, fix: dic
 
 def write_justification(section: str, data: dict, path: Path | None = None) -> Path:
     path = path or JUST_DIR / f"jeremiah_{section.replace('.', '_')}.json"
+    if path.is_file() and "repair_notes" not in data:
+        try:
+            old = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            old = {}
+        if old.get("repair_notes"):
+            data["repair_notes"] = old["repair_notes"]
     atomic_text(path, json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     return path
 
@@ -470,7 +482,7 @@ def draft_section(
     }
 
 
-REVISE_SYS = """You revise a rejected patristic reading draft. Return ONLY valid JSON, no fences."""
+REVISE_SYS = """You revise a rejected patristic reading draft. Return ONLY valid JSON, no fences. VERIFY FIRST: checker notes can misquote the Greek or English; confirm each flagged clause against the locked text before changing it, and ignore notes whose quoted words appear in neither. Never remove a correct inline citation."""
 
 REVISE_B_SHAPE = '{"title": str, "english": [str, ...], "translator_notes": [...]}'
 
@@ -512,6 +524,37 @@ def _cap_note(value, limit: int = 40):
     return value
 
 
+def section_needs_fresh_draft(section: str, book: str) -> bool:
+    """True when revise cannot run: no evidence, betacode gloss, or scaffold English."""
+    adapter = get_adapter(book)
+    just_path = adapter.justification_path(section)
+    if not just_path.is_file():
+        return True
+    prior = json.loads(just_path.read_text(encoding="utf-8"))
+    for key in ("pass_a_gloss", "lemmas", "choices"):
+        if not prior.get(key):
+            return True
+    gloss = str(prior.get("pass_a_gloss") or "")
+    if content_errors(gloss, "pass_a_gloss"):
+        return True
+    # Betacode still in the gloss field is the locked source, not an English gloss.
+    if re.search(r"[A-Za-z][)/\\=]|[/\\=][A-Za-z]", gloss):
+        return True
+    eng_path = adapter.english_path_for_section(section)
+    if not eng_path.is_file():
+        return True
+    rows = json.loads(eng_path.read_text(encoding="utf-8"))
+    row = None
+    for existing in rows if isinstance(rows, list) else [rows]:
+        if str(existing.get("section")) == section:
+            row = existing
+            break
+    english = (row or {}).get("english") or []
+    if content_errors(english, "english"):
+        return True
+    return False
+
+
 def load_receipt_failures(receipt_path: str) -> dict[str, list[str]]:
     """Map failed sections to checker/arbiter notes from a promote receipt."""
     data = json.loads(Path(receipt_path).read_text(encoding="utf-8"))
@@ -547,6 +590,12 @@ def load_receipt_failures(receipt_path: str) -> dict[str, list[str]]:
                              f"notes={_cap_note(parsed.get('notes'))}; "
                              f"reason={_cap_note(parsed.get('reason'))}; "
                              f"checks={_cap_note(parsed.get('checks'))}")
+        gaps = entry.get("lemma_gap") or []
+        if isinstance(gaps, list):
+            for gap in gaps:
+                if str(gap).strip():
+                    notes.append(str(gap))
+                    content_fail = True
         if content_fail and notes:
             out[section] = notes
     return out
@@ -627,7 +676,45 @@ def revise_section(
     greek_text = " ".join(fix["greek"])
     current_b = json.dumps({"title": row.get("title"), "english": row.get("english"),
                             "translator_notes": row.get("translator_notes") or []}, ensure_ascii=False)
-    critique = "\n".join(f"- {n}" for n in notes)
+    pass_b_text = row.get("english") or []
+    if not isinstance(pass_b_text, list):
+        pass_b_text = [pass_b_text]
+    pass_b_text = "\n".join(str(item) for item in pass_b_text)
+    gloss = prior.get("pass_a_gloss") or ""
+    repair_live = unsatisfied_repair_notes(prior.get("repair_notes"), row.get("english") or [])
+    gate_notes = [note for note in notes if str(note).startswith("GATE:")]
+    restore_notes = [note for note in notes if str(note).startswith("Restore the sense of")]
+    judged = [
+        note for note in notes
+        if note not in gate_notes and note not in restore_notes
+        and not str(note).startswith("Rewrite this sentence")
+    ]
+    defect = refute_confabulated_clauses(judged, greek_text, gloss, pass_b_text)
+    if defect.get("override") and not restore_notes and not repair_live:
+        print("  skip revise: confabulated notes", flush=True)
+        return {"ok": True, "section": section, "repaired": False,
+                "skipped": "confabulated-notes"}
+    if defect.get("override"):
+        notes = []
+    elif defect.get("actionable"):
+        notes = list(defect["actionable"])[:8]
+        rewrites = unsupported_pass_b_quotes(notes, gloss, pass_b_text)
+        if rewrites:
+            notes = [
+                "Remove this sentence from Pass B. The gloss does not say it. Do not keep it, and do not add a second sentence that restates it: %s" % item["quote"]
+                for item in rewrites
+            ]
+        else:
+            shortened = []
+            for note in notes:
+                short = concrete_omission_note(note)
+                shortened.append(short or note)
+            notes = shortened
+    else:
+        notes = judged
+    if gate_notes or restore_notes or repair_live:
+        notes = list(gate_notes) + list(restore_notes) + list(repair_live) + list(notes)
+    critique = "\n".join("- %s" % note for note in notes)
     messages = [
         {"role": "system", "content": REVISE_SYS},
         {"role": "user", "content": (
@@ -761,7 +848,7 @@ def main() -> int:
     ap.add_argument("--hard-max-chars", type=int, default=0, help="Override draft refuse threshold chars")
     ap.add_argument("--revise-from", default="", help="Promote receipt summary.json whose failed sections get revised")
     ap.add_argument("--retries", type=int, default=2, help="Retries on structural_fail / API error")
-    ap.add_argument("--draft-fallbacks", default="@cf/openai/gpt-oss-20b,@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    ap.add_argument("--draft-fallbacks", default=DRAFT_FALLBACK_DEFAULTS,
                     help="Comma models rotated across attempts after the primary")
     ap.add_argument(
         "--prep",
@@ -883,6 +970,16 @@ def revise_main(args, row, book: str) -> int:
         if section not in claimed:
             raise SystemExit("Receipt section outside the claim; refusing writes")
     if not failures:
+        structural = False
+        try:
+            structural = receipt_structural_only(
+                json.loads(Path(args.revise_from).read_text(encoding="utf-8"))
+            )
+        except (OSError, ValueError):
+            structural = False
+        if structural:
+            print("Structural fail has no checker notes; a revise cannot repair it.", flush=True)
+            return 1
         print("No failed sections with checker notes to revise.", flush=True)
         return 0
     override = args.max_tokens or None
@@ -892,13 +989,25 @@ def revise_main(args, row, book: str) -> int:
     for section, notes in failures.items():
         print(f"Revising {section} against {len(notes)} note(s)", flush=True)
         result: dict = {"ok": False}
-        for attempt in range(2):
+        gate_added = False
+        attempt = 0
+        while attempt < 3:
             _m = _rev_chain[attempt % len(_rev_chain)]
             result = revise_section(section, _m, cf_token, nv_token,
                                     account, args.agent, notes, args.revise_from,
                                     max_tokens=override, book=book)
             if result.get("ok"):
                 break
+            detail = str(result.get("detail") or "")
+            if (not gate_added and result.get("error") == "missing_draft_evidence"
+                    and "near-copies" in detail):
+                notes = list(notes) + [
+                    "GATE: The last draft copied the gloss word order and was rejected. "
+                    "Rewrite every sentence into normal English prose. Keep every clause. "
+                    "Do not copy the gloss."
+                ]
+                gate_added = True
+            attempt += 1
             time.sleep(1.0)
         if result.get("ok"):
             print(f"  PASS title={result.get('title')!r} repaired={result.get('repaired')}", flush=True)

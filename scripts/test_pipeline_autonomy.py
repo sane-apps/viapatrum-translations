@@ -307,6 +307,31 @@ class AdapterTests(unittest.TestCase):
             c.load_source_row("nope-nothing")
 
 
+class JsonBookTests(unittest.TestCase):
+    def test_severianus_fragment_and_earliest_queue(self):
+        import overnight_quota as quota
+
+        adapter = adapters.get_adapter("severianus-fragmentum-philemonem")
+        fix = adapter.load_source_row("u01-open")
+        greek = " ".join(fix["greek"])
+        self.assertGreater(len(greek), 40)
+        self.assertTrue(any("\u0370" <= ch <= "\u03ff" or "\u1f00" <= ch <= "\u1fff" for ch in greek))
+        self.assertFalse(autonomy.source_is_betacode(greek))
+        self.assertEqual(adapter.justification_path("u01-open").name, "u01_open.json")
+        self.assertIsNone(adapter.manifest_path())
+        claim = "severianus-fragmentum-philemonem--u01-open"
+        self.assertTrue(__import__("re").fullmatch(adapter.claim_re, claim))
+        rows = quota.earliest_scaffold_candidates(4)
+        ids = [row[0] for row in rows]
+        self.assertEqual(ids[0], claim)
+        self.assertEqual(sum(item.startswith("severianus-fragmentum-philemonem--") for item in ids), 1)
+        self.assertEqual([row[3] for row in rows], sorted(row[3] for row in rows))
+        self.assertLessEqual(len(rows), 4)
+        for _claim, slug, _section, _year in rows:
+            self.assertNotIn("melito", slug)
+            self.assertNotIn(slug, ("cyril-alexandria-isaiah", "origen-jeremiah-samuel"))
+
+
 class CompletionTests(unittest.TestCase):
     def test_cut_off_english_is_finished_not_redrafted(self):
         import draft_claim as draft
@@ -475,6 +500,341 @@ class ReviseTests(unittest.TestCase):
                 "checker_a": {"model": "a", "ok": False, "api_error": True},
                 "checker_b": {"model": "b", "ok": True}}]}))
             self.assertEqual(draft.load_receipt_failures(str(receipt)), {})
+
+
+
+class ClauseRepairTests(unittest.TestCase):
+    def test_omission_already_in_reading_is_refuted(self):
+        from pipeline_autonomy import refute_confabulated_clauses
+
+        result = refute_confabulated_clauses(
+            ["Pass A omitted the clause 'since He was about to rebuke Israel' from the reading."],
+            "Ἐπειδὴ γὰρ ἔμελλε τὰς κατὰ τοῦ Ἰσραὴλ ποιεῖσθαι μομφάς",
+            "since He was about to rebuke Israel and make the charge known",
+            "since He was about to rebuke Israel and make the charge known",
+        )
+        self.assertTrue(result["override"], result)
+        self.assertEqual(result["refuted"][0]["basis"], "omission-already-in-draft")
+        self.assertEqual(result["actionable"], [])
+
+    def test_greek_absent_from_source_is_refuted(self):
+        from pipeline_autonomy import refute_confabulated_clauses
+
+        result = refute_confabulated_clauses(
+            ["Pass B omits the clause 'τοιούτον τί φασιν οἱ ἡ προκειμένην' from the source."],
+            "ὁ λόγος ἦν πρὸς τὸν θεόν καὶ ἐσκήνωσεν ἐν ἡμῖν",
+            "The word was with God.",
+            "The word was with God.",
+        )
+        self.assertTrue(result["override"], result)
+        self.assertEqual(result["refuted"][0]["basis"], "greek-not-in-source")
+
+    def test_real_omission_stays_actionable(self):
+        from pipeline_autonomy import refute_confabulated_clauses
+
+        result = refute_confabulated_clauses(
+            ["Pass B omits 'since He was about to rebuke Israel' (Ἐπειδὴ γὰρ ἔμελλε τὰς κατὰ τοῦ Ἰσραήλ)."],
+            "Ἐπειδὴ γὰρ ἔμελλε τὰς κατὰ τοῦ Ἰσραὴλ ποιεῖσθαι μομφάς",
+            "The prophet speaks.",
+            "The prophet speaks.",
+        )
+        self.assertFalse(result["override"], result)
+        self.assertEqual(len(result["actionable"]), 1)
+
+    def test_addition_of_translated_source_is_refuted(self):
+        from pipeline_autonomy import refute_confabulated_clauses
+
+        result = refute_confabulated_clauses(
+            ["Pass B added the phrase 'despite their noble birth which was and is becoming to their fathers' (εὐγένειαν)."],
+            "τὴν τοῖς πατράσι πρέπουσάν τε καὶ ἐνοῦσαν εὐγένειαν εἶχον",
+            "The elements had toiled.",
+            "He had pity on them despite their noble birth which was and is becoming to their fathers.",
+        )
+        self.assertTrue(result["override"], result)
+        self.assertEqual(result["refuted"][0]["basis"], "addition-is-translated-source")
+
+    def test_unsupported_pass_b_stays_actionable(self):
+        from pipeline_autonomy import refute_confabulated_clauses
+
+        quote = "As they ascend, they will experience the perfection and blamelessness that come from being in Christ"
+        result = refute_confabulated_clauses(
+            ["Pass B adds the sentence '%s' which the gloss does not say." % quote],
+            "ἣ καὶ ἀληθῶς ἐστι τελεία καὶ ἄμωμος",
+            "The intelligible Jerusalem, which is truly perfect and blameless, is the Church.",
+            quote + ".",
+        )
+        self.assertFalse(result["override"], result)
+        self.assertTrue(result["actionable"])
+
+    def test_mistranslation_blocks_override(self):
+        from pipeline_autonomy import refute_confabulated_clauses
+
+        result = refute_confabulated_clauses(
+            [
+                "Pass A omitted the clause 'since He was about to rebuke Israel' from the reading.",
+                "Mistranslated 'πεπονηκότων' as 'those involved in the labor' rather than those who had toiled.",
+            ],
+            "Ἐπειδὴ γὰρ ἔμελλε πεπονηκότων εὐγένειαν",
+            "since He was about to rebuke Israel",
+            "since He was about to rebuke Israel and all those involved in the labor",
+        )
+        self.assertFalse(result["override"], result)
+        self.assertTrue(any("Mistranslated" in item for item in result["actionable"]))
+
+    def test_garbled_betacode_is_refuted(self):
+        from pipeline_autonomy import refute_confabulated_clauses
+
+        result = refute_confabulated_clauses(
+            ["Pass A omits the clause 'Ou) ga/r toi fasi par- aitios' from the Greek."],
+            "Toiou=to/n ti fasin oi thn prokeimenhn lithn anaferontej",
+            "Toiou=to/n ti fasin oi thn prokeimenhn lithn anaferontej",
+            "Thus they speak.",
+        )
+        self.assertTrue(result["override"], result)
+        self.assertEqual(result["refuted"][0]["basis"], "garbled-not-in-source")
+
+    def test_boilerplate_without_a_quote_is_ignored(self):
+        from pipeline_autonomy import refute_confabulated_clauses
+
+        result = refute_confabulated_clauses(
+            ["The draft dropped a clause and the completeness check failed."],
+            "ὁ λόγος",
+            "The word.",
+            "The word.",
+        )
+        self.assertFalse(result["override"], result)
+        self.assertEqual(result["actionable"], [])
+        self.assertEqual(result["refuted"], [])
+
+
+class HoldRepairTests(unittest.TestCase):
+    def test_one_repair_then_park(self):
+        import overnight_quota as quota
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "HOLD.jsonl"
+            with patch.object(quota, "HOLD_PATH", path):
+                first = quota.record_claim_fail("c1", "hold")
+                self.assertFalse(first.get("held"))
+                self.assertFalse(quota._hold_blocks(first))
+                second = quota.record_claim_fail("c1", "hold")
+                self.assertTrue(second.get("held"))
+                self.assertFalse(second.get("repair_spent"))
+                self.assertFalse(quota._hold_blocks(second))
+                third = quota.record_claim_fail("c1", "hold")
+                self.assertTrue(third.get("repair_spent"))
+                self.assertTrue(quota._hold_blocks(third))
+
+
+class StructuralReceiptTests(unittest.TestCase):
+    def test_structural_only_receipt(self):
+        self.assertTrue(autonomy.receipt_structural_only(
+            {"results": [{"structural": {"ok": False}}]}
+        ))
+        self.assertFalse(autonomy.receipt_structural_only(
+            {"results": [{"structural": {"ok": True}}]}
+        ))
+        self.assertFalse(autonomy.receipt_structural_only({"results": []}))
+        self.assertFalse(autonomy.receipt_structural_only({"results": [
+            {"structural": {"ok": False}},
+            {"structural": {"ok": True}},
+        ]}))
+
+    def test_clear_hold_after_promote(self):
+        import overnight_quota as quota
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "HOLD.jsonl"
+            with patch.object(quota, "HOLD_PATH", path):
+                quota.record_claim_fail("c1", "hold")
+                quota.record_claim_fail("c1", "hold")
+                self.assertTrue(quota.load_hold()["c1"].get("held"))
+                quota.clear_claim_hold("c1")
+                self.assertNotIn("c1", quota.load_hold())
+
+
+class LemmaSenseTests(unittest.TestCase):
+    def test_missing_lemma_sense(self):
+        gaps = autonomy.missing_lemma_senses(
+            [{"form": "εὐγένειαν", "gloss": "noble birth"}],
+            ["He had pity on them as those being wronged."],
+        )
+        self.assertEqual(len(gaps), 1)
+        self.assertIn("noble birth", gaps[0])
+        self.assertFalse(autonomy.missing_lemma_senses(
+            [{"form": "εὐγένειαν", "gloss": "noble birth"}],
+            ["despite their noble birth"],
+        ))
+        self.assertFalse(autonomy.missing_lemma_senses(
+            [{"form": "εὐγένειαν", "gloss": "noble birth"}],
+            ["a noble family"],
+        ))
+        self.assertFalse(autonomy.missing_lemma_senses(
+            [{"form": "x", "gloss": "pity"}],
+            ["no pity here"],
+        ))
+
+
+class BetacodeSourceTests(unittest.TestCase):
+    def test_source_is_betacode(self):
+        self.assertTrue(autonomy.source_is_betacode("lisqhko/taj"))
+        self.assertFalse(autonomy.source_is_betacode("εὐγένειαν καὶ τοῖς πατράσι"))
+        self.assertFalse(autonomy.source_is_betacode(
+            "Fragmentum (in catenis)\n"
+            "Ἐν πολλαῖς ἐπιστολαῖς ξένον τίθησι ῥῆμα"))
+
+
+
+
+class QuoteCoverageTests(unittest.TestCase):
+    def test_near_quote_already_in_reading_is_refuted(self):
+        result = autonomy.refute_confabulated_clauses(
+            ["Pass B omits 'since he was about to rebuke Israel and make the charge known to the angels'."],
+            "Ἐπειδὴ γὰρ ἔμελλε τὰς κατὰ τοῦ Ἰσραὴλ ποιεῖσθαι μομφάς",
+            "since he was about to rebuke Israel",
+            "because he was about to rebuke Israel and make the charge known to the angels today",
+        )
+        self.assertTrue(result["override"], result)
+        self.assertEqual(result["actionable"], [])
+
+    def test_scattered_words_stay_a_real_omission(self):
+        result = autonomy.refute_confabulated_clauses(
+            ["Pass B omits 'since he was about to rebuke Israel and make the charge known to the angels'."],
+            "Ἐπειδὴ γὰρ ἔμελλε τὰς κατὰ τοῦ Ἰσραὴλ ποιεῖσθαι μομφάς",
+            "The prophet speaks.",
+            "The angels sang. Much later Israel heard a rebuke. The charge was known to nobody in particular today.",
+        )
+        self.assertTrue(result["actionable"], result)
+
+    def test_meta_pass_fragment_is_not_a_quote(self):
+        quotes = autonomy._english_quotes(
+            "Pass A omits the clause 'the water was turned into blood and the air was darkened' (Pass B includes it)."
+        )
+        self.assertFalse(any("pass b" in q for q in quotes))
+
+    def test_pass_a_complaint_does_not_rewrite_pass_b(self):
+        result = autonomy.refute_confabulated_clauses(
+            ["Pass A omits the clause 'purple elephants danced on the shore at dusk' (Pass B includes it)."],
+            "ὁ λόγος",
+            "The word.",
+            "The reading says something else entirely about the prophet.",
+        )
+        self.assertEqual(result["actionable"], [])
+        self.assertEqual(result["refuted"][0]["basis"], "complaint-targets-pass-a")
+
+    def test_real_pass_b_omission_stays(self):
+        result = autonomy.refute_confabulated_clauses(
+            ["Pass B omits the clause 'purple elephants danced on the shore at dusk'."],
+            "ὁ λόγος",
+            "The word.",
+            "The reading says something else entirely about the prophet.",
+        )
+        self.assertTrue(result["actionable"], result)
+
+
+class RepairNoteTests(unittest.TestCase):
+    def test_word_still_present(self):
+        notes = [{"until_absent": "involved", "note": "Rewrite this sentence so it no longer says involved."}]
+        self.assertEqual(len(autonomy.unsatisfied_repair_notes(notes, ["all those involved"])), 1)
+        self.assertEqual(autonomy.unsatisfied_repair_notes(notes, ["on all bodies"]), [])
+        kept = [{"until_absent": "involved", "sentence_has": "sores and blisters", "note": notes[0]["note"]}]
+        self.assertEqual(len(autonomy.unsatisfied_repair_notes(kept, ["the elements had toiled"])), 1)
+        self.assertEqual(
+            autonomy.unsatisfied_repair_notes(kept, ["sores and blisters rose on all bodies"]),
+            [],
+        )
+
+    def test_omission_note_names_the_greek(self):
+        note = "Pass B omits the clause 'πᾶσάν τε αὐτῶν καταδῃώσας τὴν γῆν' from the reading."
+        out = autonomy.concrete_omission_note(note)
+        self.assertIn("καταδῃώσας", out)
+        self.assertTrue(out.startswith("Add this missing clause"))
+        lied = "Pass A omits the clause 'πᾶσάν τε αὐτῶν καταδῃώσας τὴν γῆν' (Pass B includes it)."
+        self.assertEqual(autonomy.concrete_omission_note(lied), "")
+
+    def test_defect_key_is_stable(self):
+        note = "Pass B omits 'πᾶσάν τε αὐτῶν καταδῃώσας τὴν γῆν' from the reading."
+        self.assertEqual(autonomy.stable_defect_key([note]), autonomy.stable_defect_key([note]))
+        self.assertTrue(autonomy.stable_defect_key([note]).startswith("g:"))
+        self.assertEqual(autonomy.stable_defect_key(["Rewrite this sentence and leave it."]), "")
+
+
+class ChangedDefectTests(unittest.TestCase):
+    def test_changed_defect_does_not_park(self):
+        import overnight_quota as quota
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "HOLD.jsonl"
+            with patch.object(quota, "HOLD_PATH", path):
+                first = quota.record_claim_fail("c2", "hold", "alpha")
+                self.assertFalse(first.get("repair_spent"))
+                second = quota.record_claim_fail("c2", "hold", "beta")
+                self.assertFalse(second.get("repair_spent"))
+                self.assertTrue(second.get("held"))
+                third = quota.record_claim_fail("c2", "hold", "gamma")
+                self.assertFalse(third.get("repair_spent"))
+                self.assertFalse(quota._hold_blocks(third))
+
+    def test_same_defect_parks_on_the_third(self):
+        import overnight_quota as quota
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "HOLD.jsonl"
+            with patch.object(quota, "HOLD_PATH", path):
+                quota.record_claim_fail("c3", "hold", "same-span")
+                quota.record_claim_fail("c3", "hold", "same-span")
+                third = quota.record_claim_fail("c3", "hold", "same-span")
+                self.assertTrue(third.get("repair_spent"))
+                self.assertTrue(quota._hold_blocks(third))
+
+    def test_open_repair_is_not_parked(self):
+        import overnight_quota as quota
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "HOLD.jsonl"
+            with patch.object(quota, "HOLD_PATH", path):
+                row = quota.record_claim_fail("c4", "hold", "")
+                self.assertTrue(row.get("held"))
+                self.assertFalse(row.get("repair_spent"))
+                again = quota.record_claim_fail("c4", "hold", "")
+                self.assertFalse(again.get("repair_spent"))
+                self.assertFalse(quota._hold_blocks(again))
+
+
+    def test_torn_receipt_does_not_park(self):
+        import overnight_quota as quota
+
+        note = (
+            "Pass B omits '\u03c0\u1fb6\u03c3\u03ac\u03bd \u03c4\u03b5 "
+            "\u03b1\u1f50\u03c4\u1ff6\u03bd \u03ba\u03b1\u03c4\u03b1\u03b4"
+            "\u1fc3\u03ce\u03c3\u03b1\u03c2 \u03c4\u1f74\u03bd \u03b3\u1fc6\u03bd' "
+            "from the reading."
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            promote = root / "outputs" / "ai-promote"
+            good = promote / "20260929T010000Z-c9"
+            good.mkdir(parents=True)
+            (good / "summary.json").write_text(
+                json.dumps({"results": [{"clause_defect": {"actionable": [note]}}]}),
+                encoding="utf-8",
+            )
+            torn = promote / "20260929T020000Z-c9"
+            torn.mkdir()
+            with patch.object(quota, "ROOT", root):
+                key = quota._concrete_defect_key("c9")
+            self.assertTrue(key.startswith("g:"))
+            hold = root / "HOLD.jsonl"
+            with patch.object(quota, "HOLD_PATH", hold):
+                first = quota.record_claim_fail("c9", "hold", key)
+                self.assertFalse(first.get("repair_spent"))
+                second = quota.record_claim_fail("c9", "hold", key)
+                self.assertEqual(second.get("same_fails"), 2)
+                self.assertFalse(second.get("repair_spent"))
+            empty = Path(tmp) / "empty-root"
+            (empty / "outputs" / "ai-promote").mkdir(parents=True)
+            with patch.object(quota, "ROOT", empty):
+                self.assertEqual(quota._concrete_defect_key("c9"), "")
 
 
 if __name__ == "__main__":

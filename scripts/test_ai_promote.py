@@ -308,6 +308,325 @@ class PromotionTests(unittest.TestCase):
             self.assertFalse(promote.review_is_current(bundle, entry, 'm-d'))
 
 
+ARB = 'nvidia/nemotron-3-super-120b-a12b'
+
+
+def scripture_fail(reasons, notes='', fidelity=True, title=True, failed=('scripture',)):
+    checks = {key: True for key in ('source_identity', 'completeness', 'negation', 'agency',
+                                    'modality', 'doctrine', 'scripture')}
+    for key in failed:
+        checks[key] = False
+    return {'verdict': 'fail', 'reviewer': 'model', 'notes': notes, 'checks': checks,
+            'pass_a_fidelity': fidelity, 'title_is_thought': title,
+            'covered_source_paragraphs': [1], 'uncertainties': [], 'reasons': reasons}
+
+
+def grounding_bundle(english):
+    return {'section': 's1', 'greek': ['g1'],
+            'english_row': {'section': 's1', 'english': english},
+            'justification': {'draft_model': DRAFT}}
+
+
+def grounding_entry(fail_a, pass_b_model=B, arbiter=None):
+    entry = {'section': 's1', 'binding': 'B', 'draft_model': DRAFT,
+             'checker_a': {'model': A, 'ok': False, 'parsed': fail_a},
+             'checker_b': {'model': pass_b_model, 'ok': True, 'parsed': verdict()}}
+    if arbiter is not None:
+        entry['arbiter'] = arbiter
+    return entry
+
+
+PASS_B_CITED = ["Man shall not live by bread alone, but by every word of God. "
+                "(Deuteronomy 8:3; cf. Matthew 4:4) Unless one is born of water and spirit. "
+                "(John 3:5) I am the way and the door. (John 14:6) A veil lies on their hearts. "
+                "(2 corinthians 3:14)"]
+
+
+class GroundingTests(unittest.TestCase):
+    def test_presence_refutation_overrides(self):
+        fail = scripture_fail(["The quote lacks Deuteronomy 8:3/Matthew 4:4 citation."])
+        result = promote.grounding_override(grounding_entry(fail), grounding_bundle(PASS_B_CITED))
+        self.assertTrue(result['override'], result)
+        self.assertEqual(result['detail']['refuted_sentences'][0]['basis'], 'present-in-pass-b')
+
+    def test_gloss_scoped_demand_refuted(self):
+        fail = scripture_fail(["Missing inline scripture citations in Pass A."],
+                              notes='Pass A gloss lacks citation for the bread quote.')
+        result = promote.grounding_override(grounding_entry(fail), grounding_bundle(PASS_B_CITED))
+        self.assertTrue(result['override'], result)
+        self.assertIn('gloss-layer', result['detail']['refuted_sentences'][-1]['basis'])
+
+    def test_genuinely_missing_citation_holds(self):
+        fail = scripture_fail(["Pass B omits the John 3:5 citation for the rebirth quote."])
+        bare = grounding_bundle(['Unless one is born of water and spirit, with no citation.'])
+        self.assertFalse(promote.grounding_override(grounding_entry(fail), bare)['override'])
+
+    def test_correctness_dispute_holds(self):
+        fail = scripture_fail(["The (John 14:6) citation is wrong, it should be John 10:9."])
+        self.assertFalse(promote.grounding_override(
+            grounding_entry(fail), grounding_bundle(PASS_B_CITED))['override'])
+
+    def test_non_scripture_fail_blocks(self):
+        fail = scripture_fail(["The quote lacks John 3:5 citation."], failed=('scripture', 'completeness'))
+        self.assertFalse(promote.grounding_override(
+            grounding_entry(fail), grounding_bundle(PASS_B_CITED))['override'])
+
+    def test_vague_fail_holds(self):
+        fail = scripture_fail(["Scripture handling seems weak overall."])
+        self.assertFalse(promote.grounding_override(
+            grounding_entry(fail), grounding_bundle(PASS_B_CITED))['override'])
+
+    def test_api_error_blocks(self):
+        fail = scripture_fail(["The quote lacks John 3:5 citation."])
+        entry = grounding_entry(fail)
+        entry['checker_a']['api_error'] = True
+        self.assertFalse(promote.grounding_override(entry, grounding_bundle(PASS_B_CITED))['override'])
+
+    def test_bare_parsed_blocks(self):
+        entry = grounding_entry(scripture_fail(['x']))
+        entry['checker_a']['parsed'] = {}
+        self.assertFalse(promote.grounding_override(entry, grounding_bundle(PASS_B_CITED))['override'])
+
+    def test_praise_sentence_does_not_satisfy(self):
+        fail = scripture_fail([], notes='Renders John 3:5 without error.')
+        self.assertFalse(promote.grounding_override(
+            grounding_entry(fail), grounding_bundle(PASS_B_CITED))['override'])
+
+    def test_format_nit_ignored_when_claim_refuted(self):
+        fail = scripture_fail(["Pass B uses incorrect citation formatting (lowercase, post-block "
+                               "placement) and omits citation for John 14:6 in fourth clause."])
+        result = promote.grounding_override(grounding_entry(fail), grounding_bundle(PASS_B_CITED))
+        self.assertTrue(result['override'], result)
+
+    def test_fidelity_flag_falls_with_citation_reasons(self):
+        fail = scripture_fail(["Missing inline scripture citations in Pass A."], fidelity=False)
+        result = promote.grounding_override(grounding_entry(fail), grounding_bundle(PASS_B_CITED))
+        self.assertTrue(result['override'], result)
+        self.assertIn('pass_a_fidelity', result['detail']['flags_excused'])
+
+    def test_fidelity_flag_with_noncitation_defect_holds(self):
+        fail = scripture_fail(["Missing inline citations in Pass A.", "Pass A adds a clause about giants."],
+                              fidelity=False)
+        self.assertFalse(promote.grounding_override(
+            grounding_entry(fail), grounding_bundle(PASS_B_CITED))['override'])
+
+    def test_mixed_clause_does_not_refute(self):
+        fail = scripture_fail(["Omits the final clause of the paragraph but the John 3:5 citation is present."])
+        self.assertFalse(promote.grounding_override(
+            grounding_entry(fail), grounding_bundle(PASS_B_CITED))['override'])
+
+    def test_rem_close_receipt_replay(self):
+        qwen = scripture_fail(
+            ["Missing inline scripture citations in Pass A (e.g., 'Man shall not live by bread alone' "
+             "lacks Deuteronomy 8:3/Matthew 4:4 citation"],
+            notes=("source: 'γὰρ εἴρηκεν ἁπλῶς τῶν Ἰουδαίων' (p1); English: 'For it has been said that the "
+                   "Jews will be deprived of bread and water' (Pass A gloss lacks citation for 'Man shall "
+                   "not live by bread alone' quote)"),
+            fidelity=False)
+        nemotron = scripture_fail(
+            ["Missing inline citation for Matthew 4:4 / Deuteronomy 8:3 quotation in Pass A",
+             "Missing inline citation for 2 Corinthians 3:14 quotation in Pass A",
+             "Missing inline citation for John 3:5 quotation in Pass A",
+             "Missing inline citation for John 14:6 quotation in Pass A",
+             "Pass B uses incorrect citation formatting (lowercase, post-block placement) and omits "
+             "citation for John 14:6 in fourth clause"],
+            notes=("The source Greek contains scriptural quotations which correspond to Matthew 4:4 / "
+                   "Deuteronomy 8:3, and later which is John 3:5, and which is John 14:6. Pass A renders "
+                   "these quotations but omits the required inline parenthetical citations (e.g., "
+                   "(Matthew 4:4), (John 3:5), (John 14:6)) beside the quoted clauses as mandated by the "
+                   "standing rules. Pass B includes some citations but uses incorrect formatting: it "
+                   "places them after the quotation block and uses lowercase ('cf.', '2 corinthians') and "
+                   "non-standard punctuation, and omits citations for some quotes (e.g., the John 14:6 "
+                   "quote in the fourth clause of Pass B lacks a citation despite being present in the "
+                   "source). Furthermore, the source contains a quotation from 2 Corinthians 3:14, and "
+                   "Pass A renders it but omits the citation, while Pass B includes it but with incorrect "
+                   "casing ('2 corinthians 3:14') and places it after the quotation block. The standing "
+                   "rules require inline parenthetical citations like (Isaiah 29:13) as REQUIRED additions "
+                   "beside quoted clauses. Failure to provide correct inline citations for all scriptural "
+                   "quotations constitutes a failure of the 'scripture' check."))
+        arbiter = {'model': ARB, 'ok': False, 'parsed': nemotron,
+                   'decision': 'HOLD', 'reason': 'split decision stands; parked, never published'}
+        entry = grounding_entry(qwen, pass_b_model='@cf/zai-org/glm-4.7-flash', arbiter=arbiter)
+        entry['draft_model'] = '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+        bundle = grounding_bundle(PASS_B_CITED)
+        bundle['justification']['draft_model'] = entry['draft_model']
+        result = promote.grounding_override(entry, bundle)
+        self.assertTrue(result['override'], result)
+        self.assertEqual(len(result['detail']['failers']), 2)
+
+    def test_extract_refs_aliases_and_ranges(self):
+        refs = promote.extract_refs('See (Dt 8:3), 2 Cor 3:14-15, Jn 3, and Song of Sol 2:4.')
+        self.assertIn(('deut', 8, 3), refs)
+        self.assertIn(('2cor', 3, 14), refs)
+        self.assertIn(('john', 3, None), refs)
+        self.assertNotIn(('song', 2, 4), refs)  # 'Sol' is not a registered alias.
+        self.assertEqual(promote.extract_refs('bare page marker 70.348 and Tome 2'), [])
+
+    def test_review_current_honors_grounding(self):
+        fail = scripture_fail(["The quote lacks John 3:5 citation."])
+        entry = grounding_entry(fail)
+        entry['grounding_override'] = {'overridden': True}
+        bundle = grounding_bundle(PASS_B_CITED)
+        with patch.object(promote, 'structural_ok', return_value={'ok': True}), \
+             patch.object(promote, 'bundle_binding', return_value='B'), \
+             patch.object(promote, 'checker_verdict_ok', return_value=False):
+            self.assertTrue(promote.review_is_current(bundle, entry, DRAFT))
+
+    def test_review_current_reholds_when_pass_b_changes(self):
+        fail = scripture_fail(["The quote lacks John 3:5 citation."])
+        entry = grounding_entry(fail)
+        entry['grounding_override'] = {'overridden': True}
+        bundle = grounding_bundle(['Unless one is born of water and spirit, with no citation.'])
+        with patch.object(promote, 'structural_ok', return_value={'ok': True}), \
+             patch.object(promote, 'bundle_binding', return_value='B'), \
+             patch.object(promote, 'checker_verdict_ok', return_value=False):
+            self.assertFalse(promote.review_is_current(bundle, entry, DRAFT))
+
+
+class JevGateTests(unittest.TestCase):
+    def _entry_bundle(self):
+        bundle = {'section': 's1', 'book': 'b', 'greek': ['g1'],
+                  'english_row': {'english': ['x (John 3:5)']},
+                  'justification': {'draft_model': DRAFT}}
+        return {}, bundle
+
+    def _cites(self, choice, conf, cf=False):
+        return {'section': 's1', 'cites': [{'display': 'John 3:5', 'sentence': 's',
+                'choice': choice, 'verdict': 'v', 'confidence': conf,
+                'auto': True, 'cf': cf}]}
+
+    def test_hold_fires_on_high_conf_contradicts(self):
+        entry, bundle = self._entry_bundle()
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': 'k'}), \
+             patch('jev_cite_check.check_section',
+                   return_value=self._cites('contradicts', 0.97)):
+            hold = promote.jev_citation_gate(entry, bundle)
+        self.assertTrue(hold['held'])
+        self.assertIn('John 3:5', hold['reason'])
+        self.assertIn('jev_cites', entry)
+
+    def test_cf_contradicts_does_not_hold(self):
+        entry, bundle = self._entry_bundle()
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': 'k'}), \
+             patch('jev_cite_check.check_section',
+                   return_value=self._cites('contradicts', 0.97, cf=True)):
+            self.assertIsNone(promote.jev_citation_gate(entry, bundle))
+        self.assertIn('jev_cites', entry)
+
+    def test_low_conf_contradicts_does_not_hold(self):
+        entry, bundle = self._entry_bundle()
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': 'k'}), \
+             patch('jev_cite_check.check_section',
+                   return_value=self._cites('contradicts', 0.27)):
+            self.assertIsNone(promote.jev_citation_gate(entry, bundle))
+
+    def test_supports_never_holds(self):
+        entry, bundle = self._entry_bundle()
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': 'k'}), \
+             patch('jev_cite_check.check_section',
+                   return_value=self._cites('supports', 0.99)):
+            self.assertIsNone(promote.jev_citation_gate(entry, bundle))
+
+    def test_missing_key_skips(self):
+        entry, bundle = self._entry_bundle()
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': ''}):
+            self.assertIsNone(promote.jev_citation_gate(entry, bundle))
+        self.assertEqual(entry['jev_cites'], {'skipped': 'no-key'})
+
+    def test_api_error_skips(self):
+        entry, bundle = self._entry_bundle()
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': 'k'}), \
+             patch('jev_cite_check.check_section', side_effect=TimeoutError('slow')):
+            self.assertIsNone(promote.jev_citation_gate(entry, bundle))
+        self.assertIn('TimeoutError', entry['jev_cites']['error'])
+
+    def test_grounding_refuses_jev_hold(self):
+        fail = scripture_fail(['The quote lacks John 3:5 citation.'])
+        entry = grounding_entry(fail)
+        entry['jev_hold'] = {'held': True}
+        bundle = grounding_bundle(PASS_B_CITED)
+        self.assertFalse(promote.grounding_override(entry, bundle)['override'])
+
+
+
+class ClauseOverrideTests(unittest.TestCase):
+    def _entry(self, reasons, pass_b_ok=True):
+        fail = {'verdict': 'fail', 'reasons': reasons, 'notes': '', 'checks': {'completeness': False}}
+        entry = {
+            'section': 's1', 'binding': 'B', 'draft_model': DRAFT,
+            'checker_a': {'model': A, 'ok': False, 'parsed': fail},
+            'checker_b': {'model': B, 'ok': pass_b_ok, 'parsed': verdict() if pass_b_ok else fail},
+        }
+        return entry
+
+    def test_present_omission_overrides(self):
+        gloss = 'since He was about to rebuke Israel and make the charge known'
+        entry = self._entry(["Pass A omitted the clause 'since He was about to rebuke Israel' from the reading."])
+        bundle = {
+            'section': 's1', 'greek': ['Ἐπειδὴ γὰρ ἔμελλε τὰς κατὰ τοῦ Ἰσραὴλ'],
+            'justification': {'draft_model': DRAFT, 'pass_a_gloss': gloss},
+            'english_row': {'english': [gloss]},
+        }
+        result = promote.clause_override(entry, bundle)
+        self.assertTrue(result['override'], result)
+
+    def test_mistranslation_blocks_clause_override(self):
+        gloss = 'since He was about to rebuke Israel'
+        entry = self._entry([
+            "Pass A omitted the clause 'since He was about to rebuke Israel' from the reading.",
+            "Mistranslated 'πεπονηκότων' as 'those involved in the labor' rather than those who had toiled.",
+        ])
+        bundle = {
+            'section': 's1',
+            'greek': ['Ἐπειδὴ γὰρ ἔμελλε πεπονηκότων'],
+            'justification': {'draft_model': DRAFT, 'pass_a_gloss': gloss},
+            'english_row': {'english': [gloss + ' and all those involved in the labor']},
+        }
+        self.assertFalse(promote.clause_override(entry, bundle)['override'])
+
+    def test_arbiter_promote_holds_unsupported_sentence(self):
+        quote = 'As they ascend, they will experience the perfection and blamelessness that come from being in Christ'
+        bundle = {
+            'section': 's1', 'book': 'b', 'binding': 'B',
+            'greek': ['ἣ καὶ ἀληθῶς ἐστι τελεία καὶ ἄμωμος'],
+            'justification': {
+                'draft_model': 'm-d',
+                'pass_a_gloss': 'The intelligible Jerusalem, which is truly perfect and blameless, is the Church.',
+            },
+            'english_row': {'english': [quote + '.']},
+        }
+        bad = {
+            'model': 'm-y', 'ok': False,
+            'parsed': {'verdict': 'fail', 'reasons': ["Pass B adds the sentence '%s'." % quote]},
+        }
+        good = {'model': 'm-x', 'ok': True, 'parsed': {'verdict': 'pass'}}
+        arb = {'model': 'm-z', 'ok': True, 'decision': 'PROMOTE', 'parsed': {'verdict': 'pass'}}
+        entry = {
+            'section': 's1', 'binding': 'B', 'draft_model': 'm-d',
+            'checker_a': good, 'checker_b': bad, 'arbiter': arb,
+        }
+        with patch.object(promote, 'structural_ok', return_value={'ok': True}), \
+             patch.object(promote, 'bundle_binding', return_value='B'), \
+             patch.object(promote, 'model_families', side_effect=lambda model: {model}), \
+             patch.object(promote, 'checker_verdict_ok', return_value=True):
+            self.assertFalse(promote.review_is_current(bundle, entry, 'm-d'))
+
+    def test_review_current_honors_clause_override(self):
+        gloss = 'since He was about to rebuke Israel and make the charge known'
+        entry = self._entry(["Pass A omitted the clause 'since He was about to rebuke Israel' from the reading."])
+        entry['clause_override'] = {'overridden': True}
+        entry['binding'] = 'B'
+        bundle = {
+            'section': 's1', 'greek': ['Ἐπειδὴ γὰρ ἔμελλε τὰς κατὰ τοῦ Ἰσραὴλ'],
+            'justification': {'draft_model': DRAFT, 'pass_a_gloss': gloss},
+            'english_row': {'english': [gloss]},
+        }
+        with patch.object(promote, 'structural_ok', return_value={'ok': True}), \
+             patch.object(promote, 'bundle_binding', return_value='B'), \
+             patch.object(promote, 'checker_verdict_ok', return_value=False):
+            self.assertTrue(promote.review_is_current(bundle, entry, DRAFT))
+
+
 
 if __name__ == '__main__':
     unittest.main()

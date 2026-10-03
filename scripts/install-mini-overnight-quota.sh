@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Install Mini LaunchAgent for Fathers dual-lane overnight (CF + NVIDIA).
+# Install the Mini LaunchAgent for the always-on Fathers lanes (CF + NVIDIA).
 # Run ON the Mac Mini only.
+# Does not kill a burn that was started outside launchd.
 
 set -euo pipefail
 
@@ -23,23 +24,17 @@ OUT="$HOME/SaneApps/outputs/fathers-overnight"
 mkdir -p "$HOME/Library/LaunchAgents" "$LOG_DIR" "$OUT"
 chmod +x "$SCRIPT"
 
-# Daily ~01:10 UTC ≈ after CF neuron reset (00:00 UTC). Local Mini TZ may be ET:
-# 01:10 UTC = 21:10 ET previous calendar day — use UTC via StartCalendarInterval
-# in *local* clock. Owner Mini is America/New_York → 21:10 local.
 python3 - "$PLIST" "$SCRIPT" "$LOG_DIR" "$LABEL" <<'PY'
 import plistlib, pathlib, sys
 plist, script, log_dir, label = sys.argv[1:5]
 data = {
     "Label": label,
     "ProgramArguments": ["/bin/bash", script],
-    # After CF free-neuron reset (00:00 UTC): 21:10 America/New_York
-    "StartCalendarInterval": {"Hour": 21, "Minute": 10},
-    "RunAtLoad": False,
+    "RunAtLoad": True,
+    # Restart only after a crash. A clean stop stays down.
+    # KeepAlive true (always) used to bootout mid-promote and stack a second run.
+    "KeepAlive": {"SuccessfulExit": False},
     "Nice": 10,
-    # Calendar-only. No KeepAlive — that restarted mid-promote after bootout/bootstrap
-    # and stacked duplicate ai_promote runs. Stuck claims resume on the next scheduled
-    # burn (or manual run-overnight-quota.sh when idle). Wrapper still has a fuse if
-    # someone re-enables KeepAlive later.
     "ThrottleInterval": 300,
     "ProcessType": "Background",
     "WorkingDirectory": str(pathlib.Path(script).resolve().parents[1]),
@@ -49,6 +44,7 @@ data = {
         "LC_ALL": "en_US.UTF-8",
         "HOME": str(pathlib.Path.home()),
         "SANE_TRANSLATIONS_ROOT": str(pathlib.Path(script).resolve().parents[1]),
+        "SANE_FATHERS_FOREVER": "1",
     },
     "StandardOutPath": f"{log_dir}/fathers-overnight.out.log",
     "StandardErrorPath": f"{log_dir}/fathers-overnight.err.log",
@@ -60,12 +56,13 @@ print(path)
 PY
 
 uid="$(id -u)"
+# Reloads the launchd job only. A nohup burn is a different process and keeps its flock.
 launchctl bootout "gui/$uid/$LABEL" 2>/dev/null || true
 launchctl bootstrap "gui/$uid" "$PLIST"
 launchctl enable "gui/$uid/$LABEL" 2>/dev/null || true
 echo "installed $LABEL"
 echo "  plist: $PLIST"
-echo "  schedule: daily 21:10 local (≈01:10 UTC)"
-echo "  calendar-only (no KeepAlive — prevents promote stacking on reinstall)"
+echo "  mode: always-on supervisor (SANE_FATHERS_FOREVER=1)"
+echo "  restart: only after a crash (KeepAlive SuccessfulExit false)"
 echo "  locks: ~/SaneApps/outputs/fathers-overnight/locks/"
-echo "  Manual recover when idle: $SCRIPT"
+echo "  One batch, then exit: $SCRIPT"

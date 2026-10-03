@@ -364,6 +364,9 @@ def redraft_section(section: str, agent: str, model: str, cf_token: str,
             "justification": str(just_path)}
 
 
+DRAFT_FALLBACK_DEFAULTS = "@cf/meta/llama-3.3-70b-instruct-fp8-fast,@cf/zai-org/glm-4.7-flash"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Constrained Pass B redraft from Pass A.")
     ap.add_argument("--claim", required=True)
@@ -372,7 +375,7 @@ def main() -> int:
     ap.add_argument("--section", action="append", default=[])
     ap.add_argument("--attempts", type=int, default=3)
     ap.add_argument("--draft-fallbacks",
-                    default="@cf/openai/gpt-oss-20b,@cf/meta/llama-3.3-70b-instruct-fp8-fast")
+                    default=DRAFT_FALLBACK_DEFAULTS)
     args = ap.parse_args()
     model = normalize_model(args.model)
     chain = [model] + [normalize_model(x) for x in (args.draft_fallbacks or "").split(",")

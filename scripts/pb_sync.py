@@ -193,7 +193,7 @@ def book_row(slug, yml, yml_path):
         {
             "title": yml.get("title", ""),
             "authors": yml.get("author", ""),
-            "description": yml.get("description", ""),
+            "description": yml.get("logos_blurb") or yml.get("description", ""),
             "language": lang,
             "copyright": yml.get("copyright", ""),
             "resource_type": pb_type,

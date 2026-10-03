@@ -31,6 +31,18 @@ from pipeline.verify_translation_qa import (  # noqa: E402
 )
 
 
+EPHEMERAL_PREFIXES = ("/tmp/", "/private/tmp/", "/var/folders/")
+
+def _is_ephemeral(path) -> bool:
+    """True when a witness lives somewhere the OS may wipe (see le-blanc 2026-09-28)."""
+    import os
+    text = str(path)
+    tmpdir = os.environ.get("TMPDIR", "")
+    if tmpdir and text.startswith(tmpdir.rstrip("/") + "/"):
+        return True
+    return text.startswith(EPHEMERAL_PREFIXES)
+
+
 def row_hashes(rows: list[dict]) -> dict[str, tuple[str, str]]:
     out = {}
     for key, row in indexed(rows, "rows").items():
@@ -57,6 +69,13 @@ def main() -> int:
     eng_path = (book / args.english).resolve()
     src_path = (book / args.source).resolve()
     raw = [(book / r).resolve() for r in args.raw]
+    ephemeral = [str(r) for r in raw if _is_ephemeral(r)]
+    if ephemeral:
+        print("REFUSING: raw witnesses must be durable repo paths, not temp scratch:",
+              file=sys.stderr)
+        for r in ephemeral:
+            print("  " + r, file=sys.stderr)
+        return 2
     identity = json.loads(((book / args.identity_from).read_text()))["identity"]
     scope = json.loads((book / args.scope_json).read_text())
     if args.verify_old:

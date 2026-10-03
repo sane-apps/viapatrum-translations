@@ -22,6 +22,7 @@ import argparse
 import json
 import os
 import sys
+import threading
 import time
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -119,19 +120,34 @@ def parse_open_rows() -> list[dict[str, str]]:
     return rows
 
 
+def _hold_blocks(row: dict) -> bool:
+    """A held slice gets one repair. A second fail while held stays parked."""
+    if not row or not row.get("held"):
+        return False
+    return bool(row.get("repair_spent"))
+
+
 def free_auto_claims() -> list[str]:
     hold = load_hold()
-    out = []
+    fresh = []
+    repair = []
     for r in parse_open_rows():
         cid = str(r.get("Claim ID", ""))
         if r.get("Status") != "free":
             continue
-        if not cid.startswith(AUTO_PREFIXES):
+        notes = (r.get("Notes") or "").casefold()
+        if "betacode" in notes or "do not publish" in notes:
             continue
-        if hold.get(cid, {}).get("held"):
+        if not _auto_claim(cid):
             continue
-        out.append(cid)
-    return out
+        row = hold.get(cid) or {}
+        if _hold_blocks(row):
+            continue
+        if row.get("held"):
+            repair.append(cid)
+        else:
+            fresh.append(cid)
+    return fresh + repair
 
 
 def claimed_for_agent(agent: str) -> list[str]:
@@ -141,8 +157,8 @@ def claimed_for_agent(agent: str) -> list[str]:
         for r in parse_open_rows()
         if r.get("Status") in {"claimed", "checking", "review"}
         and r.get("Agent", "").strip() == agent
-        and str(r.get("Claim ID", "")).startswith(AUTO_PREFIXES)
-        and not load_hold().get(str(r.get("Claim ID", "")), {}).get("held")
+        and _auto_claim(str(r.get("Claim ID", "")))
+        and not _hold_blocks(load_hold().get(str(r.get("Claim ID", "")), {}))
     ]
 
 
@@ -156,6 +172,12 @@ def _claim_wall_s() -> int:
 
 HOLD_PATH = OUT / "HOLD.jsonl"
 AUTO_PREFIXES = ("jer-h", "cyr-isa-")
+_QUEUE_SKIP = {"origen-jeremiah-samuel", "cyril-alexandria-isaiah"}
+
+
+def _auto_claim(cid: str) -> bool:
+    """Isaiah and Jeremiah keep their ids. Other books use slug--section."""
+    return bool(cid) and (cid.startswith(AUTO_PREFIXES) or "--" in cid)
 
 
 def _auto_wall_s() -> int:
@@ -183,17 +205,145 @@ def load_hold() -> dict:
     return data
 
 
-def record_claim_fail(claim: str, reason: str) -> dict:
-    hold = load_hold()
-    row = hold.get(claim) or {"claim": claim, "fails": 0}
-    row["fails"] = int(row.get("fails") or 0) + 1
-    row["reason"] = reason
-    row["updated"] = datetime.now(timezone.utc).isoformat()
-    if row["fails"] >= 2:
-        row["held"] = True
-    hold[claim] = row
-    HOLD_PATH.write_text("\n".join(json.dumps(hold[c]) for c in sorted(hold)) + "\n", encoding="utf-8")
+_HOLD_LOCK = threading.Lock()
+
+
+def effective_lane_shares(active_lanes, share_of) -> dict:
+    """Normalize budget shares over lanes that actually have queued work.
+
+    Raw shares from work-lanes.json sum to 1.0 across ALL lanes; when some
+    lanes have nothing queued, their idle share would otherwise be
+    unspendable while a busy lane caps out. Normalizing reallocates within
+    the same fixed total, so the overall budget cap binds exactly as before.
+    """
+    shares = {}
+    for lane_name in (active_lanes or []):
+        try:
+            shares[lane_name] = max(0.0, float(share_of(lane_name) or 0.0))
+        except (TypeError, ValueError):
+            shares[lane_name] = 0.0
+    total = sum(shares.values())
+    if total <= 0:
+        n = len(shares)
+        return {lane_name: (1.0 / n if n else 0.0) for lane_name in shares}
+    return {lane_name: value / total for lane_name, value in shares.items()}
+
+
+def _concrete_defect_key(claim_id: str):
+    """Use the newest readable receipt. Empty means do not park."""
+    from pipeline_autonomy import stable_defect_key
+    root = ROOT / "outputs" / "ai-promote"
+    if not root.is_dir():
+        return ""
+    suffix = "-" + claim_id
+    dirs = sorted(
+        p for p in root.iterdir() if p.is_dir() and p.name.endswith(suffix)
+    )
+    data = None
+    for folder in reversed(dirs):
+        summary = folder / "summary.json"
+        try:
+            loaded = json.loads(summary.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if isinstance(loaded, dict):
+            data = loaded
+            break
+    if not isinstance(data, dict):
+        return ""
+    texts = []
+    for entry in data.get("results") or []:
+        if not isinstance(entry, dict):
+            continue
+        for gap in entry.get("lemma_gap") or []:
+            texts.append(str(gap))
+        defect = entry.get("clause_defect") or {}
+        if isinstance(defect, dict):
+            for item in defect.get("actionable") or []:
+                texts.append(str(item))
+        for key in ("checker_a", "checker_b", "arbiter"):
+            check = entry.get(key) or {}
+            if not isinstance(check, dict) or check.get("ok") is not False:
+                continue
+            parsed = check.get("parsed") or {}
+            if not isinstance(parsed, dict):
+                continue
+            notes = parsed.get("notes")
+            if isinstance(notes, str):
+                texts.append(notes)
+            elif isinstance(notes, list):
+                texts.extend(str(item) for item in notes)
+    blob = "\n".join(texts)
+    if "Rewrite this sentence" in blob or "Restore the sense of" in blob:
+        return ""
+    return stable_defect_key(texts)
+
+
+def _write_hold(hold: dict) -> None:
+    HOLD_PATH.write_text(
+        "\n".join(json.dumps(hold[c]) for c in sorted(hold)) + "\n",
+        encoding="utf-8",
+    )
+
+
+def record_claim_fail(claim: str, reason: str, defect_key=None) -> dict:
+    with _HOLD_LOCK:
+        hold = load_hold()
+        row = hold.get(claim) or {"claim": claim, "fails": 0}
+        already_held = bool(row.get("held"))
+        row["reason"] = reason
+        row["updated"] = datetime.now(timezone.utc).isoformat()
+        if defect_key == "":
+            row["fails"] = 1
+            row["held"] = True
+            row["repair_spent"] = False
+            row["same_fails"] = 0
+            row["defect_key"] = ""
+        elif isinstance(defect_key, str) and defect_key:
+            previous = str(row.get("defect_key") or "")
+            if previous and previous != defect_key:
+                row["fails"] = 1
+                row["held"] = True
+                row["repair_spent"] = False
+                row["same_fails"] = 1
+                row["defect_key"] = defect_key
+            else:
+                row["fails"] = int(row.get("fails") or 0) + 1
+                row["defect_key"] = defect_key
+                if previous == defect_key:
+                    row["same_fails"] = int(row.get("same_fails") or 0) + 1
+                else:
+                    row["same_fails"] = 1
+                if row["fails"] >= 2:
+                    row["held"] = True
+                if int(row.get("same_fails") or 0) >= 3:
+                    row["held"] = True
+                    row["repair_spent"] = True
+        else:
+            row["fails"] = int(row.get("fails") or 0) + 1
+            if row["fails"] >= 2:
+                row["held"] = True
+            if already_held:
+                row["repair_spent"] = True
+        hold[claim] = row
+        _write_hold(hold)
     return row
+
+
+def clear_claim_hold(claim: str) -> None:
+    """A slice that just promoted is not parked."""
+    with _HOLD_LOCK:
+        hold = load_hold()
+        if claim not in hold:
+            return
+        hold.pop(claim, None)
+        if hold:
+            HOLD_PATH.write_text(
+                "\n".join(json.dumps(hold[c]) for c in sorted(hold)) + "\n",
+                encoding="utf-8",
+            )
+        else:
+            HOLD_PATH.write_text("", encoding="utf-8")
 
 
 def run_wall(cmd: list[str], env: dict, timeout_s: int) -> int:
@@ -266,10 +416,13 @@ def process_claim(
         entry["promote_rc"] = rc
         if rc == 0:
             entry["ok"] = True
+            clear_claim_hold(claim_id)
         elif rc == 2:
             entry["error"] = "api_fail"
         elif rc == 4:
             entry["error"] = "promote_wall_timeout"
+        elif rc == 5:
+            entry["error"] = "source_not_greek"
         else:
             entry["error"] = "hold"
         if not entry.get("ok"):
@@ -440,6 +593,7 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
     except ImportError:
         book_lane = book_year = is_active = lane_share = None
     lane_skipped: list[dict] = []
+    _eff_shares: dict = {}
     if book_lane is not None:
         rows0 = {r["Claim ID"]: r for r in parse_open_rows()}
 
@@ -458,6 +612,9 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
         free_rows = [(c, r) for c, r in kept if not r]
         free_rows.sort(key=lambda cr: book_year((rows0.get(cr[0]) or {}).get("Book slug", "")))
         queue = resume_rows + free_rows
+        _q_lanes = {lane_of(c)[0] for c, _r in queue if not _r}
+        _eff_shares = effective_lane_shares(_q_lanes, lane_share)
+        print(f"[{lane}] effective lane shares: " + ", ".join(f"{k}={v:.2f}" for k, v in sorted(_eff_shares.items())), flush=True)
         if lane_skipped:
             print(f"[{lane}] work-lane pause skips: {len(lane_skipped)}", flush=True)
     log["lane_skipped"] = lane_skipped
@@ -518,10 +675,15 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
 
         claim_lane = book_lane(row.get("Book slug", "")) if book_lane else "unknown"
         if cf_metered and not resume and lane_share is not None:
-            if lane_spent.get(claim_lane, 0) >= lane_share(claim_lane) * fathers_budget:
+            eff_share = _eff_shares.get(claim_lane, lane_share(claim_lane)) if _eff_shares else lane_share(claim_lane)
+            if lane_spent.get(claim_lane, 0) >= eff_share * fathers_budget:
                 lane_capped += 1
                 print(f"[{lane}] {claim_id} skipped: work lane {claim_lane} share spent", flush=True)
                 continue
+
+        if not resume and _hold_blocks(load_hold().get(claim_id) or {}):
+            print("[%s] %s skipped: repair already spent" % (lane, claim_id), flush=True)
+            continue
 
         entry = process_claim(
             claim_id,
@@ -549,9 +711,11 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             log["stop_reason"] = "draft_failed"
             break
         if err in {"content_fail", "hold"}:
-            row = record_claim_fail(claim_id, err)
+            row = record_claim_fail(claim_id, err, _concrete_defect_key(claim_id))
             content_skips += 1
-            print(f"[{lane}] {err} on {claim_id} (fails={row['fails']} held={bool(row.get('held'))}); next claim", flush=True)
+            print("[%s] %s on %s (fails=%s held=%s spent=%s); next claim" % (
+                lane, err, claim_id, row.get("fails"), bool(row.get("held")),
+                bool(row.get("repair_spent"))), flush=True)
             continue
         if err == "promote_lock_busy":
             print(f"[{lane}] {claim_id} promote lock busy; next claim", flush=True)
@@ -566,6 +730,9 @@ def run_lane(lane: str, args: argparse.Namespace, env: dict) -> dict:
             if consec_api_fail >= 3:
                 log["stop_reason"] = "consecutive_failures"
                 break
+            continue
+        if err == "source_not_greek":
+            print("[%s] %s skipped: source is not Unicode Greek" % (lane, claim_id), flush=True)
             continue
         log["stop_reason"] = err or "promote_failed"
         break
@@ -659,6 +826,523 @@ def run_gemini_side(args: argparse.Namespace, env: dict, cfg: dict) -> dict:
     return log
 
 
+
+def reopen_unsupported_done(dry_run: bool = False) -> list[str]:
+    """Put today's done slices back in the queue when Pass B outruns the gloss.
+
+    Wide scans do not un-mark an archive. A scan error must not fail the batch.
+    """
+    try:
+        return _reopen_unsupported_done(dry_run)
+    except Exception as exc:  # noqa: BLE001
+        print("reopen scan failed: %s" % type(exc).__name__, flush=True)
+        return []
+
+
+def _reopen_unsupported_done(dry_run: bool) -> list[str]:
+    import sys as _sys
+
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    from ai_promote import _failer_texts, load_section_bundle
+    from pipeline_autonomy import unsupported_pass_b_quotes
+
+    text = CLAIMS.read_text(encoding="utf-8")
+    if "## Done / closed" not in text:
+        return []
+    head, _, tail = text.partition("## Done / closed")
+    hits = []
+    for line in tail.splitlines():
+        if "20260928" not in line and "20260929" not in line:
+            continue
+        if not line.startswith("| "):
+            continue
+        if "accept-current" in line:
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) < 5 or cells[1] != "done":
+            continue
+        claim = cells[0]
+        if not claim.startswith(("jer-h", "cyr-isa-")):
+            continue
+        if ("| %s |" % claim) in head:
+            continue
+        if "receipt " not in line:
+            continue
+        receipt = line.split("receipt ", 1)[1].strip().strip("|").strip()
+        summary = ROOT / "outputs" / "ai-promote" / receipt / "summary.json"
+        if not summary.is_file():
+            continue
+        try:
+            data = json.loads(summary.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        book = ""
+        bad = False
+        for entry in data.get("results") or []:
+            book = entry.get("book") or book
+            texts = []
+            for key in ("checker_a", "checker_b", "arbiter"):
+                check = entry.get(key) or {}
+                parsed = check.get("parsed") or {}
+                if check.get("ok") is False and isinstance(parsed, dict):
+                    texts.extend(_failer_texts(parsed))
+            if not texts:
+                continue
+            try:
+                bundle = load_section_bundle(entry.get("section"), entry.get("book"))
+            except SystemExit:
+                continue
+            just = bundle.get("justification") or {}
+            english = (bundle.get("english_row") or {}).get("english") or []
+            if not isinstance(english, list):
+                english = [english]
+            if unsupported_pass_b_quotes(
+                texts, str(just.get("pass_a_gloss") or ""), "\n".join(str(item) for item in english)
+            ):
+                bad = True
+                break
+        if bad:
+            hits.append((claim, book or "cyril-alexandria-isaiah", cells[2]))
+    print("reopen candidates: %s" % (", ".join(item[0] for item in hits) or "(none)"), flush=True)
+    if dry_run or not hits:
+        return [item[0] for item in hits]
+    if len(hits) > 3:
+        print("reopen skipped: %d candidates" % len(hits), flush=True)
+        return []
+    drop = {"| %s |" % item[0] for item in hits}
+    out = []
+    inserted = False
+    in_done = False
+    for line in text.splitlines(keepends=True):
+        bare = line.strip()
+        if bare.startswith("## Done"):
+            in_done = True
+        if in_done and any(bare.startswith(prefix) for prefix in drop):
+            continue
+        out.append(line)
+        if not inserted and not in_done and bare.startswith("|---"):
+            for claim, book, slice_id in hits:
+                out.append(
+                    "| %s | free | %s | %s |  |  | wip/%s | repair unsupported Pass B |\n"
+                    % (claim, book, slice_id, claim)
+                )
+            inserted = True
+    if not inserted:
+        print("reopen skipped: no open table", flush=True)
+        return []
+    tmp = CLAIMS.with_suffix(".md.reopen")
+    tmp.write_text("".join(out), encoding="utf-8")
+    os.replace(str(tmp), str(CLAIMS))
+    print("reopened %s" % ", ".join(item[0] for item in hits), flush=True)
+    return [item[0] for item in hits]
+
+
+def reopen_scaffold_done(dry_run: bool = False) -> list[str]:
+    """Put done slices whose English is still operational text back in the queue.
+
+    Four per batch. A scan error must not fail the batch.
+    """
+    try:
+        return _reopen_scaffold_done(dry_run)
+    except Exception as exc:  # noqa: BLE001
+        print("scaffold reopen failed: %s" % type(exc).__name__, flush=True)
+        return []
+
+
+def _reopen_scaffold_done(dry_run: bool) -> list[str]:
+    sys.path.insert(0, str(ROOT))
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from ai_promote import load_section_bundle, sections_from_slice
+    from pipeline.check_pass_ab import content_errors
+
+    text = CLAIMS.read_text(encoding="utf-8")
+    if "## Done / closed" not in text:
+        return []
+    head, _, tail = text.partition("## Done / closed")
+    hits = []
+    for line in tail.splitlines():
+        if not line.startswith("| "):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) < 3 or cells[1] != "done":
+            continue
+        claim = cells[0]
+        if claim.startswith("cyr-isa-"):
+            book = "cyril-alexandria-isaiah"
+        elif claim.startswith("jer-h"):
+            book = "origen-jeremiah-samuel"
+        elif "--" in claim:
+            book = claim.split("--", 1)[0]
+        else:
+            continue
+        if ("| %s |" % claim) in head:
+            continue
+        try:
+            sections = sections_from_slice(cells[2], book)
+        except (SystemExit, Exception):  # noqa: BLE001
+            continue
+        scaffold = False
+        for section in sections:
+            try:
+                bundle = load_section_bundle(section, book)
+            except SystemExit:
+                continue
+            english = (bundle.get("english_row") or {}).get("english") or []
+            if content_errors(english, "english"):
+                scaffold = True
+                break
+        if scaffold:
+            hits.append((claim, book, cells[2]))
+    hits.sort(key=lambda item: (not item[0].startswith("cyr-isa-"), item[0]))
+    print(
+        "scaffold candidates: %d" % len(hits),
+        flush=True,
+    )
+    if dry_run or not hits:
+        return [item[0] for item in hits]
+    hits = hits[:4]
+    drop = {"| %s |" % item[0] for item in hits}
+    out = []
+    inserted = False
+    in_done = False
+    for line in text.splitlines(keepends=True):
+        bare = line.strip()
+        if bare.startswith("## Done"):
+            in_done = True
+        if in_done and any(bare.startswith(prefix) for prefix in drop):
+            continue
+        out.append(line)
+        if not inserted and not in_done and bare.startswith("|---"):
+            for claim, book, slice_id in hits:
+                out.append(
+                    "| %s | free | %s | %s |  |  | wip/%s | repair scaffold closeout |\n"
+                    % (claim, book, slice_id, claim)
+                )
+            inserted = True
+    if not inserted:
+        print("scaffold reopen skipped: no open table", flush=True)
+        return []
+    tmp = CLAIMS.with_suffix(".md.scaffold")
+    tmp.write_text("".join(out), encoding="utf-8")
+    os.replace(str(tmp), str(CLAIMS))
+    with _HOLD_LOCK:
+        hold = load_hold()
+        changed = False
+        for claim, _book, _slice in hits:
+            if claim in hold:
+                hold.pop(claim, None)
+                changed = True
+        if changed:
+            if hold:
+                HOLD_PATH.write_text(
+                    "\n".join(json.dumps(hold[c]) for c in sorted(hold)) + "\n",
+                    encoding="utf-8",
+                )
+            else:
+                HOLD_PATH.write_text("", encoding="utf-8")
+    print("reopened scaffold %s" % ", ".join(item[0] for item in hits), flush=True)
+    return [item[0] for item in hits]
+
+
+
+def _queue_helpers():
+    scripts = str(ROOT / "scripts")
+    if scripts not in sys.path:
+        sys.path.insert(0, scripts)
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from book_adapter import get_adapter
+    from pipeline.check_pass_ab import PLACEHOLDER, content_errors
+    from pipeline_autonomy import source_is_betacode
+    from work_lanes import book_year
+    return get_adapter, content_errors, PLACEHOLDER, source_is_betacode, book_year
+
+
+def _prefer_section(section: str) -> tuple:
+    preferred = section == "open" or section.endswith("-open") or section.endswith("_open")
+    return (0 if preferred else 1, section)
+
+
+def earliest_scaffold_candidates(limit: int = 4) -> list:
+    """Oldest Greek scaffold fragments, one claim per identical source. No writes."""
+    import hashlib
+    import re as _re
+
+    get_adapter, content_errors, _placeholder, source_is_betacode, book_year = _queue_helpers()
+    claims = CLAIMS.read_text(encoding="utf-8") if CLAIMS.is_file() else ""
+    books = []
+    root = ROOT / "books"
+    if not root.is_dir():
+        return []
+    for book_dir in root.iterdir():
+        if not book_dir.is_dir():
+            continue
+        slug = book_dir.name
+        if slug in _QUEUE_SKIP or "melito" in slug:
+            continue
+        yml = book_dir / "book.yml"
+        if not yml.is_file():
+            continue
+        language = ""
+        for line in yml.read_text(encoding="utf-8", errors="replace").splitlines():
+            if line.startswith("language:"):
+                language = line.split(":", 1)[1].strip().strip("\"'").casefold()
+                break
+        if not language.startswith("greek"):
+            continue
+        trans = book_dir / "translations"
+        if not trans.is_dir() or not any(trans.glob("*_source.json")):
+            continue
+        books.append((book_year(slug), slug))
+    books.sort()
+    found = []
+    for year, slug in books:
+        if len(found) >= limit:
+            break
+        try:
+            adapter = get_adapter(slug)
+            index = adapter._source_index()
+        except SystemExit:
+            continue
+        groups = {}
+        order = []
+        for section in index:
+            try:
+                fix = adapter.load_source_row(section)
+            except SystemExit:
+                continue
+            greek = "\n".join(fix.get("greek") or [])
+            if len(greek.strip()) < 40 or source_is_betacode(greek):
+                continue
+            if _re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", section) is None:
+                continue
+            digest = hashlib.sha256(greek.encode("utf-8")).hexdigest()
+            if digest not in groups:
+                groups[digest] = []
+                order.append(digest)
+            groups[digest].append(section)
+        for digest in order:
+            if len(found) >= limit:
+                break
+            members = sorted(groups[digest], key=_prefer_section)
+            section = members[0]
+            claim_id = "%s--%s" % (slug, section)
+            if _re.fullmatch(adapter.claim_re, claim_id) is None:
+                continue
+            if ("| %s |" % claim_id) in claims:
+                continue
+            try:
+                eng_path = adapter.english_path_for_section(section)
+                payload = json.loads(eng_path.read_text(encoding="utf-8"))
+                payload_rows = payload if isinstance(payload, list) else [payload]
+                english = payload_rows[adapter.english_row_index(section)].get("english")
+            except (OSError, ValueError, IndexError, KeyError, TypeError):
+                continue
+            if not content_errors(english):
+                continue
+            found.append((claim_id, slug, section, year))
+    return found
+
+
+def _rewrite_claims(text: str) -> None:
+    if "## Open / active claims" not in text or "| Claim ID |" not in text:
+        raise SystemExit("CLAIMS.md lost its open table")
+    tmp = CLAIMS.with_suffix(".md.queue")
+    tmp.write_text(text, encoding="utf-8")
+    os.replace(str(tmp), str(CLAIMS))
+
+
+def note_betacode_free_rows(dry_run: bool = False) -> list:
+    """Free rows whose source is still betacode stop occupying a slot."""
+    _get_adapter, _errors, _placeholder, source_is_betacode, _year = _queue_helpers()
+    from book_adapter import get_adapter
+
+    hits = []
+    for row in parse_open_rows():
+        if row.get("Status") != "free":
+            continue
+        notes = (row.get("Notes") or "").casefold()
+        if "betacode" in notes or "do not publish" in notes:
+            continue
+        cid = str(row.get("Claim ID") or "")
+        if not _auto_claim(cid):
+            continue
+        slug = row.get("Book slug") or ""
+        try:
+            adapter = get_adapter(slug)
+            greek_bits = []
+            for section in adapter.sections_from_slice(row.get("Slice (sections)") or ""):
+                fix = adapter.load_source_row(section)
+                greek_bits.extend(fix.get("greek") or [])
+        except SystemExit:
+            continue
+        if source_is_betacode("\n".join(str(bit) for bit in greek_bits)):
+            hits.append(cid)
+    print("betacode free rows: %s" % (", ".join(hits) or "(none)"), flush=True)
+    if dry_run or not hits:
+        return hits
+    text = CLAIMS.read_text(encoding="utf-8")
+    out = []
+    in_open = False
+    for line in text.splitlines(keepends=True):
+        bare = line.strip()
+        if bare.startswith("## Open / active claims"):
+            in_open = True
+        elif in_open and bare.startswith("## "):
+            in_open = False
+        if in_open and bare.startswith("|"):
+            cells = [cell.strip() for cell in bare.strip("|").split("|")]
+            if cells and cells[0] in hits and not cells[0].startswith("---"):
+                cells[-1] = "source is betacode; do not publish"
+                line = "| " + " | ".join(cells) + " |\n"
+        out.append(line)
+    _rewrite_claims("".join(out))
+    return hits
+
+
+def enqueue_earliest_scaffolds(limit: int = 4, dry_run: bool = False) -> list:
+    rows = earliest_scaffold_candidates(limit)
+    print(
+        "earliest candidates: %s" % (", ".join(item[0] for item in rows) or "(none)"),
+        flush=True,
+    )
+    if dry_run or not rows:
+        return [item[0] for item in rows]
+    text = CLAIMS.read_text(encoding="utf-8")
+    rows = [item for item in rows if ("| %s |" % item[0]) not in text]
+    if not rows:
+        return []
+    out = []
+    inserted = False
+    in_open = False
+    for line in text.splitlines(keepends=True):
+        bare = line.strip()
+        if bare.startswith("## Open / active claims"):
+            in_open = True
+        elif bare.startswith("## "):
+            in_open = False
+        out.append(line)
+        if in_open and not inserted and bare.startswith("|---"):
+            for claim_id, slug, section, _year in rows:
+                out.append(
+                    "| %s | free | %s | %s |  |  | wip/%s | earliest scaffold |\n"
+                    % (claim_id, slug, section, claim_id)
+                )
+                just_dir = ROOT / "books" / slug / "reviews" / "justifications"
+                if not just_dir.is_dir():
+                    just_dir.mkdir(parents=True)
+            inserted = True
+    if not inserted:
+        print("earliest enqueue skipped: no open table", flush=True)
+        return []
+    _rewrite_claims("".join(out))
+    print("enqueued %s" % ", ".join(item[0] for item in rows), flush=True)
+    return [item[0] for item in rows]
+
+
+def _load_english_cache(adapter, section: str, cache: dict):
+    path = adapter.english_path_for_section(section)
+    if path not in cache:
+        text = path.read_text(encoding="utf-8")
+        raw = json.loads(text)
+        wrapped = not isinstance(raw, list)
+        cache[path] = {
+            "rows": [raw] if wrapped else raw,
+            "wrapped": wrapped,
+            "text": text,
+            "dirty": False,
+        }
+    entry = cache[path]
+    item = entry["rows"][adapter.english_row_index(section)]
+    return entry, item
+
+
+def mirror_identical_greek(dry_run: bool = False) -> list:
+    """Copy one gated reading onto scaffold copies of the same Greek."""
+    import hashlib
+
+    get_adapter, content_errors, placeholder, _betacode, _year = _queue_helpers()
+    if not CLAIMS.is_file():
+        return []
+    slugs = []
+    seen = set()
+    in_done = False
+    for line in CLAIMS.read_text(encoding="utf-8").splitlines():
+        if line.startswith("## Done"):
+            in_done = True
+            continue
+        if not in_done or not line.startswith("| "):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) < 2 or cells[1] != "done" or "--" not in cells[0]:
+            continue
+        slug = cells[0].split("--", 1)[0]
+        if slug in seen or slug in _QUEUE_SKIP or "melito" in slug:
+            continue
+        seen.add(slug)
+        slugs.append(slug)
+    copied = []
+    for slug in slugs:
+        try:
+            adapter = get_adapter(slug)
+            index = adapter._source_index()
+        except SystemExit:
+            continue
+        groups = {}
+        for section, (_path, _i, row) in index.items():
+            greek = row.get("greek") or ""
+            if not isinstance(greek, str):
+                greek = "\n".join(str(part) for part in greek)
+            if len(str(greek).strip()) < 40:
+                continue
+            digest = hashlib.sha256(str(greek).encode("utf-8")).hexdigest()
+            groups.setdefault(digest, []).append(section)
+        cache = {}
+        for members in groups.values():
+            if len(members) < 2:
+                continue
+            clean = None
+            disagree = False
+            scaffolds = []
+            for section in members:
+                try:
+                    entry, item = _load_english_cache(adapter, section, cache)
+                except (OSError, ValueError, IndexError, KeyError, SystemExit, TypeError):
+                    continue
+                english = item.get("english")
+                if content_errors(english):
+                    scaffolds.append((entry, item))
+                    continue
+                if clean is None:
+                    clean = english
+                elif clean != english:
+                    disagree = True
+                    break
+            if disagree or not clean or not scaffolds:
+                continue
+            joined = clean if isinstance(clean, str) else " ".join(str(part) for part in clean)
+            if len(joined.strip()) < 40 or placeholder.search(joined):
+                continue
+            reading = list(clean) if isinstance(clean, list) else [str(clean)]
+            for entry, item in scaffolds:
+                item["english"] = list(reading)
+                entry["dirty"] = True
+                copied.append("%s:%s" % (slug, item.get("section")))
+        if dry_run:
+            continue
+        for path, entry in cache.items():
+            if not entry["dirty"]:
+                continue
+            payload = entry["rows"][0] if entry["wrapped"] else entry["rows"]
+            rendered = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+            tmp = path.with_suffix(path.suffix + ".mirror")
+            tmp.write_text(rendered, encoding="utf-8")
+            os.replace(str(tmp), str(path))
+    if copied:
+        print("mirrored identical greek: %s" % ", ".join(copied), flush=True)
+    return copied
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--agent", default="overnight")
@@ -727,6 +1411,11 @@ def main() -> int:
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     lanes = ["cf", "nv"] if args.lanes == "both" else [args.lanes]
     want_gemini = gemini_enabled(cfg, force=bool(args.enable_gemini))
+    if args.mode == "auto":
+        reopen_unsupported_done(dry_run=bool(args.dry_run))
+        reopen_scaffold_done(dry_run=bool(args.dry_run))
+        note_betacode_free_rows(dry_run=bool(args.dry_run))
+        enqueue_earliest_scaffolds(dry_run=bool(args.dry_run))
 
     logs: dict[str, dict] = {}
     try:
@@ -759,6 +1448,11 @@ def main() -> int:
                 return 2
         return 0
     finally:
+        if args.mode == "auto" and not args.dry_run:
+            try:
+                mirror_identical_greek()
+            except Exception as exc:  # noqa: BLE001
+                print("mirror failed: %s" % type(exc).__name__, flush=True)
         clear_wall_deadline()
         release_all()
 

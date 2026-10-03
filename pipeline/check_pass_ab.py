@@ -221,6 +221,11 @@ def _failed_greek_scan(text: str) -> bool:
 
 
 
+def _hyphen_gloss(text: str, words: list) -> bool:
+    joins = len(re.findall(r"[A-Za-z]-[A-Za-z]", text))
+    return joins >= 8 and joins >= 0.03 * max(1, len(words))
+
+
 def check_record(j: dict) -> list[str]:
     if not isinstance(j, dict):
         return ["justification must be an object"]
@@ -233,7 +238,7 @@ def check_record(j: dict) -> list[str]:
     if na and nb:
         if na == nb:
             errors.append("Pass A copies Pass B (including formatting-only differences)")
-        elif min(len(a_words), len(b_words)) >= 8:
+        elif min(len(a_words), len(b_words)) >= 25:  # short maxims: gloss can be the English
             smaller, larger = sorted((na, nb), key=len)
             ratio = SequenceMatcher(None, a_words, b_words, autojunk=False).ratio()
             if smaller in larger or ratio >= 0.82:
@@ -248,13 +253,15 @@ def check_record(j: dict) -> list[str]:
         english = sum(1 for w in a_words if w in ENGLISH_FUNCTION)
         if latin / len(a_words) >= 0.12 and english / len(a_words) < 0.20:
             errors.append("Pass A is a Latin note, not an English sense gloss")
-    if len(re.findall(r"[A-Za-z]-[A-Za-z]", a)) >= 8:
+    # Interlinear cribs hyphenate most words; long sections legitimately
+    # carry a few compounds ("well-known", "God-befitting"), so use a share.
+    if _hyphen_gloss(a, a_words):
         errors.append("Pass A is an interlinear hyphen gloss; write a normal English sense gloss")
     if normalized(src) and normalized(src) == nb:
         errors.append("Pass B copies source text")
     # Literary Pass B (STYLE.md): accurate sense in readable prose — not gloss residue.
     if b_words:
-        if len(re.findall(r"[A-Za-z]-[A-Za-z]", b)) >= 8:
+        if _hyphen_gloss(b, b_words):
             errors.append(
                 "Pass B is still an interlinear hyphen gloss; write literary English sentences"
             )
