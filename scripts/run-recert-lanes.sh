@@ -58,7 +58,7 @@ lane() {  # name args...
   local pidf="$OUT/lane-$name.pid"
   if [ -f "$pidf" ] && kill -0 "$(cat "$pidf")" 2>/dev/null; then return 0; fi
   local ck="${PAIRS[$((NLANE % ${#PAIRS[@]}))]}"; NLANE=$((NLANE + 1))
-  WP_CHECKERS="$ck" nohup nice -n 10 python3 scripts/work_pipeline.py queue "$@" >> "$OUT/lane$name.out" 2>&1 &
+  WP_CHECKERS="$ck" WORK_PIPELINE_WORKERS=8 nohup nice -n 10 python3 scripts/work_pipeline.py queue "$@" >> "$OUT/lane$name.out" 2>&1 &
   echo $! > "$pidf"
   echo "$(date +%T) lane $name started pid $! checkers $ck"
 }

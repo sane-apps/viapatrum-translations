@@ -276,6 +276,43 @@ def _cf_pick_content(result: dict) -> str | None:
     return content
 
 
+# ---------------------------------------------------------------- batch route
+# Batch-capable Workers AI models (catalog property async_queue, 2026-10-03)
+# go through the local batch broker (scripts/cf_batch_broker.py), which turns
+# many calls into a few ?queueRequest=true batches under the per-model caps.
+# CF_BATCH=0 forces direct calls. If the broker is down, calls go direct.
+BATCH_MODELS = ("kimi-k2.6", "gpt-oss-120b", "gpt-oss-20b", "qwen3.8-27b", "gemma-4-26b", "deepseek-v4-flash",
+                "llama-3.3-70b", "qwen3-30b-a3b", "llama-4-scout")
+BROKER = "http://127.0.0.1:" + os.environ.get("CF_BATCH_PORT", "8799")
+import threading as _threading
+_use_batch = _threading.local()  # per-thread flag: vendor_call sets it when the model is at its cap
+_broker_seen = {"t": 0.0, "up": False}
+
+
+def _broker_up() -> bool:
+    if time.time() - _broker_seen["t"] < 30:
+        return _broker_seen["up"]
+    try:
+        with urllib.request.urlopen(BROKER + "/stats", timeout=2) as r:
+            up = r.status == 200
+    except Exception:  # noqa: BLE001
+        up = False
+    _broker_seen.update(t=time.time(), up=up)
+    return up
+
+
+def batch_route(model: str, api: str = "run") -> bool:
+    return (api == "run" and os.environ.get("CF_BATCH", "1") != "0"
+            and any(k in model for k in BATCH_MODELS) and _broker_up())
+
+
+def _broker_run(model: str, payload: dict) -> dict:
+    req = urllib.request.Request(BROKER + "/run", data=json.dumps({"model": model, "payload": payload}).encode(),
+                                 headers={"Content-Type": "application/json"}, method="POST")
+    with urllib.request.urlopen(req, timeout=1700) as r:
+        return json.loads(r.read() or b"{}")
+
+
 def cf_call(
     model: str,
     messages: list,
@@ -315,6 +352,22 @@ def cf_call(
     # Kimi K2.6 ignores enable_thinking=false; its switch is reasoning_effort "none".
     if reasoning_effort is not None:
         payload["reasoning_effort"] = reasoning_effort
+    if getattr(_use_batch, "on", False) and batch_route(model, api):
+        _use_batch.on = False
+        t0 = time.time()
+        try:
+            out = _broker_run(model, payload)
+        except Exception as e:  # noqa: BLE001
+            out = {"error": f"broker: {e}"}
+        if out.get("result") is not None:
+            result = out["result"]
+            content = _cf_pick_content(result)
+            if content is not None:
+                usage = result.get("usage") or {}
+                return {"content": content, "ms": int((time.time() - t0) * 1000), "batched": True,
+                        "pt": usage.get("prompt_tokens") or 0, "ct": usage.get("completion_tokens") or 0,
+                        "neurons": usage.get("neurons") or 0}
+        rate_acquire(model)  # broker failed: fall back to a paced direct call
     body = json.dumps(payload).encode()
     last_err = None
     for attempt in range(3):
@@ -591,6 +644,28 @@ def _rate_file(model: str) -> Path:
     return RATE_DIR / (re.sub(r"[^A-Za-z0-9._-]+", "_", model) + ".json")
 
 
+def rate_try(model: str) -> bool:
+    """Take a slot only if one is free now; never waits."""
+    import fcntl
+    ceiling = RATE_CEILING[_rate_class(model)]
+    with open(_rate_file(model), "a+") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        fh.seek(0)
+        try:
+            st = json.loads(fh.read() or "{}")
+        except ValueError:
+            st = {}
+        now = time.time()
+        hits = [t for t in st.get("hits", []) if now - t < 60]
+        if len(hits) >= st.get("limit", ceiling):
+            return False
+        hits.append(now)
+        st["hits"] = hits
+        st.setdefault("limit", ceiling)
+        fh.seek(0); fh.truncate(); fh.write(json.dumps(st))
+        return True
+
+
 def rate_acquire(model: str, max_wait: float = 900.0) -> None:
     """Block until model has a free slot in the last 60 s."""
     import fcntl
@@ -664,7 +739,10 @@ def vendor_call(
     """Route to Workers AI or NIM using researched profiles, inside the
     shared per-model rate limit."""
     model = normalize_model(model)
-    rate_acquire(model)
+    if batch_route(model) and not rate_try(model):
+        _use_batch.on = True            # at the cap: overflow goes to the batch broker
+    elif not batch_route(model):
+        rate_acquire(model)             # direct-only model: wait for a slot
     r = _vendor_call_raw(model, messages, cf_token=cf_token, nv_token=nv_token, account=account,
                          max_tokens=max_tokens)
     if "429" in str(r.get("error", "")):
