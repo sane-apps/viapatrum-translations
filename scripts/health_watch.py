@@ -47,8 +47,9 @@ for f in pids:
     except (OSError, ValueError):
         pass
 snap["lanes_alive"] = alive
-if alive < 12:
-    alerts.append(f"only {alive}/15 lanes alive")
+LANES = 6  # run-recert-lanes.sh (owner 2026-10-03 evening: cut from 15 to save credits)
+if alive < LANES - 1:
+    alerts.append(f"only {alive}/{LANES} lanes alive")
 q = json.loads((T / "outputs/work-pipeline/queue.json").read_text())
 done = sum(1 for v in q.values() if v.get("result") in ("certified", "held", "checked"))
 snap["queue_done"] = done
