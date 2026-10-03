@@ -36,3 +36,11 @@ books/origen-luke-homilies/sources/rauer_gcs35_djvu.txt
 books/**/sources/*.png
 books/**/sources/*.jpg
 books/**/sources/bekker-pages/
+
+# OCR page images are derived from the source PDFs (fetched via
+# sources/manifest.json); keep the text locks in git, not GBs of scans
+# (2026-10-03: 274 new pages, ~2 GB, broke pushes). Already-tracked pages stay.
+books/**/sources/**/*_ocr/*.png
+books/**/sources/**/_ocr*/*.png
+books/**/sources/**/*_ocr/*.jpg
+books/**/sources/**/_ocr*/*.jpg
