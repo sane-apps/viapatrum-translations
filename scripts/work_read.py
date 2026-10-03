@@ -93,34 +93,60 @@ def quote_found(q: str, corpus_norm: str) -> bool:
     return len(q) >= 3 and q in corpus_norm
 
 
-def parse_obj(raw: str):
+def _balanced_blocks(raw: str):
+    """(start, end) of each top-level balanced {...} block, in order."""
+    i = raw.find("{")
+    while i >= 0:
+        depth, inq, esc, end = 0, False, False, -1
+        for j in range(i, len(raw)):
+            c = raw[j]
+            if inq:
+                esc = (c == "\\") and not esc
+                if c == '"' and not esc:
+                    inq = False
+                continue
+            if c == '"':
+                inq = True
+            elif c == "{":
+                depth += 1
+            elif c == "}":
+                depth -= 1
+                if depth == 0:
+                    end = j + 1
+                    break
+        if end < 0:
+            return
+        yield i, end
+        i = raw.find("{", end)
+
+
+def parse_obj(raw: str, expected_keys=()):
+    """First balanced {...} block as JSON. With expected_keys, a first block
+    without any of them (thinking that leaked ahead of the answer) gives way
+    to the LAST balanced block that parses and has one of those top-level
+    keys; with no such block the first block stands, as before."""
     if not raw:
         return None
     raw = raw.strip()
     raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw)
-    i = raw.find("{")
-    if i < 0:
+    blocks = _balanced_blocks(raw)
+    first = next(blocks, None)
+    if first is None:
         return None
-    depth, inq, esc = 0, False, False
-    for j in range(i, len(raw)):
-        c = raw[j]
-        if inq:
-            esc = (c == "\\") and not esc
-            if c == '"' and not esc:
-                inq = False
+    try:
+        obj = json.loads(raw[first[0]:first[1]])
+    except json.JSONDecodeError:
+        obj = None
+    if not expected_keys or (isinstance(obj, dict) and any(k in obj for k in expected_keys)):
+        return obj
+    for a, b in reversed(list(blocks)):
+        try:
+            cand = json.loads(raw[a:b])
+        except json.JSONDecodeError:
             continue
-        if c == '"':
-            inq = True
-        elif c == "{":
-            depth += 1
-        elif c == "}":
-            depth -= 1
-            if depth == 0:
-                try:
-                    return json.loads(raw[i:j + 1])
-                except json.JSONDecodeError:
-                    return None
-    return None
+        if isinstance(cand, dict) and any(k in cand for k in expected_keys):
+            return cand
+    return obj
 
 
 def read_with(model: str, title: str, secs: list[dict], tokens: dict) -> dict:
@@ -135,7 +161,7 @@ def read_with(model: str, title: str, secs: list[dict], tokens: dict) -> dict:
             last = r["error"]
             time.sleep(10 * (attempt + 1))
             continue
-        obj = parse_obj(r.get("content", ""))
+        obj = parse_obj(r.get("content", ""), expected_keys=("followability", "findings", "summary"))
         if obj is not None:
             obj["_ms"] = int((time.time() - t0) * 1000)
             return obj

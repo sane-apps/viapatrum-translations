@@ -49,6 +49,7 @@ import json
 import os
 import re
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -79,6 +80,8 @@ FAMILY = {DRAFTER: "deepseek", FALLBACK: "qwen"}
 for _m in CHECKERS:
     FAMILY[_m] = next((f for f in ("kimi", "glm", "gpt-oss", "llama", "mistral", "gemma", "nemotron", "qwen") if f in _m), _m)
 MAX_REPAIR_ROUNDS = 3
+MAX_FULL_REDRAFTS = 3   # full redrafts after the first draft for structural gate failures
+STRUCTURAL = ("near-copies", "copies", "too short", "Latin note")  # gate errors that need a redraft
 FOLLOW_BAR = 4          # legacy single bar (kept for reports)
 # Readability pass (owner 2026-10-02: accurate, readable, not painfully slow):
 # no reader below FOLLOW_MIN and the readers' mean at least FOLLOW_AVG, with no
@@ -131,24 +134,45 @@ def receipts_ok(models: list[str], purpose: str) -> None:
         require_llm_receipt([m], receipt_path=path, purpose=purpose)
 
 
-def call(model: str, system: str, user: str, max_tokens: int = 8000) -> dict | None:
-    """One JSON-returning call with retries; falls back to FALLBACK for checkers."""
+RATE_ERR = re.compile(r"429|rate.?limit|too many requests|capacity|9007|3040", re.I)
+NUDGE = "\n\nReturn only the JSON object."
+
+
+def call(model: str, system: str, user: str, max_tokens: int = 8000, expect: tuple = ()) -> dict | None:
+    """One JSON-returning call. Paid models allow ~20 calls a minute, so no
+    blind retries (efficiency sweep 2026-10-03): a 429 / capacity error backs
+    off 15-120 s; an unparseable or truncated reply gets ONE immediate retry
+    with a 'JSON only' nudge; any other error gets one retry. Then None."""
     msgs = [{"role": "system", "content": system}, {"role": "user", "content": user}]
     last = ""
-    # Long drafts take ~60 s and Workers AI throttles bursts; give a busy
-    # minute room (waits 15/30/60/90/120 s) and say why a call failed.
-    for attempt, wait in enumerate((15, 30, 60, 90, 120, 0)):
+    waits = iter((15, 30, 60, 90, 120))
+    nudged = retried = False
+    while True:
         r = vendor_call(model, msgs, cf_token=TOKENS["cf"], nv_token=TOKENS["nv"], max_tokens=max_tokens)
-        if not r.get("error"):
-            obj = work_read.parse_obj(r.get("content", ""))
+        err = str(r.get("error") or "")
+        if not err:
+            obj = work_read.parse_obj(r.get("content", ""), expected_keys=expect)
             if obj is not None:
                 return obj
             last = "unparseable: " + str(r.get("content", ""))[:120]
         else:
-            last = str(r.get("error"))[:200]
-        if wait:
+            last = err[:200]
+        if err and RATE_ERR.search(err):
+            wait = next(waits, None)
+            if wait is None:
+                break
             time.sleep(wait)
-    print(f"call {model} failed after retries: {last}", file=sys.stderr, flush=True)
+            continue
+        if not err or err.startswith("truncated"):
+            if nudged:
+                break
+            nudged = True
+            msgs = [msgs[0], {"role": "user", "content": user + NUDGE}]
+            continue
+        if retried:
+            break
+        retried = True
+    print(f"call {model} failed: {last}", file=sys.stderr, flush=True)
     return None
 
 
@@ -320,7 +344,8 @@ def vote_glossary(slug: str, terms: list[dict], context: str, langname: str) -> 
     listing = json.dumps([{k: t.get(k) for k in ("source_term", "sense", "candidates")} for t in terms], ensure_ascii=False)
     votes = {}
     for m in CHECKERS:
-        obj = call(m, VOTE_SYS.format(langname=langname), f"{context}\n\nKEY TERMS:\n{listing}\n\nReturn the JSON now.", max_tokens=4000) or {}
+        obj = call(m, VOTE_SYS.format(langname=langname), f"{context}\n\nKEY TERMS:\n{listing}\n\nReturn the JSON now.", max_tokens=4000,
+                   expect=("votes",)) or {}
         votes[m] = {norm(v.get("source_term", "")): v for v in obj.get("votes", []) if isinstance(v, dict)}
     glossary, open_terms = [], []
     for t in terms:
@@ -378,17 +403,20 @@ def make_brief(slug: str, pairs: list[dict], lang: str, meta: dict) -> dict:
             f"Section ids in order: {', '.join(p['id'] for p in pairs)}\n\nSOURCE:\n{src}")
     feedback, brief, problems = "", None, []
     for attempt in range(2):
-        cand = call(DRAFTER, BRIEF_SYS.format(langname=langname), head + feedback + "\n\nReturn the JSON now.", max_tokens=12000)
+        cand = call(DRAFTER, BRIEF_SYS.format(langname=langname), head + feedback + "\n\nReturn the JSON now.",
+                    max_tokens=12000, expect=("title_en", "key_terms", "argument"))
         if not cand:
             log(slug, f"brief: drafter returned nothing (attempt {attempt + 1})")
             continue
         brief = cand
         chk = call(CHECKERS[0], BRIEF_CHECK_SYS.format(langname=langname),
                    head + "\n\nBRIEF:\n" + json.dumps({k: v for k, v in brief.items() if k != "key_terms"}, ensure_ascii=False)
-                   + "\n\nReturn the JSON now.", max_tokens=6000) or {}
+                   + "\n\nReturn the JSON now.", max_tokens=6000, expect=("problems", "missing")) or {}
         problems = [p for p in chk.get("problems", []) if isinstance(p, dict)]
         log(slug, f"brief facts attempt {attempt + 1}: {len(problems)} problems")
-        if not problems:
+        if brief_validates(brief, problems):
+            # One attempt: nothing any later stage reads is in doubt.
+            # Outline problems are kept for the record below.
             break
         feedback = ("\n\nA checker found these problems in your previous brief. Correct each one (or remove the claim) "
                     "and return the complete brief.\nPrevious brief:\n" + json.dumps(brief, ensure_ascii=False)
@@ -408,9 +436,34 @@ def make_brief(slug: str, pairs: list[dict], lang: str, meta: dict) -> dict:
 
 
 def brief_text(brief: dict) -> str:
+    """Full verified brief: intro prompts and the receipt hash (brief_sha256)."""
     keep = {k: brief.get(k) for k in ("title_en", "author", "addressee", "genre", "occasion", "argument",
                                       "cast", "voices", "glossary", "names", "scripture")}
     return json.dumps(keep, ensure_ascii=False)
+
+
+# What the section stages (draft, Pass B, check, repair, polish) use. They
+# never read the addressee, occasion or outline, nor the glossary's vote
+# record (votes, decided_by, decision_note), which was most of the prompt.
+SECTION_BRIEF_KEYS = ("title_en", "author", "genre", "argument", "cast", "voices", "glossary", "names", "scripture")
+SECTION_GLOSS_KEYS = ("source_term", "english", "sense", "banned")
+
+
+def section_brief_text(brief: dict) -> str:
+    keep = {k: brief.get(k) for k in SECTION_BRIEF_KEYS}
+    keep["glossary"] = [{k: g.get(k) for k in SECTION_GLOSS_KEYS if g.get(k)}
+                        for g in brief.get("glossary") or [] if isinstance(g, dict)]
+    return json.dumps(keep, ensure_ascii=False)
+
+
+def brief_validates(brief: dict, problems: list[dict]) -> bool:
+    """A brief needs no second attempt when it has the fields the section
+    stages need and the fact check found nothing in the fields they read."""
+    if not isinstance(brief.get("key_terms"), list) or not brief.get("argument"):
+        return False
+    # Only the outline: no stage reads it. The occasion feeds the intro, whose
+    # checker accepts what the "verified" brief says (review 2026-10-03).
+    return not any(str(p.get("field", "other")) != "outline" for p in problems)
 
 
 # ---------------------------------------------------------------- draft
@@ -490,9 +543,8 @@ def section_gate(j: dict, brief: dict) -> list[str]:
     errs += [f"lint {f['rule']}: {f['why']} ('{f['quote'][:60]}')" for f in lint_work(sec, lint_brief) if f["severity"] == "error"
              and not (f["rule"] == "boundary" and ((open_end and "ends without" in f["why"])
                                                     or (open_start and "starts with a lowercase" in f["why"])))]
-    for old, new in (brief.get("names") or {}).items():
-        if old and len(old) > 3 and old.lower() in low and new and new.lower() not in low:
-            errs.append(f"names: '{old}' left unexplained (modern: '{new}')")
+    # Ancient names: work_lint's names rule (whole word, case-sensitive) above.
+    # The old substring test here held 'vision' for 'Sion' (2026-10-03).
     return errs
 
 
@@ -510,6 +562,49 @@ def modern_names(text: str, brief: dict) -> str:
     return text
 
 
+WORD_NOTE_KEYS = ("lemmas", "choices", "bible_refs")
+
+
+def draft_pass_b(j: dict, piece: list[str], feedback: str = "", *, brief: dict, langname: str,
+                 tail: str = "") -> list[str] | None:
+    """Pass B for one source piece from its word notes (j: lemmas, choices,
+    bible_refs). Separate call: one call writing both lanes yields
+    near-copies (seen with Llama and again with DeepSeek, 2026-10-02)."""
+    ub = (f"WORK BRIEF:\n{section_brief_text(brief)}\n\nEND OF PREVIOUS ENGLISH:\n{tail[-700:] or '(start of work)'}"
+          + "\n\nSOURCE:\n" + "\n".join(piece)
+          + "\n\nWORD NOTES:\n" + json.dumps({k: j.get(k) for k in WORD_NOTE_KEYS}, ensure_ascii=False)
+          + (f"\n\nFIX THESE PROBLEMS FROM REVIEW:\n{feedback}" if feedback else "") + "\n\nReturn the JSON now.")
+    voice = brief.get("voice") or f"{brief.get('author', 'the author')}, {brief.get('genre', '')}"
+    pb = call(DRAFTER, PASSB_SYS.format(langname=langname, voice=voice, divine=DIVINE), ub, max_tokens=10000,
+              expect=("pass_b_english",))
+    if not pb or not pb.get("pass_b_english"):
+        return None
+    paras = [x for x in pb["pass_b_english"] if str(x).strip()]
+    return paras or None
+
+
+def redraft_pass_b(slug: str, j: dict, p: dict, prev_tail: str, brief: dict, langname: str,
+                   feedback: str) -> dict | None:
+    """Near-copy failure: keep Pass A, lemmas and choices; write Pass B again
+    with the HOW TO FIX feedback. None when the parts cannot be matched."""
+    pieces = chunk_source(p["source"])
+    notes = j.get("_part_notes") or ([{k: j.get(k) for k in WORD_NOTE_KEYS}] if len(pieces) == 1 else [])
+    if len(notes) != len(pieces) or not j.get("pass_a_gloss"):
+        return None
+    paras, tail = [], prev_tail
+    for i, piece in enumerate(pieces):
+        pb = draft_pass_b(notes[i], piece, feedback, brief=brief, langname=langname, tail=tail)
+        if pb is None:
+            log(slug, f"draft {p['id']} part {i + 1}: no usable Pass B (Pass B redo)")
+            return None
+        paras += pb
+        tail = " ".join(pb)
+    out = {k: v for k, v in j.items() if k != "_gate"}
+    out["pass_b_english"] = [modern_names(para, brief) for para in paras if str(para).strip()]
+    out["pass_b_redone"] = out.get("pass_b_redone", 0) + 1
+    return out
+
+
 def draft_section(slug: str, p: dict, prev_tail: str, next_head: str, brief: dict, langname: str,
                   feedback: str = "") -> dict | None:
     pieces = chunk_source(p["source"])
@@ -517,29 +612,22 @@ def draft_section(slug: str, p: dict, prev_tail: str, next_head: str, brief: dic
     tail = prev_tail
     for i, piece in enumerate(pieces):
         nxt = "\n".join(pieces[i + 1])[:600] if i + 1 < len(pieces) else next_head
-        user = (f"WORK BRIEF:\n{brief_text(brief)}\n\nSECTION {p['id']}"
+        user = (f"WORK BRIEF:\n{section_brief_text(brief)}\n\nSECTION {p['id']}"
                 + (f" (part {i + 1} of {len(pieces)})" if len(pieces) > 1 else "")
                 + f"\n\nEND OF PREVIOUS ENGLISH (context only):\n{tail[-700:] or '(start of work)'}"
                 + f"\n\nSOURCE TO TRANSLATE:\n" + "\n".join(piece)
                 + f"\n\nSTART OF WHAT FOLLOWS (context only; do not translate):\n{nxt or '(end of work)'}"
                 + (f"\n\nFIX THESE PROBLEMS FROM REVIEW:\n{feedback}" if feedback else "")
                 + "\n\nReturn the JSON now.")
-        obj = call(DRAFTER, DRAFT_SYS.format(langname=langname), user, max_tokens=10000)
+        obj = call(DRAFTER, DRAFT_SYS.format(langname=langname), user, max_tokens=10000, expect=("pass_a_gloss",))
         if not obj or not obj.get("pass_a_gloss"):
             log(slug, f"draft {p['id']} part {i + 1}: no usable Pass A")
             return None
-        # Separate call: one call writing both lanes yields near-copies (seen
-        # with Llama and again with DeepSeek, 2026-10-02).
-        ub = (f"WORK BRIEF:\n{brief_text(brief)}\n\nEND OF PREVIOUS ENGLISH:\n{tail[-700:] or '(start of work)'}"
-              + "\n\nSOURCE:\n" + "\n".join(piece)
-              + "\n\nWORD NOTES:\n" + json.dumps({k: obj.get(k) for k in ("lemmas", "choices", "bible_refs")}, ensure_ascii=False)
-              + (f"\n\nFIX THESE PROBLEMS FROM REVIEW:\n{feedback}" if feedback else "") + "\n\nReturn the JSON now.")
-        voice = brief.get("voice") or f"{brief.get('author', 'the author')}, {brief.get('genre', '')}"
-        pb = call(DRAFTER, PASSB_SYS.format(langname=langname, voice=voice, divine=DIVINE), ub, max_tokens=10000)
-        if not pb or not pb.get("pass_b_english"):
+        pb = draft_pass_b(obj, piece, feedback, brief=brief, langname=langname, tail=tail)
+        if pb is None:
             log(slug, f"draft {p['id']} part {i + 1}: no usable Pass B")
             return None
-        obj["pass_b_english"] = [x for x in pb["pass_b_english"] if str(x).strip()]
+        obj["pass_b_english"] = pb
         parts.append(obj)
         tail = " ".join(obj["pass_b_english"])
     j = {
@@ -554,6 +642,8 @@ def draft_section(slug: str, p: dict, prev_tail: str, next_head: str, brief: dic
         "bible_refs": [b for x in parts for b in (x.get("bible_refs") or []) if isinstance(b, dict)],
         "pass_b_english": [modern_names(para, brief) for x in parts for para in x.get("pass_b_english") if str(para).strip()],
         "notes": [n for x in parts for n in (x.get("notes") or []) if n],
+        # per-part word notes so a near-copy failure can redo Pass B alone
+        "_part_notes": [{k: x.get(k) for k in WORD_NOTE_KEYS} for x in parts],
         "drafter": DRAFTER, "pipeline": "work_pipeline", "brief_sha256": sha(brief_text(brief)),
         "source_sha256": sha("\n".join(p["source"])),
     }
@@ -591,9 +681,9 @@ COMPAT = {"negation": "meaning", "agency": "meaning", "modality": "meaning", "om
 
 def check_one(model: str, sec: dict, english: list[str], brief: dict, langname: str) -> list[dict] | None:
     eng = "\n".join(english)
-    user = (f"WORK BRIEF:\n{brief_text(brief)}\n\nSECTION {sec['id']}\n\nSOURCE:\n" + "\n".join(sec["source"])
+    user = (f"WORK BRIEF:\n{section_brief_text(brief)}\n\nSECTION {sec['id']}\n\nSOURCE:\n" + "\n".join(sec["source"])
             + f"\n\nENGLISH:\n{eng}\n\nReturn the JSON now.")
-    obj = call(model, CHECK_SYS.format(langname=langname), user, max_tokens=6000)
+    obj = call(model, CHECK_SYS.format(langname=langname), user, max_tokens=6000, expect=("findings", "verdict"))
     if obj is None:
         return None
     en, sn = norm(eng), norm("\n".join(sec["source"]))
@@ -661,7 +751,7 @@ def check_section(sec: dict, english: list[str], brief: dict, langname: str) -> 
                             for n, f in enumerate(items))
         user = ("SOURCE:\n" + "\n".join(sec["source"]) + "\n\nENGLISH:\n" + "\n".join(english)
                 + f"\n\nREPORTED PROBLEMS:\n{listing}\n\nReturn the JSON now.")
-        obj = call(judge, ADJ_SYS.format(langname=langname), user, max_tokens=3000) or {}
+        obj = call(judge, ADJ_SYS.format(langname=langname), user, max_tokens=3000, expect=("rulings",)) or {}
         rulings = {int(r.get("n", 0)): r for r in obj.get("rulings", []) if isinstance(r, dict) and str(r.get("n", "")).isdigit()}
         for n, f in enumerate(items):
             r = rulings.get(n + 1)
@@ -694,6 +784,36 @@ def source_check(sections: list[dict], brief: dict | None, models: list[str] | N
     return out
 
 
+# Baseline source checks for read-fix / polish (efficiency sweep 2026-10-03):
+# the "old" side of the old-vs-new comparison is the same text with the same
+# checkers, so it is checked once per text and reused. Keyed on a hash of the
+# section id, source, English and section brief; errors are never cached.
+_CHECK_CACHE: dict[str, dict] = {}
+_CHECK_LOCK = threading.Lock()
+
+
+def _check_key(sec: dict, english: list[str], brief: dict) -> str:
+    return sha(json.dumps([sec["id"], "\n".join(sec["source"]), "\n".join(english), section_brief_text(brief)],
+                          ensure_ascii=False))
+
+
+def remember_check(sec: dict, english: list[str], brief: dict, chk: dict) -> None:
+    if not chk.get("error"):
+        with _CHECK_LOCK:
+            _CHECK_CACHE[_check_key(sec, english, brief)] = chk
+
+
+def baseline_check(sec: dict, english: list[str], brief: dict, langname: str) -> dict:
+    key = _check_key(sec, english, brief)
+    with _CHECK_LOCK:
+        hit = _CHECK_CACHE.get(key)
+    if hit is not None:
+        return hit
+    chk = check_section(sec, english, brief, langname)
+    remember_check(sec, english, brief, chk)
+    return chk
+
+
 def referee(sec: dict, english: list[str], findings: list[dict], langname: str) -> list[dict]:
     """Third family rules on the residue after repairs. Findings both checkers
     found independently stand; one-checker findings (merely upheld, or with
@@ -706,10 +826,10 @@ def referee(sec: dict, english: list[str], findings: list[dict], langname: str) 
                         for n, f in enumerate(disputed))
     user = ("SOURCE:\n" + "\n".join(sec["source"]) + "\n\nENGLISH:\n" + "\n".join(english)
             + f"\n\nREPORTED PROBLEMS:\n{listing}\n\nReturn the JSON now.")
-    obj = call(REFEREE, ADJ_SYS.format(langname=langname), user, max_tokens=3000)
+    obj = call(REFEREE, ADJ_SYS.format(langname=langname), user, max_tokens=3000, expect=("rulings",))
     used = REFEREE
     if obj is None:
-        obj, used = call(FALLBACK, ADJ_SYS.format(langname=langname), user, max_tokens=3000), FALLBACK
+        obj, used = call(FALLBACK, ADJ_SYS.format(langname=langname), user, max_tokens=3000, expect=("rulings",)), FALLBACK
     if obj is None:
         return findings
     rulings = {int(r.get("n", 0)): r for r in obj.get("rulings", []) if isinstance(r, dict) and str(r.get("n", "")).isdigit()}
@@ -740,28 +860,35 @@ def apply_edits(text: str, edits: list) -> tuple[str, int]:
 
 
 def repair_section(j: dict, sec: dict, problems: list[dict], brief: dict, langname: str) -> dict | None:
+    return repair_attempt(j, sec, problems, brief, langname)[0]
+
+
+def repair_attempt(j: dict, sec: dict, problems: list[dict], brief: dict, langname: str) -> tuple[dict | None, str]:
+    """(repaired record, '') or (None, 'call') when the drafter call failed,
+    (None, 'no-edits') when none of its edits applied."""
     plist = "\n".join(f"- [{f.get('class')}] \"{f.get('quote', '')}\" (source: \"{f.get('source_quote', '')}\"): {f.get('why', '')} Suggested: {f.get('fix', '')}"
                       for f in problems)
     eng = "\n\n".join(j["pass_b_english"])
     tried = "\n".join(f"- {e.get('old', '')[:80]!r} -> {e.get('new', '')[:80]!r}" for r in (j.get("repairs") or [])[-3:]
                       for e in (r.get("edits") or []) if isinstance(e, dict))
-    user = (f"WORK BRIEF:\n{brief_text(brief)}\n\nSOURCE:\n" + "\n".join(sec["source"])
+    user = (f"WORK BRIEF:\n{section_brief_text(brief)}\n\nSOURCE:\n" + "\n".join(sec["source"])
             + f"\n\nLITERAL GLOSS:\n{j.get('pass_a_gloss', '')}\n\nENGLISH:\n{eng}"
             + f"\n\nCONFIRMED PROBLEMS:\n{plist}"
             + (f"\n\nEDITS ALREADY TRIED THAT DID NOT SATISFY THE CHECKERS (do something different; re-read the source words):\n{tried}" if tried else "")
             + "\n\nEvery problem needs an edit unless the English already says exactly what the source says. Return the JSON now.")
-    obj = call(DRAFTER, REPAIR_SYS.format(langname=langname, divine=DIVINE), user, max_tokens=6000)
+    obj = call(DRAFTER, REPAIR_SYS.format(langname=langname, divine=DIVINE), user, max_tokens=6000,
+               expect=("edits", "gloss_edits", "fixed"))
     if not obj:
-        return None
+        return None, "call"
     new_eng, n = apply_edits(eng, obj.get("edits"))
     new_gloss, _ = apply_edits(str(j.get("pass_a_gloss", "")), obj.get("gloss_edits"))
     if n == 0:
-        return None
+        return None, "no-edits"
     out = dict(j)
     out["pass_a_gloss"] = new_gloss
     out["pass_b_english"] = [x for x in new_eng.split("\n\n") if x.strip()]
     out.setdefault("repairs", []).append({"problems": problems, "edits": obj.get("edits"), "fixed": obj.get("fixed", [])})
-    return out
+    return out, ""
 
 
 # ---------------------------------------------------------------- per-section loop
@@ -789,11 +916,30 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
         prev_tail = " ".join(json.loads(prev_stage.read_text()).get("pass_b_english") or [])[-700:]
     next_head = "\n".join(pairs[idx + 1]["source"])[:600] if idx + 1 < len(pairs) else ""
     j, feedback = None, ""
-    for attempt in range(4):  # structural gate: redraft only for structural Pass A/B failures, else targeted repair
-        if j is None or any(k in e for e in (j.get("_gate") or []) for k in ("near-copies", "copies", "too short", "Latin note")):
-            j = draft_section(slug, sec, prev_tail, next_head, brief, langname, feedback)
-            if j is None:
-                continue
+    # Structural gate: redraft only for structural Pass A/B failures, else
+    # targeted repair. The first near-copy failure redoes Pass B alone (keeps
+    # Pass A, lemmas, choices); later ones redraft in full, at most
+    # MAX_FULL_REDRAFTS times after the first draft, then the section holds.
+    iters, budget, full_drafts, pb_redone = 0, 4, 0, False
+    while iters < budget:
+        iters += 1
+        gate = (j or {}).get("_gate") or []
+        if j is None or any(k in e for e in gate for k in STRUCTURAL):
+            redo = None
+            if j is not None and not pb_redone and any("near-copies" in e or "copies Pass B" in e for e in gate):
+                pb_redone = True
+                budget += 1  # the Pass B redo does not use up a full redraft
+                redo = redraft_pass_b(slug, j, sec, prev_tail, brief, langname, feedback)
+                log(slug, f"{sec['id']}: near-copy, Pass B redo {'done' if redo else 'failed; full redraft'}")
+            if redo is not None:
+                j = redo
+            else:
+                if full_drafts > MAX_FULL_REDRAFTS:
+                    break
+                full_drafts += 1
+                j = draft_section(slug, sec, prev_tail, next_head, brief, langname, feedback)
+                if j is None:
+                    continue
         errs = section_gate(j, brief)
         if not errs:
             j.pop("_gate", None)
@@ -807,7 +953,7 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
                          "modern English that reorders clauses, joins or splits sentences and chooses idiomatic words, "
                          "keeping every claim. The two must read clearly differently.")
         j["_gate"] = errs
-        if not any(k in e for e in errs for k in ("near-copies", "copies", "too short", "Latin note")):
+        if not any(k in e for e in errs for k in STRUCTURAL):
             fixed = repair_section(j, sec, [{"class": "gate", "quote": "", "why": e, "fix": ""} for e in errs], brief, langname)
             if fixed is not None:
                 fixed["_gate"] = section_gate(fixed, brief)
@@ -820,6 +966,7 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
             j["_status"], j["_why"] = "hold", "gate: " + "; ".join(section_gate(j, brief)[:3])
             break
         chk = check_section(sec, j["pass_b_english"], brief, langname)
+        remember_check(sec, j["pass_b_english"], brief, chk)  # baseline for the whole-work read
         history.append({"round": rnd, "confirmed": len(chk.get("confirmed", [])), "rejected": len(chk.get("rejected", [])),
                         "error": chk.get("error")})
         if chk.get("error"):
@@ -838,8 +985,12 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
             j["_status"], j["_why"] = "hold", f"{len(open_f)} confirmed problems after {rnd} repairs"
             j["open_findings"] = open_f
             break
-        fixed = repair_section(j, sec, chk["confirmed"], brief, langname)
+        fixed, why = repair_attempt(j, sec, chk["confirmed"], brief, langname)
+        if fixed is None and why == "call":
+            fixed, why = repair_attempt(j, sec, chk["confirmed"], brief, langname)  # transient: once more
         if fixed is None:
+            # Holds as before: no early referee pass (a speed change must not
+            # certify a section that would have held; review 2026-10-03).
             j["_status"], j["_why"] = "hold", "repair failed"
             j["open_findings"] = chk["confirmed"]
             break
@@ -874,9 +1025,9 @@ def polish_section(j: dict, sec: dict, notes: list[dict], brief: dict, langname:
     """Whole-section literary rewrite; the caller re-checks it against the source."""
     eng = "\n\n".join(j["pass_b_english"])
     note_txt = "\n".join(f"- [{n.get('class')}] \"{n.get('quote', '')}\": {n.get('why', '')}" for n in notes[:12]) or "- (general: hard to follow)"
-    user = (f"WORK BRIEF:\n{brief_text(brief)}\n\nSOURCE:\n" + "\n".join(sec["source"])
+    user = (f"WORK BRIEF:\n{section_brief_text(brief)}\n\nSOURCE:\n" + "\n".join(sec["source"])
             + f"\n\nCURRENT ENGLISH:\n{eng}\n\nREADER NOTES:\n{note_txt}\n\nReturn the JSON now.")
-    obj = call(DRAFTER, POLISH_SYS.format(langname=langname, divine=DIVINE), user, max_tokens=8000)
+    obj = call(DRAFTER, POLISH_SYS.format(langname=langname, divine=DIVINE), user, max_tokens=8000, expect=("english",))
     paras = [str(x).strip() for x in (obj or {}).get("english") or [] if str(x).strip()]
     if not paras or paras == j["pass_b_english"]:
         return None
@@ -954,11 +1105,12 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
             # accept when the fix adds no confirmed source problem.
             with ThreadPoolExecutor(2) as ex2:
                 f_new = ex2.submit(check_section, pairs[idx[sid]], fixed["pass_b_english"], brief, langname)
-                f_old = ex2.submit(check_section, pairs[idx[sid]], j["pass_b_english"], brief, langname)
+                f_old = ex2.submit(baseline_check, pairs[idx[sid]], j["pass_b_english"], brief, langname)
                 chk, chk_old = f_new.result(), f_old.result()
             if chk.get("error") or chk_old.get("error"):
                 log(slug, f"read-fix {sid}: rejected (checker unavailable)")
                 return
+            remember_check(pairs[idx[sid]], fixed["pass_b_english"], brief, chk)
             n_new, n_old = len(chk.get("confirmed", [])), len(chk_old.get("confirmed", []))
             if n_new > n_old:
                 log(slug, f"read-fix {sid}: rejected (source problems {n_old} -> {n_new})")
@@ -992,10 +1144,11 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
                     return
                 with ThreadPoolExecutor(2) as ex2:
                     f_new = ex2.submit(check_section, pairs[idx[sid]], new["pass_b_english"], brief, langname)
-                    f_old = ex2.submit(check_section, pairs[idx[sid]], j["pass_b_english"], brief, langname)
+                    f_old = ex2.submit(baseline_check, pairs[idx[sid]], j["pass_b_english"], brief, langname)
                     chk, chk_old = f_new.result(), f_old.result()
                 if chk.get("error") or chk_old.get("error"):
                     return
+                remember_check(pairs[idx[sid]], new["pass_b_english"], brief, chk)
                 n_new, n_old = len(chk.get("confirmed", [])), len(chk_old.get("confirmed", []))
                 if n_new > n_old:
                     log(slug, f"polish {sid}: rejected (source problems {n_old} -> {n_new})")
@@ -1134,14 +1287,14 @@ def research(slug: str, brief: dict) -> dict:
     if results:
         listing = "\n\n".join(f"[{n + 1}] {r['url']}\n{r['title']}\n{r['text']}" for n, r in enumerate(results[:15]))
         obj = call(CHECKERS[0], RESEARCH_SYS, f"WORK: {title_en} ({title_src}) by {author}\n\nSEARCH RESULTS:\n{listing}\n\nReturn the JSON now.",
-                   max_tokens=4000) or {}
+                   max_tokens=4000, expect=("claims",)) or {}
         by_url = {r["url"]: r for r in results}
         claims = [c for c in obj.get("claims") or [] if isinstance(c, dict) and c.get("text")
                   and any(u in by_url for u in c.get("sources") or [])][:12]
         if claims:
             listing = "\n\n".join(f"{n + 1}. CLAIM: {c['text']}\nSOURCE TEXT: " + " ".join(by_url[u]["text"][:1500] for u in c["sources"] if u in by_url)
                                    for n, c in enumerate(claims))
-            chk = call(CHECKERS[1], RESEARCH_CHECK_SYS, listing + "\n\nReturn the JSON now.", max_tokens=3000) or {}
+            chk = call(CHECKERS[1], RESEARCH_CHECK_SYS, listing + "\n\nReturn the JSON now.", max_tokens=3000, expect=("rulings",)) or {}
             ok = {int(r.get("n", 0)) for r in chk.get("rulings") or [] if isinstance(r, dict) and r.get("supported") is True}
             out["claims"] = [{"kind": "fact", "text": c["text"], "sources": [u for u in c["sources"] if u in by_url],
                               "checked_by": CHECKERS[1]} for n, c in enumerate(claims) if n + 1 in ok]
@@ -1174,7 +1327,8 @@ def make_intro(slug: str, brief: dict, pairs: list[dict]) -> dict:
             "\n\nSITE RULES: paragraph 1 the author, paragraph 2 occasion and context, paragraph 3 the contents. Use no years.")
     for attempt in range(4):
         ctx = f"\n\nVERIFIED BACKGROUND FACTS (web-sourced, checked; use them to explain the context):\n{facts}" if facts else ""
-        obj = call(DRAFTER, INTRO_SYS, f"VERIFIED WORK BRIEF:\n{brief_text(brief)}{ctx}{rule}{feedback}\n\nReturn the JSON now.", max_tokens=3000)
+        obj = call(DRAFTER, INTRO_SYS, f"VERIFIED WORK BRIEF:\n{brief_text(brief)}{ctx}{rule}{feedback}\n\nReturn the JSON now.", max_tokens=3000,
+                   expect=("paragraphs",))
         paras = [p for p in (obj or {}).get("paragraphs", []) if str(p).strip()]
         if len(paras) != 3:
             continue
@@ -1184,7 +1338,7 @@ def make_intro(slug: str, brief: dict, pairs: list[dict]) -> dict:
                   + (f"VERIFIED BACKGROUND FACTS (web-sourced, checked; do not flag these):\n{facts}\n" if facts else "") + "\n")
         chk = call(CHECKERS[0], INTRO_CHECK_SYS,
                    record + f"BRIEF:\n{brief_text(brief)}\n\nSOURCE (opening):\n{source_dump(pairs)[:30000]}\n\nINTRODUCTION:\n" + "\n\n".join(paras),
-                   max_tokens=2000) or {}
+                   max_tokens=2000, expect=("unsupported",)) or {}
         bad = real_flags(chk.get("unsupported", []))
         form = intro_problems(slug, paras)
         res = {"paragraphs": paras, "unsupported": bad, "form": form, "checker": CHECKERS[0]}
@@ -1214,18 +1368,10 @@ def make_intro(slug: str, brief: dict, pairs: list[dict]) -> dict:
 # ---------------------------------------------------------------- commands
 
 
-def run(slug: str) -> int:
-    meta = book_meta(slug)
-    pairs = load_pairs(slug)
-    if not pairs:
-        print(f"{slug}: no sections")
-        return 2
-    lang = detect_lang(pairs, meta)
-    langname = LANGNAME.get(lang, "Greek")
-    moves = rebalance(slug, pairs)
-    log(slug, f"segments: moved {len(moves)} boundaries to sentence/paragraph ends")
-    log(slug, f"start: {len(pairs)} sections, {lang}, {sum(len(' '.join(p['source']).split()) for p in pairs)} source words")
-    brief = make_brief(slug, pairs, lang, meta)
+def resolve_terms(slug: str, brief: dict, quiet: bool = False) -> list[dict]:
+    """Apply editor term decisions and auto-decide open terms in place, as run()
+    always has. Returns the terms still open (they stop the work)."""
+    say = (lambda m: None) if quiet else (lambda m: log(slug, m))
     dec_path = STAGE / slug / "term_decisions.json"
     decisions = json.loads(dec_path.read_text()) if dec_path.exists() else {}
     for g in brief.get("glossary") or []:
@@ -1242,17 +1388,56 @@ def run(slug: str) -> int:
         elif len({norm(v) for v in (t.get("votes") or {}).values() if v}) == 1:
             pick = next(v for v in (t.get("votes") or {}).values() if v)
             brief.setdefault("glossary", []).append({**t, "english": pick, "decided_by": "unanimous"})
-            log(slug, f"term unanimous: {t.get('source_term')} -> {pick}")
+            say(f"term unanimous: {t.get('source_term')} -> {pick}")
         elif not any((t.get("votes") or {}).get(k) for k in ("kimi", "glm")) and (t.get("votes") or {}).get("drafter"):
             pick = t["votes"]["drafter"]
             brief.setdefault("glossary", []).append({**t, "english": pick, "decided_by": "drafter-default"})
-            log(slug, f"term drafter-default (no votes): {t.get('source_term')} -> {pick}")
+            say(f"term drafter-default (no votes): {t.get('source_term')} -> {pick}")
         elif centroid_pick(list((t.get("votes") or {}).values())):
             pick = centroid_pick(list((t.get("votes") or {}).values()))
             brief.setdefault("glossary", []).append({**t, "english": pick, "decided_by": "auto-centroid"})
-            log(slug, f"term auto-decided: {t.get('source_term')} -> {pick} (votes {t.get('votes')})")
+            say(f"term auto-decided: {t.get('source_term')} -> {pick} (votes {t.get('votes')})")
         else:
             still_open.append(t)
+    return still_open
+
+
+def held_with_retries(slug: str, pairs: list[dict]) -> int:
+    """Sections held now that a later run will retry (.retries < 2)."""
+    n = 0
+    for p in pairs:
+        f = STAGE / slug / "sections" / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', p['id'])}.json"
+        try:
+            j = json.loads(f.read_text()) if f.exists() else {}
+        except ValueError:
+            continue
+        if j.get("_status") != "hold":
+            continue
+        tries = f.with_suffix(".retries")
+        try:
+            used = int(tries.read_text()) if tries.exists() else 0
+        except ValueError:
+            used = 0
+        if used < 2:
+            n += 1
+    return n
+
+
+def run(slug: str, attempt: int | None = None) -> int:
+    """attempt: this work's queue attempt (1 = first); None outside the queue."""
+    meta = book_meta(slug)
+    pairs = load_pairs(slug)
+    if not pairs:
+        print(f"{slug}: no sections")
+        return 2
+    lang = detect_lang(pairs, meta)
+    langname = LANGNAME.get(lang, "Greek")
+    moves = rebalance(slug, pairs)
+    log(slug, f"segments: moved {len(moves)} boundaries to sentence/paragraph ends")
+    log(slug, f"start: {len(pairs)} sections, {lang}, {sum(len(' '.join(p['source']).split()) for p in pairs)} source words")
+    brief = make_brief(slug, pairs, lang, meta)
+    dec_path = STAGE / slug / "term_decisions.json"
+    still_open = resolve_terms(slug, brief)
     if still_open:
         log(slug, f"STOP: {len(still_open)} key terms need a decision in {dec_path}: "
             + "; ".join(f"{t['source_term']} {t['votes']}" for t in still_open))
@@ -1269,7 +1454,15 @@ def run(slug: str) -> int:
                 return None
         list(ex.map(lambda st: [safe(i) for i in st], stretches))
     intro = make_intro(slug, brief, pairs)
-    read = read_and_fix(slug, pairs, brief, langname, intro)
+    # A work with a held section cannot certify this run, and the next run
+    # redoes those sections; on the first queue attempt the whole-work read
+    # (and its fixes and polish) would be thrown away. The final attempt
+    # always reads.
+    held = held_with_retries(slug, pairs) if attempt == 1 else 0
+    if held:
+        log(slug, f"read skipped: {held} held")
+    else:
+        read_and_fix(slug, pairs, brief, langname, intro)
     status(slug)
     return 0
 
@@ -1465,7 +1658,7 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
         update_log(book, {**log_rows.get(book, {}), "result": "running", "pid": os.getpid(),
                           "at": time.strftime("%Y-%m-%dT%H:%M:%S")})
         try:
-            rc = run(book)
+            rc = run(book, attempt=(log_rows.get(book, {}).get("attempts", 0) or 0) + 1)
         except Exception as e:  # one bad work must not stop the library
             rc = 99
             log(book, f"queue: CRASH {type(e).__name__}: {e}")

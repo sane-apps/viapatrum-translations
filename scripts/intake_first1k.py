@@ -236,7 +236,8 @@ def main() -> int:
     ap.add_argument("--pg-khazarzar", default="", help="PG mode copy-text: path under Khazarzar PG_Migne/, "
                     "e.g. 'Athanasius the Great of Alexandria_ PG 25-28/Vita Antonii.pdf'")
     ap.add_argument("--pg-scan", default="", help="PG mode check witness: archive.org item(s) of the PG "
-                    "volume, comma list (e.g. patrologiae_cursus_completus_gr_vol_026)")
+                    "volume, comma list (e.g. patrologiae_cursus_completus_gr_vol_026; item@30 names the volume "
+                    "when the item name does not)")
     ap.add_argument("--pg-anchors", default="", help="PG mode without Khazarzar: 'first words|last words' "
                     "of the work in the scan OCR")
     ap.add_argument("--dry-run", action="store_true")
@@ -367,8 +368,12 @@ def audit_and_move(slug: str, stage: Path, final: Path, what: str) -> int:
 #       --pg-anchors "first words of the work|last words of the work"
 KHAZ = "http://khazarzar.skeptik.net/pgm/PG_Migne"
 PG_CACHE = ROOT / "outputs" / "pg-intake" / "cache"
-KHAZ_FOOTER = re.compile(r"Ερευνητικό|Χρηματοδότηση|Επιτρέπεται η ελεύθερη|Πανεπιστήμιο Αιγαίου|"
-                         r"Εργαστήριο ∆ιαχείρισης|ΨΗΦΙΑΚΗ ΠΑΤΡΟΛΟΓΙΑ|^\s*\d{1,3}\s*$")
+KHAZ_FOOTER = re.compile(r"Ερευνητικό|Χρηματοδότηση|Επιτρέπεται η ελεύθερη|Πανεπιστήμιο Αιγαίου|Εργαστήριο|"
+                         r"aegean\.gr|Interreg|ΨΗΦΙΑΚΗ ΠΑΤΡΟΛΟΓΙΑ|^\s*\d{1,3}\s*$")
+# Migne's Latin editorial asides inside the Greek: "(Corderius.)", "[Ambr. ...]", "Cap.."
+# and page or heading marks left from the typing ("p.7", "20ΠΕΡΙ ΥΙΟΥ.20").
+LATIN_ASIDE = re.compile(r"\s*\([^()]*[A-Za-z][^()]*\)|\s*\[[^\[\]]*[A-Za-z][^\[\]]*\]|\bCap\.\.?\s*|"
+                         r"\bp\.\d+\s*|(?<!\S)20(?=[Α-Ω])|(?<=\.)20(?=\s|$)")
 SECTION_WORDS = 450  # lanes take sections of about 300-650 words
 
 
@@ -413,7 +418,18 @@ def khazarzar(rel: str) -> tuple[bytes, str, str]:
     tmp.write_bytes(raw)
     exe = shutil.which("pdftotext") or "/opt/homebrew/bin/pdftotext"
     text = subprocess.run([exe, str(tmp), "-"], capture_output=True, text=True, check=True).stdout
-    return raw, text.translate(LOOKALIKE), url
+    return raw, greek_numerals(text.translate(LOOKALIKE)), url
+
+
+LATIN_CAPS = str.maketrans("ABEZHIKMNOPTXYS", "ΑΒΕΖΗΙΚΜΝΟΡΤΧΥϚ")
+
+
+def greek_numerals(text: str) -> str:
+    """Greek numerals typed with Latin look-alikes ("ΨΑΛΜΟΣ ΡΙS ʹ", "IS ʹ"):
+    S stands for stigma (6), I for iota and so on."""
+    return re.sub(r"(?<!\w)([A-ZΑ-Ω](?: ?[A-ZΑ-Ω]){0,3})(\s?[\u02b9\u0374])",
+                  lambda m: m.group(1).translate(LATIN_CAPS) + m.group(2)
+                  if re.search(r"[A-Z]", m.group(1)) else m.group(0), text)
 
 
 def migne_print(text: str) -> tuple[bool, str]:
@@ -480,43 +496,58 @@ def locate(ct: list[str], ot: list[str], n: int = 4) -> tuple[int, int, int]:
     return max(0, best[1] - 80), best[2] + 80, best[0]
 
 
-def collate(ct: list[str], win: list[str]) -> dict:
-    """Word diff of copy-text against the scan: agreement, spacing-only and
-    OCR-like differences, and the substantive ones (both readings real words)."""
-    sm = difflib.SequenceMatcher(None, ct, win, autojunk=False)
-    same = sum(b.size for b in sm.get_matching_blocks())
-    counts, subst, voc = collections.Counter(), [], vocab()
-    for op, a1, a2, b1, b2 in sm.get_opcodes():
-        if op == "equal":
-            continue
-        A, B = ct[a1:a2], win[b1:b2]
-        if "".join(A) == "".join(B):
-            counts["spacing"] += 1
-        elif len(A) > 8 or len(B) > 8:
-            counts["gap"] += 1  # scan notes, Latin, lacuna or page furniture
-        elif not B:
-            counts["copy_text_only"] += 1  # mostly words the OCR lost
-        elif not A:
-            counts["scan_only"] += 1  # mostly OCR debris; real additions show here too
-        elif (difflib.SequenceMatcher(None, "".join(A), "".join(B)).ratio() >= 0.6
-              or not all(x in voc and len(x) >= 3 for x in A + B)):
-            counts["ocr"] += 1
-        else:
-            counts["substantive"] += 1
-            subst.append({"copy_text": " ".join(A), "scan": " ".join(B), "at_word": a1})
+def collate(ct: list[str], win: list[str], step: int = 1500) -> dict:
+    """Word diff of copy-text against the scan, in chunks so long works stay
+    fast: agreement, spacing-only and OCR-like differences, and the
+    substantive ones (both readings real words, not near-spellings)."""
+    counts, subst, voc, same, pos = collections.Counter(), [], vocab(), 0, 0
+    idx = collections.defaultdict(list)
+    for i in range(len(win) - 4):
+        idx[tuple(win[i:i + 4])].append(i)
+    for c0 in range(0, len(ct), step):
+        part = ct[c0:c0 + step]
+        # Each chunk finds its own place (median 4-gram offset), so one bad
+        # stretch of OCR cannot throw the rest out of step.
+        offs = sorted(i - j for j in range(len(part) - 4) for i in idx.get(tuple(part[j:j + 4]), ()))
+        if offs:
+            pos = offs[len(offs) // 2]
+        lo, hi = max(0, pos - 300), min(len(win), pos + int(step * 1.6) + 300)
+        sm = difflib.SequenceMatcher(None, part, win[lo:hi], autojunk=False)
+        blocks = [b for b in sm.get_matching_blocks() if b.size]
+        same += sum(b.size for b in blocks)
+        pos = lo + blocks[-1].b + blocks[-1].size if blocks else pos + step  # fallback for the next chunk
+        ops = sm.get_opcodes()
+        for k, (op, a1, a2, b1, b2) in enumerate(ops):
+            if op == "equal" or (op == "insert" and k in (0, len(ops) - 1)):
+                continue  # window slack around the chunk
+            A, B = part[a1:a2], win[lo + b1:lo + b2]
+            if "".join(A) == "".join(B):
+                counts["spacing"] += 1
+            elif len(A) > 8 or len(B) > 8:
+                counts["gap"] += 1  # scan notes, Latin, lacuna or page furniture
+            elif not B:
+                counts["copy_text_only"] += 1  # mostly words the OCR lost
+            elif not A:
+                counts["scan_only"] += 1  # mostly OCR debris; real additions show here too
+            elif (difflib.SequenceMatcher(None, "".join(A), "".join(B)).ratio() >= 0.6
+                  or not all(x in voc and len(x) >= 3 for x in A + B)):
+                counts["ocr"] += 1
+            else:
+                counts["substantive"] += 1
+                subst.append({"copy_text": " ".join(A), "scan": " ".join(B), "at_word": c0 + a1})
     return {"agreement": round(same / max(1, len(ct)), 3), "differences": dict(counts), "substantive": subst[:400]}
 
 
 def join_splits(words: list[str], extra: set) -> list[str]:
     """Rejoin words the Khazarzar typesetting broke with a space ("κρα τοῦντες")
     when the joined form is a known word and a half is not."""
-    voc, out, i = vocab() | extra, [], 0
+    voc, out, i = vocab(), [], 0
     while i < len(words):
         a = words[i]
         if i + 1 < len(words) and re.fullmatch(r"[^\W\d_]+", a):
             b = words[i + 1]
             fa, fb, fab = fold(a), fold(b), fold(a + b)
-            if fa and fb and fab in voc and (fa not in voc or fb not in voc):
+            if fa and fb and (fab in voc or fab in extra) and (fa not in voc or fb not in voc):
                 out.append(a + b); i += 2
                 continue
         out.append(a); i += 1
@@ -542,32 +573,61 @@ def chunk(text: str, size: int = SECTION_WORDS) -> list[str]:
     return out
 
 
+# A run of Latin words (Migne's rubrics and notes: "etc.", "EX COMMENTARIO IN
+# JOB. Cap. I, v. 1.", "Sequentia Cyrilli sunt") with the numerals and
+# punctuation inside it. Greek text has no Latin letters of its own.
+LATIN_RUN = re.compile(r"(?:(?<=\s)|^)(?:[^\s\u0370-\u03ff\u1f00-\u1fff]*[A-Za-z][^\s\u0370-\u03ff\u1f00-\u1fff]*"
+                       r"(?:\s+(?=[^\s\u0370-\u03ff\u1f00-\u1fff]*[A-Za-z0-9])[^\s\u0370-\u03ff\u1f00-\u1fff]+)*)(?=\s|$)")
+
+
+def strip_latin(p: str) -> str:
+    """Greek paragraph without Migne's Latin asides, rubrics and page marks."""
+    p = LATIN_ASIDE.sub("", p)
+    p = LATIN_RUN.sub("", p)
+    p = re.sub(r"\s+([,.;·])", r"\1", re.sub(r"\s{2,}", " ", p))
+    return re.sub(r"[,;·]+([.;·])", r"\1", p).strip()  # "Βασίλειος, etc. ." -> "Βασίλειος."
+
+
 COL = re.compile(r"\b(\d{1,3}[AB]?)\.(\d{2,4})\b")
+NUMERAL = re.compile(r"(?<!\w)[α-ωϛ]{1,4}\s?[\u02b9\u0374]")
+TITLE_WORD = re.compile(r"ΛΟΓΟΣ|ΕΠΙΣΤΟΛΗ|ΔΙΑΛΟΓΟΣ|ΟΜΙΛΙΑ|ΒΙΒΛΙΟΝ|ΤΟΥ ΕΝ ΑΓΙΟΙΣ|ΤΟΥ ΑΥΤΟΥ|ΚΕΦΑΛΑΙ|ΤΟΜΟΣ|ΒΙΟΣ|"
+                        r"ΨΑΛΜΟΣ|ΕΡΜΗΝΕΙΑ|ΥΠΟΜΝΗΜΑ|ΠΡΟΟΙΜΙΟΝ|ΠΡΟΛΟΓΟΣ|ΑΝΤΙΡΡΗΤΙΚΟΣ|ΣΥΝΟΔ|ΕΚΛΟΓΗ")
 
 
 def pg_sections(text: str, vols: set) -> list[tuple[str, str, list]]:
     """[(unit n, title, [(section n, [paragraph], locus)])] from Khazarzar text.
-    All-capital lines are headings and open a unit when the text has several;
-    numbered lines ("2 Κατὰ πλεονεξίας") open chapters; PG column marks become
-    each section's locus."""
+    All-capital title lines (ΛΟΓΟΣ, ΕΠΙΣΤΟΛΗ, ΔΙΑΛΟΓΟΣ ...) open a unit when
+    the text has several; the heading stays in the Greek, so a capital line
+    that is really text is never lost. Numbered lines ("2 Κατὰ πλεονεξίας")
+    open chapters; PG column marks become each section's locus."""
     lines = [l.strip() for l in text.split("\n")[1:] if l.strip() and not KHAZ_FOOTER.search(l)]
-    blocks = []  # [(heading, [lines])]
+    blocks = []  # [heading, [lines], heading line count]; heading lines stay in the body
     for l in lines:
-        letters = [c for c in l if c.isalpha()]
-        if len(letters) >= 3 and all(not c.islower() for c in letters) and (
-                len(l.split()) >= 2 or not blocks or not blocks[-1][1]):
-            if blocks and not blocks[-1][1]:
-                blocks[-1] = (blocks[-1][0] + " " + l, [])
-            else:
-                blocks.append((l, []))
+        # a Greek numeral in lowercase ("ΛΟΓΟΣ ς ʹ") does not stop a title line
+        letters = [c for c in NUMERAL.sub("", l) if c.isalpha()]
+        caps = len(letters) >= 3 and all(not c.islower() for c in letters)
+        if caps and blocks and blocks[-1][2] == len(blocks[-1][1]) and blocks[-1][2]:
+            blocks[-1][0] += " " + l  # a title running over several lines
+            blocks[-1][1].append(l)
+            blocks[-1][2] += 1
+        elif caps and TITLE_WORD.search(l):
+            blocks.append([l, [l], 1])
         else:
             if not blocks:
-                blocks.append(("", []))
+                blocks.append(["", [], 0])
             blocks[-1][1].append(l)
-    blocks = [b for b in blocks if b[1]]
+    def all_caps(body):
+        return all(not c.islower() for l in body for c in l if c.isalpha())
+    for k in range(len(blocks) - 2, -1, -1):  # a title with no text after it joins the next unit
+        if (len(blocks[k][1]) == blocks[k][2] or all_caps(blocks[k][1])
+                or len(" ".join(blocks[k][1]).split()) < 40):  # a title page, not a unit
+            blocks[k + 1][1][:0] = blocks[k][1]
+            blocks[k + 1][0] = (blocks[k][0] + " " + blocks[k + 1][0]).strip()
+            del blocks[k]
+    blocks = [(h, body) for h, body, _ in blocks if body]
     if len(blocks) > 12:  # a heading per psalm or chapter: one file, a chapter each
-        blocks = [("", [f"{k} {head} {l}" if j == 0 else l for j, l in enumerate(body)])
-                  for k, (head, body) in enumerate(blocks, 1)]
+        blocks = [("", [f"{k} {l}" if j == 0 else l for j, l in enumerate(body)])
+                  for k, (_, body) in enumerate(blocks, 1)]
         blocks = [("", [l for _, body in blocks for l in body])]
     units = []
     for u, (title, body) in enumerate(blocks, 1):
@@ -583,6 +643,10 @@ def pg_sections(text: str, vols: set) -> list[tuple[str, str, list]]:
                 cur.append(l)
         if cur:
             chapters.append((num, " ".join(cur)))
+        if len(chapters) > 1 and chapters[0][0] is None and chapters[1][0]:
+            # the title before chapter 1 opens chapter 1, not a section of its own
+            chapters[1:2] = [(chapters[1][0], chapters[0][1] + " " + chapters[1][1])]
+            del chapters[0]
         marks = [f"{v}.{c}" for v, c in COL.findall(title) if v.rstrip("AB") in vols]
         title = re.sub(r"\s{2,}", " ", COL.sub("", title)).strip()
         secs, col = [], marks[-1] if marks else ""
@@ -591,8 +655,11 @@ def pg_sections(text: str, vols: set) -> list[tuple[str, str, list]]:
             for k, p in enumerate(pieces, 1):
                 marks = [f"{v}.{c}" for v, c in COL.findall(p) if v.rstrip("AB") in vols]
                 start = col or (marks[0] if marks else "")
+                if not col and marks and not re.match(r"\s*" + re.escape(marks[0]), p):
+                    v0, c0 = marks[0].split(".")  # text before the first mark is the column before
+                    start = f"{v0}.{int(c0) - 1}"
                 p = COL.sub(lambda m: "" if m.group(1).rstrip("AB") in vols else m.group(0), p)
-                p = re.sub(r"\s{2,}", " ", p).strip()
+                p = strip_latin(p)
                 col = marks[-1] if marks else col
                 locus = f"PG {start}" + (f"–{col.split('.')[-1]}" if col and col != start else "") if start else ""
                 sn = (num if len(pieces) == 1 else f"{num}.{k}") if num else str(len(secs) + 1)
@@ -628,7 +695,13 @@ def pg_main(a) -> int:
     scans = [s.strip() for s in a.pg_scan.split(",") if s.strip()]
     if not scans:
         raise SystemExit("--pg-scan names the archive.org PG volume item(s) to check against")
-    vols = {str(int(m.group(1))) for s in scans for m in [re.search(r"vol_0*(\d+)", s)] if m}
+    # PG volume of each scan: from the item name (..._gr_vol_026) or given as item@30
+    vols = set()
+    for sc in scans:
+        m = re.search(r"@(\d+)$", sc) or re.search(r"vol_0*(\d+)", sc)
+        if m:
+            vols.add(str(int(m.group(1))))
+    scans = [sc.split("@")[0] for sc in scans]
     files, witnesses, stem0 = {}, [], a.stem or "".join(w[0] for w in a.slug.split("-"))
     if a.pg_khazarzar:
         raw, text, url = khazarzar(a.pg_khazarzar)
@@ -641,37 +714,53 @@ def pg_main(a) -> int:
             raise SystemExit(f"refused: {a.pg_khazarzar} prints like a later critical edition ({why}); "
                              "PG copy-text needs the scan OCR (--pg-anchors)")
         ct = [f for f in (fold(x) for x in join_splits(text.split(), set())) if f]
+        # Candidates: each scan alone (two scans of one volume compete) and,
+        # for a work running over volumes, the volumes read in order.
+        per = {item: [(item, n, l) for n, l in scan_lines(item)] for item in scans}
+        cands = list(per.items())
+        if len(vols) > 1 and len(vols) == len(scans):
+            cands.append(("+".join(scans), [x for item in scans for x in per[item]]))
         best = None
-        for item in scans:
-            lines = scan_lines(item)
-            ot, owords, where = scan_tokens(lines)
+        for label, lines in cands:
+            ot, _, where = scan_tokens([(n, l) for _, n, l in lines])
             s, e, h = locate(ct, ot)
             if h and (best is None or h > best[3]):
-                best = (item, s, e, h, lines, ot, where)
+                best = (label, s, e, h, lines, ot, where)
         if not best:
             raise SystemExit("refused: the work was not found in the PG scan OCR")
         item, s, e, h, lines, ot, where = best
         # Spacing the scan confirms ("ἀλή θειαν" printed whole) rejoins the
         # copy-text; line breaks stay for the headings.
-        text2 = "\n".join(" ".join(join_splits(l.split(), set(ot[s:e]))) for l in text.split("\n"))
+        seen = set(ot[s:e])
+        text2 = "\n".join(" ".join(join_splits(l.split(), seen)) for l in text.split("\n"))
         coll = collate([f for f in (fold(x) for x in text2.split()) if f], ot[s:e])
         print(f"check {item}: agreement {coll['agreement']}, differences {coll['differences']}")
         print("  substantive, copy-text | scan:", "; ".join(f"{d['copy_text']} | {d['scan']}"
                                                          for d in coll["substantive"][:25]))
-        if coll["agreement"] < 0.55:
+        # Identity floor. Verse prints a Latin verse beside each Greek line, so the
+        # scan keeps fewer words; 0.40 is enough when real differences are rare.
+        rate = 1000 * coll["differences"].get("substantive", 0) / max(1, len(text2.split()))
+        if coll["agreement"] < 0.40 or (coll["agreement"] < 0.45 and rate > 0.5):
             raise SystemExit(f"refused: copy-text and PG scan agree on only {coll['agreement']} of words")
         parts = pg_sections(text2, vols)
         name = Path(a.pg_khazarzar).name
         stem_src = re.sub(r"[^a-z0-9]+", "_", Path(name).stem.lower()).strip("_")
-        lo, hi = lines[where[s]][0], lines[where[min(e, len(where)) - 1]][0]
-        raw_scan = cached(f"https://archive.org/download/{item}/{item}_djvu.txt", f"{item}_djvu.txt")
-        excerpt = "\n".join(raw_scan.decode("utf-8", "replace").split("\n")[lo:hi + 1])
+        used = lines[where[s]:where[min(e, len(where)) - 1] + 1]
+        scan_text, spans = [], []
+        for it in dict.fromkeys(x[0] for x in used):
+            nos = [n for i2, n, _ in used if i2 == it]
+            raw_scan = cached(f"https://archive.org/download/{it}/{it}_djvu.txt", f"{it}_djvu.txt")
+            scan_text.append("\n".join(raw_scan.decode("utf-8", "replace").split("\n")[nos[0]:nos[-1] + 1]))
+            spans.append(f"{it} djvu.txt lines {nos[0] + 1}-{nos[-1] + 1}")
+        scan_text = "\n".join(scan_text)
         files[f"{stem_src}_khazarzar.pdf"] = raw
         files[f"{stem_src}_khazarzar.txt"] = (f"[{a.author}: {a.original_title or a.title}; Khazarzar PG text, {url}"
                                              + (f"; this book is the stretch '{a.pg_anchors}'" if a.pg_anchors else "")
-                                             + "]\n" + full).encode("utf-8")
+                                             + "; page footers of the Aegean project removed]\n"
+                                             + "\n".join(l for l in full.split("\n") if not KHAZ_FOOTER.search(l))
+                                             ).encode("utf-8")
         files[f"{stem_src}_pg_scan.txt"] = (f"[{a.author}: {a.original_title or a.title}; PG scan OCR, archive.org "
-                                           f"{item}, djvu.txt lines {lo + 1}-{hi + 1}]\n" + excerpt).encode("utf-8")
+                                           + "; ".join(spans) + "]\n" + scan_text).encode("utf-8")
         files[f"{stem_src}_collation.json"] = json.dumps(
             {"copy_text": f"sources/{stem_src}_khazarzar.txt", "check": f"sources/{stem_src}_pg_scan.txt",
              "method": "word diff after folding accents, case and OCR letter pairs (κ/χ, β/δ)",
@@ -681,13 +770,18 @@ def pg_main(a) -> int:
              "role": "copy-text", "path": f"sources/{stem_src}_khazarzar.txt", "source": url},
             {"name": f"Migne PG {'/'.join(sorted(vols, key=int))}, archive.org scan {item} (Greek OCR)",
              "language": "Greek", "role": "check (same print; OCR compared word by word)",
-             "path": f"sources/{stem_src}_pg_scan.txt", "source": f"https://archive.org/details/{item}",
+             "path": f"sources/{stem_src}_pg_scan.txt",
+             "source": " ".join(f"https://archive.org/details/{it}" for it in item.split("+")),
              "agreement": coll["agreement"], "collation": f"sources/{stem_src}_collation.json"}]
         edition = f"Migne PG {'/'.join(sorted(vols, key=int))}; Khazarzar Digital Patrology text, checked against the PG scan"
         method = ("New English from the Greek copy-text (Migne PG as typed by the Aegean Digital Patrology); "
                   f"the copy-text was diffed word by word against the OCR of the PG scan ({coll['agreement']:.0%} "
                   "word agreement, the rest OCR noise or listed in the collation). No published English used as wording.")
         single = False
+        quality = ("" if coll["agreement"] >= 0.6 else
+                   f"Word agreement with the PG scan is only {coll['agreement']:.0%}: the scan's Greek OCR runs the "
+                   "Latin translation column and the notes into the Greek, so many words have no clean partner. "
+                   "The copy-text itself is the typed Migne text; the collation lists every real difference.")
     else:
         raise SystemExit("refused: no Khazarzar copy-text; scan-only PG intake (OCR copy-text from two scans) "
                          "is not built, because the PG scans interleave the Latin column and the notes")
@@ -728,10 +822,11 @@ def pg_main(a) -> int:
         stem = stem0 if len(parts) == 1 else f"{stem0}_{re.sub(r'[^a-z0-9]+', '', label.lower())[:16] or 'u' + n}"
         src = [dict({"section": sn, "greek": p}, **({"locus": loc} if loc else {})) for sn, p, loc in secs]
         eng = [{"section": sn, "title": "", "english": []} for sn, _, _ in secs]
-        meta = {"slug": a.slug, "title": a.title + (f": {label or title.title()}" if len(parts) > 1 else ""),
+        meta = {"slug": a.slug, "title": a.title + (f": {label or 'Part ' + n}" if len(parts) > 1 else ""),
                 "author": a.author, "edition": edition, "status": "available", "first_english": False,
                 "text_history": {"method": method, "witnesses": witnesses,
-                                 **({"single_witness": True} if single else {})}}
+                                 **({"single_witness": True} if single else {}),
+                                 **({"quality_note": quality} if quality else {})}}
         if title:
             meta["source_heading"] = title
         t = stage / "translations"

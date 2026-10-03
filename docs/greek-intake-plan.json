@@ -1,20 +1,21 @@
 {
  "generated": "2026-10-03",
- "method": "Listed First1KGreek and Perseus canonical-greekLit with one git-tree API call each, read every __cts__.xml from raw.githubusercontent, matched author and work by hand and checked each against its CTS title and TEI sourceDesc. Intake ran through scripts/intake_first1k.py, its fetch served from the same raw files by outputs/greek-intake/run_intake.py to stay under the GitHub API limit. Round 2 ran the script itself, with --edition and --skip-units where needed (outputs/greek-intake/run2.py, queue2.json).",
+ "method": "Listed First1KGreek and Perseus canonical-greekLit with one git-tree API call each, read every __cts__.xml from raw.githubusercontent, matched author and work by hand and checked each against its CTS title and TEI sourceDesc. Intake ran through scripts/intake_first1k.py, its fetch served from the same raw files by outputs/greek-intake/run_intake.py to stay under the GitHub API limit. Round 2 ran the script itself, with --edition and --skip-units where needed (outputs/greek-intake/run2.py, queue2.json). Round 3 (PG, 2026-10-03): works with no TEI came from the Aegean Digital Patrology text on Khazarzar, taken only when it prints like Migne (grave before punctuation, PG column marks) and diffed word by word against the Greek OCR of the PG volume scan on archive.org (scripts/intake_first1k.py --pg-khazarzar/--pg-scan; queue and results in outputs/pg-intake/). Round 3 (PG, 2026-10-03): works with no TEI came from the Aegean Digital Patrology text on Khazarzar, taken only when it prints like Migne (grave before punctuation, PG column marks) and diffed word by word against the Greek OCR of the PG volume scan on archive.org (scripts/intake_first1k.py --pg-khazarzar/--pg-scan; queue and results in outputs/pg-intake/). Round 3 (PG, 2026-10-03): works with no TEI came from the Aegean Digital Patrology text on Khazarzar, taken only when it prints like Migne (grave before punctuation, PG column marks) and diffed word by word against the Greek OCR of the PG volume scan on archive.org (scripts/intake_first1k.py --pg-khazarzar/--pg-scan; queue and results in outputs/pg-intake/).",
  "counts": {
-  "taken": 89,
-  "skipped: no TEI source": 423,
+  "taken": 173,
+  "skipped: no TEI source": 311,
   "skipped: no words of Pinytus survive": 1,
-  "skipped: Routh's text mixes Irenaeus' Latin, Lati": 1,
+  "skipped: Routh's text mixes Irenaeus' Latin, Latin": 1,
   "skipped: Greek fragments only": 1,
   "skipped: TEI is the Greek version": 1,
   "skipped: partial exists, needs extension": 17,
-  "skipped: Philocalia excerpts already covered by o": 1,
+  "skipped: no born-digital PG text": 14,
+  "skipped: Philocalia excerpts already covered by or": 1,
+  "skipped: Khazarzar text follows a later edition": 15,
   "skipped: no TEI source for the Genesis fragments": 1,
   "skipped: TEI": 1,
-  "skipped: TEI is titled De decretis but its text i": 1,
+  "skipped: TEI is titled De decretis but its text is": 1,
   "skipped: edition may be in copyright": 2,
-  "skipped: TEI is titled Carmina moralia but its so": 1,
   "skipped: attribution and date uncertain": 1
  },
  "rows": [
@@ -901,8 +902,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Hippolytus (PG 10 folder holds only ANF English); the PG 10 scans interleave the Latin column and Greek notes, so a scan-only copy-text is not clean enough. Next: Achelis/Bonwetsch GCS 1 (1897, archive.org werkehrsgimauftr01hipp) with column-aware OCR"
   },
   {
    "year": 235,
@@ -915,8 +916,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Hippolytus (PG 10 folder holds only ANF English); the PG 10 scans interleave the Latin column and Greek notes, so a scan-only copy-text is not clean enough. Next: Achelis/Bonwetsch GCS 1 (1897, archive.org werkehrsgimauftr01hipp) with column-aware OCR"
   },
   {
    "year": 235,
@@ -929,8 +930,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Hippolytus (PG 10 folder holds only ANF English); the PG 10 scans interleave the Latin column and Greek notes, so a scan-only copy-text is not clean enough. Next: Achelis/Bonwetsch GCS 1 (1897, archive.org werkehrsgimauftr01hipp) with column-aware OCR"
   },
   {
    "year": 235,
@@ -943,8 +944,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Hippolytus (PG 10 folder holds only ANF English); the PG 10 scans interleave the Latin column and Greek notes, so a scan-only copy-text is not clean enough. Next: Achelis/Bonwetsch GCS 1 (1897, archive.org werkehrsgimauftr01hipp) with column-aware OCR"
   },
   {
    "year": 235,
@@ -957,8 +958,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Hippolytus (PG 10 folder holds only ANF English); the PG 10 scans interleave the Latin column and Greek notes, so a scan-only copy-text is not clean enough. Next: Achelis/Bonwetsch GCS 1 (1897, archive.org werkehrsgimauftr01hipp) with column-aware OCR"
   },
   {
    "year": 235,
@@ -971,8 +972,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Hippolytus (PG 10 folder holds only ANF English); the PG 10 scans interleave the Latin column and Greek notes, so a scan-only copy-text is not clean enough. Next: Achelis/Bonwetsch GCS 1 (1897, archive.org werkehrsgimauftr01hipp) with column-aware OCR"
   },
   {
    "year": 235,
@@ -985,8 +986,8 @@
    "edition": null,
    "slug": "ante-nicene-topics",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Hippolytus (PG 10 folder holds only ANF English); the PG 10 scans interleave the Latin column and Greek notes, so a scan-only copy-text is not clean enough. Next: Achelis/Bonwetsch GCS 1 (1897, archive.org werkehrsgimauftr01hipp) with column-aware OCR"
   },
   {
    "year": 235,
@@ -999,8 +1000,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Hippolytus (PG 10 folder holds only ANF English); the PG 10 scans interleave the Latin column and Greek notes, so a scan-only copy-text is not clean enough. Next: Achelis/Bonwetsch GCS 1 (1897, archive.org werkehrsgimauftr01hipp) with column-aware OCR"
   },
   {
    "year": 235,
@@ -1543,8 +1544,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Dionysius; his letters and On Nature survive as quotations already in the library (eusebius-church-history, eusebius-preparation-gospel). Next: excerpt books from those, checked against Feltoe 1904 (archive.org LettersDionysiusOfAlexandria)"
   },
   {
    "year": 265,
@@ -1557,8 +1558,8 @@
    "edition": null,
    "slug": "ante-nicene-topics",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Dionysius; his letters and On Nature survive as quotations already in the library (eusebius-church-history, eusebius-preparation-gospel). Next: excerpt books from those, checked against Feltoe 1904 (archive.org LettersDionysiusOfAlexandria)"
   },
   {
    "year": 265,
@@ -1571,8 +1572,8 @@
    "edition": null,
    "slug": "ante-nicene-topics",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Dionysius; his letters and On Nature survive as quotations already in the library (eusebius-church-history, eusebius-preparation-gospel). Next: excerpt books from those, checked against Feltoe 1904 (archive.org LettersDionysiusOfAlexandria)"
   },
   {
    "year": 265,
@@ -1585,8 +1586,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Dionysius; his letters and On Nature survive as quotations already in the library (eusebius-church-history, eusebius-preparation-gospel). Next: excerpt books from those, checked against Feltoe 1904 (archive.org LettersDionysiusOfAlexandria)"
   },
   {
    "year": 265,
@@ -1599,8 +1600,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: no Khazarzar text for Dionysius; his letters and On Nature survive as quotations already in the library (eusebius-church-history, eusebius-preparation-gospel). Next: excerpt books from those, checked against Feltoe 1904 (archive.org LettersDionysiusOfAlexandria)"
   },
   {
    "year": 268,
@@ -1655,8 +1656,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: no born-digital PG text",
+   "note": "PG intake 2026-10-03: not on Khazarzar; only the PG 10 scans (two, same print) exist, with the Latin column interleaved. Kata meros pistis is now held to be Apollinaris'"
   },
   {
    "year": 270,
@@ -1665,12 +1666,12 @@
    "inventory_status": "partial",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": "ante-nicene-topics",
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-thaumaturgus-expositio-fidei",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-thaumaturgus-expositio-fidei"
   },
   {
    "year": 270,
@@ -1679,12 +1680,12 @@
    "inventory_status": "missing",
    "language": "syc; grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-thaumaturgus-ad-philagrium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-thaumaturgus-ad-philagrium"
   },
   {
    "year": 270,
@@ -1767,8 +1768,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Tractatus de placitis Manichaeorum.pdf: Alexander Lycopolitanus_PG 18/Tractatus de placitis Manichaeorum.pdf prints like a later critical edition (grave before punctuation 0/24 (0.00), PG column marks"
   },
   {
    "year": 300,
@@ -1893,8 +1894,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Epistula ad Thmuitanos.pdf: Phileas Thmuitanus_PG 10/Epistula ad Thmuitanos.pdf prints like a later critical edition (grave before punctuation 0/3 (0.00), PG column marks 0); PG copy-text "
   },
   {
    "year": 309,
@@ -2079,8 +2080,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Epistula canonica.pdf: Peter of Alexandria_PG 18/Epistula canonica.pdf prints like a later critical edition (grave before punctuation 0/12 (0.00), PG column marks 0); PG copy-text nee"
   },
   {
    "year": 311,
@@ -2275,8 +2276,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Contra Hieroclem.pdf: Eusebius Caesariensis_PG 19-24/Contra Hieroclem.pdf prints like a later critical edition (grave before punctuation 0/33 (0.00), PG column marks 0); PG copy-text"
   },
   {
    "year": 339,
@@ -2319,8 +2320,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Commentarius in Isaiam.pdf: Eusebius Caesariensis_PG 19-24/Commentarius in Isaiam.pdf prints like a later critical edition (grave before punctuation 1/299 (0.00), PG column marks 140); PG "
   },
   {
    "year": 339,
@@ -2329,12 +2330,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "eusebius-commentary-psalms",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books eusebius-commentary-psalms"
   },
   {
    "year": 339,
@@ -2375,12 +2376,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "eusebius-fragmenta-lucam",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books eusebius-fragmenta-lucam, eusebius-fragmenta-danielem. Not taken: Fragmenta in proverbia.pdf: Eusebius Caesariensis_PG 19-24/Fragmenta in proverbia.pdf prints like a later critical edition (grave before punctuation 0/0 (0.00), PG column marks 2); PG copy; Fragmenta in Hebraeos.pdf: Eusebius Caesariensis_PG 19-24/Fragmenta in Hebraeos.pdf prints like a later critical edition (grave before punctuation 0/1 (0.00), PG column marks 1); PG copy-"
   },
   {
    "year": 339,
@@ -2393,8 +2394,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Epistula ad Carpianum ad canones evangeliorum praemissa.pdf: Eusebius Caesariensis_PG 19-24/Epistula ad Carpianum ad canones evangeliorum praemissa.pdf prints like a later critical edition (grave before punctuation 0/0 (0"
   },
   {
    "year": 339,
@@ -2403,12 +2404,12 @@
    "inventory_status": "missing",
    "language": "grc; syc/ara catena extracts",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "eusebius-quaestiones-stephanum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books eusebius-quaestiones-stephanum, eusebius-quaestiones-marinum"
   },
   {
    "year": 339,
@@ -2465,12 +2466,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "eusebius-de-solemnitate-paschali",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books eusebius-de-solemnitate-paschali"
   },
   {
    "year": 339,
@@ -2909,12 +2910,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-contra-apollinarium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-contra-apollinarium"
   },
   {
    "year": 373,
@@ -2937,12 +2938,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-contra-sabellianos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-contra-sabellianos"
   },
   {
    "year": 373,
@@ -2993,12 +2994,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-dialogi-de-trinitate",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-dialogi-de-trinitate, athanasius-dialogi-contra-macedonianos"
   },
   {
    "year": 373,
@@ -3021,12 +3022,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-scholia-job",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-scholia-job. Not taken: Scholia in Acta.pdf: copy-text and PG scan agree on only 0.043 of words; Scholia in cantica canticorum.pdf: Athanasius the Great of Alexandria_ PG 25-28/Scholia in cantica canticorum.pdf prints like a later critical edition (grave before punctuation 2/2 (1.00), PG col"
   },
   {
    "year": 373,
@@ -3035,12 +3036,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-expositiones-psalmos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-expositiones-psalmos"
   },
   {
    "year": 373,
@@ -3107,12 +3108,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-adelphium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-adelphium"
   },
   {
    "year": 373,
@@ -3135,12 +3136,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-dracontium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-dracontium"
   },
   {
    "year": 373,
@@ -3167,8 +3168,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Epistula ad Palladium.pdf: Athanasius the Great of Alexandria_ PG 25-28/Epistula ad Palladium.pdf prints like a later critical edition (grave before punctuation 1/3 (0.33), PG column mark"
   },
   {
    "year": 373,
@@ -3177,12 +3178,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-marcellinum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-marcellinum"
   },
   {
    "year": 373,
@@ -3191,12 +3192,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-maximum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-maximum"
   },
   {
    "year": 373,
@@ -3205,12 +3206,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-palladium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-palladium"
   },
   {
    "year": 373,
@@ -3247,12 +3248,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-episcopos-aegypti",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-episcopos-aegypti"
   },
   {
    "year": 373,
@@ -3261,12 +3262,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-jovianum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-jovianum"
   },
   {
    "year": 373,
@@ -3275,12 +3276,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-monachos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-monachos"
   },
   {
    "year": 373,
@@ -3303,12 +3304,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistulae-serapionem",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistulae-serapionem"
   },
   {
    "year": 373,
@@ -3317,12 +3318,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-vita-antonii",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-vita-antonii"
   },
   {
    "year": 373,
@@ -3331,12 +3332,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-vita-syncleticae",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-vita-syncleticae"
   },
   {
    "year": 373,
@@ -3345,12 +3346,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-in-illud-omnia",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-in-illud-omnia"
   },
   {
    "year": 373,
@@ -3359,12 +3360,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-de-sabbatis",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-de-sabbatis"
   },
   {
    "year": 373,
@@ -3485,8 +3486,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Petitiones Arianorum.pdf: Athanasius the Great of Alexandria_ PG 25-28/Petitiones Arianorum.pdf prints like a later critical edition (grave before punctuation 2/6 (0.33), PG column marks"
   },
   {
    "year": 373,
@@ -3509,12 +3510,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-epistula-afros",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-epistula-afros"
   },
   {
    "year": 373,
@@ -3523,12 +3524,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "athanasius-tomus-antiochenos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books athanasius-tomus-antiochenos"
   },
   {
    "year": 374,
@@ -3551,12 +3552,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "marcellus-de-incarnatione-contra-arianos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books marcellus-de-incarnatione-contra-arianos"
   },
   {
    "year": 378,
@@ -3609,12 +3610,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "basil-adversus-eunomium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books basil-adversus-eunomium"
   },
   {
    "year": 379,
@@ -3623,12 +3624,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "basil-enarratio-isaiam",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books basil-enarratio-isaiam"
   },
   {
    "year": 379,
@@ -3637,12 +3638,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "basil-regulae-fusius",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books basil-regulae-fusius, basil-regulae-brevius"
   },
   {
    "year": 379,
@@ -3665,12 +3666,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "basil-homiliae-hexaemeron",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books basil-homiliae-hexaemeron"
   },
   {
    "year": 379,
@@ -3679,12 +3680,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "basil-homiliae-psalmos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books basil-homiliae-psalmos"
   },
   {
    "year": 379,
@@ -3723,12 +3724,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "basil-regulae-morales",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books basil-regulae-morales"
   },
   {
    "year": 379,
@@ -3765,12 +3766,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "basil-homilia-irascuntur",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books basil-homilia-irascuntur, basil-homilia-gratiarum-actione, basil-homilia-invidia, basil-homilia-lacisis, basil-homilia-tempore-famis, basil-homilia-ad-baptisma, basil-homilia-in-divites, basil-homilia-principium-proverbiorum, basil-in-barlaam, basil-in-gordium, basil-in-mamantem, basil-in-ebriosos, basil-in-principio-erat-verbum, basil-in-quadraginta-martyres, basil-in-christi-generationem, basil-quod-deus-non-auctor-malorum, basil-quod-rebus-mundanis, basil-contra-sabellianos-arium, basil-de-fide, basil-homilia-de-spiritu-sancto, basil-homilia-misericordia-judicio, basil-homilia-in-psalmum-115, basil-homilia-in-psalmum-28"
   },
   {
    "year": 380,
@@ -3998,7 +3999,7 @@
    "slug": "gregory-nazianzus-oration-27",
    "flat": true,
    "status": "taken",
-   "note": "TEI covers only Or. 27-31 (Theological Orations)"
+   "note": "TEI covers only Or. 27-31 (Theological Orations). PG intake 2026-10-03 added books: gregory-nazianzus-oration-1, gregory-nazianzus-oration-2, gregory-nazianzus-oration-3, gregory-nazianzus-oration-4, gregory-nazianzus-oration-5, gregory-nazianzus-oration-6, gregory-nazianzus-oration-8, gregory-nazianzus-oration-9, gregory-nazianzus-oration-10, gregory-nazianzus-oration-11, gregory-nazianzus-oration-12, gregory-nazianzus-oration-13, gregory-nazianzus-oration-14, gregory-nazianzus-oration-15, gregory-nazianzus-oration-16, gregory-nazianzus-oration-17, gregory-nazianzus-oration-18, gregory-nazianzus-oration-19, gregory-nazianzus-oration-20, gregory-nazianzus-oration-21, gregory-nazianzus-oration-22, gregory-nazianzus-oration-23, gregory-nazianzus-oration-24, gregory-nazianzus-oration-25, gregory-nazianzus-oration-26, gregory-nazianzus-oration-32, gregory-nazianzus-oration-33, gregory-nazianzus-oration-34, gregory-nazianzus-oration-35, gregory-nazianzus-oration-36, gregory-nazianzus-oration-37, gregory-nazianzus-oration-38, gregory-nazianzus-oration-39, gregory-nazianzus-oration-40, gregory-nazianzus-oration-41, gregory-nazianzus-oration-42, gregory-nazianzus-oration-44, gregory-nazianzus-oration-45. PG intake 2026-10-03 added books: gregory-nazianzus-oration-1, gregory-nazianzus-oration-2, gregory-nazianzus-oration-3, gregory-nazianzus-oration-4, gregory-nazianzus-oration-5, gregory-nazianzus-oration-6, gregory-nazianzus-oration-8, gregory-nazianzus-oration-9, gregory-nazianzus-oration-10, gregory-nazianzus-oration-11, gregory-nazianzus-oration-12, gregory-nazianzus-oration-13, gregory-nazianzus-oration-14, gregory-nazianzus-oration-15, gregory-nazianzus-oration-16, gregory-nazianzus-oration-17, gregory-nazianzus-oration-18, gregory-nazianzus-oration-19, gregory-nazianzus-oration-20, gregory-nazianzus-oration-21, gregory-nazianzus-oration-22, gregory-nazianzus-oration-23, gregory-nazianzus-oration-24, gregory-nazianzus-oration-25, gregory-nazianzus-oration-26, gregory-nazianzus-oration-32, gregory-nazianzus-oration-33, gregory-nazianzus-oration-34, gregory-nazianzus-oration-35, gregory-nazianzus-oration-36, gregory-nazianzus-oration-37, gregory-nazianzus-oration-38, gregory-nazianzus-oration-39, gregory-nazianzus-oration-40, gregory-nazianzus-oration-41, gregory-nazianzus-oration-42, gregory-nazianzus-oration-44, gregory-nazianzus-oration-45"
   },
   {
    "year": 390,
@@ -4071,14 +4072,14 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": "tlg2022.tlg060",
-   "repo": "1st1K",
-   "edition": "tlg2022.tlg060.1st1K-grc1.xml",
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
    "edition_desc": "pseudo-Menander Die arabische Überlieferung der sogenannten Menandersentenzen Manfred Ullmann Wiesbaden Kommissionsverlag Franz Steiner 77-80 1961",
    "edition_year": 1961,
-   "slug": null,
+   "slug": "gregory-nazianzus-carmina-dogmatica",
    "flat": null,
-   "status": "skipped: TEI is titled Carmina moralia but its sourceDesc is Ullmann 1961 (Arabic Menander sentences)",
-   "note": "skipped: TEI is titled Carmina moralia but its sourceDesc is Ullmann 1961 (Arabic Menander sentences); wrong text and possibly in copyright"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nazianzus-carmina-dogmatica, gregory-nazianzus-carmina-moralia, gregory-nazianzus-carmina-de-se-ipso, gregory-nazianzus-carmina-ad-alios"
   },
   {
    "year": 390,
@@ -4241,12 +4242,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-epistula-canonica-letoium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-epistula-canonica-letoium"
   },
   {
    "year": 395,
@@ -4269,12 +4270,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-in-ascensionem",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-in-ascensionem"
   },
   {
    "year": 395,
@@ -4367,12 +4368,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-adversus-castigationes",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-adversus-castigationes, gregory-nyssa-de-baptismum-differunt"
   },
   {
    "year": 395,
@@ -4437,12 +4438,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-de-beatitudinibus",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-de-beatitudinibus"
   },
   {
    "year": 395,
@@ -4465,12 +4466,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-de-oratione-dominica",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-de-oratione-dominica"
   },
   {
    "year": 395,
@@ -4479,12 +4480,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-de-opificio-hominis",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-de-opificio-hominis"
   },
   {
    "year": 395,
@@ -4493,12 +4494,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-apologia-hexaemeron",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-apologia-hexaemeron"
   },
   {
    "year": 395,
@@ -4521,12 +4522,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-de-anima-et-resurrectione",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-de-anima-et-resurrectione"
   },
   {
    "year": 395,
@@ -4535,12 +4536,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "gregory-nyssa-de-sancto-theodoro",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books gregory-nyssa-de-sancto-theodoro, gregory-nyssa-in-stephanum-ii, gregory-nyssa-in-xl-martyres-i, gregory-nyssa-in-xl-martyres-ii, gregory-nyssa-in-sanctum-ephraim, gregory-nyssa-vita-gregorii-thaumaturgi"
   },
   {
    "year": 395,
@@ -5515,12 +5516,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-ad-stagirium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-ad-stagirium"
   },
   {
    "year": 407,
@@ -5533,8 +5534,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Ad Theodorum lapsum i.pdf: John Chrysostom_PG 47-64/Ad Theodorum lapsum i.pdf prints like a later critical edition (grave before punctuation 0/61 (0.00), PG column marks 0); PG copy-text ; Ad Theodorum lapsum ii.pdf: John Chrysostom_PG 47-64/Ad Theodorum lapsum ii.pdf prints like a later critical edition (grave before punctuation 0/13 (0.00), PG column marks 0); PG copy-text"
   },
   {
    "year": 407,
@@ -5547,8 +5548,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Ad eos qui scandalizati sunt.pdf: John Chrysostom_PG 47-64/Ad eos qui scandalizati sunt.pdf prints like a later critical edition (grave before punctuation 6/83 (0.07), PG column marks 144); PG c"
   },
   {
    "year": 407,
@@ -5561,8 +5562,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Ad viduam juniorem.pdf: John Chrysostom_PG 47-64/Ad viduam juniorem.pdf prints like a later critical edition (grave before punctuation 0/19 (0.00), PG column marks 0); PG copy-text nee; De non iterando conjugio.pdf: John Chrysostom_PG 47-64/De non iterando conjugio.pdf prints like a later critical edition (grave before punctuation 0/36 (0.00), PG column marks 0); PG copy-te"
   },
   {
    "year": 407,
@@ -5571,12 +5572,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-adversus-judaeos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-adversus-judaeos"
   },
   {
    "year": 407,
@@ -5585,12 +5586,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-adversus-oppugnatores",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-adversus-oppugnatores"
   },
   {
    "year": 407,
@@ -5599,12 +5600,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-catecheses-illuminandos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-catecheses-illuminandos"
   },
   {
    "year": 407,
@@ -5627,12 +5628,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-commentarius-galatas",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-commentarius-galatas"
   },
   {
    "year": 407,
@@ -5641,12 +5642,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-comparatio-regis-monachi",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-comparatio-regis-monachi"
   },
   {
    "year": 407,
@@ -5655,12 +5656,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-in-eutropium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-in-eutropium, chrysostom-de-capto-eutropio"
   },
   {
    "year": 407,
@@ -5669,12 +5670,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-contra-subintroductas",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-contra-subintroductas, chrysostom-quod-regulares-feminae"
   },
   {
    "year": 407,
@@ -5683,12 +5684,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-de-anna",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-de-anna"
   },
   {
    "year": 407,
@@ -5697,12 +5698,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-de-davide-et-saule",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-de-davide-et-saule"
   },
   {
    "year": 407,
@@ -5711,12 +5712,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-de-lazaro",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-de-lazaro"
   },
   {
    "year": 407,
@@ -5725,12 +5726,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-de-compunctione-demetrium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-de-compunctione-demetrium, chrysostom-de-compunctione-stelechium"
   },
   {
    "year": 407,
@@ -5739,12 +5740,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-de-diabolo-tentatore",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-de-diabolo-tentatore"
   },
   {
    "year": 407,
@@ -5771,8 +5772,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: De incomprehensibili dei natura.pdf: John Chrysostom_PG 47-64/De incomprehensibili dei natura.pdf prints like a later critical edition (grave before punctuation 2/96 (0.02), PG column marks 0); PG "
   },
   {
    "year": 407,
@@ -5795,12 +5796,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-de-paenitentia",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-de-paenitentia"
   },
   {
    "year": 407,
@@ -5813,8 +5814,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: De sacerdotio.pdf: John Chrysostom_PG 47-64/De sacerdotio.pdf prints like a later critical edition (grave before punctuation 0/134 (0.00), PG column marks 9); PG copy-text needs t"
   },
   {
    "year": 407,
@@ -5841,8 +5842,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: De virginitate.pdf: John Chrysostom_PG 47-64/De virginitate.pdf prints like a later critical edition (grave before punctuation 0/161 (0.00), PG column marks 0); PG copy-text needs "
   },
   {
    "year": 407,
@@ -5907,12 +5908,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-expositiones-psalmos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-expositiones-psalmos"
   },
   {
    "year": 407,
@@ -5935,12 +5936,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-2-timotheum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-2-timotheum"
   },
   {
    "year": 407,
@@ -5949,12 +5950,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-1-thessalonicenses",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-1-thessalonicenses"
   },
   {
    "year": 407,
@@ -5963,12 +5964,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-colossenses",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-colossenses"
   },
   {
    "year": 407,
@@ -5977,12 +5978,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-philippenses",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-philippenses"
   },
   {
    "year": 407,
@@ -5991,12 +5992,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-1-timotheum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-1-timotheum"
   },
   {
    "year": 407,
@@ -6005,12 +6006,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-de-statuis",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-de-statuis"
   },
   {
    "year": 407,
@@ -6019,12 +6020,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-ephesios",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-ephesios"
   },
   {
    "year": 407,
@@ -6033,12 +6034,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-philemonem",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-philemonem"
   },
   {
    "year": 407,
@@ -6047,12 +6048,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-2-corinthios",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-2-corinthios"
   },
   {
    "year": 407,
@@ -6061,12 +6062,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-romanos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-romanos"
   },
   {
    "year": 407,
@@ -6075,12 +6076,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-hebraeos",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-hebraeos"
   },
   {
    "year": 407,
@@ -6089,12 +6090,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-1-corinthios",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-1-corinthios"
   },
   {
    "year": 407,
@@ -6103,12 +6104,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-2-thessalonicenses",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-2-thessalonicenses"
   },
   {
    "year": 407,
@@ -6117,12 +6118,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-acta",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-acta"
   },
   {
    "year": 407,
@@ -6131,12 +6132,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-titum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-titum"
   },
   {
    "year": 407,
@@ -6159,12 +6160,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-joannem",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-joannem"
   },
   {
    "year": 407,
@@ -6173,12 +6174,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-homiliae-matthaeum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-homiliae-matthaeum"
   },
   {
    "year": 407,
@@ -6187,12 +6188,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-salutate-priscillam",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-salutate-priscillam. Not taken: In illud Pater si possibile est.pdf: copy-text and PG scan agree on only 0.04 of words"
   },
   {
    "year": 407,
@@ -6201,12 +6202,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-de-prophetiarum-obscuritate",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-de-prophetiarum-obscuritate"
   },
   {
    "year": 407,
@@ -6229,12 +6230,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-in-principium-actorum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-in-principium-actorum, chrysostom-de-mutatione-nominum"
   },
   {
    "year": 407,
@@ -6257,12 +6258,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-in-kalendas",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-in-kalendas"
   },
   {
    "year": 407,
@@ -6271,12 +6272,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-in-ignatium",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-in-ignatium, chrysostom-de-babyla, chrysostom-in-lucianum, chrysostom-de-pelagia, chrysostom-de-droside, chrysostom-de-maccabeis, chrysostom-in-juventinum-maximum, chrysostom-in-julianum, chrysostom-in-barlaam, chrysostom-de-bernice-prosdoce, chrysostom-in-romanum, chrysostom-de-meletio, chrysostom-in-eustathium"
   },
   {
    "year": 407,
@@ -6289,8 +6290,8 @@
    "edition": null,
    "slug": null,
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "skipped: Khazarzar text follows a later edition",
+   "note": "PG intake 2026-10-03: Quod nemo laeditur nisi a se ipso.pdf: John Chrysostom_PG 47-64/Quod nemo laeditur nisi a se ipso.pdf prints like a later critical edition (grave before punctuation 1/39 (0.03), PG column marks 0); P"
   },
   {
    "year": 407,
@@ -6313,12 +6314,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-sermones-genesim",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-sermones-genesim"
   },
   {
    "year": 407,
@@ -6327,12 +6328,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "chrysostom-in-diem-natalem",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books chrysostom-in-diem-natalem, chrysostom-de-baptismo-christi, chrysostom-de-cruce-et-latrone-i, chrysostom-de-cruce-et-latrone-ii, chrysostom-de-resurrectione-mortuorum, chrysostom-in-ascensionem, chrysostom-de-sancta-pentecoste"
   },
   {
    "year": 407,
@@ -7633,12 +7634,12 @@
    "inventory_status": "missing",
    "language": "grc",
    "urn": null,
-   "repo": null,
-   "edition": null,
-   "slug": null,
+   "repo": "khazarzar+archive.org",
+   "edition": "Migne PG (Khazarzar Digital Patrology text), checked against the PG scan OCR",
+   "slug": "macarius-opusculum",
    "flat": null,
-   "status": "skipped: no TEI source",
-   "note": "no First1KGreek or Perseus edition for this author and work; next step is PG/GCS OCR"
+   "status": "taken",
+   "note": "PG intake 2026-10-03 (intake_first1k.py --pg): books macarius-opusculum"
   },
   {
    "year": 450,

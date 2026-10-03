@@ -241,33 +241,48 @@ def score(obj: dict | None, raw: str, section: str = "6.1", source: list[str] | 
     return {"ok": ok, "checks": checks, "notes": notes}
 
 
+TRUNCATED_REASONING = "truncated: reasoning only (thinking used the token budget; no answer)"
+
+
+def _cf_reasoning_only(result: dict) -> bool:
+    """True when the reply has reasoning text but no answer text: a thinking
+    model ran out of tokens before it wrote the answer."""
+    if not isinstance(result, dict) or result.get("response") or result.get("output_text"):
+        return False
+    if result.get("choices"):
+        msg0 = (result["choices"][0] or {}).get("message") or {}
+        return not msg0.get("content") and bool(msg0.get("reasoning_content") or msg0.get("reasoning"))
+    if isinstance(result.get("output"), list):
+        items = [i for i in result["output"] if isinstance(i, dict)]
+        has_reason = any(i.get("type") == "reasoning" for i in items)
+        has_answer = any(isinstance(b, dict) and b.get("text") for i in items if i.get("type") != "reasoning"
+                         for b in i.get("content") or [])
+        return has_reason and not has_answer
+    return False
+
+
 def _cf_pick_content(result: dict) -> str | None:
-    """Normalize Workers AI result shapes (legacy response + chat choices)."""
+    """Normalize Workers AI result shapes (legacy response + chat choices).
+    Answer text only: reasoning text is never returned as the answer (a
+    truncated thinking reply gave half-thoughts that parsed as JSON,
+    2026-10-03). None when there is no answer; see _cf_reasoning_only."""
     if not isinstance(result, dict):
         return None
     content = result.get("response")
     if content is None and result.get("choices"):
         msg0 = result["choices"][0].get("message") or {}
-        content = (
-            msg0.get("content")
-            or msg0.get("reasoning_content")
-            or msg0.get("reasoning")
-        )
+        content = msg0.get("content") or None
     if content is None and result.get("output_text"):
         content = result.get("output_text")
     if content is None and isinstance(result.get("output"), list):
-        # Responses API-ish: join text chunks
+        # Responses API-ish: join answer text chunks once each; skip reasoning items
         parts = []
         for item in result["output"]:
-            if not isinstance(item, dict):
+            if not isinstance(item, dict) or item.get("type") == "reasoning":
                 continue
             for block in item.get("content") or []:
                 if isinstance(block, dict) and block.get("text"):
                     parts.append(block["text"])
-            if item.get("type") == "message":
-                for block in item.get("content") or []:
-                    if isinstance(block, dict) and block.get("text"):
-                        parts.append(block["text"])
         content = "\n".join(parts) if parts else None
     if content is None:
         return None
@@ -367,6 +382,8 @@ def cf_call(
                 return {"content": content, "ms": int((time.time() - t0) * 1000), "batched": True,
                         "pt": usage.get("prompt_tokens") or 0, "ct": usage.get("completion_tokens") or 0,
                         "neurons": usage.get("neurons") or 0}
+            if _cf_reasoning_only(result):
+                return {"error": TRUNCATED_REASONING, "ms": int((time.time() - t0) * 1000), "batched": True}
         rate_acquire(model)  # broker failed: fall back to a paced direct call
     body = json.dumps(payload).encode()
     last_err = None
@@ -389,6 +406,8 @@ def cf_call(
             if api == "chat" and data.get("choices"):
                 content = _cf_pick_content({"choices": data["choices"]})
                 if not content:
+                    if _cf_reasoning_only({"choices": data["choices"]}):
+                        return {"error": TRUNCATED_REASONING, "ms": ms}
                     return {"error": f"empty chat result: {json.dumps(data)[:200]}", "ms": ms}
                 usage = data.get("usage") or {}
                 return {
@@ -399,14 +418,16 @@ def cf_call(
                     "neurons": usage.get("neurons") or 0,
                 }
             if not data.get("success"):
+                # Rate / capacity errors go straight back (no internal retry):
+                # vendor_call lowers the model's allowance on a 429 and the
+                # caller backs off (efficiency sweep 2026-10-03).
                 msg = json.dumps(data.get("errors") or data)[:240]
-                if re.search(r"429|rate|capacity|9007|3040", msg, re.I) and attempt < 2:
-                    time.sleep(1.5 * (attempt + 1))
-                    continue
                 return {"error": msg, "ms": ms}
             result = data.get("result") or {}
             content = _cf_pick_content(result)
             if content is None:
+                if _cf_reasoning_only(result):
+                    return {"error": TRUNCATED_REASONING, "ms": ms}
                 return {"error": f"empty result: {json.dumps(result)[:200]}", "ms": ms}
             usage = result.get("usage") or {}
             return {
@@ -416,6 +437,15 @@ def cf_call(
                 "ct": usage.get("completion_tokens") or 0,
                 "neurons": usage.get("neurons") or 0,
             }
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                try:
+                    detail = e.read().decode(errors="replace")[:200]
+                except Exception:  # noqa: BLE001
+                    detail = ""
+                return {"error": f"HTTP 429 rate limited: {detail}", "ms": int((time.time() - t0) * 1000)}
+            last_err = e
+            time.sleep(1.0 * (attempt + 1))
         except Exception as e:  # noqa: BLE001
             last_err = e
             time.sleep(1.0 * (attempt + 1))
@@ -779,6 +809,10 @@ def _vendor_call_raw(
         return {"error": "no CF_TOKEN", "ms": 0}
     prof = cf_profile(model)
     tok = int(max_tokens if max_tokens else prof.get("max_tokens", 1800))
+    if any(k in model.lower() for k in THINKING_ALWAYS_ON):
+        # Thinking cannot be turned off here; a caller's answer-sized budget
+        # gets eaten by reasoning and the reply comes back with no answer.
+        tok = max(tok, int(prof.get("max_tokens", 0) or 0))
     return cf_call(
         model,
         messages,
@@ -792,6 +826,9 @@ def _vendor_call_raw(
         reasoning_effort=prof.get("reasoning_effort"),
         timeout=int(prof.get("timeout", 120)),
     )
+
+
+THINKING_ALWAYS_ON = ("glm-5.3", "gpt-oss-120b")  # never below the profile's max_tokens
 
 
 def cf_profile(model: str) -> dict:
