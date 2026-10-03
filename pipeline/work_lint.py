@@ -317,6 +317,7 @@ def rule_term_drift(sections, brief):
 
 def rule_glossary(sec, brief):
     out = []
+    text = sec["text"]
     # Owner rule 2026-10-03: cite the book as "Wisdom of Solomon", never bare "Wisdom".
     for m in re.finditer(r"\bWisdom(?! of Solomon)(?=\s+\d+[:.]\d+)", text):
         out.append(_f("glossary", "error", sec, m.group(0) + text[m.end():m.end() + 8],
@@ -332,6 +333,10 @@ def rule_glossary(sec, brief):
                 out.append(_f("glossary", "error", sec, m.group(0),
                               f"banned rendering of {entry.get('source_term', '?')}; use '{entry.get('english', '?')}'"))
     for old, modern in (brief.get("names") or {}).items():
+        # Only a plain short name is a modern form; a note ("Christ (Christou)
+        # appears once in section 9") is not something the text can say.
+        if not modern or len(modern) > 40 or len(modern.split()) > 5 or re.search(r"[()\u2014\u2013:;]|\bappears\b", modern):
+            continue
         # A short form of the modern name ("Wisdom" for Wisdom of Solomon) is the
         # library's own citation style (91 "Wisdom N:N" vs 1 long form, owner
         # 2026-10-03): only real renames (Sion -> Zion) are flagged, and only

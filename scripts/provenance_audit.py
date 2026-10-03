@@ -28,6 +28,21 @@ def delatinize(s):
     s = "".join(c for c in s if unicodedata.category(c) != "Mn")
     return "".join(GREEK_LATIN.get(c, c if c.isascii() else " ") for c in s.lower())
 
+# 2026-10-03: TEI witnesses (First1KGreek/Perseus intake) carry markup and
+# editorial notes inside sentences, and long works pass 60k characters: the
+# linkage check compared against tags and apparatus and flagged genuine
+# sources (Hermas, Tatian, Theophilus book 3). Read XML as text without tags
+# or notes, and read the whole witness.
+WITNESS_CHARS = 2_000_000
+
+
+def witness_text(path, text):
+    if str(path).lower().endswith(".xml"):
+        text = re.sub(r"<note\b.*?</note>", " ", text, flags=re.S)
+        text = re.sub(r"<[^>]+>", " ", text)
+    return text
+
+
 def norm(s):
     return re.sub(r"[^a-z]+", "", delatinize(s)).replace("c", "k")
 
@@ -147,7 +162,7 @@ def main():
                 flag("witness-mismatch", slug, wp,
                      "head=" + txt[:180].replace("\n", " "), author, title)
         # linkage: unit heads must occur in witness text
-        wnorm = " ".join(norm(t or "")[:60000] for _, _, _, t in witnesses if t)
+        wnorm = " ".join(norm(witness_text(wp, t or ""))[:WITNESS_CHARS] for _, wp, _, t in witnesses if t)
         for sp in srcs:
             stats["source_files"] += 1
             base = os.path.basename(sp)

@@ -335,7 +335,11 @@ def vote_glossary(slug: str, terms: list[dict], context: str, langname: str) -> 
         # lay reader cannot place them. Fall back to the next plain choice.
         plain = {k: v for k, v in tally.items() if "-" not in k}
         best = max(plain.items(), key=lambda kv: kv[1]) if plain else ("", 0)
-        banned = sorted({b for m in CHECKERS for b in (votes[m].get(key, {}).get("banned") or []) if b and norm(b) != best[0]})
+        sense = norm(t.get("sense") or "")
+        # A rendering the entry's own sense uses ("also called the Black One")
+        # is a real alternative name, never banned (Barnabas, 2026-10-03).
+        banned = sorted({b for m in CHECKERS for b in (votes[m].get(key, {}).get("banned") or [])
+                         if b and norm(b) != best[0] and norm(b) not in sense})
         entry = {"source_term": t.get("source_term"), "sense": t.get("sense"), "banned": banned,
                  "votes": {"drafter": first, **{FAMILY[m]: votes[m].get(key, {}).get("choice", "") for m in CHECKERS}}}
         unanimous = len(tally) == 1 and sum(tally.values()) == len(picks)
@@ -1437,7 +1441,12 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
     otherwise the current text stays live and the result is logged."""
     log_rows = json.loads(QUEUE_LOG.read_text()) if QUEUE_LOG.exists() else {}
     done = 0
-    for words, book in site_books(unpublished):
+    # Phase one (owner 2026-10-03): the early Church first, in date order.
+    # Writers who died by 450 come first, earliest writer first; later
+    # writers follow, also in date order. Size only breaks ties.
+    import book_era
+    for words, book in sorted(site_books(unpublished), key=lambda wb: (
+            not book_era.is_early(wb[1]), book_era.book_year(wb[1]) or 9999, wb[0])):
         if done >= limit:
             break
         if (max_words and words > max_words) or words < min_words:

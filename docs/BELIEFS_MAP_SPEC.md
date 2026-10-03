@@ -1,0 +1,130 @@
+# Beliefs map: where did this belief come from?
+
+Owner-approved 2026-10-03. Code: `scripts/doctrine_map.py`. Data:
+`websites/fathers.saneapps.com/data/explore/doctrines.json` (definitions) and
+`doctrine_map.json` (results). This file is the spec; change it before
+changing the method.
+
+## Goal
+
+For each doctrine that divides the churches, show when it first appears in
+the early writings, what came before it, and who spoke against it, with every
+claim tied to a quoted, linked passage. The bar is fairness that a Catholic,
+an Orthodox Christian and a Baptist scholar would each accept.
+
+## Phase one
+
+The writers who died by 450 come first. Translation lanes run earliest writer
+first: untranslated early works, then re-checks of translated early works,
+then later centuries (`scripts/book_era.py`, `run-recert-lanes.sh`). A gap
+inventory of every surviving early work, `docs/early-inventory.json`, shows
+what the library still lacks.
+
+## Exact meanings, not similar sounds (owner 2026-10-03)
+
+"Real presence is a different belief shared by many, but the Catholic belief
+is ultra specific... not 'sounds similar', because then anyone can claim the
+Fathers agree with them." So the map is built on QUESTIONS, each with its
+competing precise POSITIONS (`data/explore/doctrine_questions.json`):
+
+- each position is defined in its own tradition's words, checked word for
+  word against official texts (`doctrines.json` keeps the per-doctrine
+  quotes);
+- its MARK is the one thing that tells it from its neighbours;
+- the question's SHARED GROUND is what several positions affirm, and it
+  counts for none of them.
+
+Example, the Eucharist: memorial, spiritual presence, sacramental union,
+real change with no defined mode, transubstantiation. "This is my body"
+excludes memorial and decides nothing among the other four.
+
+## Verdicts, per passage, for every position at once
+
+| Verdict | Meaning |
+|---|---|
+| states | the passage says this position's mark |
+| excludes | the passage rules this position out |
+| compatible | fits, or doesn't touch it, but decides nothing |
+| disputed | graders could not reach a majority |
+
+A writer counts as holding a position only through a passage that states
+its mark, or that excludes every rival. Silence is never evidence.
+
+## Method
+
+1. **Index:** every English paragraph in the library, embedded with the same
+   model as site search.
+2. **Search:** for each question, the nearest passages to every phrasing
+   (the question, its queries and shared ground, and each position's
+   statement, mark and exclusions), then reranked. Up to 180 early and 30
+   later candidates per question.
+3. **Blind judging:** Kimi K2.6 and GPT-OSS-120B (labs the translation lanes do not use) see the positions only as letters,
+   shuffled per passage, with no names or churches, and give every position
+   a verdict with the deciding words quoted. Splits go to Nemotron; with no
+   majority the verdict is disputed. (Owner exception to the translate-only
+   rule, recorded in `LLM_VENDOR_API_SOP.md`.)
+4. **Audit:** Claude 4.5+ subagents re-check every "states", "excludes" and
+   "disputed" verdict, and every earliest statement of a position, against
+   the passage and, where it decides the date, the original language. An
+   audited change wins and is logged with its reason.
+5. **Report:** `doctrine_map.py report` writes the site data, including how
+   many writers were searched in each century, so readers can see how deep the
+   evidence goes.
+
+## Fairness rules
+
+- Graders never see a position's name or which church holds it.
+- Silence is never evidence.
+- Words both sides claim ("through the Son", "faith alone", "sacrifice",
+  "this is my body") are shared ground and decide nothing.
+- The same rules apply to every doctrine, whichever church holds it.
+- Every grade on the page shows its quote and links to the full passage.
+- Commentary is written by the orchestrating agent from the graded evidence
+  and verified sources, never by the grading models.
+
+## The page
+
+- A page per question: each position as a timeline row (100 to 800), marking
+  passages that state it or exclude it, with its earliest statement called
+  out, plus a band for the shared ground.
+- A filter by tradition.
+- Every deciding passage in date order, with what it decides and what it
+  leaves open.
+- Tapping a mark opens the passage.
+- Rebuilt by every ship; re-graded incrementally as new works are certified.
+
+## Hard boundaries the audit checks first
+
+From the definitions research (2026-10-03). These marks are close in early
+texts; every "states" or "excludes" verdict on them gets an audit.
+
+- Eucharist presence: Cyril of Jerusalem's "what seems bread is not bread"
+  (near the transubstantiation mark); Theodoret and Gelasius "the nature of
+  bread remains" (states sacramental union, excludes real change); Augustine's
+  figure language beside his realist language; "transformed" against the
+  Lutheran mark.
+- Eucharist sacrifice: "offering" only excludes no-sacrifice; propitiatory
+  needs a stated purpose (sins, the dead) or Christ named as victim.
+- Rome: Ignatius "presides in love", Irenaeus "more powerful origin" fit both
+  honour and jurisdiction.
+- Mary: "spotless", "all-holy" state personal sinlessness at most; a bodily
+  taking-up states Dormition and Assumption alike unless her death is
+  addressed.
+- After death: the Orthodox defining text itself speaks of punishment in
+  Hades; its line with purgatory is thin.
+- Justification: theosis has no defining text and overlaps infused
+  righteousness.
+- Scripture: only a claim about the final norm decides; praise is shared
+  ground.
+- Predestination: only passages about those passed by decide single vs double.
+- Church order: Jerome's "bishop and presbyter were once the same" states the
+  presbyterian mark only if he denies the bishop's present authority.
+- Attribution: works of uncertain authorship (e.g. the "Anaphora of
+  Epiphanius") carry their uncertainty onto the page instead of a firm date.
+
+## Known limits
+
+- Evidence is only as deep as what the library has translated; the page says
+  so.
+- English translations are graded, not the originals. A disputed or
+  first-explicit passage is checked against the source language in the audit.

@@ -565,6 +565,93 @@ def normalize_model(model: str) -> str:
     return m
 
 
+# ---------------------------------------------------------------- rate limits
+# One slot ledger per model in /tmp/vendor-rate/<model>.json, shared by every
+# process (lanes, grading, intake) through an flock. A call waits for a free
+# slot instead of drawing a 429. Limits start from Cloudflare's published
+# numbers and adapt: a 429 cuts that model's allowance by a quarter for 10
+# minutes; a clean 10 minutes lets it climb back toward the ceiling.
+RATE_DIR = Path("/tmp/vendor-rate")
+RATE_CEILING = {  # requests per minute, per account, per model
+    "default": 280,          # Workers AI text generation default is 300/min
+    "paid": 18,              # paid-access models: 20/min (50 with prepaid AI Gateway credits)
+    "nvidia": 35,            # NIM free-tier pacing
+}
+PAID_ACCESS = ("glm-5", "kimi-k2", "deepseek-v4", "qwen3.8")
+
+
+def _rate_class(model: str) -> str:
+    if is_nvidia_model(model):
+        return "nvidia"
+    return "paid" if any(k in model for k in PAID_ACCESS) else "default"
+
+
+def _rate_file(model: str) -> Path:
+    RATE_DIR.mkdir(exist_ok=True)
+    return RATE_DIR / (re.sub(r"[^A-Za-z0-9._-]+", "_", model) + ".json")
+
+
+def rate_acquire(model: str, max_wait: float = 900.0) -> None:
+    """Block until model has a free slot in the last 60 s."""
+    import fcntl
+    ceiling = RATE_CEILING[_rate_class(model)]
+    path = _rate_file(model)
+    deadline = time.time() + max_wait
+    while True:
+        with open(path, "a+") as fh:
+            fcntl.flock(fh, fcntl.LOCK_EX)
+            fh.seek(0)
+            try:
+                st = json.loads(fh.read() or "{}")
+            except ValueError:
+                st = {}
+            now = time.time()
+            hits = [t for t in st.get("hits", []) if now - t < 60]
+            limit = st.get("limit", ceiling)
+            if now - st.get("cut_at", 0) > 600 and limit < ceiling:
+                limit = min(ceiling, limit + max(1, ceiling // 10))  # recover after a clean 10 min
+                st["cut_at"] = now - 300
+            if len(hits) < limit or now > deadline:
+                hits.append(now)
+                st.update(hits=hits, limit=limit)
+                fh.seek(0); fh.truncate(); fh.write(json.dumps(st))
+                return
+            wait = 60 - (now - hits[0]) + 0.05
+        time.sleep(min(max(wait, 0.2), 5.0))
+
+
+def rate_throttled(model: str) -> None:
+    """A 429 got through: lower this model's allowance for a while."""
+    import fcntl
+    path = _rate_file(model)
+    with open(path, "a+") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        fh.seek(0)
+        try:
+            st = json.loads(fh.read() or "{}")
+        except ValueError:
+            st = {}
+        limit = st.get("limit", RATE_CEILING[_rate_class(model)])
+        st["limit"] = max(2, int(limit * 0.75))
+        st["cut_at"] = time.time()
+        st["throttles"] = st.get("throttles", 0) + 1
+        fh.seek(0); fh.truncate(); fh.write(json.dumps(st))
+
+
+def rate_status() -> dict:
+    """Per model: calls in the last minute, current allowance, 429s seen."""
+    out = {}
+    for f in sorted(RATE_DIR.glob("*.json")) if RATE_DIR.exists() else []:
+        try:
+            st = json.loads(f.read_text() or "{}")
+        except ValueError:
+            continue
+        now = time.time()
+        out[f.stem] = {"last_min": sum(1 for t in st.get("hits", []) if now - t < 60),
+                       "limit": st.get("limit"), "throttles": st.get("throttles", 0)}
+    return out
+
+
 def vendor_call(
     model: str,
     messages: list,
@@ -574,8 +661,26 @@ def vendor_call(
     account: str = DEFAULT_ACCOUNT,
     max_tokens: int | None = None,
 ) -> dict:
-    """Route to Workers AI or NIM using researched profiles."""
+    """Route to Workers AI or NIM using researched profiles, inside the
+    shared per-model rate limit."""
     model = normalize_model(model)
+    rate_acquire(model)
+    r = _vendor_call_raw(model, messages, cf_token=cf_token, nv_token=nv_token, account=account,
+                         max_tokens=max_tokens)
+    if "429" in str(r.get("error", "")):
+        rate_throttled(model)
+    return r
+
+
+def _vendor_call_raw(
+    model: str,
+    messages: list,
+    *,
+    cf_token: str = "",
+    nv_token: str = "",
+    account: str = DEFAULT_ACCOUNT,
+    max_tokens: int | None = None,
+) -> dict:
     if is_nvidia_model(model):
         if not nv_token:
             return {"error": "no NV_API_KEY", "ms": 0}
