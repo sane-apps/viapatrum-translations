@@ -1,0 +1,5 @@
+This fragment was written by Severianus of Gabala (fl. c. 400), a Christian bishop and preacher. It is a short comment on the opening of Paul's letter to Philemon. Severianus wrote it to explain how Paul prepares his reader for the request he is about to make.
+
+The occasion is Paul's appeal on behalf of Onesimus. Severianus observes that Paul often places an unusual word at the start of a letter as a preparatory move for the argument to come. In Philemon, Paul is about to make a request for Onesimus, and he shows the credibility of his appeal through his own worth.
+
+A reader should know that the key term rendered here as "unusual word" refers to a striking word Paul uses for rhetorical preparation. Paul's "worth" is his claim to consideration, and that worth consists in his being in chains, meaning his imprisonment. The lowly state of being bound is what gives his appeal its persuasive force. The text comments on the letter to Philemon, and the person a reader will meet is Onesimus, the one on whose behalf Paul makes his request.

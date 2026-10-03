@@ -1,0 +1,5 @@
+Severianus of Gabala (fl. c. 400) wrote this commentary on the Epistle to Titus. The surviving fragments come from catena quotations on Titus, addressing interpretive problems in the letter: why Paul cites a pagan poet, how to reconcile purity language with the Creator, and how to apply instructions to women.
+
+Severianus explains that Paul quotes the Cretan poet's line about Cretans not to endorse the poet's theology but to affirm only the truth about Cretan character, explicitly distancing himself from the poet's false claim about Zeus's tomb.
+
+Severianus argues that all things are pure by creation, so impurity lies in human defilement, not in the Creator. He interprets Paul's instruction to older women as showing that women are called to a clerical inheritance, since Paul would not have called them 'reverent' otherwise. He also distinguishes integrity of mind from dignity of work, urging avoidance of corrupt thoughts as well as corrupt deeds. The author cites the Epistle to Titus by standard New Testament book name and chapter-verse, such as Tit 1:12-13, 1:15-16, 2:3, and 2:7.

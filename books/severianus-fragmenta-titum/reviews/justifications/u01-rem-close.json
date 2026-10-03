@@ -1,0 +1,218 @@
+{
+ "excerpt_id": "severianus-fragmenta-titum:u01-rem-close",
+ "section": "u01-rem-close",
+ "edition": {
+  "language": "grc",
+  "path": "books/severianus-fragmenta-titum/translations/sftit_u01_rem_source.json"
+ },
+ "source_text": "Tit 2,7 Τὸ τῆς ἀδιαφορίας\n\nἐπὶ τοῦ νοῦ ἔλαβεν, τὸ δὲ τῆς σεμνότητος ἐπὶ τοῦ ἔργου, ἵνα μὴ μόνον ἔργου ἀπέχῃ\nφθαρτοῦ ἀλλὰ καὶ νοήματος.\n",
+ "thought_title": "Integrity of mind and dignity of work",
+ "orientation": "Severianus is explaining Paul's instruction in Titus 2:7, distinguishing where integrity and dignity apply.",
+ "pass_a_gloss": "Tit 2:7 The thing of integrity he took upon the mind, but the thing of dignity upon the work, in order that he may hold back not only from a corrupt work but also from a corrupt thought.",
+ "lemmas": [
+  {
+   "form": "ἀδιαφορίας",
+   "lemma": "ἀδιαφορία",
+   "gloss": "integrity"
+  },
+  {
+   "form": "νοῦ",
+   "lemma": "νοῦς",
+   "gloss": "mind"
+  },
+  {
+   "form": "ἔλαβεν",
+   "lemma": "λαμβάνω",
+   "gloss": "he took"
+  },
+  {
+   "form": "σεμνότητος",
+   "lemma": "σεμνότης",
+   "gloss": "dignity"
+  },
+  {
+   "form": "ἔργου",
+   "lemma": "ἔργον",
+   "gloss": "work"
+  },
+  {
+   "form": "ἀπέχῃ",
+   "lemma": "ἀπέχω",
+   "gloss": "he may hold back from"
+  },
+  {
+   "form": "φθαρτοῦ",
+   "lemma": "φθαρτός",
+   "gloss": "corrupt"
+  },
+  {
+   "form": "νοήματος",
+   "lemma": "νόημα",
+   "gloss": "thought"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Τὸ τῆς ἀδιαφορίας",
+   "english": "The thing of integrity",
+   "why": "Keeps the article-noun construction literal, matching the source's abstract phrasing without smoothing it into 'integrity' alone.",
+   "rejected": [
+    "Integrity",
+    "The matter of integrity"
+   ]
+  },
+  {
+   "term": "ἔλαβεν",
+   "english": "he took",
+   "why": "The verb means 'took' or 'received'; 'applied' would be interpretive, and the source says Paul took the quality upon the mind.",
+   "rejected": [
+    "he applied",
+    "he understood"
+   ]
+  },
+  {
+   "term": "ἀπέχῃ",
+   "english": "he may hold back from",
+   "why": "The subjunctive with ἵνα expresses purpose; 'hold back from' preserves the middle sense of keeping oneself away.",
+   "rejected": [
+    "he abstains from",
+    "he avoids"
+   ]
+  },
+  {
+   "term": "φθαρτοῦ",
+   "english": "corrupt",
+   "why": "The adjective means perishable or corrupt; 'corrupt' fits the moral contrast with integrity and dignity.",
+   "rejected": [
+    "perishable",
+    "destructive"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Titus 2:7",
+   "method": "wording",
+   "note": "Τὸ τῆς ἀδιαφορίας... τὸ δὲ τῆς σεμνότητος"
+  }
+ ],
+ "pass_b_english": [
+  "In Tit 2:7, Paul took integrity as a matter of the mind, and dignity as a matter of work, so that the teacher may refrain not only from corrupt work but also from corrupt thought."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "b00961ee28bf3b0e6543700d344860e82e34871bf10ae574f1af25854f52ca22",
+ "source_sha256": "ef4c088e19b896852861a5a3124cca8163373d82ea58dbd32f6bd36009ce0958",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "hold back",
+    "source_quote": "ἀπέχῃ",
+    "why": "Glossary requires 'integrity' for ἀδιαφορία and 'dignity' for σεμνότητος, but ἀπέχῃ means 'abstain/keep away from,' not 'hold back.'",
+    "fix": "so that he may abstain not only from corrupt work but also from corrupt thought.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἀπέχω includes 'hold back from'; LSJ cites this sense. Within normal range, not a major error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "He took integrity as a matter of the mind, and dignity as a matter of work, so that he may hold back not only from corrupt work but also from corrupt thought.",
+     "why": "Subject of 'he may hold back' unclear; who is holding back? Titus? The teacher? Generic Christian?",
+     "fix": "Specify subject: the teacher/Titus",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "integrity",
+     "why": "Greek likely ἀφθορία (incorruption) or similar; 'integrity' may obscure physical/moral purity nuance needed for contrast with 'dignity'.",
+     "fix": "Check Greek; perhaps 'incorruption' or 'purity'",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "He took integrity as a matter of the mind",
+     "why": "'He' could be Paul or Severianus; no antecedent in this section.",
+     "fix": "Replace with 'Paul took integrity…'",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "so that he may hold back not only from corrupt work but also from corrupt thought",
+     "why": "'Hold back from' is awkward; the argument needs 'refrain from' or 'be kept from'.",
+     "fix": "Use 'refrain from' or 'be kept from'.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "He took integrity as a matter of the mind, and dignity as a matter of work, so that he may hold back not only from corrupt work but also from corrupt thought.",
+     "new": "Paul took integrity as a matter of the mind, and dignity as a matter of work, so that the teacher may refrain not only from corrupt work but also from corrupt thought."
+    }
+   ],
+   "fixed": [
+    "Subject of 'he may hold back' unclear: specified 'the teacher'.",
+    "'integrity' is the glossary-approved rendering for ἀδιαφορία; no change needed.",
+    "'He' replaced with 'Paul' to clarify the antecedent.",
+    "'hold back from' replaced with 'refrain from' for natural English."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "Paul took integrity as a matter of the mind, and dignity as a matter of work",
+     "why": "No clear biblical basis given; seems to invent distinction without support.",
+     "fix": "Cite which Titus verse this comments on.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "Paul took integrity as a matter of the mind, and dignity as a matter of work, so that the teacher may refrain not only from corrupt work but also from corrupt thought.",
+     "new": "In Tit 2:7, Paul took integrity as a matter of the mind, and dignity as a matter of work, so that the teacher may refrain not only from corrupt work but also from corrupt thought."
+    }
+   ],
+   "fixed": [
+    "Added the Titus verse reference (Tit 2:7) to the English to address the lack of biblical basis."
+   ]
+  }
+ ]
+}

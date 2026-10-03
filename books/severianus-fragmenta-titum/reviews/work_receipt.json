@@ -1,0 +1,61 @@
+{
+ "slug": "severianus-fragmenta-titum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 151,
+   "moved_start": "Tit 1,13b Ἐπειδὴ πολλάκις ἐπαινῶν ἐπιείκειαν ἐκδιδάσκει, εὗρ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 14,
+   "moved_start": "καὶ τοῦτό ἐστι"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 25,
+   "moved_start": "Tit 2,7 Τὸ τῆς ἀδιαφορίας"
+  }
+ ],
+ "brief_sha256": "b00961ee28bf3b0e6543700d344860e82e34871bf10ae574f1af25854f52ca22",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T02:35:44Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "52d901af95ba1fea472c89c37e8d0d15bec88174f72d7a2ed57ed8983c32f124",
+   "english_sha256": "ceeb7f80362a10b6d11e846956505225bd1d1a4ef713090bee2b93a9fa8191ab",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "3069c33b1ada7d9522b9b5c8882611116ad1c846da93cf81ce92ca8b3308e7de",
+   "english_sha256": "de3a19c24dbf71f974606b21dac5d2620d7c6134da0ef4f5a39c484f0f65f34d",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "d020e7abfd63551b9ab48d15b5c39e86d2e8baa0f7b206752e2b43f5fa62615e",
+   "english_sha256": "c6862ad3692b324fb152702d9bf91566078be7d64c1c1bfbdf91b915f8e132f7",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "ef4c088e19b896852861a5a3124cca8163373d82ea58dbd32f6bd36009ce0958",
+   "english_sha256": "0a2ae361136ffad097883e3e3508e543858cc21568984646f1ad79a05dace293",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

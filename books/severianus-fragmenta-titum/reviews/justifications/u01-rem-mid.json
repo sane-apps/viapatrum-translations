@@ -1,0 +1,497 @@
+{
+ "excerpt_id": "severianus-fragmenta-titum:u01-rem-mid",
+ "section": "u01-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/severianus-fragmenta-titum/translations/sftit_u01_rem_source.json"
+ },
+ "source_text": "καὶ τοῦτό ἐστι\nτὸ θεὸν ὁμολογοῦσιν εἰδέναι, τοῖς δὲ ἔργοις ἀρνοῦνται. Tit 2,3 Ἔδειξεν ὅτι εἰς\nκλῆρον τὰς γυναῖκας καλεῖ· οὐ γὰρ ἂν ἱεροπρεπεῖς εἶπεν.",
+ "thought_title": "Women called to clerical inheritance",
+ "orientation": "Severianus is commenting on Titus 1:16 and 2:3, explaining that Paul's calling older women reverent shows they are summoned to a clerical inheritance.",
+ "pass_a_gloss": "And this is what they profess to know God, but by their works they deny him. Tit 2:3 He showed that he calls women to a share in the clerical inheritance; for he would not have said reverent.",
+ "lemmas": [
+  {
+   "form": "ὁμολογοῦσιν",
+   "lemma": "ὁμολογέω",
+   "gloss": "they profess"
+  },
+  {
+   "form": "εἰδέναι",
+   "lemma": "οἶδα",
+   "gloss": "to know"
+  },
+  {
+   "form": "ἀρνοῦνται",
+   "lemma": "ἀρνέομαι",
+   "gloss": "they deny"
+  },
+  {
+   "form": "Ἔδειξεν",
+   "lemma": "δείκνυμι",
+   "gloss": "he showed"
+  },
+  {
+   "form": "κλῆρον",
+   "lemma": "κλῆρος",
+   "gloss": "clerical inheritance"
+  },
+  {
+   "form": "γυναῖκας",
+   "lemma": "γυνή",
+   "gloss": "women"
+  },
+  {
+   "form": "καλεῖ",
+   "lemma": "καλέω",
+   "gloss": "he calls"
+  },
+  {
+   "form": "ἱεροπρεπεῖς",
+   "lemma": "ἱεροπρεπής",
+   "gloss": "reverent"
+  },
+  {
+   "form": "εἶπεν",
+   "lemma": "λέγω",
+   "gloss": "he said"
+  }
+ ],
+ "choices": [
+  {
+   "term": "κλῆρον",
+   "english": "clerical inheritance",
+   "why": "The glossary fixes κλῆρον as clerical inheritance, the sacred office to which women are summoned.",
+   "rejected": [
+    "office",
+    "lot",
+    "inheritance"
+   ]
+  },
+  {
+   "term": "ἱεροπρεπεῖς",
+   "english": "reverent",
+   "why": "The glossary fixes ἱεροπρεπεῖς as reverent, befitting a sacred office.",
+   "rejected": [
+    "godly",
+    "holy in demeanor",
+    "sacred-looking"
+   ]
+  },
+  {
+   "term": "ὁμολογοῦσιν εἰδέναι",
+   "english": "they profess to know",
+   "why": "Keeps the present tense and the infinitive construction, matching the source's claim about what they say.",
+   "rejected": [
+    "they claim to know",
+    "they confess to know"
+   ]
+  },
+  {
+   "term": "ἀρνοῦνται",
+   "english": "they deny",
+   "why": "Keeps the middle voice force of denial by deeds, contrasting with profession.",
+   "rejected": [
+    "they disown",
+    "they reject"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Titus 1:16",
+   "method": "wording",
+   "note": "θεὸν ὁμολογοῦσιν εἰδέναι, τοῖς δὲ ἔργοις ἀρνοῦνται"
+  },
+  {
+   "display": "Titus 2:3",
+   "method": "wording",
+   "note": "ἱεροπρεπεῖς"
+  }
+ ],
+ "pass_b_english": [
+  "And this is what it means: “They profess to know God, but they deny him by their works” (Titus 1:16). Paul showed that he calls women to a share in the clerical inheritance, for he would not have called them reverent in Titus 2:3 otherwise."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "b00961ee28bf3b0e6543700d344860e82e34871bf10ae574f1af25854f52ca22",
+ "source_sha256": "d020e7abfd63551b9ab48d15b5c39e86d2e8baa0f7b206752e2b43f5fa62615e",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "(Titus 1:16)",
+     "source_quote": "Tit 2,3",
+     "why": "English cites Titus 1:16 but source marks Tit 2,3 for this clause.",
+     "fix": "(Titus 2:3)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source cites Tit 2,3 but English cites Titus 1:16; wrong scripture reference misleads reader."
+    }
+   ],
+   "edits": [
+    {
+     "old": "(Titus 1:16)",
+     "new": "(Titus 2:3)"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "(Titus 2:3)",
+     "source_quote": "τοῖς δὲ ἔργοις ἀρνοῦνται. Tit 2,3",
+     "why": "The citation \"Titus 2:3\" is wrong; the quote \"They profess to know God, but they deny him by their works\" matches Titus 1:16, not 2:3. The Greek source labels the next sentence as Tit 2,3, not the quote.",
+     "fix": "(Titus 1:16). He showed...",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "agreed_by": [
+      "@cf/moonshotai/kimi-k2.6",
+      "@cf/zai-org/glm-5.2"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "(Titus 2:3)",
+     "new": "(Titus 1:16)"
+    }
+   ],
+   "fixed": [
+    "The citation was corrected from Titus 2:3 to Titus 1:16, matching the quoted verse."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "He showed that he calls women to a clerical inheritance",
+     "why": "Unclear whether 'he' is Paul or the commentator; antecedent lost.",
+     "fix": "Specify 'Paul showed' or 'the apostle showed'.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "He showed that he calls women to a clerical inheritance, for he would not have called them reverent otherwise",
+     "why": "Non sequitur: no prior mention of women or 'reverent' in given text.",
+     "fix": "Supply missing context about Titus 2:3 or 'reverent' requirement.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "clerical inheritance",
+     "why": "'Clerical' suggests modern clergy; likely mistranslates Greek kleros or diakonia.",
+     "fix": "Use 'share in the ministry' or 'inheritance of service'.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "he calls women to a clerical inheritance",
+     "why": "Clerical inheritance is odd; context suggests ordination or church office.",
+     "fix": "Use 'ordination' or 'ministry' instead of 'clerical inheritance.'",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "He showed that he calls women to a clerical inheritance, for he would not have called them reverent otherwise.",
+     "why": "Unclear who 'he' is—Paul or God—and what 'reverent' refers to.",
+     "fix": "Clarify: 'Paul showed that God calls women...' and specify the reverent reference.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "He showed that he calls women to a clerical inheritance, for he would not have called them reverent otherwise.",
+     "new": "Paul showed that God calls women to a clerical inheritance, for he would not have called them reverent otherwise."
+    }
+   ],
+   "fixed": [
+    "The speaker ambiguity is real; I have specified Paul as the one showing and God as the one calling.",
+    "The non sequitur is addressed by clarifying the agents, though the fragment itself lacks prior context.",
+    "The term 'clerical inheritance' is the work brief's required rendering for κλῆρον, so I have kept it.",
+    "The term 'clerical inheritance' is the work brief's required rendering for κλῆρον, so I have kept it.",
+    "The speaker ambiguity is real; I have specified Paul as the one showing and God as the one calling."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "Paul showed that God calls women to a clerical inheritance, for he would not have called them reverent otherwise",
+     "why": "Logic is opaque; 'reverent' (Greek σώφρονας?) does not obviously imply clerical status.",
+     "fix": "Clarify the Greek term and exegetical link being assumed.",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "Paul showed that God calls women to a clerical inheritance, for he would not have called them reverent otherwise.",
+     "why": "It is unclear how this follows from Titus 1:16; the logical connection is opaque.",
+     "fix": "Explain the exegetical link between 'deny him by works' and women's calling.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "clerical inheritance",
+     "why": "Anachronistic term; patristic Greek likely refers to spiritual or priestly dignity.",
+     "fix": "Use 'priestly calling' or 'sacred ministry' instead of 'clerical inheritance.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "Paul showed that God calls women to a clerical inheritance, for he would not have called them reverent otherwise.",
+     "new": "Paul showed that he calls women to a clerical inheritance, for he would not have called them reverent otherwise."
+    }
+   ],
+   "fixed": [
+    "The speaker problem is not real: the source says 'He showed that he calls women to a clerical inheritance,' and the English already attributes the showing to Paul, which matches the source's implicit subject.",
+    "The mistranslation problem about 'clerical inheritance' is not real: the glossary mandates 'clerical inheritance' for κλῆρον, so the English follows the work brief.",
+    "The logic problem is not real: the source itself states the exegetical link ('for he would not have said reverent'), and the English preserves it."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "Paul showed that he calls women to a clerical inheritance",
+     "why": "Unclear if author states this or paraphrases Paul; no quotation marks",
+     "fix": "Clarify: 'The author infers that Paul...'",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "for he would not have called them reverent otherwise",
+     "why": "Antecedent of 'them' unclear; no prior mention of women being 'reverent'",
+     "fix": "Supply missing context: 'reverent' in Titus 2:3 or 2:5",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "clerical inheritance",
+     "why": "Anachronistic; 'clerical' implies later clergy system, not Paul's era",
+     "fix": "Use 'ministerial share' or 'share in the lot/office'",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "Paul showed that he calls women to a clerical inheritance",
+     "why": "'Clerical inheritance' is anachronistic and unclear; context suggests women are included in religious devotion.",
+     "fix": "Consider 'a share in godly reverence' or 'a religious calling' instead.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "And this is what it means",
+     "why": "The logical link between Titus 1:16 and 'women to a clerical inheritance' is missing.",
+     "fix": "Add the missing reasoning connecting the verse to women's roles.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "And this is what it means: “They profess to know God, but they deny him by their works” (Titus 1:16). Paul showed that he calls women to a clerical inheritance, for he would not have called them reverent otherwise.",
+     "new": "And this is what it means: “They profess to know God, but they deny him by their works” (Titus 1:16). The author infers that Paul calls women to a share in the clerical inheritance, for he would not have called them reverent in Titus 2:3 otherwise."
+    }
+   ],
+   "fixed": [
+    "The speaker problem is addressed by clarifying that the author infers Paul's call.",
+    "The antecedent of 'them' is clarified by adding 'in Titus 2:3'.",
+    "The anachronism of 'clerical inheritance' is softened by adding 'a share in'.",
+    "The logical link is improved by making the inference explicit."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "The author infers",
+     "why": "Unclear who 'The author' is—Paul? The fragment's author? A prior commentator?",
+     "fix": "Clarify: 'The commentator infers' or 'I infer'.",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "he would not have called them reverent",
+     "why": "Antecedent of 'he' unclear after section break; Paul or God?",
+     "fix": "Specify 'Paul' explicitly.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "clerical inheritance",
+     "why": "'Inheritance' is odd for office; Greek may mean 'share in ministry' or 'clerical order'.",
+     "fix": "Use 'clerical office' or 'ministry'.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "The author infers that Paul calls women to a share in the clerical inheritance, for he would not have called them reverent in Titus 2:3 otherwise.",
+     "new": "Paul showed that he calls women to a clerical inheritance, for he would not have called them reverent in Titus 2:3 otherwise."
+    }
+   ],
+   "fixed": [
+    "The author infers: changed to Paul showed, matching the source's implied subject Paul.",
+    "he would not have called them reverent: antecedent now Paul, matching the source.",
+    "clerical inheritance: kept as the glossary-approved rendering for κλῆρον."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "clerical inheritance",
+     "why": "No other variant appears, but 'clerical' is anachronistic—Greek likely 'kleros' (lot/inheritance, clergy). Reader may miss the wordplay.",
+     "fix": "Use 'inheritance of the clergy' or gloss 'kleros'.",
+     "variants": [
+      {
+       "text": "clerical inheritance",
+       "sections": [
+        "u01-rem-mid"
+       ]
+      },
+      {
+       "text": "clerical",
+       "sections": []
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "And this is what it means",
+     "why": "Unclear whether this introduces Severianus's comment or continues Paul's voice from 1:16.",
+     "fix": "Clarify transition to new topic.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "Paul showed that he calls women to a clerical inheritance, for he would not have called them reverent in Titus 2:3 otherwise.",
+     "why": "Logical leap is compressed: why does 'reverent' imply clerical status? Argument elliptical.",
+     "fix": "Expand: 'reverent' (hieroprepes) means 'befitting sacred persons'.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "clerical inheritance",
+     "why": "'Clerical' suggests modern clergy office; Greek 'kleros' means lot/share, later 'clergy'. Anachronistic.",
+     "fix": "Translate 'inheritance of the sacred lot' or similar.",
+     "variants": null
+    },
+    {
+     "class": "wrong_scripture",
+     "quote": "And this is what it means: \"They profess to know God, but they deny him by their works\" (Titus 1:16).",
+     "why": "Verse 1:16 follows 1:15 about purity; but the quotation is attached to women's clerical inheritance with no logical connection.",
+     "fix": "Note that 1:16 belongs to prior argument about defilement, not women.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "calls women to a clerical inheritance",
+     "why": "Paul in Titus 2:3 addresses older women's behavior; 'clerical inheritance' seems to overread the passage.",
+     "fix": "Consider 'share in the ministry' or 'reverent dignity' if the Greek does not support 'clerical.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "And this is what it means: “They profess to know God, but they deny him by their works” (Titus 1:16).",
+     "new": "And this is what it means: “They profess to know God, but they deny him by their works” (Titus 1:16)."
+    },
+    {
+     "old": "Paul showed that he calls women to a clerical inheritance, for he would not have called them reverent in Titus 2:3 otherwise.",
+     "new": "Paul showed that he calls women to a share in the clerical inheritance, for he would not have called them reverent in Titus 2:3 otherwise."
+    }
+   ],
+   "fixed": [
+    "The English already says what the source says for the speaker transition; no change needed.",
+    "The logical leap is inherent in the source's compressed argument; the English preserves it faithfully.",
+    "The scripture reference is correct as given in the source; no change needed."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "(Titus 1:16)",
+    "source_quote": "Tit 2,3",
+    "why": "English cites Titus 1:16 but source marks Tit 2,3 for this sentence.",
+    "fix": "(Titus 2:3)",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source 'Tit 2,3' is a section marker, not the scripture citation; the quote matches Titus 1:16 exactly."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}
