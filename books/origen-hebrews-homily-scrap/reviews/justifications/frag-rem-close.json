@@ -1,0 +1,266 @@
+{
+ "excerpt_id": "origen-hebrews-homily-scrap:frag-rem-close",
+ "section": "frag-rem-close",
+ "edition": {
+  "language": "grc",
+  "path": "books/origen-hebrews-homily-scrap/translations/heb_frag_rem_source.json"
+ },
+ "source_text": "Ἡ δὲ εἰς ἡμᾶς φθάσασα ἱστορία, ὑπό τινων μὲν λεγόντων, ὅτι\n\nΚλήμης ὁ γενόμενος ἐπίσκοπος Ῥωμαίων ἔγραψε Ἐπιστολήν· ὑπό τινων δὲ, ὅτι\nΛουκᾶς ὁ γράψας τὸ Εὐαγγέλιον, καὶ τὰς Πράξεις.\n",
+ "thought_title": "The tradition that reached us about the epistle's writer",
+ "orientation": "Origen is closing his discussion of Hebrews' authorship by reporting the two traditions that have reached him about who wrote it.",
+ "pass_a_gloss": "But the tradition that reached us, some saying that Clement, who became bishop of the Romans, wrote the Epistle; but others, that Luke, who wrote the Gospel and the Acts, did.",
+ "lemmas": [
+  {
+   "form": "φθάσασα",
+   "lemma": "φθάνω",
+   "gloss": "having reached"
+  },
+  {
+   "form": "ἱστορία",
+   "lemma": "ἱστορία",
+   "gloss": "tradition"
+  },
+  {
+   "form": "λεγόντων",
+   "lemma": "λέγω",
+   "gloss": "saying"
+  },
+  {
+   "form": "γενόμενος",
+   "lemma": "γίγνομαι",
+   "gloss": "having become"
+  },
+  {
+   "form": "ἐπίσκοπος",
+   "lemma": "ἐπίσκοπος",
+   "gloss": "bishop"
+  },
+  {
+   "form": "ἔγραψε",
+   "lemma": "γράφω",
+   "gloss": "wrote"
+  },
+  {
+   "form": "γράψας",
+   "lemma": "γράφω",
+   "gloss": "having written"
+  },
+  {
+   "form": "Εὐαγγέλιον",
+   "lemma": "εὐαγγέλιον",
+   "gloss": "Gospel"
+  },
+  {
+   "form": "Πράξεις",
+   "lemma": "πρᾶξις",
+   "gloss": "Acts"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἡ δὲ εἰς ἡμᾶς φθάσασα ἱστορία",
+   "english": "But the tradition that reached us",
+   "why": "Keeps the adversative δέ and renders ἱστορία with the glossary's 'tradition'; φθάσασα as 'reached' preserves the perfective sense of arrival.",
+   "rejected": [
+    "But the account that came to us",
+    "But the history that arrived to us"
+   ]
+  },
+  {
+   "term": "ὑπό τινων μὲν λεγόντων",
+   "english": "some saying",
+   "why": "Renders the genitive absolute with μὲν as a participial clause, preserving the contrast with the following δέ.",
+   "rejected": [
+    "by some who say",
+    "on the one hand by some saying"
+   ]
+  },
+  {
+   "term": "Κλήμης ὁ γενόμενος ἐπίσκοπος Ῥωμαίων",
+   "english": "Clement, who became bishop of the Romans",
+   "why": "Uses the brief's name 'Clement of Rome' in the gloss while keeping the source's participial phrase 'who became bishop of the Romans' literally.",
+   "rejected": [
+    "Clement who was made bishop of Rome",
+    "Clement, the one who became bishop of the Romans"
+   ]
+  },
+  {
+   "term": "Λουκᾶς ὁ γράψας τὸ Εὐαγγέλιον, καὶ τὰς Πράξεις",
+   "english": "Luke, who wrote the Gospel and the Acts",
+   "why": "Keeps the articular participle 'who wrote' and the definite articles on Gospel and Acts, matching the source's identification of Luke.",
+   "rejected": [
+    "Luke the writer of the Gospel and Acts",
+    "Luke, the one who wrote the Gospel and the Acts"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "The tradition that has come down to us says that some claim Clement of Rome, who became bishop of Rome, wrote the Epistle, while others claim it was Luke, the author of the Gospel and Acts."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "dcdded80442cdbf61a375eae7e732cc6416497085055f91bbcee201fe0957593",
+ "source_sha256": "71eac9af78500bc96f35a2d3072226fa7d7cfbc7328888cca327725a00a20e29",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "the one who wrote",
+    "source_quote": "Λουκᾶς ὁ γράψας τὸ Εὐαγγέλιον, καὶ τὰς Πράξεις",
+    "why": "Glossary fixes 'wrote' for Luke's source form; brief maps to modern name.",
+    "fix": "Luke, the author of the Gospel and Acts",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ὁ γράψας is correctly rendered 'the one who wrote'; no glossary issue evident."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "The tradition that has come down to us says that some claim",
+    "source_quote": "Ἡ δὲ εἰς ἡμᾶς φθάσασα ἱστορία, ὑπό τινων μὲν λεγόντων",
+    "why": "Source: tradition from some saying; English adds extra 'says that' layer.",
+    "fix": "The tradition that has come down to us from some says that Clement...",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἱστορία + λεγόντων naturally yields 'tradition...says that some claim'; no meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "Luke, the one who wrote the Gospel and Acts",
+     "why": "Slight variation in phrasing may confuse about same person",
+     "fix": "Standardize to 'Luke, author of Gospel and Acts'",
+     "variants": [
+      {
+       "text": "Luke, the author of the Gospel and Acts",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "Luke, the one who wrote the Gospel and Acts",
+       "sections": [
+        "frag-rem-close"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "Luke, the one who wrote the Gospel and Acts",
+     "new": "Luke, author of the Gospel and Acts"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "Clement of Rome, who became bishop of the Romans",
+     "why": "Same person called 'Clement of Rome' and 'bishop of the Romans'",
+     "fix": "Use 'bishop of Rome' consistently or gloss once",
+     "variants": [
+      {
+       "text": "Clement of Rome",
+       "sections": [
+        "intro",
+        "frag-rem-close"
+       ]
+      },
+      {
+       "text": "Clement of Rome, who became bishop of the Romans",
+       "sections": [
+        "frag-rem-close"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "Clement of Rome, who became bishop of the Romans",
+     "new": "Clement of Rome, who became bishop of Rome"
+    }
+   ],
+   "fixed": [
+    "Changed 'bishop of the Romans' to 'bishop of Rome' for consistency with the name Clement of Rome."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "Luke, author of the Gospel and Acts",
+     "why": "Intro has 'the author' but close lacks article; reader may wonder if same person.",
+     "fix": "Make consistent: 'Luke, the author of the Gospel and Acts'",
+     "variants": [
+      {
+       "text": "Luke, the author of the Gospel and Acts",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "Luke, author of the Gospel and Acts",
+       "sections": [
+        "frag-rem-close"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "Luke, author of the Gospel and Acts",
+     "new": "Luke, the author of the Gospel and Acts"
+    }
+   ],
+   "fixed": [
+    "Added 'the' before 'author' to match the source's article and make the reference consistent."
+   ]
+  }
+ ]
+}

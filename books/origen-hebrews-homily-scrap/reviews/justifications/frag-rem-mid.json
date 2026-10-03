@@ -1,0 +1,210 @@
+{
+ "excerpt_id": "origen-hebrews-homily-scrap:frag-rem-mid",
+ "section": "frag-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/origen-hebrews-homily-scrap/translations/heb_frag_rem_source.json"
+ },
+ "source_text": "Εἴ τις οὖν Ἐκκλησία ἔχει\nταύτην τὴν Ἐπιστολὴν ὡς Παύλου, αὕτη εὐδοκιμείτω καὶ ἐπὶ τούτῳ, οὐ γὰρ εἰκῆ οἱ\nἀρχαῖοι ἄνδρες ὡς Παύλου αὐτὴν παραδεδώκασι. Τίς δὲ ὁ γράψας τὴν Ἐπιστολὴν, τὸ\nμὲν ἀληθὲς Θεὸς οἶδεν.",
+ "thought_title": "The church that holds Hebrews as Paul's may be approved, but only God knows the writer",
+ "orientation": "Origen has just given his own opinion that the thoughts are Paul's but the wording and composition are by a recorder of the apostle's teaching; now he turns to the church's reception of the epistle and the hidden identity of its actual writer.",
+ "pass_a_gloss": "If therefore any church has this Epistle as Paul's, let this church be approved also on this account; for not without reason have the ancients handed it down as Paul's. But who wrote the Epistle, the truth God knows.",
+ "lemmas": [
+  {
+   "form": "Ἐκκλησία",
+   "lemma": "ἐκκλησία",
+   "gloss": "church"
+  },
+  {
+   "form": "Ἐπιστολὴν",
+   "lemma": "ἐπιστολή",
+   "gloss": "epistle"
+  },
+  {
+   "form": "εὐδοκιμείτω",
+   "lemma": "εὐδοκιμέω",
+   "gloss": "let it be approved"
+  },
+  {
+   "form": "εἰκῆ",
+   "lemma": "εἰκῆ",
+   "gloss": "without reason"
+  },
+  {
+   "form": "ἀρχαῖοι",
+   "lemma": "ἀρχαῖος",
+   "gloss": "ancient"
+  },
+  {
+   "form": "ἄνδρες",
+   "lemma": "ἀνήρ",
+   "gloss": "men"
+  },
+  {
+   "form": "παραδεδώκασι",
+   "lemma": "παραδίδωμι",
+   "gloss": "they have handed down"
+  },
+  {
+   "form": "γράψας",
+   "lemma": "γράφω",
+   "gloss": "the one who wrote"
+  },
+  {
+   "form": "ἀληθὲς",
+   "lemma": "ἀληθής",
+   "gloss": "truth"
+  },
+  {
+   "form": "Θεὸς",
+   "lemma": "θεός",
+   "gloss": "God"
+  },
+  {
+   "form": "οἶδεν",
+   "lemma": "οἶδα",
+   "gloss": "knows"
+  }
+ ],
+ "choices": [
+  {
+   "term": "εὐδοκιμείτω",
+   "english": "let it be approved",
+   "why": "The verb is a third-person imperative expressing permission or commendation, and 'approved' keeps the sense of being well regarded without importing a modern institutional connotation.",
+   "rejected": [
+    "let it be commended",
+    "let it be praised"
+   ]
+  },
+  {
+   "term": "οὐ γὰρ εἰκῆ",
+   "english": "for not without reason",
+   "why": "The phrase is a causal clause explaining the approval; 'without reason' preserves the negative force of εἰκῆ and the explanatory γάρ.",
+   "rejected": [
+    "for not in vain",
+    "for not idly"
+   ]
+  },
+  {
+   "term": "οἱ ἀρχαῖοι ἄνδρες",
+   "english": "the ancients",
+   "why": "The glossary specifies 'the ancients' for this fixed term, and the noun ἄνδρες is implied in the English rendering.",
+   "rejected": [
+    "the ancient men",
+    "the men of old"
+   ]
+  },
+  {
+   "term": "τὸ μὲν ἀληθὲς Θεὸς οἶδεν",
+   "english": "the truth God knows",
+   "why": "The word order is fronted for emphasis on 'the truth,' and the μὲν particle is left untranslated as is natural in English; the clause states a simple fact about divine knowledge.",
+   "rejected": [
+    "God knows the truth",
+    "as for the truth, God knows"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Origen continues: So if any church holds this Epistle as Paul's, let it be commended even for this, for the ancients did not hand it down as Paul's without reason. But who wrote the Epistle, the truth God knows."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "dcdded80442cdbf61a375eae7e732cc6416497085055f91bbcee201fe0957593",
+ "source_sha256": "f527cd070607399ceb546c48c36e11b3c066ddac5d0e4d90815a53ed72f87f83",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "let it be approved",
+    "source_quote": "αὕτη εὐδοκιμείτω καὶ ἐπὶ τούτῳ",
+    "why": "Glossary requires 'church' for Ἐκκλησία; 'approved' misses 'even in this' (καὶ ἐπὶ τούτῳ).",
+    "fix": "let that church be commended even in this",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English 'let it be approved even in this' includes καὶ ἐπὶ τούτῳ; glossary claim is factually wrong about omission."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "the truth God knows",
+    "source_quote": "τὸ μὲν ἀληθὲς Θεὸς οἶδεν",
+    "why": "τὸ ἀληθὲς means 'the truth' as subject, but English reads like vocative; should be 'the truth is, God knows' or 'God alone knows the truth'.",
+    "fix": "the truth is, God knows",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'the truth God knows' renders τὸ ἀληθὲς Θεὸς οἶδεν correctly; English word order is archaic but unambiguous, not vocative."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "So if any church holds this Epistle as Paul's",
+     "why": "Shift from reporting Origen's view to direct address without clear speaker marker",
+     "fix": "Add 'Origen continues:' or similar",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "So if any church holds this Epistle as Paul's",
+     "new": "Origen continues: So if any church holds this Epistle as Paul's"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "let it be approved even in this",
+     "why": "'Approved' seems wrong; context suggests 'commended' or 'accepted' for holding this view.",
+     "fix": "let it be commended even for this",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "let it be approved even in this",
+     "new": "let it be commended even for this"
+    }
+   ],
+   "fixed": []
+  }
+ ]
+}

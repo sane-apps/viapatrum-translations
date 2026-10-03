@@ -1,0 +1,313 @@
+{
+ "excerpt_id": "origen-hebrews-homily-scrap:frag-rem-early",
+ "section": "frag-rem-early",
+ "edition": {
+  "language": "grc",
+  "path": "books/origen-hebrews-homily-scrap/translations/heb_frag_rem_source.json"
+ },
+ "source_text": "Τούτοις μεθ' ἕτερα ἐπιφέρει λέγων· Ἐγὼ δὲ\nἀποφαινόμενος εἴποιμ' ἂν, ὅτι τὰ μὲν νοήματα τοῦ Ἀποστόλου ἐστὶν, ἡ δὲ φράσις,\nκαὶ ἡ σύνθεσις, ἀπομνημονεύσαντός τινος τὰ ἀποστολικὰ, καὶ ὡσπερεὶ\nσχολιογραφήσαντος τὰ εἰρημένα ὑπὸ τοῦ διδασκάλου.",
+ "thought_title": "Paul's thoughts, another's wording",
+ "orientation": "Origen is giving his own opinion about who composed the Epistle to the Hebrews, after noting that its style is more polished than Paul's.",
+ "pass_a_gloss": "To these things after other things he adds, saying: But I, speaking my opinion, would say that the thoughts are the Apostle's, but the wording [phrasis] and the composition are of someone who recorded the apostolic things, and as it were wrote notes on the things said by the teacher.",
+ "lemmas": [
+  {
+   "form": "ἀποφαινόμενος",
+   "lemma": "ἀποφαίνομαι",
+   "gloss": "speaking my opinion"
+  },
+  {
+   "form": "εἴποιμ'",
+   "lemma": "λέγω",
+   "gloss": "I would say"
+  },
+  {
+   "form": "νοήματα",
+   "lemma": "νόημα",
+   "gloss": "thoughts"
+  },
+  {
+   "form": "φράσις",
+   "lemma": "φράσις",
+   "gloss": "wording"
+  },
+  {
+   "form": "σύνθεσις",
+   "lemma": "σύνθεσις",
+   "gloss": "composition"
+  },
+  {
+   "form": "ἀπομνημονεύσαντός",
+   "lemma": "ἀπομνημονεύω",
+   "gloss": "of one who recorded"
+  },
+  {
+   "form": "ἀποστολικὰ",
+   "lemma": "ἀποστολικός",
+   "gloss": "apostolic things"
+  },
+  {
+   "form": "σχολιογραφήσαντος",
+   "lemma": "σχολιογραφέω",
+   "gloss": "of one who wrote notes"
+  },
+  {
+   "form": "εἰρημένα",
+   "lemma": "λέγω",
+   "gloss": "things said"
+  },
+  {
+   "form": "διδασκάλου",
+   "lemma": "διδάσκαλος",
+   "gloss": "teacher"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἀποφαινόμενος εἴποιμ' ἄν",
+   "english": "speaking my opinion, I would say",
+   "why": "The participle expresses the manner of speaking, and the optative with ἄν preserves the cautious, opinion-giving force of Origen's statement.",
+   "rejected": [
+    "I declare",
+    "I would assert"
+   ]
+  },
+  {
+   "term": "ἀπομνημονεύσαντός",
+   "english": "of someone who recorded",
+   "why": "The glossary English 'recorder' is used, and the genitive participle is rendered as a relative clause to keep the source's participial construction clear.",
+   "rejected": [
+    "of a recorder",
+    "of one who memorialized"
+   ]
+  },
+  {
+   "term": "σχολιογραφήσαντος",
+   "english": "wrote notes",
+   "why": "The glossary English 'one who wrote notes' is used, and the participle is rendered as a finite relative clause to match the parallel construction.",
+   "rejected": [
+    "annotated",
+    "commented on"
+   ]
+  },
+  {
+   "term": "ὡσπερεὶ",
+   "english": "as it were",
+   "why": "The particle softens the metaphor of note-writing, and 'as it were' preserves that hedging force.",
+   "rejected": [
+    "so to speak",
+    "like"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "After other remarks Origen writes, speaking in his own voice: \"I, speaking my opinion, would say that the thoughts are the Apostle's, but the wording and the composition belong to someone who recorded the apostolic teaching and, as it were, wrote notes on what was said by the teacher.\""
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "dcdded80442cdbf61a375eae7e732cc6416497085055f91bbcee201fe0957593",
+ "source_sha256": "ab827bc227087e5e9d6d55adb360870b977d61674554deb6c36483f2b1bad950",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "wrote notes",
+    "source_quote": "σχολιογραφήσαντος",
+    "why": "Glossary requires 'one who wrote notes', not 'wrote notes'.",
+    "fix": "and, as it were, one who wrote notes on what was said by the teacher.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Greek participle σχολιογραφήσαντος modifies τινος; 'wrote notes' correctly renders it. No glossary break."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "I, speaking my opinion, would say",
+     "why": "Reader cannot tell if this is Chrysostom or the unnamed 'he' speaking; quotation marks absent.",
+     "fix": "Attribute the 'I' to Clement of Alexandria.",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "wording",
+     "why": "Three overlapping terms for Greek 'lexis/phrasis'; reader may miss they are near-synonyms here.",
+     "fix": "Clarify these translate related Greek rhetorical terms.",
+     "variants": [
+      {
+       "text": "wording",
+       "sections": [
+        "frag-open",
+        "frag-rem-early"
+       ]
+      },
+      {
+       "text": "composition",
+       "sections": [
+        "frag-open",
+        "frag-rem-early"
+       ]
+      },
+      {
+       "text": "style",
+       "sections": [
+        "frag-open"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "After other remarks he adds this: I, speaking my opinion, would say",
+     "new": "After other remarks he adds this: \"I, speaking my opinion, would say"
+    },
+    {
+     "old": "wrote notes on what was said by the teacher.",
+     "new": "wrote notes on what was said by the teacher.\""
+    }
+   ],
+   "fixed": [
+    "The speaker problem is real: the English lacks quotation marks, making it unclear that the 'I' is a quoted voice. Added quotation marks around the quoted opinion.",
+    "The glossary problem is real: the English uses 'wording' for φράσις, but the literal gloss also uses 'wording' for φράσις while the source also has χαρακτὴρ τῆς λέξεως rendered as 'style'. Added a bracketed transliteration to the gloss to distinguish the Greek term."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "After other remarks he adds this",
+     "why": "Unclear who 'he' refers to—Origen himself or another source?",
+     "fix": "Specify 'Origen adds' or cite source",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "After other remarks he adds this:",
+     "new": "After other remarks Origen adds this:"
+    }
+   ],
+   "fixed": [
+    "The speaker is now specified as Origen, resolving the ambiguity."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "I, speaking my opinion, would say",
+     "why": "Quotation marks suggest direct quote but speaker unclear: Origen himself or another?",
+     "fix": "Add 'Origen writes:' before quotation",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "wrote notes on what was said by the teacher",
+     "why": "'Notes' suggests brief jottings, but Greek hypomnēmata can mean fuller 'commentary' or 'record'.",
+     "fix": "composed a record of what was said by the teacher",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "After other remarks Origen adds this: \"I, speaking my opinion, would say",
+     "new": "After other remarks Origen writes: \"I, speaking my opinion, would say"
+    },
+    {
+     "old": "wrote notes on what was said by the teacher.",
+     "new": "composed a record of what was said by the teacher."
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "I, speaking my opinion, would say that",
+     "why": "Quotation marks appear mid-section without clear prior speaker shift",
+     "fix": "Indicate this is Origen speaking, not quoting another",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "composed a record of what was said by the teacher",
+     "why": "Intro paraphrases Origen's quote differently from the actual quoted text; reader may think they are different statements.",
+     "fix": "Align the intro's paraphrase wording with the quoted text in frag-rem-early.",
+     "variants": [
+      {
+       "text": "composed a record of what was said by the teacher",
+       "sections": [
+        "frag-rem-early"
+       ]
+      },
+      {
+       "text": "made notes on what was said by the teacher",
+       "sections": [
+        "intro"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "After other remarks Origen writes: \"I, speaking my opinion, would say",
+     "new": "After other remarks Origen writes, speaking in his own voice: \"I, speaking my opinion, would say"
+    },
+    {
+     "old": "composed a record of what was said by the teacher.",
+     "new": "wrote notes on what was said by the teacher."
+    }
+   ],
+   "fixed": [
+    "The speaker issue is fixed by explicitly indicating that Origen is speaking in his own voice before the quotation.",
+    "The glossary issue is fixed by aligning the quoted text with the literal gloss, using 'wrote notes' instead of 'composed a record'."
+   ]
+  }
+ ]
+}
