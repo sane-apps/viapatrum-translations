@@ -727,5 +727,26 @@ class ReviewAccuracyTests(unittest.TestCase):
         self.assertFalse(W.follow_ok([float("nan"), float("nan")], words=10))
 
 
+
+class SweepTests(unittest.TestCase):
+    """Held-section sweep 2026-10-03."""
+
+    def test_glossary_findings_do_not_hold(self):
+        a, b = W.CHECKERS
+        gl = {"class": "glossary", "severity": "major", "quote": "Church", "source_quote": "x", "why": "w", "fix": "church"}
+        real = {"class": "negation", "severity": "major", "quote": "not", "source_quote": "x", "why": "w", "fix": "f"}
+        with mock.patch.object(W, "check_one", side_effect=lambda m, *r: [gl, real] if m == a else [real]), \
+                mock.patch.object(W, "call", return_value={"rulings": []}):
+            chk = W.check_section({"id": "1", "source": ["x"]}, ["not Church"], {}, "Greek")
+        self.assertEqual([f["class"] for f in chk["confirmed"]], ["negation"])
+        self.assertIn(gl, chk["minor"])
+
+    def test_repair_prompt_allows_no_edit(self):
+        src = Path(W.__file__).read_text()
+        self.assertIn("leave correct English alone", src)
+        self.assertNotIn("Every problem needs an edit", src)
+        self.assertIn("Checkers are often wrong", W.REPAIR_SYS)
+
+
 if __name__ == "__main__":
     unittest.main()
