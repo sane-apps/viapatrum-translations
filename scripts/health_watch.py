@@ -126,6 +126,14 @@ sl = T / "outputs/work-pipeline/status-site.log"
 if sl.exists() and "FAILED" in sh(f"tail -3 '{sl}'"):
     alerts.append("status site deploy failing")
 
+# weekly Claude held review (com.saneapps.fathers-held-review): exit 3 means
+# Claude is not logged in on the Mini, so held sections pile up unreviewed.
+hr = H / "Library/Logs/SaneApps/fathers-held-review.out.log"
+if hr.exists() and now - hr.stat().st_mtime < 8 * 86400:
+    last = [l for l in sh(f"tail -50 '{hr}'").splitlines() if "held review exit" in l or "Claude unavailable" in l][-1:]
+    if last and ("exit 3" in last[0] or "unavailable" in last[0]):
+        alerts.append("weekly held review could not run: Claude not logged in on the Mini")
+
 # milestone: Beliefs live
 try:
     # The zone's bot protection answers Python's default User-Agent with 403.
