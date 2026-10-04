@@ -1,0 +1,171 @@
+{
+ "excerpt_id": "polycarp-philippians:praef",
+ "section": "praef",
+ "edition": {
+  "language": "grc",
+  "path": "books/polycarp-philippians/translations/pp_source.json"
+ },
+ "source_text": "Πολύκαρπος καὶ οἱ σὺν αὐτῷ πρεσβύτεροι τῇ ἐκκλησίᾳ τοῦ θεοῦ τῇ παροικούσῃ Φιλίππους: ἔλεος ὑμῖν καὶ εἰρήνη παρὰ θεοῦ παντοκράτορος καὶ Ἰησοῦ Χριστοῦ τοῦ σωτῆρος ἡμῶν πληθυνθείη.",
+ "thought_title": "Greeting to the Philippian church",
+ "orientation": "Polycarp and his fellow elders open the letter with a greeting to the church at Philippi.",
+ "pass_a_gloss": "Polycarp and the with him elders to the church of God the sojourning [at] Philippi: mercy to you and peace from God Almighty and Jesus Christ the Savior of us may be multiplied.",
+ "lemmas": [
+  {
+   "form": "Πολύκαρπος",
+   "lemma": "Πολύκαρπος",
+   "gloss": "Polycarp"
+  },
+  {
+   "form": "πρεσβύτεροι",
+   "lemma": "πρεσβύτερος",
+   "gloss": "elders"
+  },
+  {
+   "form": "ἐκκλησίᾳ",
+   "lemma": "ἐκκλησία",
+   "gloss": "church"
+  },
+  {
+   "form": "παροικούσῃ",
+   "lemma": "παροικέω",
+   "gloss": "sojourning"
+  },
+  {
+   "form": "ἔλεος",
+   "lemma": "ἔλεος",
+   "gloss": "mercy"
+  },
+  {
+   "form": "εἰρήνη",
+   "lemma": "εἰρήνη",
+   "gloss": "peace"
+  },
+  {
+   "form": "παντοκράτορος",
+   "lemma": "παντοκράτωρ",
+   "gloss": "Almighty"
+  },
+  {
+   "form": "σωτῆρος",
+   "lemma": "σωτήρ",
+   "gloss": "Savior"
+  },
+  {
+   "form": "πληθυνθείη",
+   "lemma": "πληθύνω",
+   "gloss": "may be multiplied"
+  }
+ ],
+ "choices": [
+  {
+   "term": "τῇ παροικούσῃ Φιλίππους",
+   "english": "that sojourns at Philippi",
+   "why": "The participle παροικούσῃ means residing as a foreigner or temporary resident; 'sojourns' preserves the sense of the church as a pilgrim community in a place not its true home.",
+   "rejected": [
+    "that dwells at Philippi",
+    "that resides in Philippi"
+   ]
+  },
+  {
+   "term": "πληθυνθείη",
+   "english": "may be multiplied",
+   "why": "The optative expresses a wish or prayer; 'may be multiplied' keeps the optative force and the literal sense of increase.",
+   "rejected": [
+    "be increased",
+    "abound"
+   ]
+  },
+  {
+   "term": "ἔλεος ὑμῖν καὶ εἰρήνη",
+   "english": "mercy to you and peace",
+   "why": "The dative ὑμῖν is a dative of advantage; 'to you' preserves the address and the two nouns are kept in their source order.",
+   "rejected": [
+    "mercy and peace be yours",
+    "mercy and peace to you"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Polycarp and the elders with him, to the church of God at Philippi: may mercy and peace from God Almighty and Jesus Christ our Savior be multiplied to you."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "17cad87f9d3e238067503758a1296ee501385699024d8c466673c12c6e04f0bf",
+ "source_sha256": "b6db23074fc2a0860603dccc98fe332397d5679eb7e1673f052ec82b73d04d32",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "church of God that sojourns at Philippi",
+     "why": "Same community called by three different labels across sections.",
+     "fix": "Use 'Philippians' or 'church at Philippi' consistently.",
+     "variants": [
+      {
+       "text": "church of God that sojourns at Philippi",
+       "sections": [
+        "praef"
+       ]
+      },
+      {
+       "text": "Philippians",
+       "sections": [
+        "intro",
+        "1",
+        "3"
+       ]
+      },
+      {
+       "text": "brothers and sisters",
+       "sections": [
+        "3",
+        "11",
+        "12"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "to the church of God that sojourns at Philippi",
+     "new": "to the church of God at Philippi"
+    }
+   ],
+   "fixed": [
+    "The source τῇ ἐκκλησίᾳ τοῦ θεοῦ τῇ παροικούσῃ Φιλίππους means 'to the church of God that sojourns at Philippi,' but the brief asks for consistent community labels; using 'church of God at Philippi' keeps the meaning while matching the consistent label."
+   ]
+  }
+ ]
+}
