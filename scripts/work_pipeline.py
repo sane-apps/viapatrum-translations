@@ -273,9 +273,26 @@ def rebalance(slug: str, pairs: list[dict]) -> list[dict]:
     seg = STAGE / slug / "segments.json"
     if seg.exists():
         saved = json.loads(seg.read_text())
+        # A repaired source must reach the lanes (2026-10-04: Polycarp's Latin
+        # chapters were fixed in the source file, but this cache kept feeding the
+        # old Greek-letter text and the redrafts "passed" on it). Sections no move
+        # touched take the current source; a moved section that changed is
+        # reported, since its boundary would need a fresh rebalance.
+        moved = {m["from"] for m in saved["moves"]} | {m["to"] for m in saved["moves"]}
+        changed = []
         for p in pairs:
-            if p["id"] in saved["sections"]:
-                p["source"] = saved["sections"][p["id"]]
+            if p["id"] not in saved["sections"]:
+                continue
+            if p["source"] and p["source"] != saved["sections"][p["id"]]:
+                if p["id"] in moved:
+                    log(slug, f"segments: source changed for moved section {p['id']}; delete segments.json to rebalance")
+                else:
+                    saved["sections"][p["id"]] = p["source"]
+                    changed.append(p["id"])
+            p["source"] = saved["sections"][p["id"]]
+        if changed:
+            seg.write_text(json.dumps(saved, ensure_ascii=False, indent=1))
+            log(slug, f"segments: source changed for {', '.join(changed)}; cache refreshed")
         return saved["moves"]
     moves = []
     for i in range(len(pairs) - 1):
@@ -925,6 +942,11 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
         # change); after that it stays held for a person.
         tries = jpath.with_suffix(".retries")
         n = int(tries.read_text()) if tries.exists() else 0
+        if is_stale(j, sec):
+            # Checked against text that is no longer the source: redo it.
+            log(slug, f"{sec['id']}: source changed since it passed; redrafting")
+            jpath.rename(jpath.with_suffix(".stale.json"))
+            j = {}
         if j.get("_status") == "pass" or (j.get("_status") == "hold" and n >= 2):
             return j
         if j.get("_status") == "hold":
@@ -1029,11 +1051,19 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
 # ---------------------------------------------------------------- whole-work read
 
 
+def is_stale(j: dict, sec: dict) -> bool:
+    """A passed section whose locked source has changed since it was checked."""
+    return (j.get("_status") == "pass" and bool(j.get("source_sha256")) and bool(sec.get("source"))
+            and j["source_sha256"] != sha("\n".join(sec["source"])))
+
+
 def staged_sections(slug: str, pairs: list[dict]) -> list[dict]:
     out = []
     for p in pairs:
         f = STAGE / slug / "sections" / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', p['id'])}.json"
         j = json.loads(f.read_text()) if f.exists() else {}
+        if is_stale(j, p):
+            j = {**j, "_status": "stale", "_why": "source changed after this section passed"}
         out.append({"id": p["id"], "title": j.get("thought_title") or p["title"],
                     "text": "\n".join(j.get("pass_b_english") or p["english"]), "_j": j, "_file": f})
     return out

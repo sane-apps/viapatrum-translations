@@ -834,5 +834,32 @@ class ClaimTests(unittest.TestCase):
                 self.assertEqual(W.claim("new"), {})
 
 
+
+class SourceChangeTests(unittest.TestCase):
+    """2026-10-04: a repaired source must reach the lanes and void old passes."""
+
+    def test_stale_pass(self):
+        sec = {"id": "12", "source": ["Confido enim vos"]}
+        good = {"_status": "pass", "source_sha256": W.sha("Confido enim vos")}
+        self.assertFalse(W.is_stale(good, sec))
+        self.assertTrue(W.is_stale({**good, "source_sha256": W.sha("ξονφιδο ενιμ ϝος")}, sec))
+        self.assertFalse(W.is_stale({**good, "_status": "hold", "source_sha256": "x"}, sec))
+        self.assertFalse(W.is_stale({"_status": "pass"}, sec), "old records without a hash are left alone")
+
+    def test_segments_cache_refresh(self):
+        with tempfile.TemporaryDirectory() as d:
+            stage = Path(d)
+            (stage / "bk").mkdir()
+            seg = stage / "bk" / "segments.json"
+            seg.write_text(json.dumps({"moves": [{"from": "1", "to": "2", "moved_chars": 3, "moved_start": "x"}],
+                                       "sections": {"1": ["a"], "2": ["x b"], "3": ["old"]}}))
+            pairs = [{"id": "1", "source": ["a"]}, {"id": "2", "source": ["changed"]}, {"id": "3", "source": ["new"]}]
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "log"):
+                W.rebalance("bk", pairs)
+            self.assertEqual(pairs[2]["source"], ["new"], "unmoved section takes the repaired source")
+            self.assertEqual(pairs[1]["source"], ["x b"], "moved section keeps its cut (reported)")
+            self.assertEqual(json.loads(seg.read_text())["sections"]["3"], ["new"])
+
+
 if __name__ == "__main__":
     unittest.main()
