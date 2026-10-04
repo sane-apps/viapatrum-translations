@@ -301,7 +301,11 @@ BATCH_MODELS = ("kimi-k2.6", "gpt-oss-120b", "gpt-oss-20b", "qwen3.8-27b", "gemm
 BROKER = "http://127.0.0.1:" + os.environ.get("CF_BATCH_PORT", "8799")
 import threading as _threading
 _use_batch = _threading.local()  # per-thread flag: vendor_call sets it when the model is at its cap
-_broker_seen = {"t": 0.0, "up": False}
+_broker_seen = {"t": 0.0, "up": False, "stats": {}}
+# A model whose oldest pending batch is older than this is stuck at Cloudflare
+# (2026-10-04: Kimi K2.6 batches stopped completing; every overflow call waited
+# the broker's full 25-min deadline, then failed). Its calls go direct instead.
+BATCH_STUCK_S = float(os.environ.get("CF_BATCH_STUCK_S", "600"))
 
 
 def _broker_up() -> bool:
@@ -310,15 +314,21 @@ def _broker_up() -> bool:
     try:
         with urllib.request.urlopen(BROKER + "/stats", timeout=2) as r:
             up = r.status == 200
+            stats = json.loads(r.read() or b"{}") if up else {}
     except Exception:  # noqa: BLE001
-        up = False
-    _broker_seen.update(t=time.time(), up=up)
+        up, stats = False, {}
+    _broker_seen.update(t=time.time(), up=up, stats=stats)
     return up
+
+
+def _batch_stuck(model: str) -> bool:
+    m = (_broker_seen.get("stats") or {}).get("models", {}).get(model) or {}
+    return (m.get("oldest_pending_s") or 0) > BATCH_STUCK_S
 
 
 def batch_route(model: str, api: str = "run") -> bool:
     return (api == "run" and os.environ.get("CF_BATCH", "1") != "0"
-            and any(k in model for k in BATCH_MODELS) and _broker_up())
+            and any(k in model for k in BATCH_MODELS) and _broker_up() and not _batch_stuck(model))
 
 
 def _broker_run(model: str, payload: dict) -> dict:
