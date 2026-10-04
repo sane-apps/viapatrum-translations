@@ -1,0 +1,5 @@
+The author of this account is unknown. It belongs to the early Christian genre of martyr acts, written to preserve the record of how Justin and five companions were arrested, questioned, and executed in Rome under the prefect Rusticus.
+
+The occasion is a persecution in which Christians were compelled by decree to offer libations to idols. Justin, a Christian teacher and philosopher, is brought with his companions before Rusticus. The prefect demands that they obey the decrees and sacrifice to the gods. Justin explains that he follows the true teaching of the Christians, worshipping the one God who made all creation, and his Child Jesus Christ, whose coming the prophets foretold.
+
+A reader will meet Justin, the principal defendant, and Rusticus, the prefect who interrogates and condemns them. Paeon and Euelpistus say they received the faith from their parents. When threatened with scourging and beheading, they refuse to sacrifice, declaring their hope of salvation and boldness before the judgment seat of Christ. Rusticus condemns them, and they are executed. Believers secretly bury their bodies.
