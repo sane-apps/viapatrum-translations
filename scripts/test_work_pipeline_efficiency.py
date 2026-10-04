@@ -857,7 +857,7 @@ class SourceChangeTests(unittest.TestCase):
             with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "log"):
                 W.rebalance("bk", pairs)
             self.assertEqual(pairs[2]["source"], ["new"], "unmoved section takes the repaired source")
-            self.assertEqual(pairs[1]["source"], ["x b"], "moved section keeps its cut (reported)")
+            self.assertEqual(pairs[1]["source"], ["x b"], "moved section keeps its cached cut")
             self.assertEqual(json.loads(seg.read_text())["sections"]["3"], ["new"])
 
 

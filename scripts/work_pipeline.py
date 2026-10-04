@@ -276,19 +276,17 @@ def rebalance(slug: str, pairs: list[dict]) -> list[dict]:
         # A repaired source must reach the lanes (2026-10-04: Polycarp's Latin
         # chapters were fixed in the source file, but this cache kept feeding the
         # old Greek-letter text and the redrafts "passed" on it). Sections no move
-        # touched take the current source; a moved section that changed is
-        # reported, since its boundary would need a fresh rebalance.
+        # touched take the current source. A moved section keeps its cached
+        # cut: until apply writes the moves back, its raw source differs from
+        # the cache by design, so a difference there is not a source change.
         moved = {m["from"] for m in saved["moves"]} | {m["to"] for m in saved["moves"]}
         changed = []
         for p in pairs:
             if p["id"] not in saved["sections"]:
                 continue
-            if p["source"] and p["source"] != saved["sections"][p["id"]]:
-                if p["id"] in moved:
-                    log(slug, f"segments: source changed for moved section {p['id']}; delete segments.json to rebalance")
-                else:
-                    saved["sections"][p["id"]] = p["source"]
-                    changed.append(p["id"])
+            if p["id"] not in moved and p["source"] and p["source"] != saved["sections"][p["id"]]:
+                saved["sections"][p["id"]] = p["source"]
+                changed.append(p["id"])
             p["source"] = saved["sections"][p["id"]]
         if changed:
             seg.write_text(json.dumps(saved, ensure_ascii=False, indent=1))
