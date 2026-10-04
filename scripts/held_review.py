@@ -163,8 +163,12 @@ def preflight() -> str:
                            input="Reply with exactly: ok", capture_output=True, text=True, timeout=180)
     except (OSError, subprocess.TimeoutExpired) as e:
         return f"claude unavailable: {type(e).__name__}"
+    # Judge Claude's answer (stdout) only: a config warning on stderr once failed
+    # the whole Sunday run (2026-10-04, a malformed permission rule).
+    if r.stdout.strip().endswith("ok"):
+        return ""
     out = (r.stdout + r.stderr).strip()
-    return "" if out.endswith("ok") else ("not logged in" if "login" in out.lower() else out[-200:])
+    return "not logged in" if "login" in out.lower() else out[-200:]
 
 
 def judge(d: Path, workers: int = 3) -> int:
