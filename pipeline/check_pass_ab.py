@@ -222,7 +222,10 @@ def _failed_greek_scan(text: str) -> bool:
 
 
 def _hyphen_gloss(text: str, words: list) -> bool:
-    joins = len(re.findall(r"[A-Za-z]-[A-Za-z]", text))
+    # Count distinct hyphenated words: a crib hyphenates many different words,
+    # while a passage about one subject may repeat one ordinary compound
+    # (Hermas, Mandate 8: "self-control" 23 times held the section, 2026-10-04).
+    joins = len({w.lower() for w in re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)+", text)})
     return joins >= 8 and joins >= 0.03 * max(1, len(words))
 
 
