@@ -1,0 +1,88 @@
+name: Claims
+
+# Shared claim board for outside contributors (owner 2026-10-03): comment
+# /claim on an issue to take it, /unclaim to give it back. One claim per
+# issue; runs for the same issue are serialized and read the live issue, so
+# two people claiming at once cannot both win. Claims with no open pull
+# request expire after 7 days.
+
+on:
+  issue_comment:
+    types: [created]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: read
+
+jobs:
+  claim:
+    if: github.event_name == 'issue_comment' && !github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    concurrency:
+      group: claim-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const n = context.payload.issue.number;
+            const comment = context.payload.comment;
+            const body = (comment.body || '').trim().toLowerCase();
+            if (!body.startsWith('/claim') && !body.startsWith('/unclaim')) return;
+            const user = comment.user.login;
+            const live = (await github.rest.issues.get({ owner, repo, issue_number: n })).data;
+            if (live.state !== 'open') return;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: n, per_page: 100 });
+            let holder = null;
+            for (const c of comments) {
+              if (c.user.type !== 'Bot') continue;
+              const m = (c.body || '').match(/<!-- claim:([A-Za-z0-9-]+) -->/);
+              if (m) holder = { login: m[1], at: c.created_at };
+              if ((c.body || '').includes('<!-- unclaim -->')) holder = null;
+            }
+            const claimed = live.labels.some(l => (l.name || l) === 'claimed');
+            if (!claimed) holder = null;
+            const say = (text) => github.rest.issues.createComment({ owner, repo, issue_number: n, body: text });
+            if (body.startsWith('/claim')) {
+              if (holder && holder.login !== user) {
+                await say(`@${user} this issue is already claimed by @${holder.login} (since ${holder.at.slice(0, 10)}). Please pick another open issue that has no \`claimed\` label.`);
+                return;
+              }
+              await github.rest.issues.addLabels({ owner, repo, issue_number: n, labels: ['claimed'] });
+              await say(`<!-- claim:${user} -->Claimed by @${user}. It is yours for 7 days. Open one pull request that says "Fixes #${n}" in its description. Comment \`/unclaim\` if you stop.`);
+            } else {
+              const staff = ['OWNER', 'MEMBER', 'COLLABORATOR'].includes(comment.author_association);
+              if (!holder || (holder.login !== user && !staff)) return;
+              await github.rest.issues.removeLabel({ owner, repo, issue_number: n, name: 'claimed' }).catch(() => {});
+              await say('<!-- unclaim -->Released. This issue is open for anyone: comment `/claim` to take it.');
+            }
+
+  expire:
+    if: github.event_name != 'issue_comment'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const week = 7 * 24 * 3600 * 1000;
+            const issues = await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', labels: 'claimed', per_page: 100 });
+            for (const issue of issues) {
+              if (issue.pull_request) continue;
+              const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: issue.number, per_page: 100 });
+              let at = null;
+              for (const c of comments) {
+                if (c.user.type !== 'Bot') continue;
+                if (/<!-- claim:/.test(c.body || '')) at = new Date(c.created_at);
+                if ((c.body || '').includes('<!-- unclaim -->')) at = null;
+              }
+              if (at && Date.now() - at.getTime() < week) continue;
+              const prs = await github.rest.search.issuesAndPullRequests({ q: `repo:${owner}/${repo} is:pr is:open "#${issue.number}" in:body` });
+              if (prs.data.total_count > 0) continue;
+              await github.rest.issues.removeLabel({ owner, repo, issue_number: issue.number, name: 'claimed' }).catch(() => {});
+              await github.rest.issues.createComment({ owner, repo, issue_number: issue.number, body: '<!-- unclaim -->This claim expired after 7 days without a pull request. The issue is open for anyone: comment `/claim` to take it.' });
+            }

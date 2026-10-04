@@ -231,7 +231,9 @@ corrupt or ambiguous Greek or Latin source, or need a judgment a careful reader
 should make.
 
 How to fix one (people and AI assistants alike):
-1. Pick a file (or its GitHub issue, labelled `held-section`).
+1. Pick its GitHub issue (label `held-section`, without the `claimed` label)
+   and comment `/claim` on it; a bot confirms within a minute. One issue per
+   person; comment `/unclaim` if you stop.
 2. Read `source` (the locked Greek or Latin) and `english` (the current text),
    then `findings`: what the checkers objected to and the reviewer's note.
 3. Edit only the `english` list in that file. Faithful AND readable modern
