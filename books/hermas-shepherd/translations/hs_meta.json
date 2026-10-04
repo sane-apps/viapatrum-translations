@@ -15,7 +15,161 @@
     "path": "sources/tlg1419.tlg001.1st1K-grc1.xml",
     "urn": "urn:cts:greekLit:tlg1419.tlg001",
     "source": "https://raw.githubusercontent.com/OpenGreekAndLatin/First1KGreek/master/data/tlg1419/tlg001/tlg1419.tlg001.1st1K-grc1.xml"
+   },
+   {
+    "name": "Lake 1913, The Apostolic Fathers II (Internet Archive scan apostolicfathers02lakeuoft, OCR djvu.txt excerpt: The Shepherd, Similitudes 9.29-10.4)",
+    "language": "Latin",
+    "role": "control witness for the Latin of Sim. 9.30.3-9.33.3 and Sim. 10 (public domain)",
+    "path": "sources/witnesses/apostolicfathers02lakeuoft.txt",
+    "source": "https://archive.org/details/apostolicfathers02lakeuoft",
+    "sha256": "42a57cdfa3e87996746968de158bb914001de01d28d020aa5a6a633bc286ab36"
+   },
+   {
+    "name": "Lake 1913, The Apostolic Fathers II (Internet Archive scan TheApostolicFathersV2, OCR djvu.txt excerpt: The Shepherd, Similitudes 9.29-10.4)",
+    "language": "Latin",
+    "role": "control witness for the Latin of Sim. 9.30.3-9.33.3 and Sim. 10 (public domain)",
+    "path": "sources/witnesses/TheApostolicFathersV2.txt",
+    "source": "https://archive.org/details/TheApostolicFathersV2",
+    "sha256": "bfa72115db6a4dd722d18faf4db10afaf52c5537211e03aa51eb40f32117d707"
    }
   ]
- }
+ },
+ "source_repairs": [
+  {
+   "date": "2026-10-04",
+   "sections": [
+    "26 (Sim 9.30.3-9.33.3: Latin spans inside lines 179-195; Greek kept)",
+    "27 (Sim 10: Latin lines 0-9, 11-16; Greek of 10.3.3-5 kept)"
+   ],
+   "what": "First1KGreek encodes Lake's Latin (the Vulgate version L1, printed where the Greek is lost) in Greek letters (e.g. 'ποστ#3υαμ περσξριπσεραμ λιβρυμ ηυνξ' = 'Postquam perscripseram librum hunc'), with OCR slips. Latin spans were separated token by token from the accented Greek, restored to Latin letters by fixed letter mapping (ξ c, #3/θ q, ϝ v, χ x, Ω V ...), then every word was compared across three witnesses (that file and two independent Internet Archive OCRs of Lake vol. II, witness_A = apostolicfathers02lakeuoft, witness_B = TheApostolicFathersV2). 14 word slips and 3 punctuation slips were settled by majority (listed in 'corrections'); single-witness OCR slips where First1K agreed with the other OCR were kept as First1K ('kept'). Lake's capitalization was applied where both OCRs show it (85 sentence-initial words); spacing before ; : ? normalized; a soft hyphen and a stray combining breve removed. Real Greek left exactly as it was. Both sections stay under the key 'greek' because each still contains Greek.",
+   "corrections": [
+    {
+     "locus": "Sim 9.30.3",
+     "first1k": "ceter",
+     "corrected": "ceteris",
+     "witness_A": "ceter ,",
+     "witness_B": "ceteris",
+     "note": "First1K truncated at line end"
+    },
+    {
+     "locus": "Sim 9.30.3",
+     "first1k": "visitar",
+     "corrected": "visitare",
+     "witness_A": "visitai ;;",
+     "witness_B": "visitare"
+    },
+    {
+     "locus": "Sim 9.30.3",
+     "first1k": "can didi",
+     "corrected": "candidi",
+     "witness_A": "car _ / didi (line break)",
+     "witness_B": "candidi",
+     "note": "word split at Lake's line-end hyphen"
+    },
+    {
+     "locus": "Sim 9.30.4",
+     "first1k": "obscuranerunt",
+     "corrected": "obscuraverunt",
+     "witness_A": "obscuraverunt",
+     "witness_B": "obscuraverunt"
+    },
+    {
+     "locus": "Sim 9.30.5",
+     "first1k": "fanere",
+     "corrected": "favere",
+     "witness_A": "favere",
+     "witness_B": "favere"
+    },
+    {
+     "locus": "Sim 9.31.3",
+     "first1k": "nestra",
+     "corrected": "vestra",
+     "witness_A": "vestra",
+     "witness_B": "vestra"
+    },
+    {
+     "locus": "Sim 9.32.5",
+     "first1k": "pernianere",
+     "corrected": "permanere",
+     "witness_A": "permanere",
+     "witness_B": "offe «1:0 permanere"
+    },
+    {
+     "locus": "Sim 9.32.5",
+     "first1k": "clenientiam",
+     "corrected": "Clementiam",
+     "witness_A": "Clementiam",
+     "witness_B": "Clementiam"
+    },
+    {
+     "locus": "Sim 9.32.5",
+     "first1k": "tarn",
+     "corrected": "tam",
+     "witness_A": "tam",
+     "witness_B": "tam"
+    },
+    {
+     "locus": "Sim 9.32.5",
+     "first1k": "eum;",
+     "corrected": "eum,",
+     "witness_A": "eum,",
+     "witness_B": "eum,",
+     "note": "punctuation"
+    },
+    {
+     "locus": "Sim 9.33.1",
+     "first1k": "vobis",
+     "corrected": "vobis.",
+     "witness_A": "vobis.",
+     "witness_B": "vobis.",
+     "note": "punctuation (sentence end)"
+    },
+    {
+     "locus": "Sim 9.33.2",
+     "first1k": "sum;",
+     "corrected": "sum,",
+     "witness_A": "sum,",
+     "witness_B": "sum,",
+     "note": "punctuation"
+    },
+    {
+     "locus": "Sim 10.1.3",
+     "first1k": "die",
+     "corrected": "dic",
+     "witness_A": "dic",
+     "witness_B": "dic"
+    },
+    {
+     "locus": "Sim 10.2.1",
+     "first1k": "doniine",
+     "corrected": "domine",
+     "witness_A": "domine",
+     "witness_B": "domine"
+    },
+    {
+     "locus": "Sim 10.2.4",
+     "first1k": "consuinma",
+     "corrected": "consumma",
+     "witness_A": "consumma",
+     "witness_B": "consumma"
+    },
+    {
+     "locus": "Sim 10.2.4",
+     "first1k": "ilium",
+     "corrected": "illum",
+     "witness_A": "illum",
+     "witness_B": "illum"
+    },
+    {
+     "locus": "Sim 10.4.5",
+     "first1k": "ilium",
+     "corrected": "illum",
+     "witness_A": "illum",
+     "witness_B": "illum"
+    }
+   ],
+   "kept": "montibus (B iontibis), opes (B epes), positi (B pogiti), remanserunt (B remanserw.t+), hoc (A hoe), quemque (A quemqgue), Et 9.31.6 (B ONY), reddere (B ~“eddere), aedificatur (A aedifieatur), tibi 9.32.3 (B ἘΠῚ), eos (A 608), eius 9.32.5 (B εἴτις.), calcare (B caleare), patiens (B p:iicns), Haec 9.33.1 (A Haee), illis (A 1115), hunc (A hune, B hunce), haec 10.1.1 (A haee), ut 10.3.1 (A αὖ), aliquid 10.3.2 (B aliguid), conversare (B cornversare), magnalia 10.4.1 (B magnatia), neglexerit (B negtexerit)",
+   "by": "Claude (attended, owner request 2026-10-04)"
+  }
+ ]
 }
