@@ -915,6 +915,9 @@ def repair_attempt(j: dict, sec: dict, problems: list[dict], brief: dict, langna
 
 def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langname: str) -> dict:
     sec = pairs[idx]
+    # A section's own language wins over the book's: Polycarp's Philippians 10-12
+    # and 14 and the end of Hermas survive only in Latin inside Greek works.
+    langname = LANGNAME.get(sec.get("lang") or "", langname)
     jpath = STAGE / slug / "sections" / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', sec['id'])}.json"
     if jpath.exists():
         j = json.loads(jpath.read_text())

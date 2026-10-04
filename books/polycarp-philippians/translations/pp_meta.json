@@ -15,7 +15,37 @@
     "path": "sources/tlg1622.tlg001.1st1K-grc1.xml",
     "urn": "urn:cts:greekLit:tlg1622.tlg001",
     "source": "https://raw.githubusercontent.com/OpenGreekAndLatin/First1KGreek/master/data/tlg1622/tlg001/tlg1622.tlg001.1st1K-grc1.xml"
+   },
+   {
+    "name": "Lake 1912, The Apostolic Fathers I (Internet Archive scan apostolicfathers01lake, OCR djvu.txt excerpt: Polycarp to the Philippians 9-14)",
+    "language": "Latin",
+    "role": "control witness for the Latin of 10-14 (public domain)",
+    "path": "sources/witnesses/apostolicfathers01lake.txt",
+    "source": "https://archive.org/details/apostolicfathers01lake",
+    "sha256": "885e7ce92470132583a68585d26b2004f0ac3298cb2e26e2feab20f89761212e"
+   },
+   {
+    "name": "Lake 1912/1919, The Apostolic Fathers I (Internet Archive scan TheApostolicFathersV1, OCR djvu.txt excerpt: Polycarp to the Philippians 9-14)",
+    "language": "Latin",
+    "role": "control witness for the Latin of 10-14 (public domain)",
+    "path": "sources/witnesses/TheApostolicFathersV1.txt",
+    "source": "https://archive.org/details/TheApostolicFathersV1",
+    "sha256": "4225ad082e636b88fe62e36c2f71307c089b95509dc73991529573a386ebb383"
    }
   ]
- }
+ },
+ "source_repairs": [
+  {
+   "date": "2026-10-04",
+   "sections": [
+    "10",
+    "11",
+    "12",
+    "13 (last sentence)",
+    "14"
+   ],
+   "what": "First1KGreek encodes Lake's Latin for chapters 10-12, the end of 13 and 14 in Greek letters (e.g. 'ξονφιδο ενιμ' = 'confido enim'), with OCR slips. Restored to Latin letters by fixed letter mapping, then every word compared across three witnesses (that file and two independent Internet Archive OCRs of Lake); 17 single-word OCR slips settled by majority (e.g. alterntri->alterutri, babebitis->habebitis, dorninum->dominum, Crescentum/Crescentem->Crescentem). These sections now use the key 'latin'.",
+   "by": "Claude (attended, owner request 2026-10-04)"
+  }
+ ]
 }
