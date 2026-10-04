@@ -1790,6 +1790,27 @@ def update_log(book: str, row: dict) -> dict:
         return rows
 
 
+def claim(book: str) -> dict | None:
+    """Mark the book running for this lane, unless another live lane holds it,
+    in ONE lock hold. Lanes used to read, see the book free, and write 'running'
+    in a second step, so two or three lanes ran the same book at once
+    (spend audit 2026-10-03: barnabas-epistle twice, didache three times).
+    Returns the book's previous row, or None when another lane has it."""
+    import fcntl
+    QUEUE_LOG.parent.mkdir(parents=True, exist_ok=True)
+    with open(str(QUEUE_LOG) + ".lock", "w") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        rows = json.loads(QUEUE_LOG.read_text()) if QUEUE_LOG.exists() else {}
+        if prev_running(rows, book):
+            return None
+        prev = rows.get(book) or {}
+        rows[book] = {**prev, "result": "running", "pid": os.getpid(), "at": time.strftime("%Y-%m-%dT%H:%M:%S")}
+        tmp = QUEUE_LOG.with_suffix(".tmp")
+        tmp.write_text(json.dumps(rows, indent=1, ensure_ascii=False))
+        tmp.rename(QUEUE_LOG)
+        return prev
+
+
 def prev_running(rows: dict, book: str) -> bool:
     """Another live queue lane is on this book (parallel lanes share queue.json)."""
     row = rows.get(book) or {}
@@ -1838,9 +1859,9 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
         prev = log_rows.get(book, {})
         if prev.get("result") in ("needs-term-decision",) and not (STAGE / book / "term_decisions.json").exists():
             continue
+        if claim(book) is None:
+            continue  # another lane took it between our read and now
         t0 = time.time()
-        update_log(book, {**log_rows.get(book, {}), "result": "running", "pid": os.getpid(),
-                          "at": time.strftime("%Y-%m-%dT%H:%M:%S")})
         try:
             rc = run(book, attempt=(log_rows.get(book, {}).get("attempts", 0) or 0) + 1)
         except Exception as e:  # one bad work must not stop the library

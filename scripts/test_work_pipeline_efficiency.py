@@ -808,5 +808,31 @@ class SweepTests(unittest.TestCase):
         self.assertIn("Checkers are often wrong", W.REPAIR_SYS)
 
 
+
+class ClaimTests(unittest.TestCase):
+    """One book, one lane (spend audit 2026-10-03)."""
+
+    def test_claim_refuses_a_book_a_live_lane_holds(self):
+        import os
+        with tempfile.TemporaryDirectory() as d:
+            q = Path(d) / "queue.json"
+            q.write_text(json.dumps({"bk": {"result": "running", "pid": os.getppid(), "attempts": 1}}))
+            with mock.patch.object(W, "QUEUE_LOG", q):
+                self.assertIsNone(W.claim("bk"))
+                self.assertEqual(json.loads(q.read_text())["bk"]["pid"], os.getppid())
+
+    def test_claim_takes_a_free_or_dead_book_and_keeps_its_row(self):
+        import os
+        with tempfile.TemporaryDirectory() as d:
+            q = Path(d) / "queue.json"
+            q.write_text(json.dumps({"bk": {"result": "running", "pid": 999999, "attempts": 2}}))
+            with mock.patch.object(W, "QUEUE_LOG", q):
+                prev = W.claim("bk")
+                self.assertEqual(prev["attempts"], 2)
+                row = json.loads(q.read_text())["bk"]
+                self.assertEqual((row["result"], row["pid"], row["attempts"]), ("running", os.getpid(), 2))
+                self.assertEqual(W.claim("new"), {})
+
+
 if __name__ == "__main__":
     unittest.main()
