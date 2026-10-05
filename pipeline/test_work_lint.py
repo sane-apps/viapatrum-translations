@@ -160,5 +160,26 @@ class WorkLintTests(unittest.TestCase):
         self.assertTrue([f for f in found if f["rule"] == "boundary"])
 
 
+
+class LacunaRuleTests(unittest.TestCase):
+    """2026-10-05 audit: a gap the source marks mid-text was filled with invented English."""
+
+    def _run(self, source, text):
+        return [f for f in wl.lint_work([{"id": "1", "text": text, "source": source}]) if f["rule"] == "lacuna"]
+
+    def test_gap_dropped_is_warned(self):
+        f = self._run("καὶ τίς αὐτοῦ τὴν παρουσίαν ὑποστήσεται; ... .. παραβαλλομένους θηρίοις.",
+                      "And who will endure his coming? Do you not see those thrown to wild beasts.")
+        self.assertEqual(len(f), 1)
+        self.assertEqual(f[0]["severity"], "warn", "a warning, never a hard gate")
+
+    def test_gap_kept_is_fine(self):
+        self.assertEqual(self._run("καὶ τίς αὐτοῦ τὴν παρουσίαν ὑποστήσεται; ... παραβαλλομένους θηρίοις.",
+                                   "And who will endure his coming? […] those thrown to wild beasts."), [])
+
+    def test_marks_at_the_edges_are_not_gaps(self):
+        self.assertEqual(self._run("... τὴν παρουσίαν ὑποστήσεται παραβαλλομένους θηρίοις ...",
+                                   "who will endure his coming, thrown to wild beasts."), [])
+
 if __name__ == "__main__":
     unittest.main()

@@ -16,6 +16,10 @@ mkdir -p "$OUT"
 mkdir "$LOCK" 2>/dev/null || { echo "$(date +%T) another tick is running"; exit 0; }
 trap 'rmdir "$LOCK"' EXIT
 cd "$ROOT" || exit 1
+# Pause switch (owner 2026-10-05, quality audit): while outputs/work-pipeline/
+# lanes.paused exists, no lane is started. Running lanes still finish their
+# current work and exit on lanes.restart (never kill a lane).
+if [ -f "$OUT/lanes.paused" ]; then echo "$(date +%T) lanes paused ($(head -1 "$OUT/lanes.paused"))"; exit 0; fi
 set -a; source "$HOME/.config/nv/env" >/dev/null 2>&1; set +a
 [ -n "${CLOUDFLARE_API_TOKEN:-}" ] || { echo "$(date +%T) no Cloudflare token"; exit 2; }
 KW='{"chat_template_kwargs":{"enable_thinking":false}}'
@@ -45,7 +49,11 @@ refresh @cf/openai/gpt-oss-120b translation-qa '{}'
 # GLM-5.3 out (spend audit 2026-10-03): never benched as a checker, the defect
 # bench rejected it, 27% of its billed calls returned nothing (~\$70/day), and a
 # failed call fell back to an unbenched model or counted a finding as confirmed.
-PAIRS=("@cf/openai/gpt-oss-120b,@cf/moonshotai/kimi-k2.6" "@cf/openai/gpt-oss-120b,@cf/zai-org/glm-5.2")
+# GPT-OSS out (quality audit 2026-10-05, docs/QUALITY_AUDIT_20261005.md): it
+# raised the false finding or voted down the true one in 13 of 24 traced errors.
+# Kimi + GLM are the benched pair; rate_acquire paces lanes under their caps,
+# so fewer lanes run at full speed.
+PAIRS=("@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2")
 NLANE=0
 # NVIDIA referee (third family): same 3 h freshness rule, NIM provider.
 NVR=$(ls -t "$RECEIPTS"/*-nvidia-nvidia_nemotron-3-ultra-550b-a55b.json 2>/dev/null | head -1)

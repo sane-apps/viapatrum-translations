@@ -601,10 +601,13 @@ class ReadBindingTests(unittest.TestCase):
                 mock.patch.object(W, "rebalance", return_value=[]), mock.patch.object(W, "intro_problems", return_value=[]),
                 mock.patch.object(W.work_read, "verify", return_value=([], []))]
 
-    def run_read(self, stage, pairs, rounds, polish=None, extra=()):
+    def run_read(self, stage, pairs, rounds, polish=None, extra=(), read_edits=True):
+        # These tests cover the read-fix + polish loop, which is off by default
+        # since the 2026-10-05 audit (WP_READ_EDITS); test it switched on.
         seq = iter(rounds)
         from contextlib import ExitStack
         with ExitStack() as es:
+            es.enter_context(mock.patch.object(W, "READ_EDITS", read_edits))
             for p in [*self.patches(stage, pairs), *extra]:
                 es.enter_context(p)
             es.enter_context(mock.patch.object(W, "read_two", side_effect=lambda t, l: next(seq)))
@@ -612,6 +615,21 @@ class ReadBindingTests(unittest.TestCase):
             res = W.read_and_fix("s", pairs, {}, "Greek", None)
             st = W.status("s")
         return res, st
+
+    def test_default_readers_score_but_never_edit(self):
+        """2026-10-05: with WP_READ_EDITS off, one read; no fix or polish edits the text."""
+        a, b = W.JUDGES
+        with tempfile.TemporaryDirectory() as d:
+            stage, pairs = self.setup(d)
+            rounds = [{a: {"followability": 3, "findings": []}, b: {"followability": 2, "findings": []}}] * 3
+            calls = []
+            with mock.patch.object(W, "repair_section", side_effect=lambda *a: calls.append("fix")):
+                res, st = self.run_read(stage, pairs, rounds, polish=lambda *a: calls.append("polish"), read_edits=False)
+            text = json.loads((stage / "s" / "sections" / "1.json").read_text())["pass_b_english"]
+        self.assertEqual(res["round"], 0, "one read when the intro is unchanged")
+        self.assertEqual(calls, [], "readers never edit the translation")
+        self.assertEqual(text, ["Old text."])
+        self.assertEqual(res["followability"], [3, 2])
 
     def test_last_round_scores_not_best(self):
         a, b = W.JUDGES
@@ -672,7 +690,8 @@ class ReadBindingTests(unittest.TestCase):
                           mock.patch.object(W.work_read, "verify", return_value=([term], [])),
                           mock.patch.object(W, "make_intro", side_effect=mk),
                           mock.patch.object(W, "read_two", side_effect=read),
-                          mock.patch.object(W, "polish_section", return_value=None)]:
+                          mock.patch.object(W, "polish_section", return_value=None),
+                          mock.patch.object(W, "READ_EDITS", True)]:
                     es.enter_context(p)
                 res = W.read_and_fix("s", pairs, {}, "Greek", old)
         self.assertEqual(seen, [["intelligent natures"]])  # once per run

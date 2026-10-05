@@ -78,6 +78,13 @@ CHECKERS = os.environ.get("WP_CHECKERS", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/g
 # source checker only. Override with WP_JUDGES=a,b.
 JUDGES = os.environ.get("WP_JUDGES", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2").split(",")
 FALLBACK = "@cf/qwen/qwen3.8-27b"  # used only when a checker errors out
+# Readers never see the source, so their notes must not edit the translation
+# until each edit is judged against the text it replaces (quality audit
+# 2026-10-05: reader-fix and polish edits made 14 of 94 confirmed errors, e.g.
+# a lacuna filled with an invented sentence). Off: readers still score the work
+# (certification) and feed the introduction. WP_READ_EDITS=1 restores the old
+# read-fix + polish loop.
+READ_EDITS = os.environ.get("WP_READ_EDITS", "0") == "1"
 # Third-family referee for disputed residue (owner 2026-10-02: use NV too).
 # NVIDIA Nemotron 3 Ultra 550B; falls back to FALLBACK if NIM is unavailable.
 REFEREE = os.environ.get("WP_REFEREE", "nvidia/nemotron-3-ultra-550b-a55b")
@@ -1212,12 +1219,18 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
                 if f["class"] == "unexplained" and k and k not in seen:
                     seen.add(k)
                     terms.append(f)
+        changed = False
         if terms and intro is not None and not intro_redone:
             intro_redone = True
             new_intro = make_intro(slug, brief, pairs, terms=terms[:12])
             changed = (new_intro or {}).get("paragraphs") != intro.get("paragraphs")
             log(slug, f"intro: {len(terms[:12])} unexplained terms; intro {'redrafted' if changed else 'unchanged'}")
             intro = new_intro
+        if not READ_EDITS:
+            # No reader edits: read again only if the intro changed.
+            if changed:
+                continue
+            break
         by_sec: dict[str, list] = {}
         for f in fixable:
             ids = [f.get("section")] if f["class"] != "term_drift" else sorted({s for v in f.get("variants", []) for s in v.get("sections", [])})

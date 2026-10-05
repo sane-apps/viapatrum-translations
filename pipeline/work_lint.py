@@ -573,9 +573,31 @@ def rule_false_friend(sec, brief):
 # Driver
 # --------------------------------------------------------------------------
 
+# ---- lacuna ------------------------------------------------------------------
+
+# A gap the source marks mid-text ("…", "...", "***") should show in the English
+# as "[…]". Warning, not error (quality audit 2026-10-05): sources also use dots
+# for damaged words and OCR debris, so a hard gate would hold good sections;
+# the list feeds re-checks, and an edit must never remove a marker the English
+# already had (judged with the edit, not here).
+_SRC_GAP = re.compile(r"(?:\.\s?\.\s?\.|…|\*\s?\*\s?\*)")
+_EN_GAP = re.compile(r"\[\s*(?:…|\.\.\.)\s*\]|…|\.\.\.")
+
+
+def rule_lacuna(sec, brief):
+    src = (sec.get("source") or "").strip()
+    inner = src[3:-3] if len(src) > 6 else ""  # a mark that only opens or closes a fragment is not a gap
+    if not inner or not _SRC_GAP.search(inner) or _EN_GAP.search(sec["text"]):
+        return []
+    m = _SRC_GAP.search(inner)
+    return [_f("lacuna", "warn", sec, sec["text"][:40],
+               "the source marks a gap here ('" + inner[max(0, m.start() - 20):m.end() + 20].strip()
+               + "'); keep a […] in the English, unless the dots mark a damaged word or OCR debris")]
+
+
 SECTION_RULES = (rule_boundary, rule_bracket_filler, rule_citation_style, rule_ancient_names,
                  rule_stray_script, rule_glossary, rule_scaffold, rule_output_guard,
-                 rule_archaic, rule_false_friend)
+                 rule_archaic, rule_false_friend, rule_lacuna)
 
 
 def lint_work(sections: list[dict], brief: dict | None = None) -> list[dict]:
