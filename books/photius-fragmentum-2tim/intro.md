@@ -1,5 +1,5 @@
-Photius of Constantinople (c. 810–c. 893) wrote this brief exegetical note on a single verse from Paul's Second Letter to Timothy. It is a commentary fragment, not a full treatise, and it addresses a question about the identity of the 'faithful men' Paul mentions.
+Photius of Constantinople (c. 810–c. 893) is the author of this fragment on 2 Timothy. It is not Severian's fragments on that letter.
 
-The occasion is a short explanation of 2 Timothy 2:2, where Paul tells Timothy to entrust his teaching to faithful men. Photius explains that these faithful men are bishops and elders, whom Timothy was about to ordain. He then interprets the phrase 'through many witnesses' as referring to the Law and the Prophets.
+Paul tells Timothy to entrust the teaching to faithful men. Photius says those men are the bishops and elders Timothy was about to ordain.
 
-A reader will meet Timothy, Paul's coworker and the recipient of the letter, who was about to ordain bishops and elders. The biblical text is quoted as a bare lemma at the start of the fragment. To follow the argument, note that 'faithful men' means ordained ministers, 'bishops' and 'elders' are the two offices named, 'ordain' means to ordain by the laying on of hands, and 'witnesses' refers to the Law and the Prophets, the two major divisions of the Old Testament scriptures.
+The many witnesses are the Law and the Prophets. The citations use the old names of the biblical books.

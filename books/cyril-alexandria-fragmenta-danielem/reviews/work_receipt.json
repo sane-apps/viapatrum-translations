@@ -1,0 +1,64 @@
+{
+ "slug": "cyril-alexandria-fragmenta-danielem",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-open",
+   "to": "frag-rem-early",
+   "moved_chars": 42,
+   "moved_start": "Τί οὖν ἐστι τὸ, Ἕως τοῦ Παλαιοῦ τῶν ἡμερῶν"
+  }
+ ],
+ "brief_sha256": "2e375584a27cef61208ed987ce5eaad3c54e0f101ec4b3b4b12b5a5068dcfe8d",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T10:20:04Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "7d27d562e48d5844ff88f4cd021ef6ff5e28632c5d8b5175b0de780f6c4d45b4",
+   "english_sha256": "38a7472763c2f2fbdf85b7ffce6fbcac775e56fbfef83cdc9d64cbef038be0c1",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "5b0adaecf26cc4dcd7e53736e552c61807b9918d2bce087e50f9f5376659670c",
+   "english_sha256": "616da443172a1c8d429276c7314b49500631aaa29280518790ace1e0c01b69ba",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "f05354d2b571fc1736a1491d8a138b051abc146770dfcd3e302efa0df431f24f",
+   "english_sha256": "408d1b620c36be3086c03670508f7359ce484055b4727b4f1e7cfaa8d009e63a",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "f05354d2b571fc1736a1491d8a138b051abc146770dfcd3e302efa0df431f24f",
+   "english_sha256": "2f62f9a2835e85a34cebab4ff28590e06b45c9ee70b90d562a9d9889d1e7ae52",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:33:53Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open",
+    "frag-rem-close",
+    "frag-rem-early",
+    "frag-rem-mid"
+   ],
+   "edits_undone": 17,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

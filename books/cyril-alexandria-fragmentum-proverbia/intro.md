@@ -1,5 +1,5 @@
-Cyril of Alexandria (c. 376–444) wrote this surviving fragment of commentary on Proverbs. It is presented under his name, identified as the holy Cyril, and offers his interpretation of a single difficult phrase from Proverbs 8:22.
+Cyril of Alexandria (c. 376–444) wrote this fragment on Proverbs. It takes up one saying of Wisdom: "The Lord created me."
 
-The fragment addresses the words 'The Lord created me' spoken of Wisdom. Cyril argues that this language should not be taken as creation of the divine essence. When the phrase is applied to the divinity, 'created' means 'appointed' rather than brought into being in essence.
+If that is said of the divinity, he takes "created" to mean "appointed," not brought into being. He sets beside it "Create a clean heart in me, O God," and the line about creating the two in himself.
 
-Cyril quotes Proverbs 8:22, Psalm 50:12 in the older Greek numbering (Psalm 51:12 in modern Hebrew numbering), and Ephesians 2:15. His quotation of Ephesians 2:15 reads 'in himself,' which differs from the standard critical text 'in him.' Key terms include 'created,' 'appointed,' 'divinity,' 'in essence,' 'beginning,' 'providential,' and 'creative.' Wisdom is appointed as the beginning of God's providential and creative works.
+Wisdom, he says, was appointed as the beginning of God's providential and creative works. Notes about the copy are left out of this book.

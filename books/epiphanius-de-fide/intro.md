@@ -1,5 +1,5 @@
-This excerpt comes from a discourse on faith attributed to Epiphanius of Salamis, also called Epiphanius of Cyprus.
+Epiphanius of Salamis (c. 310/320–403) is the name on this short piece from the discourse on faith. It is not the Panarion, and it is not the Ancoratus.
 
-The argument centers on Christ as mediator. Epiphanius holds that as God, Christ speaks things fitting for God, and as man, he speaks things fitting for a human. In both natures he holds authority naturally and substantially, without confusion and without division. The excerpt also alludes to 1 Timothy 2:5, where Christ is called the mediator of God and human beings.
+The heading calls him Epiphanius of Cyprus. The piece says he showed that Christ is mediator of God and human beings, with flesh from human beings and invisible essence from the Father.
 
-Key terms in this translation include mediator, flesh, invisible essence, without confusion, without division, authority, naturally, and substantially. The excerpt is a third-person report about what Epiphanius showed, introduced by a heading and the phrase in order that he might show.
+Christ speaks the divine things as God and the human things as man. In both he holds authority naturally and substantially, without confusion and without division. The citations use the old names of the biblical books.

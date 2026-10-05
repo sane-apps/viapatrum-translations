@@ -1,0 +1,63 @@
+{
+ "slug": "arethas-epigrammata",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 143,
+   "moved_start": "15.34 ΤΟΥ ΑΥΤΟΥ ∆ρᾶσέ τί που καὶ νερτερίοις μετὰ πνεύμασιν ἀ"
+  }
+ ],
+ "brief_sha256": "427225a5167d8d21ee7c0200b90d1260edf230ec348338eda8fbc706e21d71e4",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-05T01:41:35Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "3a222336ceb6736c09274bb86f0ba571f6d14a4279a7bcb906f7ff5ef82f5e74",
+   "english_sha256": "7a264a8adc7aa1d8ab41d4129b4e581383ba6e534d40b029b78b199bd6dbc3ec",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "133f9d3806d36e8e48e1193765dfb830503ec3983849f93824003ef3efea9c9a",
+   "english_sha256": "1cdca1875f0be67c4ab2ebdaecde7fd7f08c196be72158a2c86fd18ffe99a0f7",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "d841f506fdc044be5da6b696a5d05cdf59368e4014a786cc6371f5ff90725af2",
+   "english_sha256": "b338ace015f89ca9d365925630984c806340ff101cc97c01cdc12a610bf7a2a7",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "56ac81472fbf8c3e95fd648cf0b587c849059899570b7c47eb8068c76d9a1b29",
+   "english_sha256": "d80e9ca445781fb52ddd72c07a65ad6cd0dac08186e0f0f059ed0cf9264ee732",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:21:10Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 8,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

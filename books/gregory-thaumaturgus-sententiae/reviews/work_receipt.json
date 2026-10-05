@@ -1,0 +1,55 @@
+{
+ "slug": "gregory-thaumaturgus-sententiae",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [],
+ "brief_sha256": "d208ffed4f75f1d3d15169b418c248e9493c52c7fe599bad337b9dceb112aa33",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T09:50:03Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "72f665db7168e412e0809d003b528d8f53867cb931ff60d0976f7140fa4b85d5",
+   "english_sha256": "9634cbb35338973fcf541d025fa5b0dceac81672358df95736e3b373028249d1",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "979fd5c0a426b51f95e7d9406dff3fd15d4c32111818ecf7a1226d7c056f8ae4",
+   "english_sha256": "62ec897aa92f812a842737ada82a7ef3c059a2cb15bec84c6c6f7a26eaddef10",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "0c1855ca88243ff9ac5df6c7a018946492cbbefb6fbe12d9b793d44263458e00",
+   "english_sha256": "839405212087755354dea468919e681da3f6c34fcfe743d74aeb0e948521cd34",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "dfae809166efab9299282e16f09dc2d6207bcecb9eef80fa31ff7dcb02b5abd0",
+   "english_sha256": "e464df7eb7eb4ae338dc05dec3fc1274bc2dbe0ad516530ff2ded6f286e3893d",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:48:41Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-rem-close",
+    "frag-rem-early"
+   ],
+   "edits_undone": 18,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

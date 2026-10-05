@@ -1,0 +1,63 @@
+{
+ "slug": "eustathius-orationes-contra-arianos",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-rem-mid",
+   "to": "frag-rem-close",
+   "moved_chars": 140,
+   "moved_start": "56 ∆εῖ δὲ φιλαλήθως τοὺς ἐννόμους ἀγωνιστὰς πάντα συμπεριλαβ"
+  }
+ ],
+ "brief_sha256": "c8ae31ef940e0eb2ddaa5680dfaa27932134b77f0756ddac5e2c12567d224983",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T10:10:24Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "c6479e0a9ee305a5f94a4132ce843e40ccef3f708328f4e22fb274f39f196f59",
+   "english_sha256": "e36aff9583416718b7aa63028a1e62be70a7289ad3cba216eabedb2e60138953",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "b5e0cbcae2db9dfca8695e20b1fa8e9c90dfc22734ac0dcf41f54219a9674e22",
+   "english_sha256": "18e27d32b404e23073580f082da73b29bd1839a7afc5bb26f22070b9d0463f1f",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "8782849fa34cae17064da9ea07d1f9f17baa9233e9f3bf8eaa6f07c792b2c4e8",
+   "english_sha256": "80d6b7385b682ec7e075decfc8649e0ce1dced876adbb6000b3d6f29f7675250",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "c341c1a72956d7fa9eb408289a9630d266e8096c2218de2326f0ba3beda4b3bf",
+   "english_sha256": "7ab2205135a49474dcf82a14f2e105999dbc4da0db44f58c5e5d0a7d072ae91f",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:19:48Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-rem-close",
+    "frag-rem-early",
+    "frag-rem-mid"
+   ],
+   "edits_undone": 10,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

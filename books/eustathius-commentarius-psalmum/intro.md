@@ -1,0 +1,5 @@
+Eustathius of Antioch (c. 320–337) wrote this commentary on Psalm 15. He was bishop of Antioch and a defender of Nicene orthodoxy against Arianism. The work survives only in fragments.
+
+Eustathius interprets Psalm 15 to defend the full humanity of Christ's soul and the unity of his person. He argues that Jesus possessed a human soul as well as human flesh, and that the soul is rational and of the same substance as human souls, just as his flesh is of the same substance as human flesh, having come from Mary.
+
+A reader will meet Jesus Christ, Mary, and God the Father. Eustathius quotes or alludes to Galatians 4:4, 'God sent his Son, born of a woman,' stressing that it uses the singular because the person of Christ is one. He denies that this means one nature, or that flesh and divinity share the same substance, but affirms one Lord Jesus Christ, known in the distinction of natures. Key terms include soul, flesh, of the same substance, rational, person, nature, and substance. The author cites Psalm 15 according to the Septuagint numbering.

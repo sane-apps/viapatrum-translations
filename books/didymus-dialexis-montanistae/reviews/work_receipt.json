@@ -1,0 +1,74 @@
+{
+ "slug": "didymus-dialexis-montanistae",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 93,
+   "moved_start": "Πῶς γὰρ Πέτρος τὸν Ἀνανίαν καὶ τὴν Σαπφείραν ἤλεγξε νοσφισαμ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 96,
+   "moved_start": "Νοῆσαι δὲ δεῖ τὸν πατέρα τέλειον, ἐν τελείᾳ ὑποστάσει, καὶ τ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 8,
+   "moved_start": "Λέγει δὲ"
+  }
+ ],
+ "brief_sha256": "87c75337853771f894d2043c79d7c294fa173e8a192d5938484e91c8abe93cc1",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-04T04:27:45Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "372156eb0702ff8028fa49e7da643b97ef957dca7bd23edd82ca6f9a3375dfdc",
+   "english_sha256": "8f41c3971b9f1f34139261033b4fb8e6adfe552fdf71bdde65d36339e7f256fa",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "f57782cc18a2127d5c881370119158972543bab344115e04b65084c3833ca427",
+   "english_sha256": "911f5abbedf725649449c9f86b7724c9fadfaab66a003436bf098e01c6a51035",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "122bcb65a1da6d1b005d219f03e503b0b7fc99abc78b3977cd171c4d62bd4ec0",
+   "english_sha256": "6094c955758166563ec8f1d1e5f7d25348c09143629769fdc277413907fa54b1",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "fea1688ee0348280c9e78a5bbcfec713164baac0c16c07fdccd61e98f73d9558",
+   "english_sha256": "c8c0e951d0865b8798b769c901540a6caf867959ba0601eadddccb9b7e4e06bb",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:57:00Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 5,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

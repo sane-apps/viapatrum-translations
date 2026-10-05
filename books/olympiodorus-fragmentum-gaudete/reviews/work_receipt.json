@@ -1,0 +1,56 @@
+{
+ "slug": "olympiodorus-fragmentum-gaudete",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [],
+ "brief_sha256": "71644d62464b789325dbf8a4474ad99bfdc91a857e0b956bf1cefafa1839f108",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T10:14:41Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "80d6d639b0c52aa2958e0a4286b5212af0906cdee202f928120c8bc4ff31f7b9",
+   "english_sha256": "43642f71ec1e27ac1f810158213646d9c65f14524ade1988ec3de41560c293c9",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "abb7ec6d29a17e92a370e4b55399fd07b93e5bf146353eb6b9204c6c3f6303ca",
+   "english_sha256": "e60d197d4770eaf542ccdfad1ad35f9b1e2aa9550c203bf5bfe197ed911d5b3a",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "ae12ce735813e12f87d873d2c142239d493be88a1f9693641855c62c8dc76da8",
+   "english_sha256": "b2c9e60a345c68123608aaeb8c4651e83589a244e042c339aef405b773ad549e",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "184bfea5982adfd8fd45f611b70fafa953ba6408765a201b9e347db61ab6ba0d",
+   "english_sha256": "45438a12d094250cc5cfaadc4df4c6272d9d0dc41070a892809bfaee1925ae5c",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T21:16:51Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 16,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

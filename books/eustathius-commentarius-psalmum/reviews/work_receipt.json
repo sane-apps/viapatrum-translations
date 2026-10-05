@@ -1,0 +1,67 @@
+{
+ "slug": "eustathius-commentarius-psalmum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-rem-early",
+   "to": "frag-rem-mid",
+   "moved_chars": 85,
+   "moved_start": "Λογικὴ ἄρα, καὶ ταῖς ψυχαῖς τῶν ἀνθρώπων ὁμοούσιος, ὥσπερ κα"
+  },
+  {
+   "from": "frag-rem-mid",
+   "to": "frag-rem-close",
+   "moved_chars": 196,
+   "moved_start": "Εὐσταθίου Ἀντιοχείας ἐξ ἑρμηνείας τοῦ ιεʹ ψαλμοῦ· Ἐξαπέστειλ"
+  }
+ ],
+ "brief_sha256": "4c8299cb6819dff0daed10abc075203efc761b367a4ee41f9c98567a6608a1c5",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T09:59:22Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "0dc337cb36c4ddf41b3f8a4aba22f1539b31f8b5f28508feacba1530ae15b16a",
+   "english_sha256": "0689b42eef84c9402a920cca4856bed0946a807a2134baafeb77600a293c3d05",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "ead1f6a393d9d0772eb1d3cb1aae6a3fe5e9630a418531078d310aa1c62e4f56",
+   "english_sha256": "53e9082ed934d51810bb2edcdf469a5aabe54ac8e1abf667b4023f876c72fe46",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "8cd4a475bd8bd87426b7c0009d074d2c65914ce9d879ac659e2d8d0ac0e4ab26",
+   "english_sha256": "3cc1bed116f1f7b3885fae9e0dece8e331fd5005b8265ba29a5179265e38d994",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "f314e1fc10267bddb1731cac036cd0475f8419b7712752bceef1f4dc7051161e",
+   "english_sha256": "ed1ddd5156bff7297b02f10ed5d8c78e177647abf57e19bb2dbbbcda0c11e30f",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:40:48Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open"
+   ],
+   "edits_undone": 10,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

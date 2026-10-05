@@ -1,0 +1,73 @@
+{
+ "slug": "amphilochius-in-illud-non-potest",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 66,
+   "moved_start": "Βλέπε αὐτοῦ τὸ ἄτυφον· οὐκ εἶπεν θέλεις σε θεραπεύσω, οὐ γὰρ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 48,
+   "moved_start": "Εἰ οὖν οὐκ ἔχει οὕτως, δέσποτα, διὰ τί λέγεις Οὐ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 112,
+   "moved_start": "Ἃ γὰρ ἂν ἐκεῖνος ποιῇ, ὁ πατήρ, ταῦτα καὶ ὁ υἱὸς ὁμοίως ποιε"
+  }
+ ],
+ "brief_sha256": "a800cdc7e413dac469a6d54e9afcd7d614c3a70f72584833746b8ad5867c605b",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-04T23:23:12Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "59254e5daab967ccce35c914e8292b4f2b54ac98759eb6aa547538d7cd74c001",
+   "english_sha256": "3b4955dddc09f27f6ebd7ca5e32b6e071b88e4d8112905373e4444a868579d05",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "e33c7777f6f961c05e6222ff98f2b0ea266f20d656eef32d1680b3adc7c32524",
+   "english_sha256": "253d430c2721691366ff94385659f8b636d9640f1b2f91d6abc688aa63a30712",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "573a026a45bcff973a15d7422cc379bd46a7bfa68ad60a797b70249842bbf627",
+   "english_sha256": "5c6e47e3bfb3df59eb5f18395250f9d5acb58e919bc3d44af236a25f134b2fe0",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "a03d11c01b3efdc894670dd8cc56d2485956d5e412e575e960ea9d4292f5d36b",
+   "english_sha256": "30931bcb0ba3b6fe247105c4d4506103f468215fcfdd461666a114d003dd3dfc",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:20:33Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-close"
+   ],
+   "edits_undone": 2,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

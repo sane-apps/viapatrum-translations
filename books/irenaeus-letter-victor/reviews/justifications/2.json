@@ -1,0 +1,199 @@
+{
+ "excerpt_id": "irenaeus-letter-victor:2",
+ "section": "2",
+ "edition": {
+  "language": "grc",
+  "path": "books/irenaeus-letter-victor/translations/victor_source.json"
+ },
+ "source_text": "Ἐν ᾧ ἄν τις δύναιτο εὖ ποιεῖν τοῖς πλησίον καὶ οὐ ποιεῖ· ἀλλότριος τῆς ἀγάπης τοῦ Κυρίου νομισθήσεται. Hoc attulit",
+ "thought_title": "Failure to do good estranges from the Lord's love",
+ "orientation": "Irenaeus closes the letter with a general warning about failing to do good to a neighbor.",
+ "pass_a_gloss": "In whatever matter anyone might be able to do good to neighbors and does not do it, he will be considered a stranger to the love of the Lord. Hoc attulit",
+ "lemmas": [
+  {
+   "form": "δύναιτο",
+   "lemma": "δύναμαι",
+   "gloss": "might be able"
+  },
+  {
+   "form": "εὖ ποιεῖν",
+   "lemma": "εὖ ποιέω",
+   "gloss": "to do good"
+  },
+  {
+   "form": "πλησίον",
+   "lemma": "πλησίον",
+   "gloss": "neighbors"
+  },
+  {
+   "form": "ποιεῖ",
+   "lemma": "ποιέω",
+   "gloss": "does"
+  },
+  {
+   "form": "ἀλλότριος",
+   "lemma": "ἀλλότριος",
+   "gloss": "stranger"
+  },
+  {
+   "form": "ἀγάπης",
+   "lemma": "ἀγάπη",
+   "gloss": "love"
+  },
+  {
+   "form": "Κυρίου",
+   "lemma": "κύριος",
+   "gloss": "Lord"
+  },
+  {
+   "form": "νομισθήσεται",
+   "lemma": "νομίζω",
+   "gloss": "will be considered"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἀλλότριος",
+   "english": "stranger",
+   "why": "The glossary bans 'charity of the Lord' and 'love of Christ'; 'stranger' preserves the sense of being alienated or outside the love of the Lord.",
+   "rejected": [
+    "alien",
+    "foreigner"
+   ]
+  },
+  {
+   "term": "νομισθήσεται",
+   "english": "will be considered",
+   "why": "The passive future of νομίζω carries the sense of being reckoned or judged as; 'will be considered' keeps the impersonal judgment force.",
+   "rejected": [
+    "will be thought",
+    "will be deemed"
+   ]
+  },
+  {
+   "term": "Ἐν ᾧ",
+   "english": "In whatever matter",
+   "why": "The relative with ἐν indicates the sphere or matter in which the failure occurs; 'in whatever matter' preserves the generalizing force.",
+   "rejected": [
+    "In which",
+    "Wherein"
+   ]
+  },
+  {
+   "term": "εὖ ποιεῖν",
+   "english": "to do good",
+   "why": "The infinitive phrase is the standard Greek idiom for benefaction; 'to do good' is literal and clear.",
+   "rejected": [
+    "to benefit",
+    "to act well"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "If someone is able to do good to their neighbors and does not do it, that person will be considered a stranger to the love of the Lord. Irenaeus concluded with this saying."
+ ],
+ "notes": [
+  "The Latin phrase 'Hoc attulit' appears after the Greek and is not part of the Greek sentence; it is likely a scribal or editorial note meaning 'He brought this' or 'This he adduced.'"
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "2866ad97d770bcde1c4be96f5a7bef21ebfa2b1176d3d5a7bf85f28e4760fcec",
+ "source_sha256": "c31a708b8c6a98a294a11b7d0cec39a298387ee24765f3c658b23c42ae7461ac",
+ "pass_b_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "omission",
+     "severity": "major",
+     "quote": "If someone is able to do good to their neighbors and does not do it, that person will be considered a stranger to the love of the Lord.",
+     "source_quote": "Hoc attulit",
+     "why": "The Latin clause “Hoc attulit” present in the source is omitted in the English rendering.",
+     "fix": "If someone is able to do good to their neighbors and does not do it, that person will be considered a stranger to the love of the Lord. He brought this.",
+     "model": "@cf/openai/gpt-oss-120b",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin 'Hoc attulit' ('he/it brought this') is in source but entirely omitted from English, losing meaning."
+    }
+   ],
+   "edits": [
+    {
+     "old": "If someone is able to do good to their neighbors and does not do it, that person will be considered a stranger to the love of the Lord.",
+     "new": "If someone is able to do good to their neighbors and does not do it, that person will be considered a stranger to the love of the Lord. He brought this."
+    }
+   ],
+   "fixed": [
+    "Added the omitted Latin clause \"Hoc attulit\" as \"He brought this.\""
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "He brought this.",
+     "why": "Fragmentary phrase with no clear subject or referent; does not parse as English.",
+     "fix": "Omit or supply context, e.g., 'He concluded with this saying.'",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "He brought this.",
+     "why": "The pronoun 'He' has no antecedent in the section; it is unclear whether it refers to Irenaeus, Victor, or someone else.",
+     "fix": "Replace with 'Irenaeus concluded with this saying' or identify the speaker.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "He brought this.",
+     "new": "Irenaeus concluded with this saying."
+    }
+   ],
+   "fixed": [
+    "The fragmentary 'Hoc attulit' has no clear subject in the source; replacing 'He brought this' with 'Irenaeus concluded with this saying' supplies the authorial voice from the work brief.",
+    "The pronoun 'He' had no antecedent; the replacement identifies Irenaeus as the speaker."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:gpt-oss+glm",
+ "confidence": "source_verified"
+}

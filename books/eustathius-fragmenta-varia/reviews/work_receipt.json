@@ -30,13 +30,13 @@
   {
    "section": "frag-open",
    "source_sha256": "3b4e5d48dc15eee22b4eef0e8d7497f3d27f4d6090f433add4fb491e23b7700a",
-   "english_sha256": "84d36a167db384768569bc06ee6cd4657c6a66e31ee61a096a39cb773755494d",
+   "english_sha256": "e201c21264f1c8e1e2f07a6727dc0aa948e18449806c1b96502c1f56b08abaaa",
    "justification": "reviews/justifications/frag-open.json"
   },
   {
    "section": "frag-rem-early",
    "source_sha256": "a65a0075aa10ed3c53eef6ef943ab67de4aefdfddad2bb766e8f956564bacc4b",
-   "english_sha256": "0c408b1a8487448fbd1d759bac3e3448a2bb4435732c450543658191d7f6dc49",
+   "english_sha256": "fd1306dd195770cc3e28432378e5bbbfd26ad61d2d253aec53e8c5957a879feb",
    "justification": "reviews/justifications/frag-rem-early.json"
   },
   {
@@ -48,8 +48,22 @@
   {
    "section": "frag-rem-close",
    "source_sha256": "abf40ada324d5766e7936eab22f81f37deb6e83c7b2ccca75cce7a46027fab9d",
-   "english_sha256": "e75c20728eb01ebc95929ae55431726f4b6e0026c2613ac44486159b4817a7fa",
+   "english_sha256": "6173cec06e15763420f01042faf4436b4de7f3677d6dcb90234570c03fac2b80",
    "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:00:01Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open",
+    "frag-rem-close",
+    "frag-rem-early"
+   ],
+   "edits_undone": 14,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
   }
  ]
 }

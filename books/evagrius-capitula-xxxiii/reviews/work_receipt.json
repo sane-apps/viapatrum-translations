@@ -1,0 +1,68 @@
+{
+ "slug": "evagrius-capitula-xxxiii",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 65,
+   "moved_start": "Ὕδρωψ, ἔστιν ἔκκλισις ἄλογος ψυχῆς, καθ' ἣν σβεσθεισῶν τῶν ἀ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 65,
+   "moved_start": "Βδέλλα, ἔστι φύσις ἀκάθαρτος τὸ δίκαιον αἶμα ἐκ τῶν λογικῶν "
+  }
+ ],
+ "brief_sha256": "4f07cff98268748875c64f0f3b521099358abd9e9f82ea941ee0925a949742d5",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-04T17:21:42Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "3489c4e16cc9697a5fa9bb3d1fcf94961f95a4833dba308a9dc38d7e88898e3f",
+   "english_sha256": "e1a1757d7ae06e5317af6e9ae7f9b2dc36202f7788287cb706955f29b4b1421d",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "8ef541a34ac6c7dfbf28f9c2ad2105e9f8ca668e4959f635343ea89ed9c4a568",
+   "english_sha256": "37a2e84bf1e8f8c7db5ea24f08849c83ccdcd0519f210dcf7282e5753bc9fde8",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "c12fb33d380a2e613decbc7e777897393cfad6a77510b380ff923a8d3bcabfbd",
+   "english_sha256": "d71801de417872f0cd45f150ba9d86f3a1ae3a5a37c62740e1f073878ad04f47",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "721061041d047df4b4e3ef5f4096b496b6f5c7142c2d45dde6a6cb6a0e5d96de",
+   "english_sha256": "927d9e0763715efe2aabf0bb93d21fd823a6ae5cab8efdfb594992daa829fffb",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:19:49Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 2,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

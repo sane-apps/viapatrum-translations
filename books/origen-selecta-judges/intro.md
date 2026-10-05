@@ -1,0 +1,5 @@
+Origen of Alexandria (c. 185–c. 254) wrote these selections on Judges. They are not his homilies on Judges, and they are not his notes on Judges. He addressed them to readers who found certain passages morally troubling or hard to understand. His purpose was to defend the text against objections and to explain difficult words, customs, and objects.
+
+He responds to apparent problems such as Jephthah's rash vow, the pronunciation test used against the Ephraimites, and the temporary barrenness of Samson's mother. Origen argues that divine help and human error can be distinguished in Jephthah's case, and that the Benjamites' early defeats were a just punishment for a prior wrong.
+
+A reader should know that the test word rendered here as "ear of grain" is the Hebrew term behind the famous "shibboleth" episode in Judges 12:6. The "books of Kingdoms" refers to what are now called the books of Samuel and Kings. The "preceding cause" of the Benjamites' punishment is the atrocity described in Judges 19–20. Origen also explains that the ephod was a priestly garment, while the theraphin were idolatrous objects.

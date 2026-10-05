@@ -1,0 +1,225 @@
+{
+ "excerpt_id": "arethas-epigrammata:u01-rem-mid",
+ "section": "u01-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/arethas-epigrammata/translations/areep_u01_rem_source.json"
+ },
+ "source_text": "ἀμαυροῦν οὐ δυνήσεται τάφος· πάντων γὰρ αὐτῆς οὐδαμῶς λάθοι στόμα καλὸν\nφερούσης νουθέτημα τῷ βίῳ· εἰ δ' οὖν, λαλήσει καὶ γραφὴ πάντων πλέον αὕτη παρ'\nαὐτὸν τὸν τάφον τεθειμένη.",
+ "thought_title": "The tomb cannot darken Anna's lesson",
+ "orientation": "Arethas is concluding his praise of Anna, arguing that her grave cannot hide the virtue her life taught.",
+ "pass_a_gloss": "The tomb will not be able to darken it; for by no means would the beautiful mouth of her, who carries a lesson for life, escape the notice of all; but if not, the inscription itself, placed beside the very tomb, will speak more than all.",
+ "lemmas": [
+  {
+   "form": "ἀμαυροῦν",
+   "lemma": "ἀμαυρόω",
+   "gloss": "to darken"
+  },
+  {
+   "form": "δυνήσεται",
+   "lemma": "δύναμαι",
+   "gloss": "will be able"
+  },
+  {
+   "form": "τάφος",
+   "lemma": "τάφος",
+   "gloss": "tomb"
+  },
+  {
+   "form": "λάθοι",
+   "lemma": "λανθάνω",
+   "gloss": "would escape notice"
+  },
+  {
+   "form": "στόμα",
+   "lemma": "στόμα",
+   "gloss": "mouth"
+  },
+  {
+   "form": "καλὸν",
+   "lemma": "καλός",
+   "gloss": "beautiful"
+  },
+  {
+   "form": "φερούσης",
+   "lemma": "φέρω",
+   "gloss": "carrying"
+  },
+  {
+   "form": "νουθέτημα",
+   "lemma": "νουθέτημα",
+   "gloss": "lesson"
+  },
+  {
+   "form": "βίῳ",
+   "lemma": "βίος",
+   "gloss": "life"
+  },
+  {
+   "form": "λαλήσει",
+   "lemma": "λαλέω",
+   "gloss": "will speak"
+  },
+  {
+   "form": "γραφὴ",
+   "lemma": "γραφή",
+   "gloss": "inscription"
+  },
+  {
+   "form": "τεθειμένη",
+   "lemma": "τίθημι",
+   "gloss": "placed"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἀμαυροῦν",
+   "english": "to darken",
+   "why": "Keeps the visual metaphor of obscuring light or brightness, matching the earlier imagery of shining crowns and boldness.",
+   "rejected": [
+    "to obscure",
+    "to dim"
+   ]
+  },
+  {
+   "term": "στόμα καλὸν",
+   "english": "beautiful mouth",
+   "why": "Literal rendering preserves the personification of Anna's speech or reputation as a mouth that cannot be hidden.",
+   "rejected": [
+    "fair voice",
+    "lovely speech"
+   ]
+  },
+  {
+   "term": "νουθέτημα τῷ βίῳ",
+   "english": "a lesson for life",
+   "why": "Uses the fixed glossary term 'lesson' and keeps the dative as indicating the lesson's purpose or sphere.",
+   "rejected": [
+    "a life-lesson",
+    "an admonition for living"
+   ]
+  },
+  {
+   "term": "γραφὴ",
+   "english": "inscription",
+   "why": "In context this refers to the written epitaph on the tomb, not Scripture or writing in general.",
+   "rejected": [
+    "writing",
+    "scripture"
+   ]
+  },
+  {
+   "term": "πάντων πλέον",
+   "english": "more than all",
+   "why": "Preserves the comparative force: the inscription will speak more than all other things.",
+   "rejected": [
+    "above all",
+    "most of all"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "The tomb will not be able to darken these things. For the beautiful mouth that carries a lesson for life could never escape notice. And if it should, the inscription placed beside the tomb itself will speak more than all."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "427225a5167d8d21ee7c0200b90d1260edf230ec348338eda8fbc706e21d71e4",
+ "source_sha256": "d841f506fdc044be5da6b696a5d05cdf59368e4014a786cc6371f5ff90725af2",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "the beautiful mouth",
+    "source_quote": "στόμα καλὸν φερούσης νουθέτημα τῷ βίῳ",
+    "why": "\"στόμα\" refers to Anna's person/reputation, not literal mouth; \"beautiful mouth\" is absurd here.",
+    "fix": "her noble reputation that bears a lesson for life could never escape notice",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "στόμα καλὸν is standard praise of speech/eloquence; 'beautiful mouth' is literal but within normal range, not absurd mistranslation."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "the inscription placed beside the tomb itself will speak more than all",
+     "why": "'More than all' is vague—more than what? Likely 'more than all else' or 'more than any voice.'",
+     "fix": "Use 'will speak louder than anything else.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "the inscription placed beside the tomb itself will speak more than all.",
+     "new": "the inscription placed beside the tomb itself will speak louder than anything else."
+    }
+   ],
+   "fixed": [
+    "Changed 'more than all' to 'louder than anything else' to clarify the comparison in πάντων πλέον."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "The tomb will not be able to darken these things",
+     "why": "Same shift continues; 'these things' refers back across section break with unclear antecedent.",
+     "fix": "Indicate author continues speaking of Anna.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "The tomb will not be able to darken these things.",
+     "new": "The tomb will not be able to darken her."
+    }
+   ],
+   "fixed": [
+    "The source has ἀμαυροῦν οὐ δυνήσεται τάφος, with the object implied from the preceding context about Anna's virtue; 'these things' had no clear antecedent, so 'her' restores the reference to Anna."
+   ]
+  }
+ ],
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T19:21:10Z",
+   "undone": 2,
+   "confirmed_before": 0,
+   "confirmed_after": 0
+  }
+ ]
+}

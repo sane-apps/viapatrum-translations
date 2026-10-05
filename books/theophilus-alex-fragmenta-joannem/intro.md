@@ -1,5 +1,5 @@
-Theophilus of Alexandria (c. 345–412) wrote this commentary on the Gospel of John. The surviving fragment comments on a passage marked as John 3.
+Theophilus of Alexandria (c. 345–412) is the author of these fragments on John. They are not his fragments on Matthew.
 
-The author uses Christ's answer to overturn an unlawful doctrine. According to this error, the soul sometimes pre-exists the body by itself, and sometimes is joined to bodies on account of its own sins, so that a woman can conceive only when some soul sins.
+He says the Savior overturns an unlawful teaching: that a soul sometimes exists before the body, and is joined to a body because of its own sins, so that a woman conceives only when some soul sins.
 
-A reader will meet Christ, called the Savior, whose words are quoted directly. The source marks the citation as John 3, though the quotation resembles John 9:3. Key terms include unlawful doctrine, soul, pre-existing, punishment, error, and the works of God.
+Christ answers, "Neither this man sinned nor his parents, but this happened so that the works of God might be revealed." This file marks that line as John 3. The citations use the old names of the biblical books.

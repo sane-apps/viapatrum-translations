@@ -1,0 +1,64 @@
+{
+ "slug": "epiphanius-anaphora-graeca",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 6,
+   "moved_start": "«Ἵνα ὁ"
+  }
+ ],
+ "brief_sha256": "e3cb911ea08b8f42ccf6ca3ff004afe0740d2b87b24e6fe6e91fdeb9362f9c8f",
+ "followability": [
+  4,
+  5
+ ],
+ "applied": "2026-10-04T01:12:25Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "c2579675895fbb17358376a073c4e63376b969c71eb2014abbfdd34882f934d0",
+   "english_sha256": "a23fe02509199969004b6a70127df17100a3ed5e3863568675d79c6f1a03f38b",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "8228bfe91a5c6efa42e0aeb3374324d24c2ea9c9a1009933a94b70fa1aafcd5a",
+   "english_sha256": "20893a56b86653a2d205e268ea0e8312285a1a8caf4c2c1e489bb68096993289",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "a1052f84710379f01524f51749ab79a1680385c760d81810e2ec7123fdccfac2",
+   "english_sha256": "e931b499a4cf7cad7f2644e0c93c3ae7226fc1c6b03a6ad5799605c079a46bdd",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "a5f91ea0fc0add4e8932d2c3aa70f43c2867b0a794aa68b6052e439f06d30df7",
+   "english_sha256": "cdcb14e857352d6bd0dde53ffa717b21a92e566060eb026f5dbf94d7d31c5d34",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:34:18Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 10,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

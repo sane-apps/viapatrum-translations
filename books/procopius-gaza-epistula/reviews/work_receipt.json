@@ -1,0 +1,68 @@
+{
+ "slug": "procopius-gaza-epistula",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 27,
+   "moved_start": "καί μοι δοκῶ Λυδὸς ἐξαίφνης"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 126,
+   "moved_start": "ἀλλὰ μὲν ἴσως ταῦτα γελάσεις, ὡς αὐτόχρημα τὸ\nσοφιστικὸν ἐπα"
+  }
+ ],
+ "brief_sha256": "b619129f5e337ef8976793adf31813b3da9a5cc350eb1e4b6a21d447a3c97edd",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T10:12:36Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "1112b0746fafed07feb234e4ac041cace958b78efa2eeb5587dac572e4c04106",
+   "english_sha256": "3590a06fdca4d16c2a8d77cf97f033bc8470760372e61dacdfc85a86cb3fda61",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "ef6e6acac106b6bef3cdf552c2919c791306cc4f3b11a6bc2defc9d5f6d1ac34",
+   "english_sha256": "fe762ce5067d8d33698e83369739ff4f9ca660f8a43f97d81804efc94a39a6a8",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "8e42e60a40a0841ce43c41ea537c8e853c606a352636d0829ef85d5b0d8f4f86",
+   "english_sha256": "3783453b6d1dc9cf427dd76de959fbc7e2e577ff2460468a9f44714982c31557",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "0e92bcaf41b77dcfa30ce57dcbf4630e6d995a630cf79d154dc0a8ffb7358010",
+   "english_sha256": "dcde2a4fd4a1a960954a5e41c9354dc92514d01953b39bc76c4bc52ae2566a31",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T21:42:51Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-early"
+   ],
+   "edits_undone": 17,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

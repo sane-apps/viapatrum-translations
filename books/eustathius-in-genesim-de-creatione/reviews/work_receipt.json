@@ -1,0 +1,68 @@
+{
+ "slug": "eustathius-in-genesim-de-creatione",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 177,
+   "moved_start": "Ὡσαύτως καὶ διὰ τοῦ λέγειν πάντα τὰ πετεινὰ καὶ πάντα τὰ θηρ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 276,
+   "moved_start": "ἐν τῷ γὰρ εἰπεῖν· καὶ εἶπεν ὁ Θεός· ποιήσωμεν ἄνθρωπον κατ' "
+  }
+ ],
+ "brief_sha256": "42e548aa84922686ed86015cfaf4eee5d5dea0d9356108ec311ec084cb580db8",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-03T22:50:30Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "cffa332544af9e5c609c7fbfe4e87d66cb01ae4e112d1074bebcecb26135ca0d",
+   "english_sha256": "caead719915d603c772eca5fa5f86a91066c143a277c8f4b4fec855e6f7d4e62",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "44959215bf013d90b9ffb8555c26a94778c00a7ea5e8e92bf0cf47eb7d6a81b5",
+   "english_sha256": "e2fa22d61eb861f8effe4bf6aed83a4db5e607f2de173432d8fd6064b925bb1c",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "2d9f8c4cd3cea007e1a87ab718e8bc527f8e7cf84c25cdbed656fac35f40da71",
+   "english_sha256": "76a85ca21eb5cc560a471e0b60104b5583cb8245f5944bc46282f69664dd4594",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "dfa3ec2b75041a4ceaf04e74f71d87fb61f1d770f1f0cf60d2229477fa79b9bd",
+   "english_sha256": "b4fa8acc4e27f09ab8be1a5684871b7ef07701015c61e0fab1625ba9029b8643",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:52:00Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close"
+   ],
+   "edits_undone": 9,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

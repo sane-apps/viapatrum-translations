@@ -1,0 +1,75 @@
+{
+ "slug": "amphilochius-in-sabbati-sancti",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 201,
+   "moved_start": "Χθὲς ἐδονήθη ἡ γῆ καὶ περὶ φυγῆς ἐβουλεύετο καὶ διαστῆναι το"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 18,
+   "moved_start": "Μᾶλλον δὲ τίς εἶδε"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 108,
+   "moved_start": "Μὴ κάμῃς ἀνόνητα, μὴ εἰς ἀσέβειαν ἀναλώσῃς τὰ σά, μὴ κατὰ θε"
+  }
+ ],
+ "brief_sha256": "12fcb30becdf0fd286ef6d8d3f335b2705a86bd073cbfabacaa2ccdcdf4b47ce",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-04T21:46:41Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "c2e69169314e0a904c15f1e1db62a0f07d910b79a7f81e42a4f634bcd4d723c1",
+   "english_sha256": "263d55b6452f53a089ac1fd4e34e94400a032ff2f397a8a68187c9aa3a4f5f55",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "717e6cee6c1b364032a7782f58f6c1a4f1e9fd63b82d7c1c10af22272d2bd9c1",
+   "english_sha256": "85619d893692c6ab4bf61a853680b58b9ef9b72678157a06234896a83675352d",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "7820d5917c62aaf489a883e4571e8a606254e33f0f0cb9f075ee5ea8dfc770ae",
+   "english_sha256": "b14d37fdda73fc08b53f6eb954522341df83a159d91860a3d712239091b102d7",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "0d5f8def4e8d8b4745b9ea616df7b6f54fcc0520301d286e325308cf3a273191",
+   "english_sha256": "10579033ccf6dee546d50dff83ff08d95f07d352ba5af0f097ba65f64ace8ec4",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:20:32Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 6,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

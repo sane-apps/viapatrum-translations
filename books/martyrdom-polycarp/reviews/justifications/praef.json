@@ -1,0 +1,133 @@
+{
+ "excerpt_id": "martyrdom-polycarp:praef",
+ "section": "praef",
+ "edition": {
+  "language": "grc",
+  "path": "books/martyrdom-polycarp/translations/mp_source.json"
+ },
+ "source_text": "Ἡ ἐκκλησία τοῦ θεοῦ ἡ παροικοῦσα Σμύρναν τῇ ἐκκλησίᾳ τοῦ θεοῦ τῇ παροικούσῃ ἐν Φιλομηλίῳ καὶ πάσαις ταῖς κατὰ πάντα τόπον τῆς ἁγίας καὶ καθολικῆς ἐκκλησίας παροικίαις: ἐλεος, εἰρήνη καὶ ἀγάπη θεοῦ πατρὸς καὶ κυρίου ἡμῶν Ἰησου Χριστοῦ πληθυνθείη.",
+ "thought_title": "Greeting to the churches",
+ "orientation": "The church of Smyrna opens its letter with a formal greeting to the church in Philomelium and to all communities of the holy and catholic church.",
+ "pass_a_gloss": "The church [of] God the [one] sojourning [in] Smyrna to the church [of] God the [one] sojourning in Philomelium and to all the throughout every place of the holy and catholic church communities: mercy, peace and love [of] God [the] Father and [of] our Lord Jesus Christ may [it] be multiplied.",
+ "lemmas": [
+  {
+   "form": "παροικοῦσα",
+   "lemma": "παροικέω",
+   "gloss": "sojourn, dwell as a resident alien"
+  },
+  {
+   "form": "παροικίαις",
+   "lemma": "παροικία",
+   "gloss": "communities of sojourners"
+  },
+  {
+   "form": "καθολικῆς",
+   "lemma": "καθολικός",
+   "gloss": "catholic, universal"
+  },
+  {
+   "form": "ἐλεος",
+   "lemma": "ἔλεος",
+   "gloss": "mercy"
+  },
+  {
+   "form": "εἰρήνη",
+   "lemma": "εἰρήνη",
+   "gloss": "peace"
+  },
+  {
+   "form": "ἀγάπη",
+   "lemma": "ἀγάπη",
+   "gloss": "love"
+  },
+  {
+   "form": "πληθυνθείη",
+   "lemma": "πληθύνω",
+   "gloss": "may it be multiplied"
+  }
+ ],
+ "choices": [
+  {
+   "term": "παροικοῦσα",
+   "english": "sojourns",
+   "why": "Keeps the resident-alien sense of the church as a temporary dweller on earth, matching the brief's addressee language.",
+   "rejected": [
+    "dwells",
+    "resides"
+   ]
+  },
+  {
+   "term": "καθολικῆς ἐκκλησίας",
+   "english": "catholic church",
+   "why": "Fixed glossary term; the brief specifies 'catholic church' for the universal church.",
+   "rejected": [
+    "universal church"
+   ]
+  },
+  {
+   "term": "πληθυνθείη",
+   "english": "may it be multiplied",
+   "why": "Optative of wish, standard epistolary greeting formula; keeps the optative force.",
+   "rejected": [
+    "be increased",
+    "abound"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "The church of God that sojourns in Smyrna, to the church of God that sojourns in Philomelium, and to all the communities of the holy and catholic church that sojourn in every place: may mercy, peace, and love from God the Father and our Lord Jesus Christ be multiplied to you."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "378d15f8a44b1ec911f4be8da659ac773605be36c488238a2fa122ac4983ca0e",
+ "source_sha256": "f89260c23dc80f3e3c97ac467e4e78bfbe124efefd3ae831d2afe28f9eedcad6",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "May mercy, peace, and love from God the Father and our Lord Jesus Christ be multiplied to you.",
+    "source_quote": "ἐλεος, εἰρήνη καὶ ἀγάπη θεοῦ πατρὸς καὶ κυρίου ἡμῶν Ἰησου Χριστοῦ πληθυνθείη.",
+    "why": "Optative 'πληθυνθείη' (may be multiplied) is a wish/prayer, but English places it as declarative opening; however, 'May...be multiplied' preserves optative. Check: source has vocative address structure with blessing first, then sender identification. English inverts order but keeps all elements.",
+    "fix": "No fix needed—elements present, order inverted for English epistolary style.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English reorders blessing before sender but preserves all elements; 'May...be multiplied' correctly renders optative πληθυνθείη."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "polish1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "polish": [
+  {
+   "changed": "Restored the letter's natural opening order by placing the sender and recipients first, then the greeting, so the sentence flows as one clear address rather than a reversed and confusing sequence.",
+   "notes": []
+  }
+ ]
+}

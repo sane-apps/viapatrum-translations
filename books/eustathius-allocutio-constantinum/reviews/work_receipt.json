@@ -1,0 +1,55 @@
+{
+ "slug": "eustathius-allocutio-constantinum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [],
+ "brief_sha256": "8f1534d2c547806edb9badaa19ac37973423dd5394a7aec4298fc704d4118771",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T10:04:41Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "5e6edbc7e0d0fe436d218dbc505174f0c259526281172822af1af088082568ec",
+   "english_sha256": "c8a9f1ece7de60f7897f4b76a6def05224cac595311ae606d927dd53b1faff06",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "8681d173777db8d6783fbabd045708b86053c58cea6185452cfc917216b528f9",
+   "english_sha256": "10e0862c1dd9fb85d5f243d08bca41fc0c57e87948a07776fdd571db5e992f9c",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "bd86b9578ef4aab9576ba65670f483f2d39c84a0e6de7899e9f3d4844d041b30",
+   "english_sha256": "a0cdbdcb0405faf019a0bc473da5810e35270f4238fc6d4b6ecd9becee1eddb0",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "63a0758ed371362f1cd2bc6365baeb4b880279d3c815fd73ee6177accdaa2840",
+   "english_sha256": "be3207c2340faf11b6d79a22a7029eea477a945bb133b1a3a33121156789298b",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T16:36:55Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open",
+    "frag-rem-mid"
+   ],
+   "edits_undone": 13,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

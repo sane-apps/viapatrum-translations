@@ -1,0 +1,516 @@
+{
+ "excerpt_id": "cyril-alexandria-fragmenta-contra-diodorum:frag-rem-mid",
+ "section": "frag-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-alexandria-fragmenta-contra-diodorum/translations/fcd_frag_rem_source.json"
+ },
+ "source_text": "\nπατήρ·\" ἵνα νοῇς οὕτως· εἰ καὶ κέκληται πρὸς υἱοθεσίαν ὁ ἄνθρωπος καὶ υἱὸς\nἀνεδείχθη νέος, ἀλλὰ μὴ ζητείτω τὰ ὑπὲρ φύσιν, μηδὲ ἀξιούτω μαθεῖν ἅπερ μηδὲ",
+ "thought_title": "The veiled saying means even an adopted son must not seek what is beyond nature",
+ "orientation": "Cyril is explaining the veiled force of Christ's saying from Matthew 24:36, addressing what the disciples should understand from it.",
+ "pass_a_gloss": "Father; so that you understand thus: even if the human being has been called to adoption and has been shown to be a new son by adoption, yet let him not seek the things beyond nature, nor let him think it right to learn what not even",
+ "lemmas": [
+  {
+   "form": "πατήρ",
+   "lemma": "πατήρ",
+   "gloss": "Father"
+  },
+  {
+   "form": "νοῇς",
+   "lemma": "νοέω",
+   "gloss": "you understand"
+  },
+  {
+   "form": "κέκληται",
+   "lemma": "καλέω",
+   "gloss": "has been called"
+  },
+  {
+   "form": "υἱοθεσίαν",
+   "lemma": "υἱοθεσία",
+   "gloss": "adoption"
+  },
+  {
+   "form": "ἄνθρωπος",
+   "lemma": "ἄνθρωπος",
+   "gloss": "human being"
+  },
+  {
+   "form": "υἱὸς",
+   "lemma": "υἱός",
+   "gloss": "son"
+  },
+  {
+   "form": "ἀνεδείχθη",
+   "lemma": "ἀναδείκνυμι",
+   "gloss": "was shown to be"
+  },
+  {
+   "form": "νέος",
+   "lemma": "νέος",
+   "gloss": "new"
+  },
+  {
+   "form": "ζητείτω",
+   "lemma": "ζητέω",
+   "gloss": "let him seek"
+  },
+  {
+   "form": "ὑπὲρ φύσιν",
+   "lemma": "ὑπέρ φύσιν",
+   "gloss": "beyond nature"
+  },
+  {
+   "form": "ἀξιούτω",
+   "lemma": "ἀξιόω",
+   "gloss": "let him think it right"
+  },
+  {
+   "form": "μαθεῖν",
+   "lemma": "μανθάνω",
+   "gloss": "to learn"
+  }
+ ],
+ "choices": [
+  {
+   "term": "υἱοθεσίαν",
+   "english": "adoption",
+   "why": "The glossary fixes 'adoption' for υἱοθεσία, avoiding the banned 'adoption as sons' and 'sonship'.",
+   "rejected": [
+    "adoption as sons",
+    "sonship"
+   ]
+  },
+  {
+   "term": "ὑπὲρ φύσιν",
+   "english": "beyond nature",
+   "why": "The glossary fixes 'beyond nature' for this phrase, avoiding 'above nature' and 'supernatural'.",
+   "rejected": [
+    "above nature",
+    "supernatural"
+   ]
+  },
+  {
+   "term": "ἀνεδείχθη νέος",
+   "english": "has been shown to be a new son",
+   "why": "ἀναδείκνυμι means to show forth or display; the passive with νέος conveys that the human being has been publicly displayed as a new son, matching Cyril's point about renewed humanity.",
+   "rejected": [
+    "has become a new son",
+    "was appointed a new son"
+   ]
+  },
+  {
+   "term": "ἀξιούτω μαθεῖν",
+   "english": "let him think it right to learn",
+   "why": "ἀξιόω with infinitive means to deem worthy or think fit; the third-person imperative keeps the hortatory force of the Greek.",
+   "rejected": [
+    "let him be worthy to learn",
+    "let him claim to learn"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "He said that only the Father knows. Understand it this way: even if a human being has been called to adoption and has been shown to be a new son, he must not seek what is beyond nature, nor think it right to learn what not even [text breaks off]"
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "e505dbf89d6a8f66e6f5494f89ce1bb4b790d74c0be9d6b4fe7e579d8cad6171",
+ "source_sha256": "80605d8f789ba6012cb277d4b616b13f6f5037540b1bb048c8f9eedf4a2cf3cb",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 3,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "new son",
+    "source_quote": "υἱὸς ἀνεδείχθη νέος",
+    "why": "'νέος' modifies the person, not 'son'; means 'shown to be a new person/renewed', not 'new son'.",
+    "fix": "shown to be a new son, or a son renewed",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "νέος can modify υἱὸς naturally; 'new son' is within normal Greek word-order range, not a meaning change."
+   },
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "he must not seek",
+    "source_quote": "μὴ ζητείτω",
+    "why": "Third-person imperative 'let him not seek' softened to 'must not seek'; changes grammatical force.",
+    "fix": "let him not seek",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "μὴ ζητείτω (3rd sg. imperative) rendered 'must not seek' preserves prohibition; 'let him not' vs 'must not' is preference."
+   },
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "nor think it right",
+    "source_quote": "μηδὲ ἀξιούτω",
+    "why": "Third-person imperative 'let him not deem it fitting' softened to 'nor think it right'; changes grammatical force.",
+    "fix": "nor let him deem it fitting",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "μηδὲ ἀξιούτω (3rd sg. imperative) rendered 'nor think it right' preserves prohibition; 'let him not deem' vs 'must not' is preference."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 3,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "unreadable",
+     "quote": "nor think it right to learn what not even",
+     "why": "Sentence breaks mid-clause across section boundary; fragmentary but needs marking.",
+     "fix": "Add '[text breaks off]' or join with next section.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "“Father.” Understand it this way: even if a human being has been called to adoption",
+     "why": "A bare quotation mark around 'Father' with no context or sentence leaves the reader confused about what is being quoted or referenced.",
+     "fix": "Add context: e.g., 'He said only the Father knows. Understand it this way…'",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "nor think it right to learn what not even",
+     "why": "Sentence breaks mid-clause across section boundary; reader cannot tell who is speaking or where the thought ends.",
+     "fix": "Keep the full sentence within one section or add an ellipsis and continuation marker.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "“Father.” Understand it this way:",
+     "new": "He said only the Father knows. Understand it this way:"
+    },
+    {
+     "old": "nor think it right to learn what not even",
+     "new": "nor think it right to learn what not even [text breaks off]"
+    }
+   ],
+   "fixed": [
+    "Added context for the bare quotation mark around 'Father'.",
+    "Added '[text breaks off]' to mark the fragmentary sentence.",
+    "The speaker issue is resolved by the added context and the break marker; the full sentence cannot be kept within one section because the source itself breaks off."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "He said only the Father knows.",
+     "why": "Unclear if this is Cyril speaking or continuing Christ's voice from prior section.",
+     "fix": "Add attribution: 'Cyril explains: He said...'",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "nor think it right to learn what not even [text breaks off]",
+     "why": "Sentence fragment with no indication of how much text is lost or what followed.",
+     "fix": "Mark more clearly: '[text breaks off; X words/letters lost]'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "He said only the Father knows. Understand it this way:",
+     "new": "Cyril explains: He said only the Father knows. Understand it this way:"
+    },
+    {
+     "old": "nor think it right to learn what not even [text breaks off]",
+     "new": "nor think it right to learn what not even [text breaks off; the remainder of the sentence is lost]"
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "nor the son",
+     "why": "Reader cannot track if 'son' means Christ or adopted human; 'new son' vs 'adoption' blur the technical term.",
+     "fix": "Consistently mark adopted son vs Son of God.",
+     "variants": [
+      {
+       "text": "nor the son",
+       "sections": [
+        "frag-open",
+        "frag-rem-early"
+       ]
+      },
+      {
+       "text": "nor the son",
+       "sections": [
+        "frag-rem-early"
+       ]
+      },
+      {
+       "text": "a new son",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      },
+      {
+       "text": "called to adoption",
+       "sections": [
+        "intro",
+        "frag-rem-mid",
+        "frag-rem-close"
+       ]
+      },
+      {
+       "text": "adoption",
+       "sections": [
+        "intro"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "Cyril explains: He said only the Father knows.",
+     "why": "Editorial voice intrudes without marking transition from fragment to commentary.",
+     "fix": "Use brackets or font change for editorial framing.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "even if a human being has been called to adoption and has been shown to be a new son, he must not seek what is beyond nature, nor think it right to learn what not even [text breaks off",
+     "why": "Incomplete sentence with no indication of how much is Cyril vs lacuna.",
+     "fix": "Mark lacuna clearly with […] and estimate missing length.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "Cyril explains: He said only the Father knows. Understand it this way:",
+     "new": "[Cyril explains:] He said only the Father knows. Understand it this way:"
+    },
+    {
+     "old": "even if a human being has been called to adoption and has been shown to be a new son, he must not seek what is beyond nature, nor think it right to learn what not even [text breaks off; the remainder of the sentence is lost]",
+     "new": "even if a human being has been called to adoption and has been shown to be a new son, he must not seek what is beyond nature, nor think it right to learn what not even […]"
+    }
+   ],
+   "fixed": [
+    "The glossary problem about 'son' is addressed by changing 'new son' to 'new adopted son' in the literal gloss, making the adopted status explicit while keeping the English natural.",
+    "The speaker problem is addressed by marking the editorial framing with brackets.",
+    "The unreadable problem is addressed by replacing the editorial note with an ellipsis in brackets to mark the lacuna."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "a new son",
+     "why": "Three different descriptions of same status; reader may think they differ.",
+     "fix": "Standardize to 'adopted son' or gloss equivalents.",
+     "variants": [
+      {
+       "text": "a new son",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      },
+      {
+       "text": "renewed human being",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "called to adoption",
+       "sections": [
+        "intro",
+        "frag-rem-close"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "[Cyril explains:]",
+     "why": "Editorial insertion in brackets; actual speaker unclear without it.",
+     "fix": "Keep bracketed attribution or integrate into text.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "nor think it right to learn what not even […]",
+     "why": "Ellipsis breaks sentence; argument incomplete, reader cannot follow conclusion.",
+     "fix": "Indicate lacuna more clearly or supply probable restoration.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "has been shown to be a new son",
+     "new": "has been shown to be a new adopted son"
+    },
+    {
+     "old": "nor think it right to learn what not even […]",
+     "new": "nor think it right to learn what not even [the text breaks off here]"
+    }
+   ],
+   "fixed": [
+    "The bracketed attribution '[Cyril explains:]' is retained as it clarifies the speaker without altering the source text."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "adoption",
+     "why": "Same Greek concept: 'called to adoption' vs 'new adopted son'—reader may miss equivalence.",
+     "fix": "Use 'adoption/sonship' consistently with note.",
+     "variants": [
+      {
+       "text": "adoption",
+       "sections": [
+        "intro",
+        "frag-rem-mid",
+        "frag-rem-close"
+       ]
+      },
+      {
+       "text": "adopted son",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "[Cyril explains:]",
+     "why": "Editorial insertion in brackets; unclear if this is Cyril speaking or the fragment compiler.",
+     "fix": "Identify speaker explicitly: 'Cyril writes:' or 'The fragment continues:'.",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "[Cyril explains:]",
+     "why": "Editorial bracket signals speaker but text breaks off mid-sentence, leaving reader unsure if explanation is Cyril's or a paraphrase.",
+     "fix": "Note that the fragment is incomplete and the explanation is Cyril's own voice.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "[Cyril explains:] He said only the Father knows. Understand it this way:",
+     "new": "Cyril writes: He said only the Father knows. Understand it this way:"
+    },
+    {
+     "old": "has been shown to be a new adopted son",
+     "new": "has been shown to be a new son by adoption"
+    }
+   ],
+   "fixed": [
+    "The speaker issue is resolved by replacing the bracketed editorial insertion with 'Cyril writes:' to identify the speaker explicitly.",
+    "The glossary issue is resolved by using 'son by adoption' to make the connection to 'called to adoption' clearer."
+   ]
+  }
+ ],
+ "polish": [
+  {
+   "changed": "Removed editorial bracket, kept the same adoption terminology for consistency, and clarified the speaker as the one who said only the Father knows.",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "intro",
+     "quote": "adoption",
+     "variants": [
+      {
+       "text": "adoption",
+       "sections": [
+        "intro",
+        "frag-rem-mid",
+        "frag-rem-close"
+       ]
+      },
+      {
+       "text": "adopted son",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ],
+     "why": "Same Greek concept: 'called to adoption' vs 'new adopted son'—reader may miss equivalence.",
+     "fix": "Use 'adoption/sonship' consistently with note.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    },
+    {
+     "class": "speaker",
+     "section": "frag-rem-mid",
+     "quote": "[Cyril explains:]",
+     "why": "Editorial insertion in brackets; unclear if this is Cyril speaking or the fragment compiler.",
+     "fix": "Identify speaker explicitly: 'Cyril writes:' or 'The fragment continues:'.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    },
+    {
+     "class": "speaker",
+     "section": "frag-rem-mid",
+     "quote": "[Cyril explains:]",
+     "why": "Editorial bracket signals speaker but text breaks off mid-sentence, leaving reader unsure if explanation is Cyril's or a paraphrase.",
+     "fix": "Note that the fragment is incomplete and the explanation is Cyril's own voice.",
+     "model": "@cf/zai-org/glm-5.2"
+    }
+   ]
+  }
+ ],
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T19:29:16Z",
+   "undone": 3,
+   "confirmed_before": 0,
+   "confirmed_after": 0
+  }
+ ]
+}

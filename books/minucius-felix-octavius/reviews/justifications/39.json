@@ -1,0 +1,260 @@
+{
+ "excerpt_id": "minucius-felix-octavius:39",
+ "section": "39",
+ "edition": {
+  "language": "lat",
+  "path": "books/minucius-felix-octavius/translations/mfo_source.json"
+ },
+ "source_text": "Cum Octauius perorasset, aliquamdiu nos ad silentium stupefacti intentos uultus tenebamus, et quod ad me est, magnitudine admirationis euanui, quod ea, quae facilius est sentire quam dicere, et argumentis et exemplis et lectionum auctoritatibus adornasset, et quod maleuolos isdem illis quibus armantur, philosophorum telis retudisset, ostendisset etiam ueritatem non tantummodo facilem sed et fauorabilem.",
+ "thought_title": "The effect of Octavius's speech on the narrator",
+ "orientation": "Marcus the narrator describes the stunned silence that follows Octavius's closing speech, before Caecilius responds.",
+ "pass_a_gloss": "When Octavius had finished speaking, for some time we held our faces intent, stunned into silence, and as far as concerns me, I melted away in the greatness of admiration, because he had adorned those things which are easier to feel than to say with arguments and examples and the authorities of readings, and because he had blunted the ill-disposed with those very weapons of the philosophers with which they are armed, and had shown also the truth to be not only easy but also favorable.",
+ "lemmas": [
+  {
+   "form": "perorasset",
+   "lemma": "peroro",
+   "gloss": "had finished speaking"
+  },
+  {
+   "form": "stupefacti",
+   "lemma": "stupefacio",
+   "gloss": "stunned"
+  },
+  {
+   "form": "intentos",
+   "lemma": "intentus",
+   "gloss": "intent, fixed"
+  },
+  {
+   "form": "uultus",
+   "lemma": "uultus",
+   "gloss": "faces, expressions"
+  },
+  {
+   "form": "euanui",
+   "lemma": "euanesco",
+   "gloss": "I melted away, vanished"
+  },
+  {
+   "form": "adornasset",
+   "lemma": "adorno",
+   "gloss": "had adorned, embellished"
+  },
+  {
+   "form": "retudisset",
+   "lemma": "retundo",
+   "gloss": "had blunted, beaten back"
+  },
+  {
+   "form": "maleuolos",
+   "lemma": "maleuolus",
+   "gloss": "the ill-disposed, malicious"
+  },
+  {
+   "form": "telis",
+   "lemma": "telum",
+   "gloss": "weapons, missiles"
+  },
+  {
+   "form": "ostendisset",
+   "lemma": "ostendo",
+   "gloss": "had shown"
+  },
+  {
+   "form": "fauorabilem",
+   "lemma": "fauorabilis",
+   "gloss": "favorable, winning favor"
+  },
+  {
+   "form": "lectionum",
+   "lemma": "lectio",
+   "gloss": "of readings, of texts"
+  }
+ ],
+ "choices": [
+  {
+   "term": "euanui",
+   "english": "I melted away",
+   "why": "The verb euanesco means to vanish or dissolve; 'melted away' captures the narrator's sense of being overcome by admiration.",
+   "rejected": [
+    "I vanished",
+    "I was carried away"
+   ]
+  },
+  {
+   "term": "retudisset",
+   "english": "had blunted",
+   "why": "Retundo literally means to beat back or blunt a weapon; it fits the metaphor of turning the philosophers' own weapons against them.",
+   "rejected": [
+    "had repelled",
+    "had dulled"
+   ]
+  },
+  {
+   "term": "fauorabilem",
+   "english": "favorable",
+   "why": "Fauorabilis means winning favor or goodwill; Octavius has shown truth to be not only accessible but attractive.",
+   "rejected": [
+    "popular",
+    "pleasing"
+   ]
+  },
+  {
+   "term": "lectionum auctoritatibus",
+   "english": "the authorities of readings",
+   "why": "Lectiones refers to texts or readings; auctoritas here means the weight or authority of written sources, kept literal to preserve the source's phrasing.",
+   "rejected": [
+    "the authority of literature",
+    "the testimony of books"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "When Octavius had finished speaking, we sat stunned for some time, our faces fixed in silence. As for me, I was overcome by the sheer force of admiration. He had adorned what is easier to feel than to say with arguments, examples, and the authority of texts. He had turned back the malicious with the very weapons of the philosophers with which they arm themselves. And he had shown that truth is not only easy but also favorable."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "1ea81ac0c9e1206e8c3a8eb1c0fc1120e88c2881cdef649c884556bacd28b7f7",
+ "source_sha256": "388df7c11a01ad52b0addceceb88fba045918c3525a942be5d5caa1adbb0ee57",
+ "pass_b_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "blunted the weapons of the philosophers—the very weapons with which the malicious arm themselves",
+     "source_quote": "et quod maleuolos isdem illis quibus armatur, philosophorum telis retudisset",
+     "why": "Latin says Octavius turned back the malefactors using the philosophers' weapons, not that he blunted those weapons.",
+     "fix": "and because he had turned back the malefactors with the very weapons with which the philosophers arm themselves",
+     "model": "@cf/openai/gpt-oss-120b",
+     "upheld_by": "@cf/moonshotai/kimi-k2.6",
+     "ruling": "Latin 'maleuolos...retudisset' = turned back the malicious, not 'blunted the weapons'; 'isdem...quibus armantur' modifies maleuolos, not weapons."
+    }
+   ],
+   "edits": [
+    {
+     "old": "he had blunted the weapons of the philosophers—the very weapons with which the malicious arm themselves—",
+     "new": "he had turned back the malicious with the very weapons of the philosophers with which they arm themselves—"
+    }
+   ],
+   "fixed": [
+    "Corrected: source 'maleuolos isdem illis quibus armatur, philosophorum telis retudisset' means Octavius turned back the malicious using the philosophers' weapons, not that he blunted the weapons."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "wins favor",
+     "source_quote": "fauorabilem",
+     "why": "\"Fauorabilis\" here means \"favorable\" (to the speaker, i.e., supportive/advantageous), not \"winning favor\" from others; truth is shown as easy and favorable (to its possessor).",
+     "fix": "favorable",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/openai/gpt-oss-120b",
+     "ruling": "‘fauorabilem’ means ‘favourable/advantageous’, not ‘wins favor’; translation changes agency"
+    }
+   ],
+   "edits": [
+    {
+     "old": "truth is not only easy but also wins favor",
+     "new": "truth is not only easy but also favorable"
+    }
+   ],
+   "fixed": [
+    "Changed 'wins favor' to 'favorable' because 'fauorabilem' means favorable (advantageous/supportive to its possessor), not winning favor from others."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/moonshotai/kimi-k2.6"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:gpt-oss+kimi",
+ "confidence": "source_verified",
+ "polish": [
+  {
+   "changed": "Split one long sentence into shorter, clearer sentences; removed the em dash; kept every claim and qualification; made the sequence of Octavius's achievements easier to follow aloud.",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "15",
+     "quote": "the response of our Januarius",
+     "variants": [
+      {
+       "text": "Januarius",
+       "sections": [
+        "15"
+       ]
+      },
+      {
+       "text": "Octavius",
+       "sections": [
+        "1",
+        "3",
+        "4",
+        "14",
+        "16",
+        "39",
+        "40"
+       ]
+      }
+     ],
+     "why": "Octavius is suddenly called 'Januarius' with no explanation; reader thinks a new person.",
+     "fix": "Add note: Januarius is an alternate name for Octavius.",
+     "model": "@cf/zai-org/glm-5.2"
+    }
+   ]
+  }
+ ]
+}

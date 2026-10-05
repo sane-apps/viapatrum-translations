@@ -1,0 +1,57 @@
+{
+ "slug": "eustathius-in-ecclesiasten",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [],
+ "brief_sha256": "9798005a4ffdee7b998e4651c95a409f355496e4b429ac725603c005d4c7146d",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T22:42:27Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "88bb0e219cd4364b2bc373f0401fa83b5190b6852823e1411ad873736af48c51",
+   "english_sha256": "393d78dfa2fea0133a87137bacb3fb570038a60473dd2b12f6ae4b4127073638",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "ef315ac56b69de81abb4e3915164e0f0056ad9c7fc11c79e57f2a8c1469afa81",
+   "english_sha256": "2c4e241f10414a0c2d0f76d8acb2455704849439b6876825ec8b1048541cdfcd",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "94b16e06cb03fa8dff8535378c8edb5faede12463de8216db16bceeaf7ba061b",
+   "english_sha256": "84afc63d777041074f98cbeded2033824597694be3d02db4276eaa2254de477b",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "ceb9e14d3a5f2049f61b92ef27fbf1f1389e8d46c772c09b45838493699b1c39",
+   "english_sha256": "28f0d0cf112d17e0797eee9d5ff8e982a207fc9c219994ac480f16ce1a7960af",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:56:09Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open",
+    "frag-rem-close",
+    "frag-rem-early",
+    "frag-rem-mid"
+   ],
+   "edits_undone": 47,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

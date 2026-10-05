@@ -1,0 +1,56 @@
+{
+ "slug": "origen-ruth-scrap",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [],
+ "brief_sha256": "7553acedea15a36af5c4320c58e2fd6a8410b0406122a93601c47aed3442de5c",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T10:06:16Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "f5c4729b83ddfae0812c918c2c3489a3261a1489225844de80bc7de4907c5b54",
+   "english_sha256": "ac90b52b6ef3f7770ad00d894bf5a465dd8e8759bb0f2ad6f6db553ec702bc90",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "f5c4729b83ddfae0812c918c2c3489a3261a1489225844de80bc7de4907c5b54",
+   "english_sha256": "2b916149abb525b87583ebc877028396ce0bfdd9a6742bf39a3556a4ef557a4f",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "f5c4729b83ddfae0812c918c2c3489a3261a1489225844de80bc7de4907c5b54",
+   "english_sha256": "f6a965898a0d8a5c5e4e5e5d228aa8704943a02d02d5da84f5003ce9ff247e52",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "f5c4729b83ddfae0812c918c2c3489a3261a1489225844de80bc7de4907c5b54",
+   "english_sha256": "f6a965898a0d8a5c5e4e5e5d228aa8704943a02d02d5da84f5003ce9ff247e52",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T21:39:12Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open",
+    "frag-rem-close",
+    "frag-rem-mid"
+   ],
+   "edits_undone": 11,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

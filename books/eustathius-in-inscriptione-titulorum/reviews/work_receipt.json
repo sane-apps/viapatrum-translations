@@ -1,0 +1,70 @@
+{
+ "slug": "eustathius-in-inscriptione-titulorum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 122,
+   "moved_start": "Ἔστι γοῦν ἐννοοῦντας ἰδεῖν ὅπως ὀνόματι μὲν αὐτὰ τὰ τῶν πειρ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 104,
+   "moved_start": "Τηνικαῦτα δέ φησι· ὁ Κύριος εἶπεν αὐτῇ· δύο ἔθνη ἐν τῇ γαστρ"
+  }
+ ],
+ "brief_sha256": "0798fb993975c95fe87b63afd9d4e759b3029deb799b0e3dfd574037267ffb06",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T15:13:41Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "4ee60f710cd964338af0570d0b677b341376e45e03fcc066bfbed42a20be05b9",
+   "english_sha256": "1c9936a6eec35c8d95ca34f5f8050c1f86daf608a8ca842f5f3f8f7cce5ba570",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "9e1d00154b606f6169530f290707d843cb81dabd84096b16b787e1daa52a4eaf",
+   "english_sha256": "ffe9543f0f4cccc457b9f2708d02955b2df3de0143c20cfb4a64a4bd5501e1c9",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "68acdb6b9d213fa3f8176e0525cf3749dc8f42378fee6087acfd05a3d0ecaaf8",
+   "english_sha256": "321a5713ab3981d0b3f8db7193f92e4d3dac249b6697f52a32ce44bed30e9d1b",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "d51b784abef12cdac93cb759179dcce4e9e89b3c347002427d7199a5fff62e2d",
+   "english_sha256": "a33343bb008ad67b1cf91033e91c1cdceb377a91508afd7e826e2f860a4ed01a",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:18:49Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 14,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

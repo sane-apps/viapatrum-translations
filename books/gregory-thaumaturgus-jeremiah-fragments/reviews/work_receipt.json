@@ -1,0 +1,67 @@
+{
+ "slug": "gregory-thaumaturgus-jeremiah-fragments",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.3"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 240,
+   "moved_start": "Πῶς περιτετμημένους ὀνομάσας ὁ λό-γος, εἶτα οὐκ Ἰουδαίους μό"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 281,
+   "moved_start": "Οὐκοῦν ἄπερ ἐλέγετο μικροῦ πρόσ-θεν περὶ τοῦ Ἰσμαὴλ, ὅτι δὴ "
+  }
+ ],
+ "brief_sha256": "880538c465766c326b19d8427c8229650326bef34a2fb79462309a729370868a",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T22:31:39Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "3c1809da0f5826681f30353b545acddd83c4057fd47143e99ab3003441a188a3",
+   "english_sha256": "ba686361003f27dbb39c874f9c75861f58840b6e75d70cafc95b7a5118d428ce",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "98af41c2250683ab5d942867b825c8a85a8b390d5889d508beff400d8e9dd346",
+   "english_sha256": "a4caae67ae9f061bbe7f2bfd65888ac681ba5f8dacbc7d320a14d25024106812",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "dfd71b3ccc44aab641846feb3e768edf82f2a0b545fba2c48f4406320f98eace",
+   "english_sha256": "17af63686d106a493fec95a0102f9b8184ffa187977501fba58476fd4af7669b",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "8bbff3392221de987f81fa9cadfac1203cf957cd21e0c6b6ce0493a41dacc831",
+   "english_sha256": "24c5ffb99abf624105e58976a8d68c27339407b9d5a3206f9be7ac64333a473f",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:50:45Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-early"
+   ],
+   "edits_undone": 1,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

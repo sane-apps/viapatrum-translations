@@ -1,0 +1,70 @@
+{
+ "slug": "procopius-gaza-refutatio-procli",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 271,
+   "moved_start": "Αὕτη δὲ καὶ μόνη θεία φύσει\nπρόοδος, εἴπερ δεῖ φύσει λέγειν "
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 26,
+   "moved_start": "Ἐν ἓξ γὰρ ἡμέραις σύμπας ὁ"
+  }
+ ],
+ "brief_sha256": "dc23d3da772d967b3d6410c438ff07df0796a0395a09525d5d31b9947b79c813",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-04T00:13:45Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "9dfc789a6d049c20ddf4f06a9cfbf2324563cbda2f40062fddaee9f4387ae90b",
+   "english_sha256": "9418c2e4a060fa575680940bec6edf8afa51ca0b0f6f60b509a1ead9193f105d",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "e13eee2560e2727e00e695f9cd4e922df3a7949627dce8425abf24311c49c39b",
+   "english_sha256": "c926e8bfdcd412283314e40ca726a5bdd32ba38433620f1306b97795b7a66a1b",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "29843c42884485ca528b870fd0f9ec697896d54b6111fc5ab576a5961176b6a6",
+   "english_sha256": "a01f78f3a5477401e3e4b361f3fb4f3dfa434e112af8269055e414309c39d475",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "b56d4c1980c52fac3bfeeab1167bc2d9dfa6350899ec3ec3b9833a1b6cd592f6",
+   "english_sha256": "35e58644e9d4451537c3abcd792c22aebb487fcc1febc35107b6fc5689b91e32",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T21:47:16Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 17,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

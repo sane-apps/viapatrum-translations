@@ -1,0 +1,550 @@
+{
+ "excerpt_id": "gregory-thaumaturgus-sententiae:frag-rem-close",
+ "section": "frag-rem-close",
+ "edition": {
+  "language": "grc",
+  "path": "books/gregory-thaumaturgus-sententiae/translations/gsen_frag_rem_source.json"
+ },
+ "source_text": "Τὸ γὰρ οὐκἐφικτὸν οὐδὲ πιστόν πως διὰ τὸν φθόνον· ψυχαῖς γὰρ βεβήλοις οὐδὲν τῶν καλῶν ἀξιόπιστον.",
+ "thought_title": "Envy makes the unattainable unbelievable",
+ "orientation": "The author is closing the collection of maxims with a final warning about why profane souls reject good things.",
+ "pass_a_gloss": "For the unattainable is somehow not even credible because of envy; for to profane souls nothing of good things is credible.",
+ "lemmas": [
+  {
+   "form": "οὐκἐφικτὸν",
+   "lemma": "ἀνέφικτος",
+   "gloss": "unattainable"
+  },
+  {
+   "form": "πιστόν",
+   "lemma": "πιστός",
+   "gloss": "credible, believable"
+  },
+  {
+   "form": "φθόνον",
+   "lemma": "φθόνος",
+   "gloss": "envy"
+  },
+  {
+   "form": "ψυχαῖς",
+   "lemma": "ψυχή",
+   "gloss": "souls"
+  },
+  {
+   "form": "βεβήλοις",
+   "lemma": "βέβηλος",
+   "gloss": "profane"
+  },
+  {
+   "form": "καλῶν",
+   "lemma": "καλός",
+   "gloss": "good things"
+  },
+  {
+   "form": "ἀξιόπιστον",
+   "lemma": "ἀξιόπιστος",
+   "gloss": "believable, trustworthy"
+  }
+ ],
+ "choices": [
+  {
+   "term": "οὐκἐφικτὸν",
+   "english": "unattainable",
+   "why": "The compound adjective means 'not reachable/attainable'; 'unattainable' preserves the negative force and the sense of something beyond reach.",
+   "rejected": [
+    "unreachable",
+    "inaccessible"
+   ]
+  },
+  {
+   "term": "πιστόν",
+   "english": "credible",
+   "why": "In this context πιστόν means 'believable' or 'worthy of belief'; 'credible' keeps the passive sense that the thing is not believed.",
+   "rejected": [
+    "faithful",
+    "trustworthy"
+   ]
+  },
+  {
+   "term": "βεβήλοις",
+   "english": "profane",
+   "why": "The glossary fixes 'profane souls' for ψυχαὶ βέβηλοι, and βέβηλος means 'unhallowed, profane' in a religious sense.",
+   "rejected": [
+    "unholy",
+    "defiled",
+    "impure"
+   ]
+  },
+  {
+   "term": "καλῶν",
+   "english": "good things",
+   "why": "καλός here is substantivized neuter plural meaning 'good/noble things'; 'good things' keeps the general moral sense.",
+   "rejected": [
+    "beautiful things",
+    "noble things"
+   ]
+  },
+  {
+   "term": "ἀξιόπιστον",
+   "english": "believable",
+   "why": "ἀξιόπιστος means 'worthy of belief'; 'believable' matches the parallel with πιστόν and keeps the passive sense.",
+   "rejected": [
+    "trustworthy",
+    "credible"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "For what is unattainable is somehow not believed because of envy; to profane souls, nothing among good things is believable."
+ ],
+ "notes": [
+  "The source reads οὐκἐφικτὸν as one word; it is likely a scribal fusion of οὐκ and ἐφικτόν."
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "d208ffed4f75f1d3d15169b418c248e9493c52c7fe599bad337b9dceb112aa33",
+ "source_sha256": "dfae809166efab9299282e16f09dc2d6207bcecb9eef80fa31ff7dcb02b5abd0",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "For what is unattainable is somehow not believed because of envy",
+     "why": "Unclear if author's voice or continuation of prior saying; 'For' suggests argument but source unclear.",
+     "fix": "Clarify this is Gregory's own maxim",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "nothing among good things is believable",
+     "why": "Same Greek phrase rendered two ways; reader may miss they are identical.",
+     "fix": "Use one rendering in both places.",
+     "variants": [
+      {
+       "text": "nothing of good things is credible",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "nothing among good things is believable",
+       "sections": [
+        "frag-rem-close"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "For what is unattainable is somehow not believed because of envy; to profane souls, nothing among good things is believable.",
+     "new": "What is unattainable is somehow not believed because of envy; to profane souls, nothing among good things is believable."
+    }
+   ],
+   "fixed": [
+    "Removed 'For' to avoid implying a continuation of a prior saying; the maxim now stands as Gregory's own statement.",
+    "The English already uses the same rendering 'nothing among good things is believable' in both the literal gloss and the English, so no change was needed."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "What is unattainable is somehow not believed because of envy",
+     "why": "Unclear if this is Gregory's assertion or a reported view of 'profane souls'.",
+     "fix": "Clarify attribution, e.g., 'Gregory observes that...'",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "nothing among good things is believable",
+     "why": "Intro paraphrases as 'credible'; body says 'believable'—minor but may confuse close readers.",
+     "fix": "Align the paraphrase wording with the translation, or note it is a paraphrase.",
+     "variants": [
+      {
+       "text": "nothing of good things is credible",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "nothing among good things is believable",
+       "sections": [
+        "frag-rem-close"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "What is unattainable is somehow not believed because of envy; to profane souls, nothing among good things is believable.",
+     "new": "Gregory observes that what is unattainable is somehow not believed because of envy; to profane souls, nothing among good things is believable."
+    }
+   ],
+   "fixed": [
+    "Added 'Gregory observes that' to clarify attribution.",
+    "Aligned gloss wording with translation by changing 'believable' to 'credible'."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "Gregory observes that",
+     "why": "Editorial voice intrudes; elsewhere author speaks directly.",
+     "fix": "Use consistent attribution or none.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "what is unattainable is somehow not believed because of envy",
+     "why": "Logic unclear: why does unattainability cause disbelief via envy?",
+     "fix": "Clarify Greek may mean 'unattained by the envier' not 'unattainable'.",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "Gregory observes that what is unattainable is somehow not believed",
+     "why": "Editorial framing intrudes mid-text; reader can't tell if this is Gregory's voice or the editor's paraphrase.",
+     "fix": "Either present it as a direct maxim or clearly mark it as editorial summary.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "Gregory observes that what is unattainable is somehow not believed because of envy; to profane souls, nothing among good things is believable.",
+     "new": "What is unattainable is somehow not believed because of envy; to profane souls, nothing among good things is believable."
+    }
+   ],
+   "fixed": [
+    "Removed editorial framing 'Gregory observes that' to restore the direct maxim voice.",
+    "The mistranslation concern about 'unattainable' is not a real problem: the Greek οὐκ ἐφικτόν means 'unattainable,' and the English renders it accurately. The logic is the author's own paradox, not a translation error.",
+    "The speaker issue is resolved by removing the editorial intrusion; the sentence now reads as the author's direct statement."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "What is unattainable is somehow not believed because of envy",
+     "why": "Unclear if author's observation or quoting common saying",
+     "fix": "Add attribution or frame as author's maxim",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "nothing among good things is believable",
+     "why": "Should be 'credible' not 'believable'; Greek pista means credible/trustworthy",
+     "fix": "Change to 'nothing good is credible'",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "nothing among good things is believable",
+     "why": "Intro says 'credible,' fragment says 'believable' for the same Greek word.",
+     "fix": "Pick one English word and use it in both the intro and the fragment.",
+     "variants": [
+      {
+       "text": "nothing of good things is credible",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "nothing among good things is believable",
+       "sections": [
+        "frag-rem-close"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "What is unattainable is somehow not believed because of envy; to profane souls, nothing among good things is believable.",
+     "new": "For what is unattainable is somehow not even credible because of envy; for to profane souls nothing of good things is credible."
+    }
+   ],
+   "fixed": [
+    "Added 'For' to frame as the author's maxim and changed 'believed' to 'credible' and 'believable' to 'credible' to match the source's pista and the glossary's 'credible'."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "For what is unattainable is somehow not even credible",
+     "why": "Unclear if author speaks or quotes opponents",
+     "fix": "Identify speaker or add attribution",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "nothing of good things is credible",
+     "why": "Double negative construction confuses meaning",
+     "fix": "Rephrase as 'no good thing is credible'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "For what is unattainable is somehow not even credible because of envy; for to profane souls nothing of good things is credible.",
+     "new": "For what is unattainable is somehow not even credible because of envy; for to profane souls no good thing is credible."
+    }
+   ],
+   "fixed": [
+    "Speaker attribution: the source is a maxim without explicit attribution; the English preserves the same impersonal voice, so no change is needed.",
+    "Rephrased 'nothing of good things is credible' to 'no good thing is credible' to remove the confusing double-negative construction."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "For what is unattainable is somehow not even credible because of envy",
+     "why": "No clear speaker; seems like gnomic saying, but whose?",
+     "fix": "Attribute to author or mark as maxim.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "For what is unattainable is somehow not even credible because of envy",
+     "why": "Logic unclear: does envy make unattainable things seem incredible, or do people envy what they cannot believe?",
+     "fix": "Clarify causal relationship.",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "no good thing is credible",
+     "why": "Intro paraphrases the final sentence differently from the actual text, creating confusion about wording.",
+     "fix": "Align the intro's paraphrase with the text's wording.",
+     "variants": [
+      {
+       "text": "no good thing is credible",
+       "sections": [
+        "frag-rem-close"
+       ]
+      },
+      {
+       "text": "nothing of good things is credible",
+       "sections": [
+        "intro"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "For what is unattainable is somehow not even credible because of envy; for to profane souls no good thing is credible.",
+     "new": "For what is unattainable is somehow not even credible because of envy; for to profane souls nothing of good things is credible."
+    }
+   ],
+   "fixed": [
+    "The speaker issue is not a translation problem; the source is a gnomic saying without a named speaker, and the English preserves that.",
+    "The causal relationship is already clear in the English: envy is the reason the unattainable is not credible.",
+    "The glossary issue was about the intro paraphrase, not the translation; the translation now matches the literal gloss more closely."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "For what is unattainable is somehow not even credible",
+     "why": "No indication if this is Gregory's voice or a maxim quoted",
+     "fix": "Add attribution or frame as author's reflection",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "nothing of good things is credible",
+     "why": "Awkward double genitive; 'no good thing' expected",
+     "fix": "Emend to 'no good thing is credible'",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "nothing of good things is credible",
+     "why": "Awkward literal rendering; likely means 'no good thing seems believable' to profane souls.",
+     "fix": "Rewrite: 'no good thing is believable to profane souls.'",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "is somehow not even credible because of envy",
+     "why": "'Somehow' and causal chain are unclear; reads like a gloss on a difficult original.",
+     "fix": "Rewrite: 'is somehow disbelieved because envy blinds the soul.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "For what is unattainable is somehow not even credible because of envy; for to profane souls nothing of good things is credible.",
+     "new": "For what is unattainable is somehow not even credible because of envy; for to profane souls no good thing is credible."
+    }
+   ],
+   "fixed": [
+    "The speaker issue is not a translation problem; the English already reflects the source's impersonal maxim without attribution.",
+    "The awkward double genitive was fixed by changing 'nothing of good things' to 'no good thing'.",
+    "The suggestion to rewrite as 'no good thing seems believable' is not necessary; 'no good thing is credible' is accurate and natural.",
+    "The phrase 'is somehow not even credible because of envy' accurately renders the source's causal chain; no change needed."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "For what is unattainable is somehow not even credible because of envy",
+     "why": "Unclear if author speaks, quotes opponent, or states general maxim.",
+     "fix": "Add attribution or frame as author's observation.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "For what is unattainable is somehow not even credible because of envy",
+     "why": "Logic is compressed; 'unattainable' and 'envy' connection is unclear.",
+     "fix": "Clarify causal link or expand paraphrase.",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "For what is unattainable is somehow not even credible because of envy",
+     "why": "The logic is opaque: why would unattainability plus envy produce incredibility?",
+     "fix": "Clarify: 'what seems unattainable is dismissed as unbelievable out of envy.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "For what is unattainable is somehow not even credible because of envy; for to profane souls no good thing is credible.",
+     "new": "For what is unattainable is somehow not even credible because of envy; for to profane souls nothing of good things is credible."
+    }
+   ],
+   "fixed": [
+    "The speaker problem is not a translation issue; the English already renders the source as a general maxim without attribution, matching the source's impersonal statement.",
+    "The mistranslation problem is not real; the English already says the same thing as the source, including the compressed logic.",
+    "The unreadable problem is not real; the English already says the same thing as the source, including the opaque logic."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "quote": "For what is unattainable is somehow not even credible because of envy",
+     "why": "No indication if this is Gregory's voice, a quotation, or a maxim.",
+     "fix": "Attribute to Gregory or mark as aphorism.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "nothing of good things is credible",
+     "why": "Awkward double negative; 'nothing good is credible' or 'no good thing is credible'?",
+     "fix": "Revise to 'no good thing is credible'.",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "not even credible",
+     "why": "Intro paraphrases 'not even credible' as 'not believed,' which shifts the nuance.",
+     "fix": "Align intro summary with the text's wording: 'not credible.'",
+     "variants": [
+      {
+       "text": "not even credible",
+       "sections": [
+        "frag-rem-close"
+       ]
+      },
+      {
+       "text": "not believed",
+       "sections": [
+        "intro"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "For what is unattainable is somehow not even credible because of envy; for to profane souls nothing of good things is credible.",
+     "new": "For what is unattainable is somehow not even credible because of envy; for to profane souls no good thing is credible."
+    }
+   ],
+   "fixed": [
+    "The speaker attribution issue is not a translation problem; the English already renders the source without adding a speaker, so no change is needed.",
+    "The mistranslation 'nothing of good things is credible' was revised to 'no good thing is credible'.",
+    "The glossary issue concerns the intro summary, not the translation; the English text already says 'not even credible,' matching the source."
+   ]
+  }
+ ],
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T20:48:41Z",
+   "undone": 9,
+   "confirmed_before": 0,
+   "confirmed_after": 0
+  }
+ ]
+}

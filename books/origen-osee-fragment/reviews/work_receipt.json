@@ -1,0 +1,76 @@
+{
+ "slug": "origen-osee-fragment",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.3"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-open",
+   "to": "frag-rem-early",
+   "moved_chars": 159,
+   "moved_start": "Ἀναγνοὺς γὰρ, Ἔκλαυσαν καὶ ἐδεήθησάν μου· καὶ, Ἐν τῷ οἴκῳ ὢν"
+  },
+  {
+   "from": "frag-rem-early",
+   "to": "frag-rem-mid",
+   "moved_chars": 84,
+   "moved_start": "Οἱ γὰρ\nκατὰ Θεὸν περιπατοῦντες καὶ τῶν ἐντολῶν αὐτοῦ ἀντεχόμ"
+  },
+  {
+   "from": "frag-rem-mid",
+   "to": "frag-rem-close",
+   "moved_chars": 230,
+   "moved_start": "Ὁ γὰρ εἷς, ὅτε ἁμαρτάνει, πολλοστός ἐστιν, ἀποσχιζόμενος ἀπὸ"
+  }
+ ],
+ "brief_sha256": "573d7d67cba76e36633d32c62dd6d28711a78257ab979f36f0c79e799de9703b",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T20:31:59Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "f77dbbdde9861e27ef7fbe2f365d1dc98e2ada9fd8314fe61795e737138fd2bf",
+   "english_sha256": "1ad40bf2fe76cfb20bc433289c1a947f2bd2c69a34fa3cee65b219a89c650032",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "f4a1c115afef1896f1c7bc41bc8a75873d00a95342eaf5555981f22428a88d17",
+   "english_sha256": "f5959170bc83b4e2a2663452ba86025ff63aa98cc5c81c09a792c72ae33704d7",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "440c6539d726511c29ce29c7302ac24c40b682fba24376b87a0e76a57147ccec",
+   "english_sha256": "577980dffec6aea8c27500060b4564e5c587cc5868f130fff389ac056abcc18e",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "387c194162b3d1ac2c21f9cb9a6ab19c1242656ac428dbc88e5f0da1194b5ffa",
+   "english_sha256": "b997d4f97faac64c46738fd46a724d21938fbf8062f96696c06316b1e1aaea8e",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T21:38:14Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open",
+    "frag-rem-close",
+    "frag-rem-early",
+    "frag-rem-mid"
+   ],
+   "edits_undone": 28,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

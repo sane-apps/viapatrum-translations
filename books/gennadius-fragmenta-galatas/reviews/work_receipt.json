@@ -1,0 +1,76 @@
+{
+ "slug": "gennadius-fragmenta-galatas",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 77,
+   "moved_start": "{Gal 3,21} Οὐ τοίνυν ἐνδεχόμενον ἀλλ' οὐδὲ εὔλογον ἐπ' ἀναιρ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 145,
+   "moved_start": "4 {Gal 4,3} Ἐν τάξει τῶν ἐπιτρόπων καὶ οἰκονόμων τῶν τοὺς ἀτ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 108,
+   "moved_start": "ἢ στοιχεῖα καλεῖ ἡμέρας, ὕδωρ,\nπῦρ ὧν ἦσαν ἐκ τοῦ εἰς δουλεί"
+  }
+ ],
+ "brief_sha256": "36a32cd08e8fb1eb6b937f2b100c96bf243e527140651e01e489f218a1495c47",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-03T11:01:13Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "f8f3a14389cd1bebb7a282fbb8ce54a60128a49c9c77c0299b40019655ba4ec3",
+   "english_sha256": "8543cb56c7be9dbe266f02bec0a2c960529eb75ca1d1293850a963f2ffc6126c",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "8a5dcb1d19c457eac7d843641b3b1a109634846e34f0ed92542a30d9c18ccac9",
+   "english_sha256": "9658708e31e5dbe689331439d4484573a4aaadc5f73e46bea3a1e4dbaabb2582",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "09385854d496b3538325b092245e391236e73b7eec3048cc6d89ce283ca106a1",
+   "english_sha256": "922f3f0d533e50a605323fbde52567bd8b3f428d99e82afd5d48b39fb5edbaaf",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "8469808161f4cbceb25a44c5923c1132995747fe35b908407c8a5e0000b330a0",
+   "english_sha256": "eb4be7a68a4a2cfe64ece3e6bfb31790af8e3023c7f0b4c48cadd0a35ed9203d",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:46:38Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 9,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

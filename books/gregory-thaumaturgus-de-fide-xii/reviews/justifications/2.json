@@ -1,0 +1,365 @@
+{
+ "excerpt_id": "gregory-thaumaturgus-de-fide-xii:2",
+ "section": "2",
+ "edition": {
+  "language": "lat",
+  "path": "books/gregory-thaumaturgus-de-fide-xii/translations/fide_xii_source.json"
+ },
+ "source_text": "Si quis dicit carnem Christi homoousion, id est consubstantialem esse divinitati, et non confitetur ipsum in forma Dei et Deum esse ante saecula, et seipsum exinanisse, et formam servi accepisse sicut scriptum est, anathema sit. Quomodo autem caro post tempus homoousios, id est eiusdem substantiae, cum sempiterna divinitate dici potest? Homoousion enim dicitur quod est idem natura et eadem sempiternitate invariabiliter.",
+ "thought_title": "The flesh is not consubstantial with the divinity",
+ "orientation": "Gregory is closing his treatise with a final anathema against saying Christ's flesh is consubstantial with the divinity.",
+ "pass_a_gloss": "If anyone says the flesh of Christ is homoousion, that is, consubstantial with the divinity, and does not confess that he himself was in the form of God and was God before the ages, and that he emptied himself, and that he accepted the form of a servant, as it is written, let him be anathema. But how can flesh in time be called homoousios, that is, of the same substance, with the eternal divinity? For homoousion is said of that which is the same in nature and in the same eternal existence unchangeably.",
+ "lemmas": [
+  {
+   "form": "homoousion",
+   "lemma": "homoousios",
+   "gloss": "consubstantial"
+  },
+  {
+   "form": "consubstantialem",
+   "lemma": "consubstantialis",
+   "gloss": "consubstantial"
+  },
+  {
+   "form": "divinitati",
+   "lemma": "divinitas",
+   "gloss": "divinity"
+  },
+  {
+   "form": "exinanisse",
+   "lemma": "exinanio",
+   "gloss": "emptied himself"
+  },
+  {
+   "form": "formam",
+   "lemma": "forma",
+   "gloss": "form"
+  },
+  {
+   "form": "servi",
+   "lemma": "servus",
+   "gloss": "servant"
+  },
+  {
+   "form": "caro",
+   "lemma": "caro",
+   "gloss": "flesh"
+  },
+  {
+   "form": "tempus",
+   "lemma": "tempus",
+   "gloss": "time"
+  },
+  {
+   "form": "substantiae",
+   "lemma": "substantia",
+   "gloss": "substance"
+  },
+  {
+   "form": "sempiterna",
+   "lemma": "sempiternus",
+   "gloss": "sempiternal"
+  },
+  {
+   "form": "natura",
+   "lemma": "natura",
+   "gloss": "nature"
+  },
+  {
+   "form": "sempiternitate",
+   "lemma": "sempiternitas",
+   "gloss": "sempiternity"
+  }
+ ],
+ "choices": [
+  {
+   "term": "homoousion",
+   "english": "consubstantial",
+   "why": "Glossary requires 'consubstantial' for homoousion; banned rendering is 'of the same substance'.",
+   "rejected": [
+    "of the same substance",
+    "homoousian"
+   ]
+  },
+  {
+   "term": "consubstantialem",
+   "english": "consubstantial",
+   "why": "The Latin glosses homoousion with consubstantialem; glossary requires 'consubstantial'.",
+   "rejected": [
+    "of the same substance"
+   ]
+  },
+  {
+   "term": "in forma Dei",
+   "english": "in the form of God",
+   "why": "Echoes Philippians 2:6; 'form' is the glossary term for forma.",
+   "rejected": [
+    "in God's shape",
+    "in the condition of God"
+   ]
+  },
+  {
+   "term": "formam servi",
+   "english": "form of a servant",
+   "why": "Glossary requires 'form of a servant' for forma servi.",
+   "rejected": [
+    "servant's form",
+    "condition of a slave"
+   ]
+  },
+  {
+   "term": "exinanisse",
+   "english": "emptied himself",
+   "why": "Glossary requires 'emptied himself' for exinanisse.",
+   "rejected": [
+    "humbled himself",
+    "made himself nothing"
+   ]
+  },
+  {
+   "term": "sempiterna divinitate",
+   "english": "sempiternal divinity",
+   "why": "Keeps the temporal contrast with 'after time'; 'sempiternal' preserves the Latin sempiterna.",
+   "rejected": [
+    "eternal divinity",
+    "everlasting divinity"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Philippians 2:6-7",
+   "method": "wording",
+   "note": "in forma Dei ... exinanisse ... formam servi accepisse"
+  }
+ ],
+ "pass_b_english": [
+  "If anyone says that the flesh of Christ is consubstantial with the divinity, and does not confess that he himself was in the form of God and was God before the ages, and that he emptied himself and took the form of a servant, as it is written, let him be anathema. For how can flesh that exists after time be called consubstantial with the sempiternal divinity? What is consubstantial is what is the same in nature and in sempiternity, without change."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "27ac9c6138ed4973b4bb8fa41f68c71051f7f2f1659e4365f7352fffbe69e8e8",
+ "source_sha256": "1a15571edc1c3c864be19dd2c2bd5df80a7fca62764327a9a2db55a6423d5249",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "flesh that exists after time",
+    "source_quote": "caro post tempus",
+    "why": "\"post tempus\" means \"after a time/after some time\" (temporal, created), not \"after time\" (metaphysical/atemporal).",
+    "fix": "flesh that exists in time or after a beginning",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'post tempus' literally means 'after time'; rendering as 'exists after time' captures the source's temporal-vs-sempiternal contrast adequately."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "the uncreated God the Word showed the incarnation from created humanity and was made man",
+     "why": "Same referent (divine nature/Son) rendered three ways; reader may not connect them.",
+     "fix": "Use consistent title or note equivalence.",
+     "variants": [
+      {
+       "text": "God the Word",
+       "sections": [
+        "1"
+       ]
+      },
+      {
+       "text": "the divinity",
+       "sections": [
+        "1",
+        "2"
+       ]
+      },
+      {
+       "text": "God",
+       "sections": [
+        "2"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "was made man",
+     "why": "Incarnation formulas differ; 'made man' and 'form of servant' are equivalent but not marked as such.",
+     "fix": "Gloss 'form of a servant' as 'was made man'.",
+     "variants": [
+      {
+       "text": "was made man",
+       "sections": [
+        "1"
+       ]
+      },
+      {
+       "text": "took the form of a servant",
+       "sections": [
+        "2"
+       ]
+      },
+      {
+       "text": "was recognized as man",
+       "sections": [
+        "1"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "mistranslation",
+     "quote": "flesh that exists after time",
+     "why": "'After time' is unclear English; likely means 'in time' or 'temporal' vs. eternal.",
+     "fix": "Change to 'flesh that exists in time' or 'temporal flesh'.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "flesh that exists after time",
+     "new": "flesh that exists in time"
+    }
+   ],
+   "fixed": [
+    "The glossary problems refer to source text not present in this excerpt, so no edits are needed for them here.",
+    "The mistranslation 'after time' has been corrected to 'in time' in both the English and the literal gloss."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "the uncreated God the Word showed the incarnation from created humanity and was made man",
+     "why": "Same divine referent called 'God the Word,' 'the divinity,' and 'God' without clarification.",
+     "fix": "Use consistent title or note equivalence.",
+     "variants": [
+      {
+       "text": "God the Word",
+       "sections": [
+        "1"
+       ]
+      },
+      {
+       "text": "the divinity",
+       "sections": [
+        "1",
+        "2"
+       ]
+      },
+      {
+       "text": "God",
+       "sections": [
+        "1",
+        "2"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "was made man",
+     "why": "Christ's humanity described four ways; reader may miss they are equivalent.",
+     "fix": "Clarify these all describe same incarnate state.",
+     "variants": [
+      {
+       "text": "was made man",
+       "sections": [
+        "1"
+       ]
+      },
+      {
+       "text": "was recognized as man",
+       "sections": [
+        "1"
+       ]
+      },
+      {
+       "text": "truly man",
+       "sections": [
+        "1"
+       ]
+      },
+      {
+       "text": "took the form of a servant",
+       "sections": [
+        "2"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "mistranslation",
+     "quote": "sempiternal divinity",
+     "why": "Archaic 'sempiternal' (eternal but with beginning, or just eternal?) may confuse; paired with 'sempiternity' below.",
+     "fix": "Use 'eternal' consistently or gloss 'sempiternal'.",
+     "variants": null
+    },
+    {
+     "class": "mistranslation",
+     "quote": "sempiternity",
+     "why": "Rare technical term; reader may not grasp it means eternal duration.",
+     "fix": "Gloss as 'eternal existence' or 'eternity'.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "sempiternal divinity",
+     "new": "eternal divinity"
+    },
+    {
+     "old": "in sempiternity",
+     "new": "in eternal existence"
+    }
+   ],
+   "fixed": [
+    "The glossary problems about 'the uncreated God the Word' and 'was made man' refer to text not present in the supplied English passage, so no edit is possible here.",
+    "The English already says 'flesh that exists in time,' which matches the source's 'caro post tempus' in sense."
+   ]
+  }
+ ],
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T20:24:04Z",
+   "undone": 3,
+   "confirmed_before": 0,
+   "confirmed_after": 0
+  }
+ ]
+}

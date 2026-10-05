@@ -1,0 +1,63 @@
+{
+ "slug": "cyril-alexandria-fragmenta-contra-theodorum-2",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-rem-mid",
+   "to": "frag-rem-close",
+   "moved_chars": 171,
+   "moved_start": "καὶ ταύτης ἕνεκα\nτῆς αἰτίας ὁ ζωοποιὸς τοῦ Θεοῦ Λόγος ἰδίαν "
+  }
+ ],
+ "brief_sha256": "9079ce960902be483f0d14105f6350fa82642f92a1641786deef237a02ae855b",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T10:56:42Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "a0b84ea7c33afb6f36596c47ba249827efd44076294975fb66e389d8154a53c9",
+   "english_sha256": "c4489787208c8c5be5fa534a7b9910d73461a63aff4f467e871835fd34a73451",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "04365d3a7256b1ba67e07691d69ce5e21ccf4a480eb9a06bbe4dd33a35701df7",
+   "english_sha256": "4b15a38f5e6d4f95fec99dd3afba960b605a94f954320382f32b2bc850f6e05a",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "664f5df2199ae57e1e0d3f505eed89998a82a08f8f65ae4e047951f95e644fe0",
+   "english_sha256": "2fba38cf559ebd2df23e889651e929d93e9925851b85bdf3b5ddec1fec5d9719",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "5c74e5ee5919372bcee6743d937bb75488c70c7ab440f1fdcc5593941aa6f467",
+   "english_sha256": "5cd6cacd297db8affa66247516bbe12ea2a016ad045e923055b0336d17b6a234",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:29:00Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open",
+    "frag-rem-close",
+    "frag-rem-early"
+   ],
+   "edits_undone": 17,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

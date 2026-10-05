@@ -1,0 +1,74 @@
+{
+ "slug": "eustathius-oratio-dominus-creavit",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 145,
+   "moved_start": "23 Ἀλλ' ὥσπερ ἐκ τῆς παρθένου τεχθεὶς ὁ ἄνθρωπος ἐκ γυναικὸς"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 73,
+   "moved_start": "26 Εἰ γὰρ ἀσώματός ἐστιν οὔτε ἁφῇ χειρῶν ὑποπίπτει, οὔτε αἰσ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 128,
+   "moved_start": "Οὐ γὰρ εἴσω τῶν σωματικῶν ὄγκων ἡ ἀνωτάτω Σοφία καθειργμένη "
+  }
+ ],
+ "brief_sha256": "076906d85eb24fcc0bfca1be4d7d57443de30474ef5e4b5d3eb7022eb3e14694",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-04T02:38:09Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "2657e03e611359dd495d3632f9253bf539d9ea03203f66676d19ee5b8b33a776",
+   "english_sha256": "9848cf557ef5f48e633dadc244a02a11972ce08ded67a1890d2afd08d2694d4c",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "e240839febc7da010dd282c13beed3dd6d4f1842435985d018d7dc5fbfad9f27",
+   "english_sha256": "299842663133afd43f0abb1f7607cdaa681de40df9155fa64ae0bbc2d9ea621e",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "39063016b541d6aa9c3e1d70eb485bfab2bae826fdd79bd2474bd1313ed7961f",
+   "english_sha256": "735c2299e57c024fd5e1b991d57798193b61b1c04fc7f569a52c5c95a8b29031",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "5a1ff090225a30bbac700666bf66c278cf76797ae410ed863b113fc77b839fbe",
+   "english_sha256": "cb77aae66f0c734bfc7c5bca1722f6a17dae55c4001193fdd1a8940b5ee4bc61",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:22:58Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-close",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 15,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

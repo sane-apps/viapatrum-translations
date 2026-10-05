@@ -1,0 +1,73 @@
+{
+ "slug": "eusebius-emesa-fragmenta-romanos",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 367,
+   "moved_start": "ἐπεὶ οὖν τὰ προσωποποιηθέντα ῥήματα οὔτε τῷ θεσπεσίῳ Παύλῳ ἁ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 181,
+   "moved_start": "ἵνα δὲ μὴ τὴν ἐντολὴν ἢ τὸν ταύτην δεδωκότα θεὸν αἰτιάσωνταί"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 244,
+   "moved_start": "εἰ δὲ τοῦτο ἀληθές ἐστιν, κατὰ τοὺς ἀσεβεῖς ἐρῶ· ἄρα οὐκ ἦν "
+  }
+ ],
+ "brief_sha256": "f8fa1a29b10b14e47b838da170e0b2facad4a84e4b68b95684e18c4f7b901e95",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-04T02:06:51Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "6ea859948bf907e35f59762669e962e4a9cad40a794ad8ee97123c97554f463e",
+   "english_sha256": "503f63a1a9a28655af11fc4197e8a522c691457d1441d77daf7d68ef0881217c",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "d1f336a28db72cc375e9c1df1e17f7cea3dfc833eac68d8dbc76c82437c7ae20",
+   "english_sha256": "b1cb731808f35afcd6483d762892c12f8587d1649505b90c73993526ad930be6",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "a054977dce2220c9e12ddcbdc4a327a5c2cfe933daf77ceb787021b8fc47fe96",
+   "english_sha256": "74413707aade2790a76316b2fe6ab2c08c244534a988633c1149072de71d5c6a",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "98ffa22a86dea6b39a650319acf69d0788d011111b814f93de80a9f369e24732",
+   "english_sha256": "60d7d6a3abe3e3cc2b8d380854b00df3046d99282975d98dfc47ece4e0a476b9",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:39:20Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-mid"
+   ],
+   "edits_undone": 2,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

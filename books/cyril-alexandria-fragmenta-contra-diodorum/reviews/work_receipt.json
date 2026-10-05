@@ -1,0 +1,63 @@
+{
+ "slug": "cyril-alexandria-fragmenta-contra-diodorum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-open",
+   "to": "frag-rem-early",
+   "moved_chars": 51,
+   "moved_start": "ἵνα τοίνυν μὴ ἀπαγορεύσας τὴν ἐξήγησιν ὡς ἠβούλοντο"
+  }
+ ],
+ "brief_sha256": "e505dbf89d6a8f66e6f5494f89ce1bb4b790d74c0be9d6b4fe7e579d8cad6171",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-03T09:52:05Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "59691da9822ac808affc21ec689db95327f02da9f9eeadf928aed21163ef8a26",
+   "english_sha256": "baf95ddbda43bff918f6dec7b8ddc92dd4afe2ca5222b6d89427476c9a52745f",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "1b5825a314a0b2a82c6be5ca44b37903fc8da2a5beaa1acd66c7888d58b65819",
+   "english_sha256": "9ed76dcee7142af2f5e45611bef75d97844eb7e0c08dcfa8deceee0039c0e66b",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "80605d8f789ba6012cb277d4b616b13f6f5037540b1bb048c8f9eedf4a2cf3cb",
+   "english_sha256": "08cd000443c71fdfaf518a3e0ed1819789042ff46602fb6a08f3942fc41b4466",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "430ad9c0f8c52c01b21b8ec61c31cf695841c68c45d6d614b37a7b7a34be9985",
+   "english_sha256": "7a6b257992b467a62cab23d3bf548e7b14f5c018fe959d019515a82a289b3937",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:29:16Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "frag-open",
+    "frag-rem-early",
+    "frag-rem-mid"
+   ],
+   "edits_undone": 15,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "slug": "cyril-jerusalem-epistula-constantium",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 64,
+   "moved_start": "Ἐπὶ δὲ σοῦ, δέσποτα πανευσεβέστατε βασιλεῦ, προγονικὴν εὐσέβ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 88,
+   "moved_start": "Ἥντινα τοῦ εὐαγγελίου θείαν βίβλον συνηθῶς εἰς χεῖρας ἀναλαβ"
+  }
+ ],
+ "brief_sha256": "3b984d7d7aa93f3ac732b730063682af38a2bbea73d94e679f6dea9049d43d69",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-04T19:35:14Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "ec13f45f073b15f59e32ff732eac1b465f72deb2ad9fab3485f4be38e48d77c7",
+   "english_sha256": "d5204591d03fde78dcd2d9db03f8de923fe097b696b1750279d8907a0716a7cf",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "06457e157e1dc5571eb46040c66d1cfa2c7b3533bb24c5306b327c46bed84dfd",
+   "english_sha256": "12abe9eecb093b00bd7b01336857a185bc243172d1013b951876660111c6c04f",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "f20d412ba80186fae8a3fb6f4fb0af78ba322c7a05ce622a200843b548313335",
+   "english_sha256": "dbd90c8ee099ac5b4b23a9d3c651b8f6f1972968f3c1e27606d662e1b90740e2",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "f4afa59192adc97050b0391b47087a203425a640c609bd0438b0f274bf37b9f0",
+   "english_sha256": "4f352cdd068c8ea8b7cebf3f4a6a8132435c530b3f040e3afe2a9baad132fcf3",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:27:09Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-mid"
+   ],
+   "edits_undone": 2,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

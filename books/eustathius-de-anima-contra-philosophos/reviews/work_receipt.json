@@ -1,0 +1,74 @@
+{
+ "slug": "eustathius-de-anima-contra-philosophos",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 20,
+   "moved_start": "ἢ τοὐναντίον ἐφύγετε"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 133,
+   "moved_start": "Εἰ μὲν γὰρ ἅμα τῷ τεχθῆναι τὰ παιδία, τελείας ἐξῆπτο φρονήσε"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 294,
+   "moved_start": "Εἰ δὲ ταῦτα ἴδια μέν ἐστιν ψυχῆς, ἐκ περιουσίας δὲ τὰς κρείτ"
+  }
+ ],
+ "brief_sha256": "74b3f697ded29a63ac4686d1e9de10c05c9286390aee730e12a0c06e9d5df82c",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-03T15:44:44Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "488f1291e72493629e96e30ca9c814e02dc15bf444814767c2466da503e1439d",
+   "english_sha256": "7083408edc3799cd50cd59df700a22d30e1b97bf5ed4094a3da4f30a9c7d469b",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "79779077669544fd98ab6d58527d630a3c4a485dac5c5c82e44fa1ed1e6759db",
+   "english_sha256": "1bb9f2a6c961d27c836bc53dbc58471948185c842bdbe490c2faacbe3560e771",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "84ee371251947896cc47b89df24e1d8b3c37dbfe16dd1998f405a9feb573578b",
+   "english_sha256": "0104aa159858977994401cbc204c514da8f0d03edfe93b6067c8340cf71735e0",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "40f5045d45afef5d5b12cdb971d721cc39a2a8e0aaebacd52697acb2cb02a5b5",
+   "english_sha256": "82ab1c433924b620b5659e53fd827edb440afb87a2b1c9bb652639737a2a6363",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:56:53Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 5,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

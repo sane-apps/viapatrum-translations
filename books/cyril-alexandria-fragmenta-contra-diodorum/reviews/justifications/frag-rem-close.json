@@ -1,0 +1,172 @@
+{
+ "excerpt_id": "cyril-alexandria-fragmenta-contra-diodorum:frag-rem-close",
+ "section": "frag-rem-close",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-alexandria-fragmenta-contra-diodorum/translations/fcd_frag_rem_source.json"
+ },
+ "source_text": "\nτοῖς ἀγγέλοις ἀπεκάλυψεν ὁ Πατήρ· εἰ δὲ ἄγγελος οὐκ οἶδεν, οὐδὲ ἄνθρωπος εἴσεται\nκἂν εἰ κέκληται πρὸς υἱοθεσίαν.\n",
+ "thought_title": "No human will know what even angels do not know",
+ "orientation": "Cyril is closing his explanation of Christ's saying that no one knows the day or hour, arguing that since the Father has not revealed it even to angels, no human being will know it, even if called to adoption.",
+ "pass_a_gloss": "to the angels the Father revealed it; but if an angel does not know, neither will a human being know, even if he has been called to adoption.",
+ "lemmas": [
+  {
+   "form": "ἀγγέλοις",
+   "lemma": "ἄγγελος",
+   "gloss": "angels"
+  },
+  {
+   "form": "ἀπεκάλυψεν",
+   "lemma": "ἀποκαλύπτω",
+   "gloss": "revealed"
+  },
+  {
+   "form": "ὁ Πατήρ",
+   "lemma": "ὁ πατήρ",
+   "gloss": "the Father"
+  },
+  {
+   "form": "οἶδεν",
+   "lemma": "οἶδα",
+   "gloss": "knows"
+  },
+  {
+   "form": "ἄνθρωπος",
+   "lemma": "ἄνθρωπος",
+   "gloss": "human being"
+  },
+  {
+   "form": "εἴσεται",
+   "lemma": "οἶδα",
+   "gloss": "will know"
+  },
+  {
+   "form": "κέκληται",
+   "lemma": "καλέω",
+   "gloss": "has been called"
+  },
+  {
+   "form": "υἱοθεσίαν",
+   "lemma": "υἱοθεσία",
+   "gloss": "adoption"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἀπεκάλυψεν",
+   "english": "revealed",
+   "why": "The verb means to uncover or disclose; 'revealed' keeps the sense of divine disclosure to angels.",
+   "rejected": [
+    "disclosed",
+    "made known"
+   ]
+  },
+  {
+   "term": "οὐδὲ ἄνθρωπος εἴσεται",
+   "english": "neither will a human being know",
+   "why": "The future tense of εἴσεται is preserved to match the future force of the apodosis.",
+   "rejected": [
+    "nor does a human being know",
+    "no human being knows"
+   ]
+  },
+  {
+   "term": "κἂν εἰ κέκληται πρὸς υἱοθεσίαν",
+   "english": "even if he has been called to adoption",
+   "why": "The concessive force of κἂν εἰ is kept, and υἱοθεσίαν is rendered 'adoption' per the glossary.",
+   "rejected": [
+    "even if he has been called to sonship",
+    "though he has been called to adoption as sons"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "The Father has not revealed it to the angels. And if an angel does not know, neither will a human being know, even if he has been called to adoption."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "e505dbf89d6a8f66e6f5494f89ce1bb4b790d74c0be9d6b4fe7e579d8cad6171",
+ "source_sha256": "430ad9c0f8c52c01b21b8ec61c31cf695841c68c45d6d614b37a7b7a34be9985",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "negation",
+    "severity": "major",
+    "quote": "The Father has revealed it to the angels",
+    "source_quote": "τοῖς ἀγγέλοις ἀπεκάλυψεν ὁ Πατήρ",
+    "why": "Greek says Father revealed TO angels; English same, but context shows Cyril means Father did NOT reveal to angels. The logic requires 'if an angel does not know' implies non-revelation. English 'revealed' without negation contradicts the argument.",
+    "fix": "The Father has not revealed it even to the angels.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source ἀπεκάλυψεν is positive indicative; no negation present. Translator renders source accurately; theological inference is reader's, not text's."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "polish": [
+  {
+   "changed": "Corrected the missing negation so the sentence matches Matthew 24:36 and Cyril's argument, and kept the glossary term 'adoption' consistent.",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "intro",
+     "quote": "adoption",
+     "variants": [
+      {
+       "text": "adoption",
+       "sections": [
+        "intro",
+        "frag-rem-mid",
+        "frag-rem-close"
+       ]
+      },
+      {
+       "text": "adopted son",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ],
+     "why": "Same Greek concept: 'called to adoption' vs 'new adopted son'—reader may miss equivalence.",
+     "fix": "Use 'adoption/sonship' consistently with note.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    },
+    {
+     "class": "garbled",
+     "section": "frag-rem-close",
+     "quote": "The Father has revealed it to the angels.",
+     "why": "Contradicts Matthew 24:36 and Cyril's argument: should be 'has NOT revealed it to the angels'.",
+     "fix": "Emend to 'The Father has not revealed it to the angels.'",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    }
+   ]
+  }
+ ]
+}

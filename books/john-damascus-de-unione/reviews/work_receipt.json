@@ -1,0 +1,75 @@
+{
+ "slug": "john-damascus-de-unione",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 4,
+   "moved_start": "Κατὰ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 4,
+   "moved_start": "Κατὰ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 57,
+   "moved_start": "Λέγεται δὲ καὶ οὐσιώδης ἡ τοιαύτη ἕνωσις, καὶ ἀληθὴς, καὶ"
+  }
+ ],
+ "brief_sha256": "abe54d49ad3e6a0d0a73d6220e3a7044b4358e68cbed1f5c1fbb2dadad003e61",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-04T00:07:01Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "a23122cd570e0d4b97d5e79920ea29903bd2a3b6bfafba7a1cc250b0ea5a744a",
+   "english_sha256": "b140b51e78435122deae2e23536d178e4e918a42c459037c2206b44dda26ae31",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "98b5cefa0d470a316936b4c9101a852d02b3dcd03cda81d7a975b2a344a75471",
+   "english_sha256": "f0fe3872a788ef0b3a40d9c7a9e36fce4c70f1934ebc78b9eac9663a23c6f22c",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "44352629f2afe19d64301c4f8975fd3c5cfcf3915fbba9d452b19c005038d0a5",
+   "english_sha256": "9bc5c3e2942c7e54752dd5d8f14eea77b54bd56cc40c10059b6d3e8e9df0b79f",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "be51d5c7c5b42c5db37a71e8d2271a08855080bbea457496c32b8b9913ddc42f",
+   "english_sha256": "7a7649fefc7b1fe8034b2cbe2e42e0f8bbac297d1d749b0b0b771b986cbc84a9",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:53:46Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-early"
+   ],
+   "edits_undone": 10,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

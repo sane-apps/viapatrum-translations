@@ -1,0 +1,76 @@
+{
+ "slug": "hesychius-homilia-i-hypapante",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 173,
+   "moved_start": "Ὁ Χριστὸς δέ, καθὰ\nἔφημεν, ὡς νομοθέτης τὸν ἑαυτοῦ νόμον ὑπὲ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 87,
+   "moved_start": "«Καὶ ἦν αὐτῷ\nκεχρηματισμένον μὴ ἰδεῖν θάνατον πρὶν ἂν ἴδῃ τὸ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 142,
+   "moved_start": "Καί φησιν· «Οὗτος κεῖται εἰς πτῶσιν καὶ ἀνάστασιν πολλῶν ἐν "
+  }
+ ],
+ "brief_sha256": "c2f0742fb3d1ed6a9139c7fc79ec2f8b4375288f8aa498f5ef4b3476ea856826",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-04T06:14:37Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "2db61b336d3d52f3fe65e5b58c9afa284ab852d5820e8ae5224d3a3a2c6426e3",
+   "english_sha256": "3de549e70c45868415a773f8018a6dad70c25d87f9a33e5c10751f87ea5eb497",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "aed47005531ff481739ee41544316bc2303c88d83bd02638879fa9e24fab82e8",
+   "english_sha256": "6e22e6ea9b8a77a91ec25b5d516d8bc286b51510ab2c5f94266f8d383c303eb8",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "430d97e6c8957218a70ef210e47200d5f9a3db2be8f54ae35403f23aa143927e",
+   "english_sha256": "b0b40881234aa856cc4ca46cfd1b6640affde415b8e8c52b5e5191d07e969502",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "9c8d1037373295f02e3c725c0cbb3d5d31b35623f9e05e19165b69e1dc28a254",
+   "english_sha256": "249feabcd8268c750293ffbab3463609b176faef126b657c4c894d5ece202e61",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:53:47Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 74,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+The author of this letter (fl. c. 150) is unknown. He writes as a disciple of the apostles to Diognetus, a distinguished pagan who has eagerly asked to learn about the religion of the Christians.
+
+Diognetus wants to know what God Christians trust, how they worship, why they despise the world and death, why they reject Greek gods and Jewish practice, and why they love one another. The author writes to answer these questions and to lead him toward Christian faith.
+
+The letter first clears away pagan idolatry, showing that the gods are mere corruptible materials. It then argues that Jewish sacrificial worship misunderstands God, who needs nothing, and that Jewish food laws, Sabbath, circumcision, and calendar observance are foolish. Christians are not distinguished by land, language, or customs, yet they live as resident aliens in every homeland, loving all while being persecuted. The author urges Diognetus to desire this faith, know the Father, imitate God's kindness by bearing others' burdens, and so come to true knowledge and life.

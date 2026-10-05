@@ -1,0 +1,75 @@
+{
+ "slug": "epiphanius-tractatus-contra-eos-qui-imagines-faciunt",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 64,
+   "moved_start": "6 «οιδαμεν γάρ», φησὶν ̓Ιωάννης, «οτι οταν φανερωθῇ, ομοιοι "
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 48,
+   "moved_start": "καὶ γὰρ ο τε εὐαγγελίζεσθαι ἀπεστάλησαν, ἑαυτοὺς"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 89,
+   "moved_start": "12 πῶς τὸν\nἀκατάληπτον καὶ ἀνεκδιήγητον καὶ ἀπερινόητον ἀπερ"
+  }
+ ],
+ "brief_sha256": "6f7d9481568a279feda20591fc933075f6d7240985fbe662fc4f7fdb9d741aa0",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-05T01:50:55Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "4a4bb61310c5eb70989b2b3b247c7e054a7b740a4df6355d7a09ae1e7d639fb1",
+   "english_sha256": "0c5a7c7932506d43595c6cb40501fe26731724b47f647c4421e04cf4127a5f91",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "b83adb4fb9f544a192221ee1c138281da6188bfcda46de5d66fc2a68b3791c8e",
+   "english_sha256": "a2dd12399808dd52d7bebb2ce6b9e919ebfbc9efae866a2149056ca2f61f0c1c",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "2e41e03b23b8701f462c4a6a7921956bd66725c2df617ec260aee33162c8b5a3",
+   "english_sha256": "8d4721cbf5e93ca2879ee2f2f3a9163acf9013c22cc00424b368ef8dcfa7ce93",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "4bc413ae1b6c95370f7b2bbd30d05c345a59444727e24b48ad11be630557ac45",
+   "english_sha256": "0d532241399a3d2ca457cdd3544b859eb5be14705d92a7c5f84876232efffaed",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:41:39Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 19,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

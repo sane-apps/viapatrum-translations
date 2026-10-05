@@ -1,0 +1,42 @@
+{
+ "slug": "irenaeus-letter-victor",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [],
+ "brief_sha256": "2866ad97d770bcde1c4be96f5a7bef21ebfa2b1176d3d5a7bf85f28e4760fcec",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-04T05:44:35Z",
+ "sections": [
+  {
+   "section": "1",
+   "source_sha256": "872db367c821c990262771be2429ac309a837e3361b6d5fb3a295e7869f18a18",
+   "english_sha256": "fbca38d8a6b619ba55b2d60a266cd8d8983bd4b69dbcbd36140674772843fb91",
+   "justification": "reviews/justifications/1.json"
+  },
+  {
+   "section": "2",
+   "source_sha256": "c31a708b8c6a98a294a11b7d0cec39a298387ee24765f3c658b23c42ae7461ac",
+   "english_sha256": "332412dd94fa908de252d8cf9df77f2e022a693b7973ab3d69f56eee4db698d0",
+   "justification": "reviews/justifications/2.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:49:43Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "1"
+   ],
+   "edits_undone": 4,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

@@ -1,0 +1,76 @@
+{
+ "slug": "john-damascus-de-theologia",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 151,
+   "moved_start": "Θεὸς ὁ Πατὴρ ἄναρχος· Θεὸς ὁ Υἱὸς συνάναρχος, εἰ καὶ ἐκ τοῦ "
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 236,
+   "moved_start": "Ἐπὶ δὲ τῆς οἰκονομίας τοῦ Θεοῦ καὶ Λόγου τοῦ Θεοῦ, τοῦ εὐδοκ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 140,
+   "moved_start": "Ἴδιον μὲν γὰρ τῆς θεότητος, τὸ νεκροὺς ἀνιστᾷν, καὶ τὰς\nθεοσ"
+  }
+ ],
+ "brief_sha256": "b32cccf6763fdb4e0f21ec07a7b76812fdf153252a22b64cc56c583225b0cbb7",
+ "followability": [
+  4,
+  5
+ ],
+ "applied": "2026-10-03T10:07:32Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "e0efd2156c3542c658d3f1da02604c31d3974da975aaf8ecde9c28687ba9d09e",
+   "english_sha256": "870873e8f21691fd4664c79df5183048b25f1f463b7e088602ef6e3a9ffe62b8",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "a20482a1346c834518d3bd4c23e1ef890727ad52d1bd569bfd5cef6d90b567d1",
+   "english_sha256": "0384e46b5b1e9a0bd53c7ffd0db78511b4873cd2e1ce66cc8a9695a8f1621368",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "706be6f2034128a00508aadc040423792c4cabb615abaf381b8971ffdfecdddf",
+   "english_sha256": "cebed141f287c33ecdcd4d8f4f6300674dd168578fac23e8eb45a4de7d66f209",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "04d6e7df89525e7b42a2282ccd8f330afea13bd64411292cddfc4c8efd1f4e19",
+   "english_sha256": "4bbe3997af895252bfc14bf11d551db27f47a47b4fbcfdfc1fb542c0929a3a19",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T20:48:47Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 6,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

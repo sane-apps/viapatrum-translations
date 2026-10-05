@@ -1,0 +1,216 @@
+{
+ "excerpt_id": "tertullian-to-the-martyrs:5",
+ "section": "5",
+ "edition": {
+  "language": "lat",
+  "path": "books/tertullian-to-the-martyrs/translations/tttm_source.json"
+ },
+ "source_text": "Omitto nunc gloriae causam. Eadem omnia saevitiae et cruciatus certamina iam apud homines affectatio quoque et morbus quidam animi conculcavit. Quot otiosos affectatio armorum ad gladium locat? Certe ad feras ipsas affectatione descendunt, et de morsibus et de cicatricibus formosiores sibi videntur. Iam et ad ignes quidam se auctoraverunt, ut certum spatium in tunica ardente conficerent. Alii inter venatorum taureas scapulis patientissimis inambulaverunt. Haec, benedicti, non sine causa dominus in saeculum admisit, sed ad nos et nunc exhortandos et in illo die confundendos, si reformidaverimus pati pro veritate in salutem quae alii affectaverunt pro vanitate in perditionem.",
+ "thought_title": "Pagans endure suffering for vanity",
+ "orientation": "Tertullian is addressing imprisoned Christians, giving examples of pagans who voluntarily endured suffering for earthly glory or vanity.",
+ "pass_a_gloss": "I omit now the cause of glory. The same all contests of savagery and torture already among humans vanity also and a certain disease of the mind has trampled down. How many idle men does vanity of arms hire out to the sword? Certainly they go down to the wild beasts themselves by vanity, and from the bites and from the scars they seem to themselves more beautiful. Now also to fires certain men have hired themselves out, so that they might complete a fixed distance in a burning tunic. Others have walked about among the whips of the hunters with most patient shoulders. These things, blessed ones, not without cause has the Lord admitted into the world, but for us both now to be exhorted and on that day to be confounded, if we shall have feared to suffer for truth unto salvation what others have pursued for vanity unto destruction.",
+ "lemmas": [
+  {
+   "form": "affectatio",
+   "lemma": "affectatio",
+   "gloss": "vanity, affectation"
+  },
+  {
+   "form": "conculcavit",
+   "lemma": "conculco",
+   "gloss": "has trampled down"
+  },
+  {
+   "form": "otiosos",
+   "lemma": "otiosus",
+   "gloss": "idle men"
+  },
+  {
+   "form": "auctoraverunt",
+   "lemma": "auctoro",
+   "gloss": "have hired themselves out"
+  },
+  {
+   "form": "taureas",
+   "lemma": "taurea",
+   "gloss": "whips"
+  },
+  {
+   "form": "scapulis",
+   "lemma": "scapula",
+   "gloss": "shoulders"
+  },
+  {
+   "form": "patientissimis",
+   "lemma": "patiens",
+   "gloss": "most patient"
+  },
+  {
+   "form": "inambulaverunt",
+   "lemma": "inambulo",
+   "gloss": "have walked about"
+  },
+  {
+   "form": "benedicti",
+   "lemma": "benedictus",
+   "gloss": "blessed ones"
+  },
+  {
+   "form": "exhortandos",
+   "lemma": "exhortor",
+   "gloss": "to be exhorted"
+  },
+  {
+   "form": "confundendos",
+   "lemma": "confundo",
+   "gloss": "to be confounded"
+  },
+  {
+   "form": "reformidaverimus",
+   "lemma": "reformido",
+   "gloss": "we shall have feared"
+  }
+ ],
+ "choices": [
+  {
+   "term": "affectatio",
+   "english": "vanity",
+   "why": "The glossary specifies 'vanity' as the rendering for affectatio, contrasting with Christian endurance for truth.",
+   "rejected": [
+    "affectation",
+    "self-indulgence"
+   ]
+  },
+  {
+   "term": "auctoraverunt",
+   "english": "have hired themselves out",
+   "why": "The verb auctoro means to bind oneself by contract, here to hire oneself out for a dangerous task; 'hired themselves out' captures the voluntary contractual sense.",
+   "rejected": [
+    "have pledged themselves",
+    "have sold themselves"
+   ]
+  },
+  {
+   "term": "benedicti",
+   "english": "blessed ones",
+   "why": "Tertullian addresses the imprisoned Christians with this affectionate term; 'blessed ones' preserves the direct address.",
+   "rejected": [
+    "blessed",
+    "you blessed"
+   ]
+  },
+  {
+   "term": "in perditionem",
+   "english": "unto destruction",
+   "why": "The contrast with 'unto salvation' is sharp; 'destruction' preserves the antithesis with salvation.",
+   "rejected": [
+    "unto ruin",
+    "unto perdition"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "I pass over the motive of glory for now. Vanity and a kind of sickness of mind have already trampled down all these same contests of cruelty and torture among men. How many idle men does vanity for arms hire out to the sword? Certainly they go down to face the beasts themselves out of vanity, and they think themselves more handsome for the bites and the scars. Some have even hired themselves out to the fires, so that they might run a fixed distance in a burning tunic. Others have walked about among the bulls of the beast-hunters with most patient shoulders. God has not admitted these things into the world without reason, blessed ones, but to exhort us now and to confound us on that day, if we shall have feared to suffer for truth unto salvation what others have pursued out of vanity unto destruction."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "277da6e218d081496421be54fdb20dd80207ee14f1043f390822eef039dca9a5",
+ "source_sha256": "6f84bf6e3c7531831a7eaece7356576d2532a9f98e3ed88eaf5f6a0d038f814c",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "Others have walked about among the whips of the beast-hunters with most patient shoulders.",
+     "source_quote": "Alii inter venatorum taureas scapulis patientissimis inambulaverunt.",
+     "why": "taureas = bulls, not whips; they walked among the hunters' bulls.",
+     "fix": "Others have walked about among the bulls of the beast-hunters with most patient shoulders.",
+     "model": "@cf/zai-org/glm-5.2",
+     "upheld_by": "@cf/openai/gpt-oss-120b",
+     "ruling": "source \"taureas\" = accusative plural of \"taurus\" (bulls), not \"whips\"; translation misidentifies object"
+    }
+   ],
+   "edits": [
+    {
+     "old": "Others have walked about among the whips of the beast-hunters with most patient shoulders.",
+     "new": "Others have walked about among the bulls of the beast-hunters with most patient shoulders."
+    }
+   ],
+   "fixed": [
+    "Corrected 'whips' to 'bulls' for 'taureas' (bulls), matching the source 'Alii inter venatorum taureas scapulis patientissimis inambulaverunt.'"
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "vanity for arms",
+     "why": "Phrase is opaque; likely means 'love of military glory' or 'passion for weapons.'",
+     "fix": "Render as 'love of military glory' or 'passion for arms.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "vanity for arms",
+     "new": "passion for arms"
+    }
+   ],
+   "fixed": [
+    "Changed 'vanity for arms' to 'passion for arms' to clarify the meaning of 'affectatio armorum' (vanity/passion for weapons)."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:gpt-oss+glm",
+ "confidence": "source_verified",
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T22:13:28Z",
+   "undone": 1,
+   "confirmed_before": 0,
+   "confirmed_after": 0
+  }
+ ]
+}

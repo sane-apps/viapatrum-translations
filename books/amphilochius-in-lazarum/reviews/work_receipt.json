@@ -1,0 +1,84 @@
+{
+ "slug": "amphilochius-in-lazarum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 110,
+   "moved_start": "Ἡνίκα Λάζαρος τὴν παροῦσαν ζωὴν ἀπεδύσατο φυσικῶς, οὐκ ἦν ὁ "
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 17,
+   "moved_start": "Τῶν γὰρ προσφάτως"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 130,
+   "moved_start": "Ἀλλὰ πάντα σοφῶς, καθὼς προεῖπον, πραγματευόμενος πρὸς λυσιτ"
+  }
+ ],
+ "brief_sha256": "597b98073070e062291d6c23ad794b59a7e7855937631b727314867966f6f6a8",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-04T22:26:12Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "d223f660c7ef218a137cac9a858a4d8415f5ce6061f4bf0312ff189cb7ddb41a",
+   "english_sha256": "648b773060af705405a3122db41d25c3a507f6c2e0ad6b2129ce32ce0160bc60",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "31fa8cd7a47134bb7b6467f9bf89b80271c59899e8ce940f794888b5b2c2fbdc",
+   "english_sha256": "6c75b1a44a5c8059cd73fe04800f85f14f5c740ab2b33e5dede7186bfc50310f",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "860c8ebae813a1c1444f052f5fdb508b450fb2a42de17e76463902679e1fb2ea",
+   "english_sha256": "09a1c74115f9cd63c39ddf5cb7976f7283d21b7409dc6d6632818409e7d47453",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "4672d9ae9a18ad35e96969fb8472d1864e8ef43858aab6e37c20c317bdfb7fee",
+   "english_sha256": "8baf5af12a8eb60803ad7342528299adcfee76d4fface2ea401d427d52f29fb4",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T18:50:59Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-close",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 8,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  },
+  {
+   "at": "2026-10-05T19:18:15Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open"
+   ],
+   "edits_undone": 4,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

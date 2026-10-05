@@ -1,0 +1,5 @@
+Cyril of Alexandria (c. 376–444) wrote this treatise against Theodore of Mopsuestia, who had been bishop of Mopsuestia in Cilicia for about thirty-six years and died in 428. Cyril was patriarch of Alexandria from 412 to 444.
+
+The work survives only in fragments from books two and three, preserved in later collections.
+
+Cyril argues that Christ is one and the same, both God and man, not a mindless human being. He insists that the divine Word, who existed before the ages unmixed with body and bodily things, assumed flesh for our salvation, remaining impassible in divinity while passible in flesh. Because the life-giving Word made the death-bound flesh his own, he overcame death and corruption in it and transmits that grace to us. As we fell into death in Adam, so in Christ we are refashioned toward incorruption. A reader will meet Christ, called Lord, slave, teacher, and Savior, and will hear a saying of Christ quoted from the Gospel of Matthew about the one teacher. Cyril also cites Colossians for Christ being first in all things. Key terms include divinity, incarnation, flesh, only Son, Word, life-giving, incorruption, mindless man, assumed, and refashioned.

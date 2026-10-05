@@ -1,0 +1,57 @@
+{
+ "slug": "epiphanius-fragmenta-precationis-et-exorcismi",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [],
+ "brief_sha256": "a87c36c462470e2e20ed58d56d1dff92471487fffa12c4d6f8a69f5c9542f0b8",
+ "followability": [
+  4,
+  5
+ ],
+ "applied": "2026-10-03T10:15:14Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "d69de6c27b183143aebdce9a474fcd24ff010f67bc16ee7963ac7eaf5d455ebb",
+   "english_sha256": "cbdd2b3ba2c5da3c7100833f719f89fe30f7c943b43772d5f06e842a5c003ee9",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "d69de6c27b183143aebdce9a474fcd24ff010f67bc16ee7963ac7eaf5d455ebb",
+   "english_sha256": "ed9a30e610f6f9a3e4f23f3cd0df180f6f692a440eaa07c58c0e8f1c5b95fba9",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "d69de6c27b183143aebdce9a474fcd24ff010f67bc16ee7963ac7eaf5d455ebb",
+   "english_sha256": "cbdd2b3ba2c5da3c7100833f719f89fe30f7c943b43772d5f06e842a5c003ee9",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "d69de6c27b183143aebdce9a474fcd24ff010f67bc16ee7963ac7eaf5d455ebb",
+   "english_sha256": "059d5d404119ad4ac7cfcfa982fb6f7b9245904e2b59d49f11e3addc492963bd",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T19:36:25Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-close",
+    "u01-rem-early",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 7,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

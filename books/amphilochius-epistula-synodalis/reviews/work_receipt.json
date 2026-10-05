@@ -1,0 +1,84 @@
+{
+ "slug": "amphilochius-epistula-synodalis",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/moonshotai/kimi-k2.6"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 51,
+   "moved_start": "Τὴν ἁγίαν σύνοδον τῶν πατέρων τῶν ἐν Νικαίᾳ σύνοδον"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 211,
+   "moved_start": "Ἡ τοῦ κυρίου παράδοσις ἣν μετὰ τὴν ἐκ νεκρῶν ἀνάστασιν τοῖς "
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 92,
+   "moved_start": "Ἀλλ' ἐπειδὴ καὶ μέτρον ἐπιστολῆς ἐκφεύγει τὸ περὶ τούτων λεπ"
+  }
+ ],
+ "brief_sha256": "a01831bb12ed6080b0349a737e0de13d3fa13fa0e5d1c3d1de57e4bcbe3b03e0",
+ "followability": [
+  4,
+  4
+ ],
+ "applied": "2026-10-04T07:42:17Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "88ae50cf050ff5fd1d6798ad0db05e33daa31d202ea645001e7e9eb1650da601",
+   "english_sha256": "e028c48eff9dd7276d6da15ebdbb635d004ef5bff4f6a1400801a6febf17cc05",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "7453f237905e6851c615864cf7933d4dcad51c9ff2f8d1955d526ce30729aee2",
+   "english_sha256": "134f94b1482bb2c18f8e7153376128521f094b1eb97a45488a8f6b5f76ac1c45",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "aec04efe654aa4dd764f191f2613a49c372e01375cb78cafa6e3b284fbab6718",
+   "english_sha256": "186641c065f158b1af33b950f4ab5a6a5f95b0c90c46230e13379c40b6483401",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "a960fff502f9b80b5646e23585db084127c0f169238d74fd1e6e9dd64a042cad",
+   "english_sha256": "ccf1578a7387212daf1c7995d75c221f99a2e5cb8fcaf7db0660c0e44abba0d2",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T18:42:04Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-open",
+    "u01-rem-mid"
+   ],
+   "edits_undone": 4,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  },
+  {
+   "at": "2026-10-05T19:18:09Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "u01-rem-close"
+   ],
+   "edits_undone": 4,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

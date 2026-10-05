@@ -1,0 +1,155 @@
+{
+ "excerpt_id": "eustathius-commentarius-psalmum:frag-rem-early",
+ "section": "frag-rem-early",
+ "edition": {
+  "language": "grc",
+  "path": "books/eustathius-commentarius-psalmum/translations/eps_frag_rem_source.json"
+ },
+ "source_text": "Commentarius in Psalmum [Sp.] (fragmenta) ̓Εκ τῆς ἑρμηνείας τοῦ ιεʹ ψαλμοῦ· Ἀλλὰ μὴν ἡ τοῦ Ἰησοῦ ἑκατέρων πεῖραν ἔσχε. Γέγονε γὰρ καὶ ἐν τῷ χωρίῳ τῶν ἀνθρωπίνων ψυχῶν, καὶ τῆς σαρκὸς ἐκτὸς γενομένη ζῇ καὶ ὑφέστηκε.",
+ "thought_title": "The soul of Jesus experienced both states",
+ "orientation": "Eustathius is explaining that the soul of Jesus has experience of both the realm of human souls and existence apart from the flesh.",
+ "pass_a_gloss": "But indeed the [soul] of Jesus of both [states] experience had. For it came to be also in the region of the human souls, and outside the flesh having come to be it lives and subsists.",
+ "lemmas": [
+  {
+   "form": "πεῖραν",
+   "lemma": "πεῖρα",
+   "gloss": "experience"
+  },
+  {
+   "form": "ἔσχε",
+   "lemma": "ἔχω",
+   "gloss": "had"
+  },
+  {
+   "form": "Γέγονε",
+   "lemma": "γίγνομαι",
+   "gloss": "came to be"
+  },
+  {
+   "form": "χωρίῳ",
+   "lemma": "χωρίον",
+   "gloss": "region"
+  },
+  {
+   "form": "ἀνθρωπίνων",
+   "lemma": "ἀνθρώπινος",
+   "gloss": "human"
+  },
+  {
+   "form": "ψυχῶν",
+   "lemma": "ψυχή",
+   "gloss": "souls"
+  },
+  {
+   "form": "σαρκὸς",
+   "lemma": "σάρξ",
+   "gloss": "flesh"
+  },
+  {
+   "form": "ἐκτὸς",
+   "lemma": "ἐκτός",
+   "gloss": "outside"
+  },
+  {
+   "form": "γενομένη",
+   "lemma": "γίγνομαι",
+   "gloss": "having come to be"
+  },
+  {
+   "form": "ζῇ",
+   "lemma": "ζάω",
+   "gloss": "lives"
+  },
+  {
+   "form": "ὑφέστηκε",
+   "lemma": "ὑφίστημι",
+   "gloss": "subsists"
+  }
+ ],
+ "choices": [
+  {
+   "term": "πεῖραν ἔσχε",
+   "english": "had experience",
+   "why": "πεῖραν is the direct object of ἔσχε; the phrase means to have experience of something, and the genitive ἑκατέρων specifies the two states.",
+   "rejected": [
+    "gained trial",
+    "underwent testing"
+   ]
+  },
+  {
+   "term": "ἑκατέρων",
+   "english": "of both [states]",
+   "why": "ἑκατέρων is a genitive plural meaning 'of both' or 'of each of two'; the context supplies 'states' as the implied referent, so it is bracketed in the literal gloss.",
+   "rejected": [
+    "of both things",
+    "of each"
+   ]
+  },
+  {
+   "term": "χωρίῳ",
+   "english": "region",
+   "why": "χωρίον means a place or region; 'region' fits the spatial metaphor of the realm where human souls are found.",
+   "rejected": [
+    "place",
+    "district",
+    "territory"
+   ]
+  },
+  {
+   "term": "ὑφέστηκε",
+   "english": "subsists",
+   "why": "ὑφίστημι in the perfect means to have substantial existence or to subsist; the glossary context stresses that the soul exists and subsists apart from the flesh.",
+   "rejected": [
+    "stands under",
+    "exists",
+    "has being"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "From the interpretation of Psalm 15: But indeed, the soul of Jesus had experience of both states. For it came to be in the region of human souls, and having come to be outside the flesh, it lives and subsists."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "4c8299cb6819dff0daed10abc075203efc761b367a4ee41f9c98567a6608a1c5",
+ "source_sha256": "ead1f6a393d9d0772eb1d3cb1aae6a3fe5e9630a418531078d310aa1c62e4f56",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "had experience of both states",
+    "source_quote": "ἑκατέρων πεῖραν ἔσχε",
+    "why": "πεῖραν ἔσχε means 'had experience/trial of both', not 'both states'; ἑκατέρων refers to both [conditions], not 'states'.",
+    "fix": "had experience of both",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἑκατέρων πεῖραν ἔσχε = 'had experience of both'; 'states' supplies implicit referent. Within normal range, not a major error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

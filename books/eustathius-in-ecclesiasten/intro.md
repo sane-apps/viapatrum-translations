@@ -1,0 +1,5 @@
+Eustathius of Antioch (c. 320–337) wrote this commentary on Ecclesiastes. He was bishop of Beroea and then Patriarch of Antioch, and a leading opponent of Arianism at the Council of Nicaea. The work survives only in fragments quoted by later compilers.
+
+The fragments come from catena quotations on Ecclesiastes, where later editors collected passages from earlier commentators alongside the biblical text. Eustathius explains the biblical text's use of key terms and draws out its teaching on the transience of pleasure.
+
+A reader will meet David, quoted from the Psalms entrusting his spirit to God, and the Lord Jesus, addressed in the words 'Lord Jesus, receive my spirit.' Eustathius interprets 'spirit' as the soul, understood as a deliberate choice of the mind, and argues that all such human activities end in vanity. Once the activity ceases, the enjoyment is erased, and nothing is stored up for the future. The Books of Kingdoms are the ancient Greek Bible's name for 1-2 Samuel and 1-2 Kings.

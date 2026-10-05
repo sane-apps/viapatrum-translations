@@ -1,0 +1,42 @@
+{
+ "slug": "origen-adnotationes-judges",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/openai/gpt-oss-120b",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [],
+ "brief_sha256": "5c9ed04f45f7f27d753f17b9376c899033081f18bc2949cdd71ebd87968dc262",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-05T12:36:12Z",
+ "sections": [
+  {
+   "section": "15",
+   "source_sha256": "05f1de7ab150b2140bf982c4d3913391019c76db44f29d3848a4b4439299e468",
+   "english_sha256": "d973898428850b16a5bb69e3d76763e3aaf6788357e21f70da89639464e0c2fc",
+   "justification": "reviews/justifications/15.json"
+  },
+  {
+   "section": "20",
+   "source_sha256": "f8d4b52a38f5226aa25ff948b4ca2ed8923848ad7e47471c88a45244489fc4c1",
+   "english_sha256": "a76a0fac0a855fc9562068c94dd9d51b924bf263c1508165641bf39c9947c97b",
+   "justification": "reviews/justifications/20.json"
+  }
+ ],
+ "revisions": [
+  {
+   "at": "2026-10-05T21:36:04Z",
+   "kind": "reverted_reader_edits",
+   "sections": [
+    "20"
+   ],
+   "edits_undone": 5,
+   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
+   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ]
+}

@@ -1,0 +1,143 @@
+{
+ "excerpt_id": "procopius-gaza-epistula:u01-rem-mid",
+ "section": "u01-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/procopius-gaza-epistula/translations/pgzep1_u01_rem_source.json"
+ },
+ "source_text": "καί μοι δοκῶ Λυδὸς ἐξαίφνης\nεἶναι, τὰ Λυδῶν μιμησάμενος, οἳ τῷ ∆ιονύσῳ προσκείμενοι μόνον ἔαρ ἦγον ἡνίκα δὴ\nκαὶ τύχοι παρ' αὐτοῖς ὁ ∆ιόνυσος.",
+ "thought_title": "Procopius likens himself to the Lydians",
+ "orientation": "Procopius is praising the recipient's letter and now compares his own reaction to the Lydians' devotion to Dionysus.",
+ "pass_a_gloss": "And I seem to myself suddenly to be a Lydian, having imitated the Lydians, who, devoted to Dionysus, observed spring only when Dionysus happened to be present among them.",
+ "lemmas": [
+  {
+   "form": "δοκῶ",
+   "lemma": "δοκέω",
+   "gloss": "I seem"
+  },
+  {
+   "form": "Λυδὸς",
+   "lemma": "Λυδός",
+   "gloss": "a Lydian"
+  },
+  {
+   "form": "ἐξαίφνης",
+   "lemma": "ἐξαίφνης",
+   "gloss": "suddenly"
+  },
+  {
+   "form": "μιμησάμενος",
+   "lemma": "μιμέομαι",
+   "gloss": "having imitated"
+  },
+  {
+   "form": "προσκείμενοι",
+   "lemma": "πρόσκειμαι",
+   "gloss": "devoted to"
+  },
+  {
+   "form": "ἦγον",
+   "lemma": "ἄγω",
+   "gloss": "they observed"
+  },
+  {
+   "form": "ἡνίκα",
+   "lemma": "ἡνίκα",
+   "gloss": "when"
+  },
+  {
+   "form": "τύχοι",
+   "lemma": "τυγχάνω",
+   "gloss": "happened to be"
+  },
+  {
+   "form": "παρ' αὐτοῖς",
+   "lemma": "παρά",
+   "gloss": "among them"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἔαρ ἦγον",
+   "english": "observed spring",
+   "why": "ἄγω with a season means to celebrate or observe it; 'observed' keeps the ritual sense without importing a modern holiday term.",
+   "rejected": [
+    "kept spring",
+    "held spring"
+   ]
+  },
+  {
+   "term": "προσκείμενοι",
+   "english": "devoted to",
+   "why": "The participle indicates attachment or allegiance; 'devoted to' captures the religious devotion to Dionysus.",
+   "rejected": [
+    "attached to",
+    "adherents of"
+   ]
+  },
+  {
+   "term": "ἡνίκα δὴ καὶ τύχοι",
+   "english": "only when Dionysus happened to be present among them",
+   "why": "ἡνίκα with δὴ καὶ and the optative τύχοι marks an indefinite temporal clause; 'only when... happened to be' preserves the contingency.",
+   "rejected": [
+    "whenever he chanced to be",
+    "at whatever time he was"
+   ]
+  },
+  {
+   "term": "ἐξαίφνης",
+   "english": "suddenly",
+   "why": "The adverb marks the abruptness of the self-comparison; 'suddenly' is the plain equivalent.",
+   "rejected": [
+    "all at once",
+    "of a sudden"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "And I suddenly think I have become a Lydian, imitating the Lydians, who were devoted to Dionysus and observed spring only when Dionysus happened to be present among them."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "b619129f5e337ef8976793adf31813b3da9a5cc350eb1e4b6a21d447a3c97edd",
+ "source_sha256": "8e42e60a40a0841ce43c41ea537c8e853c606a352636d0829ef85d5b0d8f4f86",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "think I have become a Lydian",
+    "source_quote": "καί μοι δοκῶ Λυδὸς ἐξαίφνης εἶναι",
+    "why": "δοκῶ means 'seem' not 'think'; ἐξαίφνης modifies the whole clause as 'suddenly', not 'have become'",
+    "fix": "And I suddenly seem to be a Lydian",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "δοκῶ μοι commonly means 'I think'; ἐξαίφνης 'suddenly' with εἶναι naturally yields 'suddenly have become'. No meaning lost."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

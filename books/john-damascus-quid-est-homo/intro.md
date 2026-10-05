@@ -1,0 +1,5 @@
+John of Damascus, a Christian monk and priest, wrote this letter to an unnamed person who had asked him to explain what a human being is. He was born in Damascus and later lived at the monastery of Mar Saba near Jerusalem, where he was ordained a priest. He wrote in Greek, and this letter is his concise answer to that request.
+
+The letter offers a short account of human nature based on the four elements of the body: blood, phlegm, yellow bile, and black bile. John explains where each element is seated in the body and what temperament it produces. He also describes how these elements dominate different stages of life, from childhood through old age.
+
+A reader should know that John defines a human being as a rational mortal animal capable of intellect and knowledge. He calls the temple of the head the ruler of the body, and says the brain receives power and thought from the liver, with the soul dwelling in the brain. He also describes the skull's sutures and the brain's membranes, contrasting the brain with marrow. The letter quotes no other speakers and cites no scripture.
