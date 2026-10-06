@@ -1,0 +1,148 @@
+{
+ "excerpt_id": "cyril-jerusalem-homilia-paralyticum:u02-rem-mid",
+ "section": "u02-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/cyril-jerusalem-homilia-paralyticum/translations/cjhp_u02_rem_source.json"
+ },
+ "source_text": "Ἀλλ' ἐξείλκυσεν ἡμᾶς\nλόγος εἰς μῆκος λόγου. καὶ ἴσως γεγόναμεν ἐμπόδιον πατρικῆς διδασκαλίας.",
+ "thought_title": "Apology for length",
+ "orientation": "Cyril pauses after a long chain of exhortations to acknowledge that his discourse has run long and may have delayed the father's teaching.",
+ "pass_a_gloss": "But the word dragged us out into length of word. And perhaps we have become a hindrance to the fatherly teaching.",
+ "lemmas": [
+  {
+   "form": "ἐξείλκυσεν",
+   "lemma": "ἐξέλκω",
+   "gloss": "dragged out"
+  },
+  {
+   "form": "λόγος",
+   "lemma": "λόγος",
+   "gloss": "word, discourse"
+  },
+  {
+   "form": "μῆκος",
+   "lemma": "μῆκος",
+   "gloss": "length"
+  },
+  {
+   "form": "γεγόναμεν",
+   "lemma": "γίγνομαι",
+   "gloss": "we have become"
+  },
+  {
+   "form": "ἐμπόδιον",
+   "lemma": "ἐμπόδιον",
+   "gloss": "hindrance"
+  },
+  {
+   "form": "πατρικῆς",
+   "lemma": "πατρικός",
+   "gloss": "fatherly"
+  },
+  {
+   "form": "διδασκαλίας",
+   "lemma": "διδασκαλία",
+   "gloss": "teaching"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἐξείλκυσεν ἡμᾶς λόγος εἰς μῆκος λόγου",
+   "english": "the word dragged us out into length of word",
+   "why": "Keeps the wordplay of λόγος repeated as subject and object, and the literal force of ἐξέλκω as dragging out.",
+   "rejected": [
+    "our discourse has run on at length",
+    "the argument has carried us far"
+   ]
+  },
+  {
+   "term": "ἐμπόδιον πατρικῆς διδασκαλίας",
+   "english": "a hindrance to the fatherly teaching",
+   "why": "Literal rendering of the genitive as the thing hindered; 'fatherly' preserves the adjective's reference to the father's instruction.",
+   "rejected": [
+    "an obstacle to the paternal instruction",
+    "in the way of the father's teaching"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "But our discourse has stretched on at length. And perhaps we have become a hindrance to the fatherly teaching."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "609536c55bb7c9b7e56f15c783c682d0f62a0db004c2d018f7c1d36fc022ff1b",
+ "source_sha256": "5e9eed625ac0ba9579da77bca769cdde32f026b1584c3eda540436aabba110aa",
+ "checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:gpt-oss+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "dragged us out into length of word",
+     "why": "Awkward calque; 'length of word' is not English idiom.",
+     "fix": "'drawn us out to a lengthy discourse' (as in u02-open) or 'led us into wordiness.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "dragged us out into length of word",
+     "new": "drawn us out to a lengthy discourse"
+    }
+   ],
+   "fixed": [
+    "The English 'dragged us out into length of word' is an awkward calque of ἐξείλκυσεν ἡμᾶς λόγος εἰς μῆκος λόγου; 'length of word' is not idiomatic English. Replaced with 'drawn us out to a lengthy discourse', which matches the source sense and the parallel phrasing in u02-open."
+   ]
+  }
+ ],
+ "polish": [
+  {
+   "changed": "Rendered the Greek idiom for a lengthy speech into natural English and clarified that 'we' refers to the speaker's own discourse.",
+   "notes": [
+    {
+     "class": "suspect_meaning",
+     "section": "u02-rem-mid",
+     "quote": "dragged us out into length of word",
+     "why": "Awkward calque; 'length of word' is not English idiom.",
+     "fix": "'drawn us out to a lengthy discourse' (as in u02-open) or 'led us into wordiness.'",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    }
+   ]
+  }
+ ]
+}

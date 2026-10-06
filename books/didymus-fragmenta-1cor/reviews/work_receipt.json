@@ -1,0 +1,62 @@
+{
+ "slug": "didymus-fragmenta-1cor",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 80,
+   "moved_start": "1 Kor 15,24b-26 Βασιλείαν ὧδε λέγει τοὺς βασιλευομένους, ἤτο"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 33,
+   "moved_start": "ὅταν δὲ λέγωμεν σῶμα ἄφθαρτον, οὐ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 69,
+   "moved_start": "1 Kor 16,2 Μίαν σαββάτων, ἡ ἀναστάσιμος τοῦ κυρίου ἡμέρα, θη"
+  }
+ ],
+ "brief_sha256": "1b4c02687685162a8130ad354485d88db11f6e70928d248fe17469c977c2302c",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-06T14:36:10Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "6dce746ec4911f4a4ae59abf855a8c66c1a54f6e49b1a9ff586a2d929346dfd7",
+   "english_sha256": "a362e557e227d048c97d988aea16bba8c85cfb556fb1ef4be7e69fda9a840336",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "817599c7be8d994a01b241b084bc5737cd0e3eb1affe91fe0ecc1b9a8267fe7a",
+   "english_sha256": "5067b06bb6a27fe2afb89109ea11d8149f48769f54c7fe05df41882a913a94ae",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "fd106b1aa07ae6645a0afadb4cf76a8486de910c05ae37dafd8d88384012ffe7",
+   "english_sha256": "959000b96b39a8951c10536d50a6629c7da0c2a08be96f8bfadab0ed061d8ae0",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "2a847281a79b495425eb5ede5621a051d724d48c807b6f227f01ac6cf33b67c0",
+   "english_sha256": "3f92811b07e38e66f7caaed41e4601de47884c0cec88645730bd1aa641c5d8af",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

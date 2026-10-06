@@ -1,0 +1,329 @@
+{
+ "excerpt_id": "tertullian-on-prayer:19",
+ "section": "19",
+ "edition": {
+  "language": "lat",
+  "path": "books/tertullian-on-prayer/translations/top_source.json"
+ },
+ "source_text": "Similiter et de stationum diebus non putant plerique sacrificiorum orationibus interueniendum, quod statio soluenda sit accepto corpore domini. ergo deuotum deo obsequium eucharistia resoluit an magis deo obligat? nonne sollemnior erit statio tua, si et ad aram dei steteris? accepto corpore domini et reseruato utrumque saluum est, et participatio sacrificii et executio officii. si statio de militari exemplo nomen accepit (nam et militia dei sumus), utique nulla laetitia siue tristitia obueniens castris stationes militum rescindit. nam laetitia libentius, tristitia sollicitius administrabit disciplinam.",
+ "thought_title": "Fasting days and the Eucharist do not cancel each other",
+ "orientation": "Tertullian is addressing customs of prayer and worship, now arguing that receiving the Lord's body on a fast day does not dissolve the fast-day observance.",
+ "pass_a_gloss": "Likewise also concerning the days of fast days, many do not think that one must take part in the prayers of the sacrifices, because the fast day must be dissolved when the body of the Lord has been received. Therefore does the Eucharist dissolve a service devoted to God, or rather does it bind one more to God? Will not your fast day be more solemn, if you also stand at the altar of God? When the body of the Lord has been received and reserved, each thing is preserved: both the participation in the sacrifice and the performance of the duty. If the fast day took its name from a military example (for we also are the army of God), surely no joy or sorrow that befalls the camp breaks up the soldiers' watches. For joy will carry out the teaching more willingly, sorrow more carefully.",
+ "lemmas": [
+  {
+   "form": "stationum",
+   "lemma": "statio",
+   "gloss": "fast day"
+  },
+  {
+   "form": "sacrificiorum",
+   "lemma": "sacrificium",
+   "gloss": "sacrifice"
+  },
+  {
+   "form": "interueniendum",
+   "lemma": "interuenio",
+   "gloss": "take part in"
+  },
+  {
+   "form": "soluenda",
+   "lemma": "soluo",
+   "gloss": "dissolve"
+  },
+  {
+   "form": "accepto",
+   "lemma": "accipio",
+   "gloss": "received"
+  },
+  {
+   "form": "reseruato",
+   "lemma": "reseruo",
+   "gloss": "reserved"
+  },
+  {
+   "form": "executio",
+   "lemma": "executio",
+   "gloss": "performance"
+  },
+  {
+   "form": "officii",
+   "lemma": "officium",
+   "gloss": "duty"
+  },
+  {
+   "form": "militari",
+   "lemma": "militaris",
+   "gloss": "military"
+  },
+  {
+   "form": "militia",
+   "lemma": "militia",
+   "gloss": "army"
+  },
+  {
+   "form": "rescindit",
+   "lemma": "rescindo",
+   "gloss": "breaks up"
+  },
+  {
+   "form": "administrabit",
+   "lemma": "administro",
+   "gloss": "carry out"
+  }
+ ],
+ "choices": [
+  {
+   "term": "statio",
+   "english": "fast day",
+   "why": "The glossary requires 'fast day' for statio, preserving the military watch-duty sense Tertullian develops.",
+   "rejected": [
+    "station",
+    "watch"
+   ]
+  },
+  {
+   "term": "sacrificiorum orationibus",
+   "english": "the prayers of the sacrifices",
+   "why": "Literal rendering of the genitive plural, keeping the connection to the Eucharist as sacrifice.",
+   "rejected": [
+    "sacrificial prayers",
+    "prayers at the sacrifice"
+   ]
+  },
+  {
+   "term": "accepto corpore domini",
+   "english": "when the body of the Lord has been received",
+   "why": "Literal ablative absolute, preserving the temporal and causal force.",
+   "rejected": [
+    "after receiving the Lord's body",
+    "by receiving the body of the Lord"
+   ]
+  },
+  {
+   "term": "executio officii",
+   "english": "performance of the duty",
+   "why": "Literal rendering of executio as carrying out, and officii as duty, matching the military imagery.",
+   "rejected": [
+    "fulfillment of the office",
+    "discharge of the obligation"
+   ]
+  },
+  {
+   "term": "disciplinam",
+   "english": "the teaching",
+   "why": "The glossary requires 'teaching' for disciplina, here meaning the rule of Christian life and worship.",
+   "rejected": [
+    "discipline",
+    "instruction"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "In the same way, many people think that on fast days they should not take part in the prayers of the sacrifices, because the fast day must be ended when the body of the Lord has been received. Does the Eucharist, then, undo a service devoted to God, or does it bind us more closely to God? Will your fast day not be more solemn if you also stand at the altar of God? When the body of the Lord has been received and reserved, both things are preserved: participation in the sacrifice and performance of the duty. If the fast day takes its name from a military example, for we are also God's army, then surely no joy or sorrow that comes upon the camp breaks up the soldiers' watches. For joy will carry out the teaching more willingly, and sorrow more carefully."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "d8313305b1a96066eabe11f6c7103e5b4953aa2f29dbaa609e22c2554ac23750",
+ "source_sha256": "26dfed5aa699ecfb02b3abe091c447a291494dc979a17816909a0ce999149907",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "negation",
+     "severity": "major",
+     "quote": "many people think that on fast days they should not take part in the prayers of the sacrifices",
+     "source_quote": "non putant ... interueniendum",
+     "why": "English adds a negation to participation, reversing Latin meaning that they think the prayers should NOT be interrupted.",
+     "fix": "many people think that the prayers of the sacrifices should not be interrupted on fast days",
+     "model": "@cf/openai/gpt-oss-120b",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin 'non putant...interueniendum' means they think prayers should NOT be interrupted; English wrongly says they should not take part."
+    }
+   ],
+   "edits": [
+    {
+     "old": "many people think that on fast days they should not take part in the prayers of the sacrifices",
+     "new": "many people think that on fast days the prayers of the sacrifices should not be interrupted"
+    }
+   ],
+   "fixed": [
+    "Corrected the negation: the Latin 'non putant ... interueniendum' means they think the prayers should not be interrupted, not that they should not take part."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:gpt-oss+glm",
+ "confidence": "source_verified",
+ "polish": [
+  {
+   "changed": "Clarified that the fast day is the same category throughout, made the military comparison read as a single continuous thought, and smoothed the sentence rhythm for reading aloud.",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "23",
+     "quote": "On days of fasting and on fast days",
+     "variants": [
+      {
+       "text": "fast day",
+       "sections": [
+        "19"
+       ]
+      },
+      {
+       "text": "fast days",
+       "sections": [
+        "19",
+        "23"
+       ]
+      },
+      {
+       "text": "days of fasting",
+       "sections": [
+        "23"
+       ]
+      },
+      {
+       "text": "Those who are fasting",
+       "sections": [
+        "18"
+       ]
+      }
+     ],
+     "why": "Reader cannot tell if these are distinct categories or the same thing.",
+     "fix": "Use one term consistently, e.g. 'station days of fasting' vs. 'periods of fasting'.",
+     "model": "@cf/zai-org/glm-5.2"
+    }
+   ]
+  },
+  {
+   "changed": "Clarified that the prayers of the sacrifices refer to the same sacramental act, kept 'fast day' consistent, and explained the military origin of the fast day's name.",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "19",
+     "quote": "the prayers of the sacrifices",
+     "variants": [
+      {
+       "text": "prayers of the sacrifices",
+       "sections": [
+        "19"
+       ]
+      },
+      {
+       "text": "participation in the sacrifice",
+       "sections": [
+        "19"
+       ]
+      },
+      {
+       "text": "the eucharist",
+       "sections": [
+        "19",
+        "24"
+       ]
+      },
+      {
+       "text": "Eucharist",
+       "sections": [
+        "19"
+       ]
+      }
+     ],
+     "why": "These all refer to the same sacramental act; inconsistent capitalization and phrasing may confuse.",
+     "fix": "Standardize to 'Eucharist' or 'sacrifice' with a note that they are the same rite.",
+     "model": "@cf/zai-org/glm-5.2"
+    },
+    {
+     "class": "term_drift",
+     "section": "19",
+     "quote": "fast day",
+     "variants": [
+      {
+       "text": "fast day",
+       "sections": [
+        "19",
+        "23",
+        "29"
+       ]
+      },
+      {
+       "text": "days of fasting",
+       "sections": [
+        "23"
+       ]
+      },
+      {
+       "text": "fasting",
+       "sections": [
+        "18",
+        "23",
+        "25"
+       ]
+      },
+      {
+       "text": "the fast",
+       "sections": [
+        "19"
+       ]
+      }
+     ],
+     "why": "Reader cannot tell whether 'fast day,' 'days of fasting,' and 'the fast' are the same or different observances.",
+     "fix": "Distinguish 'station/fast day' (appointed congregational fast) from personal fasting.",
+     "model": "@cf/zai-org/glm-5.2"
+    },
+    {
+     "class": "unexplained",
+     "section": "19",
+     "quote": "If the fast day takes its name from a military example, for we are also God's army",
+     "why": "The etymology of 'station' (military watch) is assumed but never explained.",
+     "fix": "Note: Latin 'statio' meant a military watch or guard-duty; 'station-days' were fast days.",
+     "model": "@cf/zai-org/glm-5.2"
+    }
+   ]
+  }
+ ]
+}

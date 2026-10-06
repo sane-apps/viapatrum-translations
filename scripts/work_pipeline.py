@@ -115,7 +115,17 @@ def follow_ok(scores, words: int = 0) -> bool:
     nums = [s for s in scores or [] if isinstance(s, (int, float)) and not isinstance(s, bool) and math.isfinite(s)]
     if len(nums) < 2 or min(nums) < FOLLOW_MIN:
         return False
+    # Owner 2026-10-06 (P15): with reader edits off nothing can raise a score,
+    # so the mean bar held source-verified works forever. It applies only
+    # while reader edits are on; the scores still go in the receipt.
+    if not READ_EDITS:
+        return True
     return (words and words < FRAGMENT_WORDS) or sum(nums) / len(nums) >= FOLLOW_AVG
+
+
+def reader_bar() -> str:
+    """The reader bar a certification met, for its receipt."""
+    return f"min>={FOLLOW_MIN}, mean>={FOLLOW_AVG}" if READ_EDITS else f"min>={FOLLOW_MIN}; mean waived (reader edits off, owner 2026-10-06)"
 CHUNK_WORDS = 900       # draft long sections in source chunks of about this size
 WORKERS = int(os.environ.get("WORK_PIPELINE_WORKERS", "4"))
 
@@ -1915,7 +1925,7 @@ def apply(slug: str, force_partial: bool = False) -> int:
     receipt = {"slug": slug, "pipeline": "work_pipeline", "drafter": DRAFTER, "checkers": CHECKERS,
                "boundary_moves": moves,
                "brief_sha256": sha(brief_text(json.loads((STAGE / slug / 'brief.json').read_text()))),
-               "followability": st["followability"], "applied": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+               "followability": st["followability"], "reader_bar": reader_bar(), "applied": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                "sections": []}
     jdir = BOOKS / slug / "reviews" / "justifications"
     jdir.mkdir(parents=True, exist_ok=True)

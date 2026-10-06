@@ -1,0 +1,56 @@
+{
+ "slug": "evagrius-sententiae-monachos",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 12,
+   "moved_start": "39 Μὴ εἴπῃς·"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 76,
+   "moved_start": "ἐὰν πιστεύσῃ σοι ἀργύριον, οὐ διασκορπιεῖς αὐτό, καὶ κἂν ἐπε"
+  }
+ ],
+ "brief_sha256": "4af7a7e21791673287bc26df6c2252961161b23f6065f71dd576e0317533a674",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-06T14:36:10Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "d35094f533e1d52bae2ea1694d9a93d9d2502085af24bf263aa66b9c77bd5c10",
+   "english_sha256": "d279a374585ace593037c73fe6deb74e50f257ad51c8681bcb08fa7707eb3be5",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "c90b23ffbc9bbdebc0795a1e0e8b5e71c1113888aaac05e91e3ff56499cd80c1",
+   "english_sha256": "f436ec6cb7eb1f1446d418462ec61bc021948f3469bf8ac4e2a873fd9d9d080c",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "bd90acb7003bcca3a8fb0b1f6e9bb35e391b53ac676a1017f9a1bc71a62a878e",
+   "english_sha256": "7d2e538627ebf22b6414823e55fe0ff297427efb66d7f04f6dd633788e7c4dfc",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "1e7bb6ef3933964c60cc22d6bc3d374af1777a8a8e5289e37b90b20d500ba49b",
+   "english_sha256": "5a27de54d6b9131dc8a4c4b35732f96e85be2d689188edb4d0cfd4d57c3f2b21",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

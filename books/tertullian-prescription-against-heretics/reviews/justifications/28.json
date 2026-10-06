@@ -1,0 +1,158 @@
+{
+ "excerpt_id": "tertullian-prescription-against-heretics:28",
+ "section": "28",
+ "edition": {
+  "language": "lat",
+  "path": "books/tertullian-prescription-against-heretics/translations/tpah_source.json"
+ },
+ "source_text": "Age nunc omnes erraverint; deceptus sit et apostolus de testimonio reddendo; nullam respexerit spiritus sanctus, uti eam in veritatem deduceret, ad hoc missus a Christo, ad hoc postulatus de patre, ut esset doctor veritatis; neglexerit officium dei vilicus, Christi vicarius, sinens ecclesias aliter interim intellegere, aliter credere quod ipse per apostolos praedicabat: ecquid verisimile est, ut tot ac tantae in unam fidem erraverint? Nullus inter multos eventus unus est. Exitus variasse debuerat error doctrinae ecclesiarum. Ceterum quod apud multos unum invenitur, non est erratum, sed traditum. Audeat ergo aliquis dicere illos errasse qui tradiderunt?",
+ "thought_title": "The impossibility that all the churches erred",
+ "orientation": "Tertullian is arguing that the apostolic churches cannot all have fallen into error, since their shared faith must be tradition, not mistake.",
+ "pass_a_gloss": "Come now, suppose all have erred; suppose the apostle also was deceived about giving testimony; suppose the Holy Spirit looked upon no church so as to lead it into truth, though sent by Christ for this purpose, though asked from the Father for this purpose, that he might be the teacher of truth; suppose the steward of God's household, the vicar of Christ, neglected his duty, allowing the churches meanwhile to understand otherwise, to believe otherwise than what he himself was preaching through the apostles: is it at all likely that so many and such great churches should have erred into one faith? Among many people no outcome is one and the same. The error of the churches' doctrine ought to have varied in its result. But what is found one and the same among many is not error, but tradition. Let anyone dare, then, to say that those who handed it down erred?",
+ "lemmas": [
+  {
+   "form": "erraverint",
+   "lemma": "erro",
+   "gloss": "have erred"
+  },
+  {
+   "form": "deceptus",
+   "lemma": "decipio",
+   "gloss": "deceived"
+  },
+  {
+   "form": "respexerit",
+   "lemma": "respicio",
+   "gloss": "looked upon"
+  },
+  {
+   "form": "deduceret",
+   "lemma": "deduco",
+   "gloss": "lead"
+  },
+  {
+   "form": "postulatus",
+   "lemma": "postulo",
+   "gloss": "asked for"
+  },
+  {
+   "form": "neglexerit",
+   "lemma": "neglego",
+   "gloss": "neglected"
+  },
+  {
+   "form": "vilicus",
+   "lemma": "vilicus",
+   "gloss": "steward of an estate"
+  },
+  {
+   "form": "vicarius",
+   "lemma": "vicarius",
+   "gloss": "vicar, substitute"
+  },
+  {
+   "form": "sinens",
+   "lemma": "sino",
+   "gloss": "allowing"
+  },
+  {
+   "form": "praedicabat",
+   "lemma": "praedico",
+   "gloss": "was preaching"
+  },
+  {
+   "form": "verisimile",
+   "lemma": "verisimilis",
+   "gloss": "likely"
+  },
+  {
+   "form": "traditum",
+   "lemma": "trado",
+   "gloss": "handed down"
+  }
+ ],
+ "choices": [
+  {
+   "term": "vilicus",
+   "english": "steward of God's household",
+   "why": "The vilicus is the manager of an estate; rendering it as 'steward of God's household' preserves the image of delegated oversight of the church.",
+   "rejected": [
+    "farm manager",
+    "overseer"
+   ]
+  },
+  {
+   "term": "vicarius",
+   "english": "vicar",
+   "why": "The term means one who acts in place of another; 'vicar' keeps the legal-substitute sense without modern denominational overtones.",
+   "rejected": [
+    "deputy",
+    "representative"
+   ]
+  },
+  {
+   "term": "in unam fidem erraverint",
+   "english": "erred into one faith",
+   "why": "The Latin has motion into a single faith; keeping 'into' preserves the paradox that error produced unity.",
+   "rejected": [
+    "erred in one faith",
+    "erred concerning one faith"
+   ]
+  },
+  {
+   "term": "traditum",
+   "english": "tradition",
+   "why": "The glossary requires 'tradition' for traditio; here the participle traditum is rendered as the noun 'tradition' to match the fixed term.",
+   "rejected": [
+    "something handed down",
+    "a transmitted thing"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Come now, suppose they all went astray; suppose the apostle was deceived in bearing witness; suppose the Holy Spirit looked upon no church so as to lead it into truth, though Christ sent him for this purpose and asked the Father for him so that he might be the teacher of truth; suppose the steward of God's household, the vicar of Christ, neglected his duty by allowing the churches to understand one thing and believe another than what he himself was preaching through the apostles—is it really likely that so many and such great churches erred into one faith? Among many people, no single outcome is the same. The error of the churches' teaching should have produced different results. But what is found as one thing among many is not an error; it is tradition. So let anyone dare to say that those who handed it down went astray."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "732cd7422bffe8c83613c9bdc794639232fd663fc0186467df0ebccf0cc871b1",
+ "source_sha256": "38d3769433033c082eef101cd79247fe573ca377fdb4834b2ec30ce9502caf93",
+ "checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "suppose the Holy Spirit looked upon no church so as to lead it into truth",
+    "source_quote": "nullam respexerit spiritus sanctus, uti eam in veritatem deduceret",
+    "why": "adds \"church\" as object, which is not in the Latin; the Latin says the Spirit looked upon nothing, not a specific church.",
+    "fix": "suppose the Holy Spirit looked upon nothing so as to lead it into truth",
+    "model": "@cf/openai/gpt-oss-120b",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Context 'ecclesias aliter intellegere' implies churches; 'nullam' feminine singular agrees with an implied ecclesiam, not 'nothing'."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:gpt-oss+glm",
+ "confidence": "source_verified"
+}

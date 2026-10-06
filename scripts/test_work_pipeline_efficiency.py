@@ -646,6 +646,16 @@ class TwoReaderTests(unittest.TestCase):
         self.assertTrue(W.follow_ok([4, 4]))
         self.assertFalse(W.follow_ok([5], words=100))
 
+    def test_mean_bar_only_while_reader_edits_on(self):
+        """P15 (owner 2026-10-06): with reader edits off, [3, 3] certifies; a 2 never does."""
+        with mock.patch.object(W, "READ_EDITS", False):
+            self.assertTrue(W.follow_ok([3, 3], words=5000))
+            self.assertFalse(W.follow_ok([2, 4], words=5000))
+            self.assertIn("mean waived", W.reader_bar())
+        with mock.patch.object(W, "READ_EDITS", True):
+            self.assertFalse(W.follow_ok([3, 3], words=5000))
+            self.assertTrue(W.follow_ok([3, 4], words=5000))
+
     def reads(self, script):
         calls = []
 

@@ -572,6 +572,26 @@ def check_queue_depth() -> tuple[str, str, dict]:
     return "ok", f"jev corrections open: {info['jev_open']}", info
 
 
+def check_ship_auto() -> tuple[str, str, dict]:
+    """P16 (2026-10-06): certified text, audio or library changes waiting for
+    the change-gated auto ship longer than 6 h."""
+    path = REPO / "outputs/ship-auto/state.json"
+    try:
+        st = json.loads(path.read_text())
+    except (FileNotFoundError, json.JSONDecodeError):
+        return "ok", "auto ship has not run yet", {}
+    since = st.get("pending_since")
+    info = {"pending_since": since, "pending": st.get("pending"), "last_skip": st.get("last_skip"),
+            "last_ship": st.get("last_ship")}
+    if not since:
+        return "ok", "site matches certified work", info
+    hours = (time.time() - local_ts(since)) / 3600
+    if hours > 6:
+        why = (st.get("last_skip") or {}).get("why") or "last ship did not verify"
+        return "warn", f"{', '.join(st.get('pending') or [])} changes not shipped for {hours:.0f} h ({why})", info
+    return "ok", f"changes pending {hours:.1f} h", info
+
+
 CHECKS = {
     "burn": check_burn,
     "quota": check_quota,
@@ -585,6 +605,7 @@ CHECKS = {
     "broker": check_broker,
     "audio": check_audio,
     "ship": check_ship,
+    "ship_auto": check_ship_auto,
     "beliefs": check_beliefs,
     "recert": check_recert,
     "redraft": check_redraft,
@@ -608,6 +629,7 @@ ALERTS = {
     "broker": "broker:down",
     "audio": "audio:drain",
     "ship": "ship:problem",
+    "ship_auto": "ship:pending",
     "beliefs": "beliefs:failed",
     "recert": "recert:tick",
     "redraft": "pipeline:redraft-loop",

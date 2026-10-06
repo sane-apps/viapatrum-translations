@@ -1,0 +1,192 @@
+{
+ "excerpt_id": "tertullian-on-prayer:24",
+ "section": "24",
+ "edition": {
+  "language": "lat",
+  "path": "books/tertullian-on-prayer/translations/top_source.json"
+ },
+ "source_text": "Sed quomodo omni loco, cum prohibeamur in publico? omni, inquit, loco, quem opportunitas aut etiam necessitas importarit. neque enim contra praeceptum reputatur ab apostolis factum, qui in carcere audientibus custodiis orabant et canebant deo, aut a Paulo, qui in naui coram omnibus eucharistiam fecit.",
+ "thought_title": "Every place means every place that opportunity or necessity brings",
+ "orientation": "Tertullian is answering an objection to his statement that Christians should pray at every time and in every place, since he also forbids praying in public.",
+ "pass_a_gloss": "But how in every place, when we are forbidden in public? In every place, he says, which opportunity or even necessity has brought about. For neither is it reckoned against the precept what was done by the apostles, who in prison, with the guards listening, were praying and singing to God, nor what was done by Paul, who on the ship in the presence of all performed the eucharist.",
+ "lemmas": [
+  {
+   "form": "prohibeamur",
+   "lemma": "prohibeo",
+   "gloss": "we are forbidden"
+  },
+  {
+   "form": "importarit",
+   "lemma": "importo",
+   "gloss": "has brought about"
+  },
+  {
+   "form": "reputatur",
+   "lemma": "reputo",
+   "gloss": "is reckoned"
+  },
+  {
+   "form": "audientibus",
+   "lemma": "audio",
+   "gloss": "listening"
+  },
+  {
+   "form": "custodiis",
+   "lemma": "custodia",
+   "gloss": "guards"
+  },
+  {
+   "form": "orabant",
+   "lemma": "oro",
+   "gloss": "they were praying"
+  },
+  {
+   "form": "canebant",
+   "lemma": "cano",
+   "gloss": "they were singing"
+  },
+  {
+   "form": "naui",
+   "lemma": "navis",
+   "gloss": "ship"
+  },
+  {
+   "form": "coram",
+   "lemma": "coram",
+   "gloss": "in the presence of"
+  },
+  {
+   "form": "eucharistiam",
+   "lemma": "eucharistia",
+   "gloss": "eucharist"
+  },
+  {
+   "form": "fecit",
+   "lemma": "facio",
+   "gloss": "he performed"
+  },
+  {
+   "form": "praeceptum",
+   "lemma": "praeceptum",
+   "gloss": "precept"
+  }
+ ],
+ "choices": [
+  {
+   "term": "omni loco",
+   "english": "in every place",
+   "why": "Repeats the phrase from the previous section's statement about praying at every time and in every place, keeping the literal force of the objection.",
+   "rejected": [
+    "anywhere",
+    "in all places"
+   ]
+  },
+  {
+   "term": "importarit",
+   "english": "has brought about",
+   "why": "The verb importo means to bring in or introduce; here it conveys that opportunity or necessity brings a place to you, making it a legitimate place to pray.",
+   "rejected": [
+    "has imposed",
+    "has supplied"
+   ]
+  },
+  {
+   "term": "reputatur",
+   "english": "is reckoned",
+   "why": "Reputo means to count or reckon; Tertullian is saying these apostolic actions are not counted as against the precept.",
+   "rejected": [
+    "is considered",
+    "is judged"
+   ]
+  },
+  {
+   "term": "eucharistiam fecit",
+   "english": "performed the eucharist",
+   "why": "The phrase eucharistiam facere is the standard Latin idiom for celebrating the eucharist; keeping 'performed' preserves the literal verb while remaining idiomatic.",
+   "rejected": [
+    "made the eucharist",
+    "celebrated the eucharist"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Acts 16:25",
+   "method": "allusion",
+   "note": "qui in carcere audientibus custodiis orabant et canebant deo"
+  }
+ ],
+ "pass_b_english": [
+  "But how can we pray in every place, when we are forbidden to pray in public? In every place, he says, that opportunity or even necessity has brought about. For what the apostles did is not reckoned against the precept: they prayed and sang to God in prison while the guards were listening (Acts 16:25). Nor is what Paul did, who performed the eucharist on the ship in the presence of everyone, reckoned against the precept."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "d8313305b1a96066eabe11f6c7103e5b4953aa2f29dbaa609e22c2554ac23750",
+ "source_sha256": "cd5813e436dd76f045ce8de20d3a75e68561325ad6a824134fdd9682e11f9351",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "omission",
+     "severity": "major",
+     "quote": "Nor is Paul, who performed the eucharist on the ship in the presence of everyone.",
+     "source_quote": "neque enim contra praeceptum reputatur ... aut a Paulo, qui in naui coram omnibus eucharistiam fecit.",
+     "why": "English omits that Paul’s action is also not counted against the precept.",
+     "fix": "Nor is Paul, whose performance of the eucharist on the ship before all is likewise not counted against the precept.",
+     "model": "@cf/openai/gpt-oss-120b",
+     "agreed_by": [
+      "@cf/openai/gpt-oss-120b",
+      "@cf/zai-org/glm-5.2"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "Nor is Paul, who performed the eucharist on the ship in the presence of everyone.",
+     "new": "Nor is what Paul did, who performed the eucharist on the ship in the presence of everyone, reckoned against the precept."
+    }
+   ],
+   "fixed": [
+    "Added the missing 'reckoned against the precept' to the Paul clause, matching 'neque enim contra praeceptum reputatur ... aut a Paulo'."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:gpt-oss+glm",
+ "confidence": "source_verified"
+}

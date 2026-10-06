@@ -1,0 +1,62 @@
+{
+ "slug": "severianus-fragmenta-ephesios",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 65,
+   "moved_start": "δόξαν δὲ πολλάκις ἡ γραφὴ λέγει αὐτὴν τοῦ θεοῦ τὴν οὐσίαν· ἐ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 27,
+   "moved_start": "ἀφελῶ τὸν φραγμὸν αὐτοῦ καὶ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 250,
+   "moved_start": "ἐπισημαντέον δὲ ὅτι ἀφ' ὧν\nὁ ἀπόστολος δείκνυσι τὸ ὄνομα τοῦ"
+  }
+ ],
+ "brief_sha256": "6e15042e7daf651f6f57dece53d0147c3ee5534d5554f2b9f4482c56ecafe398",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-06T14:36:10Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "7eaa50b5df17cf3f61ded8aedd2cc53b77f5bda38be2271374000b5efbd4e0c6",
+   "english_sha256": "34e61338095ebd38d28510abccd57b94f881b8ea770ec6c1f116e53855b31d98",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "a8299da05aec50086109e108a46c2a091b754b8277b0cfda512bb7d05e7bb90d",
+   "english_sha256": "d591a651bd2a0d944d1c2ccdb8e9e6fb0a8feac4e85bb404817e1cbf2c533f8d",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "31b3479c31501f5e1f197e5d2124c36b2234836e869c043165d43dfc72def7ff",
+   "english_sha256": "1dcae25a73f880968a8de5ab6dd35a67c7681ff1b972588372c44f16546f9ead",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "78dceb1004ca4293f7af42e8b9b927fb97359858335c8a0d78d7d238fc447764",
+   "english_sha256": "1e7f072c7cb05581f04cb4eb1c85176e7333213193e437a194ffcdfa56570914",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

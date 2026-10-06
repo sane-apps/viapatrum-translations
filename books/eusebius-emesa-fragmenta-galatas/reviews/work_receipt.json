@@ -1,0 +1,62 @@
+{
+ "slug": "eusebius-emesa-fragmenta-galatas",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 88,
+   "moved_start": "Gal 2,18 Πρὸς τὸν Πέτρον ὁ λόγος· σὺ κατέλυσας αὐτὰ δόγματι "
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 6,
+   "moved_start": "καὶ οὐ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 15,
+   "moved_start": "νῦν οὖν τὴν δι'"
+  }
+ ],
+ "brief_sha256": "6794f9d7c275e6bc9ebd46a6370581c9736ab6fffd7d2b6d969f2bc93cd2b367",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-06T14:36:10Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "b14735ddb48f7eca139e7058e0cba3546b2befeed6fb02cea2b25c64bb3d6715",
+   "english_sha256": "f8e1ed93ac1c4a30ec49b1a73dfd31c7a607ca9a7da409d833640cddf943b5e8",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "840a9215f24057bcb3977496b268c6b4319c2e00e78ef4733f0e7574c51eebe2",
+   "english_sha256": "42dbc3eaa4f1d0927346e0fdf8f193f5358e61564294befca76b558ccd752d2d",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "a2c20bddc13f4d57a74091464d7c6cc496509724e56ba9e405ce362921086dc9",
+   "english_sha256": "5d8594d3bd5b55a10d73ab1d00c518359bebb38d810c56e34ed4aaf5cadbdf86",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "09400f50610d561e95c6cc6b6bf14cb19edb95d76007f733527519aa4b47b3d0",
+   "english_sha256": "b52031177e70281a6e87738b9ba4a2c2a3e20c863fc7f1f25d029df8c8748cd8",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}
