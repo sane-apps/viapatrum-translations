@@ -15,7 +15,7 @@ Never ships when:
 ship.sh's own gates still decide whether a deploy goes out.
 
 After a good full ship it refreshes the paid shelf from the shipped build
-(EPUB/PDF, audiobooks, Word, assemble, upload --direct); a changed
+(EPUB/PDF, audiobooks, Word, assemble, upload: direct, then the admin route for files over 280 MB); a changed
 library.json then ships on the next run.
 
 state: outputs/ship-auto/state.json. fathers_watch alerts when changes have
@@ -119,7 +119,11 @@ def refresh_library() -> None:
             log(f"library: step failed rc={rc}; upload skipped, shelf unchanged")
             return
     rc = with_token(f'"{py}" scripts/library_sync.py upload --direct --jobs 4', 3600)
-    log(f"library: upload rc={rc} (files over 280 MB need the admin route; see its log lines)")
+    log(f"library: direct upload rc={rc}")
+    # Files over 280 MB (era audiobook zips, the largest audiobooks) go through
+    # the just-verified site's admin route; already-uploaded files are skipped.
+    rc = with_token(f'"{py}" scripts/library_sync.py upload --base https://viapatrum.org --jobs 2', 4 * 3600)
+    log(f"library: large-file upload rc={rc}")
 
 
 def main() -> int:
