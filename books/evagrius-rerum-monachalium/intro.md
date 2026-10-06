@@ -1,0 +1,5 @@
+Evagrius Ponticus (c. 345–399) wrote this treatise for a beloved monk, or someone preparing to become one, who was seeking the practice of stillness. It is not The Practice, and it is not On Evil Thoughts. He wrote to instruct this monk in the practical and spiritual foundations of the solitary life, explaining why monastic practices exist and how to pursue stillness.
+
+The work argues that the monk must be an unmarried, unworried soldier of Christ, free from worldly cares, possessions, and entanglements. Evagrius gives practical guidance on food, clothing, almsgiving, servants, friends, travel, manual work, and the cell, always to protect stillness. He then turns to inner practice: recollection of death, judgment, and the rewards of the righteous, fasting, vigils, and prayer. The goal throughout is to guard the mind from distracting thoughts and demonic attacks so the monk may remain in stillness and please God.
+
+The text also quotes the apostle Paul on marriage, worry, and soldiering, and cites the widow of Zarephath who hosted the prophet. The work cites the Greek Old Testament and the Gospels, with Psalm numbering following the Septuagint.

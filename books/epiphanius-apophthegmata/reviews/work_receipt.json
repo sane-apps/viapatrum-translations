@@ -1,0 +1,61 @@
+{
+ "slug": "epiphanius-apophthegmata",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 4,
+   "moved_start": "Ὁ δὲ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 149,
+   "moved_start": "Ὁ αὐτὸς ἔλεγεν· Ἡ Χαναναία βοᾷ καὶ ἀκούεται· καὶ ἡ αἱμόῤῥους"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 69,
+   "moved_start": "Ὁ αὐτὸς ἠρωτήθη, ∆ιατί δέκα μέν εἰσιν αἱ νομικαὶ ἐντολαὶ, ἐν"
+  }
+ ],
+ "brief_sha256": "09dc9f913b86da30ce31ebceed13a87cdb668937bbc92a0027124e999eeaffed",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-06T06:32:38Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "943020f15a05175686a77e7ba8b050cee6fcc5072614e2d9f50836594ae96870",
+   "english_sha256": "f9a8e5a819c5d5a885ac2a3ad94ee6e3c1529427dcc54415c7fa8a869930455c",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "d8e116be6afc1cc000a8e9e6672184c8d604c97b65c1e0afb30db36401f172d6",
+   "english_sha256": "e25ff87657b3ece60925f21c3aed8ed80a522b8882dbf3a595499cf353453af2",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "81718d54be14d41dd47b9f90f16080b39bb95c9e06c6b9b27e69d34ff2b6e397",
+   "english_sha256": "29cbe05cc32d3669192cb9da692efdaf1f650137145df876a744842f7b5dc6c0",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "fbfe03be1b2581c6c2dfff70d853750fe3bf1c7114e5820b8a80f0dab25c2cfb",
+   "english_sha256": "e804f626ca7b53376dc3a6145c0003265a3c025aa23072a806a9b8a1c7ae4146",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

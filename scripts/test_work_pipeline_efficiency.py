@@ -149,15 +149,17 @@ class TokenFloorTests(unittest.TestCase):
 
 
 class CallRetryTests(unittest.TestCase):
-    def run_call(self, replies):
+    def run_call(self, replies, max_tokens=8000):
         seq = iter(replies)
         seen = []
+        self.budgets = []
 
         def fake(model, msgs, **kw):
             seen.append(msgs[-1]["content"])
+            self.budgets.append(kw.get("max_tokens"))
             return next(seq)
         with mock.patch.object(W, "vendor_call", fake), mock.patch.object(W.time, "sleep") as sl:
-            out = W.call("m", "sys", "user", expect=("a",))
+            out = W.call("m", "sys", "user", max_tokens=max_tokens, expect=("a",))
         return out, seen, [c.args[0] for c in sl.call_args_list]
 
     def test_unparseable_one_nudged_retry_no_sleep(self):
@@ -173,10 +175,27 @@ class CallRetryTests(unittest.TestCase):
         self.assertEqual(len(seen), 2)
         self.assertEqual(sleeps, [])
 
-    def test_truncated_is_nudged_not_slept(self):
-        out, seen, sleeps = self.run_call([{"error": LB.TRUNCATED_REASONING}, {"content": '{"a": 2}'}])
+    def test_truncated_retries_once_with_doubled_budget(self):
+        # 2026-10-06: a cut-off reply re-sent at the same budget was cut off again.
+        out, seen, sleeps = self.run_call([{"error": LB.TRUNCATED_LENGTH}, {"content": '{"a": 2}'}], max_tokens=6000)
         self.assertEqual(out, {"a": 2})
+        self.assertEqual(self.budgets, [6000, 12000])
+        self.assertEqual(seen, ["user", "user"], "no nudge: the budget was the problem")
         self.assertEqual(sleeps, [])
+        out, seen, _ = self.run_call([{"error": LB.TRUNCATED_REASONING}, {"error": LB.TRUNCATED_LENGTH},
+                                      {"content": '{"a": 3}'}], max_tokens=12000)
+        self.assertIsNone(out)
+        self.assertEqual(self.budgets, [12000, W.MAX_TOKENS_CAP])
+
+    def test_cut_off_reply_whose_json_closed_is_used(self):
+        out, seen, _ = self.run_call([{"error": LB.TRUNCATED_LENGTH, "content": '{"a": 5} and then rambling'}])
+        self.assertEqual((out, len(seen)), ({"a": 5}, 1))
+
+    def test_unparseable_logs_completion_tokens(self):
+        err = io.StringIO()
+        with mock.patch.object(W.sys, "stderr", err):
+            self.run_call([{"content": "{\"a\": [", "ct": 6000}, {"content": "{\"a\": [", "ct": 6000}], max_tokens=6000)
+        self.assertIn("unparseable (6000 of 6000 tokens)", err.getvalue())
 
     def test_rate_error_backs_off(self):
         out, seen, sleeps = self.run_call([{"error": "HTTP 429 rate limited"}, {"error": '[{"code": 3040, "message": "Capacity temporarily exceeded"}]'},
@@ -279,7 +298,8 @@ class SectionLoopTests(unittest.TestCase):
             p.stop()
         self.tmp.cleanup()
 
-    def test_near_copy_redoes_pass_b_first(self):
+    def test_near_copy_redoes_pass_a_and_keeps_pass_b(self):
+        # 2026-10-06: Pass A (the gloss) was the fluent side; Pass B stays.
         gates = iter([["Pass A and Pass B are near-copies"], [], []])
         drafts, redos = [], []
 
@@ -289,16 +309,18 @@ class SectionLoopTests(unittest.TestCase):
 
         def fake_redo(slug, j, *a, **k):
             redos.append(1)
-            return {**{k2: v for k2, v in j.items() if k2 != "_gate"}, "pass_b_english": ["B2."]}
-        with mock.patch.object(W, "draft_section", fake_draft), mock.patch.object(W, "redraft_pass_b", fake_redo), \
+            return {**{k2: v for k2, v in j.items() if k2 != "_gate"}, "pass_a_gloss": "A2 [the]"}
+        with mock.patch.object(W, "draft_section", fake_draft), mock.patch.object(W, "redraft_pass_a", fake_redo), \
+                mock.patch.object(W, "redraft_pass_b") as rb, \
                 mock.patch.object(W, "section_gate", lambda j, b: next(gates, [])), \
                 mock.patch.object(W, "check_section", return_value={"confirmed": [], "rejected": []}):
             j = W.process_section("s", 0, self.pairs, {}, "Greek")
         self.assertEqual((len(drafts), len(redos)), (1, 1))
+        rb.assert_not_called()
         self.assertEqual(j["_status"], "pass")
-        self.assertEqual(j["pass_b_english"], ["B2."])
+        self.assertEqual((j["pass_a_gloss"], j["pass_b_english"]), ("A2 [the]", ["B."]))
 
-    def test_full_redrafts_capped(self):
+    def test_still_near_copy_after_pass_a_redo_holds_at_once(self):
         drafts, redos = [], []
 
         def fake_draft(*a, **k):
@@ -308,14 +330,58 @@ class SectionLoopTests(unittest.TestCase):
         def fake_redo(slug, j, *a, **k):
             redos.append(1)
             return {k2: v for k2, v in j.items() if k2 != "_gate"}
-        with mock.patch.object(W, "draft_section", fake_draft), mock.patch.object(W, "redraft_pass_b", fake_redo), \
+        with mock.patch.object(W, "draft_section", fake_draft), mock.patch.object(W, "redraft_pass_a", fake_redo), \
                 mock.patch.object(W, "section_gate", lambda j, b: ["Pass A and Pass B are near-copies"]), \
                 mock.patch.object(W, "check_section") as cs:
             j = W.process_section("s", 0, self.pairs, {}, "Greek")
-        self.assertEqual(len(redos), 1)
+        self.assertEqual((len(drafts), len(redos)), (1, 1), "no full redrafts for a near-copy")
+        self.assertEqual(j["_status"], "hold")
+        self.assertIn("near-copies", j["_why"])
+        cs.assert_not_called()
+
+    def test_failed_pass_a_redo_falls_back_to_one_full_redraft(self):
+        drafts = []
+
+        def fake_draft(*a, **k):
+            drafts.append(1)
+            return {"section": "1", "pass_a_gloss": "A", "pass_b_english": ["B."]}
+        with mock.patch.object(W, "draft_section", fake_draft), mock.patch.object(W, "redraft_pass_a", return_value=None), \
+                mock.patch.object(W, "section_gate", lambda j, b: ["Pass A and Pass B are near-copies"]), \
+                mock.patch.object(W, "check_section") as cs:
+            j = W.process_section("s", 0, self.pairs, {}, "Greek")
+        self.assertEqual(len(drafts), 2)
+        self.assertEqual(j["_status"], "hold")
+        cs.assert_not_called()
+
+    def test_other_structural_failures_still_capped(self):
+        drafts = []
+
+        def fake_draft(*a, **k):
+            drafts.append(1)
+            return {"section": "1", "pass_a_gloss": "A", "pass_b_english": ["B."]}
+        with mock.patch.object(W, "draft_section", fake_draft), mock.patch.object(W, "redraft_pass_a") as ra, \
+                mock.patch.object(W, "section_gate", lambda j, b: ["Pass A is too short to constrain Pass B"]), \
+                mock.patch.object(W, "check_section") as cs:
+            j = W.process_section("s", 0, self.pairs, {}, "Greek")
+        ra.assert_not_called()
         self.assertEqual(len(drafts), 1 + W.MAX_FULL_REDRAFTS)
         self.assertEqual(j["_status"], "hold")
         cs.assert_not_called()
+
+    def test_redraft_pass_a_keeps_pass_b(self):
+        j = {"section": "1", "pass_a_gloss": "fluent", "pass_b_english": ["Keep me."], "_gate": ["near-copies"]}
+        seen = []
+
+        def fake_call(model, system, user, max_tokens=0, expect=()):
+            seen.append((system, user))
+            return {"pass_a_gloss": "word [by] word"}
+        with mock.patch.object(W, "call", fake_call), mock.patch.object(W, "log"):
+            out = W.redraft_pass_a("s", j, {"id": "1", "source": ["src words."]}, "Greek")
+        self.assertEqual((out["pass_a_gloss"], out["pass_b_english"]), ("word [by] word", ["Keep me."]))
+        self.assertNotIn("_gate", out)
+        self.assertEqual(len(seen), 1)
+        self.assertIn("square brackets", seen[0][0])
+        self.assertNotIn("Keep me", seen[0][1], "the redo never sees Pass B")
 
     def run_repair_fail(self, confirmed, referee_out):
         rep = []
@@ -344,6 +410,32 @@ class SectionLoopTests(unittest.TestCase):
         rf.assert_not_called()
         self.assertEqual(j["_status"], "hold")
         self.assertEqual(j["_why"], "repair failed")
+
+    def run_no_edits(self, referee_out):
+        conf = [{"class": "omission", "quote": "B", "upheld_by": "x"}]
+        with mock.patch.object(W, "draft_section", return_value={"section": "1", "pass_a_gloss": "A", "pass_b_english": ["B."]}), \
+                mock.patch.object(W, "section_gate", return_value=[]), \
+                mock.patch.object(W, "check_section", return_value={"confirmed": conf, "rejected": []}), \
+                mock.patch.object(W, "repair_attempt", return_value=(None, "no-edits")) as ra, \
+                mock.patch.object(W, "referee", return_value=referee_out) as rf:
+            j = W.process_section("s", 0, self.pairs, {}, "Greek")
+        self.assertEqual(ra.call_count, 1, "no-edits is an answer, not a transient failure")
+        rf.assert_called_once()
+        self.assertEqual(rf.call_args.args[2], conf)
+        return j
+
+    def test_no_edit_repair_goes_to_referee_and_passes(self):
+        # 2026-10-06: declining to edit correct English held 33 sections.
+        j = self.run_no_edits([])
+        self.assertEqual(j["_status"], "pass")
+        self.assertEqual(j["checks"]["repair"], "no edits")
+
+    def test_no_edit_repair_holds_on_referee_findings(self):
+        f = {"class": "omission", "quote": "B", "referee": "r"}
+        j = self.run_no_edits([f])
+        self.assertEqual(j["_status"], "hold")
+        self.assertIn("confirmed problems", j["_why"], "held_review picks these up")
+        self.assertEqual(j["open_findings"], [f])
 
 
 class CheckCacheTests(unittest.TestCase):
@@ -382,7 +474,7 @@ class ReadSkipTests(unittest.TestCase):
             (secdir / "1.json").write_text(json.dumps({"_status": "hold" if held else "pass"}))
             if held == "spent":
                 (secdir / "1.retries").write_text("2")
-            pairs = [{"id": "1", "source": ["x"], "english": [], "lang": "grc", "src_file": None}]
+            pairs = [{"id": "1", "title": "", "source": ["x"], "english": [], "lang": "grc", "src_file": None}]
             with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "load_pairs", return_value=pairs), \
                     mock.patch.object(W, "book_meta", return_value={}), mock.patch.object(W, "rebalance", return_value=[]), \
                     mock.patch.object(W, "make_brief", return_value={}), mock.patch.object(W, "process_section"), \
@@ -398,17 +490,19 @@ class ReadSkipTests(unittest.TestCase):
         self.assertTrue(intro)
         self.assertIn("read skipped: 1 held", logs)
 
-    def test_final_attempt_reads(self):
-        self.assertTrue(self.run_with(2, True)[0])
+    # 2026-10-06: any section not passed skips the read on every attempt; a
+    # read of a work that cannot certify is thrown away.
+    def test_later_attempt_with_held_skips_read(self):
+        self.assertFalse(self.run_with(2, True)[0])
 
     def test_no_held_reads(self):
         self.assertTrue(self.run_with(1, False)[0])
 
-    def test_held_without_retries_left_reads(self):
-        self.assertTrue(self.run_with(1, "spent")[0])
+    def test_held_without_retries_left_skips_read(self):
+        self.assertFalse(self.run_with(1, "spent")[0])
 
-    def test_cli_run_reads(self):
-        self.assertTrue(self.run_with(None, True)[0])
+    def test_cli_run_with_held_skips_read(self):
+        self.assertFalse(self.run_with(None, True)[0])
 
 
 class RegateTests(unittest.TestCase):
@@ -878,6 +972,385 @@ class SourceChangeTests(unittest.TestCase):
             self.assertEqual(pairs[2]["source"], ["new"], "unmoved section takes the repaired source")
             self.assertEqual(pairs[1]["source"], ["x b"], "moved section keeps its cached cut")
             self.assertEqual(json.loads(seg.read_text())["sections"]["3"], ["new"])
+
+
+# ---------------------------------------------------------------- certifier gates (audit 2026-10-06)
+
+NOTE = "(Jerome Latin working note; lemma Luke 2:21-24. Full Rauer GCS 35 text to be locked locally.)"
+
+
+class SourceGateTests(unittest.TestCase):
+    """A placeholder source holds before any model call and never certifies."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.stage = Path(self.tmp.name)
+        self.patches = [mock.patch.object(W, "STAGE", self.stage), mock.patch.object(W, "log")]
+        for p in self.patches:
+            p.start()
+        self.pairs = [{"id": "20", "sid": "20", "title": "", "source": [NOTE], "english": [], "lang": "lat", "src_file": None}]
+
+    def tearDown(self):
+        for p in self.patches:
+            p.stop()
+        self.tmp.cleanup()
+
+    def test_placeholder_holds_with_no_model_call(self):
+        with mock.patch.object(W, "call") as c, mock.patch.object(W, "draft_section") as d:
+            j = W.process_section("bk", 0, self.pairs, {}, "Latin")
+        c.assert_not_called()
+        d.assert_not_called()
+        self.assertEqual((j["_status"], j["_why"], j["_permanent"]), ("hold", "no locked source", True))
+        on_disk = json.loads((self.stage / "bk" / "sections" / "20.json").read_text())
+        self.assertEqual(on_disk["_status"], "hold")
+
+    def test_passed_placeholder_section_is_demoted(self):
+        secdir = self.stage / "bk" / "sections"
+        secdir.mkdir(parents=True)
+        staged = {"section": "20", "_status": "pass", "pass_b_english": ["Luke from memory."], "source_text": NOTE,
+                  "source_sha256": W.sha(NOTE), "confidence": "source_verified"}
+        (secdir / "20.json").write_text(json.dumps(staged))
+        with mock.patch.object(W, "call") as c:
+            j = W.process_section("bk", 0, self.pairs, {}, "Latin")
+        c.assert_not_called()
+        self.assertEqual((j["_status"], j["confidence"]), ("hold", "held"))
+        self.assertEqual(j["pass_b_english"], ["Luke from memory."], "kept for the record")
+        self.assertEqual(W.staged_sections("bk", self.pairs)[0]["_j"]["_status"], "hold")
+
+    def test_origen_luke_section_20_holds(self):
+        # The staged record that passed with Luke written from memory (archived
+        # 2026-10-06): both the source check and check_record now refuse it.
+        real = W.ROOT / "outputs/work-pipeline/origen-luke-homilies/sections/20.json"
+        archived = sorted(W.ROOT.glob("outputs/_held/*/work-pipeline/origen-luke-homilies/sections/20.json"))
+        path = real if real.exists() else (archived[-1] if archived else None)
+        if path is None:
+            self.skipTest("origen-luke 20.json not on this machine")
+        j = json.loads(path.read_text())
+        sec = {"id": "20", "source": j["source_text"].split("\n")}
+        self.assertTrue(W.source_problems(sec))
+        self.assertTrue(any("not locked source" in e for e in W.check_record(j)))
+
+    def test_apply_refuses_placeholder_even_from_staged_passes(self):
+        st = {"sections": {"pass": 1}, "intro_ok": True, "followability": [4, 4]}
+        with mock.patch.object(W, "status", return_value=st), mock.patch.object(W, "load_pairs", return_value=self.pairs), \
+                mock.patch.object(W, "rebalance", return_value=[]), \
+                mock.patch.object(W, "staged_sections", return_value=[{"_j": {"_status": "pass"}}]), \
+                mock.patch("builtins.print") as pr:
+            self.assertEqual(W.apply("bk"), 1)
+        self.assertIn("no locked source", pr.call_args.args[0])
+
+
+class DuplicateIdTests(unittest.TestCase):
+    """Books whose files each number from 1 (audit 2026-10-06: 42 books)."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        root = Path(self.tmp.name)
+        self.books, self.stage = root / "books", root / "stage"
+        tr = self.books / "bk" / "translations"
+        tr.mkdir(parents=True)
+        for hom in ("hom1", "hom2"):
+            (tr / f"{hom}_english.json").write_text(json.dumps(
+                [{"section": "1", "title": "t", "english": ["old"]}, {"section": "2", "title": "t", "english": ["old"]}]))
+            # Each homily ends mid-sentence: a move must not cross into the next file.
+            (tr / f"{hom}_source.json").write_text(json.dumps(
+                [{"section": "1", "latin": [f"{hom} prima pars."]},
+                 {"section": "2", "latin": [f"{hom} secunda pars. et sequitur sine fine"]}]))
+        self.patches = [mock.patch.object(W, "BOOKS", self.books), mock.patch.object(W, "STAGE", self.stage),
+                        mock.patch.object(W, "log")]
+        for p in self.patches:
+            p.start()
+
+    def tearDown(self):
+        for p in self.patches:
+            p.stop()
+        self.tmp.cleanup()
+
+    def test_unique_ids_separate_files_and_certified_round_trip(self):
+        pairs = W.load_pairs("bk")
+        self.assertEqual([p["id"] for p in pairs], ["hom1_english:1", "hom1_english:2", "hom2_english:1", "hom2_english:2"])
+        self.assertEqual([p["sid"] for p in pairs], ["1", "2", "1", "2"])
+        self.assertFalse(W.duplicate_ids(pairs))
+        moves = W.rebalance("bk", pairs)
+        self.assertEqual(moves, [], "no move from one homily into the next")
+        secdir = self.stage / "bk" / "sections"
+        secdir.mkdir(parents=True)
+        for p in pairs:
+            (secdir / (p["id"].replace(":", "_") + ".json")).write_text(json.dumps(
+                {"section": p["id"], "_status": "pass", "pass_b_english": [f"New {p['id']}."], "thought_title": "T"}))
+        names = sorted(f.name for f in secdir.glob("*.json"))
+        self.assertEqual(len(names), 4)
+        (self.stage / "bk" / "brief.json").write_text(json.dumps({"title_en": "T"}))
+        (self.stage / "bk" / "intro.json").write_text(json.dumps({"paragraphs": ["a", "b", "c"]}))
+        st = {"sections": {"pass": 4}, "intro_ok": True, "followability": [4, 4]}
+        with mock.patch.object(W, "status", return_value=st), mock.patch.object(W, "intro_problems", return_value=[]), \
+                mock.patch("builtins.print"):
+            self.assertEqual(W.apply("bk"), 0)
+        h1 = json.loads((self.books / "bk" / "translations" / "hom1_english.json").read_text())
+        h2 = json.loads((self.books / "bk" / "translations" / "hom2_english.json").read_text())
+        self.assertEqual(h1[0]["english"], ["New hom1_english:1."])
+        self.assertEqual(h2[0]["english"], ["New hom2_english:1."])
+        self.assertTrue(W.certified("bk"))
+
+    def test_old_bare_id_segments_cache_is_rebuilt(self):
+        (self.stage / "bk").mkdir(parents=True)
+        (self.stage / "bk" / "segments.json").write_text(json.dumps(
+            {"moves": [{"from": "1", "to": "2", "moved_chars": 1, "moved_start": "x"}], "sections": {"1": ["a"], "2": ["b"]}}))
+        pairs = W.load_pairs("bk")
+        self.assertEqual(W.rebalance("bk", pairs), [])
+        self.assertIn("hom2_english:1", json.loads((self.stage / "bk" / "segments.json").read_text())["sections"])
+        # The old cache is kept beside, not overwritten (reversible data rule).
+        baks = list((self.stage / "bk").glob("segments.*.bak.json"))
+        self.assertEqual(len(baks), 1)
+        self.assertIn("1", json.loads(baks[0].read_text())["sections"])
+
+    def test_single_file_books_keep_bare_ids(self):
+        (self.books / "bk" / "translations" / "hom2_english.json").unlink()
+        self.assertEqual([p["id"] for p in W.load_pairs("bk")], ["1", "2"])
+
+    def test_repeat_inside_one_file_still_collides(self):
+        pairs = [{"id": "f:1"}, {"id": "f:1"}]
+        self.assertTrue(W.duplicate_ids(pairs))
+
+
+class GlossaryBanTests(unittest.TestCase):
+    """Bans that hold the chosen English forbid the right word (2026-10-06)."""
+
+    def test_ban_containing_choice_does_not_fire(self):
+        brief = {"glossary": [{"source_term": "παρθένος", "english": "virgin", "banned": ["the Virgin", "Virgin"]}]}
+        errs = gate_only(rec("παρθένος ἐστίν.", "She was the virgin of the prophecy."), brief)
+        self.assertEqual(errs, [])
+
+    def test_real_calque_ban_still_fires(self):
+        brief = {"glossary": [{"source_term": "πνεῦμα", "english": "Holy Spirit", "banned": ["Spirit of God"]}]}
+        errs = gate_only(rec("τὸ πνεῦμα λέγει.", "The Spirit of God speaks."), brief)
+        self.assertTrue(any("banned rendering 'Spirit of God'" in e for e in errs), errs)
+
+    def test_choice_inside_another_word_still_bans(self):
+        # Whole words only: 'man' in 'human', 'sin' in 'missing' are not the choice.
+        self.assertFalse(W.ban_contains_choice("human of God", "man of God"))
+        self.assertFalse(W.ban_contains_choice("missing the mark", "sin"))
+        self.assertTrue(W.ban_contains_choice("Law of Moses", "law"))
+        brief = {"glossary": [{"source_term": "ἄνθρωπος", "english": "man of God", "banned": ["human of God"]}]}
+        errs = gate_only(rec("ὁ ἄνθρωπος τοῦ θεοῦ λέγει.", "The human of God speaks."), brief)
+        self.assertTrue(any("banned rendering 'human of God'" in e for e in errs), errs)
+        brief = {"glossary": [{"source_term": "ἁμαρτία", "english": "sin", "banned": ["missing the mark"]}]}
+        errs = gate_only(rec("ἡ ἁμαρτία ἐστίν.", "It is missing the mark."), brief)
+        self.assertTrue(any("banned rendering 'missing the mark'" in e for e in errs), errs)
+
+    def test_vote_glossary_drops_bans_holding_the_choice(self):
+        votes = {"votes": [{"source_term": "παρθένος", "choice": "virgin", "banned": ["the Virgin", "maiden"]}]}
+        with mock.patch.object(W, "call", return_value=votes):
+            gl, _ = W.vote_glossary("s", [{"source_term": "παρθένος", "sense": "s", "candidates": ["virgin"]}], "", "Greek")
+        self.assertEqual(gl[0]["english"], "virgin")
+        self.assertEqual(gl[0]["banned"], ["maiden"])
+
+
+class RetryContextTests(unittest.TestCase):
+    """A retried hold starts from its findings, labelled as notes (2026-10-06)."""
+
+    def test_retry_feedback_labels_notes_and_skips_noise(self):
+        with tempfile.TemporaryDirectory() as d:
+            hr = Path(d) / "held-review" / "2026-10-04"
+            hr.mkdir(parents=True)
+            (hr / "findings.jsonl").write_text(
+                json.dumps({"id": "bk/3#0", "quote": "noisy words"}) + "\n" + json.dumps({"id": "bk/3#1", "quote": "real words"}) + "\n")
+            (hr / "verdicts.jsonl").write_text(
+                json.dumps({"id": "bk/3#0", "verdict": "noise"}) + "\n" + json.dumps({"id": "bk/3#1", "verdict": "real"}) + "\n")
+            held = {"section": "3", "_status": "hold", "_why": "2 confirmed problems after 3 repairs",
+                    "open_findings": [{"class": "omission", "quote": "noisy words", "why": "w"},
+                                      {"class": "negation", "quote": "real words", "source_quote": "οὐ", "why": "not dropped"}]}
+            with mock.patch.object(W, "HELD_REVIEW", Path(d) / "held-review"):
+                fb = W.retry_feedback("bk", held)
+        self.assertIn("checker notes, may be wrong; verify against the source", fb)
+        self.assertIn("held because: 2 confirmed problems", fb)
+        self.assertIn("real words", fb)
+        self.assertNotIn("noisy words", fb)
+
+    def test_process_section_passes_notes_to_the_redraft(self):
+        with tempfile.TemporaryDirectory() as d:
+            stage = Path(d)
+            secdir = stage / "bk" / "sections"
+            secdir.mkdir(parents=True)
+            (secdir / "1.json").write_text(json.dumps({"section": "1", "_status": "hold", "_why": "repair failed",
+                                                      "open_findings": [{"class": "omission", "quote": "q1", "why": "gap"}]}))
+            pairs = [{"id": "1", "title": "", "source": ["src."], "english": [], "lang": "grc", "src_file": None}]
+            seen = []
+
+            def fake_draft(slug, p, prev, nxt, brief, langname, feedback=""):
+                seen.append(feedback)
+                return {"section": "1", "pass_a_gloss": "A", "pass_b_english": ["B."]}
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "log"), \
+                    mock.patch.object(W, "HELD_REVIEW", stage / "none"), \
+                    mock.patch.object(W, "draft_section", fake_draft), mock.patch.object(W, "section_gate", return_value=[]), \
+                    mock.patch.object(W, "check_section", return_value={"confirmed": [], "rejected": []}):
+                j = W.process_section("bk", 0, pairs, {}, "Greek")
+            self.assertEqual(j["_status"], "pass")
+            self.assertTrue((secdir / "1.hold1.json").exists())
+        self.assertIn("may be wrong", seen[0])
+        self.assertIn("q1", seen[0])
+        # Notes keep their own heading; they are not framed as problems to fix.
+        self.assertTrue(seen[0].startswith(W.RETRY_NOTES_HEAD))
+        self.assertNotIn("FIX THESE PROBLEMS", W.feedback_block(seen[0]))
+        self.assertIn("FIX THESE PROBLEMS", W.feedback_block("- gate: x"))
+
+    def test_draft_prompt_frames_retry_notes_as_notes(self):
+        users = []
+
+        def fake_call(model, system, user, **k):
+            users.append(user)
+            return {"pass_a_gloss": "A", "pass_b_english": ["B."]}
+        notes = W.RETRY_NOTES_HEAD + " (checker notes, may be wrong; verify against the source):\n- [omission] \"q1\""
+        p = {"id": "1", "source": ["src."], "lang": "grc", "src_file": None}
+        with mock.patch.object(W, "call", fake_call):
+            W.draft_section("bk", p, "", "", {}, "Greek", notes)
+        self.assertEqual(len(users), 2, "Pass A and Pass B calls")
+        for u in users:
+            self.assertIn(W.RETRY_NOTES_HEAD, u)
+            self.assertNotIn("FIX THESE PROBLEMS", u)
+
+
+class ParkAndQueueTests(unittest.TestCase):
+    def test_parked_only_when_last_attempt_changed_nothing(self):
+        self.assertFalse(W.parked({"result": "held", "attempts": 1, "stalled": True}))
+        self.assertTrue(W.parked({"result": "held", "attempts": 2}), "old rows stay parked")
+        self.assertTrue(W.parked({"result": "held", "attempts": 2, "stalled": True}))
+        self.assertFalse(W.parked({"result": "held", "attempts": 2, "stalled": False}))
+        self.assertTrue(W.parked({"result": "held", "attempts": W.PARK_MAX, "stalled": False}), "bounded")
+        self.assertFalse(W.parked({"result": "reopened", "attempts": 0}))
+
+    def run_queue(self, pairs, rows=None, status=None):
+        with tempfile.TemporaryDirectory() as d:
+            q = Path(d) / "queue.json"
+            q.write_text(json.dumps(rows or {}))
+            with mock.patch.object(W, "QUEUE_LOG", q), mock.patch.object(W, "STAGE", Path(d)), \
+                    mock.patch.object(W, "site_books", return_value=[(10, "bk")]), \
+                    mock.patch.object(W, "certified", return_value=False), \
+                    mock.patch.object(W, "load_pairs", return_value=pairs), \
+                    mock.patch.object(W, "run", return_value=0) as run, \
+                    mock.patch.object(W, "status", return_value=status or {"sections": {"hold": 1}}), \
+                    mock.patch.object(W, "log"), mock.patch("builtins.print"), \
+                    mock.patch.dict(sys.modules, {"audit_log": mock.MagicMock()}):
+                W.queue(5, 0)
+            return run.called, json.loads(q.read_text()).get("bk")
+
+    def test_duplicate_ids_skip_without_a_run(self):
+        ran, row = self.run_queue([{"id": "1", "source": ["x."]}, {"id": "1", "source": ["y."]}])
+        self.assertFalse(ran)
+
+    def test_placeholder_source_marks_needs_source_without_a_run(self):
+        ran, row = self.run_queue([{"id": "20", "source": [NOTE]}], rows={"bk": {"result": "held", "attempts": 1}})
+        self.assertFalse(ran)
+        self.assertEqual(row["result"], "needs-source")
+        self.assertIn("20", row["why"])
+
+    def test_row_records_whether_the_attempt_moved(self):
+        ok = [{"id": "1", "source": ["Verba sunt."]}]
+        prev = {"bk": {"result": "held", "attempts": 1, "status": {"sections": {"hold": 1}}}}
+        ran, row = self.run_queue(ok, rows=prev, status={"sections": {"hold": 1}})
+        self.assertTrue(ran)
+        self.assertEqual((row["attempts"], row["stalled"]), (2, True))
+        self.assertTrue(W.parked(row))
+        ran, row = self.run_queue(ok, rows=prev, status={"sections": {"pass": 1}, "intro_ok": False})
+        self.assertEqual((row["attempts"], row["stalled"]), (2, False))
+        self.assertFalse(W.parked(row))
+
+
+class CheckerBudgetTests(unittest.TestCase):
+    """Kimi replies were cut off; glossary findings were never used (2026-10-06)."""
+
+    def test_check_prompt_drops_glossary_and_caps_findings(self):
+        self.assertNotIn("- glossary:", W.CHECK_SYS)
+        self.assertIn("at most 12 findings, majors first", W.CHECK_SYS)
+
+    def test_cf_call_length_finish_is_truncated(self):
+        body = {"success": True, "result": {"choices": [{"message": {"content": '{"findings": ['}, "finish_reason": "length"}],
+                                            "usage": {"completion_tokens": 6000}}}
+        with mock.patch.object(LB.urllib.request, "urlopen", lambda req, timeout=0: FakeResp(json.dumps(body).encode())):
+            r = LB.cf_call("@cf/moonshotai/kimi-k2.6", [], "t", "a")
+        self.assertEqual((r["error"], r["ct"], r["content"]), (LB.TRUNCATED_LENGTH, 6000, '{"findings": ['))
+        body["result"]["choices"][0]["finish_reason"] = "stop"
+        with mock.patch.object(LB.urllib.request, "urlopen", lambda req, timeout=0: FakeResp(json.dumps(body).encode())):
+            self.assertEqual(LB.cf_call("@cf/moonshotai/kimi-k2.6", [], "t", "a")["content"], '{"findings": [')
+
+    def test_cf_chat_api_length_finish_is_truncated(self):
+        body = {"choices": [{"message": {"content": "{"}, "finish_reason": "length"}], "usage": {"completion_tokens": 9}}
+        with mock.patch.object(LB.urllib.request, "urlopen", lambda req, timeout=0: FakeResp(json.dumps(body).encode())):
+            r = LB.cf_call("m", [], "t", "a", api="chat")
+        self.assertEqual(r["error"], LB.TRUNCATED_LENGTH)
+
+    def test_fallback_round_is_tagged(self):
+        a, b = W.CHECKERS
+        with mock.patch.object(W, "check_one", side_effect=lambda m, *r: None if m == a else []):
+            chk = W.check_section({"id": "1", "source": ["x"]}, ["y"], {}, "Greek")
+        self.assertEqual(chk["fallback"], [a])
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), mock.patch.object(W, "log"), \
+                mock.patch.object(W, "draft_section", return_value={"section": "1", "pass_a_gloss": "A", "pass_b_english": ["B."]}), \
+                mock.patch.object(W, "section_gate", return_value=[]), \
+                mock.patch.object(W, "check_section", return_value={"confirmed": [], "rejected": [], "fallback": [a]}):
+            j = W.process_section("s", 0, [{"id": "1", "source": ["src."], "english": [], "lang": "grc", "src_file": None}], {}, "Greek")
+        self.assertEqual(j["checks"]["fallback"][0]["checker"], "fallback")
+        self.assertEqual(j["checks"]["fallback"][0]["replaced"], [a])
+
+    def run_referee_pass(self, nim_up):
+        """No-edits path with the real referee(); only call() is mocked."""
+        conf = [{"class": "omission", "quote": "B", "upheld_by": "x"}]
+
+        def fake_call(model, system, user, **k):
+            if model == W.REFEREE and not nim_up:
+                return None
+            return {"rulings": [{"n": 1, "real": False, "why": "fine"}]}
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), mock.patch.object(W, "log"), \
+                mock.patch.object(W, "draft_section", return_value={"section": "1", "pass_a_gloss": "A", "pass_b_english": ["B."]}), \
+                mock.patch.object(W, "section_gate", return_value=[]), \
+                mock.patch.object(W, "check_section", return_value={"confirmed": conf, "rejected": []}), \
+                mock.patch.object(W, "repair_attempt", return_value=(None, "no-edits")), \
+                mock.patch.object(W, "call", fake_call):
+            return W.process_section("s", 0, [{"id": "1", "source": ["src."], "english": [], "lang": "grc", "src_file": None}], {}, "Greek")
+
+    def test_referee_pass_names_the_model_that_ruled(self):
+        j = self.run_referee_pass(nim_up=True)
+        self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", W.REFEREE))
+        self.assertNotIn("fallback", j["checks"])
+        j = self.run_referee_pass(nim_up=False)
+        self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", W.FALLBACK))
+        self.assertEqual(j["checks"]["fallback"][-1]["checker"], "referee")
+        self.assertEqual(j["checks"]["fallback"][-1]["model"], W.FALLBACK)
+
+
+class ReadWithTruncationTests(unittest.TestCase):
+    """cf_call now flags a cut-off reply as an error but keeps its text (2026-10-06)."""
+
+    def run_read(self, replies):
+        seen = []
+
+        def fake(model, msgs, cf_token="", nv_token="", max_tokens=0):
+            seen.append(max_tokens)
+            return replies[len(seen) - 1]
+        with mock.patch.object(R, "vendor_call", fake), mock.patch.object(R.time, "sleep") as sl:
+            out = R.read_with("m", "T", [{"id": "1", "title": "t", "text": "x"}], {"cf": "", "nv": ""})
+        return out, seen, sl
+
+    def test_cut_off_reply_whose_json_closed_is_used(self):
+        out, seen, sl = self.run_read([{"error": LB.TRUNCATED_LENGTH, "content": '{"followability": 4, "findings": []}'}])
+        self.assertEqual(out["followability"], 4)
+        self.assertEqual(seen, [8000])
+        sl.assert_not_called()
+
+    def test_cut_off_unparseable_grows_budget_once(self):
+        cut = {"error": LB.TRUNCATED_LENGTH, "content": '{"findings": ['}
+        out, seen, sl = self.run_read([cut, {"content": '{"followability": 3, "findings": []}'}])
+        self.assertEqual(out["followability"], 3)
+        self.assertEqual(seen, [8000, 16000])
+        sl.assert_not_called()
+        out, seen, _ = self.run_read([cut, cut, cut])
+        self.assertEqual(seen, [8000, 16000, 16000], "bounded: 3 tries, one growth")
+        self.assertIn("cut off", out["_error"])
+
+    def test_other_errors_still_back_off(self):
+        out, seen, sl = self.run_read([{"error": "503"}] * 3)
+        self.assertEqual(out["_error"], "503")
+        self.assertEqual(sl.call_count, 3)
 
 
 if __name__ == "__main__":

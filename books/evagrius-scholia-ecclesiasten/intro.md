@@ -1,0 +1,5 @@
+Evagrius Ponticus (c. 345–399) was a Christian monk and ascetic. He left Constantinople around 382, joined a monastic community in Jerusalem led by Rufinus and Melania the Elder, took monastic vows in 383, and then spent the rest of his life in the Egyptian desert at Nitria and Kellia.
+
+This work is a commentary by Evagrius on the biblical book of Ecclesiastes, consisting of 73 scholies. It was edited for the first time by Paul Géhin and published in Sources Chrétiennes 397 in 1993. The text is preserved in four manuscripts and also through an indirect tradition in exegetical chains, where the notes sometimes retain their authentic form and sometimes are reduced to a brief form going back to Procopius of Gaza.
+
+The commentary is discontinuous and made of generally quite brief notes. The influence of Origen is felt here and there. The notes become increasingly sparse as the commentary progresses, and the scholies become rarer starting from chapter 9 and stop at verse 10 of chapter 11, with the last chapter of the book left aside.

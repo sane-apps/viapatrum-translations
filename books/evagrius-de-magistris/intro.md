@@ -1,0 +1,5 @@
+Evagrius Ponticus (c. 345–399) is the author to whom modern scholarship attributes this treatise, though the manuscript tradition preserves it under the name of Nilus of Ancyra. Evagrius was a monk and ascetic teacher who spent his later years in the Egyptian monastic settlements of Nitria and Kellia, where he wrote extensively on the spiritual life.
+
+The treatise offers practical guidance for that task by comparing the leader's work to seafaring, shepherding, warfare, medicine, and Israel's journey through the desert. An unskilled guide destroys those in his care, just as an unskilled pilot wrecks a ship or an inexperienced shepherd loses sheep. The skilled leader is like a general and physician who prevents wounds or heals them quickly.
+
+Key terms include leader, disciple, freedom from passions, passions, active virtue, brother, community, self-control, warning, forgiveness, kingdom of heaven, promised land, and joy. The author uses the Septuagint text, and citations are given in modern form using standard English Bible book names and Hebrew Psalm numbering where they differ.

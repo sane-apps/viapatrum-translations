@@ -1,5 +1,5 @@
-Photius of Constantinople (c. 810–c. 893), twice patriarch of Constantinople (858–867, 877–886), was the greatest scholar of the Byzantine middle ages — theologian, canonist, and voracious reader.
+Photius of Constantinople (c. 810–c. 893) was a scholar and patriarch of Constantinople in the ninth century.
 
-The Library (the Myriobiblon) is his reading journal on a heroic scale: summaries and judgments of 279 books, pagan and Christian, many of which survive nowhere else.
+The Library is a record of Photius's private reading, containing summaries of 279 books that he had read and discussed. Photius engaged a secretary and set down all the summaries he could recollect, arranging them in the order in which his memory recalled them rather than by subject. In the ninth century it was still possible to read vast quantities of ancient literature, both pagan and Christian, that has since been lost, and Photius is often our best or only source of information about these lost books.
 
-This volume holds the opening stretch, Codices 1–17: Theodore, Eusebius, Origen, Apollinaris, Gelasius, and the councils of Ephesus and Chalcedon.
+A reader will meet summaries of early Christian writings, including works by Eusebius, Gregory of Nyssa, Origen, Apollinarius, Theodore of Mopsuestia, and Sophronius, as well as summaries of works by Theodore the Presbyter, Hadrian the Monk, and Nonnosus, and of the acts of the councils of Nicaea, Ephesus, and Chalcedon. Photius was a keen critic of style and content, and his summaries often include his own judgments on the works he describes. Because many of the books he read have since disappeared, his notes are frequently the only surviving evidence for their contents.

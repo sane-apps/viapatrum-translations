@@ -1,0 +1,5 @@
+This homily is attributed to Hesychius of Jerusalem (c. 412–450), a priest of Jerusalem. The attribution is not certain, and some scholars hold that the work was not written by the fifth-century Hesychius. This is Homily I, not Homily II on the same saint. It was composed to present the martyrdom and praise of Saint Longinus the centurion, who confessed Christ at the crucifixion, so that believers might be strengthened in faith.
+
+The author says that he found the account of Longinus' martyrdom in a manuscript in the library of the Holy Sepulchre after much searching and labor. The work survives in an abridged form in tenth-century Synaxaria and is transmitted in Patrologia Graeca 93 under the title Martyrium sancti Longini centurionis. It concerns the legend of Longinus, the centurion who attended the crucifixion and believed in Christ, preached Christianity in Cappadocia, and died a martyr.
+
+A reader will meet Longinus as a witness to the crucifixion, as a preacher in Cappadocia, and as a martyr. To follow the work, a reader should know that Longinus is the centurion whose confession appears in Matthew 27:54 and Mark 15:39.

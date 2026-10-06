@@ -31,6 +31,12 @@ CONTAMINATION = re.compile(
 )
 # English token that must never appear inside Greek/Latin source fields.
 SOURCE_ENGLISH_LEAK = re.compile(r"\btemporary\b", re.I)
+# Editor notes stored where the locked text should be (audit 2026-10-06: 38
+# Origen-on-Luke sections held "(Jerome Latin working note; lemma Luke 2:21-24.
+# Full Rauer GCS 35 text to be locked locally.)" and passed with Luke written
+# from memory). Source fields only: the English publish gate is unchanged.
+SOURCE_PLACEHOLDER = re.compile(
+    r"(?i:\bworking note\b|\bto be locked\b)|\blemma\s+(?:[1-3]\s)?[A-Z][a-z]+\s+\d+:\d+")
 
 
 def join_b(value) -> str:
@@ -68,6 +74,8 @@ def content_errors(value, label="english", *, source=False) -> list[str]:
         errors.append(f"{label}: placeholder or operational text")
     if source and SOURCE_ENGLISH_LEAK.search(text):
         errors.append(f"{label}: English/operational token in source")
+    if source and SOURCE_PLACEHOLDER.search(text):
+        errors.append(f"{label}: editor's note, not locked source text")
     if not source and text and greek_ratio(visible_text(text)) > 0.25:
         errors.append(f"{label}: copied Greek needs review; expected English")
     visible = visible_text(text)
@@ -216,7 +224,9 @@ def _failed_greek_scan(text: str) -> bool:
     """
     if greek_ratio(text) >= 0.15 or sum(c.isalpha() for c in text) < 80:
         return False
-    return text.count("\\") >= 8
+    # Escaped quotes (\' in Latin locks, e.g. "non dixit \'deus\'") are not
+    # scan damage: 237 of 239 flagged Latin sections were only that (2026-10-06).
+    return len(re.findall(r"\\(?![\x27\x22])", text)) >= 8
 
 
 

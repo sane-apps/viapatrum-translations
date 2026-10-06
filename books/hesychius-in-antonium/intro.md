@@ -1,0 +1,5 @@
+Hesychius of Jerusalem (c. 412–450) was a priest of the Church of Jerusalem and a celebrated preacher and commentator on the Old and New Testament. He wrote in Greek in the early fifth century. This homily is an encomium, a laudatory speech, in honor of Antony the Great, the monk of Egypt.
+
+The homily was preached during the celebration of the saint at the church of the Anastasis in Jerusalem. It praises Antony's life in the light of biblical quotations concerning righteousness. The speaker compares Antony with biblical figures including Abraham, Isaac, Jacob, Joseph, Moses, David, Daniel, John the Baptist, John the Evangelist, and Paul the Apostle.
+
+A reader should know that the work is a sermon of praise rather than a biography. It moves through remembrances of the righteous, the power of words and deeds, Antony's noble character, and his ascetic life. The argument is built on scriptural quotations, so familiarity with the stories of the patriarchs, prophets, and apostles will help in following the comparisons.

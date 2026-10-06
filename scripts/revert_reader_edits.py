@@ -21,7 +21,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
+import threading
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -132,25 +134,32 @@ def main(argv=None) -> int:
     if not a.apply:
         return 0
     W.TOKENS["cf"], W.TOKENS["nv"] = W.secret("CLOUDFLARE_API_TOKEN"), W.secret("NV_API_KEY")
-    totals = {"kept": 0, "refused": 0, "books_ok": 0}
-    for b, items in plans.items():
+    totals = {"kept": 0, "refused": 0, "books_ok": 0, "books_bad": []}
+    lock = threading.Lock()
+
+    def one_book(b: str) -> None:
+        items = plans[b]
         brief = json.loads((W.STAGE / b / "brief.json").read_text())
         with ThreadPoolExecutor(W.WORKERS) as ex:
             res = list(ex.map(lambda it: judge(b, it, brief), items))
         done = [r for r in res if r["keep_revert"]]
-        totals["kept"] += len(done)
-        totals["refused"] += len(res) - len(done)
-        if done:
-            write_back(b, done)
-        ok = W.certified(b)
-        totals["books_ok"] += ok
-        print(f"{b}: reverted {len(done)}/{len(res)} sections "
-              f"({sum(d['undone'] for d in done)} edits); certified {ok}", flush=True)
-        if not ok:
-            print(f"!! {b} no longer certified; stopping", flush=True)
-            return 2
+        with lock:  # one book's files at a time; the checks run in parallel
+            if done:
+                write_back(b, done)
+            ok = W.certified(b)
+            totals["kept"] += len(done)
+            totals["refused"] += len(res) - len(done)
+            totals["books_ok"] += ok
+            if not ok:
+                totals["books_bad"].append(b)
+            print(f"{b}: reverted {len(done)}/{len(res)} sections "
+                  f"({sum(d['undone'] for d in done)} edits); certified {ok}" + ("" if ok else " !!"), flush=True)
+
+    # 2026-10-05: one book at a time took ~7 min each beside the running lanes.
+    with ThreadPoolExecutor(int(os.environ.get("REVERT_BOOKS", "8"))) as ex:
+        list(ex.map(one_book, list(plans)))
     print(json.dumps(totals), flush=True)
-    return 0
+    return 2 if totals["books_bad"] else 0
 
 
 if __name__ == "__main__":

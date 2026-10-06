@@ -1,0 +1,61 @@
+{
+ "slug": "hesychius-homilia-i-lazarum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 34,
+   "moved_start": "Σὺ τὸν ἄρτον ἐζύμωσας, ἀλλ' ἡ Σιὼν"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 31,
+   "moved_start": "2 Πῶς ἐγκωμιάσω τὸν τοῦ Χριστοῦ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 37,
+   "moved_start": "«Ἐγὼ κρίνω»· οὗ τὴν κρίσιν ἀθετεῖν οὐ"
+  }
+ ],
+ "brief_sha256": "39d36a7f367a70aa31a80293c26f825cb7a9dc95ae7f101286780baaf06f21ad",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-06T05:57:51Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "4b754e7cbcefc9973cf68c28488fe8beee54fadd8cb1734b176caa8a3d156128",
+   "english_sha256": "a21b6335f55668b4bd28b50aed9c70afde2db87806811579752fa681b1f53626",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "a3dd58d0a400e4251d7bc321b8de06c0bfd40f71c02835646858a1a87c7fc951",
+   "english_sha256": "51bfa9bd4b5a9a3437ed5cb074d0633cc2b87a37a27a2bd554580c5f2c1eca80",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "cad3f68cf1c4989ddcfb1afb45981288399e8d599d75dd7a4a50fd834348cc37",
+   "english_sha256": "ef5e980f51d91a44c2297f594177ab4dab073522d86d80bdb304a4f78140b496",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "3e7d53a4213579a746931c2eefa48804d3bebdce35bc8d7c3b7c9cf1e669262b",
+   "english_sha256": "d72bcc8a5cafa2132a0224db7ed3a3171cd9ca6a0308b60dd10a7bbc171032f3",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

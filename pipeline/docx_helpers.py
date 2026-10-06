@@ -10,6 +10,14 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.shared import Inches, Pt, RGBColor
 
 
+def _core_cap(value: str, limit: int = 255) -> str:
+    """OOXML core properties reject anything longer than 255 characters."""
+    value = value or ""
+    if len(value) <= limit:
+        return value
+    return value[: limit - 1] + "…"
+
+
 def setup_document(
     *,
     title: str,
@@ -55,11 +63,11 @@ def setup_document(
     lang.set(qn("w:val"), "en-US")
     normal.element.get_or_add_rPr().append(lang)
     props = doc.core_properties
-    props.title = title
-    props.author = author
-    props.subject = subject
-    props.keywords = keywords
-    props.comments = comments
+    props.title = _core_cap(title)
+    props.author = _core_cap(author)
+    props.subject = _core_cap(subject)
+    props.keywords = _core_cap(keywords)
+    props.comments = _core_cap(comments)
     return doc
 
 

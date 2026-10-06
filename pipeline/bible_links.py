@@ -50,6 +50,109 @@ BOOK_TARGET_ALIAS = {
     "Sirach": "Sirach",
 }
 
+# Explicit abbreviations already written in the English. These are citations,
+# not guesses. A bare "the Apostle says" does not match. The letter lookahead
+# keeps "1 Cor" from eating "1 Corinthians", which the full-name pattern owns.
+# A following book ("1 Cor 1:10; 2 Cor 5:1") must not be swallowed as a verse.
+ABBREV_TO_BOOK = {
+    "gen": "Genesis",
+    "exod": "Exodus",
+    "ex": "Exodus",
+    "lev": "Leviticus",
+    "num": "Numbers",
+    "deut": "Deuteronomy",
+    "dt": "Deuteronomy",
+    "josh": "Joshua",
+    "judg": "Judges",
+    "jdg": "Judges",
+    "1 sam": "1 Samuel",
+    "2 sam": "2 Samuel",
+    "1 kgs": "1 Kings",
+    "2 kgs": "2 Kings",
+    "1 chr": "1 Chronicles",
+    "2 chr": "2 Chronicles",
+    "neh": "Nehemiah",
+    "esth": "Esther",
+    "ps": "Psalm",
+    "pss": "Psalm",
+    "psa": "Psalm",
+    "prov": "Proverbs",
+    "eccl": "Ecclesiastes",
+    "eccles": "Ecclesiastes",
+    "isa": "Isaiah",
+    "jer": "Jeremiah",
+    "lam": "Lamentations",
+    "ezek": "Ezekiel",
+    "ezk": "Ezekiel",
+    "dan": "Daniel",
+    "hos": "Hosea",
+    "obad": "Obadiah",
+    "mic": "Micah",
+    "nah": "Nahum",
+    "hab": "Habakkuk",
+    "zeph": "Zephaniah",
+    "hag": "Haggai",
+    "zech": "Zechariah",
+    "mal": "Malachi",
+    "matt": "Matthew",
+    "mt": "Matthew",
+    "mk": "Mark",
+    "lk": "Luke",
+    "jn": "John",
+    "rom": "Romans",
+    "1 cor": "1 Corinthians",
+    "2 cor": "2 Corinthians",
+    "1 kor": "1 Corinthians",
+    "2 kor": "2 Corinthians",
+    "gal": "Galatians",
+    "eph": "Ephesians",
+    "phil": "Philippians",
+    "philem": "Philemon",
+    "phlm": "Philemon",
+    "col": "Colossians",
+    "1 thess": "1 Thessalonians",
+    "2 thess": "2 Thessalonians",
+    "1 tim": "1 Timothy",
+    "2 tim": "2 Timothy",
+    "tit": "Titus",
+    "heb": "Hebrews",
+    "jas": "James",
+    "1 pet": "1 Peter",
+    "2 pet": "2 Peter",
+    "1 jn": "1 John",
+    "2 jn": "2 John",
+    "3 jn": "3 John",
+    "rev": "Revelation",
+    "wis": "Wisdom",
+    "tob": "Tobit",
+    "jdt": "Judith",
+    "1 macc": "1 Maccabees",
+    "2 macc": "2 Maccabees",
+}
+_ABBREV_VERSE = r"\d+:\d+(?:[–-]\d+(?::\d+)?)?"
+_ABBREV_MORE = r"\d+(?::\d+)?(?:[–-]\d+(?::\d+)?)?"
+# A semicolon may start another chapter of the same book ("1:10; 5:1").
+# It must include a colon, so "; 2 Cor 5:1" stays a second citation.
+_ABBREV_SEMI = r"\d+:\d+(?:[–-]\d+(?::\d+)?)?"
+ABBREV_LOC = (
+    _ABBREV_VERSE
+    + r"(?:\s*,\s*"
+    + _ABBREV_MORE
+    + r")*(?:;\s*"
+    + _ABBREV_SEMI
+    + r"(?:\s*,\s*"
+    + _ABBREV_MORE
+    + r")*)*"
+)
+ABBREV_REF = re.compile(
+    r"(?<![\w])(?P<book>"
+    + "|".join(re.escape(k) for k in sorted(ABBREV_TO_BOOK, key=len, reverse=True))
+    + r")(?![A-Za-z])\.?\s+(?P<loc>"
+    + ABBREV_LOC
+    + r")",
+    re.IGNORECASE,
+)
+
 
 def _logos_book_target(book: str) -> str:
     return BOOK_TARGET_ALIAS.get(book, book)
@@ -190,6 +293,27 @@ class BibleLinker:
             for m in REF.finditer(text)
             if not _span_inside(_spans, m.start(), m.end())
         ]
+        ref_spans = [(start, end) for start, end, _value in replacements]
+
+        def _abbrev_replace(m: re.Match) -> str | None:
+            if any(m.start() < end and m.end() > start for start, end in ref_spans):
+                return None
+            prefix = text[max(0, m.start() - 30) : m.start()]
+            # "LXX Ps 50:1" may be the Greek chapter. Do not relabel it.
+            if OLD_PREFIX.search(prefix):
+                return None
+            book = ABBREV_TO_BOOK.get(re.sub(r"\s+", " ", m["book"].lower()))
+            if not book:
+                return None
+            loc = m["loc"].replace("–", "-")
+            return self._link_markup(m.group(), book, loc, key=key, label=label, note=note)
+
+        for m in ABBREV_REF.finditer(text):
+            if _span_inside(_spans, m.start(), m.end()):
+                continue
+            value = _abbrev_replace(m)
+            if value:
+                replacements.append((m.start(), m.end(), value))
         old_pattern = re.compile(
             r"(LXX(?:/Vulgate)?|Vulgate)\s+(" + POINT + r"(?:\s*[,;]\s*" + CONT + r")*)"
         )

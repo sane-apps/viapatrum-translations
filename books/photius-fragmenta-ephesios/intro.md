@@ -1,0 +1,5 @@
+Photius of Constantinople (c. 810–c. 893) wrote this commentary on the Epistle to the Ephesians. He was Ecumenical Patriarch of Constantinople from 858 to 867 and again from 877 to 886, and he is recognized in the Eastern Orthodox Church as Saint Photius the Great. He was born in Constantinople to a noble family and was related through his father to Tarasius, who was patriarch from 784 to 806. Photius was a leading figure of the ninth-century Byzantine renascence.
+
+This work is part of a larger collection of Photius's fragmentary commentaries on the Pauline epistles. The fragments survive as excerpts and notes rather than as a continuous treatise. They reflect the exegetical activity of a patriarch who worked within the tradition of Greek Christian interpretation of Scripture.
+
+Readers should know that the biblical book is referred to as the Epistle to the Ephesians. The comments move through the letter in short units, and the translation preserves those divisions. The text assumes familiarity with the Pauline letter and with the vocabulary of Greek Christian exegesis.

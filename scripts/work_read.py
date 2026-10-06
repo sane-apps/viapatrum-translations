@@ -154,18 +154,25 @@ def read_with(model: str, title: str, secs: list[dict], tokens: dict) -> dict:
     msgs = [{"role": "system", "content": SYSTEM},
             {"role": "user", "content": f"Work: {title}\n\n{body}\n\nReturn the JSON now."}]
     last = ""
+    max_tokens, grown = 8000, False
     for attempt in range(3):
         t0 = time.time()
-        r = vendor_call(model, msgs, cf_token=tokens["cf"], nv_token=tokens["nv"], max_tokens=8000)
-        if r.get("error"):
-            last = r["error"]
+        r = vendor_call(model, msgs, cf_token=tokens["cf"], nv_token=tokens["nv"], max_tokens=max_tokens)
+        err = str(r.get("error") or "")
+        # A reply cut off at max_tokens (cf_call's "truncated: length") still
+        # carries its text: use it when its JSON closed, else grow the budget
+        # once, as work_pipeline.call does (2026-10-06).
+        if err and not (err.startswith("truncated") and r.get("content")):
+            last = err
             time.sleep(10 * (attempt + 1))
             continue
         obj = parse_obj(r.get("content", ""), expected_keys=("followability", "findings", "summary"))
         if obj is not None:
             obj["_ms"] = int((time.time() - t0) * 1000)
             return obj
-        last = "unparseable: " + (r.get("content") or "")[:200]
+        last = ("cut off: " if err else "unparseable: ") + (r.get("content") or "")[:200]
+        if err and not grown:
+            grown, max_tokens = True, 16000
     return {"_error": last}
 
 

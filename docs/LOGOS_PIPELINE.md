@@ -20,9 +20,11 @@ Sundays 04:00 local, after the 03:00 independent-review job):
 4. Restart Logos (a freshly built row expands inline and cannot be
    re-clicked in the same session).
 5. **Upload loop** for every compiled book with no upload receipt (or
-   rebuilt since its receipt): open the edit view, AX-click **Upload**,
-   wait for the `Upload successful.` text (5 min timeout). Receipts in
-   `outputs/logos_uploads.json` (`{slug: iso-timestamp}`).
+   rebuilt since its receipt) that also has `assets/cover.jpg` or
+   `cover.png`. A book with no cover is held, not uploaded. Open the
+   edit view, AX-click **Upload**, wait for the `Upload successful.`
+   text (5 min timeout). Receipts in `outputs/logos_uploads.json`
+   (`{slug: iso-timestamp}`).
 6. Regenerate `docs/LOGOS_BACKLOG.md` and write a run receipt to
    `outputs/logos_runs/<stamp>.json`.
 

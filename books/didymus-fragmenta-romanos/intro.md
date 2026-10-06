@@ -1,0 +1,5 @@
+Didymus the Blind (c. 313–c. 398) was a Christian teacher in Alexandria, Egypt. Blind from early childhood, he became a leading instructor in the city's catechetical school under Bishop Athanasius. This English is his fragments on Romans. It is not the fragments on that letter under Apollinaris, Diodorus, or Severianus.
+
+The commentary addresses Romans 7, where Paul speaks in anguish about sin and the flesh. Didymus argues that Paul is not describing his own condition or that of any baptized believer. Instead, Paul speaks in a substituted persona, borrowing the voice of a person enslaved to sin in order to convict those who love sin.
+
+A reader will meet Paul, Adam, Christ, and the devil, along with Judas and Ananias as examples of the devil dwelling in a person. Didymus quotes and argues against the devil's deceptive speech and the words of hypothetical impious objectors. Key terms to follow include flesh, sin, law, and death, which Didymus often uses as names for the devil rather than for the body or God's law. The commandment is holy, just, and good, but the devil used it to deceive Adam. Paul's speaking in character is central to the argument.

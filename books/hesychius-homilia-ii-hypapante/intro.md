@@ -1,0 +1,5 @@
+Hesychius of Jerusalem (c. 412–450) was a presbyter of the Church of Jerusalem, renowned in the Eastern Church as a theologian, biblical commentator, and preacher. By 429 he was recognized as the pre-eminent biblical interpreter and teacher of the church in Jerusalem and Palestine. He wrote in Greek and is credited with the earliest known liturgical addresses on the Virgin Mary.
+
+This English is Homily II on the Presentation. It is not Cyril of Jerusalem's homily for that feast, and it is not Amphilochius of Iconium's. It dwells on the incarnation and on Mary.
+
+A reader will meet Simeon and Anna, the two figures from the Gospel account of the Presentation who recognize the infant Jesus. The homily explores Simeon's encounter with Jesus and his prophecy, including the cross as a sign of contradiction and revelation, and Anna's prophecy. To follow the work, a reader should know that Hypapante means 'Meeting' and refers to the encounter with the Lord in the Temple, and that the homily assumes familiarity with the Gospel narrative of Luke, where Simeon and Anna appear.

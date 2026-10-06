@@ -1,0 +1,55 @@
+{
+ "slug": "severianus-fragmenta-1thess",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 70,
+   "moved_start": "1 Thess 3,3 Οὐκ εἶπεν τὸ μηδένα ὀκλάζειν, ἵνα μὴ δόξῃ κατηγο"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 3,
+   "moved_start": "καὶ"
+  }
+ ],
+ "brief_sha256": "d6b7ac55a36adbfb89d82d86c1302fd9870048a8e016dc25bbe47932ec2dd7ee",
+ "followability": [
+  3,
+  3
+ ],
+ "applied": "2026-10-06T00:50:43Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "8988e3c149f4ad361159f45d6a183772d734e68fa7d04741df8f9c4498755d85",
+   "english_sha256": "7edb5ec3721d82eb3bb117c9d8c95a59a6a115b0569451250ee106c973f0e984",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "78e14f7f9a2dd65de07ab7f9480839f77b6922d11cfe589c558404b218b57410",
+   "english_sha256": "8e407ed5775f526f300be2c6cbcbcdbdf6efa93d2cffcf1bd050cd1e20f18807",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "3e48e7beeee7b998bb1aece2efaf6898816724c485e31a20c20734a1814a2286",
+   "english_sha256": "ff19a9fb3a9d3cf7ca3aea8482c074dde9c3c35b47415fb0735c964260c6a7eb",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "0fc1d0cfc7655d0e44db5591b91cf5d5732149df4e361365bb6abd2862f6c3f3",
+   "english_sha256": "9c3aebe0464819fe11b676b025be7d1718040f1f29c94b13b95efcfa1bed5167",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

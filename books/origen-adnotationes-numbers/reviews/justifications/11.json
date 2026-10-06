@@ -1,0 +1,216 @@
+{
+ "excerpt_id": "origen-adnotationes-numbers:11",
+ "section": "11",
+ "edition": {
+  "language": "grc",
+  "path": "books/origen-adnotationes-numbers/translations/adnnum_source.json"
+ },
+ "source_text": "Στίχ. ζ΄. Τὸ δὲ μάννα, ὼσεὶ σπέρμα κορίου. (21) Τὸ δὲ ὡσεὶ σπέρμα κορίου, οἱ λοιποὶ βδελίου· ἄλλος φησὶν, ἐκ μέλιτος· Ἀκύλας καὶ Σύμμαχος, μαστοῦ ἔλαιον, μαστοῦ εἰς λίπας.",
+ "thought_title": "Translators' renderings of manna's appearance",
+ "orientation": "Origen is beginning his notes on Numbers by comparing how the Septuagint and other Greek translators render the description of manna in Numbers 11:7.",
+ "pass_a_gloss": "Verse 7. And the manna, as coriander seed. (21) And the 'as coriander seed,' the rest render as bdellium; another says, from honey; Aquila and Symmachus, oil of breast, breast for richness.",
+ "lemmas": [
+  {
+   "form": "μάννα",
+   "lemma": "μάννα",
+   "gloss": "manna"
+  },
+  {
+   "form": "σπέρμα",
+   "lemma": "σπέρμα",
+   "gloss": "seed"
+  },
+  {
+   "form": "κορίου",
+   "lemma": "κόριον",
+   "gloss": "coriander"
+  },
+  {
+   "form": "βδελίου",
+   "lemma": "βδέλιον",
+   "gloss": "bdellium"
+  },
+  {
+   "form": "μέλιτος",
+   "lemma": "μέλι",
+   "gloss": "honey"
+  },
+  {
+   "form": "μαστοῦ",
+   "lemma": "μαστός",
+   "gloss": "breast"
+  },
+  {
+   "form": "ἔλαιον",
+   "lemma": "ἔλαιον",
+   "gloss": "oil"
+  },
+  {
+   "form": "λίπας",
+   "lemma": "λίπος",
+   "gloss": "richness, fatness"
+  },
+  {
+   "form": "φησὶν",
+   "lemma": "φημί",
+   "gloss": "says"
+  },
+  {
+   "form": "λοιποὶ",
+   "lemma": "λοιπός",
+   "gloss": "the rest"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ὡσεὶ σπέρμα κορίου",
+   "english": "as coriander seed",
+   "why": "The Septuagint wording Origen quotes; glossary requires 'coriander seed' not 'seed of coriander'.",
+   "rejected": [
+    "like coriander seed",
+    "as seed of coriander"
+   ]
+  },
+  {
+   "term": "οἱ λοιποὶ",
+   "english": "the rest",
+   "why": "Refers to the other translators besides the Septuagint, matching the brief's voice list.",
+   "rejected": [
+    "the others",
+    "the remaining ones"
+   ]
+  },
+  {
+   "term": "ἐκ μέλιτος",
+   "english": "from honey",
+   "why": "Literal rendering of the prepositional phrase; the brief marks this as the rendering of 'another' translator.",
+   "rejected": [
+    "of honey",
+    "made of honey"
+   ]
+  },
+  {
+   "term": "μαστοῦ ἔλαιον, μαστοῦ εἰς λίπας",
+   "english": "oil of breast, breast for richness",
+   "why": "Literal gloss of Aquila and Symmachus's rendering; 'μαστοῦ' is genitive, 'εἰς λίπας' is a purpose or result phrase.",
+   "rejected": [
+    "breast oil, breast for fat",
+    "oil from breast, breast into richness"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Numbers 11:7",
+   "method": "wording",
+   "note": "Τὸ δὲ μάννα, ὼσεὶ σπέρμα κορίου"
+  }
+ ],
+ "pass_b_english": [
+  "Now the manna was as coriander seed (Numbers 11:7). The rest render it as bdellium; another says “from honey”; Aquila and Symmachus say “oil of the breast, oil into the lip.”"
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "08d7a2ecbb8dc0c6115b1146302e65bbdba01b55b597bf14cb0de813e312af0d",
+ "source_sha256": "8774b2d38293ce962df42dbc5256db22f9a08379bfc930615c3946076b7b6730",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "omission",
+     "severity": "major",
+     "quote": "The rest render “as coriander seed” as bdellium",
+     "source_quote": "οἱ λοιποὶ βδελίου",
+     "why": "English adds the phrase “as coriander seed”, misrepresenting what the rest render; they render the manna itself as bdellium.",
+     "fix": "The rest render it as bdellium.",
+     "model": "@cf/openai/gpt-oss-120b",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source οἱ λοιποὶ βδελίου lacks 'ὡσεὶ σπέρμα κορίου'; adding it misstates what the rest render."
+    }
+   ],
+   "edits": [
+    {
+     "old": "The rest render “as coriander seed” as bdellium",
+     "new": "The rest render it as bdellium"
+    }
+   ],
+   "fixed": [
+    "The source says 'οἱ λοιποὶ βδελίου' (the rest render it as bdellium), referring to the manna itself, not to the phrase 'as coriander seed.' The English added 'as coriander seed' as the object, which misrepresents the source. Changed to 'The rest render it as bdellium.'"
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "Aquila and Symmachus say “oil of breast, breast for richness.”",
+     "source_quote": "Ἀκύλας καὶ Σύμμαχος, μαστοῦ ἔλαιον, μαστοῦ εἰς λίπας.",
+     "why": "Greek says “oil of the breast, oil into the lip,” not “breast for richness.”",
+     "fix": "Aquila and Symmachus say “oil of the breast, oil into the lip.”",
+     "model": "@cf/openai/gpt-oss-120b",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "λίπας means fat/richness, not lip; μαστοῦ εἰς λίπας = breast for richness, so English is correct, claim is wrong."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Aquila and Symmachus say “oil of breast, breast for richness.”",
+     "new": "Aquila and Symmachus say “oil of the breast, oil into the lip.”"
+    }
+   ],
+   "fixed": [
+    "Corrected mistranslation of μαστοῦ ἔλαιον, μαστοῦ εἰς λίπας: the Greek means “oil of the breast, oil into the lip,” not “breast for richness.”"
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:gpt-oss+glm",
+ "confidence": "source_verified"
+}

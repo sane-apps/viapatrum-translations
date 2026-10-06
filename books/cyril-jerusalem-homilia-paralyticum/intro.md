@@ -1,0 +1,5 @@
+Cyril of Jerusalem (c. 313–386) wrote this homily for a Christian congregation in Jerusalem. He served as bishop of the city in the mid-fourth century and is remembered as a Church Father and Doctor of the Church. The homily was preached to exhort his hearers to seek Christ as the true healer of soul and body.
+
+The occasion is the Gospel account of the healing at the pool of Bethesda in John 5. Cyril presents Jesus as the great physician who heals the paralytic not through water but through his word. The healing becomes a lesson against unbelief and a call to repentance, since those healed by Christ must sin no more.
+
+A reader will meet Jesus, the paralytic healed after thirty-eight years, the Jews who object to the healing on the Sabbath, and Peter. Cyril quotes Jesus and the paralytic, and he composes an extended speech for the healed man defending himself before the Jews. To follow the homily, know that the pool is the pool of Bethesda, the mat is the paralytic's bed, the great physician is Christ, and the fountain is Christ as the source of living water. Cyril uses the Septuagint text and its book names and Psalm numbering.

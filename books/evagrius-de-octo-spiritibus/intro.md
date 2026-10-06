@@ -1,0 +1,5 @@
+Evagrius Ponticus (c. 345–399) was a Christian monk and ascetic born in Ibora in Pontus. He was ordained a reader by Basil of Caesarea and later a deacon by Gregory of Nazianzus, and he served as archdeacon in Constantinople during the Second Ecumenical Council in 381. He left the city for Jerusalem around 382 and became a monk, then spent his remaining years in the Egyptian desert at Nitria and Kellia, where he wrote extensively on asceticism.
+
+This English is On the Eight Evil Spirits. It is not his treatise On Evil Thoughts, and it is not The Practice. It has one short chapter for each evil thought: gluttony, fornication, avarice, anger, sadness, acedia, vainglory, and pride. It belongs to Evagrius's larger effort to map the origins of evil thoughts and the physical experiences tied to them, and it was transmitted in some manuscripts under the name of Nilus of Ancyra. The Greek text survives in the Patrologia Graeca.
+
+Each chapter consists mostly of short aphorisms, often set in pairs, with occasional longer paragraphs. The advice is filled with metaphorical imagery and is meant to be read slowly and contemplated.

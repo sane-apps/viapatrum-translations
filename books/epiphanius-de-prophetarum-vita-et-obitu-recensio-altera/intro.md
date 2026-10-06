@@ -1,0 +1,5 @@
+Epiphanius of Salamis (c. 310/320–403) was bishop of Salamis, also called Constantia, in Cyprus. Born near Eleutheropolis in Palestine, he was elected bishop in 367 and served for nearly forty years until his death. This work is attributed to him, though the authorship of the collection of prophetic lives to which it belongs is disputed, with some versions assigned to Epiphanius, others to Dorotheus of Tyre, and an anonymous recension also existing.
+
+The work was composed in the fourth century and survives in Greek manuscripts. It belongs to a tradition of brief accounts of the prophets, giving their origins, tribal affiliations, deaths, and places of burial. The text was edited by Theodor Schermann and published in Leipzig in 1907, and it appears in columns 393–414 of Patrologia Graeca volume 43.
+
+To follow the work, a reader should know that it uses the Greek names of biblical books and persons, and that the prophets are often identified by tribe and burial place rather than by extended narrative.

@@ -1,0 +1,5 @@
+This homily is attributed to Epiphanius of Salamis (c. 310/320–403), bishop of Salamis, the metropolis of Cyprus. The Greek text is preserved in Migne's Patrologia Graeca, volume 43, columns 485–501. Modern catalogues classify the work as spurious, noting that it is also attributed to Hesychius of Jerusalem, and date it to the sixth through eighth century.
+
+The homily is a praise of Mary the Mother of God. It survives in Greek and in a Slavonic version, and in the Slavonic tradition it is assigned to the liturgical date of December 26. The work includes a detailed physical description of the Virgin Mary, stating that she was of middle stature, with corn-coloured skin, blonde hair, tawny and beautiful eyes, black brows, a prominent nose, long arms, long fingers, and a long face.
+
+A reader should know that the text is a Marian encomium, not a narrative treatise. It moves through praise of the Virgin as the heavenly bride and Mother of God, the birth of Christ, and the adoration of the shepherds and Magi, including Herod's disturbance, the star, and the gifts of the Magi. The work is known in standard patristic catalogues as CPG 3771 and BHG 1143.

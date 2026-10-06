@@ -1,6 +1,6 @@
 # Logos Personal Books backlog (generated - do not hand-edit)
 
-Regenerated: 2026-10-01T12:57-04:00 by scripts/logos_backlog.py from the live
+Regenerated: 2026-10-05T00:35-04:00 by scripts/logos_backlog.py from the live
 Mini PersonalBookManager.db + repo books/*/book.yml + upload receipts.
 Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 
@@ -8,8 +8,8 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 
 - Compiled in Logos: **32**
 - Metadata row exists, never compiled: **0**
-- DOCX exists, no Logos row yet: **0**
-- No DOCX (needs build_book.py or per-slice builder): **406**
+- DOCX exists, no Logos row yet: **36**
+- No DOCX (needs build_book.py or per-slice builder): **768**
 
 ## Compiled (title | book Id | LastCompiled | uploaded)
 
@@ -52,28 +52,77 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 
 ## DOCX exists, no Logos row (pb_sync will INSERT on next build run)
 
-- (none)
+- amphilochius-epistula-synodalis | Synodical Letter
+- amphilochius-in-illud-non-potest | On “It Is Not Possible”
+- amphilochius-in-lazarum | On Lazarus
+- amphilochius-in-sabbati-sancti | On Holy Saturday
+- amphilochius-in-zacchaeum | On Zacchaeus
+- athenagoras-resurrection | On the Resurrection of the Dead
+- clement-alexandria-rich-man | Who Is the Rich Man That Shall Be Saved?
+- cyril-alexandria-fragmenta-contra-theodorum-2 | Fragments from Book Two Against Theodore of Mopsuestia
+- cyril-alexandria-fragmenta-danielem | Fragments on Daniel
+- cyril-alexandria-fragmentum-psalmum | Fragments on the Psalms
+- cyril-jerusalem-epistula-constantium | Letter to Constantius
+- didymus-dialexis-montanistae | Dialogue with a Montanist
+- epiphanius-anaphora-graeca | The Eucharistic Prayer
+- epiphanius-epistula-ad-joannem-hierosolymitanum | Letter to John of Jerusalem
+- epiphanius-tractatus-contra-eos-qui-imagines-faciunt | Treatise against Those Who Make Images
+- eusebius-emesa-fragmenta-romanos | Fragments on Romans
+- eustathius-commentarius-psalmum | Commentary on a Psalm
+- eustathius-commentarius-psalmum-92 | Commentary on Psalm 92
+- eustathius-de-anima-contra-arianos | On the Soul against the Arians
+- eustathius-de-fide-contra-arianos | On Faith against the Arians
+- eustathius-de-melchisedech | On Melchizedek
+- eustathius-fragmenta-varia | Various Fragments
+- eustathius-in-ecclesiasten | On Ecclesiastes
+- eustathius-in-genesim-de-creatione | On Creation in Genesis
+- eustathius-in-inscriptione-titulorum | On the Inscription of the Titles
+- eustathius-oratio-dominus-creavit | Oration on “The Lord Created Me”
+- eustathius-orationes-contra-arianos | Orations against the Arians
+- gregory-thaumaturgus-jeremiah-fragments | Fragments on Jeremiah
+- hesychius-homilia-i-hypapante | Homily I on the Presentation
+- hesychius-in-sanctos-martyres | In Praise of the Holy Martyrs
+- origen-acta-homily-scrap | Fragment from the Homilies on the Acts of the Apostles
+- origen-osee-fragment | Fragment from the Commentary on Hosea
+- origen-ruth-scrap | On Ruth
+- severianus-fragmenta-philippenses | Fragments on Philippians
+- tertullian-on-patience | On Patience
+- tertullian-to-the-martyrs | To the Martyrs
 
 ## No DOCX (Logos-blocked until a builder exists)
 
+- acts-of-justin | The Martyrdom of Justin and His Companions
 - agathias-historiae | Historiae
 - alexander-monachus-inventio-crucis | Inventio crucis
 - alexander-monachus-inventio-crucis-epitome | Inventio crucis epitome
 - alexander-monachus-laudatio-barnabae | Laudatio Barnabae apostoli
+- ambrose-commentary-on-twelve-psalms | Ambrose: Commentary on Twelve Psalms
+- ambrose-defence-of-david | Ambrose: Defence of the Prophet David
+- ambrose-exposition-of-luke | Ambrose: Exposition of the Gospel of Luke
+- ambrose-exposition-of-psalm-118 | Ambrose: Exposition of Psalm 118
+- ambrose-hexameron | Ambrose: Hexameron
+- ambrose-on-cain-and-abel | Ambrose: On Cain and Abel
+- ambrose-on-elijah-and-fasting | Ambrose: On Elijah and Fasting
+- ambrose-on-flight-from-the-world | Ambrose: On Flight from the World
+- ambrose-on-jacob | Ambrose: On Jacob and the Happy Life
+- ambrose-on-joseph | Ambrose: On Joseph
+- ambrose-on-naboth | Ambrose: On Naboth
+- ambrose-on-noah | Ambrose: On Noah
+- ambrose-on-paradise | Ambrose: On Paradise
+- ambrose-on-the-patriarchs | Ambrose: On the Patriarchs
+- ambrose-on-tobit | Ambrose: On Tobit
+- ambrose-prayer-of-job-and-david | Ambrose: On the Prayer of Job and David
+- ambrose-second-defence-of-david | Ambrose: Second Defence of David
 - ammonius-fragmenta-joannem | Fragmenta in Joannem
 - amphilochius-contra-haereticos | Contra haereticos
 - amphilochius-de-recens-baptizatis | De recens baptizatis
-- amphilochius-epistula-synodalis | Epistula synodalis
 - amphilochius-iambi-seleucum | Iambi ad Seleucum
-- amphilochius-in-illud-non-potest | In illud Non potest
 - amphilochius-in-illud-pater | In illud Pater
-- amphilochius-in-lazarum | In Lazarum
 - amphilochius-in-mulierem-peccatricem | In mulierem peccatricem
 - amphilochius-in-natalitia-domini | In natalitia domini
 - amphilochius-in-occursum-domini | In occursum domini
-- amphilochius-in-sabbati-sancti | In diem sabbati sancti
-- amphilochius-in-zacchaeum | In Zacchaeum
 - amphilochius-oratio-resurrectionem | Oratio in resurrectionem domini
+- anonymous-antimontanist | Against the Cataphrygians, to Avircius Marcellus (fragments)
 - apollinaris-fragmenta-joannem | Fragmenta in Joannem
 - apollinaris-fragmenta-matthaeum | Fragmenta in Matthaeum
 - apollinaris-fragmenta-psalmos | Fragmenta in Psalmos
@@ -85,9 +134,200 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - arethas-scholia-cyrilli-apologiam | Scholia Arethae in Cyrilli apologiam xii anathematismorum
 - asterius-homilia-9 | Homilia 9 (in sanctum Phocam)
 - asterius-homiliae | Homiliae
+- athanasius-against-arians-1 | Athanasius: First Oration against the Arians
+- athanasius-against-arians-2 | Athanasius: Second Oration against the Arians
+- athanasius-against-arians-3 | Athanasius: Third Oration against the Arians
+- athanasius-against-arians-4 | Pseudo-Athanasius: Fourth Oration against the Arians
+- athanasius-contra-apollinarium | Athanasius: Against Apollinaris
+- athanasius-contra-sabellianos | Athanasius: Against the Sabellians
+- athanasius-de-sabbatis | Athanasius: On Sabbaths and Circumcision
+- athanasius-dialogi-contra-macedonianos | Athanasius: Dialogues against the Macedonians
+- athanasius-dialogi-de-trinitate | Athanasius: Dialogues on the Trinity
+- athanasius-epistula-adelphium | Athanasius: Letter to Adelphius
+- athanasius-epistula-afros | Athanasius: Synodal Letter to the Africans
+- athanasius-epistula-dracontium | Athanasius: Letter to Dracontius
+- athanasius-epistula-episcopos-aegypti | Athanasius: Letter to the Bishops of Egypt and Libya
+- athanasius-epistula-jovianum | Athanasius: Letter to the Emperor Jovian
+- athanasius-epistula-marcellinum | Athanasius: Letter to Marcellinus on the Psalms
+- athanasius-epistula-maximum | Athanasius: Letter to Maximus the Philosopher
+- athanasius-epistula-monachos | Athanasius: Letter to the Monks
+- athanasius-epistula-palladium | Athanasius: Letter to Palladius
+- athanasius-epistulae-serapionem | Athanasius: Letters to Serapion on the Holy Spirit
+- athanasius-expositiones-psalmos | Athanasius: Expositions on the Psalms
+- athanasius-in-illud-omnia | Athanasius: On Matthew 11:27
+- athanasius-incarnation | Athanasius: On the Incarnation of the Word
+- athanasius-scholia-job | Athanasius: Notes on Job
+- athanasius-tomus-antiochenos | Athanasius: Tome to the Antiochenes
+- athanasius-vita-antonii | Athanasius: Life of Antony
+- athanasius-vita-syncleticae | Athanasius: Life of Syncletica
+- athenagoras-plea | Athenagoras: A Plea for the Christians
+- augustine-adulterous-marriages | Augustine: On Adulterous Marriages
+- augustine-against-adimantus | Augustine: Against Adimantus
+- augustine-against-cresconius | Augustine: Against Cresconius
+- augustine-against-faustus | Augustine: Against Faustus
+- augustine-against-gaudentius | Augustine: Against Gaudentius
+- augustine-against-lying | Augustine: Against Lying
+- augustine-against-parmenian | Augustine: Against the Letter of Parmenian
+- augustine-against-petilian | Augustine: Against the Letters of Petilian
+- augustine-against-secundinus | Augustine: Against Secundinus
+- augustine-against-the-academics | Augustine: Against the Academics
+- augustine-against-the-fundamental-letter | Augustine: Against the Letter of Mani Called Fundamental
+- augustine-against-two-letters-of-the-pelagians | Augustine: Against Two Letters of the Pelagians
+- augustine-care-for-the-dead | Augustine: On Care for the Dead
+- augustine-confessions | Augustine: Confessions
+- augustine-debate-with-felix | Augustine: Debate with Felix
+- augustine-debate-with-fortunatus | Augustine: Debate with Fortunatus
+- augustine-divination-of-demons | Augustine: On the Divination of Demons
+- augustine-expressions-in-the-heptateuch | Augustine: Expressions in the Heptateuch
+- augustine-good-of-widowhood | Augustine: On the Good of Widowhood
+- augustine-letter-to-the-catholics | Augustine: Letter to the Catholics on the Donatist Sect
+- augustine-literal-commentary-on-genesis | Augustine: Literal Commentary on Genesis
+- augustine-marriage-and-concupiscence | Augustine: On Marriage and Concupiscence
+- augustine-merits-and-forgiveness-of-sins | Augustine: On the Merits and Forgiveness of Sins
+- augustine-nature-and-origin-of-the-soul | Augustine: On the Nature and Origin of the Soul
+- augustine-notes-on-job | Augustine: Notes on Job
+- augustine-on-baptism | Augustine: On Baptism, against the Donatists
+- augustine-on-continence | Augustine: On Continence
+- augustine-on-faith-and-the-creed | Augustine: On Faith and the Creed
+- augustine-on-faith-and-works | Augustine: On Faith and Works
+- augustine-on-holy-virginity | Augustine: On Holy Virginity
+- augustine-on-lying | Augustine: On Lying
+- augustine-on-order | Augustine: On Order
+- augustine-on-patience | Augustine: On Patience
+- augustine-on-the-christian-struggle | Augustine: On the Christian Struggle
+- augustine-on-the-happy-life | Augustine: On the Happy Life
+- augustine-on-the-nature-of-the-good | Augustine: On the Nature of the Good
+- augustine-on-the-one-baptism | Augustine: On the One Baptism
+- augustine-on-the-two-souls | Augustine: On the Two Souls
+- augustine-on-the-work-of-monks | Augustine: On the Work of Monks
+- augustine-perfection-of-righteousness | Augustine: On the Perfection of Human Righteousness
+- augustine-proceedings-of-pelagius | Augustine: On the Proceedings of Pelagius
+- augustine-proceedings-with-emeritus | Augustine: Proceedings with Emeritus
+- augustine-psalm-against-the-donatists | Augustine: Psalm against the Donatist Party
+- augustine-questions-on-the-heptateuch | Augustine: Questions on the Heptateuch
+- augustine-sermon-on-rusticianus | Augustine: Sermon on the Subdeacon Rusticianus
+- augustine-sermon-to-the-church-of-caesarea | Augustine: Sermon to the People of the Church of Caesarea
+- augustine-spirit-and-the-letter | Augustine: On the Spirit and the Letter
+- augustine-to-the-donatists-after-the-conference | Augustine: To the Donatists after the Conference
+- augustine-unfinished-literal-genesis | Augustine: Unfinished Literal Commentary on Genesis
+- augustine-usefulness-of-believing | Augustine: On the Usefulness of Believing
+- barnabas-epistle | The Epistle of Barnabas
 - baron-philosophia-theologiae-ancillans | Philosophia theologiae ancillans (Exercitatio Prima Art. I-XII + Secunda Art. I-XV + Tertia Art. I-XXX)
+- basil-adversus-eunomium | Basil: Against Eunomius, Books 1-3
+- basil-contra-sabellianos-arium | Basil: Homily against the Sabellians, Arius and the Anomoeans
+- basil-de-fide | Basil: Homily on Faith
+- basil-enarratio-isaiam | Basil: Commentary on Isaiah
+- basil-homilia-ad-baptisma | Basil: Exhortation to Holy Baptism
+- basil-homilia-de-spiritu-sancto | Basil: Homily on the Holy Spirit
+- basil-homilia-gratiarum-actione | Basil: Homily on Thanksgiving
+- basil-homilia-in-divites | Basil: Homily to the Rich
+- basil-homilia-in-psalmum-115 | Basil: Homily on Psalm 115
+- basil-homilia-in-psalmum-28 | Basil: Second Homily on Psalm 28
+- basil-homilia-invidia | Basil: Homily on Envy
+- basil-homilia-irascuntur | Basil: Homily against the Angry
+- basil-homilia-lacisis | Basil: Homily Spoken at Lakizoi
+- basil-homilia-misericordia-judicio | Basil: Homily on Mercy and Judgment
+- basil-homilia-principium-proverbiorum | Basil: Homily on the Beginning of Proverbs
+- basil-homilia-tempore-famis | Basil: Homily in Time of Famine and Drought
+- basil-homiliae-hexaemeron | Basil: Homilies on the Six Days of Creation
+- basil-homiliae-psalmos | Basil: Homilies on the Psalms
+- basil-in-barlaam | Basil: Homily on the Martyr Barlaam
+- basil-in-christi-generationem | Basil: Homily on the Holy Birth of Christ
+- basil-in-ebriosos | Basil: Homily against Drunkards
+- basil-in-gordium | Basil: Homily on the Martyr Gordius
+- basil-in-mamantem | Basil: Homily on the Martyr Mamas
+- basil-in-principio-erat-verbum | Basil: Homily on In the Beginning Was the Word
+- basil-in-quadraginta-martyres | Basil: Homily on the Forty Martyrs of Sebaste
+- basil-quod-deus-non-auctor-malorum | Basil: Homily That God Is Not the Cause of Evil
+- basil-quod-rebus-mundanis | Basil: Homily on Not Clinging to Worldly Things
+- basil-regulae-brevius | Basil: The Shorter Rules
+- basil-regulae-fusius | Basil: The Longer Rules
+- basil-regulae-morales | Basil: Moral Rules
 - chronicon-paschale | Chronicon paschale
+- chrysostom-ad-stagirium | John Chrysostom: To Stagirius, Troubled by a Demon
+- chrysostom-adversus-judaeos | John Chrysostom: Discourses against the Judaizers
+- chrysostom-adversus-oppugnatores | John Chrysostom: Against the Opponents of the Monastic Life
+- chrysostom-catecheses-illuminandos | John Chrysostom: Baptismal Instructions
+- chrysostom-commentarius-galatas | John Chrysostom: Commentary on Galatians
+- chrysostom-comparatio-regis-monachi | John Chrysostom: Comparison of a King and a Monk
+- chrysostom-contra-subintroductas | John Chrysostom: Against Those Who Keep Virgins in Their Houses
+- chrysostom-de-anna | John Chrysostom: Sermons on Hannah
+- chrysostom-de-babyla | John Chrysostom: On Saint Babylas
+- chrysostom-de-baptismo-christi | John Chrysostom: On the Baptism of Christ
+- chrysostom-de-bernice-prosdoce | John Chrysostom: On Saints Bernice and Prosdoce
+- chrysostom-de-capto-eutropio | John Chrysostom: On Eutropius Taken from the Church
+- chrysostom-de-compunctione-demetrium | John Chrysostom: On Compunction, to Demetrius
+- chrysostom-de-compunctione-stelechium | John Chrysostom: On Compunction, to Stelechius
+- chrysostom-de-cruce-et-latrone-i | John Chrysostom: On the Cross and the Thief I
+- chrysostom-de-cruce-et-latrone-ii | John Chrysostom: On the Cross and the Thief II
+- chrysostom-de-davide-et-saule | John Chrysostom: Homilies on David and Saul
+- chrysostom-de-diabolo-tentatore | John Chrysostom: Homilies on the Devil as Tempter
+- chrysostom-de-droside | John Chrysostom: On Saint Drosis
+- chrysostom-de-lazaro | John Chrysostom: Sermons on Lazarus and the Rich Man
+- chrysostom-de-maccabeis | John Chrysostom: On the Maccabees
+- chrysostom-de-meletio | John Chrysostom: On Saint Meletius of Antioch
+- chrysostom-de-mutatione-nominum | John Chrysostom: Homilies on the Change of Names
+- chrysostom-de-paenitentia | John Chrysostom: Homilies on Repentance
+- chrysostom-de-pelagia | John Chrysostom: On Saint Pelagia
+- chrysostom-de-prophetiarum-obscuritate | John Chrysostom: On the Obscurity of the Prophets
+- chrysostom-de-resurrectione-mortuorum | John Chrysostom: On the Resurrection of the Dead
+- chrysostom-de-sancta-pentecoste | John Chrysostom: On Pentecost
+- chrysostom-expositiones-psalmos | John Chrysostom: Commentary on the Psalms
+- chrysostom-homiliae-1-corinthios | John Chrysostom: Homilies on 1 Corinthians
+- chrysostom-homiliae-1-thessalonicenses | John Chrysostom: Homilies on 1 Thessalonians
+- chrysostom-homiliae-1-timotheum | John Chrysostom: Homilies on 1 Timothy
+- chrysostom-homiliae-2-corinthios | John Chrysostom: Homilies on 2 Corinthians
+- chrysostom-homiliae-2-thessalonicenses | John Chrysostom: Homilies on 2 Thessalonians
+- chrysostom-homiliae-2-timotheum | John Chrysostom: Homilies on 2 Timothy
+- chrysostom-homiliae-acta | John Chrysostom: Homilies on Acts
+- chrysostom-homiliae-colossenses | John Chrysostom: Homilies on Colossians
+- chrysostom-homiliae-de-statuis | John Chrysostom: Homilies on the Statues
+- chrysostom-homiliae-ephesios | John Chrysostom: Homilies on Ephesians
+- chrysostom-homiliae-hebraeos | John Chrysostom: Homilies on Hebrews
+- chrysostom-homiliae-joannem | John Chrysostom: Homilies on John
+- chrysostom-homiliae-matthaeum | John Chrysostom: Homilies on Matthew
+- chrysostom-homiliae-philemonem | John Chrysostom: Homilies on Philemon
+- chrysostom-homiliae-philippenses | John Chrysostom: Homilies on Philippians
+- chrysostom-homiliae-romanos | John Chrysostom: Homilies on Romans
+- chrysostom-homiliae-titum | John Chrysostom: Homilies on Titus
+- chrysostom-in-ascensionem | John Chrysostom: On the Ascension
+- chrysostom-in-barlaam | John Chrysostom: On Saint Barlaam
+- chrysostom-in-diem-natalem | John Chrysostom: On Christmas Day
+- chrysostom-in-eustathium | John Chrysostom: On Saint Eustathius of Antioch
+- chrysostom-in-eutropium | John Chrysostom: On Eutropius
+- chrysostom-in-ignatium | John Chrysostom: On Saint Ignatius
+- chrysostom-in-julianum | John Chrysostom: On Saint Julian
+- chrysostom-in-juventinum-maximum | John Chrysostom: On Saints Juventinus and Maximinus
+- chrysostom-in-kalendas | John Chrysostom: On the Kalends
+- chrysostom-in-lucianum | John Chrysostom: On Saint Lucian
+- chrysostom-in-principium-actorum | John Chrysostom: Homilies on the Beginning of Acts
+- chrysostom-in-romanum | John Chrysostom: On Saint Romanus
+- chrysostom-quod-regulares-feminae | John Chrysostom: That Women under Rule Should Not Live with Men
+- chrysostom-salutate-priscillam | John Chrysostom: On Greet Priscilla and Aquila
+- chrysostom-sermones-genesim | John Chrysostom: Sermons on Genesis
+- clement-alexandria-excerpts-theodotus | Clement of Alexandria: Excerpts from Theodotus
+- clement-alexandria-newly-baptized | Clement of Alexandria: To the Newly Baptized (fragment)
+- clement-alexandria-paedagogus | Clement of Alexandria: The Instructor
+- clement-alexandria-prophetic-eclogues | Clement of Alexandria: Prophetic Eclogues
+- clement-alexandria-protrepticus | Clement of Alexandria: Exhortation to the Greeks
+- clement-alexandria-stromata | Clement of Alexandria: Miscellanies (Stromata)
+- clement-rome-corinthians | 1 Clement: The Letter to the Corinthians
 - cosmas-topographia | Cosmas Indicopleustes: Topographia Christiana
+- council-carthage-256-opinions-of-the-bishops | Council of Carthage: Opinions of the Bishops on Baptizing Heretics
+- cyprian-exhortation-to-martyrdom | Cyprian of Carthage: To Fortunatus: Exhortation to Martyrdom
+- cyprian-letters | Cyprian of Carthage: Letters
+- cyprian-on-jealousy-and-envy | Cyprian of Carthage: On Jealousy and Envy
+- cyprian-on-mortality | Cyprian of Carthage: On Mortality
+- cyprian-on-the-dress-of-virgins | Cyprian of Carthage: On the Dress of Virgins
+- cyprian-on-the-good-of-patience | Cyprian of Carthage: On the Good of Patience
+- cyprian-on-the-lapsed | Cyprian of Carthage: On the Lapsed
+- cyprian-on-the-lords-prayer | Cyprian of Carthage: On the Lord's Prayer
+- cyprian-on-the-unity-of-the-church | Cyprian of Carthage: On the Unity of the Catholic Church
+- cyprian-on-works-and-alms | Cyprian of Carthage: On Works and Alms
+- cyprian-testimonies-to-quirinus | Cyprian of Carthage: Testimonies to Quirinus
+- cyprian-that-idols-are-not-gods | Cyprian of Carthage: That Idols Are Not Gods
+- cyprian-to-demetrianus | Cyprian of Carthage: To Demetrianus
+- cyprian-to-donatus | Cyprian of Carthage: To Donatus
 - cyril-alexandria-ad-calosyrium | Ad Calosyrium
 - cyril-alexandria-ad-carthaginiense | Ad Carthaginiense concilium
 - cyril-alexandria-ad-episcopos-libyae | Ad episcopos Libyae et Pentapoleos
@@ -106,10 +346,8 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - cyril-alexandria-fragmenta-acta-catholicas | Fragmenta in Acta et epistulas catholicas
 - cyril-alexandria-fragmenta-canticum | Fragmenta in Canticum canticorum
 - cyril-alexandria-fragmenta-contra-diodorum | Fragmenta ex libro contra Diodorum Tarsensem
-- cyril-alexandria-fragmenta-contra-theodorum-2 | Fragmenta ex libro ii contra Theodorum Mopsuestenum
 - cyril-alexandria-fragmenta-contra-theodorum-3 | Fragmenta ex libro iii contra Theodorum Mopsuestenum
 - cyril-alexandria-fragmenta-cyri-joannis | Fragmenta de translatione reliquiarum Cyri et Joannis
-- cyril-alexandria-fragmenta-danielem | Fragmenta in Danielem
 - cyril-alexandria-fragmenta-de-uno-filio | Fragmenta homiliae de uno filio
 - cyril-alexandria-fragmenta-ezechielem | Fragmenta in Ezechielem
 - cyril-alexandria-fragmenta-hebraeos | Fragmenta in epistulam ad Hebraeos
@@ -121,7 +359,6 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - cyril-alexandria-fragmentum-baruch | Fragmentum in librum Baruch
 - cyril-alexandria-fragmentum-papyraceum | Fragmentum incertum papyraceum
 - cyril-alexandria-fragmentum-proverbia | Fragmentum in Proverbia
-- cyril-alexandria-fragmentum-psalmum | Fragmentum in Psalmum
 - cyril-alexandria-glaphyra | Cyril of Alexandria: Glaphyra on the Pentateuch
 - cyril-alexandria-homilia-cyrini | Homilia habita in ecclesia Cyrini
 - cyril-alexandria-homiliarum-incertarum | Homiliarum incertarum fragmenta
@@ -138,10 +375,10 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - cyril-alexandria-thesaurus | Cyril of Alexandria: Thesaurus on the Holy and Consubstantial Trinity
 - cyril-alexandria-trinity-dialogue-1 | Cyril of Alexandria: Dialogues on the Holy and Consubstantial Trinity (Dialogue 1)
 - cyril-alexandria-twelve-prophets | Cyril of Alexandria: Commentary on the Twelve Prophets
-- cyril-jerusalem-epistula-constantium | Epistula ad Constantium imperatorem
 - cyril-jerusalem-homilia-ego-vado | Homilia in illud Ego vado ad patrem meum
 - cyril-jerusalem-homilia-occursum | Homilia in occursum domini
 - cyril-jerusalem-homilia-paralyticum | Homilia in paralyticum juxta piscinam jacentem
+- didache | The Didache
 - didymus-commentarii-ecclesiasten | Commentarii in Ecclesiasten
 - didymus-commentarii-job | Commentarii in Job
 - didymus-commentarii-octateuchum | Commentarii in Octateuchum et Reges
@@ -149,7 +386,6 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - didymus-commentarii-zacchariam | Commentarii in Zacchariam
 - didymus-contra-manichaeos | Contra Manichaeos
 - didymus-de-trinitate | De trinitate
-- didymus-dialexis-montanistae | Dialexis Montanistae et orthodoxi
 - didymus-enarratio-catholicas | In epistulas catholicas brevis enarratio
 - didymus-fragmenta-1cor | Fragmenta in epistulam i ad Corinthios
 - didymus-fragmenta-2cor | Fragmenta in epistulam ii ad Corinthios
@@ -161,8 +397,9 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - didymus-in-genesim | In Genesim
 - diodorus-fragmenta | Fragmenta
 - diodorus-fragmenta-romanos | Fragmenta in epistulam ad Romanos
+- diognetus-epistle | The Epistle to Diognetus
+- dionysius-corinth-fragments | Dionysius of Corinth: Letters (fragments)
 - epiphanius-anacephalaeosis | Epiphanius: Anacephalaeosis
-- epiphanius-anaphora-graeca | Anaphora Graeca
 - epiphanius-apophthegmata | Apophthegmata
 - epiphanius-appendices-ad-indices-apostolorum-discipulorumque | Appendices ad indices apostolorum discipulorumque
 - epiphanius-de-fide | De fide
@@ -173,7 +410,6 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - epiphanius-de-xii-gemmis-fragmenta | De xii gemmis Fragmenta
 - epiphanius-enumeratio-lxxii-prophetarum-et-prophetissarum | Enumeratio lxxii prophetarum et prophetissarum
 - epiphanius-epistula-ad-eusebium | Epistula ad Eusebium
-- epiphanius-epistula-ad-joannem-hierosolymitanum | Epistula ad Joannem Hierosolymitanum
 - epiphanius-epistula-ad-theodosium-imperatorem | Epistula ad Theodosium imperatorem
 - epiphanius-fragmenta-precationis-et-exorcismi | Fragmenta precationis et exorcismi
 - epiphanius-homilia-in-assumptionem-christi | Homilia in assumptionem Christi
@@ -187,32 +423,38 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - epiphanius-notitiae-episcopatuum | Notitiae episcopatuum
 - epiphanius-testamentum-ad-cives | Testamentum ad cives
 - epiphanius-testimonia-ex-divinis-et-sacris-scripturis | Testimonia ex divinis et sacris scripturis
-- epiphanius-tractatus-contra-eos-qui-imagines-faciunt | Tractatus contra eos qui imagines faciunt
 - epiphanius-tractatus-de-numerorum-mysteriis | Tractatus de numerorum mysteriis
 - eudokia-de-martyrio-cypriani | De martyrio sancti Cypriani
 - eudokia-homerocentones | Homerocentones
+- eusebius-against-marcellus | Eusebius: Against Marcellus
+- eusebius-church-history | Eusebius: Church History
+- eusebius-commentary-psalms | Eusebius: Commentary on the Psalms
+- eusebius-de-solemnitate-paschali | Eusebius: On the Paschal Feast
+- eusebius-ecclesiastical-theology | Eusebius: Ecclesiastical Theology
 - eusebius-emesa-fragmenta-galatas | Fragmenta in epistulam ad Galatas
-- eusebius-emesa-fragmenta-romanos | Fragmenta in epistulam ad Romanos
 - eusebius-emesa-fragmentum-1cor | Fragmentum in epistulam i ad Corinthios
+- eusebius-fragmenta-danielem | Eusebius: Fragments on Daniel
+- eusebius-fragmenta-lucam | Eusebius: Fragments on Luke
+- eusebius-letter-flacillus | Eusebius: Letter to Flacillus
+- eusebius-life-constantine | Eusebius: Life of Constantine
+- eusebius-martyrs-palestine | Eusebius: The Martyrs of Palestine
+- eusebius-onomasticon | Eusebius: Onomasticon (Place-Names in Scripture)
+- eusebius-oration-constantine-saints | Constantine: Oration to the Assembly of the Saints (transmitted by Eusebius)
+- eusebius-praise-constantine | Eusebius: Oration in Praise of Constantine
+- eusebius-preparation-gospel | Eusebius: Preparation for the Gospel
+- eusebius-proof-gospel | Eusebius: Proof of the Gospel
+- eusebius-prophetic-extracts | Eusebius: Prophetic Extracts
+- eusebius-quaestiones-marinum | Eusebius: Gospel Questions to Marinus
+- eusebius-quaestiones-stephanum | Eusebius: Gospel Questions to Stephanus
+- eusebius-theophany-fragments | Eusebius: On the Theophany (Greek fragments)
 - eustathius-allocutio-constantinum | Allocutio ad imperatorem Constantinum
-- eustathius-commentarius-psalmum | Commentarius in Psalmum
-- eustathius-commentarius-psalmum-92 | Commentarius in Psalmum 92
-- eustathius-de-anima-contra-arianos | De anima contra Arianos
 - eustathius-de-anima-contra-philosophos | De anima contra philosophos
-- eustathius-de-fide-contra-arianos | De fide contra Arianos
-- eustathius-de-melchisedech | De Melchisedech
 - eustathius-engastrimytho | De engastrimytho contra Origenem
-- eustathius-fragmenta-varia | Fragmenta varia
 - eustathius-hexaemeron | Commentarius in hexaemeron
 - eustathius-homilia-lazarum | Homilia christologica in Lazarum
-- eustathius-in-ecclesiasten | In Ecclesiasten
-- eustathius-in-genesim-de-creatione | In Genesim de creatione
-- eustathius-in-inscriptione-titulorum | In inscriptione titulorum
 - eustathius-in-joseph | In Joseph
 - eustathius-in-proverbia | In Proverbia
-- eustathius-oratio-dominus-creavit | Oratio in illud Dominus creavit me
 - eustathius-oratio-psalmorum-graduum | Oratio in inscriptione psalmorum graduum
-- eustathius-orationes-contra-arianos | Orationes contra Arianos
 - eustathius-thess-de-capta-thessalonica | De capta Thessalonica
 - evagrius-ad-eulogium | Tractatus ad Eulogium
 - evagrius-capitula-xxxiii | Capitula xxxiii
@@ -245,12 +487,75 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - georgius-cedrenus-compendium-historiarum | Compendium historiarum
 - georgius-peccator-hymnus | Hymnus
 - georgius-syncellus-ecloga-chronographica | Ecloga chronographica
+- gregory-nazianzus-carmina-ad-alios | Gregory of Nazianzus: Poems to Others
+- gregory-nazianzus-carmina-de-se-ipso | Gregory of Nazianzus: Poems about Himself
+- gregory-nazianzus-carmina-dogmatica | Gregory of Nazianzus: Dogmatic Poems
+- gregory-nazianzus-carmina-moralia | Gregory of Nazianzus: Moral Poems
+- gregory-nazianzus-oration-1 | Gregory of Nazianzus: Oration 1, On Easter and His Reluctance
+- gregory-nazianzus-oration-10 | Gregory of Nazianzus: Oration 10, To His Father and to Basil
+- gregory-nazianzus-oration-11 | Gregory of Nazianzus: Oration 11, To Gregory of Nyssa
+- gregory-nazianzus-oration-12 | Gregory of Nazianzus: Oration 12, To His Father
+- gregory-nazianzus-oration-13 | Gregory of Nazianzus: Oration 13, At the Consecration of Eulalius
+- gregory-nazianzus-oration-14 | Gregory of Nazianzus: Oration 14, On Love for the Poor
+- gregory-nazianzus-oration-15 | Gregory of Nazianzus: Oration 15, In Praise of the Maccabees
+- gregory-nazianzus-oration-16 | Gregory of Nazianzus: Oration 16, On His Father's Silence
+- gregory-nazianzus-oration-17 | Gregory of Nazianzus: Oration 17, To the Citizens of Nazianzus
+- gregory-nazianzus-oration-18 | Gregory of Nazianzus: Oration 18, Funeral Oration on His Father
+- gregory-nazianzus-oration-19 | Gregory of Nazianzus: Oration 19, To Julian the Tax-Assessor
+- gregory-nazianzus-oration-2 | Gregory of Nazianzus: Oration 2, In Defence of His Flight
+- gregory-nazianzus-oration-20 | Gregory of Nazianzus: Oration 20, On Doctrine and the Making of Bishops
+- gregory-nazianzus-oration-21 | Gregory of Nazianzus: Oration 21, In Praise of Athanasius
+- gregory-nazianzus-oration-22 | Gregory of Nazianzus: Oration 22, Second Oration on Peace
+- gregory-nazianzus-oration-23 | Gregory of Nazianzus: Oration 23, Third Oration on Peace
+- gregory-nazianzus-oration-24 | Gregory of Nazianzus: Oration 24, In Praise of Cyprian
+- gregory-nazianzus-oration-25 | Gregory of Nazianzus: Oration 25, In Praise of Hero the Philosopher
+- gregory-nazianzus-oration-26 | Gregory of Nazianzus: Oration 26, On Himself
+- gregory-nazianzus-oration-27 | Gregory of Nazianzus: Oration 27 (First Theological Oration)
+- gregory-nazianzus-oration-28 | Gregory of Nazianzus: Oration 28 (Second Theological Oration)
+- gregory-nazianzus-oration-29 | Gregory of Nazianzus: Oration 29 (Third Theological Oration)
+- gregory-nazianzus-oration-3 | Gregory of Nazianzus: Oration 3, To Those Who Called Him and Did Not Come
+- gregory-nazianzus-oration-30 | Gregory of Nazianzus: Oration 30 (Fourth Theological Oration)
+- gregory-nazianzus-oration-31 | Gregory of Nazianzus: Oration 31 (Fifth Theological Oration)
+- gregory-nazianzus-oration-32 | Gregory of Nazianzus: Oration 32, On Moderation in Debate
+- gregory-nazianzus-oration-33 | Gregory of Nazianzus: Oration 33, Against the Arians and on Himself
+- gregory-nazianzus-oration-34 | Gregory of Nazianzus: Oration 34, On the Arrival of the Egyptians
+- gregory-nazianzus-oration-35 | Gregory of Nazianzus: Oration 35, On the Martyrs and against the Arians
+- gregory-nazianzus-oration-36 | Gregory of Nazianzus: Oration 36, On Himself and the See of Constantinople
+- gregory-nazianzus-oration-37 | Gregory of Nazianzus: Oration 37, On Matthew 19:1-12
+- gregory-nazianzus-oration-38 | Gregory of Nazianzus: Oration 38, On the Theophany
+- gregory-nazianzus-oration-39 | Gregory of Nazianzus: Oration 39, On the Holy Lights
+- gregory-nazianzus-oration-4 | Gregory of Nazianzus: Oration 4, First Invective against Julian
+- gregory-nazianzus-oration-40 | Gregory of Nazianzus: Oration 40, On Holy Baptism
+- gregory-nazianzus-oration-41 | Gregory of Nazianzus: Oration 41, On Pentecost
+- gregory-nazianzus-oration-42 | Gregory of Nazianzus: Oration 42, The Last Farewell
+- gregory-nazianzus-oration-44 | Gregory of Nazianzus: Oration 44, On New Sunday
+- gregory-nazianzus-oration-45 | Gregory of Nazianzus: Oration 45, Second Oration on Easter
+- gregory-nazianzus-oration-5 | Gregory of Nazianzus: Oration 5, Second Invective against Julian
+- gregory-nazianzus-oration-6 | Gregory of Nazianzus: Oration 6, First Oration on Peace
+- gregory-nazianzus-oration-8 | Gregory of Nazianzus: Oration 8, On His Sister Gorgonia
+- gregory-nazianzus-oration-9 | Gregory of Nazianzus: Oration 9, Apology to His Father
+- gregory-nyssa-adversus-castigationes | Gregory of Nyssa: Against Those Who Resent Reproof
+- gregory-nyssa-apologia-hexaemeron | Gregory of Nyssa: On the Six Days of Creation
+- gregory-nyssa-de-anima-et-resurrectione | Gregory of Nyssa: On the Soul and the Resurrection
+- gregory-nyssa-de-baptismum-differunt | Gregory of Nyssa: Against Those Who Put Off Baptism
+- gregory-nyssa-de-beatitudinibus | Gregory of Nyssa: On the Beatitudes
+- gregory-nyssa-de-opificio-hominis | Gregory of Nyssa: On the Making of Man
+- gregory-nyssa-de-oratione-dominica | Gregory of Nyssa: On the Lord's Prayer
+- gregory-nyssa-de-sancto-theodoro | Gregory of Nyssa: On Saint Theodore
+- gregory-nyssa-epistula-canonica-letoium | Gregory of Nyssa: Canonical Letter to Letoius
+- gregory-nyssa-in-ascensionem | Gregory of Nyssa: On the Ascension
+- gregory-nyssa-in-sanctum-ephraim | Gregory of Nyssa: On Saint Ephrem
+- gregory-nyssa-in-stephanum-ii | Gregory of Nyssa: Second Encomium on Saint Stephen
+- gregory-nyssa-in-xl-martyres-i | Gregory of Nyssa: First Encomium on the Forty Martyrs
+- gregory-nyssa-in-xl-martyres-ii | Gregory of Nyssa: Second Encomium on the Forty Martyrs
+- gregory-nyssa-vita-gregorii-thaumaturgi | Gregory of Nyssa: Life of Gregory the Wonderworker
+- gregory-thaumaturgus-ad-philagrium | Gregory Thaumaturgus: To Philagrius, on Consubstantiality
 - gregory-thaumaturgus-ad-tatianum-de-anima | Gregory Thaumaturgus: On the Soul, to Tatian
-- gregory-thaumaturgus-jeremiah-fragments | Fragmenta in Jeremiam
+- gregory-thaumaturgus-expositio-fidei | Gregory Thaumaturgus: Declaration of Faith
 - gregory-thaumaturgus-matthew-fragment | Fragmentum in evangelium Matthaei
 - gregory-thaumaturgus-ouden-eidolon | Eis to ouden eidolon en kosmo
 - gregory-thaumaturgus-sententiae | Sententiae
-- hesychius-homilia-i-hypapante | Homilia i de Hypapante
+- hermas-shepherd | The Shepherd of Hermas
 - hesychius-homilia-i-lazarum | Homilia i in sanctum Lazarum
 - hesychius-homilia-i-longinum | Homilia i in sanctum Longinum centurionem
 - hesychius-homilia-i-maria-deipara | Homilia i de sancta Maria deipara
@@ -268,9 +573,18 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - hesychius-in-lucam | In sanctum Lucam
 - hesychius-in-petrum-paulum | In sanctos Petrum et Paulum
 - hesychius-in-procopium | In sanctum Procopium
-- hesychius-in-sanctos-martyres | In sanctos martyres
 - hesychius-in-stephanum | In sanctum Stephanum
+- hilary-fragments | Hilary: Fragments
+- hilary-homilies-on-the-psalms | Hilary of Poitiers: Homilies on the Psalms
+- hilary-hymns | Hilary of Poitiers: Hymns
+- hilary-synod-of-serdica-to-constantius | Hilary: Address of the Synod of Serdica to Constantius
+- hilary-to-constantius | Hilary: To the Emperor Constantius
+- hilary-treatise-on-the-mysteries | Hilary of Poitiers: Treatise on the Mysteries
+- hippolytus-refutation | Hippolytus: Refutation of All Heresies
+- ignatius-letters | The Letters of Ignatius
 - irenaeus-demonstration | Irenaeus of Lyons: Demonstration of the Apostolic Preaching
+- irenaeus-letter-victor | Irenaeus: Letter to Victor of Rome (fragments)
+- jerome-commentary-on-jeremiah | Jerome: Commentary on Jeremiah
 - john-antioch-historia-chronike | Historia Chronike
 - john-damascus-commentarii-in-epistulas-pauli | Commentarii in epistulas Pauli
 - john-damascus-contra-jacobitas | Contra Jacobitas
@@ -317,7 +631,18 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - john-malalas-chronographia | Chronographia
 - john-malalas-chronographia-eclogae | Chronographia eclogae
 - john-malalas-chronologica | Chronologica
+- justin-dialogue-trypho | Justin: Dialogue with Trypho
+- justin-first-apology | Justin: First Apology
+- justin-second-apology | Justin: Second Apology
+- lactantius-divine-institutes | Lactantius: The Divine Institutes
+- lactantius-epitome-divine-institutes | Lactantius: Epitome of the Divine Institutes
+- lactantius-on-the-anger-of-god | Lactantius: On the Anger of God
+- lactantius-the-phoenix | Lactantius: The Phoenix
+- macarius-opusculum | Macarius: Spiritual Treatise (PG 34 Opusculum)
 - marcellus-ancyranus-fragmenta | Fragmenta
+- marcellus-de-incarnatione-contra-arianos | Marcellus of Ancyra: On the Incarnation and against the Arians
+- mark-deacon-life-porphyry | Mark the Deacon: Life of Porphyry of Gaza
+- martyrdom-polycarp | The Martyrdom of Polycarp
 - maximus-pg91-tomos-10 | PG 91 Tomos part 10
 - maximus-pg91-tomos1-agi | PG 91 Tomos 1 (Mystagogia; Capita de caritate; Liber asceticus; Capita theologica)
 - maximus-pg91-tomos2-a1 | PG 91 Tomos 2 part A1 (Erotapokriseis etc.)
@@ -330,12 +655,21 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - maximus-pg91-tomos2-a8 | PG 91 Tomos 2 part A8
 - maximus-pg91-tomos2-a9 | PG 91 Tomos 2 part A9
 - maximus-vita | Vita Maximi Confessoris
+- methodius-against-porphyry | Methodius: Against Porphyry (fragments)
+- methodius-created-things | Methodius: On Created Things (fragments)
+- methodius-free-will | Methodius: On Free Will
+- methodius-job-fragments | Methodius: Fragments on Job
+- methodius-martyrs | Methodius: On the Martyrs (fragments)
+- methodius-symposium | Methodius: The Banquet of the Ten Virgins
+- minucius-felix-octavius | Minucius Felix: Octavius
 - nicephorus-breviarium-historicum | Breviarium historicum de rebus gestis post imperium Mauricii
 - nicephorus-bryennius-historiae | Historiae
 - nicephorus-chronographia-brevis | Chronographia brevis
 - nicephorus-phokas-de-velitatione-bellica | De velitatione bellica
 - nicephorus-refutatio-eversio-definitionis | Refutatio et eversio definitionis synodalis anni
 - nonnos-scholia-mythologica | Scholia mythologica
+- novatian-on-the-good-of-chastity | Novatian: On the Good of Chastity
+- novatian-on-the-public-shows | Novatian: On the Public Shows
 - oecumenius-commentarius-apocalypsin | Commentarius in Apocalypsin
 - oecumenius-fragmenta-1cor | Fragmenta in epistulam i ad Corinthios
 - oecumenius-fragmenta-1thess | Fragmenta in epistulam i ad Thessalonicenses
@@ -359,16 +693,25 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - olympiodorus-commentarii-lamentationes | Commentarii in Lamentationes
 - olympiodorus-contra-severum | Contra Severum Antiochenum
 - olympiodorus-fragmentum-gaudete | Fragmentum in illud Gaudete in illa die
+- optatus-against-parmenian | Optatus: Against Parmenian the Donatist
 - origen-1-corinthians-fragments | Fragmenta ex commentariis in epistulam i ad Corinthios
-- origen-acta-homily-scrap | Fragmentum ex homiliis in Acta apostolorum
+- origen-adnotationes-deuteronomy | Origen: Notes on Deuteronomy
+- origen-adnotationes-exodus | Origen: Notes on Exodus
+- origen-adnotationes-genesis | Origen: Notes on Genesis
+- origen-adnotationes-joshua | Origen: Notes on Joshua
+- origen-adnotationes-judges | Origen: Notes on Judges
+- origen-adnotationes-leviticus | Origen: Notes on Leviticus
+- origen-adnotationes-numbers | Origen: Notes on Numbers
 - origen-apocalypse-scholia-scrap | Scholia in Apocalypsem
 - origen-contra-celsum | Origen: Contra Celsum
 - origen-de-resurrectione-scrap | De Resurrectione
 - origen-ephesians-fragments | Fragmenta ex commentariis in epistulam ad Ephesios
 - origen-exodus-homilies | Origen: Homilies on Exodus
+- origen-ezekiel-fragments | Origen: Fragments of the Commentary on Ezekiel
 - origen-genesis-homilies | Origen: Homilies on Genesis
 - origen-hebrews-homily-scrap | Ex homiliis in epistulam ad Hebraeos
 - origen-isaiah-ezekiel | Origen: Homilies on Isaiah and Ezekiel
+- origen-jeremiah-catena | Origen: Fragments on Jeremiah (catena)
 - origen-job-enarrationes | Enarrationes in Job
 - origen-job-homilies | Homiliae in Job
 - origen-job-selecta | Selecta in Job
@@ -381,7 +724,6 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - origen-luke-homilies | Origen: Homilies on Luke
 - origen-matthew-later | Origen: Commentary on Matthew 15–17 + Series
 - origen-nt-fragments | Origen: NT Catena / Scholia Fragments
-- origen-osee-fragment | Fragmentum ex commentariis in Osee
 - origen-philocalia | Origen: Philocalia
 - origen-principiis | Origen: De Principiis (Peri Archon)
 - origen-proverbs-expositio | Expositio in Proverbia
@@ -392,8 +734,15 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - origen-regnorum-fragments | Fragmenta in librum primum Regnorum
 - origen-romans | Origen: Commentary on Romans (Rufinus)
 - origen-romans-catena | Commentarii in epistulam ad Romanos (catena Greek)
-- origen-ruth-scrap | In Ruth
+- origen-selecta-deuteronomy | Origen: Selections on Deuteronomy
+- origen-selecta-exodus | Origen: Selections on Exodus
+- origen-selecta-genesis | Origen: Selections on Genesis
+- origen-selecta-joshua | Origen: Selections on Joshua
+- origen-selecta-judges | Origen: Selections on Judges
+- origen-selecta-leviticus | Origen: Selections on Leviticus
+- origen-selecta-numbers | Origen: Selections on Numbers
 - origen-song | Origen: Homilies and Commentary on the Song of Songs
+- origen-song-scholia | Origen: Scholia on the Song of Songs
 - photius-commentarii-joannem | Commentarii in Joannem
 - photius-commentarii-matthaeum | Commentarii in Matthaeum
 - photius-epigramma | Epigramma
@@ -410,6 +759,8 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - photius-fragmenta-romanos | Fragmenta in epistulam ad Romanos
 - photius-fragmentum-2tim | Fragmentum in epistulam ii ad Timotheum
 - photius-fragmentum-philemonem | Fragmentum in epistulam ad Philemonem
+- polycarp-philippians | Polycarp: To the Philippians
+- polycrates-ephesus-letter-victor | Polycrates of Ephesus: Letter to Victor of Rome (fragment)
 - procopius-gaza-catena-canticum | Catena in Canticum canticorum
 - procopius-gaza-catena-ecclesiasten | Catena in Ecclesiasten
 - procopius-gaza-commentarii-isaiam | Commentarii in Isaiam
@@ -420,6 +771,21 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - procopius-gaza-epistulae | Epistulae
 - procopius-gaza-horologium | Horologium
 - procopius-gaza-refutatio-procli | Refutatio Procli
+- pseudo-clement-contestatio | Pseudo-Clement: The Pledge (Contestatio)
+- pseudo-clement-homilies | Pseudo-Clement: The Clementine Homilies
+- pseudo-clement-letter-clement-james | Pseudo-Clement: Letter of Clement to James
+- pseudo-clement-letter-peter-james | Pseudo-Clement: Letter of Peter to James
+- pseudo-clement-virginity | Pseudo-Clement: Two Letters on Virginity
+- pseudo-cyprian-against-dice-players | Pseudo-Cyprian: Against Dice-Players
+- pseudo-cyprian-against-the-jews | Pseudo-Cyprian: Against the Jews
+- pseudo-cyprian-glory-of-martyrdom | Pseudo-Cyprian: On the Glory of Martyrdom
+- pseudo-cyprian-mounts-sinai-and-zion | Pseudo-Cyprian: On Mounts Sinai and Zion
+- pseudo-cyprian-on-rebaptism | Pseudo-Cyprian: On Rebaptism
+- pseudo-cyprian-to-novatian | Pseudo-Cyprian: To Novatian
+- pseudo-cyprian-to-vigilius | Pseudo-Cyprian: To Vigilius on Jewish Unbelief
+- pseudo-ignatius-long-recension | Pseudo-Ignatius: The Long Recension and Spurious Letters
+- pseudo-tertullian-against-all-heresies | Pseudo-Tertullian: Against All Heresies
+- second-clement | 2 Clement: An Ancient Homily
 - severianus-de-caeco-nato | De caeco nato
 - severianus-de-caeco-zacchaeo | De caeco et Zacchaeo
 - severianus-de-tribus-pueris | De tribus pueris
@@ -432,7 +798,6 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - severianus-fragmenta-ephesios | Fragmenta in epistulam ad Ephesios
 - severianus-fragmenta-galatas | Fragmenta in epistulam ad Galatas
 - severianus-fragmenta-hebraeos | Fragmenta in epistulam ad Hebraeos
-- severianus-fragmenta-philippenses | Fragmenta in epistulam ad Philippenses
 - severianus-fragmenta-romanos | Fragmenta in epistulam ad Romanos
 - severianus-fragmenta-titum | Fragmenta in epistulam ad Titum
 - severianus-fragmentum-philemonem | Fragmentum in epistulam ad Philemonem
@@ -440,11 +805,42 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - severianus-in-genesim | In Genesim
 - severianus-in-illud-quando | In illud Quando ipsi subiciet omnia
 - severianus-in-job | In Job
+- socrates-ecclesiastical-history | Socrates Scholasticus: Ecclesiastical History
+- sozomen-ecclesiastical-history | Sozomen: Ecclesiastical History
 - symeon-junior-catechesae | Catechesae
 - symeon-junior-catecheses-et-gratiae | Catecheses et Gratiae
 - symeon-junior-epistulae | Epistulae
 - symeon-magister-chronographia | Chronographia
 - symeon-metaphrastes-chronicon-breve | Chronicon breve
+- tatian-address-greeks | Tatian: Address to the Greeks
+- tertullian-against-hermogenes | Tertullian: Against Hermogenes
+- tertullian-against-marcion | Tertullian: Against Marcion
+- tertullian-against-praxeas | Tertullian: Against Praxeas
+- tertullian-against-the-jews | Tertullian: Against the Jews
+- tertullian-against-the-valentinians | Tertullian: Against the Valentinians
+- tertullian-antidote-to-the-scorpion | Tertullian: Antidote to the Scorpion
+- tertullian-exhortation-to-chastity | Tertullian: Exhortation to Chastity
+- tertullian-on-baptism | Tertullian: On Baptism
+- tertullian-on-fasting | Tertullian: On Fasting
+- tertullian-on-flight-in-persecution | Tertullian: On Flight in Persecution
+- tertullian-on-idolatry | Tertullian: On Idolatry
+- tertullian-on-modesty | Tertullian: On Modesty
+- tertullian-on-monogamy | Tertullian: On Monogamy
+- tertullian-on-prayer | Tertullian: On Prayer
+- tertullian-on-repentance | Tertullian: On Repentance
+- tertullian-on-the-cloak | Tertullian: On the Cloak
+- tertullian-on-the-crown | Tertullian: On the Crown
+- tertullian-on-the-dress-of-women | Tertullian: On the Dress of Women
+- tertullian-on-the-flesh-of-christ | Tertullian: On the Flesh of Christ
+- tertullian-on-the-resurrection-of-the-flesh | Tertullian: On the Resurrection of the Flesh
+- tertullian-on-the-shows | Tertullian: On the Shows
+- tertullian-on-the-soul | Tertullian: On the Soul
+- tertullian-on-the-veiling-of-virgins | Tertullian: On the Veiling of Virgins
+- tertullian-prescription-against-heretics | Tertullian: The Prescription against Heretics
+- tertullian-to-his-wife | Tertullian: To His Wife
+- tertullian-to-scapula | Tertullian: To Scapula
+- tertullian-to-the-nations | Tertullian: To the Nations
+- tertullian-witness-of-the-soul | Tertullian: The Witness of the Soul
 - theodore-studite-homilia-nativitatem-mariae | Homilia in nativitatem Mariae
 - theodore-studite-iambi | Iambi de variis argumentis
 - theodorus-heracleensis-matthew-fragments | Fragmenta in Matthaeum
@@ -458,6 +854,7 @@ Pipeline: docs/LOGOS_PIPELINE.md. Driver: scripts/logos_build.py.
 - theophanes-kerameus-chronographia | Chronographia
 - theophilus-alex-fragmenta-joannem | Fragmenta in Joannem
 - theophilus-alex-fragmenta-matthaeum | Fragmenta in Matthaeum
+- theophilus-autolycus | Theophilus: To Autolycus
 - theophylact-simocatta-de-vitae-termino | De vitae termino
 - theophylact-simocatta-epistulae | Epistulae
 - theophylact-simocatta-historiae | Historiae

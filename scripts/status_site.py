@@ -3,8 +3,10 @@
 work and when (from outputs/audit/events.jsonl), and where audio is missing.
 
 Builds outputs/status-site/ (index.html + works/<slug>.html). The 30-minute
-recert tick (scripts/run-recert-lanes.sh) rebuilds and deploys it to the
-private Pages project viapatrum-status (Cloudflare Access, owner only).
+recert tick (scripts/run-recert-lanes.sh) rebuilds it and deploys it to the
+private Pages project viapatrum-status (Cloudflare Access, owner only) when
+the content changed. The build time appears only in index.html, inside
+<span data-built>, which the tick leaves out of its change hash.
 """
 from __future__ import annotations
 
@@ -131,6 +133,23 @@ def scout_section() -> str:
             f'<div class="feed">{"".join(rows)}</div>{extra}')
 
 
+def drain_section() -> str:
+    """Audio backlog by reason from build_audio.py --drain (outputs/audio/
+    drain-status.json). Counts only: its run time changes every 15 min and
+    would force a deploy each tick."""
+    try:
+        d = json.loads((SITE / "outputs/audio/drain-status.json").read_text())
+    except (OSError, ValueError):
+        return ""
+    counts = d.get("counts") if isinstance(d.get("counts"), dict) else d
+    tiles = "".join(f'<div class="tile"><b>{v:,}</b><span>{E(str(k).replace("_", " "))}</span></div>'
+                    for k, v in counts.items() if isinstance(v, int) and not isinstance(v, bool))
+    if not tiles:
+        return ""
+    return ('<h2>Audio backlog</h2><p class="sub">Audio still to make, counted by reason '
+            f'(from the 15-minute audio drain).</p><section class="sum">{tiles}</section>')
+
+
 def main() -> int:
     events = audit_log.events()
     by_book = defaultdict(list)
@@ -187,7 +206,7 @@ def main() -> int:
                 f'<p class="sub"><span class="chip {cls}">{state}</span> &nbsp;{live} &nbsp;<span class="meta">{E(book)}</span></p></header>'
                 f'<h2>History</h2><div class="feed">' + ("".join(event_html(ev, False) for ev in hist)
                                                          or '<p class="ev">Nothing recorded yet.</p>') + '</div>'
-                f'<footer>Times are Mini local time; "~" marks a time taken from the receipt file. Updated {generated}.</footer>')
+                f'<footer>Times are Mini local time; "~" marks a time taken from the receipt file.</footer>')
         (OUT / "works" / f"{book}.html").write_text(page(r["title"], body), encoding="utf-8")
 
     # index
@@ -196,7 +215,7 @@ def main() -> int:
     recent = "".join(event_html(ev, True) for ev in list(reversed(events))[:60])
     scout_html = scout_section()
     body = f"""
-<header><h1>Via Patrum status</h1><p class="sub">Updated {generated} (Mini time), rebuilt every 30 minutes from the audit log.</p></header>
+<header><h1>Via Patrum status</h1><p class="sub">Built <span data-built>{generated}</span> (Mini time). Rebuilt every 30 minutes from the audit log and redeployed only when something changed.</p></header>
 <section class="sum">
   <div class="tile"><b>{totals['certified']} / {totals['live']}</b><span>live works certified</span><div class="bar"><i style="width:{pct}%"></i></div></div>
   <div class="tile"><b>{totals['held']}</b><span>held for a second look</span></div>
@@ -218,6 +237,7 @@ def main() -> int:
   </div>
 </div>
 <div class="table"><table><thead><tr><th>Work</th><th>Source check</th><th>Audio</th><th>History</th></tr></thead><tbody id="rows"></tbody></table></div>
+{drain_section()}
 {scout_html}
 <h2>Recent activity</h2><div class="feed">{recent}</div>
 <h2>New translations</h2><p class="sub">{len(new_books)} started in the pipeline, {totals['new_certified']} certified:
@@ -258,7 +278,7 @@ document.getElementById('seg').addEventListener('click', e => {{
 render();
 </script>"""
     (OUT / "index.html").write_text(page("Via Patrum Status", body), encoding="utf-8")
-    (OUT / "status.json").write_text(json.dumps({"generated": generated, "totals": totals, "works": rows}, ensure_ascii=False))
+    (OUT / "status.json").write_text(json.dumps({"totals": totals, "works": rows}, ensure_ascii=False))
     print(json.dumps(totals))
     return 0
 

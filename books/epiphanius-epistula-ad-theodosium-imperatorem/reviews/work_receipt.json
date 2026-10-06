@@ -1,0 +1,61 @@
+{
+ "slug": "epiphanius-epistula-ad-theodosium-imperatorem",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 33,
+   "moved_start": "τίς τῶν ἀρχαίων ἐπισκόπων Χριστὸν"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 41,
+   "moved_start": "26 καὶ αὐτὸ γὰρ ὅπερ πλάσσουσιν ἀπὸ ἰδίας"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 36,
+   "moved_start": "28 ὁμολογεῖ, πρῶτα μὲν ὡς χλεύη τοῖς"
+  }
+ ],
+ "brief_sha256": "0d1727abfc703a9c223065c147d40ac0cd2ad5a2c10620dec4dfeab5e2350443",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-06T04:16:33Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "fa452f018af360d1d469823b3fc47d73468e5965172fe2ae16097ee1072e750c",
+   "english_sha256": "abf45a9171f2688b5e398ed7d35c3e0149cf6c55a77c34c607ad919ad45db02c",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "46f4fc61b571ab8ef0410ed3f9196291145a192db5694fb91ba64825733d93ad",
+   "english_sha256": "8dbd274f59d0a8aed3435d348329e03de291a20a4ab14ce66d7faca51c598a8f",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "183a496a4e3b8978140ac52ae469f1cda3fc1a7aad7847fd3f3e22f99284f2ed",
+   "english_sha256": "b995be4d4edf06fdbb8a3722a24551ec82596018f9f96ddc4b15beed3a8de7b6",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "380398252d8e9acc9ed00c6821af6d027cb2ba4634d3c95f3a8f4f8c1772a1fc",
+   "english_sha256": "67e58470101a707e5ac1782f272ac02032b902e3cfe468d645daa4f9a1fce157",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

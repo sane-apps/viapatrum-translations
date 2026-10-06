@@ -4,7 +4,7 @@
 # exports sections held for confirmed problems, has headless Claude judge each
 # finding against the source, and releases the sections whose findings are
 # noise or whose real errors its fixes correct; lanes then re-read and certify.
-# Exit 3 = Claude not logged in on the Mini (health_watch alerts on it).
+# Exit 3 = Claude not logged in on the Mini (fathers_watch.py alerts on it).
 set -u
 export PATH="$HOME/.local/bin:/opt/homebrew/opt/node@24/bin:/opt/homebrew/bin:$PATH"
 ROOT="$HOME/SaneApps/clients/translations"

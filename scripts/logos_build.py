@@ -32,6 +32,12 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pb_sync import resolve_pb_db, load_yml  # noqa: E402
 
+def has_cover(slug: str) -> bool:
+    assets = os.path.join(REPO, "books", slug, "assets")
+    return any(os.path.exists(os.path.join(assets, name))
+               for name in ("cover.jpg", "cover.png"))
+
+
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UPLOAD_RECEIPTS = os.path.join(REPO, "outputs", "logos_uploads.json")
 RUNS_DIR = os.path.join(REPO, "outputs", "logos_runs")
@@ -663,10 +669,8 @@ def main():
             for slug in need_build:
                 e = inv[slug]
                 log("BUILD %s (Id %s)" % (slug, e["bid"]))
-                _assets = os.path.join(REPO, "books", slug, "assets")
-                _has_cover = any(os.path.exists(os.path.join(_assets, f)) for f in ("cover.jpg", "cover.png"))
-                if not _has_cover:
-                    log("WARN %s: no assets/cover.jpg|png; shipping coverless" % slug)
+                if not has_cover(slug):
+                    log("WARN %s: no assets/cover.jpg|png; upload held" % slug)
                 _intro = os.path.join(REPO, "books", slug, "intro.md")
                 if not os.path.exists(_intro):
                     log("WARN %s: no intro.md; book opens cold" % slug)
@@ -721,6 +725,11 @@ def main():
                         {"slug": slug,
                          "reason": "stale build; rebuild before uploading"})
                     log("SKIP upload %s (stale build; rebuild first)" % slug)
+                    continue
+                if not has_cover(slug):
+                    receipt["skipped"].append(
+                        {"slug": slug, "reason": "no cover; no upload"})
+                    log("HOLD upload %s (no cover)" % slug)
                     continue
                 log("UPLOAD %s" % slug)
                 maybe_refresh(restate)

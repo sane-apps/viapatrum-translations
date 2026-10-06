@@ -1,0 +1,61 @@
+{
+ "slug": "hesychius-in-sanctos-martyres",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 33,
+   "moved_start": "Καὶ πῶς ἐπιβάλλεσθαι τοῦ στεφάνου"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 85,
+   "moved_start": "Θαυμαστὴ μὲν οὖν ἡ\nἐλεημοσύνη, ἀλλὰ χωρὶς πίστεως ἁμαρτημάτω"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 59,
+   "moved_start": "Σπουδάσωμεν οὖν, ἀγαπητοί, τὰς ἀρετὰς ταύτας μετελθεῖν, ἵνα"
+  }
+ ],
+ "brief_sha256": "e0673e81387b3e35775cb7353d35ca220d4211fe8245d16593e3422fcf0f5146",
+ "followability": [
+  3,
+  4
+ ],
+ "applied": "2026-10-06T05:59:12Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "577ca489dd994fd23175f8eb40d497170b502b368298c8614d3c7c017a85e180",
+   "english_sha256": "d32d93272de880bf96e68b28bf46fd1ee5abb61280fd98ecbaa93c630fed4dba",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "e42cbc9a16a698963701b7252f2fae8009ba54b963b4dcb78c9c3ea6a4d1c759",
+   "english_sha256": "b5462429f909de12b82c4d72b4a4eec0d000a2b9917e5b254ba88a97bdadfa5c",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "ae2b81072d0fcee5115aa144e672806c6a526d0208daf32f91ddff20ad99af3d",
+   "english_sha256": "9897d60a07c8f2698850ce67bf8e6e162ee3f67e2fd249946c088218454a2385",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "9da42e05f0f38e7860a8f8b945b0e02d19829f077e45a067ce83491232ac3265",
+   "english_sha256": "c9e8a44f1affc0b3cf82905d386a9bc179d0cbf824053c176b76f15df818f018",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

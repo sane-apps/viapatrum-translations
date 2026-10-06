@@ -1,0 +1,5 @@
+This homily is attributed to Hesychius of Jerusalem (c. 412–450), a priest and preacher known for his biblical commentaries and festal addresses. The text as it survives is a fragment, and the attribution is not certain, but it fits the kind of encomium on martyrs that Hesychius was known to deliver. It is addressed to a congregation as brothers and fathers, and its purpose is to urge them toward a complete life of virtue rather than a partial one.
+
+The speaker calls the hearers into the Spirit's garden and tells them to gather not one virtue but all of them, because virtues depend on one another like stones in a tower or steps in a ladder. He argues that each virtue is incomplete without another: fasting needs prayer, prayer needs almsgiving, almsgiving needs faith, gentleness needs humility, and faith needs love.
+
+A reader will meet Cornelius, whose prayers and alms were remembered before God, and will hear words from Jesus and from an angel speaking to Cornelius, as well as from an unnamed scriptural speaker. The key terms are virtue, fasting, prayer, almsgiving, faith, gentleness, humility, love, crown, and kingdom of heaven.

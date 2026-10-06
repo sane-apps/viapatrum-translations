@@ -22,20 +22,8 @@ cd "$ROOT" || exit 1
 if [ -f "$OUT/lanes.paused" ]; then echo "$(date +%T) lanes paused ($(head -1 "$OUT/lanes.paused"))"; exit 0; fi
 set -a; source "$HOME/.config/nv/env" >/dev/null 2>&1; set +a
 [ -n "${CLOUDFLARE_API_TOKEN:-}" ] || { echo "$(date +%T) no Cloudflare token"; exit 2; }
-KW='{"chat_template_kwargs":{"enable_thinking":false}}'
-
-fresh() {  # receipt for model $1 with purpose $2 younger than 3 h?
-  local slug f
-  slug=$(echo "$1" | tr '/@' '__')
-  f=$(ls -t "$RECEIPTS"/*-cf-"$slug".json 2>/dev/null | xargs grep -l "\"purpose\": *\"$2\"" 2>/dev/null | head -1)
-  [ -n "$f" ] && [ $(( $(date +%s) - $(stat -f %m "$f") )) -lt 10800 ]
-}
-refresh() {  # model purpose [kwargs]
-  fresh "$1" "$2" && return 0
-  timeout 400 ruby "$GATE" --provider cf --model "$1" --purpose "$2" \
-    --notes "work_pipeline via llm_bakeoff.vendor_call, thinking off" --kwargs "${3:-$KW}" --smoke >/dev/null 2>&1 \
-    && echo "$(date +%T) receipt refreshed $1" || echo "$(date +%T) receipt FAILED $1"
-}
+# fresh()/refresh() and KW live in receipt_refresh.sh (shared with the beliefs job).
+source "$ROOT/scripts/receipt_refresh.sh" || { echo "$(date +%T) receipt_refresh.sh missing"; exit 1; }
 refresh @cf/deepseek-ai/deepseek-v4-pro-0813 translate
 for m in @cf/moonshotai/kimi-k2.6 @cf/zai-org/glm-5.2 @cf/qwen/qwen3.8-27b; do refresh "$m" translation-qa; done
 refresh @cf/openai/gpt-oss-120b translation-qa '{}'
@@ -55,13 +43,10 @@ refresh @cf/openai/gpt-oss-120b translation-qa '{}'
 # so fewer lanes run at full speed.
 PAIRS=("@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2")
 NLANE=0
-# NVIDIA referee (third family): same 3 h freshness rule, NIM provider.
-NVR=$(ls -t "$RECEIPTS"/*-nvidia-nvidia_nemotron-3-ultra-550b-a55b.json 2>/dev/null | head -1)
-if [ -z "$NVR" ] || [ $(( $(date +%s) - $(stat -f %m "$NVR") )) -ge 10800 ]; then
-  timeout 400 ruby "$GATE" --provider nvidia --model nvidia/nemotron-3-ultra-550b-a55b --purpose translation-qa \
-    --notes "work_pipeline referee via llm_bakeoff.vendor_call" --kwargs '{"reasoning_effort":"none"}' --smoke >/dev/null 2>&1 \
-    && echo "$(date +%T) receipt refreshed nemotron-3-ultra" || echo "$(date +%T) receipt FAILED nemotron-3-ultra"
-fi
+# NVIDIA referee (third family): same 3 h rule, NIM provider. Purpose-aware
+# since the beliefs job also smokes a doctrine-grade Nemotron receipt nightly.
+NOTES="work_pipeline referee via llm_bakeoff.vendor_call" refresh nvidia/nemotron-3-ultra-550b-a55b \
+  translation-qa '{"reasoning_effort":"none"}' nvidia nemotron-3-ultra
 
 # Re-gate held sections offline each tick (no LLM): gate fixes release false
 # holds once no lane is on the book (2026-10-03 stall fixes).
@@ -93,9 +78,19 @@ for n in 1; do lane B$n --limit 500 --min-words 2000 --max-words 20000; done
 for n in 1; do lane D$n --limit 500 --min-words 20000; done
 
 # Owner status site (private Pages project viapatrum-status behind Cloudflare
-# Access, owner email only): rebuild from the audit log and deploy each tick.
+# Access, owner email only): rebuild from the audit log each tick, deploy only
+# when the content changed (2026-10-06: every tick re-uploaded ~430 files).
+# The build time sits in index.html inside <span data-built>, left out of the hash.
 if nice -n 10 timeout 600 python3 scripts/status_site.py >> "$OUT/status-site.log" 2>&1; then
-  timeout 300 npx --yes wrangler@4 pages deploy outputs/status-site --project-name viapatrum-status \
-    --branch main --commit-dirty=true >> "$OUT/status-site.log" 2>&1 \
-    && echo "$(date +%T) status site deployed" || echo "$(date +%T) status site deploy FAILED"
+  SITE_SHA=$(cd outputs/status-site && find . -type f | LC_ALL=C sort | while read -r f; do
+    echo "$f"; sed 's/<span data-built>[^<]*<\/span>//' "$f"; done | shasum -a 256 | cut -d' ' -f1)
+  if [ -n "$SITE_SHA" ] && [ "$SITE_SHA" = "$(cat "$OUT/status-site.deployed.sha256" 2>/dev/null)" ]; then
+    echo "$(date +%T) status site unchanged, skip deploy"
+  elif timeout 300 npx --yes wrangler@4 pages deploy outputs/status-site --project-name viapatrum-status \
+    --branch main --commit-dirty=true >> "$OUT/status-site.log" 2>&1; then
+    echo "$SITE_SHA" > "$OUT/status-site.deployed.sha256"
+    echo "$(date +%T) status site deployed"
+  else
+    echo "$(date +%T) status site deploy FAILED"
+  fi
 fi

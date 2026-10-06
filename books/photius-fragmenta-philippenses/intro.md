@@ -1,0 +1,5 @@
+Photius of Constantinople (c. 810–c. 893) wrote these fragmentary comments on Paul's Letter to the Philippians. He was a leading scholar of the ninth-century Byzantine revival, head of the University of Constantinople before becoming patriarch, and served as patriarch from 858 to 866 and again from 877 to 886. The comments survive in catenae, chain-commentaries that gathered remarks from earlier and later interpreters around the biblical text.
+
+The fragments explain difficult phrases in Philippians and defend the coherence of Paul's argument. Photius observes that Paul writes to clergy rather than laity, and therefore stresses humility rather than moral correction, since pride especially afflicts those who live well. He explains that Paul's defense, confirmation of the gospel, and endurance of chains are all validated by the Philippians' steadfastness and faith.
+
+He also clarifies that forgetting what lies behind does not mean condemning past labors but not dwelling on them. Psalms are cited according to the Septuagint numbering.

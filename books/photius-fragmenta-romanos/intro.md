@@ -1,0 +1,5 @@
+Photius of Constantinople (c. 810–c. 893) was Ecumenical Patriarch of Constantinople from 858 to 867 and again from 877 to 886. He was born around 815 and died on 6 February 893, and he is recognized in the Eastern Orthodox Church as Saint Photius the Great. He became patriarch in 858 while still a layman, succeeding Ignatius, and his tenure was marked by a dispute with Pope Nicholas I over his legitimacy, in which Photius defended the autonomous traditions of the Eastern Church against Rome.
+
+This work consists of fragments on the Epistle to the Romans, preserved in Patrologia Graeca volume 101, columns 1233 to 1250. A manuscript of the fragments survives in Oxford, Magdalen College, MS gr. 007, folios 55 to 79v.
+
+A reader will encounter Photius's remarks on passages from Paul's letter to the Romans. The text is fragmentary, so the comments are not a continuous exposition but a series of observations on selected verses. Readers should be prepared to follow references to the Epistle to the Romans and to Greek theological terms as they appear in the translation.

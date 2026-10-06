@@ -261,6 +261,19 @@ def _cf_reasoning_only(result: dict) -> bool:
     return False
 
 
+TRUNCATED_LENGTH = "truncated: length"
+
+
+def _cf_cut_off(result: dict) -> bool:
+    """The model stopped at max_tokens (finish_reason 'length'): the answer is
+    cut off, so its JSON usually never closes (2026-10-06: Kimi checker
+    replies). The error carries the text too, for callers that can use it."""
+    if not isinstance(result, dict):
+        return False
+    choice = (result.get("choices") or [{}])[0] or {}
+    return "length" in (choice.get("finish_reason"), result.get("finish_reason"))
+
+
 def _cf_pick_content(result: dict) -> str | None:
     """Normalize Workers AI result shapes (legacy response + chat choices).
     Answer text only: reasoning text is never returned as the answer (a
@@ -387,6 +400,9 @@ def cf_call(
         if out.get("result") is not None:
             result = out["result"]
             content = _cf_pick_content(result)
+            if content is not None and _cf_cut_off(result):
+                return {"error": TRUNCATED_LENGTH, "content": content, "ms": int((time.time() - t0) * 1000), "batched": True,
+                        "ct": (result.get("usage") or {}).get("completion_tokens") or 0}
             if content is not None:
                 usage = result.get("usage") or {}
                 return {"content": content, "ms": int((time.time() - t0) * 1000), "batched": True,
@@ -420,6 +436,8 @@ def cf_call(
                         return {"error": TRUNCATED_REASONING, "ms": ms}
                     return {"error": f"empty chat result: {json.dumps(data)[:200]}", "ms": ms}
                 usage = data.get("usage") or {}
+                if _cf_cut_off({"choices": data["choices"]}):
+                    return {"error": TRUNCATED_LENGTH, "content": content, "ms": ms, "ct": usage.get("completion_tokens") or 0}
                 return {
                     "content": content,
                     "ms": ms,
@@ -440,6 +458,8 @@ def cf_call(
                     return {"error": TRUNCATED_REASONING, "ms": ms}
                 return {"error": f"empty result: {json.dumps(result)[:200]}", "ms": ms}
             usage = result.get("usage") or {}
+            if _cf_cut_off(result):
+                return {"error": TRUNCATED_LENGTH, "content": content, "ms": ms, "ct": usage.get("completion_tokens") or 0}
             return {
                 "content": content,
                 "ms": ms,

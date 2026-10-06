@@ -8,6 +8,7 @@ import unittest
 from pathlib import Path
 
 from pipeline.check_pass_ab import (
+    _failed_greek_scan,
     PLACEHOLDER,
     check_record,
     check_translation_files,
@@ -270,6 +271,31 @@ class TipReadyGateTest(unittest.TestCase):
         )
         self.assertTrue(any("broken Greek scan" in e for e in content_errors(
             betacode, "source", source=True)))
+
+    def test_source_placeholder_and_escaped_quotes(self) -> None:
+        # Audit 2026-10-06: Origen on Luke stored an editor's note as the source.
+        note = "(Jerome Latin working note; lemma Luke 2:21-24. Full Rauer GCS 35 text to be locked locally.)"
+        self.assertTrue(any("not locked source" in e for e in content_errors([note], "source_text", source=True)))
+        self.assertTrue(content_errors("(Jerome Latin note; lemma Luke 4:1-13.)", "s", source=True))
+        self.assertTrue(content_errors("Rufinus text to be locked from GCS.", "s", source=True))
+        # English reading text keeps the old gate (live pages are not newly blocked).
+        self.assertEqual(content_errors("He kept a working note of the lemma Luke 2:21."), [])
+        # Escaped quotes in a Latin lock (tap_source entry 12) are not a broken scan.
+        latin = (
+            r"et hic enim dicendo \'deus in te\' et (tu deus\' duos proponit: qui erat in Christo et [spiritum] "
+            r"ipsum. plus est, quod (et) in euangelio totidem inuenies: in principio erat sermo, et sermo erat apud "
+            r"deum, et deus erat sermo: unus, qui erat, et alius, penes quem erat. sed et nomen domini in duobus "
+            r"lego: dixit dominus domino meo: sede ad dexteram meam. et Esaias haec dicit: domine, quis credidit "
+            r"auditui nostro, et brachium domini cui reuelatum est? \'brachium\' enim \'tuum\', non \'domini\' "
+            r"dixisset, si non dominum patrem et dominum filium intellegi"
+        )
+        self.assertGreaterEqual(latin.count("\\"), 8)
+        self.assertFalse(_failed_greek_scan(latin))
+        self.assertEqual(content_errors(latin, "source", source=True), [])
+        # A real betacode scan (cyril-alexandria-isaiah book 5) still fails.
+        beta = (r"hj, kainou\j de\ ou)- ranou\ j, kai\ kainh\n gh=n, kai\ ta\ e)pagge/lmata au) tou= "
+                r"prosdokw\men, kata\ to\ gegramme/non. Efh de/ ti toiou=- ton kai\ au)to\j o(")
+        self.assertTrue(_failed_greek_scan(beta))
 
 
 if __name__ == "__main__":

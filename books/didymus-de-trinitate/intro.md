@@ -1,0 +1,5 @@
+Didymus the Blind (c. 313–c. 398) was a Christian teacher in Alexandria, Egypt, blind from early childhood. A treatise called On the Trinity has traditionally been ascribed to him, but its authorship is now widely disputed. Many scholars consider it an anonymous work rather than a genuine composition of Didymus.
+
+The text draws on Cyril of Alexandria's anti-Arian theology and cites mid-fifth-century sources on Arians, Macedonians, and Eunomians. This shows it was written after those controversies. It is addressed to Orthodox Christians contending with anti-Trinitarian heretics.
+
+The treatise defends the full divinity and shared essence of the Son and the Holy Spirit against claims that they are creatures or lesser powers. A reader will meet the apostles Paul, Peter, and John, the prophets Isaiah and David, and heretics such as Macedonius, whose words are quoted and argued against. Key terms include 'same in essence' for homoousios, 'person' for hypostasis, 'begetting' for the Son's eternal origin, and 'procession' for the Spirit's. Psalms are cited by Septuagint numbers, which are usually one behind modern English numbering.

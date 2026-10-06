@@ -238,11 +238,15 @@ class Handler(BaseHTTPRequestHandler):
 
     def _send(self, code: int, obj: dict) -> None:
         body = json.dumps(obj).encode()
-        self.send_response(code)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
+        try:
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+        except (BrokenPipeError, ConnectionResetError):
+            # Client hung up mid-response (common under KeepAlive load); not fatal.
+            return
 
     def do_GET(self):
         if self.path == "/stats":

@@ -1,0 +1,5 @@
+Hesychius of Jerusalem (c. 412–450), a priest of the Church of Jerusalem, wrote this homily in Greek for a congregation in Jerusalem in the early fifth century.
+
+The surviving text contrasts Bethlehem and Zion and praises James. Hesychius begins by reflecting that if Christ had not humbled himself and become obedient to death, servants would not have been called kinsmen, nor would the clay have been called father of the potter. He then develops a sustained comparison between Bethlehem, where Christ was born, and Zion, where the Church now receives him, showing how the mysteries of the incarnation are fulfilled in the Church.
+
+The homily turns to praise James, the brother of the Lord, as commander-in-chief of the new Jerusalem, leader of the priests, and chief of the apostles, whose brief judgment at the apostolic council settled the question of Gentile inclusion. A reader will meet Peter, mentioned as a public speaker, and Thomas, to whom Zion bared Christ's side when he wished to touch it. The homily quotes or alludes to Philippians 2:8 and Acts 15:19.
