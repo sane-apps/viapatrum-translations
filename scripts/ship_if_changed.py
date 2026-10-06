@@ -188,11 +188,15 @@ def _main() -> int:
         log("a build or ship holds outputs/build.lock; next run")
         return 0
 
-    rc = run(cmd, 4 * 3600)
-    st.setdefault("ships", {})[today] = done_today + 1
-    st["ships"] = {d: n for d, n in st["ships"].items() if d >= time.strftime("%Y-%m-%d", time.localtime(time.time() - 7 * 86400))}
     receipt = SITE / "outputs/ship-last/receipt.json"
-    verified = receipt.is_file() and json.loads(receipt.read_text()).get("verified") and receipt.stat().st_mtime > time.time() - 5 * 3600
+    before = receipt.stat().st_mtime if receipt.is_file() else 0
+    rc = run(cmd, 4 * 3600)
+    # Count only runs that deployed (ship.sh rewrites ship-last at deploy); a
+    # run blocked by a gate must not use up the day's cap.
+    if receipt.is_file() and receipt.stat().st_mtime > before:
+        st.setdefault("ships", {})[today] = done_today + 1
+    st["ships"] = {d: n for d, n in st.get("ships", {}).items() if d >= time.strftime("%Y-%m-%d", time.localtime(time.time() - 7 * 86400))}
+    verified = receipt.is_file() and receipt.stat().st_mtime > before and json.loads(receipt.read_text()).get("verified")
     st["last_ship"] = {"at": time.strftime("%Y-%m-%dT%H:%M:%S"), "rc": rc, "mode": "audio-only" if audio_only else "full",
                        "verified": bool(verified), "changed": changed}
     if rc == 0 and verified:
