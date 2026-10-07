@@ -648,7 +648,38 @@ def inventory():
     return inv
 
 
-def verify_hold(inv, slugs):
+SITE = os.path.expanduser("~/SaneApps/websites/fathers.saneapps.com")
+
+
+def published_slugs():
+    """Works the last shipped site build published (owner 2026-10-06: Logos
+    builds only certified, published works). Same rule as build_logos_pack.py.
+    Reads outputs/ship-last (the deployed build), else the local dist/."""
+    for app in ("outputs/ship-last/dist/app/v1", "dist/app/v1"):
+        cat = os.path.join(SITE, app, "catalog.json")
+        if os.path.exists(cat):
+            with open(cat, encoding="utf-8") as f:
+                return {w["slug"] for w in json.load(f).get("works") or [] if w.get("slug")}
+    fail("no site catalogue (ship-last or dist): cannot tell which works are published")
+
+
+def site_slugs(slug, entry):
+    """The site slugs a book publishes under: its folder name plus any "slug"
+    in translations/*_meta.json (Cyril books publish as cyril-..., not
+    cyril-alexandria-...)."""
+    out = {slug}
+    for meta in glob.glob(os.path.join(os.path.dirname(entry["docx_path"]), "translations", "*_meta.json")):
+        try:
+            with open(meta, encoding="utf-8") as f:
+                s = json.load(f).get("slug")
+        except (OSError, ValueError, AttributeError):
+            continue
+        if isinstance(s, str) and s:
+            out.add(s)
+    return out
+
+
+def verify_hold(inv, slugs, published=None):
     """{slug: reason} for Word files that must not be built or uploaded.
 
     The shared rule (verify_docx.logos_file_problems) that the pack and
@@ -659,6 +690,9 @@ def verify_hold(inv, slugs):
     """
     held = {}
     for slug in sorted(set(slugs)):
+        if published is not None and not (site_slugs(slug, inv[slug]) & published):
+            held[slug] = "not published on the site (held, reopened or never certified)"
+            continue
         docx = Path(inv[slug]["docx_path"])
         problems = logos_file_problems(docx.parent, docx)
         if problems:
@@ -726,7 +760,7 @@ def main():
         if args.force:
             need_build = sorted(inv)
             need_upload = sorted(s for s in inv if inv[s]["last_compiled"])
-        held = verify_hold(inv, need_build + need_upload)
+        held = verify_hold(inv, need_build + need_upload, published_slugs())
         for slug, why in sorted(held.items()):
             receipt["skipped"].append(
                 {"slug": slug, "reason": "Word file held: " + why})

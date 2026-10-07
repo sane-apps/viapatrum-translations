@@ -333,6 +333,7 @@ class OneRuleEverywhere(unittest.TestCase):
                 mock.patch.object(L, "LOCK_PATH", str(self.root / "no.lock")), \
                 mock.patch.object(L, "load_uploads", lambda: {}), \
                 mock.patch.object(L, "run", lambda cmd, timeout=120: (0, "research ok")), \
+                mock.patch.object(L, "published_slugs", lambda: {p.name for p in (self.root / "books").iterdir()}), \
                 mock.patch.object(sys, "argv", ["logos_build.py", "--dry-run"]), \
                 mock.patch("builtins.print", lambda *a, **k: out.append(" ".join(map(str, a)))):
             L.main()
@@ -461,6 +462,18 @@ class CatalogueMissing(unittest.TestCase):
             self.assertEqual(sync(set()), "Amphilochius, On the Newly Baptized.")  # unpublished
             self.assertEqual(sync({"amph"}), linked)   # published: link written
 
+
+
+class PublishedOnlyTests(unittest.TestCase):
+    """Owner 2026-10-06: the Sunday Logos build only builds published works."""
+
+    def test_unpublished_book_is_held_before_its_word_file_is_read(self):
+        inv = {"pub": {"docx_path": "/nope/pub.docx"}, "held": {"docx_path": "/nope/held.docx"}}
+        with mock.patch.object(L, "logos_file_problems", return_value=[]) as check:
+            held = L.verify_hold(inv, ["pub", "held"], published={"pub"})
+        self.assertEqual(list(held), ["held"])
+        self.assertIn("not published", held["held"])
+        self.assertEqual(check.call_count, 1)  # only the published book's file is checked
 
 if __name__ == "__main__":
     unittest.main()
