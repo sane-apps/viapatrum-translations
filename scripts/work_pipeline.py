@@ -888,7 +888,7 @@ def check_section(sec: dict, english: list[str], brief: dict, langname: str) -> 
     for i, fb in enumerate(b):
         if i not in used_b:
             pending.append((CHECKERS[0], fb))
-    rejected = []
+    rejected, unruled = [], []
     for judge in CHECKERS:
         items = [f for j, f in pending if j == judge]
         if not items:
@@ -901,11 +901,17 @@ def check_section(sec: dict, english: list[str], brief: dict, langname: str) -> 
         rulings = {int(r.get("n", 0)): r for r in obj.get("rulings", []) if isinstance(r, dict) and str(r.get("n", "")).isdigit()}
         for n, f in enumerate(items):
             r = rulings.get(n + 1)
-            if r is None or r.get("real") is True:  # no ruling = not cleared
-                confirmed.append({**f, "upheld_by": judge, "ruling": (r or {}).get("why", "no ruling")})
-            else:
+            if r is not None and r.get("real") is True:
+                confirmed.append({**f, "upheld_by": judge, "ruling": r.get("why", "")})
+            elif r is not None and r.get("real") is False:
                 rejected.append({**f, "rejected_by": judge, "ruling": r.get("why", "")})
-    out = {"confirmed": confirmed, "rejected": rejected, "minor": minors}
+            else:
+                # No ruling (call failed, item skipped, or no true/false): not
+                # cleared, but not confirmed either, so no repair edits it. The
+                # referee rules on it before the section can pass (red team
+                # 2026-10-06: 54 passes carried edits for unruled findings).
+                unruled.append({**f, "unruled_by": judge})
+    out = {"confirmed": confirmed, "rejected": rejected, "minor": minors, "unruled": unruled}
     if fallback:
         out["fallback"] = fallback
     return out
@@ -982,15 +988,46 @@ def referee(sec: dict, english: list[str], findings: list[dict], langname: str, 
     if obj is None:
         obj, used = call(FALLBACK, ADJ_SYS.format(langname=langname), user, max_tokens=3000, expect=("rulings",)), FALLBACK
     if obj is None:
-        return findings
+        # Both referees failed: every disputed finding stays open, marked as
+        # unruled so the hold does not call it a confirmed problem.
+        return keep + [{**f, "no_ruling": True, "referee_why": "no ruling"} for f in disputed]
     if info is not None:
         info["model"] = used
     rulings = {int(r.get("n", 0)): r for r in obj.get("rulings", []) if isinstance(r, dict) and str(r.get("n", "")).isdigit()}
     for n, f in enumerate(disputed):
         r = rulings.get(n + 1)
-        if r is None or r.get("real") is True:
-            keep.append({**f, "referee": used, "referee_why": (r or {}).get("why", "no ruling")})
+        if r is not None and r.get("real") is False:
+            continue  # cleared
+        if r is not None and r.get("real") is True:
+            keep.append({**f, "referee": used, "referee_why": r.get("why", "")})
+        else:  # no ruling never clears a finding, and never confirms it
+            keep.append({**f, "referee": used, "referee_why": "no ruling", "no_ruling": True})
     return keep
+
+
+def open_count(chk: dict) -> int:
+    """Problems a check left open: confirmed plus unruled. Read-fix and polish
+    compare this, so a new text cannot win just because its checker gave no
+    ruling."""
+    return len(chk.get("confirmed", [])) + len(chk.get("unruled", []))
+
+
+def unruled_finding(f: dict) -> bool:
+    """No checker and no referee ruled this finding real: the referee gave no
+    ruling, or the checker gave none and the referee never saw it."""
+    return bool(f.get("no_ruling") or (f.get("unruled_by") and not f.get("referee")))
+
+
+def open_why(open_f: list[dict], rnd: int, tail: str = "") -> str:
+    """Hold reason. Findings no checker or referee ruled on are counted apart,
+    so a missing ruling never reads as a confirmed problem."""
+    unruled = sum(1 for f in open_f if unruled_finding(f))
+    real = len(open_f) - unruled
+    if real:
+        why = f"{real} confirmed problems after {rnd} repairs" + (f" (+{unruled} without a ruling)" if unruled else "")
+    else:
+        why = f"{unruled} problems without a ruling after {rnd} repairs"
+    return why + tail
 
 
 # ---------------------------------------------------------------- repair
@@ -1082,7 +1119,9 @@ def retry_feedback(slug: str, held: dict) -> str:
     noise = noise_quotes(slug, str(held.get("section", "")))
     lines = [f"- held because: {held['_why']}"] if held.get("_why") else []
     for f in held.get("open_findings") or []:
-        if isinstance(f, dict) and (f.get("quote") or "") not in noise:
+        # A finding no checker or referee ruled on does not steer the redraft
+        # (2026-10-06: a missing ruling must never lead to an edit).
+        if isinstance(f, dict) and not unruled_finding(f) and (f.get("quote") or "") not in noise:
             lines.append(f"- [{f.get('class')}] \"{f.get('quote', '')}\" (source: \"{f.get('source_quote', '')}\"): {f.get('why', '')}")
     if not lines:
         return ""
@@ -1197,48 +1236,59 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
             break
         chk = check_section(sec, j["pass_b_english"], brief, langname)
         remember_check(sec, j["pass_b_english"], brief, chk)  # baseline for the whole-work read
+        unruled = chk.get("unruled") or []
         history.append({"round": rnd, "confirmed": len(chk.get("confirmed", [])), "rejected": len(chk.get("rejected", [])),
+                        **({"unruled": len(unruled)} if unruled else {}),
                         "error": chk.get("error"), **({"fallback": chk["fallback"]} if chk.get("fallback") else {})})
         if chk.get("error"):
             j["_status"], j["_why"] = "hold", chk["error"]
             break
-        if not chk["confirmed"]:
+        if not chk["confirmed"] and not unruled:
             j["_status"] = "pass"
             j["checks"] = {"checkers": CHECKERS, "rounds": history, "last_rejected": chk["rejected"]}
             break
-        if rnd == MAX_REPAIR_ROUNDS:
+        # Only findings a checker or the referee ruled real are repaired. A
+        # finding with no ruling gets no edit; the referee rules on it before
+        # the section can pass (red team 2026-10-06: 54 passes carried edits
+        # made for findings nobody had ruled on).
+        fix, pre_ruled = chk["confirmed"], None
+        if rnd == MAX_REPAIR_ROUNDS or not fix:
             ruled: dict = {}
-            open_f = referee(sec, j["pass_b_english"], chk["confirmed"], langname, info=ruled)
+            open_f = referee(sec, j["pass_b_english"], fix + unruled, langname, info=ruled)
             if not open_f:
                 j["_status"] = "pass"
                 j["checks"] = {"checkers": CHECKERS, "referee": ruled.get("model", REFEREE), "rounds": history,
-                               "refereed": chk["confirmed"]}
+                               "refereed": fix + unruled}
                 break
-            j["_status"], j["_why"] = "hold", f"{len(open_f)} confirmed problems after {rnd} repairs"
-            j["open_findings"] = open_f
-            break
-        fixed, why = repair_attempt(j, sec, chk["confirmed"], brief, langname)
+            fix = [f for f in open_f if not f.get("no_ruling")]
+            if rnd == MAX_REPAIR_ROUNDS or not fix:
+                j["_status"], j["_why"] = "hold", open_why(open_f, rnd)
+                j["open_findings"] = open_f
+                break
+            pre_ruled = (open_f, ruled)  # the referee upheld some: repair those
+        fixed, why = repair_attempt(j, sec, fix, brief, langname)
         if fixed is None and why == "call":
-            fixed, why = repair_attempt(j, sec, chk["confirmed"], brief, langname)  # transient: once more
+            fixed, why = repair_attempt(j, sec, fix, brief, langname)  # transient: once more
         if fixed is None and why == "no-edits":
             # The drafter re-read the source and kept the English, as REPAIR_SYS
             # asks; the referee rules as on the last round (2026-10-06: 33
             # sections held "repair failed" for declining to edit).
-            ruled = {}
-            open_f = referee(sec, j["pass_b_english"], chk["confirmed"], langname, info=ruled)
+            open_f, ruled = pre_ruled or (None, {})
+            if open_f is None:
+                open_f = referee(sec, j["pass_b_english"], fix + unruled, langname, info=ruled)
             if not open_f:
                 j["_status"] = "pass"
                 j["checks"] = {"checkers": CHECKERS, "referee": ruled.get("model", REFEREE), "rounds": history,
-                               "refereed": chk["confirmed"], "repair": "no edits"}
+                               "refereed": fix + unruled, "repair": "no edits"}
                 break
-            j["_status"], j["_why"] = "hold", f"{len(open_f)} confirmed problems after {rnd} repairs; repair made no edit"
+            j["_status"], j["_why"] = "hold", open_why(open_f, rnd, "; repair made no edit")
             j["open_findings"] = open_f
             break
         if fixed is None:
             # Holds as before: no early referee pass (a speed change must not
             # certify a section that would have held; review 2026-10-03).
             j["_status"], j["_why"] = "hold", "repair failed"
-            j["open_findings"] = chk["confirmed"]
+            j["open_findings"] = pre_ruled[0] if pre_ruled else fix + unruled
             break
         j = fixed
     j["check_history"] = history
@@ -1466,7 +1516,7 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
                 log(slug, f"read-fix {sid}: rejected (checker unavailable)")
                 return
             remember_check(pairs[idx[sid]], fixed["pass_b_english"], brief, chk)
-            n_new, n_old = len(chk.get("confirmed", [])), len(chk_old.get("confirmed", []))
+            n_new, n_old = open_count(chk), open_count(chk_old)
             if n_new > n_old:
                 log(slug, f"read-fix {sid}: rejected (source problems {n_old} -> {n_new})")
                 return
@@ -1511,7 +1561,7 @@ def read_and_fix(slug: str, pairs: list[dict], brief: dict, langname: str, intro
                 if chk.get("error") or chk_old.get("error"):
                     return
                 remember_check(pairs[idx[sid]], new["pass_b_english"], brief, chk)
-                n_new, n_old = len(chk.get("confirmed", [])), len(chk_old.get("confirmed", []))
+                n_new, n_old = open_count(chk), open_count(chk_old)
                 if n_new > n_old:
                     log(slug, f"polish {sid}: rejected (source problems {n_old} -> {n_new})")
                     return
@@ -2077,23 +2127,94 @@ def prev_running(rows: dict, book: str) -> bool:
         return False
 
 
+def pid_dead(pid) -> bool:
+    try:
+        os.kill(int(pid), 0)
+        return False
+    except ProcessLookupError:
+        return True
+    except (OSError, ValueError, TypeError):
+        return False  # alive under another user, or not a pid: leave the row
+
+
+def reap_dead_rows() -> list[str]:
+    """Rows marked running whose lane process is gone become 'crash' rows, so
+    status pages stop saying 'Checking now' and the next lane retries them.
+    A lane that dies mid-write (2026-10-06 full disk: ENOSPC on queue.tmp)
+    never gets to replace its claim. Returns the books it cleared."""
+    import fcntl
+    if not QUEUE_LOG.exists():
+        return []
+    with open(str(QUEUE_LOG) + ".lock", "w") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        rows = json.loads(QUEUE_LOG.read_text())
+        dead = [b for b, r in rows.items()
+                if r.get("result") == "running" and r.get("pid") and r["pid"] != os.getpid() and pid_dead(r["pid"])]
+        for b in dead:
+            r = rows[b]
+            rows[b] = {**r, "result": "crash", "attempts": (r.get("attempts") or 0) + 1,
+                       "why": f"lane process {r['pid']} died mid-run (claimed {r.get('at', '?')})",
+                       "at": time.strftime("%Y-%m-%dT%H:%M:%S")}
+        if dead:
+            tmp = QUEUE_LOG.with_suffix(".tmp")
+            tmp.write_text(json.dumps(rows, indent=1, ensure_ascii=False))
+            tmp.rename(QUEUE_LOG)
+    return dead
+
+
 PARK_MAX = 6  # attempts after which a held work parks even if sections still move
 
 
-def parked(row: dict) -> bool:
+def can_move(book: str, pairs: list[dict]) -> bool:
+    """A run could still change a section: one has no stage file yet, or one is
+    held with a retry left (process_section gives each hold two). Sections that
+    pass, holds out of retries and source holds (_permanent) cannot move."""
+    sdir = STAGE / book / "sections"
+    for p in pairs:
+        jp = sdir / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', p['id'])}.json"
+        try:
+            j = json.loads(jp.read_text())
+        except FileNotFoundError:
+            return True
+        except (OSError, ValueError):
+            continue
+        if j.get("_status") == "hold" and not j.get("_permanent"):
+            tries = jp.with_suffix(".retries")
+            try:
+                n = int(tries.read_text()) if tries.exists() else 0
+            except (OSError, ValueError):
+                n = 0
+            if n < 2:
+                return True
+    return False
+
+
+def parked(row: dict, book: str = "", pairs: list[dict] | None = None) -> bool:
     """A held work waits for the held review once its last attempt changed no
     section's state (2026-10-06: a flat 2-attempt park stopped books whose
-    held sections still had a retry left). Rows from before this rule have no
-    'stalled' field and stay parked as they were."""
+    held sections still had a retry left). A row from before that rule has no
+    'stalled' field: it parks only when no section can still move, so a book
+    whose sections all pass stays parked as before (owner decision; it waits on
+    readers or the intro) and a book with retries left runs again (red team
+    2026-10-06: 93 rows parked on the missing field alone)."""
     if row.get("result") != "held" or row.get("attempts", 1) < 2:
         return False
-    return row.get("stalled", True) or row.get("attempts", 1) >= PARK_MAX
+    stalled = row.get("stalled")
+    if stalled is None:
+        # Owner decision pending (2026-10-06): releasing old-format parked rows
+        # that could still move would unpark ~39 books and spend grant credit
+        # with no approval. Until the owner says so they stay parked as before.
+        # can_move(book, pairs) is the ready-made test for that release.
+        stalled = True
+    return stalled or row.get("attempts", 1) >= PARK_MAX
 
 
 def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = False) -> int:
     """Re-certify live works, smallest first. A work is applied only when every
     section passed the blind source check, the intro is clean and readers pass;
     otherwise the current text stays live and the result is logged."""
+    for b in reap_dead_rows():
+        print(f"queue {b}: lane died mid-run; row cleared to crash", flush=True)
     log_rows = json.loads(QUEUE_LOG.read_text()) if QUEUE_LOG.exists() else {}
     done = 0
     # Phase one (owner 2026-10-03): the early Church first, in date order.
@@ -2134,7 +2255,7 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
                                   "at": time.strftime("%Y-%m-%dT%H:%M:%S")})
                 print(f"queue {book}: needs-source ({len(no_src)} sections)", flush=True)
             continue
-        if parked(log_rows.get(book, {})):
+        if parked(log_rows.get(book, {}), book, pairs):
             continue  # waits for the held review, lanes move on
         if certified(book):
             continue

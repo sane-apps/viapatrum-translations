@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import io
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -1177,6 +1178,18 @@ class RetryContextTests(unittest.TestCase):
         self.assertIn("real words", fb)
         self.assertNotIn("noisy words", fb)
 
+    def test_retry_feedback_skips_unruled_findings(self):
+        """Review 2026-10-06 (P3): a finding nobody ruled on must not steer the redraft."""
+        held = {"section": "3", "_why": "1 confirmed problems after 3 repairs (+2 without a ruling)",
+                "open_findings": [{"class": "negation", "quote": "ruled words", "referee": "r", "why": "w"},
+                                  {"class": "omission", "quote": "referee gave none", "no_ruling": True, "referee": "r"},
+                                  {"class": "omission", "quote": "checker gave none", "unruled_by": "c"}]}
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "HELD_REVIEW", Path(d)):
+            fb = W.retry_feedback("bk", held)
+        self.assertIn("ruled words", fb)
+        self.assertNotIn("referee gave none", fb)
+        self.assertNotIn("checker gave none", fb)
+
     def test_process_section_passes_notes_to_the_redraft(self):
         with tempfile.TemporaryDirectory() as d:
             stage = Path(d)
@@ -1228,6 +1241,34 @@ class ParkAndQueueTests(unittest.TestCase):
         self.assertFalse(W.parked({"result": "held", "attempts": 2, "stalled": False}))
         self.assertTrue(W.parked({"result": "held", "attempts": W.PARK_MAX, "stalled": False}), "bounded")
         self.assertFalse(W.parked({"result": "reopened", "attempts": 0}))
+
+    def test_old_row_stays_parked_and_can_move_is_ready(self):
+        """Red team 2026-10-06 (P3): releasing old-format parked rows waits for
+        the owner, so they stay parked; can_move() is the ready-made test for
+        that release (a held section with a retry left can move)."""
+        row = {"result": "held", "attempts": 2}
+        pairs = [{"id": "1"}, {"id": "2 a"}]
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)):
+            sd = Path(d) / "bk" / "sections"
+            sd.mkdir(parents=True)
+            put = lambda name, j: (sd / name).write_text(json.dumps(j))  # noqa: E731
+            put("1.json", {"_status": "pass"})
+            self.assertTrue(W.parked(row, "bk", pairs), "old rows stay parked until the owner decides")
+            self.assertTrue(W.can_move("bk", pairs), "a section never staged can move")
+            put("2_a.json", {"_status": "pass"})
+            self.assertFalse(W.can_move("bk", pairs), "all pass: stays parked")
+            put("2_a.json", {"_status": "hold", "_why": "1 confirmed problems after 3 repairs"})
+            (sd / "2_a.retries").write_text("1")
+            self.assertTrue(W.can_move("bk", pairs), "a hold with a retry left runs again")
+            (sd / "2_a.retries").write_text("2")
+            self.assertFalse(W.can_move("bk", pairs), "out of retries")
+            (sd / "2_a.retries").unlink()
+            put("2_a.json", {"_status": "hold", "_why": "no locked source", "_permanent": True})
+            self.assertFalse(W.can_move("bk", pairs), "a source hold waits for a person")
+            put("2_a.json", {"_status": "hold"})
+            self.assertTrue(W.parked({**row, "stalled": True}, "bk", pairs), "a recorded stall still parks")
+            self.assertTrue(W.parked({**row, "attempts": W.PARK_MAX}, "bk", pairs), "bounded")
+            self.assertTrue(W.parked(row), "no book given: as before")
 
     def run_queue(self, pairs, rows=None, status=None):
         with tempfile.TemporaryDirectory() as d:
@@ -1361,6 +1402,118 @@ class ReadWithTruncationTests(unittest.TestCase):
         out, seen, sl = self.run_read([{"error": "503"}] * 3)
         self.assertEqual(out["_error"], "503")
         self.assertEqual(sl.call_count, 3)
+
+
+class NoRulingTests(unittest.TestCase):
+    """Red team 2026-10-06 (P3): a missing ruling neither confirms a finding
+    nor lets a repair edit the English; a dead lane's running row is cleared."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.patches = [mock.patch.object(W, "STAGE", Path(self.tmp.name)), mock.patch.object(W, "log")]
+        for p in self.patches:
+            p.start()
+        self.pairs = [{"id": "1", "source": ["src."], "english": [], "lang": "grc", "src_file": None}]
+
+    def tearDown(self):
+        for p in self.patches:
+            p.stop()
+        self.tmp.cleanup()
+
+    def test_check_section_without_ruling_is_unruled_not_confirmed(self):
+        a, b = W.CHECKERS
+        f = {"class": "omission", "severity": "major", "quote": "x", "source_quote": "y", "why": "w", "fix": "f"}
+        for reply in (None, {"rulings": []}, {"rulings": [{"n": 1, "why": "?"}]}, {"rulings": [{"n": 1, "real": "yes"}]}):
+            with mock.patch.object(W, "check_one", side_effect=lambda m, *r: [f] if m == a else []), \
+                    mock.patch.object(W, "call", return_value=reply):
+                chk = W.check_section({"id": "1", "source": ["x"]}, ["y"], {}, "Greek")
+            self.assertEqual(chk["confirmed"], [], reply)
+            self.assertEqual(chk["rejected"], [], reply)
+            self.assertEqual(len(chk["unruled"]), 1, reply)
+        with mock.patch.object(W, "check_one", side_effect=lambda m, *r: [f] if m == a else []), \
+                mock.patch.object(W, "call", return_value={"rulings": [{"n": 1, "real": True, "why": "r"}]}):
+            self.assertEqual(len(W.check_section({"id": "1", "source": ["x"]}, ["y"], {}, "Greek")["confirmed"]), 1)
+
+    def run_section(self, chk, referee_out, repair=(None, "no-edits")):
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), \
+                mock.patch.object(W, "draft_section", return_value={"section": "1", "pass_a_gloss": "A", "pass_b_english": ["B."]}), \
+                mock.patch.object(W, "section_gate", return_value=[]), \
+                mock.patch.object(W, "check_section", return_value=chk), \
+                mock.patch.object(W, "repair_attempt", return_value=repair) as ra, \
+                mock.patch.object(W, "referee", return_value=referee_out) as rf:
+            j = W.process_section("s", 0, self.pairs, {}, "Greek")
+        return j, ra, rf
+
+    def test_unruled_only_applies_no_edit_and_referee_rules(self):
+        u = {"class": "omission", "quote": "B", "unruled_by": "x"}
+        j, ra, rf = self.run_section({"confirmed": [], "rejected": [], "unruled": [u]}, [])
+        ra.assert_not_called()
+        self.assertEqual(rf.call_args.args[2], [u])
+        self.assertEqual(j["_status"], "pass")
+        # The referee gives no ruling either: hold, no edit, not "confirmed".
+        j, ra, rf = self.run_section({"confirmed": [], "rejected": [], "unruled": [u]}, [{**u, "no_ruling": True}])
+        ra.assert_not_called()
+        self.assertEqual(j["_status"], "hold")
+        self.assertEqual(j["_why"], "1 problems without a ruling after 0 repairs")
+        self.assertNotIn("confirmed problems", j["_why"])
+
+    def test_early_referee_upholds_an_unruled_finding(self):
+        """Review 2026-10-06 (P3): at an early round with only unruled findings
+        the referee rules; repair gets only what it upheld, and both the
+        no-edits and repair-failed branches reuse that ruling with no second
+        referee call."""
+        u1 = {"class": "omission", "quote": "A", "unruled_by": "x"}
+        u2 = {"class": "omission", "quote": "B", "unruled_by": "y"}
+        upheld, none = {**u1, "referee": "r", "referee_why": "real"}, {**u2, "referee": "r", "no_ruling": True}
+        chk = {"confirmed": [], "rejected": [], "unruled": [u1, u2]}
+        for repair, why in (((None, "no-edits"), "1 confirmed problems after 0 repairs (+1 without a ruling); repair made no edit"),
+                            ((None, "bad"), "repair failed")):
+            j, ra, rf = self.run_section(chk, [upheld, none], repair)
+            self.assertEqual(rf.call_count, 1, repair)
+            self.assertEqual(rf.call_args.args[2], [u1, u2], repair)
+            self.assertEqual(ra.call_count, 1, repair)
+            self.assertEqual(ra.call_args.args[2], [upheld], "only the upheld finding is repaired")
+            self.assertEqual((j["_status"], j["_why"]), ("hold", why))
+            self.assertEqual(j["open_findings"], [upheld, none])
+
+    def test_repair_gets_only_ruled_findings(self):
+        c = {"class": "negation", "quote": "A", "upheld_by": "x"}
+        u = {"class": "omission", "quote": "B", "unruled_by": "y"}
+        j, ra, rf = self.run_section({"confirmed": [c], "rejected": [], "unruled": [u]}, [c])
+        self.assertEqual(ra.call_args.args[2], [c], "the unruled finding is never sent to repair")
+        self.assertEqual(rf.call_args.args[2], [c, u], "the referee rules on both")
+        self.assertEqual(j["_why"], "1 confirmed problems after 0 repairs; repair made no edit")
+
+    def test_referee_without_ruling_keeps_finding_as_unruled(self):
+        f = {"class": "omission", "quote": "B", "upheld_by": "x"}
+        for reply in (None, {"rulings": []}, {"rulings": [{"n": 1, "real": "maybe"}]}):
+            with mock.patch.object(W, "call", return_value=reply):
+                out = W.referee({"source": ["s"]}, ["e"], [f], "Greek")
+            self.assertEqual(len(out), 1, reply)
+            self.assertTrue(out[0]["no_ruling"], reply)
+        with mock.patch.object(W, "call", return_value={"rulings": [{"n": 1, "real": False}]}):
+            self.assertEqual(W.referee({"source": ["s"]}, ["e"], [f], "Greek"), [])
+
+    def test_open_count_includes_unruled(self):
+        self.assertEqual(W.open_count({"confirmed": [1], "unruled": [2, 3]}), 3)
+
+    def test_dead_lane_running_row_is_cleared(self):
+        import subprocess
+        p = subprocess.Popen([sys.executable, "-c", "pass"])
+        p.wait()  # reaped, so its pid is gone
+        q = Path(self.tmp.name) / "queue.json"
+        q.write_text(json.dumps({
+            "dead": {"result": "running", "pid": p.pid, "at": "2026-10-06T04:08:06", "attempts": 1},
+            "live": {"result": "running", "pid": os.getppid(), "at": "x"},
+            "held": {"result": "held", "attempts": 2}}))
+        with mock.patch.object(W, "QUEUE_LOG", q):
+            self.assertEqual(W.reap_dead_rows(), ["dead"])
+            self.assertEqual(W.reap_dead_rows(), [])
+        rows = json.loads(q.read_text())
+        self.assertEqual((rows["dead"]["result"], rows["dead"]["attempts"]), ("crash", 2))
+        self.assertIn(str(p.pid), rows["dead"]["why"])
+        self.assertEqual(rows["live"]["result"], "running")
+        self.assertEqual(rows["held"], {"result": "held", "attempts": 2})
 
 
 if __name__ == "__main__":

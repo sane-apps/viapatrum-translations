@@ -135,6 +135,7 @@ class AuditCarryTests(unittest.TestCase):
             (self.out / "q-grades" / "q.json").write_text(json.dumps({"new1": {"on_question": True, "positions": {
                 "real": {"verdict": grader}, "symbolic": {"verdict": "excludes"}}}}))
             with mock.patch.object(D, "load_corpus", return_value=([light], None)), \
+                    mock.patch.object(D, "paragraphs", return_value=[light]), \
                     mock.patch.object(D, "QUESTIONS", self.out / "q.json"), \
                     mock.patch.object(D, "ATTRIBUTION", self.out / "none.json"), \
                     mock.patch.object(D, "SITE_DATA", site):
@@ -146,6 +147,62 @@ class AuditCarryTests(unittest.TestCase):
                 self.assertEqual(real["verdict"], "states")
                 self.assertFalse(real["reviewed"])
                 self.assertNotIn("carried", real)
+
+
+class StaleAndCrashTests(unittest.TestCase):
+    """2026-10-06: Beliefs quoted words the work page no longer said, and one
+    grading exception killed the whole nightly run."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.out = Path(self.tmp.name)
+        q = {"id": "q", "question": "Q?", "positions": [{"id": x, "statement": x, "mark": x} for x in "ab"]}
+        (self.out / "q.json").write_text(json.dumps([q]))
+        (self.out / "q-candidates").mkdir()
+        (self.out / "q-grades").mkdir()
+        self.patches = [mock.patch.object(D, "OUT", self.out), mock.patch.object(D, "AUDIT", self.out / "audit"),
+                        mock.patch.object(D, "QUESTIONS", self.out / "q.json"),
+                        mock.patch.object(D, "ATTRIBUTION", self.out / "none.json"),
+                        mock.patch.object(D, "SITE_DATA", self.out / "site.json")]
+        for p in self.patches:
+            p.start()
+
+    def tearDown(self):
+        for p in self.patches:
+            p.stop()
+        self.tmp.cleanup()
+
+    def test_report_leaves_out_passage_whose_english_changed(self):
+        old = dict(row(1, 395, text="Fire was kindled. " * 10), author="A")
+        kept = dict(row(2, 395, text="Let us sing the new song. " * 10), author="A")
+        grade = {"on_question": True, "positions": {"a": {"verdict": "states"}, "b": {"verdict": "compatible"}}}
+        (self.out / "q-grades" / "q.json").write_text(json.dumps({"id1": grade, "id2": grade}))
+        with mock.patch.object(D, "load_corpus", return_value=([old, kept], None)), \
+                mock.patch.object(D, "paragraphs", return_value=[kept]):
+            D.q_report()
+        texts = [p["text"] for p in json.loads((self.out / "site.json").read_text())["questions"][0]["passages"]]
+        self.assertEqual(texts, [kept["text"]])
+
+    def test_one_failed_passage_does_not_kill_grading(self):
+        cands = [row(1, 300), row(2, 300)]
+        (self.out / "q-candidates" / "q.json").write_text(json.dumps(cands))
+
+        def fake(q, c):
+            if c["id"] == "id1":
+                raise TimeoutError("broker 504")
+            return {"id": c["id"], "on_question": True, "positions": {}, "votes": {}}
+
+        with mock.patch.object(D, "token"), mock.patch.object(D.W, "receipts_ok"), \
+                mock.patch.object(D, "q_grade_one", side_effect=fake):
+            self.assertEqual(D.q_grade(None, 2), 1)
+        have = json.loads((self.out / "q-grades" / "q.json").read_text())
+        self.assertEqual(sorted(have), ["id2"])      # the failed one is retried next run, not stored
+
+    def test_fewer_than_two_votes_is_not_stored_as_disputed(self):
+        q = json.loads((self.out / "q.json").read_text())[0]
+        with mock.patch.object(D, "grade_call", return_value=None):
+            with self.assertRaises(RuntimeError):
+                D.q_grade_one(q, dict(row(1, 300), text="x"))
 
 
 if __name__ == "__main__":

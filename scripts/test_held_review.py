@@ -24,6 +24,13 @@ class ParseTests(unittest.TestCase):
         got = H.parse_lines(text, {"b/1#0", "b/1#1"})
         self.assertEqual(list(got), ["b/1#0"])
 
+    def test_unruled_holds_are_reviewed(self):
+        # 2026-10-06: work_pipeline names holds with no ruling apart from confirmed ones.
+        self.assertTrue(H.reviewable({"_why": "2 problems without a ruling after 3 repairs"}))
+        self.assertTrue(H.reviewable({"_why": "1 confirmed problems after 3 repairs (+1 without a ruling)"}))
+        self.assertFalse(H.reviewable({"_why": "gate: near-copies"}))
+        self.assertFalse(H.reviewable({"_why": "no locked source"}))
+
     def test_chunks_keep_sections_whole(self):
         fs = [finding("b", "1", i) for i in range(10)] + [finding("b", "2", i) for i in range(10)]
         cs = H.chunks(fs)

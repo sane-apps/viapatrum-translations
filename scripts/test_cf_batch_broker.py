@@ -23,6 +23,8 @@ def _reset() -> None:
     B.queues.clear()
     B.pending.clear()
     B.workers.clear()
+    B.threads.clear()
+    B.beats.clear()
     B.metered_polls.clear()
     for k in B.stats:
         B.stats[k] = 0
@@ -140,7 +142,12 @@ def test_early_flush_and_poll_429_fallback() -> None:
 
 def main() -> int:
     for fn in (test_flush_wait, test_take_batch_caps, test_model_stats,
-               test_per_model_threads_and_unmetered_polls, test_early_flush_and_poll_429_fallback, test_submit_failure_spacing):
+               test_per_model_threads_and_unmetered_polls, test_early_flush_and_poll_429_fallback, test_submit_failure_spacing,
+               test_flusher_survives_full_disk, test_dead_flusher_is_restarted, test_watchdog_exits_when_stuck,
+               test_watchdog_restart_is_not_a_wedge, test_abandoned_item_is_not_requeued,
+               test_batch_stuck_counts_a_queue_that_does_not_drain, test_full_disk_log_does_not_kill_threads,
+               test_throttle_write_failure_still_requeues, test_abandon_between_check_and_requeue,
+               test_rate_acquire_gives_up_without_a_slot):
         fn()
         print("ok", fn.__name__)
     print("ALL PASS")
@@ -163,6 +170,281 @@ def test_submit_failure_spacing() -> None:
         assert calls[1] - calls[0] >= 0.25 and calls[2] - calls[1] >= 0.25, calls
     finally:
         B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S = old
+
+
+def test_flusher_survives_full_disk() -> None:
+    """2026-10-06: rate_acquire hit ENOSPC on /tmp/vendor-rate and killed both
+    flushers; their batch was lost and later items queued for 11 hours."""
+    _reset()
+    old = (B._post, B.L.rate_acquire, B.FLUSH_S, B.POLL_TICK_S, B.POLL_EVERY_S, B.SUBMIT_RETRY_S)
+    state = {"acq": 0}
+
+    def acquire(m, *a, **k):
+        state["acq"] += 1
+        if state["acq"] == 1:
+            raise OSError(28, "No space left on device")
+
+    def post(model, body, timeout=120):
+        if "requests" in body:
+            return 202, {"result": {"request_id": "rid"}}
+        return 200, {"result": {"results": [{"index": 0, "result": {"ok": 1}}]}}
+    try:
+        B._post, B.L.rate_acquire = post, acquire
+        B.FLUSH_S, B.POLL_TICK_S, B.POLL_EVERY_S, B.SUBMIT_RETRY_S = 0.05, 0.05, 0.05, 0.05
+        first = _item(time.time())
+        B.enqueue("disk", first)
+        assert first["event"].wait(3), "the lost batch's caller was never answered"
+        assert first["error"].startswith("broker flush failed: OSError"), first["error"]
+        second = _item(time.time())
+        B.enqueue("disk", second)
+        assert second["event"].wait(3) and second["result"] == {"ok": 1}, second
+        assert B.threads["disk"][0].is_alive() and B.stats["loop_errors"] == 1
+        assert B.dead_threads() == []
+    finally:
+        B._post, B.L.rate_acquire, B.FLUSH_S, B.POLL_TICK_S, B.POLL_EVERY_S, B.SUBMIT_RETRY_S = old
+        B.pending.clear()
+
+
+def test_dead_flusher_is_restarted() -> None:
+    _reset()
+    dead = threading.Thread(target=lambda: None, name="flush:x")
+    dead.start()
+    dead.join()
+    live = threading.Thread(target=time.sleep, args=(1,), name="poll:x", daemon=True)
+    live.start()
+    B.workers["x"] = threading.Event()
+    B.threads["x"] = [dead, live]
+    B.FLUSH_S, old = 30.0, B.FLUSH_S  # the new flusher just waits
+    try:
+        assert B.dead_threads() == ["flush:x"]
+        B.enqueue("x", _item(time.time()))
+        assert B.threads["x"][0] is not dead and B.threads["x"][0].is_alive()
+        assert B.threads["x"][1] is live and B.stats["thread_restarts"] == 1
+        assert B.dead_threads() == []
+    finally:
+        B.FLUSH_S = old
+
+
+def test_watchdog_exits_when_stuck() -> None:
+    _reset()
+    now = time.time()
+    B.queues["k"] = [_item(now - 5)]
+    assert B.watchdog_once(now) == ""
+    B.queues["k"] = [_item(now - B.STUCK_S - 1)]
+    assert B.watchdog_once(now).startswith("k: 1 queued")
+    # A live flusher that has not come round its loop (wedged in a lock) also exits.
+    B.queues["k"] = [_item(now - 5)]
+    B.beats["k"] = now - B.STUCK_S - 1
+    assert "flusher wedged" in B.watchdog_once(now)
+    B.queues.clear()
+    B.beats.clear()
+
+
+def test_watchdog_restart_is_not_a_wedge() -> None:
+    """A flusher the watchdog just restarted must not trip the wedge check in
+    the same pass (its old heartbeat is stale)."""
+    _reset()
+    dead = threading.Thread(target=lambda: None, name="flush:y")
+    dead.start()
+    dead.join()
+    now = time.time()
+    B.workers["y"] = threading.Event()
+    B.threads["y"] = [dead, None]
+    B.beats["y"] = now - B.STUCK_S - 100
+    B.queues["y"] = [_item(now - 5)]
+    B.FLUSH_S, old = 30.0, B.FLUSH_S
+    try:
+        assert B.watchdog_once(now) == ""
+        assert B.threads["y"][0].is_alive() and B.stats["thread_restarts"] == 1
+    finally:
+        B.FLUSH_S = old
+        B.queues.clear()
+
+
+def test_abandoned_item_is_not_requeued() -> None:
+    """A batch in flight when its caller timed out must not be put back on the
+    queue: nobody waits for it, and its old age would trip the watchdog."""
+    _reset()
+    old = (B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S)
+    try:
+        B._post = lambda model, body, timeout=120: (500, {"errors": [{"message": "x"}]})
+        B.L.rate_acquire = B.L.rate_throttled = lambda *a, **k: None
+        B.SUBMIT_RETRY_S = 0
+        gone, live = _item(time.time() - 100), _item(time.time() - 100)
+        gone["abandoned"] = True
+        B.queues["z"] = [gone, live]
+        assert B.flush_once("z")
+        assert B.queues["z"] == [live], B.queues["z"]
+    finally:
+        B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S = old
+        B.queues.clear()
+
+
+def test_batch_stuck_counts_a_queue_that_does_not_drain() -> None:
+    """2026-10-06: a dead flusher left oldest_pending_s at 0 while items sat
+    queued for hours, so overflow calls kept going to the broker."""
+    L = B.L
+    saved = dict(L._broker_seen)
+    try:
+        m = "@cf/moonshotai/kimi-k2.6"
+        L._broker_seen["stats"] = {"models": {m: {"queued": 106, "oldest_queued_s": 36000.0}}}
+        assert L._batch_stuck(m)
+        L._broker_seen["stats"] = {"models": {m: {"queued": 3, "oldest_queued_s": 5.0}}}
+        assert not L._batch_stuck(m)
+        L._broker_seen["stats"] = {"models": {m: {"oldest_pending_s": L.BATCH_STUCK_S + 1}}}
+        assert L._batch_stuck(m)
+    finally:
+        L._broker_seen.clear()
+        L._broker_seen.update(saved)
+
+
+class _FullDisk:
+    """A stderr whose every write fails as on a full disk."""
+    def write(self, *_a):
+        raise OSError(28, "No space left on device")
+
+    def flush(self):
+        raise OSError(28, "No space left on device")
+
+
+def test_full_disk_log_does_not_kill_threads() -> None:
+    """Review 2026-10-06: with the log on the full disk, the print in the error
+    handler raised and killed the flusher anyway, and the watchdog's print
+    raised before os._exit, so a stuck broker never exited."""
+    _reset()
+    old = (B._post, B.L.rate_acquire, B.FLUSH_S, B.POLL_TICK_S, B.POLL_EVERY_S, B.SUBMIT_RETRY_S,
+           B.WATCH_S, sys.stderr, B.os._exit)
+    exits = []
+
+    def fake_exit(code):
+        exits.append(code)
+        raise SystemExit(code)  # ends the watchdog thread quietly
+
+    def acquire(m, *a, **k):
+        raise OSError(28, "No space left on device")
+    try:
+        B._post, B.L.rate_acquire = (lambda *a, **k: (500, {})), acquire
+        B.FLUSH_S, B.POLL_TICK_S, B.POLL_EVERY_S, B.SUBMIT_RETRY_S = 0.05, 0.05, 0.05, 0.05
+        sys.stderr = _FullDisk()
+        it = _item(time.time())
+        B.enqueue("m", it)
+        assert it["event"].wait(3) and it["error"].startswith("broker flush failed: OSError")
+        time.sleep(0.2)  # let the flusher come round its error handler
+        assert B.stats["loop_errors"] >= 1
+        assert B.dead_threads() == [], B.dead_threads()
+        # A stuck queue still reaches os._exit even though the log write fails.
+        B.os._exit, B.WATCH_S = fake_exit, 0.05
+        B.queues["stuck"] = [_item(time.time() - B.STUCK_S - 10)]
+        w = threading.Thread(target=B.watchdog, daemon=True)
+        w.start()
+        w.join(3)
+        assert exits == [3], exits
+    finally:
+        (B._post, B.L.rate_acquire, B.FLUSH_S, B.POLL_TICK_S, B.POLL_EVERY_S, B.SUBMIT_RETRY_S,
+         B.WATCH_S, sys.stderr, B.os._exit) = old
+        B.queues.clear()
+        B.pending.clear()
+
+
+def test_throttle_write_failure_still_requeues() -> None:
+    """Review 2026-10-06: on a 429, rate_throttled (it writes /tmp/vendor-rate)
+    raised on a full disk after the batch left the queue, so its callers hung."""
+    _reset()
+    old = (B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S, sys.stderr)
+
+    def throttled(m):
+        raise OSError(28, "No space left on device")
+    try:
+        B._post = lambda model, body, timeout=120: (429, {"errors": [{"message": "rate"}]})
+        B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S = (lambda *a, **k: None), throttled, 0
+        sys.stderr = _FullDisk()
+        fresh, spent = _item(time.time() - 100), _item(time.time() - 100)
+        spent["tries"] = 2
+        B.queues["t"] = [fresh, spent]
+        assert B.flush_once("t")
+        assert B.queues["t"] == [fresh] and fresh["tries"] == 1
+        assert spent["event"].is_set() and spent["error"].startswith("batch submit 429")
+    finally:
+        B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S, sys.stderr = old
+        B.queues.clear()
+
+
+def test_abandon_between_check_and_requeue() -> None:
+    """Review 2026-10-06: the abandoned check ran outside the lock, so a caller
+    giving up just after it could still get its item requeued and paid for.
+    Here the caller gives up the moment the flusher takes the lock to requeue
+    (the first lock is take_batch, the second the requeue)."""
+    _reset()
+    real = B.lock
+    gone = _item(time.time() - 100)
+
+    class GiveUpOnSecond:
+        n = 0
+
+        def __enter__(self):
+            real.acquire()
+            GiveUpOnSecond.n += 1
+            if GiveUpOnSecond.n == 2:
+                gone["abandoned"] = True  # do_POST's give-up runs under this lock
+            return self
+
+        def __exit__(self, *a):
+            real.release()
+    old = (B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S)
+    try:
+        B._post = lambda model, body, timeout=120: (500, {"errors": [{"message": "x"}]})
+        B.L.rate_acquire = B.L.rate_throttled = lambda *a, **k: None
+        B.SUBMIT_RETRY_S = 0
+        B.queues["r"] = [gone]
+        B.lock = GiveUpOnSecond()
+        assert B.flush_once("r") is True
+        assert GiveUpOnSecond.n == 2 and B.queues["r"] == [], B.queues["r"]
+    finally:
+        B.lock = real
+        B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S = old
+        B.queues.clear()
+
+def test_rate_acquire_gives_up_without_a_slot() -> None:
+    """Red team 2026-10-06 (translation-caps-and-429s): after its wait,
+    rate_acquire took a slot over the cap anyway, and each such call drew a
+    429. Now it returns False, takes no slot, and nothing is sent."""
+    import json
+    import tempfile
+    from unittest import mock
+    L = B.L
+    with tempfile.TemporaryDirectory() as d, mock.patch.object(L, "RATE_DIR", Path(d)):
+        m = "@cf/test/model"
+        now = time.time()
+        L._rate_file(m).write_text(json.dumps({"hits": [now, now], "limit": 2, "cut_at": now}))
+        t0 = time.time()
+        assert L.rate_acquire(m, max_wait=0.3) is False
+        assert time.time() - t0 < 2
+        assert len(json.loads(L._rate_file(m).read_text())["hits"]) == 2, "no slot taken"
+        L._rate_file(m).write_text(json.dumps({"hits": [now], "limit": 2, "cut_at": now}))
+        assert L.rate_acquire(m, max_wait=0.3) is True
+        assert len(json.loads(L._rate_file(m).read_text())["hits"]) == 2
+        # vendor_call sends nothing, and does not count a throttle, when no slot came free.
+        with mock.patch.object(L, "batch_route", return_value=False), \
+                mock.patch.object(L, "rate_acquire", return_value=False), \
+                mock.patch.object(L, "_vendor_call_raw") as raw, mock.patch.object(L, "rate_throttled") as th:
+            r = L.vendor_call(m, [{"role": "user", "content": "x"}])
+        raw.assert_not_called()
+        th.assert_not_called()
+        assert r["error"] == L.RATE_WAIT_ERR and "429" not in r["error"]
+    # The broker does not submit a batch without a slot; it requeues it.
+    _reset()
+    old = (B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S)
+    sent = []
+    try:
+        B._post = lambda model, body, timeout=120: sent.append(body) or (202, {"result": {"request_id": "r"}})
+        B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S = (lambda *a, **k: False), (lambda m: None), 0
+        it = _item(time.time() - 100)
+        B.queues["s"] = [it]
+        assert B.flush_once("s")
+        assert sent == [] and B.queues["s"] == [it] and it["tries"] == 1
+    finally:
+        B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S = old
+        B.queues.clear()
 
 
 if __name__ == "__main__":

@@ -9,8 +9,12 @@ never edits books, never ships.
 
 Alerting is state-change based: an alert id appears once when a check
 goes bad and disappears on recovery; alerts.log gets one line when an
-alert appears and one when it clears. The Air notifier turns transitions
-into user notifications.
+alert appears and one when it clears. The Air notifier
+(com.saneapps.fathers-watch-notify -> scripts/fathers_watch_notify.py)
+reads status.json over ssh and turns transitions into notifications; it
+also alerts when status.json is older than STALE_MIN, because a watch that
+is unloaded or stuck cannot report itself. The first pass after such a gap
+raises watch:gap once.
 
 The only Fathers monitor (2026-10-06): it absorbed scripts/health_watch.py
 (lanes, queue progress, 429s, batch broker, audio drain, ship, held review)
@@ -43,8 +47,16 @@ RUN_LOCK = OUT / "watch.lock"
 
 sys.path.insert(0, str(REPO / "scripts"))
 import fathers_overnight_health as burnmod  # noqa: E402
+import ship_if_changed as autoship  # noqa: E402  (one disk floor, one ship fingerprint)
 
 WATCH_LABEL = "com.saneapps.fathers-watch"
+STALE_MIN = 30  # status.json older than this = the watch is not running (it runs every 15 min)
+WATCH_HARD_LIMIT_S = STALE_MIN * 60  # a watch.lock older than this is a stuck or dead pass
+DRAIN_SILENT_S = 2 * 900  # audio drain log silent this long = two missed 15-min runs
+BROKER_STUCK_S = 1800  # a queued broker item this old with no batch in flight = its flusher is dead
+# A lock line written by a busy tick; it must not count as the job making progress.
+BUSY_RE = re.compile(r"\S+ BUSY: ")
+LOCK_NOTE = ""  # set by main() when it took over a watch lock left by a dead pass
 HELD_REVIEW = "com.saneapps.fathers-held-review"
 OVERNIGHT = "com.saneapps.fathers-overnight-quota"
 # Not named fathers-* but serves the lanes (KeepAlive).
@@ -139,6 +151,30 @@ def timed_lines(path: Path, n: int = 400) -> list[tuple[float, str]]:
     return list(reversed(out))
 
 
+def check_watch() -> tuple[str, str, dict]:
+    """The watch cannot report while it is unloaded or stuck, so the first pass
+    after a gap says how long it was silent (and the Air notifier alerts on a
+    stale status.json while the gap lasts)."""
+    info: dict = {}
+    problems = []
+    try:
+        prev = datetime.fromisoformat(str(PRIOR.get("checked_at"))).timestamp()
+        info["gap_min"] = round((time.time() - prev) / 60)
+        if info["gap_min"] > STALE_MIN:
+            problems.append(f"watch was silent {info['gap_min']} min before this pass (unloaded or stuck)")
+    except (TypeError, ValueError):
+        pass
+    if LOCK_NOTE:
+        problems.append(LOCK_NOTE)
+    code = (launchctl_states() or {}).get(WATCH_LABEL, ("-", None))[1]
+    info["last_exit"] = code
+    if code not in (None, "0", "-"):
+        problems.append(f"previous watch pass exited {code}")
+    if problems:
+        return "warn", "; ".join(problems), info
+    return "ok", "watch ran on time", info
+
+
 def check_burn() -> tuple[str, str, dict]:
     """IDLE / HEALTHY / HUNG via the existing burn module (no kill here)."""
     if overnight_retired():
@@ -206,8 +242,24 @@ def check_held_review() -> tuple[str, str, dict]:
     the Mini, so held sections pile up unreviewed until someone notices."""
     pid, code = (launchctl_states() or {}).get(HELD_REVIEW, ("-", None))
     info = {"last_exit": code}
+    # launchctl keeps the scheduled run's exit; a later manual run (logged as
+    # "held review exit N" or "manual run exit N") is the newer truth. But a
+    # launchd exit other than 0 or 3 (75 busy, 1 early cd failure, a kill
+    # before the wrapper's echo) comes from a run that wrote no exit line, so
+    # it is newer than the log and wins.
+    try:
+        text = (LOGS / "fathers-held-review.out.log").read_text(encoding="utf-8", errors="replace")
+        logged = re.findall(r"^(?:.*held review|manual run) exit (\d+)\s*$", text, re.M)
+    except OSError:
+        logged = []
+    if logged:
+        info["log_last_exit"] = logged[-1]
+        if code in (None, "-", "0", "3"):
+            code = logged[-1]
     if code == "3":
         return "fail", "weekly held review could not run: Claude not signed in on Mini (last exit 3)", info
+    if code not in (None, "0", "-"):
+        return "warn", f"held review last exit {code}", info
     return "ok", f"held review last exit {code}", info
 
 
@@ -326,9 +378,26 @@ def check_broker() -> tuple[str, str, dict]:
         return "warn", "batch broker not answering on 127.0.0.1:8799", {}
     errors = int(st.get("errors", 0) or 0)
     info = {"errors": errors, "pending_batches": st.get("pending_batches")}
+    problems = []
+    # A dead flusher still answers /stats: items sit queued with no batch in
+    # flight (2026-10-06: 321 Kimi items queued 15 h, pending_batches 0).
+    stuck = []
+    for model, m in (st.get("models") or {}).items():
+        if not isinstance(m, dict):
+            continue
+        age = m.get("oldest_queued_s") or 0
+        if m.get("queued") and age > BROKER_STUCK_S and not m.get("pending_batches"):
+            stuck.append(f"{model.split('/')[-1]} {m['queued']} queued {age / 3600:.1f} h")
+    if stuck:
+        info["stuck"] = stuck
+        problems.append("batch broker queue not draining, no batch in flight (dead flusher?): " + ", ".join(stuck))
+    if st.get("dead_threads"):
+        problems.append("batch broker threads dead: " + ", ".join(map(str, st["dead_threads"])))
     prev = prior_info("broker").get("errors")
     if isinstance(prev, int) and errors - prev > 10:
-        return "warn", f"batch broker errors rose by {errors - prev}", info
+        problems.append(f"batch broker errors rose by {errors - prev}")
+    if problems:
+        return "warn", "; ".join(problems)[:300], info
     return "ok", f"broker up, {errors} errors total", info
 
 
@@ -346,8 +415,10 @@ def check_audio() -> tuple[str, str, dict]:
     audio_t = now if rendered != prev.get("rendered") else prev.get("audio_t", now)
     info: dict = {"rendered": rendered, "audio_t": audio_t, "log_age_h": round(age_h, 1)}
     problems = []
-    if age_h > 4:
-        problems.append(f"audio drain log silent {age_h:.0f} h")
+    # The drain writes at least one line every run (every 900 s, about 17 min
+    # apart in practice), so two missed runs means it is unloaded or hung.
+    if age_h * 3600 > DRAIN_SILENT_S:
+        problems.append(f"audio drain log silent {age_h * 60:.0f} min (it runs every 15 min)")
     err = LOGS / "fathers-audio-next.err.log"
     try:
         if now - err.stat().st_mtime < 3600:
@@ -363,7 +434,8 @@ def check_audio() -> tuple[str, str, dict]:
         pass
     # Backlog by reason, written by build_audio.py --drain at the end of a run.
     # "backlog" is what the drain can render now; "waiting" (old voice, page not
-    # English, drift, unmapped, retrying) never drains alone, so it never alarms.
+    # English, drift, unmapped, retrying) never drains alone, so it does not
+    # alarm here. Sentence drift alarms on its own id in check_audio_drift.
     try:
         d = json.loads((SITE / "outputs/audio/drain-status.json").read_text(encoding="utf-8"))
         counts = d.get("counts") if isinstance(d.get("counts"), dict) else d
@@ -387,6 +459,47 @@ def check_audio() -> tuple[str, str, dict]:
     return "ok", f"drain ran {age_h:.1f} h ago, {rendered} renders logged", info
 
 
+MISMATCH_RE = re.compile(r"^skip (\S+) (\S+): (?:audio does not match the page|sentence drift)", re.M)
+
+
+def check_audio_drift() -> tuple[str, str, dict]:
+    """Narration that no longer matches its page. Two current sources:
+    drain-status.json "waiting.sentence_drift" (the last drain run), and the
+    sections the last auto ship skipped with "audio does not match the page"
+    in fathers-ship-auto.log. Kept apart from audio:drain so an open drift
+    warning never hides a drain that stopped. Nothing re-renders these alone;
+    the warning stays until someone re-reads them."""
+    info: dict = {}
+    try:
+        d = json.loads((SITE / "outputs/audio/drain-status.json").read_text(encoding="utf-8"))
+        n = (d.get("waiting") or {}).get("sentence_drift")
+        if isinstance(n, int) and not isinstance(n, bool):
+            info["drain_sentence_drift"] = n
+            info["drain_generated"] = d.get("generated", "")
+    except (OSError, ValueError, AttributeError):
+        pass
+    try:
+        text = (LOGS / "fathers-ship-auto.log").read_text(encoding="utf-8", errors="replace")
+        start = text.rfind("+ scripts/ship.sh")
+        if start >= 0:
+            info["ship_mismatch"] = len(set(MISMATCH_RE.findall(text[start:])))
+    except OSError:
+        pass
+    problems = []
+    if info.get("drain_sentence_drift"):
+        problems.append(f"{info['drain_sentence_drift']} sections wait on sentence drift (drain)")
+    if info.get("ship_mismatch"):
+        problems.append(f"last auto ship skipped {info['ship_mismatch']} sections: audio does not match the page")
+    if problems:
+        return "warn", "; ".join(problems) + "; they need a re-read", info
+    if not info:
+        return "ok", "no drain status or auto ship log to read", info
+    return "ok", "narration matches the pages", info
+
+
+SHELF_STEPS = ("build_ebooks.py", "build_audiobooks.py", "library_sync.py")
+
+
 def ship_ps() -> str:
     """etime + command of a running scripts/ship.sh, or ''."""
     try:
@@ -394,6 +507,23 @@ def ship_ps() -> str:
     except (OSError, subprocess.SubprocessError):
         return ""
     return next((line.strip() for line in raw.splitlines() if "scripts/ship.sh" in line), "")
+
+
+def shelf_ps() -> str:
+    """etime + command of a running paid-shelf step (ebooks, audiobooks,
+    Word/assemble/upload), or ''. The auto ship runs these after a ship."""
+    try:
+        raw = subprocess.check_output(["ps", "-Ao", "etime,command"], text=True, timeout=20)
+    except (OSError, subprocess.SubprocessError):
+        return ""
+    return next((line.strip() for line in raw.splitlines()
+                 if any(f"scripts/{s}" in line for s in SHELF_STEPS) and "bash -c" not in line), "")
+
+
+def etime_secs(ps_line: str) -> int:
+    """ps etime ([[dd-]hh:]mm:ss, the first field) in seconds."""
+    parts = [int(x) for x in re.split(r"[-:]", ps_line.split()[0]) if x.isdigit()]
+    return sum(v * m for v, m in zip(reversed(parts), (1, 60, 3600, 86400)))
 
 
 def ship_lock_holders() -> list[str]:
@@ -409,26 +539,35 @@ def check_ship() -> tuple[str, str, dict]:
     problems, info = [], {}
     ship = ship_ps()
     if ship:
-        parts = [int(x) for x in re.split(r"[-:]", ship.split()[0]) if x.isdigit()]
-        secs = sum(v * m for v, m in zip(reversed(parts), (1, 60, 3600, 86400)))
+        secs = etime_secs(ship)
         info["ship_secs"] = secs
         if secs > 4 * 3600:
             problems.append(f"a ship has run {secs // 3600} h (slow upload?)")
+    shelf = shelf_ps()
+    if shelf:
+        info["shelf"] = next((s for s in SHELF_STEPS if s in shelf), "?")
+        info["shelf_secs"] = etime_secs(shelf)
     # A process left holding the ship lock with no ship running blocks every
     # later ship (2026-10-03: an orphaned check_links.py from a stopped ship).
     holders = ship_lock_holders()
     if holders and not ship:
         problems.append("ship lock held with no ship running (orphan pid " + ",".join(holders) + ")")
+    # Hand-run ships log to outputs/ship-*.log; the auto ship's result is in
+    # its state.json (check_ship_auto), not in these files.
     logs = sorted((SITE / "outputs").glob("ship-*.log"), key=lambda f: f.stat().st_mtime)[-1:]
     for lg in logs:
-        if time.time() - lg.stat().st_mtime < 1800:
+        if time.time() - lg.stat().st_mtime < 1800 and not ship:
             tail = lg.read_text(encoding="utf-8", errors="replace")[-4000:]
             hits = re.findall(r"(BLOCKED[^\n]*|AssertionError[^\n]*|FAILED[^\n]*)", tail)
             if hits and "SHIP OK" not in tail:
                 problems.append(f"ship problem in {lg.name}: {hits[-1][:160]}")
     if problems:
         return "warn", "; ".join(problems), info
-    return "ok", "ship running" if ship else "no ship running", info
+    if ship:
+        return "ok", "ship running", info
+    if shelf:
+        return "ok", f"paid shelf running: {info['shelf']} for {info['shelf_secs'] // 60} min", info
+    return "ok", "no ship running", info
 
 
 def check_beliefs() -> tuple[str, str, dict]:
@@ -437,14 +576,22 @@ def check_beliefs() -> tuple[str, str, dict]:
     log = LOGS / "fathers-beliefs.log"
     try:
         lines = log.read_text(encoding="utf-8", errors="replace").splitlines()[-400:]
-        age_h = (time.time() - log.stat().st_mtime) / 3600
     except OSError:
         return "warn", "no beliefs log", {}
+    # Age from the last real line, not the file time: a BUSY line from a tick
+    # that found the lock held is not a run.
+    real = [ts for ts, line in timed_lines(log) if not BUSY_RE.match(line)]
+    age_h = (time.time() - (real[-1] if real else log.stat().st_mtime)) / 3600
     starts = [i for i, line in enumerate(lines) if re.match(r"\d\d:\d\d:\d\d index$", line)]
     start = starts[-1] if starts else 0
     while start > 0 and re.match(r"\d\d:\d\d:\d\d receipt ", lines[start - 1]):
         start -= 1  # receipt refresh lines belong to the same run
     failed = [line[9:] for line in lines[start:] if re.match(r"\d\d:\d\d:\d\d (receipt FAILED|\w+ FAILED)", line)]
+    # A step killed mid-run (2026-10-06: disk full) leaves a traceback and no
+    # FAILED line; name the step it died in.
+    if not failed and any(line.startswith("Traceback") for line in lines[start:]):
+        steps = [line[9:] for line in lines[start:] if re.match(r"\d\d:\d\d:\d\d (index|search|grade|report)$", line)]
+        failed = [f"{steps[-1] if steps else 'a step'} crashed (traceback, no exit line)"]
     info = {"log_age_h": round(age_h, 1), "failed": failed}
     if failed:
         return "warn", "beliefs map last run: " + "; ".join(failed)[:200], info
@@ -461,7 +608,8 @@ def check_recert() -> tuple[str, str, dict]:
         return "warn", "no recert tick log", {}
     now = time.time()
     problems = []
-    age_min = (now - tl[-1][0]) / 60
+    real = [ts for ts, line in tl if not BUSY_RE.match(line)]  # a BUSY tick did no work
+    age_min = (now - (real[-1] if real else tl[0][0])) / 60
     if age_min > 75:
         problems.append(f"recert tick log silent {age_min:.0f} min")
     # A refresh is retried every tick; one failure is noise, two in a row
@@ -522,7 +670,10 @@ def check_e2e() -> tuple[str, str, dict]:
     if age_h > 50:
         return "fail", f"STALE: e2e receipt {age_h:.0f}h old", info
     if d.get("rc") != 0:
-        return "fail", f"e2e RED: {str(d.get('tail', ''))[:200]}", info
+        # fathers_e2e.sh names the failing gate line and keeps the full log.
+        what = d.get("failed") or d.get("tail", "")
+        where = f" (log {d['log']})" if d.get("log") else ""
+        return "fail", f"e2e RED rc {d.get('rc')}: {str(what)[:200]}{where}", info
     return "ok", f"e2e green, {d.get('live_works')} works ({age_h:.1f}h ago)", info
 
 
@@ -550,15 +701,16 @@ def check_logos_lock() -> tuple[str, str, dict]:
 
 def check_disk() -> tuple[str, str, dict]:
     # Absolute GB, not percent: APFS snapshot/purgeable accounting makes
-    # percentages meaningless. Pipeline jobs need ~2G headroom.
-    st = os.statvfs(str(Path.home()))
-    free_g = st.f_bavail * st.f_frsize / 1e9
-    info = {"free_gb": round(free_g, 1)}
+    # percentages meaningless. One floor, measured the way the auto ship
+    # measures it: under MIN_FREE_GB ships, site builds and e2e stop.
+    free_g = autoship.free_gb()
+    floor = autoship.MIN_FREE_GB
+    info = {"free_gb": free_g, "floor_gb": floor}
     if free_g < 4:
-        return "fail", f"disk free {free_g:.1f}G (<4G)", info
-    if free_g < 8:
-        return "warn", f"disk free {free_g:.1f}G (<8G)", info
-    return "ok", f"disk free {free_g:.1f}G", info
+        return "fail", f"disk free {free_g} GB (<4 GB; jobs will die)", info
+    if free_g < floor:
+        return "warn", f"disk free {free_g} GB (<{floor} GB: ships, site builds and e2e skip)", info
+    return "ok", f"disk free {free_g} GB", info
 
 
 def check_queue_depth() -> tuple[str, str, dict]:
@@ -581,18 +733,40 @@ def check_ship_auto() -> tuple[str, str, dict]:
     except (FileNotFoundError, json.JSONDecodeError):
         return "ok", "auto ship has not run yet", {}
     since = st.get("pending_since")
-    info = {"pending_since": since, "pending": st.get("pending"), "last_skip": st.get("last_skip"),
-            "last_ship": st.get("last_ship")}
-    if not since:
-        return "ok", "site matches certified work", info
-    hours = (time.time() - local_ts(since)) / 3600
-    if hours > 6:
-        why = (st.get("last_skip") or {}).get("why") or "last ship did not verify"
-        return "warn", f"{', '.join(st.get('pending') or [])} changes not shipped for {hours:.0f} h ({why})", info
-    return "ok", f"changes pending {hours:.1f} h", info
+    last_run = st.get("last_run") or {}
+    shelf = st.get("shelf_pending") or {}
+    # Recompute what the auto ship would see now, so edits made since its
+    # last run are not reported as "site matches".
+    now = autoship.inputs()
+    waiting = [k for k in now if now[k] != (st.get("shipped") or {}).get(k)]
+    info = {"pending_since": since, "pending": st.get("pending"), "waiting_now": waiting,
+            "last_skip": st.get("last_skip"), "last_ship": st.get("last_ship"),
+            "last_run": last_run, "shelf_pending": shelf or None}
+    problems = []
+    if since and (time.time() - local_ts(since)) / 3600 > autoship.ALERT_HOURS:
+        hours = (time.time() - local_ts(since)) / 3600
+        why = last_run.get("why") or (st.get("last_skip") or {}).get("why") or "last ship did not verify"
+        problems.append(f"{', '.join(st.get('pending') or [])} changes not shipped for {hours:.0f} h ({why})")
+    elif last_run.get("exit") not in (None, 0, 75):
+        problems.append(f"last auto ship exit {last_run.get('exit')} at {last_run.get('at')}: {last_run.get('why')}")
+    if shelf.get("error"):
+        problems.append(f"paid shelf refresh failed ({shelf['error']}); the next auto ship resumes it")
+    elif shelf and (time.time() - local_ts(shelf.get("since", ""))) / 3600 > autoship.ALERT_HOURS \
+            and not shelf_ps():
+        problems.append(f"paid shelf pending since {shelf.get('since')} and not running")
+    if last_run.get("at") and (time.time() - local_ts(last_run["at"])) / 3600 > 18:
+        problems.append(f"auto ship has not run since {last_run['at']} (job unloaded?)")
+    if problems:
+        return "warn", "; ".join(problems)[:300], info
+    if shelf:
+        return "ok", f"paid shelf in progress (done: {', '.join(shelf.get('done') or []) or 'nothing yet'})", info
+    if waiting:
+        return "ok", f"{', '.join(waiting)} changed since the last auto ship; the next run ships it", info
+    return "ok", "site matches certified work", info
 
 
 CHECKS = {
+    "watch": check_watch,
     "burn": check_burn,
     "quota": check_quota,
     "jobs": check_jobs,
@@ -604,6 +778,7 @@ CHECKS = {
     "throttles": check_throttles,
     "broker": check_broker,
     "audio": check_audio,
+    "audio_drift": check_audio_drift,
     "ship": check_ship,
     "ship_auto": check_ship_auto,
     "beliefs": check_beliefs,
@@ -617,6 +792,7 @@ CHECKS = {
 
 # check -> alert id when state != ok; severity is the check's state.
 ALERTS = {
+    "watch": "watch:gap",
     "burn": "burn:hung",
     "quota": "quota:stale",
     "jobs": "jobs:exit",
@@ -628,6 +804,7 @@ ALERTS = {
     "throttles": "vendor:429",
     "broker": "broker:down",
     "audio": "audio:drain",
+    "audio_drift": "audio:drift",
     "ship": "ship:problem",
     "ship_auto": "ship:pending",
     "beliefs": "beliefs:failed",
@@ -666,14 +843,45 @@ def self_heal(results: dict, prior: dict, heals: list[str]) -> None:
                 pass
 
 
+def take_lock() -> bool:
+    """watch.lock is a directory holding "pid" = "<pid> <start epoch>". A lock
+    whose holder is no longer a watch pass (pid gone, pid reused by another
+    program after a reboot, old empty lock, or older than WATCH_HARD_LIMIT_S)
+    is taken over and noted in watch:gap. A live one means another pass is
+    running: exit 75, and if it is stuck the Air notifier sees status.json go
+    stale."""
+    global LOCK_NOTE
+    LOCK_NOTE = ""
+    try:
+        RUN_LOCK.mkdir()
+    except FileExistsError:
+        try:
+            pid_s, start_s = (RUN_LOCK / "pid").read_text().split()[:2]
+            pid, start = int(pid_s), int(start_s)
+        except (OSError, ValueError):
+            pid, start = 0, int(RUN_LOCK.stat().st_mtime)
+        age_min = int((time.time() - start) // 60)
+        if autoship.lock_holder_live(pid, start, "fathers_watch.py", WATCH_HARD_LIMIT_S):
+            print(f"BUSY: watch pass pid {pid} has run {age_min} min; exit 75")
+            return False
+        LOCK_NOTE = (f"took over a watch lock left by pid {pid or '?'} ({age_min} min old; "
+                     "gone, another program, or past the 30 min limit)")
+        for f in RUN_LOCK.iterdir():
+            f.unlink()
+        RUN_LOCK.rmdir()
+        try:
+            RUN_LOCK.mkdir()
+        except FileExistsError:
+            return False
+    (RUN_LOCK / "pid").write_text(f"{os.getpid()} {int(time.time())}\n")
+    return True
+
+
 def main() -> int:
     global PRIOR
     OUT.mkdir(parents=True, exist_ok=True)
-    try:
-        RUN_LOCK.mkdir(exist_ok=False)
-    except FileExistsError:
-        print("watch already running, skip")
-        return 0
+    if not take_lock():
+        return 75
     try:
         prior = PRIOR = load_prior()
         launchctl_states.cache_clear()
@@ -725,6 +933,7 @@ def main() -> int:
         return 0
     finally:
         try:
+            (RUN_LOCK / "pid").unlink()
             RUN_LOCK.rmdir()
         except OSError:
             pass

@@ -178,26 +178,71 @@ No human should have to poke the system to learn it is broken. Three
 scheduled pieces replace the manual watch:
 
 - Mini `com.saneapps.fathers-watch` (every 15 min): runs
-  `scripts/fathers_watch.py` — burn idle/healthy/hung, quota freshness
-  (nightly 21:10; warn >26h, fail >50h), fathers job exits, fresh HOLD
-  pileup (>5 in 48h), e2e receipt, logos lock, disk GB (warn <8G,
-  fail <4G; percent is meaningless on APFS), JEV queue depth.
-  Writes `outputs/fathers-watch/status.json` (alerts carry stable ids
-  + first_seen) and appends `alerts.log`. Bounded self-heal only:
-  kill a twice-confirmed hung burn child (once per episode), remove a
-  PID-dead logos lock older than 30 min. Never touches gates, books,
-  or deploys.
-- Mini `com.saneapps.fathers-e2e` (daily 02:30): runs the site
-  `scripts/fathers_e2e.sh` — full `ship.sh --dry-run` (build + gates +
-  browser checks, never deploys). Skips while a ship holds the release
-  lock; stashes + restores a recorded visual review so a mid-flight
-  ship is never invalidated. Receipt: site `outputs/e2e/LATEST.json`.
+  `scripts/fathers_watch.py` — every live `com.saneapps.fathers-*` job's
+  exit, lanes, queue progress, certifications, 429s, batch broker (a
+  queue older than 30 min with no batch in flight = dead flusher), audio
+  drain (`audio:drain`: its log silent over 30 min = two missed 15-min
+  runs), narration drift (`audio:drift`, its own id so it never hides a
+  stopped drain: sections waiting on sentence drift in drain-status.json
+  and sections the last auto ship skipped with "audio does not match the
+  page"; it stays open until someone re-reads them), ships (hand-run ship logs, running shelf steps) and the auto
+  ship's `state.json` (last run exit, skip, paid shelf, a fresh
+  fingerprint of what waits to ship), beliefs (a traceback with no
+  FAILED line counts), recert ticks (BUSY lock lines do not count as
+  ticks), held review (the newest exit in its log beats launchctl's
+  0 or 3; any other launchctl exit, such as 75 busy or a kill, came from
+  a newer run that wrote no exit line, so it wins),
+  e2e receipt, logos lock, and disk against the one 15 GB floor (warn
+  under 15 GB, when ships, builds and e2e skip; fail under 4 GB).
+  `watch:gap` is raised once when the previous pass is over 30 min old
+  or its lock was left by a dead pass. Writes
+  `outputs/fathers-watch/status.json` (alerts carry stable ids +
+  first_seen) and appends `alerts.log`. Bounded self-heal only: kill a
+  twice-confirmed hung burn child (once per episode), remove a PID-dead
+  logos lock older than 30 min. Never touches gates, books, or deploys.
+- The watch cannot see its own unload. Two things can: the Air notifier
+  below (alert `watch:stale` when status.json is over 30 min old) and
+  the Mini nightly report (`infra/SaneProcess/scripts/mini/mini-nightly.sh`,
+  08:45, one "Fathers watch" line: loaded, stale or NOT LOADED).
+  `python3 scripts/status_site.py --now` prints the one pipeline block
+  (live vs built vs waiting, paid shelf, last auto run and skip, git,
+  disk, watch age, owner calls from the site handoff).
+- Mini `com.saneapps.fathers-e2e` (daily 03:00, after the 02:44 disk
+  clean): runs the site `scripts/fathers_e2e.sh` — full
+  `ship.sh --dry-run` (build + gates + browser checks, never deploys).
+  Holds `outputs/build.lock` (waits up to 60 min); a skip (lock busy,
+  ship in flight, disk under 15 GB, another e2e live) exits 75 or 2 and
+  never overwrites the last receipt. A red run exits with the dry-run's
+  code. Receipt: site `outputs/e2e/LATEST.json` (names the failing gate
+  line); full log `outputs/e2e/last-run.log`.
 - Air `com.saneapps.fathers-watch-notify` (every 15 min): runs
-  `scripts/fathers_watch_notify.py` — fetches Mini status.json over
-  ssh, posts a macOS notification ONLY on new alert ids and on
-  recovery. Silent when green. `... --status` prints the one-line
-  summary any time. State: `~/.local/state/fathers_watch_notified.json`.
+  `scripts/fathers_watch_notify.py` — fetches Mini status.json over ssh, posts a macOS
+  notification ONLY on new alert ids and on recovery. Silent when
+  green. `... --status` prints the one-line summary any time. State:
+  `~/.local/state/fathers_watch_notified.json`. Until 2026-10-06 the Air
+  ran an untracked copy of this file (no `watch:stale`). The repo copy
+  with `watch:stale` is the source but, as of 2026-10-06, is untracked on
+  the Mini too: commit and push it from the Mini, then on the Air move
+  the old untracked file aside and pull. No reload is needed (the Air
+  plist already points at that path). Until then a stale watch shows
+  only in the 08:45 nightly report and `status_site.py --now`.
 
-Conventions: single-instance via atomic mkdir locks; Nice 10; logs
-under each repo's `outputs/`. Unload: `launchctl bootout
-gui/$(id -u)/<label>` on the owning machine.
+Locks and exits (2026-10-06): heavy CPU and disk jobs (site build,
+ship, auto ship + paid shelf, e2e, Logos compile, the 02:44 disk clean)
+share the site's `outputs/build.lock` through `scripts/ship_lock.py`; a
+caller that holds it passes `FATHERS_BUILD_LOCK_HELD=<pid>` so ship.sh
+does not wait on it. Network-bound jobs (recert lanes, beliefs, held
+review, independent review) do not take it, so lanes keep running
+during builds. Every job's own single-instance lock records a pid and a
+start time: a lock whose pid is dead is taken over; a live one prints
+`BUSY:` and exits 75, so launchctl and the watch see it. The auto ship,
+watch and e2e locks live under `outputs/` and survive a reboot, so their
+holder also has to still run that script (`ps`) and be younger than the
+job's hard limit (auto ship 27300 s, watch 30 min, e2e 7260 s); the lane,
+beliefs and held-review locks live in /tmp, which a reboot clears. The auto ship
+(`scripts/ship_if_changed.py`) exits 0 done / 1 ship not verified /
+2 skipped / 3 paid shelf failed (the next run resumes it) / 75 busy /
+143 killed. It refreshes the paid shelf only after a full ship of new
+text; an `--audio-only` ship starts no shelf, so new narration reaches
+the paid audiobooks with the next text change (open owner call). Nice 10; logs under each repo's `outputs/`. Unload:
+`launchctl bootout gui/$(id -u)/<label>` on the owning machine.

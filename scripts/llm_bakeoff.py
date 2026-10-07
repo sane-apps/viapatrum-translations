@@ -335,8 +335,10 @@ def _broker_up() -> bool:
 
 
 def _batch_stuck(model: str) -> bool:
+    """Stuck at Cloudflare (old pending batch) or in the broker itself (old
+    queued item: its flusher is not draining, 2026-10-06 full-disk crash)."""
     m = (_broker_seen.get("stats") or {}).get("models", {}).get(model) or {}
-    return (m.get("oldest_pending_s") or 0) > BATCH_STUCK_S
+    return max(m.get("oldest_pending_s") or 0, m.get("oldest_queued_s") or 0) > BATCH_STUCK_S
 
 
 def batch_route(model: str, api: str = "run") -> bool:
@@ -410,7 +412,8 @@ def cf_call(
                         "neurons": usage.get("neurons") or 0}
             if _cf_reasoning_only(result):
                 return {"error": TRUNCATED_REASONING, "ms": int((time.time() - t0) * 1000), "batched": True}
-        rate_acquire(model)  # broker failed: fall back to a paced direct call
+        if rate_acquire(model) is False:  # broker failed: fall back to a paced direct call
+            return {"error": RATE_WAIT_ERR, "ms": int((time.time() - t0) * 1000)}
     body = json.dumps(payload).encode()
     last_err = None
     for attempt in range(3):
@@ -726,8 +729,18 @@ def rate_try(model: str) -> bool:
         return True
 
 
-def rate_acquire(model: str, max_wait: float = 900.0) -> None:
-    """Block until model has a free slot in the last 60 s."""
+# The error a call returns when no slot came free in time. It says "rate
+# limit" so callers back off and retry (work_pipeline RATE_ERR), and it has
+# no "429" so it does not cut the model's allowance: no request was sent.
+RATE_WAIT_ERR = "rate limit: no free slot after the local wait; call not sent"
+
+
+def rate_acquire(model: str, max_wait: float = 900.0) -> bool:
+    """Wait up to max_wait for a free slot in the last 60 s and take it.
+    Returns False, with no slot taken, when none came free: the caller must
+    not send. Until 2026-10-06 it took a slot over the cap after the wait, and
+    every such call drew a 429 and cut the allowance further (red team: 293
+    throttles on the referee)."""
     import fcntl
     ceiling = RATE_CEILING[_rate_class(model)]
     path = _rate_file(model)
@@ -746,13 +759,15 @@ def rate_acquire(model: str, max_wait: float = 900.0) -> None:
             if now - st.get("cut_at", 0) > 600 and limit < ceiling:
                 limit = min(ceiling, limit + max(1, ceiling // 10))  # recover after a clean 10 min
                 st["cut_at"] = now - 300
-            if len(hits) < limit or now > deadline:
+            if len(hits) < limit:
                 hits.append(now)
                 st.update(hits=hits, limit=limit)
                 fh.seek(0); fh.truncate(); fh.write(json.dumps(st))
-                return
+                return True
+            if now >= deadline:
+                return False
             wait = 60 - (now - hits[0]) + 0.05
-        time.sleep(min(max(wait, 0.2), 5.0))
+        time.sleep(max(0.0, min(max(wait, 0.2), 5.0, deadline - now)))
 
 
 def rate_throttled(model: str) -> None:
@@ -801,8 +816,8 @@ def vendor_call(
     model = normalize_model(model)
     if batch_route(model) and not rate_try(model):
         _use_batch.on = True            # at the cap: overflow goes to the batch broker
-    elif not batch_route(model):
-        rate_acquire(model)             # direct-only model: wait for a slot
+    elif not batch_route(model) and rate_acquire(model) is False:
+        return {"error": RATE_WAIT_ERR, "ms": 0}  # direct-only model: no slot came free
     r = _vendor_call_raw(model, messages, cf_token=cf_token, nv_token=nv_token, account=account,
                          max_tokens=max_tokens)
     if "429" in str(r.get("error", "")):

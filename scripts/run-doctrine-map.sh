@@ -9,8 +9,22 @@
 set -u
 export PATH="/opt/homebrew/opt/node@24/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
 LOCK="/tmp/fathers-beliefs.lock"
-mkdir "$LOCK" 2>/dev/null || { echo "$(date +%T) already running"; exit 0; }
-trap 'rmdir "$LOCK"' EXIT
+# One beliefs run at a time. The lock directory holds "<pid> <start epoch>", so a
+# lock left by a killed run is taken over, and a live one is reported (BUSY,
+# exit 75) instead of passing as a quiet, healthy run. Network-bound: this job
+# does not take the site's outputs/build.lock, so it keeps running during builds.
+if ! mkdir "$LOCK" 2>/dev/null; then
+  read -r opid ostart 2>/dev/null < "$LOCK/pid"
+  if [ -n "${opid:-}" ] && kill -0 "$opid" 2>/dev/null; then
+    echo "$(date +%T) BUSY: beliefs run pid $opid has run $(( ($(date +%s) - ${ostart:-$(date +%s)}) / 60 )) min; exit 75"
+    exit 75
+  fi
+  echo "$(date +%T) lock left by pid ${opid:-?}, which is not running; taking it"
+  rm -f "$LOCK/pid"; rmdir "$LOCK" 2>/dev/null
+  mkdir "$LOCK" 2>/dev/null || { echo "$(date +%T) BUSY: another beliefs run took the lock first; exit 75"; exit 75; }
+fi
+echo "$$ $(date +%s)" > "$LOCK/pid"
+trap 'rm -f "$LOCK/pid"; rmdir "$LOCK" 2>/dev/null' EXIT
 set -a; source "$HOME/.config/nv/env" >/dev/null 2>&1; set +a
 ROOT="$HOME/SaneApps/clients/translations"
 cd "$ROOT" || exit 1

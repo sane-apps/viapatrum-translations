@@ -29,6 +29,7 @@ import os
 import sys
 import threading
 import time
+import traceback
 import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -48,14 +49,26 @@ POLL_TICK_S = 1.0      # poller wake-up interval
 POLL_EVERY_S = 10.0    # at most one poll per batch this often
 SUBMIT_RETRY_S = 2.0   # pause after a failed submit before the requeued items go again
 DEADLINE_S = 1500      # a caller waits at most this long
+# A model's flusher that has not come round its loop for this long, while
+# items wait, is wedged; a queued item this old means nothing drains it (its
+# caller gave up long ago and dropped it). One flusher pass takes at most
+# rate_acquire's 900 s wait + a 120 s submit, well under this. The watchdog
+# first restarts dead threads; if a queue is still stuck, the process exits
+# non-zero and launchd (KeepAlive) starts a fresh broker. 2026-10-06: both
+# flushers died in the full-disk crash and 139 Kimi items sat queued for 11
+# hours while /stats still answered.
+STUCK_S = DEADLINE_S + 120
+WATCH_S = 30.0         # watchdog interval
 
 lock = threading.Lock()
 queues: dict[str, list] = {}        # model -> [item]
 pending: list[dict] = []            # submitted batches awaiting results
 workers: dict[str, threading.Event] = {}  # model -> flusher wake event
+threads: dict[str, list] = {}       # model -> [flusher thread, poller thread]
+beats: dict[str, float] = {}        # model -> last time its flusher came round its loop
 metered_polls: set[str] = set()     # models whose polls drew a 429: poll under the limiter
 stats = {"submitted_batches": 0, "submitted_items": 0, "done_items": 0, "errors": 0,
-         "polls": 0, "poll_429s": 0}
+         "polls": 0, "poll_429s": 0, "thread_restarts": 0, "loop_errors": 0}
 
 
 def _post(model: str, body: dict, timeout: int = 120) -> tuple[int, dict]:
@@ -72,6 +85,17 @@ def _post(model: str, body: dict, timeout: int = 120) -> tuple[int, dict]:
             return e.code, {}
     except Exception as e:  # noqa: BLE001
         return -1, {"errors": [{"message": str(e)}]}
+
+
+def _log(msg: str) -> None:
+    """Write one log line. The log sits on the same disk as everything else:
+    on a full disk the write raises, and that must never kill the thread that
+    is logging (2026-10-06 review: a failed print in the error handler killed
+    the flusher it was meant to save)."""
+    try:
+        print(msg, file=sys.stderr, flush=True)
+    except (OSError, ValueError):
+        pass
 
 
 def _finish(item: dict, result=None, error: str = "") -> None:
@@ -123,19 +147,42 @@ def model_stats(now: float) -> dict:
     return out
 
 
+def ensure_threads(model: str) -> list[str]:
+    """Start the model's flusher and poller if missing or dead. Caller holds
+    lock. Returns the names of dead threads it replaced."""
+    if model not in workers:
+        workers[model] = threading.Event()
+    cur = threads.get(model) or [None, None]
+    started = []
+    for k, (target, kind) in enumerate(((flusher, "flush"), (poller, "poll"))):
+        if cur[k] is not None and cur[k].is_alive():
+            continue
+        if cur[k] is not None:
+            stats["thread_restarts"] += 1
+            started.append(cur[k].name)
+        if kind == "flush":
+            beats[model] = time.time()  # a fresh flusher is not wedged
+        cur[k] = threading.Thread(target=target, args=(model,), daemon=True, name=f"{kind}:{model}")
+        cur[k].start()
+    threads[model] = cur
+    return started
+
+
+def dead_threads() -> list[str]:
+    """Names of flusher/poller threads that have stopped. Caller holds lock."""
+    return [t.name for ts in threads.values() for t in ts if t is not None and not t.is_alive()]
+
+
 def enqueue(model: str, item: dict) -> None:
     item.setdefault("t", time.time())
     with lock:
         q = queues.setdefault(model, [])
         q.append(item)
-        wake = workers.get(model)
-        start = wake is None
-        if start:
-            wake = workers[model] = threading.Event()
+        restarted = ensure_threads(model)  # a dead flusher is replaced on the next call
+        wake = workers[model]
         early = len(q) >= FLUSH_EARLY
-    if start:
-        threading.Thread(target=flusher, args=(model,), daemon=True, name=f"flush:{model}").start()
-        threading.Thread(target=poller, args=(model,), daemon=True, name=f"poll:{model}").start()
+    if restarted:
+        _log(f"restarted dead {', '.join(restarted)}")
     if early:
         wake.set()
 
@@ -149,8 +196,19 @@ def flush_once(model: str) -> bool:
         batch = take_batch(q)
     if not batch:
         return False
-    L.rate_acquire(model)
-    code, res = _post(model, {"requests": [i["payload"] for i in batch]})
+    try:
+        # rate_acquire writes /tmp/vendor-rate: it raises on a full disk. No
+        # free slot in its wait: do not send; requeue as a failed submit.
+        if L.rate_acquire(model) is False:
+            code, res = -1, {"errors": [{"message": L.RATE_WAIT_ERR}]}
+        else:
+            code, res = _post(model, {"requests": [i["payload"] for i in batch]})
+    except Exception as e:  # noqa: BLE001
+        # The batch is already off the queue: answer its callers now so their
+        # own direct-call fallback runs, instead of leaving them to time out.
+        for it in batch:
+            _finish(it, error=f"broker flush failed: {type(e).__name__}: {e}"[:200])
+        raise
     rid = (res.get("result") or {}).get("request_id")
     if code in (200, 202) and rid:
         now = time.time()
@@ -161,12 +219,17 @@ def flush_once(model: str) -> bool:
             stats["submitted_items"] += len(batch)
         return True
     if code == 429:
-        L.rate_throttled(model)
+        try:
+            L.rate_throttled(model)  # writes /tmp/vendor-rate too: may raise on a full disk
+        except Exception as e:  # noqa: BLE001  the batch below is still requeued or answered
+            _log(f"flush:{model}: rate_throttled failed: {type(e).__name__}: {e}")
     msg = json.dumps(res.get("errors") or res)[:200]
     for it in batch:  # requeue once, then fail so the caller's own retry runs
         if it.get("tries", 0) < 2:
-            it["tries"] = it.get("tries", 0) + 1
-            with lock:
+            with lock:  # same lock as do_POST's give-up, so the check cannot race it
+                if it.get("abandoned"):
+                    continue  # its caller already got a 504; a requeue would sit forever
+                it["tries"] = it.get("tries", 0) + 1
                 queues.setdefault(model, []).append(it)
         else:
             _finish(it, error=f"batch submit {code}: {msg}")
@@ -174,22 +237,35 @@ def flush_once(model: str) -> bool:
     return True
 
 
+def _loop_error(name: str) -> None:
+    """Log a loop exception and pause; the thread keeps running."""
+    with lock:
+        stats["loop_errors"] += 1
+    _log(f"{name}: error, continuing\n{traceback.format_exc()}")
+    time.sleep(SUBMIT_RETRY_S)
+
+
 def flusher(model: str) -> None:
     wake = workers[model]
     while True:
-        wake.clear()
-        with lock:
-            wait = flush_wait(queues.get(model) or [], time.time())
-        if wait > 0:
-            wake.wait(wait)
-            continue
-        flush_once(model)
+        beats[model] = time.time()
+        try:
+            wake.clear()
+            with lock:
+                wait = flush_wait(queues.get(model) or [], time.time())
+            if wait > 0:
+                wake.wait(wait)
+                continue
+            flush_once(model)
+        except Exception:  # noqa: BLE001  one bad flush must not kill the model's queue
+            _loop_error(f"flush:{model}")
 
 
 def poll_once(b: dict) -> None:
     model = b["model"]
-    if model in metered_polls:
-        L.rate_acquire(model)
+    if model in metered_polls and L.rate_acquire(model) is False:
+        b["next_poll"] = time.time() + POLL_EVERY_S  # no slot: poll later, never over the cap
+        return
     b["next_poll"] = time.time() + POLL_EVERY_S
     code, res = _post(model, {"request_id": b["rid"]}, timeout=60)
     with lock:
@@ -224,12 +300,46 @@ def poll_once(b: dict) -> None:
 
 def poller(model: str) -> None:
     while True:
-        time.sleep(POLL_TICK_S)
-        now = time.time()
-        with lock:
-            due = [b for b in pending if b["model"] == model and b.get("next_poll", 0) <= now]
-        for b in due:
-            poll_once(b)
+        try:
+            time.sleep(POLL_TICK_S)
+            now = time.time()
+            with lock:
+                due = [b for b in pending if b["model"] == model and b.get("next_poll", 0) <= now]
+            for b in due:
+                poll_once(b)
+        except Exception:  # noqa: BLE001
+            _loop_error(f"poll:{model}")
+
+
+def watchdog_once(now: float) -> str:
+    """Restart dead threads; return a reason to exit if a queue is still stuck."""
+    with lock:
+        restarted = [n for m in list(threads) for n in ensure_threads(m)]
+        if restarted:
+            _log(f"watchdog restarted dead {', '.join(restarted)}")
+        for m, q in queues.items():
+            if q and now - min(i.get("t", now) for i in q) > STUCK_S:
+                return f"{m}: {len(q)} queued, oldest {int(now - min(i.get('t', now) for i in q))}s"
+            if q and now - beats.get(m, now) > STUCK_S:
+                return f"{m}: {len(q)} queued, flusher wedged {int(now - beats[m])}s"
+    return ""
+
+
+def watchdog() -> None:
+    while True:
+        time.sleep(WATCH_S)
+        try:
+            why = watchdog_once(time.time())
+        except Exception:  # noqa: BLE001
+            why = "watchdog error: " + traceback.format_exc()
+        if why:
+            # Exit non-zero so launchd KeepAlive starts a fresh broker; callers
+            # see a dropped connection and fall back to a direct call. The exit
+            # sits in finally so nothing in the log write can skip it.
+            try:
+                _log(f"broker stuck, exiting for launchd restart: {why}")
+            finally:
+                os._exit(3)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -253,7 +363,7 @@ class Handler(BaseHTTPRequestHandler):
             with lock:
                 body = dict(stats, queued={m: len(q) for m, q in queues.items() if q},
                             pending_batches=len(pending), models=model_stats(time.time()),
-                            metered_polls=sorted(metered_polls))
+                            metered_polls=sorted(metered_polls), dead_threads=dead_threads())
             self._send(200, body)
         else:
             self._send(404, {"error": "not found"})
@@ -269,6 +379,10 @@ class Handler(BaseHTTPRequestHandler):
         item = {"payload": payload, "event": threading.Event(), "t": time.time()}
         enqueue(model, item)
         if not item["event"].wait(DEADLINE_S + 60):
+            with lock:  # the caller gives up: drop the item so it is never sent
+                item["abandoned"] = True
+                q = queues.get(model) or []
+                q[:] = [x for x in q if x is not item]
             return self._send(504, {"error": "broker timeout"})
         self._send(200, {"result": item["result"]} if not item["error"] else {"error": item["error"]})
 
@@ -280,6 +394,7 @@ def main() -> int:
     srv = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     srv.daemon_threads = True
     print(f"cf batch broker on 127.0.0.1:{PORT}", flush=True)
+    threading.Thread(target=watchdog, daemon=True, name="watchdog").start()
     srv.serve_forever()
     return 0
 

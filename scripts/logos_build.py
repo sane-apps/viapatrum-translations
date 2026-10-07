@@ -23,14 +23,18 @@ import datetime
 import glob
 import json
 import os
+import re
 import shutil
 import sqlite3
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pb_sync import resolve_pb_db, load_yml  # noqa: E402
+from pipeline.verify_docx import logos_file_problems  # noqa: E402
 
 def has_cover(slug: str) -> bool:
     assets = os.path.join(REPO, "books", slug, "assets")
@@ -247,14 +251,33 @@ def drag_thumb(y_from, y_to):
     return True
 
 
-def find_title_pos(needle):
-    """Single AX call: find title row, return (x, y) or None.
+def norm_title(text):
+    """One line, single spaces: AX row titles can break mid-title."""
+    return " ".join(str(text).split())
+
+
+def title_has(name, needle):
+    """True when needle appears in name as whole words."""
+    pattern = r"(?<!\S)" + re.escape(norm_title(needle)) + r"(?!\w)"
+    return re.search(pattern, norm_title(name)) is not None
+
+
+def find_title_hits(needle):
+    """Single AX call: every row whose title holds needle, as [(x, y)].
 
     One call on purpose: the list re-sorts spontaneously, so a position
     read in a second call can belong to a moved row (stale-coordinate
     clicks land on the toolbar and navigate away from the tool).
+    AppleScript only pre-filters on the first word; the whole-word match
+    runs here on the title with its line breaks folded, so a break inside
+    the title cannot hide the row. All hits are returned, in list order:
+    13 titles are shared by two or more books (Fragments on John has
+    four), and only the body file tells them apart.
     """
-    esc = needle.replace('"', '')
+    words = norm_title(needle).split()
+    if not words:
+        return []
+    first = words[0].replace('"', '').replace("\\", "")
     rc, out = osa_splitter(
         'repeat with i from 1 to (count of static texts)\n'
         'try\n'
@@ -262,21 +285,24 @@ def find_title_pos(needle):
         'if nn contains "%s" then\n'
         'set pp to position of static text i\n'
         'log ("HIT=" & ((item 1 of pp as string) & "," & '
-        '(item 2 of pp as string)))\n'
-        'exit repeat\n'
+        '(item 2 of pp as string)) & "|" & (name of static text i))\n'
         'end if\n'
         'end try\n'
-        'end repeat' % esc, timeout=120)
+        'end repeat' % first, timeout=120)
     if rc != 0:
-        return None
+        return []
+    rows = []
     for line in out.splitlines():
         if line.startswith("HIT="):
+            head, _sep, name = line[4:].partition("|")
             try:
-                x, y = line[4:].split(",", 1)
-                return int(x), int(y)
+                x, y = head.split(",", 1)
+                rows.append([int(x), int(y), name])
             except ValueError:
-                pass
-    return None
+                continue
+        elif rows:
+            rows[-1][2] += " " + line  # the title went on past a line break
+    return [(x, y) for x, y, name in rows if title_has(name, needle)]
 
 
 def list_quiet(timeout=45):
@@ -336,13 +362,74 @@ def click_edit_if_present():
 
 
 def unique_needle(title, others):
-    """Shortest leading word run (5+) of title in no other title."""
-    words = " ".join(title.split()).split()
-    for n in range(5, min(len(words), 10) + 1):
+    """Shortest leading word run of title that no other title holds.
+
+    Starts at one word: many titles are shorter than five words. When no
+    leading run is unique (the same title belongs to another book, or the
+    whole title sits inside a longer one), return the whole title; the
+    caller then tries each matching row and checks the body file.
+    """
+    words = norm_title(title).split()
+    for n in range(1, len(words) + 1):
         cand = " ".join(words[:n])
-        if not any(cand in " ".join(o.split()) for o in others):
+        if not any(title_has(o, cand) for o in others):
             return cand
     return " ".join(words)
+
+
+# Most books that can share one title. Fragments on Romans has five.
+MAX_SAME_TITLE = 6
+
+
+def edit_open_for(docx_base):
+    return scroll_area_count() >= 3 and body_file() == docx_base
+
+
+def visible_hits(needle, top, bottom):
+    return [(x, y) for x, y in find_title_hits(needle) if top <= y <= bottom]
+
+
+def click_row(x, y, index, needle, docx_base, top, bottom, where):
+    """Click one row up to four times. Returns "open", "other" or "miss".
+
+    "other" means this click opened a different book's edit view: a book
+    with the same title. The caller moves on to the next matching row.
+    An edit view left open by an earlier row does not count: a lost click
+    leaves it in place, and that is a miss, so the row is clicked again.
+    """
+    # Up to 4 clicks without scrolling: the .NET list eats clicks while
+    # re-sorting/syncing, and an open wrong edit can overlap the row
+    # middle. Alternate near-left (on the title glyphs) and middle.
+    for attempt, dx in enumerate((232, 60, 232, 60)):
+        before = body_file()
+        run([CLICLICK, "c:%d,%d" % (x + dx, y + 10)], timeout=30)
+        time.sleep(4)
+        if edit_open_for(docx_base):
+            return "open"
+        # Select-only click: follow the Edit affordance.
+        if click_edit_if_present() and edit_open_for(docx_base):
+            return "open"
+        opened = body_file()
+        if opened and opened != docx_base and opened != before \
+                and scroll_area_count() >= 3:
+            log("row %d for %r opened %s, not %s; trying the next row"
+                % (index, needle, opened, docx_base))
+            return "other"
+        # Same coords failing repeatedly = stale AX positions under churn:
+        # perturb the scroll (forces row re-virtualization) and rescan.
+        if attempt == 2:
+            drag_thumb(top + 12, bottom - 12)
+            drag_thumb(bottom - 12, top + 12)
+            list_quiet(timeout=20)
+        log("row click missed (%s try %d hit=%d,%d sa=%d body=%s); retrying"
+            % (where, attempt, x, y, scroll_area_count(), body_file()))
+        # A miss means churn: let the list settle before re-finding so
+        # the next click lands.
+        list_quiet(timeout=20)
+        hits = visible_hits(needle, top, bottom)
+        if index < len(hits):
+            x, y = hits[index]
+    return "miss"
 
 
 def open_edit(title, docx_base, others=()):
@@ -353,11 +440,9 @@ def open_edit(title, docx_base, others=()):
     visible and clicked but the edit never opened (expanded-result rows
     go click-dead until relaunch; caller may restart and retry).
     """
-    words = " ".join(title.split()).split()
-    # Shortest word-prefix (min 5 words) unique across all other
-    # titles: contiguous so mid-title AX newlines cannot break the
-    # match, short enough to survive AX truncation. Recomputed from
-    # live titles so retitles cannot silently collide.
+    # Shortest unique word-prefix of the title, recomputed from live
+    # titles so retitles cannot silently collide. Matching folds AX line
+    # breaks; the body filename decides which book actually opened.
     needle = unique_needle(title, others)
     run(["open", "-a", "Logos"], timeout=30)
     time.sleep(2)
@@ -376,47 +461,22 @@ def open_edit(title, docx_base, others=()):
         for step in range(15):
             texts = ax_texts()
             cur_top = " ".join(texts[0][1].split()) if texts else ""
-            pos = find_title_pos(needle) if texts else None
-            if pos:
-                x, y = pos
-                if top <= y <= bottom:
-                    matched = True
-                    # Up to 4 clicks without scrolling: the .NET list
-                    # eats clicks while re-sorting/syncing, and an open
-                    # wrong edit can overlap the row middle. Alternate
-                    # near-left (on the title glyphs) and middle.
-                    for attempt, dx in enumerate((232, 60, 232, 60)):
-                        run([CLICLICK, "c:%d,%d" % (x + dx, y + 10)],
-                            timeout=30)
-                        time.sleep(4)
-                        if scroll_area_count() >= 3 and \
-                                body_file() == docx_base:
-                            return True, True
-                        # Select-only click: follow the Edit affordance.
-                        if click_edit_if_present():
-                            if scroll_area_count() >= 3 and \
-                                    body_file() == docx_base:
-                                return True, True
-                        # Same coords failing repeatedly = stale AX
-                        # positions under churn: perturb the scroll
-                        # (forces row re-virtualization) and rescan.
-                        if attempt == 2:
-                            drag_thumb(top + 12, bottom - 12)
-                            drag_thumb(bottom - 12, top + 12)
-                            list_quiet(timeout=20)
-                        log("row click missed (sweep %d step %d try %d "
-                            "hit=%d,%d sa=%d body=%s); retrying"
-                            % (sweep, step, attempt, x, y,
-                               scroll_area_count(), body_file()))
-                        # A miss means churn: let the list settle
-                        # before re-finding so the next click lands.
-                        list_quiet(timeout=20)
-                        pos2 = find_title_pos(needle)
-                        if pos2:
-                            x, y = pos2
-                else:
-                    log("stale coordinates (y=%d outside list); rescanning"
-                        % y)
+            hits = find_title_hits(needle) if texts else []
+            if hits and not any(top <= y <= bottom for _x, y in hits):
+                log("stale coordinates (rows outside list); rescanning")
+            # Rows that share this title are tried in list order until the
+            # body file names this book's DOCX.
+            for index in range(MAX_SAME_TITLE):
+                rows = [(x, y) for x, y in hits if top <= y <= bottom]
+                if index >= len(rows):
+                    break
+                matched = True
+                x, y = rows[index]
+                result = click_row(x, y, index, needle, docx_base, top, bottom,
+                                   "sweep %d step %d" % (sweep, step))
+                if result == "open":
+                    return True, True
+                hits = find_title_hits(needle)
             if cur_top == last_top:
                 stuck += 1
                 if stuck >= 2:
@@ -542,14 +602,25 @@ def save_uploads(data):
 
 
 def inventory():
-    """Return {slug: dict(title, docx_path, docx_base, bid, last_compiled)}."""
+    """Return {slug: dict(title, docx_path, docx_base, bid, last_compiled)}.
+
+    A book's Logos row is the one whose ResourceId book.yml names (pb_sync
+    writes it back after the first sync). A book with no resource_id yet
+    matches on title and author together, as pb_sync does. Never on title
+    alone: 13 titles are shared by two or more books (Fragments on John
+    has four authors), and a title-only key gave all of them one row.
+    """
     db = resolve_pb_db()
     con = sqlite3.connect("file:%s?mode=ro" % db, uri=True)
     con.row_factory = sqlite3.Row
     dbrows = con.execute(
-        "SELECT Id,Title,LastCompiled FROM Books WHERE IsDeleted=0").fetchall()
+        "SELECT Id,ResourceId,Title,Authors,LastCompiled FROM Books "
+        "WHERE IsDeleted=0").fetchall()
     con.close()
-    by_title = {r["Title"]: r for r in dbrows}
+    by_rid = {r["ResourceId"]: r for r in dbrows if r["ResourceId"]}
+    by_title_author = {}
+    for r in dbrows:
+        by_title_author.setdefault((r["Title"], r["Authors"]), []).append(r)
     inv = {}
     pattern = os.path.join(REPO, "books", "*", "book.yml")
     for yml_path in sorted(glob.glob(pattern)):
@@ -560,16 +631,39 @@ def inventory():
         docx_path = os.path.join(REPO, "books", slug, docx_name)
         if not docx_name or not os.path.exists(docx_path):
             continue
-        m = by_title.get(title)
+        rid = yml.get("resource_id") or ""
+        m = by_rid.get(rid) if rid else None
+        if m is None:
+            same = by_title_author.get((title, yml.get("author", ""))) or []
+            m = same[0] if same else None
         inv[slug] = {
             "title": title,
             "docx_path": docx_path,
             "docx_base": os.path.basename(docx_path),
             "docx_mtime": os.path.getmtime(docx_path),
             "bid": m["Id"] if m else None,
+            "resource_id": m["ResourceId"] if m else None,
             "last_compiled": m["LastCompiled"] if m else None,
         }
     return inv
+
+
+def verify_hold(inv, slugs):
+    """{slug: reason} for Word files that must not be built or uploaded.
+
+    The shared rule (verify_docx.logos_file_problems) that the pack and
+    pb_sync also apply: verify_docx (worksheet notes such as "True OET;
+    Pass A ≠ Pass B" once reached the Logos library this way), a file
+    older than its English or intro.md, or one that leaves out intro.md.
+    Rebuild it (build_pbb_docx.py --catchup) first.
+    """
+    held = {}
+    for slug in sorted(set(slugs)):
+        docx = Path(inv[slug]["docx_path"])
+        problems = logos_file_problems(docx.parent, docx)
+        if problems:
+            held[slug] = "; ".join(problems)[:200]
+    return held
 
 
 def parse_lc(val):
@@ -632,11 +726,19 @@ def main():
         if args.force:
             need_build = sorted(inv)
             need_upload = sorted(s for s in inv if inv[s]["last_compiled"])
+        held = verify_hold(inv, need_build + need_upload)
+        for slug, why in sorted(held.items()):
+            receipt["skipped"].append(
+                {"slug": slug, "reason": "Word file held: " + why})
+            log("HOLD %s (Word file held: %s)" % (slug, why))
+        need_build = [s for s in need_build if s not in held]
+        need_upload = [s for s in need_upload if s not in held]
         log("inventory: %d docx books; need_build=%d need_upload(known)=%d"
             % (len(inv), len(need_build), len(need_upload)))
         if args.dry_run:
             print("NEED_BUILD: %s" % " ".join(need_build))
             print("NEED_UPLOAD: %s" % " ".join(need_upload))
+            print("HELD: %s" % " ".join(sorted(held)))
             receipt["dry_run"] = True
             return
 

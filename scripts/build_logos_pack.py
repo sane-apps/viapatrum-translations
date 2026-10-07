@@ -3,7 +3,10 @@
 
 Each folder has the Word file, the series cover, and the description to paste
 into Logos. A book stays out when it has no cover, no introduction, no Bible
-links, or the Word file is much shorter than the page on the site. Only works
+links, or the Word file is much shorter than the page on the site. It also
+stays out when the Word file fails verify_docx (worksheet notes such as
+"True OET" or "Pass A"), leaves out its intro.md, or is older than its
+English; rebuild it with build_pbb_docx.py --catchup. Only works
 the site build published go in (--app-dir, required): the pack never carries
 a withheld or retired work.
 
@@ -15,10 +18,14 @@ import argparse
 import io
 import json
 import re
+import sys
 import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from pipeline.book_meta import unquote_scalar  # noqa: E402
+from pipeline.verify_docx import logos_file_problems  # noqa: E402
 BOOKS = ROOT / "books"
 SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com/dist/works"
 OUT = ROOT / "outputs" / "logos-share"
@@ -49,10 +56,7 @@ The same English is on https://viapatrum.org/works/
 def scalar(text: str, key: str) -> str:
     for line in text.splitlines():
         if line.startswith(key + ":"):
-            raw = line.split(":", 1)[1].strip()
-            if len(raw) >= 2 and raw[0] == raw[-1] and raw[0] in "'\"":
-                return raw[1:-1]
-            return raw
+            return unquote_scalar(line.split(":", 1)[1])
     return ""
 
 
@@ -92,6 +96,16 @@ def safe(name: str) -> str:
     cleaned = re.sub(r'[<>:"/\\|?*]+', " ", name)
     cleaned = re.sub(r"\s+", " ", cleaned).strip(" .")
     return cleaned[:80] or "book"
+
+
+def word_file_problems(book: Path, docx: Path) -> list[str]:
+    """Reasons this Word file must not go in the pack (empty when it may).
+
+    The one shared rule (verify_docx.logos_file_problems) that the builder,
+    the Sunday driver and pb_sync also apply: verify_docx (worksheet notes),
+    plus a file older than its English or without its intro.md.
+    """
+    return logos_file_problems(book, docx)
 
 
 def published_slugs(app_dir: Path) -> set[str]:
@@ -147,6 +161,7 @@ def main() -> int:
             why.append("no Bible links")
         if live and ratio < 0.6:
             why.append(f"shorter than the site ({ratio:.2f})")
+        why.extend(word_file_problems(book, docx))
         if why:
             excluded.append({"slug": slug, "why": ", ".join(why)})
             continue

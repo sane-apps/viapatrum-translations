@@ -13,8 +13,22 @@ RECEIPTS="$HOME/SaneApps/infra/SaneProcess/outputs/llm-api-research"
 OUT="$ROOT/outputs/work-pipeline"
 LOCK="/tmp/fathers-recert.lock"
 mkdir -p "$OUT"
-mkdir "$LOCK" 2>/dev/null || { echo "$(date +%T) another tick is running"; exit 0; }
-trap 'rmdir "$LOCK"' EXIT
+# One tick at a time. The lock directory holds "<pid> <start epoch>", so a
+# lock left by a killed run is taken over, and a live one is reported (BUSY,
+# exit 75) instead of passing as a quiet, healthy run. Network-bound: this job
+# does not take the site's outputs/build.lock, so it keeps running during builds.
+if ! mkdir "$LOCK" 2>/dev/null; then
+  read -r opid ostart 2>/dev/null < "$LOCK/pid"
+  if [ -n "${opid:-}" ] && kill -0 "$opid" 2>/dev/null; then
+    echo "$(date +%T) BUSY: tick pid $opid has run $(( ($(date +%s) - ${ostart:-$(date +%s)}) / 60 )) min; exit 75"
+    exit 75
+  fi
+  echo "$(date +%T) lock left by pid ${opid:-?}, which is not running; taking it"
+  rm -f "$LOCK/pid"; rmdir "$LOCK" 2>/dev/null
+  mkdir "$LOCK" 2>/dev/null || { echo "$(date +%T) BUSY: another tick took the lock first; exit 75"; exit 75; }
+fi
+echo "$$ $(date +%s)" > "$LOCK/pid"
+trap 'rm -f "$LOCK/pid"; rmdir "$LOCK" 2>/dev/null' EXIT
 cd "$ROOT" || exit 1
 # Pause switch (owner 2026-10-05, quality audit): while outputs/work-pipeline/
 # lanes.paused exists, no lane is started. Running lanes still finish their

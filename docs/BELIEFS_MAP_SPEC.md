@@ -69,7 +69,17 @@ its mark, or that excludes every rival. Silence is never evidence.
    audited change wins and is logged with its reason.
 5. **Report:** `doctrine_map.py report` writes the site data, including how
    many writers were searched in each century, so readers can see how deep the
-   evidence goes.
+   evidence goes. A graded passage whose English has changed since the index
+   is left out until the next index and grade see the new words, and the site
+   build also leaves out any passage its own work page no longer says
+   (`beliefs_page._on_page`). A quote never outlives its words. The report
+   keeps a new verdict with `reviewed: false`; the site shows only reviewed
+   verdicts (`beliefs_page._deciding`), so a verdict stays off the site until
+   the audit passes it.
+   Passage ids hash the words as `speak_text.legacy_read_text` cleans them, so
+   a change to the reader's cleaner does not make unchanged passages look new.
+   A passage that fails to grade is logged and retried the next night; one vote
+   or none is never stored as "disputed".
 
 ## Fairness rules
 

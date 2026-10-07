@@ -23,6 +23,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -35,9 +36,15 @@ sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT))
 
 from pipeline.bible_links import BibleLinker  # noqa: E402
-from pipeline.book_meta import load_book_meta  # noqa: E402
+from pipeline.book_meta import load_book_meta, unquote_scalar  # noqa: E402
 from pipeline.docx_helpers import setup_document  # noqa: E402
-from pipeline.verify_docx import verify_docx  # noqa: E402
+from pipeline.verify_docx import (  # noqa: E402
+    WORKSHEET_MARKS,
+    docx_text,
+    stale_reasons,
+    verify_docx,
+    worksheet_hits,
+)
 
 _SUPER = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
 
@@ -98,9 +105,59 @@ def _reader_note(note: str) -> str:
     if not text:
         return ""
     low = text.lower()
-    if any(mark in low for mark in _NOTE_BOILER):
+    if any(mark in low for mark in _NOTE_BOILER) or worksheet_hits(text):
         return ""
     return text
+
+
+# Stamped into each built file (docProps cp:version). When the note filter
+# changes, the stamp changes, and catchup() rebuilds files made with the old one.
+NOTE_FILTER_STAMP = "pbb-notes-" + hashlib.sha1(
+    "\n".join(_NOTE_BOILER + WORKSHEET_MARKS + ("intro-always",)).encode("utf-8")
+).hexdigest()[:12]
+
+
+def _docx_stamp(path: Path) -> str:
+    try:
+        with zipfile.ZipFile(path) as zf:
+            core = zf.read("docProps/core.xml").decode("utf-8", "replace")
+    except (OSError, KeyError, zipfile.BadZipFile):
+        return ""
+    match = re.search(r"<cp:version>([^<]*)</cp:version>", core)
+    return match.group(1).strip() if match else ""
+
+
+def _wants_intro(meta: dict, book_dir: Path) -> bool:
+    """Print intro.md when it exists. Only an explicit logos_intro: false opts out."""
+    flag = str(meta.get("logos_intro") or "").strip().lower()
+    return (book_dir / "intro.md").is_file() and flag not in ("false", "no", "0")
+
+
+def rebuild_reason(book_dir: Path, docx: Path) -> str:
+    """Why an existing Logos file is out of date, or "" when it is current.
+
+    Out of date means: stale_reasons() (an English JSON file or intro.md
+    is newer than the file, or intro.md is left out; the same rule the
+    pack, the Sunday driver and pb_sync apply), the file was built before
+    the current note filter, or it still carries worksheet notes. A shorter
+    result is fine: the English is the source of truth (the Amphilochius
+    file kept an older, longer draft).
+    """
+    if not docx.is_file():
+        return "no Word file"
+    stale = stale_reasons(book_dir, docx)
+    if stale:
+        return "; ".join(stale)
+    try:
+        with zipfile.ZipFile(docx) as zf:
+            xml = zf.read("word/document.xml").decode("utf-8", "replace")
+    except (OSError, KeyError, zipfile.BadZipFile) as exc:
+        return f"unreadable Word file ({exc})"
+    if worksheet_hits(docx_text(xml)):
+        return "worksheet notes in the Word file"
+    if _docx_stamp(docx) != NOTE_FILTER_STAMP:
+        return "built before the current note filter"
+    return ""
 
 
 def is_scaffold_english(paras) -> bool:
@@ -259,7 +316,14 @@ def collect_sections(book_dir: Path, only: set[str] | None) -> list[dict]:
     return sections
 
 
-def build_docx(book: str, out: Path, only: set[str] | None) -> dict:
+def build_docx(book: str, out: Path, only: set[str] | None,
+               allow_shrink: bool = False) -> dict:
+    """Build and verify one Logos file.
+
+    allow_shrink: replace a longer file already on disk. Use it for a full
+    rebuild from the current English (catchup does). Leave it off for a
+    sections subset, so one slice never replaces a whole book.
+    """
     book_dir = ROOT / "books" / book
     meta = load_book_meta(book_dir)
     sections = collect_sections(book_dir, only)
@@ -297,12 +361,15 @@ def build_docx(book: str, out: Path, only: set[str] | None) -> dict:
     doc.add_paragraph(meta["author"], style="Subtitle")
     if meta.get("edition"):
         doc.add_paragraph(str(meta["edition"]), style="Subtitle")
-    if meta.get("logos_intro") and (book_dir / "intro.md").is_file():
+    # The stamp lets catchup() see a file built before the current note filter.
+    doc.core_properties.version = NOTE_FILTER_STAMP
+    # The site shows intro.md above the text, so the Word file does too.
+    if _wants_intro(meta, book_dir):
         doc.add_heading("Introduction", level=1)
         intro_text = (book_dir / "intro.md").read_text(encoding="utf-8").strip()
-        for para in intro_text.split("\n\n"):
+        for para in re.split(r"\n\s*\n", intro_text):
             if para.strip():
-                doc.add_paragraph(para.strip())
+                doc.add_paragraph(" ".join(para.split()))
 
     tn_counter = 0
     tn_articles: list[tuple[int, str]] = []
@@ -341,13 +408,14 @@ def build_docx(book: str, out: Path, only: set[str] | None) -> dict:
     if errors:
         tmp.unlink(missing_ok=True)
         raise SystemExit("verify_docx refused the build:\n- " + "\n- ".join(errors))
-    if out.is_file():
+    if out.is_file() and not allow_shrink:
         old_n, new_n = _docx_chars(out), _docx_chars(tmp)
         # A certified slice must not replace a longer book already on the shelf.
         if old_n > 8000 and new_n < old_n * 0.5:
             tmp.unlink(missing_ok=True)
             raise SystemExit(
-                f"refusing to shrink {out.name}: {old_n} chars -> {new_n}")
+                f"refusing to shrink {out.name}: {old_n} chars -> {new_n} "
+                "(a full rebuild from the current English may pass --allow-shrink)")
     tmp.replace(out)
     return {
         "out": str(out),
@@ -391,9 +459,7 @@ def _scalar(text: str, key: str) -> str:
     raw = m.group(1).strip()
     if raw in ("|", ">", ""):
         return ""
-    if len(raw) >= 2 and raw[0] == raw[-1] and raw[0] in ("'", '"'):
-        return raw[1:-1]
-    return raw
+    return unquote_scalar(raw)
 
 
 def prepare_book_yml(slug: str, title_en: str) -> list[str]:
@@ -439,12 +505,60 @@ def prepare_book_yml(slug: str, title_en: str) -> list[str]:
     return notes
 
 
-def catchup() -> int:
-    """Build Logos DOCX for certified works that already pass the research gate.
+# Catalogue title and the English are different works. Do not ship the mismatch.
+IDENTITY_HOLD = {
+    # Site title is Homily I on Saint Lazarus, but the Greek incipit is the
+    # homily on James and David (Ἀνεγνώσθη … εἰς Ἰάκωβον … καὶ Δαυίδ).
+    "hesychius-homilia-i-lazarum",
+    # Labeled Scholia in Apocalypsem. The English is the Pantainos and Heraclas
+    # training notice and never mentions the Apocalypse.
+    "origen-apocalypse-scholia-scrap",
+}
 
-    A DOCX named in book.yml is checked by check_research.py before any
-    Logos build or site ship. Books missing a sourced intro stay off the
-    shelf rather than failing that gate.
+
+def link_refusal(book_dir: Path, linker: BibleLinker | None = None) -> str:
+    """Why verify_docx would refuse this book's English, or "" when it would pass.
+
+    The live check that replaced the hand-kept no_link list: a scaffold label
+    must not ship, and a book with no Bible datatype link stays off the shelf.
+    Do not invent links to pass it.
+    """
+    try:
+        sections = collect_sections(book_dir, None)
+    except SystemExit as exc:
+        return str(exc)
+    linker = linker or BibleLinker()
+    links = 0
+    for item in sections:
+        for para in item["english"] or []:
+            text = str(para).strip()
+            if not text or text == PENDING_ENGLISH:
+                continue
+            if any(rx.match(text) for rx in _SCAFFOLD_LEADS):
+                return "scaffold label in the English"
+            if ">> Bible:" in linker.bible_text(text, key=item["section"], label=str(item["title"])):
+                links += 1
+    return "" if links else "no Bible link in the English"
+
+
+def _own_builder(book_dir: Path) -> bool:
+    """A book with its own build_book.py is rebuilt by that script, not here."""
+    return (book_dir / "build_book.py").is_file()
+
+
+def catchup(dry_run: bool = False) -> int:
+    """Build or refresh Logos files for certified works.
+
+    No Word file yet: build one when the work passes the research gate
+    (sourced intro.md + research.json). Books missing a sourced intro stay
+    off the shelf rather than failing that gate.
+
+    Word file present: rebuild it when rebuild_reason() says it is out of
+    date (newer English or intro, worksheet notes, or an older note filter),
+    even when the new text is shorter. Books with their own build_book.py are
+    listed, not rebuilt here.
+
+    dry_run: print the plan and change nothing.
     """
     import importlib.util
 
@@ -455,20 +569,44 @@ def catchup() -> int:
     queue = json.loads((ROOT / "outputs/work-pipeline/queue.json").read_text())
     dates_path = Path.home() / "SaneApps/websites/fathers.saneapps.com/data/author-dates.json"
     dates = json.loads(dates_path.read_text(encoding="utf-8")) if dates_path.is_file() else {}
-    built, skipped, failed = [], [], []
+    linker = BibleLinker()
+    built, rebuilt, skipped, failed, plan = [], [], [], [], []
     for slug in sorted(k for k, v in queue.items() if v.get("result") == "certified"):
         cr.ERRORS.clear()
-        yml_path = ROOT / "books" / slug / "book.yml"
+        book_dir = ROOT / "books" / slug
+        yml_path = book_dir / "book.yml"
         if not yml_path.is_file():
             skipped.append((slug, "no book.yml"))
             continue
-        named = _scalar(yml_path.read_text(encoding="utf-8"), "docx")
-        existing = ROOT / "books" / slug / (named or f"{slug}.docx")
-        if existing.is_file():
-            # Leave an existing file alone. A later catchup must not overwrite it.
-            skipped.append((slug, "docx already present"))
+        if slug in IDENTITY_HOLD:
+            skipped.append((slug, "identity hold: title and English are different works"))
             continue
-        brief_path = ROOT / "books" / slug / "work_brief.json"
+        named = _scalar(yml_path.read_text(encoding="utf-8"), "docx")
+        existing = book_dir / (named or f"{slug}.docx")
+        if existing.is_file():
+            reason = rebuild_reason(book_dir, existing)
+            if not reason:
+                skipped.append((slug, "Word file current"))
+                continue
+            if _own_builder(book_dir):
+                skipped.append((slug, f"{reason}; rebuild with its own build_book.py"))
+                continue
+            if dry_run:
+                plan.append((slug, "REBUILD", reason))
+                print(f"WOULD REBUILD {slug}: {reason}", flush=True)
+                continue
+            try:
+                receipt = build_docx(slug, existing, None, allow_shrink=True)
+            except (SystemExit, ValueError, OSError) as exc:
+                failed.append((slug, str(exc)))
+                print(f"FAIL {slug}: {exc}", flush=True)
+                continue
+            rebuilt.append({"slug": slug, "why": reason, "sections": receipt["sections"],
+                            "bible_links": receipt["bible_links"], "tn_notes": receipt["tn_notes"]})
+            print(f"REBUILT {slug}: {reason}; {receipt['sections']} sections, "
+                  f"{receipt['bible_links']} Bible links, {receipt['tn_notes']} TN notes", flush=True)
+            continue
+        brief_path = book_dir / "work_brief.json"
         title_en = ""
         if brief_path.is_file():
             try:
@@ -483,6 +621,14 @@ def catchup() -> int:
         if cr.ERRORS:
             skipped.append((slug, cr.ERRORS[0]))
             continue
+        refusal = link_refusal(book_dir, linker)
+        if refusal:
+            skipped.append((slug, refusal))
+            continue
+        if dry_run:
+            plan.append((slug, "BUILD", "no Word file"))
+            print(f"WOULD BUILD {slug}", flush=True)
+            continue
         original = yml_path.read_text(encoding="utf-8")
         try:
             notes = prepare_book_yml(slug, title_en)
@@ -494,11 +640,11 @@ def catchup() -> int:
                 yml_path.write_text(original, encoding="utf-8")
                 skipped.append((slug, cr.ERRORS[0]))
                 continue
-            out = ROOT / "books" / slug / f"{slug}.docx"
+            out = book_dir / f"{slug}.docx"
             # Honor an existing docx name if prepare left one in place.
             named = _scalar(yml_path.read_text(encoding="utf-8"), "docx")
             if named:
-                out = ROOT / "books" / slug / named
+                out = book_dir / named
             receipt = build_docx(slug, out, None)
         except (SystemExit, ValueError, OSError) as exc:
             yml_path.write_text(original, encoding="utf-8")
@@ -514,14 +660,19 @@ def catchup() -> int:
         print(f"BUILT {slug}: {receipt['sections']} sections, "
               f"{receipt['bible_links']} Bible links ({', '.join(notes) or 'body only'})",
               flush=True)
+    if dry_run:
+        builds = sum(1 for row in plan if row[1] == "BUILD")
+        print(f"catchup dry run: would build={builds} rebuild={len(plan) - builds} "
+              f"skipped={len(skipped)}; nothing written", flush=True)
+        return 0
     stamp = ROOT / "outputs" / "logos-catchup"
     stamp.mkdir(parents=True, exist_ok=True)
     out_path = stamp / "latest.json"
     out_path.write_text(json.dumps({
-        "built": built, "skipped": skipped, "failed": failed,
+        "built": built, "rebuilt": rebuilt, "skipped": skipped, "failed": failed,
     }, indent=1, ensure_ascii=False), encoding="utf-8")
-    print(f"catchup built={len(built)} skipped={len(skipped)} failed={len(failed)} -> {out_path}",
-          flush=True)
+    print(f"catchup built={len(built)} rebuilt={len(rebuilt)} skipped={len(skipped)} "
+          f"failed={len(failed)} -> {out_path}", flush=True)
     return 1 if failed else 0
 
 
@@ -582,69 +733,6 @@ def shelf(limit: int) -> int:
     queue = json.loads((ROOT / "outputs/work-pipeline/queue.json").read_text(encoding="utf-8"))
     running = {slug for slug, row in queue.items() if row.get("result") == "running"}
     words = _site_words()
-    # verify_docx already refused these. The English cites no Scripture,
-    # or the only English is a scaffold label. Leave them off the shelf.
-    # Do not invent Bible links. A real abbreviation such as "1 Cor 1:10"
-    # is linked, so it is not a reason to stay on this list.
-    no_link = {
-        "origen-proverbs-expositio",
-        "minucius-felix-octavius",
-        "clement-alexandria-newly-baptized",
-        "cyril-alexandria-fragmentum-papyraceum",
-        "cyril-alexandria-sermo-trium-puerorum",
-        "epiphanius-testamentum-ad-cives",
-        "eustathius-de-anima-contra-philosophos",
-        "eustathius-oratio-psalmorum-graduum",
-        "evagrius-capitula-xxxiii",
-        "gregory-thaumaturgus-ad-tatianum-de-anima",
-        "irenaeus-letter-victor",
-        "tertullian-to-scapula",
-        "severianus-in-job",
-        "origen-lamentationes-fragments",
-        "epiphanius-homilia-in-divini-corporis-sepulturam",
-        "severianus-in-illud-quando",
-        "epiphanius-de-prophetarum-vita-et-obitu",
-        "epiphanius-homilia-in-laudes-mariae-deiparae",
-        "epiphanius-liturgia-praesanctificatorum",
-        "epiphanius-homilia-in-christi-resurrectionem",
-        "epiphanius-de-prophetarum-vita-et-obitu-recensio-altera",
-
-        "epiphanius-homilia-in-festo-palmarum",
-        "photius-bibliotheca",
-        "severianus-in-genesim",
-        "epiphanius-homilia-in-assumptionem-christi",
-        # Linker found no Bible datatype links in the English. Do not invent any.
-        "epiphanius-de-xii-gemmis",
-        "epiphanius-index-apostolorum",
-        "epiphanius-notitiae-episcopatuum",
-        "severianus-fragmenta-2thess",
-        "epiphanius-index-discipulorum",
-        "epiphanius-epistula-ad-eusebium",
-        "acts-of-justin",
-        "epiphanius-de-xii-gemmis-fragmenta",
-        "epiphanius-apophthegmata",
-        "evagrius-spiritales-sententiae",
-        "dionysius-corinth-fragments",
-        "epiphanius-appendices-ad-indices-apostolorum-discipulorumque",
-        "epiphanius-epistula-ad-theodosium-imperatorem",
-        "eustathius-allocutio-constantinum",
-        "severianus-fragmentum-philemonem",
-        "eustathius-in-proverbia",
-        "epiphanius-enumeratio-lxxii-prophetarum-et-prophetissarum",
-        "origen-hebrews-homily-scrap",
-        "photius-fragmentum-philemonem",
-        "photius-epigramma",
-        "gregory-thaumaturgus-ouden-eidolon",
-    }
-    # Catalogue title and the English are different works. Do not ship the mismatch.
-    # hesychius-homilia-i-lazarum: site title is Homily I on Saint Lazarus, but the
-    # Greek incipit is the homily on James and David (Ἀνεγνώσθη … εἰς Ἰάκωβον … καὶ Δαυίδ).
-    identity_hold = {
-        "hesychius-homilia-i-lazarum",
-        # Labeled Scholia in Apocalypsem. The English is the Pantainos and Heraclas
-        # training notice and never mentions the Apocalypse.
-        "origen-apocalypse-scholia-scrap",
-    }
     dates_path = Path.home() / "SaneApps/websites/fathers.saneapps.com/data/author-dates.json"
     author_dates = json.loads(dates_path.read_text(encoding="utf-8"))
 
@@ -678,26 +766,6 @@ def shelf(limit: int) -> int:
 
     linker = BibleLinker()
 
-    def build_would_refuse(book: Path) -> bool:
-        # The same checks verify_docx enforces: a scaffold label must not ship,
-        # and a book with no Bible datatype link stays out. Do this before an intro.
-        try:
-            sections = collect_sections(book, None)
-        except SystemExit:
-            return True
-        links = 0
-        for item in sections:
-            paras = [str(p) for p in (item["english"] or [])
-                     if str(p).strip() and str(p).strip() != PENDING_ENGLISH]
-            for para in paras:
-                text = para.strip()
-                if any(rx.match(text) for rx in _SCAFFOLD_LEADS):
-                    return True
-                linked = linker.bible_text(text, key=item["section"], label=str(item["title"]))
-                if ">> Bible:" in linked:
-                    links += 1
-        return links == 0
-
     ranked: list[tuple[int, str]] = []
     undated = 0
     empty_english = 0
@@ -706,7 +774,7 @@ def shelf(limit: int) -> int:
         if not book.is_dir() or not (book / "book.yml").is_file():
             continue
         slug = book.name
-        if slug in running or slug in no_link or slug in identity_hold:
+        if slug in running or slug in IDENTITY_HOLD:
             continue
         if (book / f"{slug}.docx").is_file():
             continue
@@ -725,7 +793,8 @@ def shelf(limit: int) -> int:
         if not has_usable_english(book):
             empty_english += 1
             continue
-        if build_would_refuse(book):
+        # Live Bible-link check (replaced the hand-kept no_link list).
+        if link_refusal(book, linker):
             refused += 1
             continue
         ranked.append((words.get(slug, 0), slug))
@@ -798,20 +867,27 @@ def main() -> int:
     ap.add_argument("--out", default="")
     ap.add_argument("--sections", default="")
     ap.add_argument("--catchup", action="store_true",
-                    help="build DOCX for certified works that pass the research gate")
+                    help="build DOCX for certified works that pass the research gate, "
+                         "and rebuild out-of-date ones")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="with --catchup, print what would be built and change nothing")
+    ap.add_argument("--allow-shrink", action="store_true",
+                    help="full rebuild may replace a longer file (not with --sections)")
     ap.add_argument("--shelf", action="store_true",
                     help="source intros and build DOCX for works that already have English")
     ap.add_argument("--limit", type=int, default=10, help="with --shelf, how many works")
     args = ap.parse_args()
     if args.catchup:
-        return catchup()
+        return catchup(dry_run=args.dry_run)
     if args.shelf:
         return shelf(args.limit)
     if not args.book or not args.out:
         ap.error("--book and --out are required unless --catchup")
     only = {s.strip() for s in args.sections.split(",") if s.strip()} or None
+    if only and args.allow_shrink:
+        ap.error("--allow-shrink is for a full rebuild, not --sections")
     try:
-        receipt = build_docx(args.book, Path(args.out), only)
+        receipt = build_docx(args.book, Path(args.out), only, allow_shrink=args.allow_shrink)
     except (SystemExit, ValueError) as exc:
         print(f"build_pbb_docx: {exc}", flush=True)
         return 1

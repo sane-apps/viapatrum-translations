@@ -45,7 +45,8 @@ class WatchTestBase(unittest.TestCase):
         patches = {"LA": self.la, "LOGS": self.logs, "WP": self.wp, "SITE": self.site, "REPO": root / "repo",
                    "OUT": self.out, "STATUS": self.out / "status.json", "ALERTS_LOG": self.out / "alerts.log",
                    "RUN_LOCK": self.out / "watch.lock", "launchctl_states": self.launchctl,
-                   "broker_stats": lambda: {"errors": 0}, "ship_ps": lambda: "", "ship_lock_holders": lambda: []}
+                   "broker_stats": lambda: {"errors": 0}, "ship_ps": lambda: "", "ship_lock_holders": lambda: [],
+                   "shelf_ps": lambda: ""}
         for k, v in patches.items():
             p = mock.patch.object(W, k, v)
             p.start()
@@ -163,6 +164,140 @@ class AlertLogTests(WatchTestBase):
         self.states[HELD] = ("-", "0")
         self.run_main()
         self.assertIn("cleared held-review:claude", (self.out / "alerts.log").read_text())
+
+
+class SelfAndJobTruthTests(WatchTestBase):
+    """P1a 2026-10-06: the watch reports its own gaps, dead broker flushers,
+    a later held-review success, BUSY lock ticks and the auto ship's state."""
+
+    def test_live_watch_lock_exits_75_and_dead_one_is_taken_and_reported(self):
+        lock = self.out / "watch.lock"
+        lock.mkdir()
+        (lock / "pid").write_text(f"{os.getpid()} {int(time.time())}\n")
+        with mock.patch("builtins.print"), \
+                mock.patch.object(W.autoship, "pid_command", lambda pid: "python fathers_watch.py"):
+            self.assertEqual(W.main(), 75)
+        self.assertTrue(lock.exists())
+        (lock / "pid").unlink()  # old-style empty lock left by a killed pass
+        with mock.patch("builtins.print"):
+            self.assertEqual(W.main(), 0)
+        self.assertFalse(lock.exists())
+        st = json.loads((self.out / "status.json").read_text())
+        self.assertEqual(st["checks"]["watch"]["state"], "warn")
+        self.assertIn("took over a watch lock", st["checks"]["watch"]["detail"])
+        self.assertIn("watch:gap", {a["id"] for a in st["alerts"]})
+
+    def test_watch_lock_pid_reused_or_too_old_is_taken(self):
+        lock = self.out / "watch.lock"
+        for cmd, start in (("/usr/libexec/somed", int(time.time())),
+                           ("python fathers_watch.py", int(time.time()) - W.WATCH_HARD_LIMIT_S - 60)):
+            lock.mkdir()
+            (lock / "pid").write_text(f"{os.getpid()} {start}\n")
+            with mock.patch("builtins.print"), \
+                    mock.patch.object(W.autoship, "pid_command", lambda pid, c=cmd: c):
+                self.assertEqual(W.main(), 0)
+            self.assertFalse(lock.exists())
+
+    def test_newer_launchd_exit_beats_an_older_logged_success(self):
+        self.states[HELD] = ("-", "75")  # BUSY run wrote no "held review exit" line
+        (self.logs / "fathers-held-review.out.log").write_text("2026-10-04 12:21:54 held review exit 0\n")
+        state, detail, _ = W.check_held_review()
+        self.assertEqual(state, "warn")
+        self.assertIn("exit 75", detail)
+
+    def test_drain_silent_two_runs_warns(self):
+        log = self.logs / "fathers-audio-next.out.log"
+        log.write_text("2026-10-06T08:18:33-04:00 audio drain: nothing left to read\n")
+        os.utime(log, (time.time() - 20 * 60,) * 2)
+        self.assertEqual(W.check_audio()[0], "ok")
+        os.utime(log, (time.time() - 35 * 60,) * 2)
+        state, detail, _ = W.check_audio()
+        self.assertEqual(state, "warn")
+        self.assertIn("silent 35 min", detail)
+
+    def test_audio_drift_has_its_own_alert_and_counts_last_ship_only(self):
+        (self.site / "outputs/audio").mkdir(parents=True)
+        (self.site / "outputs/audio/drain-status.json").write_text(json.dumps(
+            {"backlog": 0, "counts": {}, "waiting": {"sentence_drift": 72}}))
+        (self.logs / "fathers-ship-auto.log").write_text(
+            "2026-10-06 12:41:34 + scripts/ship.sh\nskip a s1: audio does not match the page\n"
+            "2026-10-06 13:38:18 + scripts/ship.sh\nskip b s1: audio does not match the page\n"
+            "skip b s1: audio does not match the page\nskip c s2: sentence drift\n")
+        state, detail, info = W.check_audio_drift()
+        self.assertEqual(state, "warn")
+        self.assertEqual(info["ship_mismatch"], 2)
+        self.assertIn("72 sections wait on sentence drift", detail)
+        self.assertEqual(W.ALERTS["audio_drift"], "audio:drift")
+        (self.site / "outputs/audio/drain-status.json").write_text(json.dumps({"waiting": {"sentence_drift": 0}}))
+        (self.logs / "fathers-ship-auto.log").write_text("2026-10-06 13:38:18 + scripts/ship.sh\nok\n")
+        self.assertEqual(W.check_audio_drift()[0], "ok")
+
+    def test_gap_since_previous_pass_is_reported_once(self):
+        W.PRIOR = {"checked_at": "2026-01-01T00:00:00+00:00"}
+        state, detail, _ = W.check_watch()
+        self.assertEqual(state, "warn")
+        self.assertIn("watch was silent", detail)
+        W.PRIOR = {"checked_at": W.now_iso()}
+        self.assertEqual(W.check_watch()[0], "ok")
+
+    def test_broker_queue_with_no_batch_in_flight_is_a_dead_flusher(self):
+        stats = {"errors": 0, "models": {"@cf/moonshotai/kimi-k2.6": {
+            "queued": 321, "oldest_queued_s": 56348.0, "pending_batches": 0}}}
+        with mock.patch.object(W, "broker_stats", lambda: stats):
+            state, detail, _ = W.check_broker()
+        self.assertEqual(state, "warn")
+        self.assertIn("kimi-k2.6 321 queued 15.7 h", detail)
+        stats["models"]["@cf/moonshotai/kimi-k2.6"]["pending_batches"] = 1
+        with mock.patch.object(W, "broker_stats", lambda: stats):
+            self.assertEqual(W.check_broker()[0], "ok")
+
+    def test_later_held_review_success_clears_launchd_exit_3(self):
+        self.states[HELD] = ("-", "3")
+        log = self.logs / "fathers-held-review.out.log"
+        log.write_text("2026-10-04 04:30:25 held review exit 3\n")
+        self.assertEqual(W.check_held_review()[0], "fail")
+        log.write_text("2026-10-04 04:30:25 held review exit 3\n2026-10-04 12:21:54 held review exit 0\nmanual run exit 0\n")
+        self.assertEqual(W.check_held_review()[0], "ok")
+
+    def test_busy_lock_lines_do_not_count_as_ticks(self):
+        log = self.logs / "fathers-recert.out.log"
+        log.write_text(f"{hhmmss(3 * 3600)} lane C1 started pid 1\n{hhmmss(60)} BUSY: tick pid 9 has run 170 min; exit 75\n")
+        state, detail, _ = W.check_recert()
+        self.assertEqual(state, "warn")
+        self.assertIn("silent", detail)
+
+    def test_beliefs_crash_without_failed_line_is_reported(self):
+        (self.logs / "fathers-beliefs.log").write_text(
+            "03:30:00 index\n03:35:00 search\nTraceback (most recent call last):\n  File x\n")
+        state, detail, _ = W.check_beliefs()
+        self.assertEqual(state, "warn")
+        self.assertIn("search crashed", detail)
+
+    def test_ship_auto_recomputes_and_reports_shelf_and_exit(self):
+        sa = W.REPO / "outputs/ship-auto"
+        sa.mkdir(parents=True)
+        now = {"text": "t2", "audio": "a", "library": "l"}
+        base = {"shipped": {"text": "t1", "audio": "a", "library": "l"},
+                "last_run": {"at": time.strftime("%Y-%m-%dT%H:%M:%S"), "exit": 0, "why": "shipped"}}
+        (sa / "state.json").write_text(json.dumps(base))
+        with mock.patch.object(W.autoship, "inputs", lambda: now):
+            state, detail, info = W.check_ship_auto()
+            self.assertEqual(state, "ok")
+            self.assertIn("text changed since the last auto ship", detail)
+            base["shelf_pending"] = {"since": base["last_run"]["at"], "done": ["ebooks"], "error": "audiobooks rc=1"}
+            base["last_run"].update(exit=3, why="paid shelf: audiobooks rc=1")
+            (sa / "state.json").write_text(json.dumps(base))
+            state, detail, _ = W.check_ship_auto()
+            self.assertEqual(state, "warn")
+            self.assertIn("last auto ship exit 3", detail)
+            self.assertIn("paid shelf refresh failed (audiobooks rc=1)", detail)
+
+    def test_e2e_names_failed_line_and_log(self):
+        (self.site / "outputs/e2e/LATEST.json").write_text(json.dumps(
+            {"rc": 1, "failed": "BLOCKED: browser check failed", "log": "outputs/e2e/last-run.log", "tail": "x"}))
+        state, detail, _ = W.check_e2e()
+        self.assertEqual(state, "fail")
+        self.assertIn("BLOCKED: browser check failed (log outputs/e2e/last-run.log)", detail)
 
 
 if __name__ == "__main__":

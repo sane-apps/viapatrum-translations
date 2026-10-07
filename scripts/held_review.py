@@ -62,6 +62,13 @@ Output ONLY JSON lines, one per finding, no prose and no fences:
 {"id": "<id>", "verdict": "real|noise|unsure", "fix_ok": true|false|null, "correct_fix": "<text>"|null, "note": "<one short sentence>"}"""
 
 
+def reviewable(j: dict) -> bool:
+    """A hold the review judges: open findings that a checker confirmed, or
+    that no checker ruled on (work_pipeline open_why, 2026-10-06)."""
+    why = str(j.get("_why", ""))
+    return "confirmed problems" in why or "without a ruling" in why
+
+
 def held_rows(rows: dict) -> list[Path]:
     out = []
     for bdir in sorted(d for d in W.STAGE.iterdir() if (d / "sections").is_dir()):
@@ -74,7 +81,7 @@ def held_rows(rows: dict) -> list[Path]:
                 j = json.loads(f.read_text())
             except ValueError:
                 continue
-            if j.get("_status") == "hold" and "confirmed problems" in str(j.get("_why", "")):
+            if j.get("_status") == "hold" and reviewable(j):
                 out.append(f)
     return out
 
@@ -366,7 +373,7 @@ def apply(d: Path, dry_run: bool) -> dict:
         if not p.exists():
             continue  # a lane is redoing this section
         j = json.loads(p.read_text())
-        if j.get("_status") != "hold" or "confirmed problems" not in str(j.get("_why", "")):
+        if j.get("_status") != "hold" or not reviewable(j):
             continue  # changed since the review
         if W.prev_running(rows, book):
             stats["skipped_running"] += 1

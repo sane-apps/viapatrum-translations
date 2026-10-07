@@ -40,7 +40,12 @@ import book_era  # noqa: E402
 import llm_bakeoff as LB  # noqa: E402
 import work_pipeline as W  # noqa: E402
 from search_sync import embed_docs, _req, CF  # noqa: E402
-from speak_text import read_text  # noqa: E402
+# Passage ids hash the cleaned words, so the cleaner must not change under the
+# grades: speak_text.read_text moved to the reader's words on 2026-10-06, which
+# would make ~300 graded passages look new (re-embed, re-grade, and drop from the
+# map meanwhile) with no English change. The legacy cleaner keeps the old ids;
+# beliefs_page._on_page ignores the [brackets] it leaves in.
+from speak_text import legacy_read_text as read_text  # noqa: E402
 
 OUT = ROOT / "outputs" / "doctrine-map"
 SITE_DATA = SITE / "data" / "explore" / "doctrine_map.json"
@@ -337,6 +342,8 @@ def q_grade_one(q: dict, c: dict) -> dict:
         r = ask(W.REFEREE)
         if r:
             raw[W.REFEREE] = r
+    if len(raw) < 2:   # one vote or none is not a verdict; retry next run rather than store "disputed"
+        raise RuntimeError(f"only {len(raw)} grader answered")
     final = {}
     for pid in pids:
         vs = [raw[m]["v"][pid]["verdict"] for m in raw]
@@ -355,6 +362,7 @@ def q_grade(only: set | None, workers: int) -> int:
     W.receipts_ok(CHECKERS + [W.REFEREE], "doctrine-grade")
     gdir = OUT / "q-grades"
     gdir.mkdir(parents=True, exist_ok=True)
+    failed = 0
     for q in load_questions():
         if only and q["id"] not in only:
             continue
@@ -369,16 +377,31 @@ def q_grade(only: set | None, workers: int) -> int:
         todo = [c for c in cands if (have.get(c["id"]) or {}).get("key") != key]
         print(f"grade {q['id']}: {len(todo)} of {len(cands)} to grade", flush=True)
 
+        # Hardening: one passage that fails (a vendor error, a broker timeout)
+        # is logged and left ungraded for the next run, so the other passages
+        # still save. (The 2026-10-06 beliefs log that ends mid-traceback was
+        # cut off by the disk-full event, not by this; an ordinary exception
+        # here already made run-doctrine-map.sh print "grade FAILED".)
         def run(c):
-            r = q_grade_one(q, c)
+            try:
+                r = q_grade_one(q, c)
+            except Exception as e:  # noqa: BLE001
+                print(f"  grade error {q['id']} {c['id']}: {type(e).__name__}: {str(e)[:200]}", flush=True)
+                return c["id"], None
             r["key"] = key
             return c["id"], r
 
         with ThreadPoolExecutor(max_workers=workers) as ex:
             for k, (cid, r) in enumerate(ex.map(run, todo), 1):
-                have[cid] = r
+                if r is None:
+                    failed += 1
+                else:
+                    have[cid] = r
                 if k % 10 == 0 or k == len(todo):
                     gpath.write_text(json.dumps(have, ensure_ascii=False, indent=1))
+    if failed:
+        print(f"grade: {failed} passages failed and wait for the next run", flush=True)
+        return 1
     return 0
 
 
@@ -467,6 +490,12 @@ def q_report() -> int:
     or exclude it, and per writer what their own words decide."""
     rows, _ = load_corpus()
     by_id = {r["id"]: r for r in rows}
+    # The corpus is as of the last index. A passage id hashes its exact words, so
+    # a graded passage whose id is not in today's English quotes words the work
+    # page no longer says (Amphilochius "Fire was kindled", 2026-10-06). It is
+    # left out until the next index and grade see the new words.
+    current = {r["id"] for r in paragraphs()}
+    stale = []
     searched = {}
     for r in rows:
         if r["year"]:
@@ -489,6 +518,9 @@ def q_report() -> int:
             # overrides its book's entry, and may name the real speaker.
             att = ((attribution.get("passages") or {}).get(cid) or (attribution.get("books") or {}).get(c["book"], {})) if c else {}
             if not c or not r.get("on_question") or att.get("status") == "spurious":
+                continue
+            if cid not in current:
+                stale.append(f"{q['id']}: {c['book']}/{c['section']}")
                 continue
             year = att.get("work_year") or c["year"]
             if not year or year > MAP_UNTIL:
@@ -531,6 +563,10 @@ def q_report() -> int:
             "searched": {str(k): sorted(v) for k, v in sorted(searched.items())}, "questions": out}
     SITE_DATA.write_text(json.dumps(data, ensure_ascii=False, indent=1))
     print(f"report: {len(out)} questions -> {SITE_DATA}", flush=True)
+    if stale:
+        print(f"report: left out {len(stale)} graded passages whose English has changed since the index:", flush=True)
+        for s in sorted(set(stale)):
+            print(f"  {s}", flush=True)
     return 0
 
 

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Mini weekly independent re-review (second-model sample + corrections snapshot).
 # LaunchAgent: com.saneapps.fathers-independent-review (Sundays 03:00).
-# Exit 0 always unless infra failed; findings never fail the job.
+# Findings never fail the job. Exit codes: 0 ran; independent_review.py's own
+# non-zero exit when it crashed; 75 another Fathers job holds the global lock.
+# Network-bound: it does not take the site's outputs/build.lock.
 
 set -euo pipefail
 
@@ -20,7 +22,8 @@ if [[ ! -d "$ROOT" ]]; then
   exit 0
 fi
 
-# Yield to the overnight burn via the same global flock (non-blocking-ish).
+# Yield to ai_promote (and the retired overnight burn) via the same global
+# flock. Its holder writes pid, owner and start time to global-burn.lock.meta.json.
 HOLD_LOG="$OUT/lock.$$.log"
 set +e
 /usr/bin/python3 -u "$ROOT/scripts/fathers_run_lock.py" try-global "indreview:$$" \
@@ -28,7 +31,7 @@ set +e
 HOLD_PID=$!
 set -e
 held=0
-for _ in $(seq 1 30); do
+for _ in $(seq 1 100); do  # up to 10 s for the lock helper to start
   if ! kill -0 "$HOLD_PID" 2>/dev/null; then
     break
   fi
@@ -42,11 +45,20 @@ for _ in $(seq 1 30); do
   sleep 0.1
 done
 if [[ "$held" -ne 1 ]]; then
-  echo "Overnight burn holds the flock; independent review yields (exit 0)."
+  META="${SANE_FATHERS_LOCK_ROOT:-$HOME/SaneApps/outputs/fathers-overnight/locks}/global-burn.lock.meta.json"
+  WHO="$(/usr/bin/python3 - "$META" <<'PY' 2>/dev/null || echo "holder unknown"
+import json, sys
+from datetime import datetime, timezone
+m = json.load(open(sys.argv[1]))
+age = (datetime.now(timezone.utc) - datetime.fromisoformat(m["started"])).total_seconds() // 60
+print(f"pid {m.get('pid')} ({m.get('owner')}) for {int(age)} min")
+PY
+)"
+  echo "[$(date -u +%Y%m%dT%H%M%SZ)] BUSY: the global Fathers lock is held by $WHO; independent review skipped (exit 75)" | tee -a "$OUT/runner.log"
   kill "$HOLD_PID" 2>/dev/null || true
   wait "$HOLD_PID" 2>/dev/null || true
   rm -f "$HOLD_LOG"
-  exit 0
+  exit 75
 fi
 cleanup() {
   kill "$HOLD_PID" 2>/dev/null || true
@@ -75,4 +87,4 @@ nice -n 10 /usr/bin/python3 scripts/corrections.py 2>&1 | tee -a "$OUT/runner.lo
 set -e
 
 echo "[$(date -u +%Y%m%dT%H%M%SZ)] independent review end rc=$RC" | tee -a "$OUT/runner.log"
-exit 0
+exit "$RC"

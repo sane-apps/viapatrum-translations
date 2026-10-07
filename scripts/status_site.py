@@ -7,15 +7,24 @@ recert tick (scripts/run-recert-lanes.sh) rebuilds it and deploys it to the
 private Pages project viapatrum-status (Cloudflare Access, owner only) when
 the content changed. The build time appears only in index.html, inside
 <span data-built>, which the tick leaves out of its change hash.
+
+It also prints the one "Pipeline now" block: live vs built vs waiting to ship,
+the paid shelf, the auto ship's last run and skip, git ahead/dirty, disk free,
+whether fathers-watch is current, and the owner calls already in the site
+handoff. `status_site.py --now` prints only that block (no site build). The
+page shows the parts that change on events, not every tick, so the tick's
+change hash still skips quiet deploys.
 """
 from __future__ import annotations
 
 import html
 import json
 import re
+import subprocess
 import sys
 import time
 from collections import defaultdict
+from datetime import datetime
 from pathlib import Path
 
 HOME = Path.home()
@@ -24,6 +33,106 @@ TR = HOME / "SaneApps/clients/translations"
 OUT = TR / "outputs" / "status-site"
 sys.path.insert(0, str(SITE / "scripts"))
 sys.path.insert(0, str(TR / "scripts"))
+import ship_if_changed as autoship  # noqa: E402
+
+WATCH_STATUS = TR / "outputs/fathers-watch/status.json"
+WATCH_STALE_MIN = 30  # fathers-watch runs every 15 min
+HANDOFF = SITE / "SESSION_HANDOFF.md"
+OWNER_CALL_RE = re.compile(r"owner calls? still open|still owner decision|\(owner decision|owner must|"
+                           r"owner to (?:run|decide)|needs owner", re.I)
+
+
+def _ago(ts: float) -> str:
+    m = int((time.time() - ts) // 60)
+    return f"{m} min ago" if m < 120 else f"{m // 60} h ago"
+
+
+def _git(repo: Path) -> str:
+    try:
+        ahead = subprocess.run(["git", "-C", str(repo), "rev-list", "--count", "@{u}..HEAD"],
+                               capture_output=True, text=True, timeout=30).stdout.strip() or "?"
+        dirty = subprocess.run(["git", "-C", str(repo), "status", "--porcelain"],
+                               capture_output=True, text=True, timeout=60).stdout
+    except (OSError, subprocess.SubprocessError):
+        return "git unavailable"
+    return f"{ahead} ahead of origin, {len(dirty.splitlines())} uncommitted"
+
+
+def ops_facts() -> list[tuple[str, str, str]]:
+    """(label, full text for the terminal, steady text for the page). The steady
+    text leaves out numbers that move every tick (minutes, GB) so the page
+    redeploys only when something happened."""
+    rows = []
+    try:
+        rc = json.loads((SITE / "outputs/ship-last/receipt.json").read_text())
+        live = f"{rc.get('shipped_at', '?')} {rc.get('mode', '')} ({'verified' if rc.get('verified') else 'NOT verified'})"
+    except (OSError, ValueError):
+        live = "no ship receipt"
+    rows.append(("Live", live, live))
+    idx = SITE / "dist/index.html"
+    built = time.strftime("%Y-%m-%dT%H:%M", time.localtime(idx.stat().st_mtime)) if idx.exists() else "no build"
+    rows.append(("Built (site dist/)", built, built))
+    st = autoship.load_state()
+    now = autoship.inputs()
+    waiting = [k for k in now if now[k] != (st.get("shipped") or {}).get(k)]
+    w = (", ".join(waiting) + " changed since the last auto ship") if waiting else "nothing"
+    if st.get("pending_since"):
+        w += f" (pending since {st['pending_since']})"
+    rows.append(("Waiting to ship", w, w))
+    shelf = st.get("shelf_pending")
+    if shelf:
+        s = (f"PENDING since {shelf.get('since')}; done: {', '.join(shelf.get('done') or []) or 'nothing'}"
+             + (f"; ERROR {shelf['error']}" if shelf.get("error") else ""))
+    else:
+        s = f"up to date (last refresh {(st.get('last_shelf') or {}).get('at', 'before state was kept')})"
+    rows.append(("Paid shelf", s, s))
+    lr = st.get("last_run") or {}
+    run = f"exit {lr.get('exit')} at {lr.get('at')}: {lr.get('why')}" if lr else "no run recorded yet"
+    rows.append(("Auto ship last run", run, run))
+    sk = st.get("last_skip") or {}
+    skip = f"{sk.get('at')}: {sk.get('why')}" if sk else "none"
+    rows.append(("Auto ship last skip", skip, skip))
+    for name, repo in (("Git site", SITE), ("Git translations", TR)):
+        g = _git(repo)
+        rows.append((name, g, g.split(",")[0]))
+    free = autoship.free_gb()
+    low = free < autoship.MIN_FREE_GB
+    rows.append(("Disk", f"{free} GB free{' - UNDER the ' if low else ', floor '}{autoship.MIN_FREE_GB} GB"
+                 + (" (ships, builds and e2e skip)" if low else ""),
+                 f"UNDER {autoship.MIN_FREE_GB} GB" if low else f"above the {autoship.MIN_FREE_GB} GB floor"))
+    try:
+        ws = json.loads(WATCH_STATUS.read_text())
+        at = datetime.fromisoformat(ws["checked_at"]).timestamp()
+        ids = ", ".join(a["id"] for a in ws.get("alerts") or []) or "no alerts"
+        stale = (time.time() - at) / 60 > WATCH_STALE_MIN
+        head = f"STALE: last pass {_ago(at)} (unloaded or stuck?)" if stale else f"{ws.get('overall')}"
+        rows.append(("Fathers watch", f"{head}; {ids}" + ("" if stale else f" (last pass {_ago(at)})"),
+                     f"{head if not stale else 'STALE'}; {ids}"))
+    except (OSError, ValueError, KeyError, TypeError):
+        rows.append(("Fathers watch", "NO status.json", "NO status.json"))
+    try:
+        head = HANDOFF.read_text(encoding="utf-8", errors="replace").splitlines()[:60]
+        # Keep only the sentence that names the owner call, not the whole bullet.
+        calls = [" ".join(seg for seg in re.split(r"(?<=[.;])\s+", ln.lstrip("- ").strip())
+                          if OWNER_CALL_RE.search(seg))[:240]
+                 for ln in head if OWNER_CALL_RE.search(ln)][:6]
+    except OSError:
+        calls = []
+    for i, c in enumerate(calls or ["none named in the site handoff"]):
+        rows.append(("Owner calls" if i == 0 else "", c, c))
+    return rows
+
+
+def ops_text(rows) -> str:
+    return "Pipeline now (" + time.strftime("%Y-%m-%d %H:%M") + ")\n" + "\n".join(
+        f"  {label:20s} {full}" for label, full, _ in rows)
+
+
+# --now answers before the heavy site imports below.
+if __name__ == "__main__" and "--now" in sys.argv:
+    print(ops_text(ops_facts()))
+    raise SystemExit(0)
+
 from build_site import work_book, PUBLIC_ENGLISH_TITLES  # noqa: E402
 import audit_log  # noqa: E402
 import work_pipeline as wp  # noqa: E402
@@ -214,6 +323,12 @@ def main() -> int:
     pct = round(100 * totals["certified"] / max(1, totals["live"]))
     recent = "".join(event_html(ev, True) for ev in list(reversed(events))[:60])
     scout_html = scout_section()
+    facts = ops_facts()
+    ops_html = ('<h2>Pipeline now</h2><p class="sub">Live site, waiting changes, paid shelf, jobs and open owner calls. '
+                'Run <code>scripts/status_site.py --now</code> on the Mini for the minute-by-minute view.</p>'
+                '<div class="feed">' + "".join(
+                    f'<div class="ev"><time>{E(label)}</time><p>{E(steady)}</p></div>' for label, _, steady in facts)
+                + '</div>')
     body = f"""
 <header><h1>Via Patrum status</h1><p class="sub">Built <span data-built>{generated}</span> (Mini time). Rebuilt every 30 minutes from the audit log and redeployed only when something changed.</p></header>
 <section class="sum">
@@ -223,6 +338,7 @@ def main() -> int:
   <div class="tile"><b>{totals['new_certified']}</b><span>new translations certified</span></div>
   <div class="tile"><b>{totals['events']:,}</b><span>recorded changes</span></div>
 </section>
+{ops_html}
 <div class="key">
   <span><span class="chip good">Certified</span> every section checked against the Greek or Latin by two independent models, intro checked, readers passed</span>
   <span><span class="chip warn">Held</span> checked; part still disputed, current text stays live</span>
@@ -280,6 +396,7 @@ render();
     (OUT / "index.html").write_text(page("Via Patrum Status", body), encoding="utf-8")
     (OUT / "status.json").write_text(json.dumps({"totals": totals, "works": rows}, ensure_ascii=False))
     print(json.dumps(totals))
+    print(ops_text(facts))
     return 0
 
 

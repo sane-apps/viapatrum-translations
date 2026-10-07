@@ -26,6 +26,7 @@ Proven mappings (Air, Logos 53.1, 2026-09-17):
 import argparse
 import datetime
 import glob
+import json
 import os
 import re
 import shutil
@@ -34,9 +35,19 @@ import subprocess
 import sys
 import urllib.parse
 import uuid
+from pathlib import Path
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BACKUP_DIR = os.path.join(REPO, "outputs", "pb-db-backups")
+sys.path.insert(0, REPO)
+from pipeline.book_meta import unquote_scalar  # noqa: E402
+from pipeline.verify_docx import logos_file_problems  # noqa: E402
+
+# The site build's list of published works. A Logos description links to the
+# work page only when the page exists (an unpublished slug is a 404).
+SITE_CATALOG = os.path.expanduser(
+    "~/SaneApps/websites/fathers.saneapps.com/dist/app/v1/catalog.json")
+WORK_URL = "https://viapatrum.org/works/{slug}/"
 
 
 def resolve_pb_db():
@@ -81,13 +92,26 @@ _SCALAR_RE = re.compile(r"^([A-Za-z0-9_]+):\s*(.*)$")
 
 
 def _unquote(val):
-    val = val.strip()
-    if len(val) >= 2 and val[0] == val[-1] and val[0] in ("'", '"'):
-        inner = val[1:-1]
-        if val[0] == "'":
-            inner = inner.replace("''", "'")
-        return inner
-    return val
+    return unquote_scalar(val)
+
+
+def published_slugs(path=SITE_CATALOG):
+    """Slugs the site published, or None when the catalogue cannot be read."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            works = json.load(f).get("works") or []
+    except (OSError, ValueError, AttributeError):
+        return None
+    return {w["slug"] for w in works if isinstance(w, dict) and w.get("slug")}
+
+
+def with_work_url(desc, slug, published):
+    """Add the work page link to a Logos description when the page exists."""
+    url = WORK_URL.format(slug=slug)
+    if url in desc or not published or slug not in published:
+        return desc
+    lead = desc.rstrip()
+    return (lead + " " if lead else "") + "The same English is free to read at " + url
 
 
 def load_yml(path):
@@ -173,7 +197,7 @@ def update_book_row(cur, bid, row):
     )
 
 
-def book_row(slug, yml, yml_path):
+def book_row(slug, yml, yml_path, published=None):
     docx_name = yml.get("docx") or ""
     docx_path = os.path.join(REPO, "books", slug, docx_name)
     if not docx_name or not os.path.exists(docx_path):
@@ -193,7 +217,8 @@ def book_row(slug, yml, yml_path):
         {
             "title": yml.get("title", ""),
             "authors": yml.get("author", ""),
-            "description": yml.get("logos_blurb") or yml.get("description", ""),
+            "description": with_work_url(
+                yml.get("logos_blurb") or yml.get("description", ""), slug, published),
             "language": lang,
             "copyright": yml.get("copyright", ""),
             "resource_type": pb_type,
@@ -228,28 +253,50 @@ def main():
     existing = {
         r[0]: r
         for r in cur.execute(
-            "SELECT ResourceId,Id,Title,Authors FROM Books WHERE IsDeleted=0"
+            "SELECT ResourceId,Id,Title,Authors,Description FROM Books WHERE IsDeleted=0"
         )
     }
     by_title = {}
-    for rid, bid, title, authors in existing.values():
+    old_desc = {}
+    for rid, bid, title, authors, desc in existing.values():
         by_title.setdefault((title, authors), []).append((rid, bid))
+        old_desc[bid] = desc
 
+    published = published_slugs()
+    if published is None:
+        # A missing or half-written catalogue (a site rebuild at 04:00) must
+        # not strip the work link from every row: keep existing descriptions.
+        print(f"note: cannot read the site catalogue at {SITE_CATALOG}; "
+              "existing descriptions left as they are")
     plan = []
     for yml_path in sorted(glob.glob(os.path.join(REPO, "books", "*", "book.yml"))):
         slug = os.path.basename(os.path.dirname(yml_path))
         yml = load_yml(yml_path)
-        row, err = book_row(slug, yml, yml_path)
+        row, err = book_row(slug, yml, yml_path, published)
         if err:
             plan.append((slug, f"SKIP ({err})", None))
             continue
         rid = yml.get("resource_id") or ""
         if rid and rid in existing:
-            plan.append((slug, f"UPDATE Id={existing[rid][1]} {rid}", (row, existing[rid][1], yml_path, yml, False)))
+            bid = existing[rid][1]
+            if published is None and old_desc.get(bid):
+                row = dict(row, description=old_desc[bid])
+            plan.append((slug, f"UPDATE Id={bid} {rid}", (row, bid, yml_path, yml, False)))
         elif (row["title"], row["authors"]) in by_title:
             rid2, bid2 = by_title[(row["title"], row["authors"])][0]
+            if published is None and old_desc.get(bid2):
+                row = dict(row, description=old_desc[bid2])
             plan.append((slug, f"UPDATE Id={bid2} {rid2} (matched by title)", (row, bid2, yml_path, yml, True)))
         else:
+            # A new row only for a Word file the driver may build: the same
+            # rule as logos_build.verify_hold (verify_docx, older than its
+            # English, no intro). Otherwise the row would sit in the Personal
+            # Books list with nothing the driver will ever build.
+            docx = Path(urllib.parse.unquote(row["src"]))
+            errs = logos_file_problems(docx.parent, docx)
+            if errs:
+                plan.append((slug, "SKIP (Word file held: %s)" % errs[0][:100], None))
+                continue
             plan.append((slug, "INSERT new row", (row, None, yml_path, yml, False)))
 
     for slug, action, _ in plan:

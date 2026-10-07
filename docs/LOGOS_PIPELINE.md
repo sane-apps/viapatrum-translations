@@ -16,7 +16,20 @@ Sundays 04:00 local, after the 03:00 independent-review job):
 3. **Build loop** for every DOCX book with `LastCompiled` NULL or older
    than the DOCX mtime: scroll-search the row by title, click it,
    verify the body file, AX-click **Build book**, poll `LastCompiled`
-   until it flips (10 min timeout per book).
+   until it flips (10 min timeout per book). A book's row is the one
+   whose `ResourceId` its `book.yml` names (`resource_id`, written back
+   by `pb_sync`); a book without one matches on title **and** author.
+   Never on title alone: 13 titles are shared (Fragments on John has
+   four authors).
+   Before any build or upload, every Word file runs
+   `verify_docx.logos_file_problems`, the one rule the pack and
+   `pb_sync` also apply: `verify_docx` (for example translator worksheet
+   notes such as `True OET` or `Pass A`), a file older than its English
+   or `intro.md`, or a file with no Introduction when `intro.md` exists.
+   A file that fails is held, logged as `HOLD`, and listed in the run
+   receipt and under `HELD:` in `--dry-run`; `pb_sync` adds no new row
+   for it. Rebuild it (`build_pbb_docx.py --catchup` for certified works),
+   then the next run takes it.
 4. Restart Logos (a freshly built row expands inline and cannot be
    re-clicked in the same session).
 5. **Upload loop** for every compiled book with no upload receipt (or
@@ -60,9 +73,12 @@ partial failure — fix the named books with `--book` and re-run.
 - After a build the view collapses to the list with an expanded result
   row; title clicks no longer reopen that row until relaunch (hence the
   phase-4 restart between builds and uploads).
-- AX row titles can contain newlines mid-title; matching uses a
-  contiguous first-5-words substring (unique across all 31 titles),
-  then verifies the body filename before clicking anything.
+- AX row titles can contain newlines mid-title. The driver folds line
+  breaks and matches whole words of the shortest leading word run that
+  no other title holds (one word up; `unique_needle`). When the title is
+  shared, it tries each matching row in list order and keeps the one
+  whose body file is this book's DOCX; a row that opens another book is
+  skipped, never built.
 - A row click either opens the edit view or only selects the row
   (revealing an `Edit` affordance at the right edge); the driver
   follows `Edit` when the first click merely selects.
@@ -75,6 +91,29 @@ partial failure — fix the named books with `--book` and re-run.
   never by control state.
 - `Upload` writes no local-DB trace (`SyncState`/`SyncRevision` do not
   change); the repo-side `logos_uploads.json` is the upload ledger.
+
+## Word files (build_pbb_docx.py)
+
+- `python3 scripts/build_pbb_docx.py --catchup` builds a Word file for
+  certified works that pass the research gate and have a Bible link
+  (the live check replaced the hand-kept `no_link` list), and rebuilds
+  an existing one when its English or `intro.md` is newer, it still has
+  worksheet notes, or it was built before the current note filter
+  (stamp in `docProps/core.xml` `cp:version`). A rebuild from the full
+  current English may be shorter than the old file. Books with their own
+  `build_book.py` are listed, not rebuilt. `--dry-run` prints the plan
+  and writes nothing. Run it before Sunday so the driver has current files.
+- `intro.md` is printed as the Introduction whenever it exists (only
+  `logos_intro: false` opts out), as on the site.
+- `pb_sync` adds `The same English is free to read at
+  https://viapatrum.org/works/<slug>/` to the Logos description when
+  the site catalogue (`dist/app/v1/catalog.json`) lists the work. When
+  the catalogue cannot be read (missing or mid-rebuild), existing rows
+  keep their description as it is.
+  A metadata-only change does not trigger a build; books already
+  uploaded need `logos_build.py --force --book <slug>` to carry it.
+- `book.yml` must parse as YAML. Quote a value that contains `"` with
+  single quotes; `pipeline/book_meta.py` removes one pair of quotes only.
 
 ## Backlog state
 
