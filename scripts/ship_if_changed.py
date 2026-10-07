@@ -220,9 +220,12 @@ def take_build_lock() -> bool:
 
 
 def site_code_gate() -> str | None:
-    """Why the site repo is not safe to ship from, or None."""
+    """Why the site repo is not safe to ship from, or None. assets/og is left
+    out: ship.sh itself rewrites those share cards on every ship, so they
+    were dirty after each ship and kept auto-ship off (2026-10-07 re-audit)."""
     try:
-        r = subprocess.run(["git", "-C", str(SITE), "status", "--porcelain", "--", "scripts", "assets", "functions"],
+        r = subprocess.run(["git", "-C", str(SITE), "status", "--porcelain", "--", "scripts", "assets", "functions",
+                            ":(exclude)assets/og"],
                            capture_output=True, text=True, timeout=120)
     except (OSError, subprocess.SubprocessError) as e:
         return f"git status failed ({type(e).__name__})"

@@ -139,8 +139,55 @@ def check_justifications(excerpts_path: Path, just_dir: Path) -> list[str]:
     return errors
 
 
-def validate_semantic_review(review: dict, expected_source_paragraphs=None) -> list[str]:
-    """Validate review evidence shape; cannot prove a reviewer actually understood it."""
+# Longer names first so "gpt-oss" is not also counted as "gpt".
+_MODEL_FAMILIES = ("gpt-oss", "deepseek", "nemotron", "gemini", "gemma", "mistral",
+                   "qwen", "llama", "claude", "kimi", "glm", "gpt")
+
+
+def _flat_text(value) -> str:
+    if isinstance(value, (list, tuple)):
+        return " ".join(_flat_text(part) for part in value)
+    return " ".join(str(value or "").split())
+
+
+def _quotes_passage(note: str, passage, n: int = 25) -> bool:
+    """True when the note copies a real span of the passage."""
+    text = _flat_text(passage)
+    if not text:
+        return False
+    if len(text) <= n:
+        return text in note
+    return any(text[i:i + n] in note for i in range(len(text) - n + 1))
+
+
+def _quote_errors(notes, sources, englishes) -> list[str]:
+    note = _flat_text(notes)
+    errors = []
+    if not any(_quotes_passage(note, passage) for passage in sources):
+        errors.append("semantic review notes do not quote the source")
+    if not any(_quotes_passage(note, passage) for passage in englishes):
+        errors.append("semantic review notes do not quote the English")
+    return errors
+
+
+def reviewer_model_families(reviewer: str) -> list[str]:
+    """Family names found in a reviewer string, each family once."""
+    name = str(reviewer or "").casefold()
+    found = []
+    for family in _MODEL_FAMILIES:
+        if family in name:
+            found.append(family)
+            name = name.replace(family, " ")
+    return found
+
+
+def validate_semantic_review(review: dict, expected_source_paragraphs=None, *,
+                             source_passages=None, english_passages=None) -> list[str]:
+    """Validate review evidence. A supplied passage must be quoted in the note.
+
+    Quoting a span still does not prove the reviewer understood the work.
+    Callers that do not supply the passage keep the shape check only.
+    """
     if not isinstance(review, dict):
         return ["semantic review must be an object"]
     errors = []
@@ -161,6 +208,8 @@ def validate_semantic_review(review: dict, expected_source_paragraphs=None) -> l
             errors.append("semantic review does not cover every source paragraph")
     if not isinstance(review.get("notes"), str) or not review["notes"].strip():
         errors.append("semantic review needs evidence notes")
+    elif source_passages is not None or english_passages is not None:
+        errors.extend(_quote_errors(review.get("notes"), source_passages or [], english_passages or []))
     return errors
 
 
@@ -358,21 +407,29 @@ def validate_audit_receipt(packet: dict, receipt: dict) -> list[str]:
         errors.append("receipt belongs to another packet")
     if receipt.get("verdict") != "pass" or not str(receipt.get("reviewer") or "").strip():
         errors.append("missing passing verdict or reviewer")
+    elif len(reviewer_model_families(receipt.get("reviewer"))) < 2:
+        errors.append("reviewer is not two model families")
+    sections = packet.get("sections") or []
     if packet.get("publication_scope") is not None:
-        errors += ["scope review: " + e for e in validate_semantic_review(receipt.get("scope_review"))]
+        errors += ["scope review: " + e for e in validate_semantic_review(
+            receipt.get("scope_review"),
+            source_passages=[s.get("source_text") for s in sections],
+            english_passages=[s.get("english") for s in sections])]
     reviews = receipt.get("reviews")
     if not isinstance(reviews, list) or any(not isinstance(r, dict) for r in reviews):
         return errors + ["receipt reviews must be a list of objects"]
     if any(not isinstance(r.get("section"), str) for r in reviews):
         return errors + ["review section ids must be strings"]
-    expected = {s["section"]: s for s in packet.get("sections", [])}
+    expected = {s["section"]: s for s in sections}
     if not expected or len(reviews) != len(expected) or {r.get("section") for r in reviews} != set(expected):
         errors.append("reviewed sections do not match the selected packet")
     for review in reviews:
         section = expected.get(review.get("section"))
         if section:
             errors += [f"{review['section']}: {e}" for e in validate_semantic_review(
-                review, len(section["source_text"]))]
+                review, len(section["source_text"]),
+                source_passages=[section.get("source_text")],
+                english_passages=[section.get("english")])]
     return errors
 
 

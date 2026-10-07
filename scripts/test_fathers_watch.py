@@ -226,7 +226,7 @@ class SelfAndJobTruthTests(WatchTestBase):
         state, detail, info = W.check_audio_drift()
         self.assertEqual(state, "warn")
         self.assertEqual(info["ship_mismatch"], 2)
-        self.assertIn("72 sections wait on sentence drift", detail)
+        self.assertIn("72 sections wait because the recording does not match the page", detail)
         self.assertEqual(W.ALERTS["audio_drift"], "audio:drift")
         (self.site / "outputs/audio/drain-status.json").write_text(json.dumps({"waiting": {"sentence_drift": 0}}))
         (self.logs / "fathers-ship-auto.log").write_text("2026-10-06 13:38:18 + scripts/ship.sh\nok\n")

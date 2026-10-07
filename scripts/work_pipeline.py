@@ -409,6 +409,27 @@ VOTE_SYS = """You choose the fixed English rendering for each key term of a new 
 Return ONE JSON object only: {{"votes": [{{"source_term": "<exact>", "choice": "<rendering>", "banned": ["<misleading renderings>"], "why": "<=20 words"}}]}}"""
 
 
+def majority_term(votes: dict) -> str:
+    """The rendering at least two voters already share, else "".
+
+    Hyphenated renderings count. A 2-of-3 split is a decision, not an open term.
+    """
+    counts: dict[str, tuple[int, str]] = {}
+    for value in (votes or {}).values():
+        if not value:
+            continue
+        key = norm(str(value))
+        n, shown = counts.get(key, (0, str(value)))
+        counts[key] = (n + 1, shown)
+    if not counts:
+        return ""
+    best_n = max(n for n, _shown in counts.values())
+    winners = [shown for n, shown in counts.values() if n == best_n]
+    if best_n >= 2 and len(winners) == 1:
+        return winners[0]
+    return ""
+
+
 def centroid_pick(picks: list[str]) -> str:
     """Plain (unhyphenated) pick with the most word overlap with all picks."""
     toks = [set(re.findall(r"[a-z]+", norm(pk).replace("-", " "))) for pk in picks]
@@ -1164,6 +1185,13 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
             log(slug, f"{sec['id']}: source changed since it passed; redrafting")
             jpath.rename(jpath.with_suffix(".stale.json"))
             j = {}
+        if j.get("_status") == "pass" and used_fallback(j):
+            # Keep the English. Do not buy a redraft of a pass the fallback touched.
+            j = block_fallback_pass(j)
+            jpath.write_text(json.dumps(j, indent=1, ensure_ascii=False))
+            tries.write_text("2")
+            log(slug, f"{sec['id']}: hold fallback model is not a certified pass")
+            return j
         if j.get("_status") == "pass" or (j.get("_status") == "hold" and n >= 2):
             return j
         if j.get("_status") == "hold":
@@ -1300,9 +1328,16 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
         fb.append({"round": history[-1]["round"], "replaced": REFEREE, "checker": "referee", "model": FALLBACK})
     if fb and isinstance(j.get("checks"), dict):
         j["checks"]["fallback"] = fb
+    elif fb:
+        j["checks"] = {"fallback": fb}
+    was_pass = j.get("_status") == "pass"
+    j = block_fallback_pass(j)
+    jpath.parent.mkdir(parents=True, exist_ok=True)
+    if was_pass and j.get("_status") != "pass":
+        # A demoted pass is not a fresh hold. Do not buy a redraft.
+        jpath.with_suffix(".retries").write_text("2")
     j["reviewer"] = f"work_pipeline:{'+'.join(FAMILY[m] for m in CHECKERS)}"
     j["confidence"] = "source_verified" if j.get("_status") == "pass" else "held"
-    jpath.parent.mkdir(parents=True, exist_ok=True)
     jpath.write_text(json.dumps(j, indent=1, ensure_ascii=False))
     log(slug, f"{sec['id']}: {j['_status']} {j.get('_why', '')} rounds={len(history)}")
     return j
@@ -1315,6 +1350,37 @@ def is_stale(j: dict, sec: dict) -> bool:
     """A passed section whose locked source has changed since it was checked."""
     return (j.get("_status") == "pass" and bool(j.get("source_sha256")) and bool(sec.get("source"))
             and j["source_sha256"] != sha("\n".join(sec["source"])))
+
+
+def used_fallback(j: dict) -> bool:
+    """True when the unbenched fallback model gave the verdict: it ruled as
+    referee, or stood in for a checker in the final round. A stand-in on an
+    earlier round does not count, because the real pair re-checked the whole
+    section after it (2026-10-07: 34 passes were demoted for that alone)."""
+    checks = j.get("checks")
+    if not isinstance(checks, dict):
+        return False
+    if checks.get("referee") == FALLBACK:
+        return True
+    fb = checks.get("fallback") or []
+    if not fb:
+        return False
+    rounds = [h.get("round") for h in (j.get("check_history") or checks.get("rounds") or [])
+              if isinstance(h, dict) and h.get("round") is not None]
+    if not rounds:
+        return True  # cannot tell which round ruled: hold
+    last = max(rounds)
+    return any(f.get("checker") == "referee" or f.get("round") == last for f in fb)
+
+
+def block_fallback_pass(j: dict) -> dict:
+    """A pass that used the fallback model does not certify."""
+    if j.get("_status") != "pass" or not used_fallback(j):
+        return j
+    j["_status"] = "hold"
+    j["_why"] = f"checker or referee used {FALLBACK}, which is not a certified pass"
+    j["confidence"] = "held"
+    return j
 
 
 def staged_sections(slug: str, pairs: list[dict]) -> list[dict]:
@@ -1618,17 +1684,63 @@ def author_dates(slug: str) -> tuple[str, str]:
     return author, ""
 
 
+_CENTURY_WORD = {
+    1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth",
+    6: "sixth", 7: "seventh", 8: "eighth", 9: "ninth", 10: "tenth",
+    11: "eleventh", 12: "twelfth", 13: "thirteenth", 14: "fourteenth",
+    15: "fifteenth", 16: "sixteenth", 17: "seventeenth", 18: "eighteenth",
+    19: "nineteenth", 20: "twentieth", 21: "twenty-first",
+}
+
+
+def _year_tokens(text: str) -> list[str]:
+    return re.findall(r"\d{3,4}", re.sub(r"\d+:\d+(?:[-\u2013]\d+)?", " ", text.replace(",", "")))
+
+
+def _century_words(year: int) -> set[str]:
+    """Century names a date year may be called.
+
+    150 is the second century. A year ending in 00, such as 100, is also
+    called by the next century, so both "first century" and "second century" pass.
+    """
+    n = (year - 1) // 100 + 1
+    words = set()
+    if n in _CENTURY_WORD:
+        words.add(_CENTURY_WORD[n])
+    if year % 100 == 0 and (year // 100 + 1) in _CENTURY_WORD:
+        words.add(_CENTURY_WORD[year // 100 + 1])
+    return words
+
+
+def _paragraph_dates_ok(paragraph: str, dates: str) -> bool:
+    """True when paragraph 1 carries the catalogue date without the worksheet label.
+
+    A parenthesis whose years are not in the date string still fails. An
+    Anonymous catalogue label is not required verbatim.
+    """
+    date_years = _year_tokens(dates)
+    if not date_years:
+        return True
+    groups = [g for g in re.findall(r"\([^()]*\)", paragraph) if _year_tokens(g)]
+    if groups:
+        return all(y in date_years for y in _year_tokens(groups[0]))
+    if all(y in _year_tokens(paragraph) for y in date_years):
+        return True
+    low = paragraph.lower()
+    return all(any(f"{word} century" in low for word in _century_words(int(y))) for y in date_years)
+
+
 def intro_problems(slug: str, paras: list[str]) -> list[str]:
     """The site's research gate, applied before an intro is written."""
     probs = []
     if len(paras) != 3:
         probs.append(f"needs exactly 3 paragraphs (author, context, contents), has {len(paras)}")
-    author, dates = author_dates(slug)
-    yrs = lambda t: re.findall(r"\d{3,4}", re.sub(r"\d+:\d+(?:[-\u2013]\d+)?", " ", t.replace(",", "")))
-    if dates and yrs(dates) and paras:
-        groups = [g for g in re.findall(r"\([^()]*\)", paras[0]) if yrs(g)]
-        if not groups or any(y not in yrs(dates) for y in yrs(groups[0])):
-            probs.append(f"paragraph 1 must name {author} with dates exactly as ({dates})")
+    _author, dates = author_dates(slug)
+    yrs = _year_tokens
+    if dates and yrs(dates) and paras and not _paragraph_dates_ok(paras[0], dates):
+        probs.append(
+            f"paragraph 1 must give the catalogue date ({dates}), or name the century those years fall in"
+        )
     rpath = STAGE / slug / "research.json"
     rtext = " ".join(c.get("text", "") for c in (json.loads(rpath.read_text()).get("claims") or [])) if rpath.exists() else ""
     allowed = set(yrs(dates)) | set(yrs(rtext)) | set(yrs((BOOKS / slug / "book.yml").read_text(errors="replace")
@@ -1832,6 +1944,10 @@ def resolve_terms(slug: str, brief: dict, quiet: bool = False) -> list[dict]:
             pick = t["votes"]["drafter"]
             brief.setdefault("glossary", []).append({**t, "english": pick, "decided_by": "drafter-default"})
             say(f"term drafter-default (no votes): {t.get('source_term')} -> {pick}")
+        elif majority_term(t.get("votes") or {}):
+            pick = majority_term(t.get("votes") or {})
+            brief.setdefault("glossary", []).append({**t, "english": pick, "decided_by": "2 of 3"})
+            say(f"term 2 of 3: {t.get('source_term')} -> {pick}")
         elif centroid_pick(list((t.get("votes") or {}).values())):
             pick = centroid_pick(list((t.get("votes") or {}).values()))
             brief.setdefault("glossary", []).append({**t, "english": pick, "decided_by": "auto-centroid"})
@@ -1960,6 +2076,10 @@ def apply(slug: str, force_partial: bool = False) -> int:
     pairs = load_pairs(slug)
     moves = rebalance(slug, pairs)
     secs = staged_sections(slug, pairs)
+    fallback_ids = [s["id"] for s in secs if used_fallback(s.get("_j") or {})]
+    if fallback_ids and not force_partial:
+        print(f"refusing: unbenched fallback model in {len(fallback_ids)} section(s): {', '.join(fallback_ids[:5])}")
+        return 1
     if not force_partial and (set(st["sections"]) != {"pass"} or not st["intro_ok"]
                               or not follow_ok(st["followability"], sum(len(" ".join(p["source"]).split()) for p in pairs))):
         print("refusing: not every section passed, intro unchecked, or followability below bar")
@@ -2189,6 +2309,27 @@ def can_move(book: str, pairs: list[dict]) -> bool:
     return False
 
 
+def term_queue_blocked(book: str, prev: dict) -> bool:
+    """Skip a needs-term-decision book only while a term still has no 2-of-3 vote.
+
+    A decisions file, or a majority already in the brief, lets the next lane
+    tick resolve it. Do not skip every old needs-term-decision row.
+    """
+    if prev.get("result") != "needs-term-decision":
+        return False
+    if (STAGE / book / "term_decisions.json").exists():
+        return False
+    try:
+        brief = json.loads((STAGE / book / "brief.json").read_text())
+    except (OSError, ValueError):
+        return True
+    for term in brief.get("open_terms") or []:
+        if majority_term(term.get("votes") or {}):
+            continue
+        return True
+    return False
+
+
 def parked(row: dict, book: str = "", pairs: list[dict] | None = None) -> bool:
     """A held work waits for the held review once its last attempt changed no
     section's state (2026-10-06: a flat 2-attempt park stopped books whose
@@ -2260,7 +2401,7 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
         if certified(book):
             continue
         prev = log_rows.get(book, {})
-        if prev.get("result") in ("needs-term-decision",) and not (STAGE / book / "term_decisions.json").exists():
+        if term_queue_blocked(book, prev):
             continue
         if claim(book) is None:
             continue  # another lane took it between our read and now

@@ -206,5 +206,34 @@ class LockTests(AutoShipTestBase):
         self.assertEqual(st["last_run"]["exit"], S.EXIT_TERM)
 
 
+class SiteCodeGateTests(unittest.TestCase):
+    """Real git: regenerated share cards do not block a ship; code does."""
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.site = Path(self.tmp.name)
+        for rel in ("scripts/build.py", "assets/og/a.png", "assets/site.css"):
+            (self.site / rel).parent.mkdir(parents=True, exist_ok=True)
+            (self.site / rel).write_text("v1")
+        git = lambda *a: REAL_RUN(["git", "-C", str(self.site), *a], capture_output=True, check=True)  # noqa: E731
+        git("init", "-q")
+        git("add", ".")
+        git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "init")
+        for k, v in {"SITE": self.site, "free_gb": lambda: 100}.items():
+            p = mock.patch.object(S, k, v)
+            p.start()
+            self.addCleanup(p.stop)
+
+    def test_share_cards_alone_do_not_block(self):
+        (self.site / "assets/og/a.png").write_text("v2")
+        (self.site / "assets/og/new.png").write_text("v1")
+        self.assertIsNone(S.site_code_gate())
+
+    def test_code_still_blocks(self):
+        (self.site / "assets/og/a.png").write_text("v2")
+        (self.site / "assets/site.css").write_text("v2")
+        self.assertEqual(S.site_code_gate(), "uncommitted site code (1 paths)")
+
+
 if __name__ == "__main__":
     unittest.main()

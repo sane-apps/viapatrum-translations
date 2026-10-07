@@ -487,7 +487,8 @@ def check_audio_drift() -> tuple[str, str, dict]:
         pass
     problems = []
     if info.get("drain_sentence_drift"):
-        problems.append(f"{info['drain_sentence_drift']} sections wait on sentence drift (drain)")
+        problems.append(
+            f"{info['drain_sentence_drift']} sections wait because the recording does not match the page (drain)")
     if info.get("ship_mismatch"):
         problems.append(f"last auto ship skipped {info['ship_mismatch']} sections: audio does not match the page")
     if problems:

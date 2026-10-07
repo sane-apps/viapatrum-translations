@@ -51,11 +51,15 @@ class TranslationQATests(unittest.TestCase):
                                  seed=42, sample_size=5, identity=self.identity)
 
     def receipt(self, packet):
-        return {"packet_id": packet["packet_id"], "reviewer": "test-reviewer",
+        def note(section):
+            source = " ".join(section["source_text"])
+            english = " ".join(section["english"])
+            return f"Source: {source} English: {english}"
+        return {"packet_id": packet["packet_id"], "reviewer": "kimi-k2.6+glm-5.2",
                 "verdict": "pass", "reviews": [{
                     "section": s["section"], "verdict": "pass",
                     "checks": {key: True for key in SEMANTIC_CHECKS},
-                    "uncertainties": [], "notes": "Synthetic fixture evidence only.",
+                    "uncertainties": [], "notes": note(s),
                     "covered_source_paragraphs": list(range(1, len(s["source_text"]) + 1)),
                 } for s in packet["sections"]]}
 
@@ -80,7 +84,11 @@ class TranslationQATests(unittest.TestCase):
         self.assertEqual(check_record(j), [])
         j["pass_a_gloss"] = "WE choose freely — no one forces this decision upon us!"
         self.assertTrue(any("copies" in e for e in check_record(j)))
-        j["pass_a_gloss"] = "Literal gloss: We choose freely; no one forces this decision upon us."
+        # The near-copy check skips sections under 25 words (short maxims), so use a long one.
+        long_b = ("We choose freely, and no one forces this decision upon us; for God made the soul master of "
+                  "its own will, so that what it does well it does by choice and not by necessity.")
+        j["pass_b_english"] = [long_b]
+        j["pass_a_gloss"] = "Literal gloss: " + long_b.replace("upon us", "on us")
         self.assertTrue(any("near-copies" in e for e in check_record(j)))
         j["pass_b_english"] = ["Καὶ οὐχὶ ἀνάγκῃ ἀλλὰ προαιρέσει πράττομεν."]
         self.assertTrue(any("Greek" in e for e in check_record(j)))
@@ -190,6 +198,15 @@ class TranslationQATests(unittest.TestCase):
         review = self.receipt(self.packet())["reviews"][0]
         review["covered_source_paragraphs"] = [True]
         self.assertTrue(validate_semantic_review(review, 1))
+        bare = self.receipt(self.packet())
+        bare["reviews"][0]["notes"] = "Pass A/B OET tip."
+        self.assertTrue(any("do not quote" in e for e in validate_audit_receipt(self.packet(), bare)))
+        lone = self.receipt(self.packet())
+        lone["reviewer"] = "cursor-held-eeng-20260924 (Mini)"
+        self.assertTrue(any("two model families" in e for e in validate_audit_receipt(self.packet(), lone)))
+        same = self.receipt(self.packet())
+        same["reviewer"] = "qwen3-30b+qwen3.8-27b"
+        self.assertTrue(any("two model families" in e for e in validate_audit_receipt(self.packet(), same)))
         self.assertTrue(validate_audit_receipt({"schema": "translation-audit-v1",
                                               "raw_source_paths": ["x"], "files": []}, {}))
 
@@ -266,7 +283,8 @@ class TranslationQATests(unittest.TestCase):
         book = Path(__file__).resolve().parents[2] / "books/julian-of-eclanum"
         packet = json.loads((book / "reviews/audit/ad-florum-1-27.packet.json").read_text())
         receipt = json.loads((book / "reviews/audit/ad-florum-1-27.review.json").read_text())
-        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+        evidence = validate_audit_receipt(packet, receipt)
+        self.assertTrue(any("two model families" in e for e in evidence), evidence)
         self.assertEqual([s["section"] for s in packet["sections"]], ["27"])
         self.assertEqual(packet["sections"][0]["locus"], "1.27")
         row = next(r for r in json.loads((book / "translations/ad_florum_1_english.json").read_text())

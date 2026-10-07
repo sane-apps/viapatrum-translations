@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Offline tests for doctrine_map: candidate slots, broker-only grading,
-audit locus carry. No network, no inference calls."""
+audit locus carry. No network, no inference calls.
+Run with the job's python (it has numpy): ~/Models/kokoro/.venv/bin/python -m unittest test_doctrine_map"""
 import json
 import sys
 import tempfile

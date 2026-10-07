@@ -30,6 +30,28 @@ def gate_only(j, brief):
         return W.section_gate(j, brief)
 
 
+class FallbackPassTests(unittest.TestCase):
+    def test_checker_fallback_does_not_certify(self):
+        out = W.block_fallback_pass({
+            "_status": "pass", "confidence": "source_verified",
+            "checks": {"fallback": [{"model": W.FALLBACK}]},
+        })
+        self.assertEqual(out["_status"], "hold")
+        self.assertEqual(out["confidence"], "held")
+        self.assertIn(W.FALLBACK, out["_why"])
+
+    def test_referee_fallback_does_not_certify(self):
+        out = W.block_fallback_pass({"_status": "pass", "checks": {"referee": W.FALLBACK}})
+        self.assertEqual(out["_status"], "hold")
+        self.assertTrue(W.used_fallback(out))
+
+    def test_two_real_checkers_still_pass(self):
+        j = {"_status": "pass", "confidence": "source_verified",
+             "checks": {"referee": "nvidia/nemotron-3-ultra-550b-a55b"}}
+        self.assertEqual(W.block_fallback_pass(j)["_status"], "pass")
+        self.assertFalse(W.used_fallback({"_status": "pass"}))
+
+
 class NamesGateTests(unittest.TestCase):
     BRIEF = {"names": {"Sion": "Zion"}, "glossary": []}
 
@@ -1343,6 +1365,17 @@ class CheckerBudgetTests(unittest.TestCase):
         self.assertEqual(j["checks"]["fallback"][0]["checker"], "fallback")
         self.assertEqual(j["checks"]["fallback"][0]["replaced"], [a])
 
+    def test_only_a_final_round_or_referee_fallback_blocks(self):
+        hist = [{"round": 0, "fallback": ["x"]}, {"round": 1}]
+        early = {"_status": "pass", "check_history": hist,
+                 "checks": {"referee": W.REFEREE, "fallback": [{"round": 0, "checker": "fallback"}]}}
+        self.assertFalse(W.used_fallback(early))
+        self.assertEqual(W.block_fallback_pass(dict(early))["_status"], "pass")
+        final = {**early, "checks": {"referee": W.REFEREE, "fallback": [{"round": 1, "checker": "fallback"}]}}
+        self.assertTrue(W.used_fallback(final))
+        self.assertTrue(W.used_fallback({"checks": {"referee": W.FALLBACK}}))
+        self.assertTrue(W.used_fallback({"checks": {"fallback": [{"round": 0}]}}))  # rounds unknown: hold
+
     def run_referee_pass(self, nim_up):
         """No-edits path with the real referee(); only call() is mocked."""
         conf = [{"class": "omission", "quote": "B", "upheld_by": "x"}]
@@ -1364,7 +1397,8 @@ class CheckerBudgetTests(unittest.TestCase):
         self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", W.REFEREE))
         self.assertNotIn("fallback", j["checks"])
         j = self.run_referee_pass(nim_up=False)
-        self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", W.FALLBACK))
+        # The fallback referee is named, and its ruling does not certify (Wave A, 2026-10-07).
+        self.assertEqual((j["_status"], j["checks"]["referee"]), ("hold", W.FALLBACK))
         self.assertEqual(j["checks"]["fallback"][-1]["checker"], "referee")
         self.assertEqual(j["checks"]["fallback"][-1]["model"], W.FALLBACK)
 
