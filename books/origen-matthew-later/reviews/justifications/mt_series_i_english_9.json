@@ -1,0 +1,169 @@
+{
+ "excerpt_id": "origen-matthew-later:mt_series_i_english:9",
+ "section": "mt_series_i_english:9",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-matthew-later/translations/mt_series_i_source.json"
+ },
+ "source_text": "Si eum postulasset Petrus, forsitan amotis ancillis non denegasset. Nec enim poterat fieri ut facta interrogatione confiteretur Dominum in Spiritu sancto, cum Spiritus sanctus nondum fuisset datus. Audax promissio facta est ei causa ut non solum scandalizaretur verum etiam ter denegaret.",
+ "thought_title": "Peter's bold promise and the Spirit not yet given",
+ "orientation": "Origen is reflecting on Peter's predicted denial, explaining why Peter could not have confessed Christ in the Holy Spirit at that moment.",
+ "pass_a_gloss": "If Peter had asked him, perhaps with the servant-girls removed he would not have denied. For it could not happen that, when the questioning took place, he would confess the Lord in the Holy Spirit, since the Holy Spirit had not yet been given. The bold promise became for him the cause that he not only stumbled but even denied three times.",
+ "lemmas": [
+  {
+   "form": "postulasset",
+   "lemma": "postulo",
+   "gloss": "had asked"
+  },
+  {
+   "form": "amotis",
+   "lemma": "amoveo",
+   "gloss": "with removed"
+  },
+  {
+   "form": "ancillis",
+   "lemma": "ancilla",
+   "gloss": "servant-girls"
+  },
+  {
+   "form": "denegasset",
+   "lemma": "denego",
+   "gloss": "would have denied"
+  },
+  {
+   "form": "confiteretur",
+   "lemma": "confiteor",
+   "gloss": "would confess"
+  },
+  {
+   "form": "nondum",
+   "lemma": "nondum",
+   "gloss": "not yet"
+  },
+  {
+   "form": "datus",
+   "lemma": "do",
+   "gloss": "given"
+  },
+  {
+   "form": "audax",
+   "lemma": "audax",
+   "gloss": "bold"
+  },
+  {
+   "form": "promissio",
+   "lemma": "promissio",
+   "gloss": "promise"
+  },
+  {
+   "form": "scandalizaretur",
+   "lemma": "scandalizo",
+   "gloss": "would stumble"
+  },
+  {
+   "form": "ter",
+   "lemma": "ter",
+   "gloss": "three times"
+  },
+  {
+   "form": "denegaret",
+   "lemma": "denego",
+   "gloss": "would deny"
+  }
+ ],
+ "choices": [
+  {
+   "term": "amotis ancillis",
+   "english": "with the servant-girls removed",
+   "why": "Keeps the ablative absolute as a condition of the hypothetical denial, preserving the nuance that the girls' presence was the occasion of the test.",
+   "rejected": [
+    "if the servant-girls had been taken away",
+    "the servant-girls being absent"
+   ]
+  },
+  {
+   "term": "scandalizaretur",
+   "english": "stumbled",
+   "why": "Uses the glossary rendering for scandalizari, keeping the moral sense of falling away rather than a merely emotional reaction.",
+   "rejected": [
+    "was scandalized",
+    "was offended"
+   ]
+  },
+  {
+   "term": "audax promissio",
+   "english": "the bold promise",
+   "why": "Preserves the causal force of the noun phrase as the subject of 'became the cause,' matching the Latin word order.",
+   "rejected": [
+    "his rash promise",
+    "the daring promise"
+   ]
+  },
+  {
+   "term": "confiteretur Dominum in Spiritu sancto",
+   "english": "would confess the Lord in the Holy Spirit",
+   "why": "Keeps the theological phrase 'in the Holy Spirit' intact, as it is central to Origen's argument about the Spirit not yet being given.",
+   "rejected": [
+    "would acknowledge the Lord by the Holy Spirit",
+    "would confess the Lord through the Holy Spirit"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "If Peter had asked him, perhaps he would not have denied him once the servant-girls were removed. For it could not have happened that, when the question was put to him, he would confess the Lord in the Holy Spirit, since the Holy Spirit had not yet been given. His bold promise became the reason he not only stumbled but denied him three times."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "cc30e27d407f24d3bb231029b1afad3f31f76773d7d969cd3c6ac7a0687f49ad",
+ "source_sha256": "83b7e522119b98ba6ffa79ef3ad2ee870ec072442dbe87b5c976aa5428dde9d0",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "once the servant-girls were removed",
+    "source_quote": "amotis ancillis",
+    "why": "amotis means 'removed' but agency is passive; 'were removed' implies someone removed them, but Latin is ablative absolute 'with the maidservants having been removed/put aside'",
+    "fix": "with the maidservants out of the way",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'were removed' is a standard rendering of ablative absolute 'amotis ancillis'; meaning is preserved, no real error."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "His bold promise became the reason",
+    "source_quote": "Audax promissio facta est ei causa",
+    "why": "facta est ei causa means 'was made/caused for him as a reason,' but English 'became the reason' softens the causality; more importantly, the Latin says the promise was made the cause for him, not that it simply became a reason",
+    "fix": "His bold promise was made the cause for him",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'became the reason' adequately renders 'facta est ei causa'; causality and personal reference are preserved."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

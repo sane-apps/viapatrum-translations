@@ -1,0 +1,173 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom6_english:1",
+ "section": "lev_hom6_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom6_source.json"
+ },
+ "source_text": "Apostolus dicit velamen auferri conversis ad Dominum. Indumenta pontificis non nudam historiam sed mysteria Christi et ecclesiae tegunt.",
+ "thought_title": "The veil removed and priestly garments as mysteries",
+ "orientation": "Origen is introducing the spiritual reading of the high priest's vestments, citing Paul that the veil is removed for those converted to the Lord.",
+ "pass_a_gloss": "The Apostle says the veil is removed for those converted to the Lord. The garments of the high priest cover not bare history but the mysteries of Christ and the church.",
+ "lemmas": [
+  {
+   "form": "velamen",
+   "lemma": "velamen",
+   "gloss": "veil"
+  },
+  {
+   "form": "auferri",
+   "lemma": "aufero",
+   "gloss": "to be removed"
+  },
+  {
+   "form": "conversis",
+   "lemma": "converto",
+   "gloss": "for those converted"
+  },
+  {
+   "form": "Dominum",
+   "lemma": "Dominus",
+   "gloss": "the Lord"
+  },
+  {
+   "form": "indumenta",
+   "lemma": "indumentum",
+   "gloss": "garments"
+  },
+  {
+   "form": "pontificis",
+   "lemma": "pontifex",
+   "gloss": "of the high priest"
+  },
+  {
+   "form": "nudam",
+   "lemma": "nudus",
+   "gloss": "bare"
+  },
+  {
+   "form": "historiam",
+   "lemma": "historia",
+   "gloss": "history"
+  },
+  {
+   "form": "mysteria",
+   "lemma": "mysterium",
+   "gloss": "mysteries"
+  },
+  {
+   "form": "Christi",
+   "lemma": "Christus",
+   "gloss": "of Christ"
+  },
+  {
+   "form": "ecclesiae",
+   "lemma": "ecclesia",
+   "gloss": "of the church"
+  },
+  {
+   "form": "tegunt",
+   "lemma": "tego",
+   "gloss": "they cover"
+  }
+ ],
+ "choices": [
+  {
+   "term": "velamen auferri conversis ad Dominum",
+   "english": "the veil is removed for those converted to the Lord",
+   "why": "Keeps the passive infinitive 'auferri' as 'is removed' and the dative 'conversis' as 'for those converted,' matching Paul's wording in 2 Corinthians 3:16.",
+   "rejected": [
+    "the veil is taken away when one turns to the Lord",
+    "the veil is lifted for those who turn to the Lord"
+   ]
+  },
+  {
+   "term": "indumenta pontificis",
+   "english": "the garments of the high priest",
+   "why": "Uses the glossary term 'high priest' for 'pontificis' and keeps 'indumenta' as 'garments' rather than 'vestments' to avoid liturgical overtones not in the Latin.",
+   "rejected": [
+    "the vestments of the pontiff",
+    "the high priest's clothing"
+   ]
+  },
+  {
+   "term": "non nudam historiam",
+   "english": "not bare history",
+   "why": "Renders 'nudam' as 'bare' to convey the sense of history stripped of spiritual meaning, matching Origen's contrast between letter and spirit.",
+   "rejected": [
+    "not naked history",
+    "not mere history"
+   ]
+  },
+  {
+   "term": "mysteria Christi et ecclesiae",
+   "english": "the mysteries of Christ and the church",
+   "why": "Uses the glossary term 'church' for 'ecclesiae' and keeps 'mysteria' as 'mysteries' to preserve the technical sense of hidden spiritual realities.",
+   "rejected": [
+    "the secrets of Christ and the assembly",
+    "the mysteries of Christ and the congregation"
+   ]
+  },
+  {
+   "term": "tegunt",
+   "english": "they cover",
+   "why": "Keeps the present tense and the sense that the garments conceal or veil the mysteries, not that they reveal them.",
+   "rejected": [
+    "they hide",
+    "they conceal"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "2 Corinthians 3:16",
+   "method": "wording",
+   "note": "velamen auferri conversis ad Dominum"
+  }
+ ],
+ "pass_b_english": [
+  "Paul says that the veil is removed for those converted to the Lord (2 Corinthians 3:16). The garments of the high priest do not cover bare history; they cover the mysteries of Christ and the church."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "afda0faabf78df83c75509fe7fab1daaa5b39a152b610cb065174c4fb328d39c",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "cover bare history",
+    "source_quote": "non nudam historiam",
+    "why": "\"Nudam\" means naked, not bare; \"nudam historiam\" is \"naked history\" (unclothed, exposed), not \"bare history\" (mere, plain). The sense is that the garments clothe/hide mysteries, not that history itself is \"bare\" in the sense of plain or unadorned. \"Bare history\" misleadingly suggests the historical sense is insufficient or empty, rather than that the literal narrative is clothed with deeper meaning.",
+    "fix": "do not clothe naked history; they clothe the mysteries of Christ and the church",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Bare history' is standard rendering of 'nudam historiam'; 'bare' means unclothed/exposed, matching 'nudam'."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

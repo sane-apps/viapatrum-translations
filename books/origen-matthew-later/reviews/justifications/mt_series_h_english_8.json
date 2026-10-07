@@ -1,0 +1,165 @@
+{
+ "excerpt_id": "origen-matthew-later:mt_series_h_english:8",
+ "section": "mt_series_h_english:8",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-matthew-later/translations/mt_series_h_source.json"
+ },
+ "source_text": "Et adhuc eo loquente, ecce Judas unus ex duodecim venit, et cum eo turba multa cum gladiis et fustibus missi a principibus sacerdotum. Propter multitudinem credentium timuerunt ne raperetur; ego autem existimo eos putasse eum magicis disciplinis posse effugere. Gloria Christo. Amen.",
+ "thought_title": "Judas arrives with the armed crowd",
+ "orientation": "Origen is commenting on Matthew 26:47, where Judas arrives with a crowd while Jesus is still speaking.",
+ "pass_a_gloss": "And still him speaking, behold Judas one from [the] twelve came, and with him crowd much with swords and clubs sent from [the] chiefs of [the] priests. Because of [the] multitude of [the] believing [ones] they feared lest he should be snatched away; I however think them [to] have thought him by magical teachings [to] be able to escape. Glory [to] Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "loquente",
+   "lemma": "loquor",
+   "gloss": "speaking"
+  },
+  {
+   "form": "venit",
+   "lemma": "venio",
+   "gloss": "came"
+  },
+  {
+   "form": "turba",
+   "lemma": "turba",
+   "gloss": "crowd"
+  },
+  {
+   "form": "gladiis",
+   "lemma": "gladius",
+   "gloss": "swords"
+  },
+  {
+   "form": "fustibus",
+   "lemma": "fustis",
+   "gloss": "clubs"
+  },
+  {
+   "form": "missi",
+   "lemma": "mitto",
+   "gloss": "sent"
+  },
+  {
+   "form": "principibus",
+   "lemma": "princeps",
+   "gloss": "chief"
+  },
+  {
+   "form": "sacerdotum",
+   "lemma": "sacerdos",
+   "gloss": "priests"
+  },
+  {
+   "form": "multitudinem",
+   "lemma": "multitudo",
+   "gloss": "multitude"
+  },
+  {
+   "form": "credentium",
+   "lemma": "credo",
+   "gloss": "of believers"
+  },
+  {
+   "form": "timuerunt",
+   "lemma": "timeo",
+   "gloss": "they feared"
+  },
+  {
+   "form": "raperetur",
+   "lemma": "rapio",
+   "gloss": "he might be seized"
+  }
+ ],
+ "choices": [
+  {
+   "term": "turba multa",
+   "english": "a large crowd",
+   "why": "Keeps the adjective-noun order and the sense of a sizeable armed group.",
+   "rejected": [
+    "a great multitude",
+    "many people"
+   ]
+  },
+  {
+   "term": "missi a principibus sacerdotum",
+   "english": "sent by the chief priests",
+   "why": "Preserves the passive participle and the agency of the chief priests.",
+   "rejected": [
+    "whom the chief priests sent",
+    "dispatched from the chief priests"
+   ]
+  },
+  {
+   "term": "ne raperetur",
+   "english": "that he might be seized",
+   "why": "Keeps the passive subjunctive of fear and the sense of forcible taking.",
+   "rejected": [
+    "that he might be snatched away",
+    "lest he be carried off"
+   ]
+  },
+  {
+   "term": "magicis disciplinis",
+   "english": "by magical arts",
+   "why": "Renders the ablative of means and the sense of learned magical practices.",
+   "rejected": [
+    "by magic",
+    "through magical teachings"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Matthew 26:47",
+   "method": "wording",
+   "note": "Et adhuc eo loquente, ecce Judas unus ex duodecim venit, et cum eo turba multa cum gladiis et fustibus missi a principibus sacerdotum"
+  }
+ ],
+ "pass_b_english": [
+  "While he was still speaking, Judas, one of the twelve, came, and with him a large crowd with swords and clubs, sent by the chief priests (Matthew 26:47). They feared that because of the multitude of believers he might be seized; but I think they supposed he could escape by magical arts. Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "cc30e27d407f24d3bb231029b1afad3f31f76773d7d969cd3c6ac7a0687f49ad",
+ "source_sha256": "e68a65a23e6292262c21ec073a6ddb11e8e084daece9a1596e3968b8df50cff0",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "They feared that because of the multitude of believers he might be seized",
+    "source_quote": "Propter multitudinem credentium timuerunt ne raperetur",
+    "why": "Subject and object reversed: the crowd feared Jesus would be snatched away by believers, not that he would be seized.",
+    "fix": "They feared that because of the multitude of believers he might be snatched away.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'raperetur' = 'be snatched away'; 'propter multitudinem credentium' = by believers. English 'seized' loses the agent and reverses the sense."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

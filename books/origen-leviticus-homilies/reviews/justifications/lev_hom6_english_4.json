@@ -1,0 +1,178 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom6_english:4",
+ "section": "lev_hom6_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom6_source.json"
+ },
+ "source_text": "Tintinnabula et mala granata in ora vestis — sonus doctrinae et fructus operum. Ingrediens sancta audiatur.",
+ "thought_title": "Bells and pomegranates on the priestly robe",
+ "orientation": "Origen is interpreting the high priest's vestments from Exodus, applying each item to the moral and doctrinal life of the Christian teacher.",
+ "pass_a_gloss": "Bells and pomegranates on [the] hem [of] [the] garment — [the] sound [of] teaching and [the] fruit [of] works. [The] holy [woman] entering let [her] be heard.",
+ "lemmas": [
+  {
+   "form": "Tintinnabula",
+   "lemma": "tintinnabulum",
+   "gloss": "bells"
+  },
+  {
+   "form": "mala granata",
+   "lemma": "malum granatum",
+   "gloss": "pomegranates"
+  },
+  {
+   "form": "ora",
+   "lemma": "ora",
+   "gloss": "hem, edge"
+  },
+  {
+   "form": "vestis",
+   "lemma": "vestis",
+   "gloss": "garment"
+  },
+  {
+   "form": "sonus",
+   "lemma": "sonus",
+   "gloss": "sound"
+  },
+  {
+   "form": "doctrinae",
+   "lemma": "doctrina",
+   "gloss": "of teaching"
+  },
+  {
+   "form": "fructus",
+   "lemma": "fructus",
+   "gloss": "fruit"
+  },
+  {
+   "form": "operum",
+   "lemma": "opus",
+   "gloss": "of works"
+  },
+  {
+   "form": "Ingrediens",
+   "lemma": "ingredior",
+   "gloss": "entering"
+  },
+  {
+   "form": "sancta",
+   "lemma": "sanctus",
+   "gloss": "holy places"
+  },
+  {
+   "form": "audiatur",
+   "lemma": "audio",
+   "gloss": "let him be heard"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Tintinnabula",
+   "english": "bells",
+   "why": "The literal object on the priestly robe; the glossary does not cover it, so the plain English word is used.",
+   "rejected": [
+    "little bells",
+    "chimes"
+   ]
+  },
+  {
+   "term": "mala granata",
+   "english": "pomegranates",
+   "why": "The literal fruit named in the source; kept as the concrete object Origen allegorizes.",
+   "rejected": [
+    "pomegranate fruit",
+    "grenades"
+   ]
+  },
+  {
+   "term": "ora vestis",
+   "english": "hem of the garment",
+   "why": "Ora means the edge or border of a garment; 'hem' is the standard English term for the garment's edge.",
+   "rejected": [
+    "edge of the robe",
+    "border of the vestment"
+   ]
+  },
+  {
+   "term": "sonus doctrinae",
+   "english": "the sound of teaching",
+   "why": "Sonus is the literal sound made by the bells; doctrina is teaching, matching Origen's allegory of the priest's voice.",
+   "rejected": [
+    "the noise of doctrine",
+    "the voice of instruction"
+   ]
+  },
+  {
+   "term": "fructus operum",
+   "english": "the fruit of works",
+   "why": "Fructus is fruit, operum is works; the pomegranates symbolize the tangible results of good deeds.",
+   "rejected": [
+    "the produce of deeds",
+    "the yield of actions"
+   ]
+  },
+  {
+   "term": "Ingrediens sancta audiatur",
+   "english": "When he enters the holy place, let him be heard",
+   "why": "Ingrediens is a present participle with temporal force; sancta is neuter plural accusative of place; audiatur is a jussive subjunctive, preserving the command force.",
+   "rejected": [
+    "Entering the holy things, he is heard",
+    "As he enters the sanctuary, he should be heard"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Exodus 28:33-35",
+   "method": "allusion",
+   "note": "Tintinnabula et mala granata in ora vestis"
+  }
+ ],
+ "pass_b_english": [
+  "Bells and pomegranates along the hem of the garment: the sound of teaching and the fruit of works. When he enters the holy place, let him be heard."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "dc36fe3b62b7079e2bb936ea0eb985bf2c4e7c83944c7bbfbce1253aeb741110",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "let him be heard",
+    "source_quote": "Ingrediens sancta audiatur",
+    "why": "Latin is passive 'let him be heard/audible'; English keeps passive but 'let him be heard' implies permission, not 'he should be heard/audible'.",
+    "fix": "When he enters the holy place, he must be heard.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Passive subjunctive 'audiatur' naturally renders as 'let him be heard'; jussive sense is standard and not misleading."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

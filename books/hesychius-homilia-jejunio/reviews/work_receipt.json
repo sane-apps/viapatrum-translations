@@ -1,0 +1,56 @@
+{
+ "slug": "hesychius-homilia-jejunio",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 86,
+   "moved_start": "Ἀπεκρίθη\nδὲ ὁ Πέτρος λέγων αὐτῷ· «Ἃ προσδοκᾷς λαβεῖν οὐκ ἔχω"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 209,
+   "moved_start": "Εἶδες οἵους τοῖς αὐτῆς δεομένοις βλαστάνει καρπούς,\nπῶς τὰς "
+  }
+ ],
+ "brief_sha256": "d669be89dc0a11555944e4b0add7e6587ea2de037667d2863bc5fb7073f6f8d6",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-07T00:01:27Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "5060099c6f211726a6dc4acf55b3e2889032b6dccc021f192d849113110b5915",
+   "english_sha256": "f5c625eb60aeaa64432674c47dcf8917ce01a7857e84688ec2e4e50ae1d775f9",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "814a8c19c366092a6f6bc3452457347ce7fa62b84ff7bef5c6350236da6e0df9",
+   "english_sha256": "9b66db6ff513ae60d35d8fcfc3f668f0447d4a59b6f7614c1f87b57c917539a5",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "2af0bd2ab90e6b985fd45aceae9cda849fbed14cf9725ad23a7d20103d88b27a",
+   "english_sha256": "ef6cf2b31ba2ebd80b060855aed64e9d7d28277c6abd4fee1f36a0b3a1fdf18a",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "03a99d56537ed2b0f24574c34ec28075ab362938bc413637a5dd20a4456a48a5",
+   "english_sha256": "4be5635eba68d70c4b04e8514e07ddf19deab0852be18be0bdec37b4a238b92d",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}

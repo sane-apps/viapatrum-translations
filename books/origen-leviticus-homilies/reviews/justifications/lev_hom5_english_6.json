@@ -1,0 +1,168 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom5_english:6",
+ "section": "lev_hom5_english:6",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom5_source.json"
+ },
+ "source_text": "Non coquetur fermentatum. Fermentum malitiae expurga. Azymi sinceritatis.",
+ "thought_title": "Unleavened sincerity",
+ "orientation": "Origen is applying the rules for the grain offering to the moral life of the believer, moving from the broken vessel and scoured bronze to the command about leaven.",
+ "pass_a_gloss": "It shall not be cooked leavened. Purge out the leaven of malice. Unleavened things of sincerity.",
+ "lemmas": [
+  {
+   "form": "coquetur",
+   "lemma": "coquo",
+   "gloss": "it shall be cooked"
+  },
+  {
+   "form": "fermentatum",
+   "lemma": "fermento",
+   "gloss": "leavened"
+  },
+  {
+   "form": "Fermentum",
+   "lemma": "fermentum",
+   "gloss": "leaven"
+  },
+  {
+   "form": "malitiae",
+   "lemma": "malitia",
+   "gloss": "of malice"
+  },
+  {
+   "form": "expurga",
+   "lemma": "expurgo",
+   "gloss": "purge out"
+  },
+  {
+   "form": "Azymi",
+   "lemma": "azymus",
+   "gloss": "unleavened things"
+  },
+  {
+   "form": "sinceritatis",
+   "lemma": "sinceritas",
+   "gloss": "of sincerity"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Non coquetur fermentatum",
+   "english": "It shall not be cooked leavened",
+   "why": "Keeps the passive future force of coquetur and the adjectival force of fermentatum, matching the legal prohibition in the source.",
+   "rejected": [
+    "Do not cook it with leaven",
+    "It is not to be baked leavened"
+   ]
+  },
+  {
+   "term": "Fermentum malitiae expurga",
+   "english": "Purge out the leaven of malice",
+   "why": "Expurga is a direct imperative, and the genitive malitiae is kept as 'of malice' to preserve the Pauline echo of 1 Corinthians 5:7-8.",
+   "rejected": [
+    "Cleanse the leaven of evil",
+    "Remove the yeast of wickedness"
+   ]
+  },
+  {
+   "term": "Azymi sinceritatis",
+   "english": "Unleavened things of sincerity",
+   "why": "Azymi is a genitive singular adjective used substantivally; the genitive sinceritatis is kept as 'of sincerity' to mirror the source's compressed phrase.",
+   "rejected": [
+    "The unleavened bread of sincerity",
+    "Sincere unleavened things"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "1 Corinthians 5:7-8",
+   "method": "wording",
+   "note": "Fermentum malitiae expurga; Azymi sinceritatis"
+  }
+ ],
+ "pass_b_english": [
+  "It shall not be cooked with leaven. Purge out the leaven of malice. Be the unleavened bread of sincerity."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "117f91525e8e724396b0b6638bb82c112b4045bb63c420f782282e424577a4cb",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "(1 Corinthians 5:7-8)",
+     "source_quote": "Non coquetur fermentatum. Fermentum malitiae expurga. Azymi sinceritatis.",
+     "why": "No scripture citation in source; English adds 1 Cor 5:7-8 without source warrant.",
+     "fix": "Remove the parenthetical citation entirely.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source has no citation; English adds (1 Corinthians 5:7-8) without source warrant."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Purge out the leaven of malice (1 Corinthians 5:7-8).",
+     "new": "Purge out the leaven of malice."
+    }
+   ],
+   "fixed": [
+    "Removed the parenthetical citation '(1 Corinthians 5:7-8)' because the source contains no scripture citation; the English added it without warrant."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 2,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "Be the unleavened bread of sincerity",
+    "source_quote": "Azymi sinceritatis",
+    "why": "Source is descriptive/adjectival ('unleavened [bread] of sincerity'), not imperative; 'Be' changes grammar to command",
+    "fix": "the unleavened bread of sincerity",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Azymi sinceritatis echoes 1 Cor 5:8 'azymis sinceritatis', understood as imperative 'be unleavened bread of sincerity' in this liturgical context."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

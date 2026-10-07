@@ -1,0 +1,218 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom4_english:8",
+ "section": "lev_hom4_english:8",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom4_source.json"
+ },
+ "source_text": "In die quo convictus fuerit, reddet. Dilatio confessionis auget vulnus. Hodie si vocem eius audieritis.",
+ "thought_title": "Confession must not be delayed",
+ "orientation": "Origen is applying the ram of the trespass offering to the soul's duty of confession, urging immediate response to God's voice.",
+ "pass_a_gloss": "On the day on which he will have been convicted, he shall repay. The delay of confession increases the wound. Today if you will have heard his voice.",
+ "lemmas": [
+  {
+   "form": "convictus",
+   "lemma": "convinco",
+   "gloss": "convicted, proven guilty"
+  },
+  {
+   "form": "fuerit",
+   "lemma": "sum",
+   "gloss": "will have been"
+  },
+  {
+   "form": "reddet",
+   "lemma": "reddo",
+   "gloss": "he shall repay, give back"
+  },
+  {
+   "form": "dilatio",
+   "lemma": "dilatio",
+   "gloss": "delay, postponement"
+  },
+  {
+   "form": "confessionis",
+   "lemma": "confessio",
+   "gloss": "of confession"
+  },
+  {
+   "form": "auget",
+   "lemma": "augeo",
+   "gloss": "increases"
+  },
+  {
+   "form": "vulnus",
+   "lemma": "vulnus",
+   "gloss": "wound"
+  },
+  {
+   "form": "hodie",
+   "lemma": "hodie",
+   "gloss": "today"
+  },
+  {
+   "form": "vocem",
+   "lemma": "vox",
+   "gloss": "voice"
+  },
+  {
+   "form": "eius",
+   "lemma": "is",
+   "gloss": "his"
+  },
+  {
+   "form": "audieritis",
+   "lemma": "audio",
+   "gloss": "you will have heard"
+  }
+ ],
+ "choices": [
+  {
+   "term": "convictus fuerit",
+   "english": "he will have been convicted",
+   "why": "Keeps the future perfect passive force of the Latin, indicating the moment of proven guilt as the trigger for repayment.",
+   "rejected": [
+    "he is convicted",
+    "he was found guilty"
+   ]
+  },
+  {
+   "term": "reddet",
+   "english": "he shall repay",
+   "why": "Preserves the future indicative with its command-like force in legal context.",
+   "rejected": [
+    "he must repay",
+    "let him repay"
+   ]
+  },
+  {
+   "term": "dilatio confessionis",
+   "english": "the delay of confession",
+   "why": "Keeps the noun phrase structure and the glossary term 'confession'.",
+   "rejected": [
+    "postponing confession",
+    "putting off confession"
+   ]
+  },
+  {
+   "term": "auget vulnus",
+   "english": "increases the wound",
+   "why": "Literal rendering of the metaphor; the wound is the soul's sin-sickness.",
+   "rejected": [
+    "makes the wound worse",
+    "aggravates the injury"
+   ]
+  },
+  {
+   "term": "hodie si vocem eius audieritis",
+   "english": "today if you will have heard his voice",
+   "why": "Keeps the future perfect in the protasis and the direct address, matching the Psalm quotation's urgency.",
+   "rejected": [
+    "if today you hear his voice",
+    "today, if you hear his voice"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Psalm 95:7",
+   "method": "wording",
+   "note": "Hodie si vocem eius audieritis"
+  }
+ ],
+ "pass_b_english": [
+  "On the day he is convicted, he shall repay. Delaying confession only deepens the wound. Today, if you hear His voice (Psalm 94:7; Hebrew 95:7)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "d936b7c7f38024c4f4defe363d9166a421c2e4cfae4f9d6ba64110a59e5e950a",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "his voice",
+     "source_quote": "eius",
+     "why": "'eius' refers to God's voice, not the convicted person's. The Psalm quote means 'if you hear His [God's] voice.'",
+     "fix": "Today, if you hear His voice (Psalm 95:7).",
+     "model": "@cf/zai-org/glm-5.2",
+     "upheld_by": "@cf/moonshotai/kimi-k2.6",
+     "ruling": "'eius' in Psalm 95:7 refers to God (capitalized in liturgical Latin), not the convicted person; 'his' misleads readers about the source."
+    },
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Psalm 95:7",
+     "source_quote": "Hodie si vocem eius audieritis",
+     "why": "LXX Psalm 94:7, not 95:7; Hebrew numbering differs by one.",
+     "fix": "Psalm 94:7 (Hebrew 95:7)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "LXX/Vulgate Psalm 94:7, not 95:7; Hebrew numbering differs by one, misleading reference."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Today, if you hear his voice (Psalm 95:7).",
+     "new": "Today, if you hear His voice (Psalm 94:7; Hebrew 95:7)."
+    }
+   ],
+   "fixed": [
+    "Changed 'his voice' to 'His voice' because 'eius' refers to God's voice in the Psalm quotation, not the convicted person's.",
+    "Changed 'Psalm 95:7' to 'Psalm 94:7; Hebrew 95:7' because the source follows LXX numbering, where this verse is Psalm 94:7, one behind the Hebrew numbering."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 2,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Psalm 94:7; Hebrew 95:7",
+    "source_quote": "Hodie si vocem eius audieritis",
+    "why": "LXX Psalm 94:7 = Hebrew Psalm 95:7, but citation format is garbled and confusing.",
+    "fix": "Psalm 95:7 (Hebrew; 94:7 LXX)",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Format correctly distinguishes LXX (94:7) from Hebrew (95:7); not garbled, just scholarly convention."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 2,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

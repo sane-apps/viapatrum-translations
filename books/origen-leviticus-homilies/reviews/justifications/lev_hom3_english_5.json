@@ -1,0 +1,195 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom3_english:5",
+ "section": "lev_hom3_english:5",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom3_source.json"
+ },
+ "source_text": "Confitebitur peccatum; offeret feminam de grege. Confessio praecedit munus. Christus agnus; anima paenitens ovis.",
+ "thought_title": "Confession precedes the offering",
+ "orientation": "Origen is explaining the order of the sin offering: confession of sin comes before the gift, and the female animal from the flock signifies Christ as lamb and the penitent soul as sheep.",
+ "pass_a_gloss": "He will confess the sin; he will offer a female from the flock. Confession precedes the gift. Christ is the lamb; the penitent soul is the sheep.",
+ "lemmas": [
+  {
+   "form": "Confitebitur",
+   "lemma": "confiteor",
+   "gloss": "will confess"
+  },
+  {
+   "form": "peccatum",
+   "lemma": "peccatum",
+   "gloss": "sin"
+  },
+  {
+   "form": "offeret",
+   "lemma": "offero",
+   "gloss": "will offer"
+  },
+  {
+   "form": "feminam",
+   "lemma": "femina",
+   "gloss": "female"
+  },
+  {
+   "form": "grege",
+   "lemma": "grex",
+   "gloss": "flock"
+  },
+  {
+   "form": "Confessio",
+   "lemma": "confessio",
+   "gloss": "confession"
+  },
+  {
+   "form": "praecedit",
+   "lemma": "praecedo",
+   "gloss": "precedes"
+  },
+  {
+   "form": "munus",
+   "lemma": "munus",
+   "gloss": "gift"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  },
+  {
+   "form": "agnus",
+   "lemma": "agnus",
+   "gloss": "lamb"
+  },
+  {
+   "form": "anima",
+   "lemma": "anima",
+   "gloss": "soul"
+  },
+  {
+   "form": "paenitens",
+   "lemma": "paenitens",
+   "gloss": "penitent"
+  },
+  {
+   "form": "ovis",
+   "lemma": "ovis",
+   "gloss": "sheep"
+  }
+ ],
+ "choices": [
+  {
+   "term": "feminam de grege",
+   "english": "a female from the flock",
+   "why": "Keeps the literal gender and source of the animal, which Origen will interpret spiritually as the soul.",
+   "rejected": [
+    "a ewe",
+    "a female sheep"
+   ]
+  },
+  {
+   "term": "munus",
+   "english": "gift",
+   "why": "Renders the offering as a gift, preserving the sense of something presented to God, distinct from sacrificium.",
+   "rejected": [
+    "offering",
+    "present"
+   ]
+  },
+  {
+   "term": "anima paenitens",
+   "english": "the penitent soul",
+   "why": "Keeps the noun-adjective structure and the moral sense of the soul that repents.",
+   "rejected": [
+    "the repenting soul",
+    "the soul that repents"
+   ]
+  },
+  {
+   "term": "ovis",
+   "english": "sheep",
+   "why": "Distinguishes the adult sheep from the lamb (agnus), preserving the contrast between Christ and the soul.",
+   "rejected": [
+    "ewe",
+    "flock animal"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 5:6",
+   "method": "wording",
+   "note": "Confitebitur peccatum; offeret feminam de grege"
+  }
+ ],
+ "pass_b_english": [
+  "He will confess his sin and offer a female from the flock (Leviticus 5:6). Confession comes before the sacrifice. Christ is the lamb; the penitent soul is the sheep."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "19d6e71510396ba856effe6013dc41f338bb365cdc8ef3fb6924a4d4dc99a685",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "the gift",
+     "source_quote": "munus",
+     "why": "'Munus' here means sacrifice/offering, not 'gift'; glossary bans 'gift'.",
+     "fix": "Confession comes before the sacrifice.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "'Munus' in Lev 5:6 context means offering/sacrifice; 'gift' misleads and violates stated glossary constraint."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Confession comes before the gift.",
+     "new": "Confession comes before the sacrifice."
+    }
+   ],
+   "fixed": [
+    "Changed 'the gift' to 'the sacrifice' because 'munus' here means sacrifice/offering, and the glossary bans 'gift'."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 2,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

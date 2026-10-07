@@ -1,0 +1,170 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom6_english:5",
+ "section": "lev_hom6_english:5",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom6_source.json"
+ },
+ "source_text": "Lamina aurea in fronte: Sanctum Domino. Cogitatio in fronte consecrata. Omnis captivitas in obsequium Christi.",
+ "thought_title": "The golden plate on the forehead",
+ "orientation": "Origen is interpreting the high priest's vestments, and now explains the golden plate worn on the forehead.",
+ "pass_a_gloss": "The golden plate on the forehead: Holy to the Lord. The thought on the forehead consecrated. Every captivity into the obedience of Christ.",
+ "lemmas": [
+  {
+   "form": "Lamina",
+   "lemma": "lamina",
+   "gloss": "plate"
+  },
+  {
+   "form": "aurea",
+   "lemma": "aureus",
+   "gloss": "golden"
+  },
+  {
+   "form": "fronte",
+   "lemma": "frons",
+   "gloss": "forehead"
+  },
+  {
+   "form": "Sanctum",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "Domino",
+   "lemma": "dominus",
+   "gloss": "to the Lord"
+  },
+  {
+   "form": "Cogitatio",
+   "lemma": "cogitatio",
+   "gloss": "thought"
+  },
+  {
+   "form": "consecrata",
+   "lemma": "consecro",
+   "gloss": "consecrated"
+  },
+  {
+   "form": "captivitas",
+   "lemma": "captivitas",
+   "gloss": "captivity"
+  },
+  {
+   "form": "obsequium",
+   "lemma": "obsequium",
+   "gloss": "obedience"
+  },
+  {
+   "form": "Christi",
+   "lemma": "Christus",
+   "gloss": "of Christ"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Lamina aurea",
+   "english": "golden plate",
+   "why": "Literal rendering of the physical object worn by the high priest, matching the source's concrete description.",
+   "rejected": [
+    "gold plate",
+    "golden plaque"
+   ]
+  },
+  {
+   "term": "Sanctum Domino",
+   "english": "Holy to the Lord",
+   "why": "Preserves the inscription's formula as a dedication, keeping the dative of dedication.",
+   "rejected": [
+    "Holy for the Lord",
+    "Consecrated to the Lord"
+   ]
+  },
+  {
+   "term": "Cogitatio in fronte consecrata",
+   "english": "The thought on the forehead consecrated",
+   "why": "Keeps the noun phrase structure and the passive participle, showing the thought itself is made holy.",
+   "rejected": [
+    "A consecrated thought on the forehead",
+    "The mind consecrated on the forehead"
+   ]
+  },
+  {
+   "term": "Omnis captivitas in obsequium Christi",
+   "english": "Every captivity into the obedience of Christ",
+   "why": "Preserves the universal 'omnis' and the directional 'in' with accusative, echoing Paul's language of taking every thought captive.",
+   "rejected": [
+    "All captivity to obey Christ",
+    "Every thought made captive to Christ"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Exodus 28:36",
+   "method": "wording",
+   "note": "Sanctum Domino"
+  },
+  {
+   "display": "2 Corinthians 10:5",
+   "method": "wording",
+   "note": "captivitas in obsequium Christi"
+  }
+ ],
+ "pass_b_english": [
+  "The golden plate on the forehead: Holy to the Lord (Exodus 28:36). The thought on the forehead consecrated. Every captivity into the obedience of Christ (2 Corinthians 10:5)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "d552dae897b48b832a60f712cf61b92656b96cc8274787f69908333b40f4e518",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "The thought on the forehead consecrated",
+    "source_quote": "Cogitatio in fronte consecrata",
+    "why": "Missing verb; Latin is passive 'is consecrated', not a bare participle.",
+    "fix": "The thought on the forehead is consecrated.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'consecrata' is a participle; 'consecrated' matches it. No finite verb exists in source to be 'missing.'"
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Every captivity into the obedience of Christ",
+    "source_quote": "Omnis captivitas in obsequium Christi",
+    "why": "Missing verb; Latin implies 'is led/brings' captivity, not bare noun phrase.",
+    "fix": "Every captivity into the obedience of Christ (2 Corinthians 10:5).",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source is a noun phrase with no finite verb; 'into the obedience of Christ' renders 'in obsequium Christi' accurately."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

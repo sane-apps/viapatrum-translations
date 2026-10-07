@@ -1,0 +1,181 @@
+{
+ "excerpt_id": "origen-matthew-later:mt_series_close_english:11",
+ "section": "mt_series_close_english:11",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-matthew-later/translations/mt_series_close_source.json"
+ },
+ "source_text": "Et imposuerunt super caput eius causam eius scriptam: Hic est Jesus rex Iudaeorum. Occasione sive veritate Christus rex pronuntiatur, et omnis littera regnum eius testatur, sive Graecorum sive Romanorum sive Hebraeorum. Nulla alia causa mortis invenitur nisi: Rex fuit Iudaeorum — Ego autem constitutus sum rex ab eo super Sion.",
+ "thought_title": "The title over the cross proclaims Christ king",
+ "orientation": "Origen is beginning his commentary on Matthew, treating the crucifixion scene where the soldiers place the written charge over Jesus' head.",
+ "pass_a_gloss": "And they placed over his head his charge written: This is Jesus, king of the Jews. By occasion or by truth Christ is proclaimed king, and every letter testifies to his kingdom, whether of the Greeks or of the Romans or of the Hebrews. No other cause of death is found except: He was king of the Jews — But I have been appointed king by him over Sion.",
+ "lemmas": [
+  {
+   "form": "imposuerunt",
+   "lemma": "impono",
+   "gloss": "they placed upon"
+  },
+  {
+   "form": "causam",
+   "lemma": "causa",
+   "gloss": "charge, accusation"
+  },
+  {
+   "form": "scriptam",
+   "lemma": "scribo",
+   "gloss": "written"
+  },
+  {
+   "form": "pronuntiatur",
+   "lemma": "pronuntio",
+   "gloss": "is proclaimed"
+  },
+  {
+   "form": "littera",
+   "lemma": "littera",
+   "gloss": "letter, written text"
+  },
+  {
+   "form": "testatur",
+   "lemma": "testor",
+   "gloss": "testifies, bears witness"
+  },
+  {
+   "form": "invenitur",
+   "lemma": "invenio",
+   "gloss": "is found"
+  },
+  {
+   "form": "constitutus sum",
+   "lemma": "constituo",
+   "gloss": "I have been appointed"
+  },
+  {
+   "form": "rex",
+   "lemma": "rex",
+   "gloss": "king"
+  },
+  {
+   "form": "Sion",
+   "lemma": "Sion",
+   "gloss": "Sion, Zion"
+  }
+ ],
+ "choices": [
+  {
+   "term": "causam eius",
+   "english": "his charge",
+   "why": "causa here is the legal accusation or ground of condemnation written on the titulus, not a general 'reason'",
+   "rejected": [
+    "his case",
+    "his reason"
+   ]
+  },
+  {
+   "term": "Occasione sive veritate",
+   "english": "By occasion or by truth",
+   "why": "preserves the paired ablatives and the either/or force: whether incidentally or truly, Christ is proclaimed king",
+   "rejected": [
+    "By chance or in truth",
+    "Whether by occasion or in reality"
+   ]
+  },
+  {
+   "term": "omnis littera",
+   "english": "every letter",
+   "why": "littera is singular collective here, meaning every written text or script; 'every letter' keeps the literal force and the threefold listing that follows",
+   "rejected": [
+    "all writing",
+    "every script"
+   ]
+  },
+  {
+   "term": "constitutus sum rex ab eo",
+   "english": "I have been appointed king by him",
+   "why": "constitutus sum is passive with agent ab eo, matching the Psalm citation's sense of divine appointment",
+   "rejected": [
+    "I am set as king",
+    "I was made king"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Matthew 27:37",
+   "method": "wording",
+   "note": "Et imposuerunt super caput eius causam eius scriptam: Hic est Jesus rex Iudaeorum"
+  },
+  {
+   "display": "Psalm 2:6",
+   "method": "wording",
+   "note": "Ego autem constitutus sum rex ab eo super Sion"
+  }
+ ],
+ "pass_b_english": [
+  "And they placed above his head the written charge against him: This is Jesus, the king of the Jews (Matthew 27:37). Whether by occasion or by truth, Christ is proclaimed king, and every letter bears witness to his reign—whether Greek, Roman, or Hebrew. No other ground for his death is found except this: he was king of the Jews. But I have been appointed king by him over Zion (Psalm 2:6)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "cc30e27d407f24d3bb231029b1afad3f31f76773d7d969cd3c6ac7a0687f49ad",
+ "source_sha256": "e223656e75e232ddee287adbf9e56331730e5e2dbfc9e1032891baaa6d1d75c0",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 3,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "every letter bears witness to his reign",
+    "source_quote": "omnis littera regnum eius testatur",
+    "why": "\"littera\" means script/alphabet/writing, not epistle; \"regnum eius\" is \"his kingdom,\" not \"his reign.\"",
+    "fix": "every script bears witness to his kingdom",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Letter' covers alphabet/character; 'reign' is a valid sense of 'regnum.' Neither changes meaning."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "No other ground for his death is found except this: he was king of the Jews",
+    "source_quote": "Nulla alia causa mortis invenitur nisi: Rex fuit Iudaeorum",
+    "why": "Source says \"Rex fuit Iudaeorum\" (he was king of the Jews), but English changes to past tense narrative; more importantly, the Latin charge is identical to the inscription, not a past-tense report.",
+    "fix": "No other cause of death is found except: King of the Jews",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'He was king of the Jews' correctly renders 'Rex fuit Iudaeorum'; past tense matches Latin perfect tense."
+   },
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "But I have been appointed king by him over Zion (Psalm 2:6)",
+    "source_quote": "Ego autem constitutus sum rex ab eo super Sion",
+    "why": "The English hides that this is a Psalm quotation (first-person voice of Christ/the speaker in Psalms), not Origen's own statement; the parenthetical attribution is insufficient to distinguish voice.",
+    "fix": "But I have been set by him as king over Zion—Psalm 2:6",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Parenthetical '(Psalm 2:6)' signals quotation; first-person 'I' preserves the quoted voice adequately."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 3,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

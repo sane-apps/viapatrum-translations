@@ -1,0 +1,202 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom14_english:3",
+ "section": "lev_hom14_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom14_source.json"
+ },
+ "source_text": "Manus testium primi; lapidabit eum omnis populus. Testimonium grave. Veritas non otiosa.",
+ "thought_title": "The first witnesses cast the stone",
+ "orientation": "Origen is commenting on the expulsion of the blasphemer from the camp, now describing the execution by stoning and the role of the witnesses.",
+ "pass_a_gloss": "The hand of the witnesses first; all the people will stone him. A weighty testimony. Truth is not idle.",
+ "lemmas": [
+  {
+   "form": "Manus",
+   "lemma": "manus",
+   "gloss": "hand"
+  },
+  {
+   "form": "testium",
+   "lemma": "testis",
+   "gloss": "witness"
+  },
+  {
+   "form": "primi",
+   "lemma": "primus",
+   "gloss": "first"
+  },
+  {
+   "form": "lapidabit",
+   "lemma": "lapido",
+   "gloss": "will stone"
+  },
+  {
+   "form": "eum",
+   "lemma": "is",
+   "gloss": "him"
+  },
+  {
+   "form": "omnis",
+   "lemma": "omnis",
+   "gloss": "all"
+  },
+  {
+   "form": "populus",
+   "lemma": "populus",
+   "gloss": "people"
+  },
+  {
+   "form": "Testimonium",
+   "lemma": "testimonium",
+   "gloss": "testimony"
+  },
+  {
+   "form": "grave",
+   "lemma": "gravis",
+   "gloss": "weighty"
+  },
+  {
+   "form": "Veritas",
+   "lemma": "veritas",
+   "gloss": "truth"
+  },
+  {
+   "form": "non",
+   "lemma": "non",
+   "gloss": "not"
+  },
+  {
+   "form": "otiosa",
+   "lemma": "otiosus",
+   "gloss": "idle"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Manus testium primi",
+   "english": "The hand of the witnesses first",
+   "why": "Keeps the genitive construction and the adverbial force of 'primi' as 'first' in action, matching the legal sequence in Leviticus 24:14.",
+   "rejected": [
+    "The witnesses' hands first",
+    "First the hands of the witnesses"
+   ]
+  },
+  {
+   "term": "lapidabit eum omnis populus",
+   "english": "all the people will stone him",
+   "why": "Preserves the future tense and the collective subject 'omnis populus' as 'all the people', matching the communal execution.",
+   "rejected": [
+    "the whole people stones him",
+    "everyone will stone him"
+   ]
+  },
+  {
+   "term": "Testimonium grave",
+   "english": "A weighty testimony",
+   "why": "Renders 'grave' as 'weighty' to convey the seriousness and burden of witness-bearing, not merely 'serious'.",
+   "rejected": [
+    "A serious testimony",
+    "A heavy testimony"
+   ]
+  },
+  {
+   "term": "Veritas non otiosa",
+   "english": "Truth is not idle",
+   "why": "Keeps the negative adjective 'otiosa' as 'idle' to preserve the sense that truth acts and bears witness, not passive.",
+   "rejected": [
+    "Truth is not inactive",
+    "Truth is not useless"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 24:14",
+   "method": "wording",
+   "note": "Manus testium primi; lapidabit eum omnis populus"
+  }
+ ],
+ "pass_b_english": [
+  "The hand of the witnesses is first; all the people will stone him. A weighty testimony. Truth is not idle."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "1e87fd086a58502b8e8322531201c9441bdcba06b1617b21e364dcee2e644f28",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "severity": "major",
+     "quote": "The hand of the witnesses is first; all the people will stone him (Leviticus 24:14). A weighty testimony. Truth is not idle.",
+     "source_quote": "Manus testium primi; lapidabit eum omnis populus. Testimonium grave. Veritas non otiosa.",
+     "why": "Source lacks Scripture citation marker; English adds '(Leviticus 24:14)' as if source cited it.",
+     "fix": "The hand of the witnesses is first; all the people will stone him. A weighty testimony. Truth is not idle.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source has no parenthetical citation; English adds '(Leviticus 24:14)' not in Latin text."
+    }
+   ],
+   "edits": [
+    {
+     "old": "all the people will stone him (Leviticus 24:14).",
+     "new": "all the people will stone him."
+    }
+   ],
+   "fixed": [
+    "Removed the added Scripture citation '(Leviticus 24:14)' because the source text 'Manus testium primi; lapidabit eum omnis populus. Testimonium grave. Veritas non otiosa.' does not include a citation marker."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "all the people will stone him",
+    "source_quote": "lapidabit eum omnis populus",
+    "why": "Future indicative 'will stone' changes command to prediction; source is jussive/command.",
+    "fix": "all the people shall stone him",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'lapidabit' is future indicative; English 'will stone' matches source exactly. No jussive/command form present."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

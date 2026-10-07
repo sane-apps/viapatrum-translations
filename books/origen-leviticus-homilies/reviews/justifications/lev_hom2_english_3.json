@@ -1,0 +1,225 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom2_english:3",
+ "section": "lev_hom2_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom2_source.json"
+ },
+ "source_text": "Si tota synagoga erraverit, vitulum offerunt. Anima una — capram vel ovem. Gradus peccati gradus hostiae. Christus pro populo et pro singulis.",
+ "thought_title": "Degrees of sacrifice match degrees of sin",
+ "orientation": "Origen is explaining how the size of the sin offering in Leviticus corresponds to the scope of the sin: the whole congregation offers a calf, while an individual soul offers a goat or sheep.",
+ "pass_a_gloss": "If [the] whole synagogue [will have] erred, [a] calf they offer. [A] soul one — [a] goat or [a] sheep. [The] step [of] sin [is the] step [of the] victim. Christ for [the] people and for [the] individuals.",
+ "lemmas": [
+  {
+   "form": "erraverit",
+   "lemma": "erro",
+   "gloss": "has gone astray"
+  },
+  {
+   "form": "vitulum",
+   "lemma": "vitulus",
+   "gloss": "calf"
+  },
+  {
+   "form": "offerunt",
+   "lemma": "offero",
+   "gloss": "they offer"
+  },
+  {
+   "form": "anima",
+   "lemma": "anima",
+   "gloss": "soul"
+  },
+  {
+   "form": "capram",
+   "lemma": "capra",
+   "gloss": "goat"
+  },
+  {
+   "form": "ovem",
+   "lemma": "ovis",
+   "gloss": "sheep"
+  },
+  {
+   "form": "gradus",
+   "lemma": "gradus",
+   "gloss": "degree"
+  },
+  {
+   "form": "peccati",
+   "lemma": "peccatum",
+   "gloss": "of sin"
+  },
+  {
+   "form": "hostiae",
+   "lemma": "hostia",
+   "gloss": "of the victim"
+  },
+  {
+   "form": "populo",
+   "lemma": "populus",
+   "gloss": "for the people"
+  },
+  {
+   "form": "singulis",
+   "lemma": "singuli",
+   "gloss": "for individuals"
+  }
+ ],
+ "choices": [
+  {
+   "term": "synagoga",
+   "english": "synagogue",
+   "why": "Kept as the source term for the gathered people of Israel, matching Origen's usage for the whole congregation.",
+   "rejected": [
+    "assembly",
+    "congregation"
+   ]
+  },
+  {
+   "term": "anima una",
+   "english": "one soul",
+   "why": "Renders the singular individual as a soul, preserving Origen's moral application to the individual person.",
+   "rejected": [
+    "one person",
+    "a single life"
+   ]
+  },
+  {
+   "term": "gradus peccati gradus hostiae",
+   "english": "the degree of sin is the degree of the victim",
+   "why": "Keeps the parallel structure and the equation between sin and sacrificial victim.",
+   "rejected": [
+    "the level of sin matches the level of offering",
+    "as the sin, so the sacrifice"
+   ]
+  },
+  {
+   "term": "Christus pro populo et pro singulis",
+   "english": "Christ is for the people and for individuals",
+   "why": "Preserves the terse summary and the double scope of Christ's offering.",
+   "rejected": [
+    "Christ is offered for the people and for each one",
+    "Christ stands for the people and for individuals"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 4:13-14",
+   "method": "allusion",
+   "note": "si tota synagoga erraverit, vitulum offerunt"
+  },
+  {
+   "display": "Leviticus 4:27-28",
+   "method": "allusion",
+   "note": "anima una — capram vel ovem"
+  }
+ ],
+ "pass_b_english": [
+  "If the whole synagogue has gone astray, they offer a calf. One soul goes astray—a goat or a sheep is offered. The degree of sin is the degree of the victim. Christ is for the people and for individuals."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "ce0e7635b1c16ae1d39e2bec271c607102a368440400101979ef7d53cf038b47",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "agency",
+     "severity": "major",
+     "quote": "One soul offers a goat or a sheep",
+     "source_quote": "Anima una — capram vel ovem",
+     "why": "Subject changed: 'anima una' is subject of erraverit, not offerunt; one soul sins, community offers calf",
+     "fix": "One soul goes astray—a goat or sheep is offered",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "'Anima una' parallels 'tota synagoga erraverit'; it means one soul sins, not offers. Ellipsis omits the verb 'erraverit'."
+    }
+   ],
+   "edits": [
+    {
+     "old": "One soul offers a goat or a sheep.",
+     "new": "One soul goes astray—a goat or a sheep is offered."
+    }
+   ],
+   "fixed": [
+    "Changed 'One soul offers a goat or a sheep' to 'One soul goes astray—a goat or a sheep is offered' because the source 'Anima una — capram vel ovem' continues the verb 'erraverit' from the previous sentence: the one soul goes astray, and the corresponding victim is a goat or sheep."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 3,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "One soul goes astray",
+    "source_quote": "Anima una",
+    "why": "Latin 'anima' here means 'one person/soul' as subject of erraverit, not 'goes astray' as new verb.",
+    "fix": "If one soul has gone astray—a goat or a sheep.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Dash construction correctly carries 'gone astray' to 'one soul'; no new verb added, meaning preserved."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "The degree of sin is the degree of the victim",
+    "source_quote": "Gradus peccati gradus hostiae",
+    "why": "'Hostia' means sacrificial victim/offering, not 'victim' in general; 'gradus' is rank/stage, not 'degree'.",
+    "fix": "The rank of sin determines the rank of the offering.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Victim' is standard English for sacrificial 'hostia'; 'degree' is within normal range of 'gradus.'"
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "Christ is for the people and for individuals",
+    "source_quote": "Christus pro populo et pro singulis",
+    "why": "Missing verb 'offertur' or similar implied: Christ is offered for people and individuals.",
+    "fix": "Christ is offered for the people and for individuals.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin has no explicit verb; 'Christ is for' adequately renders 'pro.' Implied offering is contextually clear."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 3,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

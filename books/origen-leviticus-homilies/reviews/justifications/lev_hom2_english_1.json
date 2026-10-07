@@ -1,0 +1,168 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom2_english:1",
+ "section": "lev_hom2_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom2_source.json"
+ },
+ "source_text": "Superior de principiis Levitici dictum est; nunc lex sacrificiorum quae munera appellantur. Anima quae peccaverit ex populo — non voluntate semper, sed ignorantia — munus offert. Synagoga et anima typice leguntur.",
+ "thought_title": "Transition from principles to the law of sacrifices",
+ "orientation": "Origen has just finished the moral application of the burnt offering and now turns to the law of sacrifices, called 'gifts,' beginning with the soul that sins from ignorance.",
+ "pass_a_gloss": "The previous part has been spoken about the principles of Leviticus; now the law of sacrifices which are called gifts. The soul which has sinned from the people — not always by will, but by ignorance — offers a gift. The synagogue and the soul are read typically.",
+ "lemmas": [
+  {
+   "form": "Superior",
+   "lemma": "superus",
+   "gloss": "previous, earlier"
+  },
+  {
+   "form": "principiis",
+   "lemma": "principium",
+   "gloss": "principles, beginnings"
+  },
+  {
+   "form": "Levitici",
+   "lemma": "Leviticus",
+   "gloss": "Leviticus"
+  },
+  {
+   "form": "dictum",
+   "lemma": "dico",
+   "gloss": "has been said"
+  },
+  {
+   "form": "lex",
+   "lemma": "lex",
+   "gloss": "law"
+  },
+  {
+   "form": "sacrificiorum",
+   "lemma": "sacrificium",
+   "gloss": "of sacrifices"
+  },
+  {
+   "form": "munera",
+   "lemma": "munus",
+   "gloss": "gifts"
+  },
+  {
+   "form": "appellantur",
+   "lemma": "appello",
+   "gloss": "are called"
+  },
+  {
+   "form": "anima",
+   "lemma": "anima",
+   "gloss": "soul"
+  },
+  {
+   "form": "peccaverit",
+   "lemma": "pecco",
+   "gloss": "has sinned"
+  },
+  {
+   "form": "voluntate",
+   "lemma": "voluntas",
+   "gloss": "by will"
+  },
+  {
+   "form": "ignorantia",
+   "lemma": "ignorantia",
+   "gloss": "by ignorance"
+  },
+  {
+   "form": "offert",
+   "lemma": "offero",
+   "gloss": "offers"
+  },
+  {
+   "form": "typice",
+   "lemma": "typicus",
+   "gloss": "typically, as a figure"
+  }
+ ],
+ "choices": [
+  {
+   "term": "munera",
+   "english": "gifts",
+   "why": "The source explicitly says the sacrifices are called munera, and the glossary reserves 'sacrifice' for sacrificium; 'gifts' preserves the distinct term.",
+   "rejected": [
+    "offerings",
+    "presents"
+   ]
+  },
+  {
+   "term": "typice",
+   "english": "typically",
+   "why": "The adverb signals figural reading, matching the glossary's 'figure' for figura; 'typically' keeps the technical sense of type.",
+   "rejected": [
+    "as a type",
+    "figuratively"
+   ]
+  },
+  {
+   "term": "Anima quae peccaverit",
+   "english": "The soul which has sinned",
+   "why": "The relative clause with perfect subjunctive is rendered as a generalizing relative clause, preserving the indefinite force.",
+   "rejected": [
+    "A soul that sins",
+    "If a soul has sinned"
+   ]
+  },
+  {
+   "term": "non voluntate semper, sed ignorantia",
+   "english": "not always by will, but by ignorance",
+   "why": "The ablatives of manner are kept as prepositional phrases; 'always' modifies the whole contrast, matching the Latin word order.",
+   "rejected": [
+    "not by will always, but by ignorance",
+    "not always willingly, but ignorantly"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "We have spoken already about the principles of Leviticus; now we come to the law of the sacrifices that are called gifts. The soul which has sinned from among the people—not always by will, but by ignorance—offers a gift. The synagogue and the soul are read as figures."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "90cf5ac8f47ae93f58547fd8eb7b50344a1771d598dcc68d8fc4c980de67d050",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "not always by will, but by ignorance",
+    "source_quote": "non voluntate semper, sed ignorantia",
+    "why": "Latin 'semper' modifies 'voluntate', meaning 'not by will always' i.e. not always voluntary; English inverts to 'not always by will', changing scope of 'always'.",
+    "fix": "not by will always, but by ignorance",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'non voluntate semper' and English 'not always by will' express same scope: sin is not always voluntary. No meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,135 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom16_english:1",
+ "section": "lev_hom16_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom16_source.json"
+ },
+ "source_text": "Si Paulo lex spiritalis, et benedictiones spiritales. Non solum terrae fructus sed animae victoria.",
+ "thought_title": "If the law is spiritual for Paul, blessings are spiritual too",
+ "orientation": "Origen is opening a new homily by arguing from Paul's authority that the law's blessings must be understood spiritually, not as earthly rewards.",
+ "pass_a_gloss": "If [to] Paul [the] law [is] spiritual, and [the] blessings [are] spiritual. Not only [of the] earth [the] fruits but [of the] soul [the] victory.",
+ "lemmas": [
+  {
+   "form": "Si",
+   "lemma": "si",
+   "gloss": "if"
+  },
+  {
+   "form": "Paulo",
+   "lemma": "Paulus",
+   "gloss": "for Paul"
+  },
+  {
+   "form": "lex",
+   "lemma": "lex",
+   "gloss": "the law"
+  },
+  {
+   "form": "spiritalis",
+   "lemma": "spiritalis",
+   "gloss": "spiritual"
+  },
+  {
+   "form": "benedictiones",
+   "lemma": "benedictio",
+   "gloss": "blessings"
+  },
+  {
+   "form": "terrae",
+   "lemma": "terra",
+   "gloss": "of the earth"
+  },
+  {
+   "form": "fructus",
+   "lemma": "fructus",
+   "gloss": "fruits"
+  },
+  {
+   "form": "animae",
+   "lemma": "anima",
+   "gloss": "of the soul"
+  },
+  {
+   "form": "victoria",
+   "lemma": "victoria",
+   "gloss": "victory"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Si Paulo lex spiritalis",
+   "english": "If the law is spiritual for Paul",
+   "why": "The dative Paulo marks the authority to whom the law is spiritual; the conditional si opens the inference.",
+   "rejected": [
+    "If Paul says the law is spiritual",
+    "If the law is spiritual according to Paul"
+   ]
+  },
+  {
+   "term": "et benedictiones spiritales",
+   "english": "the blessings are spiritual also",
+   "why": "The et is connective and the predicate adjective spiritales is supplied from the previous clause; the sense is that the blessings of the law share the same spiritual character.",
+   "rejected": [
+    "and spiritual blessings",
+    "and the blessings spiritual"
+   ]
+  },
+  {
+   "term": "Non solum terrae fructus sed animae victoria",
+   "english": "Not only the fruits of the earth but the victory of the soul",
+   "why": "The contrast non solum...sed marks the replacement of a literal earthly reading with a spiritual one; victoria animae is the spiritual counterpart to terrae fructus.",
+   "rejected": [
+    "Not only the fruits of the land but the soul's victory",
+    "Not only earthly fruits but the victory of the spirit"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "If the law is spiritual for Paul, then its blessings are spiritual as well—not only the fruits of the earth, but the victory of the soul."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "3b54f6efd3d607c6f78817464e5423ae0c1be9ec0d450382dd73df372cf64c72",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "If the law is spiritual for Paul",
+    "source_quote": "Si Paulo lex spiritalis",
+    "why": "Source says law is spiritual 'to/for Paul', not that Paul holds this opinion; English makes Paul the subject of belief.",
+    "fix": "If for Paul the law is spiritual, then its blessings are spiritual too.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Si Paulo lex spiritalis' naturally means 'if the law is spiritual for Paul'; English correctly renders the dative, no meaning changed."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

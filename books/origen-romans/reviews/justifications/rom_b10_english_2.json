@@ -1,0 +1,165 @@
+{
+ "excerpt_id": "origen-romans:rom_b10_english:2",
+ "section": "rom_b10_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b10_source.json"
+ },
+ "source_text": "Deus autem spei repleat vos omni gaudio et pace in credendo, ut abundetis in spe in virtute Spiritus sancti. Gloria Christo Iesu in saecula. Amen.",
+ "thought_title": "A prayer for hope, joy, and peace",
+ "orientation": "Origen has just quoted Paul's words about the word of faith and confession, and now he closes this opening section with a prayer drawn from Romans 15:13.",
+ "pass_a_gloss": "God however of hope may fill you [with] all joy and peace in believing, so that you may abound in hope in [the] power of [the] Spirit holy. Glory [to] Christ Jesus into [the] ages. Amen.",
+ "lemmas": [
+  {
+   "form": "repleat",
+   "lemma": "repleo",
+   "gloss": "may fill"
+  },
+  {
+   "form": "gaudio",
+   "lemma": "gaudium",
+   "gloss": "joy"
+  },
+  {
+   "form": "pace",
+   "lemma": "pax",
+   "gloss": "peace"
+  },
+  {
+   "form": "credendo",
+   "lemma": "credo",
+   "gloss": "in believing"
+  },
+  {
+   "form": "abundetis",
+   "lemma": "abundo",
+   "gloss": "you may abound"
+  },
+  {
+   "form": "spe",
+   "lemma": "spes",
+   "gloss": "hope"
+  },
+  {
+   "form": "virtute",
+   "lemma": "virtus",
+   "gloss": "power"
+  },
+  {
+   "form": "Spiritus",
+   "lemma": "Spiritus",
+   "gloss": "the Spirit"
+  },
+  {
+   "form": "sancti",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "Gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  },
+  {
+   "form": "saecula",
+   "lemma": "saeculum",
+   "gloss": "forever"
+  },
+  {
+   "form": "Amen",
+   "lemma": "amen",
+   "gloss": "Amen"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Deus autem spei",
+   "english": "But may the God of hope",
+   "why": "The genitive 'spei' modifies 'Deus' as a characteristic quality; 'autem' marks a transition and is rendered as 'But' to preserve the connective force.",
+   "rejected": [
+    "Now the God of hope",
+    "And the God of hope"
+   ]
+  },
+  {
+   "term": "in credendo",
+   "english": "in believing",
+   "why": "The gerund in the ablative with 'in' expresses the sphere or activity in which joy and peace are experienced; 'believing' keeps the verbal force rather than substituting the noun 'faith'.",
+   "rejected": [
+    "in faith",
+    "through believing"
+   ]
+  },
+  {
+   "term": "in virtute Spiritus sancti",
+   "english": "in the power of the Holy Spirit",
+   "why": "The phrase names the source of power for abounding in hope; 'Holy Spirit' is the natural English rendering of 'Spiritus sancti' in a doxological context.",
+   "rejected": [
+    "in the power of the holy Spirit",
+    "by the power of the Holy Spirit"
+   ]
+  },
+  {
+   "term": "in saecula",
+   "english": "forever",
+   "why": "The plural 'saecula' with 'in' is a standard doxological formula meaning endless ages; 'forever' conveys the sense naturally in English.",
+   "rejected": [
+    "unto the ages",
+    "for ever and ever"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 15:13",
+   "method": "wording",
+   "note": "Deus autem spei repleat vos omni gaudio et pace in credendo, ut abundetis in spe in virtute Spiritus sancti"
+  }
+ ],
+ "pass_b_english": [
+  "But may the God of hope fill you with all joy and peace in believing, so that you may abound in hope in the power of the Holy Spirit (Romans 15:13). Glory to Christ Jesus forever. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "f8bf661021f1999063c2e94ba3bf9224f54723dbbf89f485a5011b86128da999",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "the Holy Spirit",
+    "source_quote": "Spiritus sancti",
+    "why": "Glossary bans 'the Holy Spirit' for Spiritus; must be 'the Spirit'.",
+    "fix": "in the power of the Spirit",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Spiritus sancti' naturally renders as 'the Holy Spirit'; no meaning is changed or lost."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

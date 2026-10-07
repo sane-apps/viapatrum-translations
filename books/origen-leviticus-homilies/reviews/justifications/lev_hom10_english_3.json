@@ -1,0 +1,172 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom10_english:3",
+ "section": "lev_hom10_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom10_source.json"
+ },
+ "source_text": "Hircus in eremum portat iniquitates. Christus tulit peccata in corpus suum. Amen.",
+ "thought_title": "The scapegoat carries sins into the desert; Christ bore sins in his body",
+ "orientation": "Origen is explaining the Day of Propitiation rite in Leviticus 16, where the goat sent into the desert carries away the people's iniquities, and he applies it to Christ.",
+ "pass_a_gloss": "The goat carries iniquities into the desert. Christ bore sins in his own body. Amen.",
+ "lemmas": [
+  {
+   "form": "Hircus",
+   "lemma": "hircus",
+   "gloss": "goat"
+  },
+  {
+   "form": "eremum",
+   "lemma": "eremus",
+   "gloss": "desert"
+  },
+  {
+   "form": "portat",
+   "lemma": "porto",
+   "gloss": "carries"
+  },
+  {
+   "form": "iniquitates",
+   "lemma": "iniquitas",
+   "gloss": "iniquities"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  },
+  {
+   "form": "tulit",
+   "lemma": "fero",
+   "gloss": "bore"
+  },
+  {
+   "form": "peccata",
+   "lemma": "peccatum",
+   "gloss": "sins"
+  },
+  {
+   "form": "corpus",
+   "lemma": "corpus",
+   "gloss": "body"
+  },
+  {
+   "form": "suum",
+   "lemma": "suus",
+   "gloss": "his own"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Hircus",
+   "english": "The goat",
+   "why": "The subject is the scapegoat from the Day of Propitiation rite, so the definite article makes the reference clear.",
+   "rejected": [
+    "A goat",
+    "He-goat"
+   ]
+  },
+  {
+   "term": "in eremum",
+   "english": "into the desert",
+   "why": "The preposition in with accusative indicates motion toward, matching the ritual sending of the goat away.",
+   "rejected": [
+    "in the desert",
+    "to the wilderness"
+   ]
+  },
+  {
+   "term": "portat",
+   "english": "carries",
+   "why": "The present tense is kept to match the source's vivid present, describing the ritual action.",
+   "rejected": [
+    "carried",
+    "bears"
+   ]
+  },
+  {
+   "term": "tulit",
+   "english": "bore",
+   "why": "The perfect tense indicates Christ's completed action in the past, distinct from the present of the goat's ritual carrying.",
+   "rejected": [
+    "carried",
+    "took"
+   ]
+  },
+  {
+   "term": "iniquitates",
+   "english": "iniquities",
+   "why": "The source uses iniquitates for the goat's burden, distinct from peccata for Christ's, so the distinction is preserved.",
+   "rejected": [
+    "sins",
+    "transgressions"
+   ]
+  },
+  {
+   "term": "peccata",
+   "english": "sins",
+   "why": "The source uses peccata for what Christ bore, and the glossary gives 'sin' for peccatum, so the standard rendering is used.",
+   "rejected": [
+    "offenses",
+    "transgressions"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 16:21-22",
+   "method": "wording",
+   "note": "The goat bearing iniquities into the desert reflects the scapegoat rite, where Aaron lays hands on the goat and it carries their iniquities into the desert."
+  },
+  {
+   "display": "1 Peter 2:24",
+   "method": "wording",
+   "note": "Christ bore our sins in his body on the tree, matching 'Christus tulit peccata in corpus suum'."
+  }
+ ],
+ "pass_b_english": [
+  "The goat carries their iniquities into the desert. Christ bore our sins in his own body. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "c81e99f7d1a9f031dad8187a11b1a8b4f3a664d4e3eaf58956fa2c018c16784e",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "our sins",
+    "source_quote": "peccata",
+    "why": "Source says 'sins' generically, not 'our sins'; adds possessive not in Latin.",
+    "fix": "Christ bore sins in his own body. Amen.",
+    "model": "@cf/zai-org/glm-5.2",
+    "rejected_by": "@cf/moonshotai/kimi-k2.6",
+    "ruling": "Latin 'peccata' lacks explicit possessive; 'our' is normal contextual rendering for Christian soteriological formula (1 Pet 2:24)."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

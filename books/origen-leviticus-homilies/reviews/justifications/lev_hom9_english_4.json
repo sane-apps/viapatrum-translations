@@ -1,0 +1,160 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom9_english:4",
+ "section": "lev_hom9_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom9_source.json"
+ },
+ "source_text": "Homo paratus et mundus ducit hircum in desertum. Apostolorum ministerium. Munditia ad mysterium.",
+ "thought_title": "The prepared and clean man leads the goat into the desert",
+ "orientation": "Origen is explaining the Day of Atonement ritual of the scapegoat, identifying the man who leads it away as a figure of the apostles' ministry.",
+ "pass_a_gloss": "A prepared and clean man leads the goat into the desert. The ministry of the apostles. Cleanliness for the mystery.",
+ "lemmas": [
+  {
+   "form": "paratus",
+   "lemma": "paratus",
+   "gloss": "prepared"
+  },
+  {
+   "form": "mundus",
+   "lemma": "mundus",
+   "gloss": "clean"
+  },
+  {
+   "form": "ducit",
+   "lemma": "duco",
+   "gloss": "leads"
+  },
+  {
+   "form": "hircum",
+   "lemma": "hircus",
+   "gloss": "goat"
+  },
+  {
+   "form": "desertum",
+   "lemma": "desertum",
+   "gloss": "desert"
+  },
+  {
+   "form": "apostolorum",
+   "lemma": "apostolus",
+   "gloss": "of the apostles"
+  },
+  {
+   "form": "ministerium",
+   "lemma": "ministerium",
+   "gloss": "ministry"
+  },
+  {
+   "form": "munditia",
+   "lemma": "munditia",
+   "gloss": "cleanliness"
+  },
+  {
+   "form": "mysterium",
+   "lemma": "mysterium",
+   "gloss": "mystery"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Homo paratus et mundus",
+   "english": "A prepared and clean man",
+   "why": "Keeps the two adjectives as distinct qualities required of the one who performs the rite, matching the source's paratactic style.",
+   "rejected": [
+    "a man prepared and pure",
+    "one who is ready and clean"
+   ]
+  },
+  {
+   "term": "ducit hircum in desertum",
+   "english": "leads the goat into the desert",
+   "why": "Literal rendering of the action, preserving the present tense and the directional preposition.",
+   "rejected": [
+    "takes the goat away to the wilderness",
+    "drives the goat out into the desert"
+   ]
+  },
+  {
+   "term": "Apostolorum ministerium",
+   "english": "The ministry of the apostles",
+   "why": "Renders the genitive phrase as a simple identification, keeping the terse homiletic style of the source.",
+   "rejected": [
+    "the apostles' service",
+    "the office of the apostles"
+   ]
+  },
+  {
+   "term": "Munditia ad mysterium",
+   "english": "Cleanliness for the mystery",
+   "why": "Preserves the compact prepositional phrase and the noun 'mystery' as the goal toward which cleanliness is directed.",
+   "rejected": [
+    "purity is required for the mystery",
+    "cleanness unto the mystery"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 16:21",
+   "method": "allusion",
+   "note": "ducit hircum in desertum"
+  }
+ ],
+ "pass_b_english": [
+  "A prepared and clean man leads the goat into the desert (Leviticus 16:21). This is the ministry of the apostles. Cleanliness is required for the mystery."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "20a880f9cb19271ed400e6e3afa051a62de8e236da0699bfb0a70f7726fefc70",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "A prepared and clean man",
+    "source_quote": "Homo paratus et mundus",
+    "why": "\"paratus\" means ready/prepared, but context of Lev 16:21 scapegoat ritual requires \"appointed/designated\" (the man already chosen for this task).",
+    "fix": "The man appointed and clean leads the goat into the desert.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "paratus means prepared/ready; appointed is a contextual gloss, not a distinct lexical meaning."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Cleanliness is required for the mystery",
+    "source_quote": "Munditia ad mysterium",
+    "why": "\"ad\" indicates purpose/relationship (cleanliness for/toward the mystery), not requirement; \"munditia\" is purity not mere cleanliness.",
+    "fix": "Purity is for the mystery.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ad can express fitness/suitability; required is acceptable paraphrase; mundus/munditia overlap as clean/pure."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

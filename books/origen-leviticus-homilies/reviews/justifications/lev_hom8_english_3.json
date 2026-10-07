@@ -1,0 +1,176 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom8_english:3",
+ "section": "lev_hom8_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom8_source.json"
+ },
+ "source_text": "Triginta tribus diebus manet in sanguine purificationis. Tempus medicinale animae. Non festina ad sancta.",
+ "thought_title": "Thirty-three days of purification",
+ "orientation": "Origen is explaining the purification period after childbirth from Leviticus 12, applying it to the soul's need for healing before approaching holy things.",
+ "pass_a_gloss": "For thirty-three days she remains in the blood of purification. A time of healing for the soul. Do not hurry to holy things.",
+ "lemmas": [
+  {
+   "form": "Triginta",
+   "lemma": "triginta",
+   "gloss": "thirty"
+  },
+  {
+   "form": "tribus",
+   "lemma": "tres",
+   "gloss": "three"
+  },
+  {
+   "form": "diebus",
+   "lemma": "dies",
+   "gloss": "days"
+  },
+  {
+   "form": "manet",
+   "lemma": "maneo",
+   "gloss": "she remains"
+  },
+  {
+   "form": "sanguine",
+   "lemma": "sanguis",
+   "gloss": "blood"
+  },
+  {
+   "form": "purificationis",
+   "lemma": "purificatio",
+   "gloss": "of purification"
+  },
+  {
+   "form": "Tempus",
+   "lemma": "tempus",
+   "gloss": "time"
+  },
+  {
+   "form": "medicinale",
+   "lemma": "medicinalis",
+   "gloss": "of healing"
+  },
+  {
+   "form": "animae",
+   "lemma": "anima",
+   "gloss": "for the soul"
+  },
+  {
+   "form": "festina",
+   "lemma": "festino",
+   "gloss": "do hurry"
+  },
+  {
+   "form": "sancta",
+   "lemma": "sanctus",
+   "gloss": "holy things"
+  }
+ ],
+ "choices": [
+  {
+   "term": "sanguine purificationis",
+   "english": "blood of purification",
+   "why": "Keeps the literal phrase from Leviticus 12, where the woman remains in the blood of her purification; 'blood' is the glossary term for sanguis.",
+   "rejected": [
+    "purifying blood",
+    "blood of cleansing"
+   ]
+  },
+  {
+   "term": "Tempus medicinale animae",
+   "english": "A time of healing for the soul",
+   "why": "Renders the noun phrase as a complete sentence, matching Origen's terse moral application; 'healing' captures the medicinal sense.",
+   "rejected": [
+    "medicinal time of the soul",
+    "a soul-healing time"
+   ]
+  },
+  {
+   "term": "Non festina ad sancta",
+   "english": "Do not hurry to holy things",
+   "why": "Preserves the imperative force of the prohibition and the glossary term 'holy' for sancta.",
+   "rejected": [
+    "Do not rush to the holy",
+    "Do not hasten to sacred things"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 12:4",
+   "method": "wording",
+   "note": "Triginta tribus diebus manet in sanguine purificationis"
+  }
+ ],
+ "pass_b_english": [
+  "For thirty-three days she remains in the blood of her purification (Leviticus 12:4). This is a time of healing for the soul. She is not to hurry to holy things."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "f5358e58f4e5b1b9165ad4679debce72e981eb9ad76598f666fec99bffde22fb",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "severity": "major",
+     "quote": "Do not hurry to holy things.",
+     "source_quote": "Non festina ad sancta.",
+     "why": "Source is third-person description, not second-person command.",
+     "fix": "She is not to hurry to holy things.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin 'Non festina' is 2nd-person singular imperative, correctly rendered as a command. The claim that source is third-person is wrong."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Do not hurry to holy things.",
+     "new": "She is not to hurry to holy things."
+    }
+   ],
+   "fixed": [
+    "Changed 'Do not hurry to holy things' to 'She is not to hurry to holy things' because the source 'Non festina ad sancta' is third-person description, not a second-person command."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,180 @@
+{
+ "excerpt_id": "origen-matthew-later:mt_series_i_english:10",
+ "section": "mt_series_i_english:10",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-matthew-later/translations/mt_series_i_source.json"
+ },
+ "source_text": "Amen dico tibi, priusquam gallus cantet, ter me negabis. Quaeritur utrum si deprecatus fuisset ut repelleretur praecognita denegatio, forsitan non denegasset — sicut Ninivitis exoratus quae per Jonam praedixerat non fecit. Gloria Christo. Amen.",
+ "thought_title": "Could Peter's denial have been averted by prayer?",
+ "orientation": "Origen is still discussing Peter's predicted denial, now asking whether Peter could have prayed to have the foreknown denial turned away, as Nineveh's repentance turned away Jonah's announced destruction.",
+ "pass_a_gloss": "Truly I say to you, before the rooster crows, you will deny me three times. It is asked whether, if he had prayed that the foreknown denial be driven away, perhaps he would not have denied — just as, having been entreated by the Ninevites, he did not do what he had foretold through Jonah. Glory to Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "Amen",
+   "lemma": "amen",
+   "gloss": "truly"
+  },
+  {
+   "form": "dico",
+   "lemma": "dico",
+   "gloss": "I say"
+  },
+  {
+   "form": "tibi",
+   "lemma": "tu",
+   "gloss": "to you"
+  },
+  {
+   "form": "priusquam",
+   "lemma": "priusquam",
+   "gloss": "before"
+  },
+  {
+   "form": "gallus",
+   "lemma": "gallus",
+   "gloss": "rooster"
+  },
+  {
+   "form": "cantet",
+   "lemma": "canto",
+   "gloss": "crows"
+  },
+  {
+   "form": "ter",
+   "lemma": "ter",
+   "gloss": "three times"
+  },
+  {
+   "form": "negabis",
+   "lemma": "nego",
+   "gloss": "you will deny"
+  },
+  {
+   "form": "quaeritur",
+   "lemma": "quaero",
+   "gloss": "it is asked"
+  },
+  {
+   "form": "deprecatus fuisset",
+   "lemma": "deprecor",
+   "gloss": "he had prayed"
+  },
+  {
+   "form": "repelleretur",
+   "lemma": "repello",
+   "gloss": "it be driven away"
+  },
+  {
+   "form": "praecognita",
+   "lemma": "praecognosco",
+   "gloss": "foreknown"
+  }
+ ],
+ "choices": [
+  {
+   "term": "praecognita denegatio",
+   "english": "the foreknown denial",
+   "why": "Keeps the passive participle force of praecognita as 'known beforehand,' matching Origen's concern with divine foreknowledge and human action.",
+   "rejected": [
+    "the predicted denial",
+    "the denial known in advance"
+   ]
+  },
+  {
+   "term": "repelleretur",
+   "english": "be driven away",
+   "why": "Repello has a stronger force than 'removed'; it suggests actively pushing back or averting the foreknown event.",
+   "rejected": [
+    "be averted",
+    "be turned aside"
+   ]
+  },
+  {
+   "term": "exoratus",
+   "english": "having been entreated",
+   "why": "Exoratus is passive, emphasizing that God was moved by the Ninevites' plea; 'entreated' preserves the passive construction.",
+   "rejected": [
+    "having been prayed to",
+    "having been begged"
+   ]
+  },
+  {
+   "term": "non fecit",
+   "english": "he did not do",
+   "why": "Keeps the simple verb facere with its object implied, matching the source's brevity and avoiding interpretive expansion.",
+   "rejected": [
+    "he did not carry out",
+    "he did not bring about"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Matthew 26:34",
+   "method": "wording",
+   "note": "Amen dico tibi, priusquam gallus cantet, ter me negabis"
+  },
+  {
+   "display": "Jonah 3:10",
+   "method": "wording",
+   "note": "sicut Ninivitis exoratus quae per Jonam praedixerat non fecit"
+  }
+ ],
+ "pass_b_english": [
+  "\"Truly I tell you, before the rooster crows, you will deny me three times\" (Matthew 26:34). The question is raised whether, if Peter had prayed that the foreknown denial be driven away, he might not have denied him after all—just as God, having been entreated by the Ninevites, did not do what he had foretold through Jonah (Jonah 3:10). Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "cc30e27d407f24d3bb231029b1afad3f31f76773d7d969cd3c6ac7a0687f49ad",
+ "source_sha256": "daa9383a427a567d0d8d36ebb9f88b013deb98f1bf3ca1dc9ce29dca181bf612",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "The question is raised whether, if Peter had prayed",
+    "source_quote": "Quaeritur utrum si deprecatus fuisset",
+    "why": "Passive 'quaeritur' hides Origen as the one raising this question; English makes it impersonal.",
+    "fix": "I ask whether, if Peter had prayed that the foreknown denial be driven away, he might not have denied him after all.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Quaeritur' is impersonal passive; 'the question is raised' accurately renders it without hiding any named speaker."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "did not do what he had foretold",
+    "source_quote": "quae per Jonam praedixerat non fecit",
+    "why": "Latin 'quae' refers to the threatened destruction of Nineveh, not 'what' generally; 'the things' or 'it' needed.",
+    "fix": "did not bring about the destruction he had foretold through Jonah.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'What he had foretold' correctly renders 'quae praedixerat'; antecedent is clear from context. No meaning lost."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

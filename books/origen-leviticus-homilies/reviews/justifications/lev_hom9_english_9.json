@@ -1,0 +1,169 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom9_english:9",
+ "section": "lev_hom9_english:9",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom9_source.json"
+ },
+ "source_text": "Nubes thymiamatis operiat propitiatorium. Gloria abscondita. Timete accedere nudi.",
+ "thought_title": "The cloud of incense veils the mercy seat",
+ "orientation": "Origen is interpreting the high priest's incense ritual on the Day of Atonement, applying it to prayer and the hidden glory of God.",
+ "pass_a_gloss": "Let a cloud of incense cover the mercy seat. Glory hidden. Fear to approach naked.",
+ "lemmas": [
+  {
+   "form": "Nubes",
+   "lemma": "nubes",
+   "gloss": "cloud"
+  },
+  {
+   "form": "thymiamatis",
+   "lemma": "thymiama",
+   "gloss": "of incense"
+  },
+  {
+   "form": "operiat",
+   "lemma": "operio",
+   "gloss": "let it cover"
+  },
+  {
+   "form": "propitiatorium",
+   "lemma": "propitiatorium",
+   "gloss": "the mercy seat"
+  },
+  {
+   "form": "Gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  },
+  {
+   "form": "abscondita",
+   "lemma": "absconditus",
+   "gloss": "hidden"
+  },
+  {
+   "form": "Timete",
+   "lemma": "timeo",
+   "gloss": "fear (plural imperative)"
+  },
+  {
+   "form": "accedere",
+   "lemma": "accedo",
+   "gloss": "to approach"
+  },
+  {
+   "form": "nudi",
+   "lemma": "nudus",
+   "gloss": "naked"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Nubes thymiamatis",
+   "english": "a cloud of incense",
+   "why": "Keeps the genitive of material as a natural English 'of' phrase, preserving the image of incense forming a cloud.",
+   "rejected": [
+    "an incense cloud",
+    "a cloud from incense"
+   ]
+  },
+  {
+   "term": "operiat",
+   "english": "let it cover",
+   "why": "The subjunctive is jussive; rendering as 'let it cover' preserves the command force rather than a flat indicative.",
+   "rejected": [
+    "covers",
+    "should cover"
+   ]
+  },
+  {
+   "term": "propitiatorium",
+   "english": "the mercy seat",
+   "why": "Standard English term for the kapporet, the cover of the ark where atonement was made; keeps the cultic reference clear.",
+   "rejected": [
+    "the propitiatory",
+    "the place of atonement"
+   ]
+  },
+  {
+   "term": "Gloria abscondita",
+   "english": "Glory hidden",
+   "why": "Keeps the terse nominal style of the Latin, which reads as a statement of fact about the divine presence.",
+   "rejected": [
+    "The glory is hidden",
+    "Hidden glory"
+   ]
+  },
+  {
+   "term": "Timete accedere nudi",
+   "english": "Fear to approach naked",
+   "why": "The infinitive after 'timete' is rendered as an infinitive in English, preserving the command and its object.",
+   "rejected": [
+    "Be afraid to approach naked",
+    "Fear approaching naked"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 16:13",
+   "method": "wording",
+   "note": "Nubes thymiamatis operiat propitiatorium"
+  }
+ ],
+ "pass_b_english": [
+  "Let a cloud of incense cover the mercy seat (Leviticus 16:13). Glory hidden. Fear to approach naked."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "6cff06acb74bf6c94d08d71b80807c278439f1404d481d33b1a81c4b17d980d2",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "Fear to approach naked",
+    "source_quote": "Timete accedere nudi",
+    "why": "Imperative 'timete' is command 'fear/be afraid', not infinitive 'fear to'",
+    "fix": "Be afraid to approach naked, or Fear approaching naked",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Fear to approach' is idiomatic English imperative; 'fear' here is imperative verb, not infinitive. Meaning preserved."
+   },
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Let a cloud of incense cover the mercy seat (Leviticus 16:13). Glory hidden. Fear to approach naked.",
+    "source_quote": "Nubes thymiamatis operiat propitiatorium. Gloria abscondita. Timete accedere nudi.",
+    "why": "Three terse clauses lack speaker marking; source likely Scripture commands/author's voice, but English could be read as all authorial prose",
+    "fix": "Let a cloud of incense cover the mercy seat. Glory is hidden. Be afraid to approach naked.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source lacks speaker marking too; English faithfully mirrors terse Latin. No meaning changed or lost."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

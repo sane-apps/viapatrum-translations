@@ -1,0 +1,163 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom5_english:8",
+ "section": "lev_hom5_english:8",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom5_source.json"
+ },
+ "source_text": "Omnis masculus de sacerdotali genere edet. Masculus — sensus fortis; non dissolutus affectus. Sancta sanctis.",
+ "thought_title": "Who may eat the holy things",
+ "orientation": "Origen is explaining the rule about who may eat the priestly portion, interpreting 'male' spiritually as the strong mind rather than weak emotion.",
+ "pass_a_gloss": "Every male from the priestly kind shall eat. Male — a strong sense; not a dissolute affection. Holy things for holy people.",
+ "lemmas": [
+  {
+   "form": "masculus",
+   "lemma": "masculus",
+   "gloss": "male"
+  },
+  {
+   "form": "sacerdotali",
+   "lemma": "sacerdotalis",
+   "gloss": "priestly"
+  },
+  {
+   "form": "genere",
+   "lemma": "genus",
+   "gloss": "kind, stock"
+  },
+  {
+   "form": "edet",
+   "lemma": "edo",
+   "gloss": "shall eat"
+  },
+  {
+   "form": "sensus",
+   "lemma": "sensus",
+   "gloss": "sense, mind"
+  },
+  {
+   "form": "fortis",
+   "lemma": "fortis",
+   "gloss": "strong"
+  },
+  {
+   "form": "dissolutus",
+   "lemma": "dissolutus",
+   "gloss": "dissolute, weak"
+  },
+  {
+   "form": "affectus",
+   "lemma": "affectus",
+   "gloss": "affection, emotion"
+  },
+  {
+   "form": "sancta",
+   "lemma": "sanctus",
+   "gloss": "holy things"
+  },
+  {
+   "form": "sanctis",
+   "lemma": "sanctus",
+   "gloss": "for holy people"
+  }
+ ],
+ "choices": [
+  {
+   "term": "masculus",
+   "english": "male",
+   "why": "Keeps the literal gender term that Origen immediately spiritualizes as strength of mind.",
+   "rejected": [
+    "man",
+    "virile person"
+   ]
+  },
+  {
+   "term": "sacerdotali genere",
+   "english": "priestly kind",
+   "why": "Preserves the idea of descent or stock, which matters for the spiritual reading of who belongs to the priesthood.",
+   "rejected": [
+    "priestly race",
+    "priestly family"
+   ]
+  },
+  {
+   "term": "sensus fortis",
+   "english": "strong sense",
+   "why": "Renders the mind as the seat of firm understanding, matching Origen's contrast with weak emotion.",
+   "rejected": [
+    "strong intellect",
+    "firm perception"
+   ]
+  },
+  {
+   "term": "dissolutus affectus",
+   "english": "dissolute affection",
+   "why": "Keeps the moral weakness implied by dissolutus and the emotional register of affectus.",
+   "rejected": [
+    "loose emotion",
+    "unrestrained feeling"
+   ]
+  },
+  {
+   "term": "sancta sanctis",
+   "english": "holy things for holy people",
+   "why": "Preserves the compact Latin formula and its dative of recipient.",
+   "rejected": [
+    "the holy to the holy",
+    "holy things to holy ones"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 6:18",
+   "method": "wording",
+   "note": "Omnis masculus de sacerdotali genere edet"
+  }
+ ],
+ "pass_b_english": [
+  "Every male of the priestly kind shall eat it (Leviticus 6:18). The male is a strong sense, not a dissolute affection. Holy things for holy people."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "f5b6374c6b1b7ceda1aa46d9be0300d5e1c7e341291af1909074a15e44ac6225",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "The male is a strong sense, not a dissolute affection.",
+    "source_quote": "Masculus — sensus fortis; non dissolutus affectus.",
+    "why": "Latin 'sensus' is nominative, 'fortis' modifies 'masculus': 'the male is strong sense.' English inverts to 'strong sense' as noun phrase, changing grammar and sense.",
+    "fix": "The male is strong sense, not dissolute affection.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Both 'sensus' and 'fortis' are nominative; 'sensus fortis' is a noun phrase meaning 'strong sense.' No grammatical inversion or meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

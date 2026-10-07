@@ -1,0 +1,165 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom3_english:2",
+ "section": "lev_hom3_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom3_source.json"
+ },
+ "source_text": "Si anima audierit vocem iuramenti et testis sit et non renuntiaverit, accipiet peccatum. Silentium consciorum reatus est. Veritas in ore ecclesiae.",
+ "thought_title": "The guilt of silent witnesses",
+ "orientation": "Origen is explaining the sin-offering for a soul that hears a public oath and, though a witness, does not speak up.",
+ "pass_a_gloss": "If [the] soul [shall] have heard [the] voice [of] an oath and [a] witness [it] is and not [it] shall have reported, [it] shall receive sin. [The] silence [of] those who know [is] guilt. [The] truth [is] in [the] mouth [of the] church.",
+ "lemmas": [
+  {
+   "form": "anima",
+   "lemma": "anima",
+   "gloss": "soul"
+  },
+  {
+   "form": "audierit",
+   "lemma": "audio",
+   "gloss": "has heard"
+  },
+  {
+   "form": "vocem",
+   "lemma": "vox",
+   "gloss": "voice"
+  },
+  {
+   "form": "iuramenti",
+   "lemma": "iuramentum",
+   "gloss": "of an oath"
+  },
+  {
+   "form": "testis",
+   "lemma": "testis",
+   "gloss": "witness"
+  },
+  {
+   "form": "renuntiaverit",
+   "lemma": "renuntio",
+   "gloss": "has reported"
+  },
+  {
+   "form": "accipiet",
+   "lemma": "accipio",
+   "gloss": "will receive"
+  },
+  {
+   "form": "peccatum",
+   "lemma": "peccatum",
+   "gloss": "sin"
+  },
+  {
+   "form": "silentium",
+   "lemma": "silentium",
+   "gloss": "silence"
+  },
+  {
+   "form": "consciorum",
+   "lemma": "conscius",
+   "gloss": "of those who know"
+  },
+  {
+   "form": "reatus",
+   "lemma": "reatus",
+   "gloss": "guilt"
+  },
+  {
+   "form": "veritas",
+   "lemma": "veritas",
+   "gloss": "truth"
+  }
+ ],
+ "choices": [
+  {
+   "term": "accipiet peccatum",
+   "english": "will receive sin",
+   "why": "Keeps the literal force of accipiet as receiving, matching the legal language of incurring guilt without softening it.",
+   "rejected": [
+    "will incur guilt",
+    "will bear sin"
+   ]
+  },
+  {
+   "term": "renuntiaverit",
+   "english": "has reported it",
+   "why": "Renuntio here means to make known or declare publicly, not to renounce; the context is a witness failing to speak.",
+   "rejected": [
+    "has renounced",
+    "has announced"
+   ]
+  },
+  {
+   "term": "consciorum",
+   "english": "of those who know",
+   "why": "Conscius means one who shares knowledge; rendering it as 'those who know' preserves the participial sense of shared awareness.",
+   "rejected": [
+    "of the conscious",
+    "of accomplices"
+   ]
+  },
+  {
+   "term": "in ore ecclesiae",
+   "english": "in the mouth of the church",
+   "why": "Keeps the bodily metaphor of the mouth as the organ of speech, matching Origen's ecclesial application of the verse.",
+   "rejected": [
+    "on the lips of the church",
+    "in the church's speech"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 5:1",
+   "method": "wording",
+   "note": "Si anima audierit vocem iuramenti et testis sit et non renuntiaverit, accipiet peccatum"
+  }
+ ],
+ "pass_b_english": [
+  "If a soul has heard the voice of an oath and is a witness and has not reported it, it will receive sin (Leviticus 5:1). The silence of those who know is guilt. Truth is in the mouth of the church."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "630a2d0e46552162ea9008b7efbbf670975d387a8c91fd65cea4acc471f38c1d",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Truth is in the mouth of the church.",
+    "source_quote": "Veritas in ore ecclesiae.",
+    "why": "English hides that this is Origen's own authoritative statement, not a Scripture quotation.",
+    "fix": "The truth is in the church's mouth. [Origen's comment, not Scripture]",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Translation accurately renders 'Veritas in ore ecclesiae.' No source markers indicate Origen's own statement vs Scripture quotation."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

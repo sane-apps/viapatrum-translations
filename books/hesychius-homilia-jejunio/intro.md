@@ -1,5 +1,5 @@
-Hesychius of Jerusalem (c. 412–450) preached this homily on fasting. It is a sermon for the fast, not one of his festal homilies.
+Hesychius of Jerusalem (c. 412–450) was a presbyter of the church in Jerusalem, active during the first half of the fifth century. He was known as a biblical commentator and preacher, and he opposed Nestorius during the period of the Third Ecumenical Council. This homily is addressed to a Christian congregation, whom he calls 'beloved,' to exhort them to practice a true, God-pleasing fast.
 
-He asks the hearers to treat fasting as more than going without food. The homily ties that discipline to health and to growth in the soul.
+The homily was probably delivered in connection with a fasting season or commemoration. It survives in a manuscript from Saint Catherine's Monastery at Mount Sinai. Hesychius urges his hearers to understand fasting not as mere abstinence from bread and water but as a practice joined with reverence, holy prayers, and almsgiving, because God desires abstinence from evil deeds.
 
-A reader needs the season of the fast and the plain sense of the word: refusing food for a time, and refusing what harms the soul. The citations use the old names of the biblical books.
+The homily contrasts a praiseworthy fast with a blameworthy fast through biblical examples. The Ninevites were saved by fasting, while Jezebel and the Jews used fasting to commit murder. Hesychius then presents a long catalogue of biblical figures whose fasting brought deliverance, healing, or divine favor, culminating in Moses, whose fast granted him the unique vision of God. The homily closes by urging the congregation to embrace fasting with joy, to combine it with mercy and peace, and to fast from all evils, not only from foods.

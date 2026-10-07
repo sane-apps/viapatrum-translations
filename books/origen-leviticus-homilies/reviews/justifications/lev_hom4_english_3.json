@@ -1,0 +1,154 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom4_english:3",
+ "section": "lev_hom4_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom4_source.json"
+ },
+ "source_text": "Aut vi rapuerit aut calumniam fecerit. Rapina et fraus unum altare polluunt. Convertimini qui opprimitis.",
+ "thought_title": "Violence and fraud defile the one altar",
+ "orientation": "Origen is applying Leviticus 5:21 (6:2) to the soul, explaining that violence and fraud both defile the same altar of faith between brothers.",
+ "pass_a_gloss": "Or if he has taken by force or has made false accusation. Robbery and fraud defile one altar. Be converted, you who oppress.",
+ "lemmas": [
+  {
+   "form": "rapuerit",
+   "lemma": "rapio",
+   "gloss": "has taken by force"
+  },
+  {
+   "form": "calumniam",
+   "lemma": "calumnia",
+   "gloss": "false accusation"
+  },
+  {
+   "form": "fecerit",
+   "lemma": "facio",
+   "gloss": "has made"
+  },
+  {
+   "form": "rapina",
+   "lemma": "rapina",
+   "gloss": "robbery"
+  },
+  {
+   "form": "fraus",
+   "lemma": "fraus",
+   "gloss": "fraud"
+  },
+  {
+   "form": "unum",
+   "lemma": "unus",
+   "gloss": "one"
+  },
+  {
+   "form": "altare",
+   "lemma": "altare",
+   "gloss": "altar"
+  },
+  {
+   "form": "polluunt",
+   "lemma": "polluo",
+   "gloss": "defile"
+  },
+  {
+   "form": "convertimini",
+   "lemma": "converto",
+   "gloss": "be converted"
+  },
+  {
+   "form": "opprimitis",
+   "lemma": "opprimo",
+   "gloss": "oppress"
+  }
+ ],
+ "choices": [
+  {
+   "term": "calumniam fecerit",
+   "english": "has made false accusation",
+   "why": "Keeps the legal force of calumnia as a false charge, matching the sin context of Leviticus 5:21 (6:2).",
+   "rejected": [
+    "has slandered",
+    "has defrauded"
+   ]
+  },
+  {
+   "term": "polluunt",
+   "english": "defile",
+   "why": "Polluo is the standard term for ritual and moral defilement, continuing the altar imagery from the previous section.",
+   "rejected": [
+    "pollute",
+    "stain"
+   ]
+  },
+  {
+   "term": "convertimini",
+   "english": "be converted",
+   "why": "The passive imperative carries the call to turn back to God, echoing the homily's theme of conversion.",
+   "rejected": [
+    "turn back",
+    "repent"
+   ]
+  },
+  {
+   "term": "opprimitis",
+   "english": "oppress",
+   "why": "Opprimo denotes crushing or oppressing others, fitting the context of violence and fraud against a neighbor.",
+   "rejected": [
+    "crush",
+    "wrong"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 5:21 (6:2)",
+   "method": "allusion",
+   "note": "The source continues the citation from the previous section: 'Aut vi rapuerit aut calumniam fecerit' echoes the offenses listed in Leviticus 5:21 (6:2) LXX."
+  }
+ ],
+ "pass_b_english": [
+  "Or if someone has taken by force or made a false accusation. Robbery and fraud defile one and the same altar. Be converted, you who oppress."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "68023f0336ebd624a270c6445c63b78e8bfb596dffdac94b434d1610363954d4",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Be converted, you who oppress.",
+    "source_quote": "Convertimini qui opprimitis.",
+    "why": "English hides that this is Scripture quotation (imperative 'Convertimini' with prophetic force).",
+    "fix": "Turn back, you who oppress—Scripture's direct address.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English accurately renders 'Convertimini qui opprimitis' as imperative; no meaning lost or changed."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

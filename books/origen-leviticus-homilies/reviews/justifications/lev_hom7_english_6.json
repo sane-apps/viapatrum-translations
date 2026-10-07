@@ -1,0 +1,150 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom7_english:6",
+ "section": "lev_hom7_english:6",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom7_source.json"
+ },
+ "source_text": "In aquis quae pinnulas et squamas habent munda. Squamae virtutum; pinnae — motus ad superiora. Sine his demersi.",
+ "thought_title": "Clean fish: scales and fins as virtues and upward motion",
+ "orientation": "Origen is explaining the clean animals of Leviticus, now applying the fish that have fins and scales to the soul's virtues and movement toward higher things.",
+ "pass_a_gloss": "In the waters, the things which have fins and scales are clean. The scales are virtues; the fins are movement toward the higher things. Without these things they are sunk down.",
+ "lemmas": [
+  {
+   "form": "aquis",
+   "lemma": "aqua",
+   "gloss": "waters"
+  },
+  {
+   "form": "pinnulas",
+   "lemma": "pinnula",
+   "gloss": "little fins"
+  },
+  {
+   "form": "squamas",
+   "lemma": "squama",
+   "gloss": "scales"
+  },
+  {
+   "form": "habent",
+   "lemma": "habeo",
+   "gloss": "have"
+  },
+  {
+   "form": "munda",
+   "lemma": "mundus",
+   "gloss": "clean"
+  },
+  {
+   "form": "virtutum",
+   "lemma": "virtus",
+   "gloss": "of virtues"
+  },
+  {
+   "form": "motus",
+   "lemma": "motus",
+   "gloss": "movement"
+  },
+  {
+   "form": "superiora",
+   "lemma": "superior",
+   "gloss": "higher things"
+  },
+  {
+   "form": "sine",
+   "lemma": "sine",
+   "gloss": "without"
+  },
+  {
+   "form": "his",
+   "lemma": "hic",
+   "gloss": "these things"
+  },
+  {
+   "form": "demersi",
+   "lemma": "demergo",
+   "gloss": "sunk down"
+  }
+ ],
+ "choices": [
+  {
+   "term": "pinnulas",
+   "english": "fins",
+   "why": "The diminutive pinnula is the standard term for fish fins in Latin; rendering as 'fins' keeps the literal sense without over-translating the diminutive.",
+   "rejected": [
+    "little fins",
+    "winglets"
+   ]
+  },
+  {
+   "term": "motus ad superiora",
+   "english": "movement toward the higher things",
+   "why": "The phrase is a compact definition of what fins signify; 'higher things' preserves the neuter plural superiora as a substantive, matching Origen's moral-spiritual direction.",
+   "rejected": [
+    "upward motion",
+    "movement to the heights"
+   ]
+  },
+  {
+   "term": "demersi",
+   "english": "sunk down",
+   "why": "The perfect passive participle demersi describes the state of being submerged or sunk; 'sunk down' keeps the passive, completed-state force of the Latin.",
+   "rejected": [
+    "drowned",
+    "submerged"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 11:9",
+   "method": "allusion",
+   "note": "haec sunt quae edetis ex omnibus quae in aquis sunt: quae habent pinnulas et squamas"
+  }
+ ],
+ "pass_b_english": [
+  "In the waters, those creatures that have fins and scales are clean. The scales are the virtues; the fins are movement toward the higher things. Without these, one is sunk down."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "afef3b80db56dad0e11ab55dd99b70430e1371246949680f469a11f24d0c1d11",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "agency",
+    "severity": "major",
+    "quote": "one is sunk down",
+    "source_quote": "Sine his demersi",
+    "why": "Latin 'demersi' is passive ('those sunk down'), not 'one is sunk down'; agency obscured.",
+    "fix": "Without these, they are sunk down.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'demersi' is nominative plural participle ('those sunk down'); 'one is sunk down' preserves meaning adequately without obscuring agency."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

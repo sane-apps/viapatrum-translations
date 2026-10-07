@@ -1,0 +1,179 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom3_english:3",
+ "section": "lev_hom3_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom3_source.json"
+ },
+ "source_text": "Anima quae tetigerit morticinum aut a fera captum immunda est. Conversatio mortua immunditiam affert. Separare sanctum ab immundo.",
+ "thought_title": "Contact with death makes unclean",
+ "orientation": "Origen is applying the Levitical purity rules to the soul, explaining that contact with what is dead or captured by a wild beast makes one unclean.",
+ "pass_a_gloss": "Soul which [has] touched [a] dead [thing] or [a thing] captured by [a] wild [beast] unclean is. [The] way [of life] dead uncleanness brings. To separate [the] holy from [the] unclean.",
+ "lemmas": [
+  {
+   "form": "tetigerit",
+   "lemma": "tango",
+   "gloss": "has touched"
+  },
+  {
+   "form": "morticinum",
+   "lemma": "morticinus",
+   "gloss": "dead body"
+  },
+  {
+   "form": "fera",
+   "lemma": "fera",
+   "gloss": "wild beast"
+  },
+  {
+   "form": "captum",
+   "lemma": "capio",
+   "gloss": "captured"
+  },
+  {
+   "form": "immunda",
+   "lemma": "immundus",
+   "gloss": "unclean"
+  },
+  {
+   "form": "conversatio",
+   "lemma": "conversatio",
+   "gloss": "conduct, way of life"
+  },
+  {
+   "form": "mortua",
+   "lemma": "mortuus",
+   "gloss": "dead"
+  },
+  {
+   "form": "immunditiam",
+   "lemma": "immunditia",
+   "gloss": "uncleanness"
+  },
+  {
+   "form": "affert",
+   "lemma": "affero",
+   "gloss": "brings"
+  },
+  {
+   "form": "separare",
+   "lemma": "separo",
+   "gloss": "separate"
+  },
+  {
+   "form": "sanctum",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "immundo",
+   "lemma": "immundus",
+   "gloss": "unclean"
+  }
+ ],
+ "choices": [
+  {
+   "term": "morticinum",
+   "english": "dead body",
+   "why": "The literal sense of the Latin term for an animal that has died of itself, matching the Levitical purity context.",
+   "rejected": [
+    "carcass",
+    "corpse"
+   ]
+  },
+  {
+   "term": "a fera captum",
+   "english": "something captured by a wild beast",
+   "why": "Keeps the passive force of captum and the agency of the wild beast, preserving the ritual category.",
+   "rejected": [
+    "prey",
+    "what a wild beast has caught"
+   ]
+  },
+  {
+   "term": "conversatio mortua",
+   "english": "dead conduct",
+   "why": "Conversatio means one's manner of life or conduct; rendering it as 'conduct' preserves the moral application Origen is making.",
+   "rejected": [
+    "dead way of life",
+    "deadly behavior"
+   ]
+  },
+  {
+   "term": "immunditiam affert",
+   "english": "brings uncleanness",
+   "why": "Affert has the sense of carrying or bringing in; 'brings' keeps the active force of the verb.",
+   "rejected": [
+    "causes uncleanness",
+    "produces uncleanness"
+   ]
+  },
+  {
+   "term": "separare sanctum ab immundo",
+   "english": "separate the holy from the unclean",
+   "why": "This is a direct command in the infinitive, echoing Leviticus 10:10; the glossary terms sanctus and immundus are rendered as 'holy' and 'unclean'.",
+   "rejected": [
+    "distinguish the holy from the unclean",
+    "set apart the holy from the unclean"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 5:2",
+   "method": "wording",
+   "note": "Anima quae tetigerit morticinum aut a fera captum immunda est"
+  },
+  {
+   "display": "Leviticus 10:10",
+   "method": "wording",
+   "note": "Separare sanctum ab immundo"
+  }
+ ],
+ "pass_b_english": [
+  "A soul that has touched a dead body or something captured by a wild beast is unclean (Leviticus 5:2). Dead conduct brings uncleanness. Separate the holy from the unclean (Leviticus 10:10)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "7fc1a944248216c40ab7701249bddad628ebb46679793d111140585cc631b05a",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Dead conduct brings uncleanness",
+    "source_quote": "Conversatio mortua immunditiam affert",
+    "why": "\"Conversatio\" means way of life/intercourse, not \"conduct\" alone; \"mortua\" modifies it, but \"dead conversation/way of life\" is the sense—\"dead\" as spiritually lifeless, not \"dead conduct\" which is awkward and misses the social/relational sense of conversatio.",
+    "fix": "A dead way of life brings uncleanness.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Conversatio can mean 'conduct/way of life'; rendering as 'conduct' is within normal range, not a meaning-changing error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

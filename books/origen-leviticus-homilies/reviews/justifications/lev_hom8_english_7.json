@@ -1,0 +1,174 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom8_english:7",
+ "section": "lev_hom8_english:7",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom8_source.json"
+ },
+ "source_text": "Si lepra totum corpus operuerit et alba fuerit, mundus est. Totalis confessio candidum facit. Qui partem tegit, manet immundus.",
+ "thought_title": "Total confession makes clean",
+ "orientation": "Origen is applying the Levitical rule about leprosy to confession of sin: a leprosy that covers the whole body and turns white is clean, and so total confession makes a person clean.",
+ "pass_a_gloss": "If leprosy covers the whole body and is white, he is clean. Total confession makes white. He who covers a part remains unclean.",
+ "lemmas": [
+  {
+   "form": "lepra",
+   "lemma": "lepra",
+   "gloss": "leprosy"
+  },
+  {
+   "form": "totum",
+   "lemma": "totus",
+   "gloss": "whole"
+  },
+  {
+   "form": "corpus",
+   "lemma": "corpus",
+   "gloss": "body"
+  },
+  {
+   "form": "operuerit",
+   "lemma": "operio",
+   "gloss": "covers"
+  },
+  {
+   "form": "alba",
+   "lemma": "albus",
+   "gloss": "white"
+  },
+  {
+   "form": "mundus",
+   "lemma": "mundus",
+   "gloss": "clean"
+  },
+  {
+   "form": "totalis",
+   "lemma": "totalis",
+   "gloss": "total"
+  },
+  {
+   "form": "confessio",
+   "lemma": "confessio",
+   "gloss": "confession"
+  },
+  {
+   "form": "candidum",
+   "lemma": "candidus",
+   "gloss": "white"
+  },
+  {
+   "form": "facit",
+   "lemma": "facio",
+   "gloss": "makes"
+  },
+  {
+   "form": "partem",
+   "lemma": "pars",
+   "gloss": "part"
+  },
+  {
+   "form": "tegit",
+   "lemma": "tego",
+   "gloss": "covers"
+  },
+  {
+   "form": "manet",
+   "lemma": "maneo",
+   "gloss": "remains"
+  },
+  {
+   "form": "immundus",
+   "lemma": "immundus",
+   "gloss": "unclean"
+  }
+ ],
+ "choices": [
+  {
+   "term": "mundus est",
+   "english": "he is clean",
+   "why": "Keeps the ritual sense of clean as the opposite of unclean, matching the glossary's immundus as unclean.",
+   "rejected": [
+    "he is pure",
+    "he is undefiled"
+   ]
+  },
+  {
+   "term": "totalis confessio",
+   "english": "total confession",
+   "why": "Renders totalis literally to preserve the parallel with the whole body covered by leprosy.",
+   "rejected": [
+    "complete confession",
+    "full confession"
+   ]
+  },
+  {
+   "term": "candidum facit",
+   "english": "makes white",
+   "why": "Keeps the physical whiteness image that links the leprosy's whiteness to the cleansing effect of confession.",
+   "rejected": [
+    "makes bright",
+    "makes shining"
+   ]
+  },
+  {
+   "term": "manet immundus",
+   "english": "remains unclean",
+   "why": "Uses the glossary term unclean for immundus and keeps the durative force of manet.",
+   "rejected": [
+    "stays unclean",
+    "is still unclean"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 13:13",
+   "method": "wording",
+   "note": "Si lepra totum corpus operuerit et alba fuerit, mundus est"
+  }
+ ],
+ "pass_b_english": [
+  "If leprosy covers the whole body and is white, the person is clean (Leviticus 13:13). Total confession makes a person white. The one who covers only part remains unclean."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "2eaf3bdf8a9e8734ced1246117bafb4899808bc7457de85f3e7038dc2eccab78",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Total confession makes a person white. The one who covers only part remains unclean.",
+    "source_quote": "Totalis confessio candidum facit. Qui partem tegit, manet immundus.",
+    "why": "English hides that these are Origen's interpretive comments, not Scripture text.",
+    "fix": "Total confession makes one white. Whoever covers only part remains unclean.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source has no speaker markers; English faithfully renders both sentences. Formatting is editorial, not a translation error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

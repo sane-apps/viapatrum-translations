@@ -1,0 +1,149 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom5_english:11",
+ "section": "lev_hom5_english:11",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom5_source.json"
+ },
+ "source_text": "Sacrificium laudis cum placentis oleo. Eucharistia — gratiarum actio. Cantate Domino.",
+ "thought_title": "Sacrifice of praise with oiled cakes",
+ "orientation": "Origen is interpreting the Levitical offerings spiritually, moving from the ram of the fault offering to the sacrifice of praise and the Eucharist.",
+ "pass_a_gloss": "A sacrifice of praise with cakes with oil. Eucharist — an act of thanksgiving. Sing to the Lord.",
+ "lemmas": [
+  {
+   "form": "Sacrificium",
+   "lemma": "sacrificium",
+   "gloss": "sacrifice"
+  },
+  {
+   "form": "laudis",
+   "lemma": "laus",
+   "gloss": "of praise"
+  },
+  {
+   "form": "placentis",
+   "lemma": "placenta",
+   "gloss": "with cakes"
+  },
+  {
+   "form": "oleo",
+   "lemma": "oleum",
+   "gloss": "with oil"
+  },
+  {
+   "form": "Eucharistia",
+   "lemma": "eucharistia",
+   "gloss": "Eucharist"
+  },
+  {
+   "form": "gratiarum",
+   "lemma": "gratia",
+   "gloss": "of thanks"
+  },
+  {
+   "form": "actio",
+   "lemma": "actio",
+   "gloss": "an act"
+  },
+  {
+   "form": "Cantate",
+   "lemma": "canto",
+   "gloss": "Sing"
+  },
+  {
+   "form": "Domino",
+   "lemma": "Dominus",
+   "gloss": "to the Lord"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Sacrificium laudis",
+   "english": "sacrifice of praise",
+   "why": "The glossary requires 'sacrifice' for sacrificium; 'of praise' renders the genitive laudis literally.",
+   "rejected": [
+    "praise offering",
+    "thank offering"
+   ]
+  },
+  {
+   "term": "placentis oleo",
+   "english": "cakes with oil",
+   "why": "Literal rendering of the ablative/instrumental phrase; placenta is a cake, oleo is oil.",
+   "rejected": [
+    "oil cakes",
+    "cakes in oil"
+   ]
+  },
+  {
+   "term": "Eucharistia — gratiarum actio",
+   "english": "Eucharist — an act of thanksgiving",
+   "why": "The source gives the Greek-derived term and its Latin gloss; 'act of thanksgiving' renders gratiarum actio literally.",
+   "rejected": [
+    "thanksgiving",
+    "gratitude"
+   ]
+  },
+  {
+   "term": "Cantate Domino",
+   "english": "Sing to the Lord",
+   "why": "Imperative plural of canto with dative Domino; literal command.",
+   "rejected": [
+    "Sing for the Lord",
+    "Sing the Lord"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Psalm 96:1",
+   "method": "wording",
+   "note": "Cantate Domino"
+  }
+ ],
+ "pass_b_english": [
+  "A sacrifice of praise with cakes and oil. Eucharist—an act of thanksgiving. Sing to the Lord (Psalm 96:1)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "2d0e5b7b78136e3c557646b410514ccbe9e3c1ea6c20e3b87470c636f4428f42",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Psalm 96:1",
+    "source_quote": "Cantate Domino",
+    "why": "Cantate Domino is Psalm 95 LXX / Psalm 96 Hebrew, but the Hebrew number is 96, so this is actually correct per the brief's instruction to use Hebrew numbering. However, the source does not specify a psalm number at all; the English adds one.",
+    "fix": "Sing to the Lord. [Or: Sing to the Lord (Psalm 95).]",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Cantate Domino matches Psalm 96:1 in Hebrew numbering; adding the reference is standard editorial practice, not a meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

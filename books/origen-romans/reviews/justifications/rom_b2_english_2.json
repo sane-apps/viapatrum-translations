@@ -1,0 +1,178 @@
+{
+ "excerpt_id": "origen-romans:rom_b2_english:2",
+ "section": "rom_b2_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b2_source.json"
+ },
+ "source_text": "Non enim qui in manifesto Iudaeus est, neque quae in manifesto in carne circumcisio; sed qui in abscondito Iudaeus, et circumcisio cordis in spiritu. Gentes naturaliter quae legis sunt faciunt — opus legis scriptum in cordibus. Gloria Christo. Amen.",
+ "thought_title": "True Jew and circumcision of the heart",
+ "orientation": "Origen is explaining Paul's teaching in Romans 2 that outward Jewish identity and physical circumcision are not what matter before God.",
+ "pass_a_gloss": "For not he who in the open is a Jew, nor that which in the open in the flesh is circumcision; but he who in the hidden is a Jew, and circumcision of the heart in the spirit. The Gentiles naturally do the things of the law — the work of the law written in their hearts. Glory to Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "manifesto",
+   "lemma": "manifestus",
+   "gloss": "in the open, outwardly"
+  },
+  {
+   "form": "abscondito",
+   "lemma": "absconditus",
+   "gloss": "in the hidden, inwardly"
+  },
+  {
+   "form": "circumcisio",
+   "lemma": "circumcisio",
+   "gloss": "circumcision"
+  },
+  {
+   "form": "cordis",
+   "lemma": "cor",
+   "gloss": "of the heart"
+  },
+  {
+   "form": "spiritu",
+   "lemma": "spiritus",
+   "gloss": "in the spirit"
+  },
+  {
+   "form": "gentes",
+   "lemma": "gens",
+   "gloss": "the Gentiles"
+  },
+  {
+   "form": "naturaliter",
+   "lemma": "naturaliter",
+   "gloss": "naturally, by nature"
+  },
+  {
+   "form": "legis",
+   "lemma": "lex",
+   "gloss": "of the law"
+  },
+  {
+   "form": "opus",
+   "lemma": "opus",
+   "gloss": "the work"
+  },
+  {
+   "form": "scriptum",
+   "lemma": "scriptus",
+   "gloss": "written"
+  },
+  {
+   "form": "cordibus",
+   "lemma": "cor",
+   "gloss": "in their hearts"
+  },
+  {
+   "form": "gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  }
+ ],
+ "choices": [
+  {
+   "term": "in manifesto",
+   "english": "in the open",
+   "why": "Renders the outward, visible sphere contrasted with the hidden; keeps the spatial metaphor of the Latin.",
+   "rejected": [
+    "outwardly",
+    "publicly"
+   ]
+  },
+  {
+   "term": "in abscondito",
+   "english": "in the hidden",
+   "why": "Preserves the literal hiddenness contrast with 'in the open' and matches the source's parallel structure.",
+   "rejected": [
+    "inwardly",
+    "secretly"
+   ]
+  },
+  {
+   "term": "circumcisio cordis in spiritu",
+   "english": "circumcision of the heart in the spirit",
+   "why": "Uses the glossary term 'circumcision of the heart' and keeps 'in the spirit' as the sphere of the inward circumcision.",
+   "rejected": [
+    "spiritual circumcision of the heart"
+   ]
+  },
+  {
+   "term": "opus legis scriptum in cordibus",
+   "english": "the work of the law written in their hearts",
+   "why": "Literal rendering of the clause; 'the work of the law' is kept as a single work written in hearts, matching the source.",
+   "rejected": [
+    "what the law requires written on their hearts"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 2:28-29",
+   "method": "wording",
+   "note": "Non enim qui in manifesto Iudaeus est, neque quae in manifesto in carne circumcisio; sed qui in abscondito Iudaeus, et circumcisio cordis in spiritu."
+  },
+  {
+   "display": "Romans 2:14-15",
+   "method": "wording",
+   "note": "Gentes naturaliter quae legis sunt faciunt — opus legis scriptum in cordibus."
+  }
+ ],
+ "pass_b_english": [
+  "For it is not the one who is a Jew in the open, nor the circumcision that is in the open in the flesh; but the one who is a Jew in the hidden, and circumcision of the heart in the spirit (Romans 2:28-29). The Gentiles naturally do the things of the law—the work of the law written in their hearts (Romans 2:14-15). Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "e8a04a0ea2521056a6a911a8308e64b03b55617bfc3f13758d53f9a7a97be3a8",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "in the hidden",
+    "source_quote": "in abscondito",
+    "why": "Latin 'abscondito' is neuter ablative, 'in secret/hidden place'; 'the hidden' is ungrammatical English",
+    "fix": "in secret, or the one hidden within",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'in abscondito' rendered 'in the hidden' is awkward but within meaning; not a mistranslation changing sense"
+   },
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Glory to Christ. Amen.",
+    "source_quote": "Gloria Christo. Amen.",
+    "why": "Origen's doxology, not Scripture; should be marked as authorial voice, not Paul's",
+    "fix": "Glory to Christ. Amen. [Origen]",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English already separates doxology after Scripture citations; no misattribution to Paul occurs"
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

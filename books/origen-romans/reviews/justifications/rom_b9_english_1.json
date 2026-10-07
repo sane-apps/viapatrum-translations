@@ -1,0 +1,215 @@
+{
+ "excerpt_id": "origen-romans:rom_b9_english:1",
+ "section": "rom_b9_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b9_source.json"
+ },
+ "source_text": "Non enim omnes qui ex Israel, hi sunt Israelitae; neque quia sunt semen Abrahae, omnes filii. In Isaac vocabitur tibi semen — non filii carnis hi filii Dei.",
+ "thought_title": "Not all from Israel are Israelites",
+ "orientation": "Origen is quoting Paul's words from Romans 9:6-8, where Paul distinguishes physical descent from Abraham from the true children of the promise.",
+ "pass_a_gloss": "Not for all [those] who [are] from Israel, these are Israelites; nor because they are seed of Abraham, [are] all sons. In Isaac [it] will be called to you seed — not [the] sons of [the] flesh these [are] sons of God.",
+ "lemmas": [
+  {
+   "form": "Israelitae",
+   "lemma": "Israelita",
+   "gloss": "Israelites"
+  },
+  {
+   "form": "semen",
+   "lemma": "semen",
+   "gloss": "seed"
+  },
+  {
+   "form": "Abrahae",
+   "lemma": "Abraham",
+   "gloss": "Abraham"
+  },
+  {
+   "form": "filii",
+   "lemma": "filius",
+   "gloss": "children"
+  },
+  {
+   "form": "Isaac",
+   "lemma": "Isaac",
+   "gloss": "Isaac"
+  },
+  {
+   "form": "vocabitur",
+   "lemma": "vocare",
+   "gloss": "shall be named"
+  },
+  {
+   "form": "tibi",
+   "lemma": "tu",
+   "gloss": "for you"
+  },
+  {
+   "form": "carnis",
+   "lemma": "caro",
+   "gloss": "of the flesh"
+  },
+  {
+   "form": "Dei",
+   "lemma": "Deus",
+   "gloss": "of God"
+  }
+ ],
+ "choices": [
+  {
+   "term": "hi sunt Israelitae",
+   "english": "these are Israelites",
+   "why": "Keeps the demonstrative force of 'hi' and the predicate position, matching Paul's distinction between ethnic descent and true identity.",
+   "rejected": [
+    "these ones are Israelites",
+    "they are Israelites"
+   ]
+  },
+  {
+   "term": "semen Abrahae",
+   "english": "the seed of Abraham",
+   "why": "Literal rendering of 'semen' as 'seed' preserves the biblical language of descent and promise.",
+   "rejected": [
+    "descendants of Abraham",
+    "offspring of Abraham"
+   ]
+  },
+  {
+   "term": "In Isaac vocabitur tibi semen",
+   "english": "In Isaac shall be named for you the seed",
+   "why": "Keeps the future passive 'vocabitur' and the dative 'tibi' to preserve the promise formula from Genesis as quoted by Paul.",
+   "rejected": [
+    "In Isaac your seed will be called",
+    "Through Isaac shall your offspring be named"
+   ]
+  },
+  {
+   "term": "non filii carnis hi filii Dei",
+   "english": "not the children of the flesh, these are the children of God",
+   "why": "Preserves the elliptical contrast and the demonstrative 'hi' with the predicate, matching the source's abrupt antithesis.",
+   "rejected": [
+    "it is not the children of the flesh who are the children of God",
+    "the children of the flesh are not the children of God"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 9:6-8",
+   "method": "quotation",
+   "note": "Non enim omnes qui ex Israel, hi sunt Israelitae; neque quia sunt semen Abrahae, omnes filii. In Isaac vocabitur tibi semen — non filii carnis hi filii Dei."
+  },
+  {
+   "display": "Genesis 21:12",
+   "method": "quotation",
+   "note": "In Isaac vocabitur tibi semen"
+  }
+ ],
+ "pass_b_english": [
+  "For not all who are from Israel are Israelites, nor are all children because they are the seed of Abraham. “In Isaac shall be named for you the seed” (Genesis 21:12) — not the children of the flesh are these the children of God (Romans 9:6-8)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "d60bb1c348895b7242e167b7c488a80910cae9e90c53f3775bc7b4f361987411",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "speaker",
+     "severity": "major",
+     "quote": "not the children of the flesh, these are the children of God",
+     "source_quote": "non filii carnis hi filii Dei",
+     "why": "English 'these are' makes it Origen's assertion; source 'hi' continues Paul's quotation, meaning 'not children of flesh are these children of God' i.e. 'the children of God are not the children of flesh'.",
+     "fix": "not the children of the flesh are these the children of God",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source 'non filii carnis hi filii Dei' = 'not children of flesh are these children of God'; English 'these are' wrongly asserts flesh-children are God's children."
+    }
+   ],
+   "edits": [
+    {
+     "old": "not the children of the flesh, these are the children of God",
+     "new": "not the children of the flesh are these the children of God"
+    }
+   ],
+   "fixed": [
+    "The English 'these are' made the clause Origen's assertion, but the source 'non filii carnis hi filii Dei' continues Paul's quotation, with 'hi' meaning 'these' as the subject of 'are' — 'the children of God are not the children of the flesh.' Changed to 'not the children of the flesh are these the children of God' to preserve the quotation."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 2,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 3,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "(Genesis 21:12)",
+    "source_quote": "In Isaac vocabitur tibi semen",
+    "why": "The citation is to Genesis, but the words quoted are Paul's citation in Romans 9:7; the parenthetical misattributes Paul's own quotation.",
+    "fix": "Remove '(Genesis 21:12)' or replace with '(Romans 9:7)'.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'In Isaac vocabitur tibi semen' matches Genesis 21:12; citing it is standard, not misattribution."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "nor are all children because they are the seed of Abraham",
+    "source_quote": "neque quia sunt semen Abrahae, omnes filii",
+    "why": "The Latin means 'nor because they are seed of Abraham are they all children,' not 'children because they are seed.' The logic is reversed.",
+    "fix": "nor because they are the seed of Abraham are they all children.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Nor are all children because they are the seed' correctly renders 'neque quia sunt semen Abrahae, omnes filii'; logic is preserved."
+   },
+   {
+    "class": "unreadable",
+    "severity": "major",
+    "quote": "not the children of the flesh are these the children of God",
+    "source_quote": "non filii carnis hi filii Dei",
+    "why": "The English word order is ungrammatical and incomprehensible; 'are these' should introduce, not follow.",
+    "fix": "not the children of the flesh are the children of God.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Not the children of the flesh are these the children of God' is archaic but grammatical, matching Latin word order."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 3,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

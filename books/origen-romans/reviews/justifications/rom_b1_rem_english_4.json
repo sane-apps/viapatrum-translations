@@ -1,0 +1,176 @@
+{
+ "excerpt_id": "origen-romans:rom_b1_rem_english:4",
+ "section": "rom_b1_rem_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b1_rem_source.json"
+ },
+ "source_text": "Quod ante promiserat per prophetas suos in Scripturis sanctis de Filio suo, qui factus est ex semine David secundum carnem, qui praedestinatus est Filius Dei in virtute secundum Spiritum sanctificationis. Secundum carnem factum; secundum spiritum Filius Dei in virtute.",
+ "thought_title": "The Son's twofold origin: from David's seed and predestined in power",
+ "orientation": "Origen is explaining Paul's opening words about the gospel, now quoting the clause about God's Son who was born of David's line and predestined as Son of God in power.",
+ "pass_a_gloss": "Which [thing] before he had promised through [the] prophets his in [the] Scriptures holy concerning [the] Son his, who was made from [the] seed of David according to [the] flesh, who was predestined [the] Son of God in power according to [the] Spirit of sanctification. According to [the] flesh made; according to [the] spirit [the] Son of God in power.",
+ "lemmas": [
+  {
+   "form": "promiserat",
+   "lemma": "promitto",
+   "gloss": "he had promised"
+  },
+  {
+   "form": "prophetas",
+   "lemma": "propheta",
+   "gloss": "prophets"
+  },
+  {
+   "form": "Scripturis",
+   "lemma": "scriptura",
+   "gloss": "Scriptures"
+  },
+  {
+   "form": "sanctis",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "Filio",
+   "lemma": "filius",
+   "gloss": "Son"
+  },
+  {
+   "form": "factus est",
+   "lemma": "fio",
+   "gloss": "was made"
+  },
+  {
+   "form": "semine",
+   "lemma": "semen",
+   "gloss": "seed"
+  },
+  {
+   "form": "secundum",
+   "lemma": "secundum",
+   "gloss": "according to"
+  },
+  {
+   "form": "carnem",
+   "lemma": "caro",
+   "gloss": "the flesh"
+  },
+  {
+   "form": "praedestinatus est",
+   "lemma": "praedestino",
+   "gloss": "was predestined"
+  },
+  {
+   "form": "virtute",
+   "lemma": "virtus",
+   "gloss": "power"
+  },
+  {
+   "form": "sanctificationis",
+   "lemma": "sanctificatio",
+   "gloss": "of sanctification"
+  }
+ ],
+ "choices": [
+  {
+   "term": "secundum carnem",
+   "english": "according to the flesh",
+   "why": "Matches the glossary rendering for caro as 'the flesh' and preserves the Pauline contrast with the Spirit.",
+   "rejected": [
+    "in the flesh",
+    "by flesh"
+   ]
+  },
+  {
+   "term": "praedestinatus est",
+   "english": "was predestined",
+   "why": "Uses the glossary term 'predestined' for God's prior determination of Christ as Son of God in power.",
+   "rejected": [
+    "was appointed beforehand",
+    "was foreordained"
+   ]
+  },
+  {
+   "term": "Spiritum sanctificationis",
+   "english": "the Spirit of sanctification",
+   "why": "Keeps the literal phrase 'Spirit of sanctification' as in the source, preserving the genitive construction.",
+   "rejected": [
+    "the Holy Spirit",
+    "the sanctifying Spirit"
+   ]
+  },
+  {
+   "term": "factus est",
+   "english": "was made",
+   "why": "Renders the passive of fio literally, emphasizing the Son's origin from David's seed.",
+   "rejected": [
+    "was born",
+    "came to be"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 1:2-4",
+   "method": "wording",
+   "note": "quod ante promiserat per prophetas suos in Scripturis sanctis de Filio suo, qui factus est ex semine David secundum carnem, qui praedestinatus est Filius Dei in virtute secundum Spiritum sanctificationis"
+  }
+ ],
+ "pass_b_english": [
+  "What he had promised beforehand through his prophets in the holy Scriptures concerned his Son, who was made from the seed of David according to the flesh and was predestined as Son of God in power according to the Spirit of sanctification (Romans 1:2-4). He was made according to the flesh; according to the Spirit he is Son of God in power."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "bd7531117c0733d4b15ffc654c6526904980a73b7aa50d765aa597116c751db6",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "was predestined",
+    "source_quote": "praedestinatus est",
+    "why": "Tense mismatch: Latin is present 'is predestined,' English past 'was predestined.'",
+    "fix": "is predestined as Son of God in power",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'praedestinatus est' is perfect passive, not present; 'was predestined' correctly renders it."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "he is Son of God in power",
+    "source_quote": "Filius Dei in virtute",
+    "why": "Tense mismatch: Latin 'praedestinatus est' governs both clauses with present force, English shifts to present 'is' without parallel 'is predestined.'",
+    "fix": "according to the Spirit he is predestined Son of God in power",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin has no verb in second clause; 'is' supplies the copula, matching 'Filius Dei in virtute' correctly."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

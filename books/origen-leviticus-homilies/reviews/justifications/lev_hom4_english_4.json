@@ -1,0 +1,150 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom4_english:4",
+ "section": "lev_hom4_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom4_source.json"
+ },
+ "source_text": "Invenerit rem perditam et negaverit. Inventio sine confessione furtum spirituale. Veritas reddit.",
+ "thought_title": "Finding and denying a lost thing",
+ "orientation": "Origen is applying the Levitical rules about fraud and false dealing to the soul, explaining that finding a lost item and denying it is a spiritual theft.",
+ "pass_a_gloss": "He will have found a lost thing and will have denied it. Finding without confession is spiritual theft. Truth restores it.",
+ "lemmas": [
+  {
+   "form": "Invenerit",
+   "lemma": "invenio",
+   "gloss": "will have found"
+  },
+  {
+   "form": "rem",
+   "lemma": "res",
+   "gloss": "thing"
+  },
+  {
+   "form": "perditam",
+   "lemma": "perdo",
+   "gloss": "lost"
+  },
+  {
+   "form": "negaverit",
+   "lemma": "nego",
+   "gloss": "will have denied"
+  },
+  {
+   "form": "Inventio",
+   "lemma": "inventio",
+   "gloss": "finding"
+  },
+  {
+   "form": "sine",
+   "lemma": "sine",
+   "gloss": "without"
+  },
+  {
+   "form": "confessione",
+   "lemma": "confessio",
+   "gloss": "confession"
+  },
+  {
+   "form": "furtum",
+   "lemma": "furtum",
+   "gloss": "theft"
+  },
+  {
+   "form": "spirituale",
+   "lemma": "spiritalis",
+   "gloss": "spiritual"
+  },
+  {
+   "form": "Veritas",
+   "lemma": "veritas",
+   "gloss": "truth"
+  },
+  {
+   "form": "reddit",
+   "lemma": "reddo",
+   "gloss": "restores"
+  }
+ ],
+ "choices": [
+  {
+   "term": "furtum spirituale",
+   "english": "spiritual theft",
+   "why": "Keeps the noun phrase as a predicate with the adjective 'spiritual' modifying 'theft', matching the source's word order and the glossary sense of spiritalis as the spiritual sense.",
+   "rejected": [
+    "theft in the spirit",
+    "a spiritual kind of theft"
+   ]
+  },
+  {
+   "term": "Veritas reddit",
+   "english": "Truth restores it",
+   "why": "Renders the present tense as a general statement; supplies 'it' as the implied object of the lost thing, keeping the terse Latin force.",
+   "rejected": [
+    "Truth gives back",
+    "Truth returns"
+   ]
+  },
+  {
+   "term": "confessione",
+   "english": "confession",
+   "why": "Uses the glossary term for confessio, the acknowledgment of sin required before offering.",
+   "rejected": [
+    "admission",
+    "acknowledgment"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 6:3",
+   "method": "allusion",
+   "note": "Invenerit rem perditam et negaverit"
+  }
+ ],
+ "pass_b_english": [
+  "Or he finds something lost and denies it. Finding without confession is spiritual theft. Truth restores it."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "59c8e1d8a91d30dd95679cf42e92068b9e61d324819a7e4fd5f003c9eb6a58d8",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Truth restores it",
+    "source_quote": "Veritas reddit",
+    "why": "\"reddit\" means \"pays back, returns, gives back\" not \"restores\"; \"Veritas\" is subject of judicial restitution, not abstract truth.",
+    "fix": "Truth makes restitution.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'reddit' = gives back/returns; 'restores' is within normal range. 'Veritas' as abstract truth is defensible."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

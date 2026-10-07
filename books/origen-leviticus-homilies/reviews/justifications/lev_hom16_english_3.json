@@ -1,0 +1,155 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom16_english:3",
+ "section": "lev_hom16_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom16_source.json"
+ },
+ "source_text": "Pax in terra; quinque centum persequentur. Pax Christi; pauci fortes terga hostium.",
+ "thought_title": "Peace and the few who rout many",
+ "orientation": "Origen is expounding the blessings promised in Leviticus 26 to those who walk in God's precepts, interpreting them spiritually.",
+ "pass_a_gloss": "Peace on earth; five hundred [people] will pursue. [The] peace of Christ; [the] few strong [ones] [will see] [the] backs of [the] enemies.",
+ "lemmas": [
+  {
+   "form": "Pax",
+   "lemma": "pax",
+   "gloss": "peace"
+  },
+  {
+   "form": "terra",
+   "lemma": "terra",
+   "gloss": "earth"
+  },
+  {
+   "form": "quinque",
+   "lemma": "quinque",
+   "gloss": "five"
+  },
+  {
+   "form": "centum",
+   "lemma": "centum",
+   "gloss": "hundred"
+  },
+  {
+   "form": "persequentur",
+   "lemma": "persequor",
+   "gloss": "will pursue"
+  },
+  {
+   "form": "Christi",
+   "lemma": "Christus",
+   "gloss": "of Christ"
+  },
+  {
+   "form": "pauci",
+   "lemma": "paucus",
+   "gloss": "few"
+  },
+  {
+   "form": "fortes",
+   "lemma": "fortis",
+   "gloss": "strong men"
+  },
+  {
+   "form": "terga",
+   "lemma": "tergum",
+   "gloss": "backs"
+  },
+  {
+   "form": "hostium",
+   "lemma": "hostis",
+   "gloss": "of enemies"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Pax in terra",
+   "english": "Peace on earth",
+   "why": "Keeps the simple noun phrase and the spatial sense of 'in terra' as the sphere where peace is given.",
+   "rejected": [
+    "Peace in the land",
+    "There will be peace on the earth"
+   ]
+  },
+  {
+   "term": "quinque centum persequentur",
+   "english": "five hundred will pursue",
+   "why": "Preserves the abrupt numeric subject and the future tense of the verb, matching the promise form of Leviticus 26:8.",
+   "rejected": [
+    "five hundred shall chase",
+    "a hundred will be pursued by five"
+   ]
+  },
+  {
+   "term": "Pax Christi",
+   "english": "The peace of Christ",
+   "why": "Renders the genitive as possessive, marking the shift from earthly peace to the specifically Christian peace.",
+   "rejected": [
+    "Christ's peace",
+    "the peace belonging to Christ"
+   ]
+  },
+  {
+   "term": "pauci fortes terga hostium",
+   "english": "a few strong men the backs of enemies",
+   "why": "Keeps the elliptical construction without a verb, preserving the terse antithesis with the preceding clause.",
+   "rejected": [
+    "a few strong men will turn the backs of enemies",
+    "few brave men rout the enemy"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 26:6-8",
+   "method": "allusion",
+   "note": "Pax in terra; quinque centum persequentur"
+  }
+ ],
+ "pass_b_english": [
+  "Peace on earth; five hundred will pursue. The peace of Christ; a few strong men the backs of enemies."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "a49e650cce55a08fcbde4412d2b5b34ebdf8343a172bf526a4dc528535580600",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "unreadable",
+    "severity": "major",
+    "quote": "a few strong men the backs of enemies",
+    "source_quote": "pauci fortes terga hostium",
+    "why": "Missing verb; English is ungrammatical and incomprehensible.",
+    "fix": "a few strong men will turn the backs of enemies.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'pauci fortes terga hostium' also lacks a verb; elliptical phrase matches source. Not a translation error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

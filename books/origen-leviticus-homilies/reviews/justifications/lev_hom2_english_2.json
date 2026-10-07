@@ -1,0 +1,208 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom2_english:2",
+ "section": "lev_hom2_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom2_source.json"
+ },
+ "source_text": "Munus similaginis cum oleo et ture — laus et oratio. Sacerdos memoriale incendit. Qui non potest pecudem, offert farinam: misericordia gradus pauperum novit.",
+ "thought_title": "The poor person's offering of fine flour",
+ "orientation": "Origen is explaining the graduated offerings in Leviticus, now turning to the offering of fine flour with oil and frankincense as the sacrifice of the poor.",
+ "pass_a_gloss": "Gift [of] fine flour with oil and frankincense — praise and prayer. [The] priest [the] memorial burns. [He] who not is able [a] beast, offers flour: [the] mercy [of] steps [of the] poor knows.",
+ "lemmas": [
+  {
+   "form": "munus",
+   "lemma": "munus",
+   "gloss": "gift, offering"
+  },
+  {
+   "form": "similaginis",
+   "lemma": "similago",
+   "gloss": "fine flour"
+  },
+  {
+   "form": "oleo",
+   "lemma": "oleum",
+   "gloss": "oil"
+  },
+  {
+   "form": "ture",
+   "lemma": "tus",
+   "gloss": "frankincense"
+  },
+  {
+   "form": "laus",
+   "lemma": "laus",
+   "gloss": "praise"
+  },
+  {
+   "form": "oratio",
+   "lemma": "oratio",
+   "gloss": "prayer"
+  },
+  {
+   "form": "sacerdos",
+   "lemma": "sacerdos",
+   "gloss": "priest"
+  },
+  {
+   "form": "memoriale",
+   "lemma": "memoriale",
+   "gloss": "memorial portion"
+  },
+  {
+   "form": "incendit",
+   "lemma": "incendo",
+   "gloss": "burns"
+  },
+  {
+   "form": "pecudem",
+   "lemma": "pecus",
+   "gloss": "animal, beast"
+  },
+  {
+   "form": "offert",
+   "lemma": "offero",
+   "gloss": "offers"
+  },
+  {
+   "form": "farinam",
+   "lemma": "farina",
+   "gloss": "flour"
+  }
+ ],
+ "choices": [
+  {
+   "term": "munus similaginis",
+   "english": "a gift of fine flour",
+   "why": "Keeps munus as gift per the brief's sense of offering, and similago as fine flour to distinguish from ordinary farina.",
+   "rejected": [
+    "an offering of semolina",
+    "a present of fine wheat"
+   ]
+  },
+  {
+   "term": "memoriale incendit",
+   "english": "burns the memorial portion",
+   "why": "Memoriale is a technical cultic term for the portion burned as a reminder before God; rendering as memorial portion preserves the ritual sense.",
+   "rejected": [
+    "lights the memorial",
+    "sets fire to the remembrance"
+   ]
+  },
+  {
+   "term": "misericordia gradus pauperum novit",
+   "english": "mercy knows the steps of the poor",
+   "why": "Gradus means steps or degrees; the phrase means mercy recognizes the graduated levels of what the poor can offer. Kept literal to preserve the metaphor.",
+   "rejected": [
+    "mercy understands the ranks of the poor",
+    "compassion knows the stages of poverty"
+   ]
+  },
+  {
+   "term": "laus et oratio",
+   "english": "praise and prayer",
+   "why": "Origen interprets the flour, oil, and frankincense spiritually as praise and prayer; the dash in the source marks this as an interpretive gloss, kept as such.",
+   "rejected": [
+    "praise and petition",
+    "worship and supplication"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 2:1-2",
+   "method": "allusion",
+   "note": "munus similaginis cum oleo et ture; sacerdos memoriale incendit"
+  },
+  {
+   "display": "Leviticus 5:11",
+   "method": "allusion",
+   "note": "qui non potest pecudem, offert farinam"
+  }
+ ],
+ "pass_b_english": [
+  "A gift of fine flour with oil and frankincense means praise and prayer. The priest burns the memorial portion. The one who cannot offer an animal offers flour: mercy acknowledges the degrees of poverty."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "226a9ec49fe0afb33b17766ea551dec64d94269651aeed4517f080840a7d6ccf",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "mercy knows the steps of the poor",
+     "source_quote": "misericordia gradus pauperum novit",
+     "why": "Gradus means 'degrees/levels/ranks', not 'steps' as footsteps; novit means 'knows/recognizes/acknowledges'. The sense is that mercy acknowledges or makes allowance for the varying degrees/conditions of poverty, not that mercy literally knows footsteps.",
+     "fix": "mercy acknowledges the degrees of poverty",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Gradus means 'degrees/levels'; 'steps of the poor' misleads, losing sense that mercy accounts for varying degrees of poverty."
+    }
+   ],
+   "edits": [
+    {
+     "old": "mercy knows the steps of the poor",
+     "new": "mercy acknowledges the degrees of poverty"
+    }
+   ],
+   "fixed": [
+    "Changed 'mercy knows the steps of the poor' to 'mercy acknowledges the degrees of poverty': gradus here means degrees/levels/ranks, and novit means acknowledges/recognizes, so the English misstated the source."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "mercy acknowledges the degrees of poverty",
+    "source_quote": "misericordia gradus pauperum novit",
+    "why": "Misericordia is mercy, but novit here means 'knows' not 'acknowledges'; gradus pauperum means 'steps/degrees of the poor'—the poor's steps are known to mercy, i.e., God mercifully recognizes different poverty levels. English inverts subject and object, making mercy the active knower/acknowledger rather than the poor's steps being known to mercy.",
+    "fix": "mercy knows the steps of the poor",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'misericordia gradus pauperum novit' has misericordia as subject; English correctly renders it. 'Acknowledges' is within novit's range."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

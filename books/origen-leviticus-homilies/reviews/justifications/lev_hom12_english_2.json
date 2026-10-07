@@ -1,0 +1,124 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom12_english:2",
+ "section": "lev_hom12_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom12_source.json"
+ },
+ "source_text": "Cui infusum est oleum chrismatis. Unctio Spiritus. Christiani a Christo.",
+ "thought_title": "The Anointing of Christ and Christians",
+ "orientation": "Origen is describing the greatness of Christ as the great priest, and now explains how the anointing oil was poured into him and how Christians receive their name from Christ.",
+ "pass_a_gloss": "To whom the oil of chrism has been poured in. The anointing of the Spirit. Christians from Christ.",
+ "lemmas": [
+  {
+   "form": "infusum",
+   "lemma": "infundo",
+   "gloss": "poured in"
+  },
+  {
+   "form": "oleum",
+   "lemma": "oleum",
+   "gloss": "oil"
+  },
+  {
+   "form": "chrismatis",
+   "lemma": "chrisma",
+   "gloss": "of chrism"
+  },
+  {
+   "form": "unctio",
+   "lemma": "unctio",
+   "gloss": "anointing"
+  },
+  {
+   "form": "Spiritus",
+   "lemma": "Spiritus",
+   "gloss": "of the Spirit"
+  },
+  {
+   "form": "Christiani",
+   "lemma": "Christianus",
+   "gloss": "Christians"
+  },
+  {
+   "form": "Christo",
+   "lemma": "Christus",
+   "gloss": "from Christ"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Cui infusum est oleum chrismatis",
+   "english": "To whom the oil of chrism has been poured in",
+   "why": "Keeps the dative of recipient and the passive perfect of infundo to show the completed action of anointing upon Christ",
+   "rejected": [
+    "Into whom the chrism oil was poured",
+    "Who has had the oil of chrism poured into him"
+   ]
+  },
+  {
+   "term": "Unctio Spiritus",
+   "english": "The anointing of the Spirit",
+   "why": "Renders the noun phrase as a bare appositional statement, preserving the terse explanatory force of the Latin",
+   "rejected": [
+    "The Spirit's anointing",
+    "An anointing by the Spirit"
+   ]
+  },
+  {
+   "term": "Christiani a Christo",
+   "english": "Christians from Christ",
+   "why": "Keeps the preposition a with the ablative to show derivation or source, matching the Latin's compact etymological point",
+   "rejected": [
+    "Christians are from Christ",
+    "Christians take their name from Christ"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Into him the oil of chrism has been poured. The anointing of the Spirit. Christians from Christ."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "6fed19b5179621bc5d621a596da0d5d37160e54b31daf9840bb2ffd1c428debd",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Into him",
+    "source_quote": "Cui",
+    "why": "\"Cui\" is dative/ablative, but context shows this refers back to the high priest (pontifex) previously mentioned. \"Into him\" is wrong preposition and awkward; \"Upon whom\" or \"To whom\" would convey the anointing sense correctly.",
+    "fix": "Upon whom the oil of chrism has been poured.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Cui is dative/ablative; 'into him' is a reasonable rendering for oil poured on someone. Preference for 'upon whom' is not a major error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,247 @@
+{
+ "excerpt_id": "origen-psalms-rufinus:ps36_hom2_english:2",
+ "section": "ps36_hom2_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-psalms-rufinus/translations/ps36_hom2_source.json"
+ },
+ "source_text": "Subditus esto Domino et ora eum; noli aemulari in eo qui prosperatur in via sua. Gloria Christo. Amen.",
+ "thought_title": "Submit to the Lord and do not envy the prosperous",
+ "orientation": "Origen is quoting the psalmist's command to submit to the Lord and pray, and not to envy the one who prospers in his way, then closing with a doxology to Christ.",
+ "pass_a_gloss": "Be subject to the Lord and pray to him; do not envy the one who prospers in his way. Glory to Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "Subditus",
+   "lemma": "subdo",
+   "gloss": "be subject"
+  },
+  {
+   "form": "esto",
+   "lemma": "sum",
+   "gloss": "be (imperative)"
+  },
+  {
+   "form": "Domino",
+   "lemma": "Dominus",
+   "gloss": "the Lord"
+  },
+  {
+   "form": "ora",
+   "lemma": "oro",
+   "gloss": "pray"
+  },
+  {
+   "form": "eum",
+   "lemma": "is",
+   "gloss": "him"
+  },
+  {
+   "form": "noli",
+   "lemma": "nolo",
+   "gloss": "do not"
+  },
+  {
+   "form": "aemulari",
+   "lemma": "aemulor",
+   "gloss": "envy"
+  },
+  {
+   "form": "eo",
+   "lemma": "is",
+   "gloss": "the one"
+  },
+  {
+   "form": "prosperatur",
+   "lemma": "prosperor",
+   "gloss": "prospers"
+  },
+  {
+   "form": "via",
+   "lemma": "via",
+   "gloss": "way"
+  },
+  {
+   "form": "sua",
+   "lemma": "suus",
+   "gloss": "his"
+  },
+  {
+   "form": "Gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Subditus esto Domino",
+   "english": "Be subject to the Lord",
+   "why": "The imperative of sum with the perfect passive participle subditus expresses the commanded state of submission; 'be subject' keeps the passive force and the command.",
+   "rejected": [
+    "Submit to the Lord",
+    "Be submissive to the Lord"
+   ]
+  },
+  {
+   "term": "ora eum",
+   "english": "pray to him",
+   "why": "The verb oro takes an accusative of the person addressed; 'pray to him' makes the object explicit in English.",
+   "rejected": [
+    "pray him",
+    "entreat him"
+   ]
+  },
+  {
+   "term": "noli aemulari",
+   "english": "do not envy",
+   "why": "The glossary requires 'envy' for aemulari; noli with the infinitive is the standard negative command.",
+   "rejected": [
+    "do not be jealous",
+    "do not provoke"
+   ]
+  },
+  {
+   "term": "in eo qui prosperatur in via sua",
+   "english": "the one who prospers in his way",
+   "why": "The relative clause identifies the person; 'prospers in his way' keeps the literal sense of prosperatur and via sua.",
+   "rejected": [
+    "the one who has success in his path",
+    "him who thrives in his way"
+   ]
+  },
+  {
+   "term": "Gloria Christo",
+   "english": "Glory to Christ",
+   "why": "The doxological formula uses the dative of the person glorified; 'Glory to Christ' is the standard English rendering.",
+   "rejected": [
+    "Glory be to Christ",
+    "Glory of Christ"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Psalm 37:7 (LXX 36:7)",
+   "method": "wording",
+   "note": "Subditus esto Domino et ora eum; noli aemulari in eo qui prosperatur in via sua"
+  }
+ ],
+ "pass_b_english": [
+  "Be subject to the Lord and pray to him; do not envy the one who prospers in his way (Psalm 37:7 (LXX 36:7)). Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "85b470383944bb050758eedfef2f06fde8dbc0b3dbac36873123c2d6f4e96749",
+ "source_sha256": "5fe875d988d05bbb94e085cca3e341ced090ca8fc8f09f75770ca4fd1e55e5b1",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Psalm 37:7",
+     "source_quote": "Subditus esto Domino et ora eum; noli aemulari in eo qui prosperatur in via sua",
+     "why": "Wrong verse citation: this is Psalm 36:7 (LXX), not Psalm 37:7.",
+     "fix": "Psalm 36:7 (Hebrew 37:7)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin 'Subditus esto Domino...' matches Vulgate Psalm 36:7, not 37:7; citation misleads reader to wrong verse."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Psalm 37:7",
+     "new": "Psalm 36:7 (Hebrew 37:7)"
+    }
+   ],
+   "fixed": [
+    "Wrong verse citation: source is Psalm 36:7 (LXX), not Psalm 37:7."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Psalm 36:7 (Hebrew 37:7)",
+     "source_quote": "Subditus esto Domino et ora eum; noli aemulari in eo qui prosperatur in via sua",
+     "why": "Verse is Psalm 36:7 in Hebrew numbering, not LXX 36:7; should be Psalm 37:7.",
+     "fix": "Psalm 37:7 (LXX 36:7)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin matches Vulgate Psalm 36:7 (LXX numbering), but 'Hebrew 37:7' label is wrong; Hebrew is 37:7, LXX is 36:7."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Psalm 36:7 (Hebrew 37:7)",
+     "new": "Psalm 37:7 (LXX 36:7)"
+    }
+   ],
+   "fixed": [
+    "The source verse 'Subditus esto Domino et ora eum; noli aemulari in eo qui prosperatur in via sua' is Psalm 37:7 in Hebrew numbering, so the citation should be Psalm 37:7 (LXX 36:7)."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Psalm 37:7 (LXX 36:7)",
+    "source_quote": "Subditus esto Domino et ora eum; noli aemulari in eo qui prosperatur in via sua",
+    "why": "The citation should be Psalm 36:7 (LXX), which corresponds to modern Psalm 37:7, not Psalm 37:7 (LXX 36:7). The format reverses LXX and Hebrew numbers.",
+    "fix": "Psalm 37:7 (Hebrew 37:7; LXX 36:7)",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Format 'Psalm 37:7 (LXX 36:7)' correctly gives Hebrew number first, LXX in parentheses. Not reversed."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,189 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom9_english:7",
+ "section": "lev_hom9_english:7",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom9_source.json"
+ },
+ "source_text": "Pontifex sumit de sanguine et infert intra velamen. Solus Christus intrat vera sancta.",
+ "thought_title": "Christ alone enters the true holy place",
+ "orientation": "Origen is explaining the high priest's entry into the holy place on the Day of Atonement as a figure of Christ's unique entry into the true sanctuary.",
+ "pass_a_gloss": "The high priest takes from the blood and carries it in within the veil. Christ alone enters the true holy things.",
+ "lemmas": [
+  {
+   "form": "Pontifex",
+   "lemma": "pontifex",
+   "gloss": "high priest"
+  },
+  {
+   "form": "sumit",
+   "lemma": "sumo",
+   "gloss": "takes"
+  },
+  {
+   "form": "sanguine",
+   "lemma": "sanguis",
+   "gloss": "blood"
+  },
+  {
+   "form": "infert",
+   "lemma": "infero",
+   "gloss": "carries in"
+  },
+  {
+   "form": "intra",
+   "lemma": "intra",
+   "gloss": "within"
+  },
+  {
+   "form": "velamen",
+   "lemma": "velamen",
+   "gloss": "veil"
+  },
+  {
+   "form": "Solus",
+   "lemma": "solus",
+   "gloss": "alone"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  },
+  {
+   "form": "intrat",
+   "lemma": "intro",
+   "gloss": "enters"
+  },
+  {
+   "form": "vera",
+   "lemma": "verus",
+   "gloss": "true"
+  },
+  {
+   "form": "sancta",
+   "lemma": "sanctus",
+   "gloss": "holy things"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Pontifex",
+   "english": "high priest",
+   "why": "Glossary requires 'high priest' for pontifex, not 'pontiff' or 'chief priest'.",
+   "rejected": [
+    "pontiff",
+    "chief priest"
+   ]
+  },
+  {
+   "term": "sanguine",
+   "english": "blood",
+   "why": "Glossary requires 'blood' for sanguis, not 'lifeblood'.",
+   "rejected": [
+    "lifeblood"
+   ]
+  },
+  {
+   "term": "velamen",
+   "english": "veil",
+   "why": "Glossary requires 'veil' for velamen, not 'covering' or 'screen'.",
+   "rejected": [
+    "covering",
+    "screen"
+   ]
+  },
+  {
+   "term": "vera sancta",
+   "english": "true holy things",
+   "why": "Neuter plural of sanctus with vera; 'holy things' preserves the plural and the glossary sense of sanctus as holy, set apart for God.",
+   "rejected": [
+    "true sanctuary",
+    "true holy place"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 16:15",
+   "method": "wording",
+   "note": "Pontifex sumit de sanguine et infert intra velamen"
+  },
+  {
+   "display": "Hebrews 9:12",
+   "method": "wording",
+   "note": "Solus Christus intrat vera sancta"
+  }
+ ],
+ "pass_b_english": [
+  "The high priest takes some of the blood and carries it within the veil (Leviticus 16:15). Christ alone enters the true holy things."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "78a7b817f9d5ba4c648177486581f9367e18e5e30da17644a2f39643c6e63ad3",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "addition",
+     "severity": "major",
+     "quote": "Christ alone enters the true holy things (Hebrews 9:12)",
+     "source_quote": "Solus Christus intrat vera sancta",
+     "why": "Source has no Hebrews citation; English adds biblical reference not in Latin.",
+     "fix": "Christ alone enters the true holy things.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin 'Solus Christus intrat vera sancta' lacks any citation; English adds '(Hebrews 9:12)' not in source."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Christ alone enters the true holy things (Hebrews 9:12)",
+     "new": "Christ alone enters the true holy things"
+    }
+   ],
+   "fixed": [
+    "Removed the added biblical reference '(Hebrews 9:12)' from the English, since the source 'Solus Christus intrat vera sancta' has no such citation."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

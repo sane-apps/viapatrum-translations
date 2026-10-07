@@ -1,0 +1,175 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom8_english:9",
+ "section": "lev_hom8_english:9",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom8_source.json"
+ },
+ "source_text": "Vestes scissae, caput nudum, extra castra. Luctus peccati. Extra ecclesiae pacem qui immundus perseverat.",
+ "thought_title": "The Leper's Exclusion",
+ "orientation": "Origen is interpreting the Levitical rule about the leper's torn clothes and uncovered head, applying it to the sinner who remains unclean and outside the peace of the church.",
+ "pass_a_gloss": "Clothes torn, head bare, outside the camp. Mourning of sin. Outside the peace of the church is he who remains unclean.",
+ "lemmas": [
+  {
+   "form": "Vestes",
+   "lemma": "vestis",
+   "gloss": "clothes"
+  },
+  {
+   "form": "scissae",
+   "lemma": "scindere",
+   "gloss": "torn"
+  },
+  {
+   "form": "caput",
+   "lemma": "caput",
+   "gloss": "head"
+  },
+  {
+   "form": "nudum",
+   "lemma": "nudus",
+   "gloss": "bare"
+  },
+  {
+   "form": "extra",
+   "lemma": "extra",
+   "gloss": "outside"
+  },
+  {
+   "form": "castra",
+   "lemma": "castra",
+   "gloss": "camp"
+  },
+  {
+   "form": "Luctus",
+   "lemma": "luctus",
+   "gloss": "mourning"
+  },
+  {
+   "form": "peccati",
+   "lemma": "peccatum",
+   "gloss": "of sin"
+  },
+  {
+   "form": "ecclesiae",
+   "lemma": "ecclesia",
+   "gloss": "of the church"
+  },
+  {
+   "form": "pacem",
+   "lemma": "pax",
+   "gloss": "peace"
+  },
+  {
+   "form": "immundus",
+   "lemma": "immundus",
+   "gloss": "unclean"
+  },
+  {
+   "form": "perseverat",
+   "lemma": "perseverare",
+   "gloss": "remains"
+  }
+ ],
+ "choices": [
+  {
+   "term": "extra castra",
+   "english": "outside the camp",
+   "why": "Literal rendering of the Levitical exclusion, preserving the spatial and communal sense of separation.",
+   "rejected": [
+    "outside the encampment",
+    "beyond the camp"
+   ]
+  },
+  {
+   "term": "Luctus peccati",
+   "english": "Mourning of sin",
+   "why": "Keeps the genitive force of peccati as the object or cause of mourning, matching the terse Latin.",
+   "rejected": [
+    "grief for sin",
+    "sorrow over sin"
+   ]
+  },
+  {
+   "term": "Extra ecclesiae pacem",
+   "english": "Outside the peace of the church",
+   "why": "Preserves the spatial metaphor and the genitive ecclesiae, tying the Levitical camp to the church's communion.",
+   "rejected": [
+    "beyond the church's peace",
+    "outside the church's peace"
+   ]
+  },
+  {
+   "term": "qui immundus perseverat",
+   "english": "he who remains unclean",
+   "why": "Perseverat carries the sense of continuing in a state, not a single act; 'remains' captures the ongoing condition.",
+   "rejected": [
+    "who persists unclean",
+    "who continues in uncleanness"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 13:45",
+   "method": "allusion",
+   "note": "Vestes scissae, caput nudum, extra castra"
+  }
+ ],
+ "pass_b_english": [
+  "Torn clothes, bare head, outside the camp. Mourning of sin. Outside the peace of the church he who remains unclean."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "f58f9e32ce98ced6a731c4a298a024071e4d0b052c6af0d98b9f228a9b6fd514",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Mourning of sin.",
+    "source_quote": "Luctus peccati.",
+    "why": "Latin luctus is 'mourning/grief for' not 'of'; ambiguous English hides Origen's point about mourning over sin.",
+    "fix": "Mourning for sin.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Mourning of sin' is standard genitive rendering of 'Luctus peccati'; meaning is clear and within normal range."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "Outside the peace of the church he who remains unclean.",
+    "source_quote": "Extra ecclesiae pacem qui immundus perseverat.",
+    "why": "Missing main verb sense: 'perseverat' means 'persists/remains' as ongoing action, not static state; also awkward word order obscures subject.",
+    "fix": "He who persists in uncleanness remains outside the peace of the church.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Remains' correctly conveys 'perseverat'; word order follows Latin source; no meaning lost or changed."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

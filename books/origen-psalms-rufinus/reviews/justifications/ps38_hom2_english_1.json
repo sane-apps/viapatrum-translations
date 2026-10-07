@@ -1,0 +1,191 @@
+{
+ "excerpt_id": "origen-psalms-rufinus:ps38_hom2_english:1",
+ "section": "ps38_hom2_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-psalms-rufinus/translations/ps38_hom2_source.json"
+ },
+ "source_text": "Qui est imago Dei invisibilis primogenitus omnis creaturae. Qui exit de hoc mundo ferens imaginem terreni ad nihilum redigitur in civitate Dei; caelestis imaginis insignia reportet.",
+ "thought_title": "Bearing the heavenly image",
+ "orientation": "Origen is closing the homily on Psalm 38 by contrasting the earthly image, which perishes, with the heavenly image of Christ, the firstborn of all creation.",
+ "pass_a_gloss": "Who is [the] image of God [the] invisible firstborn of all creation. Who goes out of this world bearing [the] image of [the] earthly to nothing [he] is reduced in [the] city of God; of [the] heavenly image [the] marks [he] may carry back.",
+ "lemmas": [
+  {
+   "form": "imago",
+   "lemma": "imago",
+   "gloss": "image"
+  },
+  {
+   "form": "invisibilis",
+   "lemma": "invisibilis",
+   "gloss": "invisible"
+  },
+  {
+   "form": "primogenitus",
+   "lemma": "primogenitus",
+   "gloss": "firstborn"
+  },
+  {
+   "form": "creaturae",
+   "lemma": "creatura",
+   "gloss": "creation"
+  },
+  {
+   "form": "exit",
+   "lemma": "exeo",
+   "gloss": "goes out"
+  },
+  {
+   "form": "mundo",
+   "lemma": "mundus",
+   "gloss": "world"
+  },
+  {
+   "form": "ferens",
+   "lemma": "fero",
+   "gloss": "bearing"
+  },
+  {
+   "form": "terreni",
+   "lemma": "terrenus",
+   "gloss": "earthly"
+  },
+  {
+   "form": "redigitur",
+   "lemma": "redigo",
+   "gloss": "is reduced"
+  },
+  {
+   "form": "nihilum",
+   "lemma": "nihilum",
+   "gloss": "nothing"
+  },
+  {
+   "form": "civitate",
+   "lemma": "civitas",
+   "gloss": "city"
+  },
+  {
+   "form": "insignia",
+   "lemma": "insigne",
+   "gloss": "marks"
+  }
+ ],
+ "choices": [
+  {
+   "term": "insignia",
+   "english": "marks",
+   "why": "The glossary for imago Dei speaks of bearing the marks of the heavenly image, so insignia is rendered as marks to match that language.",
+   "rejected": [
+    "badges",
+    "emblems",
+    "signs"
+   ]
+  },
+  {
+   "term": "reportet",
+   "english": "let him carry back",
+   "why": "Reportet is a jussive subjunctive expressing a wish or exhortation; carry back preserves the prefix re- and the force of the command.",
+   "rejected": [
+    "may he bring back",
+    "let him bring",
+    "he should carry"
+   ]
+  },
+  {
+   "term": "ad nihilum redigitur",
+   "english": "is reduced to nothing",
+   "why": "The passive of redigo with ad nihilum means to be brought to nothing or annihilated; reduced to nothing keeps the passive and the destination.",
+   "rejected": [
+    "is brought to nothing",
+    "comes to nothing",
+    "is annihilated"
+   ]
+  },
+  {
+   "term": "terreni",
+   "english": "of the earthly one",
+   "why": "Terreni is a genitive singular masculine, referring to the earthly man or image; of the earthly one makes the personal reference explicit.",
+   "rejected": [
+    "of the earthly",
+    "of earth",
+    "earthly"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Colossians 1:15",
+   "method": "wording",
+   "note": "imago Dei invisibilis primogenitus omnis creaturae"
+  }
+ ],
+ "pass_b_english": [
+  "He is the image of the invisible God, the firstborn of all creation (Colossians 1:15). Whoever goes out of this world bearing the image of the earthly one is reduced to nothing in the city of God; let him carry back the marks of the heavenly image."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "85b470383944bb050758eedfef2f06fde8dbc0b3dbac36873123c2d6f4e96749",
+ "source_sha256": "00c40cbbe70f3bd0b8764a1074a977634306486f107d51947ed72504d2d2b466",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 3,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "He is the image of the invisible God, the firstborn of all creation (Colossians 1:15).",
+    "source_quote": "Qui est imago Dei invisibilis primogenitus omnis creaturae.",
+    "why": "Source uses 'Qui est' (relative clause), continuing description; English 'He is' makes it a new independent statement, changing syntax and possibly speaker attribution.",
+    "fix": "who is the image of the invisible God, the firstborn of all creation",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'Qui est' opens Col 1:15 quote; 'He is' is standard biblical rendering, not a major change."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "is reduced to nothing in the city of God",
+    "source_quote": "ad nihilum redigitur in civitate Dei",
+    "why": "Latin 'ad nihilum redigitur' means 'is reduced to nothing,' but 'in civitate Dei' is where he should carry back marks, not where he is reduced to nothing; misjoined clauses.",
+    "fix": "is reduced to nothing; in the city of God let him carry back the marks of the heavenly image",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin syntax: 'ad nihilum redigitur in civitate Dei' attaches to same clause; semicolon separates 'reportet'. Translation is defensible."
+   },
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "let him carry back",
+    "source_quote": "caelestis imaginis insignia reportet",
+    "why": "English imperative 'let him' softens the Latin jussive/subjunctive 'reportet' (let him carry back/bring back) which is hortatory command, not permission.",
+    "fix": "let him bring back the marks of the heavenly image",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Let him carry' is standard jussive rendering; hortatory nuance preserved, not softened to mere permission."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 3,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

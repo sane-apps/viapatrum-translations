@@ -1,0 +1,164 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom2_english:5",
+ "section": "lev_hom2_english:5",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom2_source.json"
+ },
+ "source_text": "Sacerdos edit de sacrificio peccati in loco sancto. Qui peccata populi portat, sanctificatur. Christus esca nostra; peccatum nostrum tulit. Amen.",
+ "thought_title": "The priest eats the sin offering in the holy place",
+ "orientation": "Origen is explaining the sin offering, having just spoken of Christ suffering outside the gate and bearing our reproach.",
+ "pass_a_gloss": "Priest eats from sacrifice of sin in place holy. Who sins of people carries, is sanctified. Christ food our; sin our he carried. Amen.",
+ "lemmas": [
+  {
+   "form": "Sacerdos",
+   "lemma": "sacerdos",
+   "gloss": "priest"
+  },
+  {
+   "form": "edit",
+   "lemma": "edo",
+   "gloss": "eats"
+  },
+  {
+   "form": "sacrificio",
+   "lemma": "sacrificium",
+   "gloss": "sacrifice"
+  },
+  {
+   "form": "peccati",
+   "lemma": "peccatum",
+   "gloss": "sin"
+  },
+  {
+   "form": "loco",
+   "lemma": "locus",
+   "gloss": "place"
+  },
+  {
+   "form": "sancto",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "peccata",
+   "lemma": "peccatum",
+   "gloss": "sins"
+  },
+  {
+   "form": "populi",
+   "lemma": "populus",
+   "gloss": "people"
+  },
+  {
+   "form": "portat",
+   "lemma": "porto",
+   "gloss": "carries"
+  },
+  {
+   "form": "sanctificatur",
+   "lemma": "sanctifico",
+   "gloss": "is made holy"
+  },
+  {
+   "form": "esca",
+   "lemma": "esca",
+   "gloss": "food"
+  },
+  {
+   "form": "tulit",
+   "lemma": "fero",
+   "gloss": "carried"
+  }
+ ],
+ "choices": [
+  {
+   "term": "sacrificio peccati",
+   "english": "sacrifice of sin",
+   "why": "Keeps the genitive literal, matching the Levitical phrase for the sin offering without importing a technical term not in the source.",
+   "rejected": [
+    "sin offering"
+   ]
+  },
+  {
+   "term": "sanctificatur",
+   "english": "is made holy",
+   "why": "Passive verb rendered literally to preserve the action of being sanctified rather than a state.",
+   "rejected": [
+    "is sanctified",
+    "becomes holy"
+   ]
+  },
+  {
+   "term": "esca nostra",
+   "english": "our food",
+   "why": "Literal rendering of the predicate nominative, keeping the metaphor of eating Christ as food.",
+   "rejected": [
+    "our nourishment",
+    "our meal"
+   ]
+  },
+  {
+   "term": "tulit",
+   "english": "carried",
+   "why": "Perfect tense of fero rendered as simple past to match the completed action of Christ bearing sin.",
+   "rejected": [
+    "bore",
+    "has carried"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 6:26",
+   "method": "wording",
+   "note": "Sacerdos edit de sacrificio peccati in loco sancto"
+  }
+ ],
+ "pass_b_english": [
+  "The priest eats the sacrifice of sin in the holy place (Leviticus 6:26). The one who carries the sins of the people is made holy. Christ is our food; he carried our sin. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "9cebbc25a22d67a0f7433ba930136f7b78eb2a9177d2823c676fa5020fb8afee",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Leviticus 6:26",
+    "source_quote": "Sacerdos edit de sacrificio peccati in loco sancto",
+    "why": "The citation does not match the source words quoted; needs verification against LXX/Latin numbering.",
+    "fix": "Verify citation: likely Leviticus 6:17 (LXX/Vulgate) or 6:26 (Hebrew); note numbering difference.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Leviticus 6:26 (Vulgate/LXX numbering) matches 'Sacerdos edit de sacrificio peccati in loco sancto' correctly."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

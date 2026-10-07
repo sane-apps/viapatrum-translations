@@ -1,0 +1,165 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom16_english:7",
+ "section": "lev_hom16_english:7",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom16_source.json"
+ },
+ "source_text": "Recordabor testamenti; non abiciam in finem. Misericordia superstes. Completae Homiliae XVI in Leviticum. Gloria Christo. Amen.",
+ "thought_title": "Closing doxology and colophon",
+ "orientation": "Origen is concluding the sixteenth homily on Leviticus with a final recollection of God's covenant mercy, followed by a scribal colophon and doxology.",
+ "pass_a_gloss": "I will remember [the] testament; I will not cast [it] away in [the] end. Mercy surviving. Completed Homilies 16 on Leviticus. Glory [to] Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "Recordabor",
+   "lemma": "recordor",
+   "gloss": "I will remember"
+  },
+  {
+   "form": "testamenti",
+   "lemma": "testamentum",
+   "gloss": "covenant"
+  },
+  {
+   "form": "abiciam",
+   "lemma": "abicio",
+   "gloss": "I will cast away"
+  },
+  {
+   "form": "finem",
+   "lemma": "finis",
+   "gloss": "end"
+  },
+  {
+   "form": "Misericordia",
+   "lemma": "misericordia",
+   "gloss": "mercy"
+  },
+  {
+   "form": "superstes",
+   "lemma": "superstes",
+   "gloss": "remaining, surviving"
+  },
+  {
+   "form": "Completae",
+   "lemma": "compleo",
+   "gloss": "completed"
+  },
+  {
+   "form": "Homiliae",
+   "lemma": "homilia",
+   "gloss": "homilies"
+  },
+  {
+   "form": "Leviticum",
+   "lemma": "Leviticus",
+   "gloss": "Leviticus"
+  },
+  {
+   "form": "Gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  },
+  {
+   "form": "Christo",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  },
+  {
+   "form": "Amen",
+   "lemma": "amen",
+   "gloss": "amen"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Recordabor testamenti",
+   "english": "I will remember the covenant",
+   "why": "Future tense of recordor with genitive object; 'testamentum' here means covenant, not a last will, matching the biblical context of God's covenant with Israel.",
+   "rejected": [
+    "I will recall the testament",
+    "I shall be mindful of the testament"
+   ]
+  },
+  {
+   "term": "non abiciam in finem",
+   "english": "I will not cast away to the end",
+   "why": "Abicio means to cast away or reject; 'in finem' is adverbial, meaning to the end or forever, preserving the negation and future tense.",
+   "rejected": [
+    "I will not reject forever",
+    "I will not cast off at the end"
+   ]
+  },
+  {
+   "term": "Misericordia superstes",
+   "english": "Mercy remains",
+   "why": "Superstes means surviving or remaining; the phrase is a terse affirmation that mercy endures, matching the homiletic closing tone.",
+   "rejected": [
+    "Mercy is a survivor",
+    "Mercy survives"
+   ]
+  },
+  {
+   "term": "Completae Homiliae XVI in Leviticum",
+   "english": "The Sixteen Homilies on Leviticus are completed",
+   "why": "This is a scribal colophon; 'completae' is a perfect passive participle agreeing with 'homiliae', rendered as a statement of completion.",
+   "rejected": [
+    "The Sixteen Homilies on Leviticus have been finished",
+    "Completed: Sixteen Homilies on Leviticus"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 26:44",
+   "method": "allusion",
+   "note": "Recordabor testamenti echoes the covenant remembrance language of Leviticus 26:44-45, though the exact wording is Origen's summary."
+  }
+ ],
+ "pass_b_english": [
+  "I will remember the covenant; I will not cast away to the end. Mercy remains. The Sixteen Homilies on Leviticus are completed. Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "6f6a4cd06df10ec728384a5d3883d9f4a5a812e6c9515355a7c55b13ad1d279c",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "I will remember the covenant; I will not cast away to the end. Mercy remains.",
+    "source_quote": "Recordabor testamenti; non abiciam in finem. Misericordia superstes.",
+    "why": "These are Scripture/Psalm verses (Ps 105 LXX/106 Heb), not Origen's own words; speaker unclear",
+    "fix": "It shall be remembered of his covenant; I will not reject forever. Mercy survives.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Translation accurately renders source words; speaker attribution is editorial matter, not a translation error changing meaning."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

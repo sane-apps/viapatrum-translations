@@ -1,0 +1,130 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom12_english:3",
+ "section": "lev_hom12_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom12_source.json"
+ },
+ "source_text": "In patre et matre non contaminabitur. Perfectus amat supra carnem.",
+ "thought_title": "The perfect one loves above the flesh",
+ "orientation": "Origen is explaining the high priest's purity rules from Leviticus 21, applying them spiritually to the Christian who is anointed.",
+ "pass_a_gloss": "In father and mother he will not be contaminated. The perfect one loves above the flesh.",
+ "lemmas": [
+  {
+   "form": "patre",
+   "lemma": "pater",
+   "gloss": "father"
+  },
+  {
+   "form": "matre",
+   "lemma": "mater",
+   "gloss": "mother"
+  },
+  {
+   "form": "contaminabitur",
+   "lemma": "contaminare",
+   "gloss": "will be contaminated"
+  },
+  {
+   "form": "perfectus",
+   "lemma": "perfectus",
+   "gloss": "the perfect one"
+  },
+  {
+   "form": "amat",
+   "lemma": "amare",
+   "gloss": "loves"
+  },
+  {
+   "form": "supra",
+   "lemma": "supra",
+   "gloss": "above"
+  },
+  {
+   "form": "carnem",
+   "lemma": "caro",
+   "gloss": "flesh"
+  }
+ ],
+ "choices": [
+  {
+   "term": "contaminabitur",
+   "english": "will be contaminated",
+   "why": "The passive future keeps the legal prohibition's force and the ritual sense of contamination.",
+   "rejected": [
+    "will be defiled",
+    "shall be polluted"
+   ]
+  },
+  {
+   "term": "perfectus",
+   "english": "the perfect one",
+   "why": "The masculine singular substantive names the spiritually mature person Origen has in view, not an abstract quality.",
+   "rejected": [
+    "the perfect man",
+    "perfection"
+   ]
+  },
+  {
+   "term": "supra carnem",
+   "english": "above the flesh",
+   "why": "The preposition supra preserves the spatial metaphor of loving beyond or higher than fleshly ties.",
+   "rejected": [
+    "beyond the flesh",
+    "more than the flesh"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 21:11",
+   "method": "wording",
+   "note": "In patre et matre non contaminabitur"
+  }
+ ],
+ "pass_b_english": [
+  "He will not be contaminated by father or mother (Leviticus 21:11). The perfect one loves above the flesh."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "865cd94004190d59b32390fbf1d3a7af52054c9e4aad065bec39626fe9c55a45",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "The perfect one loves above the flesh",
+    "source_quote": "Perfectus amat supra carnem",
+    "why": "\"amat\" is 3rd singular present active indicative \"he loves,\" but \"supra carnem\" means \"beyond flesh\" or \"above flesh\" in the sense of transcendence, not \"above the flesh\" as a location. More critically, the context of Leviticus 21:11 about the high priest not defiling himself with father or mother suggests this is about the perfect one's relationship to fleshly ties, not an abstract statement about love. The English makes it sound like a general mystical claim rather than a specific moral/spiritual requirement about not being bound by fleshly kinship.",
+    "fix": "The perfect one is set beyond the flesh.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Translation accurately renders 'amat supra carnem' as 'loves above the flesh'; claim is interpretive preference, not a meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

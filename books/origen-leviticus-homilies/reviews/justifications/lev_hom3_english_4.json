@@ -1,0 +1,190 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom3_english:4",
+ "section": "lev_hom3_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom3_source.json"
+ },
+ "source_text": "Si iuraverit quis ut male faciat vel bene et absconderit, deliquit. Verbum temerarium vinculum fit. Sit sermo vester est est, non non.",
+ "thought_title": "Oaths bind the speaker",
+ "orientation": "Origen is explaining Leviticus 5:4, where a rash oath to do evil or good, once hidden, makes a person guilty.",
+ "pass_a_gloss": "If [he] swears anyone that [he] may do evil or good and [he] hides [it], [he] has sinned. A rash word a bond becomes. Let [your] speech be yes yes, no no.",
+ "lemmas": [
+  {
+   "form": "iuraverit",
+   "lemma": "iuro",
+   "gloss": "has sworn"
+  },
+  {
+   "form": "male",
+   "lemma": "male",
+   "gloss": "evilly"
+  },
+  {
+   "form": "bene",
+   "lemma": "bene",
+   "gloss": "well"
+  },
+  {
+   "form": "absconderit",
+   "lemma": "abscondo",
+   "gloss": "has hidden"
+  },
+  {
+   "form": "deliquit",
+   "lemma": "delinquo",
+   "gloss": "has sinned"
+  },
+  {
+   "form": "verbum",
+   "lemma": "verbum",
+   "gloss": "word"
+  },
+  {
+   "form": "temerarium",
+   "lemma": "temerarius",
+   "gloss": "rash"
+  },
+  {
+   "form": "vinculum",
+   "lemma": "vinculum",
+   "gloss": "bond"
+  },
+  {
+   "form": "fit",
+   "lemma": "fio",
+   "gloss": "becomes"
+  },
+  {
+   "form": "sermo",
+   "lemma": "sermo",
+   "gloss": "speech"
+  },
+  {
+   "form": "vester",
+   "lemma": "vester",
+   "gloss": "your"
+  },
+  {
+   "form": "est",
+   "lemma": "sum",
+   "gloss": "is"
+  }
+ ],
+ "choices": [
+  {
+   "term": "deliquit",
+   "english": "has sinned",
+   "why": "The verb delinquo here carries the moral weight of guilt before God, matching the homily's focus on sin requiring confession.",
+   "rejected": [
+    "has transgressed",
+    "has offended"
+   ]
+  },
+  {
+   "term": "verbum temerarium",
+   "english": "a rash word",
+   "why": "Temerarium means thoughtless or reckless; 'rash' keeps the sense of an unguarded oath.",
+   "rejected": [
+    "a hasty word",
+    "a careless word"
+   ]
+  },
+  {
+   "term": "vinculum",
+   "english": "bond",
+   "why": "Vinculum is a binding chain or fetter; 'bond' preserves the image of the oath as something that now holds the speaker.",
+   "rejected": [
+    "chain",
+    "tie"
+   ]
+  },
+  {
+   "term": "sermo vester",
+   "english": "your speech",
+   "why": "Sermo is everyday talk or conversation, distinct from verbum; 'speech' keeps that ordinary register.",
+   "rejected": [
+    "your word",
+    "your saying"
+   ]
+  },
+  {
+   "term": "est est, non non",
+   "english": "yes yes, no no",
+   "why": "The doubled est and non echo Matthew 5:37; rendering them as 'yes' and 'no' matches the standard English biblical phrasing.",
+   "rejected": [
+    "is is, is not is not",
+    "it is it is, it is not it is not"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 5:4",
+   "method": "paraphrase",
+   "note": "iuraverit quis ut male faciat vel bene et absconderit, deliquit"
+  },
+  {
+   "display": "Matthew 5:37",
+   "method": "quotation",
+   "note": "Sit sermo vester est est, non non"
+  }
+ ],
+ "pass_b_english": [
+  "If someone has sworn to do evil or good and has hidden it, he has sinned (Leviticus 5:4). A rash word becomes a bond. Let your speech be yes yes, no no (Matthew 5:37)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "88bf527eecd16f3638b89d4622aed0985678cb406af0c767040af55e60e0eeb0",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Matthew 5:37",
+    "source_quote": "Sit sermo vester est est, non non",
+    "why": "Source quotes Leviticus 5:4 context; 'est est, non non' is James 5:12, not Matthew 5:37.",
+    "fix": "James 5:12",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source 'Sit sermo vester est est, non non' matches Matthew 5:37's 'let your communication be Yea, yea; Nay, nay.'"
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "A rash word becomes a bond",
+    "source_quote": "Verbum temerarium vinculum fit",
+    "why": "'fit' means 'is made/is,' not 'becomes'; 'vinculum' is bond/obligation, but 'fit' suggests state not process.",
+    "fix": "A rash word is a binding obligation",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'fit' can mean 'becomes'; 'vinculum' as bond is standard. Rendering is within normal meaning range."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

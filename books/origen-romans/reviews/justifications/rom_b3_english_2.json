@@ -1,0 +1,161 @@
+{
+ "excerpt_id": "origen-romans:rom_b3_english:2",
+ "section": "rom_b3_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b3_source.json"
+ },
+ "source_text": "Quem proposuit Deus propitiationem per fidem in sanguine ipsius ad ostensionem iustitiae suae. Ut sit ipse iustus et iustificans eum qui ex fide est Iesu. Gloria Deo. Amen.",
+ "thought_title": "Christ set forth as atoning sacrifice through faith",
+ "orientation": "Origen is quoting Paul's words from Romans 3 about how God set forth Christ as an atoning sacrifice to show his righteousness.",
+ "pass_a_gloss": "Whom [he] set forth God [as] propitiation through faith in [the] blood of him to [the] showing of [the] justice of his. So that [he] may be himself just and justifying [the] one who from faith is of Jesus. Glory [to] God. Amen.",
+ "lemmas": [
+  {
+   "form": "proposuit",
+   "lemma": "propono",
+   "gloss": "set forth"
+  },
+  {
+   "form": "propitiationem",
+   "lemma": "propitiatio",
+   "gloss": "atoning sacrifice"
+  },
+  {
+   "form": "sanguine",
+   "lemma": "sanguis",
+   "gloss": "blood"
+  },
+  {
+   "form": "ostensionem",
+   "lemma": "ostensio",
+   "gloss": "showing"
+  },
+  {
+   "form": "iustitiae",
+   "lemma": "iustitia",
+   "gloss": "righteousness"
+  },
+  {
+   "form": "iustus",
+   "lemma": "iustus",
+   "gloss": "righteous"
+  },
+  {
+   "form": "iustificans",
+   "lemma": "iustifico",
+   "gloss": "justifying"
+  },
+  {
+   "form": "fide",
+   "lemma": "fides",
+   "gloss": "faith"
+  },
+  {
+   "form": "gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  }
+ ],
+ "choices": [
+  {
+   "term": "propitiationem",
+   "english": "atoning sacrifice",
+   "why": "The glossary requires 'atoning sacrifice' for propitiatio, not 'mercy seat' or 'propitiation'.",
+   "rejected": [
+    "mercy seat",
+    "propitiation"
+   ]
+  },
+  {
+   "term": "ostensionem iustitiae suae",
+   "english": "the showing of his righteousness",
+   "why": "Literal rendering of ostensio as 'showing' preserves the noun form and the possessive 'his' referring to God.",
+   "rejected": [
+    "demonstration of his justice",
+    "to demonstrate his righteousness"
+   ]
+  },
+  {
+   "term": "ex fide est Iesu",
+   "english": "is from the faith of Jesus",
+   "why": "Literal word order and the genitive 'of Jesus' are kept; 'from the faith' preserves the preposition ex.",
+   "rejected": [
+    "has faith in Jesus",
+    "believes in Jesus"
+   ]
+  },
+  {
+   "term": "Gloria Deo. Amen.",
+   "english": "Glory to God. Amen.",
+   "why": "This is a doxological formula; the dative Deo is rendered 'to God' and Amen is kept as a liturgical word.",
+   "rejected": [
+    "Glory be to God. Amen.",
+    "Praise God. Amen."
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 3:25-26",
+   "method": "wording",
+   "note": "Quem proposuit Deus propitiationem per fidem in sanguine ipsius ad ostensionem iustitiae suae. Ut sit ipse iustus et iustificans eum qui ex fide est Iesu."
+  }
+ ],
+ "pass_b_english": [
+  "God set him forth as an atoning sacrifice through faith in his blood, for the showing of his righteousness, so that he himself might be righteous and the one who justifies the person who is from the faith of Jesus (Romans 3:25-26). Glory to God. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "5619977bd3b55a2c0096753ea12c8f75ff1673786fea60929a5e4c3b592e1b97",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "so that he himself might be righteous",
+    "source_quote": "Ut sit ipse iustus",
+    "why": "\"Sit\" is present subjunctive of purpose, not potential \"might be\"; God already is righteous.",
+    "fix": "so that he himself is righteous",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'might be' suitably renders purpose subjunctive 'sit'; no meaning change. Mere stylistic preference."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "the person who is from the faith of Jesus",
+    "source_quote": "eum qui ex fide est Iesu",
+    "why": "\"Ex fide est Iesu\" means \"who is of faith in Jesus,\" not \"from the faith of Jesus.\"",
+    "fix": "the one who is of faith in Jesus",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'from the faith of Jesus' adequately renders 'ex fide est Iesu'; 'of' covers 'ex' within normal range."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

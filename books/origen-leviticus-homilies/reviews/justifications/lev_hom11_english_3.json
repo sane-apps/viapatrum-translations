@@ -1,0 +1,159 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom11_english:3",
+ "section": "lev_hom11_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom11_source.json"
+ },
+ "source_text": "Peccata morte punita — separatio a vita Deo. Mors animae. Elige vitam. Amen.",
+ "thought_title": "Sin punished by death: separation from God",
+ "orientation": "Origen is concluding his moral application of the Levitical precepts, warning that sin brings death understood as the soul's separation from God, and urging the hearer to choose life.",
+ "pass_a_gloss": "Sins punished by death — separation from life with God. Death of the soul. Choose life. Amen.",
+ "lemmas": [
+  {
+   "form": "Peccata",
+   "lemma": "peccatum",
+   "gloss": "sins"
+  },
+  {
+   "form": "morte",
+   "lemma": "mors",
+   "gloss": "by death"
+  },
+  {
+   "form": "punita",
+   "lemma": "punio",
+   "gloss": "punished"
+  },
+  {
+   "form": "separatio",
+   "lemma": "separatio",
+   "gloss": "separation"
+  },
+  {
+   "form": "vita",
+   "lemma": "vita",
+   "gloss": "life"
+  },
+  {
+   "form": "Deo",
+   "lemma": "Deus",
+   "gloss": "God"
+  },
+  {
+   "form": "Mors",
+   "lemma": "mors",
+   "gloss": "death"
+  },
+  {
+   "form": "animae",
+   "lemma": "anima",
+   "gloss": "of the soul"
+  },
+  {
+   "form": "Elige",
+   "lemma": "eligo",
+   "gloss": "choose"
+  },
+  {
+   "form": "vitam",
+   "lemma": "vita",
+   "gloss": "life"
+  },
+  {
+   "form": "Amen",
+   "lemma": "amen",
+   "gloss": "Amen"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Peccata morte punita",
+   "english": "Sins punished by death",
+   "why": "Keeps the passive participle force of 'punita' and the ablative of means 'morte', preserving the compact Latin syntax.",
+   "rejected": [
+    "Sins that death punishes",
+    "Death-punished sins"
+   ]
+  },
+  {
+   "term": "separatio a vita Deo",
+   "english": "separation from life with God",
+   "why": "Renders the compressed phrase 'a vita Deo' as separation from the life that is lived with God, making the theological point explicit without adding a verb.",
+   "rejected": [
+    "separation from life, God",
+    "separation from the life of God"
+   ]
+  },
+  {
+   "term": "Mors animae",
+   "english": "Death of the soul",
+   "why": "Straightforward genitive rendering that preserves the stark noun phrase.",
+   "rejected": [
+    "The soul's death",
+    "Soul-death"
+   ]
+  },
+  {
+   "term": "Elige vitam",
+   "english": "Choose life",
+   "why": "Direct imperative rendering, matching the biblical command and the homiletic urgency.",
+   "rejected": [
+    "Make a choice for life",
+    "Opt for life"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Deuteronomy 30:19",
+   "method": "allusion",
+   "note": "Elige vitam echoes the command to choose life in Deuteronomy 30:19."
+  }
+ ],
+ "pass_b_english": [
+  "Sins punished by death are separation from life with God. Death of the soul. Choose life. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "73ac80347d9f7186bca580f3994a87d967d1993d19a4deece1d8926e459b3c57",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Sins punished by death are separation from life with God",
+    "source_quote": "Peccata morte punita — separatio a vita Deo",
+    "why": "Latin is nominal phrase, not full sentence; 'punita' is passive participle agreeing with 'peccata', meaning 'sins punished by death' or 'the punishment of sins is death'. English turns this into a declarative sentence with shifted meaning.",
+    "fix": "Sins, punished by death: separation from the life of God. Death of the soul. Choose life. Amen.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Dash links two nominal phrases; English 'are' captures apposition adequately. Meaning preserved, not misleading."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

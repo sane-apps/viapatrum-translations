@@ -1,0 +1,150 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom4_english:7",
+ "section": "lev_hom4_english:7",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom4_source.json"
+ },
+ "source_text": "Offeret arietem immaculatum sacerdoti. Christus aries; delictum nostrum portat. Sacerdos aestimat.",
+ "thought_title": "The ram as Christ bearing our sin",
+ "orientation": "Origen is interpreting the Levitical guilt offering, showing that the ram offered to the priest is a figure of Christ bearing our sin.",
+ "pass_a_gloss": "He will offer an unblemished ram to the priest. Christ is the ram; he bears our sin. The priest assesses it.",
+ "lemmas": [
+  {
+   "form": "Offeret",
+   "lemma": "offero",
+   "gloss": "he will offer"
+  },
+  {
+   "form": "arietem",
+   "lemma": "aries",
+   "gloss": "ram"
+  },
+  {
+   "form": "immaculatum",
+   "lemma": "immaculatus",
+   "gloss": "unblemished"
+  },
+  {
+   "form": "sacerdoti",
+   "lemma": "sacerdos",
+   "gloss": "priest"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  },
+  {
+   "form": "aries",
+   "lemma": "aries",
+   "gloss": "ram"
+  },
+  {
+   "form": "delictum",
+   "lemma": "delictum",
+   "gloss": "sin"
+  },
+  {
+   "form": "nostrum",
+   "lemma": "noster",
+   "gloss": "our"
+  },
+  {
+   "form": "portat",
+   "lemma": "porto",
+   "gloss": "he bears"
+  },
+  {
+   "form": "Sacerdos",
+   "lemma": "sacerdos",
+   "gloss": "priest"
+  },
+  {
+   "form": "aestimat",
+   "lemma": "aestimo",
+   "gloss": "he assesses"
+  }
+ ],
+ "choices": [
+  {
+   "term": "immaculatum",
+   "english": "unblemished",
+   "why": "Keeps the ritual sense of the offering animal without moralizing it, matching the Levitical requirement.",
+   "rejected": [
+    "spotless",
+    "perfect"
+   ]
+  },
+  {
+   "term": "delictum nostrum portat",
+   "english": "he bears our sin",
+   "why": "Preserves the present tense and the singular 'delictum' as the collective sin borne by Christ.",
+   "rejected": [
+    "he carries our offense",
+    "he takes away our sin"
+   ]
+  },
+  {
+   "term": "aestimat",
+   "english": "assesses it",
+   "why": "Keeps the priest's judicial act of valuation distinct from mere seeing or judging.",
+   "rejected": [
+    "evaluates",
+    "judges"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 6:6",
+   "method": "wording",
+   "note": "Offeret arietem immaculatum sacerdoti"
+  }
+ ],
+ "pass_b_english": [
+  "He will offer an unblemished ram to the priest (Leviticus 6:6). Christ is the ram; he bears our sin. The priest assesses it."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "615445117b6b2e60e6bd7713c94f1a820fbafb58ff443a3ccb3fdea9e4f40c6f",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "agency",
+    "severity": "major",
+    "quote": "he bears our sin",
+    "source_quote": "delictum nostrum portat",
+    "why": "Source says 'our sin' is borne, but 'he' ambiguous: Christ or ram? Source has Christ as ram, one subject.",
+    "fix": "Christ is the ram, bearing our sin. The priest assesses it.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Context 'Christus aries' makes 'he' unambiguous; pronoun agrees with Christ, the ram who bears sin."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

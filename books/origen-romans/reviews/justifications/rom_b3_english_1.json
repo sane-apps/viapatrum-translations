@@ -1,0 +1,176 @@
+{
+ "excerpt_id": "origen-romans:rom_b3_english:1",
+ "section": "rom_b3_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b3_source.json"
+ },
+ "source_text": "Non est distinctio: omnes enim peccaverunt et egent gloria Dei. Iustitia Dei per fidem Iesu Christi in omnes qui credunt — non ex operibus legis, gratis per redemptionem quae est in Christo Iesu.",
+ "thought_title": "No distinction: all have sinned and need God's glory",
+ "orientation": "Origen is quoting Paul's words from Romans 3 about the universal state of sin and the righteousness of God given through faith in Jesus Christ.",
+ "pass_a_gloss": "Not is [there] distinction: all [people] for have sinned and [they] lack [the] glory of God. [The] justice of God through [the] faith of Jesus Christ into all [people] who believe — not from [the] works of [the] law, freely through [the] redemption which is in Christ Jesus.",
+ "lemmas": [
+  {
+   "form": "distinctio",
+   "lemma": "distinctio",
+   "gloss": "distinction"
+  },
+  {
+   "form": "peccaverunt",
+   "lemma": "pecco",
+   "gloss": "have sinned"
+  },
+  {
+   "form": "egent",
+   "lemma": "egeo",
+   "gloss": "lack, need"
+  },
+  {
+   "form": "gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  },
+  {
+   "form": "iustitia",
+   "lemma": "iustitia",
+   "gloss": "righteousness"
+  },
+  {
+   "form": "fidem",
+   "lemma": "fides",
+   "gloss": "faith"
+  },
+  {
+   "form": "credunt",
+   "lemma": "credo",
+   "gloss": "believe"
+  },
+  {
+   "form": "operibus",
+   "lemma": "opus",
+   "gloss": "works"
+  },
+  {
+   "form": "legis",
+   "lemma": "lex",
+   "gloss": "of the law"
+  },
+  {
+   "form": "gratis",
+   "lemma": "gratis",
+   "gloss": "freely, without cost"
+  },
+  {
+   "form": "redemptionem",
+   "lemma": "redemptio",
+   "gloss": "redemption"
+  },
+  {
+   "form": "Christo Iesu",
+   "lemma": "Christus Iesus",
+   "gloss": "Christ Jesus"
+  }
+ ],
+ "choices": [
+  {
+   "term": "egent gloria Dei",
+   "english": "lack the glory of God",
+   "why": "The Latin egeo with genitive means to lack or be in need of something; 'lack' preserves the sense of deprivation rather than a mere desire.",
+   "rejected": [
+    "need the glory of God",
+    "fall short of the glory of God"
+   ]
+  },
+  {
+   "term": "per fidem Iesu Christi",
+   "english": "through faith of Jesus Christ",
+   "why": "The genitive 'Iesu Christi' is ambiguous in Latin; rendering it as 'of Jesus Christ' keeps the literal genitive without resolving whether it is faith in Christ or Christ's own faithfulness.",
+   "rejected": [
+    "through faith in Jesus Christ",
+    "through the faithfulness of Jesus Christ"
+   ]
+  },
+  {
+   "term": "gratis",
+   "english": "freely",
+   "why": "The adverb gratis means without payment or cost; 'freely' captures the gratuitous character of the redemption.",
+   "rejected": [
+    "as a gift",
+    "without cost"
+   ]
+  },
+  {
+   "term": "redemptionem",
+   "english": "redemption",
+   "why": "The Latin redemptio means a buying back or release by payment; 'redemption' is the standard literal rendering.",
+   "rejected": [
+    "ransom",
+    "deliverance"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 3:22-24",
+   "method": "wording",
+   "note": "Non est distinctio: omnes enim peccaverunt et egent gloria Dei. Iustitia Dei per fidem Iesu Christi in omnes qui credunt — non ex operibus legis, gratis per redemptionem quae est in Christo Iesu."
+  }
+ ],
+ "pass_b_english": [
+  "There is no distinction: all have sinned and lack the glory of God. God's righteousness comes through faith of Jesus Christ to all who believe—not from works of the law, but freely through the redemption that is in Christ Jesus (Romans 3:22-24)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "ad08ad231b67080646232e6f3fc5a63654b60d402f547f90876b713b18901a5a",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "faith of Jesus Christ",
+    "source_quote": "fidem Iesu Christi",
+    "why": "Genitive is ambiguous: subjective (Christ's faith) or objective (faith in Christ). 'Faith of Jesus Christ' wrongly suggests Christ's own faith.",
+    "fix": "faith in Jesus Christ",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Faith of Jesus Christ' is a literal rendering of 'fidem Iesu Christi'; ambiguity is preserved, not changed."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "freely through the redemption",
+    "source_quote": "gratis per redemptionem",
+    "why": "'Gratis' means 'freely/by grace,' but 'freely' alone loses the technical sense of grace central to Paul's argument.",
+    "fix": "by grace, freely, through the redemption",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Gratis' means 'freely'; 'freely' is within normal range. No meaning lost; 'grace' is interpretive, not required."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

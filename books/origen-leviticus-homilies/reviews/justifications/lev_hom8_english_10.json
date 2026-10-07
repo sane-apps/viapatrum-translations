@@ -1,0 +1,203 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom8_english:10",
+ "section": "lev_hom8_english:10",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom8_source.json"
+ },
+ "source_text": "Lepra in veste — vitium in conversatione vel doctrina. Combure quod insanabile. Nova vestis Christi.",
+ "thought_title": "Leprosy in the garment as corruption in conduct or teaching",
+ "orientation": "Origen is interpreting the Levitical rules about leprosy in a garment, applying them to the moral and doctrinal life of the believer.",
+ "pass_a_gloss": "Leprosy in a garment means a fault in conduct or teaching. Burn what is incurable. The new garment is Christ.",
+ "lemmas": [
+  {
+   "form": "Lepra",
+   "lemma": "lepra",
+   "gloss": "leprosy"
+  },
+  {
+   "form": "veste",
+   "lemma": "vestis",
+   "gloss": "garment"
+  },
+  {
+   "form": "vitium",
+   "lemma": "vitium",
+   "gloss": "fault, corruption"
+  },
+  {
+   "form": "conversatione",
+   "lemma": "conversatio",
+   "gloss": "conduct, way of life"
+  },
+  {
+   "form": "doctrina",
+   "lemma": "doctrina",
+   "gloss": "teaching"
+  },
+  {
+   "form": "Combure",
+   "lemma": "comburo",
+   "gloss": "burn up"
+  },
+  {
+   "form": "insanabile",
+   "lemma": "insanabilis",
+   "gloss": "incurable"
+  },
+  {
+   "form": "Nova",
+   "lemma": "novus",
+   "gloss": "new"
+  },
+  {
+   "form": "vestis",
+   "lemma": "vestis",
+   "gloss": "garment"
+  },
+  {
+   "form": "Christi",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Lepra in veste",
+   "english": "Leprosy in a garment",
+   "why": "Keeps the literal image from Leviticus 13, which Origen is applying spiritually.",
+   "rejected": [
+    "Mildew in clothing",
+    "Stain on a garment"
+   ]
+  },
+  {
+   "term": "vitium in conversatione vel doctrina",
+   "english": "a fault in conduct or teaching",
+   "why": "Conversatio means manner of life or conduct, and doctrina is teaching; both are the spiritual referents of the garment's leprosy.",
+   "rejected": [
+    "a vice in speech or doctrine",
+    "a defect in lifestyle or instruction"
+   ]
+  },
+  {
+   "term": "Combure quod insanabile",
+   "english": "Burn what is incurable",
+   "why": "Preserves the imperative force of Combure and the neuter quod insanabile as the thing to be destroyed.",
+   "rejected": [
+    "Burn the incurable thing",
+    "What cannot be healed must be burned"
+   ]
+  },
+  {
+   "term": "Nova vestis Christi",
+   "english": "The new garment is Christ",
+   "why": "Supplies the copula for the elliptical Latin phrase, making the identification explicit as Origen intends.",
+   "rejected": [
+    "Christ's new garment",
+    "A new garment of Christ"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 13:47-59",
+   "method": "allusion",
+   "note": "Lepra in veste refers to the law about leprosy in a garment, which Origen is interpreting spiritually."
+  }
+ ],
+ "pass_b_english": [
+  "Leprosy in a garment is a fault in conduct or teaching. Burn what is incurable. The new garment of Christ."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "f301afc21deba01a68d71edf13a2a382da21ee3b3186369e29ca1699ea877d51",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "The new garment is Christ",
+     "source_quote": "Nova vestis Christi",
+     "why": "Missing 'is' in source; 'Christi' is genitive: 'the new garment of Christ'.",
+     "fix": "The new garment of Christ.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Christi is genitive: 'of Christ', not 'is Christ'; meaning changed."
+    }
+   ],
+   "edits": [
+    {
+     "old": "The new garment is Christ.",
+     "new": "The new garment of Christ."
+    }
+   ],
+   "fixed": [
+    "Changed 'The new garment is Christ' to 'The new garment of Christ' because the source 'Nova vestis Christi' has 'Christi' as genitive, meaning 'of Christ', not 'is Christ'."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "fault",
+    "source_quote": "vitium",
+    "why": "Vitium means vice/flaw, not 'fault'; 'fault' is too weak for moral/spiritual corruption.",
+    "fix": "vice in conduct or teaching",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Vitium covers fault/flaw/vice; 'fault' is within normal range and not a mistranslation."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "The new garment of Christ",
+    "source_quote": "Nova vestis Christi",
+    "why": "English omits 'vestis' (garment), making 'new garment of Christ' into adjective 'new garment of Christ'.",
+    "fix": "A new garment: Christ.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English 'garment' renders 'vestis'; nothing is omitted. Claim is incoherent."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

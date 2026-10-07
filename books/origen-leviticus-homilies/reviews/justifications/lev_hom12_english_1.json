@@ -1,0 +1,173 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom12_english:1",
+ "section": "lev_hom12_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom12_source.json"
+ },
+ "source_text": "Omnis sacerdos inter homines parvus ad illum: Tu es sacerdos in aeternum secundum ordinem Melchisedech. Magnus sacerdos Christus.",
+ "thought_title": "Every priest is small; Christ is the great priest",
+ "orientation": "Origen is contrasting the Levitical priests, who are small among men, with Christ, who is the great priest according to the order of Melchizedek.",
+ "pass_a_gloss": "Every priest among men [is] small [compared] to him: You are [a] priest into eternity according to [the] order [of] Melchisedech. [A] great priest [is] Christ.",
+ "lemmas": [
+  {
+   "form": "sacerdos",
+   "lemma": "sacerdos",
+   "gloss": "priest"
+  },
+  {
+   "form": "inter",
+   "lemma": "inter",
+   "gloss": "among"
+  },
+  {
+   "form": "homines",
+   "lemma": "homo",
+   "gloss": "men, human beings"
+  },
+  {
+   "form": "parvus",
+   "lemma": "parvus",
+   "gloss": "small"
+  },
+  {
+   "form": "illum",
+   "lemma": "ille",
+   "gloss": "him (that one)"
+  },
+  {
+   "form": "aeternum",
+   "lemma": "aeternus",
+   "gloss": "forever, eternal"
+  },
+  {
+   "form": "secundum",
+   "lemma": "secundum",
+   "gloss": "according to"
+  },
+  {
+   "form": "ordinem",
+   "lemma": "ordo",
+   "gloss": "order"
+  },
+  {
+   "form": "magnus",
+   "lemma": "magnus",
+   "gloss": "great"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  }
+ ],
+ "choices": [
+  {
+   "term": "parvus",
+   "english": "small",
+   "why": "Keeps the spatial/rank metaphor of the Latin, contrasting with 'magnus' (great) applied to Christ.",
+   "rejected": [
+    "little",
+    "minor"
+   ]
+  },
+  {
+   "term": "inter homines",
+   "english": "among men",
+   "why": "Preserves the prepositional phrase showing the sphere in which the priest is small.",
+   "rejected": [
+    "among humans",
+    "in the midst of men"
+   ]
+  },
+  {
+   "term": "ad illum",
+   "english": "in comparison to him",
+   "why": "Renders the comparative force of 'ad' with the accusative, showing the standard of comparison is Christ.",
+   "rejected": [
+    "to him",
+    "toward him"
+   ]
+  },
+  {
+   "term": "in aeternum",
+   "english": "forever",
+   "why": "Standard rendering of the temporal phrase, preserving the eternal duration of Christ's priesthood.",
+   "rejected": [
+    "unto eternity",
+    "for eternity"
+   ]
+  },
+  {
+   "term": "secundum ordinem Melchisedech",
+   "english": "according to the order of Melchizedek",
+   "why": "Keeps the technical phrase from Psalm 110:4, preserving the proper name and the word 'order'.",
+   "rejected": [
+    "after the order of Melchizedek",
+    "in the order of Melchizedek"
+   ]
+  },
+  {
+   "term": "magnus sacerdos",
+   "english": "great priest",
+   "why": "Preserves the noun 'sacerdos' as 'priest' per glossary and the adjective 'magnus' as 'great', contrasting with 'parvus'.",
+   "rejected": [
+    "high priest",
+    "great high priest"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Psalm 110:4",
+   "method": "wording",
+   "note": "Tu es sacerdos in aeternum secundum ordinem Melchisedech"
+  }
+ ],
+ "pass_b_english": [
+  "Every priest among men is small in comparison to him: “You are a priest forever according to the order of Melchizedek” (Psalm 110:4). Christ is the great priest."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "dcf6c31bedd8aeb7f89f32337565f63b58ef3e3f73e1c1e817ce5b126681c191",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Psalm 110:4",
+    "source_quote": "Tu es sacerdos in aeternum secundum ordinem Melchisedech",
+    "why": "LXX Psalm 109:4, not Hebrew Psalm 110:4; LXX numbering differs.",
+    "fix": "Psalm 109:4 (Hebrew 110:4)",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin source lacks any scripture reference; 'Psalm 110:4' is translator's helpful addition, not a mistranslation of source words."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

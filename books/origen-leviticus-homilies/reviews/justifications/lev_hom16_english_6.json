@@ -1,0 +1,199 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom16_english:6",
+ "section": "lev_hom16_english:6",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom16_source.json"
+ },
+ "source_text": "Addam plagas septies. Incrementum poenae ad conversionem. Noli cervicem indurare.",
+ "thought_title": "Sevenfold Plagues and the Stiff Neck",
+ "orientation": "Origen is continuing his homiletic paraphrase of the covenant curses in Leviticus 26, applying each threat as a merciful call to conversion.",
+ "pass_a_gloss": "I will add plagues sevenfold. An increase of punishment toward conversion. Do not harden the neck.",
+ "lemmas": [
+  {
+   "form": "Addam",
+   "lemma": "addo",
+   "gloss": "I will add"
+  },
+  {
+   "form": "plagas",
+   "lemma": "plaga",
+   "gloss": "plagues, blows"
+  },
+  {
+   "form": "septies",
+   "lemma": "septies",
+   "gloss": "sevenfold, seven times"
+  },
+  {
+   "form": "Incrementum",
+   "lemma": "incrementum",
+   "gloss": "increase, growth"
+  },
+  {
+   "form": "poenae",
+   "lemma": "poena",
+   "gloss": "of punishment, penalty"
+  },
+  {
+   "form": "conversionem",
+   "lemma": "conversio",
+   "gloss": "conversion, turning back"
+  },
+  {
+   "form": "Noli",
+   "lemma": "nolo",
+   "gloss": "do not (imperative)"
+  },
+  {
+   "form": "cervicem",
+   "lemma": "cervix",
+   "gloss": "neck"
+  },
+  {
+   "form": "indurare",
+   "lemma": "induro",
+   "gloss": "to harden"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Addam plagas septies",
+   "english": "I will add plagues sevenfold",
+   "why": "Keeps the first-person future force of the divine threat and the literal 'sevenfold' of the LXX wording.",
+   "rejected": [
+    "I will strike you seven times more",
+    "I will multiply your wounds"
+   ]
+  },
+  {
+   "term": "Incrementum poenae ad conversionem",
+   "english": "An increase of punishment toward conversion",
+   "why": "Preserves the noun phrase structure and the directional 'ad' as purpose or goal, matching Origen's brief moral gloss.",
+   "rejected": [
+    "The punishment grows so that you may convert",
+    "Punishment increases for the sake of repentance"
+   ]
+  },
+  {
+   "term": "Noli cervicem indurare",
+   "english": "Do not harden the neck",
+   "why": "Renders the negative imperative literally and keeps the body-part idiom as in the source.",
+   "rejected": [
+    "Do not be stiff-necked",
+    "Do not make your neck stiff"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 26:18",
+   "method": "wording",
+   "note": "Addam plagas septies"
+  },
+  {
+   "display": "Leviticus 26:21",
+   "method": "wording",
+   "note": "Addam plagas septies"
+  },
+  {
+   "display": "Exodus 32:9",
+   "method": "wording",
+   "note": "Noli cervicem indurare"
+  }
+ ],
+ "pass_b_english": [
+  "I will add plagues sevenfold (Leviticus 26:18, 21). An increase of punishment toward conversion. Do not harden the neck (Leviticus 26:41)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "468bfcc0f5593ae8acc5c79eac521fd91d288e89a56e5baca97052853d63bc87",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Exodus 32:9",
+     "source_quote": "Noli cervicem indurare",
+     "why": "Source cites Leviticus context; 'Do not harden the neck' is not Exodus 32:9.",
+     "fix": "Do not harden the neck (Leviticus 26:41 or similar context).",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Exodus 32:9 says 'cervice dura'; 'Noli cervicem indurare' matches Deut 10:16 or Jer 7:26, not Exodus 32:9."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Do not harden the neck (Exodus 32:9).",
+     "new": "Do not harden the neck (Leviticus 26:41)."
+    }
+   ],
+   "fixed": [
+    "Changed scripture reference from Exodus 32:9 to Leviticus 26:41, since the source phrase 'Noli cervicem indurare' is part of the Leviticus context, not Exodus."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Leviticus 26:18, 21",
+    "source_quote": "Addam plagas septies",
+    "why": "Source quotes singular phrase, not two verses; English invents dual citation.",
+    "fix": "Leviticus 26:21 (or 26:18 if following LXX numbering).",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Leviticus 26:18 and 21 both contain 'addam plagas septies'; citation is accurate, not invented."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "An increase of punishment toward conversion",
+    "source_quote": "Incrementum poenae ad conversionem",
+    "why": "Latin 'ad conversionem' means 'for conversion' or 'to bring about conversion'; 'toward' weakens purpose to direction.",
+    "fix": "An increase of punishment to bring about conversion.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Toward' is within normal range for 'ad' expressing purpose; no meaning lost or changed."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

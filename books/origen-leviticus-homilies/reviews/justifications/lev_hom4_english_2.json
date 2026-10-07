@@ -1,0 +1,203 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom4_english:2",
+ "section": "lev_hom4_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom4_source.json"
+ },
+ "source_text": "Si anima peccaverit et mentietur proximo in deposito vel societate, delictum est. Fides inter fratres altare est. Mendacium spoliat communionem.",
+ "thought_title": "Sin against a neighbor and the altar of faith",
+ "orientation": "Origen is explaining the spiritual meaning of Leviticus 4:1, applying the law of sin against a neighbor to the moral life of believers.",
+ "pass_a_gloss": "If [the] soul [shall] have sinned and [shall] have lied to [the] neighbor in [a] deposit or [a] partnership, [it] is [a] sin. Faith between brothers [is] [an] altar. [A] lie despoils [the] communion.",
+ "lemmas": [
+  {
+   "form": "anima",
+   "lemma": "anima",
+   "gloss": "soul"
+  },
+  {
+   "form": "peccaverit",
+   "lemma": "pecco",
+   "gloss": "sins"
+  },
+  {
+   "form": "mentietur",
+   "lemma": "mentior",
+   "gloss": "lies"
+  },
+  {
+   "form": "proximo",
+   "lemma": "proximus",
+   "gloss": "neighbor"
+  },
+  {
+   "form": "deposito",
+   "lemma": "depositum",
+   "gloss": "deposit"
+  },
+  {
+   "form": "societate",
+   "lemma": "societas",
+   "gloss": "partnership"
+  },
+  {
+   "form": "delictum",
+   "lemma": "delictum",
+   "gloss": "transgression"
+  },
+  {
+   "form": "fides",
+   "lemma": "fides",
+   "gloss": "faith"
+  },
+  {
+   "form": "fratres",
+   "lemma": "frater",
+   "gloss": "brothers"
+  },
+  {
+   "form": "altare",
+   "lemma": "altare",
+   "gloss": "altar"
+  },
+  {
+   "form": "mendacium",
+   "lemma": "mendacium",
+   "gloss": "lying"
+  },
+  {
+   "form": "spoliat",
+   "lemma": "spolio",
+   "gloss": "strips away"
+  }
+ ],
+ "choices": [
+  {
+   "term": "delictum",
+   "english": "transgression",
+   "why": "The source uses delictum, not peccatum, so a distinct rendering preserves the legal-moral nuance of a fault against a neighbor.",
+   "rejected": [
+    "sin",
+    "offense"
+   ]
+  },
+  {
+   "term": "mentietur",
+   "english": "lies",
+   "why": "The future tense in a conditional clause is rendered as a present habitual action in English, matching the generalizing force of the Latin.",
+   "rejected": [
+    "will lie",
+    "shall lie"
+   ]
+  },
+  {
+   "term": "societate",
+   "english": "partnership",
+   "why": "Societas denotes a shared undertaking or business relationship, not a general social bond.",
+   "rejected": [
+    "fellowship",
+    "company"
+   ]
+  },
+  {
+   "term": "spoliat",
+   "english": "strips away",
+   "why": "Spoliat has a forceful sense of despoiling or robbing, which fits the image of lying destroying the communion built on faith.",
+   "rejected": [
+    "takes away",
+    "removes"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 6:2",
+   "method": "wording",
+   "note": "Si anima peccaverit et mentietur proximo in deposito vel societate"
+  }
+ ],
+ "pass_b_english": [
+  "If a soul sins and lies to a neighbor about a deposit or a partnership, it is a transgression (Leviticus 5:21 (6:2)). Faith between brothers is an altar. Lying strips away communion."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "6dad040753a5e71264ab4619947be29568f5944ac1f05f7f06ac498f0f5aa306",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Leviticus 6:2",
+     "source_quote": "Si anima peccaverit...",
+     "why": "This citation format may not match LXX numbering; Leviticus 6:2 in Hebrew is 5:21 in LXX",
+     "fix": "Leviticus 5:21 (6:2)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Leviticus 6:2 (Hebrew/MT) = Leviticus 5:21 in LXX; early Christian Latin texts often follow LXX numbering, potentially misleading readers."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Leviticus 6:2",
+     "new": "Leviticus 5:21 (6:2)"
+    }
+   ],
+   "fixed": [
+    "The citation was updated to reflect LXX numbering with the Hebrew in parentheses, per the brief's instruction to use standard English book names and modern numbering with a note where LXX numbering differs."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 2,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "transgression",
+    "source_quote": "delictum est",
+    "why": "Source says 'it is a fault/trespass,' not 'transgression.' 'Delictum' is a specific term for a fault requiring reparation, distinct from 'peccatum' (sin).",
+    "fix": "it is a fault (Leviticus 5:21 (6:2))",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Delictum' can mean transgression; rendering within normal range. No meaning lost or changed."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

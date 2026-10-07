@@ -1,0 +1,170 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom8_english:2",
+ "section": "lev_hom8_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom8_source.json"
+ },
+ "source_text": "Mulier quae conceperit et pepererit masculum immunda septem diebus. Nativitas carnis purificatione indiget. Masculus — sensus fortior.",
+ "thought_title": "Birth of the stronger sense requires purification",
+ "orientation": "Origen is commenting on Leviticus 12:2, applying the law about a woman who bears a male child to the soul's birth of a stronger spiritual sense.",
+ "pass_a_gloss": "Woman who [she] has conceived and [she] has given birth [to] male [child] unclean seven days. Birth of flesh purification [it] needs. Male [child] — sense stronger.",
+ "lemmas": [
+  {
+   "form": "Mulier",
+   "lemma": "mulier",
+   "gloss": "woman"
+  },
+  {
+   "form": "conceperit",
+   "lemma": "concipio",
+   "gloss": "has conceived"
+  },
+  {
+   "form": "pepererit",
+   "lemma": "pario",
+   "gloss": "has borne"
+  },
+  {
+   "form": "masculum",
+   "lemma": "masculus",
+   "gloss": "male child"
+  },
+  {
+   "form": "immunda",
+   "lemma": "immundus",
+   "gloss": "unclean"
+  },
+  {
+   "form": "septem",
+   "lemma": "septem",
+   "gloss": "seven"
+  },
+  {
+   "form": "diebus",
+   "lemma": "dies",
+   "gloss": "days"
+  },
+  {
+   "form": "Nativitas",
+   "lemma": "nativitas",
+   "gloss": "birth"
+  },
+  {
+   "form": "carnis",
+   "lemma": "caro",
+   "gloss": "of the flesh"
+  },
+  {
+   "form": "purificatione",
+   "lemma": "purificatio",
+   "gloss": "purification"
+  },
+  {
+   "form": "indiget",
+   "lemma": "indigeo",
+   "gloss": "needs"
+  },
+  {
+   "form": "sensus",
+   "lemma": "sensus",
+   "gloss": "sense"
+  },
+  {
+   "form": "fortior",
+   "lemma": "fortis",
+   "gloss": "stronger"
+  }
+ ],
+ "choices": [
+  {
+   "term": "immunda",
+   "english": "unclean",
+   "why": "The glossary requires 'unclean' for immundus, the ritual and moral state of separation from God.",
+   "rejected": [
+    "defiled",
+    "impure"
+   ]
+  },
+  {
+   "term": "purificatione",
+   "english": "purification",
+   "why": "The noun purificatio is rendered literally as 'purification', matching the ritual context of Leviticus 12.",
+   "rejected": [
+    "cleansing",
+    "purgation"
+   ]
+  },
+  {
+   "term": "Masculus",
+   "english": "male child",
+   "why": "The noun masculus is rendered as 'male child' to preserve the biological and figurative sense of the stronger offspring.",
+   "rejected": [
+    "male",
+    "man-child"
+   ]
+  },
+  {
+   "term": "sensus fortior",
+   "english": "stronger sense",
+   "why": "Origen interprets the male child as the stronger spiritual sense of the soul, so 'sense' is used for sensus and 'stronger' for fortior.",
+   "rejected": [
+    "more robust understanding",
+    "stronger meaning"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 12:2",
+   "method": "quotation",
+   "note": "Mulier quae conceperit et pepererit masculum immunda septem diebus"
+  }
+ ],
+ "pass_b_english": [
+  "“A woman who has conceived and borne a male child is unclean for seven days” (Leviticus 12:2). The birth of the flesh needs purification. The male child is the stronger sense."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "4e28609a3662d892c71e7c799c046cd546d89770c57c3611dc24f03789d63057",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "The male child is the stronger sense",
+    "source_quote": "Masculus — sensus fortior",
+    "why": "Latin 'sensus fortior' means 'stronger sense/perception,' not 'the male child is the stronger sense.' The dash indicates allegorical interpretation: male = stronger sense, not that the child himself is sense.",
+    "fix": "The male stands for the stronger sense.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'Masculus — sensus fortior' equates male child with stronger sense; English correctly renders the allegorical gloss."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

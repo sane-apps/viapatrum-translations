@@ -1,0 +1,155 @@
+{
+ "excerpt_id": "origen-romans:rom_b8_english:2",
+ "section": "rom_b8_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b8_source.json"
+ },
+ "source_text": "Si filii, et heredes: heredes quidem Dei, coheredes autem Christi. Expectatio creaturae revelationem filiorum Dei expectat. Gloria Spiritui. Amen.",
+ "thought_title": "Heirs with Christ and creation's expectation",
+ "orientation": "Origen is quoting and glossing Paul's words from Romans 8 about believers as God's children and heirs, and creation awaiting the revelation of God's children.",
+ "pass_a_gloss": "If [we are] children, also [we are] heirs: heirs indeed of God, coheirs moreover of Christ. [The] expectation [of] the creation [the] revelation [of the] children of God awaits. Glory [to the] Spirit. Amen.",
+ "lemmas": [
+  {
+   "form": "filii",
+   "lemma": "filius",
+   "gloss": "children"
+  },
+  {
+   "form": "heredes",
+   "lemma": "heres",
+   "gloss": "heirs"
+  },
+  {
+   "form": "coheredes",
+   "lemma": "coheres",
+   "gloss": "co-heirs"
+  },
+  {
+   "form": "expectatio",
+   "lemma": "expectatio",
+   "gloss": "expectation"
+  },
+  {
+   "form": "creaturae",
+   "lemma": "creatura",
+   "gloss": "of creation"
+  },
+  {
+   "form": "revelationem",
+   "lemma": "revelatio",
+   "gloss": "revelation"
+  },
+  {
+   "form": "expectat",
+   "lemma": "expecto",
+   "gloss": "awaits"
+  },
+  {
+   "form": "gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  },
+  {
+   "form": "Spiritui",
+   "lemma": "Spiritus",
+   "gloss": "to the Spirit"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Si filii, et heredes",
+   "english": "If children, also heirs",
+   "why": "Keeps the conditional force and the compact Pauline phrasing; 'et' here means 'also' in the apodosis.",
+   "rejected": [
+    "If sons, then heirs",
+    "If children, then heirs too"
+   ]
+  },
+  {
+   "term": "coheredes autem Christi",
+   "english": "co-heirs moreover of Christ",
+   "why": "'Autem' marks a contrastive addition, so 'moreover' preserves the adversative-connective force; 'co-heirs' keeps the compound noun parallel to 'heirs.'",
+   "rejected": [
+    "but co-heirs of Christ",
+    "and joint heirs with Christ"
+   ]
+  },
+  {
+   "term": "Expectatio creaturae revelationem filiorum Dei expectat",
+   "english": "The expectation of creation awaits the revelation of the children of God",
+   "why": "The cognate accusative construction (expectatio...expectat) is kept literally to show the rhetorical repetition; 'awaits' preserves the present tense and forward-looking sense.",
+   "rejected": [
+    "Creation waits with eager longing for the revealing of the sons of God",
+    "The eager expectation of the creation waits for the revelation of God's sons"
+   ]
+  },
+  {
+   "term": "Gloria Spiritui",
+   "english": "Glory to the Spirit",
+   "why": "A doxological formula; the dative 'Spiritui' is rendered with 'to' to show it is the recipient of glory, and 'the Spirit' follows the glossary for Spiritus.",
+   "rejected": [
+    "Glory be to the Spirit",
+    "Glory to the Holy Spirit"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 8:17",
+   "method": "wording",
+   "note": "Si filii, et heredes: heredes quidem Dei, coheredes autem Christi"
+  },
+  {
+   "display": "Romans 8:19",
+   "method": "wording",
+   "note": "Expectatio creaturae revelationem filiorum Dei expectat"
+  }
+ ],
+ "pass_b_english": [
+  "If children, also heirs: heirs indeed of God, co-heirs moreover of Christ (Romans 8:17). The expectation of creation awaits the revelation of the children of God (Romans 8:19). Glory to the Spirit. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "b3abd1f8f211da86154ae238af0307a243de6f8f3cf8cfbcca4757eaf8cdb222",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Glory to the Spirit",
+    "source_quote": "Gloria Spiritui",
+    "why": "Latin dative 'Spiritui' is ambiguous: could mean 'to the Spirit' or 'of the Spirit'. Context suggests 'Glory of the Spirit' or 'Glory be to the Spirit' as doxology. 'Glory to the Spirit' is possible but less certain; the phrase is abrupt and may represent a marginal gloss or liturgical insertion, not Origen's commentary voice.",
+    "fix": "Glory of the Spirit. Amen.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Dative 'Spiritui' naturally renders 'to the Spirit'; 'Gloria Spiritui' is a standard doxology. Translator's choice is within normal range."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

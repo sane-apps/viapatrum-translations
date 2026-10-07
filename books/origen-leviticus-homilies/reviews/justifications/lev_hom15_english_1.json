@@ -1,0 +1,186 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom15_english:1",
+ "section": "lev_hom15_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom15_source.json"
+ },
+ "source_text": "Domus in urbe murata intra annum redimatur; postea firma emptori. Tempus gratiae breve. Noli dormire.",
+ "thought_title": "The walled house and the brief time of grace",
+ "orientation": "Origen is applying the Levitical law about redeeming a house in a walled city to the soul's brief opportunity for repentance.",
+ "pass_a_gloss": "[The] house in [the] city walled within [a] year let [it] be bought back; afterwards [let it be] firm to [the] buyer. [The] time of grace [is] short. Do not sleep.",
+ "lemmas": [
+  {
+   "form": "Domus",
+   "lemma": "domus",
+   "gloss": "house"
+  },
+  {
+   "form": "urbe",
+   "lemma": "urbs",
+   "gloss": "city"
+  },
+  {
+   "form": "murata",
+   "lemma": "muratus",
+   "gloss": "walled"
+  },
+  {
+   "form": "intra",
+   "lemma": "intra",
+   "gloss": "within"
+  },
+  {
+   "form": "annum",
+   "lemma": "annus",
+   "gloss": "year"
+  },
+  {
+   "form": "redimatur",
+   "lemma": "redimo",
+   "gloss": "is to be redeemed"
+  },
+  {
+   "form": "postea",
+   "lemma": "postea",
+   "gloss": "afterwards"
+  },
+  {
+   "form": "firma",
+   "lemma": "firmus",
+   "gloss": "firm"
+  },
+  {
+   "form": "emptori",
+   "lemma": "emptor",
+   "gloss": "to the buyer"
+  },
+  {
+   "form": "Tempus",
+   "lemma": "tempus",
+   "gloss": "time"
+  },
+  {
+   "form": "gratiae",
+   "lemma": "gratia",
+   "gloss": "of grace"
+  },
+  {
+   "form": "breve",
+   "lemma": "brevis",
+   "gloss": "brief"
+  },
+  {
+   "form": "Noli",
+   "lemma": "nolo",
+   "gloss": "do not"
+  },
+  {
+   "form": "dormire",
+   "lemma": "dormio",
+   "gloss": "sleep"
+  }
+ ],
+ "choices": [
+  {
+   "term": "redimatur",
+   "english": "is to be redeemed",
+   "why": "The subjunctive expresses the legal prescription of the law, not a mere possibility.",
+   "rejected": [
+    "may be redeemed",
+    "can be redeemed"
+   ]
+  },
+  {
+   "term": "firma emptori",
+   "english": "firm to the buyer",
+   "why": "Firma is a predicate adjective with the dative of possession; the house becomes the buyer's permanent property.",
+   "rejected": [
+    "confirmed for the buyer",
+    "secured to the buyer"
+   ]
+  },
+  {
+   "term": "Tempus gratiae breve",
+   "english": "The time of grace is brief",
+   "why": "A terse nominal sentence; Origen applies the year of redemption to the limited period of repentance.",
+   "rejected": [
+    "The time of favor is short",
+    "Grace's time is brief"
+   ]
+  },
+  {
+   "term": "Noli dormire",
+   "english": "Do not sleep",
+   "why": "The imperative of nolo with the infinitive is the standard Latin prohibition; the urgency is direct.",
+   "rejected": [
+    "Do not be asleep",
+    "Refuse to sleep"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 25:29",
+   "method": "paraphrase",
+   "note": "Domus in urbe murata intra annum redimatur; postea firma emptori"
+  }
+ ],
+ "pass_b_english": [
+  "A house in a walled city is to be redeemed within a year; afterwards it remains firm to the buyer (Leviticus 25:29). The time of grace is brief. Do not sleep."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "b70f6050bc99d316ae692a6d9778bc62e6f1a09d8375423aebdde2d5c1ff0d55",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "A house in a walled city is to be redeemed within a year; afterwards it remains firm to the buyer (Leviticus 25:29).",
+    "source_quote": "Domus in urbe murata intra annum redimatur; postea firma emptori.",
+    "why": "Source lacks citation; English adds (Leviticus 25:29) as if in original text.",
+    "fix": "A house in a walled city is to be redeemed within a year; afterwards it remains firm to the buyer.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Citation is a valid editorial reference; 'as if in original' is speculative, not a demonstrated error."
+   },
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "A house in a walled city is to be redeemed",
+    "source_quote": "Domus in urbe murata intra annum redimatur",
+    "why": "Source is jussive/subjunctive 'redimatur' (let it be redeemed), not passive indicative 'is to be redeemed'.",
+    "fix": "Let a house in a walled city be redeemed within a year; afterwards it stands firm to the buyer.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Is to be redeemed' correctly conveys jussive 'redimatur'; periphrastic modal rendering is standard and accurate."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

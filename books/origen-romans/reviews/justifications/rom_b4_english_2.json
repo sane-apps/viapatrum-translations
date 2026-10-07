@@ -1,0 +1,185 @@
+{
+ "excerpt_id": "origen-romans:rom_b4_english:2",
+ "section": "rom_b4_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b4_source.json"
+ },
+ "source_text": "Beati quorum remissae sunt iniquitates. Beatitudo haec in praeputium — fides reputatur iustitiae sine operibus legis. Gloria Christo. Amen.",
+ "thought_title": "Blessed are those whose sins are forgiven",
+ "orientation": "Origen is commenting on Romans 4, where Paul quotes David's words about the blessedness of the forgiven, and Origen applies this blessedness to the uncircumcised who are justified by faith.",
+ "pass_a_gloss": "Blessed [are those] whose iniquities have been forgiven. [This] blessedness [is] in [the] foreskin — faith is counted [as] righteousness without [the] works of [the] law. Glory [be] to Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "Beati",
+   "lemma": "beatus",
+   "gloss": "blessed"
+  },
+  {
+   "form": "remissae",
+   "lemma": "remitto",
+   "gloss": "have been forgiven"
+  },
+  {
+   "form": "iniquitates",
+   "lemma": "iniquitas",
+   "gloss": "iniquities"
+  },
+  {
+   "form": "Beatitudo",
+   "lemma": "beatitudo",
+   "gloss": "blessedness"
+  },
+  {
+   "form": "praeputium",
+   "lemma": "praeputium",
+   "gloss": "uncircumcision"
+  },
+  {
+   "form": "fides",
+   "lemma": "fides",
+   "gloss": "faith"
+  },
+  {
+   "form": "reputatur",
+   "lemma": "reputo",
+   "gloss": "is reckoned"
+  },
+  {
+   "form": "iustitiae",
+   "lemma": "iustitia",
+   "gloss": "as righteousness"
+  },
+  {
+   "form": "sine",
+   "lemma": "sine",
+   "gloss": "without"
+  },
+  {
+   "form": "operibus",
+   "lemma": "opus",
+   "gloss": "works"
+  },
+  {
+   "form": "legis",
+   "lemma": "lex",
+   "gloss": "of the law"
+  },
+  {
+   "form": "Gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Beati quorum remissae sunt iniquitates",
+   "english": "Blessed are those whose iniquities have been forgiven",
+   "why": "Keeps the passive perfect force of remissae sunt and the plural iniquitates as iniquities, matching the biblical quotation's tone.",
+   "rejected": [
+    "Blessed are they whose sins are forgiven",
+    "Happy are those whose transgressions are forgiven"
+   ]
+  },
+  {
+   "term": "Beatitudo haec in praeputium",
+   "english": "This blessedness is in the uncircumcision",
+   "why": "Preserves the literal in praeputium as 'in the uncircumcision' to reflect the state of being uncircumcised, not a location.",
+   "rejected": [
+    "This blessedness is for the uncircumcised",
+    "This happiness comes upon the uncircumcision"
+   ]
+  },
+  {
+   "term": "fides reputatur iustitiae",
+   "english": "faith is reckoned as righteousness",
+   "why": "Uses the glossary term faith and keeps the dative iustitiae as 'as righteousness' to show the reckoning's result.",
+   "rejected": [
+    "faith is counted for righteousness",
+    "faith is credited as righteousness"
+   ]
+  },
+  {
+   "term": "sine operibus legis",
+   "english": "without works of the law",
+   "why": "Uses the glossary term the law and keeps the literal phrase 'works of the law' to match Paul's contrast.",
+   "rejected": [
+    "apart from works of law",
+    "without the works of the Law"
+   ]
+  },
+  {
+   "term": "Gloria Christo",
+   "english": "Glory to Christ",
+   "why": "Renders the doxological formula literally as a brief ascription of glory.",
+   "rejected": [
+    "Glory be to Christ",
+    "To Christ be the glory"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 4:7",
+   "method": "quotation",
+   "note": "Beati quorum remissae sunt iniquitates"
+  }
+ ],
+ "pass_b_english": [
+  "Blessed are those whose iniquities have been forgiven (Romans 4:7). This blessedness belongs to the uncircumcision: faith is reckoned as righteousness without works of the law. Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "786c7e82716cc40f18f9a0a39430a4dd1ba451d683d86eff14ba0b6ff3587106",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "This blessedness belongs to the uncircumcision",
+    "source_quote": "Beatitudo haec in praeputium",
+    "why": "\"in praeputium\" means \"unto/for the uncircumcised\" (people), not \"belongs to the uncircumcision\" (state/condition).",
+    "fix": "This blessedness is for the uncircumcised",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'in praeputium' = 'unto uncircumcision'; 'belongs to' reasonably conveys this. Minor preference, not major error."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "without works of the law",
+    "source_quote": "sine operibus legis",
+    "why": "Glossary requires \"the law\" not \"the law\"; more critically, \"operibus legis\" is \"works of the law\" but context suggests Paul's technical term.",
+    "fix": "without works of the law",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'sine operibus legis' = 'without works of the law'; English matches source exactly. Claim is incoherent, no real error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

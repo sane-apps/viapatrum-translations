@@ -1,5 +1,5 @@
-Origen of Alexandria (c. 185–c. 254) preached these homilies on Psalms 36, 37, and 38. Rufinus translated them. They are not the Greek fragments on the Psalms, and they are not the excerpts.
+Origen of Alexandria (c. 185–c. 254) preached these homilies to his congregation in Caesarea, Palestine. They are among the earliest surviving examples of Christian preaching on the Psalms. Origen treats the psalms as moral medicine for the soul, offering spiritual instruction on virtue, sin, and repentance.
 
-He calls the psalm moral medicine. He warns against envying evildoers and urges hope in the Lord. One homily sets God's armor against the devil's. Another says the Lord's words are tried silver, to be lent well.
+The homilies cover Psalms 36, 37, and 38 in the Septuagint numbering, which corresponds to Psalms 37, 38, and 39 in modern Hebrew numbering. The surviving text consists of five homilies on Psalm 36, two on Psalm 37, and two on Psalm 38. Rufinus of Aquileia selected these nine homilies for translation because, as he states in his preface, their exposition is entirely moral.
 
-The close takes up guarding the tongue, the heart that grows hot, the image of God rather than the earthly image, and the believer as a pilgrim. The citations use the old names of the biblical books.
+Origen warns against envy of evildoers, urges hope in the Lord, and contrasts the breastplate of God with the breastplate of the devil. He treats the words of the Lord as tested silver entrusted to teachers, reflects on guarding the tongue and the burning heart of meditation, and urges the hearer to bear the marks of the image of God rather than the earthly one. The believer is described as a sojourner and pilgrim on earth.

@@ -1,0 +1,223 @@
+{
+ "excerpt_id": "origen-psalms-rufinus:ps36_hom4_english:1",
+ "section": "ps36_hom4_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-psalms-rufinus/translations/ps36_hom4_source.json"
+ },
+ "source_text": "Pecunia Domini sunt eloquia Domini — argentum igne probatum. Si male doceo, pecunia mea reproba; si bene, fenus iustum. Misericordiam volo quam sacrificium.",
+ "thought_title": "The Lord's money is his tested words",
+ "orientation": "Origen is explaining that the words of the Lord are the Lord's money, tested silver, and that a teacher's teaching is either approved or rejected money.",
+ "pass_a_gloss": "Money [of the] Lord are [the] words [of the] Lord — silver [by] fire tested. If badly I teach, money my reprobate; if well, interest just. Mercy I wish rather than sacrifice.",
+ "lemmas": [
+  {
+   "form": "Pecunia",
+   "lemma": "pecunia",
+   "gloss": "money"
+  },
+  {
+   "form": "Domini",
+   "lemma": "Dominus",
+   "gloss": "of the Lord"
+  },
+  {
+   "form": "eloquia",
+   "lemma": "eloquium",
+   "gloss": "words"
+  },
+  {
+   "form": "argentum",
+   "lemma": "argentum",
+   "gloss": "silver"
+  },
+  {
+   "form": "igne",
+   "lemma": "ignis",
+   "gloss": "by fire"
+  },
+  {
+   "form": "probatum",
+   "lemma": "probo",
+   "gloss": "tested"
+  },
+  {
+   "form": "doceo",
+   "lemma": "doceo",
+   "gloss": "I teach"
+  },
+  {
+   "form": "reproba",
+   "lemma": "reprobus",
+   "gloss": "rejected"
+  },
+  {
+   "form": "fenus",
+   "lemma": "fenus",
+   "gloss": "interest"
+  },
+  {
+   "form": "iustum",
+   "lemma": "iustus",
+   "gloss": "just"
+  },
+  {
+   "form": "Misericordiam",
+   "lemma": "misericordia",
+   "gloss": "mercy"
+  },
+  {
+   "form": "sacrificium",
+   "lemma": "sacrificium",
+   "gloss": "sacrifice"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Pecunia Domini",
+   "english": "The money of the Lord",
+   "why": "Keeps the metaphor of money as the tested words of God, per the glossary.",
+   "rejected": [
+    "The Lord's treasure",
+    "The Lord's wealth"
+   ]
+  },
+  {
+   "term": "eloquia Domini",
+   "english": "words of the Lord",
+   "why": "Uses the fixed glossary rendering for the Lord's sayings.",
+   "rejected": [
+    "divine utterances",
+    "sayings of God"
+   ]
+  },
+  {
+   "term": "argentum igne probatum",
+   "english": "silver tested by fire",
+   "why": "Literal rendering of the ablative of means and the participle, preserving the image of testing.",
+   "rejected": [
+    "fire-tested silver",
+    "silver refined in fire"
+   ]
+  },
+  {
+   "term": "fenus iustum",
+   "english": "a just interest",
+   "why": "Keeps the financial metaphor of teaching as lending money that yields interest.",
+   "rejected": [
+    "a righteous return",
+    "a fair profit"
+   ]
+  },
+  {
+   "term": "Misericordiam volo quam sacrificium",
+   "english": "I want mercy rather than sacrifice",
+   "why": "Literal rendering of the comparative construction, preserving the biblical wording.",
+   "rejected": [
+    "I desire mercy, not sacrifice",
+    "Mercy I desire, not sacrifice"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Hosea 6:6",
+   "method": "wording",
+   "note": "Misericordiam volo quam sacrificium"
+  }
+ ],
+ "pass_b_english": [
+  "The money of the Lord is the words of the Lord—silver tested by fire. If I teach badly, my money is rejected; if I teach well, it is a just interest. I want mercy rather than sacrifice."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "85b470383944bb050758eedfef2f06fde8dbc0b3dbac36873123c2d6f4e96749",
+ "source_sha256": "4dd7ef37b8b86bcb8353e902dbfebb986bca5c71755e82597e4b991b60609b28",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "I want mercy rather than sacrifice (Hosea 6:6)",
+     "source_quote": "Misericordiam volo quam sacrificium",
+     "why": "Source lacks any scripture citation; Hosea 6:6 is editorial addition not in Latin.",
+     "fix": "I want mercy rather than sacrifice.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin source 'Misericordiam volo quam sacrificium' has no citation; '(Hosea 6:6)' is editorial addition not in source."
+    }
+   ],
+   "edits": [
+    {
+     "old": "I want mercy rather than sacrifice (Hosea 6:6).",
+     "new": "I want mercy rather than sacrifice."
+    }
+   ],
+   "fixed": [
+    "Removed editorial scripture citation (Hosea 6:6) not present in the Latin source."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "I want mercy rather than sacrifice",
+    "source_quote": "Misericordiam volo quam sacrificium",
+    "why": "Latin 'volo' is 1st person singular, but context shows this is God speaking through Hosea 6:6 / Matthew 9:13, not Origen's own desire. English 'I want' makes it sound like Origen's personal statement, not a divine quotation.",
+    "fix": "'I desire mercy and not sacrifice'—the Lord's words, not mine.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'volo' is 1st person singular, matching the biblical quotation; 'I want' correctly renders the speaker's words."
+   },
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "I want mercy rather than sacrifice",
+    "source_quote": "Misericordiam volo quam sacrificium",
+    "why": "The English hides that these are God's words (Scripture quotation), making them appear as Origen's own statement and obscuring the shift in speaker.",
+    "fix": "As the Lord says, 'I desire mercy and not sacrifice'",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin has no quotation marks either; 'I want' faithfully renders 'volo' without obscuring speaker more than source does."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

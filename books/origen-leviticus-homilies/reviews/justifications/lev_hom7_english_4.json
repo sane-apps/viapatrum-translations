@@ -1,0 +1,184 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom7_english:4",
+ "section": "lev_hom7_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom7_source.json"
+ },
+ "source_text": "Mundum quod ungulam findit et ruminat. Ruminatio — meditatio legis; ungula fissa — discretio operum. Utrumque require.",
+ "thought_title": "Clean animal: split hoof and chewing cud",
+ "orientation": "Origen is explaining the Levitical distinction between clean and unclean animals as a figure for the soul's need for both meditation on the law and discernment in works.",
+ "pass_a_gloss": "Clean is what splits the hoof and chews the cud. Chewing the cud is meditation on the law; the split hoof is discernment of works. Require both.",
+ "lemmas": [
+  {
+   "form": "mundum",
+   "lemma": "mundus",
+   "gloss": "clean"
+  },
+  {
+   "form": "ungulam",
+   "lemma": "ungula",
+   "gloss": "hoof"
+  },
+  {
+   "form": "findit",
+   "lemma": "findo",
+   "gloss": "splits"
+  },
+  {
+   "form": "ruminat",
+   "lemma": "rumino",
+   "gloss": "chews the cud"
+  },
+  {
+   "form": "ruminatio",
+   "lemma": "ruminatio",
+   "gloss": "chewing the cud"
+  },
+  {
+   "form": "meditatio",
+   "lemma": "meditatio",
+   "gloss": "meditation"
+  },
+  {
+   "form": "legis",
+   "lemma": "lex",
+   "gloss": "of the law"
+  },
+  {
+   "form": "fissa",
+   "lemma": "fissus",
+   "gloss": "split"
+  },
+  {
+   "form": "discretio",
+   "lemma": "discretio",
+   "gloss": "discernment"
+  },
+  {
+   "form": "operum",
+   "lemma": "opus",
+   "gloss": "of works"
+  },
+  {
+   "form": "utrumque",
+   "lemma": "uterque",
+   "gloss": "both"
+  },
+  {
+   "form": "require",
+   "lemma": "requiro",
+   "gloss": "require"
+  }
+ ],
+ "choices": [
+  {
+   "term": "mundum",
+   "english": "clean",
+   "why": "The standard rendering for the Levitical category of animals permitted for eating, matching the glossary's clean/unclean distinction.",
+   "rejected": [
+    "pure",
+    "undefiled"
+   ]
+  },
+  {
+   "term": "ruminat",
+   "english": "chews the cud",
+   "why": "The literal action of a ruminant animal, kept literal to preserve the figure Origen is interpreting.",
+   "rejected": [
+    "ruminates",
+    "chews over"
+   ]
+  },
+  {
+   "term": "ungula fissa",
+   "english": "split hoof",
+   "why": "Literal rendering of the physical characteristic, preserving the figure for spiritual discernment.",
+   "rejected": [
+    "cloven hoof",
+    "divided hoof"
+   ]
+  },
+  {
+   "term": "discretio operum",
+   "english": "discernment of works",
+   "why": "Keeps the genitive relation explicit and matches the moral sense of distinguishing right from wrong actions.",
+   "rejected": [
+    "discrimination of deeds",
+    "judgment of works"
+   ]
+  },
+  {
+   "term": "require",
+   "english": "require",
+   "why": "The imperative force of the Latin is preserved as a command to the hearer.",
+   "rejected": [
+    "seek",
+    "demand"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 11:3",
+   "method": "allusion",
+   "note": "The source describes the clean animal as one that splits the hoof and chews the cud, matching Leviticus 11:3."
+  }
+ ],
+ "pass_b_english": [
+  "A clean animal is one that has a split hoof and chews the cud. Chewing the cud is meditation on the law; the split hoof is discernment of works. You must have both."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "0d2a11da0f7c0f697a348f1c6014513c6dfacc96d269f2d29e116ae72bcedfd0",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "A clean animal is one that has a split hoof and chews the cud",
+    "source_quote": "Mundum quod ungulam findit et ruminat",
+    "why": "Source is a command/requirement, not a definition; 'Mundum' is neuter accusative or imperative, not nominative description",
+    "fix": "Let it be clean: one that has a split hoof and chews the cud",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Mundum' is neuter accusative subject of an impersonal definition; 'clean animal is one that' correctly renders the biblical/legal formula."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "You must have both",
+    "source_quote": "Utrumque require",
+    "why": "Imperative 'require' (seek/demand) weakened to 'must have'; loses urgency and active seeking",
+    "fix": "Seek both",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'require' = seek/need; 'You must have both' conveys the imperative requirement adequately within normal range."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

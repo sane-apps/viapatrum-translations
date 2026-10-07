@@ -1,0 +1,221 @@
+{
+ "excerpt_id": "origen-matthew-later:mt_series_rem_english:4",
+ "section": "mt_series_rem_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-matthew-later/translations/mt_series_rem_source.json"
+ },
+ "source_text": "Qui sedent super cathedram Moysi omnia opera sua faciunt ut ab hominibus videantur. Onus legis corporale grave est; jugum Christi suave et onus leve — Evangelium lex spiritalis. Claudunt regnum caelorum nec ipsi intrant nec alios introire sinunt. Gloria Christo. Amen.",
+ "thought_title": "The Scribes' Burden, Yoke, and Shut Kingdom",
+ "orientation": "Origen is commenting on Jesus' woes against the scribes and Pharisees, just after explaining that all pretended righteousness is dead.",
+ "pass_a_gloss": "Those who sit upon Moses' seat do all their works so that they may be seen by men. The bodily burden of the law is heavy; the yoke of Christ is sweet and the burden light — the Gospel is a spiritual law. They shut the kingdom of heaven, and neither do they themselves enter nor do they allow others to enter. Glory to Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "sedent",
+   "lemma": "sedeo",
+   "gloss": "sit"
+  },
+  {
+   "form": "cathedram",
+   "lemma": "cathedra",
+   "gloss": "seat"
+  },
+  {
+   "form": "opera",
+   "lemma": "opus",
+   "gloss": "works"
+  },
+  {
+   "form": "videantur",
+   "lemma": "video",
+   "gloss": "be seen"
+  },
+  {
+   "form": "onus",
+   "lemma": "onus",
+   "gloss": "burden"
+  },
+  {
+   "form": "corporale",
+   "lemma": "corporalis",
+   "gloss": "bodily"
+  },
+  {
+   "form": "grave",
+   "lemma": "gravis",
+   "gloss": "heavy"
+  },
+  {
+   "form": "jugum",
+   "lemma": "jugum",
+   "gloss": "yoke"
+  },
+  {
+   "form": "suave",
+   "lemma": "suavis",
+   "gloss": "sweet"
+  },
+  {
+   "form": "leve",
+   "lemma": "levis",
+   "gloss": "light"
+  },
+  {
+   "form": "spiritalis",
+   "lemma": "spiritalis",
+   "gloss": "spiritual"
+  },
+  {
+   "form": "claudunt",
+   "lemma": "claudo",
+   "gloss": "shut"
+  }
+ ],
+ "choices": [
+  {
+   "term": "cathedram Moysi",
+   "english": "Moses' seat",
+   "why": "The glossary requires 'Moses' seat' for cathedra Moysi, avoiding 'chair of Moses' or 'teaching chair of Moses.'",
+   "rejected": [
+    "chair of Moses",
+    "teaching chair of Moses"
+   ]
+  },
+  {
+   "term": "jugum Christi suave et onus leve",
+   "english": "the yoke of Christ is sweet and the burden light",
+   "why": "Keeps the exact contrast between the heavy bodily burden of the law and the sweet yoke and light burden of Christ, preserving the adjectives as predicates.",
+   "rejected": [
+    "Christ's yoke is easy and his burden is light"
+   ]
+  },
+  {
+   "term": "Evangelium lex spiritalis",
+   "english": "the Gospel is a spiritual law",
+   "why": "Renders the noun phrase lex spiritalis as 'a spiritual law' to preserve the predicative force of the sentence, matching the letter-spirit contrast in the glossary.",
+   "rejected": [
+    "the Gospel is the spiritual law",
+    "the Gospel is spiritual law"
+   ]
+  },
+  {
+   "term": "nec ipsi intrant nec alios introire sinunt",
+   "english": "neither do they themselves enter nor do they allow others to enter",
+   "why": "Preserves the double negation and the two finite verbs, keeping the parallel structure of the accusation.",
+   "rejected": [
+    "they neither enter nor let others enter"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Matthew 23:2-3",
+   "method": "wording",
+   "note": "Qui sedent super cathedram Moysi"
+  },
+  {
+   "display": "Matthew 23:5",
+   "method": "wording",
+   "note": "omnia opera sua faciunt ut ab hominibus videantur"
+  },
+  {
+   "display": "Matthew 11:30",
+   "method": "wording",
+   "note": "jugum Christi suave et onus leve"
+  },
+  {
+   "display": "Matthew 23:13",
+   "method": "wording",
+   "note": "Claudunt regnum caelorum nec ipsi intrant nec alios introire sinunt"
+  }
+ ],
+ "pass_b_english": [
+  "Those who sit on Moses' seat do all their works to be seen by others (Matthew 23:2-3, 5). The bodily burden of the law is heavy; the yoke of Christ is sweet and the burden light (Matthew 11:30) — the Gospel is a spiritual law. They shut the kingdom of heaven, neither entering themselves nor allowing others to enter (Matthew 23:13). Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "cc30e27d407f24d3bb231029b1afad3f31f76773d7d969cd3c6ac7a0687f49ad",
+ "source_sha256": "3b65171f5c30038c8d8e8bcc2771d43c5d1be9bec3f7180e63ff2b4e4034ba37",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 5,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Moses' seat",
+    "source_quote": "cathedram Moysi",
+    "why": "Glossary mandates 'Moses' seat'; 'Moses' seat' is banned as 'chair of Moses'/'teaching chair of Moses' but 'Moses' seat' is the required form. Wait—checking: glossary says 'Moses' seat' is the English, banned are 'chair of Moses', 'teaching chair of Moses'. The English has 'Moses' seat' which matches. No error.",
+    "fix": "—",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English 'Moses' seat' matches glossary requirement for 'cathedram Moysi'."
+   },
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Those who sit on Moses' seat do all their works to be seen by others",
+    "source_quote": "Qui sedent super cathedram Moysi omnia opera sua faciunt ut ab hominibus videantur",
+    "why": "Source lacks quotation marks; this is Origen summarizing/paraphrasing Matthew 23, not Jesus' direct words. English puts it in running text without marking as Jesus' speech, matching source. No error.",
+    "fix": "—",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English has no quotation marks, matching source's unmarked paraphrase of Matthew 23."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "the Gospel is a spiritual law",
+    "source_quote": "Evangelium lex spiritalis",
+    "why": "Source says 'Evangelium lex spiritalis' = 'the Gospel [is] a spiritual law'. English matches. No error.",
+    "fix": "—",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Evangelium lex spiritalis' correctly rendered as 'the Gospel is a spiritual law'."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "They shut the kingdom of heaven",
+    "source_quote": "Claudunt regnum caelorum",
+    "why": "Source 'Claudunt' = 'they shut/close'. English matches. No error.",
+    "fix": "—",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Claudunt regnum caelorum' correctly rendered as 'They shut the kingdom of heaven'."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "neither entering themselves nor allowing others to enter",
+    "source_quote": "nec ipsi intrant nec alios introire sinunt",
+    "why": "English 'neither entering themselves nor allowing others to enter' matches 'nec ipsi intrant nec alios introire sinunt'. No error.",
+    "fix": "—",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'nec ipsi intrant nec alios introire sinunt' fully and accurately translated."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 5,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

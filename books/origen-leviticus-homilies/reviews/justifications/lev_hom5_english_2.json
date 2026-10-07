@@ -1,0 +1,175 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom5_english:2",
+ "section": "lev_hom5_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom5_source.json"
+ },
+ "source_text": "Sanctum sanctorum est; in atrio comedatur. Non foris dogmata sancta spargere. Intra ecclesiam edere.",
+ "thought_title": "Holy things eaten within",
+ "orientation": "Origen is explaining the rule that the sin offering is most holy and must be eaten in the court, applying it to the church's teaching.",
+ "pass_a_gloss": "It is holy of holies; let it be eaten in the court. Not to scatter holy teachings outside. To eat within the church.",
+ "lemmas": [
+  {
+   "form": "Sanctum",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "sanctorum",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "est",
+   "lemma": "sum",
+   "gloss": "is"
+  },
+  {
+   "form": "in",
+   "lemma": "in",
+   "gloss": "in"
+  },
+  {
+   "form": "atrio",
+   "lemma": "atrium",
+   "gloss": "court"
+  },
+  {
+   "form": "comedatur",
+   "lemma": "comedo",
+   "gloss": "let it be eaten"
+  },
+  {
+   "form": "Non",
+   "lemma": "non",
+   "gloss": "not"
+  },
+  {
+   "form": "foris",
+   "lemma": "foris",
+   "gloss": "outside"
+  },
+  {
+   "form": "dogmata",
+   "lemma": "dogma",
+   "gloss": "teachings"
+  },
+  {
+   "form": "sancta",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "spargere",
+   "lemma": "spargo",
+   "gloss": "to scatter"
+  },
+  {
+   "form": "Intra",
+   "lemma": "intra",
+   "gloss": "within"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Sanctum sanctorum est",
+   "english": "It is holy of holies",
+   "why": "Renders the Hebrew superlative literally to preserve the ritual category of the sin offering as most holy.",
+   "rejected": [
+    "It is the holy of holies",
+    "It is most holy"
+   ]
+  },
+  {
+   "term": "in atrio comedatur",
+   "english": "let it be eaten in the court",
+   "why": "Keeps the passive jussive force of the Latin, matching the ritual command.",
+   "rejected": [
+    "it is eaten in the court",
+    "one eats it in the court"
+   ]
+  },
+  {
+   "term": "Non foris dogmata sancta spargere",
+   "english": "Not to scatter holy teachings outside",
+   "why": "Preserves the infinitive as a general prohibition, matching the abrupt homiletic style.",
+   "rejected": [
+    "Do not scatter holy teachings outside",
+    "Holy teachings are not to be scattered outside"
+   ]
+  },
+  {
+   "term": "Intra ecclesiam edere",
+   "english": "To eat within the church",
+   "why": "Keeps the infinitive parallel to the previous clause and renders ecclesia with the glossary term.",
+   "rejected": [
+    "Eat within the church",
+    "Within the church one eats"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 6:26",
+   "method": "wording",
+   "note": "Sanctum sanctorum est; in atrio comedatur"
+  }
+ ],
+ "pass_b_english": [
+  "It is holy of holies; let it be eaten in the court (Leviticus 6:26). Not to scatter holy teachings outside. To eat within the church."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "3b9de8dc3c2f2d5d356b6986caf982137b73ccd0afac7918baa613abc8478029",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "It is holy of holies",
+    "source_quote": "Sanctum sanctorum est",
+    "why": "Sanctum sanctorum = 'holy of holies' (superlative), not 'holy of holies' as predicate description. Better: 'It is most holy' or 'a most holy thing'.",
+    "fix": "It is most holy; let it be eaten in the court.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Sanctum sanctorum' literally means 'holy of holies'; rendering is standard and meaning preserved."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "Not to scatter holy teachings outside",
+    "source_quote": "Non foris dogmata sancta spargere",
+    "why": "Missing subject/infinitive construction; 'est' or implied command lost. The Latin is elliptical but the English loses the grammatical force.",
+    "fix": "Do not scatter holy teachings outside.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'Non foris...spargere' is infinitive; English 'Not to scatter' accurately mirrors the construction."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

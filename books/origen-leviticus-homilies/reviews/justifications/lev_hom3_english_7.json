@@ -1,0 +1,169 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom3_english:7",
+ "section": "lev_hom3_english:7",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom3_source.json"
+ },
+ "source_text": "Si nec aves, similago absque oleo et ture — quia sacrificium peccati est. Luctus non festum. Panis asper paenitentiae.",
+ "thought_title": "The poor person's sin offering without oil or incense",
+ "orientation": "Origen is explaining the graduated sin offerings in Leviticus, now reaching the very poorest offering of fine flour without oil or frankincense.",
+ "pass_a_gloss": "If not birds, [the] fine flour without oil and frankincense — because [a] sacrifice of sin it is. Mourning not [a] feast. [The] bread rough of repentance.",
+ "lemmas": [
+  {
+   "form": "aves",
+   "lemma": "avis",
+   "gloss": "birds"
+  },
+  {
+   "form": "similago",
+   "lemma": "similago",
+   "gloss": "fine flour"
+  },
+  {
+   "form": "oleo",
+   "lemma": "oleum",
+   "gloss": "oil"
+  },
+  {
+   "form": "ture",
+   "lemma": "tus",
+   "gloss": "frankincense"
+  },
+  {
+   "form": "sacrificium",
+   "lemma": "sacrificium",
+   "gloss": "sacrifice"
+  },
+  {
+   "form": "peccati",
+   "lemma": "peccatum",
+   "gloss": "sin"
+  },
+  {
+   "form": "luctus",
+   "lemma": "luctus",
+   "gloss": "mourning"
+  },
+  {
+   "form": "festum",
+   "lemma": "festum",
+   "gloss": "feast"
+  },
+  {
+   "form": "panis",
+   "lemma": "panis",
+   "gloss": "bread"
+  },
+  {
+   "form": "asper",
+   "lemma": "asper",
+   "gloss": "rough"
+  },
+  {
+   "form": "paenitentiae",
+   "lemma": "paenitentia",
+   "gloss": "repentance"
+  }
+ ],
+ "choices": [
+  {
+   "term": "similago",
+   "english": "fine flour",
+   "why": "The standard English rendering for the finest wheat flour used in offerings; keeps the concrete Levitical term.",
+   "rejected": [
+    "flour",
+    "wheaten flour"
+   ]
+  },
+  {
+   "term": "absque oleo et ture",
+   "english": "without oil and frankincense",
+   "why": "Preserves the privative force of absque and the two named ingredients, which Origen reads as signs of mourning rather than festivity.",
+   "rejected": [
+    "with no oil or incense",
+    "lacking oil and frankincense"
+   ]
+  },
+  {
+   "term": "quia sacrificium peccati est",
+   "english": "because it is a sacrifice for sin",
+   "why": "Keeps the causal quia and the genitive of purpose; 'sacrifice for sin' matches the glossary sense of peccatum requiring sacrifice.",
+   "rejected": [
+    "since it is a sin offering",
+    "for it is a sin sacrifice"
+   ]
+  },
+  {
+   "term": "Luctus non festum",
+   "english": "Mourning, not a feast",
+   "why": "Renders the stark noun opposition without adding a verb, preserving Origen's terse antithesis.",
+   "rejected": [
+    "It is mourning, not celebration",
+    "Grief, not festivity"
+   ]
+  },
+  {
+   "term": "Panis asper paenitentiae",
+   "english": "The rough bread of repentance",
+   "why": "Keeps the noun phrase with descriptive adjective and genitive; 'rough' captures asper's tactile harshness, and 'repentance' matches the glossary's confessional sense.",
+   "rejected": [
+    "the bitter bread of penance",
+    "harsh bread of penitence"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 5:11",
+   "method": "wording",
+   "note": "similago absque oleo et ture — quia sacrificium peccati est"
+  }
+ ],
+ "pass_b_english": [
+  "If he cannot bring even birds, then fine flour without oil and frankincense, because it is a sacrifice for sin (Leviticus 5:11). Mourning, not a feast. The rough bread of repentance."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "1dcb99437efd95cb244fa76eb77006639bd872d4ee8227900c59a8e03f299fe1",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Mourning, not a feast. The rough bread of repentance.",
+    "source_quote": "Luctus non festum. Panis asper paenitentiae.",
+    "why": "Source has no quotation marks or speaker shift; English presents as Origen's voice, but source continues Scripture's words from Leviticus via ellipsis.",
+    "fix": "Mourning, not a feast: the rough bread of repentance.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'Luctus non festum. Panis asper paenitentiae' are author's comments, not Scripture. No speaker error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

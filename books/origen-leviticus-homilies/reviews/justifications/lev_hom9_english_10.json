@@ -1,0 +1,154 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom9_english:10",
+ "section": "lev_hom9_english:10",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom9_source.json"
+ },
+ "source_text": "Imponet incensum super ignem coram Domino. Ignis examinat. Oratio pura.",
+ "thought_title": "Incense on the fire before the Lord",
+ "orientation": "Origen is explaining the high priest's ritual of putting incense on the fire in the tabernacle, applying it to the soul's prayer.",
+ "pass_a_gloss": "He will place incense upon the fire before the Lord. The fire tests. Pure prayer.",
+ "lemmas": [
+  {
+   "form": "Imponet",
+   "lemma": "impono",
+   "gloss": "he will place upon"
+  },
+  {
+   "form": "incensum",
+   "lemma": "incensum",
+   "gloss": "incense"
+  },
+  {
+   "form": "super",
+   "lemma": "super",
+   "gloss": "upon"
+  },
+  {
+   "form": "ignem",
+   "lemma": "ignis",
+   "gloss": "fire"
+  },
+  {
+   "form": "coram",
+   "lemma": "coram",
+   "gloss": "before, in the presence of"
+  },
+  {
+   "form": "Domino",
+   "lemma": "Dominus",
+   "gloss": "the Lord"
+  },
+  {
+   "form": "Ignis",
+   "lemma": "ignis",
+   "gloss": "fire"
+  },
+  {
+   "form": "examinat",
+   "lemma": "examino",
+   "gloss": "tests, examines"
+  },
+  {
+   "form": "Oratio",
+   "lemma": "oratio",
+   "gloss": "prayer"
+  },
+  {
+   "form": "pura",
+   "lemma": "purus",
+   "gloss": "pure"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Imponet",
+   "english": "He will place",
+   "why": "Future tense of the ritual action, matching the source's future indicative.",
+   "rejected": [
+    "He places",
+    "Let him place"
+   ]
+  },
+  {
+   "term": "coram Domino",
+   "english": "before the Lord",
+   "why": "Standard rendering of the prepositional phrase indicating presence before God.",
+   "rejected": [
+    "in the sight of the Lord",
+    "in the Lord's presence"
+   ]
+  },
+  {
+   "term": "examinat",
+   "english": "tests",
+   "why": "The verb means to test or prove by fire, fitting the image of fire as a purifying agent.",
+   "rejected": [
+    "examines",
+    "proves"
+   ]
+  },
+  {
+   "term": "Oratio pura",
+   "english": "Pure prayer",
+   "why": "Noun phrase without verb, matching the source's elliptical style; 'pure' renders pura as the quality of prayer.",
+   "rejected": [
+    "Prayer is pure",
+    "A pure prayer"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 16:13",
+   "method": "wording",
+   "note": "Imponet incensum super ignem coram Domino"
+  }
+ ],
+ "pass_b_english": [
+  "He will place the incense on the fire before the Lord (Leviticus 16:13). Fire tests. Pure prayer."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "738aa155823c58e9dcf78543ac0bf5cda2c957ea4ecbd4af2d539c1d90d1edf7",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "Fire tests. Pure prayer.",
+    "source_quote": "Ignis examinat. Oratio pura.",
+    "why": "Missing subject/agent for 'examinat' and logical connection between fire testing and pure prayer.",
+    "fix": "Fire tests. Let prayer be pure.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source 'Ignis examinat. Oratio pura.' is verbless/elliptical; English 'Fire tests. Pure prayer.' matches exactly."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

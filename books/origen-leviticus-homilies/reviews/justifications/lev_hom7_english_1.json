@@ -1,0 +1,175 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom7_english:1",
+ "section": "lev_hom7_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom7_source.json"
+ },
+ "source_text": "Vinum et siceram non bibant cum intrant tabernaculum. Ebrietas saeculi impedit visionem. Sobrii estote.",
+ "thought_title": "Sobriety for entering the tabernacle",
+ "orientation": "Origen is applying the priestly rule about not drinking wine or strong drink when entering the tabernacle to the soul's need for sobriety in order to see spiritual things.",
+ "pass_a_gloss": "They are not to drink wine and strong drink when they enter the tabernacle. The drunkenness of the world hinders vision. Be sober.",
+ "lemmas": [
+  {
+   "form": "vinum",
+   "lemma": "vinum",
+   "gloss": "wine"
+  },
+  {
+   "form": "siceram",
+   "lemma": "sicera",
+   "gloss": "strong drink"
+  },
+  {
+   "form": "bibant",
+   "lemma": "bibo",
+   "gloss": "they drink"
+  },
+  {
+   "form": "intrant",
+   "lemma": "intro",
+   "gloss": "they enter"
+  },
+  {
+   "form": "tabernaculum",
+   "lemma": "tabernaculum",
+   "gloss": "tabernacle"
+  },
+  {
+   "form": "ebrietas",
+   "lemma": "ebrietas",
+   "gloss": "drunkenness"
+  },
+  {
+   "form": "saeculi",
+   "lemma": "saeculum",
+   "gloss": "of the world"
+  },
+  {
+   "form": "impedit",
+   "lemma": "impedio",
+   "gloss": "hinders"
+  },
+  {
+   "form": "visionem",
+   "lemma": "visio",
+   "gloss": "vision"
+  },
+  {
+   "form": "sobrii",
+   "lemma": "sobrius",
+   "gloss": "sober"
+  },
+  {
+   "form": "estote",
+   "lemma": "sum",
+   "gloss": "be"
+  }
+ ],
+ "choices": [
+  {
+   "term": "siceram",
+   "english": "strong drink",
+   "why": "The standard English rendering for the biblical term, distinct from wine, preserving the literal force of the prohibition.",
+   "rejected": [
+    "liquor",
+    "beer"
+   ]
+  },
+  {
+   "term": "ebrietas saeculi",
+   "english": "the drunkenness of the world",
+   "why": "Keeps the genitive force of 'saeculi' as the source or kind of drunkenness, matching Origen's moral application.",
+   "rejected": [
+    "worldly drunkenness",
+    "the world's drunkenness"
+   ]
+  },
+  {
+   "term": "impedit visionem",
+   "english": "hinders vision",
+   "why": "Literal rendering of the verb and object, preserving the idea that drunkenness blocks spiritual sight.",
+   "rejected": [
+    "blocks sight",
+    "prevents seeing"
+   ]
+  },
+  {
+   "term": "sobrii estote",
+   "english": "be sober",
+   "why": "Direct imperative rendering, matching the command form and the biblical register.",
+   "rejected": [
+    "stay sober",
+    "be watchful"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 10:9",
+   "method": "wording",
+   "note": "Vinum et siceram non bibant cum intrant tabernaculum"
+  },
+  {
+   "display": "1 Peter 5:8",
+   "method": "wording",
+   "note": "Sobrii estote"
+  }
+ ],
+ "pass_b_english": [
+  "They are not to drink wine or strong drink when they enter the tabernacle (Leviticus 10:9). The drunkenness of the world hinders vision. Be sober (1 Peter 5:8)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "1a5586d8d2a88f419c0b10aa028a0c97ca4186fe11210854427d7376113fcff8",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Be sober (1 Peter 5:8)",
+    "source_quote": "Sobrii estote",
+    "why": "Source cites no biblical reference; 'Sobrii estote' is a general exhortation, not 1 Peter 5:8 specifically.",
+    "fix": "Be sober.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "1 Pet 5:8 says 'sobrii estote'; reference is valid, not wrong."
+   },
+   {
+    "class": "addition",
+    "severity": "major",
+    "quote": "(Leviticus 10:9)",
+    "source_quote": "Vinum et siceram non bibant cum intrant tabernaculum",
+    "why": "Source contains no scripture citation; the reference is added by translator without source support.",
+    "fix": "They are not to drink wine or strong drink when they enter the tabernacle.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source clearly paraphrases Lev 10:9; citation is correct, not an addition."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

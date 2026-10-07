@@ -1,0 +1,191 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom13_english:2",
+ "section": "lev_hom13_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom13_source.json"
+ },
+ "source_text": "Quoniam lex spiritalis est, petamus Dominum ut umbras in veritatem aperiat. Pascha nostrum Christus.",
+ "thought_title": "Prayer for the Law's Spiritual Unveiling",
+ "orientation": "Origen is concluding his argument that the law is spiritual and now prays that God would open its shadows into truth, identifying Christ as the Christian Passover.",
+ "pass_a_gloss": "Since the law is spiritual, let us ask the Lord that he may open the shadows into truth. Our Passover is Christ.",
+ "lemmas": [
+  {
+   "form": "Quoniam",
+   "lemma": "quoniam",
+   "gloss": "since"
+  },
+  {
+   "form": "lex",
+   "lemma": "lex",
+   "gloss": "law"
+  },
+  {
+   "form": "spiritalis",
+   "lemma": "spiritalis",
+   "gloss": "spiritual"
+  },
+  {
+   "form": "est",
+   "lemma": "sum",
+   "gloss": "is"
+  },
+  {
+   "form": "petamus",
+   "lemma": "peto",
+   "gloss": "let us ask"
+  },
+  {
+   "form": "Dominum",
+   "lemma": "Dominus",
+   "gloss": "the Lord"
+  },
+  {
+   "form": "ut",
+   "lemma": "ut",
+   "gloss": "that"
+  },
+  {
+   "form": "umbras",
+   "lemma": "umbra",
+   "gloss": "shadows"
+  },
+  {
+   "form": "in",
+   "lemma": "in",
+   "gloss": "into"
+  },
+  {
+   "form": "veritatem",
+   "lemma": "veritas",
+   "gloss": "truth"
+  },
+  {
+   "form": "aperiat",
+   "lemma": "aperio",
+   "gloss": "he may open"
+  },
+  {
+   "form": "Pascha",
+   "lemma": "Pascha",
+   "gloss": "Passover"
+  },
+  {
+   "form": "nostrum",
+   "lemma": "noster",
+   "gloss": "our"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  }
+ ],
+ "choices": [
+  {
+   "term": "umbras in veritatem aperiat",
+   "english": "may open the shadows into truth",
+   "why": "Keeps the spatial metaphor of opening shadows into truth, matching the source's movement from shadow to reality.",
+   "rejected": [
+    "may reveal the truth hidden in shadows",
+    "may turn shadows into truth"
+   ]
+  },
+  {
+   "term": "Pascha nostrum Christus",
+   "english": "Our Passover is Christ",
+   "why": "Preserves the terse, declarative identification without a copula, matching the Latin's compactness.",
+   "rejected": [
+    "Christ is our Passover",
+    "Our Passover: Christ"
+   ]
+  },
+  {
+   "term": "petamus",
+   "english": "let us ask",
+   "why": "Renders the hortatory subjunctive as a communal prayer request, fitting the homiletic context.",
+   "rejected": [
+    "we ask",
+    "we should ask"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "1 Corinthians 5:7",
+   "method": "wording",
+   "note": "Pascha nostrum Christus"
+  }
+ ],
+ "pass_b_english": [
+  "Since the law is spiritual, let us ask the Lord to open the shadows into truth. Our Passover is Christ."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "527ac17a0ec9f4a438a752560a50f3954c31606958b5dda49f1075f6fc55803e",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Our Passover is Christ (1 Corinthians 5:7)",
+     "source_quote": "Pascha nostrum Christus",
+     "why": "Source quotes no verse; 1 Cor 5:7 says 'Christ our passover is sacrificed for us', not this exact wording.",
+     "fix": "Our Passover is Christ.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source 'Pascha nostrum Christus' has no verse citation; adding '(1 Corinthians 5:7)' misrepresents the Latin text as a direct quote."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Our Passover is Christ (1 Corinthians 5:7)",
+     "new": "Our Passover is Christ"
+    }
+   ],
+   "fixed": [
+    "Removed the incorrect scripture citation; the source reads 'Pascha nostrum Christus' without a verse reference, and the wording does not match 1 Corinthians 5:7."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

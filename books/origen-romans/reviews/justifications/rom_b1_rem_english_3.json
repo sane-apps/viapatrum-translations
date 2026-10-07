@@ -1,0 +1,190 @@
+{
+ "excerpt_id": "origen-romans:rom_b1_rem_english:3",
+ "section": "rom_b1_rem_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b1_rem_source.json"
+ },
+ "source_text": "Paulus servus Jesu Christi, vocatus apostolus, segregatus in Evangelium Dei. Vocatus non est idem quod electus — multi vocati, pauci electi. Segregatus in Evangelium: Deus segregat iustos a ventre; Paulus non fortuito sed secundum propositum vocatus est.",
+ "thought_title": "Paul's calling and separation for the gospel",
+ "orientation": "Origen is explaining the opening words of Romans, where Paul describes himself as servant, called apostle, and set apart for the gospel.",
+ "pass_a_gloss": "Paul [a] servant of Jesus Christ, called [an] apostle, separated into [the] Gospel of God. Called not is [the] same [thing] that chosen — many called, few chosen. Separated into [the] Gospel: God separates [the] just from [the] womb; Paul not by chance but according to [the] purpose called is.",
+ "lemmas": [
+  {
+   "form": "servus",
+   "lemma": "servus",
+   "gloss": "servant"
+  },
+  {
+   "form": "vocatus",
+   "lemma": "voco",
+   "gloss": "called"
+  },
+  {
+   "form": "apostolus",
+   "lemma": "apostolus",
+   "gloss": "apostle"
+  },
+  {
+   "form": "segregatus",
+   "lemma": "segrego",
+   "gloss": "set apart"
+  },
+  {
+   "form": "Evangelium",
+   "lemma": "evangelium",
+   "gloss": "gospel"
+  },
+  {
+   "form": "electus",
+   "lemma": "eligo",
+   "gloss": "chosen"
+  },
+  {
+   "form": "multi",
+   "lemma": "multus",
+   "gloss": "many"
+  },
+  {
+   "form": "pauci",
+   "lemma": "paucus",
+   "gloss": "few"
+  },
+  {
+   "form": "iustos",
+   "lemma": "iustus",
+   "gloss": "the righteous"
+  },
+  {
+   "form": "ventre",
+   "lemma": "venter",
+   "gloss": "womb"
+  },
+  {
+   "form": "fortuito",
+   "lemma": "fortuitus",
+   "gloss": "by chance"
+  },
+  {
+   "form": "propositum",
+   "lemma": "propositum",
+   "gloss": "purpose"
+  }
+ ],
+ "choices": [
+  {
+   "term": "segregatus in Evangelium Dei",
+   "english": "set apart for the gospel of God",
+   "why": "The glossary does not cover this phrase, but 'set apart' preserves the literal sense of segregatus as separation for a purpose, matching the source's spatial metaphor.",
+   "rejected": [
+    "separated unto the gospel of God",
+    "segregated for the gospel of God"
+   ]
+  },
+  {
+   "term": "vocatus non est idem quod electus",
+   "english": "Called is not the same thing as chosen",
+   "why": "The source explicitly distinguishes vocatus from electus; 'chosen' is the standard English for electus and keeps the contrast sharp.",
+   "rejected": [
+    "elected",
+    "selected"
+   ]
+  },
+  {
+   "term": "multi vocati, pauci electi",
+   "english": "many are called, few are chosen",
+   "why": "This is a recognizable biblical saying; the literal rendering preserves the parallel structure and the contrast between calling and election.",
+   "rejected": [
+    "many called, few chosen",
+    "many are invited, few are selected"
+   ]
+  },
+  {
+   "term": "Deus segregat iustos a ventre",
+   "english": "God sets apart the righteous from the womb",
+   "why": "The phrase 'from the womb' is literal and echoes biblical language about God's prior separation of the righteous; 'sets apart' keeps the same verb as the earlier clause.",
+   "rejected": [
+    "God separates the just from the womb",
+    "God sets aside the righteous from birth"
+   ]
+  },
+  {
+   "term": "non fortuito sed secundum propositum",
+   "english": "not by chance but according to purpose",
+   "why": "The contrast between fortuito and propositum is central to Origen's argument against heretics; 'by chance' and 'according to purpose' preserve the exact opposition.",
+   "rejected": [
+    "not accidentally but by design",
+    "not randomly but according to plan"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 1:1",
+   "method": "wording",
+   "note": "Paulus servus Jesu Christi, vocatus apostolus, segregatus in Evangelium Dei"
+  },
+  {
+   "display": "Matthew 22:14",
+   "method": "wording",
+   "note": "multi vocati, pauci electi"
+  }
+ ],
+ "pass_b_english": [
+  "\"Paul, a servant of Jesus Christ, called to be an apostle, set apart for the gospel of God\" (Romans 1:1). Called is not the same thing as chosen, for \"many are called, but few are chosen\" (Matthew 22:14). Set apart for the gospel: God sets apart the righteous from the womb. Paul was called not by chance but according to purpose."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "dfe2760079e4362e0dac458acdacb6fa93f038455e705ec6caf5b05b12cf95a9",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "chosen",
+    "source_quote": "electus",
+    "why": "Glossary requires 'elect' not 'chosen' for 'electus'.",
+    "fix": "Called is not the same thing as elect, for 'many are called, but few are elect'.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Chosen' is within normal semantic range of 'electus'; glossary consistency is a preference, not a major error."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "chosen",
+    "source_quote": "electi",
+    "why": "Glossary requires 'elect' not 'chosen' for 'electi'.",
+    "fix": "many are called, but few are elect",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Chosen' correctly renders 'electi' here; glossary preference for 'elect' does not change meaning or mislead."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,179 @@
+{
+ "excerpt_id": "origen-psalms-rufinus:ps38_hom1_english:1",
+ "section": "ps38_hom1_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-psalms-rufinus/translations/ps38_hom1_source.json"
+ },
+ "source_text": "Dixi custodiam vias meas ut non delinquam in lingua mea. Posui ori meo custodiam cum consisteret peccator adversum me. Obmutui et humiliatus sum.",
+ "thought_title": "Guarding the tongue against sin",
+ "orientation": "The psalmist speaks in the first person, resolving to guard his ways and his mouth while a sinner stands against him.",
+ "pass_a_gloss": "I said I will guard my ways [so] that [I] may not offend in my tongue. I placed [a] guard [on] my mouth when [the] sinner stood against me. I was silent and [I] was humbled.",
+ "lemmas": [
+  {
+   "form": "Dixi",
+   "lemma": "dico",
+   "gloss": "I said"
+  },
+  {
+   "form": "custodiam",
+   "lemma": "custodio",
+   "gloss": "I will guard"
+  },
+  {
+   "form": "vias",
+   "lemma": "via",
+   "gloss": "ways"
+  },
+  {
+   "form": "delinquam",
+   "lemma": "delinquo",
+   "gloss": "I sin"
+  },
+  {
+   "form": "lingua",
+   "lemma": "lingua",
+   "gloss": "tongue"
+  },
+  {
+   "form": "Posui",
+   "lemma": "pono",
+   "gloss": "I set"
+  },
+  {
+   "form": "ori",
+   "lemma": "os",
+   "gloss": "mouth"
+  },
+  {
+   "form": "custodiam",
+   "lemma": "custodia",
+   "gloss": "guard"
+  },
+  {
+   "form": "consisteret",
+   "lemma": "consisto",
+   "gloss": "stood"
+  },
+  {
+   "form": "peccator",
+   "lemma": "peccator",
+   "gloss": "sinner"
+  },
+  {
+   "form": "adversum",
+   "lemma": "adversus",
+   "gloss": "against"
+  },
+  {
+   "form": "Obmutui",
+   "lemma": "obmutesco",
+   "gloss": "I was silenced"
+  },
+  {
+   "form": "humiliatus",
+   "lemma": "humilio",
+   "gloss": "humbled"
+  }
+ ],
+ "choices": [
+  {
+   "term": "custodiam vias meas",
+   "english": "I will guard my ways",
+   "why": "Keeps the literal future force of the psalmist's resolution and the plain sense of viae as ways or paths.",
+   "rejected": [
+    "I will keep my ways",
+    "I will watch my ways"
+   ]
+  },
+  {
+   "term": "ut non delinquam in lingua mea",
+   "english": "so that I do not sin with my tongue",
+   "why": "Preserves the purpose clause and the literal 'in my tongue' as 'with my tongue' for natural English.",
+   "rejected": [
+    "that I may not offend with my tongue",
+    "so as not to sin in my tongue"
+   ]
+  },
+  {
+   "term": "Posui ori meo custodiam",
+   "english": "I set a guard on my mouth",
+   "why": "Literal rendering of posui with custodiam as a noun, matching the psalm's image of placing a guard.",
+   "rejected": [
+    "I placed a watch before my mouth",
+    "I put a muzzle on my mouth"
+   ]
+  },
+  {
+   "term": "cum consisteret peccator adversum me",
+   "english": "when the sinner stood against me",
+   "why": "Keeps the temporal cum clause and the literal stance of the sinner opposing the speaker.",
+   "rejected": [
+    "while the sinner stood before me",
+    "as the sinner took his stand against me"
+   ]
+  },
+  {
+   "term": "Obmutui et humiliatus sum",
+   "english": "I was silenced and I was humbled",
+   "why": "Renders both passive forms literally, preserving the psalmist's passive suffering.",
+   "rejected": [
+    "I was dumb and brought low",
+    "I kept silence and was humbled"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Psalm 39:1 (LXX 38:2)",
+   "method": "wording",
+   "note": "Dixi custodiam vias meas ut non delinquam in lingua mea. Posui ori meo custodiam cum consisteret peccator adversum me. Obmutui et humiliatus sum."
+  }
+ ],
+ "pass_b_english": [
+  "I said, “I will guard my ways so that I do not sin with my tongue.” I set a guard on my mouth when the sinner stood against me. I was silenced and I was humbled (Psalm 39:1, LXX 38:2)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "85b470383944bb050758eedfef2f06fde8dbc0b3dbac36873123c2d6f4e96749",
+ "source_sha256": "99a5e17a4e9435e50e751535a0c9e213e09a92c1f52ae9e3a8fabfc5c21f3300",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Psalm 39:1, LXX 38:2",
+    "source_quote": "Dixi custodiam vias meas ut non delinquam in lingua mea. Posui ori meo custodiam cum consisteret peccator adversum me. Obmutui et humiliatus sum.",
+    "why": "Citation format violates brief: should be Hebrew number with LXX note, not LXX number first.",
+    "fix": "(Psalm 39 [LXX 38]:2)",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Citation gives both Hebrew/Vulgate and LXX numbers correctly; format preference is not a major meaning-changing error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

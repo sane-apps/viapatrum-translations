@@ -1,0 +1,181 @@
+{
+ "excerpt_id": "origen-romans:rom_b5_english:2",
+ "section": "rom_b5_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-romans/translations/rom_b5_source.json"
+ },
+ "source_text": "Sicut per unum hominem peccatum in hunc mundum intravit et per peccatum mors, ita et per unum Iesum Christum gratia et donum in plures abundavit. Gloria Christo. Amen.",
+ "thought_title": "Sin and death through one man, grace through one Christ",
+ "orientation": "Origen is summarizing the contrast between Adam's transgression and the overflowing grace that comes through Jesus Christ.",
+ "pass_a_gloss": "Just as through one man sin entered into this world and through sin death, so also through one Jesus Christ grace and gift abounded unto many. Glory to Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "peccatum",
+   "lemma": "peccatum",
+   "gloss": "sin"
+  },
+  {
+   "form": "intravit",
+   "lemma": "intro",
+   "gloss": "entered"
+  },
+  {
+   "form": "mors",
+   "lemma": "mors",
+   "gloss": "death"
+  },
+  {
+   "form": "gratia",
+   "lemma": "gratia",
+   "gloss": "grace"
+  },
+  {
+   "form": "donum",
+   "lemma": "donum",
+   "gloss": "gift"
+  },
+  {
+   "form": "abundavit",
+   "lemma": "abundo",
+   "gloss": "abounded"
+  },
+  {
+   "form": "gloria",
+   "lemma": "gloria",
+   "gloss": "glory"
+  }
+ ],
+ "choices": [
+  {
+   "term": "in hunc mundum",
+   "english": "into this world",
+   "why": "The demonstrative hunc is explicit in the source and should be kept.",
+   "rejected": [
+    "into the world"
+   ]
+  },
+  {
+   "term": "per unum Iesum Christum",
+   "english": "through one Jesus Christ",
+   "why": "The source names Jesus Christ explicitly, not just Christ.",
+   "rejected": [
+    "through one Christ"
+   ]
+  },
+  {
+   "term": "gratia et donum",
+   "english": "grace and gift",
+   "why": "Both nouns are distinct in the source and should remain separate.",
+   "rejected": [
+    "grace and the gift"
+   ]
+  },
+  {
+   "term": "in plures",
+   "english": "unto many",
+   "why": "The preposition in with accusative here has a directional sense of reaching many.",
+   "rejected": [
+    "to many",
+    "upon many"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 5:12",
+   "method": "wording",
+   "note": "per unum hominem peccatum in hunc mundum intravit et per peccatum mors"
+  },
+  {
+   "display": "Romans 5:15",
+   "method": "wording",
+   "note": "gratia et donum in plures abundavit"
+  }
+ ],
+ "pass_b_english": [
+  "Just as sin entered this world through one man, and death through sin, so also grace and gift abounded unto many through one Jesus Christ (Romans 5:12b-15). Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "ad3b2169d030142cfac471b9f8986bb09aa68914f02bb64b2ceca7468684587e",
+ "source_sha256": "16eed26a469bd14aeaad0e3198e6fcd713f64c8bb6b0fb846be35ede781d4c05",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "(Romans 5:12, 15)",
+     "source_quote": "Sicut per unum hominem peccatum in hunc mundum intravit et per peccatum mors, ita et per unum Iesum Christum gratia et donum in plures abundavit",
+     "why": "The citation combines two verses but the Latin quotes only one continuous passage; 5:12b-15 is more accurate.",
+     "fix": "(Romans 5:12b-15)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin conflates Romans 5:12 and 5:15 wording; citation '(5:12, 15)' is acceptable but '5:12b-15' more precise."
+    }
+   ],
+   "edits": [
+    {
+     "old": "(Romans 5:12, 15)",
+     "new": "(Romans 5:12b-15)"
+    }
+   ],
+   "fixed": [
+    "The citation combines two verses but the Latin quotes only one continuous passage; 5:12b-15 is more accurate."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "referee": "nvidia/nemotron-3-ultra-550b-a55b",
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "refereed": [
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "through one Jesus Christ",
+    "source_quote": "per unum Iesum Christum",
+    "why": "English drops \"unum\" (\"one\"), which parallels \"unum hominem\" and is theologically crucial to Paul's argument about the one man and the one Christ.",
+    "fix": "through one Jesus Christ",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "upheld_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English omits 'unum' in 'per unum Iesum Christum', losing the crucial parallel with 'unum hominem'."
+   }
+  ],
+  "repair": "no edits"
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

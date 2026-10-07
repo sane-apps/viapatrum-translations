@@ -1,0 +1,165 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom13_english:3",
+ "section": "lev_hom13_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom13_source.json"
+ },
+ "source_text": "Lucerna et panes propositionis — verbum illuminans et cibus vitae. Oleum sinceritatis.",
+ "thought_title": "Lamp, bread, and oil as spiritual nourishment",
+ "orientation": "Origen is interpreting the tabernacle furnishings spiritually, applying them to Christ and the soul.",
+ "pass_a_gloss": "The lamp and the loaves of the setting forth — the word that gives light and the food of life. The oil of sincerity.",
+ "lemmas": [
+  {
+   "form": "Lucerna",
+   "lemma": "lucerna",
+   "gloss": "lamp"
+  },
+  {
+   "form": "panes",
+   "lemma": "panis",
+   "gloss": "loaves"
+  },
+  {
+   "form": "propositionis",
+   "lemma": "propositio",
+   "gloss": "of the setting forth"
+  },
+  {
+   "form": "verbum",
+   "lemma": "verbum",
+   "gloss": "word"
+  },
+  {
+   "form": "illuminans",
+   "lemma": "illumino",
+   "gloss": "giving light"
+  },
+  {
+   "form": "cibus",
+   "lemma": "cibus",
+   "gloss": "food"
+  },
+  {
+   "form": "vitae",
+   "lemma": "vita",
+   "gloss": "of life"
+  },
+  {
+   "form": "Oleum",
+   "lemma": "oleum",
+   "gloss": "oil"
+  },
+  {
+   "form": "sinceritatis",
+   "lemma": "sinceritas",
+   "gloss": "of sincerity"
+  }
+ ],
+ "choices": [
+  {
+   "term": "panes propositionis",
+   "english": "loaves of the setting forth",
+   "why": "Renders the Latin literally; 'propositionis' means 'of the setting forth' (the showbread), keeping the tabernacle reference clear without importing a modern liturgical term.",
+   "rejected": [
+    "showbread",
+    "bread of the presence"
+   ]
+  },
+  {
+   "term": "verbum illuminans",
+   "english": "the word that gives light",
+   "why": "Keeps the participial force of 'illuminans' as an ongoing action of the word, matching Origen's spiritual reading of the lamp.",
+   "rejected": [
+    "the illuminating word",
+    "the word which enlightens"
+   ]
+  },
+  {
+   "term": "cibus vitae",
+   "english": "food of life",
+   "why": "Literal genitive rendering preserves the parallel with 'verbum illuminans' and the spiritual nourishment theme.",
+   "rejected": [
+    "life-giving food",
+    "bread of life"
+   ]
+  },
+  {
+   "term": "Oleum sinceritatis",
+   "english": "oil of sincerity",
+   "why": "Literal genitive; 'sinceritas' is rendered 'sincerity' to keep the moral-spiritual sense Origen attaches to the oil.",
+   "rejected": [
+    "pure oil",
+    "oil of purity"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Exodus 25:30",
+   "method": "wording",
+   "note": "panes propositionis"
+  },
+  {
+   "display": "Exodus 27:20",
+   "method": "wording",
+   "note": "oleum sinceritatis"
+  }
+ ],
+ "pass_b_english": [
+  "The lamp and the loaves of the setting forth are the word that gives light and the food of life. The oil of sincerity."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "3a5a1eba51a45156561dbe55eb5671b69b0201cfd3497fd05205a3f33ffb0344",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "loaves of the setting forth",
+    "source_quote": "panes propositionis",
+    "why": "\"Propositionis\" means \"of the presence/proposition,\" not \"setting forth.\" This is the showbread/ bread of the Presence.",
+    "fix": "loaves of the Presence",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Propositio denotes 'setting forth/placing before'; 'setting forth' is valid for showbread context."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "sincerity",
+    "source_quote": "sinceritatis",
+    "why": "\"Sinceritas\" here means purity/unadulterated quality of oil, not moral sincerity. The oil is pure, unmixed.",
+    "fix": "pure oil or oil of purity",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Sinceritas spans 'purity' and 'sincerity'; 'sincerity' is within normal range, not a meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

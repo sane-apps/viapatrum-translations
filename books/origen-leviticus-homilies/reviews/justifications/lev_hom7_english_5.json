@@ -1,0 +1,168 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom7_english:5",
+ "section": "lev_hom7_english:5",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom7_source.json"
+ },
+ "source_text": "Camelus ruminat nec findit; sus findit nec ruminat — immunda. Alterum sine altero non sufficit. Fides cum operibus.",
+ "thought_title": "Camel, pig, and the insufficiency of one mark alone",
+ "orientation": "Origen is explaining the clean-animal rule from Leviticus, applying the two marks (chewing the cud and the split hoof) to the soul's need for both meditation and discernment.",
+ "pass_a_gloss": "Camelus ruminat nec findit; [the] camel chews [the] cud and [does] not split [the hoof]; sus findit nec ruminat — [the] pig splits [the hoof] and [does] not chew [the] cud — immunda. [they are] unclean. Alterum sine altero non sufficit. [the] one without [the] other [is] not sufficient. Fides cum operibus. Faith with works.",
+ "lemmas": [
+  {
+   "form": "Camelus",
+   "lemma": "camelus",
+   "gloss": "camel"
+  },
+  {
+   "form": "ruminat",
+   "lemma": "rumino",
+   "gloss": "chews the cud"
+  },
+  {
+   "form": "findit",
+   "lemma": "findo",
+   "gloss": "splits"
+  },
+  {
+   "form": "sus",
+   "lemma": "sus",
+   "gloss": "pig"
+  },
+  {
+   "form": "immunda",
+   "lemma": "immundus",
+   "gloss": "unclean"
+  },
+  {
+   "form": "Alterum",
+   "lemma": "alter",
+   "gloss": "the one"
+  },
+  {
+   "form": "sine",
+   "lemma": "sine",
+   "gloss": "without"
+  },
+  {
+   "form": "altero",
+   "lemma": "alter",
+   "gloss": "the other"
+  },
+  {
+   "form": "sufficit",
+   "lemma": "sufficio",
+   "gloss": "is enough"
+  },
+  {
+   "form": "Fides",
+   "lemma": "fides",
+   "gloss": "faith"
+  },
+  {
+   "form": "cum",
+   "lemma": "cum",
+   "gloss": "with"
+  },
+  {
+   "form": "operibus",
+   "lemma": "opus",
+   "gloss": "works"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ruminat",
+   "english": "chews the cud",
+   "why": "The established rendering for the Levitical mark, matching the previous section's language.",
+   "rejected": [
+    "ruminates",
+    "chews over"
+   ]
+  },
+  {
+   "term": "findit",
+   "english": "splits the hoof",
+   "why": "Keeps the physical action literal and consistent with the previous section's 'split hoof'.",
+   "rejected": [
+    "divides",
+    "parts"
+   ]
+  },
+  {
+   "term": "immunda",
+   "english": "unclean",
+   "why": "The glossary term for ritual and moral uncleanness.",
+   "rejected": [
+    "impure",
+    "defiled"
+   ]
+  },
+  {
+   "term": "Alterum sine altero non sufficit",
+   "english": "The one without the other is not enough",
+   "why": "Preserves the exact negation and the reciprocal structure of the Latin.",
+   "rejected": [
+    "Neither alone suffices",
+    "One without the other fails"
+   ]
+  },
+  {
+   "term": "Fides cum operibus",
+   "english": "Faith with works",
+   "why": "Keeps the terse, aphoristic form of the Latin, which is a compressed theological summary.",
+   "rejected": [
+    "Faith accompanied by works",
+    "Faith together with works"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "The camel chews the cud but does not split the hoof; the pig splits the hoof but does not chew the cud. Both are unclean. One without the other is not enough. Faith with works."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "97a6a2c67e9b33b901ad85f37e4d54b6c1d5ffd06d4a079f712597ec3cab4ab7",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Faith with works.",
+    "source_quote": "Fides cum operibus.",
+    "why": "Source lacks speaker identification; English adds doctrinal conclusion as author's voice without marking shift.",
+    "fix": "Faith with works. — or indicate this is Origen's application.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'Fides cum operibus' is a standalone phrase, not dialogue; no speaker tag in source to omit. Translation faithfully renders it."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

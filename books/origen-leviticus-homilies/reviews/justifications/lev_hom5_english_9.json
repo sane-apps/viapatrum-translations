@@ -1,0 +1,145 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom5_english:9",
+ "section": "lev_hom5_english:9",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom5_source.json"
+ },
+ "source_text": "Quidquid tetigerit altare sanctificabitur. Altare Christus; contactus fidei. Accedite ad lapidem vivum.",
+ "thought_title": "Contact with the altar sanctifies",
+ "orientation": "Origen is explaining the Levitical rule that whatever touches the altar becomes holy, applying it to Christ as the living stone whom believers touch by faith.",
+ "pass_a_gloss": "Whatever [it] will have touched [the] altar [it] will be sanctified. [The] altar [is] Christ; [the] contact [is] of faith. Approach [you all] to [the] stone living.",
+ "lemmas": [
+  {
+   "form": "tetigerit",
+   "lemma": "tango",
+   "gloss": "will have touched"
+  },
+  {
+   "form": "altare",
+   "lemma": "altare",
+   "gloss": "altar"
+  },
+  {
+   "form": "sanctificabitur",
+   "lemma": "sanctifico",
+   "gloss": "will be made holy"
+  },
+  {
+   "form": "contactus",
+   "lemma": "contactus",
+   "gloss": "contact, touching"
+  },
+  {
+   "form": "fidei",
+   "lemma": "fides",
+   "gloss": "of faith"
+  },
+  {
+   "form": "accedite",
+   "lemma": "accedo",
+   "gloss": "draw near (plural command)"
+  },
+  {
+   "form": "lapidem",
+   "lemma": "lapis",
+   "gloss": "stone"
+  },
+  {
+   "form": "vivum",
+   "lemma": "vivus",
+   "gloss": "living"
+  }
+ ],
+ "choices": [
+  {
+   "term": "sanctificabitur",
+   "english": "will be made holy",
+   "why": "Passive future of sanctifico; the glossary term 'holy' is used for sanctus, and this verb form carries the same root sense of being made holy.",
+   "rejected": [
+    "will be sanctified",
+    "will be consecrated"
+   ]
+  },
+  {
+   "term": "contactus fidei",
+   "english": "the contact is of faith",
+   "why": "The noun contactus is equated with faith; rendering as a copular phrase preserves the terse explanatory force of the Latin.",
+   "rejected": [
+    "the touch of faith",
+    "faith is the touching"
+   ]
+  },
+  {
+   "term": "accedite",
+   "english": "draw near",
+   "why": "Plural imperative; the verb accedo means to approach or draw near, fitting the invitation to believers.",
+   "rejected": [
+    "come",
+    "approach"
+   ]
+  },
+  {
+   "term": "lapidem vivum",
+   "english": "living stone",
+   "why": "Direct rendering of the biblical phrase; 'living' preserves the adjective's force as applied to Christ.",
+   "rejected": [
+    "stone that lives",
+    "alive stone"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "1 Peter 2:4",
+   "method": "wording",
+   "note": "Accedite ad lapidem vivum"
+  }
+ ],
+ "pass_b_english": [
+  "Whatever touches the altar will be made holy. The altar is Christ; the contact is of faith. Draw near to the living stone (1 Peter 2:4)."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "072554fc3eac6cfd73883c79f08638fed19c408a9dcb67b6c7a23a67b6fe58d8",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "will be made holy",
+    "source_quote": "sanctificabitur",
+    "why": "Future passive 'will be made holy' misses the force of the Latin future active or middle sense 'will sanctify'—the altar makes holy what touches it, not merely receives holiness.",
+    "fix": "Whatever touches the altar will sanctify it.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'sanctificabitur' is future passive; 'will be made holy' is correct. The -bitur ending is passive, not active or middle."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

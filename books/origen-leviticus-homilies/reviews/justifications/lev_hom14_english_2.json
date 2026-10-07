@@ -1,0 +1,152 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom14_english:2",
+ "section": "lev_hom14_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom14_source.json"
+ },
+ "source_text": "Educunt eum extra castra. Blasphemia expellitur. Ecclesia non communicat tenebris.",
+ "thought_title": "Blasphemy expelled from the camp",
+ "orientation": "Origen is interpreting the punishment of the blasphemer from Leviticus 24, applying it spiritually to the church's separation from darkness.",
+ "pass_a_gloss": "They lead him out beyond the camp. Blasphemy is expelled. The church does not share with darkness.",
+ "lemmas": [
+  {
+   "form": "Educunt",
+   "lemma": "educo",
+   "gloss": "they lead out"
+  },
+  {
+   "form": "eum",
+   "lemma": "is",
+   "gloss": "him"
+  },
+  {
+   "form": "extra",
+   "lemma": "extra",
+   "gloss": "outside, beyond"
+  },
+  {
+   "form": "castra",
+   "lemma": "castra",
+   "gloss": "the camp"
+  },
+  {
+   "form": "Blasphemia",
+   "lemma": "blasphemia",
+   "gloss": "blasphemy"
+  },
+  {
+   "form": "expellitur",
+   "lemma": "expello",
+   "gloss": "is expelled, driven out"
+  },
+  {
+   "form": "Ecclesia",
+   "lemma": "ecclesia",
+   "gloss": "the church"
+  },
+  {
+   "form": "non",
+   "lemma": "non",
+   "gloss": "not"
+  },
+  {
+   "form": "communicat",
+   "lemma": "communico",
+   "gloss": "shares, has fellowship with"
+  },
+  {
+   "form": "tenebris",
+   "lemma": "tenebrae",
+   "gloss": "darkness"
+  }
+ ],
+ "choices": [
+  {
+   "term": "extra castra",
+   "english": "beyond the camp",
+   "why": "Preserves the spatial sense of expulsion from the community, matching the Leviticus punishment and the spiritual separation Origen draws.",
+   "rejected": [
+    "outside the camp"
+   ]
+  },
+  {
+   "term": "expellitur",
+   "english": "is expelled",
+   "why": "Keeps the passive force of the Latin, emphasizing that blasphemy is driven out rather than leaving on its own.",
+   "rejected": [
+    "is cast out",
+    "is driven away"
+   ]
+  },
+  {
+   "term": "communicat",
+   "english": "shares",
+   "why": "Renders the fellowship sense of communico, which carries the ecclesial meaning of communion and participation.",
+   "rejected": [
+    "has fellowship with",
+    "partakes"
+   ]
+  },
+  {
+   "term": "tenebris",
+   "english": "darkness",
+   "why": "Keeps the moral-spiritual sense of darkness as the realm opposed to the church, echoing the light-darkness contrast in early Christian moral teaching.",
+   "rejected": [
+    "the dark"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 24:14",
+   "method": "allusion",
+   "note": "Educunt eum extra castra"
+  }
+ ],
+ "pass_b_english": [
+  "They lead him beyond the camp. Blasphemy is expelled. The church shares nothing with darkness."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "37334c55e360e9d41ae3cf18d7d6f3b197b6c79e31d750d092aaa3121f8d09bc",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "agency",
+    "severity": "major",
+    "quote": "Blasphemy is expelled",
+    "source_quote": "Blasphemia expellitur",
+    "why": "Latin is passive but implies 'he' (the blasphemer) is expelled; English makes abstract 'blasphemy' the subject, changing agency and sense.",
+    "fix": "The blasphemer is expelled.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Blasphemia expellitur' is impersonal/passive: 'blasphemy is expelled.' No agent 'he' is specified; English correctly renders the Latin."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

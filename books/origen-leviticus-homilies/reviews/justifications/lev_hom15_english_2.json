@@ -1,0 +1,194 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom15_english:2",
+ "section": "lev_hom15_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom15_source.json"
+ },
+ "source_text": "Domus in vico sine muro sicut ager — semper redimi potest. Humilitas aperta redemptori. Christus ager noster.",
+ "thought_title": "The unwalled house as humility open to redemption",
+ "orientation": "Origen is applying the Levitical redemption rules to the soul, contrasting the walled city house with the unwalled village house.",
+ "pass_a_gloss": "A house in a village without a wall is like a field — it can always be redeemed. Humility is open to the redeemer. Christ is our field.",
+ "lemmas": [
+  {
+   "form": "Domus",
+   "lemma": "domus",
+   "gloss": "house"
+  },
+  {
+   "form": "vico",
+   "lemma": "vicus",
+   "gloss": "village"
+  },
+  {
+   "form": "sine",
+   "lemma": "sine",
+   "gloss": "without"
+  },
+  {
+   "form": "muro",
+   "lemma": "murus",
+   "gloss": "wall"
+  },
+  {
+   "form": "sicut",
+   "lemma": "sicut",
+   "gloss": "like, as"
+  },
+  {
+   "form": "ager",
+   "lemma": "ager",
+   "gloss": "field"
+  },
+  {
+   "form": "semper",
+   "lemma": "semper",
+   "gloss": "always"
+  },
+  {
+   "form": "redimi",
+   "lemma": "redimo",
+   "gloss": "to be redeemed"
+  },
+  {
+   "form": "potest",
+   "lemma": "possum",
+   "gloss": "can, is able"
+  },
+  {
+   "form": "Humilitas",
+   "lemma": "humilitas",
+   "gloss": "humility"
+  },
+  {
+   "form": "aperta",
+   "lemma": "apertus",
+   "gloss": "open"
+  },
+  {
+   "form": "redemptori",
+   "lemma": "redemptor",
+   "gloss": "to the redeemer"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  },
+  {
+   "form": "noster",
+   "lemma": "noster",
+   "gloss": "our"
+  }
+ ],
+ "choices": [
+  {
+   "term": "vico",
+   "english": "village",
+   "why": "The source contrasts a walled city with an unwalled settlement; 'village' preserves the rural, unprotected sense.",
+   "rejected": [
+    "town",
+    "hamlet"
+   ]
+  },
+  {
+   "term": "sicut ager",
+   "english": "like a field",
+   "why": "The comparison to a field is the point: the unwalled house has the same perpetual redeemability as agricultural land.",
+   "rejected": [
+    "as a field",
+    "just like farmland"
+   ]
+  },
+  {
+   "term": "redimi potest",
+   "english": "can always be redeemed",
+   "why": "The passive infinitive with 'potest' expresses ongoing possibility; 'always' renders 'semper' explicitly.",
+   "rejected": [
+    "is able to be redeemed",
+    "may be redeemed"
+   ]
+  },
+  {
+   "term": "Humilitas aperta redemptori",
+   "english": "Humility is open to the redeemer",
+   "why": "The nominative 'Humilitas' with the adjective 'aperta' and dative 'redemptori' is a compact statement; the rendering keeps the noun as subject and the dative as the one to whom it is open.",
+   "rejected": [
+    "Humility lies open to the redeemer",
+    "The redeemer finds humility open"
+   ]
+  },
+  {
+   "term": "Christus ager noster",
+   "english": "Christ is our field",
+   "why": "The three-word sentence is a theological identification; 'our field' keeps the possessive and the agricultural metaphor.",
+   "rejected": [
+    "Christ our field",
+    "Christ is the field for us"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 25:31",
+   "method": "allusion",
+   "note": "Houses in villages without walls are to be treated as fields and may be redeemed at any time."
+  }
+ ],
+ "pass_b_english": [
+  "A house in an unwalled village can always be redeemed, just like a field (Leviticus 25:31). Humility stands open to the redeemer. Christ is our field."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "9f0d124e513fdbd8c502a9f1b383c126115226e417df955240912a1a5c936d1d",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Humility stands open to the redeemer",
+    "source_quote": "Humilitas aperta redemptori",
+    "why": "Latin 'aperta' modifies 'humilitas' as predicate nominative, not a verb; 'stands open' adds unsupported verbal construction.",
+    "fix": "Open humility [is] for the redeemer, or: Humility, laid bare, [belongs] to the redeemer.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Aperta' is predicate adjective with 'humilitas'; 'stands open' is normal English rendering of the adjective, not a mistranslation."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "Christ is our field",
+    "source_quote": "Christus ager noster",
+    "why": "English drops explanatory connection: source presents Christ as 'ager noster' in apposition/explanation, but 'our field' loses the anaphoric link to 'field' in the lemma.",
+    "fix": "Christ is our field [that is, the field].",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Christus ager noster' = 'Christ is our field'; no anaphoric word exists in source. English faithfully renders the Latin."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,120 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom12_english:5",
+ "section": "lev_hom12_english:5",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom12_source.json"
+ },
+ "source_text": "Nemo maculam habens offeret. Maculae vitiorum. Christus immaculatus.",
+ "thought_title": "The unblemished offerer and Christ's purity",
+ "orientation": "Origen is applying the Levitical rule about priestly blemishes to the moral life, saying that no one with a blemish may offer, and then identifies Christ as the one without blemish.",
+ "pass_a_gloss": "No one having a blemish will offer. Blemishes of vices. Christ unblemished.",
+ "lemmas": [
+  {
+   "form": "maculam",
+   "lemma": "macula",
+   "gloss": "blemish"
+  },
+  {
+   "form": "habens",
+   "lemma": "habeo",
+   "gloss": "having"
+  },
+  {
+   "form": "offeret",
+   "lemma": "offero",
+   "gloss": "will offer"
+  },
+  {
+   "form": "vitiorum",
+   "lemma": "vitium",
+   "gloss": "of vices"
+  },
+  {
+   "form": "immaculatus",
+   "lemma": "immaculatus",
+   "gloss": "unblemished"
+  }
+ ],
+ "choices": [
+  {
+   "term": "maculam",
+   "english": "blemish",
+   "why": "The literal physical blemish of Leviticus, which Origen reads morally as vice; 'blemish' keeps the physical-to-moral transfer visible.",
+   "rejected": [
+    "spot",
+    "defect"
+   ]
+  },
+  {
+   "term": "offeret",
+   "english": "will offer",
+   "why": "Future tense of the prohibition in the law, kept as future to preserve the legal force.",
+   "rejected": [
+    "offers",
+    "may offer"
+   ]
+  },
+  {
+   "term": "immaculatus",
+   "english": "unblemished",
+   "why": "Echoes macula directly, showing Christ as the negation of the blemish; the glossary's 'holy' is not used because the term is specifically about lack of blemish.",
+   "rejected": [
+    "spotless",
+    "pure"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 21:17",
+   "method": "allusion",
+   "note": "Nemo maculam habens offeret"
+  }
+ ],
+ "pass_b_english": [
+  "No one who has a blemish will offer. The blemishes are vices. Christ is unblemished."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "47bc37022307c00e840fbb6e903cff6bdca074ce409e9ec9ca4e94363f591e24",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "No one who has a blemish will offer",
+    "source_quote": "Nemo maculam habens offeret",
+    "why": "Future 'will offer' changes command/prohibition to prediction; source is jussive/hortatory.",
+    "fix": "No one with a blemish may offer, or Let no one with a blemish offer.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'offeret' is future indicative; standard rendering of prohibitions in biblical/paraphrase context. No meaning lost."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

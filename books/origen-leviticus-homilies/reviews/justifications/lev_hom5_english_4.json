@@ -1,0 +1,171 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom5_english:4",
+ "section": "lev_hom5_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom5_source.json"
+ },
+ "source_text": "Si aspersum fuerit sanguis super vestimentum, lavabis in loco sancto. Macula oratione et lacrimis lavatur.",
+ "thought_title": "Washing the blood-stained garment in the holy place",
+ "orientation": "Origen is interpreting Leviticus 6:27 about contact with sacrificial blood, now applying the rule about blood sprinkled on a garment to the cleansing of the soul.",
+ "pass_a_gloss": "If [it] will have been sprinkled [with] blood upon [a] garment, you will wash [it] in [a] holy place. [A] stain by prayer and tears is washed.",
+ "lemmas": [
+  {
+   "form": "aspersum",
+   "lemma": "aspergo",
+   "gloss": "sprinkled"
+  },
+  {
+   "form": "fuerit",
+   "lemma": "sum",
+   "gloss": "has been"
+  },
+  {
+   "form": "sanguis",
+   "lemma": "sanguis",
+   "gloss": "blood"
+  },
+  {
+   "form": "vestimentum",
+   "lemma": "vestimentum",
+   "gloss": "garment"
+  },
+  {
+   "form": "lavabis",
+   "lemma": "lavo",
+   "gloss": "you shall wash"
+  },
+  {
+   "form": "loco",
+   "lemma": "locus",
+   "gloss": "place"
+  },
+  {
+   "form": "sancto",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "macula",
+   "lemma": "macula",
+   "gloss": "stain"
+  },
+  {
+   "form": "oratione",
+   "lemma": "oratio",
+   "gloss": "prayer"
+  },
+  {
+   "form": "lacrimis",
+   "lemma": "lacrima",
+   "gloss": "tears"
+  },
+  {
+   "form": "lavatur",
+   "lemma": "lavo",
+   "gloss": "is washed away"
+  }
+ ],
+ "choices": [
+  {
+   "term": "lavabis",
+   "english": "you shall wash",
+   "why": "The future indicative carries the force of a command in the Latin rendering of the Levitical rule; kept as a directive.",
+   "rejected": [
+    "wash",
+    "you will wash"
+   ]
+  },
+  {
+   "term": "in loco sancto",
+   "english": "in the holy place",
+   "why": "The glossary term sanctus is rendered 'holy'; the phrase preserves the ritual location required by the law.",
+   "rejected": [
+    "in a holy place",
+    "in the sanctuary"
+   ]
+  },
+  {
+   "term": "macula",
+   "english": "stain",
+   "why": "Rendered literally as 'stain' to preserve the image of a spot on a garment that must be cleansed, which Origen applies to the soul.",
+   "rejected": [
+    "spot",
+    "blemish"
+   ]
+  },
+  {
+   "term": "lavatur",
+   "english": "is washed away",
+   "why": "The passive present conveys the ongoing or general truth that the stain is removed by these means; 'washed away' captures the cleansing force.",
+   "rejected": [
+    "is washed",
+    "gets washed"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 6:27",
+   "method": "allusion",
+   "note": "Si aspersum fuerit sanguis super vestimentum, lavabis in loco sancto"
+  }
+ ],
+ "pass_b_english": [
+  "If blood has been sprinkled on a garment, you shall wash it in the holy place (Leviticus 6:27). A stain is washed away by prayer and tears."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "7b8e3504e28e14be2df36c5674e6210049ba5aee0d3203db17f63ec26b7954aa",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "A stain is washed away by prayer and tears.",
+    "source_quote": "Macula oratione et lacrimis lavatur.",
+    "why": "Source is Origen's commentary, not Scripture; English lacks marking that this is author's voice.",
+    "fix": "The stain, he says, is washed away by prayer and tears.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "English correctly renders 'Macula oratione et lacrimis lavatur' as author's commentary; no Scripture attribution in source."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "A stain is washed away by prayer and tears.",
+    "source_quote": "Si aspersum fuerit sanguis super vestimentum, lavabis in loco sancto. Macula oratione et lacrimis lavatur.",
+    "why": "English omits 'in loco sancto' / 'in the holy place' from the commentary clause, losing the spiritual location.",
+    "fix": "A stain is washed away by prayer and tears in the holy place.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'in loco sancto' belongs to Leviticus quote, correctly translated; commentary clause 'Macula...lavatur' lacks it."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

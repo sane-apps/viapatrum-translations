@@ -1,0 +1,144 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom10_english:1",
+ "section": "lev_hom10_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom10_source.json"
+ },
+ "source_text": "Qui de ecclesia sumus Moysen recipimus ut prophetam figuris futura scribentem. Iudaeus litterae prophetam negat.",
+ "thought_title": "We receive Moses as prophet of figures; the Jew denies the prophet of the letter",
+ "orientation": "Origen opens the homily by contrasting the Church's reception of Moses as a prophet writing future things in figures with the Jew's denial of the prophet of the letter.",
+ "pass_a_gloss": "We who are of the church receive Moses as a prophet writing future things in figures. The Jew denies the prophet of the letter.",
+ "lemmas": [
+  {
+   "form": "ecclesia",
+   "lemma": "ecclesia",
+   "gloss": "church"
+  },
+  {
+   "form": "sumus",
+   "lemma": "sum",
+   "gloss": "we are"
+  },
+  {
+   "form": "Moysen",
+   "lemma": "Moyses",
+   "gloss": "Moses"
+  },
+  {
+   "form": "recipimus",
+   "lemma": "recipio",
+   "gloss": "we receive"
+  },
+  {
+   "form": "prophetam",
+   "lemma": "propheta",
+   "gloss": "prophet"
+  },
+  {
+   "form": "figuris",
+   "lemma": "figura",
+   "gloss": "figures"
+  },
+  {
+   "form": "futura",
+   "lemma": "futurus",
+   "gloss": "future things"
+  },
+  {
+   "form": "scribentem",
+   "lemma": "scribo",
+   "gloss": "writing"
+  },
+  {
+   "form": "Iudaeus",
+   "lemma": "Iudaeus",
+   "gloss": "the Jew"
+  },
+  {
+   "form": "litterae",
+   "lemma": "littera",
+   "gloss": "of the letter"
+  },
+  {
+   "form": "negat",
+   "lemma": "nego",
+   "gloss": "denies"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Qui de ecclesia sumus",
+   "english": "We who are of the church",
+   "why": "Keeps the relative clause structure and the ecclesia glossary term; 'of the church' preserves the partitive sense of de.",
+   "rejected": [
+    "We church members",
+    "Those of us in the church"
+   ]
+  },
+  {
+   "term": "figuris futura scribentem",
+   "english": "writing future things in figures",
+   "why": "Preserves the instrumental force of figuris and the glossary term 'figure'; 'future things' renders the neuter plural futura as a substantive.",
+   "rejected": [
+    "writing the future in figures",
+    "writing future events figuratively"
+   ]
+  },
+  {
+   "term": "prophetam litterae",
+   "english": "the prophet of the letter",
+   "why": "Keeps the genitive litterae as 'of the letter' with the glossary term 'letter', showing the Jew's reduction of Moses to the literal sense.",
+   "rejected": [
+    "the literal prophet",
+    "the prophet according to the letter"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "We who are of the church receive Moses as a prophet writing future things in figures. The Jew denies that he is the prophet of the letter."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "acc89a64ee5b819017e55742e2d957c5322c30c4eb1d9a86bc7b1c1bb40ea9b7",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "The Jew denies that he is the prophet of the letter",
+    "source_quote": "Iudaeus litterae prophetam negat",
+    "why": "English says Jew denies Moses is prophet of letter; source says Jew denies prophet of letter (i.e., rejects the letter's prophet/Moses as prophet). Ambiguous but 'negat' takes accusative: Jew denies/rejects the prophet of the letter.",
+    "fix": "The Jew rejects the letter's prophet.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'litterae prophetam negat' = denies he is prophet of the letter; accusative with 'negat' supports English rendering. No meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

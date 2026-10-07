@@ -1,0 +1,144 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom12_english:6",
+ "section": "lev_hom12_english:6",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom12_source.json"
+ },
+ "source_text": "Sancta in loco sancto edent. Non prophanare mysteria. Timor disciplinae.",
+ "thought_title": "Eating holy things in a holy place",
+ "orientation": "Origen is explaining the rules for the priests who eat the holy offerings, applying them to the soul's approach to spiritual mysteries.",
+ "pass_a_gloss": "Holy things they will eat in a holy place. Do not profane the mysteries. Fear of discipline.",
+ "lemmas": [
+  {
+   "form": "Sancta",
+   "lemma": "sanctus",
+   "gloss": "holy things"
+  },
+  {
+   "form": "loco",
+   "lemma": "locus",
+   "gloss": "place"
+  },
+  {
+   "form": "sancto",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "edent",
+   "lemma": "edo",
+   "gloss": "they will eat"
+  },
+  {
+   "form": "prophanare",
+   "lemma": "profano",
+   "gloss": "to profane"
+  },
+  {
+   "form": "mysteria",
+   "lemma": "mysterium",
+   "gloss": "mysteries"
+  },
+  {
+   "form": "Timor",
+   "lemma": "timor",
+   "gloss": "fear"
+  },
+  {
+   "form": "disciplinae",
+   "lemma": "disciplina",
+   "gloss": "of discipline"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Sancta",
+   "english": "Holy things",
+   "why": "Neuter plural of sanctus used substantivally for the sacred offerings; kept as a noun phrase to preserve the ritual sense.",
+   "rejected": [
+    "The holy",
+    "Sacred items"
+   ]
+  },
+  {
+   "term": "edent",
+   "english": "they will eat",
+   "why": "Future indicative active, a command-like statement of what the priests are to do; kept as future to match the source's tense.",
+   "rejected": [
+    "they eat",
+    "let them eat"
+   ]
+  },
+  {
+   "term": "Non prophanare mysteria",
+   "english": "Do not profane the mysteries",
+   "why": "The infinitive prophanare with non functions as a prohibition; rendered as a direct negative command to preserve the imperative force.",
+   "rejected": [
+    "Not to profane the mysteries",
+    "The mysteries are not to be profaned"
+   ]
+  },
+  {
+   "term": "Timor disciplinae",
+   "english": "Fear of discipline",
+   "why": "A nominal phrase, likely a heading-like summary or exhortation; kept as a bare noun phrase to match the source's abruptness.",
+   "rejected": [
+    "The fear of instruction",
+    "Discipline's fear"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 10:13",
+   "method": "wording",
+   "note": "Sancta in loco sancto edent"
+  }
+ ],
+ "pass_b_english": [
+  "They will eat the holy things in a holy place (Leviticus 10:13). Do not profane the mysteries. Fear of discipline."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "3c56cb2c5f7b68e6f28900ef8a237ba941348905280238370d52af2893ede765",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Fear of discipline",
+    "source_quote": "Timor disciplinae",
+    "why": "Latin 'disciplina' means instruction/teaching, not discipline as punishment or control.",
+    "fix": "Reverence for instruction, or: Awe of teaching.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'disciplina' includes discipline, instruction, and training; 'discipline' is within normal range, not a mistranslation."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

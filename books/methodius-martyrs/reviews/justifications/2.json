@@ -1,0 +1,195 @@
+{
+ "excerpt_id": "methodius-martyrs:2",
+ "section": "2",
+ "edition": {
+  "language": "grc",
+  "path": "books/methodius-martyrs/translations/mart_source.json"
+ },
+ "source_text": "Πάσης ἀγαθῆς ἡ καταρχὴ πράξεως ἐν τῇ ἡμετέρᾳ βουλῇ τὴν ὑπόστασιν κέκτηται, τὸ δὲ συμπέρασμα ἐν τῷ θεῷ.",
+ "thought_title": "Beginning in human will, completion in God",
+ "orientation": "Methodius is closing the treatise by stating the principle that grounds his argument about martyrdom as a divine gift.",
+ "pass_a_gloss": "Of every good action the beginning has acquired its substance in our will, but the completion is in God.",
+ "lemmas": [
+  {
+   "form": "Πάσης",
+   "lemma": "πᾶς",
+   "gloss": "every"
+  },
+  {
+   "form": "ἀγαθῆς",
+   "lemma": "ἀγαθός",
+   "gloss": "good"
+  },
+  {
+   "form": "καταρχὴ",
+   "lemma": "καταρχή",
+   "gloss": "beginning"
+  },
+  {
+   "form": "πράξεως",
+   "lemma": "πρᾶξις",
+   "gloss": "action"
+  },
+  {
+   "form": "ἡμετέρᾳ",
+   "lemma": "ἡμέτερος",
+   "gloss": "our"
+  },
+  {
+   "form": "βουλῇ",
+   "lemma": "βουλή",
+   "gloss": "will"
+  },
+  {
+   "form": "ὑπόστασιν",
+   "lemma": "ὑπόστασις",
+   "gloss": "substance"
+  },
+  {
+   "form": "κέκτηται",
+   "lemma": "κτάομαι",
+   "gloss": "has acquired"
+  },
+  {
+   "form": "συμπέρασμα",
+   "lemma": "συμπέρασμα",
+   "gloss": "completion"
+  },
+  {
+   "form": "θεῷ",
+   "lemma": "θεός",
+   "gloss": "God"
+  }
+ ],
+ "choices": [
+  {
+   "term": "καταρχὴ",
+   "english": "beginning",
+   "why": "Glossary term; renders the starting point of an action.",
+   "rejected": [
+    "origin",
+    "start"
+   ]
+  },
+  {
+   "term": "βουλῇ",
+   "english": "will",
+   "why": "Glossary term; human intention or resolve.",
+   "rejected": [
+    "intention",
+    "resolve"
+   ]
+  },
+  {
+   "term": "ὑπόστασιν",
+   "english": "substance",
+   "why": "Glossary term; the grounding reality of the beginning in human will.",
+   "rejected": [
+    "foundation",
+    "basis"
+   ]
+  },
+  {
+   "term": "συμπέρασμα",
+   "english": "completion",
+   "why": "Glossary term; the conclusion or fulfillment of the action.",
+   "rejected": [
+    "outcome",
+    "conclusion"
+   ]
+  },
+  {
+   "term": "κέκτηται",
+   "english": "has acquired",
+   "why": "Perfect tense of κτάομαι; conveys a state of possession resulting from acquisition.",
+   "rejected": [
+    "possesses",
+    "has"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Every good action has its beginning in our will, in which it has its substance, but its completion rests with God."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "1902e7707c55c09c95d72197be7ea2c90d118fc02a0b5d90e75b9d2f071b3dd6",
+ "source_sha256": "f8b5a165d35ff72f992b5d113162623500a937d0b37e55311ce6fff0d6b01e2e",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "where it acquires its substance",
+     "source_quote": "τὴν ὑπόστασιν κέκτηται",
+     "why": "κέκτηται means 'has/possesses,' not 'acquires'; ὑπόστασις is 'substance' but the clause structure is misrendered.",
+     "fix": "Every good action has its beginning in our will, in which it has its substance, but its completion rests with God.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "κέκτηται is perfect 'has/possesses,' not 'acquires'; misrendered as process. Also 'where' wrongly makes βουλῇ locative rather than source."
+    }
+   ],
+   "edits": [
+    {
+     "old": "where it acquires its substance",
+     "new": "in which it has its substance"
+    }
+   ],
+   "fixed": [
+    "Changed 'where it acquires its substance' to 'in which it has its substance' because κέκτηται means 'has/possesses,' not 'acquires,' and the relative clause should reflect possession rather than acquisition."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "in which it has its substance",
+    "source_quote": "ἐν τῇ ἡμετέρᾳ βουλῇ τὴν ὑπόστασιν κέκτηται",
+    "why": "Relative 'which' wrongly refers to 'will' not 'beginning'; 'substance' belongs to the beginning, not will.",
+    "fix": "Every good action has its beginning in our will, and this beginning has its substance there, but its completion rests with God.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Greek syntax: ἐν τῇ βουλῇ τὴν ὑπόστασιν κέκτηται means 'in our will it has substance'; 'which' correctly refers to will, not beginning."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

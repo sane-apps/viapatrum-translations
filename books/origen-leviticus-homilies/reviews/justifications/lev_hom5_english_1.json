@@ -1,0 +1,160 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom5_english:1",
+ "section": "lev_hom5_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom5_source.json"
+ },
+ "source_text": "In loco ubi offeruntur holocausta occident peccatum. Idem locus ignis — Christus et iudicium et propitiatio.",
+ "thought_title": "Christ as both judgment and mercy at the place of burnt offering",
+ "orientation": "Origen is explaining the Levitical rule about where the sin offering is killed, applying it spiritually to Christ.",
+ "pass_a_gloss": "In [the] place where are offered burnt offerings they shall slay [the] sin. [The] same place [of] fire — Christ both judgment and propitiation.",
+ "lemmas": [
+  {
+   "form": "loco",
+   "lemma": "locus",
+   "gloss": "place"
+  },
+  {
+   "form": "offeruntur",
+   "lemma": "offero",
+   "gloss": "are offered"
+  },
+  {
+   "form": "holocausta",
+   "lemma": "holocaustum",
+   "gloss": "burnt offerings"
+  },
+  {
+   "form": "occident",
+   "lemma": "occido",
+   "gloss": "they will kill"
+  },
+  {
+   "form": "peccatum",
+   "lemma": "peccatum",
+   "gloss": "sin offering"
+  },
+  {
+   "form": "idem",
+   "lemma": "idem",
+   "gloss": "the same"
+  },
+  {
+   "form": "locus",
+   "lemma": "locus",
+   "gloss": "place"
+  },
+  {
+   "form": "ignis",
+   "lemma": "ignis",
+   "gloss": "fire"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  },
+  {
+   "form": "iudicium",
+   "lemma": "iudicium",
+   "gloss": "judgment"
+  },
+  {
+   "form": "propitiatio",
+   "lemma": "propitiatio",
+   "gloss": "propitiation"
+  }
+ ],
+ "choices": [
+  {
+   "term": "peccatum",
+   "english": "sin offering",
+   "why": "In Leviticus the noun peccatum often denotes the sin offering itself, not the abstract act; the context of killing at the altar requires the sacrificial sense.",
+   "rejected": [
+    "sin",
+    "the sin"
+   ]
+  },
+  {
+   "term": "occident",
+   "english": "they will kill",
+   "why": "The future indicative preserves the ritual prescription's force as a standing rule, not a past event.",
+   "rejected": [
+    "they kill",
+    "they killed"
+   ]
+  },
+  {
+   "term": "ignis",
+   "english": "fire",
+   "why": "The noun stands as a predicate identifying the place with fire, which Origen then interprets as Christ's double role.",
+   "rejected": [
+    "a fire",
+    "the fire"
+   ]
+  },
+  {
+   "term": "propitiatio",
+   "english": "propitiation",
+   "why": "The term carries the sense of mercy seat and atoning appeasement, matching Origen's contrast with judgment.",
+   "rejected": [
+    "mercy",
+    "atonement"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 4:24",
+   "method": "wording",
+   "note": "In loco ubi offeruntur holocausta occident peccatum"
+  }
+ ],
+ "pass_b_english": [
+  "In the place where burnt offerings are offered, they will kill the sin offering. That same place is fire—Christ is both judgment and propitiation."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "f83ea05feddac5c6ce09de08207c49e971342d2a944875a41ea408d5c54726e8",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "That same place is fire",
+    "source_quote": "Idem locus ignis",
+    "why": "Latin 'ignis' is nominative, but context demands predicate: 'is a fire' or 'is fire' misses that this is apposition/identification with Christ. The fire IS Christ, who is judgment and propitiation. English makes 'place' the subject of two predicates awkwardly.",
+    "fix": "That same place is the fire: Christ is both judgment and propitiation.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Idem locus ignis' is ambiguous apposition; 'is fire' is acceptable. Not a clear major error."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

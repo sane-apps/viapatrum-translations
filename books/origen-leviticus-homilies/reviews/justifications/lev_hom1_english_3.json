@@ -1,0 +1,256 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom1_english:3",
+ "section": "lev_hom1_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom1_source.json"
+ },
+ "source_text": "Imponet manum suam super caput hostiae, et acceptabilis erit. Manus imposita communionem significat: quae offeruntur, nostra fiunt. Christus caput; nos membra. Imponere manum — consentire et confiteri peccata quae in hostiam transeunt. Sanguis adspersus ad altare: sine sanguinis effusione non fit remissio. Pontifex noster Christus semel obtulit seipsum.",
+ "thought_title": "Laying on of hands and the blood of Christ",
+ "orientation": "Origen is explaining the ritual of the burnt offering from Leviticus, interpreting each action as a figure of Christ and the Christian's participation in his sacrifice.",
+ "pass_a_gloss": "He will place [his] hand upon [the] head [of the] victim, and acceptable it will be. [The] hand placed communion signifies: [the things] which are offered, ours they become. Christ [the] head; we [the] members. To place [the] hand — to consent and to confess [the] sins which into [the] victim pass. [The] blood sprinkled at [the] altar: without [of] blood [the] pouring out not happens remission. [The] high priest our Christ once offered himself.",
+ "lemmas": [
+  {
+   "form": "Imponet",
+   "lemma": "impono",
+   "gloss": "he will lay upon"
+  },
+  {
+   "form": "hostiae",
+   "lemma": "hostia",
+   "gloss": "victim"
+  },
+  {
+   "form": "acceptabilis",
+   "lemma": "acceptabilis",
+   "gloss": "acceptable"
+  },
+  {
+   "form": "communionem",
+   "lemma": "communio",
+   "gloss": "communion"
+  },
+  {
+   "form": "membra",
+   "lemma": "membrum",
+   "gloss": "members"
+  },
+  {
+   "form": "consentire",
+   "lemma": "consentio",
+   "gloss": "to consent"
+  },
+  {
+   "form": "confiteri",
+   "lemma": "confiteor",
+   "gloss": "to confess"
+  },
+  {
+   "form": "transeunt",
+   "lemma": "transeo",
+   "gloss": "they pass over"
+  },
+  {
+   "form": "adspersus",
+   "lemma": "adspergo",
+   "gloss": "sprinkled"
+  },
+  {
+   "form": "effusione",
+   "lemma": "effusio",
+   "gloss": "pouring out"
+  },
+  {
+   "form": "remissio",
+   "lemma": "remissio",
+   "gloss": "remission"
+  },
+  {
+   "form": "obtulit",
+   "lemma": "offero",
+   "gloss": "he offered"
+  }
+ ],
+ "choices": [
+  {
+   "term": "hostiae",
+   "english": "victim",
+   "why": "The Latin hostia refers to the sacrificial animal; 'victim' preserves the sacrificial sense without importing later liturgical connotations.",
+   "rejected": [
+    "offering",
+    "sacrifice"
+   ]
+  },
+  {
+   "term": "communionem",
+   "english": "communion",
+   "why": "The term denotes shared participation; 'communion' captures the theological sense of union with Christ in the offering.",
+   "rejected": [
+    "fellowship",
+    "sharing"
+   ]
+  },
+  {
+   "term": "sanguinis effusione",
+   "english": "pouring out of blood",
+   "why": "The phrase echoes Hebrews 9:22; 'pouring out' is literal and preserves the physical imagery of the ritual.",
+   "rejected": [
+    "shedding of blood",
+    "bloodshed"
+   ]
+  },
+  {
+   "term": "semel obtulit seipsum",
+   "english": "offered himself once",
+   "why": "The adverb semel is emphatic, contrasting Christ's single offering with repeated Levitical sacrifices; 'once' must be retained.",
+   "rejected": [
+    "offered himself",
+    "made a single offering of himself"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 1:4",
+   "method": "wording",
+   "note": "Imponet manum suam super caput hostiae, et acceptabilis erit"
+  },
+  {
+   "display": "Hebrews 9:22",
+   "method": "wording",
+   "note": "sine sanguinis effusione non fit remissio"
+  },
+  {
+   "display": "Hebrews 7:27",
+   "method": "wording",
+   "note": "Pontifex noster Christus semel obtulit seipsum"
+  }
+ ],
+ "pass_b_english": [
+  "He will lay his hand upon the head of the victim, and it will be acceptable. The laying on of the hand signifies communion: the things that are offered become ours. Christ is the head; we are the members. To lay on the hand is to consent and to confess the sins that pass over into the victim. The blood is sprinkled at the altar: without the pouring out of blood there is no remission. Our high priest Christ offered himself once."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "a6c1eed9c18714d9e1bff068cac80db8473115661e53b73a3d66f4f8c1dc4da0",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "(Hebrews 7:27)",
+     "source_quote": "Pontifex noster Christus semel obtulit seipsum",
+     "why": "The source quotes no Scripture here; this is Origen's own statement. The English wrongly adds Hebrews 7:27 as a citation, making authorial exposition appear as biblical quotation.",
+     "fix": "Our high priest Christ offered himself once.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source 'Pontifex noster Christus semel obtulit seipsum' has no citation; adding Hebrews 7:27 misleads readers."
+    },
+    {
+     "class": "addition",
+     "severity": "major",
+     "quote": "(Leviticus 1:4)",
+     "source_quote": "Imponet manum suam super caput hostiae, et acceptabilis erit",
+     "why": "No chapter-verse citation exists in the source text. Adding it supplies information the source does not claim.",
+     "fix": "He will lay his hand upon the head of the victim, and it will be acceptable.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source 'Imponet manum...' lacks citation; adding Leviticus 1:4 misrepresents source text."
+    },
+    {
+     "class": "addition",
+     "severity": "major",
+     "quote": "(Hebrews 9:22)",
+     "source_quote": "Sanguis adspersus ad altare: sine sanguinis effusione non fit remissio",
+     "why": "No biblical citation appears in source; this is authorial exposition. Adding Hebrews 9:22 misrepresents the text's voice and genre.",
+     "fix": "The blood is sprinkled at the altar: without the pouring out of blood there is no remission.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source 'Sanguis adspersus...' lacks citation; adding Hebrews 9:22 misrepresents source text."
+    }
+   ],
+   "edits": [
+    {
+     "old": "and it will be acceptable (Leviticus 1:4).",
+     "new": "and it will be acceptable."
+    },
+    {
+     "old": "without the pouring out of blood there is no remission (Hebrews 9:22).",
+     "new": "without the pouring out of blood there is no remission."
+    },
+    {
+     "old": "Our high priest Christ offered himself once (Hebrews 7:27).",
+     "new": "Our high priest Christ offered himself once."
+    }
+   ],
+   "fixed": [
+    "Removed (Leviticus 1:4): source has no citation, just 'Imponet manum suam super caput hostiae, et acceptabilis erit'.",
+    "Removed (Hebrews 9:22): source has no citation, just 'sine sanguinis effusione non fit remissio'.",
+    "Removed (Hebrews 7:27): source has no citation, just 'Pontifex noster Christus semel obtulit seipsum'."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 3,
+    "rejected": 2,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "the things that are offered become ours",
+    "source_quote": "quae offeruntur, nostra fiunt",
+    "why": "Latin 'nostra fiunt' means 'become ours' but context shows communion: we become united with what is offered, not that offerings become our property. 'Become ours' reverses the theological direction of union with Christ.",
+    "fix": "what is offered becomes ours, or we are joined to what is offered",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'quae offeruntur, nostra fiunt' literally says offered things become ours; 'become ours' is correct, not reversed."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "to consent and to confess",
+    "source_quote": "consentire et confiteri",
+    "why": "'Consentire' here means 'to agree together, to unite oneself with' (the victim/Christ), not merely 'to consent' as mental agreement. The theological sense of participatory union is weakened.",
+    "fix": "to join oneself and to confess",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'consentire' includes 'to consent/agree'; rendering is within normal range, not a major meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 3,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

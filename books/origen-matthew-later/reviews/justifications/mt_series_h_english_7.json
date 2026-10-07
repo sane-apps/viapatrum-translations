@@ -1,0 +1,197 @@
+{
+ "excerpt_id": "origen-matthew-later:mt_series_h_english:7",
+ "section": "mt_series_h_english:7",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-matthew-later/translations/mt_series_h_source.json"
+ },
+ "source_text": "Ecce appropinquavit qui me tradet. Non idem est appropinquare Jesu et appropinquare ad tradendum. Traditor elongaverat se peccatis a Jesu, et proditione qua tradere eum consiliatus est; appropinquavit ad tradendum Filium Dei quem jam prodiderat. Omnes transgressores prius produnt Jesum, postea tradunt.",
+ "thought_title": "Approaching Jesus versus approaching to betray him",
+ "orientation": "Origen is commenting on Jesus' words in Gethsemane, 'Behold, the one who betrays me has drawn near,' and distinguishes two kinds of approaching Jesus.",
+ "pass_a_gloss": "Behold, the one who will betray me has drawn near. It is not the same thing to draw near to Jesus and to draw near for the purpose of betraying. The betrayer had withdrawn himself from Jesus by sins, and by the betrayal by which he planned to betray him; he drew near to betray the Son of God whom he had already betrayed. All transgressors first betray Jesus, afterward they hand him over.",
+ "lemmas": [
+  {
+   "form": "appropinquavit",
+   "lemma": "appropinquo",
+   "gloss": "has drawn near"
+  },
+  {
+   "form": "tradet",
+   "lemma": "trado",
+   "gloss": "will betray"
+  },
+  {
+   "form": "tradendum",
+   "lemma": "trado",
+   "gloss": "betraying"
+  },
+  {
+   "form": "Traditor",
+   "lemma": "traditor",
+   "gloss": "the betrayer"
+  },
+  {
+   "form": "elongaverat",
+   "lemma": "elongo",
+   "gloss": "had withdrawn"
+  },
+  {
+   "form": "peccatis",
+   "lemma": "peccatum",
+   "gloss": "by sins"
+  },
+  {
+   "form": "proditione",
+   "lemma": "proditio",
+   "gloss": "by the betrayal"
+  },
+  {
+   "form": "consiliatus est",
+   "lemma": "consilior",
+   "gloss": "he planned"
+  },
+  {
+   "form": "prodiderat",
+   "lemma": "prodo",
+   "gloss": "had betrayed"
+  },
+  {
+   "form": "transgressores",
+   "lemma": "transgressor",
+   "gloss": "transgressors"
+  },
+  {
+   "form": "produnt",
+   "lemma": "prodo",
+   "gloss": "betray"
+  },
+  {
+   "form": "tradunt",
+   "lemma": "trado",
+   "gloss": "hand over"
+  }
+ ],
+ "choices": [
+  {
+   "term": "appropinquare ad tradendum",
+   "english": "to draw near for the purpose of betraying",
+   "why": "The gerund with ad expresses purpose, distinguishing the act of approaching from the intent to betray.",
+   "rejected": [
+    "to draw near to betray",
+    "to approach unto betrayal"
+   ]
+  },
+  {
+   "term": "elongaverat se peccatis a Jesu",
+   "english": "had withdrawn himself from Jesus by sins",
+   "why": "The reflexive with ablative of means shows the moral separation caused by sins.",
+   "rejected": [
+    "had distanced himself from Jesus through sins",
+    "had removed himself from Jesus in sins"
+   ]
+  },
+  {
+   "term": "quem jam prodiderat",
+   "english": "whom he had already betrayed",
+   "why": "Jam marks the prior inward betrayal, matching Origen's distinction between inward betrayal and outward handing over.",
+   "rejected": [
+    "whom he had now betrayed",
+    "whom he had by then betrayed"
+   ]
+  },
+  {
+   "term": "produnt ... tradunt",
+   "english": "betray ... hand over",
+   "why": "The two verbs are kept distinct to preserve Origen's contrast between inward betrayal (prodo) and outward handing over (trado).",
+   "rejected": [
+    "betray ... betray",
+    "give up ... deliver"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Matthew 26:46",
+   "method": "wording",
+   "note": "Ecce appropinquavit qui me tradet"
+  }
+ ],
+ "pass_b_english": [
+  "\"Look, the one who will betray me has drawn near\" (Matthew 26:46). Drawing near to Jesus is not the same thing as drawing near for the purpose of betraying him. The betrayer had withdrawn himself from Jesus by sins, and by the betrayal he had planned to carry out against him; he drew near to hand over the Son of God, whom he had already betrayed. All transgressors first betray Jesus, and afterward they hand him over."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "cc30e27d407f24d3bb231029b1afad3f31f76773d7d969cd3c6ac7a0687f49ad",
+ "source_sha256": "ee1ad7be283167cc7571c5fffc4baacb4b2d63d047f5192ec669e370a6973274",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 4,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "withdrawn himself from Jesus by sins",
+    "source_quote": "elongaverat se peccatis a Jesu",
+    "why": "\"Elongaverat\" means \"had distanced/removed himself,\" not \"withdrawn himself\" which implies active retreat rather than separation caused by sin.",
+    "fix": "The betrayer had distanced himself from Jesus by sins",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Withdrawn himself' is within normal range for 'elongaverat se'; no meaning lost."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "and by the betrayal he had planned to carry out against him",
+    "source_quote": "et proditione qua tradere eum consiliatus est",
+    "why": "\"Consiliatus est\" means \"had resolved/decided,\" not \"planned to carry out against him\" which adds hostile direction absent in source.",
+    "fix": "and by the betrayal he had resolved to hand him over",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Planned to carry out against him' reasonably renders 'consiliatus est'; no major distortion."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "he drew near to hand over the Son of God, whom he had already betrayed",
+    "source_quote": "appropinquavit ad tradendum Filium Dei quem jam prodiderat",
+    "why": "English uses \"hand over\" for \"tradendum\" but \"betrayed\" for \"prodiderat,\" obscuring that both are the same verb root; Latin uses \"tradere\" twice for deliberate theological point.",
+    "fix": "he drew near to betray the Son of God, whom he had already betrayed",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin has 'prodiderat' (prodere) and 'tradendum' (tradere), different verbs; English 'betray/hand over' captures distinction."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "All transgressors first betray Jesus, and afterward they hand him over",
+    "source_quote": "Omnes transgressores prius produnt Jesum, postea tradunt",
+    "why": "Same issue: English splits \"produnt/tradunt\" into \"betray/hand over,\" losing the wordplay that both are forms of \"tradere\" (hand over/betray).",
+    "fix": "All transgressors first betray Jesus, and afterward they betray him",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'produnt' and 'tradunt' are different verbs (prodere vs tradere); English correctly distinguishes them."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 4,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,187 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom12_english:4",
+ "section": "lev_hom12_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom12_source.json"
+ },
+ "source_text": "Qui non odit patrem…\nUxorem virginem de populo suo accipiat. Ecclesia virgo casta Christo. Non vidua haeresum.",
+ "thought_title": "The high priest's marriage as the Church's chastity",
+ "orientation": "Origen is interpreting the high priest's marriage rules from Leviticus 21, applying them spiritually to Christ and the Church.",
+ "pass_a_gloss": "Who [does] not hate [his] father… [Let him] take a wife [who is] a virgin from his [own] people. [The] Church [is] a virgin pure to Christ. Not [a] widow of heresies.",
+ "lemmas": [
+  {
+   "form": "odit",
+   "lemma": "odi",
+   "gloss": "hates"
+  },
+  {
+   "form": "patrem",
+   "lemma": "pater",
+   "gloss": "father"
+  },
+  {
+   "form": "Uxorem",
+   "lemma": "uxor",
+   "gloss": "wife"
+  },
+  {
+   "form": "virginem",
+   "lemma": "virgo",
+   "gloss": "virgin"
+  },
+  {
+   "form": "populo",
+   "lemma": "populus",
+   "gloss": "people"
+  },
+  {
+   "form": "accipiat",
+   "lemma": "accipio",
+   "gloss": "let him take"
+  },
+  {
+   "form": "Ecclesia",
+   "lemma": "ecclesia",
+   "gloss": "Church"
+  },
+  {
+   "form": "virgo",
+   "lemma": "virgo",
+   "gloss": "virgin"
+  },
+  {
+   "form": "casta",
+   "lemma": "castus",
+   "gloss": "chaste"
+  },
+  {
+   "form": "Christo",
+   "lemma": "Christus",
+   "gloss": "for Christ"
+  },
+  {
+   "form": "vidua",
+   "lemma": "vidua",
+   "gloss": "widow"
+  },
+  {
+   "form": "haeresum",
+   "lemma": "haeresis",
+   "gloss": "of heresies"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Uxorem virginem",
+   "english": "a virgin wife",
+   "why": "Keeps the literal force of the Levitical requirement, which Origen immediately applies spiritually.",
+   "rejected": [
+    "a wife who is a virgin",
+    "a virgin as wife"
+   ]
+  },
+  {
+   "term": "de populo suo",
+   "english": "from his own people",
+   "why": "Preserves the possessive and the source restriction, which matters for the spiritual reading of the Church as Christ's own.",
+   "rejected": [
+    "from his people",
+    "of his own nation"
+   ]
+  },
+  {
+   "term": "Ecclesia virgo casta Christo",
+   "english": "The Church is a chaste virgin for Christ",
+   "why": "Supplies the copula to make the terse Latin application clear in English while keeping the word order and the dative of reference.",
+   "rejected": [
+    "The Church, a chaste virgin, to Christ",
+    "A chaste virgin Church for Christ"
+   ]
+  },
+  {
+   "term": "Non vidua haeresum",
+   "english": "Not a widow of heresies",
+   "why": "Keeps the genitive 'of heresies' to show the Church is not bereft of the true faith and married to error.",
+   "rejected": [
+    "Not a heretical widow",
+    "Not a widow from heresies"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 21:13-14",
+   "method": "wording",
+   "note": "Uxorem virginem de populo suo accipiat"
+  }
+ ],
+ "pass_b_english": [
+  "Whoever does not hate father… Let him take a virgin wife from his own people (Leviticus 21:13-14). The Church is a chaste virgin for Christ. Not a widow of heresies."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "e8e9b6b47222edfebc3ede989512c30322577ab1d9d4bc0bc35f49c7bced3658",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 3,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "Whoever does not hate father…",
+    "source_quote": "Qui non odit patrem…",
+    "why": "Missing 'mother' and 'wife/children' from Luke 14:26 allusion; also 'hate' is Christ's command, not Levitical law.",
+    "fix": "Whoever does not hate father and mother, wife and children… (Luke 14:26).",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source 'Qui non odit patrem…' has ellipsis; translator faithfully renders truncated text, not full Luke 14:26."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "Let him take a virgin wife from his own people (Leviticus 21:13-14).",
+    "source_quote": "Uxorem virginem de populo suo accipiat.",
+    "why": "Missing 'et' and broader context: high priest must marry virgin, not widow/divorced/prostitute.",
+    "fix": "Let him take a virgin wife from his own people, neither a widow, nor divorced, nor defiled, a harlot (Lev 21:13-14).",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source 'Uxorem virginem de populo suo accipiat' lacks 'et'; citation Lev 21:13-14 supplies context. No source words omitted."
+   },
+   {
+    "class": "addition",
+    "severity": "major",
+    "quote": "Not a widow of heresies.",
+    "source_quote": "Non vidua haeresum.",
+    "why": "Source says 'Not a widow: heresies' or 'Not a widow of heresies'—but 'vidua haeresum' is genitive plural; English adds article 'a' making it sound like one widow.",
+    "fix": "Not a widow: heresies.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'a widow' is normal English rendering of singular 'vidua'; article required by English grammar, not meaning-changing addition."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 3,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

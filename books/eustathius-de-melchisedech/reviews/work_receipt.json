@@ -3,8 +3,8 @@
  "pipeline": "work_pipeline",
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
  "checkers": [
-  "@cf/openai/gpt-oss-120b",
-  "@cf/moonshotai/kimi-k2.6"
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
  ],
  "boundary_moves": [
   {
@@ -25,12 +25,13 @@
   3,
   4
  ],
- "applied": "2026-10-03T23:01:49Z",
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-07T03:14:27Z",
  "sections": [
   {
    "section": "u01-open",
    "source_sha256": "54614e16c3ec2120c375534d735c4155fd6802fd9905eadfb4ab386c3609bc01",
-   "english_sha256": "9e6dbc1c14a04bbd8cc716b8d7584dfd422b33b0f5b4a118a526da552e2f24fd",
+   "english_sha256": "afa9ded633871ee8123181676ff5bf659e8f275445aaacdbfcd14aa0f90d5e42",
    "justification": "reviews/justifications/u01-open.json"
   },
   {
@@ -50,20 +51,6 @@
    "source_sha256": "35cf0ca874efd6f508b2a73341e1a842ae146ed78f3f904a77db2c9e21dde1fc",
    "english_sha256": "f2cb8439a3cd75fc5cf42a260da0af94fd0df0c7186ad6f642856e8a0e30d298",
    "justification": "reviews/justifications/u01-rem-close.json"
-  }
- ],
- "revisions": [
-  {
-   "at": "2026-10-05T20:17:54Z",
-   "kind": "reverted_reader_edits",
-   "sections": [
-    "u01-rem-close",
-    "u01-rem-early",
-    "u01-rem-mid"
-   ],
-   "edits_undone": 7,
-   "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
-   "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
   }
  ]
 }

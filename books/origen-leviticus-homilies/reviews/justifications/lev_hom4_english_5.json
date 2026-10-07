@@ -1,0 +1,150 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom4_english:5",
+ "section": "lev_hom4_english:5",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom4_source.json"
+ },
+ "source_text": "Iuraverit falso. Iusiurandum mendax nomen Dei usurpat. Sit timor iuramenti.",
+ "thought_title": "False Oath Usurps God's Name",
+ "orientation": "Origen is listing sins that require confession and restitution, now turning to the sin of swearing falsely.",
+ "pass_a_gloss": "He will have sworn falsely. An oath lying [the] name [of] God usurps. Let there be fear [of] oath-taking.",
+ "lemmas": [
+  {
+   "form": "Iuraverit",
+   "lemma": "iuro",
+   "gloss": "he has sworn"
+  },
+  {
+   "form": "falso",
+   "lemma": "falsus",
+   "gloss": "falsely"
+  },
+  {
+   "form": "Iusiurandum",
+   "lemma": "iusiurandum",
+   "gloss": "an oath"
+  },
+  {
+   "form": "mendax",
+   "lemma": "mendax",
+   "gloss": "lying"
+  },
+  {
+   "form": "nomen",
+   "lemma": "nomen",
+   "gloss": "name"
+  },
+  {
+   "form": "Dei",
+   "lemma": "Deus",
+   "gloss": "of God"
+  },
+  {
+   "form": "usurpat",
+   "lemma": "usurpo",
+   "gloss": "usurps"
+  },
+  {
+   "form": "Sit",
+   "lemma": "sum",
+   "gloss": "let there be"
+  },
+  {
+   "form": "timor",
+   "lemma": "timor",
+   "gloss": "fear"
+  },
+  {
+   "form": "iuramenti",
+   "lemma": "iuramentum",
+   "gloss": "of an oath"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Iuraverit falso",
+   "english": "He has sworn falsely",
+   "why": "Perfect subjunctive in a conditional or generalizing context; rendered as a plain perfect to keep the force of a completed act.",
+   "rejected": [
+    "If he swears falsely",
+    "He swears falsely"
+   ]
+  },
+  {
+   "term": "Iusiurandum mendax",
+   "english": "A lying oath",
+   "why": "Adjective mendax modifies the noun oath; kept as adjective-noun to preserve the compact Latin phrase.",
+   "rejected": [
+    "An oath that lies",
+    "A false swearing"
+   ]
+  },
+  {
+   "term": "usurpat",
+   "english": "usurps",
+   "why": "The verb means to seize or take for oneself unlawfully; 'usurps' captures the wrongful appropriation of God's name.",
+   "rejected": [
+    "takes",
+    "uses",
+    "claims"
+   ]
+  },
+  {
+   "term": "Sit timor iuramenti",
+   "english": "Let there be fear of an oath",
+   "why": "Jussive subjunctive expressing a command or exhortation; kept as 'let there be' to preserve the imperative force.",
+   "rejected": [
+    "There should be fear of an oath",
+    "One must fear an oath"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "He has sworn falsely. A lying oath usurps the name of God. Let there be fear of an oath."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "b0df7e90d31a1c72695a7f52b516a13fe737cef270979d30939ad4e70fe4fea9",
+ "pass_a_redone": 1,
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "Let there be fear of an oath",
+    "source_quote": "Sit timor iuramenti",
+    "why": "Imperative 'sit' is jussive/exhortative 'let there be', but context demands 'may there be' or 'there should be' as moral prescription, not command to reader.",
+    "fix": "There must be fear of swearing an oath.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Sit' as jussive subjunctive naturally renders 'let there be'; 'may there be' is a preference, not a meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,170 @@
+{
+ "excerpt_id": "origen-psalms-rufinus:ps36_hom3_english:1",
+ "section": "ps36_hom3_english:1",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-psalms-rufinus/translations/ps36_hom3_source.json"
+ },
+ "source_text": "De eodem psalmo: peccatores tetenderunt arcum. Duo milites armati — miles Dei loricam iustitiae, miles diaboli loricam iniustitiae; galea salutis contra galeam perditionis.",
+ "thought_title": "Two armed soldiers: God's armor versus the devil's armor",
+ "orientation": "Origen is beginning a new homily on the same psalm, taking up the verse about sinners bending the bow and contrasting the equipment of God's soldier with that of the devil's soldier.",
+ "pass_a_gloss": "On the same psalm: sinners have bent the bow. Two armed soldiers — the soldier of God has the breastplate of righteousness, the soldier of the devil has the breastplate of unrighteousness; the helmet of salvation against the helmet of destruction.",
+ "lemmas": [
+  {
+   "form": "peccatores",
+   "lemma": "peccator",
+   "gloss": "sinners"
+  },
+  {
+   "form": "tetenderunt",
+   "lemma": "tendo",
+   "gloss": "have bent"
+  },
+  {
+   "form": "arcum",
+   "lemma": "arcus",
+   "gloss": "bow"
+  },
+  {
+   "form": "milites",
+   "lemma": "miles",
+   "gloss": "soldiers"
+  },
+  {
+   "form": "armati",
+   "lemma": "armo",
+   "gloss": "armed"
+  },
+  {
+   "form": "loricam",
+   "lemma": "lorica",
+   "gloss": "breastplate"
+  },
+  {
+   "form": "iustitiae",
+   "lemma": "iustitia",
+   "gloss": "of righteousness"
+  },
+  {
+   "form": "iniustitiae",
+   "lemma": "iniustitia",
+   "gloss": "of unrighteousness"
+  },
+  {
+   "form": "galea",
+   "lemma": "galea",
+   "gloss": "helmet"
+  },
+  {
+   "form": "salutis",
+   "lemma": "salus",
+   "gloss": "of salvation"
+  },
+  {
+   "form": "perditionis",
+   "lemma": "perditio",
+   "gloss": "of destruction"
+  }
+ ],
+ "choices": [
+  {
+   "term": "loricam iustitiae",
+   "english": "breastplate of righteousness",
+   "why": "The glossary requires 'breastplate' for lorica and 'righteousness' for iustitia; the genitive is rendered with 'of' to keep the literal force.",
+   "rejected": [
+    "armor of righteousness",
+    "coat of mail of justice"
+   ]
+  },
+  {
+   "term": "loricam iniustitiae",
+   "english": "breastplate of unrighteousness",
+   "why": "Parallel to the previous phrase; iniustitia is the direct opposite of iustitia, so 'unrighteousness' preserves the contrast.",
+   "rejected": [
+    "breastplate of injustice",
+    "armor of wickedness"
+   ]
+  },
+  {
+   "term": "galea salutis",
+   "english": "helmet of salvation",
+   "why": "Literal rendering of the genitive phrase; 'salvation' is the standard English for salus here.",
+   "rejected": [
+    "helmet of deliverance",
+    "saving helmet"
+   ]
+  },
+  {
+   "term": "galeam perditionis",
+   "english": "helmet of destruction",
+   "why": "Parallel to 'helmet of salvation'; perditionis is rendered 'destruction' to keep the stark opposition.",
+   "rejected": [
+    "helmet of ruin",
+    "helmet of perdition"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Psalm 37:14 (Hebrew 37:14; LXX 36:14)",
+   "method": "wording",
+   "note": "peccatores tetenderunt arcum"
+  }
+ ],
+ "pass_b_english": [
+  "On the same psalm: “Sinners have bent their bow” (Psalm 37:14 (Hebrew 37:14; LXX 36:14)). Here are two armed soldiers: the soldier of God wears the breastplate of righteousness, and the soldier of the devil wears the breastplate of unrighteousness; the helmet of salvation stands against the helmet of destruction."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "85b470383944bb050758eedfef2f06fde8dbc0b3dbac36873123c2d6f4e96749",
+ "source_sha256": "2838c3fe5b7b52a6c6c9903905e7cc4a233eb20c8522992b242bbf26a74f7ca4",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Psalm 37:14 (Hebrew 37:14; LXX 36:14)",
+    "source_quote": "De eodem psalmo: peccatores tetenderunt arcum",
+    "why": "The citation format contradicts the brief: should be Psalm 36 (LXX 36:14), not Hebrew 37:14.",
+    "fix": "Psalm 36:14 (Hebrew 37:14)",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Citation is accurate: Hebrew 37:14 = LXX 36:14. Format may differ from brief but meaning and reference are correct."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "the helmet of salvation stands against the helmet of destruction",
+    "source_quote": "galea salutis contra galeam perditionis",
+    "why": "Latin 'contra' means 'against' as opposition, but 'stands against' implies active resistance; the Latin simply states paired opposites without a verb of standing.",
+    "fix": "the helmet of salvation against the helmet of destruction",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Stands against' is normal English for 'contra' expressing opposition; no meaning changed or lost."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

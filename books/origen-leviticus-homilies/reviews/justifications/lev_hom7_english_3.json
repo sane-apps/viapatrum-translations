@@ -1,0 +1,154 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom7_english:3",
+ "section": "lev_hom7_english:3",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom7_source.json"
+ },
+ "source_text": "Ut discernant inter sanctum et profanum, mundum et immundum. Doctrinae officium. Nolite iudicare superficiem.",
+ "thought_title": "The priest's teaching office: discernment, not surface judgment",
+ "orientation": "Origen is explaining the priestly duty to distinguish holy from profane and clean from unclean, and he warns against judging by appearances.",
+ "pass_a_gloss": "So that they may distinguish between holy and profane, clean and unclean. The office of teaching. Do not judge the surface.",
+ "lemmas": [
+  {
+   "form": "discernant",
+   "lemma": "discerno",
+   "gloss": "distinguish"
+  },
+  {
+   "form": "sanctum",
+   "lemma": "sanctus",
+   "gloss": "holy"
+  },
+  {
+   "form": "profanum",
+   "lemma": "profanus",
+   "gloss": "profane"
+  },
+  {
+   "form": "mundum",
+   "lemma": "mundus",
+   "gloss": "clean"
+  },
+  {
+   "form": "immundum",
+   "lemma": "immundus",
+   "gloss": "unclean"
+  },
+  {
+   "form": "doctrinae",
+   "lemma": "doctrina",
+   "gloss": "of teaching"
+  },
+  {
+   "form": "officium",
+   "lemma": "officium",
+   "gloss": "office, duty"
+  },
+  {
+   "form": "nolite",
+   "lemma": "nolo",
+   "gloss": "do not (plural imperative)"
+  },
+  {
+   "form": "iudicare",
+   "lemma": "iudico",
+   "gloss": "judge"
+  },
+  {
+   "form": "superficiem",
+   "lemma": "superficies",
+   "gloss": "surface, outward appearance"
+  }
+ ],
+ "choices": [
+  {
+   "term": "profanum",
+   "english": "profane",
+   "why": "Keeps the cultic contrast with holy; 'profane' preserves the sense of what is outside the sacred sphere.",
+   "rejected": [
+    "common",
+    "secular"
+   ]
+  },
+  {
+   "term": "mundum et immundum",
+   "english": "clean and unclean",
+   "why": "Matches the glossary's 'unclean' for immundus and keeps the ritual purity pairing.",
+   "rejected": [
+    "pure and impure",
+    "clean and defiled"
+   ]
+  },
+  {
+   "term": "doctrinae officium",
+   "english": "the office of teaching",
+   "why": "Renders the genitive phrase as a definitional statement about the priestly role, preserving the noun 'office' for officium.",
+   "rejected": [
+    "a teaching duty",
+    "the function of doctrine"
+   ]
+  },
+  {
+   "term": "nolite iudicare superficiem",
+   "english": "do not judge the surface",
+   "why": "Keeps the plural imperative force of nolite and the literal 'surface' for superficiem, which fits Origen's contrast between letter and spiritual sense.",
+   "rejected": [
+    "do not judge by appearances",
+    "stop judging the outside"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 10:10",
+   "method": "allusion",
+   "note": "ut discernant inter sanctum et profanum, mundum et immundum"
+  }
+ ],
+ "pass_b_english": [
+  "That they may distinguish between the holy and the profane, the clean and the unclean (Leviticus 10:10). This is the office of teaching. Do not judge the surface."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "c88020e3193f2b6a5aaf31fcece8f22278b95a9c3cba27d83914ce147f506f12",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "Do not judge the surface",
+    "source_quote": "Nolite iudicare superficiem",
+    "why": "superficiem means 'appearance/face' not 'surface'; iudicare here is 'make judgments about' not 'judge'",
+    "fix": "Do not judge by appearances",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "superficiem literally means 'surface'; 'appearance' is a contextual gloss, not a distinct meaning. Rendering is within normal range."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

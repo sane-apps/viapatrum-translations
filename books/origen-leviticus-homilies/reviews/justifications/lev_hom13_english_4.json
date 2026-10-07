@@ -1,0 +1,171 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom13_english:4",
+ "section": "lev_hom13_english:4",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom13_source.json"
+ },
+ "source_text": "Ignis perpetuus et memoriale coram Domino. Noli extinguere Spiritum. Amen.",
+ "thought_title": "Perpetual fire and remembrance before the Lord",
+ "orientation": "Origen is concluding his homily on the lamp and the bread of the Presence, applying the perpetual fire of the sanctuary to the Spirit within the believer.",
+ "pass_a_gloss": "Perpetual fire and remembrance before the Lord. Do not extinguish the Spirit. Amen.",
+ "lemmas": [
+  {
+   "form": "Ignis",
+   "lemma": "ignis",
+   "gloss": "fire"
+  },
+  {
+   "form": "perpetuus",
+   "lemma": "perpetuus",
+   "gloss": "perpetual"
+  },
+  {
+   "form": "memoriale",
+   "lemma": "memoriale",
+   "gloss": "remembrance"
+  },
+  {
+   "form": "coram",
+   "lemma": "coram",
+   "gloss": "before"
+  },
+  {
+   "form": "Domino",
+   "lemma": "Dominus",
+   "gloss": "the Lord"
+  },
+  {
+   "form": "Noli",
+   "lemma": "nolo",
+   "gloss": "do not"
+  },
+  {
+   "form": "extinguere",
+   "lemma": "extinguo",
+   "gloss": "extinguish"
+  },
+  {
+   "form": "Spiritum",
+   "lemma": "Spiritus",
+   "gloss": "the Spirit"
+  },
+  {
+   "form": "Amen",
+   "lemma": "amen",
+   "gloss": "Amen"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Ignis perpetuus",
+   "english": "perpetual fire",
+   "why": "The source phrase names the sanctuary fire that was to burn continually; rendering it literally preserves the ritual reference.",
+   "rejected": [
+    "everlasting fire",
+    "eternal flame"
+   ]
+  },
+  {
+   "term": "memoriale coram Domino",
+   "english": "remembrance before the Lord",
+   "why": "The phrase echoes Leviticus 24:7 where the frankincense is placed on the bread as a memorial before the Lord; literal rendering keeps the cultic sense.",
+   "rejected": [
+    "memorial in the Lord's presence",
+    "reminder before God"
+   ]
+  },
+  {
+   "term": "Noli extinguere Spiritum",
+   "english": "Do not extinguish the Spirit",
+   "why": "This is a direct echo of 1 Thessalonians 5:19; the imperative force of 'noli' with the infinitive is preserved as a prohibition.",
+   "rejected": [
+    "Do not quench the Spirit",
+    "You must not put out the Spirit"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 24:7",
+   "method": "wording",
+   "note": "memoriale coram Domino"
+  },
+  {
+   "display": "1 Thessalonians 5:19",
+   "method": "wording",
+   "note": "Noli extinguere Spiritum"
+  }
+ ],
+ "pass_b_english": [
+  "A perpetual fire and a remembrance before the Lord (Leviticus 6:12-13). Do not extinguish the Spirit (1 Thessalonians 5:19). Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "5fcdf4132a54829a46a0d6a7b9a97ee5888682c65b36e327c3ed0ab213c027a1",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Leviticus 24:7",
+     "source_quote": "Ignis perpetuus et memoriale coram Domino",
+     "why": "Leviticus 24:7 is about showbread and frankincense, not perpetual fire. This refers to Leviticus 6:12-13 (LXX/Vulgate numbering) about the perpetual fire on the altar.",
+     "fix": "Leviticus 6:12-13",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Leviticus 24:7 covers frankincense/showbread, not 'ignis perpetuus'; perpetual fire is Lev 6:12-13."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Leviticus 24:7",
+     "new": "Leviticus 6:12-13"
+    }
+   ],
+   "fixed": [
+    "Corrected scripture reference from Leviticus 24:7 to Leviticus 6:12-13, which is the passage about the perpetual fire on the altar."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

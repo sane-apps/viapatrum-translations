@@ -1,0 +1,272 @@
+{
+ "excerpt_id": "origen-psalms-rufinus:ps37_hom1_english:2",
+ "section": "ps37_hom1_english:2",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-psalms-rufinus/translations/ps37_hom1_source.json"
+ },
+ "source_text": "Sicut onus grave gravatae sunt super me. Venite ad me omnes qui laboratis et onerati estis. Gloria Christo. Amen.",
+ "thought_title": "The heavy burden and Christ's invitation",
+ "orientation": "Origen has just quoted Psalm 37:5 about God's rebuke and chastisement, and now quotes the psalmist's words about heavy burdens, then alludes to Christ's invitation to the weary.",
+ "pass_a_gloss": "As a burden heavy they have been weighed down upon me. Come to me all [you] who labor and [who] have been burdened. Glory [be] to Christ. Amen.",
+ "lemmas": [
+  {
+   "form": "onus",
+   "lemma": "onus",
+   "gloss": "burden, load"
+  },
+  {
+   "form": "grave",
+   "lemma": "gravis",
+   "gloss": "heavy, weighty"
+  },
+  {
+   "form": "gravatae",
+   "lemma": "gravo",
+   "gloss": "to weigh down, make heavy"
+  },
+  {
+   "form": "sunt",
+   "lemma": "sum",
+   "gloss": "they are"
+  },
+  {
+   "form": "super",
+   "lemma": "super",
+   "gloss": "upon, over"
+  },
+  {
+   "form": "me",
+   "lemma": "ego",
+   "gloss": "me"
+  },
+  {
+   "form": "venite",
+   "lemma": "venio",
+   "gloss": "come (plural imperative)"
+  },
+  {
+   "form": "omnes",
+   "lemma": "omnis",
+   "gloss": "all"
+  },
+  {
+   "form": "qui",
+   "lemma": "qui",
+   "gloss": "who"
+  },
+  {
+   "form": "laboratis",
+   "lemma": "laboro",
+   "gloss": "you labor, toil"
+  },
+  {
+   "form": "onerati",
+   "lemma": "onero",
+   "gloss": "burdened, loaded down"
+  },
+  {
+   "form": "estis",
+   "lemma": "sum",
+   "gloss": "you are"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Sicut onus grave gravatae sunt super me",
+   "english": "Like a heavy burden they have been made heavy upon me",
+   "why": "Keeps the simile 'sicut' and the passive force of 'gravatae sunt' (they have been weighed down), preserving the psalmist's complaint about the weight of sins or afflictions.",
+   "rejected": [
+    "They are weighed down like a heavy burden upon me",
+    "As a heavy burden they weigh upon me"
+   ]
+  },
+  {
+   "term": "Venite ad me omnes qui laboratis et onerati estis",
+   "english": "Come to me, all you who labor and are burdened",
+   "why": "Renders the imperative 'venite' as a direct invitation, matching the allusion to Christ's words in Matthew 11:28, and keeps the present tense of 'laboratis' and the perfect passive 'onerati estis'.",
+   "rejected": [
+    "Come to me, all who are weary and heavy laden",
+    "Come to me, all you who toil and are loaded down"
+   ]
+  },
+  {
+   "term": "Gloria Christo",
+   "english": "Glory to Christ",
+   "why": "Renders the doxological formula literally, preserving the dative of dedication and the liturgical closing.",
+   "rejected": [
+    "Glory be to Christ",
+    "To Christ be the glory"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Psalm 38:4 (LXX 37:5)",
+   "method": "quotation",
+   "note": "Sicut onus grave gravatae sunt super me"
+  },
+  {
+   "display": "Matthew 11:28",
+   "method": "allusion",
+   "note": "Venite ad me omnes qui laboratis et onerati estis"
+  }
+ ],
+ "pass_b_english": [
+  "\"Like a heavy burden they have been made heavy upon me\" (Psalm 37:4 (LXX 36:4)). \"Come to me, all you who labor and are burdened\" (Matthew 11:28). Glory to Christ. Amen."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "85b470383944bb050758eedfef2f06fde8dbc0b3dbac36873123c2d6f4e96749",
+ "source_sha256": "cffc788c57aa2ffabe6b6598c8307730465f0dde6fa87e66c7f15b8edeed0de8",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Psalm 38:4",
+     "source_quote": "Sicut onus grave gravatae sunt super me",
+     "why": "Wrong psalm citation: source is Psalm 37 (LXX), not Psalm 38.",
+     "fix": "Psalm 37:4 (Psalm 38:4 MT)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Latin Psalms follow LXX numbering; 'Sicut onus grave...' is Psalm 37:5, not 38."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Psalm 38:4",
+     "new": "Psalm 37:4 (Psalm 38:4 MT)"
+    }
+   ],
+   "fixed": [
+    "Wrong psalm citation: source is Psalm 37 (LXX), not Psalm 38. Corrected to Psalm 37:4 (Psalm 38:4 MT)."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Psalm 37:4 (Psalm 38:4 MT)",
+     "source_quote": "Sicut onus grave gravatae sunt super me",
+     "why": "The source quotes Psalm 37:4 LXX, which is Psalm 38:4 MT, but the English note reverses this as Psalm 37:4 MT / Psalm 38:4 MT. The correct modern citation should be Psalm 38:4 (LXX 37:4).",
+     "fix": "Psalm 38:4 (LXX 37:4)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "English says 'Psalm 37:4 (Psalm 38:4 MT)' but source LXX Ps 37:4 = MT Ps 38:4; parenthetical mislabels MT as 38:4, wrong reference."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Psalm 37:4 (Psalm 38:4 MT)",
+     "new": "Psalm 38:4 (LXX 37:4)"
+    }
+   ],
+   "fixed": [
+    "The source quotes Psalm 37:4 LXX, which is Psalm 38:4 MT, so the modern citation should be Psalm 38:4 (LXX 37:4)."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "Psalm 38:4 (LXX 37:4)",
+     "source_quote": "Sicut onus grave gravatae sunt super me",
+     "why": "Wrong psalm citation: source is Psalm 37 (LXX 36), not Psalm 38 (LXX 37).",
+     "fix": "Psalm 37:4 (LXX 36:4)",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Source 'Sicut onus grave...' matches Psalm 37:4 (LXX 36:4), not 38:4 (LXX 37:4); wrong reference misleads reader."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Psalm 38:4 (LXX 37:4)",
+     "new": "Psalm 37:4 (LXX 36:4)"
+    }
+   ],
+   "fixed": [
+    "Wrong psalm citation: source is Psalm 37 (LXX 36), not Psalm 38 (LXX 37)."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "referee": "nvidia/nemotron-3-ultra-550b-a55b",
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 3,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "refereed": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "Psalm 37:4 (LXX 36:4)",
+    "source_quote": "Sicut onus grave gravatae sunt super me",
+    "why": "Wrong psalm citation: source quotes Ps 37:4 LXX (Hebrew 38:4), not 36:4.",
+    "fix": "Psalm 38:4 (LXX 37:4)",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "upheld_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source 'gravatae sunt' matches Ps 37:4 (LXX 36:4 in some numbering), but citation format conflates numbering systems incorrectly."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 3,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

@@ -1,0 +1,183 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom16_english:5",
+ "section": "lev_hom16_english:5",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom16_source.json"
+ },
+ "source_text": "Si non audieritis, visitabo in virga. Castigatio misericors. Revertere.",
+ "thought_title": "Merciful chastisement for disobedience",
+ "orientation": "Origen is expounding the covenant blessings and curses of Leviticus 26, now turning to God's warning of punishment for those who do not hear.",
+ "pass_a_gloss": "If you will not have heard, I will visit in a rod. Merciful chastisement. Turn back.",
+ "lemmas": [
+  {
+   "form": "audieritis",
+   "lemma": "audio",
+   "gloss": "hear, obey"
+  },
+  {
+   "form": "visitabo",
+   "lemma": "visito",
+   "gloss": "visit, punish"
+  },
+  {
+   "form": "virga",
+   "lemma": "virga",
+   "gloss": "rod, staff"
+  },
+  {
+   "form": "castigatio",
+   "lemma": "castigatio",
+   "gloss": "chastisement, correction"
+  },
+  {
+   "form": "misericors",
+   "lemma": "misericors",
+   "gloss": "merciful"
+  },
+  {
+   "form": "revertere",
+   "lemma": "revertor",
+   "gloss": "turn back, return"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Si non audieritis",
+   "english": "If you will not have heard",
+   "why": "Keeps the future perfect force of the Latin, matching the conditional warning in Leviticus 26.",
+   "rejected": [
+    "If you do not listen",
+    "If you will not obey"
+   ]
+  },
+  {
+   "term": "visitabo in virga",
+   "english": "I will visit in a rod",
+   "why": "Preserves the literal 'visit' and the instrumental 'in a rod', echoing the biblical idiom of divine visitation for punishment.",
+   "rejected": [
+    "I will punish with a rod",
+    "I will come with a rod"
+   ]
+  },
+  {
+   "term": "Castigatio misericors",
+   "english": "Merciful chastisement",
+   "why": "Renders the noun phrase as a heading-like summary, matching Origen's homiletic style of naming the section's theme.",
+   "rejected": [
+    "A merciful correction",
+    "Merciful punishment"
+   ]
+  },
+  {
+   "term": "Revertere",
+   "english": "Turn back",
+   "why": "The imperative singular addresses the hearer directly, preserving the call to conversion.",
+   "rejected": [
+    "Return",
+    "Be converted"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 26:14",
+   "method": "wording",
+   "note": "Si non audieritis"
+  },
+  {
+   "display": "Leviticus 26:16",
+   "method": "wording",
+   "note": "visitabo in virga"
+  }
+ ],
+ "pass_b_english": [
+  "If you will not have heard, I will visit in a rod (Leviticus 26:14, 16). Merciful chastisement. Turn back."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "4b4f11eaca4da449ba1e3a094a4c113231e376478353e848445d539449f4c95c",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 5,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "If you will not have heard, I will visit in a rod (Leviticus 26:14, 16).",
+    "source_quote": "Si non audieritis, visitabo in virga.",
+    "why": "English hides that this is God speaking; source is divine first-person threat.",
+    "fix": "If you will not listen, I will punish you with the rod, says the Lord.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "First-person 'visitabo' is preserved; English doesn't hide divine speaker. No error."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "visit in a rod",
+    "source_quote": "visitabo in virga",
+    "why": "\"Visit\" alone is archaic/weak; \"in virga\" means \"with a rod\" (instrumental).",
+    "fix": "punish you with the rod",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Visit in a rod' is literal KJV-style; 'in' can be instrumental. Within normal range."
+   },
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "If you will not have heard",
+    "source_quote": "Si non audieritis",
+    "why": "Future perfect misrepresents Latin future perfect as completed action; should be simple future condition.",
+    "fix": "If you will not listen",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Future perfect is standard for Latin future perfect in conditional clauses; not a mistranslation."
+   },
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "Merciful chastisement.",
+    "source_quote": "Castigatio misericors.",
+    "why": "Latin is a complete clause/claim about the nature of chastisement; English renders as fragment losing force.",
+    "fix": "This chastisement is merciful.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Both Latin and English are phrases, not full clauses; no omission or meaning lost."
+   },
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "Turn back.",
+    "source_quote": "Revertere.",
+    "why": "Latin is imperative command; English \"Turn back\" is ambiguous as imperative vs noun phrase.",
+    "fix": "Turn back!",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'Turn back' is clearly imperative in context, matching 'revertere'; no real ambiguity."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 5,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

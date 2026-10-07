@@ -1,0 +1,272 @@
+{
+ "excerpt_id": "origen-leviticus-homilies:lev_hom5_english:10",
+ "section": "lev_hom5_english:10",
+ "edition": {
+  "language": "lat",
+  "path": "books/origen-leviticus-homilies/translations/lev_hom5_source.json"
+ },
+ "source_text": "Lex arietis pro delicto; sancta sanctorum. Delictum occultum lucem quaerit. Ariete Christus solvit.",
+ "thought_title": "The Ram of the Hidden Fault",
+ "orientation": "Origen is explaining the Levitical offering of a ram for a hidden fault, reading it as a figure of Christ.",
+ "pass_a_gloss": "The law of the ram for a fault; holy of holies. A hidden fault seeks light. By the ram Christ pays.",
+ "lemmas": [
+  {
+   "form": "Lex",
+   "lemma": "lex",
+   "gloss": "law"
+  },
+  {
+   "form": "arietis",
+   "lemma": "aries",
+   "gloss": "ram"
+  },
+  {
+   "form": "pro",
+   "lemma": "pro",
+   "gloss": "for"
+  },
+  {
+   "form": "delicto",
+   "lemma": "delictum",
+   "gloss": "fault"
+  },
+  {
+   "form": "sancta",
+   "lemma": "sanctus",
+   "gloss": "holy things"
+  },
+  {
+   "form": "sanctorum",
+   "lemma": "sanctus",
+   "gloss": "of holy things"
+  },
+  {
+   "form": "Delictum",
+   "lemma": "delictum",
+   "gloss": "fault"
+  },
+  {
+   "form": "occultum",
+   "lemma": "occultus",
+   "gloss": "hidden"
+  },
+  {
+   "form": "lucem",
+   "lemma": "lux",
+   "gloss": "light"
+  },
+  {
+   "form": "quaerit",
+   "lemma": "quaero",
+   "gloss": "seeks"
+  },
+  {
+   "form": "Ariete",
+   "lemma": "aries",
+   "gloss": "by the ram"
+  },
+  {
+   "form": "Christus",
+   "lemma": "Christus",
+   "gloss": "Christ"
+  },
+  {
+   "form": "solvit",
+   "lemma": "solvo",
+   "gloss": "pays"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Lex arietis pro delicto",
+   "english": "The law of the ram for a fault",
+   "why": "Keeps the legal sense of lex and the specific animal aries, preserving the Levitical category of the guilt offering.",
+   "rejected": [
+    "The rule about the ram for guilt",
+    "The ram prescribed for transgression"
+   ]
+  },
+  {
+   "term": "sancta sanctorum",
+   "english": "holy of holies",
+   "why": "Standard rendering of the Hebrew superlative construction, matching the glossary's 'holy' for sanctus.",
+   "rejected": [
+    "most holy things",
+    "the holy things of the holy ones"
+   ]
+  },
+  {
+   "term": "Delictum occultum lucem quaerit",
+   "english": "A hidden fault seeks light",
+   "why": "Preserves the subject-verb-object order and the personification of the fault seeking light, which is the moral point.",
+   "rejected": [
+    "The hidden fault looks for the light",
+    "A secret sin wants to be exposed"
+   ]
+  },
+  {
+   "term": "Ariete Christus solvit",
+   "english": "By the ram Christ pays",
+   "why": "Keeps the instrumental ablative Ariete and the present tense solvit, showing Christ as the one who discharges the debt.",
+   "rejected": [
+    "Christ pays with the ram",
+    "The ram is how Christ pays"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Leviticus 5:15",
+   "method": "wording",
+   "note": "Lex arietis pro delicto"
+  }
+ ],
+ "pass_b_english": [
+  "The law of the ram for a fault is a holy of holies. A hidden fault seeks light. By the ram Christ sets free."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "7e6ceae77f5bd28e279abd9db64cbd19d6220a448d468740b8d8b12e04ad2444",
+ "source_sha256": "88a1468abcd2668ff59883ad6aa1c5687cefc7925be01f256cfc278203ce6b0c",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "The law of the ram for a fault is the holy of holies",
+     "source_quote": "Lex arietis pro delicto; sancta sanctorum",
+     "why": "\"sancta sanctorum\" is predicate nominative, not appositive: \"the law...is most holy\" or \"a holy of holies\"",
+     "fix": "The law of the ram for a fault is most holy; it is a holy of holies",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "Semicolon separates clauses; 'sancta sanctorum' is not appositive to 'Lex arietis'. Translation misreads the syntax."
+    }
+   ],
+   "edits": [
+    {
+     "old": "The law of the ram for a fault is the holy of holies.",
+     "new": "The law of the ram for a fault is most holy; it is a holy of holies."
+    }
+   ],
+   "fixed": [
+    "Changed 'is the holy of holies' to 'is most holy; it is a holy of holies' because 'sancta sanctorum' is a predicate nominative describing the law, not an appositive."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "most holy; it is a holy of holies",
+     "source_quote": "sancta sanctorum",
+     "why": "Latin lacks 'most holy; it is a'—just 'sancta sanctorum' (holy of holies), adding extra claim.",
+     "fix": "a holy of holies. A hidden fault seeks light.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "agreed_by": [
+      "@cf/moonshotai/kimi-k2.6",
+      "@cf/zai-org/glm-5.2"
+     ]
+    },
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "By the ram Christ pays",
+     "source_quote": "Ariete Christus solvit",
+     "why": "'solvit' means 'looses, releases, sets free' not 'pays'; Christ frees by the ram, not pays.",
+     "fix": "By the ram Christ sets free.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "'solvit' means 'looses/releases/frees'; 'pays' misrepresents Christ freeing by the ram, not paying."
+    }
+   ],
+   "edits": [
+    {
+     "old": "The law of the ram for a fault is most holy; it is a holy of holies.",
+     "new": "The law of the ram for a fault is a holy of holies."
+    },
+    {
+     "old": "By the ram Christ pays.",
+     "new": "By the ram Christ sets free."
+    }
+   ],
+   "fixed": [
+    "Removed 'most holy; it is' before 'a holy of holies' because the source has only 'sancta sanctorum' (holy of holies), not a separate 'most holy' claim.",
+    "Changed 'pays' to 'sets free' because 'solvit' means 'looses, releases, sets free', not 'pays'."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 2,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "The law of the ram for a fault is a holy of holies",
+    "source_quote": "Lex arietis pro delicto; sancta sanctorum",
+    "why": "\"sancta sanctorum\" is nominative predicate, not genitive: \"the law... is most holy\" or \"a holy of holies,\" but \"lex\" is subject, not \"arietis.\" The English makes \"holy of holies\" sound like a noun phrase the law equals, but the Latin says the law itself is most holy/sacred. More critically, \"sancta sanctorum\" as predicate adjective means \"most holy,\" not that the law \"is a holy of holies\" (the sanctuary). The English turns a qualitative claim into an equative one with wrong referent.",
+    "fix": "The law for the ram in case of fault is most holy. A hidden fault seeks light. Christ redeems by the ram.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'sancta sanctorum' is a standard genitive phrase meaning 'holy of holies'; English renders it correctly as predicate nominative."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "By the ram Christ sets free",
+    "source_quote": "Ariete Christus solvit",
+    "why": "\"solvit\" here means \"pays\" or \"discharges\" (a debt/price), not \"sets free.\" In sacrificial context, Christ pays/ransoms with the ram as price, not liberates from it. \"Sets free\" misrepresents the soteriological claim: Christ is the one who pays, not the one who liberates by releasing.",
+    "fix": "By the ram Christ pays the debt.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'solvit' includes 'releases/frees' in its normal semantic range; 'sets free' is acceptable for solvit in ransoming context."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 2,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}
