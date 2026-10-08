@@ -2,4 +2,4 @@ Philostorgius (born c. 368 at Borissus in Cappadocia), a church historian of the
 
 The Ecclesiastical History ran to twelve books, carrying the story from the rise of Arius into the 420s; its counter-narrative of Constantine, Constantius, and Julian is found nowhere else.
 
-This volume holds Book 1: the Maccabean judgments, Arius, and Constantine.
+This volume holds one passage from Book 1, on which books of the Maccabees he accepts.

@@ -2,4 +2,4 @@ Ludwig Crocius (1586–1655) taught theology and philosophy at Bremen and sat as
 
 His System of Sacred Theology (Bremen, 1636) is a full Reformed dogmatics in the high-orthodox style: precise definitions, ordered questions, objections raised and answered.
 
-This volume opens the System at its foundation — Book 1, chapter 1, on the definition of theology: sacred over against profane, a practical habit ordered to faith and eternal life.
+This volume holds chapter 10 of the first book, on the principle of theology that rests on the first one and serves it, with parts of chapters 2 and 4.
