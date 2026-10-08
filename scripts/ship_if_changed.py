@@ -6,6 +6,8 @@ readers see changed since the last good auto ship:
   text     certified English, book.yml, work receipts, topic records
   audio    narration manifests (audio-only changes use ship.sh --audio-only)
   library  outputs/downloads/library.json (the paid shelf)
+  site     the site repo's committed revision (a code-only change does not
+           rebuild the shelf)
 
 Never ships when:
   - the site repo has uncommitted code in scripts/, assets/ or functions/
@@ -93,9 +95,16 @@ def inputs() -> dict:
             + list(books.glob("*/reviews/work_receipt.json"))
             + list(books.glob("ante-nicene-topics/translations/topics/*.json"))
             + [books / "ante-nicene-topics/topics.yml"])
+    try:
+        rev = subprocess.run(["git", "-C", str(SITE), "rev-parse", "HEAD"],
+                             capture_output=True, text=True, timeout=30)
+        site = rev.stdout.strip() if rev.returncode == 0 else ""
+    except (OSError, subprocess.SubprocessError):
+        site = ""
     return {"text": fingerprint(text),
             "audio": fingerprint(SITE.glob("outputs/audio/*/manifest.json")),
-            "library": fingerprint([SITE / "outputs/downloads/library.json"])}
+            "library": fingerprint([SITE / "outputs/downloads/library.json"]),
+            "site": site}
 
 
 def load_state() -> dict:
@@ -328,10 +337,10 @@ def ship(st: dict, now: dict, changed: list[str]) -> int:
     st["shipped"] = now  # inputs as read before the ship; later edits ship next run
     st.pop("pending_since", None)
     st.pop("pending", None)
-    if not audio_only and changed != ["library"]:
-        # New text or audio needs a new shelf, from its first step. A ship of
-        # only the shelf's own library.json does not: assemble and upload always
-        # rewrite that file, so rebuilding here would ship and rebuild forever.
+    # New text needs a new shelf. Audio alone waits for the next text ship
+    # (owner 2026-10-06). The shelf's own library.json, and a committed site
+    # revision, do not: rebuilding on those would ship and rebuild forever.
+    if "text" in changed or ("audio" in changed and not audio_only):
         st["shelf_pending"] = {"since": now_ts(), "for_ship": shipped_at(), "done": []}
     save_state(st)
     log("ship verified")

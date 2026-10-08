@@ -137,6 +137,14 @@ class ExitCodeTests(AutoShipTestBase):
         self.assertIn("build.lock", self.state()["last_skip"]["why"])
         self.assertFalse(any("ship.sh" in c for c in self.cmds))
 
+    def test_site_code_ship_does_not_rebuild_the_shelf(self):
+        self.now = {"text": "t1", "audio": "a1", "library": "l1", "site": "new"}
+        self.write_state({"shipped": {"text": "t1", "audio": "a1", "library": "l1", "site": "old"}})
+        self.assertEqual(S.main(), S.EXIT_OK)
+        self.assertTrue(any("ship.sh" in c for c in self.cmds))
+        self.assertFalse(any("build_ebooks" in c for c in self.cmds))
+        self.assertNotIn("shelf_pending", self.state())
+
     def test_a_prior_ship_count_does_not_block_the_next(self):
         today = S.time.strftime("%Y-%m-%d")
         self.write_state({"shipped": {"text": "t1", "audio": "a1", "library": "l1"}, "ships": {today: 2}})
