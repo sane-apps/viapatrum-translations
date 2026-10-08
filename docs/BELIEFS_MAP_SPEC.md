@@ -113,6 +113,30 @@ its mark, or that excludes every rival. Silence is never evidence.
 - Tapping a mark opens the passage.
 - Rebuilt by every ship; re-graded incrementally as new works are certified.
 
+## Churches and questions (owner 2026-10-06)
+
+- Eleven churches, in chip order: Catholic, Orthodox, Oriental Orthodox,
+  Church of the East, Lutheran, Reformed, Anglican, Methodist, Baptist,
+  Anabaptist, Pentecostal. 23 questions: the first 19 plus spiritual gifts,
+  sanctification, Christ's natures and the millennium.
+- `doctrine_questions.json` decides which questions and positions show and
+  which churches hold (`traditions`) or reject (`rejected_by`) each;
+  `beliefs_page.load` overlays the graded map on it. A new question or church
+  shows at the next build, with "no early passage yet" until the nightly job
+  searches and grades it. No change to this script was needed for new
+  questions; at most 8 positions per question (grader letters A-H).
+- The page has no "divided" state. A church that is divided, or has no
+  settled text, is left unplaced and named in `tradition_notes` (one short
+  line under the chips); `public_note` holds a line the whole question needs.
+  `rejected_by_sources` keeps the quote behind each new rejection.
+- Oriental Orthodox placements rest mainly on Coptic and Ethiopian texts; the
+  page says so on every question that places them.
+- Changing a position's statement, mark or excluded_by, or adding a position,
+  changes the grading key and re-grades the whole question. Church lists,
+  names, quotes and notes do not.
+- The research, review and merge script live in the site repo under
+  `outputs/beliefs-expansion-20261006/` (`apply_review.py`).
+
 ## Hard boundaries the audit checks first
 
 From the definitions research (2026-10-03). These marks are close in early
