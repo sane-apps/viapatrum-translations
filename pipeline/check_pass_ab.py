@@ -149,6 +149,27 @@ def _tokens(text: str) -> list[str]:
     return re.findall(r"[^\W_]+", text, re.UNICODE)
 
 
+def repeated_paragraph(value) -> str:
+    """A paragraph of 12 words or more that appears twice in one section.
+
+    Shorter lines stay legal: a refrain or a one-word answer can repeat.
+    Measured 2026-10-08: no certified section has a repeat at this length.
+    """
+    if not isinstance(value, list):
+        return ""
+    seen: set[str] = set()
+    for part in value:
+        if not isinstance(part, str):
+            continue
+        key = normalized(part)
+        if len(key.split()) < 12:
+            continue
+        if key in seen:
+            return " ".join(key.split()[:12])
+        seen.add(key)
+    return ""
+
+
 def _repeated_phrase(text: str) -> bool:
     """Same 4 to 8 word run, three times, with no words between the copies.
 
@@ -295,6 +316,28 @@ def check_record(j: dict) -> list[str]:
                 )
     if len(b_words) >= 40 and len(a_words) < 0.45 * len(b_words):
         errors.append("Pass A is too short to constrain Pass B; gloss every clause in English")
+    # Certified sections of 80 source words or more sit between 0.95 and 1.87
+    # English words per source word (130 books, 2026-10-08). Macarius homily 5
+    # is the exception, at 0.33, and it dropped most of the section. The floor
+    # and the ceiling stay wide of that range. This is a draft gate only:
+    # content_errors() is what the site build runs, and a new error there
+    # would hold live works at ship time.
+    dropped = repeated_paragraph(j.get("pass_b_english"))
+    if dropped:
+        errors.append(f"pass_b_english: a paragraph is repeated ('{dropped}')")
+    src_words = normalized(src).split()
+    if len(src_words) >= 80 and b_words:
+        ratio = len(b_words) / len(src_words)
+        if ratio < 0.5:
+            errors.append(
+                f"Pass B is far shorter than the source ({len(b_words)} English words, "
+                f"{len(src_words)} source words); a large part of the section was dropped"
+            )
+        elif ratio > 3:
+            errors.append(
+                f"Pass B is far longer than the source ({len(b_words)} English words, "
+                f"{len(src_words)} source words); a large part of the section was added"
+            )
     if a_words:
         latin = sum(1 for w in a_words if w in LATIN_FUNCTION or LATIN_ENDING.search(w))
         english = sum(1 for w in a_words if w in ENGLISH_FUNCTION)

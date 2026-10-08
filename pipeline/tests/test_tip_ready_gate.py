@@ -13,6 +13,7 @@ from pipeline.check_pass_ab import (
     check_record,
     check_translation_files,
     content_errors,
+    repeated_paragraph,
 )
 from llm_bakeoff import score
 
@@ -203,6 +204,43 @@ class TipReadyGateTest(unittest.TestCase):
             )
             errors = check_translation_files(eng, src)
             self.assertTrue(any("section set mismatch" in e for e in errors))
+
+    def test_dropped_section_and_repeated_paragraph_fail_the_draft_gate(self) -> None:
+        para = "The opening line about the soul and the body is copied again below in full."
+        self.assertTrue(repeated_paragraph([para, para]))
+        self.assertEqual(repeated_paragraph([para, "A second paragraph about grace and the law of the Spirit."]), "")
+        self.assertEqual(repeated_paragraph(["Amen.", "Amen."]), "")
+        # The site build calls content_errors, not this draft check.
+        self.assertEqual(content_errors([para, para]), [])
+        gloss = "A full gloss that is not the reading text and covers each clause in its own words."
+        notes = {"lemmas": [{"form": "λόγος", "gloss": "word"}], "choices": [{"term": "λόγος", "english": "word"}]}
+        short = check_record({
+            "pass_a_gloss": gloss,
+            "pass_b_english": [" ".join(["word"] * 30)],
+            "source_text": " ".join(["λόγος"] * 100),
+            **notes,
+        })
+        self.assertTrue(any("far shorter than the source" in e for e in short), short)
+        self.assertTrue(any("paragraph is repeated" in e for e in check_record({
+            "pass_a_gloss": gloss,
+            "pass_b_english": [para, para],
+            "source_text": " ".join(["λόγος"] * 40),
+            **notes,
+        })))
+        covered = check_record({
+            "pass_a_gloss": " ".join(["gloss"] * 80),
+            "pass_b_english": [" ".join(["word"] * 100)],
+            "source_text": " ".join(["λόγος"] * 100),
+            **notes,
+        })
+        self.assertFalse(any("far shorter" in e or "far longer" in e for e in covered), covered)
+        added = check_record({
+            "pass_a_gloss": " ".join(["gloss"] * 80),
+            "pass_b_english": [" ".join(["word"] * 400)],
+            "source_text": " ".join(["λόγος"] * 100),
+            **notes,
+        })
+        self.assertTrue(any("far longer than the source" in e for e in added), added)
 
     def test_placeholder_regex_matches_catalogue_smells(self) -> None:
         self.assertTrue(PLACEHOLDER.search("Lemma-led open — X"))
