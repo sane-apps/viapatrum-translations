@@ -37,6 +37,17 @@ SOURCE_ENGLISH_LEAK = re.compile(r"\btemporary\b", re.I)
 # from memory). Source fields only: the English publish gate is unchanged.
 SOURCE_PLACEHOLDER = re.compile(
     r"(?i:\bworking note\b|\bto be locked\b)|\blemma\s+(?:[1-3]\s)?[A-Z][a-z]+\s+\d+:\d+")
+# A modern reuse notice was locked as if it were Cyril (2026-10-07 audit).
+# The Greek is one sentence sliced across three sections:
+# "Επιτρέπεται η ελεύθερη χρήση του υλικού με αναφορά στην πηγή προέλευσής του."
+REUSE_FOOTER_EN = re.compile(
+    r"free use is permitted|free use of the material|"
+    r"\[source too fragmentary to translate|\[fragmentary remnant",
+    re.I,
+)
+REUSE_FOOTER_SRC = re.compile(
+    r"επιτρεπεται η ελευθερη|υλικου με αναφορα|πηγη προελευσ"
+)
 
 
 def join_b(value) -> str:
@@ -59,12 +70,35 @@ def greek_ratio(text: str) -> float:
     return len(GREEK.findall(text)) / max(sum(c.isalpha() for c in text), 1)
 
 
+def _fold(text: str) -> str:
+    text = unicodedata.normalize("NFD", text.casefold())
+    return "".join(c for c in text if not unicodedata.combining(c))
+
+
+def is_reuse_footer(value, *, source=False) -> bool:
+    """True when the text is a modern reuse notice, not the father.
+
+    English and source are checked apart. A slice of the Greek footer has no
+    English words, and the English placeholder has no Greek.
+    """
+    if not isinstance(value, (str, list)):
+        return False
+    text = join_b(value)
+    if not text:
+        return False
+    if source:
+        return REUSE_FOOTER_SRC.search(_fold(text)) is not None
+    return REUSE_FOOTER_EN.search(text) is not None
+
+
 def content_errors(value, label="english", *, source=False) -> list[str]:
     if not isinstance(value, (str, list)) or (isinstance(value, list) and any(
             not isinstance(p, str) or not p.strip() for p in value)):
         return [f"{label}: expected nonempty strings"]
     text = join_b(value)
     errors = []
+    if is_reuse_footer(value, source=source):
+        errors.append(f"{label}: modern reuse footer, not the father's text")
     if not text:
         errors.append(f"{label}: empty text")
     # Numbered footnote markers belong in some raw-source transcriptions;

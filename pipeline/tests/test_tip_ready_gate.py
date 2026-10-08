@@ -250,6 +250,14 @@ class TipReadyGateTest(unittest.TestCase):
             content_errors("There is one Physician, both flesh and spirit, born and unborn."),
             [],
         )
+        self.assertTrue(any("reuse footer" in e for e in content_errors(["The free use is permitted."])))
+        self.assertTrue(any("reuse footer" in e for e in content_errors(
+            ["[Source too fragmentary to translate; likely a footer.]"])))
+        self.assertTrue(any("reuse footer" in e for e in content_errors(
+            "Επιτρέπεται η ελεύθερη χρήση του υλικού", "source", source=True)))
+        self.assertTrue(any("reuse footer" in e for e in content_errors(
+            "ην πηγή προέλευσής του.", "source", source=True)))
+        self.assertEqual(content_errors("He permits the free use of reason in this question."), [])
         greek = (
             "Ἴσως μὲν ἂν ἔδοξέ σοι τὸν περὶ τῆς Σαμαρείτιδος λόγον μὴ διακοπῆναι "
             "ἐν τῷ μέσῳ τῆς ἐξηγήσεως ταύτης καὶ πάλιν ὁ αὐτὸς λόγος πρόεισιν."
