@@ -1307,6 +1307,45 @@ class ParkAndQueueTests(unittest.TestCase):
                 W.queue(5, 0)
             return run.called, json.loads(q.read_text()).get("bk")
 
+    def test_passed_book_with_no_bound_read_can_finish(self):
+        row = {"result": "held", "attempts": 2}
+        pairs = [{"id": "1", "source": ["a."], "english": ["A."], "title": "T"}]
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), \
+                mock.patch.object(W, "_withheld", return_value=False):
+            sd = Path(d) / "bk" / "sections"
+            sd.mkdir(parents=True)
+            (sd / "1.json").write_text(json.dumps({"_status": "pass", "pass_b_english": ["A."]}))
+            self.assertFalse(W.parked(row, "bk", pairs))
+            self.assertTrue(W.parked({**row, "attempts": W.PARK_MAX}, "bk", pairs), "still bounded")
+
+    def test_passed_book_under_the_reader_minimum_stays_parked(self):
+        row = {"result": "held", "attempts": 2}
+        pairs = [{"id": "1", "source": ["a."], "english": ["A."], "title": "T"}]
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), \
+                mock.patch.object(W, "_withheld", return_value=False):
+            root = Path(d) / "bk"
+            (root / "sections").mkdir(parents=True)
+            (root / "sections" / "1.json").write_text(json.dumps({"_status": "pass", "pass_b_english": ["A."]}))
+            (root / "intro.json").write_text(json.dumps({"paragraphs": ["One.", "Two.", "Three."]}))
+            digest = W.view_sha(W.reader_view("bk", pairs, {"paragraphs": ["One.", "Two.", "Three."]}))
+            (root / "read.json").write_text(json.dumps({"text_sha256": digest, "followability": [2, 3]}))
+            self.assertTrue(W.parked(row, "bk", pairs))
+
+    def test_withheld_fails_closed_when_the_site_tree_cannot_load(self):
+        with mock.patch.dict(sys.modules, {"build_site": None}):
+            self.assertTrue(W._withheld("not-a-real-book"))
+        self.assertTrue(W._withheld("barnabas-epistle"))
+
+    def test_withheld_book_stays_parked_even_when_every_section_passed(self):
+        row = {"result": "held", "attempts": 2}
+        pairs = [{"id": "1", "source": ["a."], "english": ["A."], "title": "T"}]
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), \
+                mock.patch.object(W, "_withheld", return_value=True):
+            sd = Path(d) / "bk" / "sections"
+            sd.mkdir(parents=True)
+            (sd / "1.json").write_text(json.dumps({"_status": "pass", "pass_b_english": ["A."]}))
+            self.assertTrue(W.parked(row, "bk", pairs))
+
     def test_missing_site_dist_does_not_list_books(self):
         with tempfile.TemporaryDirectory() as d:
             scripts = Path(d) / "scripts"

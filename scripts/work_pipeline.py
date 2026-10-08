@@ -1396,8 +1396,8 @@ def staged_sections(slug: str, pairs: list[dict]) -> list[dict]:
         j = json.loads(f.read_text()) if f.exists() else {}
         if is_stale(j, p):
             j = {**j, "_status": "stale", "_why": "source changed after this section passed"}
-        out.append({"id": p["id"], "title": j.get("thought_title") or p["title"],
-                    "text": "\n".join(j.get("pass_b_english") or p["english"]), "_j": j, "_file": f})
+        out.append({"id": p["id"], "title": j.get("thought_title") or p.get("title") or "",
+                    "text": "\n".join(j.get("pass_b_english") or p.get("english") or []), "_j": j, "_file": f})
     return out
 
 
@@ -2368,23 +2368,62 @@ def term_queue_blocked(book: str, prev: dict) -> bool:
     return False
 
 
+def _withheld(slug: str) -> bool:
+    """True for a book the site refuses to publish until the English is rewritten."""
+    if slug == "barnabas-epistle":
+        return True
+    try:
+        sys.path.insert(0, str(SITE_SCRIPTS))
+        from build_site import FORCED_WITHHOLD
+        return slug in FORCED_WITHHOLD
+    except Exception:  # noqa: BLE001  a missing site tree must not unpark a withheld book
+        return True
+
+
+def finish_ready(book: str, pairs: list[dict]) -> bool:
+    """Every section passed, and a read or intro can still certify the book.
+
+    A score already bound to this text and under the reader minimum stays
+    parked: reader edits are off, so reading the same text again will not
+    raise it. Withheld books stay parked. A held section is not this case.
+    """
+    if not book or not pairs or _withheld(book):
+        return False
+    secs = staged_sections(book, pairs)
+    if len(secs) != len(pairs) or any(s["_j"].get("_status") != "pass" for s in secs):
+        return False
+    path = STAGE / book / "read.json"
+    try:
+        read = json.loads(path.read_text()) if path.exists() else {}
+    except (OSError, ValueError):
+        read = {}
+    if read.get("text_sha256"):
+        intro_path = STAGE / book / "intro.json"
+        try:
+            intro = json.loads(intro_path.read_text()) if intro_path.exists() else {}
+        except (OSError, ValueError):
+            intro = {}
+        if read["text_sha256"] == view_sha(reader_view(book, pairs, intro)):
+            nums = [s for s in (read.get("followability") or [])
+                    if isinstance(s, (int, float)) and not isinstance(s, bool) and math.isfinite(s)]
+            if len(nums) >= 2 and min(nums) < FOLLOW_MIN:
+                return False
+    return True
+
+
 def parked(row: dict, book: str = "", pairs: list[dict] | None = None) -> bool:
     """A held work waits for the held review once its last attempt changed no
     section's state (2026-10-06: a flat 2-attempt park stopped books whose
     held sections still had a retry left). A row from before that rule has no
-    'stalled' field: it parks only when no section can still move, so a book
-    whose sections all pass stays parked as before (owner decision; it waits on
-    readers or the intro) and a book with retries left runs again (red team
-    2026-10-06: 93 rows parked on the missing field alone)."""
+    'stalled' field. Those rows stay parked, including ones that could still
+    move, until the owner releases them. The exception (2026-10-08): a book
+    whose every section already passed, and which only needs a read or an
+    intro, may finish. It stops at PARK_MAX either way."""
     if row.get("result") != "held" or row.get("attempts", 1) < 2:
         return False
     stalled = row.get("stalled")
     if stalled is None:
-        # Owner decision pending (2026-10-06): releasing old-format parked rows
-        # that could still move would unpark ~39 books and spend grant credit
-        # with no approval. Until the owner says so they stay parked as before.
-        # can_move(book, pairs) is the ready-made test for that release.
-        stalled = True
+        stalled = not finish_ready(book, pairs or [])
     return stalled or row.get("attempts", 1) >= PARK_MAX
 
 
