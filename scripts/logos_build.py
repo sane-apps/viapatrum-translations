@@ -50,6 +50,13 @@ CLICLICK = shutil.which("cliclick") or "/opt/homebrew/bin/cliclick"
 
 BUILD_TIMEOUT = 600
 UPLOAD_TIMEOUT = 600
+# Owner decision made 2026-10-07 (shelf stream): at most this many Word
+# files are compiled per Sunday run. A build plus upload takes about 3 min
+# (10 max), and the run holds outputs/build.lock, so an uncapped catch-up of
+# 70+ books would block Sunday's 05:30 and 13:30 auto ships. The rest wait
+# for the next Sunday, oldest docx first.
+MAX_BUILDS_PER_RUN = 30
+CATCHUP_TIMEOUT = 3600
 AX_WAIT = 120
 MAX_PAGES = 25
 
@@ -663,6 +670,65 @@ def published_slugs():
     fail("no site catalogue (ship-last or dist): cannot tell which works are published")
 
 
+def certified_slugs():
+    """Book folders the work pipeline certified (queue.json result
+    "certified"). Owner 2026-10-06: Logos builds only certified AND
+    published works; published alone also let legacy, never-certified
+    English through. Same signal build_pbb_docx --catchup uses."""
+    path = os.path.join(REPO, "outputs", "work-pipeline", "queue.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            queue = json.load(f)
+    except (OSError, ValueError):
+        fail("no readable work-pipeline queue at %s: cannot tell which works are certified" % path)
+    return {k for k, v in queue.items() if isinstance(v, dict) and v.get("result") == "certified"}
+
+
+def _pid_is_logos_build(pid):
+    """True when pid is alive and is a logos_build.py run."""
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        pass  # alive, another user's: treat as a real holder
+    try:
+        cmd = subprocess.run(["ps", "-p", str(pid), "-o", "command="],
+                             capture_output=True, text=True, timeout=10).stdout
+    except (OSError, subprocess.SubprocessError):
+        return True  # cannot tell: do not steal the lock
+    return "logos_build.py" in cmd
+
+
+def acquire_lock(path):
+    """Create the run lock atomically (O_EXCL). A lock left by a dead run,
+    or by a pid that is no longer logos_build.py, is taken over instead of
+    cancelling the only weekly compile (2026-10-07: a dead lock skipped a
+    whole week). A live logos_build.py holder still stops this run."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    for _ in range(2):
+        try:
+            fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+        except FileExistsError:
+            try:
+                with open(path, encoding="utf-8") as f:
+                    pid = int((f.read() or "0").strip() or 0)
+            except (OSError, ValueError):
+                pid = 0
+            if pid and pid != os.getpid() and _pid_is_logos_build(pid):
+                fail("lock held by running logos_build.py pid %d: %s" % (pid, path))
+            log("taking over stale lock %s (pid %s is not a running logos_build.py)" % (path, pid or "unknown"))
+            try:
+                os.remove(path)
+            except FileNotFoundError:
+                pass
+            continue
+        with os.fdopen(fd, "w") as f:
+            f.write(str(os.getpid()))
+        return
+    fail("could not take the lock %s" % path)
+
+
 def site_slugs(slug, entry):
     """The site slugs a book publishes under: its folder name plus any "slug"
     in translations/*_meta.json (Cyril books publish as cyril-..., not
@@ -679,7 +745,7 @@ def site_slugs(slug, entry):
     return out
 
 
-def verify_hold(inv, slugs, published=None):
+def verify_hold(inv, slugs, published=None, certified=None):
     """{slug: reason} for Word files that must not be built or uploaded.
 
     The shared rule (verify_docx.logos_file_problems) that the pack and
@@ -692,6 +758,9 @@ def verify_hold(inv, slugs, published=None):
     for slug in sorted(set(slugs)):
         if published is not None and not (site_slugs(slug, inv[slug]) & published):
             held[slug] = "not published on the site (held, reopened or never certified)"
+            continue
+        if certified is not None and slug not in certified:
+            held[slug] = "not certified by the work pipeline (owner 2026-10-06: certified and published only)"
             continue
         docx = Path(inv[slug]["docx_path"])
         problems = logos_file_problems(docx.parent, docx)
@@ -713,6 +782,10 @@ def main():
     ap.add_argument("--build-only", action="store_true")
     ap.add_argument("--upload-only", action="store_true")
     ap.add_argument("--book", default=None)
+    ap.add_argument("--no-catchup", action="store_true",
+                    help="skip build_pbb_docx.py --catchup before the run")
+    ap.add_argument("--max-builds", type=int, default=MAX_BUILDS_PER_RUN,
+                    help="compile at most this many books this run (default %(default)s)")
     ap.add_argument("--force", action="store_true",
                     help="rebuild and re-upload everything in scope "
                     "(metadata-only changes such as retitles)")
@@ -726,18 +799,28 @@ def main():
     log(out.strip().splitlines()[-1] if out.strip() else "no output")
     if rc != 0:
         fail("check_research.py failed: intros/research receipts incomplete")
-    if os.path.exists(LOCK_PATH):
-        fail("lock exists: %s (another run active?)" % LOCK_PATH)
     if not args.dry_run:
-        os.makedirs(os.path.dirname(LOCK_PATH), exist_ok=True)
-        with open(LOCK_PATH, "w") as f:
-            f.write(str(os.getpid()))
+        acquire_lock(LOCK_PATH)
 
     started = datetime.datetime.now().astimezone()
     receipt = {"started": started.isoformat(timespec="seconds"),
                "mode": " ".join(sys.argv[1:]) or "full",
                "builds": [], "uploads": [], "skipped": [], "failures": []}
     try:
+        # Rebuild stale or missing Word files for certified works first
+        # (local, no model calls). verify_hold only holds a stale file; without
+        # this step nothing ever replaced it (2026-10-07: 72 stale, 4 missing).
+        if not (args.no_catchup or args.book or args.upload_only):
+            cmd = [sys.executable, os.path.join(REPO, "scripts", "build_pbb_docx.py"), "--catchup"]
+            if args.dry_run:
+                cmd.append("--dry-run")
+            rc, out = run(cmd, timeout=CATCHUP_TIMEOUT)
+            last = out.strip().splitlines()[-1] if out.strip() else "no output"
+            log("catchup rc=%d: %s" % (rc, last))
+            receipt["catchup"] = {"rc": rc, "summary": last}
+            if rc != 0:
+                # Books that failed stay stale, and verify_hold holds them.
+                receipt["failures"].append({"slug": "-", "phase": "catchup", "error": last[:300]})
         inv = inventory()
         if args.book:
             if args.book not in inv:
@@ -760,13 +843,22 @@ def main():
         if args.force:
             need_build = sorted(inv)
             need_upload = sorted(s for s in inv if inv[s]["last_compiled"])
-        held = verify_hold(inv, need_build + need_upload, published_slugs())
+        held = verify_hold(inv, need_build + need_upload, published_slugs(), certified_slugs())
         for slug, why in sorted(held.items()):
             receipt["skipped"].append(
                 {"slug": slug, "reason": "Word file held: " + why})
             log("HOLD %s (Word file held: %s)" % (slug, why))
         need_build = [s for s in need_build if s not in held]
         need_upload = [s for s in need_upload if s not in held]
+        if len(need_build) > args.max_builds:
+            # Oldest Word file first, so every book gets its turn.
+            need_build.sort(key=lambda s: inv[s]["docx_mtime"])
+            for slug in need_build[args.max_builds:]:
+                receipt["skipped"].append(
+                    {"slug": slug, "reason": "over this run's cap of %d builds; next run" % args.max_builds})
+            log("cap: building %d of %d; the rest wait for the next run"
+                % (args.max_builds, len(need_build)))
+            need_build = need_build[:args.max_builds]
         log("inventory: %d docx books; need_build=%d need_upload(known)=%d"
             % (len(inv), len(need_build), len(need_upload)))
         if args.dry_run:
