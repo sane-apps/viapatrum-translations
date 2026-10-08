@@ -1,0 +1,300 @@
+{
+ "excerpt_id": "ignatius-letters:3.10",
+ "section": "3.10",
+ "edition": {
+  "language": "grc",
+  "path": "books/ignatius-letters/translations/ign_trallians_source.json"
+ },
+ "source_text": "Εἰ δέ, ὥσπερ τινὲς ἄθεοι ὄντες, τουτέστιν ἄπιστοι, λέγουσιν, τὸ δοκεῖν πεπονθέναι αὐτόν, αὐτοὶ ὄντες τὸ δοκεῖν, ἐγὼ τί δέδεμαι, τί δὲ καὶ εὔχομαι θηριομαχῆσαι; δωρεὰν οὖν ἀποθνήσκω. ἄρα οὖν καταψεύδομαι τοῦ κυρίου.",
+ "thought_title": "If Christ only seemed to suffer, Ignatius's chains and death are meaningless",
+ "orientation": "Ignatius is writing to the church in Tralles, arguing against teachers who say Christ only seemed to suffer, and he is contrasting their claim with the reality of his own imprisonment and coming martyrdom.",
+ "pass_a_gloss": "But if, as some who are godless, that is, faithless, say, he suffered in mere appearance, they themselves being mere appearance, why am I bound, and why also do I pray to fight wild beasts? In vain, then, I am dying. Am I, then, lying about the Lord?",
+ "lemmas": [
+  {
+   "form": "ἄθεοι",
+   "lemma": "ἄθεος",
+   "gloss": "godless"
+  },
+  {
+   "form": "ἄπιστοι",
+   "lemma": "ἄπιστος",
+   "gloss": "faithless"
+  },
+  {
+   "form": "λέγουσιν",
+   "lemma": "λέγω",
+   "gloss": "they say"
+  },
+  {
+   "form": "τὸ δοκεῖν",
+   "lemma": "δοκέω",
+   "gloss": "mere appearance"
+  },
+  {
+   "form": "πεπονθέναι",
+   "lemma": "πάσχω",
+   "gloss": "to have suffered"
+  },
+  {
+   "form": "δέδεμαι",
+   "lemma": "δέω",
+   "gloss": "I am bound"
+  },
+  {
+   "form": "εὔχομαι",
+   "lemma": "εὔχομαι",
+   "gloss": "I pray"
+  },
+  {
+   "form": "θηριομαχῆσαι",
+   "lemma": "θηριομαχέω",
+   "gloss": "to fight wild beasts"
+  },
+  {
+   "form": "δωρεάν",
+   "lemma": "δωρεάν",
+   "gloss": "in vain"
+  },
+  {
+   "form": "ἀποθνήσκω",
+   "lemma": "ἀποθνήσκω",
+   "gloss": "I am dying"
+  },
+  {
+   "form": "καταψεύδομαι",
+   "lemma": "καταψεύδομαι",
+   "gloss": "I am lying about"
+  },
+  {
+   "form": "κυρίου",
+   "lemma": "κύριος",
+   "gloss": "the Lord"
+  }
+ ],
+ "choices": [
+  {
+   "term": "τὸ δοκεῖν",
+   "english": "mere appearance",
+   "why": "The glossary requires 'mere appearance' for this term, which Ignatius uses to describe the false claim that Christ only seemed to suffer.",
+   "rejected": [
+    "seeming",
+    "appearance"
+   ]
+  },
+  {
+   "term": "θηριομαχῆσαι",
+   "english": "to fight wild beasts",
+   "why": "The glossary gives 'martyrdom by beasts' for the noun, but here the verb is used; 'fight wild beasts' preserves the literal action Ignatius expects.",
+   "rejected": [
+    "to be martyred by beasts",
+    "to face the beasts"
+   ]
+  },
+  {
+   "term": "δωρεάν",
+   "english": "in vain",
+   "why": "The adverb here means 'for nothing, without purpose,' matching Ignatius's point that his death would be pointless if Christ did not truly suffer.",
+   "rejected": [
+    "freely",
+    "as a gift"
+   ]
+  },
+  {
+   "term": "καταψεύδομαι",
+   "english": "I am lying about",
+   "why": "The compound verb means to speak falsely against someone; 'lying about' captures the sense that Ignatius would be bearing false witness concerning the Lord.",
+   "rejected": [
+    "I am false to",
+    "I slander"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "But if, as some godless people—that is, faithless people—say, he suffered in mere appearance, then they themselves are mere appearance. Why am I bound? Why do I pray for martyrdom by beasts? Then I am dying in vain. Am I then lying about the Lord?"
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "356a0c23709239fae7e33f3120ae95cd205caef98fbdeeb125058b468d33eddc",
+ "source_sha256": "06895e6bb3c9863f98ea0bc2345fed7b357e4f3f33077d068806ff5e6844c2ad",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "severity": "major",
+     "quote": "fight wild beasts",
+     "source_quote": "θηριομαχῆσαι",
+     "why": "Glossary requires 'martyrdom by beasts' not 'fight wild beasts'.",
+     "fix": "Why do I pray for martyrdom by beasts?",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "no ruling"
+    },
+    {
+     "class": "glossary",
+     "severity": "major",
+     "quote": "mere appearance",
+     "source_quote": "τὸ δοκεῖν",
+     "why": "Glossary requires 'mere appearance' for τὸ δοκεῖν; but 'only in mere appearance' adds 'only' not in source.",
+     "fix": "he suffered in mere appearance",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "no ruling"
+    },
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "they themselves are mere appearance",
+     "source_quote": "αὐτοὶ ὄντες τὸ δοκεῖν",
+     "why": "Greek says they 'are' (merely) 'seeming/appearance,' i.e., they are unreal, not 'mere appearance' as a noun phrase.",
+     "fix": "they themselves are only appearance",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "no ruling"
+    },
+    {
+     "class": "modality",
+     "severity": "major",
+     "quote": "So then I am lying about the Lord",
+     "source_quote": "ἄρα οὖν καταψεύδομαι τοῦ κυρίου",
+     "why": "Greek is a question expecting 'no': 'Am I then lying about the Lord?' English statement loses the rhetorical force.",
+     "fix": "Am I then lying about the Lord?",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "no ruling"
+    }
+   ],
+   "edits": [
+    {
+     "old": "he suffered only in mere appearance",
+     "new": "he suffered in mere appearance"
+    },
+    {
+     "old": "then they themselves are mere appearance",
+     "new": "then they themselves are only appearance"
+    },
+    {
+     "old": "Why do I pray to fight wild beasts?",
+     "new": "Why do I pray for martyrdom by beasts?"
+    },
+    {
+     "old": "So then I am lying about the Lord.",
+     "new": "Am I then lying about the Lord?"
+    }
+   ],
+   "fixed": [
+    "Removed 'only' from 'he suffered only in mere appearance' to match the source.",
+    "Changed 'they themselves are mere appearance' to 'they themselves are only appearance' to reflect the Greek predicate use.",
+    "Changed 'fight wild beasts' to 'martyrdom by beasts' per glossary.",
+    "Changed the statement 'So then I am lying about the Lord' to the rhetorical question 'Am I then lying about the Lord?' to match the Greek interrogative."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "mere appearance",
+     "why": "Docetism concept rendered with slight variants; meaning is consistent but wording shifts.",
+     "fix": "Use 'mere appearance' consistently for the docetic claim.",
+     "variants": [
+      {
+       "text": "mere appearance",
+       "sections": [
+        "6.2",
+        "6.4",
+        "3.10"
+       ]
+      },
+      {
+       "text": "only in mere appearance",
+       "sections": [
+        "6.2"
+       ]
+      },
+      {
+       "text": "in mere appearance",
+       "sections": [
+        "6.4"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "then they themselves are only appearance",
+     "new": "then they themselves are mere appearance"
+    }
+   ],
+   "fixed": [
+    "The English already uses 'mere appearance' for the first occurrence; the second occurrence was changed to match the consistent wording."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 4,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "he suffered in mere appearance, then they themselves are only appearance",
+    "source_quote": "τὸ δοκεῖν πεπονθέναι αὐτόν, αὐτοὶ ὄντες τὸ δοκεῖν",
+    "why": "English obscures that 'τὸ δοκεῖν' is opponents' technical term (docetism); 'mere appearance' is glossary-correct but 'only appearance' for αὐτοὶ ὄντες τὸ δοκεῖν loses the technical parallel.",
+    "fix": "he suffered in mere appearance, then they themselves exist as mere appearance",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'mere appearance' and 'only appearance' both render τὸ δοκεῖν; parallel is preserved adequately. Mere stylistic preference."
+   },
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "Am I then lying about the Lord?",
+    "source_quote": "ἄρα οὖν καταψεύδομαι τοῦ κυρίου",
+    "why": "Rhetorical question in English, but Greek is confident assertion: 'So then I am bearing false witness against the Lord.' The question softens Ignatius's stark conclusion.",
+    "fix": "Then I am bearing false witness against the Lord.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Greek ἄρα οὖν καταψεύδομαι is a deliberative rhetorical question here; English question matches the force and modality."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 4,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}

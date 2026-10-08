@@ -1,0 +1,263 @@
+{
+ "excerpt_id": "ignatius-letters:2.4",
+ "section": "2.4",
+ "edition": {
+  "language": "grc",
+  "path": "books/ignatius-letters/translations/ign_magnesians_source.json"
+ },
+ "source_text": "Πρέπον οὖν ἐστιν μὴ μόνον καλεῖσθαι Χρις τιανούς, ἀλλὰ καὶ εἶναι: ὥσπερ καί τινες ἐπίσκοπον μὲν καλοῦσιν, χωρὶς δὲ αὐτοῦ πάντα πράσσουσιν. οἱ τοιοῦτοι δὲ οὐκ εὐσυνείδητοί μοι εἶναι φαίνονται διὰ τὸ μὴ βεβαίως κατ’ ἐντολὴν συναθροίζεσθαι.",
+ "thought_title": "Being Christians, not just called Christians",
+ "orientation": "Ignatius is writing to the church in Magnesia, urging them to obey their bishop and not act apart from him.",
+ "pass_a_gloss": "It is fitting therefore not only to be called Christians, but also to be Christians: just as also some call him bishop, but apart from him they do everything. Such people do not seem to me to have a good conscience, because they do not assemble reliably according to the commandment.",
+ "lemmas": [
+  {
+   "form": "Πρέπον",
+   "lemma": "πρέπω",
+   "gloss": "it is fitting"
+  },
+  {
+   "form": "καλεῖσθαι",
+   "lemma": "καλέω",
+   "gloss": "to be called"
+  },
+  {
+   "form": "εἶναι",
+   "lemma": "εἰμί",
+   "gloss": "to be"
+  },
+  {
+   "form": "ἐπίσκοπον",
+   "lemma": "ἐπίσκοπος",
+   "gloss": "bishop"
+  },
+  {
+   "form": "καλοῦσιν",
+   "lemma": "καλέω",
+   "gloss": "they call"
+  },
+  {
+   "form": "πράσσουσιν",
+   "lemma": "πράσσω",
+   "gloss": "they do"
+  },
+  {
+   "form": "εὐσυνείδητοι",
+   "lemma": "εὐσυνείδητος",
+   "gloss": "having a good conscience"
+  },
+  {
+   "form": "φαίνονται",
+   "lemma": "φαίνω",
+   "gloss": "they seem"
+  },
+  {
+   "form": "βεβαίως",
+   "lemma": "βέβαιος",
+   "gloss": "reliably, firmly"
+  },
+  {
+   "form": "ἐντολὴν",
+   "lemma": "ἐντολή",
+   "gloss": "commandment"
+  },
+  {
+   "form": "συναθροίζεσθαι",
+   "lemma": "συναθροίζω",
+   "gloss": "to assemble together"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Χρις τιανούς",
+   "english": "Christians",
+   "why": "The source has a space in the middle of the word (Χρις τιανούς), likely a line break or scribal spacing; the intended word is Χριστιανούς, 'Christians.'",
+   "rejected": [
+    "Christian people"
+   ]
+  },
+  {
+   "term": "εὐσυνείδητοι",
+   "english": "to have a good conscience",
+   "why": "The adjective means 'having a good conscience'; rendering it as a phrase keeps the sense clear in English.",
+   "rejected": [
+    "well-conscienced",
+    "conscientious"
+   ]
+  },
+  {
+   "term": "κατ’ ἐντολὴν",
+   "english": "according to the commandment",
+   "why": "The phrase refers to the command to assemble under the bishop; the definite article is implied by the context.",
+   "rejected": [
+    "according to commandment"
+   ]
+  },
+  {
+   "term": "βεβαίως",
+   "english": "reliably",
+   "why": "The adverb means 'firmly, steadfastly'; 'reliably' captures the sense of consistent, dependable assembly.",
+   "rejected": [
+    "firmly",
+    "steadfastly"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "So it is fitting not only to be called Christians, but actually to be Christians. In the same way, some people call a man bishop, yet do everything apart from him. Such people do not seem to me to have a good conscience, because they do not assemble faithfully according to the commandment."
+ ],
+ "notes": [
+  "The source text has 'Χρις τιανούς' with a space, likely a line break or scribal spacing for Χριστιανούς."
+ ],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "356a0c23709239fae7e33f3120ae95cd205caef98fbdeeb125058b468d33eddc",
+ "source_sha256": "5367a0e99e221291546cf08e9582b81b55b1ec0636260c674d67095b57cdfd6f",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "reliably assemble",
+    "source_quote": "βεβαίως κατ’ ἐντολὴν συναθροίζεσθαι",
+    "why": "'reliably' weakens βεβαίως (firmly/solidly); 'commandment' alone loses κατ' ἐντολήν (according to the commandment).",
+    "fix": "firmly assemble according to the commandment",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "βεβαίως means 'reliably/firmly'; 'assemble according to the commandment' accurately renders κατ' ἐντολὴν συναθροίζεσθαι. No meaning lost."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "polish": [
+  {
+   "changed": "Clarified the contrast between mere name and reality by adding 'in reality,' and kept the rest of the sentence structure natural and direct.",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "2.10",
+     "quote": "Christianity",
+     "variants": [
+      {
+       "text": "Christianity",
+       "sections": [
+        "2.10",
+        "5.6"
+       ]
+      },
+      {
+       "text": "Christians",
+       "sections": [
+        "2.4",
+        "2.10",
+        "4.3"
+       ]
+      },
+      {
+       "text": "Christian",
+       "sections": [
+        "2.10",
+        "4.3",
+        "7.7"
+       ]
+      },
+      {
+       "text": "Christian food",
+       "sections": [
+        "3.6"
+       ]
+      }
+     ],
+     "why": "Abstract noun 'Christianity' appears twice; reader may not grasp this is rare early usage.",
+     "fix": "Note that 'Christianity' as abstract noun is unusual and significant.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    }
+   ]
+  },
+  {
+   "changed": "Clarified the parallel between name and reality, made the contrast about the bishop sharper, and smoothed the final clause for natural modern reading.",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "1.2",
+     "quote": "council of elders",
+     "variants": [
+      {
+       "text": "council of elders",
+       "sections": [
+        "1.2",
+        "1.5",
+        "2.3",
+        "2.6",
+        "2.7",
+        "2.13",
+        "3.2",
+        "3.7",
+        "3.12",
+        "3.13",
+        "5.1",
+        "5.4",
+        "5.7",
+        "5.8",
+        "6.8",
+        "7.1",
+        "7.6"
+       ]
+      },
+      {
+       "text": "elders",
+       "sections": [
+        "2.2",
+        "2.4",
+        "2.15",
+        "3.3",
+        "5.6",
+        "5.9",
+        "6.12",
+        "6.13"
+       ]
+      },
+      {
+       "text": "council of the apostles",
+       "sections": [
+        "2.6"
+       ]
+      }
+     ],
+     "why": "Same institution alternates between 'council of elders' and plain 'elders'; reader may think these differ.",
+     "fix": "Use consistent term or gloss as 'body of elders/presbyters'.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    }
+   ]
+  }
+ ]
+}

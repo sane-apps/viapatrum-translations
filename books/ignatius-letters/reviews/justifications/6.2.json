@@ -1,0 +1,323 @@
+{
+ "excerpt_id": "ignatius-letters:6.2",
+ "section": "6.2",
+ "edition": {
+  "language": "grc",
+  "path": "books/ignatius-letters/translations/ign_smyrnaeans_source.json"
+ },
+ "source_text": "Ταῦτα γὰρ πάντα ἔπαθεν δἰ ἡμᾶς, ἵνα σωθῶμεν: καὶ ἀληθῶς ἔπαθεν, ὡς καὶ ἀληθῶς ἀνέστησεν ἑαυτόν, οὐχ ὥσπερ ἄπιστοί τινες λέγουσιν, τὸ δοκεῖν αὐτὸν πεπονθέναι, αὐτοὶ το δοκεῖν ὄντες: καὶ καθὼς φρονοῦσιν, καὶ συμβήσεται αὐτοῖς, οὖσιν ἀσωμάτοις καὶ δαιμονικοῖς.",
+ "thought_title": "Christ truly suffered, not in mere appearance",
+ "orientation": "Ignatius is writing to the church in Smyrna, warning against teachers who deny the real flesh and suffering of Jesus Christ.",
+ "pass_a_gloss": "These things for all [things] he suffered because of us, in order that we might be saved: and truly he suffered, as also truly he raised himself, not as some unbelievers say, the mere appearance him to have suffered, themselves the mere appearance being: and just as they think, also it will happen to them, being bodiless and demonic.",
+ "lemmas": [
+  {
+   "form": "ἔπαθεν",
+   "lemma": "πάσχω",
+   "gloss": "he suffered"
+  },
+  {
+   "form": "σωθῶμεν",
+   "lemma": "σῴζω",
+   "gloss": "we might be saved"
+  },
+  {
+   "form": "ἀνέστησεν",
+   "lemma": "ἀνίστημι",
+   "gloss": "he raised"
+  },
+  {
+   "form": "ἄπιστοί",
+   "lemma": "ἄπιστος",
+   "gloss": "unbelievers"
+  },
+  {
+   "form": "τὸ δοκεῖν",
+   "lemma": "τὸ δοκεῖν",
+   "gloss": "mere appearance"
+  },
+  {
+   "form": "πεπονθέναι",
+   "lemma": "πάσχω",
+   "gloss": "to have suffered"
+  },
+  {
+   "form": "φρονοῦσιν",
+   "lemma": "φρονέω",
+   "gloss": "they think"
+  },
+  {
+   "form": "συμβήσεται",
+   "lemma": "συμβαίνω",
+   "gloss": "it will happen"
+  },
+  {
+   "form": "ἀσωμάτοις",
+   "lemma": "ἀσώματος",
+   "gloss": "bodiless"
+  },
+  {
+   "form": "δαιμονικοῖς",
+   "lemma": "δαιμονικός",
+   "gloss": "demonic"
+  }
+ ],
+ "choices": [
+  {
+   "term": "τὸ δοκεῖν",
+   "english": "mere appearance",
+   "why": "The glossary fixes this term for the claim that Christ only seemed to suffer; it must be rendered consistently.",
+   "rejected": [
+    "seeming",
+    "appearance"
+   ]
+  },
+  {
+   "term": "ἀσωμάτοις",
+   "english": "bodiless",
+   "why": "The word means without a body, and 'bodiless' preserves the contrast with Christ's real flesh that Ignatius is making.",
+   "rejected": [
+    "incorporeal",
+    "disembodied"
+   ]
+  },
+  {
+   "term": "δαιμονικοῖς",
+   "english": "demonic",
+   "why": "The adjective describes the nature of the opponents as belonging to demons, matching the following section's contrast with Christ not being a bodiless demon.",
+   "rejected": [
+    "demon-like",
+    "of demons"
+   ]
+  },
+  {
+   "term": "ἀνέστησεν ἑαυτόν",
+   "english": "he raised himself",
+   "why": "The active verb with reflexive pronoun is deliberate: Christ raised himself, emphasizing his divine power, and the literal rendering keeps that force.",
+   "rejected": [
+    "he was raised",
+    "he rose"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "He suffered all these things for our sake, so that we might be saved. And he truly suffered, just as he truly raised himself. It is not as some faithless people say, that he suffered only in mere appearance. They themselves are unreal, and as they think, so it will happen to them, since they are bodiless and demonic."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "356a0c23709239fae7e33f3120ae95cd205caef98fbdeeb125058b468d33eddc",
+ "source_sha256": "e9224665aa9529d95080a66051f132dfdf449f3451b885b4b7c0e336579387ca",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 4,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "mere appearance",
+    "source_quote": "τὸ δοκεῖν",
+    "why": "Glossary fixes English as 'mere appearance', but 'only in mere appearance' is redundant and awkward; the glossary term should be used properly.",
+    "fix": "that he suffered in mere appearance",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Stylistic awkwardness, not a meaning change; 'τὸ δοκεῖν' rendered correctly as 'mere appearance'."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "raised himself",
+    "source_quote": "ἀνέστησεν ἑαυτόν",
+    "why": "ἀνέστησεν is intransitive 'rose', not transitive 'raised'; ἑαυτόν is reflexive object of intransitive verb, meaning 'he himself rose'.",
+    "fix": "he himself truly rose",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἀνέστησεν is transitive aorist with ἑαυτόν; 'raised himself' is accurate, not mistranslation."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "They themselves are mere appearance",
+    "source_quote": "αὐτοὶ τὸ δοκεῖν ὄντες",
+    "why": "τὸ δοκεῖν ὄντες means 'being of mere appearance' or 'existing as seeming', not 'are mere appearance' as a noun predicate.",
+    "fix": "they themselves exist as mere appearance",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Participle ὄντες rendered as 'are' is normal; meaning 'they are mere appearance' preserved adequately."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "since they are bodiless and demonic",
+    "source_quote": "οὖσιν ἀσωμάτοις καὶ δαιμονικοῖς",
+    "why": "οὖσιν is dative plural agreeing with αὐτοῖς, 'to them being...'; 'since' changes the syntax and logic of the clause.",
+    "fix": "to them, being bodiless and demonic",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Dative participle with αὐτοῖς naturally rendered causally; 'since' is standard and meaning unchanged."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 4,
+   "error": null
+  },
+  {
+   "round": "polish1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "polish": [
+  {
+   "changed": "Clarified the contrast between Christ's true suffering and the false claim of mere appearance, and made the subject of each clause explicit while preserving every claim and qualification.",
+   "notes": [
+    {
+     "class": "suspect_meaning",
+     "section": "6.2",
+     "quote": "They themselves are mere appearance, and as they think, so it will happen to them, since they are bodiless and demonic",
+     "why": "Docetists 'bodiless and demonic' is odd if they are physical persons.",
+     "fix": "Explain: 'Their denial of Christ's body makes them like bodiless demons.'",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    }
+   ]
+  },
+  {
+   "changed": "Clarified the final clause by making the consequence explicit: the opponents will become what they believe, bodiless and demonic, matching the source's contrast between Christ's true suffering and their mere appearance.",
+   "notes": [
+    {
+     "class": "suspect_meaning",
+     "section": "6.2",
+     "quote": "They themselves are mere appearance, and as they think, so it will happen to them, since they are bodiless and demonic.",
+     "why": "'As they think, so it will happen to them' is vague; likely 'they will become what they believe—unreal, bodiless'.",
+     "fix": "Clarify: 'as they believe [Christ was mere appearance], so they will become—bodiless and demonic.'",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    }
+   ]
+  },
+  {
+   "changed": "Clarified the subject of suffering as Christ, smoothed the sentence flow, and rendered 'unbelievers' as 'faithless people' to better reflect the opponents' claim to belief while preserving the original contrast.",
+   "notes": [
+    {
+     "class": "suspect_meaning",
+     "section": "6.2",
+     "quote": "Not as some unbelievers say, that he suffered only in mere appearance",
+     "why": "'Unbelievers' for docetists is odd; they claimed to be believers. 'Unbelievers' may be too strong.",
+     "fix": "Revise to 'some who do not believe' or add note that these are docetic Christians.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    }
+   ]
+  },
+  {
+   "changed": "Clarified the contrast between Christ's true suffering and the opponents' claim, and made the final clause about the opponents' bodiless and demonic state follow naturally from their thinking.",
+   "notes": [
+    {
+     "class": "suspect_meaning",
+     "section": "6.2",
+     "quote": "They themselves are mere appearance, and as they think, so they will become: bodiless and demonic",
+     "why": "'Bodiless and demonic' = angels/demons are bodiless; will they become demons? Harsh but unclear.",
+     "fix": "Gloss: they will share the nature of the bodiless demons they resemble.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    }
+   ]
+  }
+ ],
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "They themselves are mere appearance, and as they think, so it will happen to them, since they are bodiless and demonic.",
+     "why": "'As they think, so it will happen to them' is vague; likely 'they will become what they believe—unreal, bodiless'.",
+     "fix": "Clarify: 'as they believe [Christ was mere appearance], so they will become—bodiless and demonic.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "They themselves are mere appearance, and as they think, so it will happen to them, since they are bodiless and demonic.",
+     "new": "They themselves are mere appearance, and as they think, so they will become—bodiless and demonic."
+    }
+   ],
+   "fixed": []
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "They themselves are mere appearance, and as they think, so they will become: bodiless and demonic",
+     "why": "'Bodiless and demonic' = angels/demons are bodiless; will they become demons? Harsh but unclear.",
+     "fix": "Gloss: they will share the nature of the bodiless demons they resemble.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "They themselves are mere appearance, and as they think, so they will become: bodiless and demonic.",
+     "new": "They themselves are mere appearance, and as they think, so it will happen to them, since they are bodiless and demonic."
+    }
+   ],
+   "fixed": [
+    "The source says οὖσιν ἀσωμάτοις καὶ δαιμονικοῖς, a dative of possession/characteristic: 'being bodiless and demonic.' The English 'so they will become: bodiless and demonic' misreads the dative as a predicate of becoming. The clause means that what they think will happen to them, because they are bodiless and demonic. Changed to 'so it will happen to them, since they are bodiless and demonic.'"
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "quote": "They themselves are mere appearance",
+     "why": "'Mere appearance' for Greek 'phantasma' or 'dokein' is technical; better 'unreal' or 'illusions'.",
+     "fix": "'They themselves are unreal'.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "They themselves are mere appearance",
+     "new": "They themselves are unreal"
+    }
+   ],
+   "fixed": [
+    "Changed 'mere appearance' to 'unreal' for the people themselves, since the source's 'τὸ δοκεῖν ὄντες' means they are unreal/illusions, not that they are the technical category of 'mere appearance'."
+   ]
+  }
+ ]
+}

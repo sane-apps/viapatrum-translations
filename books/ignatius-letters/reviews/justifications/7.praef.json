@@ -1,0 +1,414 @@
+{
+ "excerpt_id": "ignatius-letters:7.praef",
+ "section": "7.praef",
+ "edition": {
+  "language": "grc",
+  "path": "books/ignatius-letters/translations/ign_polycarp_source.json"
+ },
+ "source_text": "Ἰγνάτιος, ὁ καὶ Θεοφόρος, Πολυκάρπῳ ἐπισκόπῳ ἐκκλησίας Σμυρναίων, μᾶλλον ἐπισκοπημένῳ ὑπὸ θεοῦ πατρὸς καὶ κυρίου Ἰησοῦ Χριστοῦ, πλεῖστα χαίρειν.",
+ "thought_title": "Greeting to Polycarp, bishop of Smyrna",
+ "orientation": "Ignatius opens his letter to Polycarp, bishop of the church in Smyrna, with a formal greeting.",
+ "pass_a_gloss": "Ignatius, the [one] also [called] God-Bearer, to Polycarp bishop of [the] church of Smyrna, rather [one] watched over by God [the] Father and [the] Lord Jesus Christ, very many [greetings].",
+ "lemmas": [
+  {
+   "form": "Θεοφόρος",
+   "lemma": "Θεοφόρος",
+   "gloss": "God-bearer"
+  },
+  {
+   "form": "ἐπισκόπῳ",
+   "lemma": "ἐπίσκοπος",
+   "gloss": "bishop"
+  },
+  {
+   "form": "ἐκκλησίας",
+   "lemma": "ἐκκλησία",
+   "gloss": "church"
+  },
+  {
+   "form": "Σμυρναίων",
+   "lemma": "Σμυρναῖος",
+   "gloss": "Smyrnaeans"
+  },
+  {
+   "form": "ἐπισκοπημένῳ",
+   "lemma": "ἐπισκοπέω",
+   "gloss": "watched over"
+  },
+  {
+   "form": "πατρὸς",
+   "lemma": "πατήρ",
+   "gloss": "Father"
+  },
+  {
+   "form": "κυρίου",
+   "lemma": "κύριος",
+   "gloss": "Lord"
+  },
+  {
+   "form": "Ἰησοῦ",
+   "lemma": "Ἰησοῦς",
+   "gloss": "Jesus"
+  },
+  {
+   "form": "Χριστοῦ",
+   "lemma": "Χριστός",
+   "gloss": "Christ"
+  },
+  {
+   "form": "πλεῖστα",
+   "lemma": "πλεῖστος",
+   "gloss": "very many"
+  },
+  {
+   "form": "χαίρειν",
+   "lemma": "χαίρω",
+   "gloss": "greetings"
+  }
+ ],
+ "choices": [
+  {
+   "term": "Θεοφόρος",
+   "english": "God-bearer",
+   "why": "The epithet means 'bearing God' and is rendered literally to preserve the title's force.",
+   "rejected": [
+    "Theophorus",
+    "God-carried"
+   ]
+  },
+  {
+   "term": "ἐπισκοπημένῳ",
+   "english": "watched over",
+   "why": "The passive participle of ἐπισκοπέω is distinct from the noun ἐπίσκοπος; rendering it as 'watched over' preserves the wordplay and the passive sense.",
+   "rejected": [
+    "overseen",
+    "bishoped"
+   ]
+  },
+  {
+   "term": "πλεῖστα χαίρειν",
+   "english": "very many greetings",
+   "why": "The standard epistolary formula is rendered literally to keep the formal greeting register.",
+   "rejected": [
+    "abundant joy",
+    "all hail"
+   ]
+  },
+  {
+   "term": "μᾶλλον",
+   "english": "rather",
+   "why": "The adverb marks a correction or refinement of the preceding title, so 'rather' preserves that nuance.",
+   "rejected": [
+    "more",
+    "instead"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Ignatius, who is also called God-Bearer, sends very many greetings to Polycarp, bishop of the church of Smyrna, or rather to one who is watched over by God the Father and the Lord Jesus Christ."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "356a0c23709239fae7e33f3120ae95cd205caef98fbdeeb125058b468d33eddc",
+ "source_sha256": "bad2a27d63bfbb3161eb3b66cb767dec1987cf1cbe31486c62d8ddc5853df71e",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "watched over",
+    "source_quote": "ἐπισκοπημένῳ",
+    "why": "Glossary requires 'bishop' for ἐπίσκοπος derivatives; 'watched over' avoids the term.",
+    "fix": "one who is bishoped by God the Father and the Lord Jesus Christ",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἐπισκοπημένῳ is a verb participle, not ἐπίσκοπος; 'watched over' fits the passive 'overseen' and breaks no glossary."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "watched over",
+    "source_quote": "ἐπισκοπημένῳ",
+    "why": "ἐπισκοπημένῳ is passive of ἐπισκοπέω, 'to oversee/bishop,' not generic 'watch over.'",
+    "fix": "one who is bishoped by God the Father and the Lord Jesus Christ",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἐπισκοπέω includes 'look upon, care for'; passive 'watched over' is within normal range, not a mistranslation."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "God-bearers",
+     "why": "Title for Ignatius vs. description of Ephesians; reader may conflate the two uses.",
+     "fix": "Capitalize 'God-Bearer' as Ignatius's title; lowercase the plural for the Ephesians.",
+     "variants": [
+      {
+       "text": "God-bearer",
+       "sections": [
+        "1.praef",
+        "2.praef",
+        "5.praef",
+        "7.praef",
+        "4.praef",
+        "6.praef",
+        "3.praef"
+       ]
+      },
+      {
+       "text": "God-bearers",
+       "sections": [
+        "1.9"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "Ignatius, who is also called God-bearer",
+     "new": "Ignatius, who is also called God-Bearer"
+    }
+   ],
+   "fixed": [
+    "Capitalized 'God-Bearer' as Ignatius's title in both the English and the literal gloss."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "God-bearers",
+     "why": "Capitalization varies for the same title; readers may miss that it is the same designation.",
+     "fix": "Standardize capitalization of 'God-bearer' throughout.",
+     "variants": [
+      {
+       "text": "God-bearer",
+       "sections": [
+        "1.praef",
+        "2.praef",
+        "5.praef",
+        "7.praef",
+        "4.praef",
+        "6.praef",
+        "3.praef"
+       ]
+      },
+      {
+       "text": "God-bearers",
+       "sections": [
+        "1.9"
+       ]
+      },
+      {
+       "text": "God-Bearer",
+       "sections": [
+        "2.praef",
+        "7.praef",
+        "4.praef",
+        "6.praef"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "bishop of the Smyrnaeans",
+     "why": "Smyrna is called both 'Smyrna' and 'the Smyrnaeans'; readers may wonder if these differ.",
+     "fix": "Use 'Smyrna' consistently or explain that 'Smyrnaeans' means the church at Smyrna.",
+     "variants": [
+      {
+       "text": "bishop of the Smyrnaeans",
+       "sections": [
+        "2.15",
+        "7.praef"
+       ]
+      },
+      {
+       "text": "bishop of Smyrna",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "church of the Smyrnaeans",
+       "sections": [
+        "7.praef"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "Ignatius, who is also called God-Bearer, sends very many greetings to Polycarp, bishop of the church of the Smyrnaeans—or rather, one who is watched over by God the Father and the Lord Jesus Christ.",
+     "new": "Ignatius, who is also called God-Bearer, sends very many greetings to Polycarp, bishop of the church of Smyrna—or rather, one who is watched over by God the Father and the Lord Jesus Christ."
+    }
+   ],
+   "fixed": [
+    "Capitalization of 'God-Bearer' is already consistent in this passage; no change needed.",
+    "Changed 'the Smyrnaeans' to 'Smyrna' to clarify that it refers to the church at Smyrna."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "God-bearers and temple-bearers, Christ-bearers, holy-thing-bearers",
+     "why": "Title 'God-bearer'/'God-Bearer' vs. plural 'God-bearers' as description of believers; inconsistent capitalization.",
+     "fix": "Standardize capitalization and clarify when descriptive.",
+     "variants": [
+      {
+       "text": "God-bearer",
+       "sections": [
+        "1.praef",
+        "2.praef",
+        "5.praef",
+        "7.praef",
+        "6.praef",
+        "3.praef"
+       ]
+      },
+      {
+       "text": "God-bearers",
+       "sections": [
+        "1.9"
+       ]
+      },
+      {
+       "text": "God-Bearer",
+       "sections": [
+        "7.praef"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "Ignatius, who is also called God-Bearer, sends very many greetings to Polycarp, bishop of the church of Smyrna. Or rather, to one who is watched over by God the Father and the Lord Jesus Christ.",
+     "new": "Ignatius, who is also called God-Bearer, sends very many greetings to Polycarp, bishop of the church of Smyrna, or rather to one who is watched over by God the Father and the Lord Jesus Christ."
+    }
+   ],
+   "fixed": [
+    "The capitalization of 'God-Bearer' is already consistent in the English. The source uses the singular title 'God-Bearer' for Ignatius, not the plural descriptive 'God-bearers' mentioned in the problem. No change needed."
+   ]
+  }
+ ],
+ "polish": [
+  {
+   "changed": "Split the long sentence into two for clarity, kept the same title capitalization, and made the implied subject of the second clause explicit as Polycarp.",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "1.9",
+     "quote": "God-bearers",
+     "variants": [
+      {
+       "text": "God-bearer",
+       "sections": [
+        "1.praef",
+        "2.praef",
+        "5.praef",
+        "7.praef",
+        "4.praef",
+        "6.praef",
+        "3.praef"
+       ]
+      },
+      {
+       "text": "God-bearers",
+       "sections": [
+        "1.9"
+       ]
+      },
+      {
+       "text": "God-Bearer",
+       "sections": [
+        "2.praef",
+        "7.praef",
+        "4.praef",
+        "6.praef"
+       ]
+      }
+     ],
+     "why": "Capitalization varies for the same title; readers may miss that it is the same designation.",
+     "fix": "Standardize capitalization of 'God-bearer' throughout.",
+     "model": "@cf/zai-org/glm-5.2"
+    },
+    {
+     "class": "term_drift",
+     "section": "2.15",
+     "quote": "bishop of the Smyrnaeans",
+     "variants": [
+      {
+       "text": "bishop of the Smyrnaeans",
+       "sections": [
+        "2.15",
+        "7.praef"
+       ]
+      },
+      {
+       "text": "bishop of Smyrna",
+       "sections": [
+        "intro"
+       ]
+      },
+      {
+       "text": "church of the Smyrnaeans",
+       "sections": [
+        "7.praef"
+       ]
+      }
+     ],
+     "why": "Smyrna is called both 'Smyrna' and 'the Smyrnaeans'; readers may wonder if these differ.",
+     "fix": "Use 'Smyrna' consistently or explain that 'Smyrnaeans' means the church at Smyrna.",
+     "model": "@cf/zai-org/glm-5.2"
+    }
+   ]
+  }
+ ]
+}

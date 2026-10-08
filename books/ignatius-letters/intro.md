@@ -1,0 +1,5 @@
+Ignatius of Antioch (d. c. 110) was the bishop of Antioch in Syria. He wrote these letters while being taken under guard from Syria to Rome, where he expected to be executed for his Christian faith during the reign of Emperor Trajan.
+
+The letters were written in great haste, modelled after the biblical epistles of Paul, Peter, and John. Ignatius wrote to the churches in Ephesus, Magnesia, Tralles, and Rome from Smyrna, and to Philadelphia, Smyrna, and Polycarp the bishop of Smyrna from Troas. In them he urges each church to unite around its bishop, the council of elders, and the deacons as the visible order willed by God. He warns against teachers who deny the real flesh, suffering, and resurrection of Jesus Christ, and against any return to Judaism.
+
+A reader will meet bishops such as Onesimus of Ephesus, Damas of Magnesia, Polybius of Tralles, and Polycarp of Smyrna, along with deacons and companions who visited Ignatius. , and he reports words of the Spirit. He presents his own coming death by wild beasts as the completion of his discipleship.
