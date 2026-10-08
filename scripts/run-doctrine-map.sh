@@ -8,7 +8,7 @@
 # Exits 1 when any step fails, so launchctl and fathers-watch see it.
 set -u
 export PATH="/opt/homebrew/opt/node@24/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
-LOCK="/tmp/fathers-beliefs.lock"
+LOCK="${BELIEFS_LOCK:-/tmp/fathers-beliefs.lock}"  # tests set BELIEFS_LOCK
 # One beliefs run at a time. The lock directory holds "<pid> <start epoch>", so a
 # lock left by a killed run is taken over, and a live one is reported (BUSY,
 # exit 75) instead of passing as a quiet, healthy run. Network-bound: this job
@@ -44,6 +44,13 @@ rc=0
 for step in index search grade report; do
   if [ "$step" = grade ] && [ "$grade_ok" = 0 ]; then
     echo "$(date +%T) grade FAILED: receipt refresh failed, grading skipped"; rc=1; continue
+  fi
+  # The report rewrites the site's doctrine_map.json, which the next ship
+  # publishes. After a failed or skipped grade it would drop every graded
+  # passage whose English changed and stamp today's date on old grades
+  # (2026-10-07: 'images' went from 2 passages to 0). Keep the last good map.
+  if [ "$step" = report ] && [ "$rc" != 0 ]; then
+    echo "$(date +%T) report SKIPPED: an earlier step failed; the site keeps the last good map"; continue
   fi
   args=(); [ "$step" = grade ] && args=(--workers 10)  # only grade runs calls in parallel
   echo "$(date +%T) $step"

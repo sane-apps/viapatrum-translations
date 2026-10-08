@@ -76,8 +76,18 @@ its mark, or that excludes every rival. Silence is never evidence.
    keeps a new verdict with `reviewed: false`; the site shows only reviewed
    verdicts (`beliefs_page._deciding`), so a verdict stays off the site until
    the audit passes it.
-   Passage ids hash the words as `speak_text.legacy_read_text` cleans them, so
-   a change to the reader's cleaner does not make unchanged passages look new.
+   Passage ids hash the words as the reader sees them (`speak_text.read_text`;
+   owner 2026-10-06: no pin to the legacy cleaner). A graded passage whose id
+   leaves the corpus is logged by the report, not dropped in silence.
+   Topic-page excerpts marked `source_verified` (and not `needs_recert`) are
+   searched too and link to `/e/<id>/`; seed ANF excerpts never are.
+   The nightly runner skips the report when an earlier step failed, so a failed
+   or skipped grade never rewrites the site map. The page date is the last full
+   grade (`outputs/doctrine-map/graded-at.json`), not the day the report ran.
+   Owner decision (made by Claude at the owner's request, 2026-10-07): only
+   audited deciding verdicts publish (`_deciding`, reviewed-only). The audit is
+   a Claude review of `reviewed: false` verdicts, run in a working session; the
+   page says how many verdicts wait for it.
    A passage that fails to grade is logged and retried the next night; one vote
    or none is never stored as "disputed".
 

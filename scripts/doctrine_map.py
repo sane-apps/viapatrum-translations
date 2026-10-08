@@ -40,12 +40,13 @@ import book_era  # noqa: E402
 import llm_bakeoff as LB  # noqa: E402
 import work_pipeline as W  # noqa: E402
 from search_sync import embed_docs, _req, CF  # noqa: E402
-# Passage ids hash the cleaned words, so the cleaner must not change under the
-# grades: speak_text.read_text moved to the reader's words on 2026-10-06, which
-# would make ~300 graded passages look new (re-embed, re-grade, and drop from the
-# map meanwhile) with no English change. The legacy cleaner keeps the old ids;
-# beliefs_page._on_page ignores the [brackets] it leaves in.
-from speak_text import legacy_read_text as read_text  # noqa: E402
+# Passage ids hash the words as the reader sees them (speak_text.read_text, the
+# site's own cleaner since 2026-10-06). Owner 2026-10-06 10:55: Beliefs accepts
+# the new ids (no pin to the legacy cleaner). The passages whose ids change are
+# re-embedded and re-graded on the next run; a run whose grading fails no
+# longer rewrites the site map (run-doctrine-map.sh skips report), so nothing
+# drops from the page while the new ids wait for their grades.
+from speak_text import read_text  # noqa: E402
 
 OUT = ROOT / "outputs" / "doctrine-map"
 SITE_DATA = SITE / "data" / "explore" / "doctrine_map.json"
@@ -73,8 +74,66 @@ def token() -> str:
 
 # ---------------------------------------------------------------- index
 
+TOPICS = ROOT / "books" / "ante-nicene-topics" / "translations" / "topics"
+EXCERPT_BOOK = "ante-nicene-topics"
+
+
+def _title_key(s: str) -> str:
+    s = re.sub(r"[^a-z0-9 ]+", " ", (s or "").lower())
+    return " ".join(w for w in s.split() if w not in ("the", "a", "an", "of", "on", "to"))
+
+
+def excerpt_rows(whole_works: set) -> list[dict]:
+    """Topic-page excerpts whose English was checked against the Greek or Latin
+    (confidence source_verified, no needs_recert flag; owner rule: seed ANF
+    text never feeds the map). Each is one passage that links to /e/<id>/.
+    The year is the excerpt's own writing date ("c. 208", "c. 210-213" -> 208).
+    An excerpt from a work the library also has whole is left out: the whole
+    work's own paragraphs already stand for it."""
+    out, seen = [], set()
+    for f in sorted(TOPICS.glob("*.json")) if TOPICS.is_dir() else ():
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        for e in data.get("excerpts", []) if isinstance(data, dict) else data:
+            if not isinstance(e, dict) or e.get("confidence") != "source_verified" or e.get("needs_recert"):
+                continue
+            eid = e.get("id")
+            if not eid or eid in seen:
+                continue
+            seen.add(eid)
+            if (e.get("author", ""), _title_key(e.get("work", ""))) in whole_works:
+                continue
+            m = re.search(r"\b(\d{2,4})\b", e.get("period") or "")
+            paras = [read_text(p) for p in e.get("english") or [] if isinstance(p, str)]
+            text = re.sub(r"\s+", " ", " ".join(paras)).strip()
+            if len(text.split()) < MIN_WORDS:
+                continue
+            piece = text[:CHUNK_CHARS]
+            out.append({"id": sha(f"excerpt|{eid}|{piece}"), "book": EXCERPT_BOOK, "file": "excerpt",
+                        "section": eid, "para": 0, "author": e.get("author", ""),
+                        "year": int(m.group(1)) if m else None, "text": piece,
+                        "work": e.get("work", ""), "href": f"/e/{eid}/"})
+    return out
+
+
+def _book_title(book: str) -> str:
+    f = ROOT / "books" / book / "book.yml"
+    m = re.search(r'^title:\s*["\']?([^"\'\n]+)', f.read_text(encoding="utf-8"), re.M) if f.is_file() else None
+    return m.group(1).strip() if m else ""
+
+
 def paragraphs():
-    """(id, book, file, section, author, year, text) for every English paragraph."""
+    """(id, book, file, section, author, year, text) for every English paragraph,
+    then the source-checked topic excerpts (excerpt_rows)."""
+    whole = set()
+    for row in _book_paragraphs(whole):
+        yield row
+    yield from excerpt_rows(whole)
+
+
+def _book_paragraphs(whole: set):
     for f in sorted((ROOT / "books").glob("*/translations/*_english.json")):
         book = f.parts[-3]
         try:
@@ -83,6 +142,8 @@ def paragraphs():
             continue
         rows = rows if isinstance(rows, list) else rows.get("sections", [])
         author, year = book_era.author_of(book), book_era.book_year(book)
+        if book != EXCERPT_BOOK:
+            whole.add((author, _title_key(_book_title(book))))
         for r in rows:
             if not isinstance(r, dict):
                 continue
@@ -402,7 +463,29 @@ def q_grade(only: set | None, workers: int) -> int:
     if failed:
         print(f"grade: {failed} passages failed and wait for the next run", flush=True)
         return 1
+    if not only:
+        # Every candidate of every question is graded: this is the date the
+        # page may give as "searched and graded on" (report reads it).
+        (OUT / GRADED_AT).write_text(json.dumps({"date": time.strftime("%Y-%m-%d")}))
     return 0
+
+
+GRADED_AT = "graded-at.json"  # under OUT
+
+
+def graded_date() -> str:
+    """Date of the last full, successful grade run (q_grade writes it); the
+    clock only when no run has finished yet. A report after a failed or
+    skipped grade must not say the library was searched today (2026-10-07:
+    the page said 'on 6 October' for questions graded on 3 October or never)."""
+    try:
+        return str(json.loads((OUT / GRADED_AT).read_text())["date"])[:10]
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
+    grades = list((OUT / "q-grades").glob("*.json"))
+    if grades:  # before the first stamped run: the newest grade file
+        return time.strftime("%Y-%m-%d", time.localtime(max(f.stat().st_mtime for f in grades)))
+    return time.strftime("%Y-%m-%d")
 
 
 # ---------------------------------------------------------------- audit loci
@@ -495,7 +578,7 @@ def q_report() -> int:
     # page no longer says (Amphilochius "Fire was kindled", 2026-10-06). It is
     # left out until the next index and grade see the new words.
     current = {r["id"] for r in paragraphs()}
-    stale = []
+    stale, gone = [], []
     searched = {}
     for r in rows:
         if r["year"]:
@@ -517,7 +600,15 @@ def q_report() -> int:
             # A passage entry (a quotation inside a work: Cyril quoting Apollinaris)
             # overrides its book's entry, and may name the real speaker.
             att = ((attribution.get("passages") or {}).get(cid) or (attribution.get("books") or {}).get(c["book"], {})) if c else {}
-            if not c or not r.get("on_question") or att.get("status") == "spurious":
+            if not c:
+                # Graded, but the id left the corpus: its English changed (a
+                # recert edit) and the new words wait for their own grade.
+                # Logged, never dropped in silence (2026-10-07: 'images' lost
+                # its two Epiphanius passages with no line in the log).
+                if r.get("on_question"):
+                    gone.append(f"{q['id']}: {cid}")
+                continue
+            if not r.get("on_question") or att.get("status") == "spurious":
                 continue
             if cid not in current:
                 stale.append(f"{q['id']}: {c['book']}/{c['section']}")
@@ -542,7 +633,8 @@ def q_report() -> int:
                 continue  # on the question but decides nothing: shared ground only
             passages.append({"year": year, "author": att.get("author") or c["author"], "book": c["book"], "file": c["file"],
                              "section": c["section"], "text": c["text"][:900], "positions": decided,
-                             "attribution": att.get("status"), "attribution_note": att.get("note")})
+                             "attribution": att.get("status"), "attribution_note": att.get("note")}
+                            | ({"href": c["href"], "work": c.get("work", "")} if c.get("href") else {}))
         passages.sort(key=lambda p: (p["year"] or 9999, p["author"]))
         positions = []
         for p in q["positions"]:
@@ -556,16 +648,26 @@ def q_report() -> int:
                                 "first_uncertain": next((x for x in st if x["positions"][p["id"]].get("reviewed")), None)
                                 if not st_rev else None,
                                 "states": len(st), "excludes": len(ex)})
+        cpath = OUT / "q-candidates" / f"{q['id']}.json"
+        cands = {c["id"] for c in json.loads(cpath.read_text())} if cpath.exists() else set()
         out.append({"id": q["id"], "question": q["question"], "shared_ground": q.get("shared_ground"),
                     "positions": positions, "passages": passages,
-                    "on_question": sum(1 for r in g.values() if r.get("on_question"))})
-    data = {"generated": time.strftime("%Y-%m-%d"),
+                    "on_question": sum(1 for r in g.values() if r.get("on_question")),
+                    # The page says "not graded yet" instead of the method text
+                    # while candidates wait (four questions had none graded).
+                    "candidates": len(cands), "graded": len(cands & set(g))})
+    data = {"generated": graded_date(),
             "searched": {str(k): sorted(v) for k, v in sorted(searched.items())}, "questions": out}
     SITE_DATA.write_text(json.dumps(data, ensure_ascii=False, indent=1))
     print(f"report: {len(out)} questions -> {SITE_DATA}", flush=True)
     if stale:
         print(f"report: left out {len(stale)} graded passages whose English has changed since the index:", flush=True)
         for s in sorted(set(stale)):
+            print(f"  {s}", flush=True)
+    if gone:
+        print(f"report: left out {len(gone)} graded passages no longer in the corpus "
+              f"(their English changed; the new words wait for a grade):", flush=True)
+        for s in sorted(set(gone)):
             print(f"  {s}", flush=True)
     return 0
 
