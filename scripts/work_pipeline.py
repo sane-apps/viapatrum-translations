@@ -2105,6 +2105,7 @@ def apply(slug: str, force_partial: bool = False) -> int:
                "sections": []}
     jdir = BOOKS / slug / "reviews" / "justifications"
     jdir.mkdir(parents=True, exist_ok=True)
+    written: list[Path] = []  # committed below when the book certifies (promote)
     for ef, rows in files.items():
         data = json.load(open(ef))
         lst = data if isinstance(data, list) else data.get("sections", [])
@@ -2122,10 +2123,12 @@ def apply(slug: str, force_partial: bool = False) -> int:
             jj = {k: v for k, v in j.items() if not k.startswith("_")}
             jname = re.sub(r"[^A-Za-z0-9_.-]", "_", p["id"]) + ".json"
             (jdir / jname).write_text(json.dumps(jj, indent=1, ensure_ascii=False))
+            written.append(jdir / jname)
             receipt["sections"].append({"section": p["id"], "source_sha256": sha("\n".join(p["source"])),
                                         "english_sha256": sha("\n".join(j["pass_b_english"])),
                                         "justification": f"reviews/justifications/{jname}"})
         Path(ef).write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+        written.append(Path(ef))
         sf = rows[0][0]["src_file"]
         if sf and moves:
             sdata = json.load(open(sf))
@@ -2138,9 +2141,11 @@ def apply(slug: str, force_partial: bool = False) -> int:
                 if key:
                     r[key] = p["source"]
             Path(sf).write_text(json.dumps(sdata, indent=2, ensure_ascii=False) + "\n")
+            written.append(Path(sf))
     intro = json.loads((STAGE / slug / "intro.json").read_text())
     if intro.get("paragraphs") and not real_flags(intro.get("unsupported") or []) and not intro_problems(slug, intro["paragraphs"]):
         (BOOKS / slug / "intro.md").write_text("\n\n".join(intro["paragraphs"]) + "\n")
+        written.append(BOOKS / slug / "intro.md")
         rpath = STAGE / slug / "research.json"
         if rpath.exists():
             res = json.loads(rpath.read_text())
@@ -2154,10 +2159,29 @@ def apply(slug: str, force_partial: bool = False) -> int:
                 new = [{"kind": c["kind"], "claim": c["text"], "sources": c["sources"]} for c in res["claims"] if c["text"] not in have]
                 old.update({"slug": slug, "checked": res["checked"], "claims": (old.get("claims") or []) + new})
                 bpath.write_text(json.dumps(old, indent=1, ensure_ascii=False) + "\n")
+                written.append(bpath)
     (BOOKS / slug / "work_brief.json").write_text((STAGE / slug / "brief.json").read_text())
     (BOOKS / slug / "reviews" / "work_receipt.json").write_text(json.dumps(receipt, indent=1, ensure_ascii=False))
+    written += [BOOKS / slug / "work_brief.json", BOOKS / slug / "reviews" / "work_receipt.json"]
     print(f"applied {len(receipt['sections'])} sections to {slug}")
+    promote_applied(slug, written)
     return 0
+
+
+def promote_applied(slug: str, written: list[Path]) -> None:
+    """One promotion point (2026-10-07): the site build and the audio drain read
+    only committed English, so a book that certifies is committed here, with
+    exactly the files apply() wrote. A failed commit leaves the certification
+    in place; `scripts/promote.py pending` lists it and fathers_watch warns."""
+    try:
+        if not certified(slug):
+            msg = "applied but not certified (receipt does not match); not committed"
+        else:
+            import promote
+            _ok, msg = promote.commit_book(slug, written, f"Certify {slug} (work_pipeline apply)", root=BOOKS.parent)
+    except Exception as e:  # noqa: BLE001  a commit problem never fails the certification
+        msg = f"not committed ({type(e).__name__}: {e})"
+    log(slug, f"promote: {msg}")
 
 
 # ---------------------------------------------------------------- library queue
