@@ -120,7 +120,7 @@ class ExitCodeTests(AutoShipTestBase):
         st = self.state()
         self.assertEqual(st["pending"], ["text"])
         self.assertIn("pending_since", st)
-        self.assertEqual(st["ships"], {})  # no deploy, cap not used
+        self.assertNotIn("ships", st)
 
     def test_skips_exit_2(self):
         self.git = subprocess.CompletedProcess([], 0, " M scripts/ship.sh\n", "")
@@ -137,14 +137,12 @@ class ExitCodeTests(AutoShipTestBase):
         self.assertIn("build.lock", self.state()["last_skip"]["why"])
         self.assertFalse(any("ship.sh" in c for c in self.cmds))
 
-    def test_daily_cap_exits_2_but_finishes_a_pending_shelf(self):
+    def test_a_prior_ship_count_does_not_block_the_next(self):
         today = S.time.strftime("%Y-%m-%d")
-        self.write_state({"shipped": {"text": "t1", "audio": "a1", "library": "l1"}, "ships": {today: 2},
-                          "shelf_pending": {"since": "x", "for_ship": "old", "done": ["ebooks", "audiobooks"]}})
-        self.assertEqual(S.main(), S.EXIT_SKIPPED)
-        self.assertFalse(any("ship.sh" in c for c in self.cmds))
-        self.assertTrue(any(" word " in c for c in self.cmds))
-        self.assertNotIn("shelf_pending", self.state())
+        self.write_state({"shipped": {"text": "t1", "audio": "a1", "library": "l1"}, "ships": {today: 2}})
+        self.assertEqual(S.main(), S.EXIT_OK)
+        self.assertTrue(any("ship.sh" in c for c in self.cmds))
+        self.assertNotIn("ships", self.state())
 
     def test_no_change_exits_0(self):
         self.now = {"text": "t1", "audio": "a1", "library": "l1"}

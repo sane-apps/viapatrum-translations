@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Change-gated automatic ship for viapatrum.org (P16, owner approved 2026-10-06).
 
-Run by com.saneapps.fathers-ship-auto at 13:30 and 05:30. Ships only when what
+Run by com.saneapps.fathers-ship-auto every 30 minutes. Ships only when what
 readers see changed since the last good auto ship:
   text     certified English, book.yml, work receipts, topic records
   audio    narration manifests (audio-only changes use ship.sh --audio-only)
@@ -12,7 +12,7 @@ Never ships when:
     (unreviewed work, e.g. an agent mid-change), or git status fails,
   - another ship, build, e2e or Logos compile holds outputs/build.lock for
     more than LOCK_WAIT_S (this job waits that long, then skips),
-  - MAX_PER_DAY ships already ran today, or the disk has under MIN_FREE_GB free.
+  - the disk has under MIN_FREE_GB free.
 ship.sh's own gates still decide whether a deploy goes out.
 
 After a good full ship (not --audio-only) of new text it refreshes the paid
@@ -32,8 +32,8 @@ live.
 Exit codes, so launchd and fathers_watch see what happened:
   0  nothing changed, or the ship verified and the shelf finished
   1  ship.sh ran and did not verify (inputs stay pending)
-  2  skipped: uncommitted site code, git status failed, daily cap, disk
-     under MIN_FREE_GB, or another build held outputs/build.lock too long
+  2  skipped: uncommitted site code, git status failed, disk under
+     MIN_FREE_GB, or another build held outputs/build.lock too long
   3  shelf refresh failed (shelf_pending stays set; the next run resumes it)
   75 another auto ship is still running (its pid is alive, runs this script,
      and is younger than RUN_HARD_LIMIT_S)
@@ -60,7 +60,6 @@ OUT = T / "outputs/ship-auto"
 STATE = OUT / "state.json"
 RUN_LOCK = OUT / "run.lock"  # a directory; its "pid" file holds "<pid> <start epoch>"
 BUILD_LOCK = SITE / "outputs/build.lock"
-MAX_PER_DAY = 2
 # The one disk floor for Fathers builds, ships and the shelf. fathers_watch
 # imports it, so the watch warns at the same number this job skips at.
 MIN_FREE_GB = 15
@@ -310,20 +309,15 @@ def refresh_library(st: dict) -> int:
     return 0
 
 
-def ship(st: dict, now: dict, changed: list[str], today: str, done_today: int) -> int:
+def ship(st: dict, now: dict, changed: list[str]) -> int:
     audio_only = changed == ["audio"] and (SITE / "outputs/ship-last/receipt.json").is_file()
     cmd = ["scripts/ship.sh"] + (["--audio-only"] if audio_only else [])
     receipt = SITE / "outputs/ship-last/receipt.json"
     before = receipt.stat().st_mtime if receipt.is_file() else 0
     save_state(st)  # pending is on disk before a kill can land
     rc = run(cmd, 4 * 3600)
-    # Count only runs that deployed (ship.sh rewrites ship-last at deploy); a
-    # run blocked by a gate must not use up the day's cap.
+    # ship.sh rewrites the receipt only when a deploy went out.
     deployed = receipt.is_file() and receipt.stat().st_mtime > before
-    if deployed:
-        st.setdefault("ships", {})[today] = done_today + 1
-    st["ships"] = {d: n for d, n in st.get("ships", {}).items()
-                   if d >= time.strftime("%Y-%m-%d", time.localtime(time.time() - 7 * 86400))}
     verified = deployed and json.loads(receipt.read_text()).get("verified")
     st["last_ship"] = {"at": now_ts(), "rc": rc, "mode": "audio-only" if audio_only else "full",
                        "verified": bool(verified), "changed": changed}
@@ -369,6 +363,7 @@ def main() -> int:
 
 def _main() -> int:
     st = load_state()
+    st.pop("ships", None)  # the old daily count is not a gate
     now = inputs()
     last = st.get("shipped", {})
     changed = [k for k in now if now[k] != last.get(k)]
@@ -384,8 +379,6 @@ def _main() -> int:
     if shelf:
         log(f"paid shelf still pending since {shelf.get('since')} (done: {', '.join(shelf.get('done', [])) or 'nothing'}"
             f"{'; last error: ' + shelf['error'] if shelf.get('error') else ''})")
-    today = time.strftime("%Y-%m-%d")
-    done_today = st.get("ships", {}).get(today, 0)
 
     why = site_code_gate()
     if why:
@@ -409,24 +402,16 @@ def _main() -> int:
         if changed:
             st["pending"] = changed
 
-    capped = None
     if changed:
-        if done_today >= MAX_PER_DAY:
-            capped = f"daily cap reached ({done_today}/{MAX_PER_DAY})"
-            st["last_skip"] = {"at": now_ts(), "why": capped, "changed": changed}
-            log(f"changed {changed}; not shipping: {capped}")
-        else:
-            code = ship(st, now, changed, today, done_today)
-            if code != EXIT_OK:
-                return finish(st, code, f"ship did not verify ({', '.join(changed)} still pending)")
-            shelf = st.get("shelf_pending")
+        code = ship(st, now, changed)
+        if code != EXIT_OK:
+            return finish(st, code, f"ship did not verify ({', '.join(changed)} still pending)")
+        shelf = st.get("shelf_pending")
 
     if shelf:
         rc = refresh_library(st)
         if rc != 0:
             return finish(st, EXIT_SHELF, f"paid shelf: {st['shelf_pending'].get('error')}")
-    if capped:
-        return finish(st, EXIT_SKIPPED, capped)
     return finish(st, EXIT_OK, "shipped" if changed else "shelf finished")
 
 
