@@ -412,22 +412,28 @@ Return ONE JSON object only: {{"votes": [{{"source_term": "<exact>", "choice": "
 def majority_term(votes: dict) -> str:
     """The rendering at least two voters already share, else "".
 
-    Hyphenated renderings count. A 2-of-3 split is a decision, not an open term.
+    A 2-of-3 split is a decision, not an open term. A hyphenated rendering
+    ("life-giving", but also "belly-dancer") wins only when both judges, the
+    two independent checker families, chose it; the drafter plus one judge
+    is not enough (owner decision 2026-10-07; vote_glossary never lets a
+    hyphenated coinage win on a plain tally).
     """
-    counts: dict[str, tuple[int, str]] = {}
-    for value in (votes or {}).values():
+    counts: dict[str, list] = {}
+    for voter, value in (votes or {}).items():
         if not value:
             continue
         key = norm(str(value))
-        n, shown = counts.get(key, (0, str(value)))
-        counts[key] = (n + 1, shown)
+        counts.setdefault(key, [str(value), []])[1].append(voter)
     if not counts:
         return ""
-    best_n = max(n for n, _shown in counts.values())
-    winners = [shown for n, shown in counts.values() if n == best_n]
-    if best_n >= 2 and len(winners) == 1:
-        return winners[0]
-    return ""
+    best_n = max(len(v) for _shown, v in counts.values())
+    winners = [(shown, v) for shown, v in counts.values() if len(v) == best_n]
+    if best_n < 2 or len(winners) != 1:
+        return ""
+    shown, voters = winners[0]
+    if "-" in shown and sum(1 for v in voters if v != "drafter") < 2:
+        return ""
+    return shown
 
 
 def centroid_pick(picks: list[str]) -> str:

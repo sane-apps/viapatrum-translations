@@ -1365,6 +1365,12 @@ class CheckerBudgetTests(unittest.TestCase):
         self.assertEqual(j["checks"]["fallback"][0]["checker"], "fallback")
         self.assertEqual(j["checks"]["fallback"][0]["replaced"], [a])
 
+    def test_majority_term_hyphen_needs_both_judges(self):
+        self.assertEqual(W.majority_term({"drafter": "chastity", "kimi": "chastity", "glm": "purity"}), "chastity")
+        self.assertEqual(W.majority_term({"drafter": "belly-dancer", "kimi": "belly-dancer", "glm": "medium"}), "")
+        self.assertEqual(W.majority_term({"drafter": "life-bringing", "kimi": "life-giving", "glm": "life-giving"}), "life-giving")
+        self.assertEqual(W.majority_term({"drafter": "a", "kimi": "b", "glm": "c"}), "")
+
     def test_only_a_final_round_or_referee_fallback_blocks(self):
         hist = [{"round": 0, "fallback": ["x"]}, {"round": 1}]
         early = {"_status": "pass", "check_history": hist,
