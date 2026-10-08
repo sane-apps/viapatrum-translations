@@ -334,6 +334,7 @@ class OneRuleEverywhere(unittest.TestCase):
                 mock.patch.object(L, "load_uploads", lambda: {}), \
                 mock.patch.object(L, "run", lambda cmd, timeout=120: (0, "research ok")), \
                 mock.patch.object(L, "published_slugs", lambda: {p.name for p in (self.root / "books").iterdir()}), \
+                mock.patch.object(L, "certified_slugs", lambda: {p.name for p in (self.root / "books").iterdir()}), \
                 mock.patch.object(sys, "argv", ["logos_build.py", "--dry-run"]), \
                 mock.patch("builtins.print", lambda *a, **k: out.append(" ".join(map(str, a)))):
             L.main()
@@ -474,6 +475,110 @@ class PublishedOnlyTests(unittest.TestCase):
         self.assertEqual(list(held), ["held"])
         self.assertIn("not published", held["held"])
         self.assertEqual(check.call_count, 1)  # only the published book's file is checked
+
+class CertifiedOnlyTests(unittest.TestCase):
+    """Owner 2026-10-06: certified AND published, not published alone."""
+
+    def test_published_but_uncertified_book_is_held(self):
+        inv = {"cert": {"docx_path": "/nope/cert.docx"}, "legacy": {"docx_path": "/nope/legacy.docx"}}
+        with mock.patch.object(L, "logos_file_problems", return_value=[]):
+            held = L.verify_hold(inv, ["cert", "legacy"], published={"cert", "legacy"}, certified={"cert"})
+        self.assertEqual(list(held), ["legacy"])
+        self.assertIn("not certified", held["legacy"])
+
+    def test_certified_slugs_reads_the_queue(self):
+        with tempfile.TemporaryDirectory() as d:
+            q = Path(d) / "outputs" / "work-pipeline"
+            q.mkdir(parents=True)
+            (q / "queue.json").write_text(json.dumps({"a": {"result": "certified"}, "b": {"result": "held"}, "c": {}}))
+            with mock.patch.object(L, "REPO", d):
+                self.assertEqual(L.certified_slugs(), {"a"})
+
+
+class LockTests(unittest.TestCase):
+    """A dead lock must not cancel the weekly compile; a live run still wins."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.lock = os.path.join(self.tmp.name, "outputs", "logos_build.lock")
+        os.makedirs(os.path.dirname(self.lock))
+
+    def test_fresh_lock_is_created_with_our_pid(self):
+        L.acquire_lock(self.lock)
+        self.assertEqual(Path(self.lock).read_text(), str(os.getpid()))
+
+    def test_dead_pid_lock_is_taken_over(self):
+        Path(self.lock).write_text("999999")
+        with mock.patch.object(L, "_pid_is_logos_build", return_value=False), mock.patch.object(L, "log"):
+            L.acquire_lock(self.lock)
+        self.assertEqual(Path(self.lock).read_text(), str(os.getpid()))
+
+    def test_empty_lock_is_taken_over(self):
+        Path(self.lock).write_text("")
+        with mock.patch.object(L, "log"):
+            L.acquire_lock(self.lock)
+        self.assertEqual(Path(self.lock).read_text(), str(os.getpid()))
+
+    def test_live_run_keeps_its_lock(self):
+        Path(self.lock).write_text("4242")
+        with mock.patch.object(L, "_pid_is_logos_build", return_value=True), mock.patch.object(L, "log"), \
+                self.assertRaises(SystemExit):
+            L.acquire_lock(self.lock)
+        self.assertEqual(Path(self.lock).read_text(), "4242")
+
+    def test_dead_pid_is_not_a_holder(self):
+        self.assertFalse(L._pid_is_logos_build(999999))
+
+
+class CatchupAndCapTests(unittest.TestCase):
+    """The Sunday run first rebuilds stale Word files (catchup), then builds
+    at most --max-builds books."""
+
+    setUp = OneRuleEverywhere.setUp
+
+    def run_main(self, argv, books):
+        db = self.root / "pb.db"
+        con = sqlite3.connect(db)
+        con.execute("CREATE TABLE IF NOT EXISTS Books (Id INTEGER PRIMARY KEY, ResourceId TEXT, Title TEXT,"
+                    " Authors TEXT, LastCompiled TEXT, IsDeleted INT)")
+        con.commit()
+        con.close()
+        calls, out = [], []
+
+        def fake_run(cmd, timeout=120):
+            calls.append(cmd)
+            return 0, "catchup built=0 rebuilt=0" if "--catchup" in cmd else "research ok"
+
+        with mock.patch.object(L, "REPO", str(self.root)), \
+                mock.patch.object(L, "resolve_pb_db", lambda: str(db)), \
+                mock.patch.object(L, "LOCK_PATH", str(self.root / "no.lock")), \
+                mock.patch.object(L, "load_uploads", lambda: {}), \
+                mock.patch.object(L, "run", fake_run), \
+                mock.patch.object(L, "published_slugs", lambda: set(books)), \
+                mock.patch.object(L, "certified_slugs", lambda: set(books)), \
+                mock.patch.object(L, "verify_hold", lambda inv, slugs, *a: {}), \
+                mock.patch.object(sys, "argv", ["logos_build.py"] + argv), \
+                mock.patch("builtins.print", lambda *a, **k: out.append(" ".join(map(str, a)))):
+            L.main()
+        lines = {ln.split(":", 1)[0]: ln.split(":", 1)[1].split() for ln in out if ln.startswith("NEED_BUILD")}
+        return calls, lines
+
+    def test_dry_run_plans_catchup_first(self):
+        calls, _ = self.run_main(["--dry-run"], [p.name for p in (self.root / "books").iterdir()])
+        catchup = [c for c in calls if "--catchup" in c]
+        self.assertEqual(len(catchup), 1)
+        self.assertIn("--dry-run", catchup[0])
+
+    def test_no_catchup_flag_skips_it(self):
+        calls, _ = self.run_main(["--dry-run", "--no-catchup"], [p.name for p in (self.root / "books").iterdir()])
+        self.assertFalse([c for c in calls if "--catchup" in c])
+
+    def test_cap_limits_builds(self):
+        books = sorted(p.name for p in (self.root / "books").iterdir())
+        _, lines = self.run_main(["--dry-run", "--max-builds", "1"], books)
+        self.assertEqual(len(lines["NEED_BUILD"]), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
