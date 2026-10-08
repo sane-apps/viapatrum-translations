@@ -98,6 +98,30 @@ def _log(msg: str) -> None:
         pass
 
 
+# Batch body shape per model. The live schema (GET ai/models/schema, 2026-10-07)
+# for @cf/openai/gpt-oss-120b and -20b accepts a direct call as Prompt or
+# Messages, but its async form is "Responses_Async": {"requests": [{"input",
+# "reasoning"}]}. A batch of Messages items fails with 400 "oneOf at '/' not
+# met ... 'prompt' ... 'messages'" (fathers-beliefs.log, 51 lines on 10-06), so
+# every gpt-oss overflow call fell back to a direct call. Other models take
+# the Messages item as is. Results come back in the Responses shape, which
+# llm_bakeoff._cf_pick_content already reads.
+RESPONSES_BATCH = ("gpt-oss-",)
+REASONING_EFFORTS = ("low", "medium", "high")  # gpt-oss: reasoning cannot be disabled
+
+
+def batch_item(model: str, payload: dict) -> dict:
+    """One request of a ?queueRequest=true batch, in the shape this model's
+    async schema takes."""
+    if not any(k in model for k in RESPONSES_BATCH) or "messages" not in payload:
+        return payload
+    item = {"input": payload["messages"]}
+    effort = payload.get("reasoning_effort")
+    if effort in REASONING_EFFORTS:
+        item["reasoning"] = {"effort": effort}
+    return item
+
+
 def _finish(item: dict, result=None, error: str = "") -> None:
     item["result"], item["error"] = result, error
     item["event"].set()
@@ -202,7 +226,7 @@ def flush_once(model: str) -> bool:
         if L.rate_acquire(model) is False:
             code, res = -1, {"errors": [{"message": L.RATE_WAIT_ERR}]}
         else:
-            code, res = _post(model, {"requests": [i["payload"] for i in batch]})
+            code, res = _post(model, {"requests": [batch_item(model, i["payload"]) for i in batch]})
     except Exception as e:  # noqa: BLE001
         # The batch is already off the queue: answer its callers now so their
         # own direct-call fallback runs, instead of leaving them to time out.
@@ -223,7 +247,12 @@ def flush_once(model: str) -> bool:
             L.rate_throttled(model)  # writes /tmp/vendor-rate too: may raise on a full disk
         except Exception as e:  # noqa: BLE001  the batch below is still requeued or answered
             _log(f"flush:{model}: rate_throttled failed: {type(e).__name__}: {e}")
-    msg = json.dumps(res.get("errors") or res)[:200]
+    full = json.dumps(res.get("errors") or res)
+    msg = full[:200]
+    # The callers' error text is cut to 200 characters, which hid the schema
+    # path of the gpt-oss 400 for two days. Log the whole reply once per failed
+    # submit (first 2,000 characters) so the cause can be read.
+    _log(f"flush:{model}: batch submit {code} for {len(batch)} items: {full[:2000]}")
     for it in batch:  # requeue once, then fail so the caller's own retry runs
         if it.get("tries", 0) < 2:
             with lock:  # same lock as do_POST's give-up, so the check cannot race it

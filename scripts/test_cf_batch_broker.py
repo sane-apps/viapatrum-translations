@@ -147,7 +147,7 @@ def main() -> int:
                test_watchdog_restart_is_not_a_wedge, test_abandoned_item_is_not_requeued,
                test_batch_stuck_counts_a_queue_that_does_not_drain, test_full_disk_log_does_not_kill_threads,
                test_throttle_write_failure_still_requeues, test_abandon_between_check_and_requeue,
-               test_rate_acquire_gives_up_without_a_slot):
+               test_rate_acquire_gives_up_without_a_slot, test_gpt_oss_batch_uses_responses_shape):
         fn()
         print("ok", fn.__name__)
     print("ALL PASS")
@@ -445,6 +445,38 @@ def test_rate_acquire_gives_up_without_a_slot() -> None:
     finally:
         B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S = old
         B.queues.clear()
+
+
+def test_gpt_oss_batch_uses_responses_shape() -> None:
+    """2026-10-06: every gpt-oss batch drew 400 'oneOf ... prompt/messages':
+    its async schema takes Responses items ({"input"}), not Messages items."""
+    _reset()
+    sent, logged = [], []
+    old = (B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S, B._log)
+    msgs = [{"role": "system", "content": "s"}, {"role": "user", "content": "u"}]
+    try:
+        B._post = lambda model, body, timeout=120: sent.append(body) or (202, {"result": {"request_id": "r"}})
+        B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S = (lambda *a, **k: None), (lambda m: None), 0
+        B.queues["@cf/openai/gpt-oss-120b"] = [_item(time.time() - 100, {"messages": msgs, "temperature": 0.6,
+                                                                          "max_tokens": 12000})]
+        B.queues["@cf/moonshotai/kimi-k2.6"] = [_item(time.time() - 100, {"messages": msgs, "max_tokens": 9})]
+        assert B.flush_once("@cf/openai/gpt-oss-120b") and B.flush_once("@cf/moonshotai/kimi-k2.6")
+        assert sent[0] == {"requests": [{"input": msgs}]}, sent[0]
+        assert sent[1] == {"requests": [{"messages": msgs, "max_tokens": 9}]}, sent[1]
+        assert B.batch_item("@cf/openai/gpt-oss-20b", {"messages": msgs, "reasoning_effort": "low"}) == \
+            {"input": msgs, "reasoning": {"effort": "low"}}
+        assert B.batch_item("@cf/openai/gpt-oss-20b", {"messages": msgs, "reasoning_effort": "none"}) == {"input": msgs}
+        # A failed submit logs the whole reply, not the 200-character cut the caller sees.
+        long = "x" * 600
+        B._post = lambda model, body, timeout=120: (400, {"errors": [{"message": long}]})
+        B._log = logged.append
+        B.queues["m400"] = [_item(time.time() - 100)]
+        assert B.flush_once("m400")
+        assert any(long in line and "batch submit 400 for 1 items" in line for line in logged), logged
+    finally:
+        B._post, B.L.rate_acquire, B.L.rate_throttled, B.SUBMIT_RETRY_S, B._log = old
+        B.queues.clear()
+        B.pending.clear()
 
 
 if __name__ == "__main__":
