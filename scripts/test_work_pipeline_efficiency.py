@@ -1307,6 +1307,27 @@ class ParkAndQueueTests(unittest.TestCase):
                 W.queue(5, 0)
             return run.called, json.loads(q.read_text()).get("bk")
 
+    def test_missing_site_dist_does_not_list_books(self):
+        with tempfile.TemporaryDirectory() as d:
+            scripts = Path(d) / "scripts"
+            scripts.mkdir()
+            with mock.patch.object(W, "SITE_SCRIPTS", scripts):
+                with self.assertRaises(W.CatalogueUnavailable):
+                    W.site_books(False)
+                with self.assertRaises(W.CatalogueUnavailable):
+                    W.site_books(True)
+
+    def test_queue_exits_when_the_site_dist_is_missing(self):
+        with tempfile.TemporaryDirectory() as d:
+            q = Path(d) / "queue.json"
+            q.write_text("{}")
+            with mock.patch.object(W, "QUEUE_LOG", q), \
+                    mock.patch.object(W, "site_books", side_effect=W.CatalogueUnavailable("dist/works")), \
+                    mock.patch.object(W, "run") as run, \
+                    mock.patch("builtins.print"):
+                self.assertEqual(W.queue(5, 0), 0)
+            self.assertFalse(run.called)
+
     def test_duplicate_ids_skip_without_a_run(self):
         ran, row = self.run_queue([{"id": "1", "source": ["x."]}, {"id": "1", "source": ["y."]}])
         self.assertFalse(ran)

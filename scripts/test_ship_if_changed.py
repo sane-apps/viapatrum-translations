@@ -232,7 +232,7 @@ class SiteCodeGateTests(unittest.TestCase):
     def test_code_still_blocks(self):
         (self.site / "assets/og/a.png").write_text("v2")
         (self.site / "assets/site.css").write_text("v2")
-        self.assertEqual(S.site_code_gate(), "uncommitted site code (1 paths)")
+        self.assertEqual(S.site_code_gate(), "uncommitted site code (1 paths: assets/site.css)")
 
 
 if __name__ == "__main__":

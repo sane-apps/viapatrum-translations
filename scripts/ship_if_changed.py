@@ -233,7 +233,10 @@ def site_code_gate() -> str | None:
         return f"git status failed (rc {r.returncode}): {r.stderr.strip()[:120]}"
     dirty = r.stdout.strip()
     if dirty:
-        return f"uncommitted site code ({len(dirty.splitlines())} paths)"
+        lines = dirty.splitlines()
+        names = ", ".join((line.split(None, 1)[1] if " " in line else line) for line in lines[:3])
+        more = f" +{len(lines) - 3}" if len(lines) > 3 else ""
+        return f"uncommitted site code ({len(lines)} paths: {names}{more})"
     if free_gb() < MIN_FREE_GB:
         return f"disk low ({free_gb()} GB free, floor {MIN_FREE_GB} GB)"
     return None

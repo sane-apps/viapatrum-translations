@@ -2207,12 +2207,20 @@ def certified(book: str) -> bool:
     return all(want[p["id"]] == (sha("\n".join(p["source"])), sha("\n".join(p["english"]))) for p in pairs)
 
 
+class CatalogueUnavailable(RuntimeError):
+    """dist/works is missing, so this tick cannot tell live books from unpublished ones."""
+
+
 def site_books(unpublished: bool = False) -> list[tuple[int, str]]:
     """(source words, book) for every live site work, deduplicated, smallest first.
-    unpublished=True instead lists books with locked source that are not live."""
+    unpublished=True instead lists books with locked source that are not live.
+    A missing dist (a ship deletes it) must not crash the lane, and must not
+    make the unpublished lanes treat every book as new."""
+    works = SITE_SCRIPTS.parent / "dist" / "works"
+    if not works.is_dir():
+        raise CatalogueUnavailable(f"{works} is missing")
     sys.path.insert(0, str(SITE_SCRIPTS))
     from build_site import work_book  # noqa: E402
-    works = SITE_SCRIPTS.parent / "dist" / "works"
     books = set()
     for d in works.iterdir():
         if d.is_dir():
@@ -2396,7 +2404,12 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
     restart_flag = STAGE / "lanes.restart"
     # Reopened books go first (owner 2026-10-03, spend cut to 6 lanes): their
     # sections already pass, so certifying them costs only a re-read.
-    for words, book in sorted(site_books(unpublished), key=lambda wb: (
+    try:
+        listed = site_books(unpublished)
+    except CatalogueUnavailable as e:
+        print(f"queue: {e}; exiting until dist/works is back", flush=True)
+        return 0
+    for words, book in sorted(listed, key=lambda wb: (
             log_rows.get(wb[1], {}).get("result") != "reopened",
             not book_era.is_early(wb[1]), book_era.book_year(wb[1]) or 9999, wb[0])):
         if done >= limit:
