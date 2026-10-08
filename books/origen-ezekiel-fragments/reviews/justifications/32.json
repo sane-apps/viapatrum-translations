@@ -7,8 +7,8 @@
  },
  "source_text": "2. Cod. f. 229 a. XXXII. 6. Καὶ τοῦτο ἐν τοῖς μάλιστα τὴν ἀλληγορίαν δείκνυσι τῆς Γραφῆς· ὁ γοῦν Φαραὼ σωματικῶς οὐκ ἂν ἀπὸ τῶν προχωρημάτω αὐτοῦ ποτίσαι τὴν γῆν, ἀλλʼ ἡ σκυβαλώδης ἔκκρισις τοῦ ἀντικειμένου ποτίζει τὰ γήϊνα.\n3. Cod. f. 222 b. XXXII. 23. Ὁ Ἑβραῖος ἐν μήκει λάκκου ἔχει· τὸ γὰρ ἰαρὴχ κατὰ τὴν Ἐβραίων φωνὴν δασέως προφερόμενον, καὶ μηρὸν, καὶ μῆκος σημαίνει· τὸ δὲ αὐτῆς πρὸς τὴν συναγωγὴν ἔχει τὴν ἐπίδοσιν· λάκκον οὖν καλεῖ τῆς ταφῆς τὸ βάθος· μῆκος δὲ, τῆς ταφῆς τὴν ἔκτασιν.",
  "thought_title": "Allegory of Pharaoh's watering and the Hebrew word for pit and length",
- "orientation": "Origen is commenting on Ezekiel 32, explaining that Pharaoh's watering of the land must be read allegorically, and then discussing the Hebrew word underlying the phrase about the pit.",
- "pass_a_gloss": "And this especially shows the allegory of Scripture. Pharaoh, at any rate, would not bodily water the earth from his discharges, but the filthy discharge of the adversary waters earthly things. The Hebrew has 'in the length of the pit'; for the word iarech, pronounced with aspiration according to the language of the Hebrews, means both thigh and length. And the same word has its extension toward the gathering. He calls the pit, then, the depth of burial; and length, the extent of burial.",
+ "orientation": "Origen is commenting on Ezekiel 32, explaining that Pharaoh's watering of the land must be read allegorically, and then discussing the Hebrew word behind 'pit' in Ezekiel 32:23.",
+ "pass_a_gloss": "And this especially shows the allegory of Scripture; Pharaoh, at any rate, would not bodily water the earth from his excrements, but the filthy discharge of the adversary waters earthly things. The Hebrew has 'in the length of the pit'; for the word iarech, pronounced with aspiration according to the speech of the Hebrews, signifies both thigh and length; and it has its application to the gathering; therefore he calls the depth of burial a pit; and length, the extent of burial.",
  "lemmas": [
   {
    "form": "ἀλληγορίαν",
@@ -18,7 +18,7 @@
   {
    "form": "προχωρημάτω",
    "lemma": "προχώρημα",
-   "gloss": "discharges"
+   "gloss": "excrement"
   },
   {
    "form": "σκυβαλώδης",
@@ -36,11 +36,6 @@
    "gloss": "adversary"
   },
   {
-   "form": "ποτίζει",
-   "lemma": "ποτίζω",
-   "gloss": "waters"
-  },
-  {
    "form": "γήϊνα",
    "lemma": "γήϊνος",
    "gloss": "earthly things"
@@ -54,6 +49,11 @@
    "form": "λάκκου",
    "lemma": "λάκκος",
    "gloss": "pit"
+  },
+  {
+   "form": "ἰαρὴχ",
+   "lemma": "ἰαρήχ",
+   "gloss": "iarech (Hebrew word)"
   },
   {
    "form": "μηρὸν",
@@ -73,48 +73,55 @@
  ],
  "choices": [
   {
+   "term": "ἀπὸ τῶν προχωρημάτω αὐτοῦ",
+   "english": "from his excrements",
+   "why": "προχώρημα means excrement, confirmed by the parallel σκυβαλώδης ἔκκρισις in the next clause",
+   "rejected": [
+    "from his foreparts",
+    "from his advance"
+   ]
+  },
+  {
    "term": "σκυβαλώδης ἔκκρισις",
    "english": "filthy discharge",
-   "why": "Matches the glossary term for the foul discharge of the adversary.",
+   "why": "matches the glossary term for the foul discharge of the adversary",
    "rejected": [
     "foul outflow",
     "waste"
    ]
   },
   {
-   "term": "ἀντικειμένου",
-   "english": "adversary",
-   "why": "Standard rendering for the devil as the opponent, consistent with the brief's identification of Pharaoh as symbol of the devil.",
+   "term": "τοῦ ἀντικειμένου",
+   "english": "of the adversary",
+   "why": "standard Origen term for the devil, consistent with the brief's cast",
    "rejected": [
-    "enemy",
-    "opponent"
+    "of the opponent",
+    "of the enemy"
    ]
   },
   {
-   "term": "λάκκος",
-   "english": "pit",
-   "why": "Glossary term for the pit of burial.",
+   "term": "τὰ γήϊνα",
+   "english": "earthly things",
+   "why": "neuter plural substantive, preserving the allegorical contrast with heavenly things",
    "rejected": [
-    "burial pit",
-    "grave"
+    "the earth",
+    "earthly matters"
    ]
   },
   {
-   "term": "συναγωγὴν",
-   "english": "gathering",
-   "why": "Literal rendering of the noun, preserving the spatial metaphor of extension toward the gathering.",
+   "term": "λάκκον οὖν καλεῖ τῆς ταφῆς τὸ βάθος",
+   "english": "therefore he calls the depth of burial a pit",
+   "why": "preserves the word order and the identification of pit with depth of burial",
    "rejected": [
-    "assembly",
-    "congregation"
+    "he calls the pit the depth of burial"
    ]
   },
   {
-   "term": "ἐπίδοσιν",
-   "english": "extension",
-   "why": "Renders the sense of increase or giving toward, fitting the spatial context of length.",
+   "term": "μῆκος δὲ, τῆς ταφῆς τὴν ἔκτασιν",
+   "english": "and length, the extent of burial",
+   "why": "preserves the parallel structure: length is identified with the extent of burial",
    "rejected": [
-    "increase",
-    "growth"
+    "and length means the extent of burial"
    ]
   }
  ],
@@ -126,234 +133,37 @@
   }
  ],
  "pass_b_english": [
-  "This passage above all shows the allegory of Scripture. Pharaoh could not physically water the earth from his foreparts; rather, the filthy discharge of the adversary waters earthly things.",
-  "The Hebrew has “in the length of the pit.” For the word iarech, pronounced with aspiration in the Hebrew tongue, means both “thigh” and “length.” Its extension reaches toward the gathering. He calls the pit the depth of burial, and length the extent of burial."
+  "This above all shows the allegory of Scripture: Pharaoh would not literally water the earth from his excrements, but the filthy discharge of the adversary waters earthly things.",
+  "The Hebrew has “in the length of the pit.” For the word iarech, pronounced with aspiration in the Hebrew tongue, means both “thigh” and “length.” The pit, therefore, he calls the depth of burial, and length the extent of burial."
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
  "pipeline": "work_pipeline",
  "brief_sha256": "0a773ea5f556c41e9d5b6fd8e58478b93b42abfd9b51dc19cadcc6115ae8cdfc",
  "source_sha256": "aa87d075cb6551ec40ceed4b2146a8b7c682c6de78ed4f4f9f1e8add13890b58",
- "repairs": [
-  {
-   "problems": [
-    {
-     "class": "mistranslation",
-     "severity": "major",
-     "quote": "Pharaoh could not literally water the earth from his discharges",
-     "source_quote": "ὁ γοῦν Φαραὼ σωματικῶς οὐκ ἂν ἀπὸ τῶν προχωρημάτω αὐτοῦ ποτίσαι τὴν γῆν",
-     "why": "Greek says Pharaoh could not water the earth from his forwardness/progress, not from his discharges.",
-     "fix": "Pharaoh could not literally water the earth from his forwardness.",
-     "model": "@cf/openai/gpt-oss-120b",
-     "upheld_by": "@cf/zai-org/glm-5.2",
-     "ruling": "προχωρήματα means discharges/excretions in medical/physiological Greek; 'forwardness/progress' ignores context of σκυβαλώδης ἔκκρισις."
-    }
-   ],
-   "edits": [
-    {
-     "old": "Pharaoh could not literally water the earth from his discharges",
-     "new": "Pharaoh could not literally water the earth from his forwardness"
-    }
-   ],
-   "fixed": [
-    "Corrected 'discharges' to 'forwardness' for προχωρημάτω; the Greek refers to Pharaoh's forwardness/progress, not discharges."
-   ]
-  },
-  {
-   "problems": [
-    {
-     "class": "mistranslation",
-     "severity": "major",
-     "quote": "from his forwardness",
-     "source_quote": "ἀπὸ τῶν προχωρημάτω αὐτοῦ",
-     "why": "προχωρήματα means discharges/excretions, not 'forwardness'; loses the bodily-waste image.",
-     "fix": "from his discharges",
-     "model": "@cf/zai-org/glm-5.2",
-     "upheld_by": "@cf/openai/gpt-oss-120b",
-     "ruling": "Greek ‘προχωρημάτω’ means ‘discharge, excrement’, not abstract ‘forwardness’; translation loses bodily‑waste image."
-    }
-   ],
-   "edits": [
-    {
-     "old": "from his forwardness",
-     "new": "from his discharges"
-    }
-   ],
-   "fixed": [
-    "Changed 'from his forwardness' to 'from his discharges' because προχωρήματα means discharges/excretions, not forwardness."
-   ]
-  },
-  {
-   "problems": [
-    {
-     "class": "mistranslation",
-     "severity": "major",
-     "quote": "Pharaoh could not literally water the earth from his discharges",
-     "source_quote": "ὁ γοῦν Φαραὼ σωματικῶς οὐκ ἂν ἀπὸ τῶν προχωρημάτω αὐτοῦ ποτίσαι τὴν γῆν",
-     "why": "The Greek says Pharaoh could not water the earth from his foreparts (προχωρημάτω), not from his discharges.",
-     "fix": "Pharaoh could not physically water the earth from his foreparts; rather, the filthy discharge of the adversary waters earthly things.",
-     "model": "@cf/openai/gpt-oss-120b",
-     "upheld_by": "@cf/zai-org/glm-5.2",
-     "ruling": "προχωρημάτω means 'foreparts/advancing parts,' not 'discharges'; 'discharges' mistranslates and misleads the reader."
-    }
-   ],
-   "edits": [
-    {
-     "old": "Pharaoh could not literally water the earth from his discharges",
-     "new": "Pharaoh could not physically water the earth from his foreparts"
-    }
-   ],
-   "fixed": [
-    "The Greek προχωρημάτω means 'foreparts' or 'front parts', not 'discharges'; the English 'discharges' misstates the source. Changed to 'foreparts' and 'literally' to 'physically' to match σωματικῶς."
-   ]
-  },
-  {
-   "problems": [
-    {
-     "class": "glossary",
-     "quote": "the adversary",
-     "why": "Same figure called both 'devil' and 'adversary' without explanation.",
-     "fix": "Use 'devil/adversary' consistently or gloss once.",
-     "variants": [
-      {
-       "text": "the adversary",
-       "sections": [
-        "intro",
-        "32"
-       ]
-      },
-      {
-       "text": "the devil",
-       "sections": [
-        "intro",
-        "30"
-       ]
-      }
-     ]
-    },
-    {
-     "class": "mistranslation",
-     "quote": "from his foreparts",
-     "why": "Euphemistic/obscure; likely means genitals/loins.",
-     "fix": "Use 'loins' or 'thigh' to match Hebrew iarech.",
-     "variants": null
-    },
-    {
-     "class": "mistranslation",
-     "quote": "the filthy discharge",
-     "why": "Modern medical term seems anachronistic for ancient text.",
-     "fix": "Use 'impure flow' or 'foul emission'.",
-     "variants": null
-    },
-    {
-     "class": "mistranslation",
-     "quote": "Pharaoh could not physically water the earth from his foreparts;",
-     "why": "'Foreparts' is an unusual rendering; Ezekiel's text likely refers to Pharaoh's streams/river.",
-     "fix": "Use 'streams' or 'channels' per the LXX or Hebrew context.",
-     "variants": null
-    }
-   ],
-   "edits": [
-    {
-     "old": "from his foreparts",
-     "new": "from his loins"
-    },
-    {
-     "old": "the filthy discharge",
-     "new": "the foul emission"
-    }
-   ],
-   "fixed": [
-    "The source uses ἀντικειμένου ('adversary') here, not διάβολος, so 'the adversary' is accurate; no change needed.",
-    "The source προχωρημάτω refers to bodily discharges/emissions, not loins or thigh; 'foreparts' was obscure, so changed to 'loins' as the closest natural English for the bodily source.",
-    "The source σκυβαλώδης ἔκκρισις means 'filthy discharge'; 'foul emission' is a more natural ancient-sounding rendering.",
-    "The source προχωρημάτω means discharges, not streams or channels; the English now reads 'from his loins' which is accurate."
-   ]
-  }
- ],
  "checks": {
   "checkers": [
-   "@cf/openai/gpt-oss-120b",
+   "@cf/moonshotai/kimi-k2.6",
    "@cf/zai-org/glm-5.2"
   ],
   "rounds": [
    {
     "round": 0,
-    "confirmed": 1,
-    "rejected": 0,
-    "error": null
-   },
-   {
-    "round": 1,
-    "confirmed": 1,
-    "rejected": 0,
-    "error": null
-   },
-   {
-    "round": 2,
-    "confirmed": 1,
-    "rejected": 0,
-    "error": null
-   },
-   {
-    "round": 3,
     "confirmed": 0,
-    "rejected": 1,
+    "rejected": 0,
     "error": null
    }
   ],
-  "last_rejected": [
-   {
-    "class": "mistranslation",
-    "severity": "major",
-    "quote": "pronounced with aspiration in the Hebrew tongue",
-    "source_quote": "δασέως προφερόμενον",
-    "why": "Greek says \"harshly pronounced\", not \"with aspiration\".",
-    "fix": "pronounced harshly in the Hebrew tongue",
-    "model": "@cf/openai/gpt-oss-120b",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "δασέως means 'with rough breathing/aspiration'; translating as 'with aspiration' is correct, not 'harshly'."
-   }
-  ]
+  "last_rejected": []
  },
  "check_history": [
   {
    "round": 0,
-   "confirmed": 1,
-   "rejected": 0,
-   "error": null
-  },
-  {
-   "round": 1,
-   "confirmed": 1,
-   "rejected": 0,
-   "error": null
-  },
-  {
-   "round": 2,
-   "confirmed": 1,
-   "rejected": 0,
-   "error": null
-  },
-  {
-   "round": 3,
    "confirmed": 0,
-   "rejected": 1,
+   "rejected": 0,
    "error": null
-  },
-  {
-   "round": "read0",
-   "confirmed": 0
   }
  ],
- "reviewer": "work_pipeline:gpt-oss+glm",
- "confidence": "source_verified",
- "reverted_reader_edits": [
-  {
-   "at": "2026-10-05T21:19:12Z",
-   "undone": 2,
-   "confirmed_before": 1,
-   "confirmed_after": 1
-  }
- ]
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
 }

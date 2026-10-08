@@ -1,5 +1,5 @@
-Origen of Alexandria (c. 185–c. 254) wrote these fragments of his commentary on Ezekiel. They are not his homilies on Ezekiel.
+Origen of Alexandria (c. 185–c. 254) wrote this commentary on selected passages from the book of Ezekiel. He interprets the prophet's oracles and visions to show their spiritual meaning for the church.
 
-He reads Pharaoh's arms as wickedness in action and as the mind of the flesh. Pharaoh stands for the devil. God breaks those arms so a sinner cannot take up a sword. Pharaoh's watering of the land is an allegory: the foul emission of the adversary waters earthly things.
+The work focuses especially on the oracles against Pharaoh and the vision of the closed east gate of the sanctuary. Origen reads Pharaoh as a symbol of the devil, the ruler of sin among human beings, whose arms God breaks so that sinners cannot grasp the sword. He explains that Pharaoh's watering the land is not literal but an allegory for the filthy discharge of the adversary watering earthly things.
 
-The closed east gate is the mysteries of God. The same meaning is in the sealed scroll, which Christ opens, and in the stone of hardness that Jacob lifted from the well. The citations use the old names of the biblical books.
+A reader will meet the prophet Ezekiel, whose words are quoted and paraphrased, and Jesus Christ, who alone opens the closed gate, the sealed scroll, and the law and prophetic word. Origen also mentions Jacob, who removed the stone from the well, and John, author of Revelation. A reader should know that Origen uses the Greek Septuagint text and its Psalm numbering, and that he often explains Hebrew words, such as iarech, which he says means both thigh and length.
