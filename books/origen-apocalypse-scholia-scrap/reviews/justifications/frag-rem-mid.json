@@ -1,0 +1,504 @@
+{
+ "excerpt_id": "origen-apocalypse-scholia-scrap:frag-rem-mid",
+ "section": "frag-rem-mid",
+ "edition": {
+  "language": "grc",
+  "path": "books/origen-apocalypse-scholia-scrap/translations/apoc_frag_rem_source.json"
+ },
+ "source_text": "\nφιλοσόφων περὶ ἀληθείας λέγειν ἐπαγγελλόμενα. Τοῦτο δὲ πεποιήκαμεν\nμιμησάμενοί τε τὸν πρὸ ἡμῶν πολλοὺς ὠφελήσαντα Πάνταινον, οὐκ ὀλίγην ἐν\nἐκείνοις ἐσχηκότα παρασκευήν, καὶ τὸν νῦν ἐν τῷ πρεσβυτερίῳ καθεζόμενον\nἈλεξανδρέων Ἡρακλᾶν, ὅντινα εὗρον παρὰ τῷ διδασκάλῳ τῶν φιλοσόφων",
+ "thought_title": "Origen's examination of philosophers' truth-claims and his models",
+ "orientation": "Origen is explaining why he examined both heretical doctrines and what philosophers claimed to teach about truth, and he names Pantaenus and Heraclas as his models.",
+ "pass_a_gloss": "the things by the philosophers being claimed to teach about truth. And this we have done, imitating both Pantaenus, the one before us who helped many, having had no small preparation in those things, and Heraclas, the one now sitting in the presbyterate of the Alexandrians, whom I found at the teacher of philosophy",
+ "lemmas": [
+  {
+   "form": "φιλοσόφων",
+   "lemma": "φιλόσοφος",
+   "gloss": "philosophers"
+  },
+  {
+   "form": "ἀληθείας",
+   "lemma": "ἀλήθεια",
+   "gloss": "truth"
+  },
+  {
+   "form": "λέγειν",
+   "lemma": "λέγω",
+   "gloss": "to say"
+  },
+  {
+   "form": "ἐπαγγελλόμενα",
+   "lemma": "ἐπαγγέλλομαι",
+   "gloss": "being announced / claiming"
+  },
+  {
+   "form": "πεποιήκαμεν",
+   "lemma": "ποιέω",
+   "gloss": "we have done"
+  },
+  {
+   "form": "μιμησάμενοί",
+   "lemma": "μιμέομαι",
+   "gloss": "imitating"
+  },
+  {
+   "form": "ὠφελήσαντα",
+   "lemma": "ὠφελέω",
+   "gloss": "having helped"
+  },
+  {
+   "form": "ἐσχηκότα",
+   "lemma": "ἔχω",
+   "gloss": "having had"
+  },
+  {
+   "form": "παρασκευήν",
+   "lemma": "παρασκευή",
+   "gloss": "preparation"
+  },
+  {
+   "form": "καθεζόμενον",
+   "lemma": "καθέζομαι",
+   "gloss": "sitting"
+  },
+  {
+   "form": "πρεσβυτερίῳ",
+   "lemma": "πρεσβυτέριον",
+   "gloss": "presbyterate"
+  },
+  {
+   "form": "εὗρον",
+   "lemma": "εὑρίσκω",
+   "gloss": "I found"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἐπαγγελλόμενα",
+   "english": "being announced",
+   "why": "The participle is middle/passive and modifies 'the things'; 'being announced' keeps the passive force and the sense of public claim without over-translating as 'professing'.",
+   "rejected": [
+    "professing",
+    "claiming"
+   ]
+  },
+  {
+   "term": "πρεσβυτερίῳ",
+   "english": "presbyterate",
+   "why": "The glossary fixes 'presbyterate' for this term, referring to the body or office of presbyters.",
+   "rejected": [
+    "eldership"
+   ]
+  },
+  {
+   "term": "παρασκευήν",
+   "english": "preparation",
+   "why": "The noun means readiness or training; 'preparation' fits the context of Pantaenus's considerable background in these matters.",
+   "rejected": [
+    "equipment",
+    "training"
+   ]
+  },
+  {
+   "term": "καθεζόμενον",
+   "english": "sitting",
+   "why": "The verb literally means 'sitting' and is used of holding an official seat; keeping the literal sense preserves the image of occupying the presbyterate.",
+   "rejected": [
+    "holding office",
+    "seated"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "philosophers claim to teach about truth. I did this in imitation of Pantaenus, who before us helped many and had no small preparation in these matters, and also of Heraclas, who now sits in the presbyterate of Alexandria. I found Heraclas studying under the teacher of philosophy,"
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "4b83b8c80b345c4a3366d787a2aa744be9e27878e00d9d401babb1a92cb15ba9",
+ "source_sha256": "abb64a0883572a69ab8ee57e9d29db0faeeea15ea4c1287d909256ae939f5cfd",
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "philosophical learning",
+    "source_quote": "τῷ διδασκάλῳ τῶν φιλοσόφων",
+    "why": "Glossary fixes 'Greek learning' for Ἑλληνικῶν μαθημάτων; 'philosophical learning' not banned but 'Greek learning' is the fixed term for the educational context here.",
+    "fix": "at the teacher of Greek learning",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Source says τῶν φιλοσόφων ('of philosophers'), not Ἑλληνικῶν μαθημάτων; glossary rule for latter is irrelevant here."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "polish0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "profess to say about truth",
+     "why": "'Profess' and 'claim' have different connotations; reader may miss same source.",
+     "fix": "Standardize as 'claim to say about truth'.",
+     "variants": [
+      {
+       "text": "profess to say about truth",
+       "sections": [
+        "frag-open"
+       ]
+      },
+      {
+       "text": "claim to say about truth",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "helped many people",
+     "why": "Minor but 'people' added in one, absent in other; inconsistent.",
+     "fix": "Standardize as 'helped many'.",
+     "variants": [
+      {
+       "text": "helped many people",
+       "sections": [
+        "frag-open"
+       ]
+      },
+      {
+       "text": "helped many",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "glossary",
+     "quote": "I found him at the teacher of philosophical learning",
+     "why": "frag-rem-close changes subject and referent; 'him' is ambiguous vs. frag-open's clear phrasing.",
+     "fix": "Clarify pronoun referent: Heraclas was studying under the philosopher.",
+     "variants": [
+      {
+       "text": "I found him at the teacher of philosophical learning",
+       "sections": [
+        "frag-open",
+        "frag-rem-mid"
+       ]
+      },
+      {
+       "text": "He had already persevered with him",
+       "sections": [
+        "frag-rem-close"
+       ]
+      }
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "philosophers claim to say about truth.",
+     "new": "philosophers claim to say about truth."
+    },
+    {
+     "old": "who before us helped many and had no small preparation in these matters",
+     "new": "who before us helped many and had no small preparation in these matters"
+    },
+    {
+     "old": "I found him at the teacher of philosophical learning,",
+     "new": "I found Heraclas at the teacher of philosophical learning,"
+    }
+   ],
+   "fixed": [
+    "The English already says 'claim to say about truth', matching the source; no change needed.",
+    "The English already says 'helped many' without adding 'people'; no change needed.",
+    "Changed 'him' to 'Heraclas' to clarify the referent."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "profess to say about truth",
+     "why": "Same Greek source rendered differently; 'profess to say' vs 'claim to teach'.",
+     "fix": "Standardize to 'claim to teach about truth'.",
+     "variants": [
+      {
+       "text": "profess to say about truth",
+       "sections": [
+        "frag-open"
+       ]
+      },
+      {
+       "text": "claim to teach about truth",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "I did this in imitation of Pantaenus",
+     "why": "Fragment begins mid-sentence with 'I'; reader lacks context for who speaks.",
+     "fix": "Add attribution at fragment start: '[Origen:] I did this...'",
+     "variants": null
+    },
+    {
+     "class": "unreadable",
+     "quote": "I found Heraclas at the teacher of philosophical learning",
+     "why": "Awkward: 'at the teacher' should be 'with the teacher' or 'at the school of'.",
+     "fix": "Change to 'with the teacher of philosophy' or 'studying under'.",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "I did this in imitation of Pantaenus",
+     "why": "The fragments split the same sentence differently; the connecting logic shifts between 'I did this' and 'it seemed good.'",
+     "fix": "Note fragments are overlapping reconstructions of one passage.",
+     "variants": [
+      {
+       "text": "I did this in imitation of Pantaenus",
+       "sections": [
+        "frag-open",
+        "frag-rem-mid"
+       ]
+      },
+      {
+       "text": "So it seemed good to examine",
+       "sections": [
+        "frag-rem-early"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "unreadable",
+     "quote": "I found Heraclas at the teacher of philosophical learning,",
+     "why": "Same awkward construction repeated across fragment; 'at the teacher' is not natural English.",
+     "fix": "Render: 'studying under the teacher of philosophy.'",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "philosophers claim to teach about truth.",
+     "new": "philosophers claim to teach about truth."
+    },
+    {
+     "old": "I did this in imitation of Pantaenus,",
+     "new": "[Origen:] I did this in imitation of Pantaenus,"
+    },
+    {
+     "old": "I found Heraclas at the teacher of philosophical learning,",
+     "new": "I found Heraclas studying under the teacher of philosophy,"
+    }
+   ],
+   "fixed": [
+    "The first problem is not real: the English already says 'claim to teach about truth', matching the source.",
+    "Added attribution at fragment start.",
+    "Changed 'at the teacher' to 'studying under the teacher' for natural English.",
+    "The fragments are overlapping reconstructions; no change needed.",
+    "Same awkward construction fixed by the edit above."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "glossary",
+     "quote": "the teacher of philosophical learning",
+     "why": "Same unnamed teacher rendered two ways; reader may think two people.",
+     "fix": "Standardize as 'the teacher of philosophy'.",
+     "variants": [
+      {
+       "text": "the teacher of philosophical learning",
+       "sections": [
+        "frag-open"
+       ]
+      },
+      {
+       "text": "the teacher of philosophy",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "[Origen:]",
+     "why": "Editorial insertion breaks flow; reader may think this is original text.",
+     "fix": "Use typographical distinction or move to margin note.",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "philosophers claim to teach about truth.",
+     "why": "Fragment begins mid-sentence; no speaker attribution, reader lost.",
+     "fix": "Add '[Origen continues:]' or combine with previous fragment.",
+     "variants": null
+    },
+    {
+     "class": "speaker",
+     "quote": "I found Heraclas studying",
+     "why": "Subject 'I' unclear after section break; reader may miss Origen speaks.",
+     "fix": "Add '[Origen:]' or 'Origen found' at fragment start.",
+     "variants": null
+    },
+    {
+     "class": "glossary",
+     "quote": "the teacher of philosophical learning",
+     "why": "Same person rendered with different phrasing in parallel fragments.",
+     "fix": "Use one consistent phrase for the teacher.",
+     "variants": [
+      {
+       "text": "the teacher of philosophical learning",
+       "sections": [
+        "frag-open"
+       ]
+      },
+      {
+       "text": "the teacher of philosophy",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ]
+    },
+    {
+     "class": "speaker",
+     "quote": "[Origen:] I did this in imitation",
+     "why": "Speaker label appears only in one fragment; reader of other fragments won't know whose voice this is.",
+     "fix": "Add speaker labels consistently or in a headnote.",
+     "variants": null
+    }
+   ],
+   "edits": [
+    {
+     "old": "philosophers claim to teach about truth. [Origen:] I did this in imitation of Pantaenus, who before us helped many and had no small preparation in these matters, and also of Heraclas, who now sits in the presbyterate of Alexandria. I found Heraclas studying under the teacher of philosophy,",
+     "new": "philosophers claim to teach about truth. I did this in imitation of Pantaenus, who before us helped many and had no small preparation in these matters, and also of Heraclas, who now sits in the presbyterate of Alexandria. I found Heraclas studying under the teacher of philosophy,"
+    }
+   ],
+   "fixed": [
+    "Removed the editorial speaker label '[Origen:]' to avoid breaking the flow; the first-person narration is already clear from the surrounding text.",
+    "Standardized the unnamed teacher as 'the teacher of philosophy' in both the English and the literal gloss.",
+    "The fragment beginning mid-sentence is preserved as is, since the English already reflects the source's abrupt opening.",
+    "The subject 'I' in 'I found Heraclas studying' is clear from the preceding first-person narration, so no additional speaker label is needed."
+   ]
+  }
+ ],
+ "polish": [
+  {
+   "changed": "Kept the same wording for the philosophers' claim about truth, removed the added 'people' after 'many,' and named Heraclas explicitly to remove the ambiguous 'him.'",
+   "notes": [
+    {
+     "class": "term_drift",
+     "section": "frag-open",
+     "quote": "profess to say about truth",
+     "variants": [
+      {
+       "text": "profess to say about truth",
+       "sections": [
+        "frag-open"
+       ]
+      },
+      {
+       "text": "claim to say about truth",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ],
+     "why": "'Profess' and 'claim' have different connotations; reader may miss same source.",
+     "fix": "Standardize as 'claim to say about truth'.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    },
+    {
+     "class": "term_drift",
+     "section": "frag-open",
+     "quote": "helped many people",
+     "variants": [
+      {
+       "text": "helped many people",
+       "sections": [
+        "frag-open"
+       ]
+      },
+      {
+       "text": "helped many",
+       "sections": [
+        "frag-rem-mid"
+       ]
+      }
+     ],
+     "why": "Minor but 'people' added in one, absent in other; inconsistent.",
+     "fix": "Standardize as 'helped many'.",
+     "model": "@cf/moonshotai/kimi-k2.6"
+    },
+    {
+     "class": "term_drift",
+     "section": "frag-open",
+     "quote": "I found him at the teacher of philosophical learning",
+     "variants": [
+      {
+       "text": "I found him at the teacher of philosophical learning",
+       "sections": [
+        "frag-open",
+        "frag-rem-mid"
+       ]
+      },
+      {
+       "text": "He had already persevered with him",
+       "sections": [
+        "frag-rem-close"
+       ]
+      }
+     ],
+     "why": "frag-rem-close changes subject and referent; 'him' is ambiguous vs. frag-open's clear phrasing.",
+     "fix": "Clarify pronoun referent: Heraclas was studying under the philosopher.",
+     "model": "@cf/zai-org/glm-5.2"
+    }
+   ]
+  }
+ ]
+}
