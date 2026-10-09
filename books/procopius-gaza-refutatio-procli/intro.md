@@ -1,5 +1,5 @@
-Procopius of Gaza (c. 465/475–c. 528) is the name on this file. It is the short refutation of Proclus printed under his name, not one of his biblical catenae.
+Procopius of Gaza (c. 465/475–c. 528) was a Christian rhetorician and biblical commentator, one of the leading figures of the rhetorical school of Gaza.
 
-The only procession without beginning and without end is the generation of the Son and the procession of the Holy Spirit from the Father. That procession stays inside the Father's essence. Every other procession belongs to things that have come into being from the Father through the Son and are completed in the Spirit.
+The reader will meet these voices alongside Procopius's own argument.
 
-Gregory the Theologian is cited for the Trinity. The six days in which the world was finished are set beside the Savior's words, "My Father is working until now, and I am working," and beside the hope that God will be all in all. A longer refutation of Proclus is also credited to Nicholas of Methone. This file is the section the Patrology prints under Procopius.
+Procopius distinguishes the unoriginate and endless procession of the Son and the Holy Spirit from the Father alone, which constitutes the Trinity, from all other processions, which belong to created things. He also speaks of illumination, return, and a final transformation of all things from corruption to incorruption. The reader should know that the author cites the Gospel of John 5:17, alludes to the six days of creation in Genesis, and refers to 1 Corinthians 15:28, where God will be all in all.
