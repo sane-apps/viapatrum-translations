@@ -291,6 +291,9 @@ def publish(d: Path) -> list[dict]:
         rec = {"book": book, "section": sec, "held_because": why,
                "source": "\n".join(src) if isinstance(src, list) else src,
                "english": j.get("pass_b_english") or [],
+               # What publish wrote. Contributors edit only "english", so import
+               # can tell a real fix from the snapshot itself (2026-10-09).
+               "published_english": j.get("pass_b_english") or [],
                "findings": [{"class": f.get("class"), "quote": f.get("quote"), "source_quote": f.get("source_quote"),
                              "checker_says": f.get("why"),
                              "reviewer_verdict": (notes.get(f["id"]) or {}).get("verdict"),
@@ -305,12 +308,36 @@ def publish(d: Path) -> list[dict]:
     return out
 
 
+def _english(text: str) -> list[str] | None:
+    try:
+        rec = json.loads(text)
+    except ValueError:
+        return None
+    return [str(x).strip() for x in rec.get("english") or [] if str(x).strip()]
+
+
+def published_snapshots(rec: dict, path: str, ref: str) -> list[list[str]]:
+    """English a held/ file carried when publish wrote it: the recorded
+    published_english, and the file as the commit that added it. A held/ file
+    whose English is one of these is not a contributor fix."""
+    out = []
+    pub = rec.get("published_english")
+    if pub:
+        out.append([str(x).strip() for x in pub if str(x).strip()])
+    added = git("log", "--diff-filter=A", "--format=%H", ref, "--", path).split()
+    if added:
+        first = _english(git("show", f"{added[-1]}:{path}"))
+        if first:
+            out.append(first)
+    return out
+
+
 def import_held(dry_run: bool = False, ref: str = "origin/main") -> dict:
     """Release held sections whose English a merged pull request changed in
     held/ on origin/main (read with git show; the working tree is untouched)."""
     git("fetch", "-q", "origin")
     rows = W.update_log("", {}) if W.QUEUE_LOG.exists() else {}
-    stats, books = {"imported": 0, "unchanged": 0, "gate": 0, "not_held": 0, "running": 0}, {}
+    stats, books = {"imported": 0, "unchanged": 0, "snapshot": 0, "gate": 0, "not_held": 0, "running": 0}, {}
     for path in git("ls-tree", "-r", "--name-only", ref, HELD_DIR + "/").split():
         if not path.endswith(".json"):
             continue
@@ -329,6 +356,12 @@ def import_held(dry_run: bool = False, ref: str = "origin/main") -> dict:
             continue
         if not eng or eng == j.get("pass_b_english"):
             stats["unchanged"] += 1
+            continue
+        if eng in published_snapshots(rec, path, ref):
+            # The file still holds what publish wrote, and the section was
+            # repaired after that. Importing it would put the old English back
+            # and release it as a contributor fix (2026-10-09: seven sections).
+            stats["snapshot"] += 1
             continue
         if W.prev_running(rows, book):
             stats["running"] += 1

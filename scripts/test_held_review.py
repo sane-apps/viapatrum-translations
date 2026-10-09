@@ -105,19 +105,23 @@ class ApplyTests(unittest.TestCase):
 
 
 class ImportTests(unittest.TestCase):
-    def run_import(self, d, english, gate=()):
+    def run_import(self, d, english, gate=(), published=None, stage_english=("Old.",), extra=None):
         root = Path(d)
         stage = root / "outputs/work-pipeline"
         sec = stage / "bk/sections/1.json"
         sec.parent.mkdir(parents=True)
-        sec.write_text(json.dumps({"section": "1", "_status": "hold", "_why": "corrupt", "pass_b_english": ["Old."]}))
-        merged = json.dumps({"book": "bk", "section": "1", "english": english})
+        sec.write_text(json.dumps({"section": "1", "_status": "hold", "_why": "corrupt",
+                                   "pass_b_english": list(stage_english)}))
+        merged = json.dumps({"book": "bk", "section": "1", "english": english, **(extra or {})})
+        first = json.dumps({"book": "bk", "section": "1", "english": published if published is not None else ["Old."]})
 
         def git(*args):
             if args[0] == "ls-tree":
                 return "held/README.md\nheld/bk/1.json\n"
             if args[0] == "show":
-                return merged
+                return first if args[1].startswith("add000:") else merged
+            if args[0] == "log" and "--diff-filter=A" in args:
+                return "add000\n"
             if args[0] == "log":
                 return "abc123 A Contributor\n"
             return ""
@@ -143,6 +147,31 @@ class ImportTests(unittest.TestCase):
             st, j = self.run_import(d, ["Old."])
         self.assertEqual(st["unchanged"], 1)
         self.assertEqual(j["_status"], "hold")
+
+    def test_publish_snapshot_not_imported_after_later_repair(self):
+        # 2026-10-09: the section was repaired after publish wrote held/, so the
+        # stage English differs from the file. The file is still the snapshot,
+        # not a contributor fix, and must not put the old English back.
+        with tempfile.TemporaryDirectory() as d:
+            st, j = self.run_import(d, ["Snapshot with the bad words."], published=["Snapshot with the bad words."],
+                                    stage_english=("Repaired later.",))
+        self.assertEqual(st["imported"], 0)
+        self.assertEqual(st["snapshot"], 1)
+        self.assertEqual(j["_status"], "hold")
+        self.assertEqual(j["pass_b_english"], ["Repaired later."])
+
+    def test_recorded_published_english_not_imported(self):
+        with tempfile.TemporaryDirectory() as d:
+            st, j = self.run_import(d, ["Snapshot."], published=["Something else."], stage_english=("Repaired.",),
+                                    extra={"published_english": ["Snapshot."]})
+        self.assertEqual(st["imported"], 0)
+        self.assertEqual(j["_status"], "hold")
+
+    def test_contributor_edit_after_later_repair_still_imported(self):
+        with tempfile.TemporaryDirectory() as d:
+            st, j = self.run_import(d, ["Contributor fix."], published=["Snapshot."], stage_english=("Repaired.",))
+        self.assertEqual(st["imported"], 1)
+        self.assertEqual(j["pass_b_english"], ["Contributor fix."])
 
     def test_gate_failure_left_held(self):
         with tempfile.TemporaryDirectory() as d:
