@@ -192,6 +192,8 @@ def reviewer_model_families(reviewer: str) -> list[str]:
 # passed the free-text two-family rule either (0 of 738 on 2026-10-09), so no
 # historical approval is withdrawn.
 PROVENANCE_SCHEMA = "review-provenance-v1"
+# Prefix of every two-family failure. Downstream gates match this phrase.
+FAMILY_ERROR = "reviewer is not two model families"
 
 # Exact model id -> exactly ONE family. Unknown ids fail closed; add researched
 # identities here, never substring guesses.
@@ -278,6 +280,8 @@ def provenance_family_errors(receipt: dict, sections) -> list[str]:
     lanes = prov.get("lanes")
     if not isinstance(lanes, list) or not lanes or any(not isinstance(x, dict) for x in lanes):
         return ["reviewer provenance has no lanes: cannot establish two model families"]
+    if not any(isinstance(x.get("calls"), list) and x.get("calls") for x in lanes):
+        return ["reviewer provenance has zero recorded calls: cannot establish two model families"]
     by_section = {s.get("section"): s for s in sections}
     reviews = {r.get("section"): r for r in receipt.get("reviews") or [] if isinstance(r, dict)}
     errors, lane_ids, per_section = [], [], {}
@@ -568,9 +572,12 @@ def validate_audit_receipt(packet: dict, receipt: dict) -> list[str]:
     sections = packet.get("sections") or []
     if receipt.get("verdict") != "pass" or not str(receipt.get("reviewer") or "").strip():
         errors.append("missing passing verdict or reviewer")
-    else:
-        # Families come from structured provenance only (never the reviewer string).
-        errors += provenance_family_errors(receipt, sections)
+    # Families come from structured provenance only (never the reviewer string),
+    # and the check runs on every receipt. Each failure carries
+    # FAMILY_ERROR so consumers that key on it (the site catalogue gate,
+    # catalogue_quality.packet_blocks_publication) hold the receipt: missing,
+    # empty or malformed provenance must never read as a non-family note.
+    errors += [f"{FAMILY_ERROR}: {e}" for e in provenance_family_errors(receipt, sections)]
     if packet.get("publication_scope") is not None:
         errors += ["scope review: " + e for e in validate_semantic_review(
             receipt.get("scope_review"),

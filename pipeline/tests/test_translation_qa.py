@@ -303,6 +303,51 @@ class TranslationQATests(unittest.TestCase):
         review["adjudications"] = [{"model": GEM, "resolution": "False positive: quoted span is rendered."}]
         self.assertEqual(validate_audit_receipt(packet, receipt), [])
 
+    def test_missing_or_empty_provenance_fails_family_check(self):
+        """A receipt with no recorded calls must carry the family error.
+
+        Downstream gates (site catalogue_quality.packet_blocks_publication and
+        check_catalogue's hand-stamped receipt test) hold a receipt only on
+        "not two model families"; a softer message let a call-less receipt pass.
+        """
+        packet = self.packet()
+
+        def family_errors(receipt):
+            return [e for e in validate_audit_receipt(packet, receipt)
+                    if e.startswith("reviewer is not two model families")]
+
+        # 1. No provenance key at all (also with a blank reviewer string).
+        bare = self.receipt(packet)
+        del bare["review_provenance"]
+        self.assertTrue(family_errors(bare), validate_audit_receipt(packet, bare))
+        bare["reviewer"] = ""
+        self.assertTrue(family_errors(bare), validate_audit_receipt(packet, bare))
+        # 2. Empty or malformed provenance, zero calls, no model ids.
+        lanes_zero = provenance(packet)
+        for lane in lanes_zero["lanes"]:
+            lane["calls"], lane["call_count"] = [], 0
+        no_model = provenance(packet)
+        for lane in no_model["lanes"]:
+            lane.pop("model")
+        malformed = {
+            "none": None, "empty dict": {}, "string": "nemotron+gemini",
+            "no lanes": {"schema": PROVENANCE_SCHEMA},
+            "empty lanes": {"schema": PROVENANCE_SCHEMA, "lanes": []},
+            "non-object lane": {"schema": PROVENANCE_SCHEMA, "lanes": ["nemotron", "gemini"]},
+            "zero calls": lanes_zero, "no model ids": no_model,
+        }
+        for name, prov in malformed.items():
+            receipt = self.receipt(packet)
+            receipt["review_provenance"] = prov
+            self.assertTrue(family_errors(receipt), (name, validate_audit_receipt(packet, receipt)))
+        # 3. One family (two lanes of it) fails.
+        one = self.receipt(packet)
+        one["review_provenance"] = provenance(packet, lanes=((NIM, "nemotron"),
+                                                            ("mistralai/mistral-nemotron", "nemotron")))
+        self.assertTrue(family_errors(one), validate_audit_receipt(packet, one))
+        # 4. Two distinct families with valid call records pass cleanly.
+        self.assertEqual(validate_audit_receipt(packet, self.receipt(packet)), [])
+
     def test_missing_quotes_fail_even_with_provenance(self):
         packet = self.packet()
         receipt = self.receipt(packet)
