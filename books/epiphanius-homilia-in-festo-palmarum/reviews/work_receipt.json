@@ -1,0 +1,56 @@
+{
+ "slug": "epiphanius-homilia-in-festo-palmarum",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 51,
+   "moved_start": "Ἑορτάζει ἑορτῶν ἑορτὰς, τὸν βασιλέα τῶν ἀσωμάτων ἐν"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 510,
+   "moved_start": "παῖδες Χριστὸν ὡς Θεὸν θεολογοῦσι, καὶ οἱ\nἱερεῖς αὐτὸν βλασφ"
+  }
+ ],
+ "brief_sha256": "b41a5eb33c072a744e07fc2812a441dbe3bd5eee4c6c65cb76d56fbc63729724",
+ "followability": [
+  3,
+  4
+ ],
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-09T19:23:09Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "5713e5ec261de5c0f45b0d5ab8170dca3314b581ef641d26f3ca8d73cea14bf5",
+   "english_sha256": "bb6e1096503fe1373431de106b6c8e3406527fe7c3a7e235caea281b5baf7135",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "d22791ae193739fa357cb4829a27f584e2c8f6be94a0617ee2f941dd96916b8c",
+   "english_sha256": "f1fcc73306fd1b094ff7b50d24395e8346ad0a55f6a9f3c8e99110a4cec3fb10",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "b1a7414d3654e042629aa53ff0e8ec46f95ccbd0b371312858dd8e03aff969a4",
+   "english_sha256": "5ff832bc5931ff9916efedc2ca046595f40160d79464216501d6f623dc4d25d3",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "a0f2a361e2711edf7180a7b288abe9a09ab3b12c23cc4d82d4a187f6bf08d00a",
+   "english_sha256": "937ecaa3f01a2f2e42e43d5adc2fa659d007ee8bfa8b6056a2ec9192f343a40b",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}
