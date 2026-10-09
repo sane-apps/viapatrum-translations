@@ -1,13 +1,30 @@
 #!/usr/bin/env python3
 """Two-family semantic review of an audit packet, with structured provenance.
 
-Runs the per-section audit prompt from scripts/independent_review.py over the
-packet's SELECTED sections in two free lanes from different model families:
+Reviews the packet's SELECTED sections in two lanes from different model
+families. Two profiles (--profile):
 
-  nim     NVIDIA NIM free endpoint, nvidia/nemotron-3-super-120b-a12b  (nemotron)
-  gemini  Google AI Studio free tier, gemini-3.5-flash-lite            (gemini)
+  aligned (default since 2026-10-09)
+    kimi    Cloudflare Workers AI @cf/moonshotai/kimi-k2.6   (kimi)
+    glm     Cloudflare Workers AI @cf/zai-org/glm-5.2        (glm)
+    Clause-aligned prompt: the source is cut into sentence chunks of <= 900
+    characters; for each chunk the model writes its own literal gloss of the
+    source FIRST, quotes the English that renders it, and lists only major
+    meaning defects. One recorded call per chunk. Workers AI runs on the
+    account's startup credits ($0 cash); credit use is recorded from the
+    neurons the API reports.
+  legacy (the default before 2026-10-09; old receipts stay valid)
+    nim     NVIDIA NIM free endpoint, nvidia/nemotron-3-super-120b-a12b  (nemotron)
+    gemini  Google AI Studio free tier, gemini-3.5-flash-lite            (gemini)
+    The independent_review prompt, one call per whole section.
 
-No metered lane exists here and none is fallen back to. A rate limit or daily
+Why the default changed (bench outputs/review-bench-20261009, 20 known-bad
+held sections with their fixed versions as controls): nemotron with the
+independent_review prompt failed 19/20 fixed sections (no discrimination);
+flash-lite was out of free quota; whole-section clause prompts on reasoning
+models ran out of output budget on 3-4k character sections.
+
+No paid fallback lane exists here and none is fallen back to. A rate limit or daily
 cap writes the resumable checkpoint and exits 3 (QUOTA_PAUSE); rerun the same
 command later to resume. Each call is recorded with the exact model id the API
 echoed, its response/request ids, timestamps, token usage and the packet hashes
@@ -21,9 +38,10 @@ so. A model fail or uncertainty is never hidden: the section stays fail until
 the text is fixed (rerun re-reviews changed text) or an adjudication bound to
 that exact call (response id) is supplied with --adjudications.
 
-  source ~/.config/nv/env   # NV_API_KEY, GEMINI_API_KEY (never printed)
+  source ~/.config/nv/env   # CLOUDFLARE_API_TOKEN (aligned); NV_API_KEY, GEMINI_API_KEY (legacy)
   python3 scripts/dual_family_review.py --packet P.packet.json \\
-      --receipt-out P.review.json [--checkpoint C.json] [--adjudications A.json]
+      --receipt-out P.review.json [--checkpoint C.json] [--adjudications A.json] \\
+      [--profile aligned|legacy]
 
 Exit: 0 receipt written and passing; 1 receipt written with unresolved fails;
 2 usage/parse error; 3 quota pause (checkpoint saved, no receipt).
@@ -48,23 +66,65 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from independent_review import CHECKS, SYSTEM, USER_TEMPLATE, para_text  # noqa: E402
 from pipeline.verify_translation_qa import (  # noqa: E402
-    PROVENANCE_SCHEMA, SEMANTIC_CHECKS, _flat_text, _quotes_passage, model_family,
+    PROVENANCE_SCHEMA, SEMANTIC_CHECKS, _flat_text, _quotes_passage, independent_family_count,
+    model_family,
 )
 
 NIM_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+CF_ACCOUNT = os.environ.get("CF_ACCOUNT_ID", "2c267ab06352ba2522114c3081a8c5fa")
+CF_URL = "https://api.cloudflare.com/client/v4/accounts/{account}/ai/run/{model}"
+CF_USD_PER_1K_NEURONS = 0.011  # Workers AI list price; billed against startup credits
 LANES = {
     "nim": {"provider": "nvidia-nim", "endpoint": NIM_URL, "tier": "free (NIM API catalog)",
             "model": "nvidia/nemotron-3-super-120b-a12b", "min_interval": 2.0},
     "gemini": {"provider": "google-ai-studio", "endpoint": GEMINI_URL.replace("{model}", "<model>"),
                "tier": "free (AI Studio free tier)", "model": "gemini-3.5-flash-lite",
                "min_interval": 4.5},
+    "kimi": {"provider": "cloudflare-workers-ai", "endpoint": CF_URL.replace("{account}", "<account>").replace("{model}", "<model>"),
+             "tier": "Workers AI on startup credits ($0 cash)", "model": "@cf/moonshotai/kimi-k2.6",
+             "min_interval": 3.0, "key": "CLOUDFLARE_API_TOKEN", "caller": "cf"},
+    "glm": {"provider": "cloudflare-workers-ai", "endpoint": CF_URL.replace("{account}", "<account>").replace("{model}", "<model>"),
+            "tier": "Workers AI on startup credits ($0 cash)", "model": "@cf/zai-org/glm-5.2",
+            "min_interval": 3.0, "key": "CLOUDFLARE_API_TOKEN", "caller": "cf"},
 }
+LANES["nim"].update({"key": "NV_API_KEY", "caller": "nim"})
+LANES["gemini"].update({"key": "GEMINI_API_KEY", "caller": "gemini"})
+PROFILES = {
+    "aligned": {"lanes": ("kimi", "glm"), "prompt": "aligned"},
+    "legacy": {"lanes": ("nim", "gemini"), "prompt": "independent"},
+}
+DEFAULT_PROFILE = "aligned"
+CHUNK_CHARS = 900
+
+ALIGNED_SYSTEM = ("You are a philologist auditing an English translation of Ancient Greek or Latin, "
+                  "clause by clause. You read the source yourself; you never trust the English. "
+                  "Reply with ONE JSON object only.")
+ALIGNED_USER = """FULL ENGLISH TRANSLATION (for locating; it renders a longer source):
+{english}
+
+SOURCE PASSAGE TO CHECK ({lang}), part {part} of {parts}:
+{chunk}
+
+Task:
+1. Write your own strict literal gloss of the SOURCE PASSAGE, word by word in order, from the {lang} only.
+2. Quote the exact English sentences that render this passage.
+3. Compare them clause by clause with your gloss. Report only MAJOR meaning errors: flipped negation or comparison, wrong subject/agent/speaker, changed tense/mood/command, wrong number, an invented clause or image not in the source, a dropped clause, a mistranslated key word, a Scripture reference that does not match the verse quoted (Psalms are usually cited in LXX numbering with the Hebrew/English number in brackets). NOT defects (never list them): style or word order; near-synonyms; an untranslated particle (καί, δέ, δή, γάρ, οὖν, τε, γε, μέν; et, autem, enim, vero); a participle rendered as a finite verb or clause; idiomatic tense or aspect; bracketed editorial notes or conjectures; parenthetical Scripture apparatus; OCR noise. Use "uncertain" only when source corruption leaves the meaning undecidable, never for something you judge acceptable.
+Return ONE JSON object: {{"gloss": "...", "english": "...", "defects": [{{"check": "<one of: {checks}>", "english": "<exact English, 3-25 words>", "source": "<exact source words>", "problem": "<=25 words"}}], "uncertain": ["..."], "verdict": "pass" or "fail"}}"""
 QUOTE_MIN = 25
 
 
 class QuotaPause(Exception):
     pass
+
+
+def _env_file(name: str) -> str:
+    env = Path.home() / ".config/nv/env"
+    if env.exists():
+        for line in env.read_text().splitlines():
+            if line.strip().startswith(f"{name}="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return ""
 
 
 def now() -> str:
@@ -130,7 +190,88 @@ def call_gemini(model: str, messages: list[dict], key: str) -> dict:
                       "total_tokens": usage.get("totalTokenCount") or 0}}
 
 
-CALLERS = {"nim": call_nim, "gemini": call_gemini}
+def call_cf(model: str, messages: list[dict], key: str) -> dict:
+    # Thinking off, as scripts/llm_bakeoff.cf_profile sets for kimi-k2.6 / glm-5.2:
+    # with thinking on, kimi spends the whole budget reasoning and returns no answer.
+    body = {"messages": messages, "temperature": 0.2, "max_completion_tokens": 4000,
+            "chat_template_kwargs": {"enable_thinking": False}, "reasoning_effort": "none"}
+    status, hdr, data = _post(CF_URL.format(account=CF_ACCOUNT, model=model), body,
+                              {"Authorization": f"Bearer {key}"}, 600)
+    res = data.get("result") or {}
+    choice = (res.get("choices") or [{}])[0]
+    msg = choice.get("message") or {}
+    usage = res.get("usage") or {}
+    return {"http_status": status, "text": msg.get("content") or res.get("response") or "",
+            "response_model": res.get("model"), "response_id": res.get("id"),
+            "request_id": hdr.get("cf-ai-req-id") or hdr.get("cf-ray"),
+            "finish_reason": choice.get("finish_reason"),
+            "usage": {"prompt_tokens": usage.get("prompt_tokens") or 0,
+                      "completion_tokens": usage.get("completion_tokens") or 0,
+                      "total_tokens": usage.get("total_tokens") or 0,
+                      "neurons": usage.get("neurons") or 0}}
+
+
+CALLERS = {"nim": call_nim, "gemini": call_gemini, "cf": call_cf}
+
+
+def source_chunks(paragraphs, size: int = CHUNK_CHARS) -> list[str]:
+    """Sentence chunks of the source, each <= size chars where a sentence allows."""
+    text = " ".join(" ".join(str(p).split()) for p in paragraphs)
+    parts = re.split(r"(?<=[.;\u00b7\u0387:!?])\s+", text)
+    out, cur = [], ""
+    for part in parts:
+        if cur and len(cur) + len(part) + 1 > size:
+            out.append(cur)
+            cur = ""
+        cur = (cur + " " + part).strip()
+    if cur:
+        out.append(cur)
+    return out or [text]
+
+
+def build_aligned_messages(item: dict, chunk: str, part: int, parts: int) -> list[dict]:
+    src = para_text(item.get("source_text", []))
+    eng = para_text(item.get("english", []))
+    lang = "Latin" if re.search(r"\b(et|est|non|qui|quod|Deus)\b", " ".join(src)) else "Greek"
+    user = ALIGNED_USER.format(english="\n".join(eng), lang=lang, part=part, parts=parts, chunk=chunk,
+                               checks=", ".join(CHECKS))
+    return [{"role": "system", "content": ALIGNED_SYSTEM}, {"role": "user", "content": user}]
+
+
+def parse_aligned(text: str) -> dict | None:
+    """Aligned-prompt reply -> {verdict, checks, uncertainties, notes}. Any listed
+    defect makes the verdict fail whatever the model's own verdict field says."""
+    raw = text or ""
+    start, obj = raw.find("{"), None
+    while start != -1 and obj is None:
+        try:
+            obj, _ = json.JSONDecoder().raw_decode(raw[start:])
+        except ValueError:
+            start = raw.find("{", start + 1)
+    if not isinstance(obj, dict) or obj.get("verdict") not in ("pass", "fail"):
+        # Invalid JSON (often an unescaped quote inside the gloss). Read the verdict
+        # and the defect list by pattern; anything unreadable counts as a fail.
+        v = re.findall(r'"verdict"\s*:\s*"(pass|fail)"', raw)
+        empty = re.search(r'"defects"\s*:\s*\[\s*\]', raw)
+        if not v:
+            return None
+        if v[-1] == "pass" and empty:
+            obj = {"verdict": "pass", "defects": [], "uncertain": []}
+        else:
+            m = re.search(r'"defects"\s*:\s*(\[.*?\])\s*,\s*"(?:uncertain|verdict)"', raw, re.S)
+            obj = {"verdict": "fail", "uncertain": [],
+                   "defects": [{"check": "completeness", "english": "", "source": "",
+                                "problem": "unparsed defect list: " + (m.group(1) if m else raw[-600:])[:600]}]}
+    defects = [d for d in obj.get("defects") or [] if isinstance(d, dict)]
+    failed = {str(d.get("check")) for d in defects}
+    checks = {k: k not in failed for k in CHECKS}
+    if defects and all(checks.values()):
+        checks["completeness"] = False  # a defect with no recognised check name
+    notes = "; ".join(f"[{d.get('check')}] \"{d.get('english')}\" vs \"{d.get('source')}\": {d.get('problem')}"
+                      for d in defects)
+    return {"verdict": "fail" if defects else obj["verdict"], "checks": checks,
+            "uncertainties": [str(u) for u in obj.get("uncertain") or [] if str(u).strip()],
+            "notes": notes or ("no major defect; gloss: " + str(obj.get("gloss") or "")[:300])}
 
 
 def parse_verdict(text: str) -> dict | None:
@@ -150,9 +291,11 @@ def is_daily_cap(body: str) -> bool:
     return bool(re.search(r"per ?day|PerDay|daily", body, re.I))
 
 
-def run_lane_call(lane: str, model: str, item: dict, key: str, state: dict) -> dict:
+def run_lane_call(lane: str, model: str, item: dict, key: str, state: dict,
+                  messages: list[dict] | None = None, parser=None) -> dict:
     """One reviewed call (with one parse retry). Raises QuotaPause on 429/cap."""
-    messages = build_messages(item)
+    messages = messages or build_messages(item)
+    parser = parser or parse_verdict
     attempts = state.setdefault("attempts", {}).setdefault(lane, [])
     for parse_try in range(2):
         for backoff_try in range(2):
@@ -162,7 +305,7 @@ def run_lane_call(lane: str, model: str, item: dict, key: str, state: dict) -> d
             started = now()
             t0 = time.time()
             try:
-                res = CALLERS[lane](model, messages, key)
+                res = CALLERS[LANES[lane]["caller"]](model, messages, key)
                 state.setdefault("last", {})[lane] = time.time()
             except urllib.error.HTTPError as exc:
                 state.setdefault("last", {})[lane] = time.time()
@@ -174,7 +317,7 @@ def run_lane_call(lane: str, model: str, item: dict, key: str, state: dict) -> d
                         raise QuotaPause(f"{lane} HTTP 429 ({'daily cap' if is_daily_cap(body) else 'rate limit persisted after 60s backoff'}): {body[:200]}")
                     time.sleep(60)
                     continue
-                if exc.code in (500, 502, 503, 504) and not backoff_try:
+                if exc.code in (408, 500, 502, 503, 504) and not backoff_try:  # 408: Workers AI inference timeout
                     time.sleep(10)
                     continue
                 return {"error": f"HTTP {exc.code}: {body[:200]}"}
@@ -187,7 +330,7 @@ def run_lane_call(lane: str, model: str, item: dict, key: str, state: dict) -> d
                     continue
                 return {"error": f"{type(exc).__name__}: {exc}"[:200]}
             res["ms"] = int((time.time() - t0) * 1000)
-            verdict = parse_verdict(res["text"])
+            verdict = parser(res["text"])
             rec = {"section": item["section"], "source_sha256": item["source_sha256"],
                    "english_sha256": item["english_sha256"], "lane": lane, "model": model,
                    "response_model": res["response_model"], "response_id": res["response_id"],
@@ -207,10 +350,49 @@ def run_lane_call(lane: str, model: str, item: dict, key: str, state: dict) -> d
             rec.update({"verdict": verdict["verdict"],
                         "checks": {k: checks.get(k) is True for k in CHECKS},
                         "uncertainties": [str(u) for u in (verdict.get("uncertainties") or [])],
-                        "covered_source_paragraphs": verdict.get("covered_source_paragraphs"),
+                        "covered_source_paragraphs": verdict.get("covered_source_paragraphs")
+                        or list(range(1, len(item.get("source_text") or []) + 1)),
                         "notes": str(verdict.get("notes") or "")})
             return rec
     return {"error": "no call made"}
+
+
+def run_aligned_section(lane: str, model: str, item: dict, key: str, state: dict) -> dict:
+    """Aligned profile: one recorded call per source chunk, folded into one
+    section record. The section fails if any chunk fails; each chunk call keeps
+    its own response id for provenance and adjudication."""
+    chunks = source_chunks(item.get("source_text") or [])
+    subs = []
+    for i, chunk in enumerate(chunks, 1):
+        rec = run_lane_call(lane, model, item, key, state,
+                            messages=build_aligned_messages(item, chunk, i, len(chunks)), parser=parse_aligned)
+        if rec.get("error"):
+            return {**rec, "section": item["section"], "chunk": i}
+        rec["chunk"], rec["chunk_sha256"] = i, sha(chunk)
+        subs.append(rec)
+    fails = [r for r in subs if r["verdict"] != "pass" or r["uncertainties"]]
+    head = subs[0]
+    agg = {k: head[k] for k in ("section", "source_sha256", "english_sha256", "lane", "model",
+                                "response_model", "http_status", "started_at")}
+    agg.update({
+        "response_id": "+".join(str(r["response_id"]) for r in (fails or subs)),
+        "request_id": "+".join(str(r.get("request_id")) for r in (fails or subs)),
+        "finish_reason": ",".join(sorted({str(r["finish_reason"]) for r in subs})),
+        "finished_at": subs[-1]["finished_at"], "ms": sum(r["ms"] for r in subs),
+        "usage": {k: sum((r.get("usage") or {}).get(k, 0) for r in subs)
+                  for k in ("prompt_tokens", "completion_tokens", "total_tokens", "neurons")},
+        "raw_sha256": sha("".join(r["raw_sha256"] for r in subs)),
+        "verdict": "fail" if any(r["verdict"] != "pass" for r in subs) else "pass",
+        "checks": {k: all(r["checks"].get(k) for r in subs) for k in CHECKS},
+        "uncertainties": [u for r in subs for u in r["uncertainties"]],
+        "covered_source_paragraphs": list(range(1, len(item.get("source_text") or []) + 1)),
+        "notes": " | ".join(f"part {r['chunk']}/{len(subs)}: {r['notes']}" for r in (fails or subs[:1])),
+        "chunk_calls": [{k: r.get(k) for k in ("chunk", "chunk_sha256", "response_model", "response_id",
+                                                 "request_id", "http_status", "finish_reason", "started_at",
+                                                 "finished_at", "ms", "usage", "raw_sha256", "verdict",
+                                                 "uncertainties", "notes")} for r in subs],
+    })
+    return agg
 
 
 def quoted_spans(note: str, passage, n: int = QUOTE_MIN) -> list[str]:
@@ -283,8 +465,12 @@ def main(argv=None) -> int:
     ap.add_argument("--receipt-out", type=Path, required=True)
     ap.add_argument("--checkpoint", type=Path)
     ap.add_argument("--adjudications", type=Path, help="JSON {section: [{model, response_id, resolution, by}]}")
+    ap.add_argument("--profile", choices=sorted(PROFILES), default=DEFAULT_PROFILE,
+                    help=f"lane pair and prompt (default {DEFAULT_PROFILE}; 'legacy' = nemotron + gemini, independent_review prompt)")
     ap.add_argument("--nim-model", default=LANES["nim"]["model"])
     ap.add_argument("--gemini-model", default=LANES["gemini"]["model"])
+    ap.add_argument("--kimi-model", default=LANES["kimi"]["model"])
+    ap.add_argument("--glm-model", default=LANES["glm"]["model"])
     ap.add_argument("--scope-note", default="")
     ap.add_argument("--max-new-calls", type=int, default=0, help="Stop after N new calls (0 = no limit)")
     args = ap.parse_args(argv)
@@ -294,22 +480,27 @@ def main(argv=None) -> int:
     if not items:
         print("FAIL: packet has no selected sections")
         return 2
-    models = {"nim": args.nim_model, "gemini": args.gemini_model}
+    profile = PROFILES[args.profile]
+    lane_names = profile["lanes"]
+    every = {"nim": args.nim_model, "gemini": args.gemini_model, "kimi": args.kimi_model, "glm": args.glm_model}
+    models = {lane: every[lane] for lane in lane_names}
     for lane, model in models.items():
         if model_family(model) is None:
             print(f"FAIL: {lane} model {model} has no family in MODEL_FAMILY")
             return 2
-    if model_family(models["nim"]) == model_family(models["gemini"]):
+    if independent_family_count([(m, model_family(m)) for m in models.values()]) < 2:
         print("FAIL: both lanes are one family")
         return 2
-    keys = {"nim": os.environ.get("NV_API_KEY", "").strip(),
-            "gemini": os.environ.get("GEMINI_API_KEY", "").strip()}
+    keys = {lane: (os.environ.get(LANES[lane]["key"], "") or _env_file(LANES[lane]["key"])).strip()
+            for lane in lane_names}
     ckpt_path = args.checkpoint or args.receipt_out.with_suffix(".checkpoint.json")
-    state = {"packet_id": packet["packet_id"], "calls": {"nim": {}, "gemini": {}},
+    state = {"packet_id": packet["packet_id"], "calls": {lane: {} for lane in lane_names},
              "superseded": [], "attempts": {}}
     if ckpt_path.exists():
         prev = json.loads(ckpt_path.read_text())
-        state["calls"] = prev.get("calls", state["calls"])
+        for lane, calls in (prev.get("calls") or {}).items():
+            if lane in state["calls"]:
+                state["calls"][lane] = calls
         state["superseded"] = prev.get("superseded", [])
         state["attempts"] = prev.get("attempts", {})
         if prev.get("packet_id") != packet["packet_id"]:
@@ -325,7 +516,7 @@ def main(argv=None) -> int:
     try:
         for item in items:
             sid = item["section"]
-            for lane in ("nim", "gemini"):
+            for lane in lane_names:
                 have = state["calls"][lane].get(sid)
                 if have and (have.get("source_sha256"), have.get("english_sha256"), have.get("model")) == (
                         item["source_sha256"], item["english_sha256"], models[lane]) and not have.get("error"):
@@ -336,7 +527,10 @@ def main(argv=None) -> int:
                     raise QuotaPause(f"{lane} key missing in environment")
                 if args.max_new_calls and new_calls >= args.max_new_calls:
                     raise QuotaPause(f"--max-new-calls {args.max_new_calls} reached")
-                rec = run_lane_call(lane, models[lane], item, keys[lane], state)
+                if profile["prompt"] == "aligned":
+                    rec = run_aligned_section(lane, models[lane], item, keys[lane], state)
+                else:
+                    rec = run_lane_call(lane, models[lane], item, keys[lane], state)
                 new_calls += 1
                 state["calls"][lane][sid] = rec
                 save()
@@ -352,21 +546,29 @@ def main(argv=None) -> int:
     reviews, lanes_prov = [], []
     for item in items:
         sid = item["section"]
-        recs = [state["calls"][lane].get(sid) for lane in ("nim", "gemini")]
+        recs = [state["calls"][lane].get(sid) for lane in lane_names]
         bad = [r for r in recs if not r or r.get("error")]
         if bad:
             errors.append(f"{sid}: lane error {[r.get('error') if r else 'missing' for r in bad]}")
             continue
         reviews.append(combine(item, recs, adjud.get(sid, [])))
-    for lane in ("nim", "gemini"):
+    for lane in lane_names:
         calls = [state["calls"][lane][it["section"]] for it in items
                  if state["calls"][lane].get(it["section"]) and not state["calls"][lane][it["section"]].get("error")]
         att = state["attempts"].get(lane, [])
         tok = {k: sum((c.get("usage") or {}).get(k, 0) for c in att) for k in
-               ("prompt_tokens", "completion_tokens", "total_tokens")}
+               ("prompt_tokens", "completion_tokens", "total_tokens", "neurons")}
+        # Aligned sections fold one call per chunk; provenance lists every chunk call.
+        flat = []
+        for c in calls:
+            for sub in c.get("chunk_calls") or [None]:
+                flat.append(c if sub is None else {**c, **sub, "chunk_of": c["section"]})
+        calls = flat
         lanes_prov.append({
             "lane": lane, "provider": LANES[lane]["provider"], "endpoint": LANES[lane]["endpoint"],
             "tier": LANES[lane]["tier"], "spend_usd": 0, "model": models[lane],
+            "credit_usd": round(tok["neurons"] / 1000 * CF_USD_PER_1K_NEURONS, 4)
+            if LANES[lane]["caller"] == "cf" else 0,
             "family": model_family(models[lane]), "call_count": len(calls),
             "http_attempts": len(att),
             "failed_attempts": [a for a in att if a.get("error")],
@@ -379,14 +581,15 @@ def main(argv=None) -> int:
                 "section", "source_sha256", "english_sha256", "response_model", "response_id",
                 "request_id", "http_status", "finish_reason", "started_at", "finished_at", "ms",
                 "usage", "raw_sha256", "verdict", "checks", "uncertainties",
-                "model_quoted_latin", "model_quoted_english")} for c in calls],
+                "model_quoted_latin", "model_quoted_english", "chunk", "chunk_sha256")} for c in calls],
         })
     if errors:
         for e in errors:
             print("FAIL:", e)
         print("No receipt written; fix lane errors and rerun (checkpoint kept).")
         return 2
-    prompt_sha = sha(SYSTEM + "\n" + USER_TEMPLATE)
+    prompt_text = (ALIGNED_SYSTEM + "\n" + ALIGNED_USER) if profile["prompt"] == "aligned" else (SYSTEM + "\n" + USER_TEMPLATE)
+    prompt_sha = sha(prompt_text)
     fails = [r for r in reviews if r["verdict"] != "pass"]
     first = items[0]
     scope = None
@@ -396,19 +599,24 @@ def main(argv=None) -> int:
                  "uncertainties": [] if not fails else [f"{len(fails)} section(s) unresolved"],
                  "composed_by": "dual_family_review adapter (summary of per-section lane verdicts)",
                  "notes": (f"Scope: {len(items)} selected section(s) {', '.join(i['section'] for i in items)}; "
-                           f"each reviewed by {models['nim']} and {models['gemini']} with the "
-                           f"independent_review prompt. {args.scope_note} Opening Latin "
+                           f"each reviewed by {' and '.join(models.values())} with the "
+                           f"{'clause-aligned chunk' if profile['prompt'] == 'aligned' else 'independent_review'} prompt. "
+                           f"{args.scope_note} Opening Latin "
                            f"\u00ab{anchor(first['source_text'])}\u00bb English \u00ab{anchor(first['english'])}\u00bb.")}
     receipt = {
         "packet_id": packet["packet_id"],
-        "reviewer": f"dual_family_review: nemotron ({models['nim']}) + gemini ({models['gemini']})",
+        "reviewer": "dual_family_review: " + " + ".join(f"{model_family(m)} ({m})" for m in models.values()),
         "reviewer_note": "Display only. The two-family gate reads review_provenance.",
         "verdict": "pass" if not fails else "fail",
         "review_provenance": {
             "schema": PROVENANCE_SCHEMA, "adapter": "scripts/dual_family_review.py",
             "adapter_sha256": sha(Path(__file__).read_bytes()),
-            "prompt": {"source": "scripts/independent_review.py SYSTEM + USER_TEMPLATE", "sha256": prompt_sha},
+            "profile": args.profile,
+            "prompt": {"source": ("scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)"
+                                  if profile["prompt"] == "aligned" else
+                                  "scripts/independent_review.py SYSTEM + USER_TEMPLATE"), "sha256": prompt_sha},
             "packet_id": packet["packet_id"], "generated_at": now(), "spend_usd": 0,
+            "credit_usd": round(sum(lp.get("credit_usd", 0) for lp in lanes_prov), 4),
             "lanes": lanes_prov,
             "superseded_calls": [{k: s.get(k) for k in ("section", "model", "response_id", "verdict",
                                                          "english_sha256", "finished_at", "notes", "error")}
