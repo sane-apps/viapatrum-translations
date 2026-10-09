@@ -1,0 +1,30 @@
+{
+  "u06-open": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "140cfe2f8a5841ce865a04e3313435d6+a47aeabb3faf44489ddc04deaf813514+d21cbf992adc4098be94bd2c77e1d0a8+0252cc0cf3df41a3bd64645c7cf4e23a+ece1b9edf88446b7bfc515fbb673d8d7",
+      "by": "Densify (agent), direct clause check against the Greek, 2026-10-09",
+      "resolution": "Checked every flag against the Greek; none is a meaning error. Bible references in parentheses (Isaiah 1:16, 1 Corinthians 5:13 / Deuteronomy 17:7, Isaiah 49:8, 2 Corinthians 6:2, Romans 3:23, Hebrews 2:9) are identification apparatus for words the Greek quotes. Psalm numbers are the edition's own LXX fragment headings (Ps 98,5bc; 100,8; 101,3; 101,14), used throughout this work. 'For in the proper sense the Savior's descent also took place when he shone forth at the consummation of the ages' renders κυρίως γὰρ καὶ ἡ τοῦ σωτῆρος κάθοδος γέγονεν ἐπιλάμψαντος ἐπὶ συντελείᾳ τῶν αἰώνων (present in the source; the chunk split put it in the previous part). ἀπειπόντος … νόμου τοῦ διὰ Μωυσέως δοθέντος is a genitive absolute with the law as subject ('the law given through Moses also spoke against wickedness'), as rendered. καλεῖ σπέρμα καλῶν ὁμωνύμως keeps the homonymy (Matt 13:38: the good seed are the children of the kingdom). οὐδὲν μᾶλλον ἐγίνετο, ἢ εἰς αὔξησιν κακίας ἐπετρίβοντο: 'nothing more came of it: they were worn down into an increase of wickedness' keeps the sense that things only got worse. The rest (articular infinitives, μέν/δέ, ὤν, ἄν + optative, feminine agreement with ἐξουσία) are syntax and style, rendered correctly in sense.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "chatcmpl-bb7f1567-fc5a-4e02-88c9-d24a6b33a95c+da6bfc87c9804ac0b13a338ab4ff5da2",
+      "by": "Densify (agent), direct clause check against the Greek, 2026-10-09",
+      "resolution": "Not meaning errors. (Isaiah 1:16) and (1 Corinthians 5:13; cf. Deuteronomy 17:7) identify words the Greek quotes; Ἐξαιρεῖτε (imperative plural) is closest to 1 Cor 5:13 ἐξάρατε, with Deut 17:7 LXX as its source, so both are given. 'he attacks the falsely named gods, who are not holy' renders τῶν οὐχ ἁγίων κατατρέχει ψευδωνύμων θεῶν; 'not holy' is kept. GLM's previous run flagged 'as when … he says' for ὥσπερ θεὸς … δηλῶν Ὀρθρίζων φησὶν ἀποστέλλων; that was corrected before this gate to 'just as God, showing that he sends the prophets with zeal, says'. Chunks 3, 4 and 5 pass.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "scripture"
+      ]
+    }
+  ]
+}

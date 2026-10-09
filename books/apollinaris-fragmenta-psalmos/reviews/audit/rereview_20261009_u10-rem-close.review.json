@@ -1,0 +1,299 @@
+{
+  "packet_id": "9ae06c5f179499b2f6a7e36a4868ff6ac28951172e2bb2924d6df8b39229e3e8",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "16ee6c7091c1ec6e0f8d4c58b2d0fd845a1bad187d8c331b4343c095e2029bd3",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "9ae06c5f179499b2f6a7e36a4868ff6ac28951172e2bb2924d6df8b39229e3e8",
+    "generated_at": "2026-10-09T22:32:34+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0204,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0129,
+        "family": "kimi",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2572,
+          "completion_tokens": 3122,
+          "total_tokens": 5694,
+          "neurons": 1173.5455322265625
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2572,
+          "completion_tokens": 3122,
+          "total_tokens": 5694
+        },
+        "first_call_at": "2026-10-09T22:23:03+00:00",
+        "last_call_at": "2026-10-09T22:24:29+00:00",
+        "calls": [
+          {
+            "section": "u10-rem-close",
+            "source_sha256": "a376aefaff7619efc4de1678c89948d41522092c05c1789669fa0f1a0e1b50de",
+            "english_sha256": "4d98e0fcb065c9ee88ee069a53934e3fcc64b84bd211ce96f925b01db4ff67f8",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "c3d679a33efd45f4bb9809b5a948377d",
+            "request_id": "142b6223-7098-447f-85f7-9428aca57708",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T22:23:03+00:00",
+            "finished_at": "2026-10-09T22:23:58+00:00",
+            "ms": 54777,
+            "usage": {
+              "prompt_tokens": 1419,
+              "completion_tokens": 2050,
+              "total_tokens": 3469,
+              "neurons": 766.8845825195312
+            },
+            "raw_sha256": "048e806348ef5e3751cf95375c53220972879a6757030f69311ef7a193350178",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [
+              "Whether ἐφιδρῦσθαι should be 'is seated' or 'has been seated' (perfect infinitive aspect)",
+              "Whether τὰς...ὑποκεῖσθαι continues accusative+infinitive after τὸ or begins new construction"
+            ],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "1dcf3359d69215e39aa58a9c89394501e91ea9eb07b1fcbd423fe1c70878e175"
+          },
+          {
+            "section": "u10-rem-close",
+            "source_sha256": "a376aefaff7619efc4de1678c89948d41522092c05c1789669fa0f1a0e1b50de",
+            "english_sha256": "4d98e0fcb065c9ee88ee069a53934e3fcc64b84bd211ce96f925b01db4ff67f8",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "0a673159bf6e4f3b9438c26b200c618a",
+            "request_id": "3fa7c2e6-2419-4822-bab4-2bbd922ee901",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T22:24:01+00:00",
+            "finished_at": "2026-10-09T22:24:29+00:00",
+            "ms": 28175,
+            "usage": {
+              "prompt_tokens": 1153,
+              "completion_tokens": 1072,
+              "total_tokens": 2225,
+              "neurons": 406.66094970703125
+            },
+            "raw_sha256": "d67bc44a932b2c5462579aa76376a89c4672a3b0f500b16682e1f286c4c7cf4d",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "322dcf2807d53bafce9451f7d963a863c4f1c6f688c155bf00474ce4f4dfc6ba"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0075,
+        "family": "glm",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2693,
+          "completion_tokens": 930,
+          "total_tokens": 3623,
+          "neurons": 681.5818176269531
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2693,
+          "completion_tokens": 930,
+          "total_tokens": 3623
+        },
+        "first_call_at": "2026-10-09T22:24:29+00:00",
+        "last_call_at": "2026-10-09T22:24:38+00:00",
+        "calls": [
+          {
+            "section": "u10-rem-close",
+            "source_sha256": "a376aefaff7619efc4de1678c89948d41522092c05c1789669fa0f1a0e1b50de",
+            "english_sha256": "4d98e0fcb065c9ee88ee069a53934e3fcc64b84bd211ce96f925b01db4ff67f8",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-6268ae22-9a8f-43d8-a374-0d9ed43d4fea",
+            "request_id": "6268ae22-9a8f-43d8-a374-0d9ed43d4fea",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T22:24:29+00:00",
+            "finished_at": "2026-10-09T22:24:32+00:00",
+            "ms": 2536,
+            "usage": {
+              "prompt_tokens": 1495,
+              "completion_tokens": 481,
+              "total_tokens": 1976,
+              "neurons": 382.6727294921875
+            },
+            "raw_sha256": "f3ab24b567bcc91c82a746f29599235a86dc77bd1d3d3517c6b9cb3f0f061099",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "1dcf3359d69215e39aa58a9c89394501e91ea9eb07b1fcbd423fe1c70878e175"
+          },
+          {
+            "section": "u10-rem-close",
+            "source_sha256": "a376aefaff7619efc4de1678c89948d41522092c05c1789669fa0f1a0e1b50de",
+            "english_sha256": "4d98e0fcb065c9ee88ee069a53934e3fcc64b84bd211ce96f925b01db4ff67f8",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-e18d1cb5-5677-4feb-8a1d-8715b962d24d",
+            "request_id": "e18d1cb5-5677-4feb-8a1d-8715b962d24d",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T22:24:35+00:00",
+            "finished_at": "2026-10-09T22:24:38+00:00",
+            "ms": 2674,
+            "usage": {
+              "prompt_tokens": 1198,
+              "completion_tokens": 449,
+              "total_tokens": 1647,
+              "neurons": 298.9090881347656
+            },
+            "raw_sha256": "f61b4f347f4dc567854796aa42f93db5441aea4b0dbc2b5e2ffc8d22dd57967b",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "322dcf2807d53bafce9451f7d963a863c4f1c6f688c155bf00474ce4f4dfc6ba"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u10-rem-close",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, negation, agency, modality, scripture; uncertainties: 2; model notes: part 1/2: [agency] \"his understanding is deepest\" vs \"βαθυτάτη γὰρ οὖσα ἡ σύνεσις αὐτοῦ\": αὐτοῦ refers to God (genitive of possession), not 'his understanding' as reflexive; 'understanding of him' or 'his' = God's understanding; [completeness] \"you will consider that yourself\" vs \"καὶ σὺ αὐτὸς ἐπιστήσεις\": dropped 'also/and' (καί); 'that yourself' obscures 'you yourself' as subject; [modality] \"The angels would be those in the heavens\" vs \"Ἄγγελοι μὲν ἂν εἶεν οἱ ἐν οὐρανοῖς\": ἂν εἶεν is potential optative ('would be' as tentative identification), but 'would be' in English suggests hypothetical/unreal; better 'would be' as conjectural identification; [completeness] \"they are above the task of bringing messages\" vs \"ὑπὲρ τὸ διαγγέλλειν ἀνθρώποις οὖσαι\": dropped 'to human beings' (ἀνθρώποις); 'bringing messages' alone misses recipients; [negation] \"they have their blessedness only in their perpetual steadfastness with God\" vs \"ἐν δὲ μόνῃ τῇ παρὰ θεῷ βεβαιότητι διηνεκῇ τὸ μακάριον ἔχουσαι\": correctly rendered; 'only' properly translates μόνῃ; [agency] \"the name indicating that God is seated upon them\" vs \"ἐνδεικνυμένου τοῦ ὀνόματος τὸ ἐφιδρῦσθαι αὐταῖς τὸν θεόν\": genitive absolute 'the name indicating' correct, but 'is seated' for ἐφιδρῦσθαι (perfect infinitive 'to have been seated') loses perfect aspect of established seating; [completeness] \"and that they are subject to the divine majesty\" vs \"τὰς δὲ ὑποκεῖσθαι τῇ θείᾳ καὶ ὑπὲρ κτίσιν μεγαλειότητι\": τὰς = 'them' (feminine, referring to thrones), not 'they'; 'they are subject' misses that accusative τάς continues infinitive construction with ἐφιδρῦσθαι, both governed by τὸ; [completeness] \"they stand always in this\" vs \"ἐν τούτῳ δὴ καθεστηκυίας ἀεὶ\": καθεστηκυίας is perfect participle 'having been established/standing,' but 'they stand' misses that this continues accusative construction (τὰς...καθεστηκυίας), still describing thrones; [completeness] \"and have their fixed and stable state\" vs \"καὶ τὸ στάσιμον καὶ πεπηγὸς ἐχούσας\": ἐχούσας accusative continues construction; 'have their...state' adds 'state' not in Greek, which has 'the fixed and stable' as direct object of 'having'; [completeness] \"in receiving the divine glory\" vs \"ἐν τῇ τῆς θείας δόξης ὑποδοχῇ\": 'receiving' for ὑποδοχῇ ('reception') is acceptable; but 'the reception' is nominal, not verbal; [scripture] \"(Psalm 148:3-4)\" vs \"312 Ps 148,3.4\": apparatus shows 3.4 (LXX 148:3-4), but English brackets as 148:3-4; however source has *** φέγγη *** indicating lacuna, and English notes '[The text is damaged here: …]' which is editorial addition; [completeness] \"the lights [that shine] in heaven\" vs \"φέγγη *** οὐρανῷ\": editorial '[that shine]' added; φέγγη alone is 'lights' or 'brightnesses'; [completeness] \"illuminating the heaven itself, the highest one\" vs \"φωτίζοντα αὐτόν τε τὸν οὐρανὸν τὸν ἀνωτάτω\": αὐτόν τε = 'itself both' or 'both itself'; 'the heaven itself' misses τε 'both/and' linking to next item; [completeness] \"and also the water above this\" vs \"καὶ δὴ τού του δὲ ἀνώτερον ὕδωρ\": τούτου δὲ ἀνώτερον = 'above this,' but 'this' refers to firmament; 'also' for δή is weak; καὶ δὴ = 'and indeed'; [modality] \"he exhorts to praise God\" vs \"ὑμνεῖν τὸν θεὸν παρακελεύεται\": παρακελεύεται takes dative of person + infinitive; subject is David/psalmist; 'he exhorts' correct but missing object 'them' (the lights/water) | part 2/2: [source_identity] \"how worthy of all praise their Maker is\" vs \"τὸ πανύμνητον ἐμφανίζοντα τοῦ δημιουργήσαντος\": \"Maker\" obscures δημιουργήσαντος (one who crafted/designed); \"worthy of all praise\" is interpretive expansion of πανύμνητον (all-praiseworthy); [agency] \"he points to those from every nation\" vs \"ὑποδείκνυσι\": Subject is unclear: ὑποδείκνυσι lacks explicit subject, but context suggests the psalmist/scripture, not \"he\" as if a person; [modality] \"he shows that its following comes after the nations\" vs \"ἐπακολούθησιν αὐτοῦ δηλοῖ τὴν μετὰ τὰ ἔθνη\": Ambiguous whether ἐπακολούθησιν is \"following\" (act of following) or \"those who follow\"; \"its following\" is unclear; [scripture] \"Psalm 4:9 (4:8)\" vs \"Ἐν εἰρήνῃ [ἐπὶ τὸ αὐτὸ] κοιμηθήσομαι καὶ ὑπνώσω\": Citation should be Psalm 4:8 (4:9 Hebrew) per LXX numbering, but the verse quoted is actually Psalm 4:9 in LXX (4:8 Hebrew); the bracketed [ἐπὶ τὸ αὐτὸ] is present in some LXX manuscripts\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: part 2/2: [completeness] \"according to the verse, \"In peace I will lie down and sleep\"\" vs \"κατὰ τὸ Ἐν εἰρήνῃ [ἐπὶ τὸ αὐτὸ] κοιμηθήσομαι καὶ ὑπνώσω\": Drops [ἐπὶ τὸ αὐτὸ] 'together' from the quoted Psalm text.\nLatin quote (from model note, verified): «βαθυτάτη γὰρ οὖσα ἡ σύνεσις αὐτοῦ»\nEnglish quote (from model note, verified): «his understanding is deepest»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), direct clause check against the Greek, 2026-10-09): Checked every flag against the Greek; none is a meaning error. αὐτοῦ = God's understanding, which 'his' renders in context; καί/δή/τε particles, participle-to-finite renderings (καθεστηκυίας 'they stand', ἐχούσας 'have'), perfect aspect of ἐφιδρῦσθαι and 'Maker' for τοῦ δημιουργήσαντος are style. 'to human beings' is present ('bringing messages to human beings'). The lacuna is marked as such ('[The text is damaged here: …]', '[that shine]' bracketed as conjecture). Ps 4:9 (4:8) is right: LXX 4:9 = English 4:8, as the model itself concedes. Several flags are marked by the model itself as 'correctly rendered'.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), direct clause check against the Greek, 2026-10-09): [ἐπὶ τὸ αὐτὸ] is printed in square brackets by the edition (editorial deletion/doubt); the translation follows the unbracketed text. Not a meaning error.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ],
+          "uncertainties": [
+            "Whether ἐφιδρῦσθαι should be 'is seated' or 'has been seated' (perfect infinitive aspect)",
+            "Whether τὰς...ὑποκεῖσθαι continues accusative+infinitive after τὸ or begins new construction"
+          ],
+          "response_id": "c3d679a33efd45f4bb9809b5a948377d+0a673159bf6e4f3b9438c26b200c618a"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-e18d1cb5-5677-4feb-8a1d-8715b962d24d"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "c3d679a33efd45f4bb9809b5a948377d+0a673159bf6e4f3b9438c26b200c618a",
+          "by": "Densify (agent), direct clause check against the Greek, 2026-10-09",
+          "resolution": "Checked every flag against the Greek; none is a meaning error. αὐτοῦ = God's understanding, which 'his' renders in context; καί/δή/τε particles, participle-to-finite renderings (καθεστηκυίας 'they stand', ἐχούσας 'have'), perfect aspect of ἐφιδρῦσθαι and 'Maker' for τοῦ δημιουργήσαντος are style. 'to human beings' is present ('bringing messages to human beings'). The lacuna is marked as such ('[The text is damaged here: …]', '[that shine]' bracketed as conjecture). Ps 4:9 (4:8) is right: LXX 4:9 = English 4:8, as the model itself concedes. Several flags are marked by the model itself as 'correctly rendered'.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "chatcmpl-e18d1cb5-5677-4feb-8a1d-8715b962d24d",
+          "by": "Densify (agent), direct clause check against the Greek, 2026-10-09",
+          "resolution": "[ἐπὶ τὸ αὐτὸ] is printed in square brackets by the edition (editorial deletion/doubt); the translation follows the unbracketed text. Not a meaning error.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    }
+  ]
+}
