@@ -1,0 +1,62 @@
+{
+ "slug": "evagrius-de-magistris",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 17,
+   "moved_start": "∆ειλὸς στρατιώτης"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 89,
+   "moved_start": "Γύμνασον ἐν λογισμοῖς τοὺς ὁπλίτας, οἳ ἐμπείρως ἔχουσι πρὸς "
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 62,
+   "moved_start": "Τοὺς γῆν Αἴγυπτον φεύγοντας δι' ἐρήμου ὁδηγεῖ ὁδόν· οἶδε γὰρ"
+  }
+ ],
+ "brief_sha256": "b4f5b6b4f3aa6e34766aafdec0e01bb1b366514f2c5c5df63aadc43bbce226cd",
+ "followability": [
+  3,
+  4
+ ],
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-09T18:48:55Z",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "8f9f2d68b346d5e9adfd41e6557e201e54b06f2876b3a8a83f58e8a208a62bb7",
+   "english_sha256": "fb5b85d158b1b1c17cc08b1e5ce66cdf7be299bee9c736909d29b20621879225",
+   "justification": "reviews/justifications/u01-open.json"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "66191d0e57313a3b07fb6be11c35d8731bc7b5f74aeb091b38e89dccd5f3f32d",
+   "english_sha256": "0af0551c6472cf101e6043af136fdd684ed2004e5ea3442b6a7f6a0b2fa86f85",
+   "justification": "reviews/justifications/u01-rem-early.json"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "e2f6bedda0335633d0097e0d2b06592287dffe37ef34c2ba0d70f530a9e40a06",
+   "english_sha256": "b4f0aff01674294cea751fdb58e7c04ae06e7d7db5b2b09358c2a8e184dab292",
+   "justification": "reviews/justifications/u01-rem-mid.json"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "885f86da3be7d7d0eb6e2cba3475654cda290fa2686ac4f907a939eb77b8d5e6",
+   "english_sha256": "8ebf567ac71f571ac364187aa0cde7554be29df2e173e385c4f2c97bed5291f2",
+   "justification": "reviews/justifications/u01-rem-close.json"
+  }
+ ]
+}
