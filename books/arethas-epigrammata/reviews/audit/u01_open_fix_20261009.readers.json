@@ -1,0 +1,168 @@
+{
+ "final": [
+  {
+   "round": 1,
+   "lane": "nemotron",
+   "response_model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-d7e7dc2f-6c6b-475b-838e-aa11e98ca8cf",
+   "followability": 3,
+   "summary": "These epigrams mourn the early death of Anna, praising her virtue and lamenting her unfulfilled life as a young widow, while also commemorating Febronia’s compassion toward the poor, even in death, framing her acts of charity as a sign of her readiness for the divine bridal chamber of Christ.",
+   "findings": [
+    {
+     "class": "term_drift",
+     "section": "u01-open",
+     "quote": "the evil spirit, in the frenzy of his malice",
+     "variants": [
+      {
+       "text": "the evil spirit, in the frenzy of his malice",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "the souls of the great-hearted",
+       "sections": [
+        "u01-rem-close"
+       ]
+      }
+     ],
+     "why": "The term 'evil spirit' in u01-open refers to a malevolent force causing suffering, while 'souls of the great-hearted' in u01-rem-close refers to virtuous deceased persons. The word 'spirit' is used in opposing senses—malevolent vs. noble—creating confusion about whether it denotes a supernatural evil or a human soul.",
+     "fix": "Clarify that 'spirit' in u01-open refers to a demonic or destructive force, while in u01-rem-close it refers to the inner virtue or soul of the deceased.",
+     "model": "nemotron"
+    },
+    {
+     "class": "unexplained",
+     "section": "u01-rem-close",
+     "quote": "divine bridal chamber of Christ",
+     "why": "This phrase is a metaphor for heavenly union with Christ, rooted in Byzantine mystical theology (cf. Song of Songs interpreted as Christ and the soul), but it is not explained and may confuse readers unfamiliar with apophatic or bridal imagery in Eastern Christian tradition.",
+     "fix": "Add a brief note: 'a metaphor for the soul’s eternal union with God in heaven, drawn from biblical wedding imagery (e.g., Matthew 25:1-13; Revelation 19:7-9)'",
+     "model": "nemotron"
+    },
+    {
+     "class": "speaker",
+     "section": "u01-rem-close",
+     "quote": "Yet may the span of our life be sufficient to send her on to the divine bridal chamber of Christ",
+     "why": "The shift to 'our life' introduces an unclear communal voice—Is this the author? The mourners? The dead? The speaker shifts from third-person description of Febronia to a first-plural wish without clarification, making it unclear who is speaking or being addressed.",
+     "fix": "Specify the speaker: e.g., 'So let us pray that our lives may be long enough to witness her entrance...' or attribute the plea to the author or community.",
+     "model": "nemotron"
+    }
+   ],
+   "dropped": 0,
+   "at": "2026-10-09T20:36:54Z"
+  },
+  {
+   "round": 1,
+   "lane": "gemini",
+   "response_model": "gemini-3.5-flash-lite",
+   "response_id": "a1DJauDKHf2xqtsPmYKPqQQ",
+   "followability": 3,
+   "summary": "These are two Byzantine epigrams by Arethas of Caesarea, composed as epitaphs for women named Anna and Febronia. They mourn untimely deaths while praising the virtues, lineage, marital fidelity, and charity of the deceased.",
+   "findings": [
+    {
+     "class": "garbled",
+     "section": "u01-rem-early",
+     "quote": "and her steadfast love of husband against nature, which by the force of widowhood shakes what is unsteady, yet in the struggle defeated by stronger powers",
+     "why": "The syntax is convoluted and nearly incomprehensible as English, making the nature of her marital devotion unclear.",
+     "fix": "Simplify the clauses to clearly express her unwavering loyalty despite early widowhood.",
+     "model": "gemini"
+    },
+    {
+     "class": "suspect_meaning",
+     "section": "u01-rem-close",
+     "quote": "among the nether spirits of men",
+     "why": "Nether spirits usually implies underworld or pagan ghosts, which clashes with the Christian context of Febronia's soul.",
+     "fix": "Translate as among the departed or souls of the dead.",
+     "model": "gemini"
+    },
+    {
+     "class": "speaker",
+     "section": "u01-open",
+     "quote": "Even though swift doom quenched the lamp of my life",
+     "why": "The first section abruptly uses the first-person voice of the deceased Anna before shifting to third-person in subsequent sections.",
+     "fix": "Ensure the shift from first-person epitaph to third-person commentary is clearly marked.",
+     "model": "gemini"
+    }
+   ],
+   "dropped": 0,
+   "at": "2026-10-09T20:37:01Z"
+  },
+  {
+   "round": 2,
+   "lane": "nemotron",
+   "response_model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-33e49baf-7006-47b5-9455-5ae3ae2bb0f4",
+   "followability": 3,
+   "summary": "This work consists of two epigrams: one mourning Anna's early death and praising her virtues, and another remembering Febronia's compassion even in death. It argues that true virtue and compassion transcend death and are preserved through memory and divine reward.",
+   "findings": [
+    {
+     "class": "term_drift",
+     "section": "u01-open",
+     "quote": "swift doom quenched the lamp of my life and stripped my torch of its light",
+     "variants": [
+      {
+       "text": "swift doom quenched the lamp of my life and stripped my torch of its light",
+       "sections": [
+        "u01-open"
+       ]
+      },
+      {
+       "text": "took hold of the lamp of purity, keeping it bright with the oil of love for the poor",
+       "sections": [
+        "u01-rem-close"
+       ]
+      }
+     ],
+     "why": "The metaphor of the 'lamp' shifts from a symbol of life extinguished by doom (Anna) to a symbol of purity sustained by love for the poor (Febronia), risking confusion about whether the image refers to the same concept.",
+     "fix": "Clarify that the lamp metaphor is reused with different meanings: one for lost life, one for enduring virtue.",
+     "model": "nemotron"
+    },
+    {
+     "class": "unexplained",
+     "section": "u01-rem-close",
+     "quote": "divine bridal chamber of Christ",
+     "why": "The phrase 'bridal chamber of Christ' is a mystical Christian concept (from the Song of Songs, interpreted as union with God) not explained; a modern reader may not recognize it as a metaphor for heavenly salvation or union with Christ.",
+     "fix": "Add a brief note: 'i.e., the heavenly union with Christ as depicted in Christian mysticism'.",
+     "model": "nemotron"
+    },
+    {
+     "class": "speaker",
+     "section": "u01-open",
+     "quote": "Even though swift doom quenched the lamp of my life",
+     "why": "The speaker shifts abruptly from Anna (first person: 'my life', 'I never looked on') to third-person description of parents and brothers, making it unclear whose voice is being presented after the first lines.",
+     "fix": "Clarify that the opening is Anna’s voice from beyond the tomb, then the narrative shifts to observers.",
+     "model": "nemotron"
+    }
+   ],
+   "dropped": 0,
+   "at": "2026-10-09T20:37:09Z"
+  },
+  {
+   "round": 2,
+   "lane": "gemini",
+   "response_model": "gemini-3.5-flash-lite",
+   "response_id": "e1DJapLrDuKsz7IPuPqQ4Q0",
+   "followability": 3,
+   "summary": "This work consists of brief epigrams by Arethas of Caesarea commemorating two women, Anna and Febronia. They reflect on premature death, mourning families, and the lasting virtues of chastity, obedience, and charity.",
+   "findings": [
+    {
+     "class": "garbled",
+     "section": "u01-rem-early",
+     "quote": "and her steadfast love of husband against nature, which by the force of widowhood shakes what is unsteady",
+     "why": "The phrasing is overly dense and syntactically tangled, making the specific virtue of her marital fidelity hard to parse.",
+     "fix": "Smooth the syntax to clearly express her unwavering loyalty to her husband.",
+     "model": "gemini"
+    },
+    {
+     "class": "unexplained",
+     "section": "u01-rem-close",
+     "quote": "Febronia, even among the nether spirits of men, did something with tokens of her compassion",
+     "why": "It is unclear who Febronia is or why she is suddenly introduced alongside the deceased Anna.",
+     "fix": "Add a brief note identifying Febronia as another commemorated woman.",
+     "model": "gemini"
+    }
+   ],
+   "dropped": 0,
+   "at": "2026-10-09T20:37:16Z"
+  }
+ ]
+}

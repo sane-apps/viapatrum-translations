@@ -1,0 +1,189 @@
+{
+  "packet_id": "8de3333b780418c1fbfd80dfe80c10feafe3faa144249b55e484ac46875f28ab",
+  "reviewer": "dual_family_review: nemotron (nvidia/nemotron-3-super-120b-a12b) + gemini (gemini-3.5-flash-lite)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "59dd934d8fb84924462158dd02d56bf21a39049a369d868945b485176e086fb5",
+    "prompt": {
+      "source": "scripts/independent_review.py SYSTEM + USER_TEMPLATE",
+      "sha256": "37dc8d5f20f16bc75b470a2805e4b44f48a8d4bdcbc382d5e23bf72ce46db8fa"
+    },
+    "packet_id": "8de3333b780418c1fbfd80dfe80c10feafe3faa144249b55e484ac46875f28ab",
+    "generated_at": "2026-10-09T20:36:41+00:00",
+    "spend_usd": 0,
+    "lanes": [
+      {
+        "lane": "nim",
+        "provider": "nvidia-nim",
+        "endpoint": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "tier": "free (NIM API catalog)",
+        "spend_usd": 0,
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "family": "nemotron",
+        "call_count": 1,
+        "http_attempts": 1,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 927,
+          "completion_tokens": 168,
+          "total_tokens": 1095
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 927,
+          "completion_tokens": 168,
+          "total_tokens": 1095
+        },
+        "first_call_at": "2026-10-09T20:36:28+00:00",
+        "last_call_at": "2026-10-09T20:36:30+00:00",
+        "calls": [
+          {
+            "section": "u01-open",
+            "source_sha256": "2cf2a3f784523745b93a4be999fd689ee18389e49f6b10c8ea9841a59b170758",
+            "english_sha256": "5955dd95bb51519a1647f919cdc7e44a80509e05ec8e77d00d2ae4f64a741975",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-f592eab2-8158-4863-ad2a-5349cccf285b",
+            "request_id": "4f8eecf9-2939-4103-bcde-9dc2fa697da1",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T20:36:28+00:00",
+            "finished_at": "2026-10-09T20:36:30+00:00",
+            "ms": 1463,
+            "usage": {
+              "prompt_tokens": 927,
+              "completion_tokens": 168,
+              "total_tokens": 1095
+            },
+            "raw_sha256": "f2477bdf628449dd00fffed2ce46cf0c9f38bcf3b8714d0f04b314613c8d4ba5",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          }
+        ]
+      },
+      {
+        "lane": "gemini",
+        "provider": "google-ai-studio",
+        "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/<model>:generateContent",
+        "tier": "free (AI Studio free tier)",
+        "spend_usd": 0,
+        "model": "gemini-3.5-flash-lite",
+        "family": "gemini",
+        "call_count": 1,
+        "http_attempts": 1,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 792,
+          "completion_tokens": 98,
+          "total_tokens": 890
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 792,
+          "completion_tokens": 98,
+          "total_tokens": 890
+        },
+        "first_call_at": "2026-10-09T20:36:30+00:00",
+        "last_call_at": "2026-10-09T20:36:31+00:00",
+        "calls": [
+          {
+            "section": "u01-open",
+            "source_sha256": "2cf2a3f784523745b93a4be999fd689ee18389e49f6b10c8ea9841a59b170758",
+            "english_sha256": "5955dd95bb51519a1647f919cdc7e44a80509e05ec8e77d00d2ae4f64a741975",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "TlDJapS_Hunpz7IP9YqVuQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T20:36:30+00:00",
+            "finished_at": "2026-10-09T20:36:31+00:00",
+            "ms": 857,
+            "usage": {
+              "prompt_tokens": 792,
+              "completion_tokens": 98,
+              "total_tokens": 890
+            },
+            "raw_sha256": "1d6565f580a68ead75ec4f85848f8e07bce69ce5c9d5a2be9fd610f3c7baa2bb",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u01-open",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: The English adds the clause 'and I never looked on a lovely child at play' which has no basis in the source Greek text; the source states only 'οὐδ' ἐπὶ τέκνον ἴδον καλὸν ἀθυρόμενον' ('nor did I see a beautiful child playing'), not that she never looked on a lovely child at play as a general state.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately renders the Greek text of Arethas the Deacon's epigram, capturing every clause without omissions or additions.\nLatin quote (anchor copied from packet text): «Fragmenta in epistulam ad Romanos ΑΡΕΘΑ ∆ΙΑΚΟΝΟΥ Εἰ καί μοι λύχνον αἰῶνος ταχὺς ἔσβεσεν»\nEnglish quote (anchor copied from packet text): «Even though swift doom quenched the lamp of my life and stripped my torch of its light,»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. The model's own gloss of the Greek, οὐδ' ἐπὶ τέκνον ἴδον καλὸν ἀθυρόμενον ('nor did I see a beautiful child playing'), is what the English says: 'and I never looked on a lovely child at play' (ἐπὶ ... ἴδον = ἐπεῖδον in tmesis, 'look upon'; οὐδέ = 'nor/never'; καλὸν = 'lovely'; ἀθυρόμενον = 'at play'). Nothing is added. The same lane failed the old live English as 'a completely different passage' and failed earlier drafts of this one for unrelated, mutually inconsistent reasons (heading lines; ἤρκεσε...τελέσαι, now rendered 'still managed to make'). Gemini (gemini-3.5-flash-lite) passed this text on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-f592eab2-8158-4863-ad2a-5349cccf285b"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "TlDJapS_Hunpz7IP9YqVuQk"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-f592eab2-8158-4863-ad2a-5349cccf285b",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. The model's own gloss of the Greek, οὐδ' ἐπὶ τέκνον ἴδον καλὸν ἀθυρόμενον ('nor did I see a beautiful child playing'), is what the English says: 'and I never looked on a lovely child at play' (ἐπὶ ... ἴδον = ἐπεῖδον in tmesis, 'look upon'; οὐδέ = 'nor/never'; καλὸν = 'lovely'; ἀθυρόμενον = 'at play'). Nothing is added. The same lane failed the old live English as 'a completely different passage' and failed earlier drafts of this one for unrelated, mutually inconsistent reasons (heading lines; ἤρκεσε...τελέσαι, now rendered 'still managed to make'). Gemini (gemini-3.5-flash-lite) passed this text on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    }
+  ]
+}
