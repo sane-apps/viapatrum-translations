@@ -1,0 +1,56 @@
+{
+ "slug": "cyril-alexandria-fragmenta-numeros",
+ "pipeline": "work_pipeline",
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "checkers": [
+  "@cf/moonshotai/kimi-k2.6",
+  "@cf/zai-org/glm-5.2"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-rem-early",
+   "to": "frag-rem-mid",
+   "moved_chars": 64,
+   "moved_start": "Προσεκομίζοντο δὲ αὐτοὶ τὸ ἐπιδέκατον τῷ κατάρχοντι καὶ ἡγου"
+  },
+  {
+   "from": "frag-rem-mid",
+   "to": "frag-rem-close",
+   "moved_chars": 14,
+   "moved_start": "Ἐπιτήρησον ὅτι"
+  }
+ ],
+ "brief_sha256": "42d14266758d3036c6fc0887b1611f3c07db41afedc6d8deb91563b190080185",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-10-09T19:16:51Z",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "8ded9984cd05d7eefcdd038e2466c2b3834379c3e38a364e82bed98c1ddf3bb5",
+   "english_sha256": "496102a314bd7e1ea12a4b4a283dec10662bdad5159c00a9ea6c6f6e91da5aac",
+   "justification": "reviews/justifications/frag-open.json"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "f2274dd9a0944e48615d436c45cfadf11d828e283fb25bbf43002304747679cb",
+   "english_sha256": "7ed8bd9e5d22c2a4daabb417eb574c08d1f2acb04f10d28ab9ef0fc1a4ab2239",
+   "justification": "reviews/justifications/frag-rem-early.json"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "938d865d44a2cb9339a4b9207504b3e2a64bffb47dd7750028e38171018f2500",
+   "english_sha256": "3be891cded5e0b61258a737b9b3f920d6f47e5c7a27d5ac48affb0656b2c1769",
+   "justification": "reviews/justifications/frag-rem-mid.json"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "54fe6bc0a4d676291c88177b6930dcd69123137f103c180000b6b94bf940fe96",
+   "english_sha256": "f12893525cd2d8c7ffd85c73b4a9ff1ff0d189d700c21d6284cd5f2698d9b1df",
+   "justification": "reviews/justifications/frag-rem-close.json"
+  }
+ ]
+}
