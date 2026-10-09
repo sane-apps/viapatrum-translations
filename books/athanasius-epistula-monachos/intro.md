@@ -1,0 +1,5 @@
+Athanasius of Alexandria (c. 293/298–373) wrote this letter to monks practicing the monastic life, established in faith in God. He wrote between 358 and 360, at the urging of certain most sincere brothers, because some who held the views of Arius were going around the monasteries to deceive the simple.
+
+The occasion was a pastoral crisis. Some who openly held Arian views were visiting monasteries, and others who claimed not to hold those views nevertheless went down and prayed together with them. Athanasius warns the monks against both dangers, urging them to shun the openly impious and to guard against those who share communion with them.
+
+A reader will meet only Athanasius and the monks he addresses. He warns that if someone pretends to confess the true faith but is seen joining the impious, the monks should urge him to abandon that habitual association; if he agrees, treat him as a brother, but if he persists, reject him. The key term "stumbling block" carries the biblical sense of an occasion of sin for others.
