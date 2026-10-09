@@ -1,0 +1,291 @@
+{
+  "packet_id": "616647505f2f70acd9aa251ff28a68cef5d05e1c1a7546c34278a258888640fb",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "16ee6c7091c1ec6e0f8d4c58b2d0fd845a1bad187d8c331b4343c095e2029bd3",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "616647505f2f70acd9aa251ff28a68cef5d05e1c1a7546c34278a258888640fb",
+    "generated_at": "2026-10-09T22:32:34+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.019,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0089,
+        "family": "kimi",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 3067,
+          "completion_tokens": 1863,
+          "total_tokens": 4930,
+          "neurons": 813.6336669921875
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 3067,
+          "completion_tokens": 1863,
+          "total_tokens": 4930
+        },
+        "first_call_at": "2026-10-09T22:23:03+00:00",
+        "last_call_at": "2026-10-09T22:24:01+00:00",
+        "calls": [
+          {
+            "section": "u03-rem-early",
+            "source_sha256": "0b592595e4d3536a4723514cab42904203fd72751cc62b6c11ee10542967074f",
+            "english_sha256": "43e27eea80084e75315e6fa661cd9ab508b19a481a1c188a2755af7dd815f49a",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "507b8911bd144fc493c849f04597b92b",
+            "request_id": "cba6aa9f-b767-4c06-b10f-7900cdfd226e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T22:23:03+00:00",
+            "finished_at": "2026-10-09T22:23:32+00:00",
+            "ms": 28148,
+            "usage": {
+              "prompt_tokens": 1539,
+              "completion_tokens": 925,
+              "total_tokens": 2464,
+              "neurons": 377.35003662109375
+            },
+            "raw_sha256": "650d1e30c9b48d09c42c6dc2870b1cc515a1fb6aac1c758403e918ea17c16b55",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "dedd75817a92340944744b72712b86d285ee9dfdfe45099d2ad572df5fd6685c"
+          },
+          {
+            "section": "u03-rem-early",
+            "source_sha256": "0b592595e4d3536a4723514cab42904203fd72751cc62b6c11ee10542967074f",
+            "english_sha256": "43e27eea80084e75315e6fa661cd9ab508b19a481a1c188a2755af7dd815f49a",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "126ae94dff034d669ada73dfc4000fa6",
+            "request_id": "66abf107-bf87-48fb-990e-407686dfb356",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T22:23:35+00:00",
+            "finished_at": "2026-10-09T22:24:01+00:00",
+            "ms": 26835,
+            "usage": {
+              "prompt_tokens": 1528,
+              "completion_tokens": 938,
+              "total_tokens": 2466,
+              "neurons": 436.28363037109375
+            },
+            "raw_sha256": "ea4cfb34ad6701fd6e01d4dfb1fad02f672fa5c2e5ab51d7b00f98acbd8d4d43",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "86f6b8f739ccbf082630e7a99acc697bbb3bea5097775eec2f7d386e8d671987"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0101,
+        "family": "glm",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 3162,
+          "completion_tokens": 1297,
+          "total_tokens": 4459,
+          "neurons": 921.2363586425781
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 3162,
+          "completion_tokens": 1297,
+          "total_tokens": 4459
+        },
+        "first_call_at": "2026-10-09T22:24:01+00:00",
+        "last_call_at": "2026-10-09T22:24:18+00:00",
+        "calls": [
+          {
+            "section": "u03-rem-early",
+            "source_sha256": "0b592595e4d3536a4723514cab42904203fd72751cc62b6c11ee10542967074f",
+            "english_sha256": "43e27eea80084e75315e6fa661cd9ab508b19a481a1c188a2755af7dd815f49a",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "7594f17cedd84234b7099cc9ac594f37",
+            "request_id": "c4d40118-c7e2-4b73-819c-1793d25a949e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T22:24:01+00:00",
+            "finished_at": "2026-10-09T22:24:12+00:00",
+            "ms": 10339,
+            "usage": {
+              "prompt_tokens": 1603,
+              "completion_tokens": 636,
+              "total_tokens": 2239,
+              "neurons": 458.4181823730469
+            },
+            "raw_sha256": "5b9297956cd0606510c2759b1b5d32164fd9c50063d206f019c6b79be3df2b98",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "dedd75817a92340944744b72712b86d285ee9dfdfe45099d2ad572df5fd6685c"
+          },
+          {
+            "section": "u03-rem-early",
+            "source_sha256": "0b592595e4d3536a4723514cab42904203fd72751cc62b6c11ee10542967074f",
+            "english_sha256": "43e27eea80084e75315e6fa661cd9ab508b19a481a1c188a2755af7dd815f49a",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-64e0fb84-09b2-4b0d-8657-afee4e19db9c",
+            "request_id": "64e0fb84-09b2-4b0d-8657-afee4e19db9c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T22:24:15+00:00",
+            "finished_at": "2026-10-09T22:24:18+00:00",
+            "ms": 3241,
+            "usage": {
+              "prompt_tokens": 1559,
+              "completion_tokens": 661,
+              "total_tokens": 2220,
+              "neurons": 462.81817626953125
+            },
+            "raw_sha256": "0da5dbd0b1bd3c782dd8369b26dfa00ca929512dcfce57053c1766dbdfb09f02",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "86f6b8f739ccbf082630e7a99acc697bbb3bea5097775eec2f7d386e8d671987"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u03-rem-early",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, agency, modality, scripture; uncertainties: 0; model notes: part 1/2: [agency] \"he is wholly hardened and brazen—not driven, not following reason, not yielding\" vs \"οὐκ ἐλαθῆναι δύναται\": Source says 'cannot be hammered,' not 'not driven, not following reason, not yielding'; [scripture] \"Job 41:5 (41:13)\" vs \"Τίς ἀποκαλύψει πρόσωπον ἐνδύσεως αὐτοῦ\": Verse numbers 41:5/41:13 do not match; this is Job 41:4 LXX (41:12 MT/Hebrew); [scripture] \"Job 41:15-16 (41:23-24)\" vs \"Οὐ σαλευθήσεται... ἀνήλατος\": Verse numbers 41:15-16/41:23-24 do not match; this is Job 41:14-15 LXX (41:22-23 MT/Hebrew); [modality] \"it cannot be beaten out\" vs \"οὐκ ἐλαθῆναι δύναται\": Source is passive infinitive 'cannot be hammered,' not 'beaten out' (which suggests extraction) | part 2/2: [completeness] \"But if anyone is gold, following the word\" vs \"Εἰ δέ τις χρυσός ἐστιν ἀκολουθῶν τῷ λόγῳ\": Dropped entire preceding clause: 'he is wholly hardened and brazen—not driven, not following reason, not yielding. He is hard, unmalleable, unyielding. And if anyone has drawn power from the devil, he too has the heart of this dragon, unmalleable and not to be driven.'; [completeness] \"And the Lord blessed the latter days of Job more than the former\" vs \"Ὁ δὲ Κύριος εὐλόγησε τὰ ἔσχατα Ἰὼβ, ἢ τὰ ἔμπροσθεν\": Dropped 'ἢ τὰ ἔμπροσθεν' comparison marker 'than the before/former' is present but source has 'ἢ' (or/than) not 'more than'; [completeness] \"and his livestock were fourteen thousand sheep\" vs \"πρόβατα μύρια τετρακισχίλια\": 'fourteen thousand' misrenders μύρια τετρακισχίλια = 10,000 4,000 = 14,000; actually correct numerically but μύρια = 10,000 not 'fourteen'; [completeness] \"If the Lord gave Job double all that he had before, after the…\" vs \"Εἰ πάντα τὰ ὅσα ἦν ἔμπροσθεν τῷ Ἰὼβ, διπλᾶ δέδωκεν ὁ Κύριος, μετὰ τὴν\": Truncated mid-sentence; source incomplete but translation also incomplete, no defect in what exists\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: source_identity, completeness; uncertainties: 0; model notes: part 1/2: [completeness] \"he is wholly hardened and brazen—not driven, not following reason, not yielding. He is hard, unmalleable, unyielding.\" vs \"[not in source passage]\": These clauses have no corresponding Greek in the source passage; they are added interpretive expansion. | part 2/2: [source_identity] \"and his livestock were fourteen thousand sheep\" vs \"πρόβατα μύρια τετρακισχίλια\": μύρια τετρακισχίλια = 10,000 + 4,000 = 14,000; translation says 'fourteen thousand' which is correct arithmetic but μύρια means 'ten thousand' not 'fourteen'; [completeness] \"And the Lord blessed the latter days of Job more than the former\" vs \"Ὁ δὲ Κύριος εὐλόγησε τὰ ἔσχατα Ἰὼβ, ἢ τὰ ἔμπροσθεν\": Source has ἤ ('or') not 'more than'; reads 'blessed the last things of Job, or the former' — a disjunction not a comparison\nLatin quote (from model note, verified): «Τίς ἀποκαλύψει πρόσωπον ἐνδύσεως αὐτοῦ»\nEnglish quote (from model note, verified): «he is wholly hardened and brazen—not driven, not following reason, not yielding»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), direct clause check against the Greek, 2026-10-09): False positives. 'not driven, not following reason, not yielding … hard, unmalleable, unyielding' renders οὐκ ἐλαυνόμενος, οὐκ ἀκολουθῶν λόγῳ, οὐκ εἴκει· ὁ δὲ σκληρός ἐστιν, ἀνήλατος, ἀνένδοτος in the same sentence (the chunk split put them in the other part; chunk 2 then calls the same words 'dropped'). Job 41:5 and 41:15-16 are the Rahlfs LXX verse numbers for Τίς ἀποκαλύψει πρόσωπον ἐνδύσεως αὐτοῦ and ἡ καρδία αὐτοῦ πέπηγεν ὡς λίθος … ἄκμων ἀνήλατος (English 41:13, 41:23-24); the edition's ιδʹ ιεʹ is its own count. ἢ τὰ ἔμπροσθεν after εὐλόγησε is the LXX comparative 'more than the former' (issue #20). μύρια τετρακισχίλια = 14,000, as the model says.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), direct clause check against the Greek, 2026-10-09): False positives. The 'not in source' clauses translate οὐκ ἐλαυνόμενος, οὐκ ἀκολουθῶν λόγῳ, οὐκ εἴκει· ὁ δὲ σκληρός ἐστιν, ἀνήλατος, ἀνένδοτος (present in the source; split across chunks). ἢ in Ὁ δὲ Κύριος εὐλόγησε τὰ ἔσχατα Ἰὼβ, ἢ τὰ ἔμπροσθεν is comparative ('more than'), LXX Job 42:12 (issue #20). 14,000 = μύρια τετρακισχίλια.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "agency",
+            "modality",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "507b8911bd144fc493c849f04597b92b+126ae94dff034d669ada73dfc4000fa6"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "7594f17cedd84234b7099cc9ac594f37+chatcmpl-64e0fb84-09b2-4b0d-8657-afee4e19db9c"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "507b8911bd144fc493c849f04597b92b+126ae94dff034d669ada73dfc4000fa6",
+          "by": "Densify (agent), direct clause check against the Greek, 2026-10-09",
+          "resolution": "False positives. 'not driven, not following reason, not yielding … hard, unmalleable, unyielding' renders οὐκ ἐλαυνόμενος, οὐκ ἀκολουθῶν λόγῳ, οὐκ εἴκει· ὁ δὲ σκληρός ἐστιν, ἀνήλατος, ἀνένδοτος in the same sentence (the chunk split put them in the other part; chunk 2 then calls the same words 'dropped'). Job 41:5 and 41:15-16 are the Rahlfs LXX verse numbers for Τίς ἀποκαλύψει πρόσωπον ἐνδύσεως αὐτοῦ and ἡ καρδία αὐτοῦ πέπηγεν ὡς λίθος … ἄκμων ἀνήλατος (English 41:13, 41:23-24); the edition's ιδʹ ιεʹ is its own count. ἢ τὰ ἔμπροσθεν after εὐλόγησε is the LXX comparative 'more than the former' (issue #20). μύρια τετρακισχίλια = 14,000, as the model says.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "agency",
+            "modality",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "7594f17cedd84234b7099cc9ac594f37+chatcmpl-64e0fb84-09b2-4b0d-8657-afee4e19db9c",
+          "by": "Densify (agent), direct clause check against the Greek, 2026-10-09",
+          "resolution": "False positives. The 'not in source' clauses translate οὐκ ἐλαυνόμενος, οὐκ ἀκολουθῶν λόγῳ, οὐκ εἴκει· ὁ δὲ σκληρός ἐστιν, ἀνήλατος, ἀνένδοτος (present in the source; split across chunks). ἢ in Ὁ δὲ Κύριος εὐλόγησε τὰ ἔσχατα Ἰὼβ, ἢ τὰ ἔμπροσθεν is comparative ('more than'), LXX Job 42:12 (issue #20). 14,000 = μύρια τετρακισχίλια.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness"
+          ]
+        }
+      ]
+    }
+  ]
+}

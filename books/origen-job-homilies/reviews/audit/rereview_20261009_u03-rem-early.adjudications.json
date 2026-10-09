@@ -1,0 +1,28 @@
+{
+  "u03-rem-early": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "507b8911bd144fc493c849f04597b92b+126ae94dff034d669ada73dfc4000fa6",
+      "by": "Densify (agent), direct clause check against the Greek, 2026-10-09",
+      "resolution": "False positives. 'not driven, not following reason, not yielding … hard, unmalleable, unyielding' renders οὐκ ἐλαυνόμενος, οὐκ ἀκολουθῶν λόγῳ, οὐκ εἴκει· ὁ δὲ σκληρός ἐστιν, ἀνήλατος, ἀνένδοτος in the same sentence (the chunk split put them in the other part; chunk 2 then calls the same words 'dropped'). Job 41:5 and 41:15-16 are the Rahlfs LXX verse numbers for Τίς ἀποκαλύψει πρόσωπον ἐνδύσεως αὐτοῦ and ἡ καρδία αὐτοῦ πέπηγεν ὡς λίθος … ἄκμων ἀνήλατος (English 41:13, 41:23-24); the edition's ιδʹ ιεʹ is its own count. ἢ τὰ ἔμπροσθεν after εὐλόγησε is the LXX comparative 'more than the former' (issue #20). μύρια τετρακισχίλια = 14,000, as the model says.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "7594f17cedd84234b7099cc9ac594f37+chatcmpl-64e0fb84-09b2-4b0d-8657-afee4e19db9c",
+      "by": "Densify (agent), direct clause check against the Greek, 2026-10-09",
+      "resolution": "False positives. The 'not in source' clauses translate οὐκ ἐλαυνόμενος, οὐκ ἀκολουθῶν λόγῳ, οὐκ εἴκει· ὁ δὲ σκληρός ἐστιν, ἀνήλατος, ἀνένδοτος (present in the source; split across chunks). ἢ in Ὁ δὲ Κύριος εὐλόγησε τὰ ἔσχατα Ἰὼβ, ἢ τὰ ἔμπροσθεν is comparative ('more than'), LXX Job 42:12 (issue #20). 14,000 = μύρια τετρακισχίλια.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness"
+      ]
+    }
+  ]
+}
