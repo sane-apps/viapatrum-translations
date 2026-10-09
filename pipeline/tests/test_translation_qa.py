@@ -9,8 +9,28 @@ from pipeline.verify_translation_qa import (
     SEMANTIC_CHECKS, check_excerpts, check_justifications, digest, file_digest,
     indexed, load_rows, make_audit_packet, reference_overlap_errors,
     validate_audit_receipt, validate_semantic_review, reviewed_section_errors,
+    independent_family_count, model_family, PROVENANCE_SCHEMA,
     main as qa_main,
 )
+
+NIM = "nvidia/nemotron-3-super-120b-a12b"
+GEM = "gemini-3.5-flash-lite"
+
+
+def provenance(packet, lanes=((NIM, "nemotron"), (GEM, "gemini")), **call_over):
+    """Structured provenance as scripts/dual_family_review.py writes it."""
+    out = []
+    for model, family in lanes:
+        calls = [{"section": s["section"], "source_sha256": s["source_sha256"],
+                  "english_sha256": s["english_sha256"], "response_model": model,
+                  "response_id": f"resp-{model}-{s['section']}",
+                  "started_at": "2026-10-09T18:00:00Z", "finished_at": "2026-10-09T18:00:05Z",
+                  "verdict": "pass", "uncertainties": [],
+                  "usage": {"prompt_tokens": 900, "completion_tokens": 200}, **call_over}
+                 for s in packet["sections"]]
+        out.append({"provider": "test", "model": model, "family": family,
+                    "call_count": len(calls), "calls": calls})
+    return {"schema": PROVENANCE_SCHEMA, "lanes": out}
 
 
 class TranslationQATests(unittest.TestCase):
@@ -56,6 +76,7 @@ class TranslationQATests(unittest.TestCase):
             english = " ".join(section["english"])
             return f"Source: {source} English: {english}"
         return {"packet_id": packet["packet_id"], "reviewer": "kimi-k2.6+glm-5.2",
+                "review_provenance": provenance(packet),
                 "verdict": "pass", "reviews": [{
                     "section": s["section"], "verdict": "pass",
                     "checks": {key: True for key in SEMANTIC_CHECKS},
@@ -203,12 +224,90 @@ class TranslationQATests(unittest.TestCase):
         self.assertTrue(any("do not quote" in e for e in validate_audit_receipt(self.packet(), bare)))
         lone = self.receipt(self.packet())
         lone["reviewer"] = "cursor-held-eeng-20260924 (Mini)"
+        del lone["review_provenance"]
         self.assertTrue(any("two model families" in e for e in validate_audit_receipt(self.packet(), lone)))
         same = self.receipt(self.packet())
-        same["reviewer"] = "qwen3-30b+qwen3.8-27b"
+        same["review_provenance"] = provenance(self.packet(), lanes=(
+            ("@cf/qwen/qwen3-30b-a3b-fp8", "qwen"), ("@cf/qwen/qwen3.8-27b", "qwen")))
         self.assertTrue(any("two model families" in e for e in validate_audit_receipt(self.packet(), same)))
         self.assertTrue(validate_audit_receipt({"schema": "translation-audit-v1",
                                               "raw_source_paths": ["x"], "files": []}, {}))
+
+    def test_free_text_reviewer_is_not_family_evidence(self):
+        packet = self.packet()
+        receipt = self.receipt(packet)
+        del receipt["review_provenance"]
+        receipt["reviewer"] = "nemotron + gemini + kimi + glm (typed, no calls)"
+        errors = validate_audit_receipt(packet, receipt)
+        self.assertTrue(any("two model families" in e and "provenance" in e for e in errors), errors)
+        receipt["review_provenance"] = {"schema": "free-text", "lanes": []}
+        self.assertTrue(any("provenance missing" in e for e in validate_audit_receipt(packet, receipt)))
+
+    def test_mistral_nemotron_is_one_family(self):
+        self.assertEqual(model_family("mistralai/mistral-nemotron"), "nemotron")
+        self.assertEqual(independent_family_count([("mistralai/mistral-nemotron", "nemotron")]), 1)
+        self.assertEqual(independent_family_count([("mistralai/mistral-nemotron", "nemotron"),
+                                                   (NIM, "nemotron")]), 1)
+        # Shared Mistral lineage: cannot pair with a mistral lane either.
+        self.assertEqual(independent_family_count([("mistralai/mistral-nemotron", "nemotron"),
+                                                   ("mistral-large", "mistral")]), 1)
+        packet = self.packet()
+        receipt = self.receipt(packet)
+        receipt["reviewer"] = "mistral-nemotron"  # the old substring rule counted two here
+        receipt["review_provenance"] = provenance(packet, lanes=(("mistralai/mistral-nemotron", "nemotron"),))
+        self.assertTrue(any("fewer than two model families" in e
+                            for e in validate_audit_receipt(packet, receipt)))
+        receipt["review_provenance"] = provenance(packet, lanes=(
+            ("mistralai/mistral-nemotron", "nemotron"), (NIM, "nemotron")))
+        self.assertTrue(any("fewer than two model families" in e
+                            for e in validate_audit_receipt(packet, receipt)))
+        receipt["review_provenance"] = provenance(packet, lanes=(
+            ("mistralai/mistral-nemotron", "nemotron"), (GEM, "gemini")))
+        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+
+    def test_two_real_families_with_calls_pass_and_one_family_fails(self):
+        packet = self.packet()
+        receipt = self.receipt(packet)
+        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+        single = self.receipt(packet)
+        single["review_provenance"] = provenance(packet, lanes=((GEM, "gemini"),))
+        self.assertTrue(any("fewer than two model families" in e
+                            for e in validate_audit_receipt(packet, single)))
+        empty = self.receipt(packet)
+        empty["review_provenance"]["lanes"][1]["calls"] = []
+        empty["review_provenance"]["lanes"][1]["call_count"] = 0
+        self.assertTrue(any("no recorded calls" in e for e in validate_audit_receipt(packet, empty)))
+
+    def test_provenance_calls_are_bound_and_checked(self):
+        packet = self.packet()
+        cases = {
+            "unknown model id": provenance(packet, lanes=((NIM, "nemotron"), ("made-up-7b", "gemini"))),
+            "declared family": provenance(packet, lanes=((NIM, "nemotron"), (GEM, "qwen"))),
+            "hash mismatch": provenance(packet, english_sha256="0" * 64),
+            "response model": provenance(packet, response_model="@cf/qwen/qwen3-30b-a3b-fp8"),
+            "response/request id": provenance(packet, response_id=""),
+            "no adjudication": provenance(packet, verdict="fail"),
+        }
+        for needle, prov in cases.items():
+            receipt = self.receipt(packet)
+            receipt["review_provenance"] = prov
+            errors = validate_audit_receipt(packet, receipt)
+            self.assertTrue(any(needle in e for e in errors), (needle, errors))
+        # A surfaced model fail with a recorded adjudication is visible, not hidden.
+        receipt = self.receipt(packet)
+        receipt["review_provenance"] = provenance(packet)
+        lane = receipt["review_provenance"]["lanes"][1]
+        lane["calls"][0]["verdict"] = "fail"
+        first = lane["calls"][0]["section"]
+        review = next(r for r in receipt["reviews"] if r["section"] == first)
+        review["adjudications"] = [{"model": GEM, "resolution": "False positive: quoted span is rendered."}]
+        self.assertEqual(validate_audit_receipt(packet, receipt), [])
+
+    def test_missing_quotes_fail_even_with_provenance(self):
+        packet = self.packet()
+        receipt = self.receipt(packet)
+        receipt["reviews"][0]["notes"] = "nemotron pass; gemini pass. Looks faithful."
+        self.assertTrue(any("do not quote" in e for e in validate_audit_receipt(packet, receipt)))
 
     def test_current_english_and_raw_hash_required(self):
         j = self.justification()

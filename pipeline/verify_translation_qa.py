@@ -171,7 +171,10 @@ def _quote_errors(notes, sources, englishes) -> list[str]:
 
 
 def reviewer_model_families(reviewer: str) -> list[str]:
-    """Family names found in a reviewer string, each family once."""
+    """Family names found in a reviewer string, each family once.
+
+    Display/diagnostic only. validate_audit_receipt never trusts this; it
+    reads provenance_family_errors (structured model ids + call metadata)."""
     name = str(reviewer or "").casefold()
     found = []
     for family in _MODEL_FAMILIES:
@@ -179,6 +182,163 @@ def reviewer_model_families(reviewer: str) -> list[str]:
             found.append(family)
             name = name.replace(family, " ")
     return found
+
+
+# Reviewer family identity (2026-10-09). The two-family rule reads the
+# structured provenance a review adapter records (scripts/dual_family_review.py):
+# exact model ids plus per-call metadata, bound to the reviewed text hashes.
+# The free-text "reviewer" string is a display field only; typing model names
+# into it proves nothing. Every receipt needs provenance: no corpus receipt
+# passed the free-text two-family rule either (0 of 738 on 2026-10-09), so no
+# historical approval is withdrawn.
+PROVENANCE_SCHEMA = "review-provenance-v1"
+
+# Exact model id -> exactly ONE family. Unknown ids fail closed; add researched
+# identities here, never substring guesses.
+# mistralai/mistral-nemotron is ONE family, "nemotron" (NVIDIA Nemotron
+# post-training on a Mistral base). MODEL_RELATED records the shared lineage
+# so it can never pair with a nemotron OR a mistral lane to make two families.
+MODEL_FAMILY = {
+    "nvidia/nemotron-3-super-120b-a12b": "nemotron",
+    "nvidia/nemotron-3-ultra-550b-a55b": "nemotron",
+    "mistralai/mistral-nemotron": "nemotron",
+    "gemini-3.5-flash-lite": "gemini",
+    "gemini-3.1-flash-lite": "gemini",
+    "gemini-flash-lite-latest": "gemini",
+    "gemini-2.5-flash-lite": "gemini",
+    "gemini-2.5-flash": "gemini",
+    "@cf/google/gemma-4-26b-a4b-it": "gemma",
+    "@cf/meta/llama-3.3-70b-instruct-fp8-fast": "llama",
+    "@cf/meta/llama-3.1-8b-instruct-fp8-fast": "llama",
+    "@cf/qwen/qwen3-30b-a3b-fp8": "qwen",
+    "@cf/qwen/qwen3.8-27b": "qwen",
+    "@cf/deepseek-ai/deepseek-v4-pro-0813": "deepseek",
+    "@cf/moonshotai/kimi-k2.6": "kimi",
+    "@cf/zai-org/glm-5.2": "glm",
+    "@cf/zai-org/glm-4.7-flash": "glm",
+    "@cf/openai/gpt-oss-20b": "gpt-oss",
+}
+MODEL_RELATED = {"mistralai/mistral-nemotron": frozenset({"mistral"})}
+
+
+def model_family(model_id) -> str | None:
+    """Family for an exact model id (case-insensitive), else None."""
+    key = str(model_id or "").strip().casefold()
+    return next((fam for mid, fam in MODEL_FAMILY.items() if mid.casefold() == key), None)
+
+
+def _response_family(response_model) -> str | None:
+    """Family of the model id the API echoed. Exact id, or a known id plus a
+    version suffix (e.g. gemini-3.5-flash-lite-001)."""
+    name = str(response_model or "").strip().casefold()
+    if name.startswith("models/"):
+        name = name[len("models/"):]
+    fam = model_family(name)
+    if fam:
+        return fam
+    for mid in sorted(MODEL_FAMILY, key=len, reverse=True):
+        if name.startswith(mid.casefold() + "-") or name.startswith(mid.casefold() + "@"):
+            return MODEL_FAMILY[mid]
+    return None
+
+
+def independent_family_count(lanes) -> int:
+    """Count independent families among (model_id, family) lanes.
+
+    Lanes with the same family, or whose recorded lineage (MODEL_RELATED)
+    touches the other lane's family, merge into one."""
+    nodes = []
+    for model_id, family in lanes:
+        related = MODEL_RELATED.get(str(model_id or "").strip().casefold(), frozenset())
+        nodes.append(({family}, set(related) | {family}))
+    groups: list[set[str]] = []
+    for fams, touch in nodes:
+        merged = set(touch)
+        keep = []
+        for g in groups:
+            if g & merged:
+                merged |= g
+            else:
+                keep.append(g)
+        groups = keep + [merged]
+    return len(groups)
+
+
+def provenance_family_errors(receipt: dict, sections) -> list[str]:
+    """Two-family rule from structured provenance, bound to the reviewed text.
+
+    sections: the packet's selected section items (section, source_sha256,
+    english_sha256). Each call must name its section and those hashes, so a
+    call made on other text cannot stand in for this review.
+    """
+    prov = receipt.get("review_provenance")
+    if not isinstance(prov, dict) or prov.get("schema") != PROVENANCE_SCHEMA:
+        return ["reviewer provenance missing: two model families must come from "
+                "recorded model calls, not the free-text reviewer"]
+    lanes = prov.get("lanes")
+    if not isinstance(lanes, list) or not lanes or any(not isinstance(x, dict) for x in lanes):
+        return ["reviewer provenance has no lanes: cannot establish two model families"]
+    by_section = {s.get("section"): s for s in sections}
+    reviews = {r.get("section"): r for r in receipt.get("reviews") or [] if isinstance(r, dict)}
+    errors, lane_ids, per_section = [], [], {}
+    for i, lane in enumerate(lanes):
+        model = lane.get("model")
+        family = model_family(model)
+        if family is None:
+            errors.append(f"provenance lane {i}: unknown model id {model!r} has no family")
+            continue
+        if lane.get("family") != family:
+            errors.append(f"provenance lane {i}: declared family {lane.get('family')!r} "
+                          f"is not {family!r} for {model}")
+        calls = lane.get("calls")
+        if not isinstance(calls, list) or not calls:
+            errors.append(f"provenance lane {i} ({model}): no recorded calls")
+            continue
+        if lane.get("call_count") != len(calls):
+            errors.append(f"provenance lane {i} ({model}): call_count does not match calls")
+        good = 0
+        for call in calls:
+            if not isinstance(call, dict):
+                errors.append(f"provenance lane {i}: call must be an object")
+                continue
+            sid = call.get("section")
+            item = by_section.get(sid)
+            if item is None:
+                errors.append(f"provenance lane {i}: call for unselected section {sid!r}")
+                continue
+            if (call.get("source_sha256") != item.get("source_sha256") or
+                    call.get("english_sha256") != item.get("english_sha256")):
+                errors.append(f"{sid}: {model} call reviewed other text (hash mismatch)")
+                continue
+            if _response_family(call.get("response_model")) != family:
+                errors.append(f"{sid}: {model} call response model "
+                              f"{call.get('response_model')!r} is not family {family}")
+                continue
+            if not (call.get("response_id") or call.get("request_id")) or not call.get("finished_at"):
+                errors.append(f"{sid}: {model} call lacks response/request id or timestamp")
+                continue
+            if call.get("verdict") not in ("pass", "fail"):
+                errors.append(f"{sid}: {model} call has no recorded model verdict")
+                continue
+            if call["verdict"] != "pass" or call.get("uncertainties"):
+                adj = [a for a in (reviews.get(sid, {}).get("adjudications") or [])
+                       if isinstance(a, dict) and a.get("model") == model
+                       and str(a.get("resolution") or "").strip()]
+                if not adj:
+                    errors.append(f"{sid}: {model} returned {call['verdict']}"
+                                  f"{' with uncertainties' if call.get('uncertainties') else ''}"
+                                  " and no adjudication is recorded")
+                    continue
+            good += 1
+            per_section.setdefault(sid, []).append((model, family))
+        if good:
+            lane_ids.append((model, family))
+    if independent_family_count(lane_ids) < 2:
+        errors.append("reviewer provenance shows fewer than two model families with recorded calls")
+    for sid in by_section:
+        if independent_family_count(per_section.get(sid, [])) < 2:
+            errors.append(f"{sid}: not reviewed by two model families in provenance")
+    return errors
 
 
 def validate_semantic_review(review: dict, expected_source_paragraphs=None, *,
@@ -405,11 +565,12 @@ def validate_audit_receipt(packet: dict, receipt: dict) -> list[str]:
         return errors + ["receipt must be an object"]
     if receipt.get("packet_id") != packet.get("packet_id"):
         errors.append("receipt belongs to another packet")
+    sections = packet.get("sections") or []
     if receipt.get("verdict") != "pass" or not str(receipt.get("reviewer") or "").strip():
         errors.append("missing passing verdict or reviewer")
-    elif len(reviewer_model_families(receipt.get("reviewer"))) < 2:
-        errors.append("reviewer is not two model families")
-    sections = packet.get("sections") or []
+    else:
+        # Families come from structured provenance only (never the reviewer string).
+        errors += provenance_family_errors(receipt, sections)
     if packet.get("publication_scope") is not None:
         errors += ["scope review: " + e for e in validate_semantic_review(
             receipt.get("scope_review"),
