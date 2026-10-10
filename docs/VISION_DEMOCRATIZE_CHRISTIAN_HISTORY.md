@@ -36,7 +36,7 @@ Today: 326 live works, 224 with read-along audio; 101 without (77 over the drain
 A. Every live work narrated (site player)
  1. build_audio.py MAX_WORDS=5000 is stale: its reason ("Pages refuses > 25 MiB") ended when audio moved to R2 on 2026-10-03, and the viapatrum-narrator Worker already encodes in ~20-min segments with an R2 multipart upload. Raise it (no hard cap; split only past YouTube's 12 h).
  2. _work_words(site slug) returns (0, scaffold) for split/renamed works; resolve through build_site.work_book.
- 3. Decided 2026-10-07: every audiobook is re-voiced into the current voice (Aura-2 orion; Scripture quotations in arcas). The drain does it under a daily dollar cap (REVOICE_USD_PER_DAY, default $150). The owner approved the spend.
+ 3. SUPERSEDED 2026-10-09 by the owner's Audiobook voice rule (`docs/SOP.md`): one voice per work, different works may differ, no site-wide voice, so do not re-voice a consistent work just to match the current default. Original note: Decided 2026-10-07: every audiobook is re-voiced into the current voice (Aura-2 orion; Scripture quotations in arcas). The drain does it under a daily dollar cap (REVOICE_USD_PER_DAY, default $150). The owner approved the spend.
  Cost: Aura-2 $0.03 / 1k characters (CF model page, 2026-10-05) -> the missing ~1M words about $150-200, on the CF grant.
 B. Downloadable audiobook per work
  master_audiobook.py already makes ACX-spec chapters + .m4b with cover (Wesley, Origen On Prayer). Roll out: one .m4b per work to R2, a Download button on the work page, a library page. Needs per-work 3000 px covers (template, not hand art) and the AI-narration disclosure in credits.

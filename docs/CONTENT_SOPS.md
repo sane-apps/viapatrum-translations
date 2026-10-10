@@ -42,7 +42,11 @@ would have caught it — this file grows by incident.
 ## 3. Audiobooks (downloadable/paid editions)
 
 - Source of truth: `outputs/audio/<work>/` (manifest + per-passage mp3s).
-- Required parts: ONE voice across all chapters; ONE container format;
+- Voice: see `docs/SOP.md` "Audiobook voice rule" (owner 2026-10-09): ONE
+  narrator voice per work across all its chapters and parts; different works
+  may use different voices; never one site-wide voice; pick per work by best
+  quality, then speed, then cost; the voice is recorded in the work's manifest.
+- Required parts: ONE voice across all chapters of that work; ONE container format;
   ACX-grade mastering (44.1 kHz, CBR 192k+, RMS -23..-18 dB, peaks at/below
   -3 dB, noise floor below -60 dB, head/tail room tone, one file per
   chapter under 120 min); opening + closing credit files; square cover

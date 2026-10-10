@@ -2,6 +2,19 @@
 
 Distilled from the Julian of Eclanum production run (Codex → Cursor, 2026-09-09). Follow this for every new book. Do not invent a parallel process.
 
+## Audiobook voice rule (owner, 2026-10-09)
+
+Owner's words: "each work should have one voice. It does NOT matter if each separate work has a different voice. internal consistency per book makes sense. Tying ourselves to one voice for the entire website makes no sense. whatever voice is best, fastest, cheapest etc."
+
+- **One narrator voice per work.** Every section, chapter and part of a work (site read-along audio, downloadable audiobook, YouTube read-along) uses the same narrator voice from start to finish. Never mix narrators inside one work.
+- **Different works may use different voices.** That is fine and expected.
+- **Never require one site-wide voice.** Do not re-voice a finished, internally consistent work just to match other works or a newer default.
+- **Choose per work, in this order:** best quality, then fastest, then cheapest. Candidates include Muse (prepaid through Nov 2, 2026; runs only in the Mini's logged-in GUI session), Cloudflare Workers AI Aura-2, and local Kokoro.
+- **Record the choice.** The chosen voice is written into the work's audio metadata (`outputs/audio/<work>/manifest.json` → `"voice"`, and every passage's `"voice"`). Re-runs, fixes and new sections read that recorded voice and reuse it; they do not fall back to the current global default.
+- If a fix needs a voice the work does not use (for example its engine is gone), re-voice that whole work in one new voice; never patch it in a second voice.
+- The separate Scripture-quotation voice (`CF_TTS_QUOTE_VOICE`, decided 2026-10-07) predates this rule; ask the owner before adding or removing it on any work.
+- This supersedes any earlier "one voice for the whole site/corpus" or "re-voice every work into the current voice" wording (2026-10-07 VISION A.3, GPU_RENDER_COSTS "breaks corpus consistency").
+
 ## Phases
 
 ### 0. Charter
