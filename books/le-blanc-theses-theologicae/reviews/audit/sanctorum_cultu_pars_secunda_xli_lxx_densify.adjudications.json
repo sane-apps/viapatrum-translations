@@ -1,0 +1,152 @@
+{
+  "1600": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-5c42c128-b4c1-4315-a015-4bee2cf8c309",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. English renders both members of the doublet: Greek εὐφημίᾳ as 'good report' and Latin 'laude' as 'praise' ('in good report and in imitation, that is, praise and imitation'). Nothing dropped or altered. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness"
+      ]
+    }
+  ],
+  "1601": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-a1513886-2174-402d-b159-c14a98173e99",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. The model's own note concedes each clause is rendered; its final claim that εὐφημίᾳ is dropped is wrong: 'good report or praise' renders 'εὐφημίᾳ, sive laude'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness"
+      ]
+    }
+  ],
+  "1609": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-d52e75a9-abc5-4e39-9d5b-148c32f648ce",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive / self-contradictory output: the model returned verdict fail with all seven checks true and a note saying the English 'accurately reflects the Latin ... no added or omitted clauses'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": []
+    }
+  ],
+  "1610": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-ecc85b68-8203-4989-a28d-072300ee43ea",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. 'non multum repugnare' is rendered verbatim as 'do not much object' (the model quotes that English itself). Polarity preserved. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "negation"
+      ]
+    }
+  ],
+  "1613": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-ba18d16e-2ffc-411b-b135-3c3f54f6f3ec",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. 'Ut quod ... tribuitur, quod ... nuncupantur' introduces examples; the English gives both examples ('So the Virgin Mary is given the title of goddess, and the saints are called tutelary deities'). Syntax recast, no content dropped. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness"
+      ]
+    }
+  ],
+  "1615": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-1f6a0043-54d1-412a-bba6-4114f1c9d4ac",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "Citation handled, not a mistranslation. The 1675 print reads 'Heb. 2. 3', but the words cited ('cui & non Angelis mundum hunc futurum subjecit') are Hebrews 2:5. The payload translator note already records: 'The 1675 print reads Heb. 2. 3; the words cited are Hebrews 2:5, so the English gives 2:5.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "scripture"
+      ]
+    }
+  ],
+  "1620": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-9edee2ef-d263-4832-9f6a-5db18624c96f",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. 'vel minimam' is rendered: 'They did not grant that even the smallest part of religious worship was owed to God's good and holy servants'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness"
+      ]
+    }
+  ],
+  "1621": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-d5a3e69b-d74b-4579-98e3-71eb205e1a8a",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. 'constitutor, moderatorque cunctorum' is rendered 'the founder and ruler of everything'; 'supervacuum putamus' = 'we think it pointless' (no negation added; 'pointless' ~ 'superfluous'). Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "negation",
+        "agency",
+        "modality"
+      ]
+    }
+  ],
+  "1622": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-d0f874f6-ffd0-4c3b-9d43-15a1b168d6ab",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. The clause 'Unus nobis est placandus Deus universorum Dominus ...' is rendered in full: 'There is one God whom we must win over, the Lord of all things, and to have him favorable we must pray to him; he is won over by godliness and every virtue.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness"
+      ]
+    }
+  ],
+  "1623": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-40c77fc1-975f-419e-9dba-0f2b9d8ecc2d",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. Every clause the model calls omitted is present: 'precari quidem, sed ἀκλήτους, non vocatas' = 'do pray together with those who want to worship God, but uncalled, without being summoned'; 'Apage ... qui ne tantillum quidem audiendus est' = 'Away ... he is not to be listened to in the least' (in the Latin, not invented); 'Pontifex' = 'High Priest'; 'offerendae sunt' (gerundive) = 'are to be offered'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "doctrine"
+      ]
+    }
+  ],
+  "1625": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-a1117229-1f4d-4e82-acd1-23d27307da37",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. 'planum est, juxta Origenem' is rendered 'it is plain that, according to Origen'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness"
+      ]
+    }
+  ],
+  "1627": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "response_id": "chatcmpl-40fd4926-1f64-49f2-bd62-b7e8da49dc87",
+      "by": "Densify (agent), 2026-10-09",
+      "resolution": "False positive. 'quae in solidum & indivisibiliter uni summo Deo deberi contendit' is rendered 'which he insists is owed entirely and undivided to the one supreme God'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness"
+      ]
+    }
+  ]
+}

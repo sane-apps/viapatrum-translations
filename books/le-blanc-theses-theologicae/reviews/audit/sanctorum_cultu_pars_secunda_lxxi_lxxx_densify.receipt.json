@@ -1,0 +1,72 @@
+{
+  "packet_stem": "sanctorum_cultu_pars_secunda_lxxi_lxxx_densify",
+  "packet": "/Users/stephansmac/SaneApps/clients/translations/books/le-blanc-theses-theologicae/reviews/audit/sanctorum_cultu_pars_secunda_lxxi_lxxx_densify.packet.json",
+  "review": "/Users/stephansmac/SaneApps/clients/translations/books/le-blanc-theses-theologicae/reviews/audit/sanctorum_cultu_pars_secunda_lxxi_lxxx_densify.review.json",
+  "packet_id": "1b2d65f43143ff25b3216b66582451e475c32dd430df951d7f9c4178795751ac",
+  "before": 1627,
+  "after": 1637,
+  "added_sections": [
+    1628,
+    1629,
+    1630,
+    1631,
+    1632,
+    1633,
+    1634,
+    1635,
+    1636,
+    1637
+  ],
+  "changed_sections": [],
+  "two_family_review": {
+    "adapter": "scripts/dual_family_review.py",
+    "lanes": [
+      {
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "family": "nemotron",
+        "calls": 10,
+        "http_attempts": 11,
+        "tokens": {
+          "prompt_tokens": 7812,
+          "completion_tokens": 2457,
+          "total_tokens": 10269
+        },
+        "spend_usd": 0
+      },
+      {
+        "model": "gemini-3.5-flash-lite",
+        "family": "gemini",
+        "calls": 10,
+        "http_attempts": 11,
+        "tokens": {
+          "prompt_tokens": 7458,
+          "completion_tokens": 1417,
+          "total_tokens": 8875
+        },
+        "spend_usd": 0
+      }
+    ],
+    "adjudicated_sections": [
+      "1630",
+      "1632",
+      "1634",
+      "1637"
+    ],
+    "adjudications_file": "/Users/stephansmac/SaneApps/clients/translations/books/le-blanc-theses-theologicae/reviews/audit/sanctorum_cultu_pars_secunda_lxxi_lxxx_densify.adjudications.json"
+  },
+  "locus": "Angelorum & Hominum Sanctorum Cultu Pars Secunda (Reformata) LXXI-LXXX (Scripture against latria/dulia: Romans 1:25, pagan one-God-many-ministers parallels, Job 31, Colossians 2:18)",
+  "next_locus": "Angelorum & Hominum Sanctorum Cultu Pars Secunda (Reformata) LXXXI-CI (next Pitt 1675 after Pars Secunda LXXX, PDF 398-402 / book 384-388; Pars Secunda NOT closed); then De Primi Hominis Immortalitate (book 389 / PDF 403)",
+  "gates": {
+    "check_pass_ab": "ok sanctorum_cultu_1628–1637 (10/10)",
+    "tip_ready": "ok theses_theologia_english.json+theses_theologia_source.json",
+    "validate_audit_receipt": "ok"
+  },
+  "punch_x": "NO",
+  "ship": "NO",
+  "claim": "le-blanc-theses-densify stays claimed",
+  "latin_lock": "/Users/stephansmac/SaneApps/clients/translations/books/le-blanc-theses-theologicae/sources/_le_blanc_sanctorum_cultu_latin_lock.txt",
+  "live_at_proceed": "None/None",
+  "leblanc_live_tip_at_proceed": 0,
+  "hold_clear_reason": "0m since tip-1637 post-ready start (live>9114)",
+  "live_floor": 9114
+}

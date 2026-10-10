@@ -1,0 +1,714 @@
+{
+  "packet_id": "aab03779c990f5108c0f76b102418bad50e25aeac8b97dffcf280afc3c2ef1f2",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "a814217788c95c2cdc98497d86ed76c28838cacff45f1d5496be5fbcf791a8ab",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "aab03779c990f5108c0f76b102418bad50e25aeac8b97dffcf280afc3c2ef1f2",
+    "generated_at": "2026-10-10T14:34:59+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0249,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0145,
+        "family": "kimi",
+        "call_count": 5,
+        "http_attempts": 5,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 3428,
+          "completion_tokens": 2822,
+          "total_tokens": 6250,
+          "neurons": 1317.6400299072266
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 3428,
+          "completion_tokens": 2822,
+          "total_tokens": 6250
+        },
+        "first_call_at": "2026-10-10T14:23:28+00:00",
+        "last_call_at": "2026-10-10T14:24:44+00:00",
+        "calls": [
+          {
+            "section": "2578",
+            "source_sha256": "d1931a80deaeb2d8078bc0c430c0d8d5f26db70d0eb97cc3c679f7388f45bf38",
+            "english_sha256": "9f8398387f98041596ee3586e2e5f50480af1e22d417ce4f8c2bfde17d2ede11",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "ba5caf232eeb4a36828a0879c58995f1",
+            "request_id": "5a592c57-0c2d-486e-b746-40f6a10d6b7e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:23:28+00:00",
+            "finished_at": "2026-10-10T14:23:46+00:00",
+            "ms": 17865,
+            "usage": {
+              "prompt_tokens": 719,
+              "completion_tokens": 710,
+              "total_tokens": 1429,
+              "neurons": 320.27728271484375
+            },
+            "raw_sha256": "8474380eb11e6db071b21bf2898473e382075b9a46534e072a1d2a6a76a98f32",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "4f9ce1f2ad3f424a072de61ab6078999eb74da4ebb0dfd7ee81072dde184b913"
+          },
+          {
+            "section": "2579",
+            "source_sha256": "7113d0ec51a4524a11acbff8a85d53e4d0449c77bc379a80aaa3a1e275072e64",
+            "english_sha256": "e8920f1493b47706bd72e7dd2a0826a9fdaa7f8dc728e511c9a180b3f7cb35b8",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "4cff19d2ece940719ee7745c2cd57f02",
+            "request_id": "a81eb410-031c-4768-a6e0-43f9a60a1a5d",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:23:49+00:00",
+            "finished_at": "2026-10-10T14:23:59+00:00",
+            "ms": 10260,
+            "usage": {
+              "prompt_tokens": 631,
+              "completion_tokens": 408,
+              "total_tokens": 1039,
+              "neurons": 202.85910034179688
+            },
+            "raw_sha256": "90532742d4ff720a6ff28ee156f156817a566bacbc100f9c994fe85a62ee5ab9",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "f75abac90c70c0f3bfd3cbd8dedf643bd97525f00d1d23a7377c4a53a281960a"
+          },
+          {
+            "section": "2580",
+            "source_sha256": "dca98c66b4a8c3ec5699f517d0a53253ff5b7dc8ab8dc9a710ffae78ab19ac5e",
+            "english_sha256": "048b0f00585e3fa716307d8aa23041955924bdc622b1f743a6f240925e9162d5",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "a3016882b3bd4549944197d8b1604cf2",
+            "request_id": "72ac8591-a8d7-4792-bc63-6bc1b4df0010",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:24:02+00:00",
+            "finished_at": "2026-10-10T14:24:13+00:00",
+            "ms": 10718,
+            "usage": {
+              "prompt_tokens": 714,
+              "completion_tokens": 417,
+              "total_tokens": 1131,
+              "neurons": 213.3000030517578
+            },
+            "raw_sha256": "aea0e344901f49ba649cbf6598f5d581c21ff560e734ef8b1401b6eaf2a29100",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "c2ec14410f61d693e10cb5a38ba0d3c93f7818acca261787decba4d277fc6243"
+          },
+          {
+            "section": "2581",
+            "source_sha256": "804a1e562e48c0a043f14adb5bbf208507f4adf9cffff908d74ba6102d32a5af",
+            "english_sha256": "466c2b6512f7c9dddb915e19895626f4c8f294b152c2d47aa7c80988daa3d960",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "6e0ff15b3879487c9e5ad0aec1b3b1e1",
+            "request_id": "31e61532-7b32-4f36-bc47-7bc51862c26a",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:24:16+00:00",
+            "finished_at": "2026-10-10T14:24:25+00:00",
+            "ms": 9221,
+            "usage": {
+              "prompt_tokens": 679,
+              "completion_tokens": 561,
+              "total_tokens": 1240,
+              "neurons": 258.0445556640625
+            },
+            "raw_sha256": "1498be69126e8c12aa93eadb145cc1d78271c867a643eddebaf945383e8fd495",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "76dfcd24758b60c913e46abed8a8e12e849e5081054873f971020e65d4359501"
+          },
+          {
+            "section": "2582",
+            "source_sha256": "f3e27d152bf819f5dbc4460b30dfa87dad714383c102697b18c8243e32124803",
+            "english_sha256": "5367712744d716822bc1cc75b8c9859111e226518cc8e81747a14dcc4b0179b0",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "60ca52f477184c72a1af2058a50eefea",
+            "request_id": "7e56c587-c615-438b-b41a-8b007790955f",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:24:28+00:00",
+            "finished_at": "2026-10-10T14:24:44+00:00",
+            "ms": 15866,
+            "usage": {
+              "prompt_tokens": 685,
+              "completion_tokens": 726,
+              "total_tokens": 1411,
+              "neurons": 323.1590881347656
+            },
+            "raw_sha256": "787b954fcdb1dbef658bbab4a358741c9095ccaaca0203b8b093bf6d2534e2c9",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "6f35a109d5d747f5debce694230854ce3667de8ece298206389f04996559b86f"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0104,
+        "family": "glm",
+        "call_count": 5,
+        "http_attempts": 5,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 3340,
+          "completion_tokens": 1310,
+          "total_tokens": 4650,
+          "neurons": 949.0909118652344
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 3340,
+          "completion_tokens": 1310,
+          "total_tokens": 4650
+        },
+        "first_call_at": "2026-10-10T14:23:46+00:00",
+        "last_call_at": "2026-10-10T14:24:46+00:00",
+        "calls": [
+          {
+            "section": "2578",
+            "source_sha256": "d1931a80deaeb2d8078bc0c430c0d8d5f26db70d0eb97cc3c679f7388f45bf38",
+            "english_sha256": "9f8398387f98041596ee3586e2e5f50480af1e22d417ce4f8c2bfde17d2ede11",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-c164d79e-a975-4b9f-9fb0-e5be8ed01dc8",
+            "request_id": "c164d79e-a975-4b9f-9fb0-e5be8ed01dc8",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:23:46+00:00",
+            "finished_at": "2026-10-10T14:23:49+00:00",
+            "ms": 2653,
+            "usage": {
+              "prompt_tokens": 699,
+              "completion_tokens": 280,
+              "total_tokens": 979,
+              "neurons": 200.96363830566406
+            },
+            "raw_sha256": "ee95dba370666bee0961fa09bc5c34fe87432e440266eec249508bd800d10eb4",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "4f9ce1f2ad3f424a072de61ab6078999eb74da4ebb0dfd7ee81072dde184b913"
+          },
+          {
+            "section": "2579",
+            "source_sha256": "7113d0ec51a4524a11acbff8a85d53e4d0449c77bc379a80aaa3a1e275072e64",
+            "english_sha256": "e8920f1493b47706bd72e7dd2a0826a9fdaa7f8dc728e511c9a180b3f7cb35b8",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-b8f8fb2c-4e00-46cf-9de5-7800ee20a1b7",
+            "request_id": "b8f8fb2c-4e00-46cf-9de5-7800ee20a1b7",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:23:59+00:00",
+            "finished_at": "2026-10-10T14:24:01+00:00",
+            "ms": 1711,
+            "usage": {
+              "prompt_tokens": 617,
+              "completion_tokens": 213,
+              "total_tokens": 830,
+              "neurons": 163.72727966308594
+            },
+            "raw_sha256": "3092259dcd94dea4dc56b9f525d7d28f09620ed3b9ad24dd8b1f2827caa81605",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "f75abac90c70c0f3bfd3cbd8dedf643bd97525f00d1d23a7377c4a53a281960a"
+          },
+          {
+            "section": "2580",
+            "source_sha256": "dca98c66b4a8c3ec5699f517d0a53253ff5b7dc8ab8dc9a710ffae78ab19ac5e",
+            "english_sha256": "048b0f00585e3fa716307d8aa23041955924bdc622b1f743a6f240925e9162d5",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-1d284f2e-d854-4187-ba11-6c83234d4530",
+            "request_id": "1d284f2e-d854-4187-ba11-6c83234d4530",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:24:13+00:00",
+            "finished_at": "2026-10-10T14:24:15+00:00",
+            "ms": 2585,
+            "usage": {
+              "prompt_tokens": 694,
+              "completion_tokens": 285,
+              "total_tokens": 979,
+              "neurons": 202.3272705078125
+            },
+            "raw_sha256": "435817bbe0a5428fe9de53716c0bbe7b6389eae5504e00a03aec9acb49831bcb",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "c2ec14410f61d693e10cb5a38ba0d3c93f7818acca261787decba4d277fc6243"
+          },
+          {
+            "section": "2581",
+            "source_sha256": "804a1e562e48c0a043f14adb5bbf208507f4adf9cffff908d74ba6102d32a5af",
+            "english_sha256": "466c2b6512f7c9dddb915e19895626f4c8f294b152c2d47aa7c80988daa3d960",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-903dfe0f-ecac-4f70-88e0-21e489eb271b",
+            "request_id": "903dfe0f-ecac-4f70-88e0-21e489eb271b",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:24:25+00:00",
+            "finished_at": "2026-10-10T14:24:28+00:00",
+            "ms": 2729,
+            "usage": {
+              "prompt_tokens": 663,
+              "completion_tokens": 268,
+              "total_tokens": 931,
+              "neurons": 191.58181762695312
+            },
+            "raw_sha256": "2d64daa2bc289856e3c57e4ada73e018adf8b44cd6f97fdf24c8388f19aff344",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "76dfcd24758b60c913e46abed8a8e12e849e5081054873f971020e65d4359501"
+          },
+          {
+            "section": "2582",
+            "source_sha256": "f3e27d152bf819f5dbc4460b30dfa87dad714383c102697b18c8243e32124803",
+            "english_sha256": "5367712744d716822bc1cc75b8c9859111e226518cc8e81747a14dcc4b0179b0",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-ad8fc4bd-c609-4cd0-b25f-ee0ae5738829",
+            "request_id": "ad8fc4bd-c609-4cd0-b25f-ee0ae5738829",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T14:24:44+00:00",
+            "finished_at": "2026-10-10T14:24:46+00:00",
+            "ms": 2174,
+            "usage": {
+              "prompt_tokens": 667,
+              "completion_tokens": 264,
+              "total_tokens": 931,
+              "neurons": 190.49090576171875
+            },
+            "raw_sha256": "0adcfe982cf7fedaca65ce800af4fea1a7904763ecef4a81a2b09503da3a36fd",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "6f35a109d5d747f5debce694230854ce3667de8ece298206389f04996559b86f"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "2578",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, negation, agency; uncertainties: 0; model notes: part 1/1: [negation] \"So that some pages are not left blank here\" vs \"Ne tamen quaedam paginae hic vacent\": Ne = 'lest' (negative purpose), not 'so that...not' result; alters logical force; [completeness] \"as an example\" vs \"quasi exempli causa\": Dropped quasi 'as-if, as-it-were'; softens claim, not plain 'as an example'; [agency] \"a person already forestalled by calling and stirring grace\" vs \"homo jam praeventus a gratia vocante & excitante\": Ambiguous: 'calling and stirring grace' makes grace the agent; Latin has grace as instrument (ablative), person forestalled by it; [completeness] \"In one order of cause\" vs \"in uno genere causae\": genus = 'kind, genus', not 'order'; technical philosophical term altered; [completeness] \"the efficient\" vs \"scilicet efficientis\": scilicet 'namely, that is to say' dropped; specifies, not merely apposition; [completeness] \"the material and dispositive\" vs \"scilicet in genere causae materialis atque dispositivae\": scilicet and full phrase dropped; 'in another' alone obscures repeated 'kind of cause'\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: CXLI. Lest however certain pages here be empty, we will add briefly, as if for the sake of example, the opinion of Gregory of Valencia, a Jesuit sufficiently notable, which many learned men report and refute. He therefore thinks efficacious grace to consist in some gift, which a man already forestal\nLatin quote (from model note, verified): «Ne tamen quaedam paginae hic vacent»\nEnglish quote (from model note, verified): «So that some pages are not left blank here»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'So that some pages are not left blank' for the negative purpose 'Ne ... vacent', 'as an example' for 'quasi exempli causa', 'forestalled by calling and stirring grace' for 'praeventus a gratia vocante & excitante', 'order of cause' for 'genere causae' (used consistently for the scholastic genus of cause), and the apposition for 'scilicet' keep the sense. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency"
+          ],
+          "uncertainties": [],
+          "response_id": "ba5caf232eeb4a36828a0879c58995f1"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-c164d79e-a975-4b9f-9fb0-e5be8ed01dc8"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "ba5caf232eeb4a36828a0879c58995f1",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'So that some pages are not left blank' for the negative purpose 'Ne ... vacent', 'as an example' for 'quasi exempli causa', 'forestalled by calling and stirring grace' for 'praeventus a gratia vocante & excitante', 'order of cause' for 'genere causae' (used consistently for the scholastic genus of cause), and the apposition for 'scilicet' keep the sense. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2579",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, modality; uncertainties: 0; model notes: part 1/1: [source_identity] \"since the human mind\" vs \"quatenus per eos habitus mens hominis\": 'since' for 'quatenus' misrepresents causal vs. extent meaning; [modality] \"He places this gift\" vs \"Hoc autem donum consistere vult\": 'vult' = 'he wills/wishes' not 'places'; modal verb dropped; [completeness] \"as it is infused\" vs \"quum infunditur\": 'quum' = 'when' not 'as'; temporal conjunction weakened\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: CXLII. This however gift to consist he wishes in infusion of habits of grace and of virtues: insofar as through those habits the mind of man strengthened elicits act of conversion. And so according to his opinion, efficacious grace either is habitual grace, when it is infused, or the infusion itself\nLatin quote (from model note, verified): «quatenus per eos habitus mens hominis»\nEnglish quote (anchor copied from packet text): «Thesis CXLII. He places this gift in the infusion of habits of grace and of the virtues,»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'since' for 'quatenus' (the mind elicits conversion through those habits), 'He places this gift' for 'consistere vult', and 'as it is infused' for 'quum infunditur' keep the sense. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "4cff19d2ece940719ee7745c2cd57f02"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-b8f8fb2c-4e00-46cf-9de5-7800ee20a1b7"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "4cff19d2ece940719ee7745c2cd57f02",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'since' for 'quatenus' (the mind elicits conversion through those habits), 'He places this gift' for 'consistere vult', and 'as it is infused' for 'quum infunditur' keep the sense. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2580",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: modality; uncertainties: 0; model notes: part 1/1: [modality] \"he can acquire\" vs \"possit... acquirere\": Latin subjunctive 'possit' expresses possibility/ability, but 'can' is acceptable; however 'possit' in this construction with 'ut' clause indicates a condition for sufficiency, not bare ability—'so that he be able to acquire' or 'as to be able to acquire' is closer to the Latin's purpose/result nuance than simple 'he can'\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: CXLIII. That truly someone may be counted to have sufficient grace for a pious action, according to his opinion, it is necessary that he have, either all gifts & aids, which for the action as its principles, or beginnings are required, or thus some one or some of such-like gifts, so that by it or th\nLatin quote (anchor copied from packet text): «CXLIII. Ut vero aliquis censeatur habere sufficientem gratiam ad piam actionem, ex ejus»\nEnglish quote (anchor copied from packet text): «Thesis CXLIII. On his view, for someone to count as having sufficient grace for a devout»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'such that ... he can acquire' renders the result clause 'ut ... possit ... acquirere'; kimi itself calls 'can' acceptable. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "a3016882b3bd4549944197d8b1604cf2"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-1d284f2e-d854-4187-ba11-6c83234d4530"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "a3016882b3bd4549944197d8b1604cf2",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'such that ... he can acquire' renders the result clause 'ut ... possit ... acquirere'; kimi itself calls 'can' acceptable. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2581",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: negation, agency, modality; uncertainties: 0; model notes: part 1/1: [negation] \"this doctor denies\" vs \"hunc Doctorem nolle\": Latin says 'this Doctor wills-not' (nolle), not 'denies'; nolo is volitional negation, not negation of proposition; [modality] \"a new aid that comes before\" vs \"novum auxilium...quod conversionem hominis praeveniat\": praeveniat is subjunctive 'may precede,' not indicative 'comes before'; modal nuance lost; [negation] \"he denies that the efficacy\" vs \"eum nolle efficaciam...esse absolutam\": nolle again: 'he wills-not,' not 'he denies'; volitional negation misrendered; [agency] \"making it depend instead\" vs \"sed pendere ab usu liberi nostri arbitrii\": Latin has no 'making'; participial or causal construction invented, not in source\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: Whence it is evident this Doctor not to will the same to be the real entity of sufficient grace and of efficacious grace; but efficacious grace a new aid to sufficient to add, which the conversion of man may precede: in which thing to the more recent Thomists he approaches, and he dissents from Moli\nLatin quote (from model note, verified): «sed pendere ab usu liberi nostri arbitrii»\nEnglish quote (anchor copied from packet text): «Thesis CXLIV. Clearly, then, this doctor denies that sufficient and efficacious grace are»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'denies that' for 'nolle' (will not have it that), 'comes before' for the relative subjunctive 'praeveniat', and 'making it depend instead' for 'sed pendere' keep the sense. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "negation",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "6e0ff15b3879487c9e5ad0aec1b3b1e1"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-903dfe0f-ecac-4f70-88e0-21e489eb271b"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "6e0ff15b3879487c9e5ad0aec1b3b1e1",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'denies that' for 'nolle' (will not have it that), 'comes before' for the relative subjunctive 'praeveniat', and 'making it depend instead' for 'sed pendere' keep the sense. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "negation",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2582",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, negation, agency; uncertainties: 0; model notes: part 1/1: [source_identity] \"His opinion runs into a difficulty of its own\" vs \"In ejus vero sententia hoc peculiare incommodum occurrit\": 'ejus' refers back to someone previously named, not generic 'his'; 'vero' = 'indeed/truly' not 'of its own'; [negation] \"not to the good works of someone already converted\" vs \"non vero in bonis operibus hominis jam conversi\": 'vero' = 'truly/indeed' not 'to'; 'non vero' = 'but not truly' not 'not to'; [completeness] \"Those works need no new infusion of habitual grace\" vs \"ad quae nulla requiritur nova habitualis gratiae infusio\": Missing 'ad quae' = 'to which' at clause start; 'nulla' = 'no' as adjective, not 'need'; [agency] \"for my part I cannot understand\" vs \"mihi quidem intelligibile non est\": Impersonal construction: 'to me it is not intelligible' not active 'I cannot understand'; [completeness] \"prior to a person's conversion as efficient cause\" vs \"hominis conversione prior in genere causae efficientis\": Missing 'in genere' = 'in kind/genus of'; 'hominis' = 'of man' not 'a person's'; [completeness] \"posterior to that same conversion as dispositive cause\" vs \"eadem conversione posterior in genere causae dispositivae\": Missing 'in genere' = 'in kind/genus of'\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: 145. In his however opinion this peculiar inconvenience occurs, that what about efficacious grace he says, in only of-the-sinner to-God conversion place to-have can, not however in good works of-man already converted; to-which no is-required new of-habitual-grace infusion, & to-which nevertheless ef\nLatin quote (from model note, verified): «In ejus vero sententia hoc peculiare incommodum occurrit»\nEnglish quote (from model note, verified): «His opinion runs into a difficulty of its own»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'His opinion' for 'In ejus vero sententia' (Gregory, just named), 'not to the good works' for 'non vero in bonis operibus', 'Those works need no new infusion' for 'ad quae nulla requiritur nova ... infusio', 'I cannot understand' for 'mihi quidem intelligibile non est', and 'as efficient cause' / 'as dispositive cause' for 'in genere causae efficientis / dispositivae' keep the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency"
+          ],
+          "uncertainties": [],
+          "response_id": "60ca52f477184c72a1af2058a50eefea"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-ad8fc4bd-c609-4cd0-b25f-ee0ae5738829"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "60ca52f477184c72a1af2058a50eefea",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'His opinion' for 'In ejus vero sententia' (Gregory, just named), 'not to the good works' for 'non vero in bonis operibus', 'Those works need no new infusion' for 'ad quae nulla requiritur nova ... infusio', 'I cannot understand' for 'mihi quidem intelligibile non est', and 'as efficient cause' / 'as dispositive cause' for 'in genere causae efficientis / dispositivae' keep the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency"
+          ]
+        }
+      ]
+    }
+  ],
+  "scope_review": {
+    "verdict": "pass",
+    "checks": {
+      "source_identity": true,
+      "completeness": true,
+      "negation": true,
+      "agency": true,
+      "modality": true,
+      "doctrine": true,
+      "scripture": true
+    },
+    "uncertainties": [],
+    "composed_by": "dual_family_review adapter (summary of per-section lane verdicts)",
+    "notes": "Scope: 5 selected section(s) 2578, 2579, 2580, 2581, 2582; each reviewed by @cf/moonshotai/kimi-k2.6 and @cf/zai-org/glm-5.2 with the clause-aligned chunk prompt. Scope: new 2578-2582 plus changed none. Opening Latin «CXLI. Ne tamen quaedam paginae hic vacent, summatim adjiciemus, quasi exempli causa,» English «Thesis CXLI. So that some pages are not left blank here, we will add in brief, as an»."
+  }
+}

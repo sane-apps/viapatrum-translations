@@ -1,0 +1,86 @@
+{
+ "1778": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-8fcd129f-d3ad-4ea5-92fa-5509a4193217",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The clause 'ne scilicet, in eo quicquam praejudicetur decretorum divinorum immutabilitati, & efficaciae gratiae divinae, aut determinationi voluntatis per judicium rationis practicae' is the second sentence of English paragraph 1: 'Its fear, of course, is that this would take something away from the unchangeableness of God's decrees, the efficacy of his grace, or the will's being settled by the judgement of practical reason.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1780": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-e06dec76-bda7-48e5-9bba-596b445e40d8",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'non male constituitur' (is not badly placed) is rendered 'it is not wrong to place'; the litotes keeps the same positive judgement and the same negation, so no polarity is flipped and nothing is omitted. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation"
+   ]
+  }
+ ],
+ "1782": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-125f6757-ed5d-4946-92d0-16ad4f400e2c",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model returned verdict fail with no failed check and says the content is accurate. Both page references are in the English: '(p. 698)' ends the first sentence group of paragraph 1 and 'He explains the matter this way (p. 696)' opens paragraph 2. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "1788": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-08e23788-ef7c-4cf8-b0f0-96e94c758326",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. Both clauses the model calls omitted are present: 'Nec enim pravi habitus ... obstant quominus de iis quae agit consultet atque deliberet, & quin voluntas ultro, absque ulla vi cogente, rationis pravae, judicium sequatur' is 'The corrupt habits that hamper its mind and will do not stop it from weighing and deliberating about what it does, nor stop its will from following the judgement of corrupt reason willingly, with no force compelling it'; 'Imo ille ipse qui bene agere non potest, potest tamen a singulis malis actibus abstinere, nec ulla necessitate ad hoc, aut illud peccatum patrandum constringitur' is 'In fact, one who cannot do good can still refrain from each particular evil act, and no necessity binds him to commit this sin or that.' The model itself calls 'he could have left him untempted' equivalent to 'posset illum non tentare'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "1791": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-99382440-dca3-4f12-8dae-a90eaa52e50d",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'as many would have it' renders 'ut multis placet' in 'libertatem non esse formaliter, ut multis placet, in sola voluntate', and 'He thinks it absurd' renders 'Absurdum autem putat'; both are in the Latin, so nothing is added. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1794": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-38bb3e36-4a84-4947-8c3f-5e6ce7f3243b",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model grants the imperium clauses are correct. The clause it calls omitted, 'si voluntas & intellectus inter se conferantur, libertas penes voluntatem ipsi magis esse videtur', opens English paragraph 3: 'when will and intellect are compared, he thinks freedom lies more with the will.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1799": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-f4754ffc-654d-42e6-964f-10990cfd717d",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model returned verdict fail with no failed check, and its own clause-by-clause notes find every clause matched ('This matches', 'good', 'good'). Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ]
+}

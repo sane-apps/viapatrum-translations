@@ -1,0 +1,218 @@
+{
+  "packet_id": "7d95f4bf4e0a40ff3ac87e2ade1f50e2c03fa1700aa5b0b5b55950623371c920",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "6ca3090bf7d69999e201fba6c11226ff143b2b20443bb23005f75ff66a290966",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "7d95f4bf4e0a40ff3ac87e2ade1f50e2c03fa1700aa5b0b5b55950623371c920",
+    "generated_at": "2026-10-10T00:18:27+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0053,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0028,
+        "family": "kimi",
+        "call_count": 1,
+        "http_attempts": 1,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 771,
+          "completion_tokens": 525,
+          "total_tokens": 1296,
+          "neurons": 257.4954833984375
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 771,
+          "completion_tokens": 525,
+          "total_tokens": 1296
+        },
+        "first_call_at": "2026-10-10T00:03:59+00:00",
+        "last_call_at": "2026-10-10T00:04:24+00:00",
+        "calls": [
+          {
+            "section": "2033",
+            "source_sha256": "06689ce0350b655ff23ac43610781c94f4099a65f7a6d4217921dc814291d264",
+            "english_sha256": "1539fa3d873b28e3abe917794080c1614591ab3082355ad0d17240076a3c9346",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "e8af862a265f45f399927c7e8913c2d1",
+            "request_id": "bea2a71e-1615-4df8-a077-fd2fde3956fa",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:03:59+00:00",
+            "finished_at": "2026-10-10T00:04:24+00:00",
+            "ms": 25225,
+            "usage": {
+              "prompt_tokens": 771,
+              "completion_tokens": 525,
+              "total_tokens": 1296,
+              "neurons": 257.4954833984375
+            },
+            "raw_sha256": "948da7cdb0a82c7db679089ef98aa3a9f6da7e05bad98a787a19008a72e35960",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "6a0df4eca7427b74256a5da66664f057ef3c91cc2e35ba50d2febc0799656277"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0025,
+        "family": "glm",
+        "call_count": 1,
+        "http_attempts": 1,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 751,
+          "completion_tokens": 323,
+          "total_tokens": 1074,
+          "neurons": 224.7818145751953
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 751,
+          "completion_tokens": 323,
+          "total_tokens": 1074
+        },
+        "first_call_at": "2026-10-10T00:04:24+00:00",
+        "last_call_at": "2026-10-10T00:04:26+00:00",
+        "calls": [
+          {
+            "section": "2033",
+            "source_sha256": "06689ce0350b655ff23ac43610781c94f4099a65f7a6d4217921dc814291d264",
+            "english_sha256": "1539fa3d873b28e3abe917794080c1614591ab3082355ad0d17240076a3c9346",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-5376e538-d355-43d0-962b-9ff0b08327c5",
+            "request_id": "5376e538-d355-43d0-962b-9ff0b08327c5",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:04:24+00:00",
+            "finished_at": "2026-10-10T00:04:26+00:00",
+            "ms": 1896,
+            "usage": {
+              "prompt_tokens": 751,
+              "completion_tokens": 323,
+              "total_tokens": 1074,
+              "neurons": 224.7818145751953
+            },
+            "raw_sha256": "5e5093936160464bc93a9acb7f99926d58ec9ad145204cb93fe4d2ee3ced7bb3",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "6a0df4eca7427b74256a5da66664f057ef3c91cc2e35ba50d2febc0799656277"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "2033",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness; uncertainties: 0; model notes: part 1/1: [source_identity] \"John Strang\" vs \"Strangius\": Latin 'Strangius' is surname only; 'John' is invented.; [completeness] \"This includes cases where\" vs \"etiam in iis in quibus\": Added demonstrative 'This includes cases' not in source; Latin has 'also in those in which'.; [completeness] \"between any one possible thing and another\" vs \"cujuscunque possibilis cum altero possibili\": Dropped 'possibili' (possible) after 'altero'; source has 'with another possible'.\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: XXXVIII. For indeed absurd they consider the opinion of those who infinite decrees to God attribute concerning contingent connections of any possible thing with another possible thing, even in those in which no order, subordination, or coherence appears. As if God had decreed whatever things would b\nLatin quote (from model note, verified): «cujuscunque possibilis cum altero possibili»\nEnglish quote (anchor copied from packet text): «They consider absurd the view of those who ascribe to God countless decrees about»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-09 (Strang fix)): False positive, checked clause by clause against the Latin. (1) source_identity: 'Strangius' here is the same man Le Blanc names in full as 'Joanne Strangio' (De Decretis Pars Secunda XIX, 1675 PDF 475), i.e. John Strang of Glasgow (1584-1654), author of the cited De voluntate et actionibus Dei circa peccatum (1657); the forename identifies him consistently with the book's other renderings (§§1776-1782, 1862, 1928-1937) and corrects the earlier wrong 'William'. The note records the identification. (2) 'This includes cases where' renders 'etiam in iis in quibus' (even in those in which) - nothing added. (3) 'between any one possible thing and another' renders 'cujuscunque possibilis cum altero possibili'; 'another' takes 'possible thing' as its noun, so 'possibili' is not dropped. This entry supersedes the earlier §2033 adjudication in decretis_xxxiii_lxv_densify, whose identification ('William Strang') was wrong. GLM (glm-5.2) passed this section on every check.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "e8af862a265f45f399927c7e8913c2d1"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-5376e538-d355-43d0-962b-9ff0b08327c5"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "e8af862a265f45f399927c7e8913c2d1",
+          "by": "Densify (agent), 2026-10-09 (Strang fix)",
+          "resolution": "False positive, checked clause by clause against the Latin. (1) source_identity: 'Strangius' here is the same man Le Blanc names in full as 'Joanne Strangio' (De Decretis Pars Secunda XIX, 1675 PDF 475), i.e. John Strang of Glasgow (1584-1654), author of the cited De voluntate et actionibus Dei circa peccatum (1657); the forename identifies him consistently with the book's other renderings (§§1776-1782, 1862, 1928-1937) and corrects the earlier wrong 'William'. The note records the identification. (2) 'This includes cases where' renders 'etiam in iis in quibus' (even in those in which) - nothing added. (3) 'between any one possible thing and another' renders 'cujuscunque possibilis cum altero possibili'; 'another' takes 'possible thing' as its noun, so 'possibili' is not dropped. This entry supersedes the earlier §2033 adjudication in decretis_xxxiii_lxv_densify, whose identification ('William Strang') was wrong. GLM (glm-5.2) passed this section on every check.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness"
+          ]
+        }
+      ]
+    }
+  ],
+  "scope_review": {
+    "verdict": "pass",
+    "checks": {
+      "source_identity": true,
+      "completeness": true,
+      "negation": true,
+      "agency": true,
+      "modality": true,
+      "doctrine": true,
+      "scripture": true
+    },
+    "uncertainties": [],
+    "composed_by": "dual_family_review adapter (summary of per-section lane verdicts)",
+    "notes": "Scope: 1 selected section(s) 2033; each reviewed by @cf/moonshotai/kimi-k2.6 and @cf/zai-org/glm-5.2 with the clause-aligned chunk prompt. Scope: changed 2033 only (Strang identification fix; no new sections). Opening Latin «XXXVIII. Etenim absurdam putant sententiam eorum qui infinita decreta Deo tribuunt de» English «They consider absurd the view of those who ascribe to God countless decrees about»."
+  }
+}

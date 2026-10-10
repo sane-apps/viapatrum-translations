@@ -1,0 +1,230 @@
+{
+  "packet_id": "b00ddafba9b5f419f0e686a2929489916d21807f5729f289f8c0879100a15e6e",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "a814217788c95c2cdc98497d86ed76c28838cacff45f1d5496be5fbcf791a8ab",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "b00ddafba9b5f419f0e686a2929489916d21807f5729f289f8c0879100a15e6e",
+    "generated_at": "2026-10-10T09:04:58+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0055,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0035,
+        "family": "kimi",
+        "call_count": 1,
+        "http_attempts": 1,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 722,
+          "completion_tokens": 838,
+          "total_tokens": 1560,
+          "neurons": 316.5218200683594
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 722,
+          "completion_tokens": 838,
+          "total_tokens": 1560
+        },
+        "first_call_at": "2026-10-10T09:03:28+00:00",
+        "last_call_at": "2026-10-10T09:03:52+00:00",
+        "calls": [
+          {
+            "section": "2337",
+            "source_sha256": "4b59eb8e74118f86077027f765ab49142b5c1379c3662019ab8a819033e00f97",
+            "english_sha256": "c23a791c16ed80200ab7a95d52cc3b00c5f30f4d01fd6323407dc1b5c1660171",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "cb5536831ccc4de3a3390b4442923d63",
+            "request_id": "3f941870-0b85-4264-8c89-546a06320aee",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T09:03:28+00:00",
+            "finished_at": "2026-10-10T09:03:52+00:00",
+            "ms": 23983,
+            "usage": {
+              "prompt_tokens": 722,
+              "completion_tokens": 838,
+              "total_tokens": 1560,
+              "neurons": 316.5218200683594
+            },
+            "raw_sha256": "5647c034728f6b6245a2e3c3ff4f039d18cae3efe5b9b29d0aa78c14f02fa70d",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "eb49091d6f385171b53934621740dbea0b31c99e216a8dd432db826db3595715"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.002,
+        "family": "glm",
+        "call_count": 1,
+        "http_attempts": 1,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 703,
+          "completion_tokens": 381,
+          "total_tokens": 1084,
+          "neurons": 182.17819213867188
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 703,
+          "completion_tokens": 381,
+          "total_tokens": 1084
+        },
+        "first_call_at": "2026-10-10T09:03:52+00:00",
+        "last_call_at": "2026-10-10T09:03:54+00:00",
+        "calls": [
+          {
+            "section": "2337",
+            "source_sha256": "4b59eb8e74118f86077027f765ab49142b5c1379c3662019ab8a819033e00f97",
+            "english_sha256": "c23a791c16ed80200ab7a95d52cc3b00c5f30f4d01fd6323407dc1b5c1660171",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-0ef9adaa-7acf-4271-a338-990992424dac",
+            "request_id": "0ef9adaa-7acf-4271-a338-990992424dac",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T09:03:52+00:00",
+            "finished_at": "2026-10-10T09:03:54+00:00",
+            "ms": 2323,
+            "usage": {
+              "prompt_tokens": 703,
+              "completion_tokens": 381,
+              "total_tokens": 1084,
+              "neurons": 182.17819213867188
+            },
+            "raw_sha256": "49fafe109b2518e2056bfd8496e8fe9490d8c625c9fa2496d611ff3aa2e4be3d",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": false,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "eb49091d6f385171b53934621740dbea0b31c99e216a8dd432db826db3595715"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "2337",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, negation; uncertainties: 0; model notes: part 1/1: [negation] \"a doctor of some fame\" vs \"Doctor non incelebris\": Latin has litotes 'not undistinguished'; English weakens to 'of some fame'; [completeness] \"on this point\" vs \"hac in parte\": 'in this part' omitted; 'on this point' is interpretive; [completeness] \"the common view\" vs \"communi sententiae\": 'opinion' not 'view'; minor but sententia is stronger; [negation] \"created in (increatam)\" vs \"increatam\": CRITICAL: Latin has 'uncreated' (in- + creatam); English says 'created in' then parenthetically notes increatam, but the text itself is wrong; [completeness] \"the various senses of grace\" vs \"Gratiae acceptionem variam\": 'acceptance' not 'senses'; acceptionem = receiving/acceptance; [completeness] \"For in the schools\" vs \"Quandoquidem in illis\": 'When indeed/since' not 'For'; illis = 'those' (the Schools), not 'the schools' repeated; [completeness] \"generally\" vs \"fere\": 'almost/nearly' not 'generally'; fere = almost, for the most part; [completeness] \"invented\" vs \"commentitia\": 'fictitious/forged' not 'invented'; commentitius = fabricated, false; [negation] \"with no authority\" vs \"nec...ullam authoritatem habere\": 'nor to have any authority' not 'with no authority'; construction is 'I judge...nor to have'\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: doctrine; uncertainties: 0; model notes: part 1/1: [doctrine] \"some quality created in (increatam) our soul by God\" vs \"qualitatem aliquam increatam animae nostrae a Deo\": increatam means 'uncreated'; the Latin says an uncreated quality, not a created one.\nLatin quote (from model note, verified): «Gratiae acceptionem variam»\nEnglish quote (from model note, verified): «some quality created in (increatam) our soul by God»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Revision review, scope §2337 only. Both reviewers again read 'increatam' as 'uncreated'. Rejected on the sources. Pighius's own text, De libero hominis arbitrio et divina gratia (Cologne, 1542), lib. 5, fol. 76r (archive.org bub_gb_nGsCu5n-cH4C), reads: 'Quandoquidem, in illis [the schools], fere imaginantur gratiam Dei qualitatem aliquam increatam animae nostrae a Deo: vel eandem cum charitatis habitu, vel distinctam ab eodem. Quae commentitia universa existimo.' Bellarmine, De gratia et libero arbitrio 1.3 (Vives ed., vol. 5; archive.org operaomnia05bell), quotes the same words, including 'increatam'. In that chapter he defends the view Pighius attacks as 'habitum supernaturalem a Deo nobis infundi, quo anima exornetur' and grace as 'habitum, sive qualitatem creatam', and he groups Pighius with Calvin's 'gratuita acceptione nos esse justos'. So the word describes the schools' infused created quality, which Pighius rejects in favour of grace as God's favour. In scholastic usage 'gratia increata' is God's favour or the Holy Spirit (Le Blanc Thesis II; Lombard, Sent. 1 d. 17), and no scholastic calls the infused quality uncreated. 'Increatam ... a Deo' is the participle of 'increo' ('created in ... by God'). English kept; the notes now cite this evidence. Kimi's other points are stylistic: 'of some fame' for 'non incelebris'; 'senses' for 'acceptionem', as in the locus title; 'generally' for 'fere'; 'invented' for 'commentitia'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source. Re-reviewed after the fix.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), 2026-10-10): Revision review, scope §2337 only. Both reviewers again read 'increatam' as 'uncreated'. Rejected on the sources. Pighius's own text, De libero hominis arbitrio et divina gratia (Cologne, 1542), lib. 5, fol. 76r (archive.org bub_gb_nGsCu5n-cH4C), reads: 'Quandoquidem, in illis [the schools], fere imaginantur gratiam Dei qualitatem aliquam increatam animae nostrae a Deo: vel eandem cum charitatis habitu, vel distinctam ab eodem. Quae commentitia universa existimo.' Bellarmine, De gratia et libero arbitrio 1.3 (Vives ed., vol. 5; archive.org operaomnia05bell), quotes the same words, including 'increatam'. In that chapter he defends the view Pighius attacks as 'habitum supernaturalem a Deo nobis infundi, quo anima exornetur' and grace as 'habitum, sive qualitatem creatam', and he groups Pighius with Calvin's 'gratuita acceptione nos esse justos'. So the word describes the schools' infused created quality, which Pighius rejects in favour of grace as God's favour. In scholastic usage 'gratia increata' is God's favour or the Holy Spirit (Le Blanc Thesis II; Lombard, Sent. 1 d. 17), and no scholastic calls the infused quality uncreated. 'Increatam ... a Deo' is the participle of 'increo' ('created in ... by God'). English kept; the notes now cite this evidence. Kimi's other points are stylistic: 'of some fame' for 'non incelebris'; 'senses' for 'acceptionem', as in the locus title; 'generally' for 'fere'; 'invented' for 'commentitia'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source. Re-reviewed after the fix.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation"
+          ],
+          "uncertainties": [],
+          "response_id": "cb5536831ccc4de3a3390b4442923d63"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "doctrine"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-0ef9adaa-7acf-4271-a338-990992424dac"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "cb5536831ccc4de3a3390b4442923d63",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Revision review, scope §2337 only. Both reviewers again read 'increatam' as 'uncreated'. Rejected on the sources. Pighius's own text, De libero hominis arbitrio et divina gratia (Cologne, 1542), lib. 5, fol. 76r (archive.org bub_gb_nGsCu5n-cH4C), reads: 'Quandoquidem, in illis [the schools], fere imaginantur gratiam Dei qualitatem aliquam increatam animae nostrae a Deo: vel eandem cum charitatis habitu, vel distinctam ab eodem. Quae commentitia universa existimo.' Bellarmine, De gratia et libero arbitrio 1.3 (Vives ed., vol. 5; archive.org operaomnia05bell), quotes the same words, including 'increatam'. In that chapter he defends the view Pighius attacks as 'habitum supernaturalem a Deo nobis infundi, quo anima exornetur' and grace as 'habitum, sive qualitatem creatam', and he groups Pighius with Calvin's 'gratuita acceptione nos esse justos'. So the word describes the schools' infused created quality, which Pighius rejects in favour of grace as God's favour. In scholastic usage 'gratia increata' is God's favour or the Holy Spirit (Le Blanc Thesis II; Lombard, Sent. 1 d. 17), and no scholastic calls the infused quality uncreated. 'Increatam ... a Deo' is the participle of 'increo' ('created in ... by God'). English kept; the notes now cite this evidence. Kimi's other points are stylistic: 'of some fame' for 'non incelebris'; 'senses' for 'acceptionem', as in the locus title; 'generally' for 'fere'; 'invented' for 'commentitia'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source. Re-reviewed after the fix.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "chatcmpl-0ef9adaa-7acf-4271-a338-990992424dac",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Revision review, scope §2337 only. Both reviewers again read 'increatam' as 'uncreated'. Rejected on the sources. Pighius's own text, De libero hominis arbitrio et divina gratia (Cologne, 1542), lib. 5, fol. 76r (archive.org bub_gb_nGsCu5n-cH4C), reads: 'Quandoquidem, in illis [the schools], fere imaginantur gratiam Dei qualitatem aliquam increatam animae nostrae a Deo: vel eandem cum charitatis habitu, vel distinctam ab eodem. Quae commentitia universa existimo.' Bellarmine, De gratia et libero arbitrio 1.3 (Vives ed., vol. 5; archive.org operaomnia05bell), quotes the same words, including 'increatam'. In that chapter he defends the view Pighius attacks as 'habitum supernaturalem a Deo nobis infundi, quo anima exornetur' and grace as 'habitum, sive qualitatem creatam', and he groups Pighius with Calvin's 'gratuita acceptione nos esse justos'. So the word describes the schools' infused created quality, which Pighius rejects in favour of grace as God's favour. In scholastic usage 'gratia increata' is God's favour or the Holy Spirit (Le Blanc Thesis II; Lombard, Sent. 1 d. 17), and no scholastic calls the infused quality uncreated. 'Increatam ... a Deo' is the participle of 'increo' ('created in ... by God'). English kept; the notes now cite this evidence. Kimi's other points are stylistic: 'of some fame' for 'non incelebris'; 'senses' for 'acceptionem', as in the locus title; 'generally' for 'fere'; 'invented' for 'commentitia'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source. Re-reviewed after the fix.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "doctrine"
+          ]
+        }
+      ]
+    }
+  ],
+  "scope_review": {
+    "verdict": "pass",
+    "checks": {
+      "source_identity": true,
+      "completeness": true,
+      "negation": true,
+      "agency": true,
+      "modality": true,
+      "doctrine": true,
+      "scripture": true
+    },
+    "uncertainties": [],
+    "composed_by": "dual_family_review adapter (summary of per-section lane verdicts)",
+    "notes": "Scope: 1 selected section(s) 2337; each reviewed by @cf/moonshotai/kimi-k2.6 and @cf/zai-org/glm-5.2 with the clause-aligned chunk prompt. Scope: changed 2337 only (Pighius increatam settled from the sources; no new sections). Opening Latin «XVIII. Et certe Albertus Pighius Doctor non incelebris, paulo ante tempora Concilii» English «Thesis XVIII. Indeed Albert Pighius, a doctor of some fame, dared on this point to set»."
+  }
+}

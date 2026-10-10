@@ -1,0 +1,138 @@
+{
+ "1999": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-e707d9c3-0886-4a12-95dd-4038a5135992",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The note itself confirms the negation ('non quidem quod actu Deo inesse concipiatur' = 'It is not a decree conceived as actually present in God') and every clause of the soliloquy ('non subtrahere', 'hoc ageret, & non aliud', 'quanquam posset aliter agere'). The modality objection is wrong: 'necessario ... ponendum esset' combines the adverb 'necessario' with the gerundive of obligation, so 'would necessarily have to be posited in God' renders both and the necessity is conditional on the purpose clause 'ad hoc, ut res illa esse posset' ('for that thing to be able to exist'), as in the Latin. 'Quanquam ... antecedat; nihilominus' is rendered by the concessive pair 'comes before ... Even so'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "negation",
+    "modality"
+   ]
+  }
+ ],
+ "2002": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-f872282b-78b4-42d1-bb10-c84230ba6f61",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (fail with no checks marked; the note only confirms a match). Real fix made before this call: the second paragraph now keeps the Latin's reported speech ('non putant ... sed ... Deum certo praenosse' = 'Rather, they hold that ... God foreknows'; 'sufficere' = 'it is enough, they say') and renders 'vel simpliciter posito, vel saltem supposito' as 'whether simply laid down or at least supposed' (the earlier 'merely' misread 'saltem'). 'quem solum putant ad agendum necessarium' = 'They hold that concurrence alone is necessary for acting'; 'ut semper praesto sit liberis agentibus, nec illa ad agendum vel applicet, vel praedeterminet' = 'always available to free agents and neither applies them to act nor predetermines them'. The first-round claim that this content was invented is wrong: it is the 'Nempe ...' sentence of the Latin. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "2004": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-531c4c9a-695a-4e38-acff-1ae11d2bec83",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (fail with no checks marked; the note says all checks pass and the verdict should be pass). Real fix made before this call: 'voluisset' is now 'had willed' (was 'had chosen'), keeping the vocabulary of the divine will. 'neque potuit in Deo non esse' = 'It could not have been absent from God'; 'quanquam nihil extra se creare voluisset' = 'even if he had willed to create nothing outside himself'; 'juxta nostrum concipiendi modum' = 'In our way of conceiving'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "2006": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-f778819a-d2cf-49f2-8932-7be65f22e880",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (fail with no checks marked). The note quotes the Vasquez concession and its English, which match. The rest is present: 'non mediam, sed conditionatam simpliciter appellant' = 'call ... not middle but simply conditional'; the two reductions ('ad scientiam visionis, juxta quosdam; vel juxta plures alios, ad scientiam simplicis intelligentiae'); Vasquez and Gregory of Valentia; 'dissensionem vocum esse, non rerum' = 'about words, not things'; 'Tom. 1. disp. 67. sub finem' = 'Volume 1, disputation 67, near the end'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "2008": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-3481d200-0c7e-48b3-a755-3e03379aa07c",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). 'Quod & in Salomone ob conditionem positam impletum est' = 'It came true in Solomon, because the condition was met'; 'in plerisque vero aliis Israelitis non item, propterea quod in illis locum non habuit illa conditio antecedens' = 'It did not come true in most other Israelites, because in their case the prior condition did not occur'. The citation '1 Reg. 11. 2.' is 1 Kings 11:2 in English numbering (Vulgate 3 Kings = 1 Kings; Le Blanc's '1 Reg.' follows the Hebrew-English count). Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "2012": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-f7559235-ee7c-4ab9-a8c0-4a9fda640f02",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clauses called missing that are present). 'ex rebus a se decernendis, atque faciendis' = 'from the things he is to decide and do' ('do' renders 'faciendis'); 'quid ... creatura libere factura, vel omissura esset' = 'what the creature would freely do or leave undone' ('leave undone' renders 'omissura'). The first-round claims are also answered: 'hoc, vel illo modo cum eo concurrere' = 'to concur with it in this or that way', and 'qua in cognitione consistit scientia conditionata, de qua quaestio est' = 'That knowledge is precisely the conditional knowledge in question'. Real fix made before this call: 'sapientis est' now reads 'it is the mark of a wise person ... to form', keeping the normative genitive. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "2013": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-d02c4dfa-03d0-4e7b-8f2b-edf0905abf87",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The note concedes the meaning is preserved: 'si oblatum ipsi fuisset martyrium' = 'if martyrdom had been offered him', where 'him' is the dative 'ipsi' (not reflexive). The first-round negation claim is also wrong: 'indignum Deo videtur, illum non certo compertum habere' = 'It seems unworthy of God not to know for certain', with God as the subject of the infinitive. Real fix made before this call: 'divinae omni scientiae' is now 'God's omniscience' (was 'God's knowledge as a whole'). The three examples, 'non est verisimile ea simpliciter a Deo nesciri', and the closing reductio ('infinita decreta ... frustranea, inania, & otiosa') are all rendered. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "2014": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-78b1d9f4-46b3-4829-a053-28c7b86af03b",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'negant in Deo dari scientiam ullam mediam' is rendered in the first sentence, 'deny that God has any middle knowledge', with the denial kept; the 'praeter scientiam naturalem ... & scientiam liberam ...' frame is the second sentence, 'Besides natural knowledge, called the knowledge of simple intelligence, and free knowledge, called the knowledge of vision, they admit no third kind' (a restatement of the same denial, not an admission). The relative clause 'per quam ... ante omne voluntatis suae decretum, Deus noverit ea quae nec simpliciter possibilia sunt, nec etiam sunt absolute futura, sed futura essent sub hac, vel illa conditione' is the second paragraph. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation"
+   ]
+  }
+ ],
+ "2019": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-fb74fe8d-c465-4abb-bc12-04af5241bfb5",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (fail with no checks marked). The note says the translation is accurate and complete and finds no defects. Checked: Grevinchoven's reply p. 393 ff.; Ames's Rescriptio Scholastica; Courcelles' praise of Gomarus 'ab Arminio edoctus'; 'ingens illud atopon' = 'that great absurdity'; the preface to Arminius's Examen Thesium Gomari. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "2020": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-12c24f34-0598-4f85-9c69-aca16cba9f55",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (sentence called added that is in the Latin). The note's own gloss of 'Inter quos primum numerandus videtur Franciscus ille Gomarus, in hanc sententiam jam a Curcellaeo citatus' ('he seems first to be numbered among them, Francis Gomarus, already cited by Courcelles for this opinion') is what the English says. The Gomarus quotation on Matthew 11:21, the Ninevites' sackcloth repentance, Ezekiel 3:6-7, and the Balduinus Walaeus attribution are all present. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "2023": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-4daf9932-52c1-4c1e-8ad7-41828b48a378",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (fail with no checks marked). The note says every clause, negation, agent, modality and the Matthew 24 citations are preserved and the Loci communes page reference is included. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "2026": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-1142f601-7abc-4c36-a024-26ad0b55ecb2",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). 'si autem laberetur, futurum ut omnes perirent, si vellet, vel aliquos inde posset eruere, ut ita in illis justitiam, in istis gratiam suam declararet, &c.' = 'If man fell, God foreknew that all would perish, if he so willed; or he could rescue some from it, so as to display his justice in the one group and his grace in the other, and so on.' Every element ('si vellet', 'aliquos ... eruere', 'justitiam'/'gratiam', '&c.') is in the second paragraph. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ]
+}

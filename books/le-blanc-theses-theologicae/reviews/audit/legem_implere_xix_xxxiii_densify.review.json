@@ -1,0 +1,2928 @@
+{
+  "packet_id": "80102a6cdf961de46370ab9cb885d7444e3cd8a1f57073cdd6814f6cd14fb4e1",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "a814217788c95c2cdc98497d86ed76c28838cacff45f1d5496be5fbcf791a8ab",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "80102a6cdf961de46370ab9cb885d7444e3cd8a1f57073cdd6814f6cd14fb4e1",
+    "generated_at": "2026-10-10T18:06:59+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.2242,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.1213,
+        "family": "kimi",
+        "call_count": 25,
+        "http_attempts": 40,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 35614,
+          "completion_tokens": 23251,
+          "total_tokens": 58865,
+          "neurons": 11025.063789367676
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 21402,
+          "completion_tokens": 13483,
+          "total_tokens": 34885
+        },
+        "first_call_at": "2026-10-10T17:42:17+00:00",
+        "last_call_at": "2026-10-10T18:01:55+00:00",
+        "calls": [
+          {
+            "section": "2689",
+            "source_sha256": "1ae1f4b4edadacaa386aea3272ed5664ce08588fb7015a709f5a93670b973163",
+            "english_sha256": "c3d0cac37dbeb10242bfb9c86b183d527a5581b9e51b3146b7f8fbc3e9bd2879",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "a22b06b4419849afa0e3de7899802f20",
+            "request_id": "ef538a99-520c-4db9-bf42-b891c2b84265",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:42:17+00:00",
+            "finished_at": "2026-10-10T17:42:39+00:00",
+            "ms": 22497,
+            "usage": {
+              "prompt_tokens": 890,
+              "completion_tokens": 835,
+              "total_tokens": 1725,
+              "neurons": 380.5
+            },
+            "raw_sha256": "bca4565b47dfc4eb9a11c03f89142eaa83243c2d18180cc10f42e757727c2de2",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "4a5c089e6da0ede7f26a805a18e6f17ee15a53a7596e797906246021f9b2ab38"
+          },
+          {
+            "section": "2690",
+            "source_sha256": "4d0974fe6d530aed527341f5c348f071f38eb18718ee7a13ae5f0def56d57929",
+            "english_sha256": "d2bd230baead069421bafbd7e1804c0c5193442505331163f357676459c11605",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "259aca108f014061acdafbc26aae08c6",
+            "request_id": "85816b51-b25f-437d-ae67-13e332af88d8",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:53:31+00:00",
+            "finished_at": "2026-10-10T17:53:57+00:00",
+            "ms": 25080,
+            "usage": {
+              "prompt_tokens": 927,
+              "completion_tokens": 649,
+              "total_tokens": 1576,
+              "neurons": 297.67364501953125
+            },
+            "raw_sha256": "34945f2079af2c67b10c4eb5bcd0b9ebf6d189b228dcfc041f16899d06c579b8",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "df8e55cee20117ed48c601d3b780430927bc0583389e64e465d48063a0b0d209"
+          },
+          {
+            "section": "2690",
+            "source_sha256": "4d0974fe6d530aed527341f5c348f071f38eb18718ee7a13ae5f0def56d57929",
+            "english_sha256": "d2bd230baead069421bafbd7e1804c0c5193442505331163f357676459c11605",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "81e89752f4fc419ebb801bd531830012",
+            "request_id": "6c2eb5bd-da83-42f4-a164-b0436e29834e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:54:00+00:00",
+            "finished_at": "2026-10-10T17:54:05+00:00",
+            "ms": 5021,
+            "usage": {
+              "prompt_tokens": 685,
+              "completion_tokens": 98,
+              "total_tokens": 783,
+              "neurons": 76.40999603271484
+            },
+            "raw_sha256": "8d85924d6d8a6d820a4413b2c62f59131c86ecedcda0b4f32fea8965b2300c9c",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "b440dc2098febd3fc03329deb3b6cd4e303351e617fc0ae2c6547a6f3d4b15b0"
+          },
+          {
+            "section": "2691",
+            "source_sha256": "f1653f79fe8c29f04014345123f8b0e952226b624316ca2881805b3223d67cb7",
+            "english_sha256": "292839f1e57f2e2479b951949d4d1a7fddcac40a4b6b77662a37e84a65f91be5",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "079763e9452f4f65ac090499d5d18733",
+            "request_id": "2585191f-ecaf-4681-b102-9a8383ae72b9",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:43:22+00:00",
+            "finished_at": "2026-10-10T17:43:35+00:00",
+            "ms": 13012,
+            "usage": {
+              "prompt_tokens": 1001,
+              "completion_tokens": 408,
+              "total_tokens": 1409,
+              "neurons": 234.8136444091797
+            },
+            "raw_sha256": "23cd2bd9645ff640d61fedc589d64f27fc24a24b11cfd40b2bd04b5eee2e81d6",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "d84555ad6f83ddc019f5c7cc18b9a083ee0fdabf546532f29a2cff74e40dbefe"
+          },
+          {
+            "section": "2691",
+            "source_sha256": "f1653f79fe8c29f04014345123f8b0e952226b624316ca2881805b3223d67cb7",
+            "english_sha256": "292839f1e57f2e2479b951949d4d1a7fddcac40a4b6b77662a37e84a65f91be5",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "6d88a81fc26c4819866f2b57ae335463",
+            "request_id": "fb5b92d4-bf9a-40ff-956e-10b19febae80",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:43:38+00:00",
+            "finished_at": "2026-10-10T17:44:00+00:00",
+            "ms": 22205,
+            "usage": {
+              "prompt_tokens": 1043,
+              "completion_tokens": 727,
+              "total_tokens": 1770,
+              "neurons": 326.86273193359375
+            },
+            "raw_sha256": "a7cbc2cd51ae1d3bad60f7bf19929e188aae5c8be739d5cec54c82d860200243",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "37c3fad3d45b41225f8f6aae7d7e055202871fa9dd9ee800de377c765b4c2c28"
+          },
+          {
+            "section": "2692",
+            "source_sha256": "70f412fcffe3fd5222d4db52cc9d5f128af5a02c5aed035df6a9e2d99608d344",
+            "english_sha256": "31a821030e8971b1174c13a467c0bf805540db3a856bb989f2ae695d513874d8",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "af1f2e9acfbc4b11a4048d6927b893a2",
+            "request_id": "8a7a561d-ba92-49cf-b70e-c1ff5fab8705",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:44:10+00:00",
+            "finished_at": "2026-10-10T17:44:26+00:00",
+            "ms": 15991,
+            "usage": {
+              "prompt_tokens": 853,
+              "completion_tokens": 570,
+              "total_tokens": 1423,
+              "neurons": 276.34454345703125
+            },
+            "raw_sha256": "df55c0e4f2247e66edead656bd1bae76b843d66b7ee185d2d80f3d460e496c48",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "59b6c10af29b365aa61bfa127463b8cab88764e44bc8db4b749e84061ccd3cfb"
+          },
+          {
+            "section": "2692",
+            "source_sha256": "70f412fcffe3fd5222d4db52cc9d5f128af5a02c5aed035df6a9e2d99608d344",
+            "english_sha256": "31a821030e8971b1174c13a467c0bf805540db3a856bb989f2ae695d513874d8",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "8807c5eeca93441d837e6a83ed9dc013",
+            "request_id": "cc441d59-495d-406b-bb4c-2e79805c37c2",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:44:29+00:00",
+            "finished_at": "2026-10-10T17:44:40+00:00",
+            "ms": 10303,
+            "usage": {
+              "prompt_tokens": 738,
+              "completion_tokens": 345,
+              "total_tokens": 1083,
+              "neurons": 170.80545043945312
+            },
+            "raw_sha256": "0d185cc946779d9700067d61bdc7ffc10d7e2db7f66e8f541baca07c0a1a79dc",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "f5f005d4b56519262fbcbcc477b1b556ce7ffbe3dabf89de39a294006ba0e689"
+          },
+          {
+            "section": "2693",
+            "source_sha256": "e72b231dcfb844b21d9319cec809eb3009179c8a3b87e00f510fdef9af631342",
+            "english_sha256": "73bb0fb2783977b0a4ab1d11f26178c21797fecafa28aaaeb1789bf7eb0bef66",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "6a43de8af0154feba211aedac891c2fc",
+            "request_id": "b2b14dff-665c-4408-bb33-fb89719f60cd",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:44:47+00:00",
+            "finished_at": "2026-10-10T17:45:02+00:00",
+            "ms": 15160,
+            "usage": {
+              "prompt_tokens": 859,
+              "completion_tokens": 515,
+              "total_tokens": 1374,
+              "neurons": 261.4591064453125
+            },
+            "raw_sha256": "6e476b3ffdfa57c757431dd450534341a05d77b608385df2838672838c991b39",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "439ad4f10f8f919e01f81ae54e14916487c4a4e45d668c73cd3c4de84de6340a"
+          },
+          {
+            "section": "2693",
+            "source_sha256": "e72b231dcfb844b21d9319cec809eb3009179c8a3b87e00f510fdef9af631342",
+            "english_sha256": "73bb0fb2783977b0a4ab1d11f26178c21797fecafa28aaaeb1789bf7eb0bef66",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "1219717966c04748a1da52dbe160f304",
+            "request_id": "ee41663d-adf8-4edb-90ad-4ac08a892be8",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:45:05+00:00",
+            "finished_at": "2026-10-10T17:45:12+00:00",
+            "ms": 6061,
+            "usage": {
+              "prompt_tokens": 654,
+              "completion_tokens": 176,
+              "total_tokens": 830,
+              "neurons": 115.88545227050781
+            },
+            "raw_sha256": "084a0ac50afa037c3eec37e0d000301dc956e9de891b809abf4b0ef7e76fd854",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "ee0ca0118c0a27f1812b2d0c15c37ee597905858f3c6a21f448ed9a31611e093"
+          },
+          {
+            "section": "2694",
+            "source_sha256": "069dace341e09541e7198ea9dd5949b31b50851a11f87c2e07cbf5778de7a555",
+            "english_sha256": "2ba8f7ed0f8ed6db2377a06fa71705e85111d9c38ba4b5ce0491b2d34d2ce3d5",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "3bc779b2a6de4624923b3c7b1b7af6c1",
+            "request_id": "db3a8622-0e6b-4d18-99c7-8244eb28d4d6",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:54:14+00:00",
+            "finished_at": "2026-10-10T17:54:30+00:00",
+            "ms": 15722,
+            "usage": {
+              "prompt_tokens": 784,
+              "completion_tokens": 855,
+              "total_tokens": 1639,
+              "neurons": 374.0218200683594
+            },
+            "raw_sha256": "472bbaa35a491b5611ff627061da9b828b1ca3255c5ac16581332e4e4b53dfe3",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "15ddd5e5e322344a21bd4f9541fed7bbd7c09a32d78356bff5d5a903a487985d"
+          },
+          {
+            "section": "2695",
+            "source_sha256": "5db46be6adcc1119761c5146abc5323095aaaa5e577cc881f223054af97244cc",
+            "english_sha256": "f9d066c2b7a0a34656147e928c813e3caf09d266986d1de24cafc998badcde63",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "366834001764445f84ce593cad07e767",
+            "request_id": "b9f75eef-07f6-489d-beca-afc70dd24530",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:54:41+00:00",
+            "finished_at": "2026-10-10T17:54:59+00:00",
+            "ms": 17821,
+            "usage": {
+              "prompt_tokens": 860,
+              "completion_tokens": 749,
+              "total_tokens": 1609,
+              "neurons": 346.6363830566406
+            },
+            "raw_sha256": "2279a24ff0b20a0aaef397816e35a11eec045b938b7e831c2d380fd07aac8533",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "27bb2f89a0cbee6cc85e92376932f03c2c34e7cfdf7c70da46545ed46ebe33c5"
+          },
+          {
+            "section": "2695",
+            "source_sha256": "5db46be6adcc1119761c5146abc5323095aaaa5e577cc881f223054af97244cc",
+            "english_sha256": "f9d066c2b7a0a34656147e928c813e3caf09d266986d1de24cafc998badcde63",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "26e97a8141cb4c0c80fb5938eb5d98cf",
+            "request_id": "0dc17553-9074-4bd5-976d-73c423e987ab",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:55:02+00:00",
+            "finished_at": "2026-10-10T17:55:04+00:00",
+            "ms": 2346,
+            "usage": {
+              "prompt_tokens": 655,
+              "completion_tokens": 90,
+              "total_tokens": 745,
+              "neurons": 70.90999603271484
+            },
+            "raw_sha256": "4700207f7298beea016a371085fa69056b63023ec0d3f5432732428ab4e77bbe",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "6a64389cd4479b7194bb48a2b8a963dfecc453e7d60a375bda7e2546966764d1"
+          },
+          {
+            "section": "2696",
+            "source_sha256": "aaa731cd19fa7e4947940748a2b6b4f229cee0fc3f56828658ee328294a90e18",
+            "english_sha256": "5344f00f6dc7d35e9452ebb46c9d71b3948cbd906b325cebe2047e14f4290f4b",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "bb8474332ddd4ffeb5836f8d66c22266",
+            "request_id": "ef6393ed-36ca-43e4-9b27-6342b5fdd00c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:46:21+00:00",
+            "finished_at": "2026-10-10T17:46:37+00:00",
+            "ms": 16094,
+            "usage": {
+              "prompt_tokens": 858,
+              "completion_tokens": 533,
+              "total_tokens": 1391,
+              "neurons": 263.32183837890625
+            },
+            "raw_sha256": "e86fdd505b8df86c31070d11e4a32448d9c0272e6f68f0c321b798f71418ddb3",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "c06b29c9a5ac83a549f86db66e979e6b12e6e12a87dbccfb125cf0ad2e55cd91"
+          },
+          {
+            "section": "2696",
+            "source_sha256": "aaa731cd19fa7e4947940748a2b6b4f229cee0fc3f56828658ee328294a90e18",
+            "english_sha256": "5344f00f6dc7d35e9452ebb46c9d71b3948cbd906b325cebe2047e14f4290f4b",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "8f67d84d771f4f1cbc25cae9122b700a",
+            "request_id": "ee64e4ab-e661-4041-9aa4-a5c66fe471d8",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:46:40+00:00",
+            "finished_at": "2026-10-10T17:46:47+00:00",
+            "ms": 7674,
+            "usage": {
+              "prompt_tokens": 655,
+              "completion_tokens": 196,
+              "total_tokens": 851,
+              "neurons": 109.45545196533203
+            },
+            "raw_sha256": "4cca3115dbd14d390342ef3bcc6272f977d03a2019a74f93475855d08652a52b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "4c94ac7bda2e7a518e5d67b517788196370ab52ab4bf1e17021b9c7b82aa8e88"
+          },
+          {
+            "section": "2697",
+            "source_sha256": "084466788f60561d98f39acb9ba510343b17b609a3ac5ac0a6a357d7aca648a0",
+            "english_sha256": "f16d28aa01d6aeebfc5a971caee72411494d9c23d5d226a95e10da4e3552d433",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "e01262407ff14658b689c4ea18d373e6",
+            "request_id": "aa11bd4a-083f-4b79-85b2-071a7efd489c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:55:12+00:00",
+            "finished_at": "2026-10-10T17:55:27+00:00",
+            "ms": 15696,
+            "usage": {
+              "prompt_tokens": 863,
+              "completion_tokens": 610,
+              "total_tokens": 1473,
+              "neurons": 291.753662109375
+            },
+            "raw_sha256": "1b5aa0b91b5baa63c6ac3137217a18a3809af6574527cac34bf1a96458ab7488",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "7906dd5e2d99f918098b09eeabccc0867915c3a32b1b5b4aa75b862b160adbde"
+          },
+          {
+            "section": "2698",
+            "source_sha256": "b226c7335798facca7079af6b2194a412f8b793d69475c763e636deef0e2e9d7",
+            "english_sha256": "ba2dc6973a243cd52461deb5a4232b0f7777aca7661a30fe17fb73542b53f9bb",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "3a9ea48abf204154895688b1bdcc0a68",
+            "request_id": "7f0009c4-1eff-4f18-9f45-33afcc0b87e6",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:55:39+00:00",
+            "finished_at": "2026-10-10T17:55:56+00:00",
+            "ms": 17509,
+            "usage": {
+              "prompt_tokens": 767,
+              "completion_tokens": 669,
+              "total_tokens": 1436,
+              "neurons": 309.5136413574219
+            },
+            "raw_sha256": "c1f8ec6bd0cac6e94196abff7aff286e7491bc81c181ca096b3a40cde8d7b91e",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "d981b926da11fcf54c270ec7e7413b5adecd2b92d73ad2ef946b14e051ccebf1"
+          },
+          {
+            "section": "2699",
+            "source_sha256": "c3f7b0d7578fe813091e6508916d09d94ff109aa16bfbff5424098175b81c424",
+            "english_sha256": "264764daa8f63347bb674fa5bcff353b129f7d5d858b785d249e186b1750af7a",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "86ef2cf70c744bd48f0b302babe0c90e",
+            "request_id": "c8f7dc2f-edcb-44c8-b226-1c205d3be737",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:47:47+00:00",
+            "finished_at": "2026-10-10T17:48:10+00:00",
+            "ms": 22892,
+            "usage": {
+              "prompt_tokens": 761,
+              "completion_tokens": 705,
+              "total_tokens": 1466,
+              "neurons": 317.4900207519531
+            },
+            "raw_sha256": "9f98aed31cf4a5aa1c99815fb4f977769791c1c1094aa592a6bbbf4b2bd2aad7",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "eaddd6f41b978ef258c743afe4a36bedcf087017a7a03441a1a6006d53412215"
+          },
+          {
+            "section": "2700",
+            "source_sha256": "64ab02efa31a97269006e96a5a62ae3115e8185d9f380a17d57c7516677b7dc9",
+            "english_sha256": "711bbdf3e88ae4efc9d09d94733c92de436b571f96b57b3d84a9eeb9e189d7a2",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "9c9560c00e62413ca34c22b39a903c8b",
+            "request_id": "ebf4c814-f4f0-4dcc-a5c9-0f028f8bdc00",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:55:59+00:00",
+            "finished_at": "2026-10-10T17:56:15+00:00",
+            "ms": 15652,
+            "usage": {
+              "prompt_tokens": 925,
+              "completion_tokens": 670,
+              "total_tokens": 1595,
+              "neurons": 323.5227355957031
+            },
+            "raw_sha256": "89ca0540aa77e1b97050422b6f0a606036e3e01091a1195fec51f756febc416b",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "52c95c07803fe792f3285300cfe2bfba38c25b3494a17c83e042eab9ba727826"
+          },
+          {
+            "section": "2700",
+            "source_sha256": "64ab02efa31a97269006e96a5a62ae3115e8185d9f380a17d57c7516677b7dc9",
+            "english_sha256": "711bbdf3e88ae4efc9d09d94733c92de436b571f96b57b3d84a9eeb9e189d7a2",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "bc9ae0e0a4814575a9cf9a89604779ba",
+            "request_id": "37f74b3a-b299-4222-961d-8e29e1930801",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:56:18+00:00",
+            "finished_at": "2026-10-10T17:56:29+00:00",
+            "ms": 11146,
+            "usage": {
+              "prompt_tokens": 815,
+              "completion_tokens": 472,
+              "total_tokens": 1287,
+              "neurons": 219.04090881347656
+            },
+            "raw_sha256": "8436dab21cd3659768e09cd4b3c178f90b00bdbfc1dfa3add3fc121142dc040c",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "168c27a36228a45fbef35f10b2664e03d1c566f960ae77b4c9bff9841a401700"
+          },
+          {
+            "section": "2701",
+            "source_sha256": "794cad936f799f56a7278640f2c2863b24adc5df07aed471a8c34d23186136f5",
+            "english_sha256": "1400828507f241c725ee74dd070c73e18eaf55c9b28766f263cf7b03c9a04078",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "f74bbd30f8f541ae9354b2eaaabbe08c",
+            "request_id": "f49eecb1-03fd-4557-a225-522db1acd798",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:49:20+00:00",
+            "finished_at": "2026-10-10T17:49:41+00:00",
+            "ms": 21399,
+            "usage": {
+              "prompt_tokens": 797,
+              "completion_tokens": 684,
+              "total_tokens": 1481,
+              "neurons": 312.9627380371094
+            },
+            "raw_sha256": "cc6ab99aeae9244e5aca269fa2ddf557b5eb333a42d6181753fd8b334af1681f",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "99e2963e5e0676a3e2987ffd372f18c2121bf90143ddf2679531f144371cf245"
+          },
+          {
+            "section": "2702",
+            "source_sha256": "20ae454a5d4da168bdaaa07aa824d3806664009bb3fc7913f81f0bab6fcaa730",
+            "english_sha256": "36caaa7a92a644338d3555a82ecaef1cf846ed77a46a9a0c3504e0696f6525ee",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "741f3dfa877f4adeb31b6ce65d0b80be",
+            "request_id": "f1ae95c0-60f3-4b8f-837f-b37a6eaab5b5",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:49:45+00:00",
+            "finished_at": "2026-10-10T17:50:08+00:00",
+            "ms": 23073,
+            "usage": {
+              "prompt_tokens": 884,
+              "completion_tokens": 828,
+              "total_tokens": 1712,
+              "neurons": 377.4363708496094
+            },
+            "raw_sha256": "1ae15cb3c7613486ca23293106d7154afdff095738354bfb2b698d85e2a99ee0",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "aad3f07b3e26bfccc2298c44e0621def2c035dd6aa55da54825c630301f9b5ec"
+          },
+          {
+            "section": "2702",
+            "source_sha256": "20ae454a5d4da168bdaaa07aa824d3806664009bb3fc7913f81f0bab6fcaa730",
+            "english_sha256": "36caaa7a92a644338d3555a82ecaef1cf846ed77a46a9a0c3504e0696f6525ee",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "e3ef30d389ae47c38b2245ed17b46b0d",
+            "request_id": "dc4183e6-ddf1-4651-8af1-82e4e165535a",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:50:11+00:00",
+            "finished_at": "2026-10-10T17:50:16+00:00",
+            "ms": 5253,
+            "usage": {
+              "prompt_tokens": 663,
+              "completion_tokens": 151,
+              "total_tokens": 814,
+              "neurons": 107.57182312011719
+            },
+            "raw_sha256": "4c4f6e8126ef8212a2aab35dc5e186ecef3d29c69e08bff84b48bca38803e1cd",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "e2dff708c7d71db4ef085c0080fa186278a3cb695d7a7f25e9854528ec4e2518"
+          },
+          {
+            "section": "2703",
+            "source_sha256": "54644ae6c4b2a52dc5afcc973a80b0ad511b425c3e44cdd6dbb6e04efcfe0d1c",
+            "english_sha256": "9a2a283d9df53a71c49d2a67f43130bc48822166cd36fd2415c206cf2f264cae",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "0ba40022e93a462ba5a1e82d46d93bd5",
+            "request_id": "ee0aeb87-17fd-4fc8-8ff0-70a3a7e768dc",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T18:00:52+00:00",
+            "finished_at": "2026-10-10T18:01:09+00:00",
+            "ms": 16672,
+            "usage": {
+              "prompt_tokens": 1117,
+              "completion_tokens": 538,
+              "total_tokens": 1655,
+              "neurons": 273.7190856933594
+            },
+            "raw_sha256": "cb6e0ca68a06b1ed57b9d58e33142e84b96db61b814e6cd8bacccb579a998bfe",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "d1ac92445faddd03c6cfc491103f4892dbd59c1f0a678b08239d6d7a232b0b97"
+          },
+          {
+            "section": "2703",
+            "source_sha256": "54644ae6c4b2a52dc5afcc973a80b0ad511b425c3e44cdd6dbb6e04efcfe0d1c",
+            "english_sha256": "9a2a283d9df53a71c49d2a67f43130bc48822166cd36fd2415c206cf2f264cae",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "b83b58570c0142a5bdc6bd29097ece0c",
+            "request_id": "23368ad5-21f6-4cf1-a4d0-11fb37bc1031",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T18:01:12+00:00",
+            "finished_at": "2026-10-10T18:01:34+00:00",
+            "ms": 22748,
+            "usage": {
+              "prompt_tokens": 1156,
+              "completion_tokens": 781,
+              "total_tokens": 1937,
+              "neurons": 347.0654602050781
+            },
+            "raw_sha256": "7a8653b9adc512b6b490418ee6bd692b76db62c77966b794c85adbae8369beb2",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "df1fd92cfcf90fb56f148a32a8676555ed74a04e199f9b7001c4943bdd3ab201"
+          },
+          {
+            "section": "2703",
+            "source_sha256": "54644ae6c4b2a52dc5afcc973a80b0ad511b425c3e44cdd6dbb6e04efcfe0d1c",
+            "english_sha256": "9a2a283d9df53a71c49d2a67f43130bc48822166cd36fd2415c206cf2f264cae",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "7754835ec83c4cf6bb6ab4ec14ca32ff",
+            "request_id": "59cbb7a5-6b7b-403a-be17-87554676b4fb",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T18:01:37+00:00",
+            "finished_at": "2026-10-10T18:01:55+00:00",
+            "ms": 18182,
+            "usage": {
+              "prompt_tokens": 1192,
+              "completion_tokens": 629,
+              "total_tokens": 1821,
+              "neurons": 294.9018249511719
+            },
+            "raw_sha256": "4d0ec9ab569bb016998f0a83d7d514fbee2e9a6f603f5281343dc566924946bb",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "f094690cd4c34cecf26ac5ef0587ff97dadee44803e31b8afdbee10ec764f252"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.1029,
+        "family": "glm",
+        "call_count": 25,
+        "http_attempts": 48,
+        "failed_attempts": [
+          {
+            "section": "2694",
+            "started_at": "2026-10-10T17:54:30+00:00",
+            "finished_at": "2026-10-10T17:54:30+00:00",
+            "http_status": 500,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Internal server error (5cd8e340-3717-482b-bb88-7ea910d43eca)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+          },
+          {
+            "section": "2694",
+            "started_at": "2026-10-10T17:54:40+00:00",
+            "finished_at": "2026-10-10T17:54:41+00:00",
+            "http_status": 500,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Internal server error (3419eb1c-19ac-4166-90b7-826a491d2559)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+          },
+          {
+            "section": "2697",
+            "started_at": "2026-10-10T17:55:27+00:00",
+            "finished_at": "2026-10-10T17:55:28+00:00",
+            "http_status": 500,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Internal server error (93ff6079-dc49-4367-b90f-1e7c95732549)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+          },
+          {
+            "section": "2697",
+            "started_at": "2026-10-10T17:55:38+00:00",
+            "finished_at": "2026-10-10T17:55:39+00:00",
+            "http_status": 500,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Internal server error (dd0db147-2183-4a01-ae8e-48c59f0240c0)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+          },
+          {
+            "section": "2694",
+            "started_at": "2026-10-10T18:00:25+00:00",
+            "finished_at": "2026-10-10T18:00:26+00:00",
+            "http_status": 500,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Internal server error (7c29d583-55e3-4bed-9a14-343a7e34472b)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+          },
+          {
+            "section": "2694",
+            "started_at": "2026-10-10T18:00:36+00:00",
+            "finished_at": "2026-10-10T18:00:37+00:00",
+            "http_status": 500,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Internal server error (9ecc8a73-97d1-47c9-b643-74bf4748ab70)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+          },
+          {
+            "section": "2697",
+            "started_at": "2026-10-10T18:00:40+00:00",
+            "finished_at": "2026-10-10T18:00:41+00:00",
+            "http_status": 500,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Internal server error (24270cd2-195b-43f6-91fc-6c386a9e75ba)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+          },
+          {
+            "section": "2697",
+            "started_at": "2026-10-10T18:00:51+00:00",
+            "finished_at": "2026-10-10T18:00:52+00:00",
+            "http_status": 500,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Internal server error (34fcdd99-c0d0-490c-a9d1-d772a4dfa25f)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+          }
+        ],
+        "tokens_all_attempts": {
+          "prompt_tokens": 34976,
+          "completion_tokens": 13596,
+          "total_tokens": 48572,
+          "neurons": 9352.6400680542
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 21010,
+          "completion_tokens": 8159,
+          "total_tokens": 29169
+        },
+        "first_call_at": "2026-10-10T17:42:39+00:00",
+        "last_call_at": "2026-10-10T18:04:25+00:00",
+        "calls": [
+          {
+            "section": "2689",
+            "source_sha256": "1ae1f4b4edadacaa386aea3272ed5664ce08588fb7015a709f5a93670b973163",
+            "english_sha256": "c3d0cac37dbeb10242bfb9c86b183d527a5581b9e51b3146b7f8fbc3e9bd2879",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-735e78b8-cddf-4e0c-b5c0-d4154cd6cef2",
+            "request_id": "735e78b8-cddf-4e0c-b5c0-d4154cd6cef2",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:42:39+00:00",
+            "finished_at": "2026-10-10T17:42:43+00:00",
+            "ms": 3614,
+            "usage": {
+              "prompt_tokens": 870,
+              "completion_tokens": 476,
+              "total_tokens": 1346,
+              "neurons": 301.1272888183594
+            },
+            "raw_sha256": "80cc906d5ef726d68fcd067bb8a85c0b634cdd2e974ece1ec4299ac736938035",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "4a5c089e6da0ede7f26a805a18e6f17ee15a53a7596e797906246021f9b2ab38"
+          },
+          {
+            "section": "2690",
+            "source_sha256": "4d0974fe6d530aed527341f5c348f071f38eb18718ee7a13ae5f0def56d57929",
+            "english_sha256": "d2bd230baead069421bafbd7e1804c0c5193442505331163f357676459c11605",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-1b5c246d-8f8a-40d6-9559-5fdb2ead217c",
+            "request_id": "1b5c246d-8f8a-40d6-9559-5fdb2ead217c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:54:05+00:00",
+            "finished_at": "2026-10-10T17:54:09+00:00",
+            "ms": 4096,
+            "usage": {
+              "prompt_tokens": 907,
+              "completion_tokens": 565,
+              "total_tokens": 1472,
+              "neurons": 321.5381774902344
+            },
+            "raw_sha256": "b2eebcafb2cfb8ec163889c61f158a43eda2ec9279209a5ccbafab90ac109996",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "df8e55cee20117ed48c601d3b780430927bc0583389e64e465d48063a0b0d209"
+          },
+          {
+            "section": "2690",
+            "source_sha256": "4d0974fe6d530aed527341f5c348f071f38eb18718ee7a13ae5f0def56d57929",
+            "english_sha256": "d2bd230baead069421bafbd7e1804c0c5193442505331163f357676459c11605",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-c2f31b22-271a-4410-8351-4de006ac5fd2",
+            "request_id": "c2f31b22-271a-4410-8351-4de006ac5fd2",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:54:12+00:00",
+            "finished_at": "2026-10-10T17:54:14+00:00",
+            "ms": 2163,
+            "usage": {
+              "prompt_tokens": 673,
+              "completion_tokens": 89,
+              "total_tokens": 762,
+              "neurons": 101.35636901855469
+            },
+            "raw_sha256": "81f43b37c9d6306bc6040f9f90eec016568b33477059effe420d404dab9f42dc",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "b440dc2098febd3fc03329deb3b6cd4e303351e617fc0ae2c6547a6f3d4b15b0"
+          },
+          {
+            "section": "2691",
+            "source_sha256": "f1653f79fe8c29f04014345123f8b0e952226b624316ca2881805b3223d67cb7",
+            "english_sha256": "292839f1e57f2e2479b951949d4d1a7fddcac40a4b6b77662a37e84a65f91be5",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-6d6fd2e3-3eb9-4ac5-970e-d9a1c80bb083",
+            "request_id": "6d6fd2e3-3eb9-4ac5-970e-d9a1c80bb083",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:44:00+00:00",
+            "finished_at": "2026-10-10T17:44:03+00:00",
+            "ms": 2714,
+            "usage": {
+              "prompt_tokens": 980,
+              "completion_tokens": 375,
+              "total_tokens": 1355,
+              "neurons": 274.7272644042969
+            },
+            "raw_sha256": "7fb2bd0dd54718f7e98a3405911c55b1b10833bc9abd989959ffc1bb7b92bf48",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "d84555ad6f83ddc019f5c7cc18b9a083ee0fdabf546532f29a2cff74e40dbefe"
+          },
+          {
+            "section": "2691",
+            "source_sha256": "f1653f79fe8c29f04014345123f8b0e952226b624316ca2881805b3223d67cb7",
+            "english_sha256": "292839f1e57f2e2479b951949d4d1a7fddcac40a4b6b77662a37e84a65f91be5",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-4b18f796-fc6d-44e0-b55c-e36eb9897425",
+            "request_id": "4b18f796-fc6d-44e0-b55c-e36eb9897425",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:44:06+00:00",
+            "finished_at": "2026-10-10T17:44:10+00:00",
+            "ms": 4691,
+            "usage": {
+              "prompt_tokens": 1026,
+              "completion_tokens": 435,
+              "total_tokens": 1461,
+              "neurons": 271.4181823730469
+            },
+            "raw_sha256": "2389052e9e04101c25182f2ad47b81f8daca3eab8926769d424a3b9a1fe86e2e",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "37c3fad3d45b41225f8f6aae7d7e055202871fa9dd9ee800de377c765b4c2c28"
+          },
+          {
+            "section": "2692",
+            "source_sha256": "70f412fcffe3fd5222d4db52cc9d5f128af5a02c5aed035df6a9e2d99608d344",
+            "english_sha256": "31a821030e8971b1174c13a467c0bf805540db3a856bb989f2ae695d513874d8",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-c67314c0-e05b-42e4-bb68-7a7a5536cdb5",
+            "request_id": "c67314c0-e05b-42e4-bb68-7a7a5536cdb5",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:44:40+00:00",
+            "finished_at": "2026-10-10T17:44:42+00:00",
+            "ms": 2620,
+            "usage": {
+              "prompt_tokens": 826,
+              "completion_tokens": 343,
+              "total_tokens": 1169,
+              "neurons": 242.3272705078125
+            },
+            "raw_sha256": "dadc539246dbca5b4aca883065dbd01889b313838428044716f2bc28c513e81f",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "59b6c10af29b365aa61bfa127463b8cab88764e44bc8db4b749e84061ccd3cfb"
+          },
+          {
+            "section": "2692",
+            "source_sha256": "70f412fcffe3fd5222d4db52cc9d5f128af5a02c5aed035df6a9e2d99608d344",
+            "english_sha256": "31a821030e8971b1174c13a467c0bf805540db3a856bb989f2ae695d513874d8",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-06dc6334-2d77-4488-8a98-8d1ddfb39b04",
+            "request_id": "06dc6334-2d77-4488-8a98-8d1ddfb39b04",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:44:45+00:00",
+            "finished_at": "2026-10-10T17:44:47+00:00",
+            "ms": 1959,
+            "usage": {
+              "prompt_tokens": 729,
+              "completion_tokens": 188,
+              "total_tokens": 917,
+              "neurons": 148.08363342285156
+            },
+            "raw_sha256": "aa422056f7f33e0c5270cbebd831c04e50788039fa15c1967a275b658740a67f",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "f5f005d4b56519262fbcbcc477b1b556ce7ffbe3dabf89de39a294006ba0e689"
+          },
+          {
+            "section": "2693",
+            "source_sha256": "e72b231dcfb844b21d9319cec809eb3009179c8a3b87e00f510fdef9af631342",
+            "english_sha256": "73bb0fb2783977b0a4ab1d11f26178c21797fecafa28aaaeb1789bf7eb0bef66",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-6e8de6bf-c339-4d2a-b311-1cc4421cd73e",
+            "request_id": "6e8de6bf-c339-4d2a-b311-1cc4421cd73e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:45:12+00:00",
+            "finished_at": "2026-10-10T17:45:15+00:00",
+            "ms": 3625,
+            "usage": {
+              "prompt_tokens": 833,
+              "completion_tokens": 394,
+              "total_tokens": 1227,
+              "neurons": 263.6181945800781
+            },
+            "raw_sha256": "b9b8a4b5e5fc445455764b030702670c1ff0781a3096bd655d8a93437743975b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "439ad4f10f8f919e01f81ae54e14916487c4a4e45d668c73cd3c4de84de6340a"
+          },
+          {
+            "section": "2693",
+            "source_sha256": "e72b231dcfb844b21d9319cec809eb3009179c8a3b87e00f510fdef9af631342",
+            "english_sha256": "73bb0fb2783977b0a4ab1d11f26178c21797fecafa28aaaeb1789bf7eb0bef66",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-b6879657-e27c-481d-bfbd-f0f16094909c",
+            "request_id": "b6879657-e27c-481d-bfbd-f0f16094909c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:45:18+00:00",
+            "finished_at": "2026-10-10T17:45:20+00:00",
+            "ms": 1908,
+            "usage": {
+              "prompt_tokens": 646,
+              "completion_tokens": 105,
+              "total_tokens": 751,
+              "neurons": 104.31999969482422
+            },
+            "raw_sha256": "fbef1f943d06ed0915b960c0f9df32928155b2306fc3fa62ab36fc95e7066c07",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "ee0ca0118c0a27f1812b2d0c15c37ee597905858f3c6a21f448ed9a31611e093"
+          },
+          {
+            "section": "2694",
+            "source_sha256": "069dace341e09541e7198ea9dd5949b31b50851a11f87c2e07cbf5778de7a555",
+            "english_sha256": "2ba8f7ed0f8ed6db2377a06fa71705e85111d9c38ba4b5ce0491b2d34d2ce3d5",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-6abbb53e-bd47-4893-acfc-17b86802aae0",
+            "request_id": "6abbb53e-bd47-4893-acfc-17b86802aae0",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T18:04:13+00:00",
+            "finished_at": "2026-10-10T18:04:17+00:00",
+            "ms": 3931,
+            "usage": {
+              "prompt_tokens": 763,
+              "completion_tokens": 367,
+              "total_tokens": 1130,
+              "neurons": 237.2763671875
+            },
+            "raw_sha256": "b02bdd4ae4ffe132e4ce9484fc66b01b18556bbbcc05d531fb720a5e7a73d4d5",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "15ddd5e5e322344a21bd4f9541fed7bbd7c09a32d78356bff5d5a903a487985d"
+          },
+          {
+            "section": "2695",
+            "source_sha256": "5db46be6adcc1119761c5146abc5323095aaaa5e577cc881f223054af97244cc",
+            "english_sha256": "f9d066c2b7a0a34656147e928c813e3caf09d266986d1de24cafc998badcde63",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-d39f2c45-e3ab-466e-86c9-47e2e43f87ec",
+            "request_id": "d39f2c45-e3ab-466e-86c9-47e2e43f87ec",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:55:04+00:00",
+            "finished_at": "2026-10-10T17:55:08+00:00",
+            "ms": 3290,
+            "usage": {
+              "prompt_tokens": 845,
+              "completion_tokens": 412,
+              "total_tokens": 1257,
+              "neurons": 272.345458984375
+            },
+            "raw_sha256": "5e51a3c98b7dac9abbc38d95d300f06e987e41e023b210d462bff4e984180076",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "27bb2f89a0cbee6cc85e92376932f03c2c34e7cfdf7c70da46545ed46ebe33c5"
+          },
+          {
+            "section": "2695",
+            "source_sha256": "5db46be6adcc1119761c5146abc5323095aaaa5e577cc881f223054af97244cc",
+            "english_sha256": "f9d066c2b7a0a34656147e928c813e3caf09d266986d1de24cafc998badcde63",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-0781e065-524e-4d9f-9e81-510fc5dce582",
+            "request_id": "0781e065-524e-4d9f-9e81-510fc5dce582",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:55:11+00:00",
+            "finished_at": "2026-10-10T17:55:12+00:00",
+            "ms": 1091,
+            "usage": {
+              "prompt_tokens": 645,
+              "completion_tokens": 89,
+              "total_tokens": 734,
+              "neurons": 97.79273223876953
+            },
+            "raw_sha256": "447def7c680733ac4954b887b1f60e648d157e1cec3f48a76ec4bcb609c11b6a",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "6a64389cd4479b7194bb48a2b8a963dfecc453e7d60a375bda7e2546966764d1"
+          },
+          {
+            "section": "2696",
+            "source_sha256": "aaa731cd19fa7e4947940748a2b6b4f229cee0fc3f56828658ee328294a90e18",
+            "english_sha256": "5344f00f6dc7d35e9452ebb46c9d71b3948cbd906b325cebe2047e14f4290f4b",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-b4745f1d-4965-45c1-a0da-7b1d60e75fa9",
+            "request_id": "b4745f1d-4965-45c1-a0da-7b1d60e75fa9",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:46:47+00:00",
+            "finished_at": "2026-10-10T17:46:50+00:00",
+            "ms": 2663,
+            "usage": {
+              "prompt_tokens": 845,
+              "completion_tokens": 385,
+              "total_tokens": 1230,
+              "neurons": 261.54547119140625
+            },
+            "raw_sha256": "b9e407f83fc450f24ceda88f4b64a0b74d893e2698c284340b5706f234f2bc63",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "c06b29c9a5ac83a549f86db66e979e6b12e6e12a87dbccfb125cf0ad2e55cd91"
+          },
+          {
+            "section": "2696",
+            "source_sha256": "aaa731cd19fa7e4947940748a2b6b4f229cee0fc3f56828658ee328294a90e18",
+            "english_sha256": "5344f00f6dc7d35e9452ebb46c9d71b3948cbd906b325cebe2047e14f4290f4b",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-c9bae934-b714-4d48-b510-cae4ef136bab",
+            "request_id": "c9bae934-b714-4d48-b510-cae4ef136bab",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:46:53+00:00",
+            "finished_at": "2026-10-10T17:46:54+00:00",
+            "ms": 1038,
+            "usage": {
+              "prompt_tokens": 647,
+              "completion_tokens": 97,
+              "total_tokens": 744,
+              "neurons": 101.24727630615234
+            },
+            "raw_sha256": "bf37cff91c94946e9d5b8165db42e7fd2a48eb2b44fb07b2865e93504606c15e",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "4c94ac7bda2e7a518e5d67b517788196370ab52ab4bf1e17021b9c7b82aa8e88"
+          },
+          {
+            "section": "2697",
+            "source_sha256": "084466788f60561d98f39acb9ba510343b17b609a3ac5ac0a6a357d7aca648a0",
+            "english_sha256": "f16d28aa01d6aeebfc5a971caee72411494d9c23d5d226a95e10da4e3552d433",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-1a8152d3-a518-4854-a96a-ff77216bcaa3",
+            "request_id": "1a8152d3-a518-4854-a96a-ff77216bcaa3",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T18:04:20+00:00",
+            "finished_at": "2026-10-10T18:04:25+00:00",
+            "ms": 4612,
+            "usage": {
+              "prompt_tokens": 850,
+              "completion_tokens": 459,
+              "total_tokens": 1309,
+              "neurons": 285.1490783691406
+            },
+            "raw_sha256": "17fa38bffc3b5446bcc241103539ee6d6b94caaa64c5e2ffa654034c4a0e6698",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "7906dd5e2d99f918098b09eeabccc0867915c3a32b1b5b4aa75b862b160adbde"
+          },
+          {
+            "section": "2698",
+            "source_sha256": "b226c7335798facca7079af6b2194a412f8b793d69475c763e636deef0e2e9d7",
+            "english_sha256": "ba2dc6973a243cd52461deb5a4232b0f7777aca7661a30fe17fb73542b53f9bb",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-19e9cd50-4c69-453f-9190-932fd36bdd94",
+            "request_id": "19e9cd50-4c69-453f-9190-932fd36bdd94",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:55:56+00:00",
+            "finished_at": "2026-10-10T17:55:59+00:00",
+            "ms": 2543,
+            "usage": {
+              "prompt_tokens": 755,
+              "completion_tokens": 343,
+              "total_tokens": 1098,
+              "neurons": 233.2908935546875
+            },
+            "raw_sha256": "357115327f920cbe803b8b13ee8ea6905e646a51c3af525126a1b4e100cb4aa8",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "d981b926da11fcf54c270ec7e7413b5adecd2b92d73ad2ef946b14e051ccebf1"
+          },
+          {
+            "section": "2699",
+            "source_sha256": "c3f7b0d7578fe813091e6508916d09d94ff109aa16bfbff5424098175b81c424",
+            "english_sha256": "264764daa8f63347bb674fa5bcff353b129f7d5d858b785d249e186b1750af7a",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-7f47a59f-ecf9-4330-9f44-834727991eb6",
+            "request_id": "7f47a59f-ecf9-4330-9f44-834727991eb6",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:48:10+00:00",
+            "finished_at": "2026-10-10T17:48:12+00:00",
+            "ms": 2074,
+            "usage": {
+              "prompt_tokens": 745,
+              "completion_tokens": 338,
+              "total_tokens": 1083,
+              "neurons": 230.0181884765625
+            },
+            "raw_sha256": "cf087003a987ec46878e51f2bcac67a32474dee7446ed1d8239710e29d05d3a6",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "eaddd6f41b978ef258c743afe4a36bedcf087017a7a03441a1a6006d53412215"
+          },
+          {
+            "section": "2700",
+            "source_sha256": "64ab02efa31a97269006e96a5a62ae3115e8185d9f380a17d57c7516677b7dc9",
+            "english_sha256": "711bbdf3e88ae4efc9d09d94733c92de436b571f96b57b3d84a9eeb9e189d7a2",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-c45abb85-e715-4230-829d-b08a40ed86ca",
+            "request_id": "c45abb85-e715-4230-829d-b08a40ed86ca",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:56:29+00:00",
+            "finished_at": "2026-10-10T17:56:32+00:00",
+            "ms": 2804,
+            "usage": {
+              "prompt_tokens": 911,
+              "completion_tokens": 404,
+              "total_tokens": 1315,
+              "neurons": 277.54547119140625
+            },
+            "raw_sha256": "4adf910b4ebacce57632e0167fff4b36fc0fa60536debb2894cc75d35dfaf296",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "52c95c07803fe792f3285300cfe2bfba38c25b3494a17c83e042eab9ba727826"
+          },
+          {
+            "section": "2700",
+            "source_sha256": "64ab02efa31a97269006e96a5a62ae3115e8185d9f380a17d57c7516677b7dc9",
+            "english_sha256": "711bbdf3e88ae4efc9d09d94733c92de436b571f96b57b3d84a9eeb9e189d7a2",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-47982b05-1db5-4fcd-8476-33d9f8ca1566",
+            "request_id": "47982b05-1db5-4fcd-8476-33d9f8ca1566",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:56:35+00:00",
+            "finished_at": "2026-10-10T17:56:37+00:00",
+            "ms": 1761,
+            "usage": {
+              "prompt_tokens": 804,
+              "completion_tokens": 240,
+              "total_tokens": 1044,
+              "neurons": 171.79635620117188
+            },
+            "raw_sha256": "2f28ecd08d055dcaafd614a3cf95ccc404d7e14cc0e14425dd10f49e5217d4b9",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "168c27a36228a45fbef35f10b2664e03d1c566f960ae77b4c9bff9841a401700"
+          },
+          {
+            "section": "2701",
+            "source_sha256": "794cad936f799f56a7278640f2c2863b24adc5df07aed471a8c34d23186136f5",
+            "english_sha256": "1400828507f241c725ee74dd070c73e18eaf55c9b28766f263cf7b03c9a04078",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-00b7833a-6dc8-41ca-b55d-496b290630e1",
+            "request_id": "00b7833a-6dc8-41ca-b55d-496b290630e1",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:49:41+00:00",
+            "finished_at": "2026-10-10T17:49:45+00:00",
+            "ms": 3402,
+            "usage": {
+              "prompt_tokens": 782,
+              "completion_tokens": 381,
+              "total_tokens": 1163,
+              "neurons": 251.92727661132812
+            },
+            "raw_sha256": "14f794024eddf4fe3272d0a74e593b5a9ae191c4a4a0b9543cc79d1e6658c267",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "99e2963e5e0676a3e2987ffd372f18c2121bf90143ddf2679531f144371cf245"
+          },
+          {
+            "section": "2702",
+            "source_sha256": "20ae454a5d4da168bdaaa07aa824d3806664009bb3fc7913f81f0bab6fcaa730",
+            "english_sha256": "36caaa7a92a644338d3555a82ecaef1cf846ed77a46a9a0c3504e0696f6525ee",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-bd36eb92-ec0f-44ae-aab7-ee072c834d10",
+            "request_id": "bd36eb92-ec0f-44ae-aab7-ee072c834d10",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:50:16+00:00",
+            "finished_at": "2026-10-10T17:50:18+00:00",
+            "ms": 2481,
+            "usage": {
+              "prompt_tokens": 865,
+              "completion_tokens": 430,
+              "total_tokens": 1295,
+              "neurons": 282.0909118652344
+            },
+            "raw_sha256": "27699b925aad1b6cf6ec3140b2ecc3ebfb47ecba8300267f1e50132223faed36",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "aad3f07b3e26bfccc2298c44e0621def2c035dd6aa55da54825c630301f9b5ec"
+          },
+          {
+            "section": "2702",
+            "source_sha256": "20ae454a5d4da168bdaaa07aa824d3806664009bb3fc7913f81f0bab6fcaa730",
+            "english_sha256": "36caaa7a92a644338d3555a82ecaef1cf846ed77a46a9a0c3504e0696f6525ee",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-4a0f7222-3c56-4e2c-bd6c-9c7e12151be3",
+            "request_id": "4a0f7222-3c56-4e2c-bd6c-9c7e12151be3",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T17:50:21+00:00",
+            "finished_at": "2026-10-10T17:50:23+00:00",
+            "ms": 1720,
+            "usage": {
+              "prompt_tokens": 654,
+              "completion_tokens": 92,
+              "total_tokens": 746,
+              "neurons": 100.13818359375
+            },
+            "raw_sha256": "7aa15653ea6a3a815362aa331a40fe99d423018c1b381180bd300175c247c1c7",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "e2dff708c7d71db4ef085c0080fa186278a3cb695d7a7f25e9854528ec4e2518"
+          },
+          {
+            "section": "2703",
+            "source_sha256": "54644ae6c4b2a52dc5afcc973a80b0ad511b425c3e44cdd6dbb6e04efcfe0d1c",
+            "english_sha256": "9a2a283d9df53a71c49d2a67f43130bc48822166cd36fd2415c206cf2f264cae",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-98532dde-3112-4770-856e-6e81152445e9",
+            "request_id": "98532dde-3112-4770-856e-6e81152445e9",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T18:01:55+00:00",
+            "finished_at": "2026-10-10T18:01:58+00:00",
+            "ms": 2908,
+            "usage": {
+              "prompt_tokens": 1099,
+              "completion_tokens": 341,
+              "total_tokens": 1440,
+              "neurons": 256.3745422363281
+            },
+            "raw_sha256": "df9058b942465b8c199a59b6620f65db75ca567b1bcf5dfdee278409da17ffd6",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "d1ac92445faddd03c6cfc491103f4892dbd59c1f0a678b08239d6d7a232b0b97"
+          },
+          {
+            "section": "2703",
+            "source_sha256": "54644ae6c4b2a52dc5afcc973a80b0ad511b425c3e44cdd6dbb6e04efcfe0d1c",
+            "english_sha256": "9a2a283d9df53a71c49d2a67f43130bc48822166cd36fd2415c206cf2f264cae",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-0fa321ee-9e7f-44aa-9af8-1cfedbe876e7",
+            "request_id": "0fa321ee-9e7f-44aa-9af8-1cfedbe876e7",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T18:02:01+00:00",
+            "finished_at": "2026-10-10T18:02:05+00:00",
+            "ms": 3371,
+            "usage": {
+              "prompt_tokens": 1138,
+              "completion_tokens": 370,
+              "total_tokens": 1508,
+              "neurons": 246.4072723388672
+            },
+            "raw_sha256": "238393faebde173c331197a3039098110bf9fdbac7308ad205e99438fc104570",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "df1fd92cfcf90fb56f148a32a8676555ed74a04e199f9b7001c4943bdd3ab201"
+          },
+          {
+            "section": "2703",
+            "source_sha256": "54644ae6c4b2a52dc5afcc973a80b0ad511b425c3e44cdd6dbb6e04efcfe0d1c",
+            "english_sha256": "9a2a283d9df53a71c49d2a67f43130bc48822166cd36fd2415c206cf2f264cae",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-555c67ff-9b62-4477-b606-e6e396b32c58",
+            "request_id": "555c67ff-9b62-4477-b606-e6e396b32c58",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T18:02:08+00:00",
+            "finished_at": "2026-10-10T18:02:13+00:00",
+            "ms": 4779,
+            "usage": {
+              "prompt_tokens": 1172,
+              "completion_tokens": 441,
+              "total_tokens": 1613,
+              "neurons": 279.1345520019531
+            },
+            "raw_sha256": "60ecacf86f6faf71df0464b4e4390de8006fda51a165c97f7e2c9515aa2c2f39",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false,
+            "chunk": 3,
+            "chunk_sha256": "f094690cd4c34cecf26ac5ef0587ff97dadee44803e31b8afdbee10ec764f252"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": [
+      {
+        "section": "2690",
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "response_id": "5a500cf58d114ea78b63b1c36ad2ac7a+99bb7440bf4d4c0d9730f80ad38870cb",
+        "verdict": "fail",
+        "english_sha256": "484cbf96c04173b4227ee1e4cf4904e74c44e914784d21aee360f75f42831fa8",
+        "finished_at": "2026-10-10T17:43:14+00:00",
+        "notes": "part 1/2: [completeness] \"So the Lord repaid me according to my righteousness, according to the cleanness of my hands in his sight.\" vs \"Fui, inquit, immaculatus, sive perfectus, cum eo, & custodivi me ab iniquitate mea.\": Added clause not in source: entire sentence about Lord's repayment is invented.; [scripture] \"David in Psalm 18\" vs \"Psal. 18.\": Psalm 18 in Vulgate/LXX numbering equals Psalm 19 in Hebrew/English; should be Psalm 18 [19]. | part 2/2: [source_identity] \"So the Lord repaid me\" vs \"Et retribuit mihi Dominus\": Latin 'Et' is 'And', not 'So'; translator adds inferential 'So' not in source.; [completeness] \"in his sight\" vs \"in conspectu oculorum ejus\": Dropped 'oculorum' (of eyes); Latin has 'in the sight of his eyes', not just 'in his sight'.",
+        "error": null
+      },
+      {
+        "section": "2690",
+        "model": "@cf/zai-org/glm-5.2",
+        "response_id": "chatcmpl-249991b1-7e74-4c9b-ad25-6e2b04a52377",
+        "verdict": "fail",
+        "english_sha256": "484cbf96c04173b4227ee1e4cf4904e74c44e914784d21aee360f75f42831fa8",
+        "finished_at": "2026-10-10T17:43:22+00:00",
+        "notes": "part 1/2: [completeness] \"So the Lord repaid me according to my righteousness, according to the cleanness of my hands in his sight.\" vs \"\": This clause is absent from the Latin source passage; it is added with no source basis.",
+        "error": null
+      },
+      {
+        "section": "2694",
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "response_id": "bc0151e0a59d462ebd5d609ce73a8845",
+        "verdict": "fail",
+        "english_sha256": "9c4d5e7c5decfd1cb0f29b7033210277dcadb96a6f4e8afc2786e86a48616d0d",
+        "finished_at": "2026-10-10T17:45:37+00:00",
+        "notes": "part 1/1: [agency] \"the obedience... lacks nothing\" vs \"nihil deest obedientiae\": Latin: nothing is lacking TO the obedience; English inverts to obedience lacks nothing; [modality] \"They do not bother to obey\" vs \"Non his, aut illis mandatis duntaxat obedire satagunt\": Latin 'satagunt' = they strive/are eager; English 'do not bother' weakens to near-indifference; [completeness] \"to their last breath\" vs \"ad ultimum usque vitae spiritum\": Latin 'spiritum' = spirit/breath of life; English drops 'vitae' (of life), weakening the phrase",
+        "error": null
+      },
+      {
+        "section": "2694",
+        "model": "@cf/zai-org/glm-5.2",
+        "response_id": "chatcmpl-b8f5c696-067a-496d-b1c9-9057f68f2a80",
+        "verdict": "pass",
+        "english_sha256": "9c4d5e7c5decfd1cb0f29b7033210277dcadb96a6f4e8afc2786e86a48616d0d",
+        "finished_at": "2026-10-10T17:45:39+00:00",
+        "notes": "part 1/1: no major defect; gloss: XXIV. With respect to all these things, nothing is lacking to the obedience of those who are truly godly and regenerated by the Spirit of God. For not with body only do they serve God, but they subject mind and affections to his will. And not only in deed do they perform what things are commanded by",
+        "error": null
+      },
+      {
+        "section": "2695",
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "response_id": "ff4271c7d1034f1194b073871e3137ed+8334ef6e03e943e9a6b3cdabd8b67812",
+        "verdict": "fail",
+        "english_sha256": "cebb343facc7ca3203754e2a807957daa23b6392c67be1ac058cb7e4ba8c6324",
+        "finished_at": "2026-10-10T17:46:13+00:00",
+        "notes": "part 1/2: [source_identity] \"They try to bring both the acts of the body and the affections of the mind into line with\" vs \"exigere conantur\": 'exigere' means demand/require, not 'bring into line with'; subject is obedience demanding, not people trying; [agency] \"They try to bring\" vs \"exigere conantur\": Subject is obedience (obedientiae), not 'they'; obedience demands, not people try; [completeness] \"In those places 'perfection' means only the integrity and sincerity of these holy men; the Hebrew word Tham or thamim, which translators there render 'perfect', properly means whole and sincere\" vs \"Etenim per perfectionem solum ibi designatur integritas atque sinceritas sanctorum istorum virorum\": Hebrew etymology 'Tham or thamim' is entirely invented, not in source | part 2/2: [agency] \"In those places 'perfection' means only\" vs \"Siquidem vox Hebraea Tham sive thamim\": Added 'In those places' and 'perfection means' not in source; source begins with 'Siquidem' introducing the Hebrew word explanation directly, not a new claim about what 'perfection' means in places.; [completeness] \"the integrity and sincerity of these holy men\" vs \"integrum & sincerum proprie significat\": Added 'of these holy men' not in source; source gives only the adjectives 'whole and sincere' as what the word signifies, with no genitive or reference to men.",
+        "error": null
+      },
+      {
+        "section": "2695",
+        "model": "@cf/zai-org/glm-5.2",
+        "response_id": "chatcmpl-ae5862f6-3253-427f-9924-81c4e12d9db4",
+        "verdict": "fail",
+        "english_sha256": "cebb343facc7ca3203754e2a807957daa23b6392c67be1ac058cb7e4ba8c6324",
+        "finished_at": "2026-10-10T17:46:21+00:00",
+        "notes": "part 1/2: [completeness] \"and to do so steadily and to the end\" vs \"idque constanter & perseveranter\": 'perseveranter' means 'perseveringly'; 'to the end' drops the sense of perseverance.",
+        "error": null
+      },
+      {
+        "section": "2697",
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "response_id": "c48bde9f63214667bc4824171320de2a",
+        "verdict": "fail",
+        "english_sha256": "13b1df79f827774248fd89e62e6e198e65fd31a54728bf9e656c9b00d7cac615",
+        "finished_at": "2026-10-10T17:47:15+00:00",
+        "notes": "part 1/1: [agency] \"They even claim we teach\" vs \"Imo quod doceant\": 'we teach' misattributes; Latin 'doceant' = 'they teach', not 'we teach'; [completeness] \"This can be seen in Bellarmine\" vs \"Sicut videre est apud Bell.\": Dropped 'Sicut' ('Just as'); 'videre est' = 'it is to be seen', not 'this can be seen'",
+        "error": null
+      },
+      {
+        "section": "2697",
+        "model": "@cf/zai-org/glm-5.2",
+        "response_id": "chatcmpl-2ab02829-91f3-4873-9f05-70966eb63197",
+        "verdict": "pass",
+        "english_sha256": "13b1df79f827774248fd89e62e6e198e65fd31a54728bf9e656c9b00d7cac615",
+        "finished_at": "2026-10-10T17:47:19+00:00",
+        "notes": "part 1/1: no major defect; gloss: XXVII. And this explanation of the Orthodox Opinion is to be observed diligently on account of the doctors of the Roman Church, who in this question, as in many others, the doctrine of the Reformed School either do not understand, or with zeal pervert. Since indeed they attribute to Protestant Theol",
+        "error": null
+      },
+      {
+        "section": "2698",
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "response_id": "310014bbcf624803a2f8af579ef1c353",
+        "verdict": "fail",
+        "english_sha256": "6d129ea3fcd35cb23aa0493d940990878d7fa5fa981cdd35048ab3a9a6f7afa7",
+        "finished_at": "2026-10-10T17:47:44+00:00",
+        "notes": "part 1/1: [completeness] \"Resting on this false assumption\" vs \"Unde est quod, hac falsa nitentes hypothesi\": Dropped 'Unde est quod' (Whence it is that); no main clause marker; [agency] \"they frame between us and them\" vs \"cum inter nos & ipsos controversiae statum ponunt\": 'cum...ponunt' is temporal/causal 'when/while they place', not 'they frame' as main verb; [modality] \"should not be called sins\" vs \"non sint appellanda peccata\": 'sint appellanda' is passive periphrastic 'are to be called', not 'should not be called'; [modality] \"deserve to be called righteous\" vs \"justa dici mereantur\": 'mereantur' is 'they deserve', but 'justa dici' is 'just to be called', not 'to be called righteous'; [completeness] \"These are Bellarmine's words\" vs \"Quae sunt verba Bellarmini\": 'Quae' is 'Which', not 'These'; relative pronoun refers back, not deictic; [modality] \"are to be called righteous\" vs \"justa dicenda sint\": 'sint' is subjunctive in indirect question, 'are to be said/should be said', not simple indicative; [negation] \"not only not sins\" vs \"non modo non sint peccata\": Correctly rendered; [completeness] \"In line with them is what we read\" vs \"Quibus conformia sunt quae leguntur\": 'Quibus conformia sunt' = 'To which conformable are', i.e. 'things conformable to which are'; 'In line with them' slightly loose",
+        "error": null
+      },
+      {
+        "section": "2698",
+        "model": "@cf/zai-org/glm-5.2",
+        "response_id": "chatcmpl-b7422dac-ddbf-441e-a5b3-e205fb32c2e4",
+        "verdict": "pass",
+        "english_sha256": "6d129ea3fcd35cb23aa0493d940990878d7fa5fa981cdd35048ab3a9a6f7afa7",
+        "finished_at": "2026-10-10T17:47:47+00:00",
+        "notes": "part 1/1: no major defect; gloss: XXVIII. Whence it is that, relying on this false hypothesis, when they posit between us and them a state of controversy which is by no means [existent], namely this: Whether men justified, and aided by the grace of the Lord, can so fulfill the divine law, that their works not only are not to be call",
+        "error": null
+      },
+      {
+        "section": "2700",
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "response_id": "2ff3840503c943f2b24c58764b5838d0+3cad8e86f7da49eead2ad3ca682c6690",
+        "verdict": "fail",
+        "english_sha256": "4b79071400f90c22a0cfed0e40dfc1e7662d8ba0381a37cdb8ba6ce3bc10a378",
+        "finished_at": "2026-10-10T17:49:10+00:00",
+        "notes": "part 1/2: [agency] \"So that no one can slander us by claiming\" vs \"Ac nequis calumnietur Protestantes diversum sentire, & nos alienam ipsis affingere doctrinam\": Subject of calumniari is 'no one' slandering 'Protestants' and 'us', not 'us' being slandered; 'calumniari' takes accusative+infinitive (Protestantes...sentire, nos...affingere), not 'by claiming that'; [completeness] \"To go through them all would be endless labour, and needless\" vs \"Nam singula persequi infinitae operae, & superfluum esset\": 'singula' means 'individual/single things', not 'them all'; 'superfluum' is 'superfluous', stronger than 'needless'; [completeness] \"besides, the matter is plain enough\" vs \"Et res alioqui est attendenti per se satis manifesta\": 'alioqui' ('otherwise/else/in other respects') and 'per se' ('by itself') omitted; 'attendenti' is dative 'to one attending/paying attention', not generic 'anyone who pays attention'; [agency] \"Our opponent affirms it absolutely\" vs \"quod adversarius absolute affirmat\": 'adversarius' is 'the adversary', not specifically 'our' opponent; no possessive in source; [completeness] \"we grant it of an imperfect, begun fulfilment\" vs \"nos de impletione imperfecta, inchoata damus\": 'damus' alone means 'we grant', but 'it' is supplied; Latin has no explicit object, just the ablative of specification; [modality] \"and I confess we teach that the justified cannot do this\" vs \"quod justificatos non posse nos docere fateor\": 'fateor' governs accusative+infinitive: 'I confess [that] the justified not to be able we to teach' = 'I confess that we teach that the justified cannot'; English inverts to 'I confess we teach', but 'fateor' takes the content as object, not a parenthetical admission about teaching | part 2/2: [agency] \"He goes on to say that we teach\" vs \"Quibus subjungit nos docere\": Subjungit means 'he adds,' not 'he goes on to say'; subject is Pareus continuing his writing.; [completeness] \"A person in the state of grace can therefore fulfil the law\" vs \"adeoque hominem in statu gratiae posse legem implere\": Dropped 'hominem' as indefinite 'a person'; Latin has accusative+infinitive depending on subjungit, not independent statement.; [modality] \"can therefore fulfil\" vs \"posse...implere\": 'Therefore' (ergo/igitur sense) not in Latin; adeoque means 'and so' introducing accusative+infinitive continuation, not inferential conclusion.; [completeness] \"but cannot fulfil it absolutely, without any sin\" vs \"non posse vero implere absolute sine omni peccato\": Dropped 'vero' ('but indeed/truly'); 'without any sin' renders 'sine omni peccato' but omits emphasis of 'vero' contrast.",
+        "error": null
+      },
+      {
+        "section": "2700",
+        "model": "@cf/zai-org/glm-5.2",
+        "response_id": "chatcmpl-2f3742ed-fe69-46e8-808a-45b2695a9bb4+chatcmpl-f7f4dfa5-ec2d-45bf-8e36-bab2ba988481",
+        "verdict": "pass",
+        "english_sha256": "4b79071400f90c22a0cfed0e40dfc1e7662d8ba0381a37cdb8ba6ce3bc10a378",
+        "finished_at": "2026-10-10T17:49:20+00:00",
+        "notes": "part 1/2: no major defect; gloss: XXX. And lest anyone slander [that] Protestants think differently, & we foist on them a foreign doctrine, concerning this matter certain of their testimonies as if in specimen we will bring forward. For to pursue each [one] would be of infinite labour, & superfluous. And the matter is otherwise, to ",
+        "error": null
+      },
+      {
+        "section": "2703",
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "response_id": "246b8f9d64034ab3b39992f13476443e+c5a132f9c8374b6593d75bf702877f47+02fb714acc3d4e379bcf8614deb186df",
+        "verdict": "fail",
+        "english_sha256": "c010ce43354a8f597bd6e2a41a5aa6df82ce4afa67668ed8f6dc60df41077a77",
+        "finished_at": "2026-10-10T17:51:32+00:00",
+        "notes": "part 1/3: [completeness] \"There he distinguishes two kinds of obedience\" vs \"ubi distinguit inter obedientiam... Et inter legis obedientiam\": Added 'two kinds of' not in source; Latin just says 'distinguishes between obedience... and between law's obedience'; [agency] \"The first is the obedience demanded by the law as opposed to the Gospel\" vs \"obedientiam quam lex Evangelio opposita exigit\": Added 'The first is' not in source; creates enumerated structure absent in Latin; [agency] \"The second is the obedience to the law\" vs \"Et inter legis obedientiam\": Added 'The second is' not in source; creates enumerated structure absent in Latin; [completeness] \"from anyone who tries to reach life and happiness by virtue of the legal covenant\" vs \"ab eo qui, vi foederis legalis, ad vitam & foelicitatem pervenire contendit\": Missing 'ab eo' = 'from him'; 'anyone' loses the singular demonstrative force; [modality] \"tries to reach\" vs \"contendit\": 'contendit' = strives/struggles/presses on, stronger than 'tries'; [completeness] \"under its solemn clause 'Do this and live'\" vs \"juxta solennem illam clausulam fac & vives\": Added 'Do this and' not in source; Latin has only 'fac & vives' = 'do & you-will-live'; [agency] \"it admits no one to eternal life\" vs \"sine qua neminem ad vitam aeternam admittit\": Subject 'it' unclear; Latin has no explicit subject, but context suggests 'Evangelium' or 'foedus gratiae' | part 2/3: [negation] \"who has not repented and does not give\" vs \"qui non acta poenitentia, verum aliquod & sincerum legi divinae obsequium praestet\": Latin has positive 'having done penitence, renders true obedience'; English flips to double negative; [modality] \"on condition that they truly repent\" vs \"modo serio resipiscant\": 'modo' is 'provided that' not 'on condition that'—but this is near-synonym; actually OK per instructions. Real issue: 'sperare' is present 'to hope' not 'offers hope...on condition'; [agency] \"it allows no one to hope\" vs \"neminem tamen patitur vitam aeternam sperare\": Subject is Evangelium throughout; 'patitur' is 'permits/allows'—actually correct. But 'qui non acta poenitentia...praestet' describes the person, not what Gospel allows; [negation] \"who has not repented and does not give\" vs \"qui non acta poenitentia...praestet\": Latin: 'who, penitence having been done, renders some true and sincere obedience'—English completely inverts meaning to 'who has NOT repented and does NOT give' | part 3/3: [completeness] \"Indeed every commandment of God, legal or evangelical\" vs \"Imo omnia Dei mandata, sive legalia, sive Evangelica\": 'every' for 'omnia' changes plural 'all' to singular 'every'; [source_identity] \"on the side from which God now sets it before us\" vs \"ex ea parte... ex qua\": 'side' mistranslates 'parte/part'; should be 'from that part from which'",
+        "error": null
+      },
+      {
+        "section": "2703",
+        "model": "@cf/zai-org/glm-5.2",
+        "response_id": "chatcmpl-fc63e307-0503-4f8f-8787-5b05b2e0c2da+chatcmpl-ae365ea3-b7dc-4ca4-9a9d-245bb7f9d063+chatcmpl-772f3f6a-94df-42c3-9626-ccd49119032a",
+        "verdict": "pass",
+        "english_sha256": "c010ce43354a8f597bd6e2a41a5aa6df82ce4afa67668ed8f6dc60df41077a77",
+        "finished_at": "2026-10-10T17:51:46+00:00",
+        "notes": "part 1/3: no major defect; gloss: XXXIII. Finally Robert Baron a Scot, in the Academy of Aberdeen Professor of Theology, a short treatise published concerning the possibility of fulfilling the law of God considered according to evangelical ἐπιείκεια, which he subjoined, in the manner of an appendix, to the disputation concerning mor",
+        "error": null
+      },
+      {
+        "section": "2694",
+        "model": null,
+        "response_id": null,
+        "verdict": null,
+        "english_sha256": null,
+        "finished_at": null,
+        "notes": null,
+        "error": "HTTP 500: {\"errors\":[{\"message\":\"AiError: AiError: Internal server error (3419eb1c-19ac-4166-90b7-826a491d2559)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+      },
+      {
+        "section": "2697",
+        "model": null,
+        "response_id": null,
+        "verdict": null,
+        "english_sha256": null,
+        "finished_at": null,
+        "notes": null,
+        "error": "HTTP 500: {\"errors\":[{\"message\":\"AiError: AiError: Internal server error (dd0db147-2183-4a01-ae8e-48c59f0240c0)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+      },
+      {
+        "section": "2703",
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "response_id": "2cced32f4b9545899083da7c38d4a670+4fa8b534e3f64c0f9f3e527f570195bb+569be80ecb8c4768a27c6c386477b678",
+        "verdict": "fail",
+        "english_sha256": "1797aaf790e53c74381e71752b5f4cda6bbef840780f77c912544e62c10722af",
+        "finished_at": "2026-10-10T17:57:33+00:00",
+        "notes": "part 1/3: [agency] \"from anyone who tries to reach life and happiness\" vs \"ab eo qui...pervenire contendit\": Latin 'ab eo' is 'from him' (singular), not 'anyone' (indefinite pluralizing); [modality] \"tries to reach\" vs \"contendit\": 'Contendit' is strives/presses on, stronger than 'tries'; no conative weakness; [doctrine] \"two kinds of obedience\" vs \"distinguit inter obedientiam...Et inter legis obedientiam\": Added 'two kinds' and 'The first...The second' structure not in Latin; Latin has no enumeration; [completeness] \"The first is the obedience...The second is the obedience\" vs \"distinguit inter obedientiam...Et inter legis obedientiam\": Added copular sentences with 'is'; Latin has no 'est' or 'est obedientia'; [agency] \"it admits no one\" vs \"sine qua neminem...admittit\": Ambiguous 'it' suggests Gospel/covenant, but Latin has no expressed subject; could be God | part 2/3: [agency] \"it allows no one to hope for eternal life\" vs \"neminem tamen patitur vitam aeternam sperare\": Subject is Evangelium (Gospel), not 'it'—the Gospel forbids/permits no one, not a generic 'it'; [modality] \"on condition that they truly repent\" vs \"modo serio resipiscant\": 'modo' is 'provided that' not 'on condition that'—stronger conditional force; 'serio' is 'seriously' not 'truly'; [negation] \"who does not repent and give\" vs \"qui non acta poenitentia, verum aliquod & sincerum legi divinae obsequium praestet\": Latin has 'acta poenitentia' (penitence having been done), not 'does not repent'—the person must HAVE DONE penitence AND render obedience; [completeness] \"The obedience that the covenant of works...demands of man\" vs \"obedientiam quam foedus operum...ab homine exigit\": Missing 'sive lex in rigore suo considerata' (or law in its rigor considered)—second apposition dropped in first clause; [agency] \"no believer can fulfil the law\" vs \"neque hoc respectu legem a fidelibus ullis impleri posse\": Passive 'impleri posse' (can be fulfilled), not active 'no believer can fulfil'—obscures that the law cannot BE fulfilled by believers | part 3/3: [source_identity] \"Accordingly, in the first section\" vs \"Etenim sectione prima\": 'Accordingly' for 'Etenim' (For/Indeed); wrong logical connective; [completeness] \"legal or evangelical\" vs \"sive legalia, sive Evangelica\": 'whether...whether' (sive...sive) meaning 'whether legal or evangelical' flattened to simple 'or'; [completeness] \"in the respect in which\" vs \"ex ea parte...ex qua\": 'from that part...from which' meaning 'insofar as' weakened to 'in the respect in which'",
+        "error": null
+      },
+      {
+        "section": "2703",
+        "model": "@cf/zai-org/glm-5.2",
+        "response_id": "chatcmpl-60f2e9ab-fa11-4216-8a96-45f8128f8a1f",
+        "verdict": "fail",
+        "english_sha256": "1797aaf790e53c74381e71752b5f4cda6bbef840780f77c912544e62c10722af",
+        "finished_at": "2026-10-10T17:58:26+00:00",
+        "notes": "part 2/3: [completeness] \"who does not repent and give the divine law some true and sincere obedience\" vs \"qui non acta poenitentia, verum aliquod & sincerum legi divinae obsequium praestet\": Drops 'acta poenitentia' (having done repentance); renders 'verum' as 'true' modifying obedience, but it likely means 'but/truly' connecting to repentance.",
+        "error": null
+      },
+      {
+        "section": "2694",
+        "model": null,
+        "response_id": null,
+        "verdict": null,
+        "english_sha256": null,
+        "finished_at": null,
+        "notes": null,
+        "error": "HTTP 500: {\"errors\":[{\"message\":\"AiError: AiError: Internal server error (9ecc8a73-97d1-47c9-b643-74bf4748ab70)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+      },
+      {
+        "section": "2697",
+        "model": null,
+        "response_id": null,
+        "verdict": null,
+        "english_sha256": null,
+        "finished_at": null,
+        "notes": null,
+        "error": "HTTP 500: {\"errors\":[{\"message\":\"AiError: AiError: Internal server error (34fcdd99-c0d0-490c-a9d1-d772a4dfa25f)\",\"code\":8005}],\"success\":false,\"result\":{},\"messages\":[]}"
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "section": "2689",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, agency, modality; uncertainties: 0; model notes: part 1/1: [agency] \"Paul's example makes this plain\" vs \"Quod evidens est Pauli Apost. exemplo\": Latin: 'which is evident by Paul's example'; English inverts: example makes plain; [modality] \"It would be hard to find anyone\" vs \"Neque enim facile reperietur aliquis\": Latin: 'nor easily will be found anyone' (future passive); English 'would be hard' conditional; [completeness] \"keeps reaching for what lies further on\" vs \"se ad ulteriora perpetuo contendere\": Latin 'himself to further things perpetually strives'; English drops reflexive 'se'; [completeness] \"I press on toward the goal\" vs \"ad destinatum persequor\": Latin 'to the appointed goal I follow after'; English drops 'destinatum' (appointed); [completeness] \"God's upward call\" vs \"supernae vocationis Dei\": Latin 'heavenly calling of God'; English 'upward' for 'supernae' (heavenly)\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: XIX. Nay, that very obedience which the faithful render to the law is not free from its own defects & blemishes, & in those very works which they produce in conformity with the law they do not attain the highest ἀκρίβειαν of the law; & always in that respect there remains to them material for progre\nLatin quote (from model note, verified): «Quod evidens est Pauli Apost. exemplo»\nEnglish quote (from model note, verified): «Paul's example makes this plain»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'Paul's example makes this plain' renders 'Quod evidens est Pauli Apost. exemplo'; 'It would be hard to find anyone' renders 'Neque enim facile reperietur aliquis'; 'keeps reaching for what lies further on' renders 'se ad ulteriora perpetuo contendere'; 'I press on toward the goal' renders 'ad destinatum persequor' and 'God's upward call' renders 'supernae vocationis Dei' (Philippians 3:12-14, checked against the WEB text). kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "a22b06b4419849afa0e3de7899802f20"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-735e78b8-cddf-4e0c-b5c0-d4154cd6cef2"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "a22b06b4419849afa0e3de7899802f20",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'Paul's example makes this plain' renders 'Quod evidens est Pauli Apost. exemplo'; 'It would be hard to find anyone' renders 'Neque enim facile reperietur aliquis'; 'keeps reaching for what lies further on' renders 'se ad ulteriora perpetuo contendere'; 'I press on toward the goal' renders 'ad destinatum persequor' and 'God's upward call' renders 'supernae vocationis Dei' (Philippians 3:12-14, checked against the WEB text). kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2690",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, scripture; uncertainties: 0; model notes: part 1/2: [completeness] \"And the Lord repaid me according to my righteousness, according to the cleanness of my hands in his sight.\" vs \"Fui, inquit, immaculatus, sive perfectus, cum eo, & custodivi me ab iniquitate mea.\": Invented clause: last sentence not in source.; [scripture] \"David in Psalm 18\" vs \"Psal. 18.\": Psalm 18 in Vulgate = Psalm 19 in Hebrew/English numbering; should be Psalm 18 [19].\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: part 1/2: [completeness] \"And the Lord repaid me according to my righteousness, according to the cleanness of my hands in his sight.\" vs \"\": Entire clause added with no corresponding Latin in this source passage.\nLatin quote (from model note, verified): «Fui, inquit, immaculatus, sive perfectus, cum eo, & custodivi me ab iniquitate mea.»\nEnglish quote (from model note, verified): «And the Lord repaid me according to my righteousness, according to the cleanness of my hands in his sight.»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected the glm-5.2 and kimi-k2.6 'added clause' flags: 'And the Lord repaid me according to my righteousness ...' renders the print's 'Et retribuit mihi Dominus secundum justitiam meam, & secundum puritatem manuum mearum in conspectu oculorum ejus'; the flag comes from the review window ending before that sentence. Rejected the kimi-k2.6 numbering flag: Le Blanc cites the Hebrew numbering, and the quoted text is Psalm 18:23-24 (checked against the WEB text). Fixed after kimi-k2.6: 'So the Lord repaid me' became 'And the Lord repaid me' for 'Et retribuit'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), 2026-10-10): Rejected the glm-5.2 and kimi-k2.6 'added clause' flags: 'And the Lord repaid me according to my righteousness ...' renders the print's 'Et retribuit mihi Dominus secundum justitiam meam, & secundum puritatem manuum mearum in conspectu oculorum ejus'; the flag comes from the review window ending before that sentence. Rejected the kimi-k2.6 numbering flag: Le Blanc cites the Hebrew numbering, and the quoted text is Psalm 18:23-24 (checked against the WEB text). Fixed after kimi-k2.6: 'So the Lord repaid me' became 'And the Lord repaid me' for 'Et retribuit'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "259aca108f014061acdafbc26aae08c6"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-1b5c246d-8f8a-40d6-9559-5fdb2ead217c"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "259aca108f014061acdafbc26aae08c6",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected the glm-5.2 and kimi-k2.6 'added clause' flags: 'And the Lord repaid me according to my righteousness ...' renders the print's 'Et retribuit mihi Dominus secundum justitiam meam, & secundum puritatem manuum mearum in conspectu oculorum ejus'; the flag comes from the review window ending before that sentence. Rejected the kimi-k2.6 numbering flag: Le Blanc cites the Hebrew numbering, and the quoted text is Psalm 18:23-24 (checked against the WEB text). Fixed after kimi-k2.6: 'So the Lord repaid me' became 'And the Lord repaid me' for 'Et retribuit'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "chatcmpl-1b5c246d-8f8a-40d6-9559-5fdb2ead217c",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected the glm-5.2 and kimi-k2.6 'added clause' flags: 'And the Lord repaid me according to my righteousness ...' renders the print's 'Et retribuit mihi Dominus secundum justitiam meam, & secundum puritatem manuum mearum in conspectu oculorum ejus'; the flag comes from the review window ending before that sentence. Rejected the kimi-k2.6 numbering flag: Le Blanc cites the Hebrew numbering, and the quoted text is Psalm 18:23-24 (checked against the WEB text). Fixed after kimi-k2.6: 'So the Lord repaid me' became 'And the Lord repaid me' for 'Et retribuit'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2691",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, modality; uncertainties: 0; model notes: part 2/2: [modality] \"None of this stops believers...from being called perfect\" vs \"Verum hoc non obstat quo minus...perfecti nominentur\": 'None of this stops' weakens to mere non-hindrance; Latin 'non obstat quo minus' is stronger 'does not prevent that'/'makes no obstacle to'; [completeness] \"compared with others who are called spiritual in a special sense\" vs \"prae illis qui singulari ratione spirituales appellantur\": 'prae' (before/in comparison with) omitted; 'singulari ratione' is 'in a singular/special manner' not 'in a special sense'; [modality] \"'Let as many of us as are perfect think this way'\" vs \"Quicunque perfecti sumus hoc sentiamus\": 'Quicunque' is 'whoever/whatever ones,' not 'as many of us as'; 'sentiamus' is hortatory subjunctive 'let us think,' correctly rendered\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/2: no major defect; gloss: XXI. Which difficulty so that it may be resolved must be observed a twofold distinction of perfection. For there is a certain perfection called absolutely so, another truly secundum quid and comparatively only. Absolutely perfect is that to which in its own kind nothing is lacking. Comparatively how\nLatin quote (from model note, verified): «prae illis qui singulari ratione spirituales appellantur»\nEnglish quote (anchor copied from packet text): «Thesis XXI. To resolve this difficulty we need a twofold distinction of perfection. One»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'None of this stops believers ... from being called perfect' renders 'hoc non obstat quo minus ... perfecti nominentur'; 'compared with others who are called spiritual in a special sense' renders 'prae illis qui singulari ratione spirituales appellantur'; 'Let as many of us as are perfect think this way' renders 'Quicunque perfecti sumus hoc sentiamus' (Philippians 3:15). kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "6d88a81fc26c4819866f2b57ae335463"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-6d6fd2e3-3eb9-4ac5-970e-d9a1c80bb083+chatcmpl-4b18f796-fc6d-44e0-b55c-e36eb9897425"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "6d88a81fc26c4819866f2b57ae335463",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'None of this stops believers ... from being called perfect' renders 'hoc non obstat quo minus ... perfecti nominentur'; 'compared with others who are called spiritual in a special sense' renders 'prae illis qui singulari ratione spirituales appellantur'; 'Let as many of us as are perfect think this way' renders 'Quicunque perfecti sumus hoc sentiamus' (Philippians 3:15). kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2692",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, agency, modality; uncertainties: 0; model notes: part 1/2: [agency] \"he can make no further improvement in that respect\" vs \"neque hoc respectu possit in melius proficere\": Subject is impersonal 'possit,' not 'he can'; 'proficere' means 'to progress/advance,' not 'make improvement'; [modality] \"no one fulfils the law perfectly in this life\" vs \"legem a nullo perfecte in hac vita impleri\": Passive infinitive 'impleri' (to be fulfilled) rendered as active 'fulfils'; [completeness] \"falls well short of the highest degree\" vs \"multum a summo gradu perfectionis abest\": 'multum' (much/greatly) weakened to 'well short'; 'abest' is present indicative, not conditional | part 2/2: [completeness] \"The essential perfection of such a thing is simply its being true and sincere\" vs \"Nec enim essentialis ejusmodi perfectio aliud est quam ipsius rei veritas atque sinceritas\": Dropped 'Nec enim' ('For neither/not'); causal/negative force lost, making assertion weaker.; [agency] \"led by his Spirit\" vs \"spiritu illius ducuntur\": 'illius' = 'that one's/his'; but 'Spirit' capitalized imposes Trinitarian reading not explicit in Latin.\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/2: no major defect; gloss: XXII. To this distinction akin is another, according to which perfection is usually distinguished into perfection of parts and perfection of degrees. Perfect according to degrees obedience is that which attains the highest degree of perfection, and through which someone so perfectly conforms and sub\nLatin quote (from model note, verified): «neque hoc respectu possit in melius proficere»\nEnglish quote (from model note, verified): «he can make no further improvement in that respect»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'he can make no further improvement' renders 'neque hoc respectu possit in melius proficere', whose subject is the 'aliquis' of the clause; 'no one fulfils the law perfectly' renders 'legem a nullo perfecte ... impleri'; 'The essential perfection of such a thing is simply its being true and sincere' renders 'Nec enim essentialis ejusmodi perfectio aliud est quam ipsius rei veritas atque sinceritas'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "af1f2e9acfbc4b11a4048d6927b893a2+8807c5eeca93441d837e6a83ed9dc013"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-c67314c0-e05b-42e4-bb68-7a7a5536cdb5+chatcmpl-06dc6334-2d77-4488-8a98-8d1ddfb39b04"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "af1f2e9acfbc4b11a4048d6927b893a2+8807c5eeca93441d837e6a83ed9dc013",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'he can make no further improvement' renders 'neque hoc respectu possit in melius proficere', whose subject is the 'aliquis' of the clause; 'no one fulfils the law perfectly' renders 'legem a nullo perfecte ... impleri'; 'The essential perfection of such a thing is simply its being true and sincere' renders 'Nec enim essentialis ejusmodi perfectio aliud est quam ipsius rei veritas atque sinceritas'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2693",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, agency; uncertainties: 0; model notes: part 1/2: [completeness] \"Obeying God for a while is not enough; we have to persevere in obeying him to the end, in hard times as in good ones\" vs \"Denique debet esse obedientia nostra constans & perseverans\": Added clause 'to the end, in hard times as in good ones' not in source | part 2/2: [agency] \"we have to persevere in obeying him\" vs \"in ejus obsequio ... perseverandum est\": Latin impersonal 'it must be persevered' changed to active 'we have to persevere'\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/2: no major defect; gloss: XXIII. But that that thing may become more clearly known, it is to be observed that for this, that our obedience may be true and sincere, three things especially are required. First it is that it be rendered not only with body and external work, but also with internal affection of mind. For it profi\nLatin quote (from model note, verified): «Denique debet esse obedientia nostra constans & perseverans»\nEnglish quote (from model note, verified): «Obeying God for a while is not enough; we have to persevere in obeying him to the end, in hard times as in good ones»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'to the end, in hard times as in good ones' renders the print's 'tam per res adversas quam per res secundas, ad finem usque', so it is not added; 'we have to persevere' renders the gerundive 'perseverandum est'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "agency"
+          ],
+          "uncertainties": [],
+          "response_id": "6a43de8af0154feba211aedac891c2fc+1219717966c04748a1da52dbe160f304"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-6e8de6bf-c339-4d2a-b311-1cc4421cd73e+chatcmpl-b6879657-e27c-481d-bfbd-f0f16094909c"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "6a43de8af0154feba211aedac891c2fc+1219717966c04748a1da52dbe160f304",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'to the end, in hard times as in good ones' renders the print's 'tam per res adversas quam per res secundas, ad finem usque', so it is not added; 'we have to persevere' renders the gerundive 'perseverandum est'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "agency"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2694",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, negation, agency, modality; uncertainties: 0; model notes: part 1/1: [source_identity] \"On all these counts\" vs \"Horum omnium respectu\": Latin means 'with respect to all these [things]', not 'on all these counts'; [negation] \"lacks nothing\" vs \"nihil deest\": Correct: 'nothing is lacking'; [agency] \"those reborn by God's Spirit\" vs \"per spiritum Dei regeniti\": Correct: 'through Spirit of God reborn'; [modality] \"They serve God not with the body alone\" vs \"Nec enim corpore tantum Deo serviunt\": Correct rendering; [completeness] \"in doing it they aim at God's glory\" vs \"sed etiam in eo gloriam Dei spectant\": 'in eo' = 'in it' (the deed), not 'in doing it'; minor but 'eo' refers to 'opere'; [modality] \"Their concern is not to obey merely\" vs \"Non his, aut illis mandatis duntaxat obedire satagunt\": 'satagunt' = 'they strive/are eager', not 'their concern is'; adds periphrasis; [completeness] \"as long as things go well\" vs \"quandiu res prospere fluunt\": 'fluunt' = 'flow', 'prospere' = 'prosperously'; acceptable idiom; [completeness] \"to their last breath\" vs \"ad ultimum usque vitae spiritum\": 'vitae spiritum' = 'breath of life', not 'last breath'; 'spiritum' = 'spirit/breath'\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: XXIV. With respect to all these things nothing is lacking to the obedience of those who are truly godly and regenerated by the Spirit of God. For they serve God not with body only, but subject mind and affections to his will. Nor only in deed do they perform what things are commanded by the law; but\nLatin quote (from model note, verified): «per spiritum Dei regeniti»\nEnglish quote (from model note, verified): «in doing it they aim at God's glory»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Fixed after the first kimi-k2.6 flag: 'They do not bother to obey just this or that commandment' became 'Their concern is not to obey merely this or that commandment' for 'Non his, aut illis mandatis duntaxat obedire satagunt'. Rejected the rest: 'On all these counts' renders 'Horum omnium respectu', 'in doing it' renders 'in eo', and 'to their last breath' renders 'ad ultimum usque vitae spiritum'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "3bc779b2a6de4624923b3c7b1b7af6c1"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-6abbb53e-bd47-4893-acfc-17b86802aae0"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "3bc779b2a6de4624923b3c7b1b7af6c1",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Fixed after the first kimi-k2.6 flag: 'They do not bother to obey just this or that commandment' became 'Their concern is not to obey merely this or that commandment' for 'Non his, aut illis mandatis duntaxat obedire satagunt'. Rejected the rest: 'On all these counts' renders 'Horum omnium respectu', 'in doing it' renders 'in eo', and 'to their last breath' renders 'ad ultimum usque vitae spiritum'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2695",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, agency; uncertainties: 0; model notes: part 1/2: [source_identity] \"They try to bring both the acts of the body and the affections of the mind into line with the whole law\" vs \"integrae legi, & universis illius praeceptis, tum corporis actus, tum animi affectus, idque constanter & perseveranter exigere conantur\": Latin has 'exigere' (demand/require), not 'bring into line'; subject is obedience demanding conformity, not 'they' trying; [agency] \"They try to bring\" vs \"exigere conantur\": Subject is obedience/perfectio, not 'they'; obedience demands, people don't 'try to bring'; [completeness] \"In those places 'perfection' means only the integrity and sincerity of these holy men; the Hebrew word Tham or thamim, which translators there render 'perfect', properly means whole and sincere\" vs \"Etenim per perfectionem solum ibi designatur integritas atque sinceritas sanctorum istorum virorum\": Hebrew etymology 'Tham or thamim' is entirely absent from Latin source; invented clause\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/2: no major defect; gloss: XXV. And so with full right can be attributed to their obedience that perfection which in the Schools is accustomed to be called perfection of Parts. Since indeed to the complete law, and to all its precepts, both the acts of the body and the affections of the mind, and that constantly and perseveri\nLatin quote (from model note, verified): «integrae legi, & universis illius praeceptis, tum corporis actus, tum animi affectus, idque constanter & perseveranter exigere conantur»\nEnglish quote (from model note, verified): «They try to bring both the acts of the body and the affections of the mind into line with the whole law»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Fixed after the glm-5.2 flag: 'steadily and to the end' became 'steadily and with perseverance' for 'constanter & perseveranter'. Rejected the kimi-k2.6 flags: in 'integrae legi ... tum corporis actus, tum animi affectus ... exigere conantur' the subject is the regenerate and 'exigere' with the dative means to measure or square their acts by the law; the clause on 'Tham sive thamim' renders the print's 'Siquidem vox Hebraea Tham sive thamim ... integrum & sincerum proprie significat', so it is not invented (Ephesians 4:24 checked against the WEB text). kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "agency"
+          ],
+          "uncertainties": [],
+          "response_id": "366834001764445f84ce593cad07e767"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-d39f2c45-e3ab-466e-86c9-47e2e43f87ec+chatcmpl-0781e065-524e-4d9f-9e81-510fc5dce582"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "366834001764445f84ce593cad07e767",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Fixed after the glm-5.2 flag: 'steadily and to the end' became 'steadily and with perseverance' for 'constanter & perseveranter'. Rejected the kimi-k2.6 flags: in 'integrae legi ... tum corporis actus, tum animi affectus ... exigere conantur' the subject is the regenerate and 'exigere' with the dative means to measure or square their acts by the law; the clause on 'Tham sive thamim' renders the print's 'Siquidem vox Hebraea Tham sive thamim ... integrum & sincerum proprie significat', so it is not invented (Ephesians 4:24 checked against the WEB text). kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "agency"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2696",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: part 1/2: [completeness] \"because it is true and sincere and lacks nothing that the nature and integrity of true obedience, acceptable to God, necessarily requires\" vs \"quae obedientia licet multum infra summam perfectionem subsidat, nihilominus, juxta scripturae stylum, perfecta dici potest\": Invented clause: 'because it is true and sincere...' has no source; Latin stops at 'perfecta dici potest'\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/2: no major defect; gloss: XXVI. We deny therefore that believers are able to fulfill God's law perfectly, if the discourse is about the perfection which is called absolute and of degrees: both because all of them, no less than the rest of men, by nature are sinners; and because after received grace they do not cease to offen\nLatin quote (from model note, verified): «quae obedientia licet multum infra summam perfectionem subsidat, nihilominus, juxta scripturae stylum, perfecta dici potest»\nEnglish quote (from model note, verified): «because it is true and sincere and lacks nothing that the nature and integrity of true obedience, acceptable to God, necessarily requires»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'because it is true and sincere and lacks nothing ...' renders the print's 'quoniam vera atque sincera est, nec quicquam ei deest eorum quae ... necessario requiruntur', so it is not invented; the flag comes from the review window ending at 'perfecta dici potest'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "bb8474332ddd4ffeb5836f8d66c22266"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-b4745f1d-4965-45c1-a0da-7b1d60e75fa9+chatcmpl-c9bae934-b714-4d48-b510-cae4ef136bab"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "bb8474332ddd4ffeb5836f8d66c22266",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'because it is true and sincere and lacks nothing ...' renders the print's 'quoniam vera atque sincera est, nec quicquam ei deest eorum quae ... necessario requiruntur', so it is not invented; the flag comes from the review window ending at 'perfecta dici potest'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2697",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness; uncertainties: 0; model notes: part 1/1: [source_identity] \"Becanus's Summa of scholastic theology\" vs \"Becanum in summa Theologiae Scolasticae\": Missing 'in' makes Becanus author not source; Latin has Becanus 'in' the Summa; [completeness] \"This can be seen in Bellarmine\" vs \"Sicut videre est apud Bell.\": Dropped 'Sicut' (As/Just as); weakens comparative force of citation\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: XXVII. And this explanation of the Orthodox Opinion carefully to-be-observed is because-of the doctors of the Roman Church, who in this question, as in many others, the doctrine of the Reformed School either not they-understand, or with-zeal they-pervert. Since indeed to Protestant Theologians they-\nLatin quote (from model note, verified): «Becanum in summa Theologiae Scolasticae»\nEnglish quote (from model note, verified): «Becanus's Summa of scholastic theology»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Fixed after kimi-k2.6: 'They even claim we teach' became 'They even claim that Protestants teach' for 'Imo quod doceant'. Rejected the rest: 'Becanus's Summa of scholastic theology' renders 'Becanum in summa Theologiae Scolasticae', and 'This can be seen in Bellarmine' renders 'Sicut videre est apud Bell.'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "e01262407ff14658b689c4ea18d373e6"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-1a8152d3-a518-4854-a96a-ff77216bcaa3"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "e01262407ff14658b689c4ea18d373e6",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Fixed after kimi-k2.6: 'They even claim we teach' became 'They even claim that Protestants teach' for 'Imo quod doceant'. Rejected the rest: 'Becanus's Summa of scholastic theology' renders 'Becanum in summa Theologiae Scolasticae', and 'This can be seen in Bellarmine' renders 'Sicut videre est apud Bell.'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2698",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, agency, modality; uncertainties: 0; model notes: part 1/1: [agency] \"they frame between us and them\" vs \"cum inter nos & ipsos controversiae statum ponunt\": Latin 'cum...ponunt' is temporal/causal 'when/while they place,' not 'they frame'; [modality] \"should not be called sins\" vs \"non sint appellanda peccata\": Latin is passive periphrastic 'are to be called,' not modal 'should not be called'; [modality] \"deserve to be called righteous\" vs \"justa dici mereantur\": Latin 'mereantur' is subjunctive in indirect question, not indicative 'deserve'; [completeness] \"In line with them is what we read\" vs \"Quibus conformia sunt quae leguntur\": Dropped 'conformia' meaning 'conformable/consistent with,' weakened to 'in line with'; [modality] \"are to be called righteous\" vs \"justa dicenda sint\": Latin is subjunctive 'are to be said' in indirect question, not declarative 'are to be called'\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: XXVIII. Whence it is that, resting on this false hypothesis, when they posit between us and them a state of controversy which is plainly none at all, namely this: Whether men justified, and by the grace of the Lord helping, can so fulfill the divine law, that their works, not only are not to be call\nLatin quote (from model note, verified): «cum inter nos & ipsos controversiae statum ponunt»\nEnglish quote (from model note, verified): «they frame between us and them»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Fixed after kimi-k2.6: 'Hence' now renders 'Unde est quod'. Rejected the rest: 'they frame ... a state of the controversy' renders 'controversiae statum ponunt'; 'should not be called sins' and 'are to be called righteous' render the gerundives 'non sint appellanda peccata' and 'justa dicenda sint'; 'In line with them is' renders 'Quibus conformia sunt'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "3a9ea48abf204154895688b1bdcc0a68"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-19e9cd50-4c69-453f-9190-932fd36bdd94"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "3a9ea48abf204154895688b1bdcc0a68",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Fixed after kimi-k2.6: 'Hence' now renders 'Unde est quod'. Rejected the rest: 'they frame ... a state of the controversy' renders 'controversiae statum ponunt'; 'should not be called sins' and 'are to be called righteous' render the gerundives 'non sint appellanda peccata' and 'justa dicenda sint'; 'In line with them is' renders 'Quibus conformia sunt'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2699",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, negation, agency, modality; uncertainties: 0; model notes: part 1/1: [agency] \"Protestants never meant to deny any of this\" vs \"Verum nunquam fuit animus Protestantium quicquam horum negare\": 'meant' implies intention; Latin 'animus fuit' states what their mind/attitude was, not purpose; [completeness] \"to the extent of doing good works\" vs \"sic a piis impleri, ut opera bona faciant\": 'sic...ut' = 'so...that' result clause; English weakens to 'to the extent of'; [negation] \"must be called sins and are really sins by nature\" vs \"appellanda esse peccata, & revera talia natura sua esse\": Latin has no 'must'; English adds modal obligation absent from source; [agency] \"they grant\" vs \"sed fatentur\": 'fatentur' = 'they confess/admit', not 'grant'; stronger acknowledgment than concession; [modality] \"The one thing they have always denied\" vs \"Id solum ab ipsis est perpetuo negatum\": Latin passive 'was denied by them'; English active obscures formulaic theological passivity\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: XXIX. But never was the mind of Protestants to deny anything of these things. They do not teach that to the justified the law of God is utterly impossible. They do not deny that believers render true obedience to the commandments of God, and the law of God is thus fulfilled by the godly through the \nLatin quote (from model note, verified): «Verum nunquam fuit animus Protestantium quicquam horum negare»\nEnglish quote (from model note, verified): «Protestants never meant to deny any of this»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'Protestants never meant to deny' renders 'nunquam fuit animus Protestantium ... negare'; 'to the extent of doing good works' renders the result clause 'sic ... ut opera bona faciant'; 'must be called sins' renders the gerundive 'appellanda esse peccata'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "86ef2cf70c744bd48f0b302babe0c90e"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-7f47a59f-ecf9-4330-9f44-834727991eb6"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "86ef2cf70c744bd48f0b302babe0c90e",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'Protestants never meant to deny' renders 'nunquam fuit animus Protestantium ... negare'; 'to the extent of doing good works' renders the result clause 'sic ... ut opera bona faciant'; 'must be called sins' renders the gerundive 'appellanda esse peccata'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2700",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, negation, agency, modality; uncertainties: 0; model notes: part 1/2: [agency] \"we are pinning on them a doctrine not their own\" vs \"nos alienam ipsis affingere doctrinam\": Latin 'nos' is object of 'calumnietur' (accused of), not active 'we are pinning'; [negation] \"we teach that the justified cannot do this\" vs \"quod justificatos non posse nos docere fateor\": Latin has 'fateor' (I confess) with accusative+infinitive 'nos docere' (that we teach), but 'non posse' governs 'justificatos'; the English 'cannot do this' obscures that 'non posse' is part of the reported teaching, not a separate negation | part 2/2: [agency] \"He goes on to say that we teach\" vs \"Quibus subjungit nos docere\": Subject is 'he' (Pareus), not 'we'; 'subjungit' means 'adds/joins below', not 'goes on to say that'; [completeness] \"A person in the state of grace can therefore fulfil\" vs \"adeoque hominem in statu gratiae posse\": Dropped 'hominem' accusative; Latin has 'that a man...is able', not 'a person...can'; [modality] \"can therefore fulfil\" vs \"posse...implere\": Latin infinitive 'posse' depends on 'subjungit nos docere'; English makes independent assertion\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/2: no major defect; gloss: XXX. And lest anyone should slander that Protestants think differently, and that we foist on them a foreign doctrine, we will bring forward certain of their testimonies on this matter as if in specimen. For to pursue each one would be of infinite labour, and superfluous. And the matter is otherwise \nLatin quote (from model note, verified): «nos alienam ipsis affingere doctrinam»\nEnglish quote (from model note, verified): «we are pinning on them a doctrine not their own»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Fixed after kimi-k2.6: 'slander us by claiming' became 'falsely allege that Protestants think otherwise, or that we are pinning ...' for 'nequis calumnietur Protestantes diversum sentire, & nos alienam ipsis affingere doctrinam' ('nos' is the subject of 'affingere'). Rejected the rest: 'and I confess we teach that the justified cannot do this' renders 'quod justificatos non posse nos docere fateor'; 'He goes on to say' renders 'Quibus subjungit'; the accusative-and-infinitive after 'subjungit' is rendered as reported speech. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "9c9560c00e62413ca34c22b39a903c8b+bc9ae0e0a4814575a9cf9a89604779ba"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-c45abb85-e715-4230-829d-b08a40ed86ca+chatcmpl-47982b05-1db5-4fcd-8476-33d9f8ca1566"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "9c9560c00e62413ca34c22b39a903c8b+bc9ae0e0a4814575a9cf9a89604779ba",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Fixed after kimi-k2.6: 'slander us by claiming' became 'falsely allege that Protestants think otherwise, or that we are pinning ...' for 'nequis calumnietur Protestantes diversum sentire, & nos alienam ipsis affingere doctrinam' ('nos' is the subject of 'affingere'). Rejected the rest: 'and I confess we teach that the justified cannot do this' renders 'quod justificatos non posse nos docere fateor'; 'He goes on to say' renders 'Quibus subjungit'; the accusative-and-infinitive after 'subjungit' is rendered as reported speech. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2701",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, negation, agency, modality; uncertainties: 0; model notes: part 1/1: [agency] \"William Ames says much the same\" vs \"Similia tradit Guilielmus Amesius\": Latin says Ames 'hands over/similar things' not 'says'; passive construction obscured; [completeness] \"or for those perfectly sanctified in Christ\" vs \"necnon iis qui in Christo perfecte sanctificantur\": necnon ('and also') rendered as 'or'; changes coordination to disjunction; [modality] \"they cannot keep\" vs \"hoc fieri non posse\": Latin 'this to be done not possible' impersonal; English makes active 'they cannot keep'; [negation] \"though not completely in effect\" vs \"non omnimodo effectu\": omnimodo means 'in every way' not 'completely'; 'not in every way in effect' differs; [completeness] \"in the quality of sincerity\" vs \"quoad qualitatem sinceritatis\": Latin 'as to quality of sincerity'; English adds definite article changing sense\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/1: no major defect; gloss: XXXI. Similar things teaches William Ames in Bellarmine enervated vol. 4. book 6. ch. 7. We, he says, do not teach the law to be utterly impossible for man, for Adam say, before the fall, & afterwards for Christ: and also for those who in Christ are perfectly sanctified, but concerning others, who h\nLatin quote (from model note, verified): «Similia tradit Guilielmus Amesius»\nEnglish quote (from model note, verified): «William Ames says much the same»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'or for those perfectly sanctified' renders 'necnon iis qui ... perfecte sanctificantur' inside the negative 'non docemus'; 'they cannot keep' renders 'ut legem ... observent, ... hoc fieri non posse'; 'though not completely in effect' renders 'non omnimodo effectu'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "f74bbd30f8f541ae9354b2eaaabbe08c"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-00b7833a-6dc8-41ca-b55d-496b290630e1"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "f74bbd30f8f541ae9354b2eaaabbe08c",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'or for those perfectly sanctified' renders 'necnon iis qui ... perfecte sanctificantur' inside the negative 'non docemus'; 'they cannot keep' renders 'ut legem ... observent, ... hoc fieri non posse'; 'though not completely in effect' renders 'non omnimodo effectu'. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Spot-checked a second time by hand against the Latin (one of 3 kimi-rejected spot-checks): no error found. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2702",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, negation, agency; uncertainties: 0; model notes: part 1/2: [agency] \"Our opponents know that our side does not deny\" vs \"Norunt adversarii nostros non negare Renatis\": Subject is 'our adversaries know our people [the regenerate] do not deny', not 'our side does not deny'; [negation] \"breaks not one jot of it\" vs \"ut nullum ejus apicem violet\": Source says 'violates none of its apex'—English 'breaks not one jot' inverts to double negative construction altering emphasis; [agency] \"by virtue of it one gains\" vs \"ut ejusdem beneficio vitae aeternae haereditatem consequatur\": Subject is the 'observation' itself (or the regenerate person implied), but 'one' obscures that the observation obtains the inheritance; [agency] \"Protestants do not claim that the regenerate cannot keep God's precepts\" vs \"qui non asserunt esse impossibile Renatis observare praecepta Dei\": Relative 'qui' refers to Protestants as subject of 'asserunt'; English makes 'Protestants' main clause subject but changes structure significantly; [completeness] \"for they work hard at keeping all of them\" vs \"studiose enim in illorum omnium observatione se exercent\": Missing 'enim' causal force; 'se exercent' is reflexive 'exercise themselves', not merely 'work hard' | part 2/2: [agency] \"by keeping them\" vs \"observando\": Latin gerund lacks explicit object 'them'; English supplies antecedent not in source\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/2: no major defect; gloss: XXXII. To the same thing revert those things which John Davenant has concerning actual righteousness, chapter 47. For examining that Tridentine canon, If anyone shall say God's precepts to a man justified and placed under grace to be impossible to keep, let him be anathema. I would wish, he says, [y\nLatin quote (from model note, verified): «Norunt adversarii nostros non negare Renatis»\nEnglish quote (from model note, verified): «Our opponents know that our side does not deny»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Rejected: 'our side does not deny the regenerate' renders 'nostros non negare Renatis'; 'breaks not one jot of it' renders 'ut nullum ejus apicem violet'; 'by virtue of it one gains the inheritance' renders 'ut ejusdem beneficio vitae aeternae haereditatem consequatur'. The canon is Trent, session 6, canon 18 (checked against the Latin text), quoted by Davenant as the print gives it. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency"
+          ],
+          "uncertainties": [],
+          "response_id": "741f3dfa877f4adeb31b6ce65d0b80be+e3ef30d389ae47c38b2245ed17b46b0d"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-bd36eb92-ec0f-44ae-aab7-ee072c834d10+chatcmpl-4a0f7222-3c56-4e2c-bd6c-9c7e12151be3"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "741f3dfa877f4adeb31b6ce65d0b80be+e3ef30d389ae47c38b2245ed17b46b0d",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Rejected: 'our side does not deny the regenerate' renders 'nostros non negare Renatis'; 'breaks not one jot of it' renders 'ut nullum ejus apicem violet'; 'by virtue of it one gains the inheritance' renders 'ut ejusdem beneficio vitae aeternae haereditatem consequatur'. The canon is Trent, session 6, canon 18 (checked against the Latin text), quoted by Davenant as the print gives it. kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "2703",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, negation, agency, modality; uncertainties: 0; model notes: part 1/3: [agency] \"from anyone who tries to reach life and happiness\" vs \"ab eo qui...pervenire contendit\": Latin 'ab eo' is 'from him,' singular; English pluralizes to 'anyone'; [modality] \"tries to reach\" vs \"contendit\": Latin 'contendit' is active 'strives/struggles'; English weakens to 'tries'; [completeness] \"The first is the obedience...The second is the obedience\" vs \"distinguit inter obedientiam...Et inter legis obedientiam\": English adds explicit numbering 'first'/'second' not in Latin | part 2/3: [agency] \"it allows no one to hope for eternal life\" vs \"neminem tamen patitur vitam aeternam sperare\": Subject is Evangelium (Gospel), not 'it' anaphoric to condition; Gospel forbids hope, not merely 'allows' none; [modality] \"on condition that they truly repent\" vs \"modo serio resipiscant\": 'modo' is 'provided that' not 'on condition that'; latter implies bilateral bargain, modo is concessive proviso; [completeness] \"one required by the covenant of works opposed to grace and the other by the covenant of grace itself\" vs \"unius quam foedus operum gratiae oppositum, alterius quam ipsum foedus gratiae postulat\": Dropped 'gratiae oppositum' structure: first is 'covenant of works opposed to grace', second lacks parallel 'ipsum' emphasis on 'itself'; [agency] \"the doctor maintains the following\" vs \"affirmat Doctor ille\": 'ille' is 'that' (previously mentioned), not merely 'the'; anaphoric deixis lost; [negation] \"no believer can fulfil the law\" vs \"neque hoc respectu legem a fidelibus ullis impleri posse\": Passive 'impleri' = 'to be fulfilled', not active 'can fulfil'; believers are object, not agent | part 3/3: [source_identity] \"Indeed, in the first section of that treatise\" vs \"Etenim sectione prima modo dicti tractatus\": Etenim means 'For indeed' not merely 'Indeed'; causal force lost; [modality] \"can be fulfilled one by one in the respect in which\" vs \"sigillatim ex ea parte impleri possunt, ex qua\": ex ea parte = 'from that part' not 'in the respect'; modal sense altered; [modality] \"under threat and penalty\" vs \"sub periculo & poena\": periculo = 'danger' not 'threat'; different semantic range\n[glm @cf/zai-org/glm-5.2] verdict=pass; failed checks: none; uncertainties: 0; model notes: part 1/3: no major defect; gloss: XXXIII. Finally Robert Baron a Scot, in the Academy of Aberdeen Professor of Theology, published a short treatise on the possibility of fulfilling the law of God considered according to evangelical ἐπιείκειαν, which he subjoined, in the manner of an appendix, to the disputation on mortal & venial si\nLatin quote (from model note, verified): «neminem tamen patitur vitam aeternam sperare»\nEnglish quote (from model note, verified): «from anyone who tries to reach life and happiness»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), 2026-10-10): Fixed after kimi-k2.6 and glm-5.2: 'who does not repent and give' became 'who does not, after repenting, give ...' for 'qui non acta poenitentia, verum aliquod & sincerum legi divinae obsequium praestet' ('non' governs 'praestet'; 'verum' agrees with 'obsequium'); 'Do this and live' became 'Do and you will live' for 'fac & vives'; 'Accordingly' became 'Indeed' for 'Etenim'; 'on the side from which' became 'in the respect in which' for 'ex ea parte ... ex qua'. Rejected the rest: 'two kinds of obedience' follows the print's own 'distinctione duplicis obedientiae'; 'no believer can fulfil the law' renders 'legem a fidelibus ullis impleri posse' with 'neque'; 'under threat and penalty' renders 'sub periculo & poena'. Hebrews 12:14 checked against the WEB text; Baron's work is the 'Disputatio theologica de vero discrimine peccati mortalis & venialis' with its 'appendix de possibilitate praestandi legem consideratam secundum epieikeian evangelicam' (Aberdeen 1633, library catalogues). kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "0ba40022e93a462ba5a1e82d46d93bd5+b83b58570c0142a5bdc6bd29097ece0c+7754835ec83c4cf6bb6ab4ec14ca32ff"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-98532dde-3112-4770-856e-6e81152445e9+chatcmpl-0fa321ee-9e7f-44aa-9af8-1cfedbe876e7+chatcmpl-555c67ff-9b62-4477-b606-e6e396b32c58"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "0ba40022e93a462ba5a1e82d46d93bd5+b83b58570c0142a5bdc6bd29097ece0c+7754835ec83c4cf6bb6ab4ec14ca32ff",
+          "by": "Densify (agent), 2026-10-10",
+          "resolution": "Fixed after kimi-k2.6 and glm-5.2: 'who does not repent and give' became 'who does not, after repenting, give ...' for 'qui non acta poenitentia, verum aliquod & sincerum legi divinae obsequium praestet' ('non' governs 'praestet'; 'verum' agrees with 'obsequium'); 'Do this and live' became 'Do and you will live' for 'fac & vives'; 'Accordingly' became 'Indeed' for 'Etenim'; 'on the side from which' became 'in the respect in which' for 'ex ea parte ... ex qua'. Rejected the rest: 'two kinds of obedience' follows the print's own 'distinctione duplicis obedientiae'; 'no believer can fulfil the law' renders 'legem a fidelibus ullis impleri posse' with 'neque'; 'under threat and penalty' renders 'sub periculo & poena'. Hebrews 12:14 checked against the WEB text; Baron's work is the 'Disputatio theologica de vero discrimine peccati mortalis & venialis' with its 'appendix de possibilitate praestandi legem consideratam secundum epieikeian evangelicam' (Aberdeen 1633, library catalogues). kimi-k2.6 flags are word-level preferences (literal mood, voice, particles, impersonal constructions, near-synonyms) or misread the text; none changes the sense. Re-reviewed after the fix. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    }
+  ],
+  "scope_review": {
+    "verdict": "pass",
+    "checks": {
+      "source_identity": true,
+      "completeness": true,
+      "negation": true,
+      "agency": true,
+      "modality": true,
+      "doctrine": true,
+      "scripture": true
+    },
+    "uncertainties": [],
+    "composed_by": "dual_family_review adapter (summary of per-section lane verdicts)",
+    "notes": "Scope: 15 selected section(s) 2689, 2690, 2691, 2692, 2693, 2694, 2695, 2696, 2697, 2698, 2699, 2700, 2701, 2702, 2703; each reviewed by @cf/moonshotai/kimi-k2.6 and @cf/zai-org/glm-5.2 with the clause-aligned chunk prompt. Scope: new 2689-2703 plus changed none. Opening Latin «XIX. Quin illud ipsum obsequium quod fideles legi exhibent suis defectibus & naevis non» English «Thesis XIX. Even the obedience believers give the law has its own defects and flaws. In»."
+  }
+}

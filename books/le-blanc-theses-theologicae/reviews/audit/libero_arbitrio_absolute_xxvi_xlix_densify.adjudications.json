@@ -1,0 +1,73 @@
+{
+ "1828": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-aa12479a-face-476e-985e-58f03e5d8466",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clauses called missing that are present). 'quia in hominis potestate non sunt' = 'They are not in a man's power'; 'fiunt sine plena rationis advertentia' = 'they happen without reason's full attention'; 'invita quodammodo ac repugnante voluntate' = 'against the will's wishes and resistance in some way'; 'quia dum in motus illos reflectitur, eis non consentit, & eos omnino nollet sibi inesse' = 'since when the will reflects on them it does not consent and would rather not have them in it at all'. The model concedes the 'non sunt' negation and the 'praecipuum' clause are correct; no polarity is changed. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation"
+   ]
+  }
+ ],
+ "1831": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-fae608d5-3a58-4e9c-b453-36fef8e799ce",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model's notes end by conceding that 'sub voluntate' is rendered 'under the will'. 'non est praevia ad voluntatem' = 'does not come before the will'; 'tanquam impellente in actum, & figente in actum' = 'a necessity that drives it into the act and fixes it there' (both participles kept); 'voluntas ageretur & non ageret, nec staret in tali actu libertas' = 'the will would be acted upon and would not act, and freedom could not remain in such an act'; 'necessitas concomitans' = 'a concomitant necessity'; 'in eliciendo actum, & in perseverando, sive figendo, se in actum' = 'in bringing forth its act and in persevering in it, that is, in fixing itself on the act'; reference lib. 6 cap. 37 kept. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1833": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-245d0f30-2c83-4011-a8ff-ab1ccb869d83",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). The model quotes the English that renders 'movendo & determinando se': 'by moving and determining itself', reflexive kept, with 'non per modum naturae, sed perfectissimae libertatis' as 'not in the manner of nature but in the manner of the most perfect freedom'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1834": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-9e05b6cf-7a95-4eab-9eed-2e66c8fa6661",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'belong to' is not an addition: it renders 'pertinere' in 'ad propriam libertatis essentiam pertinere nolit ut voluntas ad suos actus indifferenter se habeat' (he will not have it belong to the proper essence of freedom that the will stand indifferently toward its acts). Every other clause (wayfarers' indifference with the old scholastics; free from compulsion and from immutable voluntary necessity; indifference a sign not cause; present or absent without loss; lib. 6 cap. 34) is rendered. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1841": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-9441790e-aaca-4083-aa0b-bf486752bfb2",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model shows the clause it calls omitted is rendered ('They do not allow freedom without some indifference and indeterminacy in the free agent with respect to acting'). 'nec volunt libertatem esse sine' is literally 'they will not have freedom be without'; 'do not allow' keeps the same negated volition and the same object, so the claim is not weakened. 'aut saltem eos omittere, & ab iis cessare' is rendered, as the model also notes. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1842": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-39e0b708-5191-42ae-ae79-9b8a1cb6e7dd",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (fail with no checks marked). The model's only complaint is that 'However' is invented, but it renders 'tamen' in 'Observant tamen nonnulli Thomistae recentiores'. Checked against the Latin: property inseparable but not essence; independence, eminence above finite goods, power of ruling, dominion referring itself and its own to the last end; Vincent Baron against Raynaud, Disp. 1 art. 3 §1; the more common view placing the essence in indifference are all rendered. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ]
+}

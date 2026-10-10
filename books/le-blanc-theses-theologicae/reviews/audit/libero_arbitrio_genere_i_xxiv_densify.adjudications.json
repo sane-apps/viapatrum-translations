@@ -1,0 +1,86 @@
+{
+ "1755": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-58ded60d-c727-4338-a4f9-ace76283e3ba",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. Every clause the model lists is in the English: 'non esse actum, aut habitum aliquem, sed potius quandam animae facultatem' is 'is not an act or a habit. It is rather a faculty of the soul'; 'neque tamen isto nomine designari facultatem quandam, quae sit a mente & voluntate distincta' is 'Even so, the name does not mean some faculty distinct from mind and will'; 'sed liberum arbitrium homini convenire, quatenus intellectu & voluntate praeditus est' is 'Man has free choice because he has an intellect and a will.' The negation 'non esse actum' is kept as 'is not an act'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation"
+   ]
+  }
+ ],
+ "1758": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-fcad59c0-6209-40fc-8bd7-118f3211363c",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'Et huic quoque similis est definitio Zachariae Ursini' is rendered 'Zacharias Ursinus gives a similar definition'; the comparison to Wendelin's definition (huic ... similis) is kept, and nothing of substance is dropped. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1762": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-7b624fcc-9013-41bf-9e98-4072fd41cdec",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The sentence the model calls added is the rendering of the clause it calls omitted: 'Unde nascitur maxima appetitionum electionumque necnon actionum externarum varietas' is 'From this comes the great variety in what men desire and choose, and also in their outward actions.' No negation is involved. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation"
+   ]
+  }
+ ],
+ "1765": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-89f4b3c1-4114-4a4a-b213-8cb5a90a2e47",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The whole clause is in English paragraph 3: 'Without the first freedom, from compulsion, the nature of the will is destroyed, for necessity is laid on the will that it cannot be forced in what they call its elicited act' renders 'Sine prima libertate a coactione destruitur natura voluntatis, cui necessitas imponitur ut cogi non possit in actu suo, ut vocant, elicito.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1767": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-a8fbd41a-6dc5-4c20-9206-5d74599bb79c",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model returned verdict fail with no failed check. The clause it calls omitted, 'qua in re τὴν προαίρεσιν, jam saepe sitam esse diximus', ends English paragraph 4: 'That, as we have often said, is where prohairesis lies.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "1775": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-ba4419e3-c26e-4542-9704-2942b5a6a480",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model misquotes the English. Paragraph 3 reads 'Nor does man freely want to be happy and not want to be miserable, since he wills this, and cannot will otherwise, by a natural necessity', which keeps the Latin 'nec etiam homo libere vult esse foelix, & non vult esse miser' exactly: the 'nec' negates 'libere', and 'non vult esse miser' is the content of the necessary volition. The model itself grants paragraph 1 is accurate. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1776": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-51a9ac17-9180-4176-a213-a66337308de3",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'Free choice' for 'liberum arbitrium' is the standing convention of this translation (the chosen term and its reason are recorded in the justification for §1753), matching the faculty Le Blanc defines in §1755 ('a faculty ... because he has an intellect and a will'). It is the literal rendering of arbitrium and does not alter the doctrine. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "doctrine"
+   ]
+  }
+ ]
+}

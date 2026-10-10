@@ -1,0 +1,496 @@
+{
+ "2208": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "30aa9e3dc2a6457ebfcaba8afde9b3d5",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real imprecision (glm), fixed: 'To follow the dispute' did not render 'Ad cujus intelligentiam' (the antecedent is the variety of opinions); now 'To understand this variety we must note'. kimi's remaining points rejected: 'strength of free choice' = 'viribus liberi arbitrii'; 'shapes them both' = 'utramque afficit'; 'is owed praise or reward' = 'praemium, vel laus aliqua debeatur'; 'called good without qualification' = 'simpliciter bonus denominari'; 'natural or supernatural' renders 'sive ordinis naturalis, sive ordinis supernaturalis' (pass A keeps 'of the natural order'). Re-reviewed after the fix. Round 2 (kimi): rejected; repeats round 1 (afficit, debeatur, denominari, viribus, ordinis), and the round-1 fix passes glm.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "agency",
+    "modality",
+    "doctrine"
+   ]
+  }
+ ],
+ "2209": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "73cb8b5a6b9d4b21a129cf01af988286",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real imprecision (both), fixed: 'Set against moral good' supplied 'moral' for 'Ab hoc vero bono'; now 'Set against this good'. kimi's other points rejected: 'Its opposite' = 'Hujus boni oppositum' (the antecedent is the good just defined); 'includes' = 'sub se ... comprehendit'; 'without earning us any praise or reward' = 'ut non propterea laus, vel praemium quoddam nobis debeatur'; 'does not make us good without qualification' = 'nec ab eo simpliciter boni denominemur'. Re-reviewed after the fix. Round 2 (kimi): rejected; 'without earning us any praise or reward' = 'ut non propterea laus, vel praemium ... debeatur' (propterea is the 'for it' of the result); 'does not make us good without qualification' = 'nec ab eo simpliciter boni denominemur'.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "2210": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "dd9d5ed838f04a8a999dd9bb2706d46f",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real imprecision (glm), fixed: 'apart from virtue' is now 'apart from the character of virtue' ('extra rationem virtutis'). kimi's 'missing non' is wrong: 'non dicitur bonum Physicum ... ut per id opponatur bono supernaturali, sed solum ut opponatur bono morali' negates the purpose, which the English keeps ('not to set it against supernatural good, but only to set it against moral good'); 'Physical good includes' = 'Ad bonum ... pertinet'. Re-reviewed after the fix. Round 2 (kimi+glm): rejected. glm: 'perfects nature' renders 'illam ... perficiunt' with the antecedent of illam (natura) named and the subject the advantages and gifts, as the English has it. kimi repeats the 'missing non' reading answered in round 1; 'apart from the character of virtue' = 'extra rationem virtutis'.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  },
+  {
+   "model": "@cf/zai-org/glm-5.2",
+   "response_id": "chatcmpl-ccedc71f-cf5f-4d33-9b3c-dd4648413631",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real imprecision (glm), fixed: 'apart from virtue' is now 'apart from the character of virtue' ('extra rationem virtutis'). kimi's 'missing non' is wrong: 'non dicitur bonum Physicum ... ut per id opponatur bono supernaturali, sed solum ut opponatur bono morali' negates the purpose, which the English keeps ('not to set it against supernatural good, but only to set it against moral good'); 'Physical good includes' = 'Ad bonum ... pertinet'. Re-reviewed after the fix. Round 2 (kimi+glm): rejected. glm: 'perfects nature' renders 'illam ... perficiunt' with the antecedent of illam (natura) named and the subject the advantages and gifts, as the English has it. kimi repeats the 'missing non' reading answered in round 1; 'apart from the character of virtue' = 'extra rationem virtutis'.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "source_identity"
+   ]
+  }
+ ],
+ "2211": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "b91b25fd7d514535a9f27104df0a7332",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'as can be seen above all' = 'ut praesertim videre est'; connectives (vero, Nam, Adeoque, tamen, Ac proinde) are carried by the sentence order; 'only what agrees with right reason' = 'solum omne illud quod rectae rationi ... conforme est'; 'consists in' = 'positum est in'; 'written by nature on the human heart' = 'naturaliter cordi hominis est inscripta'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2212": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "d31c5f719a75429dab4830b9b88382f2",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'freely does what the law commands' = 'voluntarie praestat aliquid quod lege jubetur'; 'caring for his own family' = 'curam gerere suorum'; 'more is needed: they must be done out of charity' = 'requiritur praeterea ut fiant ex charitate'; 'outward or inward' = 'sive externum sit, sive internum etiam'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "modality"
+   ]
+  }
+ ],
+ "2213": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "0758376f23d342eb9d346ab32782397e+ce0daed8fd824833a74ffdf9d33633ff",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'further' = 'Rursus'; 'fall into two classes' = 'in duplici adhuc esse differentia'; 'should not be counted' = 'censeri non debeat'; 'This happens when' = 'Quum scilicet'; 'without aiming at a bad end' = 'finem malum non intendens'; 'because he thinks it his duty and agreeable to reason' = 'seu quia existimat id esse sui officii, & rationi congruum' (seu introduces the explanation); 'The good the Schoolmen call moral consists in keeping the commandments in this way' = 'in ejusmodi mandatorum legis observatione consistit illud bonum'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2214": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "675508eb274d41deb617f92ba0781cc1",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real ambiguity, fixed: the placement of 'without the help of special grace' could be misread; now 'without the help of special grace no one can keep God's precepts, wholly or in part, in the way that orders them to life and eternal salvation'. 'agree' = 'communi consensu agnoscunt'; 'of itself advances' = 'per se promoveat'. Re-reviewed after the fix. Round 2 (kimi): rejected; 'the way that orders them to life' renders 'modum illum quo ... ordinantur' (the manner by which they are ordered), same sense.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "agency"
+   ]
+  }
+ ],
+ "2215": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "c182a7d6c765476e9c37f04239ebd3dd",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'None of them denies ... that some precepts can be kept as to the substance of the work without grace' = 'Nullus ... negat gratia opus non esse, ut quaedam legis praecepta quoad operis substantiam serventur' (none denies that grace is not needed for this); glm's 'inverted negation' misreads the Latin. 'but only so that' = 'sed ita tamen ut'; 'being spoiled' = 'vitietur'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  },
+  {
+   "model": "@cf/zai-org/glm-5.2",
+   "response_id": "chatcmpl-1bc321a9-a463-4aa7-9522-4c7a1669dea7",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'None of them denies ... that some precepts can be kept as to the substance of the work without grace' = 'Nullus ... negat gratia opus non esse, ut quaedam legis praecepta quoad operis substantiam serventur' (none denies that grace is not needed for this); glm's 'inverted negation' misreads the Latin. 'but only so that' = 'sed ita tamen ut'; 'being spoiled' = 'vitietur'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "negation"
+   ]
+  }
+ ],
+ "2216": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "81eabbab151547efb98891fb4815c86d",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'The question among them is this' = 'Verum inter eos quaeritur'; 'can God's precepts be kept ... in such a way that' = 'sic possint praecepta divina servari, ut'; the subjunctives of the indirect question are rendered as the question itself; 'their opinions differ widely' = 'variae sunt & discrepantes eorum sententiae'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "source_identity",
+    "completeness",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2217": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "bc64bbe3c37f4992bfdd239cbc700644",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'the older Schoolmen' = 'veteribus Scholasticis'; 'a man without grace' = 'aliquem sine gratia'; 'someone might ... be free of every sin' = 'fieri posse, ut ... omni peccato careat'; 'would remain ... would shut him out' = 'maneat ... foret ... excludendus'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "source_identity",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2218": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "747002f979b6413f876cd9eb47793cc7",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'He first argues against his own view' = 'Postquam enim sic contra propriam sententiam argumentatus est'; 'he could avoid sin without grace, and so avoid damnation' renders 'cum sine gratia possit peccatum vitare, tunc sine gratia posset ... vitare damnationem'; 'even without any sin of omission or commission' = 'absque peccato omissionis & commissionis'; 'unless grace set him free' = 'nisi per gratiam liberaretur'; glm's mood point does not change the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "negation",
+    "agency",
+    "modality"
+   ]
+  },
+  {
+   "model": "@cf/zai-org/glm-5.2",
+   "response_id": "25a8cbc7835841b584b8d448d90aacff",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'He first argues against his own view' = 'Postquam enim sic contra propriam sententiam argumentatus est'; 'he could avoid sin without grace, and so avoid damnation' renders 'cum sine gratia possit peccatum vitare, tunc sine gratia posset ... vitare damnationem'; 'even without any sin of omission or commission' = 'absque peccato omissionis & commissionis'; 'unless grace set him free' = 'nisi per gratiam liberaretur'; glm's mood point does not change the sense. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "modality"
+   ]
+  }
+ ],
+ "2219": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "8133ca3ed38349b99830520379a83f98",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real error (both), fixed: 'for a long time or even a short one' reversed 'non solum brevi, sed etiam longo tempore'; now 'not only for a short time but for a long time too'. kimi's agency point rejected: 'by ‘grace’ they mean, he says' reports Vázquez's claim (Durandum ... intelligere) about Durandus and the others. Re-reviewed after the fix. Round 2 (kimi): rejected. 'He does not think any Catholic doctor has taught' = 'non putat aliquem esse Doctorem Catholicum qui docuerit'; 'he says' marks the report as Vázquez's ('pertendit ... intelligere'); the 'An' question is what they debate, as the English says.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency"
+   ]
+  }
+ ],
+ "2220": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "9166f98e67d5429584966f11816821f8",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'reads Durandus carefully' = 'legenti & expendenti Durandum'; 'Vázquez is wrong here' = 'Vasquem in eo falli'; 'of himself without grace' = 'sine gratia per seipsum'; 'for Durandus to act without grace is the same as' = 'patet Durando idem esse sine gratia facere'; 'through some help of grace' = 'mediante aliquo gratiae ... auxilio'; 'raises against himself' = 'objicit sibi'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "source_identity",
+    "completeness",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2221": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "a483bb71c1a945b0b6f0a2f54bd82a55",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'So Estius reports' = 'ut testatur Estius'; 'it plainly leans toward the heresy of Pelagius' = 'manifestum est illam ad Pelagii haeresin spectare'; 'and is contrary to the Catholic faith' continues the same indirect statement. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2222": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "b3f143abcea644f9acc1e04eaec793b7+bc12f1842da44bbfbddfdc69b466437c",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Partly accepted. glm: 'in the same chapter 2' is now 'in the disputation cited above, chapter 2'. kimi's point on 'opponitur inevitabilitati' accepted in part: 'is an inevitability' paraphrased; now rendered literally 'is set against inevitability as to all sins together, not as to each', with a note on Tapper's sense, and 'nor is it a necessity of committing any particular sin' for 'nec est ad aliquod peccatum in specie committendum'. Rejected: 'There is no one who cannot refuse' = 'Nemo ... est qui non potest nolle' (everyone can refuse), as the Latin says; 'willing and refusing do not stay in our power' sits inside the 'ut non maneat' clause; 'the seventh of the Louvain articles' = 'ad articulum septimum Academiae Lovaniensis'; passive infinitives rendered with the same sense. Re-reviewed after the fix. Round 2 (kimi+glm): glm accepted: now 'on the seventh article of the Academy of Louvain'; kimi's 'non parum' point accepted: 'fairly common' is now 'quite common'. Rejected again: 'who cannot refuse' (= 'qui non potest nolle'; everyone can refuse); 'do not stay in our power' inside 'ut non maneat'; the passive infinitives keep the same sense; 'writers' for 'recentioribus' names the persons meant. English entry patched after append. Round 3 (kimi): one point accepted: 'and so avoid' for '& etiam vitare' added a consequence the Latin lacks; now 'and even avoid'. Rejected: passive 'servari/vinci' (same sense); 'strong' for 'vehementem' (near-synonym); 'as to all sins together' for 'quoad universa' (the context is sins; note explains); 'nor is it a necessity of committing' (necessitas is understood from the previous clause); 'reports' for 'testatur'. Round 4 (kimi, after the 'and even avoid' fix): all rejected, no change. Passive 'servari/vinci' (same sense); 'without grace' for 'gratia destituti'; 'who cannot refuse' (Nemo est qui non potest nolle: everyone can refuse) and 'ut non maneat' (result clause) are read correctly, and the model misreads both again; 'make it necessary to follow it' for 'inducere necessitatem ipsam sequendi' ('ipsam' = the passion); 'all sins together' for 'quoad universa'; 'a necessity of committing' carries 'necessitas' from the clause before; 'reports' for 'testatur'; 'quite common' renders the litotes 'non parum' (the model's own round-2 point).",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2223": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "9df688b05d42425b8f0a979ea88e2ca0+e2efd2cadb8f405b8f0328b387eb88db",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'the command to love God' = 'illud quo jubemur Deum ... diligere'; 'no moral good achieved' = 'nec ullum morale bonum perfici posse' (under 'admit that ... can be'); 'every new sin is avoided' = 'ut omne novum peccatum vitetur' (result); 'not moved beforehand by any inward grace' = 'nulla interiori gratia a Deo praeventum'; 'for then the acts would be vicious' = 'quo in casu actiones illae vitio non carerent'; 'On that basis' = 'Quo posito'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2224": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "f9e6ad9a714440d9b50e11e766491414",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'Their reason is this' introduces 'Quoniam, ut aiunt' (the reason is theirs, as the English says); 'if no temptation to the contrary arises' = 'nulla in contrarium occurrente tentatione'; 'See Estius' = 'Ut videre est apud Estium'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency"
+   ]
+  }
+ ],
+ "2225": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "6a5ba0dde27f4aa780a6135c15079d1f",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'he writes: ‘We do not mean' = 'significare non volumus, inquit' (Bellarmine speaking in the first person plural); 'no temptation urges us' = 'nulla adsit tentatio provocans'; 'they cannot all be fulfilled' = 'ut non possint ... omnia adimpleri'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "negation",
+    "agency"
+   ]
+  }
+ ],
+ "2226": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "b50398e5c22b4d148880fde55334c679",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real imprecision (glm), fixed: 'other gift' for 'aliquod donum'; now 'some gift added over and above nature' (also covering kimi's 'superadditum'). The title is now given as in the source, 'Adversus haereses'. Remaining kimi points rejected: 'older and more recent' = 'tam veteribus quam recentioribus'; 'on his side' = 'pro se'; 'every such good is always preceded by' = 'semper circa illud praecedit'; 'purely as a gift' = 'mere gratis'. Re-reviewed after the fix. Round 2 (kimi): rejected; the fixed phrase passes, and the remaining points repeat round 1.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "source_identity",
+    "completeness",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2227": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "7dd73b5a971d4bb2890182de01a2a2ae",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "One point accepted: 'I have chosen' is now 'I have preferred' ('malui'). Rejected: 'John Fisher, bishop of Rochester' identifies 'Joannes Roffensis'; 'teaches the same' = 'Quibus consentanea docet'; 'contradict each other' = 'mutuo sibi pugnent'; 'on the other hand' = 'contra'; 'good in kind' = 'ex genere'; the paragraph incipit 'Neutrum sane potest' is kept in Latin. Re-reviewed after the fix. Round 2 (kimi): rejected; 'I have preferred' passes, and the remaining points (Fisher's name, consentanea, mood of possit/sit, the paragraph incipit) repeat round 1.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "source_identity",
+    "completeness",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2228": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "f06ff84c7a3f4558a8a68225d8b027cd+05b78f48197e431ebbb30ad929f3dfa4",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (part-split artifact). Both parts of Vázquez's statement are in the English in the source's order: the habitual-grace clause renders 'An gratia habitualis & gratum faciens atque justificans ... necessaria sit'; 'Nor ... whether all the works of a man in sin are sins' = 'Neque etiam quaeri utrum omnia opera ejus qui in peccato est, peccata sint'; 'nor even whether faith is needed' = 'Imo neque an fides necessaria sit'. 'he can do some good ones' = 'an aliqua bona ille efficere possit'; 'We will not dispute' = 'neque disputandum erit'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "source_identity",
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  },
+  {
+   "model": "@cf/zai-org/glm-5.2",
+   "response_id": "chatcmpl-fe0fe17b-9e67-4613-b9fa-2957b6e1110d",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (part-split artifact). Both parts of Vázquez's statement are in the English in the source's order: the habitual-grace clause renders 'An gratia habitualis & gratum faciens atque justificans ... necessaria sit'; 'Nor ... whether all the works of a man in sin are sins' = 'Neque etiam quaeri utrum omnia opera ejus qui in peccato est, peccata sint'; 'nor even whether faith is needed' = 'Imo neque an fides necessaria sit'. 'he can do some good ones' = 'an aliqua bona ille efficere possit'; 'We will not dispute' = 'neque disputandum erit'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "2229": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "a5fdaac8cc454911a24aacdfdcb7c0cd",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'without any help of divine grace at all' = 'omni gratiae divinae auxilio destitutum'; 'even by the standard of natural virtue and honesty' = '& secundum virtutem & honestatem naturalem'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "negation",
+    "modality"
+   ]
+  }
+ ],
+ "2230": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "b15022150b124d8197aeaf2a42f6757c",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real error, fixed: 'not needed for every work of moral virtue' misrendered 'necessarium non putat ad quodlibet opus'; now 'He does not think the first is needed for any work of moral virtue; only the second is'. Other points rejected: 'the kind needed' = 'quale ... necessarium est'; 'natural by nature' = 'suapte natura ordinis naturalis'; 'is prepared for us ... by God's eternal mercy' = 'aeterna Dei misericordia nobis praeparetur'. Re-reviewed after the fix. Round 2 (kimi): rejected. kimi now reads 'non ... ad quodlibet' as 'not for every'; the next sentence ('posse quidem hominem singula opera moralis virtutis efficere sine auxilio ... quod suapte natura sit ordinis supernaturalis') shows Vázquez means the supernatural help is needed for no work of moral virtue, so 'not ... for any' stands. Other points stylistic.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2231": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "0854e58175874b99af2c9bf82a2bac0b+ed8cf90d5cf74f03a4052b2ac2ef27db",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'He places it chiefly in a holy thought' = 'Illud vero praecipue constituit in sancta quadam cogitatione' (constituit is active, Vázquez the subject); 'prepared for us beforehand for each one' = 'qua praevenimur per opera singula'; 'something outside it must bring it' = 'ab extrinseco principio ... applicari debet'; 'when it might not have been' = 'cum posset non excitari'; 'Since God was free not to bring us' = 'cum liberum esset Deo non admovere nos'; 'he traces' = 'reducit' (Vázquez). Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2232": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "2c2d166f77d6424ea271afaa5d329bcf",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real imprecision (glm), fixed: 'though natural' is now 'though it belongs to the natural order' ('quod est ordinis naturalis'). kimi's points rejected: 'He maintains that God inspires' = 'vult sanctas cogitationes hominibus a Deo inspirari'; 'can be called in a sense above our nature' = 'dici posse quodammodo supra naturam nostram'; 'It is above our own effort and care' gives the 'quatenus' ground; 'without them' = 'sine qua' (the effort and care); 'with our blessedness in view' = 'ex intentione nostrae beatitudinis'. Re-reviewed after the fix. Round 2 (kimi): rejected; the fix passes glm, and the remaining points repeat round 1 ('sine qua' = without that effort and care; 'ex intentione' = with that end in view).",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2233": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "2f45e6f65f4341fba25b84d47113f968",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real error (both), fixed: 'they obtain justifying grace' collapsed means into result for 'gratiae justificantis sunt impetratoria'; now 'they serve to obtain justifying grace'. 'we obtain from God' = 'a Deo impetramus'; the citation order is kept. Re-reviewed after the fix. Round 2 (kimi): rejected; the fix ('serve to obtain') is not disputed; 'he says' introduces Vázquez's own words ('inquit'), and 'he thinks' is Vázquez.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2234": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "2e8ce397ceab4ae1b1724f78f61b76b5",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Real imprecision (glm), fixed: 'the greater part' for 'longe maxima ... parte'; now 'by far the largest part'. kimi's points rejected: 'can be given to someone' = 'in eum cadere posse'; 'pagans who do not know the one true God' = 'gentilium, nec unum verum Deum cognoscentium'. Re-reviewed after the fix. Round 2 (kimi): rejected; 'can be given to someone' = 'in eum cadere posse'; 'pagans who do not know' = 'gentilium, nec ... cognoscentium'.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "negation",
+    "agency"
+   ]
+  }
+ ],
+ "2235": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "61758388d31041fe9b805fdd4b4ed0e5+6e6660269f4b447682a92310f8c0ff07",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Two points accepted: 'has no true faith' added 'true'; now 'in truth has no faith' ('revera ... fidem non habeat'); 'slips some movements of the will past the righteous' is now 'slips into the righteous some movements of the will' ('in justis surripit'). Rejected: 'He means a pagan' = 'a se infidelem non dici ... sed paganum'; 'to whom he might refer' = 'in quem ... referre possit'; 'need not refer' = 'nec necesse putat, ut ... referant'; 'cannot even be' = 'ac ne referri quidem possunt' (the verb is carried from the previous clause). Re-reviewed after the fix. Round 2 (kimi): one point accepted: 'not to count as sin' is now 'not to have the character of sin' ('ut non habeant rationem peccati'). Others rejected as in round 1. English entry patched after append. Round 3 (kimi): all rejected. 'He does not mean' = 'a se ... non dici' (same sense); 'might' for 'possit' (relative of characteristic); 'cannot even be' carries 'referred' from the clause before; 'draws from unbelievers' = 'in infidelibus elicit'; 'He refers them' resumes 'homo'; 'he does not know' renders impersonal 'ignoretur'. No change.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2236": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "2c2db4505a1548de8a4e235e44b4e2cc",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'he says' introduces Vázquez's teaching ('quod docet Vasquez'); 'could be said to be referred habitually' = 'ex qua habitu dicantur referri'; 'without any further movement' = 'sine alia motione'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2237": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "772b584985854cc493db96c31b9a5670",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'The popes of Rome have given their verdict for this view' = 'Pontificum Romanorum calculo comprobatur'; 'appears to stand condemned' = 'damnata esse videtur'; 'That bull ... condemns several propositions, and one of them reads' = 'inter alias propositiones quae in ea Bulla damnatae sunt ... una est'; 'unbelievers' = 'infidelium' (book term). Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency",
+    "modality"
+   ]
+  }
+ ],
+ "2238": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "909bd30437d444dcbcb2f726075400d4",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "One point accepted: 'as far as' is now 'as much as' ('quantum'). Rejected: 'it must also be done when, as much as, and for the sake for which it ought to be done' = 'sed etiam debet fieri quando, & quantum, & cujus gratia oportet'; 'everything else is referred to him' = 'in quem reliqua referantur'; 'loved by the one acting' = 'ab agente dilectus'. Re-reviewed after the fix. Round 2 (kimi): rejected; 'as much as' passes; 'Their reason is that' = 'Idque quoniam'; 'him' in 'refer none of their acts to him' is the true God named in the same sentence.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "2239": [
+  {
+   "model": "@cf/moonshotai/kimi-k2.6",
+   "response_id": "234af9f5df264536968b0bfcf9dd5adb",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'He does not mean schismatics and heretics, or those unbelievers who by some faith believe ...' = 'non autem Schismaticos & Haereticos, eosque ex infidelibus qui aliqua fide credunt' (both are under 'non autem': Gregory's 'infideles' are only those who lack knowledge of the one God, as the next sentence confirms); 'Vázquez again reports' = 'eodem Vasquez referente'; 'one ‘Lincolniensis’' = 'Linconiensis quidam'. Checked clause by clause against the Latin; the English keeps the sense, agents, negations and modality of the source.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency"
+   ]
+  }
+ ]
+}

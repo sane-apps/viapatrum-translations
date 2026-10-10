@@ -1,0 +1,106 @@
+{
+ "1641": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-e5805d59-6f20-4b4f-83b7-4270d368aa85",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. Both phrases the model calls additions are in the Latin: 'plainly and as a whole' renders 'Sed simpliciter & in genere damnat religionem Angelorum', and 'as is the established custom in the Roman Church' renders 'ut in Ecclesia Romana solenne est'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1643": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-41471ce5-1278-4fd3-a321-b3f07b7935db",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The clause the model calls dropped is rendered: 'cujus reperitur hic Canon Codici Canonum Ecclesiae Universae insertus' is 'One of its canons was taken into the Code of Canons of the Universal Church', followed by the canon itself; the model's own note concedes the idea is conveyed. (The earlier 'must not' wording was changed to 'ought not' for 'non oportet' before this call.) Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1644": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-1dc2de33-e69b-4ce6-95fa-72c16b7fba03",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The sentence is rendered in full: 'Oratoria Angelis, & ipsi Sancto Michaeli struere ... non ad usum Ecclesiae Orthodoxae pertinet' is 'Building oratories to angels, and to Saint Michael himself, belongs to the custom of the old heretics, not to the practice of the orthodox Church', and 'quod quam belle congruat cum hodierna praxi Ecclesiae Romanae judicandum omnibus relinquo' is 'How well that fits the present practice of the Roman Church I leave everyone to judge'. Punctuation is not a completeness failure. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1645": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-9520c8d5-b7ba-428c-8869-5ffc0d2a2493",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'Episcoporum Catholicorum prudentia ... conversa erant' is 'turned into oratories ... by the prudence of the catholic bishops' (the prudence is the bishops'; no agent changed). The negation 'non intelligere loca ab haereticis consecrata' is kept as 'does not mean places the heretics consecrated'. 'Nam ita absurdum est, ut non egeat refutatione' is rendered 'so absurd that it needs no refutation', as the model itself concedes. 'insanum oportet fingere Theodoretum, ut dicat' is 'One would have to imagine Theodoret out of his mind to have him say', which keeps the necessity. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation",
+    "agency"
+   ]
+  }
+ ],
+ "1648": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-4996d39b-62bf-493e-ae57-508eeb7515b6",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Self-contradictory output: verdict fail with all seven checks true and a note saying 'foveto languidos' is correctly rendered and 'All checks pass'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "1652": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-b7e7d196-2149-42e7-bcc7-35113627a361",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Self-contradictory output: verdict fail with all seven checks true and a note saying the English 'matches source Latin ... with correct agency and modality'. (Separately, the print's 'petere' where sense needs 'peteret' is recorded in the payload note.) Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "1656": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-cb1bb181-7bec-4608-b93d-e5b0d5f29d79",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "Self-contradictory output: verdict fail with all seven checks true and a note saying the English 'accurately reflects the Latin' and 'correctly preserves the source's meaning'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "1657": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-919f7639-78f2-485b-a757-71d3144014c2",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive on a misquoted source. The Latin the model quotes ('Sciant enim Romani theologii') is not in the text; the actual clause 'inde probant Scholae Romanae Theologi, quod ista cognitionem Angelorum non effugiunt' is rendered 'The theologians of the Roman school also argue ... because these things do not escape the knowledge of the angels'. The citation notes (isangeloi is Luke 20:36; the ninety-nine are Luke 15:7) are recorded in the payload. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1658": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-3483ef65-2d2f-4b85-aeae-706e71eae54b",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'cum ex officio nobis adsint, & circa nos versentur, ea scire quae ad nos attinent' is rendered 'know what concerns us ... Their office keeps them with us and about us'. The print's 'Heb. 1. 13.' is recorded in the payload note; the words are Hebrews 1:14. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ]
+}

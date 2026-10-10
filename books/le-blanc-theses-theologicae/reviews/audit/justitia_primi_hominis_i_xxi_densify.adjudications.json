@@ -1,0 +1,73 @@
+{
+ "1698": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-1f19795e-46a2-4a41-abfe-0609663b6ad5",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. Both clauses the model calls dropped are in English paragraph 2: 'Sextus vero & vigesimus his verbis conceptus est' is 'Article 26 runs:', and 'Ut refert Bellarminus de gratia primi hominis, lib. unico, cap. 1.' is 'Bellarmine records this in chapter 1 of his single book On the Grace of the First Man.' The negations 'non supernaturalis' and 'non fuit indebita' are kept as 'not supernatural' and 'not an exaltation of human nature beyond its due'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation"
+   ]
+  }
+ ],
+ "1699": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-7e4b1052-e76c-49a1-9e19-c00456130fb0",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The clause is not an addition: the model's own quoted Latin 'Sed negant istam justitiam fuisse naturalem, quatenus naturale opponitur supernaturali' is exactly 'But they deny that it was natural as natural is opposed to supernatural'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1701": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-b5598142-2e7d-49cd-ba04-4ec3322b30f7",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. Both clauses are in English paragraph 3: 'aut ad male agendum proclivitatem in se experiatur' is 'and no leaning toward doing evil' (governed by 'that he felt'), and 'sicuti res in homine integro se habebat, in quo scilicet nulli erant inordinati, & adversus rectam rationem rebelles concupiscentiae motus' is 'Yet that is how things stood in unfallen man, in whom there were no disordered movements of concupiscence rebelling against right reason.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1709": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-3d3abb3f-d64c-4d6b-805a-4df23e2ac8ba",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'gratia dici meretur' is the idiom 'deserves to be called grace'; nothing is dropped. Rendering meretur as 'merits' would import the language of merit into a sentence whose next clause says this grace is owed to no merit of the creature ('nullis meritis creaturae debetur', English 'It is owed to no merit of the creature'). Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1712": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-1db45590-3c5e-4221-93c4-6b951765dbc4",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The clause 'qui non aliter differunt, nisi quod hic amiserit, quod alter nunquam habuit' is the next sentence of English paragraph 2: 'The two differ only in that the one has lost what the other never had.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1713": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-b0edfe85-1c6b-4a11-adc6-ca912a174883",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model returned verdict fail with no failed check and its note only quotes English paragraph 1, which renders 'id sibi volunt hominem eo casu creandum esse sine ordinatione ad beatitudinem sempiternam, seu claram visionem Dei, & consequenter sine fide in intellectu, & sine charitate Deum diligente condendum' clause for clause. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ]
+}

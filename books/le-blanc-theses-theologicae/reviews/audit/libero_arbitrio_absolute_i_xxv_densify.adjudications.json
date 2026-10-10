@@ -1,0 +1,133 @@
+{
+ "1802": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-9e449b80-cc94-49af-915a-8bd75fc3df67",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). 'quam sententiam tribuit Bellarminus Herveo Theologo sententiario' is 'Bellarmine assigns that view to Hervaeus, the commentator on the Sentences'; 'alii vero existimaverint ... habitum quendam naturalem consurgentem ex intellectu & voluntate, quam sententiam tenuit Bonaventura Cardinalis, & in Schola Romana Doctor Celeberrimus' is 'Others held that it is neither act nor power but a natural habit arising from intellect and will, which was the view of Cardinal Bonaventure, a teacher of great fame in the Roman School'; 'nihilominus in eo jam tota Schola Romana consentit, liberum Arbitrium esse potentiam quandam & facultatem' is the closing sentence 'Even so, the whole Roman School now agrees that free choice is a power and a faculty.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1804": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-74675777-3f17-41df-847c-903bf2e671ce",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'Nonnulli, ut Durandus ... existimaverunt' names Durandus as an instance of 'some'; the English 'Some held that it includes both mind and will. Durandus, a teacher of high standing in the Roman School, was of this view' keeps that same relation, and 'mentem, scilicet, atque voluntatem' is 'both mind and will'. The negation 'neque voluntatem solam, sed etiam rationem esse formaliter ... liberam' is 'reason, and not the will only, is free formally', and 'imo libertatem prius & magis convenire rationi quam voluntati' is 'indeed that freedom belongs to reason first and more fully than to the will'. No polarity changes and no clause is lost. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness",
+    "negation"
+   ]
+  }
+ ],
+ "1808": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-b33aacfc-f3a7-4405-a4b9-f32a06734f5b",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model grants the 'non quicquid' clause matches. 'Quippe finis summus, id est, beatitudo est objectum voluntatis, sed non est objectum liberi arbitrii, ad cujus objectum pertinent tantum media ad finem' is 'The highest end, happiness, is an object of the will, whereas free choice has for its object only the means to that end': summus = 'highest', id est is the apposition 'happiness', tantum = 'only'. 'Likewise' renders the connective 'Et' that opens the second comparison; nothing is added. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1810": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-9fb5ceb0-2afa-48ad-a6a4-4d3a1c20ec9a",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model itself states the clause 'Ut vero negent intellectum esse formaliter liberum, eo praecipue moventur quod' is present as 'Their main reason for denying the intellect formal freedom is that'; praecipue = 'main', moventur quod = 'reason ... is that'. The rest (virtue and vice belong to the will alone; praise, blame, reward, punishment only as from the will; intellect's operations sin or merit only as voluntary and commanded by the will) is rendered clause for clause. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1813": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-b2b3864c-d94b-4785-9d1c-94c73ee28689",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'seu propriae seu Metaphoricae' is exactly 'either literal or figurative', as the model's own note quotes; the disjunction is the Latin's own seu ... seu, and the literal/figurative pair matches the propria/Metaphorica distinction defined in the preceding thesis. Both reasons ('homines conditione servi non propterea carent libero Arbitrio' and 'Neque etiam per peccatum eo spoliati sunt illi quos scriptura sacra vocat peccati servos') are the two sentences of paragraph 2. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1816": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-d7d41199-c6fb-4839-b3d5-bf5f956fd72a",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). 'Duplex est necessitas inevitabilitatis & coactionis' opens the quotation in paragraph 2: 'Necessity is of two kinds, of inevitability and of compulsion.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1817": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-cda1fdf5-e455-4d38-a052-09e6d0a8e419",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (fail with no checks marked). The model returned verdict fail with every check true, and its notes say 'All seven checks pass'. Checked against the Latin: Augustine/De civitate Dei, violentia vel coactio, the heavy body hindered from descending, the will seeking happiness freely though necessarily, and God loving himself freely though of necessity are all rendered, with the reference q. 10 de Potentia a. 2 ad 1. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "1818": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-14c6ebe8-f904-4989-8183-b8dc72520dab",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). 'opus quoddam esse posse laude, vel vituperio dignum, meritorium, vel demeritorium' is the first sentence: 'a deed may deserve praise or blame, merit or demerit'. Both quotations and both marginal references (Dist. 12 q. 2 art. 1 ad 3; Dist. 18 art. 2 ad 5) are rendered. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1820": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-47baaf72-ce93-41cd-825c-b98eba4de12c",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model names no clause that is missing and concedes the Strasbourg quotation is present. Each of the five authorities is rendered with his quotation: Thomas of Strasbourg (compulsion removes merit, immutability from perfected virtue increases it), Marsilius of Inghen (necessary and inevitable by grace not by nature still praiseworthy), Biel (act of blessedness free complacenter not contradictorie, enough for merit), Orbellis (Bonaventure's words, including 'non quod sic velit hoc ut possit velle oppositum' and 'quamvis immutabiliter ordinetur ad illud'), Brulefer (deliberating act always contingent; act as free can be necessary in itself), and the closing reference to Jansenius book 6 ch. 29ff. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1822": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-76c0d56f-659a-4928-8d0f-094d8a60c063",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). The model quotes the English that renders 'Sed istud tantum sibi volunt in eo qui agit ex judicio rationis, solam coactionem libertatem perimere, non vero necessitatem': 'Their point is narrower. In one who acts on the judgment of reason, compulsion alone destroys freedom, and necessity does not.' 'istud tantum sibi volunt' (this only they mean) is 'Their point is narrower'; a non-verbatim rendering is not an omission. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1823": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-5f3dc14c-9bd1-4289-8829-2365906adbf7",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model's own notes walk each clause and conclude 'Upon review, all clauses appear present.' Checked against the Latin: 'non consistere in ejusmodi ad agendum indifferentia, & indeterminatione' = 'What they deny is that freedom ... consists in that indifference and indeterminacy toward action'; 'aut eam semper habere comitem' = 'or always goes with it'; 'verum absque illa posse manere & conservari' = 'Freedom can remain and be kept without it'; 'quandoque etiam in eo reperiri, qui nullo modo est ad agendum indifferens, sed inevitabiliter & immutabiliter agit' = 'it is sometimes found in one who is not indifferent at all but acts inevitably and unchangeably'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ]
+}

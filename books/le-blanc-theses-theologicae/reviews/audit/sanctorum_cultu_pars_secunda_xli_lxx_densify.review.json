@@ -1,0 +1,3518 @@
+{
+  "packet_id": "14da1e347259cae6b0fb4b3aa5c0d9bbd7cfe53c1934ee9b5da62b7e71a52d3e",
+  "reviewer": "dual_family_review: nemotron (nvidia/nemotron-3-super-120b-a12b) + gemini (gemini-3.5-flash-lite)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "59dd934d8fb84924462158dd02d56bf21a39049a369d868945b485176e086fb5",
+    "prompt": {
+      "source": "scripts/independent_review.py SYSTEM + USER_TEMPLATE",
+      "sha256": "37dc8d5f20f16bc75b470a2805e4b44f48a8d4bdcbc382d5e23bf72ce46db8fa"
+    },
+    "packet_id": "14da1e347259cae6b0fb4b3aa5c0d9bbd7cfe53c1934ee9b5da62b7e71a52d3e",
+    "generated_at": "2026-10-09T18:57:05+00:00",
+    "spend_usd": 0,
+    "lanes": [
+      {
+        "lane": "nim",
+        "provider": "nvidia-nim",
+        "endpoint": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "tier": "free (NIM API catalog)",
+        "spend_usd": 0,
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "family": "nemotron",
+        "call_count": 32,
+        "http_attempts": 36,
+        "failed_attempts": [
+          {
+            "section": "1607",
+            "started_at": "2026-10-09T18:48:57+00:00",
+            "finished_at": "2026-10-09T18:51:58+00:00",
+            "error": "TimeoutError: The read operation timed out"
+          }
+        ],
+        "tokens_all_attempts": {
+          "prompt_tokens": 26835,
+          "completion_tokens": 6853,
+          "total_tokens": 33688
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 25028,
+          "completion_tokens": 6293,
+          "total_tokens": 31321
+        },
+        "first_call_at": "2026-10-09T18:47:57+00:00",
+        "last_call_at": "2026-10-09T18:56:25+00:00",
+        "calls": [
+          {
+            "section": "600",
+            "source_sha256": "8594709186181f9a41cc3587b6536a36a067e7b8b15115048c9271bd378f95a2",
+            "english_sha256": "cdab0df21a81ef8ee67a6532a282cc5ac35c222e3a6651f158d29ac8de8f75a8",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-74d79f2a-915f-4055-8154-b6e23d4eb748",
+            "request_id": "f9dd297f-3eee-465a-9006-6e409afd2f44",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:56:19+00:00",
+            "finished_at": "2026-10-09T18:56:21+00:00",
+            "ms": 1878,
+            "usage": {
+              "prompt_tokens": 499,
+              "completion_tokens": 129,
+              "total_tokens": 628
+            },
+            "raw_sha256": "511a542b2391eea36ecb2e77fdaa9ef538ea1098d37907e2b0fe9736577409dc",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "631",
+            "source_sha256": "7d9d03080d200d5b56aa063ce2286576a4e1a8f24884e76721446f2079aa18e9",
+            "english_sha256": "d624d75a1ad25befdf976ab7908ae43da58b82cc711389e3488ae21f4a8e3023",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-8a7c241d-55c9-43af-aba2-191f4e22959f",
+            "request_id": "5e31e331-78c4-477b-9050-77e8682fd87e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:56:23+00:00",
+            "finished_at": "2026-10-09T18:56:25+00:00",
+            "ms": 2401,
+            "usage": {
+              "prompt_tokens": 578,
+              "completion_tokens": 152,
+              "total_tokens": 730
+            },
+            "raw_sha256": "45caae962edc20805a1a12c49b96df6ae60fae1a022b1c7eb51b16227876cd8b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true
+          },
+          {
+            "section": "1598",
+            "source_sha256": "efb73abf97734148d154832c6325e7c955181036825fd64863d77eaf20e668dc",
+            "english_sha256": "c6483872b3893b3bccef7fef1654d8825a1ed72ff110d0b53102483a46c40848",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-6da8f55a-d9c3-402e-a02d-00069460f4c1",
+            "request_id": "06f9693b-fd3d-4e98-a2bf-b8365296843d",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:47:57+00:00",
+            "finished_at": "2026-10-09T18:47:59+00:00",
+            "ms": 1932,
+            "usage": {
+              "prompt_tokens": 1382,
+              "completion_tokens": 153,
+              "total_tokens": 1535
+            },
+            "raw_sha256": "96d65d72a4ff1c80d1335d6c6716cf174ae47368a4b7b68ef245ee726305e80d",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1599",
+            "source_sha256": "b6eae6cb1614ddae58617669f0db3bce511e4f4b7efb4f7dbb75e0d02b1a1c87",
+            "english_sha256": "f9de469305e35161b2e9b1d719d58674ebb8daa85378ebb5e65e233bea5f25d7",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-f8a04783-de0f-42cf-8395-59a285877278",
+            "request_id": "242132e0-fd2a-440f-a4c3-f6ce206eca64",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:48:06+00:00",
+            "finished_at": "2026-10-09T18:48:07+00:00",
+            "ms": 1174,
+            "usage": {
+              "prompt_tokens": 865,
+              "completion_tokens": 97,
+              "total_tokens": 962
+            },
+            "raw_sha256": "a321702eb9513f8b31cc1d3ac9a0583705face18fe2b6f03a37ee816f31b65f8",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1600",
+            "source_sha256": "af400de2a445450d814d4ba46b2a32a72c619e836fc3299547b6a3cf581d61c0",
+            "english_sha256": "32ddb4a8ba0bc900a77627e04eea60473d92fb9a365229e26dce6e877f5071d7",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-5c42c128-b4c1-4315-a015-4bee2cf8c309",
+            "request_id": "d6c7dee9-b713-4104-8ecd-650324107d16",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:48:09+00:00",
+            "finished_at": "2026-10-09T18:48:14+00:00",
+            "ms": 4964,
+            "usage": {
+              "prompt_tokens": 604,
+              "completion_tokens": 195,
+              "total_tokens": 799
+            },
+            "raw_sha256": "d00e0b73b740d14f5b2be9388775b8fcbd37afa1938f63ba7054846d6e30a0a0",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1601",
+            "source_sha256": "46b18fd2d5672ee4f4a28e3fedf0247cfe1b4f35c5ac5b9dce826674d649651a",
+            "english_sha256": "dc0116af767cb281720675426ee27e87c8888d702b50ff7df30121737c63bf3b",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-a1513886-2174-402d-b159-c14a98173e99",
+            "request_id": "7285306b-2d6a-4ef2-b7a3-7867a261c08b",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:48:16+00:00",
+            "finished_at": "2026-10-09T18:48:25+00:00",
+            "ms": 8406,
+            "usage": {
+              "prompt_tokens": 659,
+              "completion_tokens": 960,
+              "total_tokens": 1619
+            },
+            "raw_sha256": "378447cdda66e66bf0ea597632e016879b9dfd703aa5b9828be1ecb80261d930",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1602",
+            "source_sha256": "a970e2064c6baa65371b5218827f943fdd99399e526054275b7bdf28c19f799f",
+            "english_sha256": "ea084da1ec85e43a757906895a802406293c3ccbcf81f9014462d5882f9fc618",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-ad1df643-86fa-4f24-8f35-9982c3a547b0",
+            "request_id": "74bcde66-9b89-4a8f-827a-93b02723031c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:48:27+00:00",
+            "finished_at": "2026-10-09T18:48:32+00:00",
+            "ms": 5508,
+            "usage": {
+              "prompt_tokens": 555,
+              "completion_tokens": 189,
+              "total_tokens": 744
+            },
+            "raw_sha256": "a147773f55e66a5f3efe32fd878b2a3bc44fb5e28199cad8ba937deaaac2b7d3",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true
+          },
+          {
+            "section": "1603",
+            "source_sha256": "59c059ee12d075af0ba5e387183bc7c9d5f8c86f79ed1b1b121981f2e5cdd079",
+            "english_sha256": "19fa93caf338f7693599a06479a221361e217a73a51b4217ac61abcc3853a56d",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-66b03374-15b9-4a05-bda2-1ccb6ed6cbf6",
+            "request_id": "aabdbf81-08d7-4906-844f-5d38fbc2aec6",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:48:34+00:00",
+            "finished_at": "2026-10-09T18:48:36+00:00",
+            "ms": 2426,
+            "usage": {
+              "prompt_tokens": 493,
+              "completion_tokens": 132,
+              "total_tokens": 625
+            },
+            "raw_sha256": "937a6afdfad5e7916c74f8da0480de904c8b942c02f53a311ea446eec8e9bbbf",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1604",
+            "source_sha256": "c7ec275a40432fd93777d9f3b6d75b9a3c658419029d8dd2c01b876982ef523e",
+            "english_sha256": "5fd2e9bf5592b2cb99e551333956eadd85ea52315993fdcaa5aaf274088ef766",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-e24f0b6a-4aed-4ffd-b9a0-3fe4b02d1802",
+            "request_id": "ebe7cb49-fb51-441f-984c-1e35b20fad4e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:48:39+00:00",
+            "finished_at": "2026-10-09T18:48:45+00:00",
+            "ms": 5940,
+            "usage": {
+              "prompt_tokens": 725,
+              "completion_tokens": 248,
+              "total_tokens": 973
+            },
+            "raw_sha256": "1bf5118ce586a7f8c29308ffda0ad0611fadd450e7a08b0e75f99827a160f760",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1605",
+            "source_sha256": "a18a71210f949c39f7a53a8d22a3e850bc06d288ff44ce912d63b19875c086e4",
+            "english_sha256": "fa7c2be5e36b17117fd59b6499c40dbdd8ab113676a39feee89f0c576149d5e7",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-f73c7b07-a0eb-4c55-9c84-7e0039878aa3",
+            "request_id": "5561aff3-bdb8-4d9e-a516-f969003eb310",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:48:47+00:00",
+            "finished_at": "2026-10-09T18:48:49+00:00",
+            "ms": 1528,
+            "usage": {
+              "prompt_tokens": 528,
+              "completion_tokens": 166,
+              "total_tokens": 694
+            },
+            "raw_sha256": "1754dfc97190ece77947a18829691e11542dba276ed3f8efca88eebbce9c9843",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true
+          },
+          {
+            "section": "1606",
+            "source_sha256": "7ac02ceb2b842d1f958f7d90a4f2ebffc91a9131b4a9521a50dba5c338a9b8c9",
+            "english_sha256": "5827de65aae65683e65145ada190e1ccf0d59a69f5a59b8126ad240625fe17fd",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-2903dc8b-f058-4d4d-87f7-9db889a94d4b",
+            "request_id": "fddd8944-e896-4b2a-8584-7783b5a5056c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:48:52+00:00",
+            "finished_at": "2026-10-09T18:48:53+00:00",
+            "ms": 1295,
+            "usage": {
+              "prompt_tokens": 584,
+              "completion_tokens": 120,
+              "total_tokens": 704
+            },
+            "raw_sha256": "591f44f0bc24259d4d5def50ff9e6ac95754d7a1f724512ef1f4e0b7b23af9ad",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1607",
+            "source_sha256": "77b81b17ff87f4c2a7598df86243ec18a2a35880a8816d61c71149ad5977797e",
+            "english_sha256": "962ed433eb7faffe9a0acb18d3874746a282b56243e794fb3f57b55a65c49ee0",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-7d9423e3-0f2d-45f0-873f-63eee9722738",
+            "request_id": "5f2c6b5d-2331-4113-8f98-c6da70dc3276",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:08+00:00",
+            "finished_at": "2026-10-09T18:52:11+00:00",
+            "ms": 3348,
+            "usage": {
+              "prompt_tokens": 716,
+              "completion_tokens": 250,
+              "total_tokens": 966
+            },
+            "raw_sha256": "044c3b51fe7a6e621813235aeadea8db1336f963de8e5e499f6d5d5d25b6063b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": true
+          },
+          {
+            "section": "1608",
+            "source_sha256": "35a0d2b941f9d413f56e663d3f022251b2462ce9dc7c671595e94084757323a9",
+            "english_sha256": "d4b488217836b089c0c47f9c319011cdd3d437638c520291f9f13cd7b3d4e0e2",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-da5985aa-ca5e-46ab-91d2-1ed591787354",
+            "request_id": "55a218a0-47c9-493f-a123-46bd5d881382",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:13+00:00",
+            "finished_at": "2026-10-09T18:52:14+00:00",
+            "ms": 1261,
+            "usage": {
+              "prompt_tokens": 483,
+              "completion_tokens": 105,
+              "total_tokens": 588
+            },
+            "raw_sha256": "140d4d1469c999f5613ee65327626a2ee626b2f4d1ed206776b1861862b3c906",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1609",
+            "source_sha256": "8ba818a1340ca884510eac6c1ed964cebc28c2587367b9acef9f4f92d103a7d7",
+            "english_sha256": "57b89b8cf33f5e95e191a1825e05bfa14fac86689d9177ca04acfe565a3dabd9",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-d52e75a9-abc5-4e39-9d5b-148c32f648ce",
+            "request_id": "b7a9a27f-3cd3-4bc0-a99e-4b86ce45a140",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:17+00:00",
+            "finished_at": "2026-10-09T18:52:20+00:00",
+            "ms": 2319,
+            "usage": {
+              "prompt_tokens": 528,
+              "completion_tokens": 173,
+              "total_tokens": 701
+            },
+            "raw_sha256": "6cc357441690974d47f79575ada7f919a7dd6128969c8ceff51c2815d56c655d",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1610",
+            "source_sha256": "86cd7b7a968477546e4fe66b7aaef1a46f4dc4d1aed4de943665e2e96d27b1be",
+            "english_sha256": "f6797d5d0f884a3327cc1821e54ce5ce2c56266fa0f69ee1891f4e2f12a988ea",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-ecc85b68-8203-4989-a28d-072300ee43ea",
+            "request_id": "e7baa52c-59fd-4db3-bb92-8f5fcc9a9cf1",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:23+00:00",
+            "finished_at": "2026-10-09T18:52:24+00:00",
+            "ms": 1251,
+            "usage": {
+              "prompt_tokens": 584,
+              "completion_tokens": 127,
+              "total_tokens": 711
+            },
+            "raw_sha256": "349bb6fddc9291da85d062e5dc978b38c322a61b3791432d1eb0a6db3aee5236",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1611",
+            "source_sha256": "8cd9c62ea99a6a2fb96058808582e3bf7d561ee3bcc1cadc7d1649486f67595a",
+            "english_sha256": "cbad027a961db8cb517d38f17fc2227bd3b286d202cd9ebc069adbaa5d25338b",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-77d564f4-5394-40d3-bd72-4a89d601761a",
+            "request_id": "5bc2224e-b831-404a-94a7-cfe680d87d36",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:29+00:00",
+            "finished_at": "2026-10-09T18:52:30+00:00",
+            "ms": 1048,
+            "usage": {
+              "prompt_tokens": 855,
+              "completion_tokens": 134,
+              "total_tokens": 989
+            },
+            "raw_sha256": "2b764da713f493227cd28f9230c675c316d11b4e2c9797d6841f13987074032f",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1612",
+            "source_sha256": "526ba6014d16a2bba21cf879383f67f4dab08553b202dbe8d174831a9b3c79c8",
+            "english_sha256": "9127795c7560bea18dd25a89076d3ac88eb1f94a4e762847f2ab5263d7e92608",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-4dd2a853-7de2-4a08-be83-726b7e187525",
+            "request_id": "ef39d8dd-9cd7-4344-8d3b-0d222328dc44",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:35+00:00",
+            "finished_at": "2026-10-09T18:52:36+00:00",
+            "ms": 1884,
+            "usage": {
+              "prompt_tokens": 723,
+              "completion_tokens": 197,
+              "total_tokens": 920
+            },
+            "raw_sha256": "efa13b6a66b62ad618cdb09eea10c1332b56c6f8d0d790e74b9a721e3a843db6",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1613",
+            "source_sha256": "fb2b2993ebe68cd0f3187128adc0222b606b11aa1ba900c0035544f1f15265aa",
+            "english_sha256": "27bc53ebb98bc667066700614ac8f3eaa758ad1f606f9b3af9de22fd61134942",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-ba18d16e-2ffc-411b-b135-3c3f54f6f3ec",
+            "request_id": "5abba37c-fae5-4124-82de-806dcf9dc28d",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:40+00:00",
+            "finished_at": "2026-10-09T18:52:43+00:00",
+            "ms": 3406,
+            "usage": {
+              "prompt_tokens": 740,
+              "completion_tokens": 220,
+              "total_tokens": 960
+            },
+            "raw_sha256": "a298d2a65b7008aac6ff018075328c76b371d3c45f704662c2744a6cf8e398cb",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1614",
+            "source_sha256": "23df9334c1e3e894c890f94670412dd443c527f35570f6608103a4460cb93925",
+            "english_sha256": "daeb3b8c8612bfe0e849d6e57bb26611c7885f269e80fb486c653e396319f180",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-8aa0764a-47b7-4567-8af1-d70c7904f61f",
+            "request_id": "63c80892-5e72-4f4c-a384-4417c7c2962c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:45+00:00",
+            "finished_at": "2026-10-09T18:52:48+00:00",
+            "ms": 2095,
+            "usage": {
+              "prompt_tokens": 957,
+              "completion_tokens": 323,
+              "total_tokens": 1280
+            },
+            "raw_sha256": "b5ef96cffbb86c060a24bf999a209db16719a21402865d36a2d3d4eeda38cbc6",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1615",
+            "source_sha256": "e0bdb7c1d6ecad81e125a0afa4c41cbdb0769ae38c4804e1c6a8d7f64a88d3cc",
+            "english_sha256": "bf96bb843a429767fa736df2d97dc3c63528ce92b82ccd7013d8d7fe6f2fb641",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-1f6a0043-54d1-412a-bba6-4114f1c9d4ac",
+            "request_id": "4526cb5a-e667-4b58-8664-a850997c176f",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:51+00:00",
+            "finished_at": "2026-10-09T18:52:53+00:00",
+            "ms": 1294,
+            "usage": {
+              "prompt_tokens": 1177,
+              "completion_tokens": 123,
+              "total_tokens": 1300
+            },
+            "raw_sha256": "0f6079a663485d78de5ed18954856be6306feb718bb8a9ae12c205b4feb8277b",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1616",
+            "source_sha256": "5ce3efb280c44cd5f0be430145403bc0c3a583b791382d69bb2fab09bba98278",
+            "english_sha256": "d0e40c1f8a6bcec41fb6f344a8fe5df21a3612a519bd43ce1b92590d42a236c0",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-68e37f7f-dec7-43bc-9932-8d1aca11d69c",
+            "request_id": "3d27edb9-67f2-4c9e-9e87-ae943f0b26ce",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:52:57+00:00",
+            "finished_at": "2026-10-09T18:53:01+00:00",
+            "ms": 3514,
+            "usage": {
+              "prompt_tokens": 599,
+              "completion_tokens": 129,
+              "total_tokens": 728
+            },
+            "raw_sha256": "0e10cd8f56e1935d03b6e29213bd78736f46d4384fc3db24c963b5719794b07b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1617",
+            "source_sha256": "0e5d5c5eb3b679bf0dacdf5c125681eb1faaa2d56a993b7901d42bedbacfb70c",
+            "english_sha256": "f428a519367e439c103afe4274e4aeb6513043e1a0ae4be9c619068a9e47c29d",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-7ab82fde-03c9-447d-824a-5700ebdcd9d7",
+            "request_id": "0ca5ecf3-71b3-4386-bbc0-2d14a96f1036",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:03+00:00",
+            "finished_at": "2026-10-09T18:53:04+00:00",
+            "ms": 1298,
+            "usage": {
+              "prompt_tokens": 653,
+              "completion_tokens": 125,
+              "total_tokens": 778
+            },
+            "raw_sha256": "e68d3998ae75913c5513ec8dcca2ccfd6cb4b1f8005e3143d9ffb1c4820b4038",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1618",
+            "source_sha256": "44cb9b37be05a9da3d7eaa85e65546fdb1562756dd8a55abb2a71cf532cba6e6",
+            "english_sha256": "66feee12661221b8c0d041eed1aa6c2cce134d880c5d09c025d642f6e16b8148",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-ae4cd749-1b80-4df1-baa3-224157caa1f3",
+            "request_id": "cf11684e-2f40-4194-aed5-39c5eb433652",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:08+00:00",
+            "finished_at": "2026-10-09T18:53:09+00:00",
+            "ms": 1322,
+            "usage": {
+              "prompt_tokens": 1022,
+              "completion_tokens": 156,
+              "total_tokens": 1178
+            },
+            "raw_sha256": "d49fe54e819e14c55201be137b3ea76459c6b6039a7a83dd40118f9d086ef8af",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1619",
+            "source_sha256": "e8deb9d0c54f2f780b57d779662aff0ad4002d2d33c2d24a1606f4824e0a00a9",
+            "english_sha256": "c7cad7ef82942bd82e86bcc6e059901487c6bd38aae471a9f3d310003800011b",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-6c2e691e-bccd-4fac-826e-4e316d7a508e",
+            "request_id": "9f7eeca1-88d2-4959-930b-8d259e14525a",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:14+00:00",
+            "finished_at": "2026-10-09T18:53:16+00:00",
+            "ms": 2893,
+            "usage": {
+              "prompt_tokens": 750,
+              "completion_tokens": 205,
+              "total_tokens": 955
+            },
+            "raw_sha256": "4d983bcb41e8bd21ed20ff844e434317f9cf73d94388b8ba1f0f4d218c923f85",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1620",
+            "source_sha256": "1715c68b5fca3e2d698502adac143236a2a8d9ac911fe8fbc4e05d7cdb69e5e9",
+            "english_sha256": "0b2d2c6d2038cbbe04d05b8d1a3ef132e3bc69c37ecd41f60729a12590789a53",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-9edee2ef-d263-4832-9f6a-5db18624c96f",
+            "request_id": "0b7cc635-f319-4e11-bf29-58b017104ab8",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:19+00:00",
+            "finished_at": "2026-10-09T18:53:21+00:00",
+            "ms": 2246,
+            "usage": {
+              "prompt_tokens": 715,
+              "completion_tokens": 194,
+              "total_tokens": 909
+            },
+            "raw_sha256": "d6fd9f81f85e29ad2fb8634470d08400432605780632d1d6c9153cee29af75a7",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1621",
+            "source_sha256": "ab9432885fd3582298d53aaeefee0e4f2597a953782ed9c3fcf210579b2cfa41",
+            "english_sha256": "a6776a45ef9c2f50abfba6806b4b9ab05db5f070d15db7b5120a265c1dd2e257",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-d5a3e69b-d74b-4579-98e3-71eb205e1a8a",
+            "request_id": "3fb590af-db51-41c9-a7ed-8e50dd122e4f",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:25+00:00",
+            "finished_at": "2026-10-09T18:53:27+00:00",
+            "ms": 2531,
+            "usage": {
+              "prompt_tokens": 974,
+              "completion_tokens": 192,
+              "total_tokens": 1166
+            },
+            "raw_sha256": "801f11047906db0cf5faa292961b193a7fc1aee956b1811a6481b716d3eb9e24",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1622",
+            "source_sha256": "de85419434f3b421020e2f6b6572203577f7b8953944dbb5826c4f4543f27d53",
+            "english_sha256": "e0463ea933fee8befe439dd4ef049f6e29340fc0691f0cc929c9520e58f931c5",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-d0f874f6-ffd0-4c3b-9d43-15a1b168d6ab",
+            "request_id": "5870c4f6-57c6-425d-a8b5-6a0082315f26",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:30+00:00",
+            "finished_at": "2026-10-09T18:53:36+00:00",
+            "ms": 5280,
+            "usage": {
+              "prompt_tokens": 1179,
+              "completion_tokens": 152,
+              "total_tokens": 1331
+            },
+            "raw_sha256": "22eda8eaf560f0c92f0a3d7492fc4203e34f21df90b7d214e49fd2b357ac7c53",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1623",
+            "source_sha256": "7a94ea0352cf87a71479956de36adcd66e10e9da4c1ee690f9876fc01031a25a",
+            "english_sha256": "6c1974c9bd4e9eb16815007c1d108fc7fcb677af7fbb4cffec5f6fda6ed43fc8",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-40c77fc1-975f-419e-9dba-0f2b9d8ecc2d",
+            "request_id": "cbf634bd-89ab-4fa0-8f55-ba30e431c8d6",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:38+00:00",
+            "finished_at": "2026-10-09T18:53:41+00:00",
+            "ms": 3033,
+            "usage": {
+              "prompt_tokens": 1330,
+              "completion_tokens": 349,
+              "total_tokens": 1679
+            },
+            "raw_sha256": "0a05dea6873f8ade1c769686b2e4573f29dd89c6468442a8f643c1a49f040454",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": false,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1624",
+            "source_sha256": "116adafcd4da99a7531186a22ccf8fd0e4afeab213ceb534181a672846e408b1",
+            "english_sha256": "2a7c5636d007ad7ee4b5b56dc5b899a7c8e2513846c80230c903c14347afb442",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-bdd0ec44-10d2-48a5-bccc-f06454bd85cb",
+            "request_id": "17fabbdb-1938-43fc-87a2-b2726197bdef",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:43+00:00",
+            "finished_at": "2026-10-09T18:53:44+00:00",
+            "ms": 1399,
+            "usage": {
+              "prompt_tokens": 1263,
+              "completion_tokens": 153,
+              "total_tokens": 1416
+            },
+            "raw_sha256": "d50b0b32b41fc432c97a62c21121d3df62ff959b0d832a8756394c73d91d3e56",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1625",
+            "source_sha256": "c36e6195f14fab2d3715657f799d4aeb480f3b00151943082a4061d23f680c59",
+            "english_sha256": "14fc6e19229886ef19363f383bbeca04ca0cc30a52e9a3a49f9cbcc7389cea7e",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-a1117229-1f4d-4e82-acd1-23d27307da37",
+            "request_id": "efa93777-d8b8-48ca-8662-d43d965ccfbe",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:48+00:00",
+            "finished_at": "2026-10-09T18:53:50+00:00",
+            "ms": 1957,
+            "usage": {
+              "prompt_tokens": 887,
+              "completion_tokens": 176,
+              "total_tokens": 1063
+            },
+            "raw_sha256": "5032a5e5f3866e921769ca5bf631fec44aeeadf1c5784eb4f5b6fd3a03f06fef",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1626",
+            "source_sha256": "ae8e39ab9bc2c0f040620ee21f95eb42d2526c9aa050cf5b76bebdfdf078b2c2",
+            "english_sha256": "9db79ff9b90c4fc5921c2e39f8f630b5e6f9ba55ee7c87cc724a7e286dccd873",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-05a780a5-9a5f-44f8-bebe-ded451d2b450",
+            "request_id": "cfd5bfc2-e393-480f-82dd-c9ffbcd8266c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:53+00:00",
+            "finished_at": "2026-10-09T18:53:54+00:00",
+            "ms": 1208,
+            "usage": {
+              "prompt_tokens": 804,
+              "completion_tokens": 128,
+              "total_tokens": 932
+            },
+            "raw_sha256": "737fdf6d2e51cf5b4a6214d8ca23337a8e9c8b6da0a48afec6ab46f935c681c3",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1627",
+            "source_sha256": "8cfd660be1c8b78d9bb25844ff986ba7956c66a4ffa8ff1211a66858af60a859",
+            "english_sha256": "68d2819b3b9cc74d10d713b2548d91c45e1125814e7c46bb771d24a0c5f7cc80",
+            "response_model": "nvidia/nemotron-3-super-120b-a12b",
+            "response_id": "chatcmpl-40fd4926-1f64-49f2-bd62-b7e8da49dc87",
+            "request_id": "3293c7cb-1548-4779-8ed6-41f3ba1a3a26",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-09T18:53:59+00:00",
+            "finished_at": "2026-10-09T18:54:00+00:00",
+            "ms": 1531,
+            "usage": {
+              "prompt_tokens": 617,
+              "completion_tokens": 141,
+              "total_tokens": 758
+            },
+            "raw_sha256": "4f593516ce154c3d89d3b030a0a8021a7c1a77c9623aa74fdf78859fea67bcf7",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false
+          }
+        ]
+      },
+      {
+        "lane": "gemini",
+        "provider": "google-ai-studio",
+        "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/<model>:generateContent",
+        "tier": "free (AI Studio free tier)",
+        "spend_usd": 0,
+        "model": "gemini-3.5-flash-lite",
+        "family": "gemini",
+        "call_count": 32,
+        "http_attempts": 34,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 24829,
+          "completion_tokens": 4061,
+          "total_tokens": 28890
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 23923,
+          "completion_tokens": 3778,
+          "total_tokens": 27701
+        },
+        "first_call_at": "2026-10-09T18:48:01+00:00",
+        "last_call_at": "2026-10-09T18:56:28+00:00",
+        "calls": [
+          {
+            "section": "600",
+            "source_sha256": "8594709186181f9a41cc3587b6536a36a067e7b8b15115048c9271bd378f95a2",
+            "english_sha256": "cdab0df21a81ef8ee67a6532a282cc5ac35c222e3a6651f158d29ac8de8f75a8",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "1TjJapqEN7GBmtkPr5rqqQU",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:56:21+00:00",
+            "finished_at": "2026-10-09T18:56:22+00:00",
+            "ms": 1039,
+            "usage": {
+              "prompt_tokens": 484,
+              "completion_tokens": 103,
+              "total_tokens": 587
+            },
+            "raw_sha256": "48c596967ed12f4c9cc8288559498d7b47a3f515e5ab69933980d1dadf9864d9",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "631",
+            "source_sha256": "7d9d03080d200d5b56aa063ce2286576a4e1a8f24884e76721446f2079aa18e9",
+            "english_sha256": "d624d75a1ad25befdf976ab7908ae43da58b82cc711389e3488ae21f4a8e3023",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "2zjJapnLH_Pg8QG_9r7RAw",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:56:27+00:00",
+            "finished_at": "2026-10-09T18:56:28+00:00",
+            "ms": 1161,
+            "usage": {
+              "prompt_tokens": 556,
+              "completion_tokens": 108,
+              "total_tokens": 664
+            },
+            "raw_sha256": "922b42e7d92b48424b0795a9ab45fb856b8785fa3f9e390def98569a512e8572",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1598",
+            "source_sha256": "efb73abf97734148d154832c6325e7c955181036825fd64863d77eaf20e668dc",
+            "english_sha256": "c6483872b3893b3bccef7fef1654d8825a1ed72ff110d0b53102483a46c40848",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "4jbJaslS_KHPsg_LzOvBAw",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:01+00:00",
+            "finished_at": "2026-10-09T18:48:02+00:00",
+            "ms": 1098,
+            "usage": {
+              "prompt_tokens": 1317,
+              "completion_tokens": 149,
+              "total_tokens": 1466
+            },
+            "raw_sha256": "00193c6038c87bbd1db12e3cf72d24de45ec7ad4c36415ede39e3a891f08e64b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1599",
+            "source_sha256": "b6eae6cb1614ddae58617669f0db3bce511e4f4b7efb4f7dbb75e0d02b1a1c87",
+            "english_sha256": "f9de469305e35161b2e9b1d719d58674ebb8daa85378ebb5e65e233bea5f25d7",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "5zbJasLIMJLqz7IP0LGYmQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:07+00:00",
+            "finished_at": "2026-10-09T18:48:08+00:00",
+            "ms": 858,
+            "usage": {
+              "prompt_tokens": 830,
+              "completion_tokens": 134,
+              "total_tokens": 964
+            },
+            "raw_sha256": "bb65cc1322c706b436349c726812f4d60837a86725ff4e33b2a83255fc8d9827",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1600",
+            "source_sha256": "af400de2a445450d814d4ba46b2a32a72c619e836fc3299547b6a3cf581d61c0",
+            "english_sha256": "32ddb4a8ba0bc900a77627e04eea60473d92fb9a365229e26dce6e877f5071d7",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "7jbJavGkLsKsz7IPh-irwAk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:14+00:00",
+            "finished_at": "2026-10-09T18:48:15+00:00",
+            "ms": 969,
+            "usage": {
+              "prompt_tokens": 571,
+              "completion_tokens": 134,
+              "total_tokens": 705
+            },
+            "raw_sha256": "6b0adf640938c78170bde6f970e9d46e0b5a3aba1417ab2099821c549840ee35",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1601",
+            "source_sha256": "46b18fd2d5672ee4f4a28e3fedf0247cfe1b4f35c5ac5b9dce826674d649651a",
+            "english_sha256": "dc0116af767cb281720675426ee27e87c8888d702b50ff7df30121737c63bf3b",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "-TbJat3oCpatz7IPpaCr6Qw",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:25+00:00",
+            "finished_at": "2026-10-09T18:48:26+00:00",
+            "ms": 1472,
+            "usage": {
+              "prompt_tokens": 626,
+              "completion_tokens": 135,
+              "total_tokens": 761
+            },
+            "raw_sha256": "76070d7a139cb79bd89509956a759604509f340bb73f9ec7f2d25b7be41775c6",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1602",
+            "source_sha256": "a970e2064c6baa65371b5218827f943fdd99399e526054275b7bdf28c19f799f",
+            "english_sha256": "ea084da1ec85e43a757906895a802406293c3ccbcf81f9014462d5882f9fc618",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "ADfJaq_aM4HXz7IPvrPfmQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:32+00:00",
+            "finished_at": "2026-10-09T18:48:33+00:00",
+            "ms": 1282,
+            "usage": {
+              "prompt_tokens": 533,
+              "completion_tokens": 139,
+              "total_tokens": 672
+            },
+            "raw_sha256": "02c98787d9d98ba97573938ff690f7c257fba1c481e04f0256b6d0799c7c767c",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1603",
+            "source_sha256": "59c059ee12d075af0ba5e387183bc7c9d5f8c86f79ed1b1b121981f2e5cdd079",
+            "english_sha256": "19fa93caf338f7693599a06479a221361e217a73a51b4217ac61abcc3853a56d",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "BjfJavKNJ5XQz7IP1-_08AI",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:38+00:00",
+            "finished_at": "2026-10-09T18:48:39+00:00",
+            "ms": 1308,
+            "usage": {
+              "prompt_tokens": 475,
+              "completion_tokens": 147,
+              "total_tokens": 622
+            },
+            "raw_sha256": "0687d50a2902158429f257504a28f023c56cea366d0eae9b01d6166427adeb8b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1604",
+            "source_sha256": "c7ec275a40432fd93777d9f3b6d75b9a3c658419029d8dd2c01b876982ef523e",
+            "english_sha256": "5fd2e9bf5592b2cb99e551333956eadd85ea52315993fdcaa5aaf274088ef766",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "DTfJaoChL8Drz7IPtubeuAk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:45+00:00",
+            "finished_at": "2026-10-09T18:48:46+00:00",
+            "ms": 1058,
+            "usage": {
+              "prompt_tokens": 699,
+              "completion_tokens": 107,
+              "total_tokens": 806
+            },
+            "raw_sha256": "38f4d4b8809317499630929ca13a79ee0675d5d3778ccb01a2f007e21c73812b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1605",
+            "source_sha256": "a18a71210f949c39f7a53a8d22a3e850bc06d288ff44ce912d63b19875c086e4",
+            "english_sha256": "fa7c2be5e36b17117fd59b6499c40dbdd8ab113676a39feee89f0c576149d5e7",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "EzfJaqWVFN3pz7IP9bbJqQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:51+00:00",
+            "finished_at": "2026-10-09T18:48:52+00:00",
+            "ms": 1059,
+            "usage": {
+              "prompt_tokens": 507,
+              "completion_tokens": 101,
+              "total_tokens": 608
+            },
+            "raw_sha256": "93d2abe28179a16e0ac223e9f2c2e8fc0fdd701a8d04f094e50396efe7ec24cd",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1606",
+            "source_sha256": "7ac02ceb2b842d1f958f7d90a4f2ebffc91a9131b4a9521a50dba5c338a9b8c9",
+            "english_sha256": "5827de65aae65683e65145ada190e1ccf0d59a69f5a59b8126ad240625fe17fd",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "GTfJavnEAtadz7IPtYzy2Qo",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:48:56+00:00",
+            "finished_at": "2026-10-09T18:48:57+00:00",
+            "ms": 1081,
+            "usage": {
+              "prompt_tokens": 559,
+              "completion_tokens": 131,
+              "total_tokens": 690
+            },
+            "raw_sha256": "ad154ad03f6268ecbea9b443ade87d2ec5b1aa9981baf6bb107c01a4c9882fe0",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1607",
+            "source_sha256": "77b81b17ff87f4c2a7598df86243ec18a2a35880a8816d61c71149ad5977797e",
+            "english_sha256": "962ed433eb7faffe9a0acb18d3874746a282b56243e794fb3f57b55a65c49ee0",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "2zfJasSpI8Toz7IPnpzVqQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:11+00:00",
+            "finished_at": "2026-10-09T18:52:12+00:00",
+            "ms": 1044,
+            "usage": {
+              "prompt_tokens": 684,
+              "completion_tokens": 106,
+              "total_tokens": 790
+            },
+            "raw_sha256": "d4ba20e43630f1746fb39b2b3bbf79b477096e8f744a7c59facb41adf1fd3a81",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1608",
+            "source_sha256": "35a0d2b941f9d413f56e663d3f022251b2462ce9dc7c671595e94084757323a9",
+            "english_sha256": "d4b488217836b089c0c47f9c319011cdd3d437638c520291f9f13cd7b3d4e0e2",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "4TfJaprhDpatz7IPpaCr6Qw",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:16+00:00",
+            "finished_at": "2026-10-09T18:52:17+00:00",
+            "ms": 1043,
+            "usage": {
+              "prompt_tokens": 458,
+              "completion_tokens": 132,
+              "total_tokens": 590
+            },
+            "raw_sha256": "aac32d809b36c4773eeb4cca9db28a2ee13308e90f474ecd3cd4a492c22bf063",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1609",
+            "source_sha256": "8ba818a1340ca884510eac6c1ed964cebc28c2587367b9acef9f4f92d103a7d7",
+            "english_sha256": "57b89b8cf33f5e95e191a1825e05bfa14fac86689d9177ca04acfe565a3dabd9",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "5jfJas36J8iez7IPrYa0wQM",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:22+00:00",
+            "finished_at": "2026-10-09T18:52:23+00:00",
+            "ms": 963,
+            "usage": {
+              "prompt_tokens": 507,
+              "completion_tokens": 89,
+              "total_tokens": 596
+            },
+            "raw_sha256": "84a054e1ca8fed25f7166fdb4a2484dbd536cebfd99a1b6fb2de96535006a912",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1610",
+            "source_sha256": "86cd7b7a968477546e4fe66b7aaef1a46f4dc4d1aed4de943665e2e96d27b1be",
+            "english_sha256": "f6797d5d0f884a3327cc1821e54ce5ce2c56266fa0f69ee1891f4e2f12a988ea",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "7DfJatPqD-npz7IP9YqVuQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:27+00:00",
+            "finished_at": "2026-10-09T18:52:29+00:00",
+            "ms": 1258,
+            "usage": {
+              "prompt_tokens": 560,
+              "completion_tokens": 142,
+              "total_tokens": 702
+            },
+            "raw_sha256": "6950ee3deea3d75f27a148230f55640d0cb157d4aa76e7d93d9bcd2399b5fa51",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1611",
+            "source_sha256": "8cd9c62ea99a6a2fb96058808582e3bf7d561ee3bcc1cadc7d1649486f67595a",
+            "english_sha256": "cbad027a961db8cb517d38f17fc2227bd3b286d202cd9ebc069adbaa5d25338b",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "8jfJatTLAd2ez7IP28CemAw",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:33+00:00",
+            "finished_at": "2026-10-09T18:52:34+00:00",
+            "ms": 1280,
+            "usage": {
+              "prompt_tokens": 818,
+              "completion_tokens": 135,
+              "total_tokens": 953
+            },
+            "raw_sha256": "558ff0c7aadcd75a6138b8e8d80c6b819992428bd258aca42a3ac23f2696d503",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1612",
+            "source_sha256": "526ba6014d16a2bba21cf879383f67f4dab08553b202dbe8d174831a9b3c79c8",
+            "english_sha256": "9127795c7560bea18dd25a89076d3ac88eb1f94a4e762847f2ab5263d7e92608",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "9zfJauiGNPfbqtsPufrAsAc",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:39+00:00",
+            "finished_at": "2026-10-09T18:52:40+00:00",
+            "ms": 981,
+            "usage": {
+              "prompt_tokens": 688,
+              "completion_tokens": 102,
+              "total_tokens": 790
+            },
+            "raw_sha256": "b6adb159d4906a4d76d76dfbcbfc0b9a76ad15e228ec3f1e2eefe30e0fe34a4d",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1613",
+            "source_sha256": "fb2b2993ebe68cd0f3187128adc0222b606b11aa1ba900c0035544f1f15265aa",
+            "english_sha256": "27bc53ebb98bc667066700614ac8f3eaa758ad1f606f9b3af9de22fd61134942",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "_TfJasncCteez7IPsvrK2AM",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:44+00:00",
+            "finished_at": "2026-10-09T18:52:45+00:00",
+            "ms": 1005,
+            "usage": {
+              "prompt_tokens": 715,
+              "completion_tokens": 96,
+              "total_tokens": 811
+            },
+            "raw_sha256": "2a977874c38d714f214cb903a7a84503f291782f1f9db8aea45f8cc4e70cacc9",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1614",
+            "source_sha256": "23df9334c1e3e894c890f94670412dd443c527f35570f6608103a4460cb93925",
+            "english_sha256": "daeb3b8c8612bfe0e849d6e57bb26611c7885f269e80fb486c653e396319f180",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "AjjJavn8MYHXz7IPvrPfmQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:50+00:00",
+            "finished_at": "2026-10-09T18:52:51+00:00",
+            "ms": 1267,
+            "usage": {
+              "prompt_tokens": 916,
+              "completion_tokens": 103,
+              "total_tokens": 1019
+            },
+            "raw_sha256": "782bc7b0c7c69d1a7d01c74fb3685caed6cd845f100f140483e8b4f058fd7f2a",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1615",
+            "source_sha256": "e0bdb7c1d6ecad81e125a0afa4c41cbdb0769ae38c4804e1c6a8d7f64a88d3cc",
+            "english_sha256": "bf96bb843a429767fa736df2d97dc3c63528ce92b82ccd7013d8d7fe6f2fb641",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "CDjJaqefKfCHqtsP8_DKgAg",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:52:56+00:00",
+            "finished_at": "2026-10-09T18:52:57+00:00",
+            "ms": 1261,
+            "usage": {
+              "prompt_tokens": 1109,
+              "completion_tokens": 101,
+              "total_tokens": 1210
+            },
+            "raw_sha256": "134338dec3fbccc22880633226c91ffdc34bac9543bb64595c832738baec13bc",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1616",
+            "source_sha256": "5ce3efb280c44cd5f0be430145403bc0c3a583b791382d69bb2fab09bba98278",
+            "english_sha256": "d0e40c1f8a6bcec41fb6f344a8fe5df21a3612a519bd43ce1b92590d42a236c0",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "DjjJatueFOqVmtkP25Wa-AM",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:02+00:00",
+            "finished_at": "2026-10-09T18:53:03+00:00",
+            "ms": 998,
+            "usage": {
+              "prompt_tokens": 570,
+              "completion_tokens": 95,
+              "total_tokens": 665
+            },
+            "raw_sha256": "6011ac7b92b2e35151f5f104dbafc149ed9e8a2856a959053c0ae56df1546a1b",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1617",
+            "source_sha256": "0e5d5c5eb3b679bf0dacdf5c125681eb1faaa2d56a993b7901d42bedbacfb70c",
+            "english_sha256": "f428a519367e439c103afe4274e4aeb6513043e1a0ae4be9c619068a9e47c29d",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "EzjJaoirL6ecqtsPo7fDkAQ",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:07+00:00",
+            "finished_at": "2026-10-09T18:53:08+00:00",
+            "ms": 1002,
+            "usage": {
+              "prompt_tokens": 624,
+              "completion_tokens": 97,
+              "total_tokens": 721
+            },
+            "raw_sha256": "e54f742a704c4cefd440874f557423a869ebc6720f5c74a79fb82a44b858541f",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1618",
+            "source_sha256": "44cb9b37be05a9da3d7eaa85e65546fdb1562756dd8a55abb2a71cf532cba6e6",
+            "english_sha256": "66feee12661221b8c0d041eed1aa6c2cce134d880c5d09c025d642f6e16b8148",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "GTjJarnnE_CHqtsP8_DKgAg",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:13+00:00",
+            "finished_at": "2026-10-09T18:53:14+00:00",
+            "ms": 988,
+            "usage": {
+              "prompt_tokens": 976,
+              "completion_tokens": 95,
+              "total_tokens": 1071
+            },
+            "raw_sha256": "20b84bb84bdd0978c044f2446f02396c92945b54efa52a3bdec5054f94eb6858",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1619",
+            "source_sha256": "e8deb9d0c54f2f780b57d779662aff0ad4002d2d33c2d24a1606f4824e0a00a9",
+            "english_sha256": "c7cad7ef82942bd82e86bcc6e059901487c6bd38aae471a9f3d310003800011b",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "HjjJav2tKMbqz7IPn7-DwAk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:18+00:00",
+            "finished_at": "2026-10-09T18:53:19+00:00",
+            "ms": 1013,
+            "usage": {
+              "prompt_tokens": 709,
+              "completion_tokens": 95,
+              "total_tokens": 804
+            },
+            "raw_sha256": "5c32a452bd2a41f712ac8ccc4e8f10668859c2b565f7a1faec0ee4a2bdd97d2c",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1620",
+            "source_sha256": "1715c68b5fca3e2d698502adac143236a2a8d9ac911fe8fbc4e05d7cdb69e5e9",
+            "english_sha256": "0b2d2c6d2038cbbe04d05b8d1a3ef132e3bc69c37ecd41f60729a12590789a53",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "JDjJataIFZv0z7IPtZ26uAQ",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:24+00:00",
+            "finished_at": "2026-10-09T18:53:25+00:00",
+            "ms": 1050,
+            "usage": {
+              "prompt_tokens": 686,
+              "completion_tokens": 129,
+              "total_tokens": 815
+            },
+            "raw_sha256": "2e72a5ce1a850b4f939f7d0d4d6b05a9f5b68232e2d8bc0c5a36322862e65550",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1621",
+            "source_sha256": "ab9432885fd3582298d53aaeefee0e4f2597a953782ed9c3fcf210579b2cfa41",
+            "english_sha256": "a6776a45ef9c2f50abfba6806b4b9ab05db5f070d15db7b5120a265c1dd2e257",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "KTjJaqGaLquLmtkPgujJ-Ac",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:29+00:00",
+            "finished_at": "2026-10-09T18:53:30+00:00",
+            "ms": 1115,
+            "usage": {
+              "prompt_tokens": 935,
+              "completion_tokens": 144,
+              "total_tokens": 1079
+            },
+            "raw_sha256": "339853fb27a3623991fd9e11412fee85151987d008ae260a815b323508477855",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1622",
+            "source_sha256": "de85419434f3b421020e2f6b6572203577f7b8953944dbb5826c4f4543f27d53",
+            "english_sha256": "e0463ea933fee8befe439dd4ef049f6e29340fc0691f0cc929c9520e58f931c5",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "MDjJaoChC_DQz7IP0qyD0Qk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:36+00:00",
+            "finished_at": "2026-10-09T18:53:37+00:00",
+            "ms": 1101,
+            "usage": {
+              "prompt_tokens": 1140,
+              "completion_tokens": 148,
+              "total_tokens": 1288
+            },
+            "raw_sha256": "3c474c0a8bab265439d4004c7509e01c58ec211b10ffc16234435d882e308a6a",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1623",
+            "source_sha256": "7a94ea0352cf87a71479956de36adcd66e10e9da4c1ee690f9876fc01031a25a",
+            "english_sha256": "6c1974c9bd4e9eb16815007c1d108fc7fcb677af7fbb4cffec5f6fda6ed43fc8",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "NTjJaurbMLaeqtsP0cG-yA4",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:41+00:00",
+            "finished_at": "2026-10-09T18:53:42+00:00",
+            "ms": 1086,
+            "usage": {
+              "prompt_tokens": 1266,
+              "completion_tokens": 145,
+              "total_tokens": 1411
+            },
+            "raw_sha256": "5c3e77e2775825b3668cf0154c851def99717c586616caaa824f1e2c04d1f457",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1624",
+            "source_sha256": "116adafcd4da99a7531186a22ccf8fd0e4afeab213ceb534181a672846e408b1",
+            "english_sha256": "2a7c5636d007ad7ee4b5b56dc5b899a7c8e2513846c80230c903c14347afb442",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "OzjJao6BHfHoz7IP79ztoQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:47+00:00",
+            "finished_at": "2026-10-09T18:53:48+00:00",
+            "ms": 981,
+            "usage": {
+              "prompt_tokens": 1208,
+              "completion_tokens": 100,
+              "total_tokens": 1308
+            },
+            "raw_sha256": "b9a4f96e935000d10efc359505599d241c90043b5513f264bf10833b155ca1bc",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1625",
+            "source_sha256": "c36e6195f14fab2d3715657f799d4aeb480f3b00151943082a4061d23f680c59",
+            "english_sha256": "14fc6e19229886ef19363f383bbeca04ca0cc30a52e9a3a49f9cbcc7389cea7e",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "QDjJau_JMteez7IPsvrK2AM",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:52+00:00",
+            "finished_at": "2026-10-09T18:53:53+00:00",
+            "ms": 937,
+            "usage": {
+              "prompt_tokens": 847,
+              "completion_tokens": 129,
+              "total_tokens": 976
+            },
+            "raw_sha256": "9e9ea6fab37d8c25b44c16e1277a39ed16083665d270eb396578cdfa6b889860",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1626",
+            "source_sha256": "ae8e39ab9bc2c0f040620ee21f95eb42d2526c9aa050cf5b76bebdfdf078b2c2",
+            "english_sha256": "9db79ff9b90c4fc5921c2e39f8f630b5e6f9ba55ee7c87cc724a7e286dccd873",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "RjjJarDZGd3pz7IP9bbJqQk",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:53:58+00:00",
+            "finished_at": "2026-10-09T18:53:59+00:00",
+            "ms": 928,
+            "usage": {
+              "prompt_tokens": 764,
+              "completion_tokens": 105,
+              "total_tokens": 869
+            },
+            "raw_sha256": "27423872ae8f84643a59a9629f79bccac3866d885daee66fdc2fbcb2a7510ade",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          },
+          {
+            "section": "1627",
+            "source_sha256": "8cfd660be1c8b78d9bb25844ff986ba7956c66a4ffa8ff1211a66858af60a859",
+            "english_sha256": "68d2819b3b9cc74d10d713b2548d91c45e1125814e7c46bb771d24a0c5f7cc80",
+            "response_model": "gemini-3.5-flash-lite",
+            "response_id": "SzjJaozHLKnUz7IPprCeyAM",
+            "request_id": null,
+            "http_status": 200,
+            "finish_reason": "STOP",
+            "started_at": "2026-10-09T18:54:03+00:00",
+            "finished_at": "2026-10-09T18:54:04+00:00",
+            "ms": 1067,
+            "usage": {
+              "prompt_tokens": 586,
+              "completion_tokens": 102,
+              "total_tokens": 688
+            },
+            "raw_sha256": "856ad9d3940a39878bc5cf818e6a1e15d9d73c41b77f3003d68fb5abc87fbe92",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": false
+          }
+        ]
+      }
+    ],
+    "superseded_calls": [
+      {
+        "section": "600",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "response_id": "chatcmpl-d55f6987-65e1-437f-97f7-63ceafa4c6bc",
+        "verdict": "pass",
+        "english_sha256": "f7610e07c9422fcfe14516770ad7e98dd4ff52c1993e9471ae290a8b097a42e7",
+        "finished_at": "2026-10-09T18:47:50+00:00",
+        "notes": "Subjective = assent as it actually sits in a mind. matches 'Certitudinem subjectivam voco, quam assensus quislibet actu in mente alicujus obtinet.' Objective = what the object of itself deserves / exacts from the mind. matches 'Objectiva vero certitudo dicitur, quae per se cuilibet assensui debetur: seu, quae ratione habita objecti, menti inesse debet: & quam objectum, ut sic dicatur, jure suo a mente exigit.'",
+        "error": null
+      },
+      {
+        "section": "600",
+        "model": "gemini-3.5-flash-lite",
+        "response_id": "1jbJasSnO5iHqtsPk7aZ8QU",
+        "verdict": "fail",
+        "english_sha256": "f7610e07c9422fcfe14516770ad7e98dd4ff52c1993e9471ae290a8b097a42e7",
+        "finished_at": "2026-10-09T18:47:51+00:00",
+        "notes": "The English translation omits large portions of the source text, specifically the introductory framing (\"Porro docendi causa certitudo distingui potest...\") and significantly condenses the definitions into informal glosses rather than translating the complete philosophical definitions.",
+        "error": null
+      },
+      {
+        "section": "631",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "response_id": "chatcmpl-d56dcfba-be4a-4eaf-94ca-c4a065995369",
+        "verdict": "fail",
+        "english_sha256": "fb0d82145f212dc999be8a0365e335fd391a82bc719060b376dbedd6ac91a233",
+        "finished_at": "2026-10-09T18:47:54+00:00",
+        "notes": "English says 'faith is less than true knowledge' but source Latin says 'fides non est certior scientia proprie dicta; sed ab illa potius certitudine superatur' meaning faith is not more certain than proper science, but is overcome by its certainty — not that faith is 'less than true knowledge' in a general sense, and the English omits the comparative nuance and the role of science as the standard.",
+        "error": null
+      },
+      {
+        "section": "631",
+        "model": "gemini-3.5-flash-lite",
+        "response_id": "3DbJap3oH73oz7IP__rFmAk",
+        "verdict": "fail",
+        "english_sha256": "fb0d82145f212dc999be8a0365e335fd391a82bc719060b376dbedd6ac91a233",
+        "finished_at": "2026-10-09T18:47:57+00:00",
+        "notes": "The English translation is fragmented into three brief headings or bullet-point summaries rather than translating the complete prose of the source paragraph: \"Etenim quo major ista certitudo, eo longius ab assensu removet omnem dubitationem\" and the subsequent sentences are radically summarized.",
+        "error": null
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "section": "600",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: Objective certainty is the certainty owed of itself to a given assent: that is, the certainty that ought to be in the mind once the object is taken into account, and that the object, so to speak, claims from the mind by its own right.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the Latin text across all three paragraphs, perfectly preserving the philosophical distinctions between subjective and objective certainty without omitting any clauses or introducing unauthorized additions.\nLatin quote (anchor copied from packet text): «II. Porro docendi causa certitudo distingui potest in subjectivam atque objectivam.»\nEnglish quote (anchor copied from packet text): «For teaching purposes, moreover, certainty can be divided into subjective and objective.»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-74d79f2a-915f-4055-8154-b6e23d4eb748"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "1TjJapqEN7GBmtkPr5rqqQU"
+        }
+      ]
+    },
+    {
+      "section": "631",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: English paragraph 2: \"But faith is more exposed to doubt than knowledge is, mathematical knowledge for example.\" matches source: \"Sed fides dubitationi magis est obnoxia quam scientiae, verbi causa Mathematicae.\" (58+ chars)\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately corresponds to the Latin source text across all sentences, successfully splitting the single Latin paragraph into three English paragraphs without losing any clauses, altering polarities, or changing agents.\nLatin quote (from model note, verified): «Sed fides dubitationi magis est obnoxia quam scientiae, verbi causa Mathematicae.»\nEnglish quote (from model note, verified): «But faith is more exposed to doubt than knowledge is, mathematical knowledge for example.»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-8a7c241d-55c9-43af-aba2-191f4e22959f"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "2zjJapnLH_Pg8QG_9r7RAw"
+        }
+      ]
+    },
+    {
+      "section": "1598",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: 1. Rivet ends by saying that we honor the most Blessed Virgin first of all, in proportion to the very great gifts God gave her. matches source: \"Denique addit nos in primis Beatissimam Virginem laudare & honorare, pro ratione donorum quae a Deo accepit maxima.\" (34+ chars)\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the entire Latin text from paragraph 41 of the Apology, preserving all doctrinal nuances, direct and indirect speech boundaries, and the specific reasons listed for honoring the Virgin Mary without omissions or additions.\nLatin quote (from model note, verified): «Denique addit nos in primis Beatissimam Virginem laudare & honorare, pro ratione donorum quae a Deo accepit maxima.»\nEnglish quote (anchor copied from packet text): «Rivet ends by saying that we honor the most Blessed Virgin first of all, in proportion to»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-6da8f55a-d9c3-402e-a02d-00069460f4c1"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "4jbJaslS_KHPsg_LzOvBAw"
+        }
+      ]
+    },
+    {
+      "section": "1599",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: 1. John Daillé teaches the same in his book On the Object of Religious Worship.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the entire Latin paragraph from Jean Daillé's work without omissions, preserving all theological nuances, negation patterns, and agency.\nLatin quote (anchor copied from packet text): «XLII. His quoque consentanea tradit Joannes Dallaeus in libro de Objecto cultus»\nEnglish quote (anchor copied from packet text): «John Daillé teaches the same in his book On the Object of Religious Worship. \"When we»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-f8a04783-de0f-42cf-8395-59a285877278"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "5zbJasLIMJLqz7IP0LGYmQk"
+        }
+      ]
+    },
+    {
+      "section": "1600",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: Source: 'τῇ εὐφημίᾳ καὶ τῇ μιμήσει, laude & imitatione.' English: 'in good report and in imitation, that is, praise and imitation.' The source explicitly pairs the Greek terms with 'laude & imitatione' (praise & imitation), but the English renders 'good report' instead of 'praise', altering the meaning of the first term. This is a dropped/altered clause.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately renders the Latin source text, including the twofold division of honor (praise and imitation, τῇ εὐφημίᾳ καὶ τῇ μιμήσει) and the citation at the end (De objecto cultus religiosi lib. 3. cap. 1.).\nLatin quote (anchor copied from packet text): «XLIII. Postea vero honorem, quem & Angelis & Sanctis caelo receptis nobis deferri par»\nEnglish quote (anchor copied from packet text): «Daillé then holds that the honor we rightly give to the angels and to the saints received»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. English renders both members of the doublet: Greek εὐφημίᾳ as 'good report' and Latin 'laude' as 'praise' ('in good report and in imitation, that is, praise and imitation'). Nothing dropped or altered. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-5c42c128-b4c1-4315-a015-4bee2cf8c309"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "7jbJavGkLsKsz7IPh-irwAk"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-5c42c128-b4c1-4315-a015-4bee2cf8c309",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. English renders both members of the doublet: Greek εὐφημίᾳ as 'good report' and Latin 'laude' as 'praise' ('in good report and in imitation, that is, praise and imitation'). Nothing dropped or altered. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1601",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: Source mentions 'ΣANCTORVM ANGELORVM & hominum εὐφημίᾳ, sive laude' (praise of saints, angels, and men). English omits angels entirely: 'good report or praise of the saints, angels and men' becomes 'good report or praise of the saints, angels and men' — actually it does include angels; correction: English does include 'saints, angels and men' — but source phrase 'Sanctorum Angelorum & hominum' is rendered as 'saints, angels and men' — that is correct. However, source says 'Sanctos extollendi' (exalting the saints) and English says 'in our eagerness to exalt them' — 'them' refers to saints, angels, and men, but English 'them' is ambiguous; however, it likely refers to the group. Main issue: source clause 'cum hoc nulla revelatione divina compertum sit' is rendered as 'since no divine revelation has disclosed this' — correct. But source also says 'nec indicet Sanctos in Christo defunctos rebus humanis praeesse' — English says 'Holy Scripture neither teaches nor hints that the saints who have died in Christ govern human affairs' — 'govern' for 'praeesse' is acceptable. However, source says 'nec etiam iis tribui quod pro singulis fidelibus orent' — English says 'Nor will they credit the saints with praying for individual believers' — correct. But source also says '& singulorum preces simul audire & exaudire possint' — English says 'or with being able to hear and answer the prayers of many people at once' — 'many people at once' captures 'singulorum preces simul' (the prayers of individuals simultaneously). However, source Latin: 'singulorum preces simul audire & exaudire possint' = 'to be able to hear and answer the prayers of individuals simultaneously'. English: 'hear and answer the prayers of many people at once' — 'many people at once' is a valid rendering of 'singulorum preces simul'. But the deeper issue: source says 'covendum putant Scholae Reformatae Doctores, ne studio Sanctos extollendi, tribuamus ipsis titulos & elogia, quae soli Deo & Christo debentur' — English: 'the teachers of the Reformed school think we must take care not to give them, in our eagerness to exalt them, titles and tributes owed to God and Christ alone' — correct. However, source says 'cavendum putant' — 'they think we must take care' — English: 'think we must take care' — correct. But source has 'ne studio Sanctos extollendi, tribuamus ipsis titulos & elogia' — English: 'not to give them ... titles and tributes' — correct. However, source also says 'neve pedem inferentes in ea quae non vidimus, quicquam eis tribuamus quod per Dei verbum non constat' — English: 'Nor should we intrude into things we have not seen and credit them with anything that the word of God does not establish.' — correct. But the source says 'Sanctorum Angelorum & hominum εὐφημίᾳ, sive laude' — the Greek term 'εὐφημίᾳ' is not reflected in English — it is omitted. The English says 'good report or praise' — which translates 'laude' but not 'εὐφημίᾳ'. The source includes a Greek word 'εὐφημίᾳ' (euphemia) meaning 'good speech' or 'praise', paired with Latin 'laude'. The English renders only 'good report or praise' — which covers 'laude' but drops the Greek term. This is an omission of source content: the Greek term is part of the source clause and is not conveyed in English. Therefore, completeness is failed because a source clause (the Greek term) is dropped.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the Latin source text across both paragraphs, preserving all theological nuances, negations, modalities, and doctrinal statements without omission or addition.\nLatin quote (anchor copied from packet text): «XLIV. In ista autem Sanctorum Angelorum & hominum εὐφημίᾳ, sive laude, cavendum putant»\nEnglish quote (anchor copied from packet text): «In this good report or praise of the saints, angels and men, the teachers of the Reformed»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. The model's own note concedes each clause is rendered; its final claim that εὐφημίᾳ is dropped is wrong: 'good report or praise' renders 'εὐφημίᾳ, sive laude'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-a1513886-2174-402d-b159-c14a98173e99"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "-TbJat3oCpatz7IPpaCr6Qw"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-a1513886-2174-402d-b159-c14a98173e99",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. The model's own note concedes each clause is rendered; its final claim that εὐφημίᾳ is dropped is wrong: 'good report or praise' renders 'εὐφημίᾳ, sive laude'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1602",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: English paragraph 1: \"Whether the saints at least pray for the Church Militant in general, some among the Reformed will not affirm as certain and suspend judgment on the question.\" matches Latin source clause \"An vero saltem in genere pro Ecclesia Militante orent quidam inter Reformatos pro certo affirmare nolunt, ac judicium suum ea de re suspendunt\" with correct preservation of agency, negation, and modality.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures all clauses, maintaining the exact meaning of Drelincourt's stance, the Reformed perspective, and the citation details provided in the Latin source.\nLatin quote (from model note, verified): «An vero saltem in genere pro Ecclesia Militante orent quidam inter Reformatos pro certo affirmare nolunt, ac judicium suum ea de re suspendunt»\nEnglish quote (from model note, verified): «Whether the saints at least pray for the Church Militant in general, some among the Reformed will not affirm as certain and suspend judgment on the question.»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-ad1df643-86fa-4f24-8f35-9982c3a547b0"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "ADfJaq_aM4HXz7IPvrPfmQk"
+        }
+      ]
+    },
+    {
+      "section": "1603",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: Chamier likewise takes up the question whether the souls of the saints pray for us in general, that is, for the Christian Church as a whole and for the whole body of believers.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately renders the Latin source text without any omissions or distortions. Phrases like 'pronunciat id nullo certo argumento constare' are precisely translated as 'He declares that no certain argument establishes it'.\nLatin quote (anchor copied from packet text): «XLVI. Similiter Chamierus quaestione proposita, utrum Sanctorum animae pro nobis orent in»\nEnglish quote (anchor copied from packet text): «Chamier likewise takes up the question whether the souls of the saints pray for us in»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-66b03374-15b9-4a05-bda2-1ccb6ed6cbf6"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "BjfJavKNJ5XQz7IP1-_08AI"
+        }
+      ]
+    },
+    {
+      "section": "1604",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: English paragraph 1: 'Others readily grant, and think it probable, that the saints reigning with Christ in heaven pray at least in general for the Church fighting here, since this seems wholly in keeping with the love that burns in them and with the communion between the two Churches, the Church Militant and the Church Triumphant.' matches Latin: 'Alii vero non gravate concedunt, & probabile existimant Sanctos in caelis cum Christo regnantes, in genere saltem pro Ecclesia hic pugnante orare: quoniam id videtur plane consentaneum & charitati qua fervent, & communioni quae est inter utramque Ecclesiam, Militantem atque Triumphantem.'\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately reflects the Latin source text without any omissions, additions, or polarity flips, correctly handling Andrew Rivet's quotation and the parenthetical citation at the end.\nLatin quote (anchor copied from packet text): «XLVII. Alii vero non gravate concedunt, & probabile existimant Sanctos in caelis cum»\nEnglish quote (anchor copied from packet text): «Others readily grant, and think it probable, that the saints reigning with Christ in»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-e24f0b6a-4aed-4ffd-b9a0-3fe4b02d1802"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "DTfJaoChL8Drz7IPtubeuAk"
+        }
+      ]
+    },
+    {
+      "section": "1605",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: English correctly states: 'he says, \"do not see what happens here and do not know individuals, yet they know that the Church is hard pressed by its enemies and faces endless struggles\" matching Latin: 'nec norint singulos, sciunt tamen Ecclesiam premi ab adversariis, & ei proposita esse perpetua certamina'.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English accurately captures the Latin text, perfectly translating Petrus Molinaeus as Peter du Moulin and accurately rendering all theological and doctrinal points without omission or addition.\nLatin quote (from model note, verified): «nec norint singulos, sciunt tamen Ecclesiam premi ab adversariis, & ei proposita esse perpetua certamina»\nEnglish quote (from model note, verified): «do not see what happens here and do not know individuals, yet they know that the Church is hard pressed by its enemies and faces endless struggles»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-f73c7b07-a0eb-4c55-9c84-7e0039878aa3"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "EzfJaqWVFN3pz7IP9bbJqQk"
+        }
+      ]
+    },
+    {
+      "section": "1606",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: The Reformed theologians agree in denying that the saints are, or can rightly be called, our intercessors and advocates.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures all semantic and theological elements of the Latin source text without omission or alteration of polarity, agency, or modality.\nLatin quote (anchor copied from packet text): «XLIX. Quicquid vero de eo sit, communi consensu negant Theologi Reformati Sanctos esse &»\nEnglish quote (anchor copied from packet text): «However that may be, the Reformed theologians agree in denying that the saints are, or»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-2903dc8b-f058-4d4d-87f7-9db889a94d4b"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "GTfJavnEAtadz7IPtYzy2Qo"
+        }
+      ]
+    },
+    {
+      "section": "1607",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: The Reformed also refuse to credit the good things that come to us to the merits of the saints, or to ask anything of God through their merits. The saints owed all that they were to divine grace, and so, strictly speaking, they could merit nothing either for themselves or for others. Yet they do not therefore deny that, by virtue of the communion of saints, the good and godly works that individual members of the Church do by God's grace in some way call down and draw God's blessing and favor on the whole body. Indeed, God sometimes spares the ungodly themselves for the sake of the godly and righteous who live among them, and gives them time and means to repent, just as the Lord declared to Abraham that he would have spared Sodom and Gomorrah if even ten righteous people had been found there.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately reflects the Latin source text across both paragraphs, properly dividing the single Latin paragraph into two for readability without altering any meaning, doctrine, agency, or negation.\nLatin quote (anchor copied from packet text): «L. Nolunt quoque bona quae nobis obtingunt Sanctorum meritis tribui, & per eorum merita»\nEnglish quote (from model note, verified): «s grace in some way call down and draw God»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-7d9423e3-0f2d-45f0-873f-63eee9722738"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "2zfJasSpI8Toz7IPnpzVqQk"
+        }
+      ]
+    },
+    {
+      "section": "1608",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: The teachers of the Reformed school readily admit and teach this, and the contrary cannot be laid to their charge except by slander.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately and completely reflects the Latin text, preserving all negations, agency, modality, and theological terminology without omissions or additions.\nLatin quote (anchor copied from packet text): «LI. Porro ex iis quae hactenus thesibus hisce & superioribus exposita fuerunt, manifestum»\nEnglish quote (anchor copied from packet text): «From what these theses and the earlier ones have set out so far, it is clear that there»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-da5985aa-ca5e-46ab-91d2-1ed591787354"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "4TfJaprhDpatz7IPpaCr6Qw"
+        }
+      ]
+    },
+    {
+      "section": "1609",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: none; uncertainties: 0; model notes: The English sentence 'It is also clear from this that the teachers of the Roman school agree with the Reformed that...' accurately reflects the Latin 'LII. Praeterea inde patet Scholae Romanae Doctores, cum Reformatis agnoscere cultum qui Sanctis hominibus & Angelis debetur...' with correct preservation of meaning, no added or omitted clauses, and proper handling of negation, agency, modality, and doctrine.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The translation accurately represents the Latin source without any omissions, polarity flips, or doctrinal distortions.\nLatin quote (anchor copied from packet text): «LII. Praeterea inde patet Scholae Romanae Doctores, cum Reformatis agnoscere cultum qui»\nEnglish quote (anchor copied from packet text): «It is also clear from this that the teachers of the Roman school agree with the Reformed»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive / self-contradictory output: the model returned verdict fail with all seven checks true and a note saying the English 'accurately reflects the Latin ... no added or omitted clauses'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-d52e75a9-abc5-4e39-9d5b-148c32f648ce"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "5jfJas36J8iez7IPrYa0wQM"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-d52e75a9-abc5-4e39-9d5b-148c32f648ce",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive / self-contradictory output: the model returned verdict fail with all seven checks true and a note saying the English 'accurately reflects the Latin ... no added or omitted clauses'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": []
+        }
+      ]
+    },
+    {
+      "section": "1610",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness, negation; uncertainties: 0; model notes: English paragraph 2 omits the source clause 'non multum repugnare' ('do not much object'), dropping negation and weakening the meaning; English says 'do not much object if' while source implies a stronger reluctance to oppose.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately and completely captures the Latin source text across both paragraphs, properly dividing the single Latin period into two English paragraphs for readability without losing any doctrinal, modal, or agency details.\nLatin quote (anchor copied from packet text): «LIII. Illud quoque a nobis ostensum, Doctores Scholae Romanae fateri, distinctionem»\nEnglish quote (anchor copied from packet text): «We have also shown that the teachers of the Roman school admit that the division of»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. 'non multum repugnare' is rendered verbatim as 'do not much object' (the model quotes that English itself). Polarity preserved. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-ecc85b68-8203-4989-a28d-072300ee43ea"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "7DfJatPqD-npz7IP9YqVuQk"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-ecc85b68-8203-4989-a28d-072300ee43ea",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. 'non multum repugnare' is rendered verbatim as 'do not much object' (the model quotes that English itself). Polarity preserved. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1611",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: The whole difficulty and question therefore comes down to this: what does the honor consist in that may lawfully be given to holy and blessed creatures, and above all to the most Blessed Virgin Mary?\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The four English paragraphs accurately capture all clauses of the single Latin source paragraph without omission, accurately reflecting the complex series of questions, modalities, and doctrinal positions.\nLatin quote (anchor copied from packet text): «LIV. Tota ergo difficultas & quaestio huc redit, Qua in re consistat honor qui creaturis»\nEnglish quote (anchor copied from packet text): «The whole difficulty and question therefore comes down to this: what does the honor»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-77d564f4-5394-40d3-bd72-4a89d601761a"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "8jfJatTLAd2ez7IP28CemAw"
+        }
+      ]
+    },
+    {
+      "section": "1612",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: English paragraph 1 matches source: \"A further point in dispute is whether it is lawful to celebrate the saints who have died in Christ as guardians and patrons of the human race, entrusted by God with the government of our affairs, and to treat them as mediators and intercessors with God who can at all times hear and take in the prayers of all people, whether spoken in the heart or with the lips, offer and commend them to God, and help with their own suffrages and merits.\"\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately reflects the source Latin text in all respects, properly capturing the theological disputes regarding the saints and the Virgin Mary without any additions or omissions.\nLatin quote (anchor copied from packet text): «LV. Praeterea illud in controversia est, An Sanctos in Christo defunctos celebrare liceat»\nEnglish quote (anchor copied from packet text): «A further point in dispute is whether it is lawful to celebrate the saints who have died»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-4dd2a853-7de2-4a08-be83-726b7e187525"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "9zfJauiGNPfbqtsPufrAsAc"
+        }
+      ]
+    },
+    {
+      "section": "1613",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: Source: 'Ut quod Mariae Virgini titulus Deae tribuitur, quod Sancti Tutelaria Numina nuncupantur...' English: 'So the Virgin Mary is given the title of goddess, and the saints are called tutelary deities...' This omits the source's explicit framing: 'Ut quod...' ('That the title of goddess is given to the Virgin Mary, that the saints are called tutelary deities...'), dropping the complementary 'ut' clause that links the two assertions as parallel propositions, thus failing completeness by not rendering the full syntactic and semantic structure of the Latin.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures all clauses, maintaining the theological context, agency, and negative/affirmative polarities without omissions.\nLatin quote (anchor copied from packet text): «LVI. Quibus quoque scandalum movent Elogia alia plurima, quae in Beatam Virginem &»\nEnglish quote (anchor copied from packet text): «The Protestants are also offended by many other tributes heaped on the Blessed Virgin and»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. 'Ut quod ... tribuitur, quod ... nuncupantur' introduces examples; the English gives both examples ('So the Virgin Mary is given the title of goddess, and the saints are called tutelary deities'). Syntax recast, no content dropped. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-ba18d16e-2ffc-411b-b135-3c3f54f6f3ec"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "_TfJasncCteez7IPsvrK2AM"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-ba18d16e-2ffc-411b-b135-3c3f54f6f3ec",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. 'Ut quod ... tribuitur, quod ... nuncupantur' introduces examples; the English gives both examples ('So the Virgin Mary is given the title of goddess, and the saints are called tutelary deities'). Syntax recast, no content dropped. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1614",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: English paragraph 1: 'churches and altars built and dedicated in their honor, candles lit to them, incense burned, knees bent before them as though they were watching; vows made to them, offerings of every kind presented, oaths sworn by their name; and, finally, solemn prayers by which people run to them for help, and hymns sung to them publicly in thanksgiving for benefits received from God' matches source Latin: 'aedes sacrae & altaria in eorum honorem construuntur atque dedicantur, cerei illis accenduntur, incensum adoletur, & coram ipsis tanquam intuentibus genua flectuntur: dum vota eis nuncupantur, & variae fiunt illis oblationes, ac juramenta per eorum nomen concipiuntur: dum denique precibus solennibus ad eorum auxilium & opem confugitur, & hymni illis publice canuntur in gratiarum actionem pro beneficiis a Deo acceptis'\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately reflects the single Latin source paragraph, dividing it into three readable paragraphs in English without omitting any clauses, altering doctrinal terms, or shifting agency.\nLatin quote (anchor copied from packet text): «LVII. Porro Beatos Spiritus sive hominum, sive Angelorum, non esse colendos eo cultu qui»\nEnglish quote (anchor copied from packet text): «The Protestants hold that the blessed spirits, whether of men or of angels, are not to be»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-8aa0764a-47b7-4567-8af1-d70c7904f61f"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "AjjJavn8MYHXz7IPvrPfmQk"
+        }
+      ]
+    },
+    {
+      "section": "1615",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: scripture; uncertainties: 0; model notes: The source Latin paragraph cites 'Apostolus Heb. 2. 3.' but the English paragraph cites 'Hebrews 2:5', which is a different verse reference, altering the scriptural citation.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The Latin source paragraph LVIII is accurately and completely rendered across the three English paragraphs, preserving all theological arguments, historical assertions, and scriptural references.\nLatin quote (anchor copied from packet text): «LVIII. Et quidem quod ad Vetus Testamentum attinet, fatentur ipsi Doctores Ecclesiae»\nEnglish quote (anchor copied from packet text): «As for the Old Testament, the teachers of the Roman Church themselves admit that the»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): Citation handled, not a mistranslation. The 1675 print reads 'Heb. 2. 3', but the words cited ('cui & non Angelis mundum hunc futurum subjecit') are Hebrews 2:5. The payload translator note already records: 'The 1675 print reads Heb. 2. 3; the words cited are Hebrews 2:5, so the English gives 2:5.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-1f6a0043-54d1-412a-bba6-4114f1c9d4ac"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "CDjJaqefKfCHqtsP8_DKgAg"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-1f6a0043-54d1-412a-bba6-4114f1c9d4ac",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "Citation handled, not a mistranslation. The 1675 print reads 'Heb. 2. 3', but the words cited ('cui & non Angelis mundum hunc futurum subjecit') are Hebrews 2:5. The payload translator note already records: 'The 1675 print reads Heb. 2. 3; the words cited are Hebrews 2:5, so the English gives 2:5.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "scripture"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1616",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: Under the New Testament, Christ and the Apostles changed nothing at all in this respect. They instituted no new worship by which angels and the spirits of the righteous, admitted to the sight of God's face, were from then on to be worshiped.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately and faithfully renders the Latin source text without any omissions, additions, or distortions in doctrine or agency.\nLatin quote (anchor copied from packet text): «LIX. Sub Novo vero Testamento Christus & Apostoli hac in parte nihil omnino immutarunt.»\nEnglish quote (anchor copied from packet text): «Under the New Testament, Christ and the Apostles changed nothing at all in this respect.»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-68e37f7f-dec7-43bc-9932-8d1aca11d69c"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "DjjJatueFOqVmtkP25Wa-AM"
+        }
+      ]
+    },
+    {
+      "section": "1617",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: Nowhere in them do we read that any worship like that of the present Roman Church was once given, or is now to be given, to angels and dead saints. On the contrary, many quite obvious signs point the other way.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the Latin source text across both paragraphs without missing clauses, altering negation, or changing agency and theological meaning.\nLatin quote (anchor copied from packet text): «LX. Neque solum altum est de rebus istis silentium in scriptis Novi Testamenti, sed nec»\nEnglish quote (anchor copied from packet text): «Not only is there deep silence about these things in the writings of the New Testament;»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-7ab82fde-03c9-447d-824a-5700ebdcd9d7"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "EzjJaoirL6ecqtsPo7fDkAQ"
+        }
+      ]
+    },
+    {
+      "section": "1618",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: First, most of the church writers who lived in the second and third centuries after Christ held that the souls of all believers, even the holiest, are kept in certain places outside heaven until the last day of judgment and are not admitted to the heavenly homeland until they receive their bodies back at the resurrection.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The three English paragraphs accurately and completely translate the single Latin source paragraph, preserving all theological arguments, citations, and nuances.\nLatin quote (anchor copied from packet text): «LXI. Primo enim, qui secundo & tertio post Christum saeculo vixerunt scriptores»\nEnglish quote (anchor copied from packet text): «First, most of the church writers who lived in the second and third centuries after»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-ae4cd749-1b80-4df1-baa3-224157caa1f3"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "GTjJarnnE_CHqtsP8_DKgAg"
+        }
+      ]
+    },
+    {
+      "section": "1619",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English accurately reflects the Latin: 'they ask God to give them rest in the land of the living, to grant them the good things he has promised, and to give them rest and a good remembrance' corresponds to 'ut eos requiescere faciat in regione viventium, & largiatur iis promissionum suarum bona, & praestet requiem bonamque memoriam'; negation preserved: 'They are not simply offering thanks for them' matches 'non vero, simpliciter, ut frustra contendit Bellarminus, pro iis gratiarum actiones offerunt'.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately renders the Latin source text across both paragraphs without missing clauses, altering agency, or changing doctrinal meaning.\nLatin quote (anchor copied from packet text): «LXII. Deinde ex vetustissimis quae supersunt Liturgiis constat, veteres illos Christianos»\nEnglish quote (anchor copied from packet text): «Second, the oldest surviving liturgies show that those early Christians offered prayers»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-6c2e691e-bccd-4fac-826e-4e316d7a508e"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "HjjJav2tKMbqz7IPn7-DwAk"
+        }
+      ]
+    },
+    {
+      "section": "1620",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: Source includes 'nec vel minimam cultus religiosi partem ipsis bonis & Sanctis Dei Ministris debitam esse concesserunt' meaning they did not concede even the smallest part of religious worship owed to God's good and holy servants. English omits 'even the smallest part', stating only 'They did not grant that ... religious worship was owed', weakening the negation and omitting the emphatic 'vel minimam' (even the smallest), thus altering the scope of denial.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the Latin source paragraph without omission, accurately rendering the philosophical and theological arguments regarding supreme and subordinate worship.\nLatin quote (anchor copied from packet text): «LXIII. Praeterea cum Gentium sapientes unum tantum summum Deum agnoscere se»\nEnglish quote (anchor copied from packet text): «Further, the pagan philosophers professed to acknowledge only one supreme God and said»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. 'vel minimam' is rendered: 'They did not grant that even the smallest part of religious worship was owed to God's good and holy servants'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-9edee2ef-d263-4832-9f6a-5db18624c96f"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "JDjJataIFZv0z7IPtZ26uAQ"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-9edee2ef-d263-4832-9f6a-5db18624c96f",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. 'vel minimam' is rendered: 'They did not grant that even the smallest part of religious worship was owed to God's good and holy servants'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1621",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness, negation, agency, modality; uncertainties: 0; model notes: English 'the first God is enough for us' omits source clause 'constitutor, moderatorque cunctorum' (founder and ruler of everything). English 'we think it pointless' changes source 'putamus ... supervacuum' (we consider it superfluous) by altering agency and modality; source 'putamus' (we think) becomes 'we think it pointless' which adds negation not in source (source says superfluous, not pointless).\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately renders the Latin text from Arnobius Book 3, perfectly capturing all theological arguments, analogies regarding earthly kingdoms, and maintaining complete fidelity to the source paragraphs without omissions or additions.\nLatin quote (anchor copied from packet text): «LXIV. Nam ad istam Ethnicorum criminationem sic cum Arnobio respondent. Ad cultum»\nEnglish quote (anchor copied from packet text): «To this pagan charge the early Christians answered with Arnobius: \"For the duty of»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. 'constitutor, moderatorque cunctorum' is rendered 'the founder and ruler of everything'; 'supervacuum putamus' = 'we think it pointless' (no negation added; 'pointless' ~ 'superfluous'). Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-d5a3e69b-d74b-4579-98e3-71eb205e1a8a"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "KTjJaqGaLquLmtkPgujJ-Ac"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-d5a3e69b-d74b-4579-98e3-71eb205e1a8a",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. 'constitutor, moderatorque cunctorum' is rendered 'the founder and ruler of everything'; 'supervacuum putamus' = 'we think it pointless' (no negation added; 'pointless' ~ 'superfluous'). Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1622",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: The English omits the Latin phrase 'Item, Unus nobis est placandus Deus universorum Dominus, & hunc ut propitium habeamus, orandum est, qui pietate & omni virtute propitiatur.' which is a distinct clause present in the source.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the Latin text of Origen's arguments against Celsus as cited in paragraph 1, preserving all doctrinal points, negations, agencies, and citations across the four formatted English paragraphs.\nLatin quote (from model note, verified): «Item, Unus nobis est placandus Deus universorum Dominus, & hunc ut propitium habeamus, orandum est, qui pietate & omni virtute propitiatur.»\nEnglish quote (anchor copied from packet text): «Origen teaches the same when he deals with a similar argument. Celsus had argued that one»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. The clause 'Unus nobis est placandus Deus universorum Dominus ...' is rendered in full: 'There is one God whom we must win over, the Lord of all things, and to have him favorable we must pray to him; he is won over by godliness and every virtue.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-d0f874f6-ffd0-4c3b-9d43-15a1b168d6ab"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "MDjJaoChC_DQz7IP0qyD0Qk"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-d0f874f6-ffd0-4c3b-9d43-15a1b168d6ab",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. The clause 'Unus nobis est placandus Deus universorum Dominus ...' is rendered in full: 'There is one God whom we must win over, the Lord of all things, and to have him favorable we must pray to him; he is won over by godliness and every virtue.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1623",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness, negation, agency, modality, doctrine; uncertainties: 0; model notes: English omits source clauses such as 'una cum iis qui Deum colere volunt, precari quidem, sed ἀκλήτους, non vocatas' and 'Nec enim solum in genere docet unum Deum esse adorandum, & religiose colendum indivisibiliter & inseparabiliter, sed etiam preces nostras ad eum solum dirigendas esse, nec ulla precationis & invocationis specie erga Beatos Angelos, aut alias quascunque creaturas utendum' and adds inventions like 'Away,' he says, 'with this advice of Celsus' and 'he is not to be listened to in the least' which are not in the source; negation flipped: source says 'non vocatas' (not called) but English adds 'without being summoned' which is not a direct negation match; agency: source says 'precari quidem' (they pray indeed) but English shifts to 'do pray together' altering subject-action; modality: source uses indicative 'precari' but English shifts to imperative 'are to be offered'; doctrine: English introduces 'High Priest' as a title for Christ in a way not present in source's 'Pontifex rogandus est' which is a procedural role, not a doctrinal title\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the Latin source text across all paragraphs, perfectly preserving Origen's statements regarding the invocation of angels and the supreme God, with correct modality, agency, and theological terminology throughout.\nLatin quote (anchor copied from packet text): «LXVI. Ubi valde notandum est quod dicit Origenes, innumerabiles potestates sacras, quo»\nEnglish quote (anchor copied from packet text): «Here it should be carefully noted that Origen says the countless holy powers, by which he»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. Every clause the model calls omitted is present: 'precari quidem, sed ἀκλήτους, non vocatas' = 'do pray together with those who want to worship God, but uncalled, without being summoned'; 'Apage ... qui ne tantillum quidem audiendus est' = 'Away ... he is not to be listened to in the least' (in the Latin, not invented); 'Pontifex' = 'High Priest'; 'offerendae sunt' (gerundive) = 'are to be offered'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "doctrine"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-40c77fc1-975f-419e-9dba-0f2b9d8ecc2d"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "NTjJaurbMLaeqtsP0cG-yA4"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-40c77fc1-975f-419e-9dba-0f2b9d8ecc2d",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. Every clause the model calls omitted is present: 'precari quidem, sed ἀκλήτους, non vocatas' = 'do pray together with those who want to worship God, but uncalled, without being summoned'; 'Apage ... qui ne tantillum quidem audiendus est' = 'Away ... he is not to be listened to in the least' (in the Latin, not invented); 'Pontifex' = 'High Priest'; 'offerendae sunt' (gerundive) = 'are to be offered'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "doctrine"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1624",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English accurately reflects the Latin source with no omissions, additions, or distortions. Key passages such as 'we judge that it is not fitting to pray to those who themselves pray' and 'we sing hymns to the only God, the Lord of all things, and to his only-begotten, God the Word' are correctly rendered and preserve the original meaning.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English accurately reflects the Latin text across all four paragraphs, preserving the exact argumentation and theological points regarding Origen and Celsus without omissions.\nLatin quote (anchor copied from packet text): «LXVII. Hic etiam observandum est Origenem, ut multos alios illius aevi Scholae»\nEnglish quote (anchor copied from packet text): «It should also be noted here that Origen, like many other teachers of the Christian»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-bdd0ec44-10d2-48a5-bccc-f06454bd85cb"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "OzjJao6BHfHoz7IP79ztoQk"
+        }
+      ]
+    },
+    {
+      "section": "1625",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: Source paragraph 1 contains the phrase 'neque absoluta, neque relativa invocatione licitum esse apud illos uti' which corresponds to English paragraph 3's 'neither absolute nor relative invocation may be used toward them'. However, English omits the source's explicit statement that 'planum est, juxta Origenem' ('it is plain, according to Origen'), dropping a source clause about the evidentness of Origen's position, thus violating completeness.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The 3 English paragraphs accurately and completely translate the single Latin source paragraph without altering doctrine, negation, agency, or modality.\nLatin quote (anchor copied from packet text): «LXVIII. Neque est quod quis dicat cum Cardinali Perronio, quum negat Origenes Angelos»\nEnglish quote (anchor copied from packet text): «Nor can anyone say with Cardinal Perron that when Origen denies that angels are to be»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. 'planum est, juxta Origenem' is rendered 'it is plain that, according to Origen'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-a1117229-1f4d-4e82-acd1-23d27307da37"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "QDjJau_JMteez7IPsvrK2AM"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-a1117229-1f4d-4e82-acd1-23d27307da37",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. 'planum est, juxta Origenem' is rendered 'it is plain that, according to Origen'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "1626",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=pass; failed checks: none; uncertainties: 0; model notes: We call them blessed, and we speak well of those to whom God has entrusted the welfare of human beings, yet we do not give them the honor owed to God.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately captures the entire Latin source paragraph, dividing it into two paragraphs in English for readability while preserving all sense, negation, and doctrinal nuances without any omissions.\nLatin quote (anchor copied from packet text): «LXIX. Itaque Origenes pulsatus Celsi objectionibus, quasi Christiani summi Dei Ministros,»\nEnglish quote (anchor copied from packet text): «So Origen, pressed by Celsus's objections that Christians despised the servants of the»",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "chatcmpl-05a780a5-9a5f-44f8-bebe-ded451d2b450"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "RjjJarDZGd3pz7IP9bbJqQk"
+        }
+      ]
+    },
+    {
+      "section": "1627",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[nemotron nvidia/nemotron-3-super-120b-a12b] verdict=fail; failed checks: completeness; uncertainties: 0; model notes: The English omits the source clause: 'quae in solidum & indivisibiliter uni summo Deo deberi contendit' (which he insists is owed entirely and undivided to the one supreme God) and replaces it with a different phrasing, failing to fully preserve the source content.\n[gemini gemini-3.5-flash-lite] verdict=pass; failed checks: none; uncertainties: 0; model notes: The English translation accurately renders the Latin source text without any omissions or distortions of theological meaning, correctly capturing Origen's distinction regarding therapeia.\nLatin quote (from model note, verified): «quae in solidum & indivisibiliter uni summo Deo deberi contendit»\nEnglish quote (anchor copied from packet text): «So when Origen, in that eighth book against Celsus, suggests that a certain therapeia,»\nADJUDICATED nvidia/nemotron-3-super-120b-a12b (Densify (agent), 2026-10-09): False positive. 'quae in solidum & indivisibiliter uni summo Deo deberi contendit' is rendered 'which he insists is owed entirely and undivided to the one supreme God'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+      "lanes": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "family": "nemotron",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-40fd4926-1f64-49f2-bd62-b7e8da49dc87"
+        },
+        {
+          "model": "gemini-3.5-flash-lite",
+          "family": "gemini",
+          "verdict": "pass",
+          "failed_checks": [],
+          "uncertainties": [],
+          "response_id": "SzjJaozHLKnUz7IPprCeyAM"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "response_id": "chatcmpl-40fd4926-1f64-49f2-bd62-b7e8da49dc87",
+          "by": "Densify (agent), 2026-10-09",
+          "resolution": "False positive. 'quae in solidum & indivisibiliter uni summo Deo deberi contendit' is rendered 'which he insists is owed entirely and undivided to the one supreme God'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness"
+          ]
+        }
+      ]
+    }
+  ],
+  "scope_review": {
+    "verdict": "pass",
+    "checks": {
+      "source_identity": true,
+      "completeness": true,
+      "negation": true,
+      "agency": true,
+      "modality": true,
+      "doctrine": true,
+      "scripture": true
+    },
+    "uncertainties": [],
+    "composed_by": "dual_family_review adapter (summary of per-section lane verdicts)",
+    "notes": "Scope: 32 selected section(s) 600, 631, 1598, 1599, 1600, 1601, 1602, 1603, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1615, 1616, 1617, 1618, 1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1627; each reviewed by nvidia/nemotron-3-super-120b-a12b and gemini-3.5-flash-lite with the independent_review prompt. Scope: new 1598-1627 plus changed 600, 631. Opening Latin «II. Porro docendi causa certitudo distingui potest in subjectivam atque objectivam.» English «For teaching purposes, moreover, certainty can be divided into subjective and objective.»."
+  }
+}

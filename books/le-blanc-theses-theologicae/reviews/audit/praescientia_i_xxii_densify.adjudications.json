@@ -1,0 +1,73 @@
+{
+ "1952": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-b3b8b784-2c44-43c7-a906-fd7dbb52700a",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (fail with no checks marked). The note itself says no clause is dropped or added and every check passes. 'in ipso Deo' is rendered: 'They therefore deny that God himself has any certain foreknowledge of future events of this kind.' 'intelligere non valentes', 'certo praescire', 'futura contingentia' and 'quae non habent causam necessariam & determinatam' are all rendered in the first sentence. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "1953": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-608abf88-4839-4098-a499-d93c9d9bdc51",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'hoc in animum inducere' is the Latin idiom for bringing oneself to believe something ('animum inducere' = to persuade oneself, resolve), so 'can persuade themselves of this' renders it and adds nothing. The rest is present: 'Nihil enim evidentius ex Scriptura colligitur', the prophets' predictions, Tertullian's saying ('Praescientia Dei tot habet testes, quot Deus fecit Prophetas'), and the closing argument from things foretold 'post multa demum secula' and done 'libere' by human beings. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1954": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-73ae5783-2856-4b07-aae2-b005591955ab",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). 'iram Dei in se provocaturos' is rendered 'bring God's wrath on themselves', and 'Veruntamen gentem cui servituri sunt ego judicabo' is rendered 'But I will judge the nation they serve', with 'Veruntamen' as 'But' and 'ego judicabo' as 'I will judge'. The opening claim, 'graviter peccaturos esse', and the quotation 'Scito ... quadringentis annis' are also rendered. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1959": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-f03d9cd0-718b-4e22-b961-83e5dd65ee65",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. Pass B may divide one Latin thesis into reading paragraphs; the paragraph count is not a fidelity criterion and the source is the same thesis VIII. Clause by clause: 'si Deus ab aeterno futura quaelibet non praescit, sed ignorat ea quae sunt a creaturis libere agenda' = 'if God does not know every future thing from eternity, but is ignorant of what creatures will freely do'; 'omniscientia Deo amplius tribuenda non est' = 'omniscience can no longer be ascribed to him'; 'neque vere dici potest omnia scire, siquidem nonnulla sunt quae latent ejus scientiam' = 'Nor can he truly be said to know all things, since some things would be hidden from his knowledge.' Nothing is dropped. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "source_identity",
+    "completeness"
+   ]
+  }
+ ],
+ "1964": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-68e9acdf-1af1-47c0-bb73-6cc5b03c9278",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (clause called missing that is present). 'neque enim homo est ut agat poenitentiam' is rendered 'for he is not a man, that he should repent', keeping the negation, the subject and the purpose clause (the wording of 1 Samuel 15:29). The rest is present: the figurative attribution of human limbs and feelings, the Greek pair (in human terms / fitting for God), the viscera and the smoke from the nostrils, 'Triumphator, sive fortitudo, Israelis non mentietur, & poenitudine non flectetur', 'non affectum, sed effectum', and the antecedent put for the consequent. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1962": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-0cdcd688-7eef-4717-9e0b-793aa895a9db",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive (words called added that are in the Latin). The first-round reading 'They also argue that ... plainly show' was corrected to follow the Latin's own framing; the corrected sentence is what this call reviewed. 'certainly' renders 'Et certe', and 'plainly' renders 'plane'. 'confici' is the passive of conficere in its logical sense, to be proved or concluded, so 'plane confici videtur' = 'it seems plainly to follow', not 'to be finished'. The rest is present: 'quiddam circa liberas hominum actiones de novo discere', 'ejusdem libri capite vigesimo secundo', Abraham ready 'ex Dei mandato' to sacrifice his son, and 'Nunc cognovi ... quod timeas Deum, quia non pepercisti unigenito tuo filio propter me'. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ]
+}

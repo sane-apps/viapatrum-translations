@@ -1,0 +1,36 @@
+{
+ "1678": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-416cc78b-b286-413f-90ad-2c77e3c2d8f0",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model's own quoted Latin, 'Hanc rem sic exponit Josue Placeus Thesibus de statu Adami ante lapsum Thesi 32.', is exactly what the English renders: 'Josue Placeus' is the Latin name of Josué de la Place (Placaeus), and 'Thesibus de statu Adami ante lapsum Thesi 32' is 'thesis 32 of his Theses on the State of Adam before the Fall'. 'sic exponit' is 'puts it this way'. Nothing is added beyond giving the vernacular form of the cited author's name. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ],
+ "1691": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-12c6e023-aaac-46d7-b3e9-b2808a0cc489",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. The model returned verdict fail with no failed check, and its own note says the English 'matches Latin source ... with full semantic equivalence'. The second sentence of the thesis, 'Idque per immutationem similem illi quam experientur pii & sancti homines, quos ultimum judicium in terra vivos deprehendet', is rendered in English paragraph 2: 'This would have happened through a change like the one the godly and holy will undergo who are found alive on earth at the last judgment.' Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": []
+  }
+ ],
+ "1693": [
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "response_id": "chatcmpl-036c465c-bfb5-4ad5-b75a-94e1c5a96d48",
+   "by": "Densify (agent), 2026-10-09",
+   "resolution": "False positive. 'however' is not an addition: it renders 'quantumvis' in the model's own quoted Latin 'homo quantumvis perfecto corporis temperamento naturali' ('man, however perfect the natural balance of his body'). quantumvis is the concessive 'however much', so dropping 'however' would lose a word of the source. Gemini (gemini-3.5-flash-lite) passed this section on every check independently.",
+   "model_verdict": "fail",
+   "model_failed_checks": [
+    "completeness"
+   ]
+  }
+ ]
+}
