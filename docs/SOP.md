@@ -12,7 +12,7 @@ Owner's words: "each work should have one voice. It does NOT matter if each sepa
 - **Choose per work, in this order:** best quality, then fastest, then cheapest. Candidates include Muse (prepaid through Nov 2, 2026; runs only in the Mini's logged-in GUI session), Cloudflare Workers AI Aura-2, and local Kokoro.
 - **Record the choice.** The chosen voice is written into the work's audio metadata (`outputs/audio/<work>/manifest.json` → `"voice"`, and every passage's `"voice"`). Re-runs, fixes and new sections read that recorded voice and reuse it; they do not fall back to the current global default.
 - If a fix needs a voice the work does not use (for example its engine is gone), re-voice that whole work in one new voice; never patch it in a second voice.
-- The separate Scripture-quotation voice (`CF_TTS_QUOTE_VOICE`, decided 2026-10-07) predates this rule; ask the owner before adding or removing it on any work.
+- The separate Scripture-quotation voice (`CF_TTS_QUOTE_VOICE`, decided 2026-10-07) predates this rule; Owner confirmed 2026-10-09: keep the separate Scripture-quotation voice; each work uses one narrator voice plus one quote voice, both consistent throughout that work.
 - This supersedes any earlier "one voice for the whole site/corpus" or "re-voice every work into the current voice" wording (2026-10-07 VISION A.3, GPU_RENDER_COSTS "breaks corpus consistency").
 
 ## Phases
