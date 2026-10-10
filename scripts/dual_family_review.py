@@ -43,6 +43,14 @@ that exact call (response id) is supplied with --adjudications.
       --receipt-out P.review.json [--checkpoint C.json] [--adjudications A.json] \\
       [--profile aligned|legacy]
 
+Optional Muse tiebreak (--muse-tiebreak; off by default, never a third family
+in the gate): for each section that is still failing after adjudications, Muse
+Code (via the GUI-session queue runner, scripts/muse_runner.py + muse_client.py)
+is asked to judge each lane flag as a real error or a false positive. The answer
+is stored as an advisory "muse_tiebreak" note on that review and cached in the
+checkpoint. It never changes a verdict and never stands in for an adjudication;
+it is input for the human/agent adjudicator. Muse is slow (~1 min per call).
+
 Exit: 0 receipt written and passing; 1 receipt written with unresolved fails;
 2 usage/parse error; 3 quota pause (checkpoint saved, no receipt).
 """
@@ -459,6 +467,77 @@ def combine(item: dict, recs: list[dict], adjudications: list[dict]) -> dict:
     return review
 
 
+MUSE_TIEBREAK_PROMPT = """You are adjudicating flags that two automated reviewers raised against an English
+translation of an Ancient Greek or Latin passage. Read the SOURCE yourself; do not trust the English.
+For each numbered flag decide whether it is a REAL meaning error in the English (flipped negation,
+wrong subject/agent, wrong tense/mood with changed meaning, invented or dropped clause, mistranslated
+key word, Scripture reference that does not match the verse quoted) or a FALSE POSITIVE (style, word
+order, near-synonym, particle, participle-as-clause, parenthetical apparatus or headings, editorial
+brackets, text actually present elsewhere in the passage).
+Do not use any tools or files; answer from the text below only.
+
+SOURCE ({section}):
+{source}
+
+ENGLISH:
+{english}
+
+FLAGS:
+{flags}
+
+Return ONE JSON object only: {{"flags": [{{"n": <number>, "real": true|false, "why": "<=30 words"}}],
+"verdict": "pass" if no flag is real else "fail"}}"""
+
+
+def _muse_flags(review: dict) -> list[str]:
+    out = []
+    for line in str(review.get("notes") or "").splitlines():
+        if line.startswith("[") and "verdict=" in line and "verdict=pass" not in line.split(";")[0]:
+            out.append(line[:3000])
+    return out or [u[:3000] for u in review.get("uncertainties") or []]
+
+
+def apply_muse_tiebreak(items: list[dict], reviews: list[dict], state: dict, ask, effort: str = "medium",
+                        timeout: int = 1500, save=None) -> int:
+    """Attach an advisory Muse judgement to every failing review. Never changes a verdict.
+    `ask(prompt, effort=, timeout=, tag=)` returns a muse_client result dict. Returns new Muse calls made."""
+    cache = state.setdefault("muse_tiebreak", {})
+    by_sid = {it["section"]: it for it in items}
+    calls = 0
+    for r in reviews:
+        if r.get("verdict") == "pass":
+            continue
+        it = by_sid[r["section"]]
+        key = sha(json.dumps([it.get("source_sha256"), it.get("english_sha256"),
+                             [l.get("response_id") for l in r.get("lanes", [])], effort]))
+        rec = cache.get(r["section"])
+        if not rec or rec.get("key") != key or rec.get("error"):
+            flags = _muse_flags(r)
+            prompt = MUSE_TIEBREAK_PROMPT.format(
+                section=r["section"], source=_flat_text(it.get("source_text")), english=_flat_text(it.get("english")),
+                flags="\n".join(f"{i}. {f}" for i, f in enumerate(flags, 1)))
+            res = ask(prompt, effort=effort, timeout=timeout, tag="tiebreak")
+            calls += 1
+            answer = str(res.get("answer") or "")
+            parsed = None
+            m = re.search(r"\{.*\}", answer, re.S)
+            if m:
+                try:
+                    parsed = json.loads(m.group(0))
+                except ValueError:
+                    parsed = None
+            rec = {"key": key, "advisory": True, "model": "muse (Muse Code, Meta)", "effort": effort,
+                   "queue_id": res.get("id"), "seconds": res.get("seconds"), "finished_at": res.get("finished_at"),
+                   "answer_sha256": sha(answer), "verdict": (parsed or {}).get("verdict"),
+                   "flags": (parsed or {}).get("flags"), "n_flags": len(flags),
+                   "error": res.get("error") or (None if parsed else "unparsed Muse answer")}
+            cache[r["section"]] = rec
+            if save:
+                save()
+        r["muse_tiebreak"] = {k: v for k, v in rec.items() if k != "key"}
+    return calls
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--packet", type=Path, required=True)
@@ -473,6 +552,11 @@ def main(argv=None) -> int:
     ap.add_argument("--glm-model", default=LANES["glm"]["model"])
     ap.add_argument("--scope-note", default="")
     ap.add_argument("--max-new-calls", type=int, default=0, help="Stop after N new calls (0 = no limit)")
+    ap.add_argument("--muse-tiebreak", action="store_true",
+                    help="advisory Muse judgement on still-failing sections via the GUI-session queue runner "
+                         "(slow; never changes a verdict; off by default)")
+    ap.add_argument("--muse-effort", default="medium")
+    ap.add_argument("--muse-timeout", type=int, default=1500)
     args = ap.parse_args(argv)
 
     packet = json.loads(args.packet.read_text(encoding="utf-8"))
@@ -503,6 +587,8 @@ def main(argv=None) -> int:
                 state["calls"][lane] = calls
         state["superseded"] = prev.get("superseded", [])
         state["attempts"] = prev.get("attempts", {})
+        if prev.get("muse_tiebreak"):
+            state["muse_tiebreak"] = prev["muse_tiebreak"]
         if prev.get("packet_id") != packet["packet_id"]:
             state["superseded"].append({"note": f"packet changed from {prev.get('packet_id')}"})
     adjud = json.loads(args.adjudications.read_text()) if args.adjudications else {}
@@ -552,6 +638,11 @@ def main(argv=None) -> int:
             errors.append(f"{sid}: lane error {[r.get('error') if r else 'missing' for r in bad]}")
             continue
         reviews.append(combine(item, recs, adjud.get(sid, [])))
+    if args.muse_tiebreak and reviews:
+        from muse_client import ask as muse_ask  # lazy: only when asked for
+        n = apply_muse_tiebreak(items, reviews, state, muse_ask, args.muse_effort, args.muse_timeout, save)
+        save()
+        print(f"muse tiebreak: {n} new call(s); advisory only")
     for lane in lane_names:
         calls = [state["calls"][lane][it["section"]] for it in items
                  if state["calls"][lane].get(it["section"]) and not state["calls"][lane][it["section"]].get("error")]

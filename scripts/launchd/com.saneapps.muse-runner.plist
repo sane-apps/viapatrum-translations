@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.saneapps.muse-runner</string>
+  <key>LimitLoadToSessionType</key><string>Aqua</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/stephansmac/SaneApps/clients/translations/.venv/bin/python</string>
+    <string>-u</string>
+    <string>/Users/stephansmac/SaneApps/clients/translations/scripts/muse_runner.py</string>
+  </array>
+  <key>WorkingDirectory</key><string>/Users/stephansmac/SaneApps/clients/translations</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key><string>/Users/stephansmac/.local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>MUSE_QUEUE</key><string>/Users/stephansmac/SaneApps/clients/translations/outputs/muse-queue</string>
+    <key>MUSE_WORKERS</key><string>2</string>
+  </dict>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>ThrottleInterval</key><integer>10</integer>
+  <key>ProcessType</key><string>Background</string>
+  <key>StandardOutPath</key><string>/Users/stephansmac/SaneApps/clients/translations/outputs/muse-queue/runner.log</string>
+  <key>StandardErrorPath</key><string>/Users/stephansmac/SaneApps/clients/translations/outputs/muse-queue/runner.log</string>
+</dict>
+</plist>
