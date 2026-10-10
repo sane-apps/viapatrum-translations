@@ -1,0 +1,31 @@
+{
+  "u07-rem-mid": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "03874490bdf4404f87591fada993c530+78b9297bf4ae4411b5edfd36fa7fe4cb+47950a1d698140c1bcb92a0e6940038b+329ea269c3ff48eaa49adf0af2d7b250+97f30c04a81b40ffbeba3a8519f140f4",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. The flagged sentences ('He says this to show his own eagerness…', 'Because God understands them to be guilty…', the vanity/Satan passage, John 14:6, Romans 1:17, 1 Cor 15:19) are all in the Greek (τοῦτο δὲ λέγει τὴν αὐτοῦ προθυμίαν ἐπιδεικνύς…; ὅτι συνίησιν ἐνόχους, ἐπιτιμήσει…; ὅρα ματαιότητα νοὸς λεγομένην … τῷ δεσμεύοντι σατανᾷ); the flags came from chunk boundaries. The references are correct: the 'rebuke the proud' sentence comments on Ps 118:21 (fragment 217), Adoleschēsō on 118:27 within fragment 220 (118:26-27), the heart passage is fragment 221 on 118:36, and 'Turn away my eyes' is 118:37; the bracketed 119 numbers are the English equivalents. 'Do not let me go astray in ignorance' renders μὴ ἀγνοηματίσῃς με (from ἀγνόημα, a sin of ignorance) correctly. Acts 24:25 and Eph 4:17-18 are correct apparatus identifications of what the Greek quotes. The rest is style.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "67a45569c85b45c58b2a2c31674885ba+14d63b758400467cad6988b1d9689105+3e2bf7a444a34b43b35ead965524752a+24c532f66b004d818143b91f8f1b8d1c+83fe601c40ee4358bb6e11167ea85103",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. The 'absent from source' sentences are present in the Greek of fragment 217 (τοῦτο δὲ λέγει … ὅτι συνίησιν ἐνόχους, ἐπιτιμήσει τοὺς δι' ὑπερηφανίας ἀπειθεῖς καὶ ἀνυποτάκτους); the flags are chunk-boundary artefacts. The scripture references are the translation's apparatus and identify the quoted texts correctly (LXX 118 = English 119; Psalm 43:26 = 44:25; Acts 24:25; Ephesians 4:17-18; 1 Corinthians 15:19). μὴ ἀγνοηματίσῃς με is 'do not let me err through ignorance'.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "scripture"
+      ]
+    }
+  ]
+}

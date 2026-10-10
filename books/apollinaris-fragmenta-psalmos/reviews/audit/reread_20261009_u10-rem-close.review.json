@@ -1,0 +1,293 @@
+{
+  "packet_id": "0651dc490d006363988aa37ab5f8d3e5e6c6c3049183bbe801bbcc3f34bde781",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "6ca3090bf7d69999e201fba6c11226ff143b2b20443bb23005f75ff66a290966",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "0651dc490d006363988aa37ab5f8d3e5e6c6c3049183bbe801bbcc3f34bde781",
+    "generated_at": "2026-10-10T00:20:39+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0168,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0093,
+        "family": "kimi",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2470,
+          "completion_tokens": 1805,
+          "total_tokens": 4275,
+          "neurons": 842.1036376953125
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2470,
+          "completion_tokens": 1805,
+          "total_tokens": 4275
+        },
+        "first_call_at": "2026-10-10T00:07:33+00:00",
+        "last_call_at": "2026-10-10T00:08:44+00:00",
+        "calls": [
+          {
+            "section": "u10-rem-close",
+            "source_sha256": "a376aefaff7619efc4de1678c89948d41522092c05c1789669fa0f1a0e1b50de",
+            "english_sha256": "b3679e1b2024608d70bcfcd76b439d38460ef7b33a918eda5a2d9513d1cf79b6",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "6dfe166d996948428e6a0564ac78bdef",
+            "request_id": "c3a17c0a-a56b-42d5-a826-6070a93bfbc4",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:07:33+00:00",
+            "finished_at": "2026-10-10T00:08:05+00:00",
+            "ms": 31679,
+            "usage": {
+              "prompt_tokens": 1368,
+              "completion_tokens": 809,
+              "total_tokens": 2177,
+              "neurons": 412.3272705078125
+            },
+            "raw_sha256": "8c26fd4d5c16aee96cf55e3f8e68dbc66790deca5ddf51faeecd922cad662290",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [
+              "*** φέγγη *** — apparent manuscript corruption or lacuna in source; exact word uncertain but meaning 'lights/shining things' clear from context"
+            ],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "1dcf3359d69215e39aa58a9c89394501e91ea9eb07b1fcbd423fe1c70878e175"
+          },
+          {
+            "section": "u10-rem-close",
+            "source_sha256": "a376aefaff7619efc4de1678c89948d41522092c05c1789669fa0f1a0e1b50de",
+            "english_sha256": "b3679e1b2024608d70bcfcd76b439d38460ef7b33a918eda5a2d9513d1cf79b6",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "74dd0ad3a9544aec8a5e117bbd1b89b7",
+            "request_id": "48398faf-fecc-4651-9ad7-45d1497f6ac2",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:08:08+00:00",
+            "finished_at": "2026-10-10T00:08:44+00:00",
+            "ms": 35701,
+            "usage": {
+              "prompt_tokens": 1102,
+              "completion_tokens": 996,
+              "total_tokens": 2098,
+              "neurons": 429.7763671875
+            },
+            "raw_sha256": "de2345813b08e6404e33fa5c8048e8bd6f6f0ec62fb41552961d9eb4183dca8d",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "322dcf2807d53bafce9451f7d963a863c4f1c6f688c155bf00474ce4f4dfc6ba"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0075,
+        "family": "glm",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2593,
+          "completion_tokens": 877,
+          "total_tokens": 3470,
+          "neurons": 680.8181762695312
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2593,
+          "completion_tokens": 877,
+          "total_tokens": 3470
+        },
+        "first_call_at": "2026-10-10T00:08:44+00:00",
+        "last_call_at": "2026-10-10T00:08:57+00:00",
+        "calls": [
+          {
+            "section": "u10-rem-close",
+            "source_sha256": "a376aefaff7619efc4de1678c89948d41522092c05c1789669fa0f1a0e1b50de",
+            "english_sha256": "b3679e1b2024608d70bcfcd76b439d38460ef7b33a918eda5a2d9513d1cf79b6",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "250cf195d2f6405fbb224172e05b255c",
+            "request_id": "f9f3bbda-1cff-426a-ab88-912debb5ef3b",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:08:44+00:00",
+            "finished_at": "2026-10-10T00:08:52+00:00",
+            "ms": 8378,
+            "usage": {
+              "prompt_tokens": 1445,
+              "completion_tokens": 441,
+              "total_tokens": 1886,
+              "neurons": 360.30908203125
+            },
+            "raw_sha256": "b3cdf7e904b403b684e72a7a3af9e90a8c83035310a3128a0187d0c3828be8db",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "1dcf3359d69215e39aa58a9c89394501e91ea9eb07b1fcbd423fe1c70878e175"
+          },
+          {
+            "section": "u10-rem-close",
+            "source_sha256": "a376aefaff7619efc4de1678c89948d41522092c05c1789669fa0f1a0e1b50de",
+            "english_sha256": "b3679e1b2024608d70bcfcd76b439d38460ef7b33a918eda5a2d9513d1cf79b6",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-a5bcc2b3-c9f8-4a28-81ac-206f4ef72720",
+            "request_id": "a5bcc2b3-c9f8-4a28-81ac-206f4ef72720",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:08:55+00:00",
+            "finished_at": "2026-10-10T00:08:57+00:00",
+            "ms": 2123,
+            "usage": {
+              "prompt_tokens": 1148,
+              "completion_tokens": 436,
+              "total_tokens": 1584,
+              "neurons": 320.50909423828125
+            },
+            "raw_sha256": "1366243e6c39afc3df9b0fc4a50bdae5ebd626478a3b809bb08166a777436ae6",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "322dcf2807d53bafce9451f7d963a863c4f1c6f688c155bf00474ce4f4dfc6ba"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u10-rem-close",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, agency, modality, scripture; uncertainties: 1; model notes: part 1/2: [completeness] \"It is clear that all these things are a hymn of God, displaying in their own beauty and power and activity the all-hymned nature of their Maker.\" vs \"no corresponding Greek in this passage\": invented clause not in source; belongs to later verse; [agency] \"are commanded to praise God\" vs \"ὑμνεῖν τὸν θεὸν παρακελεύεται\": subject is unclear but likely the Psalmist/God commands, not passive; 'praise' for ὑμνεῖν acceptable but 'are commanded' obscures who commands; [modality] \"The angels would be those in the heavens\" vs \"Ἄγγελοι μὲν ἂν εἶεν οἱ ἐν οὐρανοῖς\": 'would be' softens the optative with ἄν, but ἂν εἶεν is potential 'would be' or 'may be'—acceptable; [completeness] \"and also the water above this\" vs \"καὶ δὴ τού του δὲ ἀνώτερον ὕδωρ\": δή and δὲ particles untranslated but this is NOT a defect per instructions; however 'this' for τούτου is slightly vague—acceptable | part 2/2: [agency] \"he indicates those from every nation\" vs \"τοὺς ἐξ ἅπαντος ἔθνους ὑποδείκνυσι\": Subject is 'he' but Greek has no explicit subject; 'he' is supplied from context, but 'saying holy ones' is a participial phrase, and the main verb is third person singular with no clear agent stated.; [completeness] \"its following comes after the nations\" vs \"ἐπακολούθησιν αὐτοῦ δηλοῖ τὴν μετὰ τὰ ἔθνη\": Missing 'the' before 'following' in translation obscures that 'following' is a noun; more seriously, 'its following' is unclear—Greek has 'his following' (αὐτοῦ = Israel's), but the construction is 'shows the following of him after the nations'.; [scripture] \"Psalm 4:9 (4:8)\" vs \"Ps 149,5\": Scripture reference is wrong: source cites Psalm 149:5, not Psalm 4:8/9. The quotation 'In peace I will lie down and sleep' matches Psalm 4:8 (LXX 4:9), but the source text explicitly marks this as Ps 149,5, which is a major error in the source apparatus or translation's handling of it.\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: scripture; uncertainties: 0; model notes: part 2/2: [scripture] \"“In peace I will lie down and sleep” (Psalm 4:9 (4:8)).\" vs \"Ἐν εἰρήνῃ [ἐπὶ τὸ αὐτὸ] κοιμηθήσομαι καὶ ὑπνώσω. 43\": Source cites Ps 149,5 (LXX); English cites Ps 4:9 (4:8). Wrong verse reference.\nLatin quote (from model note, verified): «ὑμνεῖν τὸν θεὸν παρακελεύεται»\nEnglish quote (from model note, verified): «It is clear that all these things are a hymn of God, displaying in their own beauty and power and activity the all-hymned nature of their Maker.»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I checked each flag against the Greek and found no meaning error. 'It is clear that all these things are a hymn of God…' is in the Greek (δῆλον ὅτι πάντα ταῦτά ἐστιν ὕμνος θεοῦ κάλλει καὶ δυνάμει καὶ ἐνεργείᾳ τῇ ἑαυτῶν …); it was flagged only because of a chunk boundary. 'In peace I will lie down and sleep' is Psalm 4:9 (4:8), quoted by the commentator; 'Ps 149,5' is the edition's fragment heading. 'Are commanded to praise' renders παρακελεύεται with the psalm as implied subject. 'Its following' renders ἐπακολούθησιν αὐτοῦ.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): Ἐν εἰρήνῃ … κοιμηθήσομαι καὶ ὑπνώσω is Psalm 4:9 LXX (4:8 English), which the commentator cites under the Ps 149,5 lemma. The reference is correct; I found no meaning error.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "agency",
+            "modality",
+            "scripture"
+          ],
+          "uncertainties": [
+            "*** φέγγη *** — apparent manuscript corruption or lacuna in source; exact word uncertain but meaning 'lights/shining things' clear from context"
+          ],
+          "response_id": "6dfe166d996948428e6a0564ac78bdef+74dd0ad3a9544aec8a5e117bbd1b89b7"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-a5bcc2b3-c9f8-4a28-81ac-206f4ef72720"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "6dfe166d996948428e6a0564ac78bdef+74dd0ad3a9544aec8a5e117bbd1b89b7",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I checked each flag against the Greek and found no meaning error. 'It is clear that all these things are a hymn of God…' is in the Greek (δῆλον ὅτι πάντα ταῦτά ἐστιν ὕμνος θεοῦ κάλλει καὶ δυνάμει καὶ ἐνεργείᾳ τῇ ἑαυτῶν …); it was flagged only because of a chunk boundary. 'In peace I will lie down and sleep' is Psalm 4:9 (4:8), quoted by the commentator; 'Ps 149,5' is the edition's fragment heading. 'Are commanded to praise' renders παρακελεύεται with the psalm as implied subject. 'Its following' renders ἐπακολούθησιν αὐτοῦ.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "agency",
+            "modality",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "chatcmpl-a5bcc2b3-c9f8-4a28-81ac-206f4ef72720",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "Ἐν εἰρήνῃ … κοιμηθήσομαι καὶ ὑπνώσω is Psalm 4:9 LXX (4:8 English), which the commentator cites under the Ps 149,5 lemma. The reference is correct; I found no meaning error.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "scripture"
+          ]
+        }
+      ]
+    }
+  ]
+}

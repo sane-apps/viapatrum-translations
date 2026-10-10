@@ -1,0 +1,27 @@
+{
+  "u10-rem-close": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "6dfe166d996948428e6a0564ac78bdef+74dd0ad3a9544aec8a5e117bbd1b89b7",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'It is clear that all these things are a hymn of God…' is in the Greek (δῆλον ὅτι πάντα ταῦτά ἐστιν ὕμνος θεοῦ κάλλει καὶ δυνάμει καὶ ἐνεργείᾳ τῇ ἑαυτῶν …); it was flagged only because of a chunk boundary. 'In peace I will lie down and sleep' is Psalm 4:9 (4:8), quoted by the commentator; 'Ps 149,5' is the edition's fragment heading. 'Are commanded to praise' renders παρακελεύεται with the psalm as implied subject. 'Its following' renders ἐπακολούθησιν αὐτοῦ.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "chatcmpl-a5bcc2b3-c9f8-4a28-81ac-206f4ef72720",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "Ἐν εἰρήνῃ … κοιμηθήσομαι καὶ ὑπνώσω is Psalm 4:9 LXX (4:8 English), which the commentator cites under the Ps 149,5 lemma. The reference is correct; I found no meaning error.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "scripture"
+      ]
+    }
+  ]
+}

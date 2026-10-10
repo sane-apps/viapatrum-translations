@@ -1,0 +1,29 @@
+{
+  "u04-open": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "77be950af74940fc9793880cc7d3169c+a97c2c7245224b798e2e2ae91a6a10e1+5b17ac66f2c6494b9e1b892283b07a83+0941d85901ba43d9ac516af4ca99753d",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. The Greek ΡΙ is 110 (Ρ = 100, Ι = 10); Ps 110 LXX = 111 English, so 'Psalm 110 (111)' is right, and ΡΛΑ = 131 (132). 'He worked salvation in the midst of the earth' (LXX 73:12), 'You dried up the ancient rivers' (73:15) and 'He turned rivers into a desert' (106:33) are cited by English verse numbers 74:12, 74:15 and 107:33, which are correct. 'Didymus says the same' renders ὁμοίως καὶ Δίδυμός φησιν. The participle, article and 'by/according to the wrath' points are style.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "986866cc918a4fe09ff71ee092568e28+chatcmpl-bd271fe1-22df-4e62-9e54-c26a0bae7ce6+chatcmpl-cbe8fbcd-4fea-48f6-91fa-046e01b1a837",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. ΡΙ = 110, so 'Psalm 110 (111)' is correct. Εἰργάσατο σωτηρίαν ἐν μέσῳ τῆς γῆς is LXX 73:12 = English 74:12, and the English cites the English verse correctly. Ps 107:33 is likewise the English number for LXX 106:33.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "scripture"
+      ]
+    }
+  ]
+}

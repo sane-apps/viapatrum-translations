@@ -1,0 +1,31 @@
+{
+  "u03-rem-early": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "3ea5e9f06da74bbd89b3daf3436ebf6c+fc3a1deb126d41ab9101ef4fd8607db7+67f5ff089cc94291ab8bd69c103e931f+61938d054ac4457d8cacc72248e375db+f090bee5e4df45deb9b502ad10b7af51",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'He did so once, but I see my offense continually—yet I do not despair of healing, because of mercy' is in the Greek (ἐκεῖνος μέν γε εἰς ἅπαξ, ἐγὼ δὲ διὰ παντὸς ὁρῶ τὸ πταισθέν …); the flag came from a chunk boundary. Romans 5:12 (Δι' ἑνὸς ἀνθρώπου ἡ ἁμαρτία) and Psalm 118:18 [119:18] (Ἀποκάλυψον τοὺς ὀφθαλμούς μου … ἐκ τοῦ νόμου σου) correctly identify the quoted texts; the Ps 48/49/50 numbers are the edition's lemma headings. 'Ps 49,17®19' is an OCR artefact in the source heading only and does not appear in the English. 'Paralysis of the law … You shall not steal is paralyzed by running together with a thief' renders Παράλυσις ταῦτα τοῦ νόμου, τοῦ μὲν Οὐ κλέψεις τὸ κλέπτῃ συντρέχειν. In patristic use παρουσία is the Savior's coming, so 'of the Savior' only makes that explicit. The rest are participle and particle style.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "7498e93984b44cfd9347e19196b90cdb+chatcmpl-7cc178e6-1442-429d-ad96-294906b1531d+chatcmpl-a6f67267-1896-4040-9c8f-f8658bc1dd98",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. Romans 5:12 and Psalm 118:18 [119:18] are the true sources of the quoted words; 'Ps 50,7' and 'Ps 50,8b.9' are the edition's fragment headings (lemmata), not references for these quotations. 'The coming of the Savior' makes explicit the Christological sense of παρουσία in context. Dropping μέν is style.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "scripture"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "u01-rem-mid": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "b77302f9184b469ea75c9531f87dc535+fbc4defa70a34eafa12e0fc21529a57d+4d84e427edc445a58334f2257df41060+fe2c5e5cfd3d47d38d9dcf68c1c45da3+34d88f3fb8574c75aeb66be525ccee43",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. παίσειν is the active future infinitive of παίω, not a passive. In τὸ τῇ ἰδίᾳ μαχαίρᾳ παίσειν τὸν Δαυὶδ ἣν κατὰ τοῦ Δαυὶδ ἐσπάσαντο, τὸν Δαυίδ is the subject of the infinitive. The sentence applies the preceding principle, that the wicked are slain by the sword they draw (ὡσεὶ ξίφος τις σπασάμενος τούτῳ σφαγείη), to David 'bodily': he struck with the enemy's own sword, the one drawn against him (Goliath, 1 Sam 17:51). That reference is the translation's apparatus. The sentence is in the Greek; the 'not in source' flags came from chunk boundaries. 'The wicked prevail over the things on earth' gives the passive ἐπικρατεῖται … τοῖς πονηροῖς τὰ ἐν τῇ γῇ actively with the same sense. 'Eternal rest' for ἡσυχίας, 'taking … upon himself' for εἰς ἑαυτὸν ἄγων, the Psalm brackets and the particle points are style.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "e08f813b435a4129bbd5f3b83d0485f1",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. παίσειν is active ('to strike'), and τὸν Δαυίδ is its subject. Context requires this: the commentator has just said the wicked fall by the sword they draw against the righteous, and the bodily fulfilment is David striking down Goliath with Goliath's own sword (1 Sam 17:51). Reading it as 'David was struck' would contradict the principle being illustrated.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "agency"
+      ]
+    }
+  ]
+}

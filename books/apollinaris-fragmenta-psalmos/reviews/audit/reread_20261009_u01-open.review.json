@@ -1,0 +1,439 @@
+{
+  "packet_id": "03419c85424a21c0f1c781d951c8f52576cbd36e25e1326fcb3591ce7dffae27",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "6ca3090bf7d69999e201fba6c11226ff143b2b20443bb23005f75ff66a290966",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "03419c85424a21c0f1c781d951c8f52576cbd36e25e1326fcb3591ce7dffae27",
+    "generated_at": "2026-10-10T00:31:15+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0441,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0224,
+        "family": "kimi",
+        "call_count": 4,
+        "http_attempts": 4,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 7246,
+          "completion_tokens": 4363,
+          "total_tokens": 11609,
+          "neurons": 2033.0782165527344
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 7246,
+          "completion_tokens": 4363,
+          "total_tokens": 11609
+        },
+        "first_call_at": "2026-10-10T00:20:55+00:00",
+        "last_call_at": "2026-10-10T00:23:35+00:00",
+        "calls": [
+          {
+            "section": "u01-open",
+            "source_sha256": "51c4853522f67fb2306fb1a7d0f09917b9fd28d279c72b5ececbc5104b3a9d42",
+            "english_sha256": "8af8661646ca5507c7130830ca713dc37f1ca314ff3a752c5fc05ea7e833d1bd",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "aac1ffeb44af4ca89e7d531a7f8b661c",
+            "request_id": "4c58f528-aa9e-4b82-b4cb-21198c6d57bb",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:20:55+00:00",
+            "finished_at": "2026-10-10T00:21:32+00:00",
+            "ms": 37054,
+            "usage": {
+              "prompt_tokens": 1771,
+              "completion_tokens": 1077,
+              "total_tokens": 2848,
+              "neurons": 544.5863647460938
+            },
+            "raw_sha256": "36def0cc82acaeb80925518b413840387d397e247ae96a8dfcb45a168e6b859b",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "aaeb01c9c31e32b488122f073d7550712cf039094c8b40d1851e74a4edad226e"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "51c4853522f67fb2306fb1a7d0f09917b9fd28d279c72b5ececbc5104b3a9d42",
+            "english_sha256": "8af8661646ca5507c7130830ca713dc37f1ca314ff3a752c5fc05ea7e833d1bd",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "7c6ad9d27fb248c7a1d4f060cf779a7e",
+            "request_id": "df10cdca-ed5a-4783-ae88-61a32fe82f60",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:21:35+00:00",
+            "finished_at": "2026-10-10T00:21:59+00:00",
+            "ms": 23783,
+            "usage": {
+              "prompt_tokens": 1851,
+              "completion_tokens": 726,
+              "total_tokens": 2577,
+              "neurons": 364.1063537597656
+            },
+            "raw_sha256": "4d73ba5e4cc95472a02431538d472b15aa041b3f8eeb7d476abe9a4b73f3ecce",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "303e177fde4a5ce2d2c19b68be5963cc8daacf206386369c8024436dbb21d360"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "51c4853522f67fb2306fb1a7d0f09917b9fd28d279c72b5ececbc5104b3a9d42",
+            "english_sha256": "8af8661646ca5507c7130830ca713dc37f1ca314ff3a752c5fc05ea7e833d1bd",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "c6951ac41ba74acab1fa6d12377a807d",
+            "request_id": "c332f212-0546-485b-9efa-5d00f28b4206",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:22:02+00:00",
+            "finished_at": "2026-10-10T00:22:57+00:00",
+            "ms": 55164,
+            "usage": {
+              "prompt_tokens": 1837,
+              "completion_tokens": 1577,
+              "total_tokens": 3414,
+              "neurons": 672.3518676757812
+            },
+            "raw_sha256": "7ab06e4db0e045f815e181780eb1d2a0f5bfc68ef110ea180484456260c95204",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "fea04602afa6cd343048fae7938092f0e2bd5bee4f14361264842c4d0ce917f2"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "51c4853522f67fb2306fb1a7d0f09917b9fd28d279c72b5ececbc5104b3a9d42",
+            "english_sha256": "8af8661646ca5507c7130830ca713dc37f1ca314ff3a752c5fc05ea7e833d1bd",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "535c626a388344b9b14cdc51fa9d651e",
+            "request_id": "2082a4d9-cf79-4c13-beb3-246c2f795fe5",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:23:00+00:00",
+            "finished_at": "2026-10-10T00:23:35+00:00",
+            "ms": 34947,
+            "usage": {
+              "prompt_tokens": 1787,
+              "completion_tokens": 983,
+              "total_tokens": 2770,
+              "neurons": 452.03363037109375
+            },
+            "raw_sha256": "2fc8fa63f1f77cbfaaa02393cafa159a1a55d8c723eaa32bb93014543629c5b3",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 4,
+            "chunk_sha256": "cb911bb7770127509c858da663f93bc07e61c51987efc8ca73372c288ce33dc6"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0217,
+        "family": "glm",
+        "call_count": 4,
+        "http_attempts": 4,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 7550,
+          "completion_tokens": 2551,
+          "total_tokens": 10101,
+          "neurons": 1974.6763305664062
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 7550,
+          "completion_tokens": 2551,
+          "total_tokens": 10101
+        },
+        "first_call_at": "2026-10-10T00:23:35+00:00",
+        "last_call_at": "2026-10-10T00:24:11+00:00",
+        "calls": [
+          {
+            "section": "u01-open",
+            "source_sha256": "51c4853522f67fb2306fb1a7d0f09917b9fd28d279c72b5ececbc5104b3a9d42",
+            "english_sha256": "8af8661646ca5507c7130830ca713dc37f1ca314ff3a752c5fc05ea7e833d1bd",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "3c4710b774904d869f9dad111b4fd62b",
+            "request_id": "9365e9ae-d03c-4d15-80b7-b21e18a47a5f",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:23:35+00:00",
+            "finished_at": "2026-10-10T00:23:46+00:00",
+            "ms": 10725,
+            "usage": {
+              "prompt_tokens": 1828,
+              "completion_tokens": 506,
+              "total_tokens": 2334,
+              "neurons": 435.0545654296875
+            },
+            "raw_sha256": "392487c1e27d0a8bffd6eab80f67fc02da687de3123f05a1a521151ec2cfe64c",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "aaeb01c9c31e32b488122f073d7550712cf039094c8b40d1851e74a4edad226e"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "51c4853522f67fb2306fb1a7d0f09917b9fd28d279c72b5ececbc5104b3a9d42",
+            "english_sha256": "8af8661646ca5507c7130830ca713dc37f1ca314ff3a752c5fc05ea7e833d1bd",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "5a581cc42aac4e31b7b9ced4804a21c3",
+            "request_id": "6525e5de-81aa-4bb1-9810-d69e714e6343",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:23:49+00:00",
+            "finished_at": "2026-10-10T00:23:56+00:00",
+            "ms": 6824,
+            "usage": {
+              "prompt_tokens": 1948,
+              "completion_tokens": 723,
+              "total_tokens": 2671,
+              "neurons": 537.1272583007812
+            },
+            "raw_sha256": "d2292025a4975b84f6e236479ca590fae48db4d20aa190f1de5580d381b4b100",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "303e177fde4a5ce2d2c19b68be5963cc8daacf206386369c8024436dbb21d360"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "51c4853522f67fb2306fb1a7d0f09917b9fd28d279c72b5ececbc5104b3a9d42",
+            "english_sha256": "8af8661646ca5507c7130830ca713dc37f1ca314ff3a752c5fc05ea7e833d1bd",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-26432027-9838-42f2-9139-379413bbaf44",
+            "request_id": "26432027-9838-42f2-9139-379413bbaf44",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:23:59+00:00",
+            "finished_at": "2026-10-10T00:24:02+00:00",
+            "ms": 3125,
+            "usage": {
+              "prompt_tokens": 1929,
+              "completion_tokens": 676,
+              "total_tokens": 2605,
+              "neurons": 509.2763366699219
+            },
+            "raw_sha256": "027a2656a8b3222e77c1ecb1c5b0c23a59fcf28132e7ad349451bbd1176199ca",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "fea04602afa6cd343048fae7938092f0e2bd5bee4f14361264842c4d0ce917f2"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "51c4853522f67fb2306fb1a7d0f09917b9fd28d279c72b5ececbc5104b3a9d42",
+            "english_sha256": "8af8661646ca5507c7130830ca713dc37f1ca314ff3a752c5fc05ea7e833d1bd",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "e138496431fe45448e5b931d93528cda",
+            "request_id": "944af4a2-61b0-4e03-a909-d906d6a9971e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:24:05+00:00",
+            "finished_at": "2026-10-10T00:24:11+00:00",
+            "ms": 6363,
+            "usage": {
+              "prompt_tokens": 1845,
+              "completion_tokens": 646,
+              "total_tokens": 2491,
+              "neurons": 493.2181701660156
+            },
+            "raw_sha256": "373ad0bc649fe46d52c756abe4652abfac96ddf28bba7f8485abfc29d61c55e9",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 4,
+            "chunk_sha256": "cb911bb7770127509c858da663f93bc07e61c51987efc8ca73372c288ce33dc6"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u01-open",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, negation, agency, modality, scripture; uncertainties: 0; model notes: part 1/4: [agency] \"He means the church, and he announces that the Lord says\" vs \"τὴν ἐκκλησίαν δηλῶν καὶ διαγγέλλων φησὶν ὁ κύριος\": Subject is 'the Lord' (ὁ κύριος), not 'he announces that the Lord says'; participles modify the Lord; [modality] \"the judge will turn upward to the height, having handed over the kingdom\" vs \"ἐπιστρέψειν τὸν κριτὴν παραδόντα τὴν βασιλείαν\": Infinitive ἐπιστρέψειν depends on φησίν; 'he says the judge will turn', not future indicative statement; [completeness] \"The word uses winepress and harvest\" vs \"Ληνὸν δὲ καθάπερ καὶ θερισμὸν\": Missing 'and' (καί) before harvest; 'winepress and just-as also harvest'; [agency] \"The fruits are human works and thoughts\" vs \"καρποὶ δὲ ἀνθρώπων ἔργα καὶ λογισμοί\": No 'are'; apposition: 'fruits but of-men: works and reasonings'; [scripture] \"(Isaiah 66:18)\" vs \"Ἡσαΐαν\": LXX Isaiah 66:18 matches; citation format acceptable; [negation] \"who is altogether small\" vs \"μικροῦ παντελῶς ὄντος ἀνθρώπου\": μικροῦ is genitive 'of small', not 'who is small'; 'of-small altogether being of-man'; [modality] \"you remembered him when he fell away from you\" vs \"μνήμην ἐποιήσω μεταπεσόντος ἀπὸ σοῦ\": μεταπεσόντος is genitive absolute/aorist participle, not temporal 'when he fell'; 'of-having-fallen-away'; [completeness] \"he was made a little less than the angelic glory\" vs \"ὀλίγον ἠλάττωτο\": ὀλίγον adverb 'little', not 'a little less'; 'little he-was-made-less' | part 2/4: [agency] \"He speaks of the manner of the new worship of God\" vs \"Τὸν τρόπον λέγει τῆς καινῆς θεοσεβείας\": Subject is David/Psalmist, not 'He' (commentator); λέγει means 'says/speaks', not 'speaks of'; [completeness] \"the one without blood\" vs \"τὸν ἄνευ αἱμάτων\": Missing noun: 'the [manner] without bloods'; [modality] \"I ask to be heard now as well\" vs \"εἰσακουσθῆναι δέομαι\": δέομαι = 'I beg/pray', stronger than 'ask'; 'as well' weakens καὶ νῦν 'even now' | part 3/4: [source_identity] \"For having been heard before, he says, I ask to be heard now as well\" vs \"προσευχόμενοι γάρ φησιν ὁ Παῦλος μετ' εὐχαριστίας\": Invented clause not in Greek; source begins with Paul praying with thanksgiving; [agency] \"For Paul says we pray with thanksgiving\" vs \"προσευχόμενοι γάρ φησιν ὁ Παῦλος μετ' εὐχαριστίας\": Paul is subject of 'says,' not 'we pray'; participle προσευχόμενοι lacks explicit subject; [completeness] \"because the remembrance of former things prepares the favors that follow\" vs \"ἡ γὰρ τῶν προτέρων μνήμη χάριτας παρασκευάζει τὰς ἐφεξῆς\": Correct; [completeness] \"He describes the work and the appearance of those who attack him\" vs \"Ἔργον καὶ σχῆμα τῶν ἐπιτιθεμένων αὐτῷ διηγεῖται\": Correct; [completeness] \"The work is murderous plotting and flattering words for an ambush\" vs \"ἔργον μὲν ἐπιβουλὴν φονικὴν καὶ ῥήματα κολακεστικὰ πρὸς ἐνέδραν\": Correct; [completeness] \"They are fattest in body, fenced about with fat\" vs \"εἶναι δ' αὐτοὺς λιπαρωτάτους μὲν τὸ σῶμα στέατι περιπεφραγμένους\": Correct; [completeness] \"looking sideways with their eyes like a lion rushing to its prey and lying in wait secretly\" vs \"λοξὸν δὲ τοῖς ὀφθαλμοῖς ὑποβλέποντας λέοντι παραπλησίως ἐπὶ θήραν ὁρμῶντι καὶ λαθραίως ὑποκαθημένῳ\": Correct; [completeness] \"Such was Saul toward David, saying that David had found favor in his eyes, ordering him to stand by, and keeping him as an attendant, yet attempting to kill him from ambush\" vs \"τοιοῦτος ἦν πρὸς τὸν ∆αυὶδ ὁ Σαούλ, λέγων μὲν αὐτὸν εὑρηκέναι χάριν ἐν ὀφθαλμοῖς αὐτοῦ καὶ παρίστασθαι κελεύων καὶ παρεστάτην ἔχων, ὑφορώμενος δὲ καὶ ἐξ ἐνέδρας ἀποκτεῖναι ἐπιχειρῶν\": Correct; [completeness] \"A hidden punishment has been prepared for them, he says, which will enter into their belly\" vs \"Παρεσκεύασται, φησίν, αὐτοῖς ἀπόκρυφος κόλασις ἥτις εἴσω τῆς ἐκείνων χωρήσει γαστρὸς\": Correct; [scripture] \"Psalm 108 [109]:18\" vs \"κατὰ τὸ λεγόμενον ἐπὶ τοῦ Ἰουδὰ\": Correct LXX numbering with Hebrew equivalent in brackets; [completeness] \"Again he sets apart love for God through love for the temple dedicated to him\" vs \"Πάλιν τὴν πρὸς θεὸν ἀγάπην διὰ τῆς πρὸς τὸν ἀφιερωμένον αὐτῷ ναὸν ἀφορίζει\": Correct | part 4/4: [source_identity] \"Again he sets apart love for God through love for the temple dedicated to him\" vs \"ὁ γὰρ τὸν θεὸν ἀγαπῶν\": Missing opening sentence; no 'Again he sets apart' in source; [completeness] \"This one thing alone I have asked\" vs \"ἓν οὖν τοῦτο καὶ μόνον ἐζήτησα τὸν θεὸν ναὸν οἰκεῖν\": Dropped 'God' (τὸν θεὸν) before 'temple'; 'I have asked God to dwell in temple'; [completeness] \"which Hannah does\" vs \"ὅπερ ἡ Ἅννα ποιεῖ\": Correct but incomplete: 'which Hannah does' lacks context that she 'dwells in temple'; [negation] \"Now a house of God had not yet been built\" vs \"οἶκος μὲν οὖν οὔπω θεοῦ κατεσκεύαστο\": μὲν οὖν = 'indeed therefore', not 'Now'; adversative force lost; [agency] \"he brought the word up to the tabernacle and left it\" vs \"ἀνήγαγε δὲ τὸν λόγον εἰς τὴν σκηνὴν καὶ κατελίμπανεν\": ἀνήγαγε = 'he led up', but subject is David; 'left' should be 'was leaving/left behind'; [modality] \"to those able to hear spiritually\" vs \"τοῖς πνευματικῶς ἀκούειν δυναμένοις\": δυναμένοις = 'able', but infinitive ἀκούειν makes it 'to hear'; 'able to hear' is acceptable; [completeness] \"In such passages\" vs \"Ἐν τοῖς τοιούτοις\": Missing 'Ps 32,6' scripture reference in translation\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: source_identity, completeness, agency, scripture; uncertainties: 0; model notes: part 1/4: [agency] \"and you remembered him when he fell away from you\" vs \"καὶ μνήμην ἐποιήσω μεταπεσόντος ἀπὸ σοῦ\": Greek is first person 'I made remembrance'; English renders as second person 'you remembered'. | part 2/4: [completeness] \"the new worship of God, the one without blood\" vs \"τῆς καινῆς θεοσεβείας τὸν ἄνευ αἱμάτων\": θεοσεβείας means 'piety/godliness,' not 'worship of God'; 'of God' is not in the source.; [completeness] \"For having been heard before, he says, I ask to be heard now as well.\" vs \"Καὶ πρότερον γὰρ εἰσακουσθείς, φησίν, αὐτῷ καὶ νῦν εἰσακουσθῆναι δέομαι\": αὐτῷ ('by him') is dropped; source says heard by him, not just heard. | part 3/4: [completeness] \"For having been heard before, he says, I ask to be heard now as well.\" vs \"προσευχόμενοι γάρ φησιν ὁ Παῦλος μετ' εὐχαριστίας\": Invented clause not in source; Greek says 'praying with thanksgiving,' not 'having been heard before, I ask to be heard now.'; [scripture] \"'May the curse enter like water into his inward parts, and like oil into his bones' (Psalm 108 [109]:18).\" vs \"κατὰ τὸ λεγόμενον ἐπὶ τοῦ Ἰουδᾶ\": Source cites Judas, not a psalm reference; translator adds Psalm 108[109]:18 not in the Greek source passage. | part 4/4: [source_identity] \"This one thing alone I have asked: to dwell in the temple of God\" vs \"ἓν οὖν τοῦτο καὶ μόνον ἐζήτησα τὸν θεὸν ναὸν οἰκεῖν\": ἐζήτησα = 'I sought'; rendered as 'I have asked', a different verb.; [source_identity] \"to dwell in the temple of God\" vs \"τὸν θεὸν ναὸν οἰκεῖν\": Literally 'to inhabit God [as] temple' or 'to dwell [in] God's temple'; 'τὸν θεὸν ναὸν' is unusual, possibly 'God the temple'.\nLatin quote (from model note, verified): «τὴν ἐκκλησίαν δηλῶν καὶ διαγγέλλων φησὶν ὁ κύριος»\nEnglish quote (from model note, verified): «He means the church, and he announces that the Lord says»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I checked each flag against the Greek and found no meaning error. μνήμην ἐποιήσω and ἐπεσκέψω are aorist middle 2nd person singular ('you remembered … you looked after'), addressed to God as in Ps 8:5, so the English is right. 'For having been heard before, he says, I ask to be heard now as well' is in the Greek (Καὶ πρότερον γὰρ εἰσακουσθείς, φησίν, … καὶ νῦν εἰσακουσθῆναι δέομαι); the flag came from a chunk boundary. Psalm 108 [109]:18 is the curse spoken against Judas (κατὰ τὸ λεγόμενον ἐπὶ τοῦ Ἰουδᾶ) and Isaiah 66:18 is right; the 'Ps 32,6' and similar headings are the edition's lemmata. 'Not yet a house of God had been built', 'the new worship of God' (θεοσέβεια), 'altogether small' and the participle points are style.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I found no meaning error. ἐποιήσω is 2nd person singular aorist middle ('you made'), not 1st person, so 'you remembered him' is correct. The sentence about having been heard before is present in the Greek (εἰσακουσθείς … εἰσακουσθῆναι δέομαι). Psalm 108 [109]:18 identifies the verse said of Judas. 'Worship of God' for θεοσέβεια and 'I have asked' for ἐζήτησα are acceptable renderings.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "aac1ffeb44af4ca89e7d531a7f8b661c+7c6ad9d27fb248c7a1d4f060cf779a7e+c6951ac41ba74acab1fa6d12377a807d+535c626a388344b9b14cdc51fa9d651e"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "agency",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "3c4710b774904d869f9dad111b4fd62b+5a581cc42aac4e31b7b9ced4804a21c3+chatcmpl-26432027-9838-42f2-9139-379413bbaf44+e138496431fe45448e5b931d93528cda"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "aac1ffeb44af4ca89e7d531a7f8b661c+7c6ad9d27fb248c7a1d4f060cf779a7e+c6951ac41ba74acab1fa6d12377a807d+535c626a388344b9b14cdc51fa9d651e",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I checked each flag against the Greek and found no meaning error. μνήμην ἐποιήσω and ἐπεσκέψω are aorist middle 2nd person singular ('you remembered … you looked after'), addressed to God as in Ps 8:5, so the English is right. 'For having been heard before, he says, I ask to be heard now as well' is in the Greek (Καὶ πρότερον γὰρ εἰσακουσθείς, φησίν, … καὶ νῦν εἰσακουσθῆναι δέομαι); the flag came from a chunk boundary. Psalm 108 [109]:18 is the curse spoken against Judas (κατὰ τὸ λεγόμενον ἐπὶ τοῦ Ἰουδᾶ) and Isaiah 66:18 is right; the 'Ps 32,6' and similar headings are the edition's lemmata. 'Not yet a house of God had been built', 'the new worship of God' (θεοσέβεια), 'altogether small' and the participle points are style.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "3c4710b774904d869f9dad111b4fd62b+5a581cc42aac4e31b7b9ced4804a21c3+chatcmpl-26432027-9838-42f2-9139-379413bbaf44+e138496431fe45448e5b931d93528cda",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I found no meaning error. ἐποιήσω is 2nd person singular aorist middle ('you made'), not 1st person, so 'you remembered him' is correct. The sentence about having been heard before is present in the Greek (εἰσακουσθείς … εἰσακουσθῆναι δέομαι). Psalm 108 [109]:18 identifies the verse said of Judas. 'Worship of God' for θεοσέβεια and 'I have asked' for ἐζήτησα are acceptable renderings.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "agency",
+            "scripture"
+          ]
+        }
+      ]
+    }
+  ]
+}

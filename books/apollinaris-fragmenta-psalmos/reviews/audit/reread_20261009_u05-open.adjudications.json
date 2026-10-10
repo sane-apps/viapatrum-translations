@@ -1,0 +1,29 @@
+{
+  "u05-open": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "e88ed8676b5345fc96e0049174cd9040+93e898cbe0474220b0b70466421f302d+6e155cb65ba14e55850ea26a6a756fc3+243d5464890b4ed68c58ed70600dc989+ae497073c1094daba1570c6fb0f361ab",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'Another, saying that the psalm is spoken from the person of the Son, says' is in the Greek (Ἄλλος ἐκ προσώπου τοῦ υἱοῦ τὸν ψαλμὸν εἰρῆσθαι εἰπών φησι); the flag came from a chunk boundary. Isaiah 65:24 identifies the quoted Isaiah text. 'He was making constant supplications' renders the accusative-and-participle αὐτὸν … ποιούμενον of indirect statement. αὐτός τε ὁ κύριος is the subject of ἀναφέρει ('he offers … to God, the Lord himself'). Aorist/perfect, ἐπειδάν and genitive-absolute points are style.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "fb393965d92046978aa839264efd5c40",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "υἱωνός means 'grandson', and the English now renders the Greek exactly (Korah son of Izhar son of Kohath, Exod 6:18-21; Num 16:1), so the source is not in error either. I found no meaning error.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "packet_id": "6acfe770e558f19aca7f40ed01c58a9c254f4dad1f60bf9d3f7f0471ecdfead3",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "a814217788c95c2cdc98497d86ed76c28838cacff45f1d5496be5fbcf791a8ab",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "6acfe770e558f19aca7f40ed01c58a9c254f4dad1f60bf9d3f7f0471ecdfead3",
+    "generated_at": "2026-10-10T01:19:58+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0187,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0097,
+        "family": "kimi",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2493,
+          "completion_tokens": 1906,
+          "total_tokens": 4399,
+          "neurons": 880.8172607421875
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2493,
+          "completion_tokens": 1906,
+          "total_tokens": 4399
+        },
+        "first_call_at": "2026-10-10T01:14:43+00:00",
+        "last_call_at": "2026-10-10T01:15:56+00:00",
+        "calls": [
+          {
+            "section": "u10-rem-early",
+            "source_sha256": "fe494ecb9ba2f749ff437ba7cb33b987b48da2d3156dff694cb8c5a80c6e8127",
+            "english_sha256": "0bab1838cd0c9725d5a96a574c57113124678188d3327d0c709cc9fc839cad46",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "d9fa0a7b034e4b8289d4b8f72fe1e8f5",
+            "request_id": "e0dcebfc-59ab-42b3-b9d7-d7c0832c4c4e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:14:43+00:00",
+            "finished_at": "2026-10-10T01:15:11+00:00",
+            "ms": 27755,
+            "usage": {
+              "prompt_tokens": 1319,
+              "completion_tokens": 883,
+              "total_tokens": 2202,
+              "neurons": 435.0045471191406
+            },
+            "raw_sha256": "f5c42fc776b31a894781face0f119bec412f79326469283820d2e73a48292fd9",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": false,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "a1303ef44ec18308be30bfa729653b911a5667f838ec21f5c75b1fcd3ac66cfe"
+          },
+          {
+            "section": "u10-rem-early",
+            "source_sha256": "fe494ecb9ba2f749ff437ba7cb33b987b48da2d3156dff694cb8c5a80c6e8127",
+            "english_sha256": "0bab1838cd0c9725d5a96a574c57113124678188d3327d0c709cc9fc839cad46",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "d60c36ed152a4c05af9909735e7c9663",
+            "request_id": "d6eec597-82e5-4eac-a1f9-e5bb54341d34",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:15:14+00:00",
+            "finished_at": "2026-10-10T01:15:56+00:00",
+            "ms": 41780,
+            "usage": {
+              "prompt_tokens": 1174,
+              "completion_tokens": 1023,
+              "total_tokens": 2197,
+              "neurons": 445.8127136230469
+            },
+            "raw_sha256": "e9d69a38b8687602dd8628a2e00051f4981095f9d502fafddc896c393f4a7033",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": true,
+              "doctrine": false,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "86b4e26d9cf768592a67c15511d86689a390f3f407e9a302a046479ad5b69178"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.009,
+        "family": "glm",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2635,
+          "completion_tokens": 1313,
+          "total_tokens": 3948,
+          "neurons": 820.7672729492188
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2635,
+          "completion_tokens": 1313,
+          "total_tokens": 3948
+        },
+        "first_call_at": "2026-10-10T01:15:56+00:00",
+        "last_call_at": "2026-10-10T01:16:06+00:00",
+        "calls": [
+          {
+            "section": "u10-rem-early",
+            "source_sha256": "fe494ecb9ba2f749ff437ba7cb33b987b48da2d3156dff694cb8c5a80c6e8127",
+            "english_sha256": "0bab1838cd0c9725d5a96a574c57113124678188d3327d0c709cc9fc839cad46",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-a0669483-3d81-4a02-a9d1-8af3a2a5682d",
+            "request_id": "a0669483-3d81-4a02-a9d1-8af3a2a5682d",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:15:56+00:00",
+            "finished_at": "2026-10-10T01:16:00+00:00",
+            "ms": 4362,
+            "usage": {
+              "prompt_tokens": 1393,
+              "completion_tokens": 837,
+              "total_tokens": 2230,
+              "neurons": 505.45819091796875
+            },
+            "raw_sha256": "bb0f598a283299ca42af25acc7c70d1c13795d5a0b2ede99dcb2c669516141ce",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "a1303ef44ec18308be30bfa729653b911a5667f838ec21f5c75b1fcd3ac66cfe"
+          },
+          {
+            "section": "u10-rem-early",
+            "source_sha256": "fe494ecb9ba2f749ff437ba7cb33b987b48da2d3156dff694cb8c5a80c6e8127",
+            "english_sha256": "0bab1838cd0c9725d5a96a574c57113124678188d3327d0c709cc9fc839cad46",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-1ec5669c-b097-4f52-ae81-27da4c23ea72",
+            "request_id": "1ec5669c-b097-4f52-ae81-27da4c23ea72",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:16:03+00:00",
+            "finished_at": "2026-10-10T01:16:06+00:00",
+            "ms": 2889,
+            "usage": {
+              "prompt_tokens": 1242,
+              "completion_tokens": 476,
+              "total_tokens": 1718,
+              "neurons": 315.30908203125
+            },
+            "raw_sha256": "cea92eace36d043442735ea5972cc560b5404c639af787b492aac29bbd15bd1d",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "86b4e26d9cf768592a67c15511d86689a390f3f407e9a302a046479ad5b69178"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u10-rem-early",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1,
+        2
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, agency, doctrine, scripture; uncertainties: 0; model notes: part 1/2: [completeness] \"but he will do the same for all people [...] into the endless age\" vs \"ἀλλὰ πάντας ἀνθρώπους τὸ ἴσον ποιήσειν *** εἰς τὸν ἄπειρον αἰῶνα\": Missing text marked *** not translated; 'the equal' not 'the same'; [agency] \"if he too will one day see with those who run\" vs \"εἰ καὶ ὄψεταί ποτε σὺν δραμουμένοις\": Subject unclear in Greek; 'he' supplied but ambiguous (God? psalmist?); [completeness] \"showing that they share in the company of the righteous\" vs \"δηλῶν εἰς κοινωνίαν τῶν δικαίων\": 'making clear into fellowship' not 'showing that they share in the company'; [doctrine] \"who have become a beginning for God\" vs \"οἳ γεγόνασιν ἀρχὴ θεῷ\": 'beginning to God' (dative) not 'for God'; 'to' indicates relation not benefit; [completeness] \"if we are joined to true life and to the one who truly is\" vs \"εἰ πρὸς τὴν ὄντως ζωὴν συναπτόμεθα καὶ πρὸς τὸν ὄντως ὄντα\": Missing 'one' (ὄντα = being one/one who is); 'true life' ok but 'truly being one' more precise | part 2/2: [completeness] \"So hope in humans is wretched\" vs \"Οὕτω μὲν ἡ εἰς ἀνθρώπους ἐλπὶς ἀθλία\": Dropped μὲν...δὲ contrast marker 'on the one hand...on the other hand'; [agency] \"In him is the authority, as from ungrudging wealth and boundless resources, to do great good easily\" vs \"ἐν τούτῳ ἡ ἐξουσία ὡς ἐξ ἀφθόνου πλούτου καὶ ἀπείρου μεγάλα ῥᾳδίως εὐεργετεῖν\": Subject of infinitive unclear; 'to do' implies God, but Greek has bare infinitive without explicit agent; [completeness] \"as by names that mark them off\" vs \"καθάπερ ὀνόματα τῶν διορισμῶν\": Missing 'of the distinctions/determinations'; 'mark them off' overtranslates διορισμῶν; [scripture] \"Ps 145,5\" vs \"308 Ps 145,5\": Psalm numbering: LXX 145 = MT/Hebrew 146, not 145 in Hebrew/English; [scripture] \"Ps 146,4\" vs \"309 Ps 146,4\": Psalm numbering: LXX 146 = MT/Hebrew 147, not 146 in Hebrew/English\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: completeness, scripture; uncertainties: 0; model notes: part 1/2: [completeness] \"does not stop at one person or his own person\" vs \"οὐκ ἐφ' ἑνός τε ἴστησι καὶ τοῦ ἰδίου προσώπου\": ἴστησι means 'stands (them)'; 'does not stop' mistranslates the verb as halting rather than establishing.; [completeness] \"but he will do the same for all people\" vs \"ἀλλὰ πάντας ἀνθρώπους τὸ ἴσον ποιήσειν\": ποιήσειν is infinitive ('to make equal'), not finite future 'he will do the same'; subject and construction are wrong.; [completeness] \"showing that they share in the company of the righteous\" vs \"δηλῶν εἰς κοινωνίαν τῶν δικαίων\": No pronoun 'they' in source; δηλῶν governs εἰς κοινωνίαν ('making clear [the way] into fellowship'), not 'they share.'; [completeness] \"if he too will one day see with those who run\" vs \"εἰ καὶ ὄψεταί ποτε σὺν δραμουμένοις\": καὶ with εἰ means 'even if'; 'too' wrongly makes it additive rather than concessive. | part 2/2: [scripture] \"308 Ps 145,5\" vs \"308 Ps 145,5\": LXX Ps 145 = Hebrew/English Ps 146, not 145; bracketed Hebrew number is missing.; [scriptature] \"309 Ps 146,4\" vs \"309 Ps 146,4\": LXX Ps 146 = Hebrew/English Ps 147, not 146; bracketed Hebrew number is missing.\nLatin quote (from model note, verified): «ἀλλὰ πάντας ἀνθρώπους τὸ ἴσον ποιήσειν *** εἰς τὸν ἄπειρον αἰῶνα»\nEnglish quote (from model note, verified): «but he will do the same for all people [...] into the endless age»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): Checked clause by clause against the locked Greek. (1) The lacuna *** is already rendered as \"[...]\" per house convention; τὸ ἴσον ποιήσειν as 'do the same' is an acceptable idiom. 'He' for the subject of ὄψεται follows the context (the psalmist's hope). δηλῶν εἰς κοινωνίαν τῶν δικαίων rendered as 'showing that they share in the company of the righteous' is a faithful idiomatic expansion. ἀρχὴ θεῷ 'a beginning for God' is an acceptable dative rendering. 'the one who truly is' renders τὸν ὄντως ὄντα exactly (it is already there). (2) A dropped μὲν particle, a bare infinitive whose agent is clear from ἐν τούτῳ, and 'names that mark them off' for ὀνόματα τῶν διορισμῶν are acceptable idiom. 'Ps 145,5' and 'Ps 146,4' are edition fragment lemmata copied from the edition apparatus, not translation scripture references, so no LXX/English conversion applies. No meaning error.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): Checked against the locked Greek. (1) οὐκ ἐφ' ἑνός ἵστησι 'does not stop at one person' is the standard intransitive sense (stop/stand at). τὸ ἴσον ποιήσειν, governed by the preceding verb of hoping/saying, is fairly rendered with a finite 'he will do the same'. 'Showing that they share in the company of the righteous' is an idiomatic expansion of δηλῶν εἰς κοινωνίαν. εἰ καὶ ὄψεταί ποτε: additive 'too' is defensible in this context (he, too, with those who run). (2) '308 Ps 145,5' and '309 Ps 146,4' are edition fragment numbers and lemmata reproduced verbatim from the source, not translation citations; house convention leaves them untouched. No meaning error.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "agency",
+            "doctrine",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "d9fa0a7b034e4b8289d4b8f72fe1e8f5+d60c36ed152a4c05af9909735e7c9663"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-a0669483-3d81-4a02-a9d1-8af3a2a5682d+chatcmpl-1ec5669c-b097-4f52-ae81-27da4c23ea72"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "d9fa0a7b034e4b8289d4b8f72fe1e8f5+d60c36ed152a4c05af9909735e7c9663",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "Checked clause by clause against the locked Greek. (1) The lacuna *** is already rendered as \"[...]\" per house convention; τὸ ἴσον ποιήσειν as 'do the same' is an acceptable idiom. 'He' for the subject of ὄψεται follows the context (the psalmist's hope). δηλῶν εἰς κοινωνίαν τῶν δικαίων rendered as 'showing that they share in the company of the righteous' is a faithful idiomatic expansion. ἀρχὴ θεῷ 'a beginning for God' is an acceptable dative rendering. 'the one who truly is' renders τὸν ὄντως ὄντα exactly (it is already there). (2) A dropped μὲν particle, a bare infinitive whose agent is clear from ἐν τούτῳ, and 'names that mark them off' for ὀνόματα τῶν διορισμῶν are acceptable idiom. 'Ps 145,5' and 'Ps 146,4' are edition fragment lemmata copied from the edition apparatus, not translation scripture references, so no LXX/English conversion applies. No meaning error.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "agency",
+            "doctrine",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "chatcmpl-a0669483-3d81-4a02-a9d1-8af3a2a5682d+chatcmpl-1ec5669c-b097-4f52-ae81-27da4c23ea72",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "Checked against the locked Greek. (1) οὐκ ἐφ' ἑνός ἵστησι 'does not stop at one person' is the standard intransitive sense (stop/stand at). τὸ ἴσον ποιήσειν, governed by the preceding verb of hoping/saying, is fairly rendered with a finite 'he will do the same'. 'Showing that they share in the company of the righteous' is an idiomatic expansion of δηλῶν εἰς κοινωνίαν. εἰ καὶ ὄψεταί ποτε: additive 'too' is defensible in this context (he, too, with those who run). (2) '308 Ps 145,5' and '309 Ps 146,4' are edition fragment numbers and lemmata reproduced verbatim from the source, not translation citations; house convention leaves them untouched. No meaning error.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "scripture"
+          ]
+        }
+      ]
+    }
+  ]
+}

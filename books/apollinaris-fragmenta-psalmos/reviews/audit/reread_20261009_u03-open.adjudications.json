@@ -1,0 +1,28 @@
+{
+  "u03-open": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "f37a841b315a4b78b39ba72a96cb186c+f103a5a7af9b48ab8b1b7f36a541a2e1+bff76bc5368e41f4a7e33f558e40acbd+06d3253896a848a28d7d85382a1a68d1",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'He will appear to the king of the world in Jesus' reproduces Ὀφθήσεται τῷ βασιλεῖ τοῦ κόσμου ἐν τῷ Ἰησοῦ literally; this was corrected from the Greek in this re-read. Καταστήσεις αὐτοὺς ἄρχοντας ἐπὶ πᾶσαν τὴν γῆν is LXX Ps 44:17 (45:16). Ἀκούσομαι τί λαλήσει ἐν ἐμοὶ ὁ θεός is LXX Ps 84:9 and the Greek reads ἐν ΠΔ (84), so 'Psalm 84 (85)' is right. Acts 10:34 is Peter's saying, quoted verbatim. 'Ps 46,9' and 'Ps 47,11c.12' are the edition's headings. βασιλείας ἀπέδειξας ἡμᾶς is rendered by its sense, 'a kingdom over all the nations'. 'As the death of this one, so the death of that one' renders the Greek idiom τούτου … τούτου ('the one … the other'). The rest are style.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "chatcmpl-b8a3b770-2332-4bc5-8cb4-d90310d685e8+chatcmpl-9e6133fd-f37b-41c5-b9e3-2a6da6e5bb9f",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. Καταστήσεις αὐτοὺς ἄρχοντας is LXX Ps 44:17 (Eng 45:16), not Ps 45/46. ΠΔ is 84, and Ps 84:9 LXX contains Ἀκούσομαι τί λαλήσει. The Ps 48 and Ps 46 numbers flagged as 'omitted' are the edition's fragment headings, which the English does not reproduce. Reading βασιλείας as 'kingdom' is a defensible way to take an ambiguous form.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "scripture"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "u05-rem-early": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "5ae3a7de55da4933bc2c8ff16014bf00+a6260573c99749f1aa0026fe4db0da48+3b267b8831be47c492d85079d65d1396+c9b223be7b9b4952963c9e4c5f028a5a+f76afcdcf40148a2abaf91c4333d05fa",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. Αὐτὸν ὑπὲρ ἡμῶν παρίστησιν ὁ πρεσβευτής τε καὶ ἱερεύς: unaccented αὐτόν is commonly reflexive (αὑτόν) in late Greek, and the sense requires it: the ambassador-priest presents himself for us and appeases the wrath he himself bore in his sufferings (cf. Heb 9:24). John 12:28 and 17:1 correctly identify Ἐδόξασα and Δόξασόν σου τὸν υἱόν in the apparatus. 'Psalm 9:8 (9:7)' is right for the ninth psalm's 'he prepared his throne for judgment' (LXX 9:8 = English 9:7); 'Psalm 87:9 (88:8)' and '87:10 (88:9)' follow the LXX/English convention. 'Dispensed' for κρίνεται (judgment is rendered by Christ) and the supplied subjects 'God'/'He' follow the context. Hermon for Ἑρμωνιείμ is the standard English name. The 'invented clause' flags are chunk-boundary artefacts; the sentences are in the Greek.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "chatcmpl-9d22ee56-12d7-43f5-a8be-1467de55f0c0+chatcmpl-24496362-a798-4d1b-a6a5-04c19c88d987+chatcmpl-b419999a-9bb5-459f-a42c-1c31a05c1fc1+48388ee8f27147ac983692beacb05e00",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. The Psalm references are LXX with English in parentheses and correct (87:9 = 88:8, 87:10 = 88:9). John 12:28 and 17:1 are apparatus identifications. 'The judgment of God is dispensed by Christ' gives ἡ τοῦ θεοῦ κρίσις ὑπὸ Χριστοῦ κρίνεται with Christ as the one who carries out the judgment, as in the Greek. 'Ps 88,20-25' is the edition lemma.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "agency",
+        "scripture"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "u08-rem-early": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "08ec1cdde4324824b339058b9af1ed70+39ac1984f14e4ee08838ac73ac491968+87f00834afe74874980954d86e1caecc+f30213e06aeb47a597b3dccc1f55ab7d+8bc9720821f54dafabdd8f23ad82fa6c+feac848a8aea4cc784f658ddc9532e8f",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'My soul will live' quotes the psalm's Ζήσεται ἡ ψυχή μου (Ps 118:175), which the Greek introduces as the following words (ἐπάγεται τὸ Ζήσεται ἡ ψυχή μου, καὶ τὰ ἑξῆς), so the first person is correct and the reference [119:175] is right; 'Ps 119,2' is the next fragment's lemma. 'He has made this the goal of his study of the law' renders ταύτην πεποιῆσθαι σκοπὸν … τοῦ νόμου μελέτης, which is in the Greek. οὐ προορᾷ 'he does not foresee' is the Greek. 'Psalm 120:1b-2 [121:1b-2]' and '121:1b-4 [122:1b-4]' are correct LXX/English pairs. The rest (μέν/δέ, χαρίτων, 'give thanks' for ἐξομολογήσασθαι, participle syntax) is idiom.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "chatcmpl-14326646-11e9-40af-9aeb-3be3e817e6a5",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. The reference gives the verse the fragment comments on; 'Ps 118,174.175' is the edition's lemma and the translation need not repeat v. 174.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "scripture"
+      ]
+    }
+  ]
+}

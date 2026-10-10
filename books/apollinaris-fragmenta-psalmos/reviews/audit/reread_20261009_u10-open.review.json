@@ -1,0 +1,291 @@
+{
+  "packet_id": "111ac91e6c00c11c27ae8c65385d6d8373ea7bc65a7157b7a67b39e2331f5cbb",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "6ca3090bf7d69999e201fba6c11226ff143b2b20443bb23005f75ff66a290966",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "111ac91e6c00c11c27ae8c65385d6d8373ea7bc65a7157b7a67b39e2331f5cbb",
+    "generated_at": "2026-10-10T00:11:08+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0162,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0088,
+        "family": "kimi",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2532,
+          "completion_tokens": 1666,
+          "total_tokens": 4198,
+          "neurons": 796.9127197265625
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2532,
+          "completion_tokens": 1666,
+          "total_tokens": 4198
+        },
+        "first_call_at": "2026-10-10T00:04:49+00:00",
+        "last_call_at": "2026-10-10T00:06:04+00:00",
+        "calls": [
+          {
+            "section": "u10-open",
+            "source_sha256": "22ceeb037b9f44ef031e3d70b98f5bd3e823d273b3e5a55c3dfdf74d2cce2858",
+            "english_sha256": "99da6dd352525ac83f8b3a2ef971814742bfa1f58b6d2a45d593ee73224849a3",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "5573d99dd6704b939ba029cec34bba63",
+            "request_id": "86d4e0c7-ea3a-4b64-9190-4da954888e33",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:04:49+00:00",
+            "finished_at": "2026-10-10T00:05:32+00:00",
+            "ms": 43046,
+            "usage": {
+              "prompt_tokens": 1401,
+              "completion_tokens": 1015,
+              "total_tokens": 2416,
+              "neurons": 490.08636474609375
+            },
+            "raw_sha256": "26b86ecbc093f6002a2eb91459ba8e78ed51da99504a831b4a664eaf172ebe8f",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false,
+            "chunk": 1,
+            "chunk_sha256": "30e0f95044057c2ab827783f4bb8e17e32ad668a791c89b3fc4346665288be6c"
+          },
+          {
+            "section": "u10-open",
+            "source_sha256": "22ceeb037b9f44ef031e3d70b98f5bd3e823d273b3e5a55c3dfdf74d2cce2858",
+            "english_sha256": "99da6dd352525ac83f8b3a2ef971814742bfa1f58b6d2a45d593ee73224849a3",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "f36932033cab4b60bdc9baa6ea273047",
+            "request_id": "1af5c2f8-0fa8-4891-a92a-54e5ca9e537e",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:05:35+00:00",
+            "finished_at": "2026-10-10T00:06:04+00:00",
+            "ms": 28985,
+            "usage": {
+              "prompt_tokens": 1131,
+              "completion_tokens": 651,
+              "total_tokens": 1782,
+              "neurons": 306.82635498046875
+            },
+            "raw_sha256": "6c4dbd5dbc1f5aa425f63d8dfe9a17122c1c970d206c58ac4792f3c74b6926f9",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": false,
+            "chunk": 2,
+            "chunk_sha256": "20c3892817578c62774b4656e698f3729f95c2cbdbc0d46e240e541cd8c104b6"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0074,
+        "family": "glm",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2664,
+          "completion_tokens": 917,
+          "total_tokens": 3581,
+          "neurons": 672.69091796875
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2664,
+          "completion_tokens": 917,
+          "total_tokens": 3581
+        },
+        "first_call_at": "2026-10-10T00:06:04+00:00",
+        "last_call_at": "2026-10-10T00:06:14+00:00",
+        "calls": [
+          {
+            "section": "u10-open",
+            "source_sha256": "22ceeb037b9f44ef031e3d70b98f5bd3e823d273b3e5a55c3dfdf74d2cce2858",
+            "english_sha256": "99da6dd352525ac83f8b3a2ef971814742bfa1f58b6d2a45d593ee73224849a3",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-16c0d99f-5235-44a3-8c3b-cff1600a38d7",
+            "request_id": "16c0d99f-5235-44a3-8c3b-cff1600a38d7",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:06:04+00:00",
+            "finished_at": "2026-10-10T00:06:09+00:00",
+            "ms": 5042,
+            "usage": {
+              "prompt_tokens": 1501,
+              "completion_tokens": 500,
+              "total_tokens": 2001,
+              "neurons": 391.036376953125
+            },
+            "raw_sha256": "9b6696f0992a1fb6fc06f8f61a3776e9cc73a786c7988996bc7cb1aa9569bf77",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "30e0f95044057c2ab827783f4bb8e17e32ad668a791c89b3fc4346665288be6c"
+          },
+          {
+            "section": "u10-open",
+            "source_sha256": "22ceeb037b9f44ef031e3d70b98f5bd3e823d273b3e5a55c3dfdf74d2cce2858",
+            "english_sha256": "99da6dd352525ac83f8b3a2ef971814742bfa1f58b6d2a45d593ee73224849a3",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-6be27a35-14b1-4be7-9bb3-1f86fdcf5675",
+            "request_id": "6be27a35-14b1-4be7-9bb3-1f86fdcf5675",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:06:12+00:00",
+            "finished_at": "2026-10-10T00:06:14+00:00",
+            "ms": 2231,
+            "usage": {
+              "prompt_tokens": 1163,
+              "completion_tokens": 417,
+              "total_tokens": 1580,
+              "neurons": 281.654541015625
+            },
+            "raw_sha256": "3ce81d27c210d45de966bce5b3dd589a3e6ded398cee99eacab2b99eb9facfe5",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "20c3892817578c62774b4656e698f3729f95c2cbdbc0d46e240e541cd8c104b6"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u10-open",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, agency, modality; uncertainties: 0; model notes: part 1/2: [source_identity] \"Ps 143,4.5\" vs \"Ps 143,4.5\": LXX Ps 143:4-5 corresponds to Hebrew/English Ps 144:3-4, not Ps 143:4-5 in Hebrew numbering; should be [144:3-4]; [source_identity] \"Ps 144,1\" vs \"Ps 144,1\": LXX Ps 144:1 corresponds to Hebrew/English Ps 145:1, not Ps 144:1; should be [145:1]; [source_identity] \"Ps 144,4\" vs \"Ps 144,4\": LXX Ps 144:4 corresponds to Hebrew/English Ps 145:4, not Ps 144:4; should be [145:4]; [completeness] \"In the present life these words could apply to one human being after another in succession\" vs \"Κατὰ μὲν τὸν νῦν βίον τοῦ κατὰ διαδοχὴν ἑνὸς ἀνθρώπου ταῦτα ἂν εἶναι δύναιτο\": Missing 'of-the according-to-succession one human-being' genitive construction; 'these words' adds 'words' not in source; [agency] \"the worshiper adds\" vs \"προστίθεται\": Subject is impersonal 'it is added' or he/psalmist adds, not specifically 'the worshiper'; [completeness] \"seeing that they receive praise beyond all praise\" vs \"ὑπὲρ πάντα ἔπαινον τυγχάνοντα αὐτὰ ὁρῶσα\": Misconstrued: 'obtaining them beyond all praise seeing' — the generation sees the works obtaining praise beyond all praise, not 'they receive praise' | part 2/2: [agency] \"your power and wisdom is your only-begotten Son\" vs \"δύναμις δὲ καὶ σοφία σου τὸ γέννημα τὸ μονογενές σου\": Greek has 'your power and wisdom [is] your offspring the only-begotten'; English adds 'Son' not in source; [modality] \"since humans are not yet able to receive it\" vs \"οὔπω τῶν ἀνθρώπων ἐχόντων δεκτικῶς\": Greek 'not yet of humans having [it] receptively' is participial, not 'able to receive'; [agency] \"therefore he adds what is fitting for God\" vs \"διὸ ἐπιφέρει τὸ πρέπον θεῷ\": Subject of ἐπιφέρει is the psalmist/speaker, not 'he' referring to God; ambiguous reference; [completeness] \"for created things\" vs \"τῶν δημιουργουμένων\": Greek 'of the being-created things' is substantival/partitive with 'foods', not modifier of 'food'\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: completeness, scripture; uncertainties: 0; model notes: part 1/2: [scripture] \"according to Ecclesiastes\" vs \"κατὰ τὸν Ἐκκλησιαστήν\": Source cites Ecclesiastes but the preceding quotation is from Isaiah; reference mismatch with content. | part 2/2: [completeness] \"but likening the creative power in this way.\" vs \"ἀλλὰ τὸ δημιουργικὸν οὕτως ὁμοιῶν\": Drops the article τὸ: 'the creative power' becomes 'creative power'; also 'thus' (οὕτως) modifies the likening, not 'in this way' as separate phrase.\nLatin quote (from model note, verified): «Κατὰ μὲν τὸν νῦν βίον τοῦ κατὰ διαδοχὴν ἑνὸς ἀνθρώπου ταῦτα ἂν εἶναι δύναιτο»\nEnglish quote (from model note, verified): «according to Ecclesiastes»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): Checked each flag against the Greek; none is a meaning error. Fragment headings (Ps 143,4.5; 144,1; 144,4) are the edition's LXX lemmata. 'these words' supplies the subject of ταῦτα. προστίθεται 'is added' is rendered with its implied agent (the one praising). ὑπὲρ πάντα ἔπαινον τυγχάνοντα αὐτὰ ὁρῶσα = seeing them obtain (praise) beyond all praise, as rendered. τὸ γέννημα τὸ μονογενές σου = your only-begotten offspring; 'Son' is the referent, confirmed by the next clause (Χριστὸς θεοῦ δύναμις καὶ θεοῦ σοφία). The rest are participle style.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): Not meaning errors. κατὰ τὸν Ἐκκλησιαστήν is right: 'everything God made remains forever' is Ecclesiastes 3:14 (πάντα ὅσα ἐποίησεν ὁ θεός, αὐτὰ ἔσται εἰς τὸν αἰῶνα), not Isaiah. 'likening the creative power in this way' keeps τὸ δημιουργικὸν and οὕτως.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "agency",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "5573d99dd6704b939ba029cec34bba63+f36932033cab4b60bdc9baa6ea273047"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-16c0d99f-5235-44a3-8c3b-cff1600a38d7+chatcmpl-6be27a35-14b1-4be7-9bb3-1f86fdcf5675"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "5573d99dd6704b939ba029cec34bba63+f36932033cab4b60bdc9baa6ea273047",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "Checked each flag against the Greek; none is a meaning error. Fragment headings (Ps 143,4.5; 144,1; 144,4) are the edition's LXX lemmata. 'these words' supplies the subject of ταῦτα. προστίθεται 'is added' is rendered with its implied agent (the one praising). ὑπὲρ πάντα ἔπαινον τυγχάνοντα αὐτὰ ὁρῶσα = seeing them obtain (praise) beyond all praise, as rendered. τὸ γέννημα τὸ μονογενές σου = your only-begotten offspring; 'Son' is the referent, confirmed by the next clause (Χριστὸς θεοῦ δύναμις καὶ θεοῦ σοφία). The rest are participle style.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "agency",
+            "modality"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "chatcmpl-16c0d99f-5235-44a3-8c3b-cff1600a38d7+chatcmpl-6be27a35-14b1-4be7-9bb3-1f86fdcf5675",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "Not meaning errors. κατὰ τὸν Ἐκκλησιαστήν is right: 'everything God made remains forever' is Ecclesiastes 3:14 (πάντα ὅσα ἐποίησεν ὁ θεός, αὐτὰ ἔσται εἰς τὸν αἰῶνα), not Isaiah. 'likening the creative power in this way' keeps τὸ δημιουργικὸν and οὕτως.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "scripture"
+          ]
+        }
+      ]
+    }
+  ]
+}

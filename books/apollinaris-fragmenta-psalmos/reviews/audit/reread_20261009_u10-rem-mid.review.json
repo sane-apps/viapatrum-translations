@@ -1,0 +1,378 @@
+{
+  "packet_id": "8294f31882c45b69a6d3c972dd8619c9473760b844dc5a91e62ba69521443b6e",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "a814217788c95c2cdc98497d86ed76c28838cacff45f1d5496be5fbcf791a8ab",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "8294f31882c45b69a6d3c972dd8619c9473760b844dc5a91e62ba69521443b6e",
+    "generated_at": "2026-10-10T01:03:54+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0215,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0107,
+        "family": "kimi",
+        "call_count": 3,
+        "http_attempts": 3,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 3581,
+          "completion_tokens": 1995,
+          "total_tokens": 5576,
+          "neurons": 970.3736267089844
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 3581,
+          "completion_tokens": 1995,
+          "total_tokens": 5576
+        },
+        "first_call_at": "2026-10-10T00:54:49+00:00",
+        "last_call_at": "2026-10-10T00:56:03+00:00",
+        "calls": [
+          {
+            "section": "u10-rem-mid",
+            "source_sha256": "e7f7ea84daa8c037f42658c32503b93c9e1db5b96118a98c25aa030df949f66e",
+            "english_sha256": "75043da1e3eb63cc0ccb7cbfcab5e2c5879efd7e764d9ab4c4575470a9bfed5f",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "c80e977bb17d499ca9447c57949553fc",
+            "request_id": "ea7fe566-d599-4312-9486-737d8d34f6f1",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:54:49+00:00",
+            "finished_at": "2026-10-10T00:55:05+00:00",
+            "ms": 15314,
+            "usage": {
+              "prompt_tokens": 1004,
+              "completion_tokens": 475,
+              "total_tokens": 1479,
+              "neurons": 259.4363708496094
+            },
+            "raw_sha256": "14cee09016ffc4d38dc58fdb2310841d2695fa169f078351338e4796f2dbac31",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "111219bbf0cc933da29249195d83f0ed8639fd9201d6730688393f07195a4565"
+          },
+          {
+            "section": "u10-rem-mid",
+            "source_sha256": "e7f7ea84daa8c037f42658c32503b93c9e1db5b96118a98c25aa030df949f66e",
+            "english_sha256": "75043da1e3eb63cc0ccb7cbfcab5e2c5879efd7e764d9ab4c4575470a9bfed5f",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "d2709d134032457c9f839805a726078a",
+            "request_id": "58be8d08-d5b7-42f1-8904-f82e24d0de84",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:55:08+00:00",
+            "finished_at": "2026-10-10T00:55:36+00:00",
+            "ms": 28504,
+            "usage": {
+              "prompt_tokens": 1378,
+              "completion_tokens": 864,
+              "total_tokens": 2242,
+              "neurons": 401.016357421875
+            },
+            "raw_sha256": "596bd495fa9e1f3add33b58522ebc6410352fce604002789ec8b357b4d1cd790",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "0d8b73e3f495709ce089d8c73a6f48b1e54b74856068efa3d0db24bb4fe9d53f"
+          },
+          {
+            "section": "u10-rem-mid",
+            "source_sha256": "e7f7ea84daa8c037f42658c32503b93c9e1db5b96118a98c25aa030df949f66e",
+            "english_sha256": "75043da1e3eb63cc0ccb7cbfcab5e2c5879efd7e764d9ab4c4575470a9bfed5f",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "8e6b6aba010c4ab2b1dafd4989fc54b7",
+            "request_id": "347f4316-9052-430f-b31f-9be2371c1e22",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:55:39+00:00",
+            "finished_at": "2026-10-10T00:56:03+00:00",
+            "ms": 23610,
+            "usage": {
+              "prompt_tokens": 1199,
+              "completion_tokens": 656,
+              "total_tokens": 1855,
+              "neurons": 309.9208984375
+            },
+            "raw_sha256": "5fdb350024064af2281149c6c62a69ef252152dcb2385f3619d43ff190b94691",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "3332eb300732a27312ee37b03f9371ca09cb6e192c7bbd0c60cd81190bc6817e"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0108,
+        "family": "glm",
+        "call_count": 3,
+        "http_attempts": 4,
+        "failed_attempts": [
+          {
+            "section": "u10-rem-mid",
+            "started_at": "2026-10-10T00:56:03+00:00",
+            "finished_at": "2026-10-10T00:59:58+00:00",
+            "http_status": 408,
+            "error": "{\"errors\":[{\"message\":\"AiError: AiError: Request timeout (c403e965-4444-4ecc-a3b9-49aa72c7b6fa)\",\"code\":3046}],\"success\":false,\"result\":{},\"messages\":[]}"
+          }
+        ],
+        "tokens_all_attempts": {
+          "prompt_tokens": 3672,
+          "completion_tokens": 1410,
+          "total_tokens": 5082,
+          "neurons": 984.9163818359375
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 3672,
+          "completion_tokens": 1410,
+          "total_tokens": 5082
+        },
+        "first_call_at": "2026-10-10T01:00:08+00:00",
+        "last_call_at": "2026-10-10T01:00:27+00:00",
+        "calls": [
+          {
+            "section": "u10-rem-mid",
+            "source_sha256": "e7f7ea84daa8c037f42658c32503b93c9e1db5b96118a98c25aa030df949f66e",
+            "english_sha256": "75043da1e3eb63cc0ccb7cbfcab5e2c5879efd7e764d9ab4c4575470a9bfed5f",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "08719478c65f450a90d627c8409506f3",
+            "request_id": "7f252448-80f1-4f0d-8ba6-8d51876f63a0",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:00:08+00:00",
+            "finished_at": "2026-10-10T01:00:10+00:00",
+            "ms": 2464,
+            "usage": {
+              "prompt_tokens": 1007,
+              "completion_tokens": 259,
+              "total_tokens": 1266,
+              "neurons": 231.76364135742188
+            },
+            "raw_sha256": "e3c0b5328a4ce4c1d49cf9f37e761c7d5599ed7adaa315a09d8f433419484d1d",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "111219bbf0cc933da29249195d83f0ed8639fd9201d6730688393f07195a4565"
+          },
+          {
+            "section": "u10-rem-mid",
+            "source_sha256": "e7f7ea84daa8c037f42658c32503b93c9e1db5b96118a98c25aa030df949f66e",
+            "english_sha256": "75043da1e3eb63cc0ccb7cbfcab5e2c5879efd7e764d9ab4c4575470a9bfed5f",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "4a7cef7cadb243f7a49f68041f105abf",
+            "request_id": "cfd4fc13-004a-48b9-a1c2-6e5e39d6ae10",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:00:13+00:00",
+            "finished_at": "2026-10-10T01:00:21+00:00",
+            "ms": 7217,
+            "usage": {
+              "prompt_tokens": 1420,
+              "completion_tokens": 672,
+              "total_tokens": 2092,
+              "neurons": 449.52728271484375
+            },
+            "raw_sha256": "4e938de2d38b88b23774bb1b147c880fcb7277af7f8329a207607c53317914e8",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [
+              "τῇ προσούσῃ τῷ δημιουργοῦντι: could be 'by its presence to the creator' or 'belonging to the creator'; both readings are grammatically defensible."
+            ],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "0d8b73e3f495709ce089d8c73a6f48b1e54b74856068efa3d0db24bb4fe9d53f"
+          },
+          {
+            "section": "u10-rem-mid",
+            "source_sha256": "e7f7ea84daa8c037f42658c32503b93c9e1db5b96118a98c25aa030df949f66e",
+            "english_sha256": "75043da1e3eb63cc0ccb7cbfcab5e2c5879efd7e764d9ab4c4575470a9bfed5f",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "0836020779e2482184ef83f8a8aad4ae",
+            "request_id": "2f01e094-fe30-4c18-a332-9607f0abbdcc",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:00:24+00:00",
+            "finished_at": "2026-10-10T01:00:27+00:00",
+            "ms": 3043,
+            "usage": {
+              "prompt_tokens": 1245,
+              "completion_tokens": 479,
+              "total_tokens": 1724,
+              "neurons": 303.6254577636719
+            },
+            "raw_sha256": "eb9a786aefc77eebd7cac482d9fc1e911b14ad3afe23180874f98a17bfc3dfc8",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "3332eb300732a27312ee37b03f9371ca09cb6e192c7bbd0c60cd81190bc6817e"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u10-rem-mid",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1,
+        2
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, negation, agency, modality, scripture; uncertainties: 0; model notes: part 1/3: [agency] \"since he has power and wisdom that come and go\" vs \"προσγινόμενόν τε καὶ ἀπογινόμενον ἔχων τὸ δυνατὸν καὶ σοφόν\": Greek has a participial phrase 'having...come and gone,' not a finite clause with 'he' as subject; the participle's case/gender is ambiguous but likely modifies 'strength/understanding' or is absolute, not attributing coming/going to a person; [completeness] \"since he has power and wisdom that come and go\" vs \"προσγινόμενόν τε καὶ ἀπογινόμενον ἔχων τὸ δυνατὸν καὶ σοφόν\": ἔχων ('having') is omitted; the Greek says 'having come-to-be-present and gone-away-from-being-present,' not 'that come and go'; [scripture] \"Ps 146,5\" vs \"Ps 146,5\": Should be Ps 146:5 LXX (Ps 147:5 Hebrew/English); the citation is correct in LXX numbering but brackets missing for Hebrew/English equivalent | part 2/3: [agency] \"he does not have power and wisdom that fill him\" vs \"οὐ πληροῦσαν αὐτὸν δύναμιν καὶ σοφίαν ἔχων\": Greek has power/wisdom as subject of filling, not as object; 'fill him' misattributes agency; [completeness] \"but full, proceeding from himself\" vs \"ἀλλὰ πλήρη προελθοῦσαν ἐξ ἑαυτοῦ\": Dropped 'power and wisdom' as antecedent of 'full'; 'proceeding' obscures completed action; [modality] \"To him belongs the great superiority\" vs \"ᾧ καὶ ἡ μακρὰ προσῆκεν ὑπεροχὴ\": 'belongs' overstates; προσῆκεν is 'was fitting/appropriate', not ownership; [agency] \"by its presence to the one who creates\" vs \"τῇ προσούσῃ τῷ δημιουργοῦντι\": τῇ προσούσῃ is dative of attendant circumstance, not 'by its presence'; obscures syntax; [completeness] \"is what belongs to the Father of wisdom and power\" vs \"τοῦτό ἐστι περὶ τὸν τῆς σοφίας καὶ δυνάμεως πατέρα\": περὶ means 'around/concerning', not 'belongs to'; 'is what belongs' invents possession | part 3/3: [scripture] \"Psalm 135:5 (136:5)\" vs \"Τῷ ποιήσαντι τὸν οὐρανὸν ἐν συνέσει\": Greek quotes Psalm 135:6 LXX (136:6 Eng), not 135:5; verse 5 lacks this phrase.; [completeness] \"his strength and understanding are great beyond number\" vs \"πρὸς τὸ εἶναι ἰσχὺς μεγάλη καὶ σύνεσις αὐτοῦ τυγχάνει ἀριθμὸν οὐκ ἔχουσα\": Dropped πρὸς τὸ εἶναι ('with reference to the being'); 'great beyond number' obscures syntax.; [negation] \"not as an accident in him\" vs \"οὐχ ὡς ἐν αὐτῷ συμβεβηκός\": Greek says 'not as having-come-to-be-accident in him,' not 'not as an accident in him'—participle is perfect, not noun.\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: source_identity, completeness, scripture; uncertainties: 1; model notes: part 1/3: [completeness] \"since he has power and wisdom that come and go\" vs \"προσγινόμενόν τε καὶ ἀπογινόμενον ἔχων τὸ δυνατὸν καὶ σοφόν\": Translator adds causal 'since' and subject 'he'; Greek is a participial phrase, not a subordinate clause. | part 2/3: [completeness] \"To him belongs the great superiority\" vs \"ᾧ καὶ ἡ μακρὰ προσῆκεν ὑπεροχὴ\": μακρὰ ('long'/'far-reaching') is mistranslated as 'great'; it conveys distance, not magnitude.; [source_identity] \"by its presence to the one who creates\" vs \"τῇ προσούσῃ τῷ δημιουργοῦντι\": προσούσῃ is dative feminine, agreeing with ὑπεροχήν; 'its presence' is grammatically possible but the sense 'belonging to the one creating' is equally viable. | part 3/3: [scripture] \"\"To him who made the heaven in understanding\" (Psalm 135:5 (136:5))\" vs \"Τῷ ποιήσαντι τὸν οὐρανὸν ἐν συνέσει\": LXX Psalm 135:5 is 'ᾧ τὸν οὐρανὸν ἐν συνέσει ἐποίησεν'; the Greek cited here is a paraphrase, not the exact LXX text.\nLatin quote (from model note, verified): «προσγινόμενόν τε καὶ ἀπογινόμενον ἔχων τὸ δυνατὸν καὶ σοφόν»\nEnglish quote (from model note, verified): «since he has power and wisdom that come and go»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I checked each flag against the Greek and found no meaning error. 'Psalm 135:5 (136:5)' is right: LXX Ps 135:5 reads τῷ ποιήσαντι τοὺς οὐρανοὺς ἐν συνέσει. 'Since he has power and wisdom that come and go' renders the circumstantial participle προσγινόμενόν τε καὶ ἀπογινόμενον ἔχων τὸ δυνατὸν καὶ σοφόν, which describes a creature's acquired, losable power (in contrast to God's), with the same sense. 'He does not have power and wisdom that fill him [from outside], but full, proceeding from himself' gives οὐ πληροῦσαν αὐτὸν δύναμιν καὶ σοφίαν ἔχων ἀλλὰ πλήρη προελθοῦσαν ἐξ ἑαυτοῦ. 'Ps 146,5' is the edition lemma. 'Belongs' for προσῆκεν, 'great' for μακρά, and the dative τῇ προσούσῃ are idiom.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I found no meaning error. The causal 'since he has' renders the circumstantial participle ἔχων with the same sense. μακρὰ … ὑπεροχή is 'far-reaching superiority', and 'great superiority' keeps the sense. Psalm 135:5 (136:5) is the verse quoted (LXX τῷ ποιήσαντι τοὺς οὐρανοὺς ἐν συνέσει), freely cited.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "c80e977bb17d499ca9447c57949553fc+d2709d134032457c9f839805a726078a+8e6b6aba010c4ab2b1dafd4989fc54b7"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "scripture"
+          ],
+          "uncertainties": [
+            "τῇ προσούσῃ τῷ δημιουργοῦντι: could be 'by its presence to the creator' or 'belonging to the creator'; both readings are grammatically defensible."
+          ],
+          "response_id": "08719478c65f450a90d627c8409506f3+4a7cef7cadb243f7a49f68041f105abf+0836020779e2482184ef83f8a8aad4ae"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "c80e977bb17d499ca9447c57949553fc+d2709d134032457c9f839805a726078a+8e6b6aba010c4ab2b1dafd4989fc54b7",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I checked each flag against the Greek and found no meaning error. 'Psalm 135:5 (136:5)' is right: LXX Ps 135:5 reads τῷ ποιήσαντι τοὺς οὐρανοὺς ἐν συνέσει. 'Since he has power and wisdom that come and go' renders the circumstantial participle προσγινόμενόν τε καὶ ἀπογινόμενον ἔχων τὸ δυνατὸν καὶ σοφόν, which describes a creature's acquired, losable power (in contrast to God's), with the same sense. 'He does not have power and wisdom that fill him [from outside], but full, proceeding from himself' gives οὐ πληροῦσαν αὐτὸν δύναμιν καὶ σοφίαν ἔχων ἀλλὰ πλήρη προελθοῦσαν ἐξ ἑαυτοῦ. 'Ps 146,5' is the edition lemma. 'Belongs' for προσῆκεν, 'great' for μακρά, and the dative τῇ προσούσῃ are idiom.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "08719478c65f450a90d627c8409506f3+4a7cef7cadb243f7a49f68041f105abf+0836020779e2482184ef83f8a8aad4ae",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I found no meaning error. The causal 'since he has' renders the circumstantial participle ἔχων with the same sense. μακρὰ … ὑπεροχή is 'far-reaching superiority', and 'great superiority' keeps the sense. Psalm 135:5 (136:5) is the verse quoted (LXX τῷ ποιήσαντι τοὺς οὐρανοὺς ἐν συνέσει), freely cited.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "scripture"
+          ]
+        }
+      ]
+    }
+  ]
+}
