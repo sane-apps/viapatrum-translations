@@ -1,0 +1,283 @@
+{
+ "_note": "Written by question_dossiers.py queue. Works a Timeline question needs that are not in the library. Each needs a source intake (read the original, lock it under books/<slug>/sources/) before translation.",
+ "works": [
+  {
+   "question": "old-testament-canon",
+   "author": "Athanasius of Alexandria",
+   "work": "Festal Letter 39",
+   "year": 367,
+   "why": "The best-known early list: the Hebrew books plus Baruch, with Wisdom, Sirach, Esther, Judith and Tobit \"not canonized but appointed to be read\" by new believers. Survives in Greek fragments and in Coptic.",
+   "action": "intake",
+   "source_hint": "Greek fragments, Migne PG 26.1176–1180; Coptic in Lefort (1955, check copyright) or older Schmidt edition"
+  },
+  {
+   "question": "old-testament-canon",
+   "author": "Cyril of Jerusalem",
+   "work": "Catechetical Lecture 4.33–36",
+   "year": 350,
+   "why": "Gives the twenty-two books and tells catechumens to read nothing of the apocrypha.",
+   "action": "intake",
+   "source_hint": "Reischl and Rupp, Cyrilli opera (1848), vol. 1"
+  },
+  {
+   "question": "old-testament-canon",
+   "author": "Council of Carthage (397) / Hippo (393)",
+   "work": "Canon on the Scriptures",
+   "year": 397,
+   "why": "The African list that matches Augustine's forty-four books.",
+   "action": "intake",
+   "source_hint": "Bruns, Canones apostolorum et conciliorum (1839), vol. 1"
+  },
+  {
+   "question": "old-testament-canon",
+   "author": "Amphilochius of Iconium",
+   "work": "Iambics to Seleucus",
+   "year": 394,
+   "why": "A verse list that notes some add Esther.",
+   "action": "intake",
+   "source_hint": "Migne PG 37.1577–1600 (printed among Gregory of Nazianzus)"
+  },
+  {
+   "question": "old-testament-canon",
+   "author": "John of Damascus",
+   "work": "Exact Exposition of the Orthodox Faith 4.17",
+   "year": 740,
+   "why": "The twenty-two books; Wisdom and Sirach \"noble and good, but not counted\".",
+   "action": "intake",
+   "source_hint": "Migne PG 94.1176–1180"
+  },
+  {
+   "question": "old-testament-canon",
+   "action": "relock-source",
+   "book": "origen-letters",
+   "witness": "books/origen-letters/sources/africanus_working_greek.txt",
+   "ia": null,
+   "edition": "Migne PG 11.48–60 (De la Rue), working Greek in the library",
+   "quote": "origen-africanus",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "infant-baptism",
+   "author": "Apostolic Tradition (attributed to Hippolytus)",
+   "work": "Apostolic Tradition 21",
+   "year": 215,
+   "why": "Tells the church to baptize the little ones first, with parents or relatives speaking for those who cannot answer. The section survives in Coptic, Arabic and Ethiopic versions, not in the Latin.",
+   "action": "intake",
+   "source_hint": "Horner, The Statutes of the Apostles (1904), Sahidic, Arabic and Ethiopic texts"
+  },
+  {
+   "question": "infant-baptism",
+   "author": "Council of Carthage (418)",
+   "work": "Canon 2",
+   "year": 418,
+   "why": "Condemns anyone who denies that newborn infants are to be baptized.",
+   "action": "intake",
+   "source_hint": "Bruns, Canones apostolorum et conciliorum (1839), vol. 1"
+  },
+  {
+   "question": "infant-baptism",
+   "author": "John Chrysostom",
+   "work": "Baptismal Instruction quoted in Augustine, Against Julian 1.6.21",
+   "year": 390,
+   "why": "Augustine quotes Chrysostom saying the Church baptizes infants although they have no sins of their own. Against Julian is not in the library yet.",
+   "action": "intake",
+   "source_hint": "Maurist Augustine, PL 44"
+  },
+  {
+   "question": "infant-baptism",
+   "action": "intake-from-witness",
+   "author": "Irenaeus of Lyons",
+   "work": "Against Heresies",
+   "year": 180,
+   "witness": "books/ante-nicene-topics/sources/raw/irenaeus_ah_harvey1857_vol1_harvgoog_djvu.txt",
+   "edition": "Harvey, Sancti Irenaei libros quinque adversus haereses (1857), vol. 1, p. 330 (Harvey 2.33.2 = Massuet 2.22.4)",
+   "quote": "irenaeus-ah-2-22-4",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "infant-baptism",
+   "action": "relock-source",
+   "book": "origen-luke-homilies",
+   "witness": "books/origen-luke-homilies/sources/witnesses/lommatzsch-t5-1835_djvu.txt",
+   "ia": "origenous-ta-heuriskomena-panta-t.-5-1835",
+   "edition": "Lommatzsch, Origenis opera omnia, vol. 5 (1835), p. 135",
+   "quote": "origen-luke-14",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "infant-baptism",
+   "action": "relock-source",
+   "book": "origen-leviticus-homilies",
+   "witness": "books/origen-leviticus-homilies/sources/witnesses/baehrens-gcs29-1920_djvu.txt",
+   "ia": "origenes-werke.-bd-6-1920",
+   "edition": "Baehrens, GCS 29 [Origenes Werke 6] (1920), Homily 8.3",
+   "quote": "origen-leviticus-8-3",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "infant-baptism",
+   "action": "relock-source",
+   "book": "origen-romans",
+   "witness": "books/origen-romans/sources/witnesses/lommatzsch-t6-1836_djvu.txt",
+   "ia": "origenous-ta-heuriskomena-panta-t.-6-1836",
+   "edition": "Lommatzsch, Origenis opera omnia, vol. 6 (1836), Commentary on Romans 5.9 (Migne PG 14.1047)",
+   "quote": "origen-romans-5-9",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "author": "Augustine of Hippo",
+   "work": "Sermons 227 and 272; Tractates on John 26; Expositions of the Psalms 98.9; Letter 98.9",
+   "year": 410,
+   "why": "Augustine's most quoted Eucharist passages (\"If you are the body of Christ, your mystery lies on the Lord's table\"; \"Believe, and you have eaten\"; no one eats that flesh without first adoring it). None is in the library, and the usual web text refused automated download.",
+   "action": "intake",
+   "source_hint": "Maurist text, Migne PL 35, 37, 38 and 33"
+  },
+  {
+   "question": "eucharist-presence",
+   "author": "Gelasius I",
+   "work": "On the Two Natures in Christ",
+   "year": 495,
+   "why": "Says the substance and nature of bread and wine do not cease to be. Often cited with Theodoret.",
+   "action": "intake",
+   "source_hint": "Thiel, Epistolae Romanorum pontificum (1868)"
+  },
+  {
+   "question": "eucharist-presence",
+   "author": "Paschasius Radbertus and Ratramnus of Corbie",
+   "work": "On the Body and Blood of the Lord",
+   "year": 843,
+   "why": "The first treatises written on this exact question, giving opposite answers.",
+   "action": "intake",
+   "source_hint": "Migne PL 120 and 121"
+  },
+  {
+   "question": "eucharist-presence",
+   "author": "Fourth Lateran Council",
+   "work": "Canon 1",
+   "year": 1215,
+   "why": "First official use of transubstantiation.",
+   "action": "intake",
+   "source_hint": "Mansi, vol. 22"
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "Irenaeus of Lyons",
+   "work": "Against Heresies",
+   "year": 180,
+   "witness": "outputs/question-dossiers/witnesses/khaz-irenaeus-lugdunensis-pg-07-adversus-haereses-liber-4.txt",
+   "edition": "Greek fragment preserved by John of Damascus, Migne PG 7 (Massuet), Khazarzar text",
+   "quote": "irenaeus-ah-4-18-5",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "Irenaeus of Lyons",
+   "work": "Against Heresies",
+   "year": 180,
+   "witness": "outputs/question-dossiers/witnesses/khaz-irenaeus-lugdunensis-pg-07-adversus-haereses-liber-5.txt",
+   "edition": "Greek fragment, Migne PG 7 (Massuet), Khazarzar text",
+   "quote": "irenaeus-ah-5-2-3",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "Origen of Alexandria",
+   "work": "Commentary on Matthew",
+   "year": 249,
+   "witness": "outputs/question-dossiers/witnesses/khaz-origenes-pg-11-17-commentarium-in-evangelium-matthaei.txt",
+   "edition": "Migne PG 13, Khazarzar text",
+   "quote": "origen-matthew-11-14",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "Cyril of Jerusalem",
+   "work": "Mystagogical Lectures",
+   "year": 350,
+   "witness": "outputs/question-dossiers/witnesses/khaz-cyrillus-hierosolymitanus-pg-33-mystagogiae.txt",
+   "edition": "Migne PG 33, Khazarzar text",
+   "quote": "cyril-mystagogy-4-3",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "Cyril of Jerusalem",
+   "work": "Mystagogical Lectures",
+   "year": 350,
+   "witness": "outputs/question-dossiers/witnesses/khaz-cyrillus-hierosolymitanus-pg-33-mystagogiae.txt",
+   "edition": "Migne PG 33, Khazarzar text",
+   "quote": "cyril-mystagogy-4-9",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "Gregory of Nyssa",
+   "work": "Catechetical Oration",
+   "year": 385,
+   "witness": "outputs/question-dossiers/witnesses/khaz-gregory-of-nyssa-pg-44-46-oratio-catechetica-magna.txt",
+   "edition": "Migne PG 45, Khazarzar text",
+   "quote": "gregory-nyssa-catechetical-37",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "Ambrose of Milan",
+   "work": "On the Mysteries",
+   "year": 390,
+   "witness": "outputs/question-dossiers/witnesses/url-ambrose-de-mysteriis.txt",
+   "edition": "Migne PL 16, as given at The Latin Library",
+   "quote": "ambrose-mysteries-9",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "Theodoret of Cyrrhus",
+   "work": "Eranistes",
+   "year": 447,
+   "witness": "outputs/question-dossiers/witnesses/khaz-theodoretus-of-cyrrhus-pg-80-84-eranistes.txt",
+   "edition": "Migne PG 83, Khazarzar text",
+   "quote": "theodoret-eranistes-2",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "intake-from-witness",
+   "author": "John of Damascus",
+   "work": "Exact Exposition of the Orthodox Faith",
+   "year": 740,
+   "witness": "outputs/question-dossiers/witnesses/khaz-john-of-damascus-pg-94-96-expositio-fidei.txt",
+   "edition": "Migne PG 94, Khazarzar text",
+   "quote": "john-damascus-exposition-4-13",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "relock-source",
+   "book": "origen-contra-celsum",
+   "witness": "books/origen-contra-celsum/sources/cels_b8_working_greek.txt",
+   "ia": null,
+   "edition": "Koetschau, GCS 3 [Origenes Werke 2] (1899), working Greek in the library",
+   "quote": "origen-celsus-8-33",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "eucharist-presence",
+   "action": "relock-source",
+   "book": "strimesius-in-controversias-evangelicorum",
+   "witness": "books/strimesius-in-controversias-evangelicorum/sources/_strimesius_hexades_annotationum_hexas_coena_annotatio_iv_svi_densify_latin_lock.txt",
+   "ia": null,
+   "edition": "Strimesius, Ingenua in Controversias Evangelicorum (Frankfurt an der Oder, 1708)",
+   "quote": "strimesius-on-irenaeus",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  }
+ ]
+}

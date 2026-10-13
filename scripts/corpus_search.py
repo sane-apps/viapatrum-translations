@@ -159,6 +159,17 @@ def build_raw() -> int:
                     out.write(json.dumps({"book": book, "file": rel, "offset": i, "author": info["author"],
                                           "year": info["year"], "text": chunk}, ensure_ascii=False) + "\n")
                     n += 1
+        # Texts fetched for the question dossiers (witness_fetch.py), not yet in a book.
+        wdir = ROOT / "outputs" / "question-dossiers" / "witnesses"
+        for path in sorted(wdir.glob("*.txt")) if wdir.is_dir() else []:
+            t = re.sub(r"\s+", " ", path.read_text(encoding="utf-8", errors="replace")).strip()
+            rel = str(path.relative_to(ROOT))
+            for i in range(0, max(1, len(t)), RAW_CHUNK - 400):
+                chunk = t[i:i + RAW_CHUNK]
+                if len(chunk) >= 40:
+                    out.write(json.dumps({"book": "_witness", "file": rel, "offset": i, "author": path.stem,
+                                          "year": None, "text": chunk}, ensure_ascii=False) + "\n")
+                    n += 1
     tmp.rename(RAW_INDEX)
     print(f"indexed {n} raw chunks -> {RAW_INDEX}")
     return 0
@@ -249,6 +260,36 @@ def show(book: str, section: str) -> int:
     return 1
 
 
+def grab(where: str, anchor: str, after: int, before: int) -> int:
+    """Print the exact text (accents kept) around a phrase. WHERE is a book
+    and section ("tertullian-on-baptism 18") or a file path under the repo."""
+    parts = where.split()
+    if len(parts) == 2 and not parts[0].startswith(("books/", "outputs/")):
+        recs = [r for r in records() if r["book"] == parts[0] and r["section"] == parts[1]]
+        if not recs:
+            print("not found")
+            return 1
+        # One section number can repeat across a book's units (homily files).
+        text = " ||| ".join(r["source"] for r in recs)
+    else:
+        text = (ROOT / where).read_text(encoding="utf-8", errors="replace")
+    text = re.sub(r"\s+", " ", text)
+    flat, pos = [], []
+    for i, ch in enumerate(text):
+        for c in norm(ch):
+            flat.append(c)
+            pos.append(i)
+    flat = "".join(flat)
+    hits = [m.start() for m in re.finditer(re.escape(norm(anchor)), flat)]
+    if not hits:
+        print("anchor not found")
+        return 1
+    for h in hits[:3]:
+        st = pos[h]
+        print(f"@{st}: " + text[max(0, st - before): st + after] + "\n")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -264,6 +305,11 @@ def main() -> int:
     f.add_argument("--raw", action="store_true", help="search raw OCR/TEI source files instead of sections")
     f.add_argument("--limit", type=int, default=25)
     f.add_argument("--width", type=int, default=220)
+    g = sub.add_parser("grab")
+    g.add_argument("where")
+    g.add_argument("anchor")
+    g.add_argument("--after", type=int, default=800)
+    g.add_argument("--before", type=int, default=0)
     s = sub.add_parser("show")
     s.add_argument("book")
     s.add_argument("section")
@@ -275,6 +321,8 @@ def main() -> int:
         return find_raw(a.patterns, a.near, a.author, a.book, a.limit, a.width)
     if a.cmd == "find":
         return find(a.patterns, a.near, a.author, a.book, a.max_year, a.english, a.limit, a.width)
+    if a.cmd == "grab":
+        return grab(a.where, a.anchor, a.after, a.before)
     return show(a.book, a.section)
 
 
