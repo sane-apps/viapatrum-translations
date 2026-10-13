@@ -38,7 +38,16 @@ set -a; source "$HOME/.config/nv/env" >/dev/null 2>&1; set +a
 [ -n "${CLOUDFLARE_API_TOKEN:-}" ] || { echo "$(date +%T) no Cloudflare token"; exit 2; }
 # fresh()/refresh() and KW live in receipt_refresh.sh (shared with the beliefs job).
 source "$ROOT/scripts/receipt_refresh.sh" || { echo "$(date +%T) receipt_refresh.sh missing"; exit 1; }
-refresh @cf/deepseek-ai/deepseek-v4-pro-0813 translate
+# The scout writes promoted_drafter.json when a new model wins the bakeoff.
+# A lane that is already running keeps the id it imported. This refresh is
+# for the next start only.
+DEFAULT_DRAFTER="@cf/deepseek-ai/deepseek-v4-pro-0813"
+DRAFTER="$(python3 -c 'import sys; sys.path.insert(0, "'"$HOME"'/SaneApps/infra/SaneProcess/scripts/automation"); from cf_capability_scout import resolve_drafter; print(resolve_drafter())')" || DRAFTER=""
+if [ -z "${DRAFTER:-}" ]; then
+  DRAFTER="$DEFAULT_DRAFTER"
+  echo "$(date +%T) drafter pointer unread; using $DRAFTER"
+fi
+refresh "$DRAFTER" translate
 for m in @cf/moonshotai/kimi-k2.6 @cf/zai-org/glm-5.2 @cf/qwen/qwen3.8-27b; do refresh "$m" translation-qa; done
 refresh @cf/openai/gpt-oss-120b translation-qa '{}'
 # Checker pairs rotate across lanes (2026-10-03). Workers AI caps paid-access

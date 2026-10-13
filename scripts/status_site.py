@@ -214,9 +214,9 @@ def event_html(ev: dict, show_book: bool) -> str:
     return f'<div class="ev"><time>{E(when)}</time><p>{chip}{book} {E(ev["summary"])}{ref}</p></div>'
 
 
-def scout_section() -> str:
+def scout_section(path=None) -> str:
     """Cloudflare capability scout (SaneProcess outputs/cf-scout/latest.json)."""
-    path = HOME / "SaneApps/infra/SaneProcess/outputs/cf-scout/latest.json"
+    path = path or (HOME / "SaneApps/infra/SaneProcess/outputs/cf-scout/latest.json")
     try:
         r = json.loads(path.read_text())
     except (OSError, ValueError):
@@ -233,6 +233,19 @@ def scout_section() -> str:
     for n in r.get("relevant_changelog", [])[:12]:
         rows.append(f'<div class="ev"><time>{E(n["date"])}</time><p><span class="chip idle">{E(n["products"][:40])}</span> '
                     f'<a href="{E(n["link"])}">{E(n["title"])}</a></p></div>')
+    chip_for = {"promote": "good", "retry": "warn", "reject": "bad"}
+    label_for = {"promote": "Promoted", "retry": "Retest", "reject": "Kept the drafter"}
+    for t in r.get("trials") or []:
+        if not isinstance(t, dict):
+            continue
+        verdict = str(t.get("verdict") or "")
+        rows.append(f'<div class="ev"><time>trial</time><p><span class="chip {chip_for.get(verdict, "idle")}">'
+                    f'{E(label_for.get(verdict, verdict or "trial"))}</span> <code>{E(str(t.get("model") or ""))}</code> '
+                    f'against <code>{E(str(t.get("incumbent") or ""))}</code>: {E(str(t.get("reason") or ""))}</p></div>')
+    drafter = r.get("drafter")
+    if drafter:
+        rows.append(f'<div class="ev"><time>drafter</time><p>Next lane start drafts with <code>{E(str(drafter))}</code>. '
+                    f'Lanes already running keep the model they started with.</p></div>')
     if not rows:
         rows.append('<div class="ev"><time>&nbsp;</time><p>Nothing new that touches our work since the last scan.</p></div>')
     untried = r.get("not_tried_text_models") or []

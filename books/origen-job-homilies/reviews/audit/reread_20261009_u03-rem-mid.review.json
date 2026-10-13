@@ -1,0 +1,306 @@
+{
+  "packet_id": "57fa7f9bf98fe5a96990afecc8e2680de7349f50c359091f4b1666d1f802f449",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "a814217788c95c2cdc98497d86ed76c28838cacff45f1d5496be5fbcf791a8ab",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "57fa7f9bf98fe5a96990afecc8e2680de7349f50c359091f4b1666d1f802f449",
+    "generated_at": "2026-10-10T01:14:35+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0165,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0079,
+        "family": "kimi",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2924,
+          "completion_tokens": 1373,
+          "total_tokens": 4297,
+          "neurons": 719.62548828125
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2924,
+          "completion_tokens": 1373,
+          "total_tokens": 4297
+        },
+        "first_call_at": "2026-10-10T01:10:59+00:00",
+        "last_call_at": "2026-10-10T01:11:48+00:00",
+        "calls": [
+          {
+            "section": "u03-rem-mid",
+            "source_sha256": "d0a02587d0c41db6cf74b8f282c06a6aca5c2b9267ecd588380c6932c3a20af1",
+            "english_sha256": "45f1db28f9e09cf0957939fc4ee756ba8759faeff43cd10edf81d3999aca574c",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "93a010efed9b482eade726351fb7b42d",
+            "request_id": "fdd6dd3e-f3be-47a7-b800-3fb75b26f145",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:10:59+00:00",
+            "finished_at": "2026-10-10T01:11:22+00:00",
+            "ms": 23139,
+            "usage": {
+              "prompt_tokens": 1474,
+              "completion_tokens": 686,
+              "total_tokens": 2160,
+              "neurons": 376.75457763671875
+            },
+            "raw_sha256": "21b99a55ce0369b15b885d76d7333cb7418e308a7b3665df29faa1f65417901c",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "1c8b443f271067943656d21361752071fc21c0e2dfcf7c690c2c1f2fab7caf13"
+          },
+          {
+            "section": "u03-rem-mid",
+            "source_sha256": "d0a02587d0c41db6cf74b8f282c06a6aca5c2b9267ecd588380c6932c3a20af1",
+            "english_sha256": "45f1db28f9e09cf0957939fc4ee756ba8759faeff43cd10edf81d3999aca574c",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "9ed1c71fbf13492aad2c17b411b75d14",
+            "request_id": "90eea867-6ac1-439d-97ca-7e1442d5a00d",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:11:25+00:00",
+            "finished_at": "2026-10-10T01:11:48+00:00",
+            "ms": 23425,
+            "usage": {
+              "prompt_tokens": 1450,
+              "completion_tokens": 687,
+              "total_tokens": 2137,
+              "neurons": 342.87091064453125
+            },
+            "raw_sha256": "b6d30b78bb32baa4cbdf3e5df487097ac2367b7ceb9ddfe88396b81b18584ee0",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": false,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": false,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "05ece73c25e7e1e6bd77ee2761069fe1888ca788803b608fb59d67f074b64e9f"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0086,
+        "family": "glm",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 3041,
+          "completion_tokens": 1023,
+          "total_tokens": 4064,
+          "neurons": 782.9709167480469
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 3041,
+          "completion_tokens": 1023,
+          "total_tokens": 4064
+        },
+        "first_call_at": "2026-10-10T01:11:48+00:00",
+        "last_call_at": "2026-10-10T01:11:57+00:00",
+        "calls": [
+          {
+            "section": "u03-rem-mid",
+            "source_sha256": "d0a02587d0c41db6cf74b8f282c06a6aca5c2b9267ecd588380c6932c3a20af1",
+            "english_sha256": "45f1db28f9e09cf0957939fc4ee756ba8759faeff43cd10edf81d3999aca574c",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "c5ce3bf1aeda4cf086064580fb8fa74c",
+            "request_id": "7165e473-d143-43cb-a382-9772d26abf47",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:11:48+00:00",
+            "finished_at": "2026-10-10T01:11:51+00:00",
+            "ms": 3263,
+            "usage": {
+              "prompt_tokens": 1528,
+              "completion_tokens": 461,
+              "total_tokens": 1989,
+              "neurons": 378.87274169921875
+            },
+            "raw_sha256": "52e80832d539409b12ccbff279ec14b4c722e271f11f1856658d8bd3474309c1",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "1c8b443f271067943656d21361752071fc21c0e2dfcf7c690c2c1f2fab7caf13"
+          },
+          {
+            "section": "u03-rem-mid",
+            "source_sha256": "d0a02587d0c41db6cf74b8f282c06a6aca5c2b9267ecd588380c6932c3a20af1",
+            "english_sha256": "45f1db28f9e09cf0957939fc4ee756ba8759faeff43cd10edf81d3999aca574c",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-4498ba17-d2ba-47c2-88b4-86bec0eccd4b",
+            "request_id": "4498ba17-d2ba-47c2-88b4-86bec0eccd4b",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:11:54+00:00",
+            "finished_at": "2026-10-10T01:11:57+00:00",
+            "ms": 2254,
+            "usage": {
+              "prompt_tokens": 1513,
+              "completion_tokens": 562,
+              "total_tokens": 2075,
+              "neurons": 404.0981750488281
+            },
+            "raw_sha256": "3deade677843ae452eb1cdf2d6cb888c24dae3f6b1e671fa6d1e8e15e32819c7",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": true,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "05ece73c25e7e1e6bd77ee2761069fe1888ca788803b608fb59d67f074b64e9f"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u03-rem-mid",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, modality; uncertainties: 0; model notes: part 1/2: [completeness] \"Thus God made him the father of twice as many children\" vs \"ὥστε καὶ πατέρα διπλασίων παίδων αὐτὸν πεποίηκεν ὁ Θεός\": Dropped 'so that' (ὥστε) introducing final clause; obscures purpose logic.; [completeness] \"as he had been father of before\" vs \"ὧν ἦν πρότερον πατήρ\": Missing 'of whom' relative pronoun; 'as' changes comparison type. | part 2/2: [modality] \"since he received back all good things double, if he also received back\" vs \"ὅτι πάντα τὰ ἀγαθὰ διπλᾶ ἀπολαβὼν, ἐὰν καὶ τὰ τῆς προτέρας εὐημερίας ἔτη διπλᾶ ἀπείληπται\": ἐὰν with indicative ἀπείληπται is 'if' (conditional), not 'since' or causal; 'if' not 'since'; [completeness] \"than were at first\" vs \"ἢ ἦσαν δὲ πρῶτον\": Dropped ἢ 'than' comparison marker; 'what they were' adds words not in source\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: scripture; uncertainties: 0; model notes: part 2/2: [scripture] \"Verse 16. And Job lived after the blow one hundred seventy years\" vs \"ι ʹ. Ἔζησε δὲ Ἰὼβ μετὰ τὴν πληγὴν ἔτη ἑκατὸν ἑβδομήκοντα\": Greek numeral ιʹ = 10; English says 'Verse 16', wrong chapter/verse reference.\nLatin quote (from model note, verified): «ι ʹ. Ἔζησε δὲ Ἰὼβ μετὰ τὴν πληγὴν ἔτη ἑκατὸν ἑβδομήκοντα»\nEnglish quote (from model note, verified): «Thus God made him the father of twice as many children»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I checked each flag against the Greek and found no meaning error. 'Thus God made him the father of twice as many children as he had been father of before' renders ὥστε καὶ πατέρα διπλασίων παίδων αὐτὸν πεποίηκεν ὁ Θεός, ὧν ἦν πρότερον πατήρ. 'Since he received back all good things double, if he also received back …' keeps ἐάν as 'if' and gives the participle ἀπολαβών causal force, with the same sense. The rest is idiom.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I found no meaning error. 'Verse 16. And Job lived after the blow one hundred seventy years' is LXX Job 42:16. The printed 'ι ʹ' is ιϛʹ with the stigma lost in print, as the content confirms.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "modality"
+          ],
+          "uncertainties": [],
+          "response_id": "93a010efed9b482eade726351fb7b42d+9ed1c71fbf13492aad2c17b411b75d14"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-4498ba17-d2ba-47c2-88b4-86bec0eccd4b"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "93a010efed9b482eade726351fb7b42d+9ed1c71fbf13492aad2c17b411b75d14",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I checked each flag against the Greek and found no meaning error. 'Thus God made him the father of twice as many children as he had been father of before' renders ὥστε καὶ πατέρα διπλασίων παίδων αὐτὸν πεποίηκεν ὁ Θεός, ὧν ἦν πρότερον πατήρ. 'Since he received back all good things double, if he also received back …' keeps ἐάν as 'if' and gives the participle ἀπολαβών causal force, with the same sense. The rest is idiom.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "modality"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "chatcmpl-4498ba17-d2ba-47c2-88b4-86bec0eccd4b",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I found no meaning error. 'Verse 16. And Job lived after the blow one hundred seventy years' is LXX Job 42:16. The printed 'ι ʹ' is ιϛʹ with the stigma lost in print, as the content confirms.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "scripture"
+          ]
+        }
+      ]
+    }
+  ]
+}

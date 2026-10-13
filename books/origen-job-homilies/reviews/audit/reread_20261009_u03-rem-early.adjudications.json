@@ -1,0 +1,29 @@
+{
+  "u03-rem-early": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "241e78f1668547ec82d45cb3088e310b+134d59c7b77b40c5ae4ee5878e7f21fb",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'But he is wholly hardened and bold—not driven, not following reason, not yielding' is in the Greek (ἀλλ' ὅλος ἐστὶν ἀπεσκληκὼς καὶ ἰταμός …); it was flagged only because of a chunk boundary. The edition marks the lemma ιδʹ, ιεʹ, while the English gives the standard LXX 41:15-16 with Hebrew 41:23-24 as apparatus; the verse text is the same, and this has been adjudicated before. 'More than the first' is the comparative ἤ (εὐλόγησε τὰ ἔσχατα Ἰὼβ ἢ τὰ ἔμπροσθεν), not a disjunction. 'Fourteen thousand sheep' is μύρια τετρακισχίλια (10,000 + 4,000). 'The last days' for τὰ ἔσχατα, 'he too' for αὐτός, 'cannot be hammered out' (οὐκ ἐλαθῆναι δύναται) and 'there was a contention' are idiomatic renderings.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "chatcmpl-f28ecc5b-9c75-4592-9ee2-753f8db098e1+7ae022ce3fd143e08e4d06683033f977",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. ἢ τὰ ἔμπροσθεν is the comparative 'than the former', so 'more than the first' renders it exactly. The 'dropped' clause ἀλλ' ὅλος ἐστὶν ἀπεσκληκὼς καὶ ἰταμός is present in the English as 'but he is wholly hardened and bold'. The verse numbering is LXX with Hebrew in parentheses, following the edition's convention.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "completeness",
+        "scripture"
+      ]
+    }
+  ]
+}

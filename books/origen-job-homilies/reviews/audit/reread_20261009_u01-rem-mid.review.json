@@ -1,0 +1,558 @@
+{
+  "packet_id": "fe2a57a45c47dbe4e219db064561e6203eed66f02bb038acbcfee76574457a9b",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "a814217788c95c2cdc98497d86ed76c28838cacff45f1d5496be5fbcf791a8ab",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "fe2a57a45c47dbe4e219db064561e6203eed66f02bb038acbcfee76574457a9b",
+    "generated_at": "2026-10-10T01:03:54+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0513,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0247,
+        "family": "kimi",
+        "call_count": 5,
+        "http_attempts": 5,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 10571,
+          "completion_tokens": 4577,
+          "total_tokens": 15148,
+          "neurons": 2246.3755493164062
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 10571,
+          "completion_tokens": 4577,
+          "total_tokens": 15148
+        },
+        "first_call_at": "2026-10-10T00:58:13+00:00",
+        "last_call_at": "2026-10-10T01:01:04+00:00",
+        "calls": [
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "9b67648162cb4dd6a55ea0283087fcca",
+            "request_id": "4b44ff53-9e9f-4961-ad60-94ecae2b9c01",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:58:13+00:00",
+            "finished_at": "2026-10-10T00:58:49+00:00",
+            "ms": 35847,
+            "usage": {
+              "prompt_tokens": 2174,
+              "completion_tokens": 1070,
+              "total_tokens": 3244,
+              "neurons": 576.845458984375
+            },
+            "raw_sha256": "069b4c1b805f5deb5ebd38832eaa74d2e4ddda2410262a83d712c8cb3f11bcec",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "9338dfc9cc4eb7bc871875f31f6ce676e70dd2d97a6577d6db8455fb62f87cb4"
+          },
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "524c6eafe8554f838579872e6b744f72",
+            "request_id": "740c15aa-c062-492b-a925-37578b54eddd",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:58:52+00:00",
+            "finished_at": "2026-10-10T00:59:21+00:00",
+            "ms": 28628,
+            "usage": {
+              "prompt_tokens": 2175,
+              "completion_tokens": 873,
+              "total_tokens": 3048,
+              "neurons": 422.5609130859375
+            },
+            "raw_sha256": "ca938e20e8fd215910c9307cd0ee30c03bf483f8a593664bd5d03d9e604af3d1",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "86a15b41835bcb6965349c6a1ceb49e4d484da16529e56682ddd681e73c3e2bc"
+          },
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "bed655194dad4230a7a5351c742986ab",
+            "request_id": "dd2105da-2ca0-4c6f-92d8-0aaf0776e4d6",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:59:24+00:00",
+            "finished_at": "2026-10-10T00:59:57+00:00",
+            "ms": 33083,
+            "usage": {
+              "prompt_tokens": 2172,
+              "completion_tokens": 953,
+              "total_tokens": 3125,
+              "neurons": 451.39276123046875
+            },
+            "raw_sha256": "6694c49e5aa55076a553cb07804df290470cdc0175c60eec65bfbe4faa2bcbd8",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "7d12ba070e33fb324b52c8a64cb5c09301a1f5b96f57de5ad275030d06d49dab"
+          },
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "888db44d04b4471c8e0139aea4dd3be4",
+            "request_id": "94611619-1e66-47be-8f09-003b860b2e80",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:00:00+00:00",
+            "finished_at": "2026-10-10T01:00:32+00:00",
+            "ms": 31573,
+            "usage": {
+              "prompt_tokens": 2157,
+              "completion_tokens": 904,
+              "total_tokens": 3061,
+              "neurons": 432.27911376953125
+            },
+            "raw_sha256": "b3e6591b9249f7d1908da8fdfb6de8f7d1f276122f2f01f8cbc365f5add8cd0a",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 4,
+            "chunk_sha256": "1f7867691848a949fe1adc808f2ae231b2c79c85e59d588e40f90d5c4349368c"
+          },
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "0b49a772bcea46caa79b5972e9ecac69",
+            "request_id": "c7d52a40-1397-422c-9ad2-967b6441b353",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:00:35+00:00",
+            "finished_at": "2026-10-10T01:01:04+00:00",
+            "ms": 29351,
+            "usage": {
+              "prompt_tokens": 1893,
+              "completion_tokens": 777,
+              "total_tokens": 2670,
+              "neurons": 363.29730224609375
+            },
+            "raw_sha256": "4625ba7257dd379364dcc1eddf520ded28cc6c8250d98db2202065de5c6087ca",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 5,
+            "chunk_sha256": "5d9c146907a2e715c4e57cd3306bacf84233735f772fa707cd91e70ebdf8ca82"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0266,
+        "family": "glm",
+        "call_count": 5,
+        "http_attempts": 5,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 10813,
+          "completion_tokens": 3433,
+          "total_tokens": 14246,
+          "neurons": 2417.763671875
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 10813,
+          "completion_tokens": 3433,
+          "total_tokens": 14246
+        },
+        "first_call_at": "2026-10-10T01:01:04+00:00",
+        "last_call_at": "2026-10-10T01:01:39+00:00",
+        "calls": [
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-bf7c96ec-9504-4b51-a379-186fa2e3fe00",
+            "request_id": "bf7c96ec-9504-4b51-a379-186fa2e3fe00",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:01:04+00:00",
+            "finished_at": "2026-10-10T01:01:06+00:00",
+            "ms": 2381,
+            "usage": {
+              "prompt_tokens": 2226,
+              "completion_tokens": 524,
+              "total_tokens": 2750,
+              "neurons": 479.6436462402344
+            },
+            "raw_sha256": "3110b1e156af5a002fe2d34c6a5af88fc693b3d02c7f6dfd32f6c91c20116668",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "9338dfc9cc4eb7bc871875f31f6ce676e70dd2d97a6577d6db8455fb62f87cb4"
+          },
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-e27533bf-fd66-4295-9b33-6cd3be1acbe1",
+            "request_id": "e27533bf-fd66-4295-9b33-6cd3be1acbe1",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:01:09+00:00",
+            "finished_at": "2026-10-10T01:01:12+00:00",
+            "ms": 2476,
+            "usage": {
+              "prompt_tokens": 2229,
+              "completion_tokens": 528,
+              "total_tokens": 2757,
+              "neurons": 388.76727294921875
+            },
+            "raw_sha256": "03a50a1f09ea3b1c39869529ec41940f6ce2faa898b34c1bdf488521d54780ca",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "86a15b41835bcb6965349c6a1ceb49e4d484da16529e56682ddd681e73c3e2bc"
+          },
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-855065cf-a292-49d9-a070-76b753264f74",
+            "request_id": "855065cf-a292-49d9-a070-76b753264f74",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:01:15+00:00",
+            "finished_at": "2026-10-10T01:01:18+00:00",
+            "ms": 3343,
+            "usage": {
+              "prompt_tokens": 2229,
+              "completion_tokens": 508,
+              "total_tokens": 2737,
+              "neurons": 380.76727294921875
+            },
+            "raw_sha256": "769a0b54d40e4621d102ecfd323819db6065cce4a1b93f6b302986284499bd32",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "7d12ba070e33fb324b52c8a64cb5c09301a1f5b96f57de5ad275030d06d49dab"
+          },
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "a72970975deb4ea69857714c17542be0",
+            "request_id": "fb582095-aa52-4278-b546-52624149936b",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:01:21+00:00",
+            "finished_at": "2026-10-10T01:01:32+00:00",
+            "ms": 10790,
+            "usage": {
+              "prompt_tokens": 2191,
+              "completion_tokens": 1268,
+              "total_tokens": 3459,
+              "neurons": 786.0545654296875
+            },
+            "raw_sha256": "1f198b588b8316a1d9717325fe957d7ee68daa0b175267150d11762f21c160af",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 4,
+            "chunk_sha256": "1f7867691848a949fe1adc808f2ae231b2c79c85e59d588e40f90d5c4349368c"
+          },
+          {
+            "section": "u01-rem-mid",
+            "source_sha256": "8514b7f763df7079541d810de8cb50c2633dbb0ead2d1bd4fd4f34259c11201f",
+            "english_sha256": "b840cf37a6f29ae9c821c5a4a1c3f3956f9456443871e2e1b578efe82a000b52",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-2eaa9741-8755-477a-8de1-dbed33a92ff3",
+            "request_id": "2eaa9741-8755-477a-8de1-dbed33a92ff3",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T01:01:35+00:00",
+            "finished_at": "2026-10-10T01:01:39+00:00",
+            "ms": 3635,
+            "usage": {
+              "prompt_tokens": 1938,
+              "completion_tokens": 605,
+              "total_tokens": 2543,
+              "neurons": 382.5309143066406
+            },
+            "raw_sha256": "4dbbb6e199abc47b63ef535ad9d8ecc47dfb4c0748cb798e16dedfee8b58428b",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 5,
+            "chunk_sha256": "5d9c146907a2e715c4e57cd3306bacf84233735f772fa707cd91e70ebdf8ca82"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u01-rem-mid",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, negation, agency, modality, scripture; uncertainties: 0; model notes: part 1/5: [scripture] \"\"I am the light of the world\" (John 8:12)\" vs \"οἷς ἔλεγεν· Ἐγώ εἰμι τὸ φῶς τοῦ κόσμου\": No verse citation in source; John 8:12 is editorial addition; [completeness] \"Verse 25 / Verse 20 / Verse 29\" vs \"(no verse numbers in this source portion)\": Verse numbers are editorial, not in source text; [agency] \"they cast the light away from themselves\" vs \"ἐξέβαλον γὰρ τὸ φῶς ἀφ' ἑαυτῶν\": Correct: they cast out the light from themselves; [modality] \"May the stars walk about\" vs \"Ἄστρα δὲ ἐν διαίταις αὐτοῦ περιπατήσαισαν\": Optative of wish 'may they walk' is correct; [completeness] \"and is honored also for having adorned it\" vs \"(not in this source portion; cuts off at τιμᾶται)\": English includes material from beyond source cutoff; [completeness] \"so too blessed is the overseer...in Christ Jesus, to whom be glory and power forever and ever. Amen\" vs \"(not in this source portion)\": English includes substantial material beyond source cutoff | part 2/5: [agency] \"the one who imitates a royal image\" vs \"τιμᾶται δὲ καὶ ἐπὶ τῷ αὐτὴν κεκοσμηκέναι\": Greek has no 'royal image' or 'imitates'; subject is honored for adorning 'it' (feminine, the image); [source_identity] \"\"Is it not the Lord who teaches understanding and knowledge?\"\" vs \"Πότερον οὐχὶ ὁ Κύριός ἐστιν ὁ διδάσκων σύνεσιν καὶ ἐπιστήμην;\": Greek has Πότερον (Whether), not negative οὐχί expecting 'yes'; this is a genuine question, not rhetorical; [agency] \"only the wise God knows these\" vs \"ὁ μόνος σοφὸς οἶδε Θεός\": Greek is 'the only wise knows God' or 'God the only wise knows'; English inverts to 'wise God knows' | part 3/5: [completeness] \"and understanding is discernment\" vs \"σύνεσις δὲ ἡ διάκρισις\": Missing 'the' before 'discernment'; should be 'understanding [is] the discernment'; [completeness] \"Knowledge is the comprehension of things that remain the same\" vs \"ἡ περιοχὴ τῶν ὡσαύτως ἐχόντων θεωρία\": Missing 'contemplation/theory' (θεωρία); should be 'comprehension of things-that-remain-the-same [is] contemplation'; [agency] \"Therefore he first said vice, then sin\" vs \"διὸ πρῶτον εἶπεν τὴν κακίαν, εἶτα τὴν ἁμαρτίαν\": Subject is Eliphaz (implied from context), not generic 'he'; 'he' is ambiguous; [completeness] \"Verse 6: \"You took pledges from your brothers without cause, and you stripped the clothing of the naked.\"\" vs \"ʹ. Ἠνεχύραζες δὲ τοὺς ἀδελφούς σου διακε νῆς·\": Second clause 'you stripped the clothing of the naked' not in source passage provided; source ends at 'without cause' | part 4/5: [source_identity] \"“You took pledges from your brothers without cause, and you stripped the clothing of the naked.”\" vs \"ἀμφίασιν δὲ γυμνῶν ἀφείλου\": Added \"from your brothers\" not in Greek; source has only \"clothing of naked\"; [completeness] \"The words are useful, in that they speak truly of sins\" vs \"Ὠφέλιμα τὰ ῥήματα, κατὰ τοῦτό ἐστι τὸ λέγειν κατὰ λόγον ἁμαρτήματα ἀληθῶς\": Dropped \"κατὰ λόγον\" (according to reason); distorted syntax; [agency] \"I take a pledge without cause\" vs \"ἐνήχυρον [λαμβάνω] διακενῆς\": Bracketed [λαμβάνω] is editorial supplement, not source; English hides uncertainty; [completeness] \"One thing is the clothing of the naked, another the clothing of the rich\" vs \"ἄλλα γυμνοῦ, ἄλλα πλουσίου\": Added \"thing is\" and \"clothing\"; Greek has bare \"other [things] of naked, other of rich\" | part 5/5: [agency] \"I strip that tunic from him\" vs \"ἐκδύσω\": Future 'I shall strip' rendered as present; shifts to gnomic present; [completeness] \"I have taken the clothing of the naked\" vs \"ἀμφίασιν τοῦ γυμνοῦ ἀφειλόμην\": Dropped 'ἀμφίασιν' (clothing/wrapping); 'taken' alone loses the 'stripping away' sense; [negation] \"without pitying that naked man\" vs \"μὴ ἐλεήσας ἐκεῖνον τὸν γυμνόν\": Correct: aorist participle with μὴ = 'not having pitied'; [agency] \"he feeds a wife and children and barely feeds himself\" vs \"γυναῖκα τρέφει καὶ τέκνα, καὶ μόλις τρέφεται\": Correct but 'τρέφεται' is passive 'is fed' not reflexive 'feeds himself'; [completeness] \"from the few coins he earns\" vs \"ἀπὸ τῶν ποριζομένων αὐτῷ ὀλίγων ὀβολῶν\": 'earns' adds; 'ποριζομένων' = 'provided/furnished', not 'earned'; [modality] \"sometimes even when we have more than enough ourselves\" vs \"ἔσθ' ὅτε καὶ περισσὰ ἔχοντες παρ' ἑαυτοῖς\": 'even' adds emphasis not in source; 'παρ' ἑαυτοῖς' = 'among ourselves'\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: source_identity, completeness; uncertainties: 0; model notes: part 4/5: [completeness] \"“You took pledges from your brothers without cause, and you stripped the clothing of the naked.”\" vs \"ἀμφίασιν δὲ γυμνῶν ἀφείλου.\": English adds 'from your brothers' and 'without cause' not in this source clause; source only says 'garments of naked ones you stripped.'; [source_identity] \"in that they speak truly of sins that are committed among human beings in a blameworthy way.\" vs \"κατὰ τοῦτό ἐστι τὸ λέγειν κατὰ λόγον ἁμαρτήματα ἀληθῶς, ψεκτῶς γινομένων ἐν ἀνθρώποις.\": Source says 'to say sins truly' (ἀληθῶς modifies λέγειν/ἁμαρτήματα); English restructures as 'they speak truly of sins that are committed.'; [completeness] \"he suspected that he had become rich from such sources.\" vs \"ὑπώπτευσεν ἀπὸ τοιούτων τινῶν πόρων πλουτεῖν αὐτόν\": English drops 'τινῶν' ('some') — 'from some such resources.'; [completeness] \"that is, when nothing was owed to you.\" vs \"τουτέστιν μηδὲν ἐποφειλόμενος\": Source is 'owing nothing' (active/middle participle); English shifts to passive 'when nothing was owed to you.'; [completeness] \"If I lent money and, not trusting the borrower, took a pledge\" vs \"Εἰ δὲ ἐδάνεισα, καὶ μὴ πιστεύων τῷ δανεισαμένῳ, ἔλαβον ἐνήχυρον\": English adds 'money' not in source; δανεισαμένῳ is 'the one having borrowed,' not 'the borrower' as a noun.; [completeness] \"took a pledge worth what I lent, I took a pledge, but not without cause.\" vs \"ἔλαβον ἐνήχυρον ἀξιόχρεων πρὸς ὃ ἔχρησα, ἔλαβον ἐνήχυρον, οὐ διακενῆς δέ.\": Minor: source has 'worth as much as I used' (ἀξιόχρεων πρὸς ὃ ἔχρησα); 'worth what I lent' is acceptable but slightly loose. | part 5/5: [completeness] \"and I strip that tunic from him\" vs \"ἐκδύσω\": Drops object 'this tunic' (τοῦτον τὸν χιτῶνα) which is the thing stripped, not 'him'.; [completeness] \"and I strip that tunic from him under the pretext of demanding what is mine\" vs \"προφάσει τοῦ ἀπαιτεῖν τὸ ἐμὸν\": Drops 'under pretext' (προφάσει), rendering it as simple 'pretext of' rather than 'under pretext of'.; [completeness] \"and barely feeds himself from the few coins he earns\" vs \"καὶ μόλις τρέφεται ἀπὸ τῶν ποριζομένων αὐτῷ ὀλίγων ὀβολῶν\": Drops 'to him' (αὐτῷ) and changes 'being provided' (ποριζομένων) to 'he earns', shifting agency.\nLatin quote (from model note, verified): «οἷς ἔλεγεν· Ἐγώ εἰμι τὸ φῶς τοῦ κόσμου»\nEnglish quote (from model note, verified): «I am the light of the world»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I checked each flag against the Greek and found no meaning error. The lemma 'You took pledges from your brothers without cause, and you stripped the clothing of the naked' is Job 22:6 LXX (Ἠνεχύραζες δὲ τοὺς ἀδελφούς σου διακενῆς, ἀμφίασιν δὲ γυμνῶν ἀφείλου), both halves of which are in the Greek; the flags came from chunk boundaries, as did the doxology. John 8:12 is a correct apparatus identification of Ἐγώ εἰμι τὸ φῶς τοῦ κόσμου. Πότερον οὐχί introduces a question expecting 'yes', so 'Is it not the Lord who teaches…?' is right. 'Only the wise God knows these' renders ὁ μόνος σοφὸς οἶδε Θεός (cf. Rom 16:27). The rest (κατὰ λόγον, θεωρία, articles, aspect of ἐκδύσω) is style.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I found no meaning error. The verse lemma is Job 22:6, whose first half contains 'your brothers … without cause'. The remaining points (τινῶν, μηδὲν ἐποφειλόμενος, 'money' supplied for ἐδάνεισα, προφάσει, ποριζομένων) are idiom with the same sense: the commentator's point about pledges taken without cause is rendered accurately.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "9b67648162cb4dd6a55ea0283087fcca+524c6eafe8554f838579872e6b744f72+bed655194dad4230a7a5351c742986ab+888db44d04b4471c8e0139aea4dd3be4+0b49a772bcea46caa79b5972e9ecac69"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "a72970975deb4ea69857714c17542be0+chatcmpl-2eaa9741-8755-477a-8de1-dbed33a92ff3"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "9b67648162cb4dd6a55ea0283087fcca+524c6eafe8554f838579872e6b744f72+bed655194dad4230a7a5351c742986ab+888db44d04b4471c8e0139aea4dd3be4+0b49a772bcea46caa79b5972e9ecac69",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I checked each flag against the Greek and found no meaning error. The lemma 'You took pledges from your brothers without cause, and you stripped the clothing of the naked' is Job 22:6 LXX (Ἠνεχύραζες δὲ τοὺς ἀδελφούς σου διακενῆς, ἀμφίασιν δὲ γυμνῶν ἀφείλου), both halves of which are in the Greek; the flags came from chunk boundaries, as did the doxology. John 8:12 is a correct apparatus identification of Ἐγώ εἰμι τὸ φῶς τοῦ κόσμου. Πότερον οὐχί introduces a question expecting 'yes', so 'Is it not the Lord who teaches…?' is right. 'Only the wise God knows these' renders ὁ μόνος σοφὸς οἶδε Θεός (cf. Rom 16:27). The rest (κατὰ λόγον, θεωρία, articles, aspect of ἐκδύσω) is style.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "a72970975deb4ea69857714c17542be0+chatcmpl-2eaa9741-8755-477a-8de1-dbed33a92ff3",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I found no meaning error. The verse lemma is Job 22:6, whose first half contains 'your brothers … without cause'. The remaining points (τινῶν, μηδὲν ἐποφειλόμενος, 'money' supplied for ἐδάνεισα, προφάσει, ποριζομένων) are idiom with the same sense: the commentator's point about pledges taken without cause is rendered accurately.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness"
+          ]
+        }
+      ]
+    }
+  ]
+}

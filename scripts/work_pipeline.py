@@ -69,7 +69,26 @@ BOOKS = ROOT / "books"
 STAGE = ROOT / "outputs" / "work-pipeline"
 RECEIPTS = Path.home() / "SaneApps/infra/SaneProcess/outputs/llm-api-research"
 
-DRAFTER = "@cf/deepseek-ai/deepseek-v4-pro-0813"
+def _drafter_family(model: str) -> str:
+    for name in ("gpt-oss", "deepseek", "kimi", "glm", "llama", "mistral", "gemma", "nemotron", "qwen"):
+        if name in model.lower():
+            return name
+    return model.rsplit("/", 1)[-1]
+
+
+_DEFAULT_DRAFTER = "@cf/deepseek-ai/deepseek-v4-pro-0813"
+# The scout promotes a model by writing outputs/cf-scout/promoted_drafter.json.
+# This process keeps whatever it read here. A later lane start reads the file.
+try:
+    sys.path.insert(0, str(Path.home() / "SaneApps/infra/SaneProcess/scripts/automation"))
+    from cf_capability_scout import resolve_drafter, resolve_drafter_profile
+    DRAFTER = resolve_drafter(default=_DEFAULT_DRAFTER)
+    # Empty unless a scout win stored the call shape. Checkers never use it.
+    DRAFTER_PROFILE = resolve_drafter_profile()
+except Exception as exc:
+    print(f"drafter pointer unread ({exc}); using {_DEFAULT_DRAFTER}", file=sys.stderr)
+    DRAFTER = _DEFAULT_DRAFTER
+    DRAFTER_PROFILE = {}
 # Two blind checkers from different families; override with WP_CHECKERS=a,b
 # for bench A/B (keep the pipeline default on the bench winner).
 CHECKERS = os.environ.get("WP_CHECKERS", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2").split(",")
@@ -88,7 +107,7 @@ READ_EDITS = os.environ.get("WP_READ_EDITS", "0") == "1"
 # Third-family referee for disputed residue (owner 2026-10-02: use NV too).
 # NVIDIA Nemotron 3 Ultra 550B; falls back to FALLBACK if NIM is unavailable.
 REFEREE = os.environ.get("WP_REFEREE", "nvidia/nemotron-3-ultra-550b-a55b")
-FAMILY = {DRAFTER: "deepseek", FALLBACK: "qwen"}
+FAMILY = {DRAFTER: _drafter_family(DRAFTER), FALLBACK: "qwen"}
 for _m in CHECKERS + JUDGES:
     FAMILY[_m] = next((f for f in ("kimi", "glm", "gpt-oss", "llama", "mistral", "gemma", "nemotron", "qwen") if f in _m), _m)
 MAX_REPAIR_ROUNDS = 3
@@ -177,15 +196,21 @@ def call(model: str, system: str, user: str, max_tokens: int = 8000, expect: tup
     last = ""
     waits = iter((15, 30, 60, 90, 120))
     nudged = retried = grown = False
+    profile = DRAFTER_PROFILE if model == DRAFTER and DRAFTER_PROFILE else None
+    cap = profile.get("max_tokens") if profile else None
     while True:
-        r = vendor_call(model, msgs, cf_token=TOKENS["cf"], nv_token=TOKENS["nv"], max_tokens=max_tokens)
+        send = min(max_tokens, cap) if isinstance(cap, int) and cap > 0 else max_tokens
+        r = vendor_call(
+            model, msgs, cf_token=TOKENS["cf"], nv_token=TOKENS["nv"],
+            max_tokens=send, profile=profile,
+        )
         err = str(r.get("error") or "")
         if not err or (err.startswith("truncated") and r.get("content")):
             obj = work_read.parse_obj(r.get("content", ""), expected_keys=expect)
             if obj is not None:
                 return obj  # a cut-off reply whose JSON closed is still usable
             # Completion tokens show whether an unreadable reply was cut off.
-            last = (f"unparseable ({r.get('ct') or '?'} of {max_tokens} tokens{', cut off' if err else ''}): "
+            last = (f"unparseable ({r.get('ct') or '?'} of {send} tokens{', cut off' if err else ''}): "
                     + str(r.get("content", ""))[:120])
         else:
             last = err[:200]
@@ -2427,6 +2452,21 @@ def parked(row: dict, book: str = "", pairs: list[dict] | None = None) -> bool:
     return stalled or row.get("attempts", 1) >= PARK_MAX
 
 
+QUESTION_PRIORITY = ROOT / "docs" / "question-priority.json"
+
+
+def question_priority() -> dict[str, int]:
+    """Books the Timeline questions quote, in the order they are needed (owner
+    2026-10-13: "if any quoted authors are missing queue those works"). Written
+    by the site's scripts/question_dossiers.py; listed books go first. A missing
+    or broken file changes nothing."""
+    try:
+        books = json.loads(QUESTION_PRIORITY.read_text(encoding="utf-8")).get("books") or []
+    except (OSError, ValueError, AttributeError):
+        return {}
+    return {b: i for i, b in enumerate(dict.fromkeys(x for x in books if isinstance(x, str)))}
+
+
 def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = False) -> int:
     """Re-certify live works, smallest first. A work is applied only when every
     section passed the blind source check, the intro is clean and readers pass;
@@ -2448,7 +2488,9 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
     except CatalogueUnavailable as e:
         print(f"queue: {e}; exiting until dist/works is back", flush=True)
         return 0
+    prio = question_priority()
     for words, book in sorted(listed, key=lambda wb: (
+            prio.get(wb[1], len(prio)),
             log_rows.get(wb[1], {}).get("result") != "reopened",
             not book_era.is_early(wb[1]), book_era.book_year(wb[1]) or 9999, wb[0])):
         if done >= limit:
@@ -2490,7 +2532,10 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
         t0 = time.time()
         try:
             rc = run(book, attempt=(log_rows.get(book, {}).get("attempts", 0) or 0) + 1)
-        except Exception as e:  # one bad work must not stop the library
+        except (Exception, SystemExit) as e:  # one bad work must not stop the library
+            # make_brief uses SystemExit when the drafter never returns a brief.
+            # That is BaseException, so it used to kill the lane instead of
+            # moving on to the next book.
             rc = 99
             log(book, f"queue: CRASH {type(e).__name__}: {e}")
         st = status(book) if rc == 0 else {}

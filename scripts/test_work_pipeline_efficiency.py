@@ -1356,6 +1356,35 @@ class ParkAndQueueTests(unittest.TestCase):
                 with self.assertRaises(W.CatalogueUnavailable):
                     W.site_books(True)
 
+    def test_a_missing_brief_does_not_stop_the_lane(self):
+        with tempfile.TemporaryDirectory() as d:
+            q = Path(d) / "queue.json"
+            q.write_text("{}")
+            calls = []
+            notes = []
+
+            def run(book, attempt=1):
+                calls.append(book)
+                if book == "big":
+                    raise SystemExit("big: no brief")
+                return 0
+
+            with mock.patch.object(W, "QUEUE_LOG", q), mock.patch.object(W, "STAGE", Path(d)), \
+                    mock.patch.object(W, "site_books", return_value=[(30000, "big"), (30000, "next")]), \
+                    mock.patch.object(W, "certified", return_value=False), \
+                    mock.patch.object(W, "load_pairs", return_value=[{"id": "1", "source": ["Verba."]}]), \
+                    mock.patch.object(W, "run", side_effect=run), \
+                    mock.patch.object(W, "status", return_value={"sections": {"hold": 1}}), \
+                    mock.patch.object(W, "log", side_effect=lambda book, msg: notes.append(f"{book}: {msg}")), \
+                    mock.patch("builtins.print"), \
+                    mock.patch.dict(sys.modules, {"audit_log": mock.MagicMock()}):
+                self.assertEqual(W.queue(5, 0), 0)
+            self.assertCountEqual(calls, ["big", "next"])
+            rows = json.loads(q.read_text())
+            self.assertEqual(rows["big"]["result"], "crash")
+            self.assertTrue(any("no brief" in note for note in notes), notes)
+            self.assertEqual(rows["next"]["result"], "held")
+
     def test_queue_exits_when_the_site_dist_is_missing(self):
         with tempfile.TemporaryDirectory() as d:
             q = Path(d) / "queue.json"

@@ -1,0 +1,29 @@
+{
+  "u01-open": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "36a58dea91e648e0a44296565cae8c6f+f5fb4ebe6720452b9204ca697e6ce8a3+da7abdda6b7a4050a3359cd855d227b6+6cdf73f115da49cf8b242bcb3b0e9647",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'Chapter 1, verses 16 and 17' is right by content: Πῦρ ἔπεσεν ἐκ τοῦ οὐρανοῦ (Job 1:16) and the camels taken captive (1:17). The printed 'ι ʹ, ιζʹ' is a misprint for ιϛʹ, ιζʹ. 'Chapter 2, verse 9' introduces Χρόνου δὲ πολλοῦ προβεβηκότος, εἶπεν αὐτῷ ἡ γυνὴ αὐτοῦ, and the Greek prints Κεφ. Βʹ, θʹ before it; 'Κεφ. Ζʹ, αʹ' belongs to the following lemma. The malice clause (Ὅρα τὸ κακοῦργον …) is in the Greek. Job 12:5 LXX is ἡτοιμάσθαι πεσεῖν ὑπὸ ἄλλους εἰς χρόνον τακτόν, as quoted. 'For this is the whole of man' is the standard rendering of Eccl 12:13 τοῦτο πᾶς ὁ ἄνθρωπος. 'He' in the camels sentence is the devil, as the context makes clear. The rest (double negatives, 'I beg you', supplied copulas) is idiom.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "906b5631da4d4d4ab6bdbe7635517421",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. ἁμαρτών is the aorist participle of ἁμαρτάνω ('having sinned'), not a genitive plural noun (which would be ἁμαρτιῶν), so 'because he has sinned' is right. 'Were you formed' for ἐπάγης (πήγνυμι, 'were you fixed/established') keeps the sense of Job 15:7.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness"
+      ]
+    }
+  ]
+}

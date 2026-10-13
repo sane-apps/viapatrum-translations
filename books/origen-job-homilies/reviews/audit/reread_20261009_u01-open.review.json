@@ -1,0 +1,478 @@
+{
+  "packet_id": "d4663c242db823bbb11f5711c40453b9bab537b4ff58042a25787900ba959efa",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "a814217788c95c2cdc98497d86ed76c28838cacff45f1d5496be5fbcf791a8ab",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "d4663c242db823bbb11f5711c40453b9bab537b4ff58042a25787900ba959efa",
+    "generated_at": "2026-10-10T01:03:54+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0454,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0261,
+        "family": "kimi",
+        "call_count": 4,
+        "http_attempts": 4,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 8090,
+          "completion_tokens": 5323,
+          "total_tokens": 13413,
+          "neurons": 2376.9218139648438
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 8090,
+          "completion_tokens": 5323,
+          "total_tokens": 13413
+        },
+        "first_call_at": "2026-10-10T00:54:52+00:00",
+        "last_call_at": "2026-10-10T00:57:50+00:00",
+        "calls": [
+          {
+            "section": "u01-open",
+            "source_sha256": "0ac09c6726e7e008a8503a6bafc5f8beda7e9b13aba3dc40277ee5b52484026c",
+            "english_sha256": "b74d806fabd1fc50a6befcf116f3096846de3115a920b2446d9d427afb59cec5",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "36a58dea91e648e0a44296565cae8c6f",
+            "request_id": "89f76aa0-d217-4bfb-bc5e-6dec394d8339",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:54:52+00:00",
+            "finished_at": "2026-10-10T00:55:38+00:00",
+            "ms": 45543,
+            "usage": {
+              "prompt_tokens": 2012,
+              "completion_tokens": 1437,
+              "total_tokens": 3449,
+              "neurons": 645.7490844726562
+            },
+            "raw_sha256": "2a615c0dbb12b542b6ed50b1ad810b32c180c6cec6c20d1d2dea664d1f00606b",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "ca740c04199a576bd7fdb921c35393aaf243bc38c244c1a3bbab508df440be23"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "0ac09c6726e7e008a8503a6bafc5f8beda7e9b13aba3dc40277ee5b52484026c",
+            "english_sha256": "b74d806fabd1fc50a6befcf116f3096846de3115a920b2446d9d427afb59cec5",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "f5fb4ebe6720452b9204ca697e6ce8a3",
+            "request_id": "a3df3241-7cbd-44d7-b3fd-37a9765d00ae",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:55:41+00:00",
+            "finished_at": "2026-10-10T00:56:16+00:00",
+            "ms": 34929,
+            "usage": {
+              "prompt_tokens": 2008,
+              "completion_tokens": 986,
+              "total_tokens": 2994,
+              "neurons": 463.0181884765625
+            },
+            "raw_sha256": "c7c04777b3d3a75f36884c5028eef9bc35ead9e657134d9854d27e19f21f7d97",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "b8466e8fbb1c99d9555712d76c1687aa32e41010e1b9cde7a4b0312db837aba2"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "0ac09c6726e7e008a8503a6bafc5f8beda7e9b13aba3dc40277ee5b52484026c",
+            "english_sha256": "b74d806fabd1fc50a6befcf116f3096846de3115a920b2446d9d427afb59cec5",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "da7abdda6b7a4050a3359cd855d227b6",
+            "request_id": "d68e5c7e-18e0-4d10-a53b-8855b3de8e50",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:56:19+00:00",
+            "finished_at": "2026-10-10T00:56:44+00:00",
+            "ms": 25593,
+            "usage": {
+              "prompt_tokens": 2026,
+              "completion_tokens": 762,
+              "total_tokens": 2788,
+              "neurons": 383.1181640625
+            },
+            "raw_sha256": "ae10fa794fb6b7201a77a79ebf399a0e29950a4dc89bcfe6cafcafbb74225a91",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "400bc36f920b963b00e819084e61dc2b17f55adb621bea7ef3b8f04bda2dbe31"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "0ac09c6726e7e008a8503a6bafc5f8beda7e9b13aba3dc40277ee5b52484026c",
+            "english_sha256": "b74d806fabd1fc50a6befcf116f3096846de3115a920b2446d9d427afb59cec5",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "6cdf73f115da49cf8b242bcb3b0e9647",
+            "request_id": "e8517c4e-7d34-45ed-9d4e-632d55d000dd",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:56:47+00:00",
+            "finished_at": "2026-10-10T00:57:50+00:00",
+            "ms": 62232,
+            "usage": {
+              "prompt_tokens": 2044,
+              "completion_tokens": 2138,
+              "total_tokens": 4182,
+              "neurons": 885.036376953125
+            },
+            "raw_sha256": "4517c7cd7bc43246dc4b4698eeab099281dd251a3b381c5e9a010018f7174afa",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 4,
+            "chunk_sha256": "0f9d588d6c2c639819dd52273c84c2bc4e9dc2a4528e97ab6bde0abe4b0853de"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0193,
+        "family": "glm",
+        "call_count": 4,
+        "http_attempts": 4,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 8321,
+          "completion_tokens": 2225,
+          "total_tokens": 10546,
+          "neurons": 1750.0545349121094
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 8321,
+          "completion_tokens": 2225,
+          "total_tokens": 10546
+        },
+        "first_call_at": "2026-10-10T00:57:50+00:00",
+        "last_call_at": "2026-10-10T00:58:13+00:00",
+        "calls": [
+          {
+            "section": "u01-open",
+            "source_sha256": "0ac09c6726e7e008a8503a6bafc5f8beda7e9b13aba3dc40277ee5b52484026c",
+            "english_sha256": "b74d806fabd1fc50a6befcf116f3096846de3115a920b2446d9d427afb59cec5",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "edbc642cec304a9b8c462a51037a9f98",
+            "request_id": "7f71203b-08d6-4fe0-8b23-84d8e4ef56c8",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:57:50+00:00",
+            "finished_at": "2026-10-10T00:57:52+00:00",
+            "ms": 2563,
+            "usage": {
+              "prompt_tokens": 2059,
+              "completion_tokens": 474,
+              "total_tokens": 2533,
+              "neurons": 451.654541015625
+            },
+            "raw_sha256": "1eb76b173eea89cff0a9f54936789b5cebb6416334c72f28f04a618561bcb397",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "ca740c04199a576bd7fdb921c35393aaf243bc38c244c1a3bbab508df440be23"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "0ac09c6726e7e008a8503a6bafc5f8beda7e9b13aba3dc40277ee5b52484026c",
+            "english_sha256": "b74d806fabd1fc50a6befcf116f3096846de3115a920b2446d9d427afb59cec5",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "b91768bb859e4af1b4f92071f34178c8",
+            "request_id": "a411bdf1-017c-422c-bdb1-e2a5818df4ca",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:57:55+00:00",
+            "finished_at": "2026-10-10T00:57:59+00:00",
+            "ms": 3647,
+            "usage": {
+              "prompt_tokens": 2070,
+              "completion_tokens": 512,
+              "total_tokens": 2582,
+              "neurons": 468.2545166015625
+            },
+            "raw_sha256": "3fe623785b9699de25f7b15deb74e69b31968b406c2cd2a6d446efc19f01ff85",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "b8466e8fbb1c99d9555712d76c1687aa32e41010e1b9cde7a4b0312db837aba2"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "0ac09c6726e7e008a8503a6bafc5f8beda7e9b13aba3dc40277ee5b52484026c",
+            "english_sha256": "b74d806fabd1fc50a6befcf116f3096846de3115a920b2446d9d427afb59cec5",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "35d75044d39e4a97a594e04665a87b4a",
+            "request_id": "d3ecffae-abf9-4e79-8436-5afc160d362c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:58:02+00:00",
+            "finished_at": "2026-10-10T00:58:06+00:00",
+            "ms": 3809,
+            "usage": {
+              "prompt_tokens": 2097,
+              "completion_tokens": 503,
+              "total_tokens": 2600,
+              "neurons": 368.6000061035156
+            },
+            "raw_sha256": "57aa15976da922b9be7fa7877aa98919c09a95ec4431a769e0be4627709a35db",
+            "verdict": "pass",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 3,
+            "chunk_sha256": "400bc36f920b963b00e819084e61dc2b17f55adb621bea7ef3b8f04bda2dbe31"
+          },
+          {
+            "section": "u01-open",
+            "source_sha256": "0ac09c6726e7e008a8503a6bafc5f8beda7e9b13aba3dc40277ee5b52484026c",
+            "english_sha256": "b74d806fabd1fc50a6befcf116f3096846de3115a920b2446d9d427afb59cec5",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "906b5631da4d4d4ab6bdbe7635517421",
+            "request_id": "24f3db34-fb87-45f2-be73-668e6bd8c07f",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:58:09+00:00",
+            "finished_at": "2026-10-10T00:58:13+00:00",
+            "ms": 4603,
+            "usage": {
+              "prompt_tokens": 2095,
+              "completion_tokens": 736,
+              "total_tokens": 2831,
+              "neurons": 461.54547119140625
+            },
+            "raw_sha256": "b8d5c7444ec5f52a2b1a5b088138bb8b30a35315799b78ce1669b6090b79b440",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": false,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": true
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 4,
+            "chunk_sha256": "0f9d588d6c2c639819dd52273c84c2bc4e9dc2a4528e97ab6bde0abe4b0853de"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u01-open",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: source_identity, completeness, negation, agency, scripture; uncertainties: 0; model notes: part 1/4: [source_identity] \"\"That man was true\"\" vs \"Καὶ ἦν ὁ ἄνθρωπος ἐκεῖνος ἀληθινὸς\": ἀληθινὸς means 'true/genuine' not 'true' in sense of truthful; 'that man' for ὁ ἄνθρωπος ἐκεῖνος is acceptable; [completeness] \"\"Fear God, keep his commandments, for this is the whole of man\"\" vs \"Τὸν Θεὸν φοβοῦ, τὰς ἐντολὰς φύλαττε, ὅτι τοῦτο πᾶς ἄνθρωπος\": Missing ὅτι 'because/that'; 'whole of man' for πᾶς ἄνθρωπος is wrong—means 'every man' or 'all humankind'; [agency] \"\"He is blameless because he is righteous\"\" vs \"Ἄμεμπτος, ἐπειδὴ δίκαιος\": No explicit 'He is'; supplies subject and copula not in source; but meaning is clear; [completeness] \"\"He is God-fearing because a good life leads to the knowledge of God\"\" vs \"Θεοσεβής, βίος γὰρ καλὸς τὸν Θεὸν ἐπιγνῶναι ποιεῖ\": Missing explicit subject for Θεοσεβής; supplies 'He is' and 'leads to' for ποιεῖ 'makes/causes'; [scripture] \"Chapter 1, verses 16 and 17\" vs \"ι΄, ιζ΄\": Greek has 10, 17 not 16, 17—ι΄ = 10, not 16 (ιϛ΄); major verse reference error; [agency] \"\"He made the camels fall under the horsemen\"\" vs \"Τὰς μὲν καμήλους πεποίηκε γενέσθαι ὑπὸ τοὺς ἱππεῖς\": Subject is Satan/devil from context, but 'He' ambiguous; could mislead to God; [completeness] \"\"The donkeys and the oxen, the animals that plow and work the ground\"\" vs \"τὰς ὀνάδας καὶ τοὺς βόας, τοὺς ἀροτριῶντας καὶ τὴν γῆν ἐργαζομένους\": Adds 'the animals' not in source; participles directly modify the nouns; [agency] \"\"he brought down fire from heaven upon the sheep\"\" vs \"πῦρ κατήγαγεν ἐξ οὐρανοῦ ἐπὶ τὰ πρόβατα\": Subject is Satan (from context), not God; 'he' ambiguous and potentially misleading; [scripture] \"Chapter 2, verse 9\" vs \"Κεφ. Β΄, θ΄\": Correct: Β΄ = 2, θ΄ = 9; [completeness] \"\"See the malice of it\"\" vs \"Ὅρα τὸ κακοῦργον\": 'of it' added; τὸ κακοῦργον is 'the malicious deed/act' or 'the villainy' | part 2/4: [source_identity] \"Chapter 2, verse 9\" vs \"Κεφ. Ζʹ, αʹ\": Greek has Chapter 7, 1; English invents Chapter 2 verse 9; [completeness] \"See the malice of it: when much time had gone by, then she attacks\" vs \"τότε γὰρ μάλιστα...\": Dropped entire interpretive clause about wife's malice and attack; not in Greek; [negation] \"There is absolutely no one who does not worry\" vs \"Ἔστι δὲ ὅλως οὐδεὶς, ὃς οὐ τῶν ἀναγκαίων φροντίζει\": Double negative flipped: Greek says 'there is no one who does not care' = all care; English same but 'absolutely' overstates οὐδεὶς...οὐ as intensifier rather than standard double negation; [agency] \"I beg you to remember\" vs \"Ἱκετεύω δὴ μνησθῆναι\": Greek has 'I beseech [impersonal/self]' not 'I beg you'; no second person object in source; [scripture] \"Chapter 12, verse 5\" vs \"Κεφ. ΙΒʹ, εʹ\": Greek has Chapter 12, 5 but LXX Job 12:5 is different; this matches Job 15:21 or similar, not 12:5 | part 3/4: [source_identity] \"\"He grows old like a wineskin\"\" vs \"Ὃ παλαιοῦται\": Relative pronoun 'which/what' not 'he'; subject is unspecified antecedent, not Job; [scripture] \"Chapter 13, verse 28\" vs \"κηʹ\": Greek has 28, but this is Job 13:28 in LXX; however Hebrew/English numbering differs—Job 13:28 in Hebrew is 13:27, but actually LXX Job 13:28 = Hebrew 13:28? Need verification: Hebrew Job has 13:28 as v.28, so this may be correct. Actually checking: MT Job 13:28 has 28 verses, so LXX 13:28 = MT 13:28. But the citation format should show Hebrew/English if different. Uncertain on this—actually MT Job 13 has 28 verses, so numbering matches. No defect. | part 4/4: [completeness] \"\"He does not say these things according to his own wish\"\" vs \"Οὐ κατὰ βούλησιν τὴν ἑαυτοῦ ταῦτα λέγει\": Missing \"τὴν ἑαυτοῦ\" = \"his own\"; \"wish\" for βούλησιν is acceptable; [completeness] \"\"and will not stand\"\" vs \"καὶ οὐ μὴ στῇ\": Dropped double negative οὐ μὴ = \"by no means shall he stand\" / \"he shall not stand\" (emphatic); [completeness] \"\"he leaves no remembrance among the living\"\" vs \"οὐδὲ μνημόσυνόν τι τοῖς ζῶσιν ἀφίησιν\": Dropped \"τι\" = \"any\" (\"not even any memorial\"); [negation] \"\"not even any memorial\" vs \"no remembrance\"\" vs \"οὐδὲ μνημόσυνόν τι\": οὐδὲ = \"not even\" (adversative/emphatic), not simple \"no\"; this is borderline but acceptable; [completeness] \"\"but by the word of God\"\" vs \"ἀλλ' ἐκ ῥήσεως Θεοῦ\": \"utterance\" or \"saying\" for ῥήσεως is more precise than \"word\"; acceptable synonym; [completeness] \"\"and no one goes beyond\"\" vs \"οὐχ ὑπερβαίνοντος τὸν παρ' αὐτοῦ τεταγμένον βίον\": Participial construction \"[God] not going beyond\" rendered as finite clause with \"no one\"; acceptable restructuring; [completeness] \"\"These things must not be said\"\" vs \"Ταῦτα δὲ οὐχ... λεκτέον\": Missing \"δὲ\" = \"then/therefore\"; dropped connective; [completeness] \"\"as if fate rules\"\" vs \"ὡς εἱμαρμένης κρατούσης\": \"fate\" for εἱμαρμένης acceptable; \"rules\" for genitive absolute participle acceptable; [completeness] \"\"but as the will of God arranging each thing by bounds and measures\"\" vs \"ἀλλ' ὡς τοῦ θελήματος τοῦ Θεοῦ ὅροις καὶ μέτροις ἕκαστα διαταξαμένου\": Missing \"τοῦ\" before θελήματος = \"of-the\"; participial construction obscured; [completeness] \"\"What? Were you born the first of human beings?\"\" vs \"Τί γάρ; μὴ πρῶτος ἀνθρώπων ἐγεννήθης;\": Missing \"γάρ\" = \"for\"; \"What?\" for \"Τί γάρ;\" weakens the rhetorical force; [completeness] \"\"Or were you formed before the hills?\"\" vs \"ἢ πρὸ θινῶν ἐπάγης;\": \"formed\" for ἐπάγης (2nd sing. aor. pass. of πήγνυμι) = \"were you fixed/established\"; acceptable; [completeness] \"\"Or have you heard the ordinance of the Lord?\"\" vs \"ἢ σύνταγμα Κυρίου ἀκήκοας;\": \"ordinance\" for σύνταγμα acceptable; \"Lord\" for Κυρίου acceptable; [completeness] \"\"This means: Did you exist before all human beings\"\" vs \"Ἀντὶ τοῦ· μὴ πρὸ πάντων ἀνθρώπων ὑπέστης\": \"This means\" for Ἀντὶ τοῦ = \"Instead of this\" / \"In place of this\"; acceptable paraphrase; [completeness] \"\"and have you stretched out your life until now\"\" vs \"καὶ ἄχρι τοῦ νῦν διατείνας τὸν βίον\": Participial construction \"having stretched out\" rendered as finite verb; acceptable; [completeness] \"\"so that you have had experience of more things than those of the same nature as you?\"\" vs \"πλειόνων πραγμάτων πεῖραν ἔσχηκας παρὰ τοὺς ὁμοφυεῖς\": Missing explicit \"so that\" in source; added interpretation; [completeness] \"\"Where is the high and hard-to-reach place, or the sandy one?\"\" vs \"Ἵνα ἐστὶν ὁ ὑψηλὸς τόπος καὶ δύσβατος, ἤτοι ψαμμώδης\": \"Where is\" for Ἵνα ἐστὶν = \"Where is\"; but ἵνα normally = \"in order that\" — here interrogative ἵνα is rare; acceptable as Theodotion's reading; [completeness] \"\"The Hebrew: 'You were conceived.'\"\" vs \"Ὁ Ἑβραῖος· Συνελήφθης\": Missing article: \"The Hebrew [version/reading]\"; acceptable\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: source_identity, completeness; uncertainties: 0; model notes: part 4/4: [completeness] \"everyone who is afflicted suffers these things because he has sinned\" vs \"πᾶς θλιβόμενος ἁμαρτὼν ταῦτα ὑφίσταται\": ἁμαρτών is a genitive plural noun 'of sins', not 'because he has sinned'; causal sense is interpretive.; [source_identity] \"Or were you formed before the hills?\" vs \"ἢ πρὸ θινῶν ἐπάγης;\": ἐπάγης means 'were you placed/set', not 'were you formed'; different verb than πλασθῆναι.\nLatin quote (from model note, verified): «Ἔστι δὲ ὅλως οὐδεὶς, ὃς οὐ τῶν ἀναγκαίων φροντίζει»\nEnglish quote (from model note, verified): «Fear God, keep his commandments, for this is the whole of man»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I checked each flag against the Greek and found no meaning error. 'Chapter 1, verses 16 and 17' is right by content: Πῦρ ἔπεσεν ἐκ τοῦ οὐρανοῦ (Job 1:16) and the camels taken captive (1:17). The printed 'ι ʹ, ιζʹ' is a misprint for ιϛʹ, ιζʹ. 'Chapter 2, verse 9' introduces Χρόνου δὲ πολλοῦ προβεβηκότος, εἶπεν αὐτῷ ἡ γυνὴ αὐτοῦ, and the Greek prints Κεφ. Βʹ, θʹ before it; 'Κεφ. Ζʹ, αʹ' belongs to the following lemma. The malice clause (Ὅρα τὸ κακοῦργον …) is in the Greek. Job 12:5 LXX is ἡτοιμάσθαι πεσεῖν ὑπὸ ἄλλους εἰς χρόνον τακτόν, as quoted. 'For this is the whole of man' is the standard rendering of Eccl 12:13 τοῦτο πᾶς ὁ ἄνθρωπος. 'He' in the camels sentence is the devil, as the context makes clear. The rest (double negatives, 'I beg you', supplied copulas) is idiom.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I found no meaning error. ἁμαρτών is the aorist participle of ἁμαρτάνω ('having sinned'), not a genitive plural noun (which would be ἁμαρτιῶν), so 'because he has sinned' is right. 'Were you formed' for ἐπάγης (πήγνυμι, 'were you fixed/established') keeps the sense of Job 15:7.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "36a58dea91e648e0a44296565cae8c6f+f5fb4ebe6720452b9204ca697e6ce8a3+da7abdda6b7a4050a3359cd855d227b6+6cdf73f115da49cf8b242bcb3b0e9647"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "source_identity",
+            "completeness"
+          ],
+          "uncertainties": [],
+          "response_id": "906b5631da4d4d4ab6bdbe7635517421"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "36a58dea91e648e0a44296565cae8c6f+f5fb4ebe6720452b9204ca697e6ce8a3+da7abdda6b7a4050a3359cd855d227b6+6cdf73f115da49cf8b242bcb3b0e9647",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I checked each flag against the Greek and found no meaning error. 'Chapter 1, verses 16 and 17' is right by content: Πῦρ ἔπεσεν ἐκ τοῦ οὐρανοῦ (Job 1:16) and the camels taken captive (1:17). The printed 'ι ʹ, ιζʹ' is a misprint for ιϛʹ, ιζʹ. 'Chapter 2, verse 9' introduces Χρόνου δὲ πολλοῦ προβεβηκότος, εἶπεν αὐτῷ ἡ γυνὴ αὐτοῦ, and the Greek prints Κεφ. Βʹ, θʹ before it; 'Κεφ. Ζʹ, αʹ' belongs to the following lemma. The malice clause (Ὅρα τὸ κακοῦργον …) is in the Greek. Job 12:5 LXX is ἡτοιμάσθαι πεσεῖν ὑπὸ ἄλλους εἰς χρόνον τακτόν, as quoted. 'For this is the whole of man' is the standard rendering of Eccl 12:13 τοῦτο πᾶς ὁ ἄνθρωπος. 'He' in the camels sentence is the devil, as the context makes clear. The rest (double negatives, 'I beg you', supplied copulas) is idiom.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness",
+            "negation",
+            "agency",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "906b5631da4d4d4ab6bdbe7635517421",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I found no meaning error. ἁμαρτών is the aorist participle of ἁμαρτάνω ('having sinned'), not a genitive plural noun (which would be ἁμαρτιῶν), so 'because he has sinned' is right. 'Were you formed' for ἐπάγης (πήγνυμι, 'were you fixed/established') keeps the sense of Job 15:7.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "source_identity",
+            "completeness"
+          ]
+        }
+      ]
+    }
+  ]
+}

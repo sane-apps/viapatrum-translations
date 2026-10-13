@@ -1,0 +1,30 @@
+{
+  "u01-rem-close": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "e760df940ea64a2892709ff50bbb707c+573bc4b359f346cc9237c8e5bb209903+d3075a059ff44a7b8630f2f2a0c045ce+6a166e18fff7473bb1383edb77b79459+c37dffa123ad45fda660a850e9a56ac3",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'Eliphaz' names the speaker of Job 22, the implied subject of Ταῦτα οὖν λέγει, ἐγκαλῶν τῷ Ἰώβ. 'For God commanded us to fight on behalf of helpless souls. More than other people, the poor, widows, and orphans need help' renders περὶ γὰρ τῶν ἀβοηθήτων ψυχῶν πολεμεῖν ὁ Θεὸς ἐνετείλατο. Πλέον δὲ παρὰ τοὺς ἄλλους ἀνθρώπους, πτωχοί, χῆραι, ὀρφανοὶ δέονται βοηθείας, which is in the Greek. So is 'I know, he says, that from the actions of men come their judgments' (Οἶδα, φησίν, ὅτι ἐκ τῶν πράξεων τῶν ἀνθρώπων, αἱ κρίσεις αὐτοῖς); the 'invented' flags came from chunk boundaries. Jeremiah 1:9 (Ἰδοὺ δέδωκα τοὺς λόγους μου εἰς τὸ στόμα σου) is quoted in the Greek. 'Just as … so' gives the force of Ὥσπερ … μέντοι. Τί λέγω, φησίν, ὅτι οὐ παρέσχες …; ὅποτε καί … ἀφείλου is the rhetorical 'What do I mean by saying you did not provide …? You even took away …'. 'Acknowledge', 'be instructed' and 'liable to judgment' are idiom.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "chatcmpl-41607c46-1a91-4999-80b0-d1bdcc860140+4cb332d3ced645dba4d83049f02a0aad",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. Eliphaz is the speaker of Job 22, the implied subject of λέγει. The 'invented' clause is the commentator's Οἶδα, φησίν, ὅτι ἐκ τῶν πράξεων τῶν ἀνθρώπων, αἱ κρίσεις αὐτοῖς, which is in the Greek. In οὐχ ὡς νῦν μέλλοντος αὐτοῦ κρίνειν, αὐτοῦ is God, the subject of the genitive absolute ('not as though he were now about to judge'). The supplied object 'him' is Job, who is speaking of himself in the third person in the paraphrase; the sense is unchanged.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness"
+      ]
+    }
+  ]
+}

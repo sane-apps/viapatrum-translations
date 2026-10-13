@@ -1,0 +1,30 @@
+{
+  "u01-rem-mid": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "9b67648162cb4dd6a55ea0283087fcca+524c6eafe8554f838579872e6b744f72+bed655194dad4230a7a5351c742986ab+888db44d04b4471c8e0139aea4dd3be4+0b49a772bcea46caa79b5972e9ecac69",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. The lemma 'You took pledges from your brothers without cause, and you stripped the clothing of the naked' is Job 22:6 LXX (Ἠνεχύραζες δὲ τοὺς ἀδελφούς σου διακενῆς, ἀμφίασιν δὲ γυμνῶν ἀφείλου), both halves of which are in the Greek; the flags came from chunk boundaries, as did the doxology. John 8:12 is a correct apparatus identification of Ἐγώ εἰμι τὸ φῶς τοῦ κόσμου. Πότερον οὐχί introduces a question expecting 'yes', so 'Is it not the Lord who teaches…?' is right. 'Only the wise God knows these' renders ὁ μόνος σοφὸς οἶδε Θεός (cf. Rom 16:27). The rest (κατὰ λόγον, θεωρία, articles, aspect of ἐκδύσω) is style.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "negation",
+        "agency",
+        "modality",
+        "scripture"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "a72970975deb4ea69857714c17542be0+chatcmpl-2eaa9741-8755-477a-8de1-dbed33a92ff3",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. The verse lemma is Job 22:6, whose first half contains 'your brothers … without cause'. The remaining points (τινῶν, μηδὲν ἐποφειλόμενος, 'money' supplied for ἐδάνεισα, προφάσει, ποριζομένων) are idiom with the same sense: the commentator's point about pledges taken without cause is rendered accurately.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness"
+      ]
+    }
+  ]
+}

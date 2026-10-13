@@ -1,0 +1,28 @@
+{
+  "u03-rem-close": [
+    {
+      "model": "@cf/moonshotai/kimi-k2.6",
+      "response_id": "221cf570c65a45149798bf2d60e4aa94+594365bcd69e4bb28465b47c0abc1f15",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I checked each flag against the Greek and found no meaning error. 'After the fourteen years of illness' renders μετὰ τὰ τέσσαρα καὶ δέκα ἔτη, χρόνον τῆς νόσου, with the apposition folded in. 'Affliction of the body' for κακίᾳ τοῦ σώματος (bodily ill), 'brought the book to an end' (συνεπέραναν), 'as if following the Hebrew' (ὡς δὴ), 'meaning the righteous' (δηλονότι), 'one of the saints' (τινος, singular), 'This name is interpreted' (Οὗτος, referring to the name Jobab), 'many call Judea Syria' and 'That is what they call the Jews' (οὕτω καλοῦσιν) are faithful renderings that differ only in word order and particle handling.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness",
+        "agency",
+        "modality"
+      ]
+    },
+    {
+      "model": "@cf/zai-org/glm-5.2",
+      "response_id": "chatcmpl-4dce61eb-23d4-4d91-90b7-3158955fb6ef+1422ea86fea24061baef3aa9b28da74d",
+      "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+      "resolution": "I found no meaning error. χρόνον τῆς νόσου is in apposition and the English folds it in. τινος τῶν ἁγίων is singular ('one of the saints'), so the English is correct. Οὗτος refers to the name just given, so 'this name' is a clarification. 'That is what they call the Jews' is a natural English order for τοὺς Ἰουδαίους οὕτω καλοῦσιν.",
+      "model_verdict": "fail",
+      "model_failed_checks": [
+        "source_identity",
+        "completeness"
+      ]
+    }
+  ]
+}

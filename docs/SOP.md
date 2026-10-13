@@ -9,7 +9,7 @@ Owner's words: "each work should have one voice. It does NOT matter if each sepa
 - **One narrator voice per work.** Every section, chapter and part of a work (site read-along audio, downloadable audiobook, YouTube read-along) uses the same narrator voice from start to finish. Never mix narrators inside one work.
 - **Different works may use different voices.** That is fine and expected.
 - **Never require one site-wide voice.** Do not re-voice a finished, internally consistent work just to match other works or a newer default.
-- **Choose per work, in this order:** best quality, then fastest, then cheapest. Candidates include Muse (prepaid through Nov 2, 2026; runs only in the Mini's logged-in GUI session), Cloudflare Workers AI Aura-2, and local Kokoro.
+- **Choose per work, in this order:** best quality, then fastest, then cheapest among Cloudflare Workers AI Aura-2 voices (and local Kokoro only if a work already records it). Muse stays available on the Mini for translation review / tie-breaks while prepaid through Nov 2, 2026, but is not a Via Patrum audiobook candidate (owner 2026-10-09: Cloudflare only; Muse too manual).
 - **Record the choice.** The chosen voice is written into the work's audio metadata (`outputs/audio/<work>/manifest.json` → `"voice"`, and every passage's `"voice"`). Re-runs, fixes and new sections read that recorded voice and reuse it; they do not fall back to the current global default.
 - If a fix needs a voice the work does not use (for example its engine is gone), re-voice that whole work in one new voice; never patch it in a second voice.
 - The separate Scripture-quotation voice (`CF_TTS_QUOTE_VOICE`, decided 2026-10-07) predates this rule; Owner confirmed 2026-10-09: keep the separate Scripture-quotation voice; each work uses one narrator voice plus one quote voice, both consistent throughout that work.
@@ -27,13 +27,17 @@ Write in `books/<slug>/SESSION_HANDOFF.md`:
 - Legal: private study; new English from allowed source text; no modern copyrighted English copy; no public publish unless owner asks.
 - Source URLs / editions and local paths.
 
-### 1. Sources (many witnesses)
+### 1. Sources (the original language)
 
-Lock the exact permitted copy-text and compare every additional witness actually used. Identify the work, author, printed page/locus and surviving scope against the raw print or document before translating. A second scan of the same edition checks OCR; it is not an independent textual witness. Record which comparisons were done and disagreements in `variants[]`. Do not invent missing witnesses or call generated source JSON a source lock.
+**The original text is the lock (owner, 2026-10-10).** Translate a work when its Greek, Latin, or other original language can be read. Those words are the copy-text. A Migne scan, an older print (Bruns, the Clementine Vulgate, and the like), a typed transcription of that print, or a catalog file are all valid. Which site, catalog, or fetcher held the file does not matter. Do not wait for a critical edition, a second witness, or a script that already knows the URL.
+
+You still have to see the words. Open the page or the scan and confirm the passage before it is locked. Unreadable OCR, a file that has not been opened, and any English translation are not a lock. Name the page that was read. A copyrighted modern edition stays a history note when an older printing of the same words can be read. Do not copy the modern edition's file.
+
+Compare every additional witness actually used. Identify the work, author, printed page or locus, and surviving scope against the print or document before translating. A second scan of the same edition checks OCR. It is not an independent textual witness. Record comparisons and disagreements in `variants[]`. Do not invent missing witnesses or call generated source JSON a source lock.
 
 **Reader disclosure:** the public work page’s collapsed “About this text” names the copy-text, the other prints checked, and every stretch supplied from another witness (`text_history` in `*_meta.json` or the site pack). The reading column stays clean. A one-line italic cue is used only when a whole stretch is supplied from another witness (for example a homily that survives only in Jerome’s Latin). Do not call the result a manuscript. Do not claim a combination that was not actually done. Agent receipts (`variants[]`, Pass A) stay off the page.
 
-For each work, try in this order (skip what does not exist or is still in copyright):
+When another readable witness is already in hand, check it. Do not hold the translation while looking for one. A useful order, skipping whatever is missing or still in copyright:
 
 1. Best PD critical edition (GCS, Pusey, Scherer/Witte, Klostermann).
 2. A second scan or transcription of that same edition (PDF + OCR/TEI).

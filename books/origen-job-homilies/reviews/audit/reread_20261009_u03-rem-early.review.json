@@ -1,0 +1,318 @@
+{
+  "packet_id": "e068a6d92d633fe9f7f3612f90ad731fa16186f7caa453a24062bb97ecc64237",
+  "reviewer": "dual_family_review: kimi (@cf/moonshotai/kimi-k2.6) + glm (@cf/zai-org/glm-5.2)",
+  "reviewer_note": "Display only. The two-family gate reads review_provenance.",
+  "verdict": "pass",
+  "review_provenance": {
+    "schema": "review-provenance-v1",
+    "adapter": "scripts/dual_family_review.py",
+    "adapter_sha256": "6ca3090bf7d69999e201fba6c11226ff143b2b20443bb23005f75ff66a290966",
+    "profile": "aligned",
+    "prompt": {
+      "source": "scripts/dual_family_review.py ALIGNED_SYSTEM + ALIGNED_USER (per source chunk)",
+      "sha256": "96756fef37f916c28e1953fd4c7f396c001791814a58988877b5c123e042ce41"
+    },
+    "packet_id": "e068a6d92d633fe9f7f3612f90ad731fa16186f7caa453a24062bb97ecc64237",
+    "generated_at": "2026-10-10T00:20:39+00:00",
+    "spend_usd": 0,
+    "credit_usd": 0.0212,
+    "lanes": [
+      {
+        "lane": "kimi",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/moonshotai/kimi-k2.6",
+        "credit_usd": 0.0111,
+        "family": "kimi",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 2944,
+          "completion_tokens": 2160,
+          "total_tokens": 5104,
+          "neurons": 1007.5345764160156
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 2944,
+          "completion_tokens": 2160,
+          "total_tokens": 5104
+        },
+        "first_call_at": "2026-10-10T00:13:02+00:00",
+        "last_call_at": "2026-10-10T00:14:28+00:00",
+        "calls": [
+          {
+            "section": "u03-rem-early",
+            "source_sha256": "62972a5d9f76c4ea9b47be1b73983fcccb42f9348b0df4ed0f5d94080bd7f84e",
+            "english_sha256": "4a589e573ea00eccd9469ff3e6c38a4a23a926acdca3b24eebd83e0f6c73f240",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "241e78f1668547ec82d45cb3088e310b",
+            "request_id": "f4c59a96-6bff-474b-ae25-11360af49f33",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:13:02+00:00",
+            "finished_at": "2026-10-10T00:13:57+00:00",
+            "ms": 54378,
+            "usage": {
+              "prompt_tokens": 1507,
+              "completion_tokens": 1397,
+              "total_tokens": 2904,
+              "neurons": 638.1500244140625
+            },
+            "raw_sha256": "dab26e54b71d541cbe1c65ae223e10e7889229d8e0d6446798c9de007808e5af",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [
+              "ἀπογράφων: 'describing' or 'copying/describing'—sense clear, syntax difficult due to missing main verb"
+            ],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "dedd75817a92340944744b72712b86d285ee9dfdfe45099d2ad572df5fd6685c"
+          },
+          {
+            "section": "u03-rem-early",
+            "source_sha256": "62972a5d9f76c4ea9b47be1b73983fcccb42f9348b0df4ed0f5d94080bd7f84e",
+            "english_sha256": "4a589e573ea00eccd9469ff3e6c38a4a23a926acdca3b24eebd83e0f6c73f240",
+            "response_model": "@cf/moonshotai/kimi-k2.6",
+            "response_id": "134d59c7b77b40c5ae4ee5878e7f21fb",
+            "request_id": "8844f7e0-74f5-4fb8-a0ac-8f5b4e3de35c",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:14:00+00:00",
+            "finished_at": "2026-10-10T00:14:28+00:00",
+            "ms": 27631,
+            "usage": {
+              "prompt_tokens": 1437,
+              "completion_tokens": 763,
+              "total_tokens": 2200,
+              "neurons": 369.3845520019531
+            },
+            "raw_sha256": "d61fd07eaa178c7cac06c1d694349f00d130e10fec9a2233e03dd35c49e423ba",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": false,
+              "agency": false,
+              "modality": false,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "b33476ba2e232609dfdc258a36b945bae8db66123a82bdb12bf0739a4e463265"
+          }
+        ]
+      },
+      {
+        "lane": "glm",
+        "provider": "cloudflare-workers-ai",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/<account>/ai/run/<model>",
+        "tier": "Workers AI on startup credits ($0 cash)",
+        "spend_usd": 0,
+        "model": "@cf/zai-org/glm-5.2",
+        "credit_usd": 0.0101,
+        "family": "glm",
+        "call_count": 2,
+        "http_attempts": 2,
+        "failed_attempts": [],
+        "tokens_all_attempts": {
+          "prompt_tokens": 3032,
+          "completion_tokens": 1330,
+          "total_tokens": 4362,
+          "neurons": 917.8909301757812
+        },
+        "tokens_counted_calls": {
+          "prompt_tokens": 3032,
+          "completion_tokens": 1330,
+          "total_tokens": 4362
+        },
+        "first_call_at": "2026-10-10T00:14:28+00:00",
+        "last_call_at": "2026-10-10T00:14:38+00:00",
+        "calls": [
+          {
+            "section": "u03-rem-early",
+            "source_sha256": "62972a5d9f76c4ea9b47be1b73983fcccb42f9348b0df4ed0f5d94080bd7f84e",
+            "english_sha256": "4a589e573ea00eccd9469ff3e6c38a4a23a926acdca3b24eebd83e0f6c73f240",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "chatcmpl-f28ecc5b-9c75-4592-9ee2-753f8db098e1",
+            "request_id": "f28ecc5b-9c75-4592-9ee2-753f8db098e1",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:14:28+00:00",
+            "finished_at": "2026-10-10T00:14:30+00:00",
+            "ms": 2644,
+            "usage": {
+              "prompt_tokens": 1571,
+              "completion_tokens": 686,
+              "total_tokens": 2257,
+              "neurons": 474.345458984375
+            },
+            "raw_sha256": "ceefed91b561df9427b8f60f599677e40a526625f926f713964e051502aecb97",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 1,
+            "chunk_sha256": "dedd75817a92340944744b72712b86d285ee9dfdfe45099d2ad572df5fd6685c"
+          },
+          {
+            "section": "u03-rem-early",
+            "source_sha256": "62972a5d9f76c4ea9b47be1b73983fcccb42f9348b0df4ed0f5d94080bd7f84e",
+            "english_sha256": "4a589e573ea00eccd9469ff3e6c38a4a23a926acdca3b24eebd83e0f6c73f240",
+            "response_model": "@cf/zai-org/glm-5.2",
+            "response_id": "7ae022ce3fd143e08e4d06683033f977",
+            "request_id": "402ae6e4-7ec5-4f45-9be4-2229936b5289",
+            "http_status": 200,
+            "finish_reason": "stop",
+            "started_at": "2026-10-10T00:14:33+00:00",
+            "finished_at": "2026-10-10T00:14:38+00:00",
+            "ms": 5235,
+            "usage": {
+              "prompt_tokens": 1461,
+              "completion_tokens": 644,
+              "total_tokens": 2105,
+              "neurons": 443.54547119140625
+            },
+            "raw_sha256": "da73062b5e8523c5fc6103e0eb779b57c17d44aadbd6f2d5310acf532f2aabf9",
+            "verdict": "fail",
+            "checks": {
+              "source_identity": true,
+              "completeness": false,
+              "negation": true,
+              "agency": true,
+              "modality": true,
+              "doctrine": true,
+              "scripture": false
+            },
+            "uncertainties": [],
+            "model_quoted_latin": true,
+            "model_quoted_english": true,
+            "chunk": 2,
+            "chunk_sha256": "b33476ba2e232609dfdc258a36b945bae8db66123a82bdb12bf0739a4e463265"
+          }
+        ]
+      }
+    ],
+    "superseded_calls": []
+  },
+  "reviews": [
+    {
+      "section": "u03-rem-early",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "notes": "[kimi @cf/moonshotai/kimi-k2.6] verdict=fail; failed checks: completeness, negation, agency, modality, scripture; uncertainties: 1; model notes: part 1/2: [agency] \"there was a contention over this outward visible variety\" vs \"ἔριζε τῆς ἔξωθεν φαινομένης ταύτης ποικιλίας\": ἔριζε is 3rd singular, 'he/it contended,' not impersonal 'there was contention'; [agency] \"as they rise up\" vs \"ὡς ἔκ τινος βάθους τῆς ἀφανοῦς κακίας ἀνίσχουσι\": ἀνίσχουσι refers back to subject of ἔριζε (the variety/person), not new 'they'; [modality] \"it cannot be hammered out\" vs \"οὐκ ἐλαθῆναι δύναται\": infinitive is passive 'to be hammered,' not 'hammered out'; δύναται='it is able,' not 'cannot'; [negation] \"it cannot be hammered out\" vs \"οὐκ ἐλαθῆναι δύναται\": οὐκ negates infinitive: 'it is able not to be hammered' i.e. 'it cannot be hammered'; [completeness] \"but he is wholly hardened and bold—not driven, not following reason, not yielding\" vs \"Ἀπελιθώθη... καὶ οὐκ ἐλαθῆναι δύναται\": invented clause with 'bold,' 'following reason,' 'yielding' not in source; extends beyond checked passage; [scripture] \"Job 41:5 (41:13)\" vs \"Τίς ἀποκαλύψει πρόσωπον ἐνδύσεως αὐτοῦ\": LXX 41:5 = Heb 41:13, but citation format inconsistent; first citation lacks verse number in source; [scripture] \"Job 41:15-16 (41:23-24)\" vs \"ιδʹ, ιεʹ, Οὐ σαλευθήσεται...\": Greek has ιδʹ, ιεʹ (14, 15) not 15-16; LXX numbering differs from apparatus | part 2/2: [agency] \"he too has the heart of this dragon\" vs \"καὶ τού του δράκοντος αὐτὸς ἔχει τὴν καρδίαν\": αὐτὸς is 'he himself', not 'he too'; 'too' is an insertion; [completeness] \"the last days of Job\" vs \"τὰ ἔσχατα Ἰὼβ\": 'days' is added; source has 'the last things' or 'latter end'; [completeness] \"fourteen thousand sheep\" vs \"πρόβατα μύρια τετρακισχίλια\": source says 'ten thousand four thousand' (14,000), but 'μύρια' is 'ten thousand'; translation conflates; [scripture] \"Chapter 42, verse 10\" vs \"Κεφ. ΜΒʹ, ιʹ\": ΜΒʹ = 42, but this is Job 42:10 in Hebrew/English; LXX chapter numbering differs; should be noted as LXX 42:10 = Heb 42:10 (same here)\n[glm @cf/zai-org/glm-5.2] verdict=fail; failed checks: completeness, scripture; uncertainties: 0; model notes: part 1/2: [scripture] \"His heart will not be shaken; it is fixed like stone, and it stands like an anvil that cannot be hammered (Job 41:15-16 (41:23-24)).\" vs \"ιδʹ, ιεʹ, Οὐ σαλευθήσεται, ἡ καρδία αὐτοῦ πέπηγεν ὡς λίθος, ἕστηκεν δὲ ὥσπερ ἄκ μων ἀνήλατος.\": Source cites verses 14–15; English gives 41:15–16 (41:23–24), mismatching both Greek and Hebrew verse numbers. | part 2/2: [completeness] \"He is hard, unmalleable, unyielding.\" vs \"ὁ δὲ σκληρός ἐστιν, ἀνήλατος, ἀνένδοτος.\": Drops preceding clause 'ἀλλ' ὅλος ἐστὶν ἀπέσκληκὼς καὶ ἰταμός' (but he is wholly hardened and bold).; [completeness] \"And the Lord blessed the last days of Job more than the first;\" vs \"Ὁ δὲ Κύριος εὐλόγησε τὰ ἔσχατα Ἰὼβ, ἢ τὰ ἔμπροσθεν·\": Drops 'ἢ τὰ ἔμπροσθεν' (or the former things); 'more than the first' conflates rather than renders the disjunctive 'ἢ'.\nLatin quote (from model note, verified): «ἔριζε τῆς ἔξωθεν φαινομένης ταύτης ποικιλίας»\nEnglish quote (from model note, verified): «there was a contention over this outward visible variety»\nADJUDICATED @cf/moonshotai/kimi-k2.6 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I checked each flag against the Greek and found no meaning error. 'But he is wholly hardened and bold—not driven, not following reason, not yielding' is in the Greek (ἀλλ' ὅλος ἐστὶν ἀπεσκληκὼς καὶ ἰταμός …); it was flagged only because of a chunk boundary. The edition marks the lemma ιδʹ, ιεʹ, while the English gives the standard LXX 41:15-16 with Hebrew 41:23-24 as apparatus; the verse text is the same, and this has been adjudicated before. 'More than the first' is the comparative ἤ (εὐλόγησε τὰ ἔσχατα Ἰὼβ ἢ τὰ ἔμπροσθεν), not a disjunction. 'Fourteen thousand sheep' is μύρια τετρακισχίλια (10,000 + 4,000). 'The last days' for τὰ ἔσχατα, 'he too' for αὐτός, 'cannot be hammered out' (οὐκ ἐλαθῆναι δύναται) and 'there was a contention' are idiomatic renderings.\nADJUDICATED @cf/zai-org/glm-5.2 (Densify (agent), clause-by-clause check against the Greek, 2026-10-09): I found no meaning error. ἢ τὰ ἔμπροσθεν is the comparative 'than the former', so 'more than the first' renders it exactly. The 'dropped' clause ἀλλ' ὅλος ἐστὶν ἀπεσκληκὼς καὶ ἰταμός is present in the English as 'but he is wholly hardened and bold'. The verse numbering is LXX with Hebrew in parentheses, following the edition's convention.",
+      "lanes": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "family": "kimi",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ],
+          "uncertainties": [
+            "ἀπογράφων: 'describing' or 'copying/describing'—sense clear, syntax difficult due to missing main verb"
+          ],
+          "response_id": "241e78f1668547ec82d45cb3088e310b+134d59c7b77b40c5ae4ee5878e7f21fb"
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "family": "glm",
+          "verdict": "fail",
+          "failed_checks": [
+            "completeness",
+            "scripture"
+          ],
+          "uncertainties": [],
+          "response_id": "chatcmpl-f28ecc5b-9c75-4592-9ee2-753f8db098e1+7ae022ce3fd143e08e4d06683033f977"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "@cf/moonshotai/kimi-k2.6",
+          "response_id": "241e78f1668547ec82d45cb3088e310b+134d59c7b77b40c5ae4ee5878e7f21fb",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I checked each flag against the Greek and found no meaning error. 'But he is wholly hardened and bold—not driven, not following reason, not yielding' is in the Greek (ἀλλ' ὅλος ἐστὶν ἀπεσκληκὼς καὶ ἰταμός …); it was flagged only because of a chunk boundary. The edition marks the lemma ιδʹ, ιεʹ, while the English gives the standard LXX 41:15-16 with Hebrew 41:23-24 as apparatus; the verse text is the same, and this has been adjudicated before. 'More than the first' is the comparative ἤ (εὐλόγησε τὰ ἔσχατα Ἰὼβ ἢ τὰ ἔμπροσθεν), not a disjunction. 'Fourteen thousand sheep' is μύρια τετρακισχίλια (10,000 + 4,000). 'The last days' for τὰ ἔσχατα, 'he too' for αὐτός, 'cannot be hammered out' (οὐκ ἐλαθῆναι δύναται) and 'there was a contention' are idiomatic renderings.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "negation",
+            "agency",
+            "modality",
+            "scripture"
+          ]
+        },
+        {
+          "model": "@cf/zai-org/glm-5.2",
+          "response_id": "chatcmpl-f28ecc5b-9c75-4592-9ee2-753f8db098e1+7ae022ce3fd143e08e4d06683033f977",
+          "by": "Densify (agent), clause-by-clause check against the Greek, 2026-10-09",
+          "resolution": "I found no meaning error. ἢ τὰ ἔμπροσθεν is the comparative 'than the former', so 'more than the first' renders it exactly. The 'dropped' clause ἀλλ' ὅλος ἐστὶν ἀπεσκληκὼς καὶ ἰταμός is present in the English as 'but he is wholly hardened and bold'. The verse numbering is LXX with Hebrew in parentheses, following the edition's convention.",
+          "model_verdict": "fail",
+          "model_failed_checks": [
+            "completeness",
+            "scripture"
+          ]
+        }
+      ]
+    }
+  ]
+}

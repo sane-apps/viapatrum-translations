@@ -810,16 +810,22 @@ def vendor_call(
     nv_token: str = "",
     account: str = DEFAULT_ACCOUNT,
     max_tokens: int | None = None,
+    profile: dict | None = None,
 ) -> dict:
     """Route to Workers AI or NIM using researched profiles, inside the
-    shared per-model rate limit."""
+    shared per-model rate limit.
+
+    profile merges over cf_profile for one call. The scout passes schema-derived
+    thinking flags for a model the profile table does not know yet. Lane calls
+    omit it.
+    """
     model = normalize_model(model)
     if batch_route(model) and not rate_try(model):
         _use_batch.on = True            # at the cap: overflow goes to the batch broker
     elif not batch_route(model) and rate_acquire(model) is False:
         return {"error": RATE_WAIT_ERR, "ms": 0}  # direct-only model: no slot came free
     r = _vendor_call_raw(model, messages, cf_token=cf_token, nv_token=nv_token, account=account,
-                         max_tokens=max_tokens)
+                         max_tokens=max_tokens, profile=profile)
     if "429" in str(r.get("error", "")):
         rate_throttled(model)
     return r
@@ -833,6 +839,7 @@ def _vendor_call_raw(
     nv_token: str = "",
     account: str = DEFAULT_ACCOUNT,
     max_tokens: int | None = None,
+    profile: dict | None = None,
 ) -> dict:
     if is_nvidia_model(model):
         if not nv_token:
@@ -853,6 +860,8 @@ def _vendor_call_raw(
     if not cf_token:
         return {"error": "no CF_TOKEN", "ms": 0}
     prof = cf_profile(model)
+    if profile:
+        prof.update(profile)
     tok = int(max_tokens if max_tokens else prof.get("max_tokens", 1800))
     if any(k in model.lower() for k in THINKING_ALWAYS_ON):
         # Thinking cannot be turned off here; a caller's answer-sized budget

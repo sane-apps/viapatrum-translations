@@ -52,7 +52,7 @@ Copy this whole file into your AI.
 
 You are helping finish public-domain Fathers texts in new English for https://fathers.saneapps.com.
 
-Do not copy FOTC, ACW, ANF, NPNF, blogs, or other English. Translate from the locked Greek or Latin in https://github.com/sane-apps/translations
+Do not copy FOTC, ACW, ANF, NPNF, blogs, or other English. Translate from Greek or Latin you can read. A Migne scan, an older print, or a typed transcription of that print is enough. Do not wait on a particular edition or catalog. Unreadable OCR is not a lock. See `docs/SOP.md` §1. The corpus is https://github.com/sane-apps/translations
 
 Clone that repo if you do not already have it. Then run:
 
