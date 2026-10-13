@@ -2,6 +2,105 @@
  "_note": "Written by question_dossiers.py queue. Works a Timeline question needs that are not in the library. Each needs a source intake (read the original, lock it under books/<slug>/sources/) before translation.",
  "works": [
   {
+   "question": "decided-which-books-bible",
+   "author": "Athanasius of Alexandria",
+   "work": "Festal Letter 39",
+   "year": 367,
+   "why": "The first list of exactly our 27 New Testament books.",
+   "action": "intake",
+   "source_hint": "Greek fragments, Migne PG 26"
+  },
+  {
+   "question": "decided-which-books-bible",
+   "author": "Councils of Hippo (393) and Carthage (397)",
+   "work": "Canon on the Scriptures",
+   "year": 397,
+   "why": "The African list of both Testaments.",
+   "action": "intake",
+   "source_hint": "Bruns, Canones apostolorum et conciliorum (1839)"
+  },
+  {
+   "question": "decided-which-books-bible",
+   "author": "Innocent I",
+   "work": "Letter to Exsuperius of Toulouse",
+   "year": 405,
+   "why": "A Roman bishop's list.",
+   "action": "intake",
+   "source_hint": "Migne PL 20"
+  },
+  {
+   "question": "decided-which-books-bible",
+   "action": "intake-from-witness",
+   "author": "Irenaeus of Lyons",
+   "work": "Against Heresies",
+   "year": 180,
+   "witness": "outputs/question-dossiers/witnesses/khaz-irenaeus-lugdunensis-pg-07-adversus-haereses-liber-3.txt",
+   "edition": "Greek fragment, Migne PG 7, Khazarzar text",
+   "quote": "irenaeus-ah-3-11-8",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "decided-which-books-bible",
+   "action": "intake-from-witness",
+   "author": "Muratorian Fragment (author unknown)",
+   "work": "Muratorian Fragment",
+   "year": 190,
+   "witness": "outputs/question-dossiers/witnesses/url-muratorian-fragment.txt",
+   "edition": "Restored Latin from Theron, Evidence of Tradition (1957), as given at earlychristianwritings.com; single manuscript, Milan, Ambrosian Library I 101 sup.",
+   "quote": "muratorian-fragment",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "decided-which-books-bible",
+   "action": "intake-from-witness",
+   "author": "Westminster Confession (Reformed)",
+   "work": "Westminster Confession of Faith",
+   "year": 1646,
+   "witness": "outputs/question-dossiers/witnesses/url-westminster-confession.txt",
+   "edition": "Orthodox Presbyterian Church text",
+   "quote": "westminster-1-4",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "decided-which-books-bible",
+   "action": "relock-source",
+   "book": "origen-luke-homilies",
+   "witness": "books/origen-luke-homilies/sources/witnesses/lommatzsch-t5-1835_djvu.txt",
+   "ia": "origenous-ta-heuriskomena-panta-t.-5-1835",
+   "edition": "Lommatzsch, Origenis opera omnia, vol. 5 (1835), Homily 1",
+   "quote": "origen-luke-1",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "constantine-council-nicaea-choose-books",
+   "author": "Council of Nicaea",
+   "work": "Creed and twenty canons",
+   "year": 325,
+   "why": "Showing the full canons would let readers see that none concerns Scripture.",
+   "action": "intake",
+   "source_hint": "Bruns, Canones apostolorum et conciliorum (1839), vol. 1"
+  },
+  {
+   "question": "constantine-council-nicaea-choose-books",
+   "author": "Synodicon Vetus",
+   "work": "Chapter on Nicaea",
+   "year": 887,
+   "why": "A ninth-century tale that the true books were sorted from false ones at Nicaea by a miracle at the altar. It is the earliest source of the popular story.",
+   "action": "intake",
+   "source_hint": "Fabricius, Bibliotheca Graeca vol. 12 (1809)"
+  },
+  {
+   "question": "constantine-council-nicaea-choose-books",
+   "action": "intake-from-witness",
+   "author": "Jerome",
+   "work": "Preface to Judith",
+   "year": 398,
+   "witness": "outputs/question-dossiers/witnesses/url-jerome-preface-judith.txt",
+   "edition": "Migne PL 29.37–39, as given at tertullian.org",
+   "quote": "jerome-preface-judith",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
    "question": "old-testament-canon",
    "author": "Athanasius of Alexandria",
    "work": "Festal Letter 39",
@@ -54,6 +153,291 @@
    "ia": null,
    "edition": "Migne PG 11.48–60 (De la Rue), working Greek in the library",
    "quote": "origen-africanus",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "four-gospels-settled-other-gospels",
+   "author": "Irenaeus of Lyons",
+   "work": "Against Heresies 3.1.1",
+   "year": 180,
+   "why": "Says who wrote each Gospel and where. Latin only; the Latin of Book 3 is not yet fetched.",
+   "action": "intake",
+   "source_hint": "Harvey 1857 vol. 2 or Massuet, Migne PG 7"
+  },
+  {
+   "question": "four-gospels-settled-other-gospels",
+   "author": "Tatian",
+   "work": "Diatessaron",
+   "year": 170,
+   "why": "The harmony itself survives in Arabic and other versions.",
+   "action": "intake",
+   "source_hint": "Ciasca, Tatiani Evangeliorum harmoniae arabice (1888)"
+  },
+  {
+   "question": "four-gospels-settled-other-gospels",
+   "action": "intake-from-witness",
+   "author": "Irenaeus of Lyons",
+   "work": "Against Heresies",
+   "year": 180,
+   "witness": "outputs/question-dossiers/witnesses/khaz-irenaeus-lugdunensis-pg-07-adversus-haereses-liber-3.txt",
+   "edition": "Greek fragment, Migne PG 7, Khazarzar text",
+   "quote": "irenaeus-ah-3-11-8",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "four-gospels-settled-other-gospels",
+   "action": "intake-from-witness",
+   "author": "Muratorian Fragment (author unknown)",
+   "work": "Muratorian Fragment",
+   "year": 190,
+   "witness": "outputs/question-dossiers/witnesses/url-muratorian-fragment.txt",
+   "edition": "Restored Latin from Theron, Evidence of Tradition (1957), as given at earlychristianwritings.com; single manuscript, Milan, Ambrosian Library I 101 sup.",
+   "quote": "muratorian-fragment",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "four-gospels-settled-other-gospels",
+   "action": "intake-from-witness",
+   "author": "Theodoret of Cyrrhus",
+   "work": "Compendium of Heretical Fables",
+   "year": 453,
+   "witness": "outputs/question-dossiers/witnesses/khaz-theodoretus-of-cyrrhus-pg-80-84-haereticarum-fabularum-compendium.txt",
+   "edition": "Migne PG 83, Khazarzar text",
+   "quote": "theodoret-heretical-fables-1-20",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "four-gospels-settled-other-gospels",
+   "action": "relock-source",
+   "book": "origen-luke-homilies",
+   "witness": "books/origen-luke-homilies/sources/witnesses/lommatzsch-t5-1835_djvu.txt",
+   "ia": "origenous-ta-heuriskomena-panta-t.-5-1835",
+   "edition": "Lommatzsch, Origenis opera omnia, vol. 5 (1835), Homily 1",
+   "quote": "origen-luke-1",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "bible-only-rule-faith-tradition",
+   "author": "Vincent of Lérins",
+   "work": "Commonitory 2",
+   "year": 434,
+   "why": "Scripture is complete and sufficient, yet must be read by what has been believed everywhere, always and by all.",
+   "action": "intake",
+   "source_hint": "Migne PL 50; Moxon (1915)"
+  },
+  {
+   "question": "bible-only-rule-faith-tradition",
+   "action": "intake-from-witness",
+   "author": "Irenaeus of Lyons",
+   "work": "Against Heresies",
+   "year": 180,
+   "witness": "books/ante-nicene-topics/sources/raw/irenaeus_ah_harvey1857_vol2_bsb10606565_djvu.txt",
+   "edition": "Harvey (1857), vol. 2, Book 3.4.1 (Latin)",
+   "quote": "irenaeus-ah-3-4-1",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "bible-only-rule-faith-tradition",
+   "action": "intake-from-witness",
+   "author": "Athanasius of Alexandria",
+   "work": "Against the Heathen",
+   "year": 335,
+   "witness": "outputs/question-dossiers/witnesses/khaz-athanasius-the-great-of-alexandria-pg-25-28-contra-gentes.txt",
+   "edition": "Migne PG 25, Khazarzar text",
+   "quote": "athanasius-against-heathen-1",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "bible-only-rule-faith-tradition",
+   "action": "intake-from-witness",
+   "author": "Cyril of Jerusalem",
+   "work": "Catechetical Lectures",
+   "year": 350,
+   "witness": "outputs/question-dossiers/witnesses/khaz-cyrillus-hierosolymitanus-pg-33-catecheses-ad-illuminandos.txt",
+   "edition": "Migne PG 33, Khazarzar text",
+   "quote": "cyril-catechesis-4-17",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "bible-only-rule-faith-tradition",
+   "action": "intake-from-witness",
+   "author": "Basil of Caesarea",
+   "work": "On the Holy Spirit",
+   "year": 375,
+   "witness": "outputs/question-dossiers/witnesses/ia-patrologiae-cursus-completus-gr-vol-032.txt",
+   "edition": "Migne PG 32 (archive.org OCR); checked against Johnston, The Book of Saint Basil on the Holy Spirit (Oxford, 1892)",
+   "quote": "basil-holy-spirit-27-66",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "bible-only-rule-faith-tradition",
+   "action": "intake-from-witness",
+   "author": "Epiphanius of Salamis",
+   "work": "Panarion (Medicine Chest against Heresies)",
+   "year": 377,
+   "witness": "outputs/question-dossiers/witnesses/khaz-epiphanius-pg-41-43-panarion.txt",
+   "edition": "Migne PG 41, Khazarzar text",
+   "quote": "epiphanius-panarion-61-6",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "bible-only-rule-faith-tradition",
+   "action": "intake-from-witness",
+   "author": "Westminster Confession (Reformed)",
+   "work": "Westminster Confession of Faith",
+   "year": 1646,
+   "witness": "outputs/question-dossiers/witnesses/url-westminster-confession.txt",
+   "edition": "Orthodox Presbyterian Church text",
+   "quote": "westminster-1-6",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "rule-faith-appealed",
+   "author": "Hippolytus",
+   "work": "Against Noetus 1, 17–18",
+   "year": 220,
+   "why": "A rule of faith set against Noetus's teaching that the Father suffered.",
+   "action": "intake",
+   "source_hint": "Migne PG 10; Butterworth (1977, copyright) only as a note"
+  },
+  {
+   "question": "rule-faith-appealed",
+   "action": "intake-from-witness",
+   "author": "Irenaeus of Lyons",
+   "work": "Against Heresies",
+   "year": 180,
+   "witness": "books/ante-nicene-topics/sources/greek/irenaeus_ah.xml",
+   "edition": "Harvey (1857), Greek of Book 1.10 (Massuet 1.10.1–2)",
+   "quote": "irenaeus-ah-1-10-1",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "rule-faith-appealed",
+   "action": "intake-from-witness",
+   "author": "Origen of Alexandria",
+   "work": "On First Principles",
+   "year": 225,
+   "witness": "outputs/question-dossiers/witnesses/ia-origenous-ta-heuriskomena-panta-t-21-1847.txt",
+   "edition": "Lommatzsch, Origenis opera omnia, vol. 21 (1847), De principiis, Preface",
+   "quote": "origen-first-principles-preface",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "rule-faith-appealed",
+   "action": "intake-from-witness",
+   "author": "Novatian",
+   "work": "On the Trinity",
+   "year": 250,
+   "witness": "books/ante-nicene-topics/sources/raw/novatian_de_trinitate_fausset1909_djvu.txt",
+   "edition": "Fausset, Novatiani Romanae urbis presbyteri De Trinitate liber (Cambridge, 1909)",
+   "quote": "novatian-trinity-9",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "believe-bible-inspired-without-error",
+   "author": "Augustine of Hippo",
+   "work": "Letter 82.3, to Jerome",
+   "year": 405,
+   "why": "\"I firmly believe that none of their authors erred in writing anything.\" Augustine's letters are not in the library yet.",
+   "action": "intake",
+   "source_hint": "Maurist text, Migne PL 33"
+  },
+  {
+   "question": "which-bible-text-read-hebrew",
+   "author": "Augustine of Hippo",
+   "work": "City of God 18.43–44",
+   "year": 425,
+   "why": "Holds that both the Hebrew and the Seventy were given by the one Spirit.",
+   "action": "intake",
+   "source_hint": "Dombart, Teubner (1877); Maurist PL 41"
+  },
+  {
+   "question": "which-bible-text-read-hebrew",
+   "author": "Augustine and Jerome",
+   "work": "Letters 71, 75, 82",
+   "year": 404,
+   "why": "Their argument over Jerome's translation, including the riot at Oea over Jonah's plant.",
+   "action": "intake",
+   "source_hint": "Maurist text, Migne PL 33"
+  },
+  {
+   "question": "which-bible-text-read-hebrew",
+   "action": "intake-from-witness",
+   "author": "Westminster Confession (Reformed)",
+   "work": "Westminster Confession of Faith",
+   "year": 1646,
+   "witness": "outputs/question-dossiers/witnesses/url-westminster-confession.txt",
+   "edition": "Orthodox Presbyterian Church text",
+   "quote": "westminster-1-8",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "which-bible-text-read-hebrew",
+   "action": "relock-source",
+   "book": "origen-letters",
+   "witness": "books/origen-letters/sources/africanus_working_greek.txt",
+   "ia": null,
+   "edition": "Migne PG 11, working Greek in the library",
+   "quote": "origen-africanus-hexapla",
+   "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
+  },
+  {
+   "question": "read-old-testament-literally-types",
+   "author": "Diodore of Tarsus",
+   "work": "Commentary on the Psalms, preface",
+   "year": 378,
+   "why": "The Antiochene case for history over allegory, with theoria as the higher sense that grows from the history.",
+   "action": "intake",
+   "source_hint": "Mariès / Olivier edition (copyright) as note; older catena fragments"
+  },
+  {
+   "question": "read-old-testament-literally-types",
+   "author": "John Cassian",
+   "work": "Conferences 14.8",
+   "year": 427,
+   "why": "The four senses: Jerusalem as city, the Church, the soul, and heaven.",
+   "action": "intake",
+   "source_hint": "Petschenig, CSEL 13 (1886)"
+  },
+  {
+   "question": "read-old-testament-literally-types",
+   "action": "intake-from-witness",
+   "author": "Origen of Alexandria",
+   "work": "On First Principles",
+   "year": 225,
+   "witness": "outputs/question-dossiers/witnesses/ia-origenous-ta-heuriskomena-panta-t-21-1847.txt",
+   "edition": "Lommatzsch, Origenis opera omnia, vol. 21 (1847), De principiis 4.2.4",
+   "quote": "origen-first-principles-4-2-4",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "read-old-testament-literally-types",
+   "action": "intake-from-witness",
+   "author": "Westminster Confession (Reformed)",
+   "work": "Westminster Confession of Faith",
+   "year": 1646,
+   "witness": "outputs/question-dossiers/witnesses/url-westminster-confession.txt",
+   "edition": "Orthodox Presbyterian Church text",
+   "quote": "westminster-1-9",
+   "why": "Quoted from a fetched original-language text. Make it a library book (lock the source), then translate."
+  },
+  {
+   "question": "trust-that-text-copied-faithfully",
+   "author": "Jerome",
+   "work": "Preface to the Gospels, to Damasus",
+   "year": 383,
+   "why": "\"There are almost as many versions as copies.\" Only English was fetched.",
+   "action": "intake",
+   "source_hint": "Wordsworth and White, Novum Testamentum Latine (1889); Migne PL 29"
+  },
+  {
+   "question": "trust-that-text-copied-faithfully",
+   "action": "relock-source",
+   "book": "origen-letters",
+   "witness": "books/origen-letters/sources/africanus_working_greek.txt",
+   "ia": null,
+   "edition": "Migne PG 11, working Greek in the library",
+   "quote": "origen-africanus-hexapla",
    "why": "The book's source JSON does not hold this passage. Lock the real text from the witness scan, then translate."
   },
   {
