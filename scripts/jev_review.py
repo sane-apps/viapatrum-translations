@@ -42,14 +42,14 @@ def _post(url, payload, token):
         return json.loads(resp.read().decode())
 
 
-def _cf_jev(state, questions):
+def _cf_jev(state, questions, model=None):
     token = os.environ.get("CF_TOKEN") or os.environ.get("CLOUDFLARE_API_TOKEN", "")
     account = os.environ.get("CLOUDFLARE_ACCOUNT_ID", DEFAULT_ACCOUNT)
     if not token or not account:
         raise RuntimeError("CF Jev credentials missing")
     body = _post(
         "https://api.cloudflare.com/client/v4/accounts/%s/ai/run" % account,
-        {"model": CF_MODEL, "input": {"state": state, "questions": questions}},
+        {"model": model or CF_MODEL, "input": {"state": state, "questions": questions}},
         token,
     )
     # Workers AI wraps once; the gateway wraps again
@@ -76,10 +76,11 @@ def _direct_jev(state, questions):
     )
 
 
-def jev(state, questions):
+def jev(state, questions, model=None):
+    """model overrides JEV_MODEL per call (thread-safe A/B of typesafe/jev vs @cf/cloudflare/clef)."""
     global _fallback_noted
     try:
-        return _cf_jev(state, questions)
+        return _cf_jev(state, questions, model)
     except Exception as e:  # noqa: BLE001 - CF path may lack balance/scopes
         cf_err = e
     if not os.environ.get("TYPESAFE_API_KEY"):
