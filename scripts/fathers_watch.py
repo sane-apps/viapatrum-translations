@@ -232,7 +232,10 @@ def check_jobs() -> tuple[str, str, dict]:
     if missing:
         return "fail", f"jobs not loaded: {', '.join(missing)}", info
     if bad:
-        detail = ", ".join(f"{j.split('.')[-1]}={c}" for j, c in bad.items())
+        # Exit 78 = a macOS permission is missing (logos_build.py EXIT_NO_AX);
+        # say the fix, since retrying cannot help.
+        hints = {"78": " (needs owner: Accessibility for /usr/bin/osascript)"}
+        detail = ", ".join(f"{j.split('.')[-1]}={c}{hints.get(c, '')}" for j, c in bad.items())
         return "warn", f"nonzero last exit: {detail}", info
     return "ok", f"all {len(jobs)} fathers jobs loaded, last exit 0", info
 

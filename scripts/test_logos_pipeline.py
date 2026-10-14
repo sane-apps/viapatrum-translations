@@ -580,5 +580,17 @@ class CatchupAndCapTests(unittest.TestCase):
         self.assertEqual(len(lines["NEED_BUILD"]), 1)
 
 
+
+class AccessibilityPreflight(unittest.TestCase):
+    def test_missing_accessibility_exits_78_at_once(self):
+        denied = (1, "System Events got an error: osascript is not allowed assistive access. (-1728)")
+        with mock.patch.object(L, "run", return_value=(0, "")), \
+                mock.patch.object(L, "logos_running", return_value=True), \
+                mock.patch.object(L, "osa_splitter", return_value=denied), \
+                mock.patch.object(L.time, "sleep"), mock.patch.object(L, "log"):
+            with self.assertRaises(SystemExit) as cm:
+                L.launch_pb_tool()
+        self.assertEqual(cm.exception.code, L.EXIT_NO_AX)
+
 if __name__ == "__main__":
     unittest.main()

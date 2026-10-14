@@ -58,6 +58,7 @@ UPLOAD_TIMEOUT = 600
 MAX_BUILDS_PER_RUN = 30
 CATCHUP_TIMEOUT = 3600
 AX_WAIT = 120
+EXIT_NO_AX = 78  # EX_CONFIG: macOS permission missing, retrying cannot help
 MAX_PAGES = 25
 
 OSA_APP = ('tell application "System Events" to tell process "Logos" '
@@ -140,6 +141,13 @@ def launch_pb_tool():
     while time.time() - t0 < AX_WAIT:
         rc, out = osa_splitter('log ("T=" & (count of static texts))',
                                timeout=60)
+        if "not allowed assistive access" in out:
+            # 2026-10-14: every launchd run since at least Sep 27 died here
+            # after 120 s as "never became AX-ready". A launchd job's osascript
+            # has no Accessibility grant; an interactive Terminal does.
+            log("FATAL: osascript is not allowed Accessibility from launchd. Owner fix, once: System "
+                "Settings > Privacy & Security > Accessibility > + /usr/bin/osascript")
+            sys.exit(EXIT_NO_AX)
         if rc == 0 and "T=" in out:
             try:
                 n = int(out.split("T=")[1].split()[0].strip())
