@@ -198,7 +198,19 @@ def call_gemini(model: str, messages: list[dict], key: str) -> dict:
                       "total_tokens": usage.get("totalTokenCount") or 0}}
 
 
+def spend_allow() -> tuple[bool, str]:
+    """spend_guard's per-call gate (daily cap + hourly ceiling); fails closed."""
+    try:
+        import spend_guard
+        return spend_guard.allow("dual_family_review")
+    except Exception as e:  # noqa: BLE001
+        return False, f"spend guard unavailable: {type(e).__name__}: {e}"[:200]
+
+
 def call_cf(model: str, messages: list[dict], key: str) -> dict:
+    ok, why = spend_allow()
+    if not ok:  # every Workers AI review call, densify packets included
+        raise QuotaPause(f"cf spend guard refused: {why}")
     # Thinking off, as scripts/llm_bakeoff.cf_profile sets for kimi-k2.6 / glm-5.2:
     # with thinking on, kimi spends the whole budget reasoning and returns no answer.
     body = {"messages": messages, "temperature": 0.2, "max_completion_tokens": 4000,

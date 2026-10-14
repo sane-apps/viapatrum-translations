@@ -11,6 +11,8 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import dual_family_review as D  # noqa: E402
+
+D.spend_allow = lambda: (True, "test stub")  # gate tested in test_spend_guard.py
 from pipeline.verify_translation_qa import provenance_family_errors  # noqa: E402
 
 SRC = ["Non necessitate sed voluntate. " * 40, "Deus est lux et non tenebrae."]

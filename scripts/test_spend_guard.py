@@ -67,9 +67,132 @@ class SpendGuard(unittest.TestCase):
             self.assertEqual(G.main(["x", "check"]), G.OVER)
         with mock.patch.object(G, "read_usage", return_value={"error": "x"}):
             self.assertEqual(G.main(["x", "check"]), G.UNKNOWN)
-        with mock.patch.object(G, "read_usage", return_value={"neurons": 0, "usd": 1.0}):
+        with mock.patch.object(G, "read_usage", return_value={"neurons": 0, "usd": 1.0}), \
+                mock.patch.object(G, "read_hour_usage", return_value={"neurons": 0, "usd": 0.5}):
             self.assertEqual(G.main(["x", "check"]), G.OK)
+        # under the daily cap but past the hourly ceiling (cap/12): check refuses too
+        with mock.patch.object(G, "read_usage", return_value={"neurons": 0, "usd": 20.0}), \
+                mock.patch.object(G, "read_hour_usage", return_value={"neurons": 0, "usd": 13.0}):
+            self.assertEqual(G.main(["x", "check"]), G.OVER)
 
+
+
+class PerCallGate(unittest.TestCase):
+    """Broker batches and review calls are refused over the daily cap, over the
+    hourly ceiling (cap/12) or with usage unknown, and allowed under them."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        d = Path(self.tmp.name)
+        self.patches = [mock.patch.object(G, "SPEND", d / "spend"),
+                        mock.patch.object(G, "ALLOW_CACHE", d / "spend/allow.json"),
+                        mock.patch.object(G, "CAP_FILE", d / "spend/cap.json"),
+                        mock.patch.dict("os.environ", {"FATHERS_DAILY_CAP_USD": "150"})]
+        for p in self.patches:
+            p.start()
+
+    def tearDown(self):
+        for p in self.patches:
+            p.stop()
+        self.tmp.cleanup()
+
+    def usage(self, day, hour):
+        def u(x):
+            return {"error": "no token"} if x is None else {"neurons": 0, "usd": x}
+        return [mock.patch.object(G, "read_usage", return_value=u(day)),
+                mock.patch.object(G, "read_hour_usage", return_value=u(hour))]
+
+    def gate(self, day, hour):
+        ps = self.usage(day, hour)
+        for p in ps:
+            p.start()
+        try:
+            G.ALLOW_CACHE.unlink(missing_ok=True)
+            return G.allow("test")
+        finally:
+            for p in ps:
+                p.stop()
+
+    def test_decide(self):
+        self.assertTrue(self.gate(100, 5)[0])
+        self.assertIn("daily cap", self.gate(182.42, 0)[1])
+        self.assertFalse(self.gate(182.42, 0)[0])
+        self.assertAlmostEqual(G.hourly_ceiling_usd(150), 12.5)
+        ok, why = self.gate(40, 12.5)
+        self.assertFalse(ok)
+        self.assertIn("hourly ceiling", why)
+        self.assertFalse(self.gate(None, 1)[0])
+        self.assertFalse(self.gate(10, None)[0])
+
+    def test_cache_is_reused_within_ttl(self):
+        self.assertFalse(self.gate(200, 0)[0])
+        with mock.patch.object(G, "read_usage", side_effect=AssertionError("queried")):
+            self.assertFalse(G.allow("again")[0])
+
+    def _broker_flush(self, day, hour):
+        import cf_batch_broker as B
+        ps = self.usage(day, hour) + [
+            mock.patch.object(B, "_post", return_value=(200, {"result": {"request_id": "r1"}})),
+            mock.patch.object(B.L, "rate_acquire", return_value=True),
+            mock.patch.object(B, "_finish")]
+        mocks = [p.start() for p in ps]
+        try:
+            B.queues.clear(); B.pending.clear()
+            G.ALLOW_CACHE.unlink(missing_ok=True)
+            B.queues["@cf/zai-org/glm-5.2"] = [{"payload": {"messages": []}, "t": 0}]
+            self.assertTrue(B.flush_once("@cf/zai-org/glm-5.2"))
+            return mocks[2], mocks[4]
+        finally:
+            for p in ps:
+                p.stop()
+            B.queues.clear(); B.pending.clear()
+
+    def test_broker_refuses_over_cap(self):
+        post, finish = self._broker_flush(182.42, 0)
+        post.assert_not_called()
+        self.assertIn("spend guard refused", finish.call_args.kwargs["error"])
+
+    def test_broker_refuses_over_hourly_ceiling(self):
+        post, finish = self._broker_flush(20, 13)
+        post.assert_not_called()
+        self.assertIn("hourly ceiling", finish.call_args.kwargs["error"])
+
+    def test_broker_refuses_unknown_usage(self):
+        post, _ = self._broker_flush(None, None)
+        post.assert_not_called()
+
+    def test_broker_allows_under(self):
+        post, finish = self._broker_flush(20, 1)
+        post.assert_called_once()
+        finish.assert_not_called()
+
+    def _review_call(self, day, hour):
+        import dual_family_review as D
+        ps = self.usage(day, hour) + [mock.patch.object(
+            D, "_post", return_value=(200, {}, {"result": {"choices": [{"message": {"content": "ok"}}]}}))]
+        mocks = [p.start() for p in ps]
+        try:
+            G.ALLOW_CACHE.unlink(missing_ok=True)
+            try:
+                res = D.call_cf("@cf/zai-org/glm-5.2", [{"role": "user", "content": "x"}], "k")
+            except D.QuotaPause as e:
+                res = e
+            return res, mocks[2]
+        finally:
+            for p in ps:
+                p.stop()
+
+    def test_review_call_refused_over_cap_and_hourly(self):
+        import dual_family_review as D
+        for day, hour in ((182.42, 0), (20, 13), (None, None)):
+            res, post = self._review_call(day, hour)
+            self.assertIsInstance(res, D.QuotaPause)
+            post.assert_not_called()
+
+    def test_review_call_allowed_under(self):
+        res, post = self._review_call(20, 1)
+        self.assertEqual(res["text"], "ok")
+        post.assert_called_once()
 
 if __name__ == "__main__":
     unittest.main()

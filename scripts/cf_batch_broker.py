@@ -211,6 +211,15 @@ def enqueue(model: str, item: dict) -> None:
         wake.set()
 
 
+def spend_allow() -> tuple[bool, str]:
+    """spend_guard's per-call gate (daily cap + hourly ceiling); fails closed."""
+    try:
+        import spend_guard
+        return spend_guard.allow("cf-batch-broker")
+    except Exception as e:  # noqa: BLE001
+        return False, f"spend guard unavailable: {type(e).__name__}: {e}"[:200]
+
+
 def flush_once(model: str) -> bool:
     """Submit one batch for model if one is due. Returns True if it submitted or failed a batch."""
     with lock:
@@ -220,6 +229,14 @@ def flush_once(model: str) -> bool:
         batch = take_batch(q)
     if not batch:
         return False
+    ok, why = spend_allow()
+    if not ok:  # refuse, do not requeue: the caller's own (gated) path decides
+        _log(f"flush:{model}: refused {len(batch)} items: spend guard: {why}")
+        with lock:
+            stats["refused_items"] = stats.get("refused_items", 0) + len(batch)
+        for it in batch:
+            _finish(it, error=f"spend guard refused: {why}"[:200])
+        return True
     try:
         # rate_acquire writes /tmp/vendor-rate: it raises on a full disk. No
         # free slot in its wait: do not send; requeue as a failed submit.

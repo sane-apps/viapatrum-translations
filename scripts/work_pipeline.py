@@ -2032,9 +2032,15 @@ def budget_stop() -> bool:
     """spend_guard.py wrote a budget pause: stop between sections, not only
     between works, so a lane cannot spend for hours past the cap (2026-10-14)."""
     try:
-        return (STAGE / "lanes.paused").read_text(errors="replace").startswith("budget:")
+        if (STAGE / "lanes.paused").read_text(errors="replace").startswith("budget:"):
+            return True
     except OSError:
-        return False
+        pass
+    try:  # daily cap + hourly ceiling, cached 60 s (spend_guard.allow)
+        import spend_guard
+        return not spend_guard.allow("work_pipeline")[0]
+    except Exception:  # noqa: BLE001  fail closed
+        return True
 
 
 def run(slug: str, attempt: int | None = None) -> int:
