@@ -2025,6 +2025,18 @@ def held_with_retries(slug: str, pairs: list[dict]) -> int:
     return n
 
 
+BUDGET_PAUSED = 4  # run() stopped between sections for the daily spending cap
+
+
+def budget_stop() -> bool:
+    """spend_guard.py wrote a budget pause: stop between sections, not only
+    between works, so a lane cannot spend for hours past the cap (2026-10-14)."""
+    try:
+        return (STAGE / "lanes.paused").read_text(errors="replace").startswith("budget:")
+    except OSError:
+        return False
+
+
 def run(slug: str, attempt: int | None = None) -> int:
     """attempt: this work's queue attempt (1 = first); None outside the queue."""
     meta = book_meta(slug)
@@ -2049,12 +2061,17 @@ def run(slug: str, attempt: int | None = None) -> int:
         # sequential within a stretch keeps previous-section context real; parallel across stretches
         stretches = [list(range(i, min(i + 4, len(pairs)))) for i in range(0, len(pairs), 4)]
         def safe(i):
+            if budget_stop():
+                return None  # staged sections keep; the next run resumes here
             try:
                 return process_section(slug, i, pairs, brief, langname)
             except Exception as e:  # one bad section must not kill the work
                 log(slug, f"{pairs[i]['id']}: CRASH {type(e).__name__}: {e}")
                 return None
         list(ex.map(lambda st: [safe(i) for i in st], stretches))
+    if budget_stop():
+        log(slug, "paused between sections: daily spending cap reached (spend_guard.py)")
+        return BUDGET_PAUSED
     intro = make_intro(slug, brief, pairs)
     # A work with any section not passed (held, retries spent or not, or stale)
     # cannot certify this run, so the whole-work read would be thrown away, on
@@ -2569,7 +2586,7 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
             rc = 99
             log(book, f"queue: CRASH {type(e).__name__}: {e}")
         st = status(book) if rc == 0 else {}
-        result = {3: "needs-term-decision", 2: "no-sections", 99: "crash"}.get(rc, "checked")
+        result = {3: "needs-term-decision", 2: "no-sections", 99: "crash", BUDGET_PAUSED: "paused"}.get(rc, "checked")
         if rc == 0:
             ok = (set(st.get("sections", {})) == {"pass"} and st.get("intro_ok") and follow_ok(st.get("followability"), words))
             result = "certified" if ok and apply(book) == 0 else "held"
@@ -2591,6 +2608,9 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
             print(f"audit log failed: {e}", flush=True)
         print(f"queue {book} ({words} words): {result} in {log_rows[book]['minutes']} min", flush=True)
         done += 1
+        if rc == BUDGET_PAUSED:
+            print("queue: daily spending cap reached; lane exits until spend_guard lifts the pause", flush=True)
+            break
     if not done:
         # fathers_watch reads this line: an idle lane is not a dead lane.
         print(f"queue: {IDLE_MARK} (every book in range is certified, parked or taken)", flush=True)

@@ -1660,6 +1660,14 @@ class CrashLoopGuards(unittest.TestCase):
         body = out.split("\n\n[The source continues")[0]
         self.assertTrue(body.rstrip().endswith("x"), "cut lands between sections")
 
+    def test_only_a_budget_pause_stops_sections(self):
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)):
+            self.assertFalse(W.budget_stop())
+            (Path(d) / "lanes.paused").write_text("owner: audit\n")
+            self.assertFalse(W.budget_stop(), "an owner pause lets the current work finish")
+            (Path(d) / "lanes.paused").write_text("budget: $130 spent\n")
+            self.assertTrue(W.budget_stop())
+
     def test_repeated_crash_parks_the_book(self):
         self.assertFalse(W.crash_parked({"result": "crash", "crashes": 2}))
         self.assertTrue(W.crash_parked({"result": "crash", "crashes": 3}))
