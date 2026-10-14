@@ -22,6 +22,7 @@ import glob
 import hashlib
 import json
 import random
+import re
 import sys
 import time
 from pathlib import Path
@@ -104,11 +105,29 @@ def assign_swaps(positives, rng):
     return negs
 
 
-def evaluate(positives, max_per_call=12, cache=None, no_cache=False, cache_path=None):
+RANGE_RE = re.compile(r"\d+\s*[\u2013\u2014-]\s*\d+")
+
+
+def assign_near(positives):
+    """Hard negatives (2026-10-13): a different verse of the SAME book and chapter (4-6 verses away), the
+    pipeline's real error mode. Skips verse ranges (the near verse could sit inside the range) and Psalms
+    (LXX/MT numbering shifts make near verses ambiguous)."""
+    negs = []
+    for i, pos in enumerate(positives):
+        _slug, _sec, clause, ref, _disp, _cf = pos
+        book, chapter, verse = ref
+        if not verse or book == "ps" or RANGE_RE.search(clause or ""):
+            continue
+        near = verse - 4 if verse > 4 else verse + 6
+        negs.append((i, cite.display_ref((book, chapter, near)), "NEG_NEAR"))
+    return negs
+
+
+def evaluate(positives, max_per_call=12, cache=None, no_cache=False, cache_path=None, near=False):
     """Run Jev over positives + swaps. Returns (records, stats)."""
     cache = {} if cache is None else cache
     rng = random.Random(1234)
-    swaps = assign_swaps(positives, rng)
+    swaps = assign_swaps(positives, rng) + (assign_near(positives) if near else [])
     # Group questions by section: one call per section like production.
     groups = {}
     for i, pos in enumerate(positives):
@@ -192,7 +211,7 @@ def summarize(records, stats):
                  f"calls={stats['calls']} cached={stats['cached']}")
     lines.append(f"tokens in={stats['in_tokens']} out={stats['out_tokens']} "
                  f"seconds={stats['seconds']:.1f}")
-    for stratum in ("POS_DIRECT", "POS_CF", "NEG_XTEST", "NEG_STEST"):
+    for stratum in ("POS_DIRECT", "POS_CF", "NEG_XTEST", "NEG_STEST", "NEG_NEAR"):
         rows = [r for r in ok if r["stratum"] == stratum]
         if not rows:
             continue
@@ -222,6 +241,7 @@ def main(argv=None) -> int:
     ap.add_argument("--max-per-call", type=int, default=12)
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--glob", default="")
+    ap.add_argument("--near", action="store_true", help="add same-chapter near-verse negatives (NEG_NEAR)")
     args = ap.parse_args(argv)
     if args.all:
         positives = collect_positives(None, args.seed, args.glob or None)
@@ -237,7 +257,7 @@ def main(argv=None) -> int:
         cache = json.loads(Path(args.cache).read_text(encoding="utf-8"))
         print(f"loaded {len(cache)} cached answers", flush=True)
     records, stats = evaluate(positives, args.max_per_call, cache, args.no_cache,
-                              None if args.no_cache else args.cache)
+                              None if args.no_cache else args.cache, near=args.near)
     if not args.no_cache:
         Path(args.cache).write_text(json.dumps(cache, indent=1), encoding="utf-8")
     if args.out:

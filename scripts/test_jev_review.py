@@ -45,7 +45,7 @@ class JevRoutingTests(unittest.TestCase):
              patch.dict("os.environ", env, clear=False):
             out = jr.jev({"s": 1}, {"v": {}})
         self.assertIn("/ai/run", seen["url"])
-        self.assertEqual(seen["body"]["model"], "typesafe/jev")
+        self.assertEqual(seen["body"]["model"], "@cf/cloudflare/clef")  # default since owner SOP 2026-10-13
         self.assertEqual(seen["body"]["input"]["state"], {"s": 1})
         self.assertEqual(out["answers"], ANSWERS["answers"])
 

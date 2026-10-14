@@ -552,5 +552,17 @@ class SearchProposerTests(unittest.TestCase):
         self.assertEqual(len(rec["tried"]), 2)
 
 
+class SecondOpinionTests(unittest.TestCase):
+    def test_same_model_is_not_a_second_opinion(self):
+        import jev_review as jr
+        import jev_cite_correct as jc
+        keep = jr.CF_MODEL
+        try:
+            jr.CF_MODEL = jc.SECOND_VERIFIER
+            self.assertEqual(jc.second_opinion("x", "y", "John 3:5"), ("same-model", 0.0))
+        finally:
+            jr.CF_MODEL = keep
+
+
 if __name__ == "__main__":
     unittest.main()

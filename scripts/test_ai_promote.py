@@ -529,9 +529,21 @@ class JevGateTests(unittest.TestCase):
 
     def test_missing_key_skips(self):
         entry, bundle = self._entry_bundle()
-        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': ''}):
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': '', 'CF_TOKEN': '', 'CLOUDFLARE_API_TOKEN': ''}):
             self.assertIsNone(promote.jev_citation_gate(entry, bundle))
         self.assertEqual(entry['jev_cites'], {'skipped': 'no-key'})
+
+    def test_clef_hold_bar_is_lower(self):
+        # Clef's contradicts confidences run lower than Jev's (bench 2026-10-13): 0.6 holds for Clef, not for Jev.
+        entry, bundle = self._entry_bundle()
+        cites = self._cites('contradicts', 0.6)
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': 'k'}), \
+             patch('jev_cite_check.check_section', return_value=dict(cites, model='clef')):
+            self.assertTrue(promote.jev_citation_gate(entry, bundle)['held'])
+        entry, bundle = self._entry_bundle()
+        with patch.dict(promote.os.environ, {'TYPESAFE_API_KEY': 'k'}), \
+             patch('jev_cite_check.check_section', return_value=dict(cites, model='jev')):
+            self.assertIsNone(promote.jev_citation_gate(entry, bundle))
 
     def test_api_error_skips(self):
         entry, bundle = self._entry_bundle()

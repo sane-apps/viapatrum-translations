@@ -25,7 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from jev_review import jev  # noqa: E402
+from jev_review import bar, jev  # noqa: E402
 import jev_cite_check as cite  # noqa: E402
 import ai_promote as promote  # noqa: E402
 import kjv_lookup  # noqa: E402
@@ -33,8 +33,8 @@ from llm_bakeoff import vendor_call  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 PROPOSER = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
-VERIFY_CONF = 0.85
-BACKFILL_CONF = 0.9
+VERIFY_CONF = 0.85  # Jev's bar; live bars: jev_review.bar()
+BACKFILL_CONF = 0.9  # Jev's bar; live bars: jev_review.bar()
 OVERLAP_MIN_SHARED = 2
 
 _OVERLAP_STOP = frozenset(
@@ -145,7 +145,7 @@ def search_verses(clause: str, top: int = SEARCH_TOP):
     return sorted(scores, key=lambda r: -scores[r])[:top]
 
 
-TEXT_MATCH_CONF = 0.6
+TEXT_MATCH_CONF = 0.6  # Jev's bar; live bars: jev_review.bar()
 TEXT_MATCH_SHARED = 4
 
 
@@ -348,6 +348,8 @@ def second_opinion(clause: str, greek: str, display: str):
     """Clef's verdict on the same question; ("error", 0.0) when unavailable."""
     import jev_review as jr
     keep = jr.CF_MODEL
+    if keep == SECOND_VERIFIER:  # same model twice is not a second opinion
+        return ("same-model", 0.0)
     try:
         jr.CF_MODEL = SECOND_VERIFIER
         return verify_proposal(clause, greek, display)[:2]
@@ -509,13 +511,13 @@ def correct_item(item, cf_token: str, threshold: float):
         if choice == "supports" and conf >= threshold:
             proposed, display = cand, cand_display
             break
-        if choice == "supports" and conf >= AGREE_CONF:
+        if choice == "supports" and conf >= bar("agree"):
             c2, conf2 = second_opinion(clean_target, greek, cand_display)
             tried.append(f"{cand_display}:clef {c2}@{conf2:.2f}")
-            if c2 == "supports" and conf2 >= AGREE_CONF:
+            if c2 == "supports" and conf2 >= bar("agree", SECOND_VERIFIER):
                 proposed, display, basis = cand, cand_display, "jev+clef"
                 break
-        if (choice == "supports" and conf >= TEXT_MATCH_CONF and cand == top_hit
+        if (choice == "supports" and conf >= bar("text_match") and cand == top_hit
                 and shared >= TEXT_MATCH_SHARED
                 and text_match_strength(clean_target, cand) >= 0.5):
             proposed, display, basis = cand, cand_display, "verifier+text-match"
@@ -618,7 +620,7 @@ def main(argv=None) -> int:
     flags = [json.loads(l) for l in open(args.flags, encoding="utf-8")]
     wanted = {b.strip() for b in args.books.split(",") if b.strip()}
     active = active_claim_text()
-    threshold = args.verify_conf or (BACKFILL_CONF if args.mode == "backfill" else VERIFY_CONF)
+    threshold = args.verify_conf or bar("backfill" if args.mode == "backfill" else "verify")
     items = []
     for flag in flags:
         if args.mode == "correct":

@@ -887,7 +887,15 @@ def clause_override(entry: dict, bundle: dict) -> dict:
     }}
 
 
-JEV_HOLD_CONFIDENCE = 0.9
+JEV_HOLD_CONFIDENCE = 0.9  # Jev's bar; Clef's is lower (jev_review.BARS, bench 2026-10-13)
+
+
+def _hold_bar(model):
+    try:
+        from jev_review import bar
+        return bar("hold", model)
+    except ImportError:
+        return JEV_HOLD_CONFIDENCE
 
 
 def jev_citation_gate(entry: dict, bundle: dict) -> dict | None:
@@ -908,7 +916,7 @@ def jev_citation_gate(entry: dict, bundle: dict) -> dict | None:
     except ImportError as e:
         entry["jev_cites"] = {"skipped": f"import: {e}"}
         return None
-    if not os.environ.get("TYPESAFE_API_KEY"):
+    if not (os.environ.get("CF_TOKEN") or os.environ.get("CLOUDFLARE_API_TOKEN") or os.environ.get("TYPESAFE_API_KEY")):
         entry["jev_cites"] = {"skipped": "no-key"}
         return None
     try:
@@ -919,7 +927,7 @@ def jev_citation_gate(entry: dict, bundle: dict) -> dict | None:
     entry["jev_cites"] = result
     for cite in result.get("cites", []):
         if (cite.get("choice") == "contradicts" and not cite.get("cf")
-                and (cite.get("confidence") or 0) >= JEV_HOLD_CONFIDENCE):
+                and (cite.get("confidence") or 0) >= _hold_bar(result.get("model"))):
             return {"held": True, "display": cite["display"],
                     "confidence": cite["confidence"],
                     "sentence": cite.get("sentence", "")[:200],

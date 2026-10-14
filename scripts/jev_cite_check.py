@@ -18,10 +18,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from jev_review import jev  # noqa: E402
+from jev_review import bar, jev  # noqa: E402
 import ai_promote as promote  # noqa: E402
 
-AUTO_ACCEPT = 0.8
+AUTO_ACCEPT = 0.8  # Jev's bar; the live bar is jev_review.bar("auto_accept", model)
 
 ID_DISPLAY = {
     "gen": "Genesis", "exod": "Exodus", "lev": "Leviticus", "num": "Numbers",
@@ -185,7 +185,7 @@ def check_section(book, section, max_n=12):
             "choice": choice,
             "verdict": VERDICT.get(choice, "unsupported"),
             "confidence": round(conf, 3),
-            "auto": conf >= AUTO_ACCEPT,
+            "auto": conf >= bar("auto_accept", body.get("model")),
             "cf": cf,
         })
     return {"section": section, "model": body.get("model"),

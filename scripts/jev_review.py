@@ -24,8 +24,28 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 API = "https://api.typesafe.ai/v1/systemone"
-# Override with JEV_MODEL=@cf/cloudflare/clef (Jev-compatible, 2026-10-01) to A/B.
-CF_MODEL = os.environ.get("JEV_MODEL", "typesafe/jev")
+# Default is Cloudflare's own Jev-compatible Clef (owner SOP 2026-10-13): it bills as Workers AI, which the startup
+# grant covers, while typesafe/jev bills the AI Gateway balance (card). Bench 2026-10-13 (jev_cite_eval seed 7, 360
+# items): Clef 0/240 false supports, 0 high-confidence wrong (Jev 2), but lower confidence, so fewer auto-accepts at the
+# existing thresholds (0.8: Clef 9/120, Jev 24/120). Set JEV_MODEL=typesafe/jev to use Jev.
+CF_MODEL = os.environ.get("JEV_MODEL", "@cf/cloudflare/clef")
+
+# Confidence bars per model (2026-10-13 bench, jev_cite_eval seed 11 --near: 360 true cites, 980 wrong incl. 260
+# same-chapter near verses; receipts outputs/clef-bench-20261013/). Clef's confidences run lower than Jev's, so the
+# Jev bars would make Clef accept almost nothing and hold almost no wrong verse (0.9 hold: 1/260 near misses).
+# Accept bars match Jev's pass rate with 0 false accepts (Clef's highest false "supports" was 0.20).
+# Hold 0.5 for Clef: catches 60% of near-verse and 98% of other-book errors, false hold on 6% of true cites
+# (Jev at 0.9: 69%, 76%, 2.5%).
+BARS = {
+    "jev": {"auto_accept": 0.8, "verify": 0.85, "backfill": 0.9, "text_match": 0.6, "agree": 0.5, "hold": 0.9},
+    "clef": {"auto_accept": 0.6, "verify": 0.65, "backfill": 0.75, "text_match": 0.45, "agree": 0.4, "hold": 0.5},
+}
+
+
+def bar(name, model=None):
+    """Confidence bar `name` for the model that answered (defaults to the configured CF_MODEL)."""
+    m = (model or CF_MODEL or "").lower()
+    return BARS["clef" if "clef" in m else "jev"][name]
 DEFAULT_ACCOUNT = "2c267ab06352ba2522114c3081a8c5fa"
 TIMEOUT = 25
 
