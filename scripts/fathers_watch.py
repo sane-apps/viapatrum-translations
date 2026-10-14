@@ -227,8 +227,17 @@ def check_jobs() -> tuple[str, str, dict]:
     missing = [j for j in jobs if j not in states]
     # A running job's exit column is its previous run; held-review exit 3 has
     # its own alert (check_held_review).
+    # The Logos build runs inside Terminal (run-logos-build.command), so launchd
+    # only sees `open` exit 0; the build writes its own code here (2026-10-14).
+    logos = "com.saneapps.fathers-logos-build"
+    if logos in states:
+        try:
+            code = (REPO / "outputs/logos_runs/last-exit").read_text().split()[0]
+            states = {**states, logos: (states[logos][0], code)}
+        except (OSError, IndexError):
+            pass
     bad = {j: states[j][1] for j in jobs if j in states and states[j][0] == "-"
-           and states[j][1] not in ("0", "-") and not (j == HELD_REVIEW and states[j][1] == "3")}
+           and states[j][1] not in ("0", "-", "75") and not (j == HELD_REVIEW and states[j][1] == "3")}
     if missing:
         return "fail", f"jobs not loaded: {', '.join(missing)}", info
     if bad:
