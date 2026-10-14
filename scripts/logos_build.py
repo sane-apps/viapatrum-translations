@@ -253,6 +253,26 @@ def scroll_geom():
     return None
 
 
+def thumb_height():
+    """Height of the list's scroll thumb, or 0. Dragging the thumb by its own
+    height scrolls exactly one screen of rows, whatever the list length."""
+    script = ('tell application "System Events"\n'
+              'tell process "Logos"\n'
+              'tell window "Logos Pro"\n'
+              'tell splitter group 1\n'
+              'set ts to size of value indicator 1 of scroll bar 1\n'
+              'log ("TH=" & (item 2 of ts as string))\n'
+              'end tell\nend tell\nend tell\nend tell')
+    rc, out = run(["osascript", "-e", script], timeout=60)
+    for line in out.splitlines() if rc == 0 else []:
+        if line.startswith("TH="):
+            try:
+                return int(line[3:])
+            except ValueError:
+                pass
+    return 0
+
+
 def drag_thumb(y_from, y_to):
     g = scroll_geom()
     if not g:
@@ -470,10 +490,16 @@ def open_edit(title, docx_base, others=()):
             log("no scroll geometry; aborting open_edit")
             return False, matched
         _cx, top, bottom, thumb = g
+        # 80% of the thumb's height is just under one screen of rows. Logos
+        # draws a 16px minimum thumb on the 230-book list (one screen is about
+        # 43px of thumb travel there), so this undershoots, which only costs
+        # steps. A fixed 150px jumped about 3.5 screens and skipped most rows
+        # (2026-10-14: "Discovery of the Cross" was never on screen).
+        step_px = max(20, int(thumb_height() * 0.8))
         drag_thumb(thumb, top + 12)
         list_quiet(timeout=30)
         last_top, stuck = None, 0
-        for step in range(15):
+        for step in range((bottom - top) // step_px + 5):  # stops early at the bottom
             texts = ax_texts()
             cur_top = " ".join(texts[0][1].split()) if texts else ""
             hits = find_title_hits(needle) if texts else []
@@ -504,9 +530,7 @@ def open_edit(title, docx_base, others=()):
             if not g2:
                 break
             _cx2, _top2, _bot2, thumb2 = g2
-            # 150px: viewport shows ~200px of rows, so consecutive
-            # views overlap and no row is skipped between drags.
-            drag_thumb(thumb2, thumb2 + 150)
+            drag_thumb(thumb2, thumb2 + step_px)
     return False, matched
 
 
