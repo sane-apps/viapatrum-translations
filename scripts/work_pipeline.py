@@ -2502,15 +2502,22 @@ def parked(row: dict, book: str = "", pairs: list[dict] | None = None) -> bool:
 QUESTION_PRIORITY = ROOT / "docs" / "question-priority.json"
 
 
+EXCERPT_PRIORITY = ROOT / "docs" / "excerpt-priority.json"
+
+
 def question_priority() -> dict[str, int]:
     """Books the Timeline questions quote, in the order they are needed (owner
     2026-10-13: "if any quoted authors are missing queue those works"). Written
-    by the site's scripts/question_dossiers.py; listed books go first. A missing
-    or broken file changes nothing."""
-    try:
-        books = json.loads(QUESTION_PRIORITY.read_text(encoding="utf-8")).get("books") or []
-    except (OSError, ValueError, AttributeError):
-        return {}
+    by the site's scripts/question_dossiers.py; listed books go first. Then the
+    works behind the topic excerpts that still show older English (owner
+    2026-10-14: "fill out the excerpts make them completed work";
+    docs/excerpt-priority.json). A missing or broken file changes nothing."""
+    books: list = []
+    for path in (QUESTION_PRIORITY, EXCERPT_PRIORITY):
+        try:
+            books += json.loads(path.read_text(encoding="utf-8")).get("books") or []
+        except (OSError, ValueError, AttributeError):
+            continue
     return {b: i for i, b in enumerate(dict.fromkeys(x for x in books if isinstance(x, str)))}
 
 

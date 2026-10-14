@@ -11,12 +11,18 @@ import work_pipeline as W  # noqa: E402
 
 class QuestionPriorityTest(unittest.TestCase):
     def setUp(self):
-        self.old = W.QUESTION_PRIORITY
-        self.tmp = Path(tempfile.mkdtemp()) / "question-priority.json"
-        W.QUESTION_PRIORITY = self.tmp
+        self.old = W.QUESTION_PRIORITY, W.EXCERPT_PRIORITY
+        d = Path(tempfile.mkdtemp())
+        self.tmp, self.excerpts = d / "question-priority.json", d / "excerpt-priority.json"
+        W.QUESTION_PRIORITY, W.EXCERPT_PRIORITY = self.tmp, self.excerpts
 
     def tearDown(self):
-        W.QUESTION_PRIORITY = self.old
+        W.QUESTION_PRIORITY, W.EXCERPT_PRIORITY = self.old
+
+    def test_excerpt_works_follow_the_question_books(self):
+        self.tmp.write_text(json.dumps({"books": ["q1", "shared"]}))
+        self.excerpts.write_text(json.dumps({"books": ["shared", "x1"]}))
+        self.assertEqual(W.question_priority(), {"q1": 0, "shared": 1, "x1": 2})
 
     def test_order_and_duplicates(self):
         self.tmp.write_text(json.dumps({"books": ["b", "a", "b", 3]}))
