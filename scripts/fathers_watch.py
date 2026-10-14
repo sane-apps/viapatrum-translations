@@ -806,6 +806,42 @@ def check_ship_auto() -> tuple[str, str, dict]:
     return "ok", "site matches certified work", info
 
 
+JOB_HEALTH = Path.home() / "SaneApps/infra/SaneProcess/scripts/automation/job_health.py"
+
+
+def _job_health(args: list[str]) -> dict | None:
+    try:
+        r = subprocess.run([sys.executable, str(JOB_HEALTH), "--json", *args],
+                           capture_output=True, text=True, timeout=150)
+        return json.loads(r.stdout.strip().splitlines()[-1])
+    except (OSError, ValueError, IndexError, subprocess.SubprocessError):
+        return None
+
+
+def _jobs_result(result: dict | None, where: str) -> tuple[str, str, dict]:
+    if result is None:
+        return "ok", f"{where}: job check not reachable this pass", {}
+    issues = result.get("issues") or []
+    info = {"issues": issues, "jobs_on": len(result.get("jobs") or [])}
+    if not issues:
+        return "ok", f"{where}: all {info['jobs_on']} jobs on time", info
+    text = "; ".join(f"{i['job']}: {i['text']}" for i in issues[:4]) + (f" (+{len(issues) - 4} more)" if len(issues) > 4 else "")
+    return "fail", f"{where}: {text}"[:400], info
+
+
+def check_jobs_mini() -> tuple[str, str, dict]:
+    """Every scheduled job on the Mini is loaded, alive and on time
+    (SaneProcess job_health.py, 2026-10-14). Fathers exit codes are left to
+    check_jobs above, so one failure is not reported twice."""
+    return _jobs_result(_job_health(["--skip-exit-prefix", "fathers-"]), "Mini")
+
+
+def check_jobs_air() -> tuple[str, str, dict]:
+    """The same for the Air, over ssh. An Air that is asleep or away is not
+    an alert; the Air's own notifier reports the link."""
+    return _jobs_result(_job_health(["--remote", "air"]), "Air")
+
+
 CHECKS = {
     "watch": check_watch,
     "burn": check_burn,
@@ -829,6 +865,8 @@ CHECKS = {
     "logos_lock": check_logos_lock,
     "disk": check_disk,
     "queue": check_queue_depth,
+    "jobs_mini": check_jobs_mini,
+    "jobs_air": check_jobs_air,
 }
 
 # check -> alert id when state != ok; severity is the check's state.
@@ -854,6 +892,8 @@ ALERTS = {
     "e2e": "e2e:red",
     "logos_lock": "logos:stale-lock",
     "disk": "disk:low",
+    "jobs_mini": "jobs:mini",
+    "jobs_air": "jobs:air",
 }
 
 
@@ -868,6 +908,7 @@ def self_heal(results: dict, prior: dict, heals: list[str]) -> None:
                  "--kill"], capture_output=True, text=True, timeout=60).returncode
             heals.append(f"kill hung burn (rc={rc})")
     heal_broker(heals)
+    heal_jobs(results, heals)
     # PID-dead logos lock -> remove (logos_build.py has no stale detection).
     if results["logos_lock"]["state"] == "fail":
         p = REPO / "outputs/logos_build.lock"
@@ -920,6 +961,34 @@ def heal_broker(heals: list[str]) -> None:
     heals.append(f"restarted batch broker onto current code (rc={rc})")
 
 
+def heal_jobs(results: dict, heals: list[str]) -> None:
+    """Two safe repairs on the Mini (2026-10-14): wrap a scheduled job that
+    lacks job-run.sh (job_health skips one that is running), and load a job
+    jobs.json marks on that is not loaded. Anything else waits for a person."""
+    issues = ((results.get("jobs_mini") or {}).get("info") or {}).get("issues") or []
+    if any("job-run.sh" in i["text"] for i in issues):
+        r = _job_health(["--wrap", "--skip-exit-prefix", "fathers-"])
+        heals.append("wrapped unwrapped jobs" if r is not None else "job wrap failed")
+    agents = Path.home() / "Library/LaunchAgents"
+    for i in issues:
+        if i["text"].startswith("not loaded"):
+            plist = agents / f"com.saneapps.{i['job']}.plist"
+            rc = subprocess.run(["launchctl", "bootstrap", f"gui/{os.getuid()}", str(plist)],
+                                capture_output=True, timeout=30).returncode
+            heals.append(f"loaded {i['job']} (rc={rc})")
+
+
+def acknowledged() -> dict[str, str]:
+    """Alert id -> reason, for acknowledgements whose 'until' date is today or later."""
+    try:
+        data = json.loads((OUT / "acknowledged.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    today = datetime.now().date().isoformat()
+    return {aid: f"{v.get('why', '')} (until {v['until']})" for aid, v in data.items()
+            if isinstance(v, dict) and str(v.get("until", "")) >= today and v.get("why")}
+
+
 def take_lock() -> bool:
     """watch.lock is a directory holding "pid" = "<pid> <start epoch>". A lock
     whose holder is no longer a watch pass (pid gone, pid reused by another
@@ -962,7 +1031,7 @@ def main() -> int:
     try:
         prior = PRIOR = load_prior()
         launchctl_states.cache_clear()
-        prior_alerts = {a["id"]: a for a in (prior.get("alerts") or [])}
+        prior_alerts = {a["id"]: a for a in (prior.get("alerts") or []) + (prior.get("acknowledged") or [])}
         results: dict = {}
         for name, fn in CHECKS.items():
             try:
@@ -983,6 +1052,13 @@ def main() -> int:
                 alerts.append({"id": aid, "severity": results[name]["state"],
                                "text": results[name]["detail"],
                                "first_seen": first})
+        # A known, decided alert can be acknowledged until a date with a reason
+        # (outputs/fathers-watch/acknowledged.json: {"id": {"until": "YYYY-MM-DD",
+        # "why": "..."}}), so banners and the daily email stay worth reading.
+        # It comes back on its own when the date passes (2026-10-14).
+        acked_ids = acknowledged()
+        acked = [dict(a, why=acked_ids[a["id"]]) for a in alerts if a["id"] in acked_ids]
+        alerts = [a for a in alerts if a["id"] not in acked_ids]
         overall = "ok"
         if any(a["severity"] == "fail" for a in alerts):
             overall = "fail"
@@ -991,7 +1067,7 @@ def main() -> int:
         tmp = STATUS.with_suffix(".json.tmp")
         tmp.write_text(json.dumps({
             "checked_at": now, "overall": overall, "checks": results,
-            "alerts": alerts, "heals": heals,
+            "alerts": alerts, "acknowledged": acked, "heals": heals,
             "healed_burn_hung": results["burn"]["state"] != "ok" and (
                 bool(prior.get("healed_burn_hung"))
                 or any("kill hung burn" in h for h in heals)),

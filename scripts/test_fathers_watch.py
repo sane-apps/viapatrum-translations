@@ -46,7 +46,10 @@ class WatchTestBase(unittest.TestCase):
                    "OUT": self.out, "STATUS": self.out / "status.json", "ALERTS_LOG": self.out / "alerts.log",
                    "RUN_LOCK": self.out / "watch.lock", "launchctl_states": self.launchctl,
                    "broker_stats": lambda: {"errors": 0}, "ship_ps": lambda: "", "ship_lock_holders": lambda: [],
-                   "shelf_ps": lambda: ""}
+                   "shelf_ps": lambda: "",
+                   # job_health and the broker restart look at the real machine; stub them.
+                   "_job_health": lambda args: {"issues": [], "jobs": []},
+                   "broker_runs_old_code": lambda: False}
         for k, v in patches.items():
             p = mock.patch.object(W, k, v)
             p.start()
@@ -142,6 +145,31 @@ class QueueTests(WatchTestBase):
         self.assertEqual(W.check_lanes()[:2], ("warn", "only 1/3 lanes alive"))
 
 
+class JobHealthTests(WatchTestBase):
+    """2026-10-14: every launchd job on both machines is checked (job_health.py)."""
+
+    def test_a_job_problem_is_an_alert_and_a_clean_run_is_not(self):
+        issue = {"host": "mini", "job": "daily-report", "text": "has not run for 3.0 days (its schedule allows 26 h)"}
+        with mock.patch.object(W, "_job_health", lambda args: {"issues": [issue], "jobs": [{}]}):
+            state, text, _ = W.check_jobs_mini()
+        self.assertEqual(state, "fail")
+        self.assertIn("daily-report: has not run for 3.0 days", text)
+        self.assertEqual(W.check_jobs_air()[0], "ok")
+
+    def test_an_unreachable_air_is_not_an_alert(self):
+        with mock.patch.object(W, "_job_health", lambda args: None):
+            self.assertEqual(W.check_jobs_air()[0], "ok")
+
+    def test_unwrapped_job_is_wrapped_by_self_heal(self):
+        calls, heals = [], []
+        results = {"jobs_mini": {"info": {"issues": [{"job": "x", "text": "runs without job-run.sh, so ..."}]}},
+                   "burn": {"state": "ok"}, "logos_lock": {"state": "ok"}}
+        with mock.patch.object(W, "_job_health", lambda args: calls.append(args) or {"issues": []}):
+            W.heal_jobs(results, heals)
+        self.assertTrue(calls and "--wrap" in calls[0])
+        self.assertEqual(heals, ["wrapped unwrapped jobs"])
+
+
 class AlertLogTests(WatchTestBase):
     def run_main(self):
         W.PRIOR = {}
@@ -152,7 +180,7 @@ class AlertLogTests(WatchTestBase):
     def test_alerts_log_only_on_state_change_and_schema_kept(self):
         self.states[HELD] = ("-", "3")
         st = self.run_main()
-        self.assertEqual(set(st), {"checked_at", "overall", "checks", "alerts", "heals", "healed_burn_hung"})
+        self.assertEqual(set(st), {"checked_at", "overall", "checks", "alerts", "acknowledged", "heals", "healed_burn_hung"})
         self.assertEqual(st["overall"], "fail")
         ids = {a["id"] for a in st["alerts"]}
         self.assertIn("held-review:claude", ids)
@@ -164,6 +192,21 @@ class AlertLogTests(WatchTestBase):
         self.states[HELD] = ("-", "0")
         self.run_main()
         self.assertIn("cleared held-review:claude", (self.out / "alerts.log").read_text())
+
+
+class AcknowledgedTests(AlertLogTests):
+    def test_acknowledged_alert_leaves_the_alert_list_until_its_date(self):
+        self.states[HELD] = ("-", "3")
+        (self.out / "acknowledged.json").write_text(json.dumps(
+            {"held-review:claude": {"until": "2999-01-01", "why": "owner deciding"},
+             "x:old": {"until": "2000-01-01", "why": "expired"}}))
+        st = self.run_main()
+        self.assertNotIn("held-review:claude", {a["id"] for a in st["alerts"]})
+        self.assertEqual(st["acknowledged"][0]["id"], "held-review:claude")
+        self.assertIn("owner deciding", st["acknowledged"][0]["why"])
+        (self.out / "acknowledged.json").write_text(json.dumps(
+            {"held-review:claude": {"until": "2000-01-01", "why": "expired"}}))
+        self.assertIn("held-review:claude", {a["id"] for a in self.run_main()["alerts"]})
 
 
 class SelfAndJobTruthTests(WatchTestBase):
