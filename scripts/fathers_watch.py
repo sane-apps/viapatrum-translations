@@ -257,7 +257,11 @@ def check_held_review() -> tuple[str, str, dict]:
         if code in (None, "-", "0", "3"):
             code = logged[-1]
     if code == "3":
-        return "fail", "weekly held review could not run: Claude not signed in on Mini (last exit 3)", info
+        # held_review.py logs why: "Claude unavailable (You've hit your weekly
+        # limit · resets ...)" is not the same fix as a signed-out CLI.
+        why = re.findall(r"Claude unavailable \((.+?)\);", text if logged else "")
+        reason = why[-1] if why else "Claude not signed in on Mini"
+        return "fail", f"weekly held review could not run: {reason} (last exit 3; retries daily at 04:30)", info
     if code not in (None, "0", "-"):
         return "warn", f"held review last exit {code}", info
     return "ok", f"held review last exit {code}", info
@@ -304,23 +308,47 @@ def expected_lanes() -> int:
     return n or 6
 
 
+LANE_IDLE_MARK = "nothing to start in this lane"  # work_pipeline.IDLE_MARK
+
+
+def lane_idle(name: str, within_s: int = 3600) -> bool:
+    """The lane's last run ended with nothing to do, recently. Not a failure:
+    its whole size range is certified, parked or held by another lane."""
+    out = WP / f"lane{name}.out"
+    try:
+        if time.time() - out.stat().st_mtime > within_s:
+            return False
+        with out.open("rb") as fh:
+            fh.seek(max(0, out.stat().st_size - 4096))
+            tail = fh.read().decode("utf-8", "replace").strip().splitlines()
+    except OSError:
+        return False
+    return bool(tail) and LANE_IDLE_MARK in tail[-1]
+
+
 def check_lanes() -> tuple[str, str, dict]:
-    alive = []
+    alive, idle = [], []
     for f in sorted(WP.glob("lane-*.pid")):
+        name = f.stem.removeprefix("lane-")
         try:
             os.kill(int(f.read_text().strip()), 0)
-            alive.append(f.stem.removeprefix("lane-"))
+            alive.append(name)
         except (OSError, ValueError):
-            pass
+            if lane_idle(name):
+                idle.append(name)
     want = expected_lanes()
-    info = {"alive": alive, "expected": want, "paused": lanes_paused()}
-    if info["paused"]:
+    pause = (WP / "lanes.paused").read_text(errors="replace").strip() if lanes_paused() else ""
+    info = {"alive": alive, "idle": idle, "expected": want, "paused": bool(pause)}
+    if pause.startswith("budget:"):
+        return "ok", f"lanes paused by the daily spending cap; {len(alive)} finishing current work ({pause[:140]})", info
+    if pause:
         return "ok", f"lanes paused by owner; {len(alive)} finishing current work", info
-    if not alive:
+    working = len(alive) + len(idle)
+    if not working:
         return "fail", f"no recert lane running (expected {want})", info
-    if len(alive) < want - 1:
-        return "warn", f"only {len(alive)}/{want} lanes alive", info
-    return "ok", f"{len(alive)}/{want} lanes alive", info
+    if working < want - 1:
+        return "warn", f"only {len(alive)}/{want} lanes alive" + (f" ({len(idle)} idle)" if idle else ""), info
+    return "ok", f"{len(alive)}/{want} lanes alive" + (f", {len(idle)} idle with nothing to do" if idle else ""), info
 
 
 def check_progress() -> tuple[str, str, dict]:
@@ -827,6 +855,7 @@ def self_heal(results: dict, prior: dict, heals: list[str]) -> None:
                 [sys.executable, str(REPO / "scripts/fathers_overnight_health.py"),
                  "--kill"], capture_output=True, text=True, timeout=60).returncode
             heals.append(f"kill hung burn (rc={rc})")
+    heal_broker(heals)
     # PID-dead logos lock -> remove (logos_build.py has no stale detection).
     if results["logos_lock"]["state"] == "fail":
         p = REPO / "outputs/logos_build.lock"
@@ -842,6 +871,41 @@ def self_heal(results: dict, prior: dict, heals: list[str]) -> None:
                     "info": {"healed": True}}
             except OSError:
                 pass
+
+
+BROKER_LABEL = "com.saneapps.cf-batch-broker"
+
+
+def broker_runs_old_code() -> bool:
+    """The broker process started before cf_batch_broker.py last changed.
+    2026-10-14: the broker ran Oct 6 code for eight days, so a fix committed
+    Oct 8 never reached the beliefs job and it failed every night."""
+    try:
+        line = next(l for l in subprocess.check_output(["launchctl", "list"], text=True, timeout=20).splitlines()
+                    if l.endswith(BROKER_LABEL))
+        pid = int(line.split()[0])
+        started = subprocess.check_output(["ps", "-o", "lstart=", "-p", str(pid)], text=True, timeout=10).strip()
+        t0 = datetime.strptime(started, "%a %b %d %H:%M:%S %Y").timestamp()
+        return (REPO / "scripts/cf_batch_broker.py").stat().st_mtime > t0 + 60
+    except (StopIteration, ValueError, OSError, subprocess.SubprocessError):
+        return False
+
+
+def heal_broker(heals: list[str]) -> None:
+    """Restart a broker on old code, only while it holds no work."""
+    if not broker_runs_old_code():
+        return
+    try:
+        st = broker_stats()
+    except Exception:  # noqa: BLE001
+        return
+    if st.get("pending_batches") or any((m or {}).get("queued") for m in (st.get("models") or {}).values()
+                                        if isinstance(m, dict)):
+        heals.append("broker runs old code; restart waits until it holds no work")
+        return
+    rc = subprocess.run(["launchctl", "kickstart", "-k", f"gui/{os.getuid()}/{BROKER_LABEL}"],
+                        capture_output=True, timeout=30).returncode
+    heals.append(f"restarted batch broker onto current code (rc={rc})")
 
 
 def take_lock() -> bool:

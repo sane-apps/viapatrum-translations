@@ -112,11 +112,23 @@ def main() -> int:
         return 0
     notified: dict = state.get("notified", {})
     current = {a["id"]: a for a in (status.get("alerts") or [])}
+    now = datetime.now(timezone.utc)
     for aid, a in current.items():
-        if aid not in notified:
+        # One banner used to be the only word, so alerts sat open for days
+        # (ship:pending 5 days, held review 3, 2026-10-14). An alert that stays
+        # open is repeated: a fail every 12 h, a warn every 24 h. The emailed
+        # daily report lists every open alert too.
+        every_h = 12 if a.get("severity") == "fail" else 24
+        last = notified.get(aid)
+        try:
+            due = last is None or (now - datetime.fromisoformat(last)).total_seconds() >= every_h * 3600
+        except ValueError:
+            due = True
+        if due:
             sev = "FAIL" if a.get("severity") == "fail" else "WARN"
-            notify(f"Fathers {sev}: {aid}", a.get("text", aid))
-            notified[aid] = datetime.now(timezone.utc).isoformat()
+            again = "" if last is None else f" (still open since {a.get('first_seen', '?')[:16].replace('T', ' ')} UTC)"
+            notify(f"Fathers {sev}: {aid}", a.get("text", aid) + again)
+            notified[aid] = now.isoformat()
     for aid in [k for k in notified if k not in current]:
         notify("Fathers recovered", f"{aid} is green again.")
         del notified[aid]

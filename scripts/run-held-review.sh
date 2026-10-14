@@ -1,10 +1,14 @@
 #!/bin/bash
 # Weekly Claude review of held sections (owner 2026-10-03). launchd:
-# com.saneapps.fathers-held-review, Sundays 04:30. scripts/held_review.py
+# com.saneapps.fathers-held-review, daily 04:30 since 2026-10-14: it runs when
+# the last good review is 6+ days old, so a failed week retries the next
+# morning instead of waiting seven days (the Oct 11 run hit Claude's weekly
+# limit and nothing retried). scripts/held_review.py
 # exports sections held for confirmed problems, has headless Claude judge each
 # finding against the source, and releases the sections whose findings are
 # noise or whose real errors its fixes correct; lanes then re-read and certify.
-# Exit 3 = Claude not logged in on the Mini (fathers_watch.py alerts on it).
+# Exit 3 = Claude unavailable: not logged in, or out of usage (fathers_watch.py
+# alerts with the reason held_review.py logged).
 set -u
 export PATH="$HOME/.local/bin:/opt/homebrew/opt/node@24/bin:/opt/homebrew/bin:$PATH"
 ROOT="$HOME/SaneApps/clients/translations"
@@ -29,8 +33,14 @@ cd "$ROOT" || exit 1
 # CLAUDE_CODE_OAUTH_TOKEN, when present in the sane-env loader, authenticates
 # headless claude; otherwise the CLI's own login is used.
 set -a; source "$HOME/.config/nv/env" >/dev/null 2>&1; set +a
+OK_STAMP="$ROOT/outputs/held-review/last-ok"
+if [ -f "$OK_STAMP" ] && [ $(( $(date +%s) - $(stat -f %m "$OK_STAMP") )) -lt $(( 6 * 86400 )) ] && [ "${HELD_REVIEW_FORCE:-0}" != 1 ]; then
+  echo "$(date '+%F %T') held review: last good run $(date -r "$(stat -f %m "$OK_STAMP")" '+%F'), under 6 days; nothing to do"
+  exit 0
+fi
 echo "$(date '+%F %T') held review start"
 timeout 14400 nice -n 10 python3 scripts/held_review.py run
 rc=$?
+[ "$rc" = 0 ] && { mkdir -p "$(dirname "$OK_STAMP")"; touch "$OK_STAMP"; }
 echo "$(date '+%F %T') held review exit $rc"
 exit $rc

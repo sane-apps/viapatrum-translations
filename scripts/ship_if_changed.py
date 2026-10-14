@@ -283,6 +283,15 @@ def shelf_steps(py: str, app: Path) -> list[tuple[str, list[str] | str, int]]:
     ]
 
 
+# Steps that skip what they already finished, so a run that hits its time
+# limit has still moved the shelf forward. A full audiobook rebuild (330 works)
+# takes about three 2 h runs; each timeout used to count as a failure (exit 3)
+# and raise an alert while the shelf was in fact progressing (2026-10-14).
+# After RESUME_MAX timeouts in a row on one step it is a failure again.
+RESUMABLE = ("ebooks", "audiobooks", "word", "upload-direct", "upload-large")
+RESUME_MAX = 5
+
+
 def refresh_library(st: dict) -> int:
     """Build and upload the paid shelf from the shipped build, resuming from
     st["shelf_pending"]["done"]. Returns 0 only when every step returned 0."""
@@ -304,6 +313,14 @@ def refresh_library(st: dict) -> int:
         shelf["step"] = name
         save_state(st)  # a kill from here on is recorded against this step
         rc = with_token(cmd, limit) if isinstance(cmd, str) else run(cmd, limit)
+        timeouts = shelf.setdefault("timeouts", {})
+        if rc == 124 and name in RESUMABLE and timeouts.get(name, 0) + 1 < RESUME_MAX:
+            timeouts[name] = timeouts.get(name, 0) + 1
+            save_state(st)
+            log(f"library: {name} paused at its {limit}s limit ({timeouts[name]} of {RESUME_MAX - 1} allowed); "
+                f"the next run resumes where it stopped")
+            return 0
+        timeouts.pop(name, None)
         if rc != 0:
             shelf["error"] = f"{name} rc={rc}"
             save_state(st)
@@ -405,6 +422,8 @@ def _main() -> int:
         rc = refresh_library(st)
         if rc != 0:
             return finish(st, EXIT_SHELF, f"paid shelf: {st['shelf_pending'].get('error')}; nothing shipped")
+        if st.get("shelf_pending"):  # paused at a time limit: uploads still come first
+            return finish(st, EXIT_OK, "paid shelf paused at its time limit; nothing shipped until it finishes")
         shelf = None
         now = inputs()
         changed = [k for k in now if now[k] != last.get(k)]
@@ -421,6 +440,8 @@ def _main() -> int:
         rc = refresh_library(st)
         if rc != 0:
             return finish(st, EXIT_SHELF, f"paid shelf: {st['shelf_pending'].get('error')}")
+        if st.get("shelf_pending"):
+            return finish(st, EXIT_OK, ("shipped; " if changed else "") + "paid shelf paused at its time limit, resumes next run")
     return finish(st, EXIT_OK, "shipped" if changed else "shelf finished")
 
 

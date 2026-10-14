@@ -71,7 +71,9 @@ class AutoShipTestBase(unittest.TestCase):
                              ("word", " word "), ("assemble", " assemble"),
                              ("upload-direct", "--direct"), ("upload-large", "--base")):
             if needle in text:
-                return 1 if self.fail_step == name else 0
+                if self.fail_step == name:
+                    return getattr(self, "fail_rc", 1)
+                return 0
         return 0
 
 
@@ -97,6 +99,32 @@ class ExitCodeTests(AutoShipTestBase):
         st = self.state()
         self.assertNotIn("shelf_pending", st)
         self.assertTrue(st["last_shelf"]["ok"])
+
+    def test_timeout_on_a_resumable_step_pauses_instead_of_failing(self):
+        self.fail_step, self.fail_rc = "audiobooks", 124
+        self.assertEqual(S.main(), S.EXIT_OK)
+        st = self.state()
+        self.assertEqual(st["shelf_pending"]["done"], ["ebooks"])
+        self.assertNotIn("error", st["shelf_pending"])
+        self.assertEqual(st["shelf_pending"]["timeouts"], {"audiobooks": 1})
+        self.fail_step, self.cmds = None, []
+        self.assertEqual(S.main(), S.EXIT_OK)
+        self.assertNotIn("shelf_pending", self.state())
+
+    def test_endless_timeouts_become_a_failure(self):
+        self.fail_step, self.fail_rc = "audiobooks", 124
+        for _ in range(S.RESUME_MAX - 1):
+            self.assertEqual(S.main(), S.EXIT_OK)
+        self.assertEqual(S.main(), S.EXIT_SHELF)
+        self.assertEqual(self.state()["shelf_pending"]["error"], "audiobooks rc=124")
+
+    def test_paused_upload_after_assemble_still_blocks_the_next_ship(self):
+        self.fail_step, self.fail_rc = "upload-large", 124
+        S.main()
+        self.now = {"text": "t3", "audio": "a1", "library": "l2"}
+        self.cmds = []
+        self.assertEqual(S.main(), S.EXIT_OK)
+        self.assertFalse(any("ship.sh" in c for c in self.cmds))
 
     def test_failed_upload_after_assemble_blocks_the_next_ship(self):
         self.fail_step = "upload-direct"
