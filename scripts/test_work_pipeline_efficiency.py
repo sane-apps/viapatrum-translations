@@ -1645,5 +1645,27 @@ class NoRulingTests(unittest.TestCase):
         self.assertEqual(rows["held"], {"result": "held", "attempts": 2})
 
 
+
+class CrashLoopGuards(unittest.TestCase):
+    """2026-10-14: lane D1 crashed on le Blanc's Theses 60 times in 3 days."""
+
+    def test_small_source_goes_whole(self):
+        self.assertEqual(W.brief_source("[section 1]\nabc"), "[section 1]\nabc")
+
+    def test_huge_source_is_cut_at_a_section_and_says_so(self):
+        src = "\n\n".join(f"[section {i}]\n" + "x" * 1000 for i in range(400))
+        out = W.brief_source(src)
+        self.assertLess(len(out), W.BRIEF_SRC_MAX + 300)
+        self.assertIn("this brief reads the first", out)
+        body = out.split("\n\n[The source continues")[0]
+        self.assertTrue(body.rstrip().endswith("x"), "cut lands between sections")
+
+    def test_repeated_crash_parks_the_book(self):
+        self.assertFalse(W.crash_parked({"result": "crash", "crashes": 2}))
+        self.assertTrue(W.crash_parked({"result": "crash", "crashes": 3}))
+        self.assertTrue(W.crash_parked({"result": "crash", "attempts": 60}))  # row from before the count
+        self.assertFalse(W.crash_parked({"result": "held", "attempts": 60}))
+        self.assertFalse(W.crash_parked({}))
+
 if __name__ == "__main__":
     unittest.main()

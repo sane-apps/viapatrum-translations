@@ -22,6 +22,10 @@ echo "$2" >> "$STEPS"
 exit 0
 """
 
+SPEND_STUB = """import os, sys
+sys.exit(10 if os.environ.get("SPEND_OVER") and sys.argv[1:] == ["check"] else 0)
+"""
+
 
 class RunnerTests(unittest.TestCase):
     def run_job(self, **env):
@@ -30,6 +34,7 @@ class RunnerTests(unittest.TestCase):
             scripts = h / "SaneApps/clients/translations/scripts"
             scripts.mkdir(parents=True)
             (scripts / "receipt_refresh.sh").write_text(REFRESH_STUB)
+            (scripts / "spend_guard.py").write_text(SPEND_STUB)
             (h / ".config/nv").mkdir(parents=True)
             (h / ".config/nv/env").write_text("")
             py = h / "Models/kokoro/.venv/bin/python"
@@ -55,6 +60,11 @@ class RunnerTests(unittest.TestCase):
         rc, ran, out = self.run_job(FAIL_GRADE="1")
         self.assertEqual((rc, ran), (1, ["index", "search", "grade"]))
         self.assertIn("report SKIPPED", out)
+
+    def test_over_the_spending_cap_runs_nothing_and_keeps_the_map(self):
+        rc, ran, out = self.run_job(SPEND_OVER="1")
+        self.assertEqual((rc, ran), (0, []))
+        self.assertIn("skipped for today", out)
 
 
 if __name__ == "__main__":

@@ -529,6 +529,22 @@ def source_dump(pairs: list[dict]) -> str:
     return "\n\n".join(f"[section {p['id']}]\n" + "\n".join(p["source"]) for p in pairs)
 
 
+# The brief prompt carries the source. Le Blanc's Theses (328k words, about
+# 2M characters) went whole: every call timed out (HTTP 408) and lane D1
+# crashed on that one book 60 times from 2026-10-11 to 10-14. Past this size
+# the brief reads the opening of the work, and says so.
+BRIEF_SRC_MAX = 150_000
+
+
+def brief_source(src: str) -> str:
+    if len(src) <= BRIEF_SRC_MAX:
+        return src
+    cut = src.rfind("\n\n[section ", 0, BRIEF_SRC_MAX)
+    cut = cut if cut > 0 else BRIEF_SRC_MAX
+    return (src[:cut] + f"\n\n[The source continues; this brief reads the first {cut:,} of {len(src):,} "
+            "characters. Describe the whole work only from what is shown.]")
+
+
 def make_brief(slug: str, pairs: list[dict], lang: str, meta: dict) -> dict:
     path = STAGE / slug / "brief.json"
     if path.exists():
@@ -538,7 +554,7 @@ def make_brief(slug: str, pairs: list[dict], lang: str, meta: dict) -> dict:
     # No older English here: it anchored the drafter on the very calques we
     # were trying to remove (2026-10-02 run 2 kept "belly-myth").
     head = (f"Work slug: {slug}\nCatalogue title: {meta.get('title', '')}\nAuthor: {meta.get('author', '')}\n"
-            f"Section ids in order: {', '.join(p['id'] for p in pairs)}\n\nSOURCE:\n{src}")
+            f"Section ids in order: {', '.join(p['id'] for p in pairs)}\n\nSOURCE:\n{brief_source(src)}")
     feedback, brief, problems = "", None, []
     for attempt in range(2):
         cand = call(DRAFTER, BRIEF_SYS.format(langname=langname), head + feedback + "\n\nReturn the JSON now.",
@@ -2436,6 +2452,20 @@ def finish_ready(book: str, pairs: list[dict]) -> bool:
     return True
 
 
+IDLE_MARK = "nothing to start in this lane"
+CRASH_MAX = 3  # crashes in a row before a book parks (2026-10-14: le Blanc crashed 60 times)
+
+
+def crash_parked(row: dict) -> bool:
+    """A book that crashed CRASH_MAX runs in a row stops being retried. Each
+    crash re-paid for the calls before it. Rows from before this rule carry
+    no 'crashes' count; their attempts stand in. To retry, set the row's
+    result to anything else (or delete the row) after fixing the cause."""
+    if row.get("result") != "crash":
+        return False
+    return (row.get("crashes") or row.get("attempts") or 0) >= CRASH_MAX
+
+
 def parked(row: dict, book: str = "", pairs: list[dict] | None = None) -> bool:
     """A held work waits for the held review once its last attempt changed no
     section's state (2026-10-06: a flat 2-attempt park stopped books whose
@@ -2520,8 +2550,8 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
                                   "at": time.strftime("%Y-%m-%dT%H:%M:%S")})
                 print(f"queue {book}: needs-source ({len(no_src)} sections)", flush=True)
             continue
-        if parked(log_rows.get(book, {}), book, pairs):
-            continue  # waits for the held review, lanes move on
+        if parked(log_rows.get(book, {}), book, pairs) or crash_parked(log_rows.get(book, {})):
+            continue  # waits for the held review (or a fix, after repeated crashes), lanes move on
         if certified(book):
             continue
         prev = log_rows.get(book, {})
@@ -2546,7 +2576,8 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
         attempts = (log_rows.get(book, {}).get("attempts", 0) or 0) + 1
         log_rows[book] = {"attempts": attempts, "result": result, "words": words, "minutes": round((time.time() - t0) / 60, 1),
                           "status": st, "at": time.strftime("%Y-%m-%dT%H:%M:%S"),
-                          "stalled": (prev.get("status") or {}).get("sections") == st.get("sections")}
+                          "stalled": (prev.get("status") or {}).get("sections") == st.get("sections"),
+                          "crashes": ((prev.get("crashes") or 0) + 1) if result == "crash" else 0}
         if result == "held" and st.get("read_note"):
             log_rows[book]["why"] = st["read_note"]  # e.g. "held: reader unavailable"
         update_log(book, log_rows[book])
@@ -2560,6 +2591,9 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
             print(f"audit log failed: {e}", flush=True)
         print(f"queue {book} ({words} words): {result} in {log_rows[book]['minutes']} min", flush=True)
         done += 1
+    if not done:
+        # fathers_watch reads this line: an idle lane is not a dead lane.
+        print(f"queue: {IDLE_MARK} (every book in range is certified, parked or taken)", flush=True)
     return 0
 
 

@@ -33,9 +33,16 @@ cd "$ROOT" || exit 1
 # Pause switch (owner 2026-10-05, quality audit): while outputs/work-pipeline/
 # lanes.paused exists, no lane is started. Running lanes still finish their
 # current work and exit on lanes.restart (never kill a lane).
-if [ -f "$OUT/lanes.paused" ]; then echo "$(date +%T) lanes paused ($(head -1 "$OUT/lanes.paused"))"; exit 0; fi
 set -a; source "$HOME/.config/nv/env" >/dev/null 2>&1; set +a
 [ -n "${CLOUDFLARE_API_TOKEN:-}" ] || { echo "$(date +%T) no Cloudflare token"; exit 2; }
+# Daily spending cap (owner 2026-10-14: "no chance of credits burning"). Over
+# the cap it writes a "budget:" lanes.paused and touches lanes.restart; the next
+# UTC day it lifts its own pause. An owner pause is never lifted here.
+timeout 120 python3 scripts/spend_guard.py gate-lanes | sed "s/^/$(date +%T) /"
+if [ -f "$OUT/lanes.paused" ]; then echo "$(date +%T) lanes paused ($(head -1 "$OUT/lanes.paused"))"; exit 0; fi
+if [ "$(python3 -c 'import json;print(json.load(open("outputs/spend/today.json")).get("state"))' 2>/dev/null)" != ok ]; then
+  echo "$(date +%T) spend unread; no lanes start this tick"; exit 0
+fi
 # fresh()/refresh() and KW live in receipt_refresh.sh (shared with the beliefs job).
 source "$ROOT/scripts/receipt_refresh.sh" || { echo "$(date +%T) receipt_refresh.sh missing"; exit 1; }
 # The scout writes promoted_drafter.json when a new model wins the bakeoff.
@@ -84,7 +91,8 @@ lane() {  # name args...
   echo $! > "$pidf"
   echo "$(date +%T) lane $name started pid $! checkers $ck"
 }
-# Cost is not a constraint (owner 2026-10-02, CF grant): run many lanes. Work is
+# Cost was not a constraint (owner 2026-10-02, CF grant); since 2026-10-14 the
+# daily cap in spend_guard.py bounds it (above). Work is
 # network-bound (Workers AI calls), so lanes cost little CPU. Lanes skip a book
 # another lane holds (queue.json) and certified books.
 # Phase one (owner 2026-10-03): untranslated early works first, then the

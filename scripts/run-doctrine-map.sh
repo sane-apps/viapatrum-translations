@@ -35,6 +35,13 @@ source "$ROOT/scripts/receipt_refresh.sh" || { echo "$(date +%T) receipt_refresh
 # Grading needs doctrine-grade receipts for both graders and the Nemotron
 # referee (doctrine_map.py receipts_ok). Nothing refreshed them, so the grade
 # step was BLOCKED on 2026-10-04 and 10-05 while the job still exited 0.
+# Daily spending cap (spend_guard.py, 2026-10-14). Indexing embeds and grading
+# calls models, and a report without fresh grades would drop passages whose
+# English changed, so over the cap (or unread) the whole run waits a day and
+# the site keeps the last good map. Not a failure: exit 0.
+if ! timeout 120 python3 scripts/spend_guard.py check >/dev/null; then
+  echo "$(date +%T) beliefs run skipped for today: $(python3 scripts/spend_guard.py status)"; exit 0
+fi
 grade_ok=1
 NOTES="doctrine_map grade via llm_bakeoff.vendor_call, thinking off" refresh @cf/moonshotai/kimi-k2.6 doctrine-grade "$KW" || grade_ok=0
 NOTES="doctrine_map grade via llm_bakeoff.vendor_call" refresh @cf/openai/gpt-oss-120b doctrine-grade '{}' || grade_ok=0
