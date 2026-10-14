@@ -253,24 +253,43 @@ def scroll_geom():
     return None
 
 
-def thumb_height():
-    """Height of the list's scroll thumb, or 0. Dragging the thumb by its own
-    height scrolls exactly one screen of rows, whatever the list length."""
+def set_scroll(value):
+    """Scroll the book list to value (0 top .. 1 bottom) through Accessibility.
+    Exact, unlike dragging the 16px scroll thumb, where a small drag sometimes
+    did not move the list and a large one skipped rows (2026-10-14)."""
     script = ('tell application "System Events"\n'
               'tell process "Logos"\n'
               'tell window "Logos Pro"\n'
               'tell splitter group 1\n'
-              'set ts to size of value indicator 1 of scroll bar 1\n'
-              'log ("TH=" & (item 2 of ts as string))\n'
-              'end tell\nend tell\nend tell\nend tell')
-    rc, out = run(["osascript", "-e", script], timeout=60)
-    for line in out.splitlines() if rc == 0 else []:
-        if line.startswith("TH="):
-            try:
-                return int(line[3:])
-            except ValueError:
-                pass
-    return 0
+              'set value of value indicator 1 of scroll bar 1 to %.4f\n'
+              'end tell\nend tell\nend tell\nend tell' % max(0.0, min(1.0, value)))
+    rc, _out = run(["osascript", "-e", script], timeout=60)
+    time.sleep(1.5)
+    return rc == 0
+
+
+def pb_other_titles(bid):
+    """Titles of every other row in the Personal Books list. The search needle
+    must be unique against the list itself: a --book run's inventory holds one
+    book, so 'On' looked unique and opened every 'On ...' row (2026-10-14)."""
+    try:
+        con = sqlite3.connect("file:%s?mode=ro" % resolve_pb_db(), uri=True)
+        rows = con.execute("SELECT Id, Title FROM Books WHERE IsDeleted=0").fetchall()
+        con.close()
+        return [title for i, title in rows if i != bid and title]
+    except Exception:  # noqa: BLE001
+        return []
+
+
+def pb_book_count():
+    """Rows in the Personal Books list (books not deleted), or 0."""
+    try:
+        con = sqlite3.connect("file:%s?mode=ro" % resolve_pb_db(), uri=True)
+        n = con.execute("SELECT COUNT(*) FROM Books WHERE IsDeleted=0").fetchone()[0]
+        con.close()
+        return n
+    except Exception:  # noqa: BLE001
+        return 0
 
 
 def drag_thumb(y_from, y_to):
@@ -414,6 +433,7 @@ def unique_needle(title, others):
 
 # Most books that can share one title. Fragments on Romans has five.
 MAX_SAME_TITLE = 6
+ROW_PX = 76  # one Personal Books row (title, author, last built), measured 2026-10-14
 
 
 def edit_open_for(docx_base):
@@ -489,17 +509,21 @@ def open_edit(title, docx_base, others=()):
         if not g:
             log("no scroll geometry; aborting open_edit")
             return False, matched
-        _cx, top, bottom, thumb = g
-        # 80% of the thumb's height is just under one screen of rows. Logos
-        # draws a 16px minimum thumb on the 230-book list (one screen is about
-        # 43px of thumb travel there), so this undershoots, which only costs
-        # steps. A fixed 150px jumped about 3.5 screens and skipped most rows
-        # (2026-10-14: "Discovery of the Cross" was never on screen).
-        step_px = max(20, int(thumb_height() * 0.8))
-        drag_thumb(thumb, top + 12)
-        list_quiet(timeout=30)
-        last_top, stuck = None, 0
-        for step in range((bottom - top) // step_px + 5):  # stops early at the bottom
+        _cx, top, bottom, _thumb = g
+        # Step the scroll value so each view moves about 70% of a screen
+        # (rows are 76px): consecutive views overlap and no row is skipped.
+        visible = max(3, (bottom - top) // ROW_PX)
+        n = pb_book_count() or 300
+        step_v = 0.7 * visible / max(1, n - visible)
+        positions, v = [], (step_v / 2 if sweep % 2 else 0.0)
+        while v < 1.0:
+            positions.append(v)
+            v += step_v
+        positions.append(1.0)
+        for step, pos in enumerate(positions):
+            if not set_scroll(pos):
+                log("could not set list scroll; aborting open_edit")
+                return False, matched
             texts = ax_texts()
             cur_top = " ".join(texts[0][1].split()) if texts else ""
             hits = find_title_hits(needle) if texts else []
@@ -518,19 +542,7 @@ def open_edit(title, docx_base, others=()):
                 if result == "open":
                     return True, True
                 hits = find_title_hits(needle)
-            if cur_top == last_top:
-                stuck += 1
-                if stuck >= 2:
-                    break
-            else:
-                stuck = 0
-            last_top = cur_top
             log("sweep %d step %d top: %s" % (sweep, step, cur_top[:70]))
-            g2 = scroll_geom()
-            if not g2:
-                break
-            _cx2, _top2, _bot2, thumb2 = g2
-            drag_thumb(thumb2, thumb2 + step_px)
     return False, matched
 
 
@@ -943,7 +955,7 @@ def main():
                          "error": "still no DB row after sync"})
                 elif open_with_retry(
                         e["title"], e["docx_base"], restate,
-                        [t["title"] for s, t in inv.items() if s != slug]):
+                        pb_other_titles(e["bid"]) or [t["title"] for s, t in inv.items() if s != slug]):
                     if ax_click_button("Build book"):
                         new_lc = poll_build(e["bid"], prev)
                         if new_lc:
@@ -995,7 +1007,7 @@ def main():
                 maybe_refresh(restate)
                 if open_with_retry(
                         e["title"], e["docx_base"], restate,
-                        [t["title"] for s, t in inv.items() if s != slug]) \
+                        pb_other_titles(e["bid"]) or [t["title"] for s, t in inv.items() if s != slug]) \
                         and ax_click_button("Upload"):
                     ok, msg = wait_upload_ok()
                     if ok:
