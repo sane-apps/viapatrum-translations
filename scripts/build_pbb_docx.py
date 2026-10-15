@@ -717,27 +717,27 @@ def _site_words() -> dict[str, int]:
     return out
 
 
-PAINTER = ROOT / "outputs" / "bin" / "logos_cover"
-
-
 def _cover_painter() -> Path | None:
     """The Swift cover painter, compiled on first use. It used to live in /tmp,
     so after a reboot covers were skipped without a word and 8 built books
     could not upload (2026-10-15)."""
+    painter = ROOT / "outputs" / "bin" / "logos_cover"
     src = ROOT / "scripts" / "logos_cover.swift"
-    if PAINTER.is_file() and PAINTER.stat().st_mtime >= src.stat().st_mtime:
-        return PAINTER
-    PAINTER.parent.mkdir(parents=True, exist_ok=True)
+    if not src.is_file():  # a test fixture tree has no painter source
+        return None
+    if painter.is_file() and painter.stat().st_mtime >= src.stat().st_mtime:
+        return painter
+    painter.parent.mkdir(parents=True, exist_ok=True)
     run = __import__("subprocess").run
     try:
-        done = run(["swiftc", "-O", "-o", str(PAINTER), str(src)], capture_output=True, text=True, timeout=600)
+        done = run(["swiftc", "-O", "-o", str(painter), str(src)], capture_output=True, text=True, timeout=600)
     except (OSError, __import__("subprocess").TimeoutExpired) as exc:
         print(f"cover painter: swiftc failed ({exc}); covers skipped", flush=True)
         return None
     if done.returncode != 0:
         print(f"cover painter: swiftc failed: {done.stderr.strip()[:300]}; covers skipped", flush=True)
         return None
-    return PAINTER
+    return painter
 
 
 def _paint_cover(slug: str) -> None:
