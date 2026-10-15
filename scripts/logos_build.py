@@ -527,6 +527,12 @@ def open_edit(title, docx_base, others=()):
             texts = ax_texts()
             cur_top = " ".join(texts[0][1].split()) if texts else ""
             hits = find_title_hits(needle) if texts else []
+            if hits:
+                # Re-read after the list settles: Logos re-sorts in bursts
+                # after builds, and a click on a just-read position opened
+                # the wrong book 21 times in the 2026-10-14 batch.
+                list_quiet(timeout=20)
+                hits = find_title_hits(needle)
             if hits and not any(top <= y <= bottom for _x, y in hits):
                 log("stale coordinates (rows outside list); rescanning")
             # Rows that share this title are tried in list order until the
