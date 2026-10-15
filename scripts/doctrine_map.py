@@ -351,6 +351,13 @@ def broker_payload(model: str, system: str, user: str, max_tokens: int) -> dict 
     return payload
 
 
+def is_permanent_broker_error(err: str) -> bool:
+    """True for a broker batch submit rejected with a 4xx other than 429."""
+    import re
+    m = re.search(r"batch submit (\d{3})", err or "")
+    return bool(m) and 400 <= int(m.group(1)) < 500 and m.group(1) != "429"
+
+
 def grade_call(model: str, system: str, user: str, max_tokens: int = 3000) -> dict | None:
     """W.call, but batch-capable models go through the batch broker only.
     Falls back to W.call (direct, paced by vendor_call) when the broker is down
@@ -372,6 +379,11 @@ def grade_call(model: str, system: str, user: str, max_tokens: int = 3000) -> di
             last = "unparseable: " + content[:120]
         else:
             last = str(out.get("error") or "empty broker result")[:200]
+            # A 4xx batch submit (not 429) is the payload, not the moment:
+            # retrying it only sleeps 75 s per passage. 2026-10-14: 762 gpt-oss
+            # "batch submit 400 oneOf" retries ran the grade into its 3 h timeout.
+            if is_permanent_broker_error(last):
+                break
         if wait:
             time.sleep(wait)
     print(f"grade_call {model} broker failed ({last}); going direct", file=sys.stderr, flush=True)

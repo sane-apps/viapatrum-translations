@@ -279,5 +279,33 @@ class GradeDateExcerptOrphanTests(unittest.TestCase):
                          ("ante-nicene-topics", 110, "/e/ign_smyrn_3/", "Ignatius of Antioch"))
 
 
+
+class BrokerPermanentError(unittest.TestCase):
+    def test_classifies(self):
+        self.assertTrue(D.is_permanent_broker_error("batch submit 400: oneOf at '/' not met"))
+        self.assertFalse(D.is_permanent_broker_error("batch submit 429: rate"))
+        self.assertFalse(D.is_permanent_broker_error("batch submit 500: oops"))
+        self.assertFalse(D.is_permanent_broker_error("batch timed out"))
+
+    def test_400_goes_direct_without_waiting(self):
+        with mock.patch.object(D, "BATCH_ONLY", True), \
+                mock.patch.object(D.LB, "_broker_up", return_value=True), \
+                mock.patch.object(D.LB, "_broker_run", return_value={"error": "batch submit 400: oneOf"}) as run, \
+                mock.patch.object(D.W, "call", return_value={"x": 3}) as direct, \
+                mock.patch.object(D.time, "sleep") as sleep:
+            self.assertEqual(D.grade_call("@cf/openai/gpt-oss-120b", "s", "u"), {"x": 3})
+        self.assertEqual(run.call_count, 1)
+        sleep.assert_not_called()
+        direct.assert_called_once()
+
+    def test_transient_error_still_retries(self):
+        with mock.patch.object(D, "BATCH_ONLY", True), \
+                mock.patch.object(D.LB, "_broker_up", return_value=True), \
+                mock.patch.object(D.LB, "_broker_run", return_value={"error": "batch timed out"}) as run, \
+                mock.patch.object(D.W, "call", return_value={"x": 4}), \
+                mock.patch.object(D.time, "sleep"):
+            D.grade_call("@cf/openai/gpt-oss-120b", "s", "u")
+        self.assertEqual(run.call_count, 3)
+
 if __name__ == "__main__":
     unittest.main()
