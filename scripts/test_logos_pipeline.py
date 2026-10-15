@@ -613,5 +613,97 @@ class AccessibilityPreflight(unittest.TestCase):
                 L.launch_pb_tool()
         self.assertEqual(cm.exception.code, L.EXIT_NO_AX)
 
+
+class RunBudgets(unittest.TestCase):
+    """2026-10-15: a click-dead run relaunched Logos 37 times in 4.5 h holding
+    outputs/build.lock. Relaunches are capped, a running Logos is reused, and
+    the run stops starting books at MAX_RUN_S."""
+
+    def state(self, **kw):
+        s = {"since_restart": 0, "relaunches": 0, "t0": time.time()}
+        s.update(kw)
+        return s
+
+    def test_relaunch_cap_then_clean_limit(self):
+        s = self.state()
+        with mock.patch.object(L, "quit_logos") as q, mock.patch.object(L, "launch_pb_tool") as la, \
+                mock.patch.object(L, "log"):
+            for _ in range(L.MAX_RELAUNCHES):
+                L.relaunch(s, "test")
+            with self.assertRaises(L.RunBudget) as cm:
+                L.relaunch(s, "test")
+        self.assertEqual(cm.exception.rc, L.EXIT_RELAUNCH_LIMIT)
+        self.assertEqual(L.MAX_RELAUNCHES, 3)
+        self.assertEqual(q.call_count, 3)
+        self.assertEqual(la.call_count, 3)
+
+    def test_click_dead_rows_stop_at_the_cap(self):
+        s = self.state()
+        with mock.patch.object(L, "open_edit", return_value=(False, True)), \
+                mock.patch.object(L, "quit_logos"), mock.patch.object(L, "launch_pb_tool") as la, \
+                mock.patch.object(L, "log"):
+            L.open_with_retry("t", "d", s)          # 2 relaunches
+            with self.assertRaises(L.RunBudget):
+                L.open_with_retry("t2", "d2", s)    # 3rd allowed, 4th refused
+        self.assertEqual(la.call_count, 3)
+
+    def test_healthy_running_logos_is_not_restarted_between_books(self):
+        s = self.state(since_restart=10)
+        with mock.patch.object(L, "logos_running", return_value=True), \
+                mock.patch.object(L, "quit_logos") as q, mock.patch.object(L, "launch_pb_tool") as la:
+            L.maybe_refresh(s)
+        q.assert_not_called()
+        la.assert_not_called()
+        self.assertEqual(s["relaunches"], 0)
+
+    def test_gone_logos_is_relaunched_within_budget(self):
+        s = self.state()
+        with mock.patch.object(L, "logos_running", return_value=False), \
+                mock.patch.object(L, "quit_logos"), mock.patch.object(L, "launch_pb_tool") as la, \
+                mock.patch.object(L, "log"):
+            L.maybe_refresh(s)
+        la.assert_called_once()
+        self.assertEqual(s["relaunches"], 1)
+
+    def test_time_limit(self):
+        s = self.state(t0=1000.0)
+        L.check_deadline(s, now=1000.0 + L.MAX_RUN_S - 1)
+        with self.assertRaises(L.RunBudget) as cm:
+            L.check_deadline(s, now=1000.0 + L.MAX_RUN_S)
+        self.assertEqual(cm.exception.rc, L.EXIT_TIME_LIMIT)
+        with mock.patch.object(L, "logos_running", return_value=True), \
+                self.assertRaises(L.RunBudget):
+            L.maybe_refresh(self.state(t0=time.time() - L.MAX_RUN_S - 5))
+
+    def test_ensure_logos_reuses_a_responsive_instance(self):
+        with mock.patch.object(L, "logos_running", return_value=True), \
+                mock.patch.object(L, "run", return_value=(0, "")), mock.patch.object(L.time, "sleep"), \
+                mock.patch.object(L, "osa_splitter", return_value=(0, "T=37")), \
+                mock.patch.object(L, "quit_logos") as q, mock.patch.object(L, "launch_pb_tool") as la, \
+                mock.patch.object(L, "log"):
+            L.ensure_logos()
+        q.assert_not_called()
+        la.assert_not_called()
+
+    def test_ensure_logos_restarts_a_hung_instance_and_launches_a_missing_one(self):
+        with mock.patch.object(L, "logos_running", return_value=True), \
+                mock.patch.object(L, "run", return_value=(0, "")), mock.patch.object(L.time, "sleep"), \
+                mock.patch.object(L, "osa_splitter", return_value=(1, "timeout")), \
+                mock.patch.object(L, "quit_logos") as q, mock.patch.object(L, "launch_pb_tool") as la, \
+                mock.patch.object(L, "log"):
+            L.ensure_logos()
+        q.assert_called_once()
+        la.assert_called_once()
+        with mock.patch.object(L, "logos_running", return_value=False), \
+                mock.patch.object(L, "quit_logos") as q2, mock.patch.object(L, "launch_pb_tool") as la2:
+            L.ensure_logos()
+        q2.assert_not_called()
+        la2.assert_called_once()
+
+    def test_wrapper_has_a_hard_time_limit(self):
+        w = (HERE / "run-logos-build.command").read_text()
+        self.assertIn("timeout --kill-after=60 9000 /usr/bin/python3", w)
+        self.assertGreater(9000, L.MAX_RUN_S)
+
 if __name__ == "__main__":
     unittest.main()

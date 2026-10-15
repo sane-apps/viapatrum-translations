@@ -59,6 +59,72 @@ MAX_BUILDS_PER_RUN = 30
 CATCHUP_TIMEOUT = 3600
 AX_WAIT = 120
 EXIT_NO_AX = 78  # EX_CONFIG: macOS permission missing, retrying cannot help
+# Run budgets (2026-10-15). A run stuck click-dead relaunched Logos every ~6
+# min for 4.5 h (37 relaunches), holding outputs/build.lock the whole time
+# (ships skipped for hours) and leaving a code_sign_clone per launch in
+# /private/var/folders (105 of them filled the disk). Now a run reuses the
+# Logos it finds, relaunches at most MAX_RELAUNCHES times, and stops starting
+# books after MAX_RUN_S; either limit ends the run with its own exit code.
+MAX_RELAUNCHES = 3
+MAX_RUN_S = 2 * 3600
+EXIT_RELAUNCH_LIMIT = 4
+EXIT_TIME_LIMIT = 5
+
+
+class RunBudget(Exception):
+    """A run budget is spent: stop cleanly (receipt written, lock released)."""
+
+    def __init__(self, rc, msg):
+        Exception.__init__(self, msg)
+        self.rc = rc
+
+
+def relaunch(state, why):
+    """Quit and relaunch Logos, counting against MAX_RELAUNCHES for this run."""
+    if state["relaunches"] >= MAX_RELAUNCHES:
+        raise RunBudget(EXIT_RELAUNCH_LIMIT,
+                        "relaunch limit: %d Logos relaunches already this run (%s); stopping"
+                        % (state["relaunches"], why))
+    state["relaunches"] += 1
+    state["since_restart"] = 0
+    log("restarting Logos (#%d of at most %d): %s" % (state["relaunches"], MAX_RELAUNCHES, why))
+    quit_logos()
+    launch_pb_tool()
+
+
+def check_deadline(state, now=None):
+    """Raise RunBudget once the run has held the lock for MAX_RUN_S."""
+    now = time.time() if now is None else now
+    if now - state["t0"] >= MAX_RUN_S:
+        raise RunBudget(EXIT_TIME_LIMIT,
+                        "time limit: run has held outputs/build.lock %d min (limit %d); "
+                        "the rest wait for the next run" % ((now - state["t0"]) // 60, MAX_RUN_S // 60))
+
+
+def ax_ready_now():
+    """True when a running Logos already shows the Personal Books tool."""
+    rc, out = osa_splitter('log ("T=" & (count of static texts))', timeout=60)
+    if rc != 0 or "T=" not in out:
+        return False
+    try:
+        return int(out.split("T=")[1].split()[0].strip()) > 5
+    except (IndexError, ValueError):
+        return False
+
+
+def ensure_logos():
+    """Reuse a running, responsive Logos; launch only when it is gone or hung."""
+    if logos_running():
+        run(["open", "logos4:PersonalBooks"], timeout=30)
+        time.sleep(5)
+        if ax_ready_now():
+            log("reusing the running Logos")
+            return
+        log("running Logos is not responding to Accessibility; restarting it")
+        quit_logos()
+    launch_pb_tool()
+
+
 MAX_PAGES = 25
 
 OSA_APP = ('tell application "System Events" to tell process "Logos" '
@@ -569,12 +635,7 @@ def open_with_retry(title, docx_base, state, others=()):
     tries = 0
     while not opened and matched and tries < 2:
         tries += 1
-        state["relaunches"] += 1
-        state["since_restart"] = 0
-        log("row visible but click-dead; restarting Logos (#%d) "
-            "and retrying" % state["relaunches"])
-        quit_logos()
-        launch_pb_tool()
+        relaunch(state, "row visible but click-dead")
         opened, _matched2 = open_edit(title, docx_base, others)
     return opened
 
@@ -586,13 +647,13 @@ FRESH_EVERY = 2
 
 
 def maybe_refresh(state):
-    if state["since_restart"] >= FRESH_EVERY:
-        state["relaunches"] += 1
-        state["since_restart"] = 0
-        log("proactive Logos restart (#%d) to clear expanded rows"
-            % state["relaunches"])
-        quit_logos()
-        launch_pb_tool()
+    """Before each book: stop at the time limit; relaunch only a Logos that is
+    gone. (Proactive restarts every FRESH_EVERY books are retired: they spent
+    the relaunch budget on healthy sessions. A click-dead row still relaunches
+    reactively in open_with_retry.)"""
+    check_deadline(state)
+    if not logos_running():
+        relaunch(state, "Logos is not running")
 
 
 def db_last_compiled(bid):
@@ -856,6 +917,8 @@ def main():
     receipt = {"started": started.isoformat(timespec="seconds"),
                "mode": " ".join(sys.argv[1:]) or "full",
                "builds": [], "uploads": [], "skipped": [], "failures": []}
+    restate = {"since_restart": 0, "relaunches": 0, "t0": time.time()}
+    limit_rc = 0
     try:
         # Rebuild stale or missing Word files for certified works first
         # (local, no model calls). verify_hold only holds a stale file; without
@@ -936,13 +999,12 @@ def main():
             if args.book:
                 inv = {args.book: inv[args.book]}
         else:
-            # Fresh session even for upload-only: an inherited Logos
-            # session accumulates click-dead expanded rows.
-            quit_logos()
-            launch_pb_tool()
+            # Upload-only: reuse a responsive Logos; click-dead rows relaunch
+            # reactively, within MAX_RELAUNCHES.
+            ensure_logos()
 
         built_now = []
-        restate = {"since_restart": 0, "relaunches": 0}
+        restate["since_restart"] = 0
         if not args.upload_only:
             for slug in need_build:
                 e = inv[slug]
@@ -986,10 +1048,7 @@ def main():
                 need_upload.append(slug)
         if not args.build_only and need_upload:
             if not args.upload_only and built_now:
-                log("restarting Logos to clear expanded-result rows")
-                quit_logos()
-                launch_pb_tool()
-                restate["since_restart"] = 0
+                restate["since_restart"] = 0  # no proactive restart; see maybe_refresh
             uploads = load_uploads()
             for slug in sorted(need_upload):
                 e = inv.get(slug)
@@ -1040,7 +1099,12 @@ def main():
                        os.path.join(REPO, "scripts", "logos_backlog.py")],
                       timeout=120)
         log("backlog regen rc=%d" % rc)
+    except RunBudget as e:
+        limit_rc = e.rc
+        log("LIMIT: %s (exit %d)" % (e, e.rc))
+        receipt["failures"].append({"slug": "-", "phase": "budget", "error": str(e)[:300]})
     finally:
+        receipt["relaunches"] = restate["relaunches"]
         if os.path.exists(LOCK_PATH) and not args.dry_run:
             os.remove(LOCK_PATH)
         if args.dry_run:
@@ -1056,6 +1120,8 @@ def main():
             log("receipt %s builds=%d uploads=%d skipped=%d failures=%d"
                 % (rp, len(receipt["builds"]), len(receipt["uploads"]),
                    len(receipt["skipped"]), len(receipt["failures"])))
+    if limit_rc:
+        sys.exit(limit_rc)
     if receipt["failures"]:
         sys.exit(2)
 

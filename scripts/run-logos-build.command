@@ -35,8 +35,12 @@ until o=$(python3 "$SITE/scripts/ship_lock.py" "$L" $$ 2>&1); do
 done
 echo "$(date "+%F %T") holding outputs/build.lock ($o)"
 cd "$ROOT" || exit 1
-/usr/bin/python3 "$ROOT/scripts/logos_build.py" "$@"
+# Hard backstop over logos_build.py's own 2 h limit (MAX_RUN_S): the lock is
+# never held past 2 h 30 min even if the driver hangs inside one book.
+# 124 = killed by this limit (2026-10-15: a stuck run held the lock 4.5 h).
+/opt/homebrew/bin/timeout --kill-after=60 9000 /usr/bin/python3 "$ROOT/scripts/logos_build.py" "$@"
 rc=$?
+[ "$rc" -eq 124 ] && echo "$(date "+%F %T") LIMIT: logos_build.py killed at the wrapper's 2 h 30 min limit"
 echo "$(date "+%F %T") logos build exit $rc"
 echo "$rc $(date -Iseconds)" > "$STATUS"
 exit $rc
