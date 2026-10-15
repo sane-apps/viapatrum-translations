@@ -158,6 +158,27 @@ class FixtureBuild(unittest.TestCase):
         report = json.loads((self.root / "outputs/logos-catchup/latest.json").read_text())
         self.assertEqual([r["slug"] for r in report["rebuilt"]], ["fx"])
 
+    def test_catchup_holds_book_with_no_scripture(self):
+        book = write_book(self.root, "fx", ["As John 3:16 says, God loved the world."], [])
+        out = book / "fx.docx"
+        B.build_docx("fx", out, None)
+        old, edited = time.time() - 100, time.time() - 50
+        os.utime(out, (old, old))
+        (book / "intro.md").write_text("Plain words with no verse cited.", encoding="utf-8")
+        os.utime(book / "intro.md", (edited, edited))
+        for f in book.rglob("*english*.json"):
+            f.write_text(f.read_text().replace("As John 3:16 says, ", ""), encoding="utf-8")
+        queue = self.root / "outputs" / "work-pipeline"
+        queue.mkdir(parents=True)
+        (queue / "queue.json").write_text(json.dumps({"fx": {"result": "certified"}}))
+        scripts = self.root / "scripts"
+        scripts.mkdir()
+        (scripts / "check_research.py").write_text("ERRORS = []\n", encoding="utf-8")
+        self.assertEqual(B.catchup(), 0)
+        report = json.loads((self.root / "outputs/logos-catchup/latest.json").read_text())
+        self.assertEqual(report["failed"], [])
+        self.assertEqual(report["skipped"], [["fx", "held: no Scripture link in the English"]])
+
 
 class LogosRows(unittest.TestCase):
     TITLES = ["Fragments on John", "Fragments on John", "Fragments on Romans",

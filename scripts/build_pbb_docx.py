@@ -546,6 +546,18 @@ def _own_builder(book_dir: Path) -> bool:
     return (book_dir / "build_book.py").is_file()
 
 
+def _no_scripture_hold(exc: BaseException) -> bool:
+    """True when verify_docx refused only because the English links no
+    Scripture. That book stays off the Logos shelf by rule (the tip
+    exemption), so catch-up counts it as held, not failed: two such books
+    made every nightly run exit 2 and raise a job alert (2026-10-14)."""
+    msg = str(exc)
+    if not msg.startswith("verify_docx refused the build:"):
+        return False
+    errors = [line for line in msg.splitlines()[1:] if line.startswith("- ")]
+    return bool(errors) and all("no Bible datatype links found" in e for e in errors)
+
+
 def catchup(dry_run: bool = False) -> int:
     """Build or refresh Logos files for certified works.
 
@@ -598,6 +610,10 @@ def catchup(dry_run: bool = False) -> int:
             try:
                 receipt = build_docx(slug, existing, None, allow_shrink=True)
             except (SystemExit, ValueError, OSError) as exc:
+                if _no_scripture_hold(exc):
+                    skipped.append((slug, "held: no Scripture link in the English"))
+                    print(f"HOLD {slug}: no Scripture link in the English", flush=True)
+                    continue
                 failed.append((slug, str(exc)))
                 print(f"FAIL {slug}: {exc}", flush=True)
                 continue
@@ -648,6 +664,10 @@ def catchup(dry_run: bool = False) -> int:
             receipt = build_docx(slug, out, None)
         except (SystemExit, ValueError, OSError) as exc:
             yml_path.write_text(original, encoding="utf-8")
+            if _no_scripture_hold(exc):
+                skipped.append((slug, "held: no Scripture link in the English"))
+                print(f"HOLD {slug}: no Scripture link in the English", flush=True)
+                continue
             failed.append((slug, str(exc)))
             print(f"FAIL {slug}: {exc}", flush=True)
             continue
