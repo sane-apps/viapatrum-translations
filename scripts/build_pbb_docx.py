@@ -595,6 +595,9 @@ def catchup(dry_run: bool = False) -> int:
             continue
         named = _scalar(yml_path.read_text(encoding="utf-8"), "docx")
         existing = book_dir / (named or f"{slug}.docx")
+        if existing.is_file() and not dry_run:
+            # A built book with no cover cannot upload (logos_build HOLD).
+            _paint_cover(slug)
         if existing.is_file():
             reason = rebuild_reason(book_dir, existing)
             if not reason:
@@ -714,13 +717,36 @@ def _site_words() -> dict[str, int]:
     return out
 
 
+PAINTER = ROOT / "outputs" / "bin" / "logos_cover"
+
+
+def _cover_painter() -> Path | None:
+    """The Swift cover painter, compiled on first use. It used to live in /tmp,
+    so after a reboot covers were skipped without a word and 8 built books
+    could not upload (2026-10-15)."""
+    src = ROOT / "scripts" / "logos_cover.swift"
+    if PAINTER.is_file() and PAINTER.stat().st_mtime >= src.stat().st_mtime:
+        return PAINTER
+    PAINTER.parent.mkdir(parents=True, exist_ok=True)
+    run = __import__("subprocess").run
+    try:
+        done = run(["swiftc", "-O", "-o", str(PAINTER), str(src)], capture_output=True, text=True, timeout=600)
+    except (OSError, __import__("subprocess").TimeoutExpired) as exc:
+        print(f"cover painter: swiftc failed ({exc}); covers skipped", flush=True)
+        return None
+    if done.returncode != 0:
+        print(f"cover painter: swiftc failed: {done.stderr.strip()[:300]}; covers skipped", flush=True)
+        return None
+    return PAINTER
+
+
 def _paint_cover(slug: str) -> None:
-    """Series cover, when the Swift painter is already built."""
-    painter = Path("/tmp/logos_cover")
-    if not painter.is_file():
-        return
+    """Series cover in assets/cover.jpg, unless the book has one."""
     assets = ROOT / "books" / slug / "assets"
     if (assets / "cover.jpg").is_file() or (assets / "cover.png").is_file():
+        return
+    painter = _cover_painter()
+    if painter is None:
         return
     text = (ROOT / "books" / slug / "book.yml").read_text(encoding="utf-8")
     author = _scalar(text, "author")
