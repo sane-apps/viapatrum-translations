@@ -208,6 +208,7 @@ def load_corpus():
 
 
 def embed_queries(tok: str, qs: list[str]) -> np.ndarray:
+    _spend_gate("doctrine_map.embed", 0.001)
     res = _req("POST", f"{CF}/ai/run/{EMBED}", tok, json.dumps({"queries": qs, "instruction": INSTRUCTION}).encode())
     v = np.asarray((res.get("result") or {}).get("data") or [], dtype=np.float32)
     return v / (np.linalg.norm(v, axis=1, keepdims=True) + 1e-9)
@@ -216,6 +217,7 @@ def embed_queries(tok: str, qs: list[str]) -> np.ndarray:
 def rerank(tok: str, query: str, texts: list[str]) -> list[float]:
     scores = [0.0] * len(texts)
     for i in range(0, len(texts), 50):
+        _spend_gate("doctrine_map.rerank", 0.001)
         res = _req("POST", f"{CF}/ai/run/{RERANK}", tok,
                    json.dumps({"query": query, "contexts": [{"text": t[:2000]} for t in texts[i:i + 50]]}).encode())
         for item in (res.get("result") or {}).get("response") or []:
@@ -358,10 +360,22 @@ def is_permanent_broker_error(err: str) -> bool:
     return bool(m) and 400 <= int(m.group(1)) < 500 and m.group(1) != "429"
 
 
+def spend_guard_refused():
+    import spend_guard
+    return spend_guard.SpendRefused
+
+
+def _spend_gate(caller: str, usd: float) -> None:
+    import spend_guard
+    spend_guard.gate(caller, usd)  # raises SpendRefused
+
+
 def grade_call(model: str, system: str, user: str, max_tokens: int = 3000) -> dict | None:
     """W.call, but batch-capable models go through the batch broker only.
     Falls back to W.call (direct, paced by vendor_call) when the broker is down
     or keeps failing, so a dead broker never stops grading."""
+    if not LB.is_nvidia_model(LB.normalize_model(model)):  # NIM is free; Workers AI is gated per call
+        _spend_gate(f"doctrine_map.grade {model}", 0.0)
     payload = broker_payload(model, system, user, max_tokens) if BATCH_ONLY else None
     if payload is None or not LB._broker_up():
         return W.call(model, system, user, max_tokens=max_tokens)
@@ -379,6 +393,9 @@ def grade_call(model: str, system: str, user: str, max_tokens: int = 3000) -> di
             last = "unparseable: " + content[:120]
         else:
             last = str(out.get("error") or "empty broker result")[:200]
+            if "spend guard refused" in last:  # the cap, not the broker: never go direct
+                import spend_guard
+                raise spend_guard.SpendRefused(last)
             # A 4xx batch submit (not 429) is the payload, not the moment:
             # retrying it only sleeps 75 s per passage. 2026-10-14: 762 gpt-oss
             # "batch submit 400 oneOf" retries ran the grade into its 3 h timeout.
@@ -458,6 +475,8 @@ def q_grade(only: set | None, workers: int) -> int:
         def run(c):
             try:
                 r = q_grade_one(q, c)
+            except spend_guard_refused():
+                raise  # the whole grade stops; graded passages are already saved
             except Exception as e:  # noqa: BLE001
                 print(f"  grade error {q['id']} {c['id']}: {type(e).__name__}: {str(e)[:200]}", flush=True)
                 return c["id"], None

@@ -52,7 +52,22 @@ BUDGET_TAG = "budget:"  # first word of a pause this script wrote; an owner paus
 
 HOURLY_FRACTION = 1 / 12  # hourly ceiling = cap * this
 ALLOW_CACHE = SPEND / "allow.json"
-ALLOW_TTL_S = 60
+ALLOW_TTL_S = 15
+HOLD = SPEND / "hold"  # owner hold: while it exists every gated call refuses, whatever the spend
+REFUSED_TAG = "spend guard refused"  # callers match this and must not fall back to a direct call
+RESERVE_WINDOW_S = 300  # a reservation counts until Cloudflare's usage has caught up with it
+# Conservative per-call estimates, USD (2026-10-16). Real spend 10-15..16 was
+# about $0.005 per deepseek/glm/kimi call; these over-estimate on purpose so
+# parallel workers cannot all start the call that crosses the line.
+USD_PER_M_IN = 1.0
+USD_PER_M_OUT = 4.0
+USD_PER_1K_TTS_CHARS = 0.030  # Aura-2 (docs/GPU_RENDER_COSTS.md)
+USD_EMBED_CALL = 0.001
+_reserved: list = []  # (time, usd) reserved by this process
+
+
+class SpendRefused(RuntimeError):
+    """A gated Workers AI call was refused. Do not fall back to another paid path."""
 
 OVER, UNKNOWN, OK = 10, 2, 0
 
@@ -106,27 +121,92 @@ def decide(day: dict, hour: dict, cap: float) -> tuple[bool, str]:
     return True, f"ok: ${day['usd']:.2f} of ${cap:.0f} today, ${hour['usd']:.2f} of ${ceiling:.2f} this hour"
 
 
-def allow(caller: str = "") -> tuple[bool, str]:
-    """The per-call gate. Cached for ALLOW_TTL_S; never raises."""
+def hold_reason() -> str:
+    try:
+        return "owner hold (outputs/spend/hold): " + (HOLD.read_text(errors="replace").strip()[:200] or "set")
+    except OSError:
+        return ""
+
+
+def _status(caller: str = "") -> dict:
+    """{ok, why, day, hour, cap}, cached ALLOW_TTL_S across processes; never raises."""
     import time
     try:
         c = json.loads(ALLOW_CACHE.read_text())
-        if time.time() - float(c["t"]) < ALLOW_TTL_S:
-            return bool(c["ok"]), str(c["why"])
+        if time.time() - float(c["t"]) < ALLOW_TTL_S and "day" in c:
+            return c
     except (OSError, ValueError, KeyError, TypeError):
         pass
+    day = hour = None
     try:
-        ok, why = decide(read_usage(), read_hour_usage(), cap_usd())
+        du, hu = read_usage(), read_hour_usage()
+        cap = cap_usd()
+        ok, why = decide(du, hu, cap)
+        day, hour = du.get("usd"), hu.get("usd")
     except Exception as e:  # noqa: BLE001  fail closed
-        ok, why = False, f"guard error {type(e).__name__}: {e}"[:300]
+        ok, why, cap = False, f"guard error {type(e).__name__}: {e}"[:300], DEFAULT_CAP_USD
+    c = {"t": time.time(), "ok": ok, "why": why, "day": day, "hour": hour, "cap": cap, "caller": caller}
     try:
         SPEND.mkdir(parents=True, exist_ok=True)
-        tmp = ALLOW_CACHE.with_suffix(".tmp")
-        tmp.write_text(json.dumps({"t": time.time(), "ok": ok, "why": why, "caller": caller}))
+        tmp = ALLOW_CACHE.with_suffix(".tmp.%d" % os.getpid())
+        tmp.write_text(json.dumps(c))
         tmp.replace(ALLOW_CACHE)
     except OSError:
         pass
-    return ok, why
+    return c
+
+
+def allow(caller: str = "") -> tuple[bool, str]:
+    """The per-call gate (no reservation). Owner hold first; never raises."""
+    held = hold_reason()
+    if held:
+        return False, held
+    c = _status(caller)
+    return bool(c["ok"]), str(c["why"])
+
+
+def estimate_usd(in_chars: int = 0, max_tokens: int = 0, tts_chars: int = 0, embed: bool = False) -> float:
+    """Upper-bound guess of one call's cost."""
+    usd = in_chars / 4 * USD_PER_M_IN / 1e6 + max_tokens * USD_PER_M_OUT / 1e6
+    usd += tts_chars * USD_PER_1K_TTS_CHARS / 1000
+    return usd + (USD_EMBED_CALL if embed else 0.0)
+
+
+def reserve(caller: str, usd: float, now: float | None = None) -> tuple[bool, str]:
+    """Pre-call reservation: refuse when today's or this hour's spend plus what
+    this process reserved in the last RESERVE_WINDOW_S plus this call would
+    reach the daily cap or the hourly ceiling. Never raises."""
+    import threading
+    import time
+    held = hold_reason()
+    if held:
+        return False, held
+    c = _status(caller)
+    if not c.get("ok"):
+        return False, str(c.get("why"))
+    now = time.time() if now is None else now
+    lock = globals().setdefault("_RES_LOCK", threading.Lock())
+    with lock:
+        _reserved[:] = [(t, u) for t, u in _reserved if now - t < RESERVE_WINDOW_S]
+        pending = sum(u for _, u in _reserved)
+        cap = float(c.get("cap") or DEFAULT_CAP_USD)
+        day, hour = float(c.get("day") or 0), float(c.get("hour") or 0)
+        if day + pending + usd >= cap:
+            return False, (f"daily cap: ${day:.2f} spent + ${pending:.2f} reserved + ${usd:.3f} this call "
+                           f"reaches ${cap:.0f}")
+        ceiling = hourly_ceiling_usd(cap)
+        if hour + pending + usd >= ceiling:
+            return False, (f"hourly ceiling: ${hour:.2f} this hour + ${pending:.2f} reserved + ${usd:.3f} "
+                           f"this call reaches ${ceiling:.2f}")
+        _reserved.append((now, usd))
+    return True, "reserved"
+
+
+def gate(caller: str, usd: float) -> None:
+    """reserve() or raise SpendRefused (message starts with REFUSED_TAG)."""
+    ok, why = reserve(caller, usd)
+    if not ok:
+        raise SpendRefused(f"{REFUSED_TAG} ({caller}): {why}")
 
 
 def cap_usd() -> float:
@@ -207,6 +287,11 @@ def main(argv: list[str]) -> int:
         except (OSError, ValueError):
             print("spend: no reading yet")
         return 0
+    if cmd in ("check", "allow", "gate-lanes") and hold_reason():
+        print(f"refused: {hold_reason()}")
+        if cmd == "gate-lanes":
+            return 1
+        return OVER
     if cmd == "allow":
         ok, why = allow("cli")
         print(("allowed: " if ok else "refused: ") + why)

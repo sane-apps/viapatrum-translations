@@ -12,6 +12,11 @@ from unittest import mock
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import doctrine_map as D  # noqa: E402
 
+import spend_guard as _spend_guard  # noqa: E402
+# Offline: every gated call may spend (the gate itself is tested in test_spend_guard.py).
+_spend_guard.reserve = lambda caller, usd, now=None: (True, "test stub")
+_spend_guard.allow = lambda caller="": (True, "test stub")
+
 
 def row(i, year, book="b", text="t", section="1", para=0):
     return {"id": f"id{i}", "book": book, "file": "f_english", "section": section, "para": para,
@@ -306,6 +311,39 @@ class BrokerPermanentError(unittest.TestCase):
                 mock.patch.object(D.time, "sleep"):
             D.grade_call("@cf/openai/gpt-oss-120b", "s", "u")
         self.assertEqual(run.call_count, 3)
+
+
+class SpendGate(unittest.TestCase):
+    """2026-10-16: grading, embedding and reranking refuse per call; a broker
+    refusal never falls back to a direct call."""
+
+    def test_grade_call_refused_before_any_request(self):
+        refused = _spend_guard.SpendRefused("spend guard refused (t): owner hold")
+        with mock.patch.object(D, "_spend_gate", side_effect=refused), \
+                mock.patch.object(D.LB, "_broker_run", side_effect=AssertionError("broker")), \
+                mock.patch.object(D.W, "call", side_effect=AssertionError("direct")):
+            with self.assertRaises(_spend_guard.SpendRefused):
+                D.grade_call("@cf/moonshotai/kimi-k2.6", "s", "u")
+
+    def test_broker_refusal_never_goes_direct(self):
+        with mock.patch.object(D, "BATCH_ONLY", True), mock.patch.object(D, "_spend_gate"), \
+                mock.patch.object(D.LB, "_broker_up", return_value=True), \
+                mock.patch.object(D.LB, "_broker_run", return_value={"error": "spend guard refused: over"}), \
+                mock.patch.object(D.W, "call", side_effect=AssertionError("direct")):
+            with self.assertRaises(_spend_guard.SpendRefused):
+                D.grade_call("@cf/moonshotai/kimi-k2.6", "s", "u")
+
+    def test_nim_referee_is_not_gated(self):
+        with mock.patch.object(D, "_spend_gate", side_effect=AssertionError("gated")), \
+                mock.patch.object(D.W, "call", return_value={"x": 1}):
+            self.assertEqual(D.grade_call("nvidia/nemotron-3-ultra-550b-a55b", "s", "u"), {"x": 1})
+
+    def test_embeddings_refused_before_the_request(self):
+        refused = _spend_guard.SpendRefused("spend guard refused (t): owner hold")
+        with mock.patch.object(D, "_spend_gate", side_effect=refused), \
+                mock.patch.object(D, "_req", side_effect=AssertionError("network")):
+            with self.assertRaises(_spend_guard.SpendRefused):
+                D.embed_queries("tok", ["q"])
 
 if __name__ == "__main__":
     unittest.main()

@@ -25,6 +25,7 @@ import spend_guard  # noqa: E402
 
 # The live per-call gate is tested in test_spend_guard.py; offline it would fail closed.
 spend_guard.allow = lambda caller="": (True, "test stub")
+spend_guard.reserve = lambda caller, usd, now=None: (True, "test stub")
 import work_read as R  # noqa: E402
 
 

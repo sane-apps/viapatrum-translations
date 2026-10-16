@@ -353,6 +353,17 @@ def _broker_run(model: str, payload: dict) -> dict:
         return json.loads(r.read() or b"{}")
 
 
+def _spend_refused(model: str, messages: list, max_tokens: int) -> str:
+    """'' when spend_guard reserves this call, else the refusal (fails closed)."""
+    try:
+        import spend_guard as _sg
+    except Exception as e:  # noqa: BLE001
+        return f"spend guard refused (llm_bakeoff.cf_call): guard unavailable: {type(e).__name__}: {e}"[:300]
+    chars = sum(len(str(m.get("content") or "")) for m in messages if isinstance(m, dict))
+    ok, why = _sg.reserve(f"llm_bakeoff.cf_call {model}", _sg.estimate_usd(chars, int(max_tokens or 0)))
+    return "" if ok else f"{_sg.REFUSED_TAG} (llm_bakeoff.cf_call {model}): {why}"
+
+
 def cf_call(
     model: str,
     messages: list,
@@ -368,6 +379,9 @@ def cf_call(
     timeout: int = 120,
 ) -> dict:
     """Workers AI call. See docs/LLM_API_SETUP.md — Gemma/GLM thinking defaults ON."""
+    refused = _spend_refused(model, messages, max_tokens)
+    if refused:  # spend_guard (2026-10-16): no request leaves, broker or direct
+        return {"error": refused, "ms": 0, "spend_refused": True}
     if api == "chat":
         url = f"https://api.cloudflare.com/client/v4/accounts/{account}/ai/v1/chat/completions"
         payload: dict = {
@@ -412,6 +426,9 @@ def cf_call(
                         "neurons": usage.get("neurons") or 0}
             if _cf_reasoning_only(result):
                 return {"error": TRUNCATED_REASONING, "ms": int((time.time() - t0) * 1000), "batched": True}
+        if "spend guard refused" in str(out.get("error") or ""):
+            # The broker refused on the cap: never retry it as a direct call.
+            return {"error": str(out["error"])[:300], "ms": int((time.time() - t0) * 1000), "spend_refused": True}
         if rate_acquire(model) is False:  # broker failed: fall back to a paced direct call
             return {"error": RATE_WAIT_ERR, "ms": int((time.time() - t0) * 1000)}
     body = json.dumps(payload).encode()

@@ -12,6 +12,11 @@ fresh() {  # model purpose [provider]: receipt with that purpose younger than 3 
 }
 refresh() {  # model purpose [kwargs] [provider] [label]; returns 1 when the smoke fails
   fresh "$1" "$2" "${4:-cf}" && return 0
+  # A Workers AI smoke is a paid call: spend_guard first (2026-10-16). NIM is free.
+  if [ "${4:-cf}" = cf ] && ! timeout 120 python3 "$HOME/SaneApps/clients/translations/scripts/spend_guard.py" allow >/dev/null; then
+    echo "$(date +%T) receipt REFUSED ${5:-$1}: spend guard ($(python3 "$HOME/SaneApps/clients/translations/scripts/spend_guard.py" status))"
+    return 1
+  fi
   if timeout 400 ruby "$GATE" --provider "${4:-cf}" --model "$1" --purpose "$2" \
     --notes "${NOTES:-work_pipeline via llm_bakeoff.vendor_call, thinking off}" --kwargs "${3:-$KW}" --smoke >/dev/null 2>&1; then
     echo "$(date +%T) receipt refreshed ${5:-$1}"

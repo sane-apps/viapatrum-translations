@@ -214,6 +214,9 @@ def call(model: str, system: str, user: str, max_tokens: int = 8000, expect: tup
             max_tokens=send, profile=profile,
         )
         err = str(r.get("error") or "")
+        if r.get("spend_refused"):
+            print(f"call {model} refused: {err[:200]}", file=sys.stderr, flush=True)
+            return None
         if not err or (err.startswith("truncated") and r.get("content")):
             obj = work_read.parse_obj(r.get("content", ""), expected_keys=expect)
             if obj is not None:
