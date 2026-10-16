@@ -1,0 +1,217 @@
+{
+ "excerpt_id": "augustine-on-faith-and-the-creed:12",
+ "section": "12",
+ "edition": {
+  "language": "lat",
+  "path": "books/augustine-on-faith-and-the-creed/translations/aofatc_source.json"
+ },
+ "source_text": "Credimus etiam illum tertio die resurrexisse a mortuis, primogenitum consecuturis fratribus, quos in adoptionem filiorum dei uocauit, quos conparticipes et coheredes suos esse dignatus est.",
+ "thought_title": "The risen Christ as firstborn among adopted brothers",
+ "orientation": "Augustine is expounding the creed's article on the resurrection, after having treated Christ's crucifixion and burial.",
+ "pass_a_gloss": "We believe also [that] he on the third day rose from [the] dead, [the] firstborn for [the] brothers [who are] about to follow, whom into adoption of sons of God he called, whom co-sharers and co-heirs his own to be he deemed worthy.",
+ "lemmas": [
+  {
+   "form": "resurrexisse",
+   "lemma": "resurgo",
+   "gloss": "to have risen"
+  },
+  {
+   "form": "mortuis",
+   "lemma": "mortuus",
+   "gloss": "the dead"
+  },
+  {
+   "form": "primogenitum",
+   "lemma": "primogenitus",
+   "gloss": "firstborn"
+  },
+  {
+   "form": "consecuturis",
+   "lemma": "consequor",
+   "gloss": "about to follow"
+  },
+  {
+   "form": "fratribus",
+   "lemma": "frater",
+   "gloss": "brothers"
+  },
+  {
+   "form": "adoptionem",
+   "lemma": "adoptio",
+   "gloss": "adoption"
+  },
+  {
+   "form": "filiorum",
+   "lemma": "filius",
+   "gloss": "sons"
+  },
+  {
+   "form": "uocauit",
+   "lemma": "uoco",
+   "gloss": "he called"
+  },
+  {
+   "form": "conparticipes",
+   "lemma": "conparticeps",
+   "gloss": "sharers"
+  },
+  {
+   "form": "coheredes",
+   "lemma": "coheres",
+   "gloss": "co-heirs"
+  },
+  {
+   "form": "dignatus est",
+   "lemma": "dignor",
+   "gloss": "he considered worthy"
+  }
+ ],
+ "choices": [
+  {
+   "term": "primogenitum",
+   "english": "firstborn",
+   "why": "Glossary term for Christ as firstborn among many adopted brothers; keeps the familial and resurrection context.",
+   "rejected": [
+    "eldest brother",
+    "prime-born"
+   ]
+  },
+  {
+   "term": "consecuturis fratribus",
+   "english": "for the brothers who were to follow",
+   "why": "Future active participle conveys that the brothers will follow Christ in resurrection; 'follow' keeps the temporal sequence.",
+   "rejected": [
+    "future brothers",
+    "brothers to come"
+   ]
+  },
+  {
+   "term": "in adoptionem filiorum dei",
+   "english": "into the adoption of sons of God",
+   "why": "Literal rendering of the phrase; 'sons' preserves the biblical language of adoption.",
+   "rejected": [
+    "as sons of God",
+    "into divine sonship"
+   ]
+  },
+  {
+   "term": "conparticipes et coheredes suos esse",
+   "english": "to be sharers and co-heirs with himself",
+   "why": "Keeps the compound forms with 'co-' to show joint participation and inheritance with Christ.",
+   "rejected": [
+    "partakers and fellow heirs",
+    "sharers and joint heirs"
+   ]
+  },
+  {
+   "term": "dignatus est",
+   "english": "he considered worthy",
+   "why": "Deponent verb with personal subject; renders the act of deeming them worthy.",
+   "rejected": [
+    "he deigned",
+    "he was pleased"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Romans 8:29",
+   "method": "wording",
+   "note": "primogenitum in multis fratribus"
+  },
+  {
+   "display": "Romans 8:15",
+   "method": "wording",
+   "note": "spiritum adoptionis filiorum"
+  },
+  {
+   "display": "Romans 8:17",
+   "method": "wording",
+   "note": "coheredes autem Christi"
+  }
+ ],
+ "pass_b_english": [
+  "We also believe that on the third day he rose from the dead, the firstborn for the brothers who were to follow, whom he called into the adoption of sons of God and whom he deigned to make sharers and co-heirs with himself."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "d207579d36b02bc885d659bff52b19f246162e33620651f1530101a7929c5ae0",
+ "source_sha256": "b8ae1489b3c1ca872f962c15eb56f1c2e45c4ec350f43ea02eb7d0d21cd32bcd",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "whom he considered worthy",
+     "source_quote": "quos conparticipes et coheredes suos esse dignatus est",
+     "why": "'dignatus est' means 'he deigned/condescended,' not 'considered worthy.' God graciously made them sharers, not judged them worthy.",
+     "fix": "whom he deigned to make sharers and co-heirs with himself",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "dignatus est = deigned/condescended, not 'considered worthy'; reverses agency of grace"
+    }
+   ],
+   "edits": [
+    {
+     "old": "whom he considered worthy to be sharers and co-heirs with himself",
+     "new": "whom he deigned to make sharers and co-heirs with himself"
+    }
+   ],
+   "fixed": [
+    "Changed 'considered worthy' to 'deigned to make' because 'dignatus est' means 'he deigned/condescended,' not 'considered worthy.'"
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "for the brothers who were to follow",
+    "source_quote": "consecuturis fratribus",
+    "why": "\"consecuturis\" means \"those who would follow/come after,\" not \"who were to follow\" as purpose; \"primogenitus\" is title, \"firstborn for\" misrepresents dative of advantage/benefit as purpose.",
+    "fix": "the firstborn among the brothers who would follow him",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "'consecuturis' is future participle dative: 'who were to follow' is accurate. 'firstborn for' reasonably renders dative of advantage; no meaning lost."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:kimi+glm",
+ "confidence": "source_verified"
+}
