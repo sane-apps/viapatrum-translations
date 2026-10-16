@@ -107,6 +107,14 @@ READ_EDITS = os.environ.get("WP_READ_EDITS", "0") == "1"
 # Third-family referee for disputed residue (owner 2026-10-02: use NV too).
 # NVIDIA Nemotron 3 Ultra 550B; falls back to FALLBACK if NIM is unavailable.
 REFEREE = os.environ.get("WP_REFEREE", "nvidia/nemotron-3-ultra-550b-a55b")
+# Ultra times out when NIM is busy (2026-10-16: 5+ min on a one-line smoke).
+# Then the next model in REFEREES rules (NVIDIA, free). The paid Qwen
+# FALLBACK no longer referees: its rulings were held as uncertified anyway, so
+# 170 such sections paid for nothing. No NVIDIA ruling = no ruling, no spend.
+# Chain, first that answers rules (owner 2026-10-16: "have 5 model fallbacks so
+# stalls on work is unlikely"; order from the referee bench, outputs/referee-bench/).
+REFEREES = [REFEREE] + [m for m in os.environ.get("WP_REFEREE_BACKUPS", "nvidia/nemotron-3-super-120b-a12b").split(",")
+                        if m and m != REFEREE]
 FAMILY = {DRAFTER: _drafter_family(DRAFTER), FALLBACK: "qwen"}
 for _m in CHECKERS + JUDGES:
     FAMILY[_m] = next((f for f in ("kimi", "glm", "gpt-oss", "llama", "mistral", "gemma", "nemotron", "qwen") if f in _m), _m)
@@ -1041,8 +1049,8 @@ def referee(sec: dict, english: list[str], findings: list[dict], langname: str, 
     """Third family rules on the residue after repairs. Findings both checkers
     found independently stand; one-checker findings (merely upheld, or with
     leaked self-doubt) stand only if the referee also calls them real.
-    info["model"] names the model that ruled (REFEREE, or FALLBACK when NIM
-    failed), so a pass records who really cleared it."""
+    info["model"] names the model that ruled (the first in REFEREES that
+    answered), so a pass records who really cleared it."""
     keep = [f for f in findings if f.get("agreed_by") and not f.get("_self_doubt")]
     disputed = [f for f in findings if f not in keep]
     if not disputed:
@@ -1051,10 +1059,11 @@ def referee(sec: dict, english: list[str], findings: list[dict], langname: str, 
                         for n, f in enumerate(disputed))
     user = ("SOURCE:\n" + "\n".join(sec["source"]) + "\n\nENGLISH:\n" + "\n".join(english)
             + f"\n\nREPORTED PROBLEMS:\n{listing}\n\nReturn the JSON now.")
-    obj = call(REFEREE, ADJ_SYS.format(langname=langname), user, max_tokens=3000, expect=("rulings",))
-    used = REFEREE
-    if obj is None:
-        obj, used = call(FALLBACK, ADJ_SYS.format(langname=langname), user, max_tokens=3000, expect=("rulings",)), FALLBACK
+    obj, used = None, REFEREE
+    for used in REFEREES:
+        obj = call(used, ADJ_SYS.format(langname=langname), user, max_tokens=3000, expect=("rulings",))
+        if obj is not None:
+            break
     if obj is None:
         # Both referees failed: every disputed finding stays open, marked as
         # unruled so the hold does not call it a confirmed problem.

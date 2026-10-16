@@ -1496,8 +1496,11 @@ class CheckerBudgetTests(unittest.TestCase):
         """No-edits path with the real referee(); only call() is mocked."""
         conf = [{"class": "omission", "quote": "B", "upheld_by": "x"}]
 
+        self.called = []
+
         def fake_call(model, system, user, **k):
-            if model == W.REFEREE and not nim_up:
+            self.called.append(model)
+            if model in (W.REFEREES if nim_up is None else [W.REFEREE]) and not nim_up:
                 return None
             return {"rulings": [{"n": 1, "real": False, "why": "fine"}]}
         with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), mock.patch.object(W, "log"), \
@@ -1513,10 +1516,13 @@ class CheckerBudgetTests(unittest.TestCase):
         self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", W.REFEREE))
         self.assertNotIn("fallback", j["checks"])
         j = self.run_referee_pass(nim_up=False)
-        # The fallback referee is named, and its ruling does not certify (Wave A, 2026-10-07).
-        self.assertEqual((j["_status"], j["checks"]["referee"]), ("hold", W.FALLBACK))
-        self.assertEqual(j["checks"]["fallback"][-1]["checker"], "referee")
-        self.assertEqual(j["checks"]["fallback"][-1]["model"], W.FALLBACK)
+        # Ultra down: the next NVIDIA referee in the chain rules and is named (2026-10-16).
+        self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", W.REFEREES[1]))
+        self.assertNotIn("fallback", j["checks"])
+        j = self.run_referee_pass(nim_up=None)
+        # Every NVIDIA referee down: no ruling, and the paid FALLBACK is never asked to referee.
+        self.assertEqual(j["_status"], "hold")
+        self.assertNotIn(W.FALLBACK, self.called)
 
 
 class ReadWithTruncationTests(unittest.TestCase):
