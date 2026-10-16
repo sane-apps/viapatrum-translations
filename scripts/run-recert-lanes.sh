@@ -77,10 +77,6 @@ NLANE=0
 # since the beliefs job also smokes a doctrine-grade Nemotron receipt nightly.
 NOTES="work_pipeline referee via llm_bakeoff.vendor_call" refresh nvidia/nemotron-3-ultra-550b-a55b \
   translation-qa '{"reasoning_effort":"none"}' nvidia nemotron-3-ultra
-# Backup referee when Ultra times out (work_pipeline.REFEREE_BACKUP, 2026-10-16).
-NOTES="work_pipeline backup referee via llm_bakeoff.vendor_call" refresh nvidia/nemotron-3-super-120b-a12b \
-  translation-qa '{"reasoning_effort":"none"}' nvidia nemotron-3-super
-
 # Re-gate held sections offline each tick (no LLM): gate fixes release false
 # holds once no lane is on the book (2026-10-03 stall fixes).
 timeout 300 python3 scripts/regate_held.py >> "$OUT/regate.log" 2>&1 || true

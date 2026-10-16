@@ -105,15 +105,16 @@ FALLBACK = "@cf/qwen/qwen3.8-27b"  # used only when a checker errors out
 # read-fix + polish loop.
 READ_EDITS = os.environ.get("WP_READ_EDITS", "0") == "1"
 # Third-family referee for disputed residue (owner 2026-10-02: use NV too).
-# NVIDIA Nemotron 3 Ultra 550B; falls back to FALLBACK if NIM is unavailable.
+# NVIDIA Nemotron 3 Ultra 550B. The paid Qwen FALLBACK no longer referees: its
+# rulings were held as uncertified anyway, so 170 sections paid for nothing.
+# When Ultra does not answer, the disputed findings get no ruling and the
+# section waits for the held review (no stall: the lane moves on; no spend).
 REFEREE = os.environ.get("WP_REFEREE", "nvidia/nemotron-3-ultra-550b-a55b")
-# Ultra times out when NIM is busy (2026-10-16: 5+ min on a one-line smoke).
-# Then the next model in REFEREES rules (NVIDIA, free). The paid Qwen
-# FALLBACK no longer referees: its rulings were held as uncertified anyway, so
-# 170 such sections paid for nothing. No NVIDIA ruling = no ruling, no spend.
-# Chain, first that answers rules (owner 2026-10-16: "have 5 model fallbacks so
-# stalls on work is unlikely"; order from the referee bench, outputs/referee-bench/).
-REFEREES = [REFEREE] + [m for m in os.environ.get("WP_REFEREE_BACKUPS", "nvidia/nemotron-3-super-120b-a12b").split(",")
+# Backup referees (WP_REFEREE_BACKUPS, comma list) must clear the referee bench
+# bar: keep >=85% of real errors, answer >=90%, median <60 s. On 2026-10-16 no
+# free NVIDIA model did (best: Gemma 4 31B kept 76%; outputs/referee-bench/
+# REPORT.md), so the chain is Ultra alone (owner: "if they just suck we can skip it").
+REFEREES = [REFEREE] + [m for m in os.environ.get("WP_REFEREE_BACKUPS", "").split(",")
                         if m and m != REFEREE]
 FAMILY = {DRAFTER: _drafter_family(DRAFTER), FALLBACK: "qwen"}
 for _m in CHECKERS + JUDGES:

@@ -45,18 +45,8 @@ fi
 grade_ok=1
 NOTES="doctrine_map grade via llm_bakeoff.vendor_call, thinking off" refresh @cf/moonshotai/kimi-k2.6 doctrine-grade "$KW" || grade_ok=0
 NOTES="doctrine_map grade via llm_bakeoff.vendor_call" refresh @cf/openai/gpt-oss-120b doctrine-grade '{}' || grade_ok=0
-# Referee: Nemotron 3 Ultra; when its smoke times out (NIM busy, 2026-10-15/16),
-# NVIDIA's next-best Nemotron referees instead of skipping the whole grade.
-if ! NOTES="doctrine_map referee via llm_bakeoff.vendor_call" refresh nvidia/nemotron-3-ultra-550b-a55b \
-  doctrine-grade '{"reasoning_effort":"none"}' nvidia nemotron-3-ultra; then
-  if NOTES="doctrine_map backup referee via llm_bakeoff.vendor_call" refresh nvidia/nemotron-3-super-120b-a12b \
-    doctrine-grade '{"reasoning_effort":"none"}' nvidia nemotron-3-super; then
-    export WP_REFEREE=nvidia/nemotron-3-super-120b-a12b
-    echo "$(date +%T) referee: Ultra unavailable, Nemotron 3 Super rules today"
-  else
-    grade_ok=0
-  fi
-fi
+NOTES="doctrine_map referee via llm_bakeoff.vendor_call" refresh nvidia/nemotron-3-ultra-550b-a55b \
+  doctrine-grade '{"reasoning_effort":"none"}' nvidia nemotron-3-ultra || grade_ok=0
 rc=0
 for step in index search grade report; do
   if [ "$step" = grade ] && [ "$grade_ok" = 0 ]; then

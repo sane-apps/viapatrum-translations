@@ -1515,9 +1515,12 @@ class CheckerBudgetTests(unittest.TestCase):
         j = self.run_referee_pass(nim_up=True)
         self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", W.REFEREE))
         self.assertNotIn("fallback", j["checks"])
-        j = self.run_referee_pass(nim_up=False)
-        # Ultra down: the next NVIDIA referee in the chain rules and is named (2026-10-16).
-        self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", W.REFEREES[1]))
+        # Default chain is Ultra alone: no free model cleared the referee bench (2026-10-16).
+        self.assertEqual(W.REFEREES, [W.REFEREE])
+        with mock.patch.object(W, "REFEREES", [W.REFEREE, "nvidia/backup"]):
+            j = self.run_referee_pass(nim_up=False)
+        # Ultra down with a configured backup: the backup rules and is named.
+        self.assertEqual((j["_status"], j["checks"]["referee"]), ("pass", "nvidia/backup"))
         self.assertNotIn("fallback", j["checks"])
         j = self.run_referee_pass(nim_up=None)
         # Every NVIDIA referee down: no ruling, and the paid FALLBACK is never asked to referee.
