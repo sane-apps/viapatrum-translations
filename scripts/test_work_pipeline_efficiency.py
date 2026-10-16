@@ -1389,6 +1389,23 @@ class ParkAndQueueTests(unittest.TestCase):
             self.assertTrue(any("no brief" in note for note in notes), notes)
             self.assertEqual(rows["next"]["result"], "held")
 
+    def test_finish_list_limits_lanes_to_named_and_reopened_books(self):
+        with tempfile.TemporaryDirectory() as d:
+            q = Path(d) / "queue.json"
+            q.write_text(json.dumps({"reopened-live": {"result": "reopened", "attempts": 0}}))
+            (Path(d) / "finish_only.json").write_text(json.dumps({"books": ["named"]}))
+            calls = []
+            with mock.patch.object(W, "QUEUE_LOG", q), mock.patch.object(W, "STAGE", Path(d)), \
+                    mock.patch.object(W, "site_books", return_value=[(10, "named"), (10, "new-work"), (10, "reopened-live")]), \
+                    mock.patch.object(W, "certified", return_value=False), \
+                    mock.patch.object(W, "load_pairs", return_value=[{"id": "1", "source": ["Verba."]}]), \
+                    mock.patch.object(W, "run", side_effect=lambda book, attempt=1: calls.append(book) or 0), \
+                    mock.patch.object(W, "status", return_value={"sections": {"hold": 1}}), \
+                    mock.patch.object(W, "log"), mock.patch("builtins.print"), \
+                    mock.patch.dict(sys.modules, {"audit_log": mock.MagicMock()}):
+                W.queue(5, 0)
+            self.assertCountEqual(calls, ["named", "reopened-live"])
+
     def test_queue_exits_when_the_site_dist_is_missing(self):
         with tempfile.TemporaryDirectory() as d:
             q = Path(d) / "queue.json"

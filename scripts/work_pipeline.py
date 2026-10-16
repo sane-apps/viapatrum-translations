@@ -2252,6 +2252,15 @@ def promote_applied(slug: str, written: list[Path]) -> None:
 
 SITE_SCRIPTS = Path.home() / "SaneApps/websites/fathers.saneapps.com/scripts"
 QUEUE_LOG = STAGE / "queue.json"
+# Finish list (owner 2026-10-15 "nothing new until sales"; 2026-10-16 "isnt
+# burning tokens for no reason"). While STAGE/finish_only.json exists, lanes take only the
+# books it names plus reopened rows (those cost a re-read). Brand-new works and
+# routine re-checks of live works wait. Delete the file to lift it.
+def finish_only() -> set[str] | None:
+    try:
+        return set(json.loads((STAGE / "finish_only.json").read_text())["books"])
+    except FileNotFoundError:
+        return None
 
 
 def certified(book: str) -> bool:
@@ -2549,6 +2558,10 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
         print(f"queue: {e}; exiting until dist/works is back", flush=True)
         return 0
     prio = question_priority()
+    allow = finish_only()
+    if allow is not None:
+        listed = [(w, b) for w, b in listed if b in allow or log_rows.get(b, {}).get("result") == "reopened"]
+        print(f"queue: finish list on; {len(listed)} books eligible", flush=True)
     for words, book in sorted(listed, key=lambda wb: (
             prio.get(wb[1], len(prio)),
             log_rows.get(wb[1], {}).get("result") != "reopened",
