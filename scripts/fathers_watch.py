@@ -961,6 +961,18 @@ def heal_broker(heals: list[str]) -> None:
     heals.append(f"restarted batch broker onto current code (rc={rc})")
 
 
+def disabled_labels() -> set[str]:
+    """Labels `launchctl disable` turned off in this GUI domain. An owner pause
+    (2026-10-16: the five Workers AI jobs, "keep them paused until the cap is
+    fixed") is a disable plus bootout; healing must never load one back."""
+    try:
+        out = subprocess.run(["launchctl", "print-disabled", f"gui/{os.getuid()}"],
+                             capture_output=True, text=True, timeout=30).stdout
+    except (OSError, subprocess.SubprocessError):
+        return set()
+    return set(re.findall(r'"([^"]+)"\s*=>\s*(?:disabled|true)', out))
+
+
 def heal_jobs(results: dict, heals: list[str]) -> None:
     """Two safe repairs on the Mini (2026-10-14): wrap a scheduled job that
     lacks job-run.sh (job_health skips one that is running), and load a job
@@ -970,8 +982,16 @@ def heal_jobs(results: dict, heals: list[str]) -> None:
         r = _job_health(["--wrap", "--skip-exit-prefix", "fathers-"])
         heals.append("wrapped unwrapped jobs" if r is not None else "job wrap failed")
     agents = Path.home() / "Library/LaunchAgents"
+    disabled = None
     for i in issues:
         if i["text"].startswith("not loaded"):
+            if disabled is None:
+                disabled = disabled_labels()
+            if f"com.saneapps.{i['job']}" in disabled:
+                # 2026-10-14 18:05 UTC this loop loaded all five paused Workers AI jobs
+                # back 4 min after their bootout. A disabled job is a person's pause.
+                heals.append(f"left {i['job']} unloaded: disabled with launchctl (an owner pause)")
+                continue
             plist = agents / f"com.saneapps.{i['job']}.plist"
             rc = subprocess.run(["launchctl", "bootstrap", f"gui/{os.getuid()}", str(plist)],
                                 capture_output=True, timeout=30).returncode

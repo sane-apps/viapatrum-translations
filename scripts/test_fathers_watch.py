@@ -169,6 +169,32 @@ class JobHealthTests(WatchTestBase):
         self.assertTrue(calls and "--wrap" in calls[0])
         self.assertEqual(heals, ["wrapped unwrapped jobs"])
 
+    def _not_loaded(self, disabled_out):
+        heals, boots = [], []
+        results = {"jobs_mini": {"info": {"issues": [
+            {"job": "cf-batch-broker", "text": "not loaded (launchctl bootstrap it)"},
+            {"job": "daily-report", "text": "not loaded (launchctl bootstrap it)"}]}}}
+
+        def fake_run(cmd, **kw):
+            if cmd[:2] == ["launchctl", "print-disabled"]:
+                return mock.Mock(stdout=disabled_out, returncode=0)
+            boots.append(cmd)
+            return mock.Mock(returncode=0, stdout="")
+        with mock.patch.object(W.subprocess, "run", fake_run):
+            W.heal_jobs(results, heals)
+        return heals, boots
+
+    def test_a_disabled_job_is_never_loaded_back(self):
+        out = 'disabled services = {\n\t\t"com.saneapps.cf-batch-broker" => disabled\n\t\t"com.x.y" => enabled\n}\n'
+        heals, boots = self._not_loaded(out)
+        self.assertEqual(len(boots), 1)
+        self.assertIn("com.saneapps.daily-report.plist", boots[0][-1])
+        self.assertIn("left cf-batch-broker unloaded: disabled with launchctl (an owner pause)", heals)
+
+    def test_an_enabled_not_loaded_job_is_still_loaded(self):
+        heals, boots = self._not_loaded('disabled services = {\n\t\t"com.saneapps.cf-batch-broker" => enabled\n}\n')
+        self.assertEqual(len(boots), 2)
+
 
 class AlertLogTests(WatchTestBase):
     def run_main(self):
