@@ -17,8 +17,14 @@ Kinds reopened (choose with --kinds):
 Never reopened: confirmed or unruled findings (held_review.py judges those),
 "no locked source" and other permanent holds, and sections a held review kept.
 
+--sections ID,ID reopens exactly those held sections whatever their kind,
+after a person fixed what held them outside the pipeline, e.g. a locked
+source corrected against the page scan (2026-10-18, Placeus). Still never a
+permanent hold, and only on a finish-list book that is not withheld.
+
 Usage (Mini, translations root):
   python3 scripts/reopen_held.py --book SLUG [--kinds gate,fallback] [--dry-run]
+  python3 scripts/reopen_held.py --book SLUG --sections 18,100 --why "source fixed from the scan" [--dry-run]
 """
 from __future__ import annotations
 
@@ -52,7 +58,7 @@ def kept_by_review(book: str) -> set[str]:
     return out
 
 
-def reopen(book: str, kinds: list[str], dry_run: bool) -> dict:
+def reopen(book: str, kinds: list[str], dry_run: bool, sections: set[str] | None = None, why: str = "") -> dict:
     allow = W.finish_only()
     if allow is not None and book not in allow:
         raise SystemExit(f"{book} is not on finish_only.json; lanes would not take it")
@@ -74,9 +80,12 @@ def reopen(book: str, kinds: list[str], dry_run: bool) -> dict:
             continue
         if j.get("_status") != "hold" or j.get("_permanent"):
             continue
-        if not any(KINDS[k](j) for k in kinds):
+        if sections is not None:
+            if p["id"] not in sections and f.stem not in sections:
+                continue
+        elif not any(KINDS[k](j) for k in kinds):
             continue
-        if p["id"] in kept or f.stem in kept:
+        elif p["id"] in kept or f.stem in kept:
             skipped_kept.append(f.stem)
             continue
         opened.append(f.stem)
@@ -88,7 +97,8 @@ def reopen(book: str, kinds: list[str], dry_run: bool) -> dict:
     if opened and not dry_run:
         row = W.update_log(book, {}).get(book) or {}
         W.update_log(book, {**row, "result": "reopened", "attempts": 0,
-                            "why": f"reopened {len(opened)} held sections ({','.join(kinds)}) for a lane redo"})
+                            "why": f"reopened {len(opened)} held sections ("
+                                   + (why or ",".join(kinds)) + ") for a lane redo"})
     return {"book": book, "reopened": opened, "skipped_kept": skipped_kept, "dry_run": dry_run}
 
 
@@ -97,12 +107,19 @@ def main() -> int:
     ap.add_argument("--book", required=True)
     ap.add_argument("--kinds", default="gate,fallback")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--sections", default="", help="reopen exactly these held section ids (a person fixed the cause)")
+    ap.add_argument("--why", default="", help="what the person fixed, for the queue row")
     a = ap.parse_args()
     kinds = [k for k in a.kinds.split(",") if k]
     bad = [k for k in kinds if k not in KINDS]
     if bad:
         raise SystemExit(f"unknown kinds: {bad}")
-    r = reopen(a.book, kinds, a.dry_run)
+    secs = {x for x in a.sections.split(",") if x} or None
+    if secs and not a.why:
+        raise SystemExit("--sections needs --why (what was fixed)")
+    r = reopen(a.book, kinds, a.dry_run, secs, a.why)
+    if secs and set(r["reopened"]) != secs:
+        print(f"not reopened: {sorted(secs - set(r['reopened']))} (not held, permanent, or missing)")
     print(json.dumps({**r, "reopened_n": len(r["reopened"])}))
     return 0
 
