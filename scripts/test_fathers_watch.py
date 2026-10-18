@@ -139,6 +139,26 @@ class QueueTests(WatchTestBase):
         self.assertEqual(W.check_certified()[0], "ok")
         self.assertEqual(W.check_progress()[0], "ok")
 
+    def test_idle_lanes_under_the_finish_list_are_not_a_stall(self):
+        """2026-10-18: with finish_only.json on every lane ends "nothing to
+        start"; no-finish and few-certified fired for days with nothing broken."""
+        old = time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime(time.time() - 30 * 3600))
+        self.write_queue({"a": {"result": "held", "at": old}})
+        (self.wp / "finish_only.json").write_text("{}")
+        for n in ("C1", "C2"):
+            (self.wp / f"lane-{n}.pid").write_text("999999")
+            (self.wp / f"lane{n}.out").write_text("queue: nothing to start in this lane (every book in range is certified, parked or taken)\n")
+        # Two of three idle: still a stall.
+        self.assertEqual(W.check_progress()[0], "warn")
+        self.assertEqual(W.check_certified()[0], "warn")
+        (self.wp / "lane-E1.pid").write_text("999999")
+        (self.wp / "laneE1.out").write_text("queue: nothing to start in this lane\n")
+        self.assertEqual(W.check_progress()[0], "ok")
+        self.assertIn("finish list on", W.check_certified()[1])
+        # A lane that is alive and not finishing keeps the alert.
+        (self.wp / "lane-E1.pid").write_text(str(os.getpid()))
+        self.assertEqual(W.check_progress()[0], "warn")
+
     def test_lanes_count_from_runner(self):
         self.assertEqual(W.expected_lanes(), 3)
         (self.wp / "lane-C1.pid").write_text(str(os.getpid()))

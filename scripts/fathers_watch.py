@@ -363,6 +363,26 @@ def check_lanes() -> tuple[str, str, dict]:
     return "ok", f"{len(alive)}/{want} lanes alive" + (f", {len(idle)} idle with nothing to do" if idle else ""), info
 
 
+def lanes_idle_by_design() -> str:
+    """Why no lane is working when that is not a fault, else "". 2026-10-18:
+    with the owner's finish list on (finish_only.json, 2026-10-15/16: finish
+    what exists, nothing new) every lane ends "nothing to start", so
+    pipeline:no-finish and pipeline:few-certified fired for days with nothing
+    broken. A lane that is alive, or one that is not idle, keeps both alerts."""
+    alive, idle = [], 0
+    for f in WP.glob("lane-*.pid"):
+        name = f.stem.removeprefix("lane-")
+        try:
+            os.kill(int(f.read_text().strip()), 0)
+            alive.append(name)
+        except (OSError, ValueError):
+            idle += lane_idle(name)
+    if alive or idle < expected_lanes():
+        return ""
+    return ("finish list on, nothing eligible to start" if (WP / "finish_only.json").exists()
+            else "every lane idle with nothing to start")
+
+
 def check_progress() -> tuple[str, str, dict]:
     """Some lane finished a work (any result) in the last 3 h."""
     q = load_queue()
@@ -374,6 +394,9 @@ def check_progress() -> tuple[str, str, dict]:
     if lanes_paused() or age_h is None:
         return "ok", "lanes paused" if lanes_paused() else "queue empty", info
     if age_h > 3:
+        why = lanes_idle_by_design()
+        if why:
+            return "ok", f"lanes idle ({why}); last work finished {age_h:.0f} h ago", info
         return "warn", f"no lane finished a work in {age_h:.0f} h", info
     return "ok", f"last work finished {age_h:.1f} h ago", info
 
@@ -386,6 +409,8 @@ def check_certified() -> tuple[str, str, dict]:
     info = {"certified_window": n, "window_h": CERT_WINDOW_H, "floor": CERT_FLOOR}
     if lanes_paused() or not q:
         return "ok", f"{n} certified in {CERT_WINDOW_H} h (lanes paused)", info
+    if n < CERT_FLOOR and lanes_idle_by_design():
+        return "ok", f"{n} certified in {CERT_WINDOW_H} h (lanes idle: {lanes_idle_by_design()})", info
     if n < CERT_FLOOR:
         return "warn", f"{n} works certified in the last {CERT_WINDOW_H} h (floor {CERT_FLOOR})", info
     return "ok", f"{n} works certified in the last {CERT_WINDOW_H} h", info
