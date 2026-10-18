@@ -66,6 +66,13 @@ EXIT_NO_AX = 78  # EX_CONFIG: macOS permission missing, retrying cannot help
 # Logos it finds, relaunches at most MAX_RELAUNCHES times, and stops starting
 # books after MAX_RUN_S; either limit ends the run with its own exit code.
 MAX_RELAUNCHES = 3
+# 2026-10-18: every built book leaves the next row click-dead until Logos is
+# relaunched, so a healthy run spends one relaunch per book and the run-wide
+# cap of 3 stopped every night after 3-4 books with exit 4 (10-16..10-18).
+# MAX_RELAUNCHES now counts relaunches since the last book built or uploaded
+# (a stuck book still stops the run at 3); MAX_RELAUNCHES_TOTAL bounds the
+# run (code_sign_clone per launch) next to MAX_RUN_S.
+MAX_RELAUNCHES_TOTAL = 10
 MAX_RUN_S = 2 * 3600
 EXIT_RELAUNCH_LIMIT = 4
 EXIT_TIME_LIMIT = 5
@@ -80,14 +87,22 @@ class RunBudget(Exception):
 
 
 def relaunch(state, why):
-    """Quit and relaunch Logos, counting against MAX_RELAUNCHES for this run."""
-    if state["relaunches"] >= MAX_RELAUNCHES:
+    """Quit and relaunch Logos: at most MAX_RELAUNCHES since the last book
+    succeeded, at most MAX_RELAUNCHES_TOTAL in the run."""
+    stalled = state.get("stalled", state["relaunches"])
+    if stalled >= MAX_RELAUNCHES:
+        raise RunBudget(EXIT_RELAUNCH_LIMIT,
+                        "relaunch limit: %d Logos relaunches since the last book succeeded (%s); stopping"
+                        % (stalled, why))
+    if state["relaunches"] >= MAX_RELAUNCHES_TOTAL:
         raise RunBudget(EXIT_RELAUNCH_LIMIT,
                         "relaunch limit: %d Logos relaunches already this run (%s); stopping"
                         % (state["relaunches"], why))
     state["relaunches"] += 1
+    state["stalled"] = stalled + 1
     state["since_restart"] = 0
-    log("restarting Logos (#%d of at most %d): %s" % (state["relaunches"], MAX_RELAUNCHES, why))
+    log("restarting Logos (#%d this run, #%d of at most %d since the last success): %s"
+        % (state["relaunches"], state["stalled"], MAX_RELAUNCHES, why))
     quit_logos()
     launch_pb_tool()
 
@@ -917,7 +932,7 @@ def main():
     receipt = {"started": started.isoformat(timespec="seconds"),
                "mode": " ".join(sys.argv[1:]) or "full",
                "builds": [], "uploads": [], "skipped": [], "failures": []}
-    restate = {"since_restart": 0, "relaunches": 0, "t0": time.time()}
+    restate = {"since_restart": 0, "relaunches": 0, "stalled": 0, "t0": time.time()}
     limit_rc = 0
     try:
         # Rebuild stale or missing Word files for certified works first
@@ -1030,6 +1045,7 @@ def main():
                             ok = True
                             built_now.append(slug)
                             restate["since_restart"] += 1
+                            restate["stalled"] = 0  # a success resets the relaunch budget
                             inv[slug]["last_compiled"] = new_lc
                             receipt["builds"].append(
                                 {"slug": slug, "bid": e["bid"],
@@ -1077,6 +1093,7 @@ def main():
                     ok, msg = wait_upload_ok()
                     if ok:
                         restate["since_restart"] += 1
+                        restate["stalled"] = 0  # a success resets the relaunch budget
                         uploads[slug] = datetime.datetime.now(
                             ).astimezone().isoformat(timespec="seconds")
                         save_uploads(uploads)

@@ -647,6 +647,21 @@ class RunBudgets(unittest.TestCase):
                 L.open_with_retry("t2", "d2", s)    # 3rd allowed, 4th refused
         self.assertEqual(la.call_count, 3)
 
+    def test_a_success_resets_the_relaunch_budget(self):
+        """2026-10-18: one relaunch per built book is normal; only 3 in a row
+        without a success stop the run, and the run total is capped."""
+        s = self.state(stalled=0)
+        with mock.patch.object(L, "quit_logos"), mock.patch.object(L, "launch_pb_tool") as la, \
+                mock.patch.object(L, "log"):
+            for _ in range(L.MAX_RELAUNCHES_TOTAL):
+                L.relaunch(s, "test")
+                s["stalled"] = 0  # the book then built
+            with self.assertRaises(L.RunBudget) as cm:
+                L.relaunch(s, "test")
+        self.assertEqual(cm.exception.rc, L.EXIT_RELAUNCH_LIMIT)
+        self.assertEqual(la.call_count, L.MAX_RELAUNCHES_TOTAL)
+        self.assertLessEqual(L.MAX_RELAUNCHES_TOTAL, 10)
+
     def test_healthy_running_logos_is_not_restarted_between_books(self):
         s = self.state(since_restart=10)
         with mock.patch.object(L, "logos_running", return_value=True), \
