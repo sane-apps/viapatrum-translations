@@ -95,8 +95,28 @@ def neurons_this_hour(token: str, account: str) -> int:
     return int(((groups[0].get("sum") or {}).get("totalNeurons")) or 0) if groups else 0
 
 
+# A usage read that fails is retried before it counts as unknown (2026-10-18:
+# one GraphQL 502 at 05:44 refused a grade call and killed a 2 h beliefs grade
+# run). Still fail closed when every attempt fails.
+READ_RETRY_SLEEPS_S = (2, 6)
+
+
+def _with_retries(read):
+    import time
+    for pause in READ_RETRY_SLEEPS_S:
+        r = read()
+        if "error" not in r or "no Cloudflare token" in r["error"]:
+            return r
+        time.sleep(pause)
+    return read()
+
+
 def read_hour_usage() -> dict:
     """Spend in the current UTC hour (no free-tier offset), or {'error': ...}. Never raises."""
+    return _with_retries(_read_hour_usage_once)
+
+
+def _read_hour_usage_once() -> dict:
     token = _token()
     if not token:
         return {"error": "no Cloudflare token in the environment"}
@@ -226,6 +246,10 @@ def usd_of(neurons: int) -> float:
 
 def read_usage() -> dict:
     """Today's spend, or {'error': ...}. Never raises."""
+    return _with_retries(_read_usage_once)
+
+
+def _read_usage_once() -> dict:
     token = _token()
     if not token:
         return {"error": "no Cloudflare token in the environment"}

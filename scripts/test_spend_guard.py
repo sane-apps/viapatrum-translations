@@ -329,5 +329,33 @@ class HoldAndReservation(unittest.TestCase):
                 B.queues.clear()
         self.assertTrue(fin.call_args.kwargs["error"].startswith(G.REFUSED_TAG))
 
+class UsageReadRetries(unittest.TestCase):
+    """2026-10-18: one GraphQL 502 refused a grade call and killed a 2 h
+    beliefs grade. A failed read is retried; all attempts failing still refuses."""
+
+    def test_transient_error_then_success(self):
+        import spend_guard as G
+        seq = iter([{"error": "HTTPError: HTTP Error 502: Bad Gateway"}, {"neurons": 5, "usd": 0.0}])
+        with mock.patch.object(G, "_read_hour_usage_once", side_effect=lambda: next(seq)), \
+                mock.patch("time.sleep") as sl:
+            self.assertEqual(G.read_hour_usage(), {"neurons": 5, "usd": 0.0})
+        self.assertEqual(sl.call_count, 1)
+
+    def test_every_attempt_fails_still_unknown(self):
+        import spend_guard as G
+        err = {"error": "HTTPError: HTTP Error 502: Bad Gateway"}
+        with mock.patch.object(G, "_read_usage_once", return_value=err) as r, mock.patch("time.sleep"):
+            self.assertIn("error", G.read_usage())
+        self.assertEqual(r.call_count, len(G.READ_RETRY_SLEEPS_S) + 1)
+
+    def test_missing_token_is_not_retried(self):
+        import spend_guard as G
+        err = {"error": "no Cloudflare token in the environment"}
+        with mock.patch.object(G, "_read_usage_once", return_value=err) as r, mock.patch("time.sleep") as sl:
+            G.read_usage()
+        self.assertEqual(r.call_count, 1)
+        sl.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()
