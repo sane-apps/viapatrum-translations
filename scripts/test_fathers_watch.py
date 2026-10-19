@@ -49,7 +49,9 @@ class WatchTestBase(unittest.TestCase):
                    "shelf_ps": lambda: "",
                    # job_health and the broker restart look at the real machine; stub them.
                    "_job_health": lambda args: {"issues": [], "jobs": []},
-                   "broker_runs_old_code": lambda: False}
+                   "broker_runs_old_code": lambda: False,
+                   # plan pauses come from the live plan_calls state; tests start with none.
+                   "plan_status": lambda: {}, "grok_probe": lambda: None}
         for k, v in patches.items():
             p = mock.patch.object(W, k, v)
             p.start()

@@ -96,6 +96,23 @@ class ResetParsing(unittest.TestCase):
         finally:
             f.unlink(missing_ok=True)
 
+    def test_grok_report_splits_windows_at_limits(self):
+        f = pc._ledger_path()
+        rows = [{"at": "t1", "ok": True, "limit": False, "tokens": 100, "uncached": 60},
+                {"at": "t2", "ok": True, "limit": False, "tokens": 50, "uncached": 50},
+                {"at": "t3", "ok": False, "limit": True, "tokens": 0, "uncached": 0},
+                {"at": "t4", "ok": False, "limit": True, "tokens": 0, "uncached": 0},
+                {"at": "t5", "ok": True, "limit": False, "tokens": 30, "uncached": 30}]
+        try:
+            f.write_text("".join(json.dumps(r) + "\n" for r in rows))
+            rep = pc.grok_report()
+        finally:
+            f.unlink(missing_ok=True)
+        self.assertEqual(rep["windows"], [{"start": "t1", "tokens": 150, "uncached": 110, "calls": 2,
+                                           "limit_at": "t3", "back_at": "t5"}])
+        self.assertEqual(rep["since_reset"], {"start": "t5", "tokens": 30, "uncached": 30, "calls": 1})
+        self.assertFalse(rep["limited_now"])
+
     def test_unreadable_reset_waits_an_hour(self):
         self.assertEqual(pc.claude_reset("Claude AI usage limit reached", NOW), NOW + pc.timedelta(hours=1))
 

@@ -379,13 +379,25 @@ def plan_pause_note() -> str:
     if profile != "plans":
         return ""
     st = plan_status()
-    waits = [f"{p} until {st[p]['paused_until']}" for p in ("muse", "claude", "grok") if (st.get(p) or {}).get("paused_until")]
+    # Only the plans the lanes draw on: Grok left the lanes on 2026-10-19, and its pause once
+    # made every idle lane look idle by design.
+    waits = [f"{p} until {st[p]['paused_until']}" for p in ("muse", "claude") if (st.get(p) or {}).get("paused_until")]
     return "waiting for plan usage windows: " + ", ".join(waits) if waits else ""
+
+
+def grok_probe() -> None:
+    """Records when a spent Grok pool comes back (plan_calls grok-report); one tiny call at most."""
+    try:
+        subprocess.run([sys.executable, str(Path(__file__).resolve().parent / "plan_calls.py"), "probe", "grok"],
+                       capture_output=True, text=True, timeout=300)
+    except (OSError, subprocess.TimeoutExpired):
+        pass
 
 
 def check_plans() -> tuple[str, str, dict]:
     """Muse / Claude plan state for the plans lanes. A short pause is normal; a pause over
     a day (a weekly limit) is worth a warning so the owner knows the lanes are parked."""
+    grok_probe()
     st = plan_status()
     if not st:
         return "ok", "plan status unread", {}

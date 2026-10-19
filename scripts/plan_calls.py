@@ -37,6 +37,7 @@ import os
 import re
 import subprocess
 import sys
+import threading
 import time
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
@@ -334,6 +335,7 @@ def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
            "--disallowed-tools", GROK_NO_TOOLS, "--reasoning-effort", GROK_EFFORT]
     if system:
         cmd += ["--system-prompt-override", system]
+    t0 = time.time()
     try:
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=CALL_TIMEOUT_S, cwd=str(GROK_CWD), env=env)
     except subprocess.TimeoutExpired:
@@ -341,14 +343,79 @@ def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
     finally:
         pf.unlink(missing_ok=True)
     out = r.stdout.strip()
+    env_out = {}
     if out.startswith("{"):
         try:
             env_out = json.loads(out)
-            text = str(env_out.get("text") or "")
-            return (text or str(env_out)[:2000]), (r.returncode != 0 or not text)
         except ValueError:
-            pass
+            env_out = {}
+    _GROK_USAGE.last = _grok_usage(env_out, t0)
+    if env_out:
+        text = str(env_out.get("text") or "")
+        return (text or str(env_out)[:2000]), (r.returncode != 0 or not text)
     return (out or r.stderr.strip())[:2000], True
+
+
+_GROK_USAGE = threading.local()
+GROK_SESSIONS = Path.home() / ".grok" / "sessions"
+
+
+def _grok_usage(env_out: dict, t0: float) -> dict:
+    """Tokens one Grok call used, from its session's usage.json: by the session id in the
+    CLI's JSON when it gives one, else the newest session written in our cwd since t0."""
+    folder = GROK_SESSIONS / str(GROK_CWD).replace("/", "%2F")
+    sid = env_out.get("session_id") or env_out.get("sessionId") if isinstance(env_out, dict) else None
+    paths = [folder / str(sid) / "usage.json"] if sid else sorted(
+        (p for p in folder.glob("*/usage.json") if p.stat().st_mtime >= t0 - 1), key=lambda p: p.stat().st_mtime)[-1:]
+    for p in paths:
+        try:
+            u = json.loads(p.read_text()).get("session") or {}
+            return {"tokens": int(u.get("totalTokens") or 0),
+                    "uncached": int(u.get("totalTokens") or 0) - int(u.get("cachedReadTokens") or 0)}
+        except (OSError, ValueError):
+            pass
+    return {"tokens": None, "uncached": None}
+
+
+def _ledger_path() -> Path:
+    return STATE.with_name("grok-ledger.jsonl")
+
+
+def _grok_ledger(ok: bool, limit: bool) -> None:
+    u = getattr(_GROK_USAGE, "last", None) or {}
+    row = {"at": _now().isoformat(timespec="seconds"), "ok": ok, "limit": limit,
+           "tokens": u.get("tokens"), "uncached": u.get("uncached")}
+    try:
+        with _ledger_path().open("a") as fh:
+            fh.write(json.dumps(row) + "\n")
+    except OSError:
+        pass
+
+
+def grok_report() -> dict:
+    """What the ledger says about the X plan's Grok Build pool (owner 2026-10-19: "figure out
+    those limits and plan around them"): tokens spent in each window before a limit, when each
+    limit lifted, and use since the last reset."""
+    try:
+        rows = [json.loads(l) for l in _ledger_path().read_text().splitlines() if l.strip()]
+    except OSError:
+        rows = []
+    windows, cur, limited = [], {"start": rows[0]["at"] if rows else None, "tokens": 0, "uncached": 0, "calls": 0}, False
+    for r in rows:
+        if r.get("limit"):
+            if not limited:
+                windows.append({**cur, "limit_at": r["at"]})
+                limited = True
+            continue
+        if r.get("ok"):
+            if limited:
+                windows[-1]["back_at"] = r["at"]
+                cur = {"start": r["at"], "tokens": 0, "uncached": 0, "calls": 0}
+                limited = False
+            cur["tokens"] += r.get("tokens") or 0
+            cur["uncached"] += r.get("uncached") or 0
+            cur["calls"] += 1
+    return {"windows": windows, "since_reset": None if limited else cur, "limited_now": limited}
 
 
 def _run_muse(prompt: str) -> tuple[str, bool]:
@@ -400,6 +467,7 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
             with _slot("grok", GROK_CONCURRENT):
                 text, is_err = _run_grok(model, system, user)
             reset = grok_reset(text, _now()) if is_err else None
+            _grok_ledger(ok=not is_err, limit=bool(reset))
         else:
             prompt = f"{system}\n\n---\n\n{user}" if system else user
             text, is_err = _run_muse(prompt)
@@ -417,6 +485,23 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
         if is_err:
             return {"error": f"{plan} call failed: {text[:300]}", "ms": ms}
         return {"content": text, "ms": ms}
+
+
+def probe(plan: str = "grok") -> str:
+    """One tiny call, only while the ledger says the Grok pool is spent and its pause has run
+    out, so the hour it comes back is recorded (fathers_watch runs this every 15 min). Never
+    waits: a spent pool just re-pauses."""
+    global MAX_WAIT_S
+    if plan != "grok" or not grok_report()["limited_now"]:
+        return "not limited"
+    if paused_until(plan):
+        return f"paused until {paused_until(plan).isoformat()}"
+    old, MAX_WAIT_S = MAX_WAIT_S, 0
+    try:
+        r = chat("grok-4.7-build-fast", [{"role": "user", "content": 'Reply with exactly: {"ok": true}'}])
+    finally:
+        MAX_WAIT_S = old
+    return "back" if r.get("content") else f"still limited: {str(r.get('error'))[:120]}"
 
 
 def status() -> dict:
@@ -440,6 +525,12 @@ def main(argv: list[str]) -> int:
     cmd = argv[1] if len(argv) > 1 else "status"
     if cmd == "status":
         print(json.dumps(status()))
+        return 0
+    if cmd == "probe":
+        print(probe(argv[2] if len(argv) > 2 else "grok"))
+        return 0
+    if cmd == "grok-report":
+        print(json.dumps(grok_report(), indent=1))
         return 0
     if cmd == "smoke":
         models = argv[2:] or [MUSE_MODEL, "claude-haiku-5-5"]
