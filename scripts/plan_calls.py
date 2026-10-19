@@ -63,8 +63,8 @@ GROK_CWD = Path(os.environ.get("PLAN_GROK_CWD") or Path.home() / ".cache" / "pla
 # Soft budgets per plan: the owner's own Claude Code and Muse Spark sessions share these
 # plans' limits, so the lanes take a bounded slice, per hour and per rolling day.
 BUDGETS = {
-    "claude": (int(os.environ.get("PLAN_CLAUDE_CALLS_PER_HOUR", "120")),
-               int(os.environ.get("PLAN_CLAUDE_CALLS_PER_DAY", "700"))),
+    "claude": (int(os.environ.get("PLAN_CLAUDE_CALLS_PER_HOUR", "50")),
+               int(os.environ.get("PLAN_CLAUDE_CALLS_PER_DAY", "600"))),
     "muse": (int(os.environ.get("PLAN_MUSE_CALLS_PER_HOUR", "120")),
              int(os.environ.get("PLAN_MUSE_CALLS_PER_DAY", "600"))),
     # One weekly X-plan pool is shared with the owner's Cursor use: take a small slice.
