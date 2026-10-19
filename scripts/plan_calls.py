@@ -57,7 +57,9 @@ GROK_MODELS = {"grok-4.7-build-fast", "grok-4.7"}
 GROK = os.environ.get("GROK_BIN", str(Path.home() / ".grok/bin/grok"))
 GROK_EFFORT = os.environ.get("PLAN_GROK_EFFORT", "low")
 GROK_NO_TOOLS = "bash,edit,write,read,glob,grep,web_fetch,web_search,task"
-GROK_CWD = Path(os.environ.get("PLAN_GROK_CWD", "/tmp/plan-grok-empty"))  # Grok loads project files from its cwd
+# Grok loads project files (AGENTS.md and the like) from its cwd, so it runs in a private,
+# empty, owner-only folder: a shared /tmp path could be pre-seeded with instructions.
+GROK_CWD = Path(os.environ.get("PLAN_GROK_CWD") or Path.home() / ".cache" / "plan-grok-empty")
 # Soft budgets per plan: the owner's own Claude Code and Muse Spark sessions share these
 # plans' limits, so the lanes take a bounded slice, per hour and per rolling day.
 BUDGETS = {
@@ -295,10 +297,15 @@ def _runner_heartbeat_age() -> float:
 
 def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
     """(text, is_error) from one headless Grok call on the subscription login."""
-    GROK_CWD.mkdir(parents=True, exist_ok=True)
+    GROK_CWD.mkdir(mode=0o700, parents=True, exist_ok=True)
+    st = GROK_CWD.stat()
+    if st.st_uid != os.getuid() or st.st_mode & 0o077:
+        return f"grok cwd {GROK_CWD} is not a private folder owned by this user; refusing", True
     env = {k: v for k, v in os.environ.items() if k != "XAI_API_KEY"}
     pf = GROK_CWD / f"prompt-{os.getpid()}-{time.time_ns()}.txt"
-    pf.write_text(user, encoding="utf-8")
+    fd = os.open(pf, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "w", encoding="utf-8") as fh:
+        fh.write(user)
     cmd = [GROK, "--prompt-file", str(pf), "-m", model, "--output-format", "json", "--disable-web-search",
            "--disallowed-tools", GROK_NO_TOOLS, "--reasoning-effort", GROK_EFFORT]
     if system:
