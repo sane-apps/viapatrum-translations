@@ -74,6 +74,16 @@ class ResetParsing(unittest.TestCase):
         self.assertEqual(pc.plan_of("grok-4.7-build-fast"), "grok")
         self.assertIsNone(pc.plan_of("@cf/zai-org/glm-5.2"))
 
+    def test_budgets_file_is_the_one_live_setting(self):
+        f = pc.STATE.with_name("budgets.json")
+        try:
+            f.write_text('{"claude": [7, 70]}')
+            self.assertEqual(pc.budgets("claude"), (7, 70))
+            self.assertEqual(pc.budgets("muse"), pc.BUDGETS["muse"])  # plans not in the file keep defaults
+        finally:
+            f.unlink(missing_ok=True)
+        self.assertEqual(pc.budgets("claude"), pc.BUDGETS["claude"])
+
     def test_unreadable_reset_waits_an_hour(self):
         self.assertEqual(pc.claude_reset("Claude AI usage limit reached", NOW), NOW + pc.timedelta(hours=1))
 

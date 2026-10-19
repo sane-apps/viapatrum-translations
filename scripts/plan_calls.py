@@ -201,9 +201,22 @@ def paused_until(plan: str, now: datetime | None = None) -> datetime | None:
     return until if until > now else None
 
 
+def budgets(plan: str) -> tuple[int, int]:
+    """(per hour, per day) for a plan. budgets.json, when present, is the one live setting every
+    process reads on each call: per-process caps let a job with a higher cap starve the others
+    (2026-10-19, twice). Without the file, the env/defaults in BUDGETS apply."""
+    try:
+        v = json.loads(STATE.with_name("budgets.json").read_text()).get(plan)
+        if isinstance(v, list) and len(v) == 2:
+            return int(v[0]), int(v[1])
+    except (OSError, ValueError, TypeError):
+        pass
+    return BUDGETS[plan]
+
+
 def _budget_wait(plan: str, now: datetime) -> float:
     """Seconds until the plan's soft hourly and daily budgets both have room (0 = go)."""
-    per_hour, per_day = BUDGETS[plan]
+    per_hour, per_day = budgets(plan)
     t = now.timestamp()
     with _state() as s:
         c = s.setdefault(plan, {})
@@ -408,7 +421,7 @@ def status() -> dict:
         out[plan] = {"paused_until": raw if live else None, "why": p.get("why") if live else None,
                      "calls_last_hour": sum(t > now.timestamp() - 3600 for t in calls),
                      "calls_last_day": sum(t > now.timestamp() - 86400 for t in calls),
-                     "budget_hour_day": list(BUDGETS[plan]), "calls_total": p.get("calls_total", 0)}
+                     "budget_hour_day": list(budgets(plan)), "calls_total": p.get("calls_total", 0)}
     return out
 
 
