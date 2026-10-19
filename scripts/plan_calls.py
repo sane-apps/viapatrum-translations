@@ -384,6 +384,24 @@ def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
     return (out or r.stderr.strip())[:2000], True
 
 
+# Like Grok's --disallowed-tools: the model only reads the prompt. A read-only sandbox still lets
+# a shell tool read the disk, so a planted instruction in a source text could pull a file into a
+# verdict (security review 2026-10-19). Feature names from `codex features list` (0.163.0).
+CODEX_NO_TOOLS = ("shell_tool", "unified_exec", "apps", "browser_use", "browser_use_external",
+                  "browser_use_full_cdp_access", "computer_use", "in_app_browser",
+                  "skill_mcp_dependency_install", "skill_search", "tool_suggest", "sleep_tool")
+
+
+def _codex_cmd(model: str, out_file: Path) -> list[str]:
+    model, _, effort = model.partition("@")
+    cmd = [CODEX, "exec", "-m", model, "-s", "read-only", "--skip-git-repo-check", "--ephemeral",
+           "--ignore-user-config", "--ignore-rules", "-c", 'web_search="disabled"',
+           "-c", f"model_reasoning_effort={effort or CHATGPT_EFFORT}"]
+    for f in CODEX_NO_TOOLS:
+        cmd += ["--disable", f]
+    return cmd + ["-o", str(out_file), "-"]
+
+
 def _run_codex(model: str, system: str, user: str) -> tuple[str, bool]:
     """(text, is_error) from one headless Codex call on the ChatGPT login: read-only sandbox,
     no session kept, OPENAI_API_KEY removed so it can never bill per use."""
@@ -394,9 +412,7 @@ def _run_codex(model: str, system: str, user: str) -> tuple[str, bool]:
     env = {k: v for k, v in os.environ.items() if k != "OPENAI_API_KEY"}
     out_file = CODEX_CWD / f"out-{os.getpid()}-{time.time_ns()}.txt"
     prompt = f"{system}\n\n---\n\n{user}" if system else user
-    model, _, effort = model.partition("@")
-    cmd = [CODEX, "exec", "-m", model, "-s", "read-only", "--skip-git-repo-check", "--ephemeral",
-           "-c", f"model_reasoning_effort={effort or CHATGPT_EFFORT}", "-o", str(out_file), "-"]
+    cmd = _codex_cmd(model, out_file)
     try:
         r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=CALL_TIMEOUT_S,
                            cwd=str(CODEX_CWD), env=env)
