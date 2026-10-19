@@ -71,28 +71,6 @@ class ResetParsing(unittest.TestCase):
     def test_grok_ordinary_error_is_not_a_limit(self):
         self.assertIsNone(pc.grok_reset("grok timeout after 900s", NOW))
 
-    def test_codex_monthly_limit_reset(self):
-        msg = ("You've hit your usage limit. Upgrade to Plus to continue using Codex "
-               "(https://chatgpt.com/explore/plus), or try again at Nov 18th, 2026 4:02 PM.")
-        got = pc.codex_reset(msg, NOW).astimezone()
-        self.assertEqual((got.year, got.month, got.day, got.hour, got.minute), (2026, 11, 18, 16, 2))
-
-    def test_codex_runs_without_tools_or_user_config(self):
-        cmd = pc._codex_cmd("gpt-5.6-luna@high", Path("/x/out.txt"))
-        for flag in ("--ignore-user-config", "--ignore-rules", "--ephemeral", 'web_search="disabled"',
-                     "model_reasoning_effort=high"):
-            self.assertIn(flag, cmd)
-        self.assertEqual(cmd[cmd.index("-s") + 1], "read-only")
-        disabled = {cmd[i + 1] for i, a in enumerate(cmd) if a == "--disable"}
-        self.assertTrue({"shell_tool", "unified_exec", "computer_use", "browser_use"} <= disabled)
-        self.assertEqual(cmd[cmd.index("-m") + 1], "gpt-5.6-luna")
-
-    def test_chatgpt_ids_route_to_the_chatgpt_plan(self):
-        self.assertEqual(pc.plan_of("gpt-5.6-terra"), "chatgpt")
-        self.assertEqual(pc.plan_of("gpt-5.6-luna"), "chatgpt")
-        self.assertEqual(pc.plan_of("gpt-5.6-luna@high"), "chatgpt")
-        self.assertIsNone(pc.plan_of("gpt-6-luna"))  # refused on a ChatGPT login
-
     def test_grok_ids_route_to_the_grok_plan(self):
         self.assertEqual(pc.plan_of("grok-4.7-build-fast"), "grok")
         self.assertIsNone(pc.plan_of("@cf/zai-org/glm-5.2"))

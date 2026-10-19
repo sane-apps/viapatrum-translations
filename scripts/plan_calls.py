@@ -71,20 +71,9 @@ BUDGETS = {
     # One weekly X-plan pool is shared with the owner's Cursor use: take a small slice.
     "grok": (int(os.environ.get("PLAN_GROK_CALLS_PER_HOUR", "30")),
              int(os.environ.get("PLAN_GROK_CALLS_PER_DAY", "200"))),
-    # The owner's ChatGPT subscription through the Codex CLI (owner 2026-10-19: "i have chatgpt
-    # installed. see if you can get anything out of it"); limits unknown yet, so a modest slice.
-    "chatgpt": (int(os.environ.get("PLAN_CHATGPT_CALLS_PER_HOUR", "30")),
-                int(os.environ.get("PLAN_CHATGPT_CALLS_PER_DAY", "300"))),
 }
 GROK_CONCURRENT = int(os.environ.get("PLAN_GROK_MAX_CONCURRENT", "2"))
-PLANS = ("muse", "claude", "grok", "chatgpt")
-CODEX = os.environ.get("CODEX_BIN", str(Path.home() / ".local/bin/codex"))
-# gpt-6-luna is refused on a ChatGPT login ("not supported when using Codex with a ChatGPT account").
-CHATGPT_MODELS = {"gpt-5.6-terra", "gpt-5.6-luna"}
-CHATGPT_EFFORT = os.environ.get("PLAN_CHATGPT_EFFORT", "medium")
-CHATGPT_CONCURRENT = int(os.environ.get("PLAN_CHATGPT_MAX_CONCURRENT", "2"))
-# Codex reads AGENTS.md and the like from its cwd, so it runs in a private empty folder too.
-CODEX_CWD = Path(os.environ.get("PLAN_CODEX_CWD") or Path.home() / ".cache" / "plan-codex-empty")
+PLANS = ("muse", "claude", "grok")
 CLAUDE_CONCURRENT = int(os.environ.get("PLAN_CLAUDE_MAX_CONCURRENT", "3"))
 # Muse jobs in flight across every lane; the runner itself works MUSE_WORKERS (2) at once,
 # so this keeps its queue short and each call's wait bounded.
@@ -108,8 +97,6 @@ def plan_of(model: str) -> str | None:
         return "claude"
     if m in GROK_MODELS:
         return "grok"
-    if m.split("@")[0] in CHATGPT_MODELS:  # "gpt-5.6-luna@high" picks the reasoning effort
-        return "chatgpt"
     return None
 
 
@@ -137,21 +124,6 @@ def muse_reset(text: str, now: datetime) -> datetime | None:
     if m:
         return datetime.strptime(m.group(1), "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
     return now + timedelta(seconds=DEFAULT_PAUSE_S)
-
-
-CODEX_AT = re.compile(r"try again at ([A-Z][a-z]{2})[a-z]* (\d{1,2})(?:st|nd|rd|th)?,? (\d{4}),? (\d{1,2}):(\d{2}) ?([AP]M)")
-
-
-def codex_reset(text: str, now: datetime) -> datetime | None:
-    """Reset from a Codex limit message: "try again at Nov 18th, 2026 4:02 PM" (local time;
-    the ChatGPT Go allowance is monthly, 2026-10-19). Other limit wording falls back to Grok's."""
-    m = CODEX_AT.search(text or "")
-    if not m:
-        return grok_reset(text, now)
-    mon, day, year, hh, mm, ap = m.groups()
-    h = int(hh) % 12 + (12 if ap == "PM" else 0)
-    local = datetime.strptime(f"{mon} {day} {year} {h}:{mm}", "%b %d %Y %H:%M").astimezone()
-    return local.astimezone(timezone.utc)
 
 
 def grok_reset(text: str, now: datetime) -> datetime | None:
@@ -384,48 +356,6 @@ def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
     return (out or r.stderr.strip())[:2000], True
 
 
-# Like Grok's --disallowed-tools: the model only reads the prompt. A read-only sandbox still lets
-# a shell tool read the disk, so a planted instruction in a source text could pull a file into a
-# verdict (security review 2026-10-19). Feature names from `codex features list` (0.163.0).
-CODEX_NO_TOOLS = ("shell_tool", "unified_exec", "apps", "browser_use", "browser_use_external",
-                  "browser_use_full_cdp_access", "computer_use", "in_app_browser",
-                  "skill_mcp_dependency_install", "skill_search", "tool_suggest", "sleep_tool")
-
-
-def _codex_cmd(model: str, out_file: Path) -> list[str]:
-    model, _, effort = model.partition("@")
-    cmd = [CODEX, "exec", "-m", model, "-s", "read-only", "--skip-git-repo-check", "--ephemeral",
-           "--ignore-user-config", "--ignore-rules", "-c", 'web_search="disabled"',
-           "-c", f"model_reasoning_effort={effort or CHATGPT_EFFORT}"]
-    for f in CODEX_NO_TOOLS:
-        cmd += ["--disable", f]
-    return cmd + ["-o", str(out_file), "-"]
-
-
-def _run_codex(model: str, system: str, user: str) -> tuple[str, bool]:
-    """(text, is_error) from one headless Codex call on the ChatGPT login: read-only sandbox,
-    no session kept, OPENAI_API_KEY removed so it can never bill per use."""
-    CODEX_CWD.mkdir(mode=0o700, parents=True, exist_ok=True)
-    st = CODEX_CWD.stat()
-    if st.st_uid != os.getuid() or st.st_mode & 0o077:
-        return f"codex cwd {CODEX_CWD} is not a private folder owned by this user; refusing", True
-    env = {k: v for k, v in os.environ.items() if k != "OPENAI_API_KEY"}
-    out_file = CODEX_CWD / f"out-{os.getpid()}-{time.time_ns()}.txt"
-    prompt = f"{system}\n\n---\n\n{user}" if system else user
-    cmd = _codex_cmd(model, out_file)
-    try:
-        r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=CALL_TIMEOUT_S,
-                           cwd=str(CODEX_CWD), env=env)
-        text = out_file.read_text() if out_file.exists() else ""
-    except subprocess.TimeoutExpired:
-        return f"codex timeout after {CALL_TIMEOUT_S}s", True
-    finally:
-        out_file.unlink(missing_ok=True)
-    if r.returncode == 0 and text.strip():
-        return text, False
-    return ((r.stderr or "") + (r.stdout or "")).strip()[-2000:] or "codex: empty answer", True
-
-
 _GROK_USAGE = threading.local()
 GROK_SESSIONS = Path.home() / ".grok" / "sessions"
 
@@ -538,10 +468,6 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
                 text, is_err = _run_grok(model, system, user)
             reset = grok_reset(text, _now()) if is_err else None
             _grok_ledger(ok=not is_err, limit=bool(reset))
-        elif plan == "chatgpt":
-            with _slot("chatgpt", CHATGPT_CONCURRENT):
-                text, is_err = _run_codex(model, system, user)
-            reset = codex_reset(text, _now()) if is_err else None
         else:
             prompt = f"{system}\n\n---\n\n{user}" if system else user
             text, is_err = _run_muse(prompt)
