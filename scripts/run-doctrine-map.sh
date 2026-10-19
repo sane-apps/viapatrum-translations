@@ -48,6 +48,7 @@ NOTES="doctrine_map grade via llm_bakeoff.vendor_call" refresh @cf/openai/gpt-os
 NOTES="doctrine_map referee via llm_bakeoff.vendor_call" refresh nvidia/nemotron-3-ultra-550b-a55b \
   doctrine-grade '{"reasoning_effort":"none"}' nvidia nemotron-3-ultra || grade_ok=0
 rc=0
+partial=0
 for step in index search grade report; do
   if [ "$step" = grade ] && [ "$grade_ok" = 0 ]; then
     echo "$(date +%T) grade FAILED: receipt refresh failed, grading skipped"; rc=1; continue
@@ -59,8 +60,23 @@ for step in index search grade report; do
   if [ "$step" = report ] && [ "$rc" != 0 ]; then
     echo "$(date +%T) report SKIPPED: an earlier step failed; the site keeps the last good map"; continue
   fi
-  args=(); [ "$step" = grade ] && args=(--workers 10)  # only grade runs calls in parallel
+  if [ "$step" = report ] && [ "$partial" = 1 ]; then
+    echo "$(date +%T) report SKIPPED: grading is not finished yet; the site keeps the last good map"; continue
+  fi
+  # 20 grade workers (10 until 2026-10-19): each passage waits ~3 min on the
+  # batch broker whatever the concurrency, so the pool sets the pace. About
+  # $0.01 a passage: 20 at a time is ~$4 an hour, under the $12.50 ceiling.
+  args=(); [ "$step" = grade ] && args=(--workers 20)  # only grade runs calls in parallel
   echo "$(date +%T) $step"
-  nice -n 10 timeout 10800 "$PY" scripts/doctrine_map.py "$step" ${args[@]+"${args[@]}"} || { echo "$(date +%T) $step FAILED"; rc=1; }
+  nice -n 10 timeout 10800 "$PY" scripts/doctrine_map.py "$step" ${args[@]+"${args[@]}"}; src=$?
+  if [ "$src" = 0 ]; then
+    :
+  elif [ "$step" = grade ] && [ "$src" = 3 ]; then
+    # doctrine_map.py EXIT_INCOMPLETE: its time budget ran out after grading
+    # some passages; they are saved and the rest wait for the next run.
+    echo "$(date +%T) grade INCOMPLETE: graded passages are saved; the rest wait for the next run"; partial=1
+  else
+    echo "$(date +%T) $step FAILED"; rc=1
+  fi
 done
 exit $rc

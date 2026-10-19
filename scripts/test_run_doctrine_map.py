@@ -19,6 +19,7 @@ refresh() { case "$1" in *nemotron*) [ -n "${FAIL_REFEREE:-}" ] && { echo "recei
 PY_STUB = """#!/bin/bash
 echo "$2" >> "$STEPS"
 [ "$2" = grade ] && [ -n "${FAIL_GRADE:-}" ] && exit 1
+[ "$2" = grade ] && [ -n "${PARTIAL_GRADE:-}" ] && exit 3
 exit 0
 """
 
@@ -60,6 +61,14 @@ class RunnerTests(unittest.TestCase):
         rc, ran, out = self.run_job(FAIL_GRADE="1")
         self.assertEqual((rc, ran), (1, ["index", "search", "grade"]))
         self.assertIn("report SKIPPED", out)
+
+    def test_grade_out_of_time_is_progress_and_keeps_last_map(self):
+        # 2026-10-19: doctrine_map.py grade exits 3 when its time budget ran
+        # out after saving some grades; the rest wait for the next run.
+        rc, ran, out = self.run_job(PARTIAL_GRADE="1")
+        self.assertEqual((rc, ran), (0, ["index", "search", "grade"]))
+        self.assertIn("grade INCOMPLETE", out)
+        self.assertIn("report SKIPPED: grading is not finished yet", out)
 
     def test_over_the_spending_cap_runs_nothing_and_keeps_the_map(self):
         rc, ran, out = self.run_job(SPEND_OVER="1")

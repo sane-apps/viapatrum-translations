@@ -447,12 +447,27 @@ def q_grade_one(q: dict, c: dict) -> dict:
             "positions": final, "votes": raw}
 
 
-def q_grade(only: set | None, workers: int) -> int:
+# Grade budget (2026-10-19). The 3 h `timeout` in run-doctrine-map.sh killed
+# grade on 10-18 and 10-19 with 1179 passages still to grade (six new
+# questions): each passage waits ~3 min on the batch broker, and grading one
+# question at a time left the pool idle behind each question's slowest passage
+# (one old-testament-canon passage held the run 66 min). Now every question's
+# passages share one pool, and once the budget is spent no new passage starts:
+# graded ones are saved and the rest wait for the next run (exit
+# EXIT_INCOMPLETE, which the runner reports as progress, not a failure).
+GRADE_BUDGET_S = float(os.environ.get("DM_GRADE_BUDGET_S", 2.5 * 3600))  # under the runner's 3 h timeout
+EXIT_INCOMPLETE = 3
+
+
+def q_grade(only: set | None, workers: int, budget_s: float | None = None) -> int:
+    import threading
+    from concurrent.futures import as_completed
     token()
     W.receipts_ok(CHECKERS + [W.REFEREE], "doctrine-grade")
     gdir = OUT / "q-grades"
     gdir.mkdir(parents=True, exist_ok=True)
-    failed = 0
+    deadline = time.time() + (GRADE_BUDGET_S if budget_s is None else budget_s)
+    jobs, books = [], []
     for q in load_questions():
         if only and q["id"] not in only:
             continue
@@ -466,34 +481,69 @@ def q_grade(only: set | None, workers: int) -> int:
                               [(p["id"], p["statement"], p["mark"], p.get("excluded_by")) for p in q["positions"]]]))
         todo = [c for c in cands if (have.get(c["id"]) or {}).get("key") != key]
         print(f"grade {q['id']}: {len(todo)} of {len(cands)} to grade", flush=True)
+        book = {"q": q, "key": key, "path": gpath, "have": have, "left": len(todo), "new": 0}
+        books.append(book)
+        jobs += [(book, c) for c in todo]
+    stop = threading.Event()  # the budget is spent or the spending cap refused: start nothing new
 
-        # Hardening: one passage that fails (a vendor error, a broker timeout)
-        # is logged and left ungraded for the next run, so the other passages
-        # still save. (The 2026-10-06 beliefs log that ends mid-traceback was
-        # cut off by the disk-full event, not by this; an ordinary exception
-        # here already made run-doctrine-map.sh print "grade FAILED".)
-        def run(c):
-            try:
-                r = q_grade_one(q, c)
-            except spend_guard_refused():
-                raise  # the whole grade stops; graded passages are already saved
-            except Exception as e:  # noqa: BLE001
-                print(f"  grade error {q['id']} {c['id']}: {type(e).__name__}: {str(e)[:200]}", flush=True)
-                return c["id"], None
-            r["key"] = key
-            return c["id"], r
+    # Hardening: one passage that fails (a vendor error, a broker timeout)
+    # is logged and left ungraded for the next run, so the other passages
+    # still save. (The 2026-10-06 beliefs log that ends mid-traceback was
+    # cut off by the disk-full event, not by this; an ordinary exception
+    # here already made run-doctrine-map.sh print "grade FAILED".)
+    def run(job):
+        book, c = job
+        if stop.is_set() or time.time() >= deadline:
+            stop.set()
+            return job, "deferred"
+        try:
+            r = q_grade_one(book["q"], c)
+        except spend_guard_refused():
+            stop.set()
+            raise  # the whole grade stops; graded passages are already saved
+        except Exception as e:  # noqa: BLE001
+            print(f"  grade error {book['q']['id']} {c['id']}: {type(e).__name__}: {str(e)[:200]}", flush=True)
+            return job, None
+        r["key"] = book["key"]
+        return job, r
 
-        with ThreadPoolExecutor(max_workers=workers) as ex:
-            for k, (cid, r) in enumerate(ex.map(run, todo), 1):
+    def save(book):
+        book["path"].write_text(json.dumps(book["have"], ensure_ascii=False, indent=1))
+
+    failed = deferred = graded = 0
+    refused = None
+    try:
+        with ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
+            for f in as_completed([ex.submit(run, j) for j in jobs]):
+                try:
+                    (book, c), r = f.result()
+                except spend_guard_refused() as e:
+                    refused = refused or e
+                    continue
+                book["left"] -= 1
+                if r == "deferred":
+                    deferred += 1
+                    continue
                 if r is None:
                     failed += 1
-                else:
-                    have[cid] = r
-                if k % 10 == 0 or k == len(todo):
-                    gpath.write_text(json.dumps(have, ensure_ascii=False, indent=1))
+                    continue
+                book["have"][c["id"]] = r
+                book["new"] += 1
+                graded += 1
+                if book["new"] % 10 == 0 or book["left"] == 0:
+                    save(book)
+    finally:
+        for book in books:
+            if book["new"]:
+                save(book)
+    if refused is not None:
+        raise refused
     if failed:
         print(f"grade: {failed} passages failed and wait for the next run", flush=True)
         return 1
+    if deferred:
+        print(f"grade: time budget spent; graded {graded}, {deferred} passages wait for the next run", flush=True)
+        return EXIT_INCOMPLETE if graded else 1
     if not only:
         # Every candidate of every question is graded: this is the date the
         # page may give as "searched and graded on" (report reads it).

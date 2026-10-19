@@ -204,6 +204,49 @@ class StaleAndCrashTests(unittest.TestCase):
         have = json.loads((self.out / "q-grades" / "q.json").read_text())
         self.assertEqual(sorted(have), ["id2"])      # the failed one is retried next run, not stored
 
+    def test_grade_budget_saves_progress_and_defers_the_rest(self):
+        # 2026-10-19: the runner's 3 h timeout killed grade twice; now the
+        # budget stops new passages, keeps graded ones and exits 3.
+        (self.out / "q-candidates" / "q.json").write_text(json.dumps([row(1, 300), row(2, 300), row(3, 300)]))
+        clock = iter([0.0, 0.0, 0.0, 99.0, 99.0, 99.0, 99.0])
+
+        def fake(q, c):
+            return {"id": c["id"], "on_question": True, "positions": {}, "votes": {}}
+
+        with mock.patch.object(D, "token"), mock.patch.object(D.W, "receipts_ok"), \
+                mock.patch.object(D, "q_grade_one", side_effect=fake), \
+                mock.patch.object(D.time, "time", side_effect=lambda: next(clock, 99.0)):
+            self.assertEqual(D.q_grade(None, 1, budget_s=10), D.EXIT_INCOMPLETE)
+        have = json.loads((self.out / "q-grades" / "q.json").read_text())
+        self.assertEqual(sorted(have), ["id1", "id2"])
+        self.assertFalse((self.out / "graded-at.json").exists())   # not a full grade
+
+    def test_budget_spent_with_nothing_graded_is_a_failure(self):
+        (self.out / "q-candidates" / "q.json").write_text(json.dumps([row(1, 300)]))
+        with mock.patch.object(D, "token"), mock.patch.object(D.W, "receipts_ok"), \
+                mock.patch.object(D, "q_grade_one") as one:
+            self.assertEqual(D.q_grade(None, 2, budget_s=-1), 1)
+        one.assert_not_called()
+
+    def test_questions_share_one_pool(self):
+        # A slow passage in one question no longer holds back the next question.
+        qs = [{"id": i, "question": "Q?", "positions": [{"id": "a", "statement": "a", "mark": "a"}]} for i in ("q1", "q2")]
+        (self.out / "q.json").write_text(json.dumps(qs))
+        for i in ("q1", "q2"):
+            (self.out / "q-candidates" / f"{i}.json").write_text(json.dumps([row(i, 300)]))
+        import threading
+        both = threading.Barrier(2, timeout=5)
+
+        def fake(q, c):
+            both.wait()   # deadlocks (BrokenBarrierError) if questions run one after another
+            return {"id": c["id"], "on_question": True, "positions": {}, "votes": {}}
+
+        with mock.patch.object(D, "token"), mock.patch.object(D.W, "receipts_ok"), \
+                mock.patch.object(D, "q_grade_one", side_effect=fake):
+            self.assertEqual(D.q_grade(None, 2), 0)
+        for i in ("q1", "q2"):
+            self.assertIn(f"id{i}", json.loads((self.out / "q-grades" / f"{i}.json").read_text()))
+
     def test_fewer_than_two_votes_is_not_stored_as_disputed(self):
         q = json.loads((self.out / "q.json").read_text())[0]
         with mock.patch.object(D, "grade_call", return_value=None):
