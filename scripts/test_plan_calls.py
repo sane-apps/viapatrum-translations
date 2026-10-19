@@ -58,6 +58,17 @@ class ResetParsing(unittest.TestCase):
                             "2026-10-19T00:28:23Z. (rate_limit_error)", NOW)
         self.assertEqual(got, datetime(2026, 10, 19, 0, 28, 23, tzinfo=timezone.utc))
 
+    def test_grok_limit_with_iso_reset(self):
+        got = pc.grok_reset("Error: usage limit reached for your plan; resets at 2026-10-20T04:00:00Z", NOW)
+        self.assertEqual(got, datetime(2026, 10, 20, 4, 0, tzinfo=timezone.utc))
+
+    def test_grok_ordinary_error_is_not_a_limit(self):
+        self.assertIsNone(pc.grok_reset("grok timeout after 900s", NOW))
+
+    def test_grok_ids_route_to_the_grok_plan(self):
+        self.assertEqual(pc.plan_of("grok-4.7-build-fast"), "grok")
+        self.assertIsNone(pc.plan_of("@cf/zai-org/glm-5.2"))
+
     def test_unreadable_reset_waits_an_hour(self):
         self.assertEqual(pc.claude_reset("Claude AI usage limit reached", NOW), NOW + pc.timedelta(hours=1))
 

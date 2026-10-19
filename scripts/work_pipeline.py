@@ -70,7 +70,7 @@ STAGE = ROOT / "outputs" / "work-pipeline"
 RECEIPTS = Path.home() / "SaneApps/infra/SaneProcess/outputs/llm-api-research"
 
 def _drafter_family(model: str) -> str:
-    for name in ("gpt-oss", "deepseek", "kimi", "glm", "llama", "mistral", "gemma", "nemotron", "qwen", "muse", "claude"):
+    for name in ("gpt-oss", "deepseek", "kimi", "glm", "llama", "mistral", "gemma", "nemotron", "qwen", "muse", "claude", "grok"):
         if name in model.lower():
             return name
     return model.rsplit("/", 1)[-1]

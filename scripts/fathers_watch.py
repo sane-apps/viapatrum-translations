@@ -379,7 +379,7 @@ def plan_pause_note() -> str:
     if profile != "plans":
         return ""
     st = plan_status()
-    waits = [f"{p} until {st[p]['paused_until']}" for p in ("muse", "claude") if (st.get(p) or {}).get("paused_until")]
+    waits = [f"{p} until {st[p]['paused_until']}" for p in ("muse", "claude", "grok") if (st.get(p) or {}).get("paused_until")]
     return "waiting for plan usage windows: " + ", ".join(waits) if waits else ""
 
 
@@ -389,11 +389,11 @@ def check_plans() -> tuple[str, str, dict]:
     st = plan_status()
     if not st:
         return "ok", "plan status unread", {}
-    long_waits = [p for p in ("muse", "claude") if (st.get(p) or {}).get("paused_until")
+    long_waits = [p for p in ("muse", "claude", "grok") if (st.get(p) or {}).get("paused_until")
                   and datetime.fromisoformat(st[p]["paused_until"]).timestamp() - time.time() > 86400]
     summary = "; ".join(f"{p}: {(st.get(p) or {}).get('calls_last_day', 0)} calls today"
                         + (f", paused until {st[p]['paused_until']}" if (st.get(p) or {}).get("paused_until") else "")
-                        for p in ("muse", "claude"))
+                        for p in ("muse", "claude", "grok"))
     if long_waits:
         return "warn", f"plan limit over a day: {summary}", st
     return "ok", summary, st

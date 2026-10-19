@@ -86,7 +86,11 @@ fi
 # Kimi + GLM are the benched pair; rate_acquire paces lanes under their caps,
 # so fewer lanes run at full speed.
 PAIRS=("@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2")
-[ "$PROFILE" = plans ] && PAIRS=("claude-sonnet-5-5,claude-haiku-5-5")
+# Plans checkers: Sonnet (precise) + Grok build-fast on the X plan login (best recall in the
+# 2026-10-19 bench, 62 s a section). A finding counts only when both agree or the other
+# upholds it, so Grok's nitpicks are filtered and Sonnet's misses are covered. Haiku stays a
+# reader (WP_JUDGES above): its scores are the calibrated pair.
+[ "$PROFILE" = plans ] && PAIRS=("claude-sonnet-5-5,grok-4.7-build-fast")
 NLANE=0
 # NVIDIA referee (third family): same 3 h rule, NIM provider. Purpose-aware
 # since the beliefs job also smokes a doctrine-grade Nemotron receipt nightly.

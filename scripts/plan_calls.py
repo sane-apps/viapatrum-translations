@@ -2,10 +2,13 @@
 """Model calls billed to subscription plans, not Workers AI credit (owner 2026-10-19:
 "automate that ... make them self aware of usage limits in their various plans").
 
-Two plans, called through their own CLIs so no API key or per-token bill is involved:
+Three plans, called through their own CLIs so no per-token bill is involved:
   muse     Muse, through the Muse queue runner (scripts/muse_client.py). Model id "muse".
   claude   Claude Code headless (`claude -p`), no tools, no session. Model ids
            claude-sonnet-5-5, claude-haiku-5-5, claude-opus-5-5.
+  grok     Grok Build headless (`grok --prompt-file`), no tools, the X subscription login:
+           XAI_API_KEY is removed from its environment (per-use billing). Model ids
+           grok-4.7-build-fast (low effort), grok-4.7.
 
 llm_bakeoff.vendor_call routes these ids here, so every work_pipeline call (draft,
 check, repair, referee, readers) can run on the plans with no other change.
@@ -17,9 +20,9 @@ Limits are handled, not fought:
   Your usage window resets at <ISO>". Claude: "You've hit your weekly limit · resets
   Oct 12 at 9pm (America/New_York)".
 - Each plan keeps a soft budget per hour and per rolling day (PLAN_<PLAN>_CALLS_PER_HOUR /
-  _PER_DAY; Claude 60 / 500, Muse 120 / 600), because the owner's own Claude Code and Muse
-  Spark sessions share these limits. Claude also runs at most PLAN_CLAUDE_MAX_CONCURRENT
-  calls at once (default 3), so the lanes never stack a dozen CLI processes.
+  _PER_DAY; Claude 60 / 500, Muse 120 / 600, Grok 30 / 200), because the owner's own Claude
+  Code, Muse Spark and Cursor use share these limits (Grok's pool is shared with Cursor).
+  At most 3 Claude, 4 Muse and 2 Grok calls run at once across every lane.
 - A call waits at most PLAN_MAX_WAIT_S (default 6 h) for a window; past that it returns
   an error with "plan paused" in it and the caller decides.
 
@@ -47,6 +50,14 @@ CLAUDE = os.environ.get("CLAUDE_BIN", str(Path.home() / ".local/bin/claude"))
 NO_TOOLS = ["Bash", "Edit", "Write", "Read", "Glob", "Grep", "WebFetch", "WebSearch", "Agent", "NotebookEdit"]
 CLAUDE_MODELS = {"claude-sonnet-5-5", "claude-haiku-5-5", "claude-opus-5-5"}
 MUSE_MODEL = "muse"
+# Grok on the owner's X subscription login, never XAI_API_KEY (per-use billing; owner
+# 2026-10-19). build-fast at low effort: 62 s a section and the best recall in the checker
+# bench (outputs/checker-bench-20261019: 4 real catches no other checker made).
+GROK_MODELS = {"grok-4.7-build-fast", "grok-4.7"}
+GROK = os.environ.get("GROK_BIN", str(Path.home() / ".grok/bin/grok"))
+GROK_EFFORT = os.environ.get("PLAN_GROK_EFFORT", "low")
+GROK_NO_TOOLS = "bash,edit,write,read,glob,grep,web_fetch,web_search,task"
+GROK_CWD = Path(os.environ.get("PLAN_GROK_CWD", "/tmp/plan-grok-empty"))  # Grok loads project files from its cwd
 # Soft budgets per plan: the owner's own Claude Code and Muse Spark sessions share these
 # plans' limits, so the lanes take a bounded slice, per hour and per rolling day.
 BUDGETS = {
@@ -54,7 +65,12 @@ BUDGETS = {
                int(os.environ.get("PLAN_CLAUDE_CALLS_PER_DAY", "500"))),
     "muse": (int(os.environ.get("PLAN_MUSE_CALLS_PER_HOUR", "120")),
              int(os.environ.get("PLAN_MUSE_CALLS_PER_DAY", "600"))),
+    # One weekly X-plan pool is shared with the owner's Cursor use: take a small slice.
+    "grok": (int(os.environ.get("PLAN_GROK_CALLS_PER_HOUR", "30")),
+             int(os.environ.get("PLAN_GROK_CALLS_PER_DAY", "200"))),
 }
+GROK_CONCURRENT = int(os.environ.get("PLAN_GROK_MAX_CONCURRENT", "2"))
+PLANS = ("muse", "claude", "grok")
 CLAUDE_CONCURRENT = int(os.environ.get("PLAN_CLAUDE_MAX_CONCURRENT", "3"))
 # Muse jobs in flight across every lane; the runner itself works MUSE_WORKERS (2) at once,
 # so this keeps its queue short and each call's wait bounded.
@@ -76,12 +92,17 @@ def plan_of(model: str) -> str | None:
         return "muse"
     if m in CLAUDE_MODELS:
         return "claude"
+    if m in GROK_MODELS:
+        return "grok"
     return None
 
 
 # ---------------------------------------------------------------- limit messages
 
 MUSE_LIMIT = re.compile(r"quota exhausted|usage window resets", re.I)
+# Grok's wording was not seen yet: match the usual limit phrases and read any reset time.
+GROK_LIMIT = re.compile(r"usage limit|rate limit|quota|limit reached|exceeded your|too many requests|\b429\b", re.I)
+ISO_TIME = re.compile(r"(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d))")
 MUSE_RESET = re.compile(r"resets at (\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)")
 CLAUDE_LIMIT = re.compile(r"hit your (?:\w+ )?limit|usage limit reached|limit reached", re.I)
 CLAUDE_RESET = re.compile(
@@ -100,6 +121,16 @@ def muse_reset(text: str, now: datetime) -> datetime | None:
     if m:
         return datetime.strptime(m.group(1), "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
     return now + timedelta(seconds=DEFAULT_PAUSE_S)
+
+
+def grok_reset(text: str, now: datetime) -> datetime | None:
+    """Reset time from a Grok limit message, or None when it is not one."""
+    if not GROK_LIMIT.search(text or ""):
+        return None
+    m = ISO_TIME.search(text)
+    if m:
+        return datetime.fromisoformat(m.group(1).replace("Z", "+00:00"))
+    return claude_reset("limit reached " + text, now)  # "resets 3pm (zone)" style, else +1 h
 
 
 def claude_reset(text: str, now: datetime) -> datetime | None:
@@ -262,6 +293,33 @@ def _runner_heartbeat_age() -> float:
     return time.time() - hb.stat().st_mtime if hb.exists() else float("inf")
 
 
+def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
+    """(text, is_error) from one headless Grok call on the subscription login."""
+    GROK_CWD.mkdir(parents=True, exist_ok=True)
+    env = {k: v for k, v in os.environ.items() if k != "XAI_API_KEY"}
+    pf = GROK_CWD / f"prompt-{os.getpid()}-{time.time_ns()}.txt"
+    pf.write_text(user, encoding="utf-8")
+    cmd = [GROK, "--prompt-file", str(pf), "-m", model, "--output-format", "json", "--disable-web-search",
+           "--disallowed-tools", GROK_NO_TOOLS, "--reasoning-effort", GROK_EFFORT]
+    if system:
+        cmd += ["--system-prompt-override", system]
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=CALL_TIMEOUT_S, cwd=str(GROK_CWD), env=env)
+    except subprocess.TimeoutExpired:
+        return f"grok timeout after {CALL_TIMEOUT_S}s", True
+    finally:
+        pf.unlink(missing_ok=True)
+    out = r.stdout.strip()
+    if out.startswith("{"):
+        try:
+            env_out = json.loads(out)
+            text = str(env_out.get("text") or "")
+            return (text or str(env_out)[:2000]), (r.returncode != 0 or not text)
+        except ValueError:
+            pass
+    return (out or r.stderr.strip())[:2000], True
+
+
 def _run_muse(prompt: str) -> tuple[str, bool]:
     """One Muse job through the runner queue. A busy runner is waited on, never failed:
     the call waits up to an hour for its queued job (MUSE_WORKERS run at once)."""
@@ -307,6 +365,10 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
             with _slot("claude", CLAUDE_CONCURRENT):
                 text, is_err = _run_claude(model, system, user)
             reset = claude_reset(text, _now()) if is_err else None
+        elif plan == "grok":
+            with _slot("grok", GROK_CONCURRENT):
+                text, is_err = _run_grok(model, system, user)
+            reset = grok_reset(text, _now()) if is_err else None
         else:
             prompt = f"{system}\n\n---\n\n{user}" if system else user
             text, is_err = _run_muse(prompt)
@@ -331,7 +393,7 @@ def status() -> dict:
     with _state() as s:
         snap = json.loads(json.dumps(s))
     out = {"at": now.isoformat(timespec="seconds")}
-    for plan in ("muse", "claude"):
+    for plan in PLANS:
         p = snap.get(plan, {})
         raw = p.get("paused_until")
         live = bool(raw) and datetime.fromisoformat(raw) > now

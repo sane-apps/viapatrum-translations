@@ -84,43 +84,53 @@ FATHERS_GEMINI_PREP=1 python3 scripts/overnight_quota.py --lanes both --agent ov
 
 Config: `docs/LLM_LANE_CONFIG.json` → `lanes.gemini` (`enabled` defaults **false**). Project note: store `docs/gemini-prep-lane.md`.
 
-## Plans lanes: Muse drafts, Claude checks (owner 2026-10-19)
+## Plans lanes: Muse drafts, Claude + Grok check (owner 2026-10-19)
 
 Owner: "automate that … make them self aware of usage limits in their various plans."
 Translation moved off Workers AI credit. The credit stays for narration and the site.
-The work_pipeline lanes run on two subscription plans:
+The work_pipeline lanes run on three subscription plans:
 
-- **Muse** drafts and repairs (`WP_DRAFTER=muse`).
-- **Claude Sonnet 5.5 + Haiku 5.5** are the two checkers and the two readers.
+- **Muse** (Spark 1.3, medium effort, `--preset empty`) drafts and repairs (`WP_DRAFTER=muse`).
+- **Claude Sonnet 5.5 + Grok 4.7 build-fast** (low effort, X subscription login, never
+  `XAI_API_KEY`) are the two checkers.
+- **Claude Sonnet + Haiku** are the two readers.
 - **No paid fallback** (`WP_FALLBACK=""`).
 - **The referee** is unchanged: Nemotron Ultra on NVIDIA, free.
 
-`llm_bakeoff.vendor_call` sends the ids `muse` and `claude-*` to
-`scripts/plan_calls.py`, so every work_pipeline call runs on the plans with no
-other change. `$STAGE/lane-profile` picks the profile: `plans` is the default, and
-`workers-ai` restores the old Workers AI pair.
+`llm_bakeoff.vendor_call` sends the ids `muse`, `claude-*` and `grok-*` to
+`scripts/plan_calls.py`. `$STAGE/lane-profile` picks the profile: `plans` is the
+default, and `workers-ai` restores the old Workers AI pair.
 
 Why (bench `outputs/checker-bench-20261019`, 14 Muse-lane sections that passed
 Muse's own gate, 4 with hand-found meaning errors):
 - Muse's same-model critic passed all four errors.
-- Sonnet caught 3 of the 4, plus 2 real errors the hand check had missed.
+- Sonnet caught 3 of the 4 and was the most precise.
+- Grok build-fast caught 3 of the 4 plus 4 real errors nobody else found, but it nitpicks.
 - Haiku caught 2.
+- None caught the Maximus error.
 
-Haiku is the second checker only. Its false alarms are judged by the cross-check, and
-Sonnet covers its misses. Claude readers score like the Workers AI pair: Didache 4/4
-both ways, two other books within a point (`outputs/plan-limits/reader_calibration.py`).
+A finding counts only when both checkers agree or the other upholds it, so Grok's
+nitpicks are filtered and Sonnet's misses are covered.
+
+Settings bench (`muse_settings.py`):
+- Muse Spark 1.3 at medium effort drafted all 3 known-error sections right.
+- Low effort and Wonder 1.0 did worse.
+- Grok at default effort took 4-7 min a section; build-fast at low effort takes 62 s.
+
+Claude readers score like the Workers AI pair: Didache 4/4 both ways
+(`outputs/plan-limits/reader_calibration.py`).
 
 Limits are handled, never fought:
 - A spent usage window pauses that plan until the reset the plan names, and the lanes
   sleep through it.
-- Each plan keeps a soft budget per hour and per day: Claude 60 / 500, Muse 120 / 600.
-  The owner's own Claude Code and Spark sessions share these limits.
-- At most 3 `claude -p` calls run at once.
-- `fathers_watch` reports plan state (`plans` check) and treats a pause as idle by
-  design. A pause longer than a day warns as `plans:parked`.
+- Soft budgets per hour / per day: Claude 60 / 500, Muse 120 / 600, Grok 30 / 200.
+  Grok's pool is shared with the owner's Cursor use.
+- At most 3 Claude, 4 Muse and 2 Grok calls run at once.
+- `fathers_watch` reports plan state (`plans` check). A pause over a day warns as
+  `plans:parked`.
 
-The Muse-only promotion path (owner 2026-10-18) is superseded for new work: run Muse drafts
-through the plans lanes, so a second family checks them.
+The Muse-only promotion path (owner 2026-10-18) is superseded for new work: run Muse
+drafts through the plans lanes, so two other model families check them.
 
 ## What checkers must verify
 

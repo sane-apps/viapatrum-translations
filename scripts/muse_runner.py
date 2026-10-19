@@ -76,8 +76,11 @@ def run_job(q: Path, claimed: Path) -> dict:
         res["effort"] = effort
         pf = d["work"] / f"{jid}.prompt.txt"
         pf.write_text(str(job["prompt"]), encoding="utf-8")
-        p = subprocess.run([muse_bin(), "exec", "--prompt-file", str(pf), "--reasoning-effort", effort,
-                            "--workspace", str(d["ws"])], capture_output=True, text=True,
+        # --preset empty: no agent tooling, about 2 s faster a call; drafts as accurate as the
+        # default (bench 2026-10-19, outputs/checker-bench-20261019/muse_settings.py: Spark 1.3
+        # at medium effort 3/3 right; low effort and Wonder 1.0 did worse).
+        p = subprocess.run([muse_bin(), "exec", "--preset", "empty", "--prompt-file", str(pf),
+                            "--reasoning-effort", effort, "--workspace", str(d["ws"])], capture_output=True, text=True,
                            timeout=int(job.get("timeout") or 900), cwd=str(d["ws"]))
         res.update(rc=p.returncode, answer=p.stdout, stderr_tail=p.stderr[-600:])
         if p.returncode != 0:
