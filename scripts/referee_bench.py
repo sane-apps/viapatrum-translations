@@ -97,9 +97,75 @@ def user_for(r: dict) -> str:
             + f"\n\nREPORTED PROBLEMS:\n{listing}\n\nReturn the JSON now.")
 
 
+# Clef is a typed-choice model (Jev-compatible, scripts/jev_review.jev), not a chat model: it gets
+# the same inputs as ADJ_SYS and picks real/noise (owner 2026-10-19: "you can always call clef
+# from cf because its so so very cheap").
+CLEF_MODELS = {"@cf/cloudflare/clef"}
+CLEF_RULING = {"ruling": {
+    "type": "choice",
+    "instructions": ("A first checker reported one problem in an English translation of the SOURCE. Decide whether "
+                     "it is a real MAJOR error a careful translator must fix: the meaning is changed or lost, a reader "
+                     "is misled, or a reference is wrong. A rendering within the word's normal range of meaning, or "
+                     "a mere preference, is not real."),
+    "criteria": {"real": "The reported problem is a real major error in the English.",
+                 "noise": "The English is acceptable; the report is wrong, a preference, or minor."},
+}}
+
+
+def clef_ruling(model: str, r: dict) -> dict:
+    """ADJ_SYS-shaped result from one Clef typed choice."""
+    import jev_review
+    state = user_for(r).replace("\n\nReturn the JSON now.", "")
+    for attempt in range(6):  # Cloudflare only: jev() falls back to card-billed TypeSafe on any CF error
+        try:
+            body = jev_review._cf_jev(state, CLEF_RULING, model)
+            break
+        except Exception as e:  # noqa: BLE001
+            if "429" not in str(e) or attempt == 5:
+                raise
+            time.sleep(5 * 2 ** attempt)
+    ans = body["answers"]["ruling"]
+    return {"rulings": [{"n": 1, "real": ans["choice"] == "real",
+                         "why": f"clef {ans['choice']} conf={float(ans.get('confidence') or 0):.2f}"}]}
+
+
+def run_judge(models: list[str], workers: int) -> None:
+    """The held-review task itself (held_review.JUDGE_SYS, 15 findings a call) on plan models,
+    so the backlog's judge is chosen on the job it will do (owner 2026-10-19)."""
+    import held_review as H
+    sample = [json.loads(l) for l in SAMPLE.read_text().splitlines() if l.strip()]
+    (OUT / "runs-judge").mkdir(parents=True, exist_ok=True)
+    lock = threading.Lock()
+
+    def one_model(model: str) -> None:
+        path = OUT / "runs-judge" / (model.replace("/", "__") + ".jsonl")
+        done = {json.loads(l)["id"] for l in path.read_text().splitlines() if l.strip()} if path.exists() else set()
+        todo = [r for r in sample if r["id"] not in done]
+
+        def ask(chunk: list[dict]) -> None:
+            t0 = time.time()
+            got = H.claude_judge(chunk, model)
+            secs = round((time.time() - t0) / max(len(chunk), 1), 1)
+            with lock, path.open("a") as fh:
+                for r in chunk:
+                    v = got.get(r["id"])
+                    fh.write(json.dumps({"id": r["id"], "key": r["key"], "verdict": v and v["verdict"],
+                                         "real": None if v is None else v["verdict"] != "noise", "secs": secs,
+                                         "why": (v or {}).get("note", "")[:200], "fix": (v or {}).get("correct_fix"),
+                                         "error": None if v else "no verdict"}, ensure_ascii=False) + "\n")
+
+        with ThreadPoolExecutor(workers) as ex:
+            list(ex.map(ask, H.chunks(todo)))
+        print(f"{time.strftime('%T')} STAGE done judge {model}: {len(todo)} asked", flush=True)
+
+    with ThreadPoolExecutor(len(models)) as ex:
+        list(ex.map(one_model, models))
+    print(f"{time.strftime('%T')} EXIT ok run-judge", flush=True)
+
+
 def run(models: list[str], workers: int) -> None:
     W.TOKENS["cf"], W.TOKENS["nv"] = W.secret("CLOUDFLARE_API_TOKEN"), W.secret("NV_API_KEY")
-    W.receipts_ok(models, "translation-qa")
+    W.receipts_ok([m for m in models if m not in CLEF_MODELS], "translation-qa")
     sample = [json.loads(l) for l in SAMPLE.read_text().splitlines() if l.strip()]
     (OUT / "runs").mkdir(parents=True, exist_ok=True)
     lock = threading.Lock()
@@ -114,8 +180,11 @@ def run(models: list[str], workers: int) -> None:
         def ask(r: dict) -> None:
             t0 = time.time()
             try:
-                obj = W.call(model, W.ADJ_SYS.format(langname=langname(r.get("source", ""))), user_for(r),
-                             max_tokens=3000, expect=("rulings",))
+                if model in CLEF_MODELS:
+                    obj = clef_ruling(model, r)
+                else:
+                    obj = W.call(model, W.ADJ_SYS.format(langname=langname(r.get("source", ""))), user_for(r),
+                                 max_tokens=3000, expect=("rulings",))
                 err = None
             except Exception as e:  # noqa: BLE001  a bench row records the failure
                 obj, err = None, f"{type(e).__name__}: {e}"[:200]
@@ -139,10 +208,10 @@ def run(models: list[str], workers: int) -> None:
     print(f"{time.strftime('%T')} EXIT ok run", flush=True)
 
 
-def score() -> list[dict]:
+def score(runs: str = "runs") -> list[dict]:
     sample = {json.loads(l)["id"]: json.loads(l) for l in SAMPLE.read_text().splitlines() if l.strip()}
     res = []
-    for path in sorted((OUT / "runs").glob("*.jsonl")):
+    for path in sorted((OUT / runs).glob("*.jsonl")):
         rows = [json.loads(l) for l in path.read_text().splitlines() if l.strip()]
         rows = [r for r in rows if r["id"] in sample]
         ans = [r for r in rows if r["real"] is not None]
@@ -164,8 +233,9 @@ def score() -> list[dict]:
     for r in res:
         lines.append(f"| {r['model']} | {r['answered']}/{len(sample)} | {r['real_kept_pct']}% | {r['noise_cleared_pct']}% | "
                      f"{r['balanced_pct']}% | {r['median_secs']} |")
-    (OUT / "REPORT.md").write_text("\n".join(lines) + "\n")
-    (OUT / "scores.json").write_text(json.dumps(res, indent=1))
+    tag = "" if runs == "runs" else "-" + runs
+    (OUT / f"REPORT{tag}.md").write_text("\n".join(lines) + "\n")
+    (OUT / f"scores{tag}.json").write_text(json.dumps(res, indent=1))
     print("\n".join(lines))
     return res
 
@@ -177,13 +247,16 @@ def main() -> int:
     ap.add_argument("--per-book", type=int, default=4)
     ap.add_argument("--models", default="")
     ap.add_argument("--workers", type=int, default=2)
+    ap.add_argument("--prompt", choices=["referee", "judge"], default="referee",
+                    help="referee: lane ADJ_SYS, one finding a call; judge: held_review JUDGE_SYS, 15 a call")
     a = ap.parse_args()
+    models = [m for m in a.models.split(",") if m]
     if a.cmd == "build":
         build(a.n, a.per_book)
     elif a.cmd == "run":
-        run([m for m in a.models.split(",") if m], a.workers)
+        (run_judge if a.prompt == "judge" else run)(models, a.workers)
     else:
-        score()
+        score("runs-judge" if a.prompt == "judge" else "runs")
     return 0
 
 

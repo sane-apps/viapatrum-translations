@@ -36,6 +36,7 @@ import os
 import re
 import subprocess
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -144,7 +145,32 @@ def parse_lines(text: str, ids: set[str]) -> dict[str, dict]:
     return got
 
 
-def claude_judge(chunk: list[dict]) -> dict[str, dict]:
+def plan_judge(chunk: list[dict], model: str) -> dict[str, dict]:
+    """The same judgement on a plan model (claude-*, grok-*, muse) through plan_calls,
+    which waits out spent usage windows (owner 2026-10-19: spread the backlog across plans)."""
+    import plan_calls
+    ids = {f["id"] for f in chunk}
+    got: dict[str, dict] = {}
+    for _ in range(2):
+        todo = [f for f in chunk if f["id"] not in got]
+        if not todo:
+            break
+        r = plan_calls.chat(model, [{"role": "system", "content": JUDGE_SYS},
+                                    {"role": "user", "content": "FINDINGS (JSON):\n" + payload(todo) + "\n\nOutput the JSON lines now."}])
+        if r.get("error"):
+            print(f"judge: {model} failed ({str(r['error'])[:120]})", flush=True)
+            if plan_calls.PAUSED in str(r["error"]):
+                break
+            continue
+        got.update(parse_lines(r.get("content", ""), ids))
+    return got
+
+
+def claude_judge(chunk: list[dict], model: str = "") -> dict[str, dict]:
+    import plan_calls
+    model = model or MODEL
+    if plan_calls.is_plan_model(model):  # claude-sonnet-5-5, grok-4.7-build-fast, muse; "opus" stays on claude -p
+        return plan_judge(chunk, model)
     ids = {f["id"] for f in chunk}
     got: dict[str, dict] = {}
     for _ in range(2):  # one retry for any ids the first answer missed
@@ -178,18 +204,90 @@ def preflight() -> str:
     return "not logged in" if "login" in out.lower() else out[-200:]
 
 
-def judge(d: Path, workers: int = 3) -> int:
+def prefilter(d: Path, workers: int = 4) -> int:
+    """Clef (Workers AI typed choice, ~$0.24/M input) rates every finding real or noise with a
+    confidence -> <dir>/clef.jsonl. Advisory only: at its strictest bar Clef still cleared 1 of 80
+    real errors on the referee bench (2026-10-19), so it orders and pairs work, never releases."""
+    import referee_bench as RB
+    findings = [json.loads(l) for l in (d / "findings.jsonl").read_text().splitlines() if l.strip()]
+    path = d / "clef.jsonl"
+    done = {json.loads(l)["id"] for l in path.read_text().splitlines() if l.strip()} if path.exists() else set()
+    todo = [f for f in findings if f["id"] not in done]
+
+    def one(f: dict) -> dict:
+        try:
+            r = RB.clef_ruling("@cf/cloudflare/clef", f)["rulings"][0]
+            m = re.search(r"clef (\w+) conf=([\d.]+)", r["why"])
+            return {"id": f["id"], "choice": m.group(1), "conf": float(m.group(2))}
+        except Exception as e:  # noqa: BLE001  one bad call must not stop the sweep
+            return {"id": f["id"], "error": f"{type(e).__name__}: {e}"[:160]}
+
+    n = 0
+    with ThreadPoolExecutor(workers) as ex, path.open("a") as out:
+        for row in ex.map(one, todo):
+            out.write(json.dumps(row) + "\n")
+            out.flush()
+            n += 1
+            if n % 1000 == 0:
+                print(f"{time.strftime('%T')} prefilter {n}/{len(todo)}", flush=True)
+    print(f"prefilter: {n} rated ({len(done)} earlier)", flush=True)
+    return n
+
+
+def judge(d: Path, workers: int = 3, first: str = "", final: str = "") -> int:
+    """Judge every finding with `final` (default MODEL). With `first`, a cheap first judge goes
+    over everything and only its "real" verdicts (with their fixes) stand; everything it calls
+    noise or unsure goes to `final`, so nothing is cleared on the cheap judge's word.
+    Bench 2026-10-19 (outputs/referee-bench/REPORT-runs-judge.md, 160 Opus-judged findings): Muse
+    called 39% of Opus's real errors noise, but 94% of its "real" calls were real to Opus too, and
+    its fixes matched Opus's (6 of 10 identical, the rest equivalent)."""
     findings = [json.loads(l) for l in (d / "findings.jsonl").read_text().splitlines() if l.strip()]
     vpath = d / "verdicts.jsonl"
     done = {json.loads(l)["id"] for l in vpath.read_text().splitlines() if l.strip()} if vpath.exists() else set()
     todo = [f for f in findings if f["id"] not in done]
-    n = 0
-    with ThreadPoolExecutor(workers) as ex, vpath.open("a") as out:
-        for got in ex.map(claude_judge, chunks(todo)):
+    final = final or MODEL
+    fpath = d / "verdicts-first.jsonl"
+    fdone = {}
+    if first and fpath.exists():
+        for l in fpath.read_text().splitlines():
+            if l.strip():
+                v = json.loads(l)
+                fdone[v["id"]] = v
+    lock = threading.Lock()
+
+    def stands(v: dict | None) -> bool:
+        return bool(v) and v["verdict"] == "real" and bool(v.get("correct_fix"))
+
+    def one(chunk: list[dict]) -> list[dict]:
+        """Each chunk goes first -> final at once, so both plans work in parallel."""
+        out = []
+        if first:
+            new = [f for f in chunk if f["id"] not in fdone]
+            got = claude_judge(new, first) if new else {}
+            with lock, fpath.open("a") as fh:
+                for v in got.values():
+                    v["by"] = first
+                    fdone[v["id"]] = v
+                    fh.write(json.dumps(v, ensure_ascii=False) + "\n")
+            out += [fdone[f["id"]] for f in chunk if stands(fdone.get(f["id"]))]
+        rest = [f for f in chunk if not stands(fdone.get(f["id"]))]
+        if rest:
+            got = claude_judge(rest, final)
             for v in got.values():
+                v["by"] = final
+            out += list(got.values())
+        return out
+
+    n = 0
+    cs = chunks(todo)
+    with ThreadPoolExecutor(workers) as ex, vpath.open("a") as out:
+        for k, got in enumerate(ex.map(one, cs), 1):
+            for v in got:
                 out.write(json.dumps(v, ensure_ascii=False) + "\n")
                 n += 1
             out.flush()
+            if k % 20 == 0:
+                print(f"{time.strftime('%T')} judge {k}/{len(cs)} chunks, {n} verdicts", flush=True)
     print(f"judge: {n} new verdicts ({len(done)} earlier) for {len(findings)} findings", flush=True)
     return n
 
@@ -475,13 +573,19 @@ def apply(d: Path, dry_run: bool) -> dict:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("cmd", choices=["run", "export", "judge", "apply", "publish", "import"])
+    ap.add_argument("cmd", choices=["run", "export", "prefilter", "judge", "apply", "publish", "import"])
     ap.add_argument("--dir", default="", help="review folder (default: outputs/held-review/<date> for run/export)")
     ap.add_argument("--dry-run", action="store_true", help="apply/import: report only")
+    ap.add_argument("--first", default=os.environ.get("HELD_REVIEW_FIRST", ""),
+                    help="judge: cheap first judge (e.g. muse); only its real verdicts stand")
+    ap.add_argument("--final", default="", help="judge: final judge (default HELD_REVIEW_MODEL / opus)")
     a = ap.parse_args()
     d = ROOT / (a.dir or f"outputs/held-review/{time.strftime('%Y-%m-%d')}")
     if a.cmd == "publish":
         publish(d)
+        return 0
+    if a.cmd == "prefilter":
+        prefilter(d)
         return 0
     if a.cmd in ("run", "import"):
         # Contributor fixes merged on GitHub come in first, so the review does
@@ -497,7 +601,7 @@ def main() -> int:
     if a.cmd in ("run", "export") and export(d) == 0:
         return 0
     if a.cmd in ("run", "judge"):
-        judge(d)
+        judge(d, first=a.first, final=a.final)
     if a.cmd in ("run", "apply"):
         apply(d, a.dry_run)
     return 0

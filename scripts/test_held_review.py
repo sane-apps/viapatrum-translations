@@ -180,5 +180,31 @@ class ImportTests(unittest.TestCase):
         self.assertEqual(j["_status"], "hold")
 
 
+class TwoStageJudgeTests(unittest.TestCase):
+    def test_only_first_judge_real_with_fix_stands(self):
+        fs = [finding("b", "1", 0), finding("b", "1", 1), finding("b", "2", 0)]
+        first = {"b/1#0": {"id": "b/1#0", "verdict": "real", "correct_fix": "good words"},
+                 "b/1#1": {"id": "b/1#1", "verdict": "noise"},
+                 "b/2#0": {"id": "b/2#0", "verdict": "real", "correct_fix": None}}
+        seen = {}
+
+        def fake(chunk, model=""):
+            seen.setdefault(model, set()).update(f["id"] for f in chunk)
+            if model == "muse":
+                return {f["id"]: dict(first[f["id"]]) for f in chunk}
+            return {f["id"]: {"id": f["id"], "verdict": "real", "correct_fix": "opus fix"} for f in chunk}
+
+        with tempfile.TemporaryDirectory() as t, mock.patch.object(H, "claude_judge", side_effect=fake):
+            d = Path(t)
+            (d / "findings.jsonl").write_text("".join(json.dumps(f) + "\n" for f in fs))
+            H.judge(d, workers=1, first="muse", final="claude-opus-5-5")
+            got = {v["id"]: v for v in map(json.loads, (d / "verdicts.jsonl").read_text().splitlines())}
+        # A first-judge "noise" (and a real without a fix) always goes to the final judge.
+        self.assertEqual(seen["claude-opus-5-5"], {"b/1#1", "b/2#0"})
+        self.assertEqual(got["b/1#0"]["by"], "muse")
+        self.assertEqual(got["b/1#1"]["by"], "claude-opus-5-5")
+        self.assertEqual(got["b/2#0"]["by"], "claude-opus-5-5")
+
+
 if __name__ == "__main__":
     unittest.main()
