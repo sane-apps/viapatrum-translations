@@ -90,7 +90,16 @@ PAIRS=("@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2")
 # 2026-10-19 bench, 62 s a section). A finding counts only when both agree or the other
 # upholds it, so Grok's nitpicks are filtered and Sonnet's misses are covered. Haiku stays a
 # reader (WP_JUDGES above): its scores are the calibrated pair.
-[ "$PROFILE" = plans ] && PAIRS=("claude-sonnet-5-5,grok-4.7-build-fast")
+# While the X plan's Grok pool is spent (402 "usage balance exhausted", 2026-10-19; it is
+# shared with Cursor), plan_calls pauses Grok and Muse takes the second seat: it caught 48% of
+# real errors on the 2026-10-19 checker bench (outputs/checker-bench-plans), Sonnet 43%.
+SECOND=grok-4.7-build-fast
+if [ "$PROFILE" = plans ] && python3 scripts/plan_calls.py status 2>/dev/null \
+     | python3 -c 'import json,sys; sys.exit(0 if json.load(sys.stdin)["grok"]["paused_until"] else 1)'; then
+  SECOND=muse
+  echo "$(date '+%F %T') plans: Grok paused; Muse is the second checker"
+fi
+[ "$PROFILE" = plans ] && PAIRS=("claude-sonnet-5-5,$SECOND")
 NLANE=0
 # NVIDIA referee (third family): same 3 h rule, NIM provider. Purpose-aware
 # since the beliefs job also smokes a doctrine-grade Nemotron receipt nightly.

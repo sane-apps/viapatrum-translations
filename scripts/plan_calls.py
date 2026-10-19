@@ -103,7 +103,7 @@ def plan_of(model: str) -> str | None:
 
 MUSE_LIMIT = re.compile(r"quota exhausted|usage window resets", re.I)
 # Grok's wording was not seen yet: match the usual limit phrases and read any reset time.
-GROK_LIMIT = re.compile(r"usage limit|rate limit|quota|limit reached|exceeded your|too many requests|\b429\b", re.I)
+GROK_LIMIT = re.compile(r"usage limit|rate limit|quota|limit reached|exceeded your|too many requests|\b429\b|balance exhausted|payment required|\b402\b", re.I)
 ISO_TIME = re.compile(r"(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d))")
 MUSE_RESET = re.compile(r"resets at (\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)")
 CLAUDE_LIMIT = re.compile(r"hit your (?:\w+ )?limit|usage limit reached|limit reached", re.I)

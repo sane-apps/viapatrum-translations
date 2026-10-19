@@ -62,6 +62,11 @@ class ResetParsing(unittest.TestCase):
         got = pc.grok_reset("Error: usage limit reached for your plan; resets at 2026-10-20T04:00:00Z", NOW)
         self.assertEqual(got, datetime(2026, 10, 20, 4, 0, tzinfo=timezone.utc))
 
+    def test_grok_spent_pool_pauses(self):
+        # 2026-10-19: the X plan's Grok pool ran dry with a 402, no reset time given.
+        msg = 'API error (status 402 Payment Required): Grok Build usage balance exhausted'
+        self.assertEqual(pc.grok_reset(msg, NOW), NOW + pc.timedelta(hours=1))
+
     def test_grok_ordinary_error_is_not_a_limit(self):
         self.assertIsNone(pc.grok_reset("grok timeout after 900s", NOW))
 
