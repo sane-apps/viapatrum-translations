@@ -41,8 +41,7 @@ fi
 echo "$(date '+%F %T') held review start"
 # Opus through plan_calls (waits out spent usage windows), owner 2026-10-19. No cheap first judge:
 # Muse's "real" calls matched Opus on the bench, but on the live backlog 3 of 10 of its fixes were
-# wrong (one deleted a clause), so every verdict and fix comes from Opus. HELD_REVIEW_FIRST=<model>
-# turns the two-stage judge back on.
+# wrong (one deleted a clause), so every verdict and fix comes from Opus.
 export HELD_REVIEW_MODEL="${HELD_REVIEW_MODEL:-claude-opus-5-5}"
 timeout 86400 nice -n 10 python3 scripts/held_review.py run
 rc=$?

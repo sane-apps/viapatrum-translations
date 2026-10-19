@@ -36,7 +36,6 @@ import os
 import re
 import subprocess
 import sys
-import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -204,87 +203,20 @@ def preflight() -> str:
     return "not logged in" if "login" in out.lower() else out[-200:]
 
 
-def prefilter(d: Path, workers: int = 4) -> int:
-    """Clef (Workers AI typed choice, ~$0.24/M input) rates every finding real or noise with a
-    confidence -> <dir>/clef.jsonl. Advisory only: at its strictest bar Clef still cleared 1 of 80
-    real errors on the referee bench (2026-10-19), so it orders and pairs work, never releases."""
-    import referee_bench as RB
-    findings = [json.loads(l) for l in (d / "findings.jsonl").read_text().splitlines() if l.strip()]
-    path = d / "clef.jsonl"
-    done = {json.loads(l)["id"] for l in path.read_text().splitlines() if l.strip()} if path.exists() else set()
-    todo = [f for f in findings if f["id"] not in done]
-
-    def one(f: dict) -> dict:
-        try:
-            r = RB.clef_ruling("@cf/cloudflare/clef", f)["rulings"][0]
-            m = re.search(r"clef (\w+) conf=([\d.]+)", r["why"])
-            return {"id": f["id"], "choice": m.group(1), "conf": float(m.group(2))}
-        except Exception as e:  # noqa: BLE001  one bad call must not stop the sweep
-            return {"id": f["id"], "error": f"{type(e).__name__}: {e}"[:160]}
-
-    n = 0
-    with ThreadPoolExecutor(workers) as ex, path.open("a") as out:
-        for row in ex.map(one, todo):
-            out.write(json.dumps(row) + "\n")
-            out.flush()
-            n += 1
-            if n % 1000 == 0:
-                print(f"{time.strftime('%T')} prefilter {n}/{len(todo)}", flush=True)
-    print(f"prefilter: {n} rated ({len(done)} earlier)", flush=True)
-    return n
-
-
-def judge(d: Path, workers: int = 3, first: str = "", final: str = "") -> int:
-    """Judge every finding with `final` (default MODEL). With `first`, a cheap first judge goes
-    over everything and only its "real" verdicts (with their fixes) stand; everything it calls
-    noise or unsure goes to `final`, so nothing is cleared on the cheap judge's word.
-    Bench 2026-10-19 (outputs/referee-bench/REPORT-runs-judge.md, 160 Opus-judged findings): Muse
-    called 39% of Opus's real errors noise, but 94% of its "real" calls were real to Opus too, and
-    its fixes matched Opus's (6 of 10 identical, the rest equivalent). On the live backlog, though,
-    3 of 10 Muse fixes were wrong (one replaced a whole clause with "as foretold"), so the weekly
-    job runs Opus alone; use `first` only with a judge whose fixes were checked on live findings."""
+def judge(d: Path, workers: int = 3, model: str = "") -> int:
+    """Judge every finding not yet judged with `model` (default MODEL). A cheap first judge was
+    tried on 2026-10-19 and dropped: Muse's real/noise calls matched Opus on the bench, but 3 of
+    10 of its fixes on the live backlog were wrong (one replaced a whole clause)."""
     findings = [json.loads(l) for l in (d / "findings.jsonl").read_text().splitlines() if l.strip()]
     vpath = d / "verdicts.jsonl"
     done = {json.loads(l)["id"] for l in vpath.read_text().splitlines() if l.strip()} if vpath.exists() else set()
     todo = [f for f in findings if f["id"] not in done]
-    final = final or MODEL
-    fpath = d / "verdicts-first.jsonl"
-    fdone = {}
-    if first and fpath.exists():
-        for l in fpath.read_text().splitlines():
-            if l.strip():
-                v = json.loads(l)
-                fdone[v["id"]] = v
-    lock = threading.Lock()
-
-    def stands(v: dict | None) -> bool:
-        return bool(v) and v["verdict"] == "real" and bool(v.get("correct_fix"))
-
-    def one(chunk: list[dict]) -> list[dict]:
-        """Each chunk goes first -> final at once, so both plans work in parallel."""
-        out = []
-        if first:
-            new = [f for f in chunk if f["id"] not in fdone]
-            got = claude_judge(new, first) if new else {}
-            with lock, fpath.open("a") as fh:
-                for v in got.values():
-                    v["by"] = first
-                    fdone[v["id"]] = v
-                    fh.write(json.dumps(v, ensure_ascii=False) + "\n")
-            out += [fdone[f["id"]] for f in chunk if stands(fdone.get(f["id"]))]
-        rest = [f for f in chunk if not stands(fdone.get(f["id"]))]
-        if rest:
-            got = claude_judge(rest, final)
-            for v in got.values():
-                v["by"] = final
-            out += list(got.values())
-        return out
-
-    n = 0
-    cs = chunks(todo)
+    model = model or MODEL
+    n, cs = 0, chunks(todo)
     with ThreadPoolExecutor(workers) as ex, vpath.open("a") as out:
-        for k, got in enumerate(ex.map(one, cs), 1):
-            for v in got:
+        for k, got in enumerate(ex.map(lambda c: claude_judge(c, model), cs), 1):
+            for v in got.values():
+                v["by"] = model
                 out.write(json.dumps(v, ensure_ascii=False) + "\n")
                 n += 1
             out.flush()
@@ -575,19 +507,14 @@ def apply(d: Path, dry_run: bool) -> dict:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("cmd", choices=["run", "export", "prefilter", "judge", "apply", "publish", "import"])
+    ap.add_argument("cmd", choices=["run", "export", "judge", "apply", "publish", "import"])
     ap.add_argument("--dir", default="", help="review folder (default: outputs/held-review/<date> for run/export)")
     ap.add_argument("--dry-run", action="store_true", help="apply/import: report only")
-    ap.add_argument("--first", default=os.environ.get("HELD_REVIEW_FIRST", ""),
-                    help="judge: cheap first judge (e.g. muse); only its real verdicts stand")
-    ap.add_argument("--final", default="", help="judge: final judge (default HELD_REVIEW_MODEL / opus)")
+    ap.add_argument("--model", default="", help="judge: model (default HELD_REVIEW_MODEL / opus)")
     a = ap.parse_args()
     d = ROOT / (a.dir or f"outputs/held-review/{time.strftime('%Y-%m-%d')}")
     if a.cmd == "publish":
         publish(d)
-        return 0
-    if a.cmd == "prefilter":
-        prefilter(d)
         return 0
     if a.cmd in ("run", "import"):
         # Contributor fixes merged on GitHub come in first, so the review does
@@ -603,7 +530,7 @@ def main() -> int:
     if a.cmd in ("run", "export") and export(d) == 0:
         return 0
     if a.cmd in ("run", "judge"):
-        judge(d, first=a.first, final=a.final)
+        judge(d, model=a.model)
     if a.cmd in ("run", "apply"):
         apply(d, a.dry_run)
     return 0
