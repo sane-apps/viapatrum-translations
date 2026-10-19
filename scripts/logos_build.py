@@ -79,11 +79,25 @@ EXIT_TIME_LIMIT = 5
 
 
 class RunBudget(Exception):
-    """A run budget is spent: stop cleanly (receipt written, lock released)."""
+    """A run budget is spent: stop cleanly (receipt written, lock released).
 
-    def __init__(self, rc, msg):
+    run_wide: the run's own size limit (MAX_RELAUNCHES_TOTAL, MAX_RUN_S), not a
+    stuck book. 2026-10-19: with one relaunch per built book, the total cap
+    of 10 ends every run while the backlog lasts (that night: 7 built, 30
+    pending, exit 4). A run-wide stop after a book built or uploaded is the
+    queue continuing tomorrow, not a failure; stuck runs (3 relaunches since
+    the last success) and runs that built nothing still exit 4 / 5.
+    """
+
+    def __init__(self, rc, msg, run_wide=False):
         Exception.__init__(self, msg)
         self.rc = rc
+        self.run_wide = run_wide
+
+
+def budget_is_progress(e, receipt):
+    """True when a spent run-wide budget follows real work this run."""
+    return bool(e.run_wide and (receipt.get("builds") or receipt.get("uploads")))
 
 
 def relaunch(state, why):
@@ -97,7 +111,7 @@ def relaunch(state, why):
     if state["relaunches"] >= MAX_RELAUNCHES_TOTAL:
         raise RunBudget(EXIT_RELAUNCH_LIMIT,
                         "relaunch limit: %d Logos relaunches already this run (%s); stopping"
-                        % (state["relaunches"], why))
+                        % (state["relaunches"], why), run_wide=True)
     state["relaunches"] += 1
     state["stalled"] = stalled + 1
     state["since_restart"] = 0
@@ -113,7 +127,8 @@ def check_deadline(state, now=None):
     if now - state["t0"] >= MAX_RUN_S:
         raise RunBudget(EXIT_TIME_LIMIT,
                         "time limit: run has held outputs/build.lock %d min (limit %d); "
-                        "the rest wait for the next run" % ((now - state["t0"]) // 60, MAX_RUN_S // 60))
+                        "the rest wait for the next run" % ((now - state["t0"]) // 60, MAX_RUN_S // 60),
+                        run_wide=True)
 
 
 def ax_ready_now():
@@ -1117,9 +1132,14 @@ def main():
                       timeout=120)
         log("backlog regen rc=%d" % rc)
     except RunBudget as e:
-        limit_rc = e.rc
-        log("LIMIT: %s (exit %d)" % (e, e.rc))
-        receipt["failures"].append({"slug": "-", "phase": "budget", "error": str(e)[:300]})
+        if budget_is_progress(e, receipt):
+            receipt["budget"] = str(e)[:300]
+            log("LIMIT: %s; %d built, %d uploaded this run, the rest wait for the next run"
+                % (e, len(receipt["builds"]), len(receipt["uploads"])))
+        else:
+            limit_rc = e.rc
+            log("LIMIT: %s (exit %d)" % (e, e.rc))
+            receipt["failures"].append({"slug": "-", "phase": "budget", "error": str(e)[:300]})
     finally:
         receipt["relaunches"] = restate["relaunches"]
         if os.path.exists(LOCK_PATH) and not args.dry_run:

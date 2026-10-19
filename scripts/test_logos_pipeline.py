@@ -662,6 +662,25 @@ class RunBudgets(unittest.TestCase):
         self.assertEqual(la.call_count, L.MAX_RELAUNCHES_TOTAL)
         self.assertLessEqual(L.MAX_RELAUNCHES_TOTAL, 10)
 
+    def test_run_wide_stop_after_progress_is_not_a_failure(self):
+        """2026-10-19: 7 books built, then the run-wide cap of 10 relaunches
+        ended the run with exit 4 every night while 30 books were pending."""
+        s = self.state(stalled=0, relaunches=L.MAX_RELAUNCHES_TOTAL)
+        with self.assertRaises(L.RunBudget) as cm:
+            L.relaunch(s, "test")
+        built = {"builds": [{"slug": "b"}], "uploads": []}
+        self.assertTrue(L.budget_is_progress(cm.exception, built))
+        self.assertFalse(L.budget_is_progress(cm.exception, {"builds": [], "uploads": []}))
+        with self.assertRaises(L.RunBudget) as tm:
+            L.check_deadline(self.state(t0=0.0), now=L.MAX_RUN_S)
+        self.assertTrue(L.budget_is_progress(tm.exception, built))
+
+    def test_stuck_book_stays_a_failure_after_progress(self):
+        s = self.state(stalled=L.MAX_RELAUNCHES, relaunches=4)
+        with self.assertRaises(L.RunBudget) as cm:
+            L.relaunch(s, "test")
+        self.assertFalse(L.budget_is_progress(cm.exception, {"builds": [{"slug": "b"}], "uploads": []}))
+
     def test_healthy_running_logos_is_not_restarted_between_books(self):
         s = self.state(since_restart=10)
         with mock.patch.object(L, "logos_running", return_value=True), \
