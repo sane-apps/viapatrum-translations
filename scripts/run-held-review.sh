@@ -39,7 +39,10 @@ if [ -f "$OK_STAMP" ] && [ $(( $(date +%s) - $(stat -f %m "$OK_STAMP") )) -lt $(
   exit 0
 fi
 echo "$(date '+%F %T') held review start"
-timeout 14400 nice -n 10 python3 scripts/held_review.py run
+# Plans profile (owner 2026-10-19): Muse judges first and only its real verdicts stand; Opus,
+# through plan_calls (waits out spent usage windows), rules on everything else.
+export HELD_REVIEW_FIRST="${HELD_REVIEW_FIRST-muse}" HELD_REVIEW_MODEL="${HELD_REVIEW_MODEL:-claude-opus-5-5}"
+timeout 86400 nice -n 10 python3 scripts/held_review.py run
 rc=$?
 [ "$rc" = 0 ] && { mkdir -p "$(dirname "$OK_STAMP")"; touch "$OK_STAMP"; }
 echo "$(date '+%F %T') held review exit $rc"
