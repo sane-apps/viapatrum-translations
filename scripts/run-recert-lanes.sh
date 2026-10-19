@@ -55,8 +55,8 @@ if [ -z "${DRAFTER:-}" ]; then
   echo "$(date +%T) drafter pointer unread; using $DRAFTER"
 fi
 # Lane profile (owner 2026-10-19: translation off Workers AI credit). "plans" (the default
-# when $OUT/lane-profile is missing): Muse drafts and repairs, Claude Sonnet + Haiku check
-# and read, no paid fallback. scripts/plan_calls.py waits out a spent usage window on
+# when $OUT/lane-profile is missing): Muse drafts and repairs, Claude Sonnet + Grok (or Muse) check,
+# Kimi + GLM read (Workers AI), no paid fallback. scripts/plan_calls.py waits out a spent usage window on
 # either plan and paces Claude (hourly budget, 3 calls at once). Bench and reader
 # calibration: outputs/checker-bench-20261019, outputs/plan-limits. Write "workers-ai"
 # to $OUT/lane-profile to go back to the Workers AI drafter and checkers below.
@@ -64,7 +64,12 @@ PROFILE="$(head -1 "$OUT/lane-profile" 2>/dev/null | tr -d '[:space:]')"
 PROFILE="${PROFILE:-plans}"
 echo "$(date +%T) lane profile: $PROFILE ($(python3 scripts/plan_calls.py status 2>/dev/null))"
 if [ "$PROFILE" = plans ]; then
-  export WP_DRAFTER=muse WP_JUDGES=claude-sonnet-5-5,claude-haiku-5-5 WP_FALLBACK=""
+  # Readers stay on the Workers AI pair the reader bar was set on: Sonnet + Haiku read the same
+  # books 0.5 and 1 point lower and failed every book Kimi + GLM had passed (reader calibration
+  # 2026-10-19, outputs/plan-limits/reader-runs.jsonl). One whole-work read per reader costs
+  # about $0.07 for the pair, and it keeps Claude free for checking and the held review.
+  export WP_DRAFTER=muse WP_JUDGES=@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2 WP_FALLBACK=""
+  for m in @cf/moonshotai/kimi-k2.6 @cf/zai-org/glm-5.2; do refresh "$m" translation-qa; done
   DRAFTER=muse
 else
   refresh "$DRAFTER" translate
