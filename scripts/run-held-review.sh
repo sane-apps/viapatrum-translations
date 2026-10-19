@@ -39,9 +39,11 @@ if [ -f "$OK_STAMP" ] && [ $(( $(date +%s) - $(stat -f %m "$OK_STAMP") )) -lt $(
   exit 0
 fi
 echo "$(date '+%F %T') held review start"
-# Plans profile (owner 2026-10-19): Muse judges first and only its real verdicts stand; Opus,
-# through plan_calls (waits out spent usage windows), rules on everything else.
-export HELD_REVIEW_FIRST="${HELD_REVIEW_FIRST-muse}" HELD_REVIEW_MODEL="${HELD_REVIEW_MODEL:-claude-opus-5-5}"
+# Opus through plan_calls (waits out spent usage windows), owner 2026-10-19. No cheap first judge:
+# Muse's "real" calls matched Opus on the bench, but on the live backlog 3 of 10 of its fixes were
+# wrong (one deleted a clause), so every verdict and fix comes from Opus. HELD_REVIEW_FIRST=<model>
+# turns the two-stage judge back on.
+export HELD_REVIEW_MODEL="${HELD_REVIEW_MODEL:-claude-opus-5-5}"
 timeout 86400 nice -n 10 python3 scripts/held_review.py run
 rc=$?
 [ "$rc" = 0 ] && { mkdir -p "$(dirname "$OK_STAMP")"; touch "$OK_STAMP"; }

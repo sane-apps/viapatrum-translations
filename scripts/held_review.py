@@ -240,7 +240,9 @@ def judge(d: Path, workers: int = 3, first: str = "", final: str = "") -> int:
     noise or unsure goes to `final`, so nothing is cleared on the cheap judge's word.
     Bench 2026-10-19 (outputs/referee-bench/REPORT-runs-judge.md, 160 Opus-judged findings): Muse
     called 39% of Opus's real errors noise, but 94% of its "real" calls were real to Opus too, and
-    its fixes matched Opus's (6 of 10 identical, the rest equivalent)."""
+    its fixes matched Opus's (6 of 10 identical, the rest equivalent). On the live backlog, though,
+    3 of 10 Muse fixes were wrong (one replaced a whole clause with "as foretold"), so the weekly
+    job runs Opus alone; use `first` only with a judge whose fixes were checked on live findings."""
     findings = [json.loads(l) for l in (d / "findings.jsonl").read_text().splitlines() if l.strip()]
     vpath = d / "verdicts.jsonl"
     done = {json.loads(l)["id"] for l in vpath.read_text().splitlines() if l.strip()} if vpath.exists() else set()
