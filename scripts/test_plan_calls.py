@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 import os
 import sys
 import tempfile
@@ -83,6 +84,17 @@ class ResetParsing(unittest.TestCase):
         finally:
             f.unlink(missing_ok=True)
         self.assertEqual(pc.budgets("claude"), pc.BUDGETS["claude"])
+
+    def test_night_block_applies_in_its_hours(self):
+        f = pc.STATE.with_name("budgets.json")
+        h = NOW.astimezone().hour
+        try:
+            f.write_text(json.dumps({"claude": [15, 300], "night": {"hours": [h, (h + 1) % 24], "claude": [100, 900]}}))
+            self.assertEqual(pc.budgets("claude", NOW), (100, 900))
+            self.assertEqual(pc.budgets("claude", NOW + pc.timedelta(hours=2)), (15, 300))
+            self.assertEqual(pc.budgets("muse", NOW), pc.BUDGETS["muse"])
+        finally:
+            f.unlink(missing_ok=True)
 
     def test_unreadable_reset_waits_an_hour(self):
         self.assertEqual(pc.claude_reset("Claude AI usage limit reached", NOW), NOW + pc.timedelta(hours=1))

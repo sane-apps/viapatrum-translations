@@ -201,12 +201,23 @@ def paused_until(plan: str, now: datetime | None = None) -> datetime | None:
     return until if until > now else None
 
 
-def budgets(plan: str) -> tuple[int, int]:
+def budgets(plan: str, now: datetime | None = None) -> tuple[int, int]:
     """(per hour, per day) for a plan. budgets.json, when present, is the one live setting every
     process reads on each call: per-process caps let a job with a higher cap starve the others
-    (2026-10-19, twice). Without the file, the env/defaults in BUDGETS apply."""
+    (2026-10-19, twice). Without the file, the env/defaults in BUDGETS apply.
+
+    A "night" block ({"hours": [22, 8], "claude": [100, 900]}) applies between those local hours,
+    so background work takes most of a plan while the owner is not using it (owner 2026-10-19:
+    "muse and grok do most of this work so claude is free to be my main on other projects")."""
     try:
-        v = json.loads(STATE.with_name("budgets.json").read_text()).get(plan)
+        cfg = json.loads(STATE.with_name("budgets.json").read_text())
+        night = cfg.get("night") or {}
+        hours = night.get("hours")
+        if isinstance(hours, list) and len(hours) == 2 and plan in night:
+            h, (a, b) = (now or datetime.now(timezone.utc)).astimezone().hour, hours
+            if (a <= h < b) if a < b else (h >= a or h < b):
+                cfg = night
+        v = cfg.get(plan)
         if isinstance(v, list) and len(v) == 2:
             return int(v[0]), int(v[1])
     except (OSError, ValueError, TypeError):
@@ -216,7 +227,7 @@ def budgets(plan: str) -> tuple[int, int]:
 
 def _budget_wait(plan: str, now: datetime) -> float:
     """Seconds until the plan's soft hourly and daily budgets both have room (0 = go)."""
-    per_hour, per_day = budgets(plan)
+    per_hour, per_day = budgets(plan, now)
     t = now.timestamp()
     with _state() as s:
         c = s.setdefault(plan, {})
