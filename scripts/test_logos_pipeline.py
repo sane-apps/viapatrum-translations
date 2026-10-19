@@ -614,6 +614,13 @@ class AccessibilityPreflight(unittest.TestCase):
         self.assertEqual(cm.exception.code, L.EXIT_NO_AX)
 
 
+class ExactTitleFirst(unittest.TestCase):
+    def test_exact_title_row_is_tried_before_a_longer_title(self):
+        out = "HIT=100,200|A Fragment on Matthew\nHIT=100,300|Fragment on\nMatthew\nHIT=100,400|Fragment on Matthew"
+        with mock.patch.object(L, "osa_splitter", return_value=(0, out)):
+            self.assertEqual(L.find_title_hits("Fragment on Matthew"), [(100, 300), (100, 400), (100, 200)])
+
+
 class RunBudgets(unittest.TestCase):
     """2026-10-15: a click-dead run relaunched Logos 37 times in 4.5 h holding
     outputs/build.lock. Relaunches are capped, a running Logos is reused, and

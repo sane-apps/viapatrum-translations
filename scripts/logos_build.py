@@ -452,7 +452,15 @@ def find_title_hits(needle):
                 continue
         elif rows:
             rows[-1][2] += " " + line  # the title went on past a line break
-    return [(x, y) for x, y, name in rows if title_has(name, needle)]
+    hits = [(x, y, name) for x, y, name in rows if title_has(name, needle)]
+    # Exact titles first, then titles that only contain the needle, each in
+    # list order. 2026-10-19: 'Fragment on Matthew' (Gregory Thaumaturgus)
+    # also matches Cyril's 'A Fragment on Matthew', listed above it; every
+    # fresh Logos opened Cyril's row first, the list then went click-dead,
+    # and the book failed on 10-15 and 10-19.
+    exact = norm_title(needle)
+    hits.sort(key=lambda h: norm_title(h[2]) != exact)
+    return [(x, y) for x, y, _name in hits]
 
 
 def list_quiet(timeout=45):
