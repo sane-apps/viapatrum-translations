@@ -837,6 +837,11 @@ def vendor_call(
     omit it.
     """
     model = normalize_model(model)
+    if _plan_model(model):
+        # Subscription plans (Muse, Claude), not Workers AI credit: plan_calls waits out a
+        # spent usage window and paces Claude itself, so no CF rate slot or batch route.
+        import plan_calls
+        return plan_calls.chat(model, messages, max_tokens=max_tokens)
     if batch_route(model) and not rate_try(model):
         _use_batch.on = True            # at the cap: overflow goes to the batch broker
     elif not batch_route(model) and rate_acquire(model) is False:
@@ -846,6 +851,13 @@ def vendor_call(
     if "429" in str(r.get("error", "")):
         rate_throttled(model)
     return r
+
+
+def _plan_model(model: str) -> bool:
+    """Muse / Claude ids that run on subscription plans (scripts/plan_calls.py)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from plan_calls import is_plan_model
+    return is_plan_model(model)
 
 
 def _vendor_call_raw(

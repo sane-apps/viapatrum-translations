@@ -84,6 +84,44 @@ FATHERS_GEMINI_PREP=1 python3 scripts/overnight_quota.py --lanes both --agent ov
 
 Config: `docs/LLM_LANE_CONFIG.json` → `lanes.gemini` (`enabled` defaults **false**). Project note: store `docs/gemini-prep-lane.md`.
 
+## Plans lanes: Muse drafts, Claude checks (owner 2026-10-19)
+
+Owner: "automate that … make them self aware of usage limits in their various plans."
+Translation moved off Workers AI credit. The credit stays for narration and the site.
+The work_pipeline lanes run on two subscription plans:
+
+- **Muse** drafts and repairs (`WP_DRAFTER=muse`).
+- **Claude Sonnet 5.5 + Haiku 5.5** are the two checkers and the two readers.
+- **No paid fallback** (`WP_FALLBACK=""`).
+- **The referee** is unchanged: Nemotron Ultra on NVIDIA, free.
+
+`llm_bakeoff.vendor_call` sends the ids `muse` and `claude-*` to
+`scripts/plan_calls.py`, so every work_pipeline call runs on the plans with no
+other change. `$STAGE/lane-profile` picks the profile: `plans` is the default, and
+`workers-ai` restores the old Workers AI pair.
+
+Why (bench `outputs/checker-bench-20261019`, 14 Muse-lane sections that passed
+Muse's own gate, 4 with hand-found meaning errors):
+- Muse's same-model critic passed all four errors.
+- Sonnet caught 3 of the 4, plus 2 real errors the hand check had missed.
+- Haiku caught 2.
+
+Haiku is the second checker only. Its false alarms are judged by the cross-check, and
+Sonnet covers its misses. Claude readers score like the Workers AI pair: Didache 4/4
+both ways, two other books within a point (`outputs/plan-limits/reader_calibration.py`).
+
+Limits are handled, never fought:
+- A spent usage window pauses that plan until the reset the plan names, and the lanes
+  sleep through it.
+- Each plan keeps a soft budget per hour and per day: Claude 60 / 500, Muse 120 / 600.
+  The owner's own Claude Code and Spark sessions share these limits.
+- At most 3 `claude -p` calls run at once.
+- `fathers_watch` reports plan state (`plans` check) and treats a pause as idle by
+  design. A pause longer than a day warns as `plans:parked`.
+
+The Muse-only promotion path (owner 2026-10-18) is superseded for new work: run Muse drafts
+through the plans lanes, so a second family checks them.
+
 ## What checkers must verify
 
 - English is grounded in the locked Greek (no imported ANF/FOTC sense).

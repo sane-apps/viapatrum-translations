@@ -70,7 +70,7 @@ STAGE = ROOT / "outputs" / "work-pipeline"
 RECEIPTS = Path.home() / "SaneApps/infra/SaneProcess/outputs/llm-api-research"
 
 def _drafter_family(model: str) -> str:
-    for name in ("gpt-oss", "deepseek", "kimi", "glm", "llama", "mistral", "gemma", "nemotron", "qwen"):
+    for name in ("gpt-oss", "deepseek", "kimi", "glm", "llama", "mistral", "gemma", "nemotron", "qwen", "muse", "claude"):
         if name in model.lower():
             return name
     return model.rsplit("/", 1)[-1]
@@ -89,6 +89,10 @@ except Exception as exc:
     print(f"drafter pointer unread ({exc}); using {_DEFAULT_DRAFTER}", file=sys.stderr)
     DRAFTER = _DEFAULT_DRAFTER
     DRAFTER_PROFILE = {}
+# Plans lane (owner 2026-10-19): WP_DRAFTER=muse drafts on the Muse plan instead of the
+# scout's Workers AI pick; plan ids go through llm_bakeoff -> scripts/plan_calls.py.
+if os.environ.get("WP_DRAFTER"):
+    DRAFTER, DRAFTER_PROFILE = os.environ["WP_DRAFTER"], {}
 # Two blind checkers from different families; override with WP_CHECKERS=a,b
 # for bench A/B (keep the pipeline default on the bench winner).
 CHECKERS = os.environ.get("WP_CHECKERS", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2").split(",")
@@ -96,7 +100,9 @@ CHECKERS = os.environ.get("WP_CHECKERS", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/g
 # scored readability 2 in 20 of 21 rounds and stalled certification; it stays a
 # source checker only. Override with WP_JUDGES=a,b.
 JUDGES = os.environ.get("WP_JUDGES", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2").split(",")
-FALLBACK = "@cf/qwen/qwen3.8-27b"  # used only when a checker errors out
+# Used only when a checker errors out. WP_FALLBACK="" turns it off (plans lane: a paid
+# stand-in would spend Workers AI credit, and its verdict never certifies anyway).
+FALLBACK = os.environ.get("WP_FALLBACK", "@cf/qwen/qwen3.8-27b")
 # Readers never see the source, so their notes must not edit the translation
 # until each edit is judged against the text it replaces (quality audit
 # 2026-10-05: reader-fix and polish edits made 14 of 94 confirmed errors, e.g.
@@ -174,7 +180,12 @@ def sha(s: str) -> str:
 
 
 def receipts_ok(models: list[str], purpose: str) -> None:
+    # The LLM vendor SOP receipt covers Workers AI / NIM endpoints. Plan models (Muse,
+    # Claude) run through their own CLIs, and an empty FALLBACK means none is used.
+    from plan_calls import is_plan_model
     for m in models:
+        if not m or is_plan_model(m):
+            continue
         slug = m.split("/")[-1].replace("-0813", "").replace(".", ".")
         cands = sorted(RECEIPTS.glob(f"*{m.split('/')[-1]}*.json"), key=os.path.getmtime, reverse=True)
         path = None
@@ -941,7 +952,7 @@ def check_section(sec: dict, english: list[str], brief: dict, langname: str) -> 
     res, fallback = {}, []
     for m in CHECKERS:
         r = check_one(m, sec, english, brief, langname)
-        if r is None:
+        if r is None and FALLBACK:
             r = check_one(FALLBACK, sec, english, brief, langname)
             if r is not None:
                 fallback.append(m)
@@ -1517,7 +1528,7 @@ def read_two(title: str, light: list[dict]) -> dict:
         return obj
     with ThreadPoolExecutor(len(JUDGES)) as ex:
         got = dict(zip(JUDGES, ex.map(one, JUDGES)))
-    out, fallback_free = {}, FALLBACK not in JUDGES
+    out, fallback_free = {}, bool(FALLBACK) and FALLBACK not in JUDGES
     for m in JUDGES:
         obj = got[m]
         if reader_score(obj) is None:

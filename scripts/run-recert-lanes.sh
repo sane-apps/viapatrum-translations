@@ -54,9 +54,23 @@ if [ -z "${DRAFTER:-}" ]; then
   DRAFTER="$DEFAULT_DRAFTER"
   echo "$(date +%T) drafter pointer unread; using $DRAFTER"
 fi
-refresh "$DRAFTER" translate
-for m in @cf/moonshotai/kimi-k2.6 @cf/zai-org/glm-5.2 @cf/qwen/qwen3.8-27b; do refresh "$m" translation-qa; done
-refresh @cf/openai/gpt-oss-120b translation-qa '{}'
+# Lane profile (owner 2026-10-19: translation off Workers AI credit). "plans" (the default
+# when $OUT/lane-profile is missing): Muse drafts and repairs, Claude Sonnet + Haiku check
+# and read, no paid fallback. scripts/plan_calls.py waits out a spent usage window on
+# either plan and paces Claude (hourly budget, 3 calls at once). Bench and reader
+# calibration: outputs/checker-bench-20261019, outputs/plan-limits. Write "workers-ai"
+# to $OUT/lane-profile to go back to the Workers AI drafter and checkers below.
+PROFILE="$(head -1 "$OUT/lane-profile" 2>/dev/null | tr -d '[:space:]')"
+PROFILE="${PROFILE:-plans}"
+echo "$(date +%T) lane profile: $PROFILE ($(python3 scripts/plan_calls.py status 2>/dev/null))"
+if [ "$PROFILE" = plans ]; then
+  export WP_DRAFTER=muse WP_JUDGES=claude-sonnet-5-5,claude-haiku-5-5 WP_FALLBACK=""
+  DRAFTER=muse
+else
+  refresh "$DRAFTER" translate
+  for m in @cf/moonshotai/kimi-k2.6 @cf/zai-org/glm-5.2 @cf/qwen/qwen3.8-27b; do refresh "$m" translation-qa; done
+  refresh @cf/openai/gpt-oss-120b translation-qa '{}'
+fi
 # Checker pairs rotate across lanes (2026-10-03). Workers AI caps paid-access
 # models (GLM-5.x, Kimi, DeepSeek) at about 20 requests/min per model, and
 # open models such as GPT-OSS-120B at 300/min. GLM-5.2 shared by all lanes
@@ -72,6 +86,7 @@ refresh @cf/openai/gpt-oss-120b translation-qa '{}'
 # Kimi + GLM are the benched pair; rate_acquire paces lanes under their caps,
 # so fewer lanes run at full speed.
 PAIRS=("@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2")
+[ "$PROFILE" = plans ] && PAIRS=("claude-sonnet-5-5,claude-haiku-5-5")
 NLANE=0
 # NVIDIA referee (third family): same 3 h rule, NIM provider. Purpose-aware
 # since the beliefs job also smokes a doctrine-grade Nemotron receipt nightly.

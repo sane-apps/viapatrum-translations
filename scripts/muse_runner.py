@@ -93,10 +93,12 @@ def run_job(q: Path, claimed: Path) -> dict:
     return res
 
 
-def claim_all(q: Path) -> list[Path]:
+def claim_all(q: Path, limit: int | None = None) -> list[Path]:
     d = dirs(q)
     got = []
     for f in sorted(d["in"].glob("*.json")):
+        if limit is not None and len(got) >= limit:
+            break
         dst = d["work"] / f.name
         try:
             os.rename(f, dst)  # atomic claim; a second runner loses the race cleanly
@@ -145,10 +147,19 @@ def main(argv=None) -> int:
                 live.discard(job.name)
             sem.release()
 
+    # Claim only as many jobs as there are free workers, and never block here: the loop
+    # must keep touching the heartbeat. Claiming the whole queue and then waiting on the
+    # semaphore froze the heartbeat under load, and clients took the busy runner for dead
+    # (2026-10-19, plans lanes: dozens of "muse runner not alive" draft failures).
     while True:
         (q / "heartbeat").write_text(now() + "\n")
-        for job in claim_all(q):
-            sem.acquire()
+        free = 0
+        while sem.acquire(blocking=False):
+            free += 1
+        jobs = claim_all(q, limit=free)
+        for _ in range(free - len(jobs)):
+            sem.release()
+        for job in jobs:
             with lock:
                 live.add(job.name)
             threading.Thread(target=worker, args=(job,), daemon=True).start()

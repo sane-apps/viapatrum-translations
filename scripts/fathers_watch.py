@@ -363,12 +363,51 @@ def check_lanes() -> tuple[str, str, dict]:
     return "ok", f"{len(alive)}/{want} lanes alive" + (f", {len(idle)} idle with nothing to do" if idle else ""), info
 
 
+def plan_status() -> dict:
+    """scripts/plan_calls.py status (Muse / Claude plan pauses and budgets), or {}."""
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import plan_calls
+        return plan_calls.status()
+    except Exception:  # noqa: BLE001  the watch never fails on a status read
+        return {}
+
+
+def plan_pause_note() -> str:
+    """'waiting for the claude usage window (resets ...)' while the plans lanes wait, else ""."""
+    profile = (WP / "lane-profile").read_text().strip() if (WP / "lane-profile").exists() else "plans"
+    if profile != "plans":
+        return ""
+    st = plan_status()
+    waits = [f"{p} until {st[p]['paused_until']}" for p in ("muse", "claude") if (st.get(p) or {}).get("paused_until")]
+    return "waiting for plan usage windows: " + ", ".join(waits) if waits else ""
+
+
+def check_plans() -> tuple[str, str, dict]:
+    """Muse / Claude plan state for the plans lanes. A short pause is normal; a pause over
+    a day (a weekly limit) is worth a warning so the owner knows the lanes are parked."""
+    st = plan_status()
+    if not st:
+        return "ok", "plan status unread", {}
+    long_waits = [p for p in ("muse", "claude") if (st.get(p) or {}).get("paused_until")
+                  and datetime.fromisoformat(st[p]["paused_until"]).timestamp() - time.time() > 86400]
+    summary = "; ".join(f"{p}: {(st.get(p) or {}).get('calls_last_day', 0)} calls today"
+                        + (f", paused until {st[p]['paused_until']}" if (st.get(p) or {}).get("paused_until") else "")
+                        for p in ("muse", "claude"))
+    if long_waits:
+        return "warn", f"plan limit over a day: {summary}", st
+    return "ok", summary, st
+
+
 def lanes_idle_by_design() -> str:
     """Why no lane is working when that is not a fault, else "". 2026-10-18:
     with the owner's finish list on (finish_only.json, 2026-10-15/16: finish
     what exists, nothing new) every lane ends "nothing to start", so
     pipeline:no-finish and pipeline:few-certified fired for days with nothing
     broken. A lane that is alive, or one that is not idle, keeps both alerts."""
+    waiting = plan_pause_note()
+    if waiting:  # plans lanes sleep through a spent usage window by design (2026-10-19)
+        return waiting
     alive, idle = [], 0
     for f in WP.glob("lane-*.pid"):
         name = f.stem.removeprefix("lane-")
@@ -877,6 +916,7 @@ CHECKS = {
     "lanes": check_lanes,
     "progress": check_progress,
     "certified": check_certified,
+    "plans": check_plans,
     "throttles": check_throttles,
     "broker": check_broker,
     "audio": check_audio,
@@ -905,6 +945,7 @@ ALERTS = {
     "lanes": "lanes:down",
     "progress": "pipeline:no-finish",
     "certified": "pipeline:few-certified",
+    "plans": "plans:parked",
     "throttles": "vendor:429",
     "broker": "broker:down",
     "audio": "audio:drain",
