@@ -1,0 +1,193 @@
+{
+ "excerpt_id": "perpetua-felicitas:14",
+ "section": "14",
+ "edition": {
+  "language": "lat",
+  "path": "books/perpetua-felicitas/translations/perpetua_source.json"
+ },
+ "source_text": "Hae uisiones insigniores ipsorum martyrum beatissimorum Saturi et Perpetuae, quas ipsi conscripserunt. Secundulum uero deus maturiore exitu de saeculo adhuc in carcere euocauit, non sine gratia, ut bestias lucraretur. Gladium tamen etsi non anima, certe caro eius agnouit.",
+ "thought_title": "Secundulus dies in prison before the arena",
+ "orientation": "The editor closes the written visions of Saturus and Perpetua and notes that Secundulus died in prison before the account of Felicity.",
+ "pass_a_gloss": "These visions more notable of themselves of martyrs of most blessed of Saturus and of Perpetua, which they themselves wrote. Secundulus [object] however God [subject] with more timely departure from world still in prison called out, not without favor, in order that beasts [he] might gain. Sword [object] however even if not soul, certainly flesh of him [subject] knew.",
+ "lemmas": [
+  {
+   "form": "uisiones",
+   "lemma": "visio",
+   "gloss": "vision"
+  },
+  {
+   "form": "insigniores",
+   "lemma": "insignis",
+   "gloss": "more remarkable"
+  },
+  {
+   "form": "martyrum",
+   "lemma": "martyr",
+   "gloss": "martyr"
+  },
+  {
+   "form": "beatissimorum",
+   "lemma": "beatus",
+   "gloss": "most blessed"
+  },
+  {
+   "form": "conscripserunt",
+   "lemma": "conscribo",
+   "gloss": "wrote"
+  },
+  {
+   "form": "maturiore",
+   "lemma": "maturus",
+   "gloss": "earlier"
+  },
+  {
+   "form": "exitu",
+   "lemma": "exitus",
+   "gloss": "departure"
+  },
+  {
+   "form": "saeculo",
+   "lemma": "saeculum",
+   "gloss": "world"
+  },
+  {
+   "form": "euocauit",
+   "lemma": "evoco",
+   "gloss": "called out"
+  },
+  {
+   "form": "gratia",
+   "lemma": "gratia",
+   "gloss": "grace"
+  },
+  {
+   "form": "lucraretur",
+   "lemma": "lucror",
+   "gloss": "to escape by gain"
+  },
+  {
+   "form": "agnouit",
+   "lemma": "agnosco",
+   "gloss": "knew by experience"
+  }
+ ],
+ "choices": [
+  {
+   "term": "uisiones",
+   "english": "visions",
+   "why": "brief glossary fixes visio as vision for revelation of outcome",
+   "rejected": [
+    "revealing dream"
+   ]
+  },
+  {
+   "term": "martyrum",
+   "english": "martyrs",
+   "why": "brief glossary fixes martyr as martyr for one who dies confessing Christ",
+   "rejected": [
+    "witnesses who die for the faith"
+   ]
+  },
+  {
+   "term": "gratia",
+   "english": "grace",
+   "why": "brief glossary fixes gratia as grace for favor in prison outcomes",
+   "rejected": [
+    "gift"
+   ]
+  },
+  {
+   "term": "bestias",
+   "english": "wild beasts",
+   "why": "brief glossary fixes bestiae as wild beasts for arena execution",
+   "rejected": [
+    "execution in the arena"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "These are the more remarkable visions of the most blessed martyrs Saturus and Perpetua, which they wrote down themselves. But God called Secundulus out of the world while he was still in prison, by an earlier departure. This was not without grace, so that he might gain the wild beasts. Yet even if his soul did not know the sword, his flesh certainly did."
+ ],
+ "notes": [],
+ "drafter": "muse",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "966b5c4bd3ae936a448e4be13c71f2b1b6a887694a35b810ddee6fadd482c69e",
+ "source_sha256": "6ff59f1b3bc02e437125b5c63c5cd3f29237a46eb188d1859167010c705d79b8",
+ "pass_a_redone": 1,
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "so that he would escape the wild beasts",
+     "source_quote": "ut bestias lucraretur",
+     "why": "lucrari means to gain, not to escape; grace gave him the beasts' merit despite prison death",
+     "fix": "This was not without grace, so that he might still gain the wild beasts.",
+     "model": "muse",
+     "upheld_by": "claude-sonnet-5-5",
+     "ruling": "\"ut bestias lucraretur\": lucrari means to gain/win; the Passio says Secundulus gained the beasts (their honor) by dying early. \"escape the wild beasts\" reverses the sense."
+    }
+   ],
+   "edits": [
+    {
+     "old": "so that he would escape the wild beasts",
+     "new": "so that he might gain the wild beasts"
+    }
+   ],
+   "fixed": [
+    "Fixed `escape' to `gain': source ut bestias lucraretur means to gain, not to escape."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "muse"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "so that he might gain the wild beasts",
+    "source_quote": "ut bestias lucraretur",
+    "why": "Secundulus died in prison before the arena, so lucraretur means escape, not obtain; gain reverses sense",
+    "fix": "This was not without grace, so that he might escape the wild beasts.",
+    "model": "muse",
+    "rejected_by": "claude-sonnet-5-5",
+    "ruling": "\"lucraretur\" normally means \"gain/win\". \"Bestias lucraretur\" is cryptic in the Latin, and \"escape\" is only one reading. The literal \"gain the wild beasts\" keeps that ambiguity and is a defensible rendering."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:claude-sonnet-5-5+muse",
+ "confidence": "source_verified"
+}
