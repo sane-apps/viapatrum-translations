@@ -264,6 +264,12 @@ def _cf_reasoning_only(result: dict) -> bool:
 TRUNCATED_LENGTH = "truncated: length"
 
 
+def _usage(result) -> dict:
+    """pt/ct/neurons of a reply, also for cut-off and reasoning-only replies: those tokens are billed too."""
+    u = (result.get("usage") if isinstance(result, dict) else None) or {}
+    return {"pt": u.get("prompt_tokens") or 0, "ct": u.get("completion_tokens") or 0, "neurons": u.get("neurons") or 0}
+
+
 def _cf_cut_off(result: dict) -> bool:
     """The model stopped at max_tokens (finish_reason 'length'): the answer is
     cut off, so its JSON usually never closes (2026-10-06: Kimi checker
@@ -353,14 +359,20 @@ def _broker_run(model: str, payload: dict) -> dict:
         return json.loads(r.read() or b"{}")
 
 
-def _spend_refused(model: str, messages: list, max_tokens: int) -> str:
-    """'' when spend_guard reserves this call, else the refusal (fails closed)."""
+def _spend_refused(model: str, messages: list, max_tokens: int, extra: dict | None = None) -> str:
+    """'' when spend_guard reserves this call, else the refusal (fails closed).
+    n > 1 (several samples per call) bills n times the output, so the reservation covers n x max_tokens
+    (audit 22 Oct: n=3 arms reserved a third of their worst case)."""
     try:
         import spend_guard as _sg
     except Exception as e:  # noqa: BLE001
         return f"spend guard refused (llm_bakeoff.cf_call): guard unavailable: {type(e).__name__}: {e}"[:300]
     chars = sum(len(str(m.get("content") or "")) for m in messages if isinstance(m, dict))
-    ok, why = _sg.reserve(f"llm_bakeoff.cf_call {model}", _sg.estimate_usd(chars, int(max_tokens or 0)))
+    try:
+        n = max(1, int((extra or {}).get("n") or 1))
+    except (TypeError, ValueError):
+        n = 1
+    ok, why = _sg.reserve(f"llm_bakeoff.cf_call {model}", _sg.estimate_usd(chars, int(max_tokens or 0) * n))
     return "" if ok else f"{_sg.REFUSED_TAG} (llm_bakeoff.cf_call {model}): {why}"
 
 
@@ -383,8 +395,10 @@ def cf_call(
 
     extra: more body kwargs from the model's live schema (top_p, n, logprobs, response_format,
     reasoning...), merged last. When set, the reply also carries "raw" (the full result, every
-    choice and its logprobs) so callers can score from probabilities or repeat samples."""
-    refused = _spend_refused(model, messages, max_tokens)
+    choice and its logprobs) so callers can score from probabilities or repeat samples. Cut-off,
+    reasoning-only and empty replies carry "raw" too (audit 22 Oct): the checks above look at
+    choices[0] only, and with n > 1 the other choices may be complete, so the caller decides."""
+    refused = _spend_refused(model, messages, max_tokens, extra)
     if refused:  # spend_guard (2026-10-16): no request leaves, broker or direct
         return {"error": refused, "ms": 0, "spend_refused": True}
     if api == "chat":
@@ -426,14 +440,15 @@ def cf_call(
             content = _cf_pick_content(result)
             if content is not None and _cf_cut_off(result):
                 return {"error": TRUNCATED_LENGTH, "content": content, "ms": int((time.time() - t0) * 1000), "batched": True,
-                        "ct": (result.get("usage") or {}).get("completion_tokens") or 0}
+                        **_usage(result), **raw(result)}
             if content is not None:
                 usage = result.get("usage") or {}
                 return {"content": content, "ms": int((time.time() - t0) * 1000), "batched": True,
                         "pt": usage.get("prompt_tokens") or 0, "ct": usage.get("completion_tokens") or 0,
                         "neurons": usage.get("neurons") or 0, **raw(result)}
             if _cf_reasoning_only(result):
-                return {"error": TRUNCATED_REASONING, "ms": int((time.time() - t0) * 1000), "batched": True}
+                return {"error": TRUNCATED_REASONING, "ms": int((time.time() - t0) * 1000), "batched": True,
+                        **_usage(result), **raw(result)}
         if "spend guard refused" in str(out.get("error") or ""):
             # The broker refused on the cap: never retry it as a direct call.
             return {"error": str(out["error"])[:300], "ms": int((time.time() - t0) * 1000), "spend_refused": True}
@@ -461,11 +476,11 @@ def cf_call(
                 content = _cf_pick_content({"choices": data["choices"]})
                 if not content:
                     if _cf_reasoning_only({"choices": data["choices"]}):
-                        return {"error": TRUNCATED_REASONING, "ms": ms}
-                    return {"error": f"empty chat result: {json.dumps(data)[:200]}", "ms": ms}
+                        return {"error": TRUNCATED_REASONING, "ms": ms, **_usage(data), **raw(data)}
+                    return {"error": f"empty chat result: {json.dumps(data)[:200]}", "ms": ms, **_usage(data), **raw(data)}
                 usage = data.get("usage") or {}
                 if _cf_cut_off({"choices": data["choices"]}):
-                    return {"error": TRUNCATED_LENGTH, "content": content, "ms": ms, "ct": usage.get("completion_tokens") or 0}
+                    return {"error": TRUNCATED_LENGTH, "content": content, "ms": ms, **_usage(data), **raw(data)}
                 return {
                     "content": content,
                     "ms": ms,
@@ -484,11 +499,11 @@ def cf_call(
             content = _cf_pick_content(result)
             if content is None:
                 if _cf_reasoning_only(result):
-                    return {"error": TRUNCATED_REASONING, "ms": ms}
-                return {"error": f"empty result: {json.dumps(result)[:200]}", "ms": ms}
+                    return {"error": TRUNCATED_REASONING, "ms": ms, **_usage(result), **raw(result)}
+                return {"error": f"empty result: {json.dumps(result)[:200]}", "ms": ms, **_usage(result), **raw(result)}
             usage = result.get("usage") or {}
             if _cf_cut_off(result):
-                return {"error": TRUNCATED_LENGTH, "content": content, "ms": ms, "ct": usage.get("completion_tokens") or 0}
+                return {"error": TRUNCATED_LENGTH, "content": content, "ms": ms, **_usage(result), **raw(result)}
             return {
                 "content": content,
                 "ms": ms,
