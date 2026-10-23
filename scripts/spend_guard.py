@@ -141,7 +141,14 @@ def decide(day: dict, hour: dict, cap: float) -> tuple[bool, str]:
     return True, f"ok: ${day['usd']:.2f} of ${cap:.0f} today, ${hour['usd']:.2f} of ${ceiling:.2f} this hour"
 
 
+CF_AI_OFF = Path(os.environ.get("SANE_CF_AI_OFF_FILE", str(Path.home() / ".sane" / "CLOUDFLARE_AI_OFF")))
+
+
 def hold_reason() -> str:
+    # Global Cloudflare AI switch (owner 2026-10-23): our Startup tier covers only $2,500 of Workers AI; once
+    # used, every call bills the owner's card. While the file exists, every gated call refuses.
+    if CF_AI_OFF.exists():
+        return "Cloudflare AI switched off (" + str(CF_AI_OFF) + ")"
     try:
         return "owner hold (outputs/spend/hold): " + (HOLD.read_text(errors="replace").strip()[:200] or "set")
     except OSError:
