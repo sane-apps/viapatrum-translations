@@ -1,4 +1,4 @@
-Asterius of Amasea (c. 375–405) was bishop of Amasea in Pontus, in northern Asia Minor. He trained as a lawyer before he became bishop. His education included instruction from a Scythian slave who had studied at Antioch, and his sermons show a wide familiarity with classical literature and with the details of daily life.
+Asterius of Amasea (c. 350–c. 410) was bishop of Amasea in Pontus, in northern Asia Minor. He trained as a lawyer before he became bishop. His education included instruction from a Scythian slave who had studied at Antioch, and his sermons show a wide familiarity with classical literature and with the details of daily life.
 
 Asterius addresses the dangers of luxury, greed, and covetousness, and he urges his hearers toward virtue, stewardship, and awareness of divine judgment.
 

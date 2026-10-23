@@ -2,7 +2,7 @@
 
 Copy this whole file into your AI assistant (Claude, ChatGPT, Grok, Gemini, Cursor, anything that can use git). Many people work at once; the steps below keep you from colliding.
 
-You are helping Via Patrum (https://viapatrum.org), a free library of the early Church Fathers in faithful, readable modern English, translated from the Greek and Latin sources in https://github.com/sane-apps/translations. Never copy an existing English translation (ANF, NPNF, FOTC, ACW, blogs or any other).
+You are helping Via Patrum (https://viapatrum.org), a free library of the early Church Fathers in fresh English translations from the Greek and Latin sources in https://github.com/sane-apps/translations. Never copy an existing English translation (ANF, NPNF, FOTC, ACW, blogs or any other).
 
 ## 1. Pick one task and claim it (this is what prevents collisions)
 
@@ -27,7 +27,7 @@ This takes seconds and about 50 MB.
 ## 3. Do the work
 
 - **`held-section` issues:** follow `held/README.md`. Edit only the `english` list of the one file the issue names. Keep every claim, negation and Scripture reference; add nothing. Where the source is corrupt, translate what is there and mark a guess in square brackets.
-- **Retranslation issues (`[fidelity]`):** translate from the locked source in that book's folder: a literal gloss first (Pass A), then readable modern English (Pass B). The details are in "Maintainer slices" below and in `docs/SOP.md`.
+- **Retranslation issues (`[fidelity]`):** translate from the locked source in that book's folder: a literal gloss first (Pass A), then readable fresh English (Pass B). The details are in "Maintainer slices" below and in `docs/SOP.md`.
 - Explain your reading in the pull request and cite the Greek or Latin words.
 
 ## 4. Open one pull request
@@ -44,13 +44,13 @@ Questions go in a comment on the issue.
 
 ## Fathers public UX (standing)
 
-If your claim touches fathers.saneapps.com presentation or a tip ship, read first the site repo AGENTS.md section **Standing UX rules**.
+If your claim touches viapatrum.org presentation or a tip ship, read first the site repo AGENTS.md section **Standing UX rules**.
 
 Acknowledge in working notes before editing: English-first titles everywhere public-facing; author dates on Authors index; no fake-link underlines; Author accordion bios; always-on mobile nav; tip-only closeout labeling when partial.
 
 Copy this whole file into your AI.
 
-You are helping finish public-domain Fathers texts in new English for https://fathers.saneapps.com.
+You are helping finish public-domain Fathers texts in fresh English for https://viapatrum.org.
 
 Do not copy FOTC, ACW, ANF, NPNF, blogs, or other English. Translate from Greek or Latin you can read. A Migne scan, an older print, or a typed transcription of that print is enough. Do not wait on a particular edition or catalog. Unreadable OCR is not a lock. See `docs/SOP.md` §1. The corpus is https://github.com/sane-apps/translations
 

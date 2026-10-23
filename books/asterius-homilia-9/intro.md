@@ -1,4 +1,4 @@
-Asterius of Amasea (c. 375–405) wrote this homily for a congregation gathered at a shrine of the martyr Phocas on his feast day. He was bishop of Amasea in Pontus, and this is one of sixteen surviving homilies and panegyrics on the martyrs from his works. He delivered it to celebrate Phocas's witness and to encourage devotion to him.
+Asterius of Amasea (c. 350–c. 410) wrote this homily for a congregation gathered at a shrine of the martyr Phocas on his feast day. He was bishop of Amasea in Pontus, and this is one of sixteen surviving homilies and panegyrics on the martyrs from his works. He delivered it to celebrate Phocas's witness and to encourage devotion to him.
 
 The occasion is a festal gathering at the shrine of Phocas, a Christian gardener near Sinope who was martyred by beheading. Asterius opens by saying that all martyrs are holy, but they do not all receive equal glory or equal honors; the judge's assessment is exact and unswerving, apportioning rewards according to each one's contest. He then presents Phocas as a martyr of surpassing fame, known everywhere like the sun's ray.
 
