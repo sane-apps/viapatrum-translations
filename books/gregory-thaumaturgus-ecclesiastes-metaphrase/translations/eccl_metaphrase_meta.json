@@ -1,10 +1,10 @@
 {
   "slug": "gregory-thaumaturgus-ecclesiastes-metaphrase",
-  "title": "Metaphrase on Ecclesiastes (Cap. I tip)",
+  "title": "Paraphrase of Ecclesiastes",
   "author": "Gregory Thaumaturgus",
   "author_slug": "gregory-thaumaturgus",
   "period": "c. 240–270",
-  "edition": "MGR Greek (TLG 2063.006 / Documenta Catholica Omnia); tip densify Cap. A opening; PG 10.987-989",
+  "edition": "MGR Greek (TLG 2063.006 / Documenta Catholica Omnia), PG 10.987-1017; checked against the Opera omnia print (Paris, 1622)",
   "status": "available",
   "topics": [
     "ecclesiastes",
@@ -12,35 +12,63 @@
     "wisdom-literature",
     "vanity"
   ],
-  "blurb": "Gregory Thaumaturgus, Paraphrase of Ecclesiastes: the opening chapter — Solomon’s address, through his careful consideration as king in Jerusalem.",
-  "era_note": "Third-century metaphrase of Ecclesiastes transmitted under Gregory Thaumaturgus. Tip covers Cap. I opening only.",
+  "blurb": "Gregory Thaumaturgus retells the whole of Ecclesiastes in Solomon's voice: human affairs are empty, pleasure and wealth never satisfy, and the book ends with its charge to fear God and keep His commandments, for every person will be judged. A fresh English translation from the Greek.",
+  "era_note": "Third-century paraphrase of Ecclesiastes transmitted under Gregory Thaumaturgus.",
   "first_english": false,
-  "first_english_note": "Prior English exists (ANF 4 Crombie, PD); this is a new rendering from locked Greek for the tipped opening.",
+  "first_english_note": "Prior English exists (Ante-Nicene Fathers, vol. 6, public domain); this is a fresh English translation from the Greek.",
   "text_history": {
-    "method": "English densified from locked MGR Greek Cap. A tip opening; ANF 4 consulted only as sense check; earlier scaffold English discarded; Vossius 1684 Latin DjVu OCR too damaged to lock as copy-text.",
+    "method": "English translated from the Greek of the MGR / Documenta Catholica Omnia transcription (TLG 2063.006, from PG 10), read from its page images. From Ecclesiastes 1:13 to the end, each passage was also checked against the Greek and Latin columns of the Opera omnia print (Paris, 1622). The older Ante-Nicene Fathers English was used only as a sense check for the opening section.",
     "witnesses": [
       {
         "id": "mgr",
         "path": "sources/metaphrasis_MGR_concord.pdf",
         "role": "copy-text",
         "name": "MGR / Documenta Catholica Omnia concordance (TLG 2063.006)",
-        "language": "Greek"
+        "language": "Greek",
+        "coverage": "Whole work"
       },
       {
         "id": "greek_lock",
         "path": "sources/_eccl_metaphrase_greek_lock.txt",
         "role": "copy-text",
-        "name": "Locked Greek Cap. A tip opening",
-        "language": "Greek"
+        "name": "Locked Greek of the opening section",
+        "language": "Greek",
+        "coverage": "Ecclesiastes 1:1-12"
       },
       {
-        "id": "vossius1684",
+        "id": "paris1622",
         "path": "sources/gregory_thaumaturgus_opera_omnia.pdf",
         "role": "check",
-        "name": "Vossius 1684 Opera omnia page images",
-        "language": "Latin/Greek columns"
+        "name": "Opera omnia, Greek and Latin (Paris: Sonnius, Morel and Cramoisy, 1622), page images",
+        "language": "Greek and Latin",
+        "coverage": "Ecclesiastes 1:13 to the end"
       }
     ],
-    "joins": []
+    "joins": [
+      {
+        "where": "Section 5.1 (Ecclesiastes 5:8)",
+        "note": "The transcription brackets οὐ as an editor's supplement; the 1622 print has it as text ('there is no need to wonder'), and the English follows the 1622 print."
+      },
+      {
+        "where": "Section 5.2 (Ecclesiastes 5:10)",
+        "note": "The transcription's χόρος is read as κόρος ('fill, satiety') with the 1622 print."
+      },
+      {
+        "where": "Section 7.1 (Ecclesiastes 6:12)",
+        "note": "The transcription's πλέοντι is read as πλέον τι ('anything more') with the 1622 print."
+      },
+      {
+        "where": "Section 10.2 (Ecclesiastes 10:9)",
+        "note": "The transcription prints ἀλλὰ μή with the editor's conjecture μήν; the English follows μήν ('Moreover'), as the 1622 Latin does."
+      },
+      {
+        "where": "Section 12.2 (Ecclesiastes 12:8)",
+        "note": "The transcription's ἂ is read as the relative ἃ ('what I said before'), as the 1622 Latin requires."
+      },
+      {
+        "where": "Chapters 6-12",
+        "note": "Small typing and accent errors in the transcription are corrected from the 1622 print."
+      }
+    ]
   }
 }

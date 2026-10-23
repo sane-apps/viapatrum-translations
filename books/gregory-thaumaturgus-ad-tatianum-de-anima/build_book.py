@@ -26,7 +26,6 @@ META_FILE = "anima_tatianum_meta.json"
 
 FRONT_MATTER = [
     "New English rendering for private study, prepared with AI assistance from locked Latin. No modern copyrighted translation has been copied. Prior English (ANF 6 Salmond, PD) consulted only as sense/style check.",
-    "Scope: Disputatio de Anima ad Tatianum. Tip densify preface + inquiry program from locked Vossius 1684 Latin.",
     "Editorial note: the commission itself forbids Scripture testimonies in this disputation, so the tip English has no inline Bible quotes from Gregory.",
     "Translator notes use numbered Headword marks — Logos Personal Books do not compile Word footnotes.",
 ]
