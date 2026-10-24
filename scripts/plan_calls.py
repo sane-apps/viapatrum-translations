@@ -12,8 +12,9 @@ Four plans, called through their own CLIs so no per-token bill is involved:
   agy      Antigravity CLI headless (`agy -p`), the owner's Google sign-in (added 2026-10-24;
            Gemini CLI's Google login ended 18 Jun 2026). Model ids "agy/<model>" from
            `agy models`: agy/gemini-3.8-flash-{high,medium,low}, agy/claude-sonnet-4-6,
-           agy/claude-opus-4-6-thinking, agy/gpt-oss-120b-medium. Paid AI-credit fallback is
-           off (useG1Credits false in ~/.gemini/antigravity-cli/settings.json).
+           agy/claude-opus-4-6-thinking, agy/gpt-oss-120b-medium. Paid AI-credit overages are
+           off in the owner's account settings (confirmed 2026-10-24); agy drops unknown
+           settings keys, so this is not checked from a file.
 
 llm_bakeoff.vendor_call routes these ids here, so every work_pipeline call (draft,
 check, repair, referee, readers) can run on the plans with no other change.
@@ -84,8 +85,12 @@ AGY_PREFIX = "agy/"
 AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-flash-low",
               "claude-sonnet-4-6", "claude-opus-4-6-thinking", "gpt-oss-120b-medium"}
 AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
-# Like Grok, agy reads project files from its cwd: a private, empty, owner-only folder.
-AGY_CWD = Path(os.environ.get("PLAN_AGY_CWD") or Path.home() / ".cache" / "plan-agy-empty")
+# Headless agy still runs shell commands and fetches URLs (tested 2026-10-24), so lane calls
+# run under their own HOME, signed in separately, whose settings deny every tool, from an
+# empty owner-only folder. The owner's own ~/.gemini settings are untouched.
+AGY_HOME = Path(os.environ.get("PLAN_AGY_HOME") or Path.home() / ".cache" / "agy-lane-home")
+AGY_CWD = AGY_HOME / "work"
+AGY_DENY_ALL = {"command(*)", "read_file(*)", "write_file(*)", "mcp(*)", "read_url(*)", "execute_url(*)"}
 BUDGETS["agy"] = (int(os.environ.get("PLAN_AGY_CALLS_PER_HOUR", "60")),
                   int(os.environ.get("PLAN_AGY_CALLS_PER_DAY", "600")))
 PLANS = ("muse", "claude", "grok", "agy")
@@ -397,12 +402,25 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     st = AGY_CWD.stat()
     if st.st_uid != os.getuid() or st.st_mode & 0o077 or any(AGY_CWD.iterdir()):
         return f"agy cwd {AGY_CWD} is not a private, empty folder owned by this user; refusing", True
-    prompt = f"{system}\n\n---\n\n{user}" if system else user
+    try:
+        cfg = json.loads((AGY_HOME / ".gemini" / "antigravity-cli" / "settings.json").read_text())
+    except (OSError, ValueError):
+        cfg = {}
+    deny = set((cfg.get("permissions") or {}).get("deny") or [])
+    if not AGY_DENY_ALL <= deny:
+        return "agy lane settings must deny every tool; refusing", True
+    # search_web cannot be denied by a permission rule (agy 1.4.7 rejects the action name);
+    # it only sends a query to Google. Shell, files, URLs and MCP are denied in settings.
+    rule = "Answer only from the text in this prompt. Do not use any tools, search, or browse."
+    body = f"{system}\n\n---\n\n{user}" if system else user
+    prompt = f"{rule}\n\n{body}"
     cmd = [AGY, "-p", prompt, "--model", model[len(AGY_PREFIX):], "--output-format", "json",
            "--print-timeout", f"{CALL_TIMEOUT_S}s"]
     try:
+        env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
+        env["HOME"] = str(AGY_HOME)
         r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True,
-                           timeout=CALL_TIMEOUT_S + 60, cwd=str(AGY_CWD))
+                           timeout=CALL_TIMEOUT_S + 60, cwd=str(AGY_CWD), env=env)
     except subprocess.TimeoutExpired:
         return f"agy timeout after {CALL_TIMEOUT_S}s", True
     out = r.stdout.strip()
@@ -533,7 +551,7 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
         elif plan == "agy":
             with _slot("agy", AGY_CONCURRENT):
                 text, is_err = _run_agy(model, system, user)
-            reset = agy_reset(text, _now()) if is_err else None
+            reset = agy_reset(text, _now()) if is_err and "refusing" not in text else None
         else:
             prompt = f"{system}\n\n---\n\n{user}" if system else user
             text, is_err = _run_muse(prompt)
