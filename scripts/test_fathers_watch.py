@@ -391,5 +391,22 @@ class SelfAndJobTruthTests(WatchTestBase):
         self.assertIn("BLOCKED: browser check failed (log outputs/e2e/last-run.log)", detail)
 
 
+class HeldJobs(unittest.TestCase):
+    def test_check_of_a_job_marked_off_is_on_hold(self):
+        import json as _json, tempfile as _tf
+        with _tf.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
+            _json.dump({"mini": {"fathers-e2e": {"state": "off"}, "fathers-beliefs": {"state": "on"}}}, fh)
+        old = W.JOBS_REGISTRY
+        try:
+            W.JOBS_REGISTRY = Path(fh.name)
+            self.assertTrue(W.job_off("fathers-e2e"))
+            self.assertFalse(W.job_off("fathers-beliefs"))
+            self.assertFalse(W.job_off("not-listed"))
+            W.JOBS_REGISTRY = Path("/nonexistent/jobs.json")
+            self.assertFalse(W.job_off("fathers-e2e"))  # unreadable registry keeps alerting
+        finally:
+            W.JOBS_REGISTRY = old
+
+
 if __name__ == "__main__":
     unittest.main()

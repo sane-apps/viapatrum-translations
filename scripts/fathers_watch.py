@@ -946,6 +946,29 @@ CHECKS = {
     "jobs_air": check_jobs_air,
 }
 
+# A check whose job jobs.json marks "off" (owner hold, e.g. 2026-10-21 Via Patrum pause,
+# 2026-10-23 Cloudflare AI off) reports "on hold" instead of alerting every pass on a job
+# that is meant to be stopped. Turning the job back on brings the check back.
+HELD_BY_JOB = {
+    "broker": "cf-batch-broker",
+    "audio": "fathers-audio-next",
+    "audio_drift": "fathers-audio-next",
+    "ship_auto": "fathers-ship-auto",
+    "beliefs": "fathers-beliefs",
+    "recert": "fathers-recert",
+    "e2e": "fathers-e2e",
+}
+JOBS_REGISTRY = Path.home() / "SaneApps/infra/SaneProcess/scripts/automation/jobs.json"
+
+
+def job_off(label: str) -> bool:
+    try:
+        return (json.loads(JOBS_REGISTRY.read_text(encoding="utf-8")).get("mini", {})
+                .get(label, {}).get("state") == "off")
+    except (OSError, ValueError):
+        return False  # unreadable registry: keep alerting
+
+
 # check -> alert id when state != ok; severity is the check's state.
 ALERTS = {
     "watch": "watch:gap",
@@ -1132,6 +1155,10 @@ def main() -> int:
         prior_alerts = {a["id"]: a for a in (prior.get("alerts") or []) + (prior.get("acknowledged") or [])}
         results: dict = {}
         for name, fn in CHECKS.items():
+            if name in HELD_BY_JOB and job_off(HELD_BY_JOB[name]):
+                results[name] = {"state": "ok", "detail": f"on hold: {HELD_BY_JOB[name]} is off in jobs.json",
+                                 "info": {"held": True}}
+                continue
             try:
                 state, detail, info = fn()
             except Exception as exc:  # noqa: BLE001 - one bad check must not kill the pass
