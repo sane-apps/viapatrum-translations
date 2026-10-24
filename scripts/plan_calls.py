@@ -2,13 +2,18 @@
 """Model calls billed to subscription plans, not Workers AI credit (owner 2026-10-19:
 "automate that ... make them self aware of usage limits in their various plans").
 
-Three plans, called through their own CLIs so no per-token bill is involved:
+Four plans, called through their own CLIs so no per-token bill is involved:
   muse     Muse, through the Muse queue runner (scripts/muse_client.py). Model id "muse".
   claude   Claude Code headless (`claude -p`), no tools, no session. Model ids
            claude-sonnet-5-5, claude-haiku-5-5, claude-opus-5-5.
   grok     Grok Build headless (`grok --prompt-file`), no tools, the X subscription login:
            XAI_API_KEY is removed from its environment (per-use billing). Model ids
            grok-4.7-build-fast (low effort), grok-4.7.
+  agy      Antigravity CLI headless (`agy -p`), the owner's Google sign-in (added 2026-10-24;
+           Gemini CLI's Google login ended 18 Jun 2026). Model ids "agy/<model>" from
+           `agy models`: agy/gemini-3.8-flash-{high,medium,low}, agy/claude-sonnet-4-6,
+           agy/claude-opus-4-6-thinking, agy/gpt-oss-120b-medium. Paid AI-credit fallback is
+           off (useG1Credits false in ~/.gemini/antigravity-cli/settings.json).
 
 llm_bakeoff.vendor_call routes these ids here, so every work_pipeline call (draft,
 check, repair, referee, readers) can run on the plans with no other change.
@@ -73,7 +78,17 @@ BUDGETS = {
              int(os.environ.get("PLAN_GROK_CALLS_PER_DAY", "200"))),
 }
 GROK_CONCURRENT = int(os.environ.get("PLAN_GROK_MAX_CONCURRENT", "2"))
-PLANS = ("muse", "claude", "grok")
+# Antigravity: the plan quota refreshes every 5 h (weekly cap); limits are not published.
+AGY = os.environ.get("AGY_BIN", "/opt/homebrew/bin/agy")
+AGY_PREFIX = "agy/"
+AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-flash-low",
+              "claude-sonnet-4-6", "claude-opus-4-6-thinking", "gpt-oss-120b-medium"}
+AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
+# Like Grok, agy reads project files from its cwd: a private, empty, owner-only folder.
+AGY_CWD = Path(os.environ.get("PLAN_AGY_CWD") or Path.home() / ".cache" / "plan-agy-empty")
+BUDGETS["agy"] = (int(os.environ.get("PLAN_AGY_CALLS_PER_HOUR", "60")),
+                  int(os.environ.get("PLAN_AGY_CALLS_PER_DAY", "600")))
+PLANS = ("muse", "claude", "grok", "agy")
 CLAUDE_CONCURRENT = int(os.environ.get("PLAN_CLAUDE_MAX_CONCURRENT", "3"))
 # Muse jobs in flight across every lane; the runner itself works MUSE_WORKERS (2) at once,
 # so this keeps its queue short and each call's wait bounded.
@@ -97,6 +112,8 @@ def plan_of(model: str) -> str | None:
         return "claude"
     if m in GROK_MODELS:
         return "grok"
+    if m.startswith(AGY_PREFIX) and m[len(AGY_PREFIX):] in AGY_MODELS:
+        return "agy"
     return None
 
 
@@ -356,6 +373,51 @@ def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
     return (out or r.stderr.strip())[:2000], True
 
 
+AGY_LIMIT = re.compile(r"quota|rate limit|usage limit|limit reached|exhausted|resource_exhausted|\b429\b|"
+                       r"credits", re.I)
+
+
+def agy_reset(text: str, now: datetime) -> datetime | None:
+    """Reset time for a spent Antigravity quota: an ISO time when given, else +1 h."""
+    if not AGY_LIMIT.search(text or ""):
+        return None
+    m = ISO_TIME.search(text)
+    if m:
+        try:
+            return datetime.fromisoformat(m.group(1).replace("Z", "+00:00"))
+        except ValueError:
+            pass
+    return now + timedelta(seconds=DEFAULT_PAUSE_S)
+
+
+def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
+    """(text, is_error) from one headless Antigravity call. Exit codes are not trusted:
+    only status SUCCESS with a non-empty response counts."""
+    AGY_CWD.mkdir(mode=0o700, parents=True, exist_ok=True)
+    st = AGY_CWD.stat()
+    if st.st_uid != os.getuid() or st.st_mode & 0o077 or any(AGY_CWD.iterdir()):
+        return f"agy cwd {AGY_CWD} is not a private, empty folder owned by this user; refusing", True
+    prompt = f"{system}\n\n---\n\n{user}" if system else user
+    cmd = [AGY, "-p", prompt, "--model", model[len(AGY_PREFIX):], "--output-format", "json",
+           "--print-timeout", f"{CALL_TIMEOUT_S}s"]
+    try:
+        r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True,
+                           timeout=CALL_TIMEOUT_S + 60, cwd=str(AGY_CWD))
+    except subprocess.TimeoutExpired:
+        return f"agy timeout after {CALL_TIMEOUT_S}s", True
+    out = r.stdout.strip()
+    if out.startswith("{"):
+        try:
+            env = json.loads(out)
+            text = str(env.get("response") or "")
+            if env.get("status") == "SUCCESS" and text.strip():
+                return text, False
+            return (str(env.get("error") or env.get("status") or "") + " " + text)[:2000].strip() or out[:2000], True
+        except ValueError:
+            pass
+    return (out or r.stderr.strip() or f"agy exit {r.returncode} with no output")[:2000], True
+
+
 _GROK_USAGE = threading.local()
 GROK_SESSIONS = Path.home() / ".grok" / "sessions"
 
@@ -468,6 +530,10 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
                 text, is_err = _run_grok(model, system, user)
             reset = grok_reset(text, _now()) if is_err else None
             _grok_ledger(ok=not is_err, limit=bool(reset))
+        elif plan == "agy":
+            with _slot("agy", AGY_CONCURRENT):
+                text, is_err = _run_agy(model, system, user)
+            reset = agy_reset(text, _now()) if is_err else None
         else:
             prompt = f"{system}\n\n---\n\n{user}" if system else user
             text, is_err = _run_muse(prompt)

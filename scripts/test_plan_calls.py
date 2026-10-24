@@ -71,6 +71,20 @@ class ResetParsing(unittest.TestCase):
     def test_grok_ordinary_error_is_not_a_limit(self):
         self.assertIsNone(pc.grok_reset("grok timeout after 900s", NOW))
 
+    def test_agy_ids_route_to_agy_plan(self):
+        self.assertEqual(pc.plan_of("agy/claude-opus-4-6-thinking"), "agy")
+        self.assertEqual(pc.plan_of("agy/gemini-3.8-flash-high"), "agy")
+        self.assertIsNone(pc.plan_of("agy/not-a-model"))
+        self.assertEqual(pc.plan_of("claude-opus-5-5"), "claude")
+
+    def test_agy_limit_pauses_one_hour_or_until_iso(self):
+        self.assertEqual(pc.agy_reset("RESOURCE_EXHAUSTED: quota exceeded", NOW), NOW + pc.timedelta(hours=1))
+        got = pc.agy_reset("quota exhausted; resets at 2026-10-24T22:00:00Z", NOW)
+        self.assertEqual(got.isoformat(), "2026-10-24T22:00:00+00:00")
+
+    def test_agy_ordinary_error_is_not_a_limit(self):
+        self.assertIsNone(pc.agy_reset("agy timeout after 900s", NOW))
+
     def test_grok_ids_route_to_the_grok_plan(self):
         self.assertEqual(pc.plan_of("grok-4.7-build-fast"), "grok")
         self.assertIsNone(pc.plan_of("@cf/zai-org/glm-5.2"))
