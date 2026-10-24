@@ -19,8 +19,11 @@ is the source now.
 from __future__ import annotations
 
 import json
+import os
+import re
 import subprocess
 import sys
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -57,12 +60,31 @@ def fetch_status() -> tuple[dict | None, str]:
         return None, str(exc)
 
 
+AGENT_ALERT = Path.home() / "SaneApps" / "infra" / "scripts" / "send-internal-report.sh"
+
+
 def notify(title: str, body: str) -> None:
+    """Pop-up on this Mac, and the same text as an agent alert on the Mini (owner 2026-10-24:
+    pop-ups are fine "IF you see them and act on them")."""
+    full = body
     body = body.replace('"', "'")[:400]
     subprocess.run(["osascript", "-e",
                     f'display notification "{body}" with title "{title}" '
                     'sound name "Blow"'],
                    capture_output=True, timeout=30)
+    if AGENT_ALERT.is_file():
+        key = "fathers-watch-" + re.sub(r"[^a-z]+", "-", title.lower()).strip("-")[:40]
+        with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False, encoding="utf-8") as fh:
+            fh.write(full + "\n\nRaised by fathers_watch_notify.py (Air pop-up).\n")
+        try:
+            env = {k: v for k, v in os.environ.items() if k != "SANE_REPORT_KIND"}
+            env["SANE_REPORT_KEY"] = key
+            subprocess.run(["/bin/bash", str(AGENT_ALERT), f"Air pop-up: {title}", fh.name],
+                           capture_output=True, timeout=60, env=env)
+        except (OSError, subprocess.SubprocessError):
+            pass
+        finally:
+            os.unlink(fh.name)
 
 
 def load_state() -> dict:
