@@ -6,80 +6,485 @@
     "locus": "PG 68 Book 16 §18 (68.1041)",
     "path": "sources/adoration_book16_greek_clean.txt"
   },
-  "source_text": "Κύριος πρὸς Μωσῆν λέγων· Λάλησον τοῖς υἱοῖς Ἰσραὴλ καὶ ἐρεῖς πρὸς αὐτούς· Ἀνὴρ ἢ γυνὴ ὃς ἂν μεγάλως εὔξηται εὐχὴν ἀφαγνίσασθαι ἁγνίαν Κυρίῳ, ἀπὸ οἴνου καὶ σίκερα ἁγνισθήσεται. Καὶ ὄξος ἐξ οἴνου καὶ ὄξος ἐκ σίκερα οὐ πίεται, καὶ ὅσα κατεργάζεται ἐκ σταφυλῆς οὐ πίεται, σταφυλὴν πρόσφατον καὶ σταφίδα οὐ φάγεται πάσας τὰς ἡμέρας τῆς εὐχῆς τοῦ ἁγνισμοῦ αὐτοῦ, ἀπὸ πάντων ὅσα γίνεται ἐξ ἀμπέλου, οἶνον ἀπὸ στεμφύλων ἕως γιγάρτου οὐ φάγεται πάσας τὰς ἡμέρας τοῦ ἁγνισμοῦ. Ξυρὸν οὐκ ἐπελεύσεται ἐπὶ τὴν κεφαλὴν αὐτοῦ, ἕως ἂν πληρωθῶσιν αἱ ἡμέραι, ὅσας ηὔξατο Κυρίῳ. Ἅγιος ἔσται τρέφων κόμην, τρίχα κεφαλῆς πάσας τὰς ἡμέρας τῆς εὐχῆς Κυρίῳ. Ἐπὶ πάσῃ ψυχῇ τετελευτηκυίᾳ οὐκ εἰσελεύσεται ἐπὶ πατρὶ καὶ μητρὶ, καὶ ἐπ' ἀδελφῷ καὶ ἐπ' ἀδελφῇ, οὐ μιανθήσεται ἐπ' αὐτοῖς, ἀποθανόντων αὐτῶν, ὅτι εὐχὴ Θεοῦ αὐτοῦ ἐπ' αὐτῷ ἐπὶ κεφαλῆς αὐτοῦ, Πάσας τὰς ἡμέρας τῆς εὐχῆς αὐτοῦ ἅγιος ἔσται Κυρίῳ. Ἐὰν δέ τις θανάτῳ ἀποθάνῃ ἐπ' αὐτῷ ἐξάπινα, παραχρῆμα μιανθήσεται ἡ κεφαλὴ εὐχῆς αὐτοῦ· καὶ ξυρήσεται τὴν κεφαλὴν αὐτοῦ ᾗ ἂν ἡμέρᾳ καθαρισθῇ, τῇ ἡμέρᾳ τῇ ἑβδόμῃ ξυρηθήσεται· καὶ τῇ ἡμέρᾳ τῇ ὀγδόῃ οἴσει δύο τρυγόνας, ἢ δύο νεοσσοὺς περιστερῶν πρὸς τὸν ἱερέα, ἐπὶ τὰς θύρας τῆς σκηνῆς τοῦ μαρτυρίου. Καὶ ποιήσει ὁ ἱερεὺς μίαν περὶ ἁμαρτίας, καὶ μίαν εἰς ὁλοκαύτωμα· καὶ ἐξιλάσεται περὶ αὐτοῦ ὁ ἱερεὺς περὶ ὧν ἥμαρτε περὶ τῆς ψυχῆς, καὶ ἁγιάσει τὴν κεφαλὴν αὐτοῦ ἐν ἐκείνῃ τῇ ἡμέρᾳ, ᾗ ἡγίασε Κυρίῳ, πάσας τὰς ἡμέρας τῆς εὐχῆς,",
-  "pass_a_gloss": "§18 dual gloss: ἁγνισμός / purification · σίκερα / sikera · κόμη / hair … Pass A ≠ Pass B. Theme: Nazirite as gospel life image.",
+  "source_text": "Κύριος πρὸς Μωσῆν λέγων· Λάλησον τοῖς υἱοῖς Ἰσραὴλ καὶ ἐρεῖς πρὸς αὐτούς· Ἀνὴρ ἢ γυνὴ ὃς ἂν μεγάλως εὔξηται εὐχὴν ἀφαγνίσασθαι ἁγνίαν Κυρίῳ, ἀπὸ οἴνου καὶ σίκερα ἁγνισθήσεται. Καὶ ὄξος ἐξ οἴνου καὶ ὄξος ἐκ σίκερα οὐ πίεται, καὶ ὅσα κατεργάζεται ἐκ σταφυλῆς οὐ πίεται, σταφυλὴν πρόσφατον καὶ σταφίδα οὐ φάγεται πάσας τὰς ἡμέρας τῆς εὐχῆς τοῦ ἁγνισμοῦ αὐτοῦ, ἀπὸ πάντων ὅσα γίνεται ἐξ ἀμπέλου, οἶνον ἀπὸ στεμφύλων ἕως γιγάρτου οὐ φάγεται πάσας τὰς ἡμέρας τοῦ ἁγνισμοῦ. Ξυρὸν οὐκ ἐπελεύσεται ἐπὶ τὴν κεφαλὴν αὐτοῦ, ἕως ἂν πληρωθῶσιν αἱ ἡμέραι, ὅσας ηὔξατο Κυρίῳ. Ἅγιος ἔσται τρέφων κόμην, τρίχα κεφαλῆς πάσας τὰς ἡμέρας τῆς εὐχῆς Κυρίῳ. Ἐπὶ πάσῃ ψυχῇ τετελευτηκυίᾳ οὐκ εἰσελεύσεται ἐπὶ πατρὶ καὶ μητρὶ, καὶ ἐπ' ἀδελφῷ καὶ ἐπ' ἀδελφῇ, οὐ μιανθήσεται ἐπ' αὐτοῖς, ἀποθανόντων αὐτῶν, ὅτι εὐχὴ Θεοῦ αὐτοῦ ἐπ' αὐτῷ ἐπὶ κεφαλῆς αὐτοῦ, Πάσας τὰς ἡμέρας τῆς εὐχῆς αὐτοῦ ἅγιος ἔσται Κυρίῳ. Ἐὰν δέ τις θανάτῳ ἀποθάνῃ ἐπ' αὐτῷ ἐξάπινα, παραχρῆμα μιανθήσεται ἡ κεφαλὴ εὐχῆς αὐτοῦ· καὶ ξυρήσεται τὴν κεφαλὴν αὐτοῦ ᾗ ἂν ἡμέρᾳ καθαρισθῇ, τῇ ἡμέρᾳ τῇ ἑβδόμῃ ξυρηθήσεται· καὶ τῇ ἡμέρᾳ τῇ ὀγδόῃ οἴσει δύο τρυγόνας, ἢ δύο νεοσσοὺς περιστερῶν πρὸς τὸν ἱερέα, ἐπὶ τὰς θύρας τῆς σκηνῆς τοῦ μαρτυρίου. Καὶ ποιήσει ὁ ἱερεὺς μίαν περὶ ἁμαρτίας, καὶ μίαν εἰς ὁλοκαύτωμα· καὶ ἐξιλάσεται περὶ αὐτοῦ ὁ ἱερεὺς περὶ ὧν ἥμαρτε περὶ τῆς ψυχῆς, καὶ ἁγιάσει τὴν κεφαλὴν αὐτοῦ ἐν ἐκείνῃ τῇ ἡμέρᾳ, ᾗ ἡγίασε Κυρίῳ, πάσας τὰς ἡμέρας τῆς εὐχῆς, καὶ προσάξει ἀμνὸν ἐνιαύσιον εἰς ὁλοκαύτωμα πλημμελείας. Καὶ αἱ ἡμέραι αἱ πρότεραι ἄλογοι ἔσονται, ὅτι ἐμιάνθη ἡ κεφαλὴ εὐχῆς αὐτοῦ.» {ΠΑΛΛ.} Οὐκ ἄτραχυ μὲν τὸ χρησμῴδημα συνιδεῖν, ἥκιστά γε μὴν, οὐχὶ τοῦ νόμου λεπτὴν παθόντος τὴν βάσανον. Τὸ γὰρ μὴ ψιλοῦσθαι τὴν τρίχα, μακρὰν δὲ ἀνεῖναι καὶ κατασείεσθαι κόμην, οἴνου τε καὶ ὄξους καὶ σταφίδος, καὶ μὴν καὶ γιγάρτων ἀποφοιτᾷν, ποῖον ἂν ἔχοι λατρείας τρόπον; {ΚΥΡ.} Οὐδένα μὲν, ὦ Παλλάδιε, κατά γε τὸ ἀληθὲς, εἴπερ τις ὅλως αὐτὸ κατὰ φύσιν ὅ τί ποτέ ἐστιν καταθροῖτο τὸ χρῆμα. Οὐκ ἀθαύμαστός γε μὴν ὁ τοῦ νόμου σκοπὸς, τὰ Ἑλλήνων ἔθη μεταχαράττοντος εὐτέχνως ἐπὶ τὰ πρεπωδέστερα, καὶ μετατιθέντος ἀστείως εἰς εἰκόνα ζωῆς εὐαγγελικῆς, καὶ τὸ εἰκαῖον εἶναι δοκοῦν. Οὐκοῦν εἴ τῳ περ εἴη σκοπὸς ἀφαγνίσασθαι τῷ Θεῷ κατὰ τὴν μεγάλην εὐχὴν, τουτέστι κατά γε τὸν τῆς ἀνωτάτω πολιτείας τρόπον, καὶ δικαιοσύνης ἐντελοῦς ὀρθὴν καὶ ἀμώμητον τρίβον, οἴνου καὶ σικέρατος οἰχέσθω μακρὰν, τουτέστι, παντὸς τοῦ καταμεθύσκειν ἰσχύοντος, καὶ καταθολοῦν εἰωθότος, ἀπαλλαττέτω τὸν νοῦν. Εἶεν δ' ἂν, οἶμαι, ταυτὶ φρόνημα κοσμικὸν, γεώδεις ἐπιθυμίαι, μέριμναι σαρκὸς, εἰκαῖοι περισπασμοί· ταῦτά τοι παθόντας τῶν ἱερέων τινὰς λόγος ἐθρήνει προφητικὸς, ὡδί πως ἔχων· «Ὅτι ἱερεὺς καὶ προφήτης ἐξέστησαν διὰ τὸν οἶνον, ἀπὸ τῆς μέθης τοῦ σίκερα.» Καὶ μὴν καὶ περὶ ἑτέρων ὁ",
+  "pass_a_gloss": "[Quotation continues from §17 'And spoke (ἐλάλησε)':] the Lord (Κύριος) to Moses saying: speak to the sons of Israel and say to them: a man or woman who greatly (μεγάλως) vows a vow (εὔχομαι εὐχήν) to purify-off a purity (ἀφαγνίζομαι ἁγνείαν) to the Lord shall be purified (ἁγνίζομαι) from wine and sikera (σίκερα, strong drink); vinegar (ὄξος) from wine and from sikera he shall not drink, and whatever is worked from the grape (σταφυλή) he shall not drink; fresh grape and raisin (σταφίς) he shall not eat all the days of the vow of his purification (ἁγνισμός); from all that comes from the vine (ἄμπελος), wine from pressed skins (στέμφυλα) to grape-stone (γίγαρτον), he shall not eat. Razor (ξυρόν) shall not come upon his head until the days are filled that he vowed. Holy he shall be, nourishing (τρέφω) long hair (κόμη), hair of the head, all the days. Upon every dead soul (ψυχὴ τετελευτηκυῖα) he shall not go in, upon father and mother, brother and sister; he shall not be defiled (μιαίνω) for them when they die, for the vow of his God is upon him upon his head; all the days holy to the Lord. If anyone dies by death suddenly (ἐξάπινα) beside him, at once (παραχρῆμα) the head of his vow is defiled; he shall shave (ξυράω) his head on the day he is cleansed (καθαρίζω), on the seventh day; on the eighth he shall bring two turtledoves (τρυγών) or two young (νεοσσός) of doves (περιστερά) to the priest at the doors of the tent of witness (σκηνὴ τοῦ μαρτυρίου); the priest shall make (ποιέω) one for sin, one for holocaust (ὁλοκαύτωμα), and atone (ἐξιλάσκομαι) for him for what he sinned concerning the soul [the dead]; and sanctify (ἁγιάζω) his head on that day on which he sanctified all the days of the vow to the Lord; and bring a yearling lamb (ἀμνὸς ἐνιαύσιος) for holocaust of trespass (πλημμέλεια); and the former days shall be without account (ἄλογοι), because the head of his vow was defiled. PALL.: Not un-rough (ἄτραχυς with neg.) the oracle (χρησμῴδημα) to see together (συνορᾶν); least of all (ἥκιστα), the law not having suffered a fine testing (λεπτὴ βάσανος). For not to strip (ψιλόω) the hair, but to let it go long and to shake down (κατασείω) the locks, and to keep away (ἀποφοιτάω) from wine, vinegar, raisin, and grape-stones, what manner of worship (λατρεία) could it have? CYR.: None, O Palladius, in truth, if one were to view the thing (χρῆμα) according to nature, whatever it is. Yet not un-wonderful (ἀθαύμαστος) the aim (σκοπός) of the law, re-stamping (μεταχαράττω) skillfully (εὐτέχνως) the customs (ἔθη) of the Greeks to the more fitting, and transferring wittily (ἀστείως) into an image (εἰκών) of gospel life (ζωὴ εὐαγγελική) even what seems random (εἰκαῖον). So if anyone's aim is to purify himself to God according to the great vow, that is, the manner of the highest citizenship (πολιτεία) and the straight, blameless track (τρίβος) of complete righteousness (δικαιοσύνη ἐντελής), let wine and sikera be gone far; that is, let him rid his mind (νοῦς) of everything able to make drunk (καταμεθύσκω) and wont to muddy (καταθολόω). These would be: worldly mind-set (φρόνημα κοσμικόν), earthy desires (γεώδεις ἐπιθυμίαι), cares of flesh (μέριμναι σαρκός), random distractions (περισπασμοί). For suffering these a prophetic word lamented (θρηνέω) some priests: [Isaiah 28:7 LXX] priest and prophet stood out of themselves (ἐξίσταμαι) through wine, from the drunkenness (μέθη) of sikera. And about others too the [prophet, §19]...",
   "pass_b_english": [
-    "Cyril: …Lord toward Moses saying: Speak to the sons of Israel and you will say toward them: A man or a woman who if greatly should vow a vow to purify a purity for Lord, from wine and sikera will be purified. And vinegar from wine and vinegar from sikera he will not drink, and as many as are worked from a grape he will not drink, a grape fresh and a raisin he will not eat all the days of the vow of his purification, from all as many as become from a vine, wine from grape-skins until a grape-stone he will not eat all the days of the purification. A razor will not go-upon upon his head, until if should be fulfilled the days, as many as he vowed for Lord. Holy he will be nourishing hair, hair of a head all the days of the vow for Lord. Upon every soul having died he will not enter upon a father and a mother, and upon a brother and upon a sister, he will not be defiled upon them, of them having died, because a vow of his God upon him upon his head, All the days of his vow holy he will be for Lord. And if someone by a death should die’ ([[Numbers 6:1-9 >> Bible:Numbers 6:1-9]])",
-    "Palladius: Not unharsh on the one hand the oracle to see-together, least at least then, not of the law a fine having suffered the assay. For the not to be stripped the hair, and long then to let-go and to be shaken hair, and of wine and of vinegar and of a raisin, and indeed also of grape-stones to depart, what sort would have of a service manner?",
-    "Cyril: None on the one hand, O Palladius, according at least to the true, if someone altogether it according to nature what ever it is should look-down the matter. Not unmarvelous at least then the of the law aim, the of Greeks customs rewriting well-artfully upon the more-fitting, and transferring gracefully unto an image of a life evangelical, also the random to be seeming. So then if for someone at least there should be an aim to purify for God according to the great vow, that is according at least to the of the uppermost citizenship manner, and of a righteousness complete a right and unblemished path, of wine and of sikera let him go far, that is, of every the to make-drunk being able, and accustomed to muddy, let him free the mind. And they would be, I think, these a mindset worldly, earthy desires, cares of flesh, random distractions; these indeed having suffered of the priests some a word was mourning prophetic, thus somehow holding: ‘Because a priest and a prophet were amazed through the wine, from the drunkenness of the sikera.’ ([[Isaiah 28:7 >> Bible:Isaiah 28:7]]) And indeed also about others the"
+    "Cyril: ‘…to Moses, saying: Speak to the sons of Israel, and say to them: If a man or a woman makes a great vow to consecrate himself in purity to the Lord, he shall keep himself pure from wine and strong drink. He shall not drink vinegar made from wine or vinegar made from strong drink, nor drink anything that is made from grapes; he shall eat no fresh grapes or raisins all the days of the vow of his purification. Of all that comes from the vine, wine from the pressed skins down to the seed, he shall eat nothing all the days of his purification. No razor shall come upon his head until the days are fulfilled that he vowed to the Lord. He shall be holy, letting the locks of the hair of his head grow, all the days of the vow to the Lord. He shall not go near any dead person, not to his father or his mother, nor to his brother or his sister; he shall not be defiled for them when they die, because the vow of his God is upon him, upon his head. All the days of his vow he shall be holy to the Lord. And if anyone dies suddenly beside him, at once the head of his vow shall be defiled; and he shall shave his head on the day he is cleansed; on the seventh day he shall be shaved. And on the eighth day he shall bring two turtledoves or two young pigeons to the priest, to the doors of the tent of witness. And the priest shall offer one for sin and one as a whole burnt offering, and the priest shall make atonement for him for the sin he committed in the matter of the dead; and he shall sanctify his head on that day, the day on which he consecrated all the days of his vow to the Lord. And he shall bring a year-old lamb as a whole burnt offering for the trespass. And the former days shall not count, because the head of his vow was defiled’ (Numbers 6:1–12).",
+    "Palladius: This oracle is not easy to understand; indeed, it can hardly be understood at all unless the law is examined closely. Not cutting the hair, but letting it grow long and hang loose, and keeping away from wine and vinegar and raisins, and even from grape seeds: what kind of worship could there be in that?",
+    "Cyril: None at all, Palladius, in truth, if one looks simply at the practice itself, at what it is by nature. Yet the aim of the law is admirable. It skillfully recasts the customs of the Greeks into something more seemly, and gracefully turns even what seems pointless into an image of the Gospel life. So if anyone aims to consecrate himself to God by the great vow, that is, by the highest way of life and the straight and blameless path of perfect righteousness, let wine and strong drink be far from him; that is, let him free his mind from everything that can make it drunk and that tends to cloud it. These, I think, would be a worldly outlook, earthly desires, the cares of the flesh and idle distractions. It was for falling into these that a prophetic word lamented some of the priests, saying something like this: ‘For priest and prophet were beside themselves because of wine, from the drunkenness of strong drink’ (Isaiah 28:7). And indeed about others too the…"
   ],
   "lemmas": [
     {
-      "form": "ἁγνισμοῦ",
-      "lemma": "ἁγνισμός",
-      "gloss": "purification",
+      "form": "ἐλάλησε",
+      "lemma": "ἐλάλησε",
+      "gloss": "And spoke",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "Κύριος",
+      "lemma": "Κύριος",
+      "gloss": "the Lord",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "μεγάλως",
+      "lemma": "μεγάλως",
+      "gloss": "woman who greatly",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "εὔχομαι εὐχήν",
+      "lemma": "εὔχομαι εὐχήν",
+      "gloss": "vows a vow",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἀφαγνίζομαι ἁγνείαν",
+      "lemma": "ἀφαγνίζομαι ἁγνείαν",
+      "gloss": "purify-off a purity",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἁγνίζομαι",
+      "lemma": "ἁγνίζομαι",
+      "gloss": "shall be purified",
       "lexica": "LSJ"
     },
     {
       "form": "σίκερα",
       "lemma": "σίκερα",
-      "gloss": "sikera",
+      "gloss": "wine and sikera",
       "lexica": "LSJ"
     },
     {
-      "form": "κόμην",
+      "form": "ὄξος",
+      "lemma": "ὄξος",
+      "gloss": "vinegar",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "σταφυλή",
+      "lemma": "σταφυλή",
+      "gloss": "from the grape",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "σταφίς",
+      "lemma": "σταφίς",
+      "gloss": "grape and raisin",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἁγνισμός",
+      "lemma": "ἁγνισμός",
+      "gloss": "of his purification",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἄμπελος",
+      "lemma": "ἄμπελος",
+      "gloss": "from the vine",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "στέμφυλα",
+      "lemma": "στέμφυλα",
+      "gloss": "from pressed skins",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "γίγαρτον",
+      "lemma": "γίγαρτον",
+      "gloss": "to grape-stone",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ξυρόν",
+      "lemma": "ξυρόν",
+      "gloss": "Razor",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "τρέφω",
+      "lemma": "τρέφω",
+      "gloss": "nourishing",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "κόμη",
       "lemma": "κόμη",
-      "gloss": "hair",
+      "gloss": "long hair",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ψυχὴ τετελευτηκυῖα",
+      "lemma": "ψυχὴ τετελευτηκυῖα",
+      "gloss": "every dead soul",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "μιαίνω",
+      "lemma": "μιαίνω",
+      "gloss": "not be defiled",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἐξάπινα",
+      "lemma": "ἐξάπινα",
+      "gloss": "by death suddenly",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "παραχρῆμα",
+      "lemma": "παραχρῆμα",
+      "gloss": "at once",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ξυράω",
+      "lemma": "ξυράω",
+      "gloss": "he shall shave",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "καθαρίζω",
+      "lemma": "καθαρίζω",
+      "gloss": "he is cleansed",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "τρυγών",
+      "lemma": "τρυγών",
+      "gloss": "bring two turtledoves",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "νεοσσός",
+      "lemma": "νεοσσός",
+      "gloss": "or two young",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "περιστερά",
+      "lemma": "περιστερά",
+      "gloss": "of doves",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "σκηνὴ τοῦ μαρτυρίου",
+      "lemma": "σκηνὴ τοῦ μαρτυρίου",
+      "gloss": "tent of witness",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ποιέω",
+      "lemma": "ποιέω",
+      "gloss": "priest shall make",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ὁλοκαύτωμα",
+      "lemma": "ὁλοκαύτωμα",
+      "gloss": "one for holocaust",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἐξιλάσκομαι",
+      "lemma": "ἐξιλάσκομαι",
+      "gloss": "and atone",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἁγιάζω",
+      "lemma": "ἁγιάζω",
+      "gloss": "and sanctify",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἀμνὸς ἐνιαύσιος",
+      "lemma": "ἀμνὸς ἐνιαύσιος",
+      "gloss": "a yearling lamb",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "πλημμέλεια",
+      "lemma": "πλημμέλεια",
+      "gloss": "holocaust of trespass",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἄλογοι",
+      "lemma": "ἄλογοι",
+      "gloss": "be without account",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἄτραχυς",
+      "lemma": "ἄτραχυς",
+      "gloss": "Not un-rough",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "χρησμῴδημα",
+      "lemma": "χρησμῴδημα",
+      "gloss": "the oracle",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "συνορᾶν",
+      "lemma": "συνορᾶν",
+      "gloss": "to see together",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἥκιστα",
+      "lemma": "ἥκιστα",
+      "gloss": "least of all",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "λεπτὴ βάσανος",
+      "lemma": "λεπτὴ βάσανος",
+      "gloss": "a fine testing",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ψιλόω",
+      "lemma": "ψιλόω",
+      "gloss": "not to strip",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "κατασείω",
+      "lemma": "κατασείω",
+      "gloss": "to shake down",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἀποφοιτάω",
+      "lemma": "ἀποφοιτάω",
+      "gloss": "to keep away",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "λατρεία",
+      "lemma": "λατρεία",
+      "gloss": "manner of worship",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "χρῆμα",
+      "lemma": "χρῆμα",
+      "gloss": "view the thing",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἀθαύμαστος",
+      "lemma": "ἀθαύμαστος",
+      "gloss": "Yet not un-wonderful",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "σκοπός",
+      "lemma": "σκοπός",
+      "gloss": "the aim",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "μεταχαράττω",
+      "lemma": "μεταχαράττω",
+      "gloss": "re-stamping",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "εὐτέχνως",
+      "lemma": "εὐτέχνως",
+      "gloss": "skillfully",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἔθη",
+      "lemma": "ἔθη",
+      "gloss": "the customs",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἀστείως",
+      "lemma": "ἀστείως",
+      "gloss": "and transferring wittily",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "εἰκών",
+      "lemma": "εἰκών",
+      "gloss": "into an image",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ζωὴ εὐαγγελική",
+      "lemma": "ζωὴ εὐαγγελική",
+      "gloss": "of gospel life",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "εἰκαῖον",
+      "lemma": "εἰκαῖον",
+      "gloss": "what seems random",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "πολιτεία",
+      "lemma": "πολιτεία",
+      "gloss": "the highest citizenship",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "τρίβος",
+      "lemma": "τρίβος",
+      "gloss": "blameless track",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "δικαιοσύνη ἐντελής",
+      "lemma": "δικαιοσύνη ἐντελής",
+      "gloss": "of complete righteousness",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "νοῦς",
+      "lemma": "νοῦς",
+      "gloss": "rid his mind",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "καταμεθύσκω",
+      "lemma": "καταμεθύσκω",
+      "gloss": "to make drunk",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "καταθολόω",
+      "lemma": "καταθολόω",
+      "gloss": "wont to muddy",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "φρόνημα κοσμικόν",
+      "lemma": "φρόνημα κοσμικόν",
+      "gloss": "worldly mind-set",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "γεώδεις ἐπιθυμίαι",
+      "lemma": "γεώδεις ἐπιθυμίαι",
+      "gloss": "earthy desires",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "μέριμναι σαρκός",
+      "lemma": "μέριμναι σαρκός",
+      "gloss": "cares of flesh",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "περισπασμοί",
+      "lemma": "περισπασμοί",
+      "gloss": "random distractions",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "θρηνέω",
+      "lemma": "θρηνέω",
+      "gloss": "prophetic word lamented",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "ἐξίσταμαι",
+      "lemma": "ἐξίσταμαι",
+      "gloss": "out of themselves",
+      "lexica": "LSJ"
+    },
+    {
+      "form": "μέθη",
+      "lemma": "μέθη",
+      "gloss": "from the drunkenness",
       "lexica": "LSJ"
     }
   ],
   "choices": [
     {
-      "term": "ἁγνισμός",
-      "english": "purification",
+      "term": "Num 6:9 μιανθήσεται future",
+      "english": "shall be defiled",
       "rejected": [
-        "consecration soft"
+        "is defiled"
       ],
-      "why": "Num 6 vow."
+      "why": "Num 6:9 μιανθήσεται future: 'is defiled' -> 'shall be defiled' (matches §21 quotation)"
     },
     {
-      "term": "σίκερα",
-      "english": "sikera",
-      "rejected": [
-        "strong drink soft"
-      ],
-      "why": "Mind muddle."
+      "term": "wording",
+      "english": "Palladius' question recast from stiff infinitive subject ('For not to cut ... could that be') to natural English",
+      "rejected": [],
+      "why": "Palladius' question recast from stiff infinitive subject ('For not to cut ... could that be') to natural English"
     },
     {
-      "term": "κόμη",
-      "english": "hair",
+      "term": "wording",
+      "english": "'as what it is' calque -> 'at what it is by nature'",
+      "rejected": [],
+      "why": "'as what it is' calque -> 'at what it is by nature'"
+    },
+    {
+      "term": "wording",
+      "english": "worldly outlook",
       "rejected": [
-        "locks soft"
+        "worldly mind"
       ],
-      "why": "Kept for God."
+      "why": "φρόνημα κοσμικόν 'worldly mind' -> 'worldly outlook' (keeps 'mind' for νοῦς)"
+    },
+    {
+      "term": "checked",
+      "english": "Num 6:1-12 LXX (opening '…to Moses' fits §17 '[the Lord] spoke'), Isa 28:7 LXX",
+      "rejected": [],
+      "why": "checked: Num 6:1-12 LXX (opening '…to Moses' fits §17 '[the Lord] spoke'), Isa 28:7 LXX"
     }
   ],
   "bible_refs": [
-    "Numbers 6:1-9",
+    "Numbers 6:1–12",
     "Isaiah 28:7"
   ],
   "anf_compare": {
     "status": "no_pd_reference",
-    "notes": "No PD complete English of Cyril De adoratione Book 16. Sense from PG 68 Greek lock. Modern English not copied. OET = no previous English translation. Melito skipped. Never Cyril Matthew."
+    "notes": "No public-domain English of De adoratione Book 16. Translated afresh from the PG 68 Greek on 2026-10-23; the withdrawn English was not used for wording."
   },
   "apparatus": [
     {
       "type": "ocr_warning",
-      "note": "PG OCR; column may cut mid-sentence."
+      "note": "PG OCR; a column may cut mid-sentence or mid-word."
+    },
+    {
+      "type": "translator_note",
+      "note": "Column join with §17: §17 ends «Καὶ ἐλάλησε and §18 begins Κύριος πρὸς Μωσῆν λέγων. English word order needs the subject with the verb, so 'the Lord' is rendered in §17 ('And the Lord spoke'), and §18 begins '…to Moses, saying'. The Nazirite law is Numbers 6:1–12 LXX; Cyril's text has 'whole burnt offering of trespass' (ὁλοκαύτωμα πλημμελείας) in 6:12 where the standard LXX reads 'for a trespass offering'; translated as Cyril has it. 'ἄλογοι' rendered 'shall not count' (the days are void). Masculine 'he' kept after 'a man or a woman' as the Greek does. Palladius' 'ἥκιστά γε μήν, οὐχὶ τοῦ νόμου λεπτὴν παθόντος τὴν βάσανον' taken as 'hardly at all, unless the law is examined closely'; the elliptical construction is doubtful. Isaiah 28:7 LXX verified (ἱερεὺς καὶ προφήτης ἐξέστησαν διὰ τὸν οἶνον... ἀπὸ τῆς μέθης τοῦ σίκερα). Sentence breaks off at 'the' and continues with 'prophet says' in §19."
     }
   ],
   "variants": [],
+  "review": {
+    "coverage": "every clause checked",
+    "changes": [
+      "Num 6:9 μιανθήσεται future: 'is defiled' -> 'shall be defiled' (matches §21 quotation)",
+      "Palladius' question recast from stiff infinitive subject ('For not to cut ... could that be') to natural English",
+      "'as what it is' calque -> 'at what it is by nature'",
+      "φρόνημα κοσμικόν 'worldly mind' -> 'worldly outlook' (keeps 'mind' for νοῦς)",
+      "checked: Num 6:1-12 LXX (opening '…to Moses' fits §17 '[the Lord] spoke'), Isa 28:7 LXX"
+    ],
+    "verdict": "pass"
+  },
   "checks": {
     "pass_a_ne_pass_b": "pass",
     "source_lock": "pass",
     "placeholders": "pass",
-    "jer_h20b": "intact"
+    "inline_scripture": "pass",
+    "clause_review": "pass",
+    "review_coverage": "every clause checked"
   },
-  "confidence": 0.8,
-  "reviewer": "composer-agent"
+  "confidence": "source_verified",
+  "reviewer": "Claude (translate + independent clause review), 2026-10-23"
 }
