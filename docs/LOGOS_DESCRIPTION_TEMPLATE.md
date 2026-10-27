@@ -8,7 +8,7 @@ Copy this stub for each tip-shipped work before Air Personal Book upload.
 **Work:** <Author>, *<Title>*
 **Slug:** `<slug>`
 **Resource type:** Monograph · **Language:** English
-**Site:** https://fathers.saneapps.com/works/<slug>/
+**Site:** https://viapatrum.org/works/<slug>/
 **Body DOCX:** `books/<slug>/<docx>`
 
 ## Short description (paste into Logos Personal Books)

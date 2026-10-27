@@ -10,7 +10,7 @@ Jerome’s Letter 33 to Paula is the ancient catalogue of what Origen wrote. Mos
 
 | Book | Slug | Works | Rank | Status |
 |------|------|-------|------|--------|
-| 1 | `origen-prayer-martyrdom` | *On Prayer*; *Exhortation to Martyrdom* | 1 | Done (Logos + fathers.saneapps.com) |
+| 1 | `origen-prayer-martyrdom` | *On Prayer*; *Exhortation to Martyrdom* | 1 | Done (Logos + viapatrum.org) |
 | 2 | `origen-heraclides-pascha` | *Dialogue with Heraclides*; *On Pascha* | 1 | In progress. Heraclides Greek locked. Pascha: Witte page-images usable; tesseract not (see `books/origen-heraclides-pascha/sources/pascha_ocr_status.md`) |
 
 Cross-author Tier A in `docs/WORKS_QUEUE.md` still puts **Melito, *On Pascha*** then **Irenaeus, *Demonstration*** after Origen Book 2. The sequence below is Origen-only, if the owner stays in Origen.

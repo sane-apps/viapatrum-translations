@@ -6,11 +6,11 @@ Motivating sense: The Reformed tradition would be in a healthier and stronger th
 
 | Rank | Status | Slug | Work | Notes |
 |------|--------|------|------|-------|
-| 1 | **LIVE densify I–XV (4 secs)** | `le-blanc-theses-theologicae` | Louis Le Blanc, *Theses theologicae* — *De Theologia* I–XV | LIVE https://fathers.saneapps.com/works/le-blanc-theses-theologicae/ . Pitt 1675 IA. Not whole De Theologia (XVI+) nor folio. No 2024 English. |
+| 1 | **LIVE densify I–XV (4 secs)** | `le-blanc-theses-theologicae` | Louis Le Blanc, *Theses theologicae* — *De Theologia* I–XV | LIVE https://viapatrum.org/works/le-blanc-theses-theologicae/ . Pitt 1675 IA. Not whole De Theologia (XVI+) nor folio. No 2024 English. |
 | 2 | **tip LIVE** | `davenant-dissertationes-duae` | John Davenant, *Dissertationes duae* — *De morte Christi* Cap. 1 origin + Thesis 1 | Locked PD Latin: Cambridge, Roger Daniel, 1650. IA `bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650` https://archive.org/details/bim_early-english-books-1641-1700_dissertationes-du-_davenant-john-bp_1650 (1650 Latin PD). ESTC R5446 / Wing D317. Allport 1831 English not copy-text. |
 | 3 | **tipped** | `crocius-syntagma` | Ludwig Crocius, *Syntagma sacrae theologiae* | Bremen: Villerian, 1636. SLUB http://digital.slub-dresden.de/id335860389 (PD Mark 1.0). Tip: Liber I Cap. 1 LIVE. |
-| 4 | **LIVE densify Art. I–VII (7 secs)** | `baron-philosophia-theologiae-ancillans` | Robert Baron, *Philosophia* — Exercitatio Prima Art. I–V tip→expand | Oxford 1658 IA. LIVE https://fathers.saneapps.com/works/baron-philosophia-theologiae-ancillans/ . Not whole Philosophia (213 pp). Art. VIII+ next. |
-| 5 | **tip LIVE** | `placeus-de-imputatione` | Josué de la Place (Placeus), *De imputatione primi peccati Adami* — Caput Primum tip | Locked PD Latin: Salmurii, Ioannes Lesnerius, 1661. IA `deimputationepri00lapl`. Tip Cap. 1 LIVE https://fathers.saneapps.com/works/placeus-de-imputatione/ (CoS UX pause lifted 2026-09-15). Amyraut French not used. |
+| 4 | **LIVE densify Art. I–VII (7 secs)** | `baron-philosophia-theologiae-ancillans` | Robert Baron, *Philosophia* — Exercitatio Prima Art. I–V tip→expand | Oxford 1658 IA. LIVE https://viapatrum.org/works/baron-philosophia-theologiae-ancillans/ . Not whole Philosophia (213 pp). Art. VIII+ next. |
+| 5 | **tip LIVE** | `placeus-de-imputatione` | Josué de la Place (Placeus), *De imputatione primi peccati Adami* — Caput Primum tip | Locked PD Latin: Salmurii, Ioannes Lesnerius, 1661. IA `deimputationepri00lapl`. Tip Cap. 1 LIVE https://viapatrum.org/works/placeus-de-imputatione/ (CoS UX pause lifted 2026-09-15). Amyraut French not used. |
 | 6 | **tip LIVE** | `strimesius-in-controversias-evangelicorum` | Samuel Strimesius, *Ingenua in Controversias Evangelicorum* — Prefatio tip | Frankfurt (Oder) / Viadrina, 1708 Schrey & Hartmann. GB `3epYAAAAcAAJ` (ONB). Sister *Ingenua in Arminianismum* (Halle DOI 10.25673/65287) remains queued (Anubis-blocked bulk download). |
 
 ---
@@ -34,7 +34,7 @@ Motivating sense: The Reformed tradition would be in a healthier and stronger th
 
 Priority: (1) no usable public-domain English first, (2) Victorian/copyrighted refresh.  
 Accurate, beautiful prose; author voice intact. Do not copy modern translations.  
-Ship each finished work to https://fathers.saneapps.com.
+Ship each finished work to https://viapatrum.org.
 
 **Who is working right now:** `docs/CLAIMS.md` (claim before translating).  
 **How to onboard an AI:** paste `docs/START_HERE.md` into the model.
@@ -43,8 +43,8 @@ Ship each finished work to https://fathers.saneapps.com.
 
 | Status | Slug / book | Works | Notes |
 |--------|-------------|-------|-------|
-| **done (site)** | `origen-heraclides-pascha` | Origen, *Dialogue with Heraclides*; *On Pascha* | Both on fathers.saneapps.com. Pascha literary pass 2026-09-11. Logos attach when asked. |
-| **done (site)** | `cyril-alexandria-adoration-1` | Cyril of Alexandria, *De adoratione* Book 1 | Post-Nicene. Book 1 of 17 on fathers.saneapps.com. Next: court treatises. |
+| **done (site)** | `origen-heraclides-pascha` | Origen, *Dialogue with Heraclides*; *On Pascha* | Both on viapatrum.org. Pascha literary pass 2026-09-11. Logos attach when asked. |
+| **done (site)** | `cyril-alexandria-adoration-1` | Cyril of Alexandria, *De adoratione* Book 1 | Post-Nicene. Book 1 of 17 on viapatrum.org. Next: court treatises. |
 | **done** | `origen-john-later` | Origen Comm. John 13/19/20/28/32 | **DONE** Books 13/19/20/28/32 CLOSEOUT tip `959ffcc`. Melito skipped. Never Cyril Matthew. |
 | **done** | `origen-song` | Origen Song Homilies + Commentary | **DONE** Homiliae+Prologus+Libri I–IV CLOSEOUT tip 62e34744 (surviving Rufinus thru Song 2:15 Amen). Baehrens GCS 33. Melito skipped. Never Cyril Matthew densify. |
 | **done** | `origen-jeremiah-samuel` | Origen Jeremiah + Samuel 28 + Lamentations | **DONE** Jer 155 + Sam 10 + Lam 118 OET (GCS III). Remainder none. Melito skipped. Never Cyril Matthew densify. |
@@ -68,7 +68,7 @@ Ship each finished work to https://fathers.saneapps.com.
 | **done** | `origen-nt-fragments` | Origen NT Gospel catena / scholia fragments | **DONE** SERIES CLOSEOUT tip `af9c9531` (John open `32a0b77f` / John rem `1bbafdb5` / Luke catena `5c3d952e` / scholia SERIES `af9c9531`). First1K tlg006/017/077/078. Pauline Khazarzar tipped: Ephesians `dc2096b1` / 1Cor `30aea2e0` / Hebrews scrap `7aec66dc` / Romans catena `6e744e38` (≠ Rufinus Romans). Melito skipped. Never Cyril Matthew densify. True OET. |
 
 
-| **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on fathers.saneapps.com (2026-09-12). |
+| **done (site)** | `cyril-alexandria-recta-fide-court` | *De recta fide* to the princesses and empresses (CPG 5219–5220) | Arcadia §§1–100 + Pulcheria §§1–48 Pass A≠B on viapatrum.org (2026-09-12). |
 | **done** | `cyril-alexandria-adoration-1` | *De adoratione* Books 2–17 | Books 2–17 COMPLETE; Book 17 CLOSEOUT tip `9161f43` (33/33). Adoration series done. Skip Melito. Never Cyril Matthew. |
 | **done** | `cyril-alexandria-matthew-fragments` | *Fragmenta in Matthaeum* (CPG **5206**) | **DONE** 290/290 CLOSEOUT tip `eb6236c` (a72–a73). OET fragments complete. **Never densify** Cyril Matthew. CPG 5219/5220 stay closed. |
 | **done** | `cyril-alexandria-thesaurus` | *Thesaurus* on the Holy and Consubstantial Trinity (CPG **5215**) | **SERIES CLOSEOUT** `7f0dd153` (Logoi I–XXXV). PG 75. True OET — no Greystone wording; no ANF. Melito skipped. Never Cyril Matthew densify. Prol `704d5e64`; L1 `7c253775`; L2–L20 through `d573f6d5`; L21 `283ad798` L22 `476445b2` L23 `cfbc1e60` L24 `42933563` L25 `2381bd18` L26 `9fff8b68` L27 `8401e192` L28 `99251c17` L29 `d7924a95` L30 `87e894c3` L31 `20532721` L32 `5230b670` L33 `96b831d3` L34 `61123974` L35 `7f0dd153`. |

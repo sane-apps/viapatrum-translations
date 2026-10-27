@@ -136,7 +136,7 @@ Produced by `build_book.py`:
 }
 ```
 
-## Explore stance layer (fathers.saneapps.com)
+## Explore stance layer (viapatrum.org)
 
 Editorial tags for the public **Explore** timeline (`/explore/`). Stored under
 `websites/fathers.saneapps.com/data/explore/` and merged at site build into

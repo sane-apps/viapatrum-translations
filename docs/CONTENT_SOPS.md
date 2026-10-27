@@ -5,7 +5,7 @@ gates that run without a human, the checks a human still does, and the ship
 path. Prose describes; scripts enforce. When a miss ships, add the gate that
 would have caught it — this file grows by incident.
 
-## 1. Library web works (fathers.saneapps.com text + read-along audio)
+## 1. Library web works (viapatrum.org text + read-along audio)
 
 - Source of truth: `books/<slug>/` (`book.yml`, `translations/*_english.json`,
   `intro.md`, `research.json`).

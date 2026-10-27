@@ -33,7 +33,9 @@ from xml.dom import minidom
 
 SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com"
 PUBLISHER = "SaneApps · Via Patrum"
-SITE_URL = "https://fathers.saneapps.com"
+SITE_URL = "https://viapatrum.org"
+# Book ids are uuid5 of the original site URL. Keep this seed so a rebuilt edition keeps its id (rename, 26 Oct 2026).
+BOOK_ID_SEED_URL = "https://fathers.saneapps.com"
 LICENSE = "New English translation © 2026 SaneApps (CC BY 4.0); source text public domain."
 
 
@@ -301,7 +303,7 @@ def passage_xhtml(p: dict, pid: str = "p") -> str:
 
 def build_epub(meta: dict, passages: list[dict], dest: Path) -> None:
     e = html.escape
-    book_id = f"urn:uuid:{uuid.uuid5(uuid.NAMESPACE_URL, SITE_URL + '/works/' + meta['slug'] + '/edition')}"
+    book_id = f"urn:uuid:{uuid.uuid5(uuid.NAMESPACE_URL, BOOK_ID_SEED_URL + '/works/' + meta['slug'] + '/edition')}"
     modified = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     sub = f'<p class="sub">{e(meta["subtitle"])}</p>' if meta["subtitle"] else ""
     title_body = (
