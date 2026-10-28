@@ -1,68 +1,116 @@
 {
   "anf_compare": {
-    "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "status": "not_applicable",
+    "notes": "No ANF or NPNF English of this work."
   },
   "apparatus": [],
   "bible_refs": [
     {
+      "display": "Song of Songs 2:1",
+      "method": "quotation",
+      "note": "a flower of the plain, a lily of the valleys"
+    },
+    {
+      "display": "Song of Songs 2:5",
+      "method": "quotation",
+      "note": "hem me in with apples"
+    },
+    {
+      "display": "Song of Songs 2:3",
+      "method": "allusion",
+      "note": "as an apple tree among the trees of the wood"
+    },
+    {
+      "display": "Ephesians 3:6",
+      "method": "allusion",
+      "note": "members of the same body and partakers"
+    },
+    {
+      "display": "Song of Songs 2:6",
+      "method": "quotation",
+      "note": "his left hand under my head"
+    },
+    {
       "display": "Matthew 25:34",
       "method": "quotation",
-      "note": "Come, blessed of my Father"
+      "note": "come, you blessed of my Father"
     },
     {
       "display": "Proverbs 3:16",
-      "method": "allusion",
-      "note": "length of life and years of life are in the right hand of wisdom"
+      "method": "quotation",
+      "note": "length of life in her right hand, riches and glory in her left"
+    },
+    {
+      "display": "Proverbs 4:8",
+      "method": "quotation",
+      "note": "honor her, that she may embrace you"
     }
   ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "english": "the eyes, even the pure ones",
+      "term": "Εὐώνυμος",
+      "english": "the left hand",
       "rejected": [
-        "the pure eyes"
+        "the Euonymus of God",
+        "right-handed",
+        "of good name"
       ],
-      "term": "Ὀφθαλμοὶ δὲ καὶ οἱ ἄκακοι",
-      "why": "the word order is changed for better English flow"
+      "why": "εὐώνυμος is the ordinary euphemism for 'left'; the lemma is Song of Songs 2:6"
     },
     {
-      "english": "in the right hand of wisdom",
+      "term": "Ὀφθαλμοὶ δὲ καὶ οἱ ἄκακοι καὶ ὀξυδερκεῖς τῆς Ἐκκλησίας διδάσκαλοι",
+      "english": "The eyes are also the Church's teachers, guileless and keen-sighted",
+      "rejected": [
+        "seeing God alone belongs to the teachers"
+      ],
+      "why": "'seeing God alone' closes the previous sentence about the bride's mind"
+    },
+    {
+      "term": "τὴν ἀποκοιλανθεῖσαν ἀπὸ τῶν οἰκησάντων αὐτὴν πάλαι δαιμόνων",
+      "english": "what the demons who once dwelt in it had hollowed out",
+      "rejected": [
+        "the valley the demons inhabited"
+      ],
+      "why": "the play on κοιλάς / ἀποκοιλαίνω is kept with 'hollowed out'"
+    },
+    {
+      "term": "Στοιβάσατέ με ἐν μήλοις",
+      "english": "Hem me in with apples",
+      "rejected": [
+        "stack me with apples"
+      ],
+      "why": "Song of Songs 2:5 LXX; Cyril glosses it as making her safe"
+    },
+    {
+      "term": "ἐν δεξιᾷ τῆς σοφίας",
+      "english": "in the right hand of Wisdom",
       "rejected": [
         "on the right of wisdom"
       ],
-      "term": "ἐν δεξιᾷ τῆς σοφίας",
-      "why": "the phrase is an idiom and the word order is changed for better English flow"
+      "why": "Proverbs 3:16; the hand is implied by δεξιᾷ"
     },
     {
-      "english": "the purified soul",
+      "term": "τοξότης",
+      "english": "Archer",
       "rejected": [
-        "the soul purified"
+        "archer"
       ],
-      "term": "ἡ κεκαθαρμένη ψυχή",
-      "why": "the word order is changed for better English flow"
+      "why": "capitalized because the same One is the Bridegroom, Christ"
     },
     {
-      "english": "imperishable eternity",
+      "term": "Εὐώνυμος αὐτοῦ ἐπὶ τὴν κεφαλήν μου",
+      "english": "His left hand is at my head",
       "rejected": [
-        "eternal imperishability"
+        "under my head"
       ],
-      "term": "ἀφθάρτου ἀϊδιότητος",
-      "why": "genitive phrase describing the nature of the participation"
-    },
-    {
-      "english": "Euonymus",
-      "rejected": [
-        "good name"
-      ],
-      "term": "Εὐώνυμος",
-      "why": "proper noun, possibly a name or title"
+      "why": "the source has ἐπί where the LXX has ὑπό; 'at' serves both the archery and the pillow readings"
     }
   ],
-  "confidence": "machine_draft",
+  "confidence": "reviewed",
   "edition": {
     "id": "cyril-alexandria-fragmenta-canticum",
     "language": "grc",
@@ -75,116 +123,226 @@
   "lemmas": [
     {
       "form": "ὁρῶντα",
-      "gloss": "seeing",
-      "lemma": "ὁράω"
+      "lemma": "ὁράω",
+      "gloss": "see"
     },
     {
-      "form": "Ἐκκλησίας",
-      "gloss": "Church",
-      "lemma": "ἐκκλησία"
+      "form": "ἄκακοι",
+      "lemma": "ἄκακος",
+      "gloss": "guileless"
     },
     {
-      "form": "διδάσκαλοι",
-      "gloss": "teachers",
-      "lemma": "διδάσκαλος"
+      "form": "ὀξυδερκεῖς",
+      "lemma": "ὀξυδερκής",
+      "gloss": "keen-sighted"
     },
     {
-      "form": "νύμφη",
-      "gloss": "bride",
-      "lemma": "νύμφη"
+      "form": "διδάσκαλοι",
+      "lemma": "διδάσκαλος",
+      "gloss": "teacher"
     },
     {
-      "form": "ἐπιδημία",
-      "gloss": "presence",
-      "lemma": "ἐπιδημία"
+      "form": "ἄνθος",
+      "lemma": "ἄνθος",
+      "gloss": "flower"
     },
     {
-      "form": "κοιλάδας",
-      "gloss": "valleys",
-      "lemma": "κοιλάς"
+      "form": "πεδίου",
+      "lemma": "πεδίον",
+      "gloss": "plain"
     },
     {
-      "form": "ἀνθέων",
-      "gloss": "flowers",
-      "lemma": "ἄνθος"
+      "form": "κρίνον",
+      "lemma": "κρίνον",
+      "gloss": "lily"
     },
     {
-      "form": "δαίμων",
-      "gloss": "demon",
-      "lemma": "δαίμων"
+      "form": "κοιλάδων",
+      "lemma": "κοιλάς",
+      "gloss": "valley"
     },
     {
-      "form": "εὐαγγελικοῖς",
-      "gloss": "Gospel",
-      "lemma": "εὐαγγελικός"
+      "form": "ὑετὸν",
+      "lemma": "ὑετός",
+      "gloss": "rain"
     },
     {
-      "form": "λόγοις",
-      "gloss": "words",
-      "lemma": "λόγος"
+      "form": "τεκοῦσα",
+      "lemma": "τίκτω",
+      "gloss": "bear"
     },
     {
-      "form": "ἁγίων",
-      "gloss": "saints",
-      "lemma": "ἅγιος"
+      "form": "παραβάλλει",
+      "lemma": "παραβάλλω",
+      "gloss": "compare"
     },
     {
-      "form": "Εὐώνυμος",
-      "gloss": "right-handed",
-      "lemma": "Εὐώνυμος"
+      "form": "ἐπιδημία",
+      "lemma": "ἐπιδημία",
+      "gloss": "coming"
+    },
+    {
+      "form": "ἀνεπιτηδείους",
+      "lemma": "ἀνεπιτήδειος",
+      "gloss": "unfit"
+    },
+    {
+      "form": "σπόρον",
+      "lemma": "σπόρος",
+      "gloss": "sowing"
+    },
+    {
+      "form": "ἀποκοιλανθεῖσαν",
+      "lemma": "ἀποκοιλαίνω",
+      "gloss": "hollow out"
+    },
+    {
+      "form": "δαιμόνων",
+      "lemma": "δαίμων",
+      "gloss": "demon"
+    },
+    {
+      "form": "Στοιβάσατέ",
+      "lemma": "στοιβάζω",
+      "gloss": "hem in, pack round"
+    },
+    {
+      "form": "μήλοις",
+      "lemma": "μῆλον",
+      "gloss": "apple"
+    },
+    {
+      "form": "ἀσφαλίσατε",
+      "lemma": "ἀσφαλίζω",
+      "gloss": "make safe"
+    },
+    {
+      "form": "Συνταχθείην",
+      "lemma": "συντάσσω",
+      "gloss": "rank with"
+    },
+    {
+      "form": "σύσσωμοι",
+      "lemma": "σύσσωμος",
+      "gloss": "sharing one body"
+    },
+    {
+      "form": "συμμέτοχοι",
+      "lemma": "συμμέτοχος",
+      "gloss": "partaking with"
+    },
+    {
+      "form": "Εὐώνυμος",
+      "lemma": "εὐώνυμος",
+      "gloss": "left"
     },
     {
       "form": "δεξιὰ",
-      "gloss": "right",
-      "lemma": "δεξιός"
+      "lemma": "δεξιός",
+      "gloss": "right"
     },
     {
-      "form": "νύμφην",
-      "gloss": "bride",
-      "lemma": "νύμφη"
+      "form": "περιλήψεται",
+      "lemma": "περιλαμβάνω",
+      "gloss": "embrace"
     },
     {
-      "form": "κοινωνίαν",
-      "gloss": "participation",
-      "lemma": "κοινωνία"
+      "form": "εὐλογημένοι",
+      "lemma": "εὐλογέω",
+      "gloss": "bless"
     },
     {
-      "form": "ἀφθάρτου",
-      "gloss": "imperishable",
-      "lemma": "ἄφθαρτος"
+      "form": "Μῆκος",
+      "lemma": "μῆκος",
+      "gloss": "length"
     },
     {
-      "form": "αἰωνίων",
-      "gloss": "eternal",
-      "lemma": "αἰώνιος"
+      "form": "ἀριστερᾷ",
+      "lemma": "ἀριστερός",
+      "gloss": "left"
     },
     {
-      "form": "δόξαν",
-      "gloss": "glory",
-      "lemma": "δόξα"
+      "form": "ἐπιστήμη",
+      "lemma": "ἐπιστήμη",
+      "gloss": "knowledge"
     },
     {
-      "form": "δεξιᾶς",
-      "gloss": "right hand",
-      "lemma": "δεξιά"
+      "form": "Ὑπερέχει",
+      "lemma": "ὑπερέχω",
+      "gloss": "rise above"
     },
     {
-      "form": "ἀριστερᾶς",
-      "gloss": "left hand",
-      "lemma": "ἀριστερά"
+      "form": "καλύψει",
+      "lemma": "καλύπτω",
+      "gloss": "cover"
+    },
+    {
+      "form": "Τίμησον",
+      "lemma": "τιμάω",
+      "gloss": "honor"
+    },
+    {
+      "form": "τοξότης",
+      "lemma": "τοξότης",
+      "gloss": "archer"
+    },
+    {
+      "form": "βέλος",
+      "lemma": "βέλος",
+      "gloss": "arrow"
+    },
+    {
+      "form": "κεκαθαρμένη",
+      "lemma": "καθαίρω",
+      "gloss": "purify"
+    },
+    {
+      "form": "εὐθύνει",
+      "lemma": "εὐθύνω",
+      "gloss": "aim, direct"
+    },
+    {
+      "form": "σκοπόν",
+      "lemma": "σκοπός",
+      "gloss": "mark"
+    },
+    {
+      "form": "ἀναλαμβάνει",
+      "lemma": "ἀναλαμβάνω",
+      "gloss": "take up"
+    },
+    {
+      "form": "ἀφθάρτου",
+      "lemma": "ἄφθαρτος",
+      "gloss": "incorruptible"
+    },
+    {
+      "form": "ἀϊδιότητος",
+      "lemma": "ἀϊδιότης",
+      "gloss": "eternity"
+    },
+    {
+      "form": "ἀμέτοχοι",
+      "lemma": "ἀμέτοχος",
+      "gloss": "having no share"
+    },
+    {
+      "form": "κεφαλήν",
+      "lemma": "κεφαλή",
+      "gloss": "head"
     }
   ],
-  "pass_a_gloss": "Seeing God alone, the Church's teachers are pure and sharp-sighted, I am the flower of the field and the lily of the valleys, the bride receives the heavenly rain and gives birth to virtue, the Church shows how much Christ's presence has benefited, even the valleys are full of flowers, the valleys are those that were once inhabited by demons, store me in your memories, secure me with the words of the Gospel, these words make Christ sweet to us, I want to be counted among the saints, for they are like apples, the law is on the left and the Gospel is on the right, or perhaps this life is on the left and the future life is on the right, which will receive me when it says 'Come, blessed of my Father', it says elsewhere that length of life and years of life are in the right hand of wisdom, but wealth and glory are in the left, the right hand is the knowledge of divine things, from which comes eternal life, but the left hand is human knowledge, from which comes wealth and glory, it says that my mind surpasses human things, and divine knowledge will cover me, for it has been said again 'Honor her and she will embrace you', it shows that the same one is our bridegroom and archer, and the purified soul is the bride and the arrow, so the arrow aims straight at the good\n\nAs he takes the bride into participation of imperishable eternity, length of life and years of life, giving through the right hand; through the left hand, the wealth of eternal goods and the glory of God, which those seeking the glory of the world become without share; therefore he says that his Euonymus is upon my head, through which…",
+  "pass_a_gloss": "[seeing God alone: translated with the previous section.] And eyes [are] also the guileless and sharp-sighted teachers of the Church. I [am] a flower of the plain, a lily of the valleys. As having received the rain from above, and having given birth to virtue, the bride likens herself to a flower of the plain; and she shows how much the sojourn of Christ benefited, seeing that it showed even the valleys, unsuited for every sowing, full of such flowers. For 'valley' she calls that which was hollowed out by the demons who long ago dwelt in it. Pack me round with apples. With the Gospel words make me secure; for these are fragrant to us of Christ. And may I too, she says, be ranked with His saints; for as He [is an] apple, so those of one body and sharing with Him [are] apples. His left, etc. Left [is] the law, right the Gospel. Or also left [is] the present life, right the coming one, which will embrace me when He says to those on the right: Come, the blessed of My Father. And it says also elsewhere: Length of life and years of life, in the right of wisdom; and in the left, wealth and glory. Her right, then, [is] the knowledge of divine things, from which [is] eternal life; and left the knowledge of human things, from which wealth and glory. She says, therefore, that My mind rises over human things, and the divine knowledge will cover me. For it has been said again: Honor her, that she may embrace you. It shows, then, that the same [One] is both bridegroom and archer of ours, and the purified soul both bride and arrow; as an arrow, then, He directs [her] toward the good mark. As a bride He takes [her] up into fellowship of incorruptible everlastingness, bestowing through the right length of life and years of life; and through the left, the wealth of the eternal goods and the glory of God, of which those seeking the glory of the world come to have no share. Because of this she says that His left [is] at my head, through which [the arrow is directed at the mark].",
   "pass_b_english": [
-    "Seeing God alone, the Church's teachers are both the pure and the sharp-sighted. I am the flower of the field. The Church, as the bride of Christ, receives the heavenly rain and gives birth to virtue, and in doing so, she shows how much Christ's presence has benefited her, even transforming the valleys, for he says the valleys are those that were once inhabited by demons.",
-    "The Church's teachers are pure and sharp-sighted, and they secure us with the words of the Gospel, which make Christ sweet to us. I want to be counted among the saints, for they are like apples, and the law is on the left, while the Gospel is on the right, guiding us towards eternal life. The right hand represents the knowledge of divine things, from which comes eternal life, while the left hand represents human knowledge, from which comes wealth and glory.",
-    "As the bride is taken into the participation of imperishable eternity, she receives the gift of length of life and years of life, bestowed through the right hand. This participation is a sharing in the eternal nature of God, which is characterized by imperishable eternity.",
-    "In contrast, those who seek the glory of the world are deprived of the wealth of eternal goods and the glory of God, which are given through the left hand. The speaker notes that the Euonymus of God is upon their head, through which…"
+    "The eyes are also the Church's teachers, guileless and keen-sighted. 'I am a flower of the plain, a lily of the valleys' (Song of Songs 2:1). Since the bride has received the rain from above and has borne virtue, she compares herself to a flower of the plain; and she shows how much the coming of Christ has helped, since it has shown even the valleys, unfit for any sowing, full of such flowers. For by a valley she means what the demons who once dwelt in it had hollowed out.",
+    "'Hem me in with apples' (Song of Songs 2:5): make me safe with the words of the Gospel, for these breathe the fragrance of Christ upon us. 'And may I too,' she says, 'be ranked with His saints'; for as He is an apple tree (Song of Songs 2:3), so those who share His body and partake with Him (Ephesians 3:6) are apples.",
+    "'His left hand…' (Song of Songs 2:6). The left hand is the Law, the right the Gospel. Or else the left is the present life and the right the life to come: the right hand that will embrace me when He says to those on His right, 'Come, you blessed of My Father' (Matthew 25:34). It also says elsewhere, 'Length of life and years of life are in the right hand of Wisdom, and in her left are riches and glory' (Proverbs 3:16). Her right hand, then, is the knowledge of divine things, from which comes eternal life; her left is the knowledge of human things, from which come riches and glory. So she says, 'My mind rises above human things, and divine knowledge will cover me.' For it is said again, 'Honor her, that she may embrace you' (Proverbs 4:8).",
+    "This shows, then, that the same One is both our Bridegroom and our Archer, and that the purified soul is both bride and arrow. As an arrow, then, He aims her at the good mark; as a bride He takes her up into fellowship in incorruptible eternity, granting through the right hand length of life and years of life (Proverbs 3:16), and through the left the riches of eternal goods and the glory of God, in which those who seek the glory of the world have no share. That is why she says, 'His left hand is at my head' (Song of Songs 2:6), the hand by which the arrow is aimed at the mark."
   ],
   "source_text": "\nμόνον ὁρῶντα Θεόν. Ὀφθαλμοὶ δὲ καὶ οἱ ἄκακοι καὶ ὀξυδερκεῖς τῆς Ἐκκλησίας\nδιδάσκαλοι. Ἐγὼ ἄνθος τοῦ πεδίου, κρίνον τῶν κοιλάδων. Ὡς δεξαμένη ἡ νύμφη\nτὸν ἄνωθεν ὑετὸν, καὶ τεκοῦσα τὴν ἀρετὴν, ἄνθει ἑαυτὴν παραβάλλει πεδίου·\nδείκνυσι δὲ ὅσον ὠφέλησεν ἡ τοῦ Χριστοῦ ἐπιδημία, ὅσου γε καὶ τὰς κοιλάδας τὰς\nἀνεπιτηδείους πρὸς ἅπαντα σπόρον, τοιούτων μεστὰς ἔδειξεν ἀνθέων. Κοιλάδα γὰρ\nλέγει τὴν ἀποκοιλανθεῖσαν ἀπὸ τῶν οἰκησάντων αὐτὴν πάλαι δαιμόνων.\nΣτοιβάσατέ με ἐν μήλοις. Τοῖς εὐαγγελικοῖς με ἀσφαλίσατε λόγοις· οὗτοι γὰρ ἡμῖν\nεὐωδιάζουσι Χριστόν. Συνταχθείην δὲ, φησὶ, κἀγὼ μετὰ τῶν ἁγίων αὐτοῦ· ὡς γὰρ\nαὐτὸς μῆλον, οὕτως σύσσωμοι καὶ συμμέτοχοι αὐτοῦ μῆλα. Εὐώνυμος αὐτοῦ, κ.τ.λ.\nΕὐώνυμος ὁ νόμος, δεξιὰ τὸ Εὐαγγέλιον. Ἢ καὶ εὐώνυμος ὁ παρὼν βίος, δεξιὰ ὁ\nμέλλων, ἥτις με περιλήψεται ὅταν τοῖς ἐκ δεξιῶν εἴπῃ· ∆εῦτε, οἱ εὐλογημένοι τοῦ\nΠατρός μου. Λέγει δὲ καὶ ἑτέρωθι· Μῆκος βίου καὶ ἔτη ζωῆς, ἐν δεξιᾷ τῆς σοφίας· ἐν\nδὲ τῇ ἀριστερᾷ, πλοῦτος καὶ δόξα. ∆εξιὰ γοῦν αὐτῆς ἡ τῶν θείων ἐπιστήμη, ἐξ ἧς ἡ\nαἰώνιος ζωή· ἀριστερὰ δὲ ἡ τῶν ἀνθρωπίνων γνῶσις, ἐξ ὧν πλοῦτος καὶ δόξα. Λέγει\nτοίνυν, ὅτι Ὑπερέχει ὁ νοῦς μου τὰ ἀνθρώπινα· καὶ ἡ θεία γνῶσις καλύψει με. Καὶ\nγὰρ εἴρηται πάλιν· Τίμησον αὐτὴν, ἵνα σε περιλάβῃ.\n∆είκνυσι τοίνυν, ὅτι ὁ αὐτὸς καὶ νυμφίος καὶ τοξότης ἡμῶν ἐστι, νύμφη τε\nκαὶ βέλος ἡ κεκαθαρμένη ψυχή· ὡς βέλος οὖν πρὸς τὸν ἀγαθὸν εὐθύνει σκοπόν. Ὡς\nνύμφην εἰς κοινωνίαν ἀναλαμβάνει τῆς ἀφθάρτου ἀϊδιότητος, μῆκος βίου καὶ ἔτη\nζωῆς, διὰ τῆς δεξιᾶς χαριζόμενος· διὰ δὲ τῆς ἀριστερᾶς, τὸν τῶν αἰωνίων ἀγαθῶν\nπλοῦτον καὶ τὴν τοῦ Θεοῦ δόξαν, ἧς οἱ τὴν τοῦ κόσμου ζητοῦντες δόξαν ἀμέτοχοι\nγίνονται. ∆ιὰ τοῦτό φησιν, ὅτι Εὐώνυμος αὐτοῦ ἐπὶ τὴν κεφαλήν μου, δι' ἧς",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash",
+  "reviewer": "claude-opus-5.5 (English reviewed 2026-10-23; justification refreshed 2026-10-24)",
   "draft_agent": "overnight-mini-cf",
   "draft_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it",
   "drafted_at": "2026-10-02T04:02:46.759620+00:00",
@@ -205,5 +363,14 @@
     }
   ],
   "ai_crosscheck_at": "2026-10-02T04:03:07.142369+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20261002T040247770348Z-cyril-alexandria-fragmenta-canticum--u01-rem-mid/summary.json"
+  "ai_crosscheck_receipt": "outputs/ai-promote/20261002T040247770348Z-cyril-alexandria-fragmenta-canticum--u01-rem-mid/summary.json",
+  "review": {
+    "reviewer": "claude-opus-5.5",
+    "reviewed_at": "2026-10-24",
+    "notes": [
+      "Pass B now equals the published English (retranslated clause by clause on 2026-10-23).",
+      "Pass A rewritten as a literal gloss of the Greek in source order; bracketed words mark text carried across section breaks, print numbers and readings.",
+      "Lemmas, choices and Scripture references rebuilt to match the published English; the old machine-draft entries (wrong senses such as 'consolation', 'knees', 'apathy', 'Logos', 'right-handed') were removed."
+    ]
+  }
 }

@@ -1,41 +1,73 @@
 {
   "anf_compare": {
-    "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "status": "no_pd_reference_used",
+    "notes": "An NPNF English exists under Basil, Letter 260; it was read only to confirm the text's identity and the two readings taken by sense, not for wording."
   },
   "apparatus": [],
   "bible_refs": [
     {
-      "display": "Leviticus 25:8-55",
-      "method": "allusion",
-      "note": "The Jubilee year is described in Leviticus 25:8-55"
+      "display": "Exodus 21:2",
+      "method": "allusion: the Hebrew slave set free after six years of service, in the seventh",
+      "note": "δι' ἑπτὰ ἐτῶν ὁ Ἑβραῖος ἀπελύετο τῆς δουλείας."
     },
     {
-      "display": "Deuteronomy 15:1-18",
-      "method": "allusion",
-      "note": "The seventh year of release for Hebrew slaves is described in Deuteronomy 15:1-18"
+      "display": "Leviticus 25:8-10",
+      "method": "allusion: seven weeks of years make the Jubilee, with release proclaimed",
+      "note": "The Jubilee; the letter adds the land's sabbath, the cancelling of debts and release from slavery."
     }
   ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "english": "sevenfold",
+      "term": "ἑπτὰ πολυπλασιάσας",
+      "english": "multiplied the seven",
+      "why": "Continues 'the Lord did not move on to another number, but…': the number seven is what is multiplied.",
       "rejected": [
-        "seven times"
-      ],
-      "term": "ἑπτὰ πολυπλασιάσας",
-      "why": "The phrase is used to describe the multiplication of the number seven, which is significant in the Hebrew tradition"
+        "having multiplied sevenfold"
+      ]
     },
     {
-      "english": "he set a limit within it",
+      "term": "δι' ἑπτὰ ἐτῶν",
+      "english": "after seven years",
+      "why": "διά with the genitive of time: at the end of seven years (Exodus 21:2).",
       "rejected": [
-        "he set a limit on it"
-      ],
-      "term": "ἐν αὐτῷ τὸν ὅρον ἔθετο",
-      "why": "The phrase is used to describe the establishment of a boundary or limit, in this case, the seventh year as a time of release"
+        "for seven years"
+      ]
+    },
+    {
+      "term": "τὸ ὀνομαστὸν Ἰωβίλαιον",
+      "english": "the renowned Jubilee",
+      "why": "ὀνομαστός is renowned; the subject is the seven weeks of years (Leviticus 25:8-10).",
+      "rejected": [
+        "the named Jubilee"
+      ]
+    },
+    {
+      "term": "ὃς διὰ τῶν ἑπτὰ ἡμερῶν ἀνακυκλούμενος ἡμᾶς παρατρέχει",
+      "english": "which circles round through the seven days and runs past us",
+      "why": "The age turns through the week and passes us by.",
+      "rejected": [
+        "which runs us through by means of the seven days"
+      ]
+    },
+    {
+      "term": "ἐκτίσεις",
+      "english": "the penalties … are paid off",
+      "why": "ἔκτισις is payment of a penalty: lesser sins are paid for in this age so that we escape endless punishment.",
+      "rejected": [
+        "forgiveness"
+      ]
+    },
+    {
+      "term": "φιλοκόσμων",
+      "english": "world-loving",
+      "why": "φιλόκοσμος here pairs with 'this world' (κόσμος).",
+      "rejected": [
+        "beauty-loving"
+      ]
     }
   ],
   "confidence": "machine_draft",
@@ -50,115 +82,135 @@
   "excerpt_id": "ep-rem-close",
   "lemmas": [
     {
-      "form": "ἑπτὰ",
-      "gloss": "seven",
-      "lemma": "ἑπτά"
-    },
-    {
       "form": "πολυπλασιάσας",
-      "gloss": "multiply",
-      "lemma": "πολυπλασιάζω"
+      "lemma": "πολυπλασιάζω",
+      "gloss": "multiply"
     },
     {
       "form": "ὅρον",
-      "gloss": "limit",
-      "lemma": "ὅρος"
+      "lemma": "ὅρος",
+      "gloss": "limit"
     },
     {
-      "form": "Ἑβραῖος",
-      "gloss": "Hebrew",
-      "lemma": "Ἑβραῖος"
+      "form": "ἀπελύετο",
+      "lemma": "ἀπολύω",
+      "gloss": "set free"
     },
     {
       "form": "δουλείας",
-      "gloss": "slavery",
-      "lemma": "δουλεία"
+      "lemma": "δουλεία",
+      "gloss": "slavery"
+    },
+    {
+      "form": "ἑβδομάδες",
+      "lemma": "ἑβδομάς",
+      "gloss": "week (of years)"
+    },
+    {
+      "form": "ὀνομαστὸν",
+      "lemma": "ὀνομαστός",
+      "gloss": "renowned"
     },
     {
       "form": "Ἰωβίλαιον",
-      "gloss": "Jubilee",
-      "lemma": "Ἰωβήλαιον"
+      "lemma": "ἰωβηλαῖος",
+      "gloss": "Jubilee"
     },
     {
       "form": "ἐσαββάτιζεν",
-      "gloss": "rest",
-      "lemma": "ἐσαββατίζω"
+      "lemma": "σαββατίζω",
+      "gloss": "keep sabbath"
     },
     {
-      "form": "χρεῶν",
-      "gloss": "debt",
-      "lemma": "χρέος"
+      "form": "ἀποκοπαὶ",
+      "lemma": "ἀποκοπή",
+      "gloss": "cancellation (of debts)"
     },
     {
       "form": "ἀπαλλαγὴ",
-      "gloss": "release",
-      "lemma": "ἀπαλλαγή"
+      "lemma": "ἀπαλλαγή",
+      "gloss": "release"
     },
     {
-      "form": "αἰών",
-      "gloss": "age",
-      "lemma": "αἰών"
+      "form": "συντέλειαν",
+      "lemma": "συντέλεια",
+      "gloss": "completion"
     },
     {
-      "form": "ἀγαθοῦ",
-      "gloss": "good",
-      "lemma": "ἀγαθός"
+      "form": "τύποι",
+      "lemma": "τύπος",
+      "gloss": "type"
     },
     {
-      "form": "Δεσπότου",
-      "gloss": "Master",
-      "lemma": "Δεσπότης"
+      "form": "ἀνακυκλούμενος",
+      "lemma": "ἀνακυκλέω",
+      "gloss": "circle round"
+    },
+    {
+      "form": "παρατρέχει",
+      "lemma": "παρατρέχω",
+      "gloss": "run past"
+    },
+    {
+      "form": "ἐκτίσεις",
+      "lemma": "ἔκτισις",
+      "gloss": "payment of a penalty"
+    },
+    {
+      "form": "φιλάνθρωπον",
+      "lemma": "φιλάνθρωπος",
+      "gloss": "loving, kind to mankind"
+    },
+    {
+      "form": "ἐπιμέλειαν",
+      "lemma": "ἐπιμέλεια",
+      "gloss": "care"
+    },
+    {
+      "form": "ἀπεράντῳ",
+      "lemma": "ἀπέραντος",
+      "gloss": "endless"
+    },
+    {
+      "form": "κόλασιν",
+      "lemma": "κόλασις",
+      "gloss": "punishment"
+    },
+    {
+      "form": "συγγένειαν",
+      "lemma": "συγγένεια",
+      "gloss": "kinship"
+    },
+    {
+      "form": "φιλοκόσμων",
+      "lemma": "φιλόκοσμος",
+      "gloss": "world-loving"
     }
   ],
-  "pass_a_gloss": "The number seven is significant in the Hebrew tradition, representing completion and release, and is reflected in various time periods and customs, including the seventh year of release for Hebrew slaves and the Jubilee year, which was a time of rest for the land and a new beginning, and these customs are types of the present age, which is characterized by a cycle of seven days, during which sins are forgiven through the philanthropic care of the good Master, so that we are not handed over to punishment for an endless age\nseven having multiplied\nas of the beauty-loving men from\nthe named Jubilee they were making to the ancients\nSeven and seven weeks of years the named Jubilee they were making to the ancients\nin which rested the earth",
+  "pass_a_gloss": "[continuing 'but the'] seven, having multiplied [it], in it he set the limit. And after seven years the Hebrew was let go from slavery. And seven weeks of years were making the famous Jubilee for those of long ago, in which the earth kept sabbath, and there were cuttings-off of debts, and a release from slavery; and as it were a new life was being set up from the start in the number of seven, the old one in a certain manner receiving its end. And these [are] types of this age, which, circling back through the seven days, runs past us; in which the payments of the more moderate sins come about, according to the man-loving care of the good Master, so that we are not handed over to punishment in the age without end. The 'seven times', then, [is] because of the kinship toward this world, as of the men who love the world, from them…",
   "pass_b_english": [
-    "…Having multiplied sevenfold, he set the limit within it. And for seven years the Hebrew was released from slavery. In the past, they made the named Jubilee consisting of seven weeks of years, in which the land rested (Leviticus 25:4), debts were cut off, and there was a release from slavery; and a new life was established from the beginning in the seventh number, in a certain way receiving the completion of the old.",
-    "These things are types of this present age, which runs us through by means of the seven days; in which the forgiveness of more moderate sins takes place, according to the philanthropic care of the good Master, so that we are not handed over to punishment for an endless age. The sevenfold, then, is because of the relationship to this world, as if of the beauty-loving men from them…"
+    "…multiplied the seven and set the limit within it. And after seven years the Hebrew was set free from slavery (Exodus 21:2). Seven weeks of years made up the renowned Jubilee for the people of old (Leviticus 25:8–10), in which the land kept sabbath, debts were cancelled, and there was release from slavery; and in the number seven a new life, as it were, began afresh, with the old in a way reaching its completion.",
+    "These things are types of this present age, which circles round through the seven days and runs past us. In it the penalties for lesser sins are paid off, in keeping with the loving care of the good Master, so that we may not be handed over to punishment in the endless age. The “seven times,” then, is used because of its kinship with this world, as with world-loving people, from them…"
   ],
   "source_text": "\nἑπτὰ πολυπλασιάσας, ἐν αὐτῷ τὸν ὅρον ἔθετο. Καὶ δι' ἑπτὰ ἐτῶν ὁ Ἑβραῖος ἀπελύετο\nτῆς δουλείας. Ἑπτὰ δὲ ἑβδομάδες ἐτῶν τὸ ὀνομαστὸν Ἰωβίλαιον ἐποίουν τοῖς πάλαι,\nἐν ᾧ ἐσαββάτιζεν ἡ γῆ, χρεῶν δὲ ἦσαν ἀποκοπαὶ, καὶ δουλείας ἀπαλλαγὴ, καὶ οἱονεὶ\nνέος ἄνωθεν καθίστατο βίος ἐν τῷ ἑβδοματικῷ ἀριθμῷ, τοῦ παλαιοῦ τρόπον τινὰ\nτὴν συντέλειαν δεχομένου.\nΤαῦτα δὲ τύποι τοῦ αἰῶνος τούτου, ὃς διὰ τῶν ἑπτὰ ἡμερῶν\nἀνακυκλούμενος ἡμᾶς παρατρέχει· ἐν ᾧ γίνονται αἱ τῶν μετριωτέρων ἁμαρτημάτων\nἐκτίσεις, κατὰ τὴν φιλάνθρωπον ἐπιμέλειαν τοῦ ἀγαθοῦ ∆εσπότου, ὡς μὴ τῷ\nἀπεράντῳ αἰῶνι παραδοθῆναι ἡμᾶς εἰς κόλασιν. Τὸ μὲν οὖν ἑπτάκις, διὰ τὴν πρὸς\nτὸν κόσμον τοῦτον συγγένειαν ὡς τῶν φιλοκόσμων ἀνθρώπων ἀπ' αὐτῶν\n",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+nvidia/nemotron-3-super-120b-a12b",
-  "draft_agent": "overnight-mini-cf",
-  "draft_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it",
-  "drafted_at": "2026-09-30T21:53:18.250448+00:00",
+  "reviewer": "claude (Wave A review, clause by clause against the Greek)",
+  "draft_agent": "claude-waveA",
+  "draft_model": "claude",
+  "drafted_at": "2026-10-23",
   "revisions": [
     {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-09-30T18:32:36.516727+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260930T183212188981Z-cyril-alexandria-ad-optimum--ep-rem-close/summary.json",
-      "notes_addressed": 2
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-09-30T18:33:51.291416+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260930T183237520729Z-cyril-alexandria-ad-optimum--ep-rem-close/summary.json",
-      "notes_addressed": 1
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-09-30T20:08:58.053609+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260930T183352379199Z-cyril-alexandria-ad-optimum--ep-rem-close/summary.json",
-      "notes_addressed": 2
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-09-30T20:09:45.655274+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260930T200859030428Z-cyril-alexandria-ad-optimum--ep-rem-close/summary.json",
-      "notes_addressed": 3
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-09-30T21:53:18.264135+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260930T201421003850Z-cyril-alexandria-ad-optimum--ep-rem-close/summary.json",
+      "model": "claude",
+      "agent": "claude-waveA-review",
+      "at": "2026-10-23",
+      "from_receipt": "/Users/stephansmac/SaneApps/websites/fathers.saneapps.com/outputs/waveA-20261023/cyril-alexandria-ad-optimum/rv0.json",
       "notes_addressed": 1
     }
   ],
-  "ai_crosscheck_at": "2026-09-30T21:55:42.343895+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20260930T215319215572Z-cyril-alexandria-ad-optimum--ep-rem-close/summary.json"
+  "review_notes": [
+    "Author: this letter is Basil of Caesarea's Letter 260, to Bishop Optimus. PG 77 prints it among the letters of Cyril of Alexandria as Letter 80.",
+    "Retranslated from the rv0 review: 'multiplied the seven', 'after seven years' (Exodus 21:2), 'renowned' for ὀνομαστόν, Leviticus 25:8-10 for the Jubilee, 'circles round … and runs past us', 'penalties … paid off' for ἐκτίσεις, 'world-loving' for φιλοκόσμων.",
+    "The copy-text writes the D of Δεσπότου with the sign ∆ (U+2206); read as Δεσπότου, 'Master'. The copy-text breaks off mid-sentence after ἀπ' αὐτῶν."
+  ]
 }

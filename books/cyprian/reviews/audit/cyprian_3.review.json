@@ -1,0 +1,100 @@
+{
+  "packet_id": "d7e82268687c0ef2f75689b0cc0466671aa86249e5d291ce0082302e9e9735de",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "3",
+            "source_sha256": "e4618e08d6068941258f22f11e309c6df937e0bb984dd4f43d0e820a54fbc5e3",
+            "english_sha256": "ee467f1a42ca2578b6fdfed80afd33aa581b38302686a843e457980ad7e2ae61",
+            "response_model": "muse",
+            "response_id": "20261019T074408_muse-gloss-3_d0c8ec24",
+            "started_at": "2026-10-19T11:44:09+00:00",
+            "finished_at": "2026-10-19T11:44:40+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "3",
+            "source_sha256": "e4618e08d6068941258f22f11e309c6df937e0bb984dd4f43d0e820a54fbc5e3",
+            "english_sha256": "ee467f1a42ca2578b6fdfed80afd33aa581b38302686a843e457980ad7e2ae61",
+            "response_model": "muse",
+            "response_id": "20261019T074442_muse-compare-3_537b435b",
+            "started_at": "2026-10-19T11:44:43+00:00",
+            "finished_at": "2026-10-19T11:45:03+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "Galerius Maximus succeeds Aspasius Paternus",
+        "source": "Proconsular fasti 258",
+        "sense_relied_on": "recall ordered by the new proconsul",
+        "section": "3"
+      },
+      {
+        "item": "strator; curriculum; Sexti (ad Sextum)",
+        "source": "Late-Roman officium and transport",
+        "sense_relied_on": "officers lift him into a carriage to Sexti",
+        "section": "3"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "3",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"in Sexti perduxerunt, ubi idem Galerius Maximus proconsul bonae valetudinis recuperandae gratia secesserat.\" matches English \"conducted him to Sexti, where the same Galerius Maximus the proconsul had retired in order to recover his health.\"\nSource quote (anchor from packet): «II. Tunc Paternus proconsul iussit beatum Cyprianum episcopu»\nEnglish quote (anchor from packet): «Then Paternus the proconsul ordered the blessed Cyprian, bis»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T074442_muse-compare-3_537b435b"
+        }
+      ]
+    }
+  ]
+}

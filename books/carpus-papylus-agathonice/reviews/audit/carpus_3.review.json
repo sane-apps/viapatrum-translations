@@ -1,0 +1,94 @@
+{
+  "packet_id": "cbb5ffd9941ba9f4d86f758bf48816a9d279f0cd62e2c7fabdabbb989281af50",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "3",
+            "source_sha256": "9957b7982d8c1599a3489415040b311465f1e87b21c1ba89e71e0b67fcd8692d",
+            "english_sha256": "76360836159a56e4530b68201661722a27439a8d14b3189f70181f5f1298770c",
+            "response_model": "muse",
+            "response_id": "20261018T225650_muse-gloss-3_7b17160f",
+            "started_at": "2026-10-19T02:56:51+00:00",
+            "finished_at": "2026-10-19T02:57:39+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "3",
+            "source_sha256": "9957b7982d8c1599a3489415040b311465f1e87b21c1ba89e71e0b67fcd8692d",
+            "english_sha256": "76360836159a56e4530b68201661722a27439a8d14b3189f70181f5f1298770c",
+            "response_model": "muse",
+            "response_id": "20261018T225740_muse-compare-3_3b34696e",
+            "started_at": "2026-10-19T02:57:41+00:00",
+            "finished_at": "2026-10-19T02:58:06+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "Οὗτοι οὔτε ... ἔζησαν, ἵνα καὶ ἀποθάνωσιν",
+        "source": "Retry adjudication 2026-10-18",
+        "sense_relied_on": "single negation kept; ἵνα consecutive kept positive ('that they should die as well'); no modal added",
+        "section": "3"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "3",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"Θεοί, οἳ τὸν οὐρανὸν καὶ τὴν γῆν οὐκ ἐποίησαν, ἀπολέσθωσαν.\" matches English \"May the gods who did not make heaven and earth perish (Jeremiah 10:11).\"; final clause \"Οὗτοι οὔτε ἄνθρωποι ὄντες ποτὲ ἔζησαν, ἵνα καὶ ἀποθάνωσιν.\" matches \"They never lived as human beings — that they should die as well!\"\nSource quote (anchor from packet): «Ὁ δὲ ἀνθύπατος θυμωθεὶς ἔφη· Θύσατε τοῖς θεοῖς καὶ μὴ μωραίν»\nEnglish quote (anchor from packet): «But the proconsul, enraged, said, “Sacrifice to the gods and»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T225740_muse-compare-3_3b34696e"
+        }
+      ]
+    }
+  ]
+}

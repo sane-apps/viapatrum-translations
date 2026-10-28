@@ -1,69 +1,76 @@
 {
   "anf_compare": {
     "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "notes": "ANF/NPNF has no text of this letter; translated directly from the PG 77 Greek."
   },
   "apparatus": [],
-  "bible_refs": [
-    {
-      "display": "1 Timothy 3:1",
-      "method": "wording",
-      "note": "ἱερὰν λειτουργίαν (holy ministry) echoes the description of the office of bishop in 1 Timothy 3:1."
-    },
-    {
-      "display": "1 Timothy 3:3",
-      "method": "wording",
-      "note": "θεοσεβείας (godliness) is a key virtue listed for overseers in 1 Timothy 3:2."
-    },
-    {
-      "display": "1 Timothy 3:3",
-      "method": "wording",
-      "note": "ἐχθρὰ φρονεῖν (thinking hostile thoughts) parallels the requirement that an overseer not be a brawler or quarrelsome man in 1 Timothy 3:3."
-    }
-  ],
+  "bible_refs": [],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "term": "ἀθέσμως ἐκβεβλῆσθαι",
-      "english": "to be exposed shamelessly",
-      "why": "The adverb ἀθέσμως modifies the passive infinitive ἐκβεβλῆσθαι, indicating the manner of the exposure.",
+      "term": "καὶ ἀθέσμως ἐκβεβλῆσθαι",
+      "english": "…and that he has been thrown out unlawfully",
       "rejected": [
-        "to be disgraced",
-        "to be exposed"
-      ]
+        "The presbyter was shamelessly exposed"
+      ],
+      "why": "The infinitive is still governed by φησι in the previous section: Peter's reported complaint. ἀθέσμως is 'unlawfully'."
     },
     {
-      "term": "προσεπάγων ὅτι",
-      "english": "having pressed that",
-      "why": "The participle προσεπάγων (from προσάπτω) indicates the action of the subject before the main verb, and ὅτι introduces the content of the pressing.",
+      "term": "προσεπάγων ὅτι",
+      "english": "and he adds that",
       "rejected": [
-        "arguing that",
-        "saying that"
-      ]
+        "having pressed that",
+        "it was claimed that"
+      ],
+      "why": "προσεπάγω is 'add further'; the subject is still Peter."
     },
     {
-      "term": "ἡρπάσθη πάντα τὰ προσήκοντα αὐτῷ",
-      "english": "even all the things belonging to him were stolen",
-      "why": "The aorist passive ἡρπάσθη is the main verb of the clause, and πάντα τὰ προσήκοντα αὐτῷ is the direct object.",
+      "term": "στη 279 σάτω τοῦ πρεσβύτου τὸ δάκρυον",
+      "english": "stop the old man's tears",
       "rejected": [
-        "all his property was stolen",
-        "everything he owned was taken"
-      ]
+        "shed a tear for the presbyter at the 279th"
+      ],
+      "why": "στησάτω (aorist imperative of ἵστημι) is split by the PG column number 279; the number is not text."
     },
     {
-      "term": "ἐκτὸς εἰ μὴ παραιτοῖτό τινας ὡς ὑπόπτους",
-      "english": "except if she refuses some as suspects",
-      "why": "The construction ἐκτὸς εἰ μὴ indicates an exception, and παραιτοῖτό τινας ὡς ὑπόπτους means she refuses to accept some as being under surveillance.",
+      "term": "ἐννοοῦσα … δυσωπηθεῖσα",
+      "english": "bearing in mind … and yielding besides to our letters",
       "rejected": [
-        "unless she refuses some as witnesses",
-        "except if she rejects some as informers"
-      ]
+        "Your holiness should consider that this appears to be in accordance with divine canons"
+      ],
+      "why": "Both are participles agreeing with ἡ σὴ ὁσιότης and lead to the imperative στησάτω; they are not separate statements."
+    },
+    {
+      "term": "ἕλοιτο / δικαζέσθω / παραιτοῖτο",
+      "english": "he chooses / let him be tried / he objects",
+      "rejected": [
+        "she chooses",
+        "let her be judged",
+        "she refuses"
+      ],
+      "why": "The subject is Peter. Only αὐτῆς is feminine, and it refers to θεοσέβεια ('your piety')."
+    },
+    {
+      "term": "τῶν ὑπὸ τὴν αὐτῆς χεῖρα θεοσεβεστάτων ἐπισκόπων",
+      "english": "the most God-fearing bishops under your authority",
+      "rejected": [
+        "the godly bishops under her hand"
+      ],
+      "why": "αὐτῆς refers back to τῆς σῆς θεοσεβείας, so the bishops are under Domnus; 'your' makes this plain in English."
+    },
+    {
+      "term": "τὴν ἐσομένην ἐπ' αὐτῷ κρίσιν παραλύουσα, πρὸς τὸ μὴ ἐν",
+      "english": "that undoes the judgment he will receive, by making it seem not to have been…",
+      "rejected": [
+        "the impending judgment upon him being dissolved, so that not in money or possessions"
+      ],
+      "why": "The clause runs on into the next section (δίκῃ πεποιῆσθαι δοκεῖν); the Greek says nothing about money here."
     }
   ],
-  "confidence": "machine_draft",
+  "confidence": "source_verified",
   "edition": {
     "id": "cyril-alexandria-epistula-domnum",
     "language": "grc",
@@ -76,38 +83,103 @@
   "lemmas": [
     {
       "form": "ἀθέσμως",
-      "lemma": "ἀθέσμος",
-      "gloss": "shamelessly"
+      "lemma": "ἄθεσμος",
+      "gloss": "lawlessly, unlawfully (adverb)"
+    },
+    {
+      "form": "ἐκβεβλῆσθαι",
+      "lemma": "ἐκβάλλω",
+      "gloss": "to throw out (perfect passive infinitive)"
     },
     {
       "form": "προσεπάγων",
-      "lemma": "προσάπτω",
-      "gloss": "having pressed"
+      "lemma": "προσεπάγω",
+      "gloss": "to add further (present participle)"
     },
     {
       "form": "ἡρπάσθη",
       "lemma": "ἁρπάζω",
-      "gloss": "was stolen"
+      "gloss": "to seize (aorist passive)"
     },
     {
       "form": "προσήκοντα",
       "lemma": "προσήκω",
-      "gloss": "belonging"
+      "gloss": "to belong to"
+    },
+    {
+      "form": "χρήματα",
+      "lemma": "χρῆμα",
+      "gloss": "money, goods"
     },
     {
       "form": "ὁσιότης",
-      "lemma": "ὁσιότης",
-      "gloss": "holiness"
+      "lemma": "ὁσιότης",
+      "gloss": "holiness (form of address)"
+    },
+    {
+      "form": "κανόσι",
+      "lemma": "κανών",
+      "gloss": "canon"
+    },
+    {
+      "form": "λειτουργίαν",
+      "lemma": "λειτουργία",
+      "gloss": "ministry"
+    },
+    {
+      "form": "δυσωπηθεῖσα",
+      "lemma": "δυσωπέω",
+      "gloss": "to move by entreaty; passive 'be moved, yield' (aorist passive participle)"
+    },
+    {
+      "form": "γράμματα",
+      "lemma": "γράμμα",
+      "gloss": "letter"
+    },
+    {
+      "form": "δάκρυον",
+      "lemma": "δάκρυον",
+      "gloss": "tear"
+    },
+    {
+      "form": "πρεσβύτου",
+      "lemma": "πρεσβύτης",
+      "gloss": "old man (Peter)"
+    },
+    {
+      "form": "ἕλοιτο",
+      "lemma": "αἱρέω",
+      "gloss": "middle: to choose (aorist optative)"
+    },
+    {
+      "form": "δικαζέσθω",
+      "lemma": "δικάζω",
+      "gloss": "middle/passive: to go to law, be tried (present imperative)"
     },
     {
       "form": "θεοσεβείας",
       "lemma": "θεοσέβεια",
-      "gloss": "godliness"
+      "gloss": "piety (form of address: 'your piety')"
+    },
+    {
+      "form": "θεοσεβεστάτων",
+      "lemma": "θεοσεβής",
+      "gloss": "most God-fearing (superlative, honorific)"
     },
     {
       "form": "ἐπισκόπων",
       "lemma": "ἐπίσκοπος",
-      "gloss": "bishops"
+      "gloss": "bishop"
+    },
+    {
+      "form": "παραιτοῖτό",
+      "lemma": "παραιτέομαι",
+      "gloss": "to decline, object to (present optative)"
+    },
+    {
+      "form": "ὑπόπτους",
+      "lemma": "ὕποπτος",
+      "gloss": "suspect"
     },
     {
       "form": "ἐχθρὰ",
@@ -120,63 +192,52 @@
       "gloss": "pretext"
     },
     {
+      "form": "παραλύουσα",
+      "lemma": "παραλύω",
+      "gloss": "to loosen, undo (present participle)"
+    },
+    {
       "form": "κρίσιν",
       "lemma": "κρίσις",
-      "gloss": "judgment"
+      "gloss": "judgment, trial"
     }
   ],
-  "pass_a_gloss": "And shamelessly to be exposed, having pressed that even all the things belonging to him were stolen. Your holiness, considering also that it seems to accord with divine canons and what is fitting for the church and those appointed to holy ministry, and besides these also having beseeched our letters, shed the tear of the presbyter at the 279th. And if she were to obtain to be judged against the ones pressing upon her the charges, let her be judged according to what is customary upon your godliness, manifestly with the godly bishops under her hand, except if she refuses some as suspects; for we believe that none of the godly bishops thinks ill of a brother, in order that this not become a pretext, the coming judgment upon him being dissolved, in order that not in\nmoney or possessions\nunder the same hand\nso that this may not become a pretext, weakening the judgment coming upon him\nhaving added that even all the moneys belonging to him were stolen",
+  "pass_a_gloss": "[Continuing Peter's reported speech:] and to have been thrown out (ἐκβάλλω, pf. pass. inf.) lawlessly (ἀθέσμως), adding further (προσεπάγω, pres. ptc.) that also all the money (χρήματα) belonging (προσήκω, ptc.) to him was snatched (ἁρπάζω, aor. pass.). Your holiness (ὁσιότης), therefore (τοιγαροῦν), bearing in mind (ἐννοέω, pres. ptc. fem.) both what seems good (δοκέω, ptc.) to the divine canons (κανών) and what is fitting (πρέπω, ptc.) to a church and to those appointed (τάσσω, pf. pass. ptc.) to sacred ministry (λειτουργία), and still besides these, having been moved/put to shame (δυσωπέω, aor. pass. ptc. fem.) by the letters (γράμματα) from us, let it stop (ἵστημι, aor. impv. 3 sg., στησάτω; split by column number 279) the tear (δάκρυον) of the old man (πρεσβύτης). And if he should choose (αἱρέομαι, aor. opt.) to go to law (δικάζω, aor. mid. inf.) against those bringing (ἐπάγω, ptc.) the charges (αἰτία) against him, let him be tried (δικάζω, pres. mid./pass. impv.) according to what is customary (εἰωθός) before your God-fearingness (θεοσέβεια), being present together (συμπάρειμι, ptc., gen. abs.), clearly (δηλονότι), the most God-fearing (θεοσεβέστατος) bishops (ἐπίσκοπος) under her [= your God-fearingness's] hand (χείρ), except if he should decline (παραιτέομαι, pres. opt.) some as suspect (ὕποπτος). For we believe (πιστεύω) that none of the most God-fearing bishops thinks (φρονέω) hostile things (ἐχθρός) toward a brother (ἀδελφός); but in order that this may not become a pretext (πρόφασις), loosening/undoing (παραλύω, pres. ptc. fem.) the judgment (κρίσις) that will be (εἰμί, fut. ptc.) upon him, toward its not in [continues in the next section].",
   "pass_b_english": [
-    "The presbyter was shamelessly exposed, and it was claimed that all belonging to him had been stolen.",
-    "Your holiness should consider that this appears to be in accordance with divine canons and what is fitting for the church and those appointed to holy ministry.",
-    "Moreover, having considered the letters from us that have entreated you, you should shed a tear for the presbyter at the 279th.",
-    "If she chooses to be judged against those bringing charges against her, let her be judged according to the customary practice of your godliness, manifestly with the godly bishops under her hand, unless she refuses some as suspects.",
-    "For we believe that none of the godly bishops thinks ill of a brother, in order that this may not become a pretext, the impending judgment upon him being dissolved, so that not in money or possessions."
+    "…and that he has been thrown out unlawfully; and he adds that all the money belonging to him was seized as well.",
+    "Let your holiness, then, bearing in mind what the divine canons decree and what befits the church and those appointed to sacred ministry, and yielding besides to our letters, stop the old man's tears. And if he chooses to go to trial against those who bring the charges against him, let him be tried in the customary way before your piety, with the most God-fearing bishops under your authority sitting with you, of course, unless he objects to some of them as suspect. For we do not believe that any of the most God-fearing bishops harbors hostility toward a brother; but so that this may not become a pretext that undoes the judgment he will receive, by making it seem not to have been…"
   ],
   "source_text": "\nκαὶ ἀθέσμως ἐκβεβλῆσθαι, προσεπάγων ὅτι καὶ ἡρπάσθη πάντα τὰ προσήκοντα αὐτῷ\nχρήματα.\nἩ σὴ τοιγαροῦν ὁσιότης ἐννοοῦσα καὶ τὸ τοῖς θείοις κανόσι δοκοῦν καὶ τὸ\nπρέπον ἐκκλησίᾳ καὶ τοῖς τεταγμένοις εἰς ἱερὰν λειτουργίαν, ἔτι τε πρὸς τούτοις καὶ\nτὰ παρ' ἡμῶν δυσωπηθεῖσα γράμματα, στη 279 σάτω τοῦ πρεσβύτου τὸ δάκρυον. Καὶ\nεἰ μὲν ἕλοιτο δικάσασθαι πρὸς τοὺς ἐπάγοντας αὐτῷ τὰς αἰτίας, δικαζέσθω κατὰ τὸ\nεἰωθὸς ἐπὶ τῆς σῆς θεοσεβείας, συμπαρόντων δηλονότι τῶν ὑπὸ τὴν αὐτῆς χεῖρα\nθεοσεβεστάτων ἐπισκόπων, ἐκτὸς εἰ μὴ παραιτοῖτό τινας ὡς ὑπόπτους· οὐδένα μὲν\nγὰρ τῶν θεοσεβεστάτων ἐπισκόπων ἐχθρὰ φρονεῖν ἀδελφῷ πιστεύομεν, ἵνα δὲ μὴ\nπρόφασις αὕτη γένηται, τὴν ἐσομένην ἐπ' αὐτῷ κρίσιν παραλύουσα, πρὸς τὸ μὴ ἐν",
   "variants": [],
-  "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/google/gemma-4-26b-a4b-it+arb:mistralai/mistral-nemotron",
-  "draft_agent": "overnight-mini-nv",
-  "draft_model": "@cf/zai-org/glm-4.7-flash+rev:@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:nvidia/nemotron-3-super-120b-a12b+rev:@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:nvidia/nemotron-3-super-120b-a12b",
-  "drafted_at": "2026-10-01T08:02:23.526795+00:00",
-  "revisions": [
-    {
-      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-      "agent": "overnight-mini-cf",
-      "at": "2026-10-01T06:01:24.261554+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261001T060036387938Z-cyril-alexandria-epistula-domnum--ep-rem-mid/summary.json",
-      "notes_addressed": 2
-    },
-    {
-      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-      "agent": "overnight-mini-cf",
-      "at": "2026-10-01T06:02:23.294313+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261001T060125167235Z-cyril-alexandria-epistula-domnum--ep-rem-mid/summary.json",
-      "notes_addressed": 3
-    },
-    {
-      "model": "nvidia/nemotron-3-super-120b-a12b",
-      "agent": "overnight-mini-nv",
-      "at": "2026-10-01T08:00:56.589609+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261001T060224254781Z-cyril-alexandria-epistula-domnum--ep-rem-mid/summary.json",
-      "notes_addressed": 1
-    },
-    {
-      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-      "agent": "overnight-mini-nv",
-      "at": "2026-10-01T08:01:42.906624+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261001T080057508949Z-cyril-alexandria-epistula-domnum--ep-rem-mid/summary.json",
-      "notes_addressed": 1
-    },
-    {
-      "model": "nvidia/nemotron-3-super-120b-a12b",
-      "agent": "overnight-mini-nv",
-      "at": "2026-10-01T08:02:23.537334+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261001T080143842592Z-cyril-alexandria-epistula-domnum--ep-rem-mid/summary.json",
-      "notes_addressed": 1
-    }
+  "source_normalizations": [
+    "'στη 279 σάτω' is στησάτω split by the PG column number 279; the number is not text and is not translated."
   ],
-  "ai_crosscheck_at": "2026-10-01T08:02:47.513075+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20261001T080224458033Z-cyril-alexandria-epistula-domnum--ep-rem-mid/summary.json"
+  "reviewer": "claude source review, separate pass (same model family as the drafter)",
+  "notes": [
+    "The section opens inside Peter's reported speech (φησι in the previous section governs ἐκβεβλῆσθαι).",
+    "The section ends mid-sentence at πρὸς τὸ μὴ ἐν; the next section supplies δίκῃ πεποιῆσθαι δοκεῖν and opens '…justly done'.",
+    "The earlier draft listed 1 Timothy 3:1-3 as allusions; none fits the passage (ἱερὰν λειτουργίαν, θεοσέβεια and ἐχθρὰ φρονεῖν are ordinary church vocabulary), so no Scripture is cited."
+  ],
+  "review": {
+    "coverage": "every clause checked against the source",
+    "changes": [
+      "Opening clause restored as Peter's reported complaint ('…and that he has been thrown out unlawfully; and he adds that …').",
+      "στη|σάτω read as the imperative 'stop the old man's tears'; column number 279 removed from the sense.",
+      "Subject of ἕλοιτο / δικαζέσθω / παραιτοῖτο corrected from 'she' to 'he' (Peter); the bishops are under Domnus's authority.",
+      "Garbled last clause replaced; it now runs into the next section ('…by making it seem not to have been…').",
+      "Paragraphs follow the two source paragraphs; three unfounded 1 Timothy 3 references removed.",
+      "Justification rebuilt 2026-10-24 to match the corrected English; old machine-draft glosses and choices replaced."
+    ],
+    "checked": [
+      "agency: Peter is the subject of the trial verbs; αὐτῆς = your piety",
+      "modality: imperatives στησάτω and δικαζέσθω; optatives ἕλοιτο and παραιτοῖτο in the conditions",
+      "negation: οὐδένα … ἐχθρὰ φρονεῖν πιστεύομεν; ἵνα δὲ μὴ",
+      "column number 279 not translated"
+    ],
+    "verdict": "pass"
+  },
+  "drafter": "claude",
+  "pipeline": "claude_direct",
+  "reviewed": "2026-10-23",
+  "source_sha256": "b94f5960051065761f2bbc10506742be226f7ab6e94193af93a4c6dbd8bc9a15"
 }

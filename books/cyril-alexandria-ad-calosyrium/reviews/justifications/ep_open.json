@@ -1,42 +1,56 @@
 {
   "anf_compare": {
-    "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "status": "no_pd_reference_used",
+    "notes": "No published English was consulted; translated from the PG 76 Greek only."
   },
   "apparatus": [],
   "bible_refs": [
     {
       "display": "Genesis 1:27",
       "method": "wording",
-      "note": "Scripture says the human was made according to the image of God"
+      "note": "κατ' εἰκόνα Θεοῦ γενέσθαι τὸν ἄνθρωπον reports what the monks cite; LXX Genesis 1:27 κατ' εἰκόνα θεοῦ ἐποίησεν αὐτόν."
     },
     {
       "display": "John 4:24",
-      "method": "wording",
-      "note": "The Savior says 'God is Spirit' (Πνεῦμα ὁ Θεός)"
+      "method": "direct quotation",
+      "note": "Πνεῦμα ὁ Θεός, John 4:24 (πνεῦμα ὁ θεός); the Savior's words to the Samaritan woman."
     }
   ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "term": "ἀνθρωποειδὲς ἤγουν ἀνθρωπομορφόν",
-      "english": "humanlike or anthropomorphic",
-      "why": "The author uses 'anthropomorphic' to mean 'having the form of a man' in a pejorative sense, and 'humanlike' as a synonym for the same idea.",
+      "term": "ἀνθρωποειδὲς ἤγουν ἀνθρωπόμορφον",
+      "english": "human in appearance, that is, of human form",
+      "why": "ἤγουν ('that is') makes the second word explain the first; it is not a choice between two views, so the English does not say 'either ... or'.",
       "rejected": [
-        "man-like",
-        "human-shaped"
+        "either humanlike or anthropomorphic"
       ]
     },
     {
-      "term": "ἐν εἴδει σωματικῷ",
-      "english": "in a physical form",
-      "why": "The phrase 'in a physical form' captures the contrast with the bodiless nature of God, rendering the abstract 'eidos' concretely.",
+      "term": "τῆς ἐσχάτης δυσσεβείας",
+      "english": "the utmost impiety",
+      "why": "ἔσχατος here marks degree, the worst kind of impiety; it does not point to the last age.",
       "rejected": [
-        "in a bodily shape",
-        "in a bodily form"
+        "the last impiety"
+      ]
+    },
+    {
+      "term": "εὐδοκιμεῖν μὲν ἐν ἀσκήσει πολλούς",
+      "english": "many excel in ascetic discipline",
+      "why": "πολλούς is the subject of the infinitive (many monks), not an adjective on ἀσκήσει.",
+      "rejected": [
+        "they prosper in much asceticism"
+      ]
+    },
+    {
+      "term": "λογοποιεῖν αὐτοὺς διεβεβαιοῦντο",
+      "english": "they assured me that these people go on to spread talk",
+      "why": "The informants are the subject of διεβεβαιοῦντο; αὐτούς, the troublemakers, is the subject of λογοποιεῖν.",
+      "rejected": [
+        "they assured themselves by arguing such things"
       ]
     }
   ],
@@ -44,7 +58,7 @@
   "edition": {
     "id": "cyril-alexandria-ad-calosyrium",
     "language": "grc",
-    "locus": "Ep opening",
+    "locus": "Ep opening (superscription to 'nor is he in bodily form')",
     "path": "translations/ac_ep_open_source.json",
     "sha256": "54ed25acbfb83b66e787731064fc1bae4ab5aaaf5cdb5206e7315a6dfc1eea39",
     "checks": []
@@ -52,85 +66,142 @@
   "excerpt_id": "ep-open",
   "lemmas": [
     {
-      "form": "ἀφικόμενοι",
-      "lemma": "ἐφίκνομαι",
-      "gloss": "arriving"
+      "form": "ἀφικόμενοι",
+      "lemma": "ἀφικνέομαι",
+      "gloss": "arrive"
+    },
+    {
+      "form": "Καλαμῶνος",
+      "lemma": "Καλαμών",
+      "gloss": "Calamon (place name)"
     },
     {
       "form": "ἠρωτῶντο",
-      "lemma": "ἐρωτάω",
-      "gloss": "were asked"
+      "lemma": "ἐρωτάω",
+      "gloss": "ask"
     },
     {
-      "form": "διαγωγήν",
-      "lemma": "διαγωγή",
-      "gloss": "conduct of life"
+      "form": "μοναστῶν",
+      "lemma": "μοναστής",
+      "gloss": "monk"
+    },
+    {
+      "form": "διαγωγήν",
+      "lemma": "διαγωγή",
+      "gloss": "way of life, conduct"
     },
     {
       "form": "εὐδοκιμεῖν",
-      "lemma": "εὐδοκιμέω",
-      "gloss": "to prosper/succeed"
+      "lemma": "εὐδοκιμέω",
+      "gloss": "be well thought of, excel"
     },
     {
-      "form": "ἀσκησίν",
-      "lemma": "ἀσκήσις",
-      "gloss": "asceticism"
+      "form": "ἀσκήσει",
+      "lemma": "ἄσκησις",
+      "gloss": "ascetic discipline"
     },
     {
-      "form": "ἀμαθίας",
-      "lemma": "ἀμαθία",
+      "form": "ἀμαθίας",
+      "lemma": "ἀμαθία",
       "gloss": "ignorance"
     },
     {
+      "form": "ἠρεμεῖν",
+      "lemma": "ἠρεμέω",
+      "gloss": "keep quiet"
+    },
+    {
+      "form": "λογοποιεῖν",
+      "lemma": "λογοποιέω",
+      "gloss": "make up stories, spread talk"
+    },
+    {
+      "form": "διεβεβαιοῦντο",
+      "lemma": "διαβεβαιόομαι",
+      "gloss": "affirm, assure"
+    },
+    {
+      "form": "εἰκόνα",
+      "lemma": "εἰκών",
+      "gloss": "image"
+    },
+    {
       "form": "ἀνθρωποειδὲς",
-      "lemma": "ἀνθρωποειδής",
-      "gloss": "humanlike"
+      "lemma": "ἀνθρωποειδής",
+      "gloss": "human in appearance"
     },
     {
-      "form": "ἀσύνετον",
-      "lemma": "ἀσύνητος",
-      "gloss": "absurd"
+      "form": "ἀνθρωπόμορφον",
+      "lemma": "ἀνθρωπόμορφος",
+      "gloss": "of human form"
     },
     {
-      "form": "ὁμοιότης",
-      "lemma": "ὁμοιότης",
+      "form": "ἀσύνετον",
+      "lemma": "ἀσύνετος",
+      "gloss": "senseless"
+    },
+    {
+      "form": "δυσσεβείας",
+      "lemma": "δυσσέβεια",
+      "gloss": "impiety"
+    },
+    {
+      "form": "ὁμοιότης",
+      "lemma": "ὁμοιότης",
       "gloss": "likeness"
     },
     {
-      "form": "σωματική",
-      "lemma": "σωματικός",
-      "gloss": "physical"
+      "form": "σωματική",
+      "lemma": "σωματικός",
+      "gloss": "bodily"
     },
     {
-      "form": "ἀσώματος",
-      "lemma": "ἄσωμος",
-      "gloss": "bodiless"
+      "form": "ἀσώματος",
+      "lemma": "ἀσώματος",
+      "gloss": "without body"
+    },
+    {
+      "form": "ἐνσώματος",
+      "lemma": "ἐνσώματος",
+      "gloss": "embodied"
     },
     {
       "form": "Πνεῦμα",
       "lemma": "πνεῦμα",
-      "gloss": "Spirit"
+      "gloss": "spirit"
     }
   ],
-  "pass_a_gloss": "Arriving from Mount Kalamos, some asked me about the monks there, how they live. They said they succeed in much asceticism and desire the monastic life, but some who pass by and disturb those who wish to be quiet, they claim that because Scripture says the human was made according to the image of God, one must believe that the divine is either humanlike or anthropomorphic, which is completely absurd and able to be charged with the stains of the last impiety. For the human is acknowledged to be according to the image of God, but the likeness is not physical, for God is bodiless. And the Savior himself teaches this saying 'God is Spirit.' Therefore, if he is spirit, he is not in a physical form.",
+  "pass_a_gloss": "Letter of the holy Cyril, bishop of Alexandria, to Calosyrius, bishop of Arsinoë (Ἀρσενοΐτην), against those saying the divine to be human-formed (ἀνθρωπόμορφον). Having arrived (ἀφικόμενοι), some from the mountain of Calamon (Καλαμῶνος) were asked by me about the monks (μοναστῶν) there, in what way they continue, or also what sort of conduct (διαγωγήν) of life they have. And they said that many are well-reputed (εὐδοκιμεῖν) in ascetic discipline (ἀσκήσει), and greatly wish to accomplish the life befitting monks; but that there are some going about and troubling (θορυβοῦντας), out of ignorance (ἀμαθίας), those wishing to be quiet (ἠρεμεῖν); then they firmly assured (διεβεβαιοῦντο) that these make up talk (λογοποιεῖν) of some such sort. For they said: Since the divine Scripture says that man came to be according to the image (κατ' εἰκόνα) of God, one must believe that the divine is human-looking (ἀνθρωποειδές), that is (ἤγουν), human-formed; which is altogether senseless (ἀσύνετον), and able to bring under the charges (ἐγκλήμασιν) of the utmost impiety (ἐσχάτης δυσσεβείας) those choosing to think so. For man is admittedly (ὁμολογουμένως) according to the image of God, but the likeness (ὁμοιότης) is not bodily (σωματική); for God is bodiless (ἀσώματος). And this the Savior himself will teach, saying 'God [is] spirit.' Therefore he is not embodied (ἐνσώματος), if he is spirit, nor in bodily form (εἴδει σωματικῷ).",
   "pass_b_english": [
-    "Arriving from Mount Kalamos, some were asked by me about the monks there, what manner of life they lead, or what conduct of life they have.",
-    "They said that they prosper in much asceticism, and greatly desire to achieve the monastic life that befits the monks.",
-    "But they said that there are some who pass by and disturb those who wish to be quiet, and they assured themselves by arguing such things.",
-    "For they said that since the human is to be made according to the image of God, the divine Scripture says, one must believe that the divine is either humanlike or anthropomorphic.",
-    "Which is completely absurd, and able to be charged with the stains of the last impiety to those who think thus.",
-    "For the human is acknowledged to be according to the image of God, but the likeness is not physical.",
-    "For God is bodiless.",
-    "And the Savior himself teaches this, saying 'God is Spirit.'",
-    "Therefore, if he is spirit, he is not in a physical form."
+    "Letter of Saint Cyril, Bishop of Alexandria, to Calosyrius, Bishop of Arsinoë, against those who say that the divine has human form.",
+    "Some people who had come from the mountain of Calamon were asked by me about the monks there: how they live, and what manner of life they lead.",
+    "They told me that many excel in ascetic discipline and earnestly wish to achieve the life that befits monks.",
+    "But there are some, they said, who go about and, out of ignorance, trouble those who wish to live in quiet; and they assured me that these people go on to spread talk of this kind.",
+    "For they said: “Since divine Scripture says that man was made in the image of God (Genesis 1:27), one must believe that the divine is human in appearance, that is, of human form.”",
+    "This is utterly senseless, and it can bring those who choose to think so under charges of the utmost impiety.",
+    "For it is agreed that man is in the image of God, but the likeness is not bodily; for God is without body.",
+    "And the Savior himself teaches this when he says, “God is spirit” (John 4:24).",
+    "So if he is spirit, he is not embodied, nor is he in bodily form."
   ],
   "source_text": "Ad Calosyrium\nΕΠΙΣΤΟΛΗ ΤΟΥ ΑΓΙΟΥ ΚΥΡΙΛΛΟΥ ΕΠΙΣΚΟΠΟΥ ΑΛΕΞΑΝ∆ΡΕΙΑΣ πρὸς\nΚαλοσίριον ἐπίσκοπον Ἀρσενοΐτην κατὰ τῶν λεγόντων\nἀνθρωπόμορφον εἶναι τὸ θεῖον.\nἈΦΙΚΟΜΕΝΟΙ τινες ἀπὸ τοῦ ὄρους τοῦ Καλαμῶνος, ἠρωτῶντο παρ' ἐμοῦ περὶ\nτῶν αὐτόθι μοναστῶν, τίνα τρόπον διατελοῦσιν, ἢ καὶ ὁποίαν ἔχουσι τοῦ βίου τὴν\nδιαγωγήν. οἱ δὲ ἔφασκον εὐδοκιμεῖν μὲν ἐν ἀσκήσει πολλοὺς, καὶ σφόδρα βούλεσθαι\nτὸν μοναχοῖς πρέποντα κατορθῶσαι βίον· εἶναι δέ τινας τοὺς περιιόντας καὶ\nθορυβοῦντας ἐξ ἀμαθίας τοὺς ἐθέλοντας ἠρεμεῖν, εἶτα λογοποιεῖν αὐτοὺς\nδιεβεβαιοῦντο τοιαῦτά τινα· ἔφασκον γάρ Ἐπειδὴ κατ' εἰκόνα Θεοῦ γενέσθαι τὸν\nἄνθρωπον ἡ θεία λέγει γραφὴ, χρὴ πιστεύειν ὅτι ἢ ἀνθρωποειδὲς ἤγουν\nἀνθρωπόμορφόν ἐστι τὸ θεῖον· ὅπερ ἐστὶ παντελῶς ἀσύνετον, καὶ τοῖς τῆς ἐσχάτης\nδυσσεβείας 604 ἐγκλήμασιν ὑπενεγκεῖν δυνάμενον τοὺς οὕτω φρονεῖν ἑλομένους.\nἔστι μὲν γὰρ ὁμολογουμένως κατ' εἰκόνα Θεοῦ ὁ ἄνθρωπος, ἡ δὲ ὁμοιότης οὐ\nσωματική· ὁ γὰρ Θεός ἐστιν ἀσώματος. καὶ τοῦτο διδάξει λέγων αὐτὸς ὁ Σωτήρ\n\"Πνεῦμα \"ὁ Θεός.\" οὐκοῦν οὐκ ἐνσώματος, εἰ πνεῦμά ἐστιν, οὐδὲ ἐν εἴδει σωματικῷ.\n",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "reviewer": "claude (Wave A review, clause by clause against the Greek)",
   "draft_agent": "overnight-mini-cf",
   "draft_model": "@cf/zai-org/glm-4.7-flash",
   "drafted_at": "2026-09-30T20:30:57.885180+00:00",
-  "ai_crosscheck_at": "2026-09-30T20:31:17.166855+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20260930T203058882877Z-cyril-alexandria-ad-calosyrium--ep-open/summary.json"
+  "revisions": [
+    {
+      "model": "claude",
+      "agent": "claude-waveA-review",
+      "at": "2026-10-23",
+      "from_receipt": "/Users/stephansmac/SaneApps/websites/fathers.saneapps.com/outputs/waveA-20261023/cyril-alexandria-ad-calosyrium/rv0.json",
+      "notes_addressed": 1
+    }
+  ],
+  "review_notes": [
+    "Reviewer rv0 retranslation applied to the English and title: the superscription restored, ἐξ ἀμαθίας and οὐκ ἐνσώματος restored, γενέσθαι made past ('was made'), 'the utmost impiety' for ἐσχάτης δυσσεβείας, the subject of λογοποιεῖν corrected, Genesis 1:27 and John 4:24 cited inline, 'Calamon' for τοῦ Καλαμῶνος.",
+    "The two old translator notes that contradicted the Greek (the 'last age of apostasy' reading and the claim that the paragraph ends mid-sentence) were removed, as rv0 asked.",
+    "Pass A rewritten as an English sense gloss of the full Greek, superscription included; lemma tags corrected (ἀφικνέομαι, ἀσύνετος, ἀσώματος)."
+  ]
 }

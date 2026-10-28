@@ -1,0 +1,106 @@
+{
+  "packet_id": "2c1315b5d458f14cb5a6fb37254eaa5400abe903deae266749568ac2123ebd43",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "59813a86d1dbec9cbb9533e0024c6ac4b5a62158635db8315975aea5a57821c2",
+            "english_sha256": "3153b42b6e7dc01826ff359086d583b2a204577f84b56c94e904682735633019",
+            "response_model": "muse",
+            "response_id": "20261019T075208_muse-gloss-5_de7009c4",
+            "started_at": "2026-10-19T11:52:08+00:00",
+            "finished_at": "2026-10-19T11:52:33+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "59813a86d1dbec9cbb9533e0024c6ac4b5a62158635db8315975aea5a57821c2",
+            "english_sha256": "3153b42b6e7dc01826ff359086d583b2a204577f84b56c94e904682735633019",
+            "response_model": "muse",
+            "response_id": "20261019T075234_muse-compare-5_fa29e6ec",
+            "started_at": "2026-10-19T11:52:34+00:00",
+            "finished_at": "2026-10-19T11:53:01+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "vix et aegre: reluctant sentence",
+        "source": "Judicial reluctance topos",
+        "sense_relied_on": "the sentence barely and painfully spoken",
+        "section": "5"
+      },
+      {
+        "item": "auctor et signifer; documento esse; sanguine sancietur disciplina",
+        "source": "Roman exemplary punishment",
+        "sense_relied_on": "ringleader made an example; discipline sealed with blood",
+        "section": "5"
+      },
+      {
+        "item": "gladio animadverti placet; Deo gratias",
+        "source": "Execution formula; martyr reply",
+        "sense_relied_on": "beheading decreed from the tablet; Thanks be to God",
+        "section": "5"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "5",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Galerius Maximus collocutus cum concilio sententiam vix et aegre dixit verbis huiusmodi' and English 'Galerius Maximus conferred with his council and then pronounced the sentence, with difficulty and reluctance' — all clauses rendered without addition, omission, or flip\nSource quote (anchor from packet): «IV. Galerius Maximus collocutus cum concilio sententiam vix »\nEnglish quote (anchor from packet): «Galerius Maximus conferred with his council and then pronoun»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T075234_muse-compare-5_fa29e6ec"
+        }
+      ]
+    }
+  ]
+}

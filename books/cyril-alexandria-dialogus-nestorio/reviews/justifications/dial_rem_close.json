@@ -1,49 +1,88 @@
 {
   "anf_compare": {
-    "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "status": "no_pd_reference_used",
+    "notes": "No published English was consulted; translated from the PG 76 Greek only."
   },
   "apparatus": [],
   "bible_refs": [
     {
-      "display": "Full Book chapter:verse",
-      "method": "wording",
-      "note": "quoted source words"
+      "display": "Hebrews 9:28",
+      "method": "direct quotation (continued from the previous section): 'ἅπαξ προσενεχθεὶς εἰς τὸ πολλῶν ἀνενεγκεῖν ἁμαρτίας, ἐκ δευτέρου χωρὶς ἁμαρτίας ὀφθήσεται'",
+      "note": "Opens with the quotation already under way; 'Christ' is its first word in the previous section."
     },
     {
-      "display": "John 6:51",
-      "method": "allusion",
-      "note": "eating Christ's flesh"
+      "display": "1 Peter 2:22",
+      "method": "direct quotation: 'ἁμαρτίαν οὐκ ἐποίησεν, καὶ δόλος οὐχ ὑπῆρχεν ἐν τῷ στόματι αὐτοῦ'",
+      "note": "ὑπῆρχεν for the Epistle's εὑρέθη; same sense."
+    },
+    {
+      "display": "John 6:56-57",
+      "method": "direct quotation: 'ὁ τρώγων μου τὴν σάρκα καὶ πίνων μου τὸ αἷμα ... ζῶ διὰ τὸν ἀποστείλαντά με Πατέρα'",
+      "note": "Joins 6:56 with the wording of 6:57."
+    },
+    {
+      "display": "John 6:50-51",
+      "method": "wording: 'ἐκ τούτου τοῦ ἄρτου'",
+      "note": "The bread saying."
+    },
+    {
+      "display": "John 8:52",
+      "method": "wording: 'οὐ μὴ γεύσωνται θανάτου εἰς τὸν αἰῶνα'",
+      "note": "The 'never taste death' wording, joined to the bread saying of John 6:50-51."
     }
   ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "english": "my flesh",
+      "term": "{ΝΕΣΤ.} … {ΚΥΡ.}",
+      "english": "Nestorius says: … Cyril says:",
+      "why": "The speaker labels in the print mark who asks about eating the divinity or the humanity (Nestorius) and who answers (Cyril).",
       "rejected": [
-        "my body"
-      ],
-      "term": "τὴν σάρκα",
-      "why": "Christ's words in the quote"
+        "running both speeches together"
+      ]
     },
     {
-      "english": "the divinity",
+      "term": "ἴδε οὖν",
+      "english": "See, then",
+      "why": "ἴδε is the imperative 'see'; οὖν draws the conclusion.",
       "rejected": [
-        "the godhead"
-      ],
-      "term": "τὴν θεότητα",
-      "why": "contrasted with humanity"
+        "indeed"
+      ]
     },
     {
+      "term": "διὰ τὸν ἀποστείλαντά με Πατέρα",
+      "english": "because of the Father who sent me",
+      "why": "διά with the accusative gives the cause.",
+      "rejected": [
+        "through the Father who sent me"
+      ]
+    },
+    {
+      "term": "τὴν θεότητα, ἢ τὴν ἀνθρωπότητα",
+      "english": "the divinity, or the humanity",
+      "why": "The two abstract nouns Nestorius sets against each other.",
+      "rejected": [
+        "the godhead, or the manhood"
+      ]
+    },
+    {
+      "term": "αἱρετικέ",
       "english": "heretic",
+      "why": "Nestorius' direct address to Cyril.",
       "rejected": [
         "schismatic"
-      ],
-      "term": "αἱρετικέ",
-      "why": "address to the opponent"
+      ]
+    },
+    {
+      "term": "τὴν τοῦ ζωοποιοῦ Λόγου ζωοποιοῦσαν σάρκα",
+      "english": "the life-giving flesh of the life-giving Word",
+      "why": "Keeps Cyril's repeated word in the same order of thought.",
+      "rejected": [
+        "the flesh of the life-giving Word which gives life"
+      ]
     }
   ],
   "confidence": "machine_draft",
@@ -58,81 +97,161 @@
   "excerpt_id": "dial-rem-close",
   "lemmas": [
     {
+      "form": "ἅπαξ",
+      "lemma": "ἅπαξ",
+      "gloss": "once"
+    },
+    {
       "form": "προσενεχθεὶς",
-      "gloss": "to offer",
-      "lemma": "προσενέχω"
+      "lemma": "προσφέρω",
+      "gloss": "offer (passive: be offered)"
+    },
+    {
+      "form": "ἀνενεγκεῖν",
+      "lemma": "ἀναφέρω",
+      "gloss": "bear; offer up"
     },
     {
       "form": "ἁμαρτίας",
-      "gloss": "sin",
-      "lemma": "ἁμαρτία"
+      "lemma": "ἁμαρτία",
+      "gloss": "sin"
     },
     {
       "form": "ὀφθήσεται",
-      "gloss": "to appear",
-      "lemma": "ὁράω"
+      "lemma": "ὁράω",
+      "gloss": "appear (passive of see)"
     },
     {
-      "form": "ἁμαρτίαν",
-      "gloss": "sin",
-      "lemma": "ἁμαρτία"
+      "form": "ἐποίησεν",
+      "lemma": "ποιέω",
+      "gloss": "do, commit"
     },
     {
       "form": "δόλος",
-      "gloss": "deceit",
-      "lemma": "δόλος"
+      "lemma": "δόλος",
+      "gloss": "deceit"
+    },
+    {
+      "form": "στόματι",
+      "lemma": "στόμα",
+      "gloss": "mouth"
     },
     {
       "form": "προσφέρει",
-      "gloss": "to offer",
-      "lemma": "προσφέρω"
+      "lemma": "προσφέρω",
+      "gloss": "offer"
     },
     {
-      "form": "αὐτὸν",
-      "gloss": "himself",
-      "lemma": "αὐτός"
+      "form": "ἴδε",
+      "lemma": "ὁράω",
+      "gloss": "see (imperative)"
+    },
+    {
+      "form": "ἀνήνεγκεν",
+      "lemma": "ἀναφέρω",
+      "gloss": "offer up"
     },
     {
       "form": "λαοῦ",
-      "gloss": "people",
-      "lemma": "λαός"
+      "lemma": "λαός",
+      "gloss": "people"
     },
     {
       "form": "τρώγων",
-      "gloss": "to eat",
-      "lemma": "τρώγω"
+      "lemma": "τρώγω",
+      "gloss": "eat"
     },
     {
       "form": "σάρκα",
-      "gloss": "flesh",
-      "lemma": "σάρξ"
+      "lemma": "σάρξ",
+      "gloss": "flesh"
+    },
+    {
+      "form": "αἷμα",
+      "lemma": "αἷμα",
+      "gloss": "blood"
+    },
+    {
+      "form": "ζήσεται",
+      "lemma": "ζάω",
+      "gloss": "live"
+    },
+    {
+      "form": "ἀποστείλαντα",
+      "lemma": "ἀποστέλλω",
+      "gloss": "send"
+    },
+    {
+      "form": "ἐσθίεις",
+      "lemma": "ἐσθίω",
+      "gloss": "eat"
     },
     {
       "form": "αἱρετικέ",
-      "gloss": "heretic",
-      "lemma": "αἱρετικός"
+      "lemma": "αἱρετικός",
+      "gloss": "heretic"
     },
     {
       "form": "θεότητα",
-      "gloss": "divinity",
-      "lemma": "θεότητα"
+      "lemma": "θεότης",
+      "gloss": "divinity"
     },
     {
       "form": "ἀνθρωπότητα",
-      "gloss": "humanity",
-      "lemma": "ἀνθρωπότητα"
+      "lemma": "ἀνθρωπότης",
+      "gloss": "humanity"
+    },
+    {
+      "form": "πίστει",
+      "lemma": "πίστις",
+      "gloss": "faith"
+    },
+    {
+      "form": "μεταλαμβάνω",
+      "lemma": "μεταλαμβάνω",
+      "gloss": "receive, partake of"
+    },
+    {
+      "form": "ζωοποιοῦ",
+      "lemma": "ζωοποιός",
+      "gloss": "life-giving"
+    },
+    {
+      "form": "ζωοποιοῦσαν",
+      "lemma": "ζωοποιέω",
+      "gloss": "give life"
+    },
+    {
+      "form": "Σωτὴρ",
+      "lemma": "σωτήρ",
+      "gloss": "Savior"
+    },
+    {
+      "form": "ἄρτου",
+      "lemma": "ἄρτος",
+      "gloss": "bread"
+    },
+    {
+      "form": "γεύσωνται",
+      "lemma": "γεύομαι",
+      "gloss": "taste"
+    },
+    {
+      "form": "θανάτου",
+      "lemma": "θάνατος",
+      "gloss": "death"
     }
   ],
-  "pass_a_gloss": "Christ was offered once to bear the sins of many, and he will appear a second time without sin; he did not commit sin, and there was no deceit in his mouth; he offers himself for us, not for himself, but for the people; the heretic is asked what he eats, the divinity or the humanity, for Christ said 'he who eats my flesh' not 'my divinity'\nand drinking my blood\nThe eating my the flesh\nhe will live through\nover the people",
+  "pass_a_gloss": "[CYRIL, continuing Hebrews 9:28 from the previous section] once having been brought forward (προσενεχθείς) for the carrying up of the sins of many, out of a second [time] without sin will be seen. And again: Sin he did not do, and deceit was not present in the mouth of him; and look, he himself brings himself forward on behalf of us; see (ἴδε) therefore, not on behalf of himself did he carry himself up, but on behalf of the people. [NESTORIUS] Of him saying: The one chewing (τρώγων) of me the flesh, and drinking of me the blood, will live through me, according as I live on account of (διὰ τόν) the one having sent me, Father. Whom then are you eating, heretic? The divinity (θεότητα), or the humanity (ἀνθρωπότητα)? For not did the Christ say, The one chewing of me the divinity, but, The flesh. [CYRIL] I on my part by faith partake (μεταλαμβάνω) of the of the life-making Word life-making flesh; whence the Savior declared: The ones eating out of this bread by no means will taste of death into the age; the ones [the text breaks off]",
   "pass_b_english": [
-    "Having been offered once to bear the sins of many, he will appear a second time apart from sin. And again: 'He did not commit sin, and there was no deceit in his mouth'; and behold, he offers himself for us; indeed, he did not offer himself for himself, but for the people.",
-    "While he says, 'He who eats my flesh and drinks my blood will live through me, just as I live through the Father who sent me' (John 6:54-56), what then do you eat, heretic: the divinity or the humanity? For Christ did not say, 'He who eats my divinity,' but, 'the flesh' (John 6:51).",
-    "I myself receive by faith the flesh of the life-giving Word which gives life; therefore the Savior said, 'Those who eat from this bread will never taste death for eternity' (John 6:51); those who…"
+    "'…having been offered once to bear the sins of many, will appear a second time, apart from sin' (Hebrews 9:28). And again: 'He committed no sin, and there was no deceit in his mouth' (1 Peter 2:22). And look, he himself offers himself for us. See, then: he did not offer himself up for himself, but for the people.",
+    "Nestorius says: Since he says, 'Whoever eats my flesh and drinks my blood will live through me, just as I live because of the Father who sent me' (John 6:56-57), what then do you eat, heretic? The divinity, or the humanity? For Christ did not say, 'Whoever eats my divinity,' but 'the flesh.'",
+    "Cyril says: For my part, I receive by faith the life-giving flesh of the life-giving Word. Hence the Savior said, 'Those who eat of this bread will never taste death' (John 6:50-51; 8:52). Those who…"
   ],
   "source_text": "\nαπαξ προσενεχθεὶς εἰς τὸ πολλῶν ἀνενεγκεῖν ἁμαρτίας, ἐκ δευτέρου χωρὶς ἁμαρτίας\nὀφθήσεται. Καὶ πάλιν· ̔Αμαρτίαν οὐκ ἐποίησεν, καὶ δόλος οὐχ ὑπῆρχεν ἐν τῷ στόματι\nαὐτοῦ· καὶ ἰδοὺ αὐτὸς ἑαυτὸν προσφέρει ὑπὲρ ἡμῶν· ιδε ουν οὐχ ὑπὲρ ἑαυτοῦ\nἀνήνεγκεν αὑτὸν, ἀλλ' ὑπὲρ τοῦ λαοῦ. {ΝΕΣΤ.} Αὐτοῦ λέγοντος· ̔Ο τρώγων μου τὴν\nσάρκα, καὶ πίνων μου τὸ αιμα, ζήσεται δι' ἐμοῦ, καθὼς ἐγὼ ζῶ διὰ τὸν ἀποστείλαντά\nμε Πατέρα. 76.253 Τίνα ουν ἐσθίεις, αἱρετικέ; τὴν θεότητα, η τὴν ἀνθρωπότητα; Οὐκ\nειπε γὰρ ὁ Χριστὸς, ̔Ο τρώγων μου τὴν θεότητα, ἀλλὰ, Τὴν σάρκα. {ΚΥΡ.} ̓Εγὼ μὲν\nπίστει μεταλαμβάνω τὴν τοῦ ζωοποιοῦ Λόγου ζωοποιοῦσαν σάρκα· οθεν ὁ Σωτὴρ\nεφη· Οἱ ἐσθίοντες ἐκ τούτου τοῦ αρτου, οὐ μὴ γεύσωνται θανάτου εἰς τὸν αἰῶνα· οἱ\n",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+nvidia/nemotron-3-super-120b-a12b",
+  "reviewer": "claude (Wave A review, clause by clause against the Greek)",
   "draft_agent": "overnight-mini-cf",
   "draft_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:nvidia/nemotron-3-super-120b-a12b+rev:@cf/zai-org/glm-4.7-flash+rev:@cf/google/gemma-4-26b-a4b-it+rev:nvidia/nemotron-3-super-120b-a12b+rev:@cf/google/gemma-4-26b-a4b-it",
   "drafted_at": "2026-10-01T08:12:28.781089+00:00",
@@ -171,8 +290,20 @@
       "at": "2026-10-01T08:12:28.786807+00:00",
       "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261001T081127250651Z-cyril-alexandria-dialogus-nestorio--dial-rem-close/summary.json",
       "notes_addressed": 1
+    },
+    {
+      "model": "claude",
+      "agent": "claude-waveA-cleanup",
+      "at": "2026-10-24",
+      "from_receipt": "/Users/stephansmac/SaneApps/websites/fathers.saneapps.com/outputs/waveA-20261023/cyril-alexandria-dialogus-nestorio/rv0.json",
+      "notes_addressed": 1
     }
   ],
   "ai_crosscheck_at": "2026-10-01T08:12:57.005850+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20261001T081229587720Z-cyril-alexandria-dialogus-nestorio--dial-rem-close/summary.json"
+  "ai_crosscheck_receipt": "outputs/ai-promote/20261001T081229587720Z-cyril-alexandria-dialogus-nestorio--dial-rem-close/summary.json",
+  "review_notes": [
+    "Reviewer rv0 retranslation applied to the English: the {ΝΕΣΤ.} and {ΚΥΡ.} speaker labels restored, ἴδε οὖν 'See, then', διὰ τὸν Πατέρα 'because of the Father', citations Hebrews 9:28, 1 Peter 2:22, John 6:56-57 and John 6:50-51; 8:52.",
+    "Cleanup 2026-10-24: pass_b_english set to the current English; choices, lemmas and bible_refs rewritten to match it (the old bible_refs held a template entry and John 6:51; the old lemmas had invalid lemma forms προσενέχω, θεότητα, ἀνθρωπότητα); Pass A rewritten as a literal English sense gloss.",
+    "Speaker labels checked: Cyril (continuing), Nestorius, Cyril. Negations kept: 'committed no sin', 'no deceit', 'did not offer himself up for himself', 'did not say', 'never taste death'."
+  ]
 }

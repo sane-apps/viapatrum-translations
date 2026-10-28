@@ -1,43 +1,72 @@
 {
   "anf_compare": {
-    "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "status": "no_pd_reference_used",
+    "notes": "No published English was consulted; translated from the PG 70 Greek only."
   },
   "apparatus": [],
   "bible_refs": [
     {
-      "display": "Ezekiel",
-      "method": "prophesied by",
-      "note": "reference to Ezekiel's prophecy"
+      "display": "Ezekiel 34:18",
+      "method": "wording_or_map",
+      "note": "The trampled pasture and muddied water take up LXX Ezekiel 34:18 (τὰ κατάλοιπα τῆς νομῆς ὑμῶν κατεπατεῖτε ... τὸ λοιπὸν τοῖς ποσὶν ὑμῶν ἐταράσσετε); Cyril uses κατεπάτουν and συνετάραττον."
+    },
+    {
+      "display": "Ezekiel 34:23",
+      "method": "wording",
+      "note": "Lemma Καὶ ἀναστήσω ἐπ' αὐτοὺς ποιμένα ἕνα ... τὸν δοῦλόν μου Δαβίδ = LXX Ezekiel 34:23 (ποιμένα ἕνα καὶ ποιμανεῖ αὐτούς, τὸν δοῦλόν μου Δαυιδ); the catena's ellipsis stands for the omitted words."
     }
   ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "english": "having subtle and transparent",
+      "term": "οὐκ ἀνικάνως ἔχουσαν ποδηγεῖν εἰς ἀλήθειαν",
+      "english": "which was well able to guide them to the truth",
+      "why": "Litotes: 'not unable' means 'well able'. The earlier draft reversed the sense.",
       "rejected": [
-        "having subtle and visible"
-      ],
-      "term": "διειδὲς ἔχοντες",
-      "why": "adjective describing the water"
+        "was not unconquerably able to guide to truth"
+      ]
     },
     {
-      "english": "a thick and earthly",
+      "term": "παχεῖάν τινα καὶ ὑλώδη καὶ γαιώδους ἀκαθαρσίας ἀνάπλεων παρατιθέντες διδασκαλίαν",
+      "english": "setting a thick, material teaching, full of earthly impurity, before",
+      "why": "The adjectives agree with διδασκαλίαν, the object of παρατιθέντες ('setting before'); impurity is what the teaching is full of, not the object.",
       "rejected": [
-        "a thick and material"
-      ],
-      "term": "παχεῖάν τινα",
-      "why": "adjective describing the impurity"
+        "setting forth a thick and earthly impurity"
+      ]
+    },
+    {
+      "term": "τοῖς ἐν τάξει προβάτων ἀκολουθοῦσιν αὐτοῖς ὡς κριοῖς",
+      "english": "those who followed them as sheep follow rams",
+      "why": "The dative participle names those who receive the teaching; ἐν τάξει προβάτων is 'in the place of sheep', and the Levites are the rams.",
+      "rejected": [
+        "teaching the sheep to follow them like rams"
+      ]
+    },
+    {
+      "term": "ἀταλαίπωρον ἰδεῖν",
+      "english": "is easy to see",
+      "why": "ἀταλαίπωρος is 'without trouble'; with ἰδεῖν it means plain or easy to see.",
+      "rejected": [
+        "a thing to be seen without weariness"
+      ]
+    },
+    {
+      "term": "ὁ Θεὸς καὶ Πατήρ",
+      "english": "God the Father",
+      "why": "The draft had dropped 'the Father'.",
+      "rejected": [
+        "God"
+      ]
     }
   ],
   "confidence": "machine_draft",
   "edition": {
     "id": "cyril-alexandria-fragmenta-ezechielem",
     "language": "grc",
-    "locus": "Frag remainder close",
+    "locus": "Frag remainder, close ('and fine, clear water' to 'already been done')",
     "path": "translations/fe_frag_rem_source.json",
     "sha256": "57447b05ac2e25e2fe23d5175875e73e826121ae7728b6195de900db64d0355f",
     "checks": []
@@ -45,74 +74,125 @@
   "excerpt_id": "frag-rem-close",
   "lemmas": [
     {
+      "form": "λεπτόν",
+      "gloss": "fine",
+      "lemma": "λεπτός"
+    },
+    {
       "form": "διειδὲς",
-      "gloss": "transparent",
+      "gloss": "transparent, clear",
       "lemma": "διειδής"
     },
     {
-      "form": "παίδευσιν",
-      "gloss": "education",
-      "lemma": "παιδεία"
+      "form": "ὕδωρ",
+      "gloss": "water",
+      "lemma": "ὕδωρ"
+    },
+    {
+      "form": "παίδευσιν",
+      "gloss": "instruction",
+      "lemma": "παίδευσις"
+    },
+    {
+      "form": "ἀνικάνως",
+      "gloss": "unable (with οὐκ: well able)",
+      "lemma": "ἀνικάνως"
     },
     {
       "form": "ποδηγεῖν",
       "gloss": "to guide",
-      "lemma": "ποδηγεώ"
+      "lemma": "ποδηγέω"
     },
     {
-      "form": "αλήθειαν",
+      "form": "ἀλήθειαν",
       "gloss": "truth",
-      "lemma": "αλήθεια"
+      "lemma": "ἀλήθεια"
     },
     {
-      "form": "νομήν",
+      "form": "κατεπάτουν",
+      "gloss": "trample",
+      "lemma": "καταπατέω"
+    },
+    {
+      "form": "νομήν",
       "gloss": "pasture",
-      "lemma": "νόμη"
+      "lemma": "νομή"
     },
     {
-      "form": "ὑλώδη",
-      "gloss": "earthly",
+      "form": "συνετάραττον",
+      "gloss": "stir up, muddy",
+      "lemma": "συνταράσσω"
+    },
+    {
+      "form": "ὑλώδη",
+      "gloss": "material",
       "lemma": "ὑλώδης"
     },
     {
-      "form": "γαιώδους",
+      "form": "γαιώδους",
       "gloss": "earthy",
       "lemma": "γαιώδης"
     },
     {
-      "form": "ἀκαθαρσίας",
+      "form": "ἀκαθαρσίας",
       "gloss": "impurity",
       "lemma": "ἀκαθαρσία"
     },
     {
-      "form": "ποιμένα",
+      "form": "παρατιθέντες",
+      "gloss": "set before",
+      "lemma": "παρατίθημι"
+    },
+    {
+      "form": "διδασκαλίαν",
+      "gloss": "teaching",
+      "lemma": "διδασκαλία"
+    },
+    {
+      "form": "κριοῖς",
+      "gloss": "ram",
+      "lemma": "κριός"
+    },
+    {
+      "form": "ποιμένα",
       "gloss": "shepherd",
       "lemma": "ποιμήν"
     },
     {
-      "form": "δοῦλόν",
+      "form": "δοῦλόν",
       "gloss": "servant",
       "lemma": "δοῦλος"
     },
     {
-      "form": "προεφήτευσε",
+      "form": "ἀταλαίπωρον",
+      "gloss": "easy, without trouble",
+      "lemma": "ἀταλαίπωρος"
+    },
+    {
+      "form": "προτετελευτηκότος",
+      "gloss": "die before",
+      "lemma": "προτελευτάω"
+    },
+    {
+      "form": "προεφήτευσε",
       "gloss": "prophesied",
       "lemma": "προφητεύω"
     },
     {
-      "form": "ὑπόσχεσιν",
+      "form": "ὑπόσχεσιν",
       "gloss": "promise",
       "lemma": "ὑπόσχεσις"
     }
   ],
-  "pass_a_gloss": "Having subtle and transparent water, the education through Moses is able to guide to truth, but they trampled and disturbed it, setting forth a thick and earthly impurity, teaching the sheep to follow them like rams, and God will raise a shepherd, my servant David, to guide them, as prophesied by Ezekiel, with promises to be fulfilled in due time, not already accomplished\nthey trampled in some manner the pasture\nnot unconquerably having the ability to guide into truth\nand the water\nwretched to see\nnot being able to lead without difficulty to truth\nnot being able to lead without difficulty\nnot insufficiently\nforetold indeed the blessed Ezekiel\nnot in an unconquered manner",
+  "pass_a_gloss": "[continuing: those of the blood of Levi, having as it were a most beautiful pasture] and fine and transparent (διειδές) having water, the instruction (παίδευσιν) through Moses, not unable (οὐκ ἀνικάνως) to guide into truth, they trampled in a way the pasture; and they stirred up also the water, a thick and material (ὑλώδη) and of earthy impurity full teaching (διδασκαλίαν) setting before (παρατιθέντες) those in the rank of sheep following them as rams. Lemma: and I will raise up over them one shepherd ... my servant David [Ezekiel 34:23]. [Cat. f. 225] That he says such things about Christ, untroublesome (ἀταλαίπωρον) to see; for having died before already the blessed David and in tombs already lying, prophesied on the one hand the blessed Ezekiel. And was making the promise (ὑπόσχεσιν) the God and Father as going to be according to times, and not as already fulfilled; for on things going to be the promises, no longer on things already done.",
   "pass_b_english": [
-    "Having subtle and transparent water, the education through Moses was not unconquerably able to guide to truth, yet they trampled the pasture in some manner and disturbed the water, setting forth a thick and earthly impurity, teaching the sheep to follow them like rams. And I will raise up for them one shepherd … my servant David. That he says such things concerning Christ is a thing to be seen without weariness; for the blessed David had already passed away and was already lying in the tombs, and the blessed Ezekiel had foretold indeed. God was performing the promise as something to be fulfilled in due time, and not as something already accomplished; for promises belong to those things which are to be fulfilled, not to those which have already been done."
+    "…and fine, clear water, namely the instruction given through Moses, which was well able to guide them to the truth, in a way trampled the pasture and muddied the water as well (Ezekiel 34:18), setting a thick, material teaching, full of earthly impurity, before those who followed them as sheep follow rams.",
+    "“And I will raise up over them one shepherd … my servant David” (Ezekiel 34:23). That he says such things about Christ is easy to see. For when the blessed David had already died and was already lying in the tomb, the blessed Ezekiel prophesied; and God the Father made the promise as one that would come to pass in due time, not as one already fulfilled. For promises concern what is yet to be, not what has already been done."
   ],
   "source_text": "\nλεπτὸν δὲ καὶ διειδὲς ἔχοντες ὕδωρ τὴν διὰ Μωϋσέως παίδευσιν οὐκ ἀνικάνως\nἔχουσαν ποδηγεῖν εἰς ἀλήθειαν, κατεπάτουν τρόπον τινὰ τὴν νομήν· συνετάραττον\nδὲ καὶ τὸ ὕδωρ, παχεῖάν τινα καὶ ὑλώδη καὶ γαιώδους ἀκαθαρσίας ἀνάπλεων\nπαρατιθέντες διδασκαλίαν τοῖς ἐν τάξει προβάτων ἀκολουθοῦσιν αὐτοῖς ὡς κριοῖς.\nΚαὶ ἀναστήσω ἐπ' αὐτοὺς ποιμένα ἕνα ... τὸν δοῦλόν μου ∆αβίδ. Cat. f. 225.) Ὅτι δὲ\nπερὶ Χριστοῦ τὰ τοιαῦτά φησιν, ἀταλαίπωρον ἰδεῖν· προτετελευτηκότος γὰρ ἤδη τοῦ\nμακαρίου ∆αβὶδ καὶ ἐν τάφοις ἤδη κειμένου, προεφήτευσε μὲν ὁ μακάριος Ἰεζεκιήλ.\nἘποιεῖτο δὲ τὴν ὑπόσχεσιν ὁ Θεὸς καὶ Πατὴρ ὡς ἐσομένην κατὰ καιροὺς, καὶ οὐχ ὡς\nἤδη τετελεσμένην· ἐπὶ γὰρ τοῖς ἐσομένοις αἱ ὑποσχέσεις, οὐκέτι τοῖς ἤδη\nπεπραγμένοις.\n\n1\n",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash",
+  "reviewer": "claude (Wave A review, clause by clause against the Greek)",
   "draft_agent": "overnight-mini-nv",
   "draft_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:nvidia/nemotron-3-super-120b-a12b+rev:nvidia/nemotron-3-super-120b-a12b+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it+rev:nvidia/nemotron-3-super-120b-a12b",
   "drafted_at": "2026-10-02T05:24:47.345998+00:00",
@@ -151,8 +231,22 @@
       "at": "2026-10-02T05:24:47.363917+00:00",
       "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261002T034613501127Z-cyril-alexandria-fragmenta-ezechielem--frag-rem-close/summary.json",
       "notes_addressed": 1
+    },
+    {
+      "model": "claude",
+      "agent": "claude-waveA-review",
+      "at": "2026-10-24",
+      "from_receipt": "/Users/stephansmac/SaneApps/websites/fathers.saneapps.com/outputs/waveA-20261023/cyril-alexandria-fragmenta-ezechielem/rv0.json",
+      "notes_addressed": 8
     }
   ],
   "ai_crosscheck_at": "2026-10-02T05:25:03.616874+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20261002T052448353718Z-cyril-alexandria-fragmenta-ezechielem--frag-rem-close/summary.json"
+  "ai_crosscheck_receipt": "outputs/ai-promote/20261002T052448353718Z-cyril-alexandria-fragmenta-ezechielem--frag-rem-close/summary.json",
+  "review_notes": [
+    "The earlier machine draft is replaced by the reviewed English from rv0; it had reversed the litotes οὐκ ἀνικάνως, made the instruction the subject, dropped the teaching (διδασκαλίαν), misread the sheep-and-rams clause and ἀταλαίπωρον, calqued προεφήτευσε μέν, and lost 'the Father'.",
+    "The lemma is now quoted and cited (Ezekiel 34:23), and the trampled pasture and muddied water are cited to Ezekiel 34:18; the rams may echo Ezekiel 34:17 but are left uncited.",
+    "bible_refs, choices, lemmas and Pass A rewritten to match; the old lemma tags παιδεία, ποδηγεώ and νόμη corrected to παίδευσις, ποδηγέω and νομή.",
+    "Translator notes on the English row replaced; the old note about the previous draft was worksheet text and its gloss was wrong.",
+    "The trailing '1' in the source is a page number and is not translated."
+  ]
 }

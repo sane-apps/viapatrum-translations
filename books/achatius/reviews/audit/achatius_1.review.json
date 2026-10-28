@@ -1,0 +1,106 @@
+{
+  "packet_id": "9a759280028316629550b7d6859bd788635e6e46410b15694fbe8a6c51a3d329",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "ba25d1d4ee3fbf35d08318d8b4bbdf254fa2b579b143acec91d7f5a287e43c2d",
+            "english_sha256": "b6518d2589fd039de0cc9eff77ca5573c901e8176b85c7a3281d31af141f93b2",
+            "response_model": "muse",
+            "response_id": "20261019T065500_muse-gloss-1_0fac8a85",
+            "started_at": "2026-10-19T10:55:01+00:00",
+            "finished_at": "2026-10-19T10:55:37+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "ba25d1d4ee3fbf35d08318d8b4bbdf254fa2b579b143acec91d7f5a287e43c2d",
+            "english_sha256": "b6518d2589fd039de0cc9eff77ca5573c901e8176b85c7a3281d31af141f93b2",
+            "response_model": "muse",
+            "response_id": "20261019T065538_muse-compare-1_73237ee7",
+            "started_at": "2026-10-19T10:55:39+00:00",
+            "finished_at": "2026-10-19T10:56:17+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "assidua ac iugis oratio pro imperatore: constant prayer for the emperor",
+        "source": "Cf. 1 Tim 2:2; Tertullian Apol. 30-32",
+        "sense_relied_on": "Christians out-pray all for the emperor’s welfare",
+        "section": "1"
+      },
+      {
+        "item": "sacrificium solvere/exsolvere: pay/render the sacrifice as a due",
+        "source": "Lewis & Short s.v. solvo II",
+        "sense_relied_on": "sacrifice is a due neither God demands nor we owe",
+        "section": "1"
+      },
+      {
+        "item": "obtestor: call to witness, beseech",
+        "source": "Lewis & Short s.v. obtestor",
+        "sense_relied_on": "I call my Lord to witness for the king’s safety",
+        "section": "1"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "1",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'quis enim homini sacra persoluat?' matches English 'For who would pay sacred honors to a man?' with would matching blind gloss would pay; no added/dropped clause or flipped negation/agency/modality\nSource quote (anchor from packet): «I. Quotiescumque servorum dei gloriosa facta memoramus, illi»\nEnglish quote (anchor from packet): «Whenever we recount the glorious acts of the servants of God»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T065538_muse-compare-1_73237ee7"
+        }
+      ]
+    }
+  ]
+}

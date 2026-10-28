@@ -1,0 +1,100 @@
+{
+  "packet_id": "baf1e1ea676ea31b10cfa0d09a55edc4ba2056dd9ddba3c05f0b0b70c89622f3",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "f174e8f2ce3bc63b815fa96e8c58f6ee681830a22b38d64597083a0432627e6a",
+            "english_sha256": "3a1f31cca5221f61c55774b1db968ee4047ec7aede284f31a78ab58044bd8a99",
+            "response_model": "muse",
+            "response_id": "20261018T230548_muse-gloss-5_f8ce16a9",
+            "started_at": "2026-10-19T03:05:50+00:00",
+            "finished_at": "2026-10-19T03:06:29+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "f174e8f2ce3bc63b815fa96e8c58f6ee681830a22b38d64597083a0432627e6a",
+            "english_sha256": "3a1f31cca5221f61c55774b1db968ee4047ec7aede284f31a78ab58044bd8a99",
+            "response_model": "muse",
+            "response_id": "20261018T230630_muse-compare-5_53101a97",
+            "started_at": "2026-10-19T03:06:32+00:00",
+            "finished_at": "2026-10-19T03:07:00+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "Πολλὰ ἐάσας σε ... ἤγαγόν σε (agency adjudicated)",
+        "source": "Repair adjudication 2026-10-18",
+        "sense_relied_on": "speaker-continued 1sg: the proconsul let Carpus babble and thereby led him into the blasphemy charge; no reflexive invented",
+        "section": "5"
+      },
+      {
+        "item": "κρεμασθέντα ξέεσθαι; βοώμενος (flagged)",
+        "source": "LSJ s.v. κρεμάννυμι; ξέω",
+        "sense_relied_on": "hung up and scraped; 'crying out' left visible for the blind critic",
+        "section": "5"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "5",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"Ὁ ἀνθύπατος εἶπεν· Πολλὰ ἐάσας σε φλυαρῆσαι εἰς βλασφημίαν\" matches English \"I have let you chatter on at length, and led you into reviling the gods and the Augusti\"; no added/dropped/flipped meaning\nSource quote (anchor from packet): «Ὁ ἀνθύπατος εἶπεν· Πολλὰ ἐάσας σε φλυαρῆσαι εἰς βλασφημίαν ἤ»\nEnglish quote (anchor from packet): «The proconsul said, “I have let you chatter on at length, an»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T230630_muse-compare-5_53101a97"
+        }
+      ]
+    }
+  ]
+}

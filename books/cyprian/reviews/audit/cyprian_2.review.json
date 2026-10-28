@@ -1,0 +1,100 @@
+{
+  "packet_id": "005bf5d4b302b3378e86166040f8e317355473210ef2da45b5d977cd497c3fd8",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "2",
+            "source_sha256": "699e67ae28222ea5588a1fd389c5eb0f3ca2593d9dcb8ccc38c938d6c2a9d0d9",
+            "english_sha256": "b81db66910cd05d83c53f943c27ff576e7a660398588ed50a0246b589affead0",
+            "response_model": "muse",
+            "response_id": "20261019T074246_muse-gloss-2_e5ee714e",
+            "started_at": "2026-10-19T11:42:46+00:00",
+            "finished_at": "2026-10-19T11:43:26+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "2",
+            "source_sha256": "699e67ae28222ea5588a1fd389c5eb0f3ca2593d9dcb8ccc38c938d6c2a9d0d9",
+            "english_sha256": "b81db66910cd05d83c53f943c27ff576e7a660398588ed50a0246b589affead0",
+            "response_model": "muse",
+            "response_id": "20261019T074328_muse-compare-2_086cae29",
+            "started_at": "2026-10-19T11:43:29+00:00",
+            "finished_at": "2026-10-19T11:44:03+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "delatores non esse; disciplina vs ultro offerre",
+        "source": "Trajanic precedent; Cyprianic discipline",
+        "sense_relied_on": "your own laws bar informers; our discipline bars volunteering",
+        "section": "2"
+      },
+      {
+        "item": "conciliabula; coemeteria; capite plectetur",
+        "source": "Valerian persecution measures",
+        "sense_relied_on": "no meetings, no cemeteries, on pain of death",
+        "section": "2"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "2",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: quote at least 25 characters of the source and at least 25 characters of the English, exactly as written: source 'Paternus proconsul dixit: Non solum de episcopis , verum etiam de presbyteris mihi scribere dignati sunt' matches English 'They have deigned to write to me not only about the bishops, but also about the presbyters, and so I wish to learn from you' with agency, negation, and modality preserved throughout, including final 'Fac quod tibi praeceptum est' rendered as 'Do what has been commanded to you.'\nSource quote (anchor from packet): «Paternus proconsul dixit: Non solum de episcopis , verum eti»\nEnglish quote (anchor from packet): «The proconsul Paternus said, They have deigned to write to m»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T074328_muse-compare-2_086cae29"
+        }
+      ]
+    }
+  ]
+}

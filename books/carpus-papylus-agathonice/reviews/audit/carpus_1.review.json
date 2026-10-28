@@ -1,0 +1,94 @@
+{
+  "packet_id": "3dd34d3a9c7351062f1551b02ec36f2356acc7feb83e7ee4567df00bbe65de72",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "cec92b15d1bfaf0332b2d1f56537214e609f98e76c7ed0fc317a8ac389f86e08",
+            "english_sha256": "b0a31ab67538d993a78b954f4e01d4e9dd7103608c4f8176622e403177e3c608",
+            "response_model": "muse",
+            "response_id": "20261018T224829_muse-gloss-1_99ba51a1",
+            "started_at": "2026-10-19T02:48:29+00:00",
+            "finished_at": "2026-10-19T02:48:54+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "cec92b15d1bfaf0332b2d1f56537214e609f98e76c7ed0fc317a8ac389f86e08",
+            "english_sha256": "b0a31ab67538d993a78b954f4e01d4e9dd7103608c4f8176622e403177e3c608",
+            "response_model": "muse",
+            "response_id": "20261018T224855_muse-compare-1_323492a9",
+            "started_at": "2026-10-19T02:48:57+00:00",
+            "finished_at": "2026-10-19T02:49:21+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "Τί καλεῖ (scan: Τίς καλῇ)",
+        "source": "Contextual dialogue + grammar",
+        "sense_relied_on": "'what are you called' — the scan's Τίς καλῇ is ungrammatical; reading flagged for critic adjudication.",
+        "section": "1"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "1",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Ἐνδημοῦντος τοῦ ἀνθυπάτου ἐν Περγάμῳ προσήχθησαν αὐτῷ οἱ μακάριοι Κάρπος' matches English 'While the proconsul was holding court at Pergamum, the blessed Carpus and Papylus'; source 'Τὸ πρῶτον καὶ ἐξαίρετον ὄνομα Χριστιανός' matches English 'My first and choicest name is Christian'\nSource quote (anchor from packet): «Ἐνδημοῦντος τοῦ ἀνθυπάτου ἐν Περγάμῳ προσήχθησαν αὐτῷ οἱ μακ»\nEnglish quote (anchor from packet): «While the proconsul was holding court at Pergamum, the bless»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T224855_muse-compare-1_323492a9"
+        }
+      ]
+    }
+  ]
+}

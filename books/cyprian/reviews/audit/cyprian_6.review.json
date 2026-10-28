@@ -1,0 +1,106 @@
+{
+  "packet_id": "f3e5226a56ae73bb9bd87f2d0277931dbfd07f3e48950fe32d8e7da5f1fb2def",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "6",
+            "source_sha256": "10ed5a2d81d915c2291ea04ea4edbc0fd589a5c39184726c5fb7ee01bd93a5aa",
+            "english_sha256": "0e46fabc0df7062553cf39f26753809111bb41f001b216b36e9adc05cc91263f",
+            "response_model": "muse",
+            "response_id": "20261019T075311_muse-gloss-6_fd5df4b0",
+            "started_at": "2026-10-19T11:53:12+00:00",
+            "finished_at": "2026-10-19T11:53:45+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "6",
+            "source_sha256": "10ed5a2d81d915c2291ea04ea4edbc0fd589a5c39184726c5fb7ee01bd93a5aa",
+            "english_sha256": "0e46fabc0df7062553cf39f26753809111bb41f001b216b36e9adc05cc91263f",
+            "response_model": "muse",
+            "response_id": "20261019T075345_muse-compare-6_39bf8c91",
+            "started_at": "2026-10-19T11:53:47+00:00",
+            "finished_at": "2026-10-19T11:54:13+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "lacerna byrrus; dalmatica; linea: cloak, dalmatic, linen tunic",
+        "source": "Late-Roman dress",
+        "sense_relied_on": "stripping in order: cloak, dalmatic to deacons, waiting in linen",
+        "section": "6"
+      },
+      {
+        "item": "spiculator; viginti quinque aurei",
+        "source": "Executioner fee",
+        "sense_relied_on": "25 gold pieces ordered for the headsman",
+        "section": "6"
+      },
+      {
+        "item": "Macrobius Candidianus; via Mappaliensis",
+        "source": "Carthaginian topography",
+        "sense_relied_on": "night burial with candles at the procurator grounds",
+        "section": "6"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "6",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'post paucos autem dies Galerius Maximus proconsul decessit.' matches English 'A few days afterward Galerius Maximus the proconsul died.'; also source 'in agrum Sexti productus est et ibi se lacerna byrro exspoliavit' matches English 'was brought into the field of Sextus, and there he stripped off his hooded cloak'\nSource quote (anchor from packet): «V. Post hanc vero sententiam turba fratrum dicebat: Et nos c»\nEnglish quote (anchor from packet): «After this sentence was pronounced, the multitude of the bre»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T075345_muse-compare-6_39bf8c91"
+        }
+      ]
+    }
+  ]
+}
