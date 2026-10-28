@@ -21,7 +21,8 @@ PLACEHOLDER = re.compile(
     r"\b(?:TODO|TBD|FIXME|YYYY)\b|\[n\d+\]|\blemma-led\s+open\b|"
     r"\brem\s+(?:early|mid|closeout)\s*:|\blemma and argument toward the thesis\b|"
     r"\b(?:see translations/|see working file|full cleaned source)\b|"
-    r"\b(?:scaffold|placeholder|translation pending)\b",
+    r"\bscaffold\s+(?:reading|text|draft|rows?|sections?)\b|"
+    r"\b(?:placeholder|translation pending)\b",
     re.I,
 )
 CONTAMINATION = re.compile(

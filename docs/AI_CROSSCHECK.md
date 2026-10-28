@@ -84,6 +84,83 @@ FATHERS_GEMINI_PREP=1 python3 scripts/overnight_quota.py --lanes both --agent ov
 
 Config: `docs/LLM_LANE_CONFIG.json` → `lanes.gemini` (`enabled` defaults **false**). Project note: store `docs/gemini-prep-lane.md`.
 
+## Muse-only lane: drafter + blind-gloss critic + research (owner 2026-10-18)
+
+Owner decision: a Muse-only lane may promote its own sections. It
+replaces the two-family rule **for Muse drafts only**; CF/NV drafts keep
+checker A + checker B above. The lane has three legs: the drafter, a
+blind-gloss critic (same model, fresh context), and recorded research
+evidence. A Muse-only receipt must say so — never claim two model
+families for it.
+
+**When it runs.** Run the critic on a hard section. Skip it on an easy one.
+
+- Hard: any one of — source over ~120 words or more than one paragraph;
+  a lacuna, gap, damaged OCR, or supplied stretch; chunked edges; dense
+  negation, agency, or modality; a load-bearing doctrinal term in dispute;
+  two or more Scripture quotations or allusions, or disputed numbering;
+  a prior checker fail or repair on this section.
+- Easy (skip): one short continuous paragraph, none of the above. The
+  deterministic gates and the two family checkers still run.
+
+**How it runs.**
+
+1. Drafter (parent Muse) writes Pass A + lemmas + Pass B from the locked
+   source only.
+2. Critic (fresh subagent, prompt starts with the subagent preamble in
+   `~/SaneApps/infra/SaneProcess/AGENTS.md`): stage 1 receives the locked
+   source alone and writes its own clause-by-clause literal gloss, loaded
+   lemmas, Scripture guesses, and gap notes — blind to the draft. Stage 2
+   receives the draft and flags each defect by quoting the Greek, the
+   English, and its own gloss: added claim, dropped clause, flipped
+   negation/agency/modality/doctrine, wrong Scripture target, filled
+   lacuna, calque or archaic prose, or a sentence that fails read-aloud.
+   No quote, no flag. The critic never edits files.
+3. Parent adjudicates every flag against the locked source: fix it, or
+   rebut it in writing with the quoted evidence. One repair round, then
+   the section stays parked. Never vote a flag away.
+4. Research leg: any construction either agent is unsure of, and every
+   contested flag, gets a lookup **before** adjudication — LSJ or Lampe
+   for Greek, Lewis & Short or Blaise for Latin, a named grammar (Smyth,
+   Blass–Debrunner, Wallace) for syntax, the edition's own notes for
+   text questions. Record the source, the entry or locus, and the sense
+   relied on in the justification (`research` block). Model memory and
+   uncited web text are not evidence. Unresolved uncertainty fails
+   closed, as everywhere in this pipeline.
+5. Record the blind gloss, flags, adjudication, research, and a hash of
+   the exact Pass B reviewed in the justification (`muse_critic`
+   block). Any Pass B edit after that re-runs stage 2 on the changed
+   clauses.
+6. Close the critic subagent as soon as its output is captured.
+
+Promote on this lane only when: structural gate passes, critic and
+drafter agree clause by clause after adjudication, every uncertainty has
+a recorded research source, and the §3 semantic checks (identity,
+completeness, negation, agency, modality, doctrine, Scripture) pass with
+evidence.
+
+**System support (2026-10-18).** The publication gate accepts this lane:
+`pipeline/verify_translation_qa.py` recognises
+`review-provenance-muse-v1` (model id `muse`, family `muse` — family-level only, since the queue runner does not record the serving Muse version)
+with exactly two hash-bound lanes — `blind-gloss` and `compare` — plus a
+research entry with item, source, and sense relied on for every reviewed
+section. Two Muse lanes under the old v1 schema still count as one
+family and fail. Write the receipt with the adapter (research JSON is
+recorded before the review runs):
+
+```bash
+python3 scripts/muse_review.py --packet P.packet.json \
+    --receipt-out P.review.json --research research.json
+```
+
+Do not work around the gate by naming other models in a receipt.
+
+**Ordering rule (2026-10-18).** The packet's English hash covers the whole
+English row (title and notes included), so the filed receipt must be
+generated **after** the draft is promoted into the book file, against a
+fresh packet built from the promoted text. A receipt generated against a
+sandbox copy will fail hash binding even when the paragraphs match.
+
 ## Plans lanes: Muse drafts, Claude + Grok check (owner 2026-10-19)
 
 Owner: "automate that … make them self aware of usage limits in their various plans."

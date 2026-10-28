@@ -10,6 +10,7 @@ from pipeline.verify_translation_qa import (
     indexed, load_rows, make_audit_packet, reference_overlap_errors,
     validate_audit_receipt, validate_semantic_review, reviewed_section_errors,
     independent_family_count, model_family, PROVENANCE_SCHEMA,
+    MUSE_MODEL_ID, MUSE_PROVENANCE_SCHEMA,
     main as qa_main,
 )
 
@@ -31,6 +32,28 @@ def provenance(packet, lanes=((NIM, "nemotron"), (GEM, "gemini")), **call_over):
         out.append({"provider": "test", "model": model, "family": family,
                     "call_count": len(calls), "calls": calls})
     return {"schema": PROVENANCE_SCHEMA, "lanes": out}
+
+
+def muse_provenance(packet, roles=("blind-gloss", "compare"), research=True, **call_over):
+    """Muse-only provenance as scripts/muse_review.py writes it."""
+    out = []
+    for role in roles:
+        calls = [{"section": s["section"], "source_sha256": s["source_sha256"],
+                  "english_sha256": s["english_sha256"], "response_model": MUSE_MODEL_ID,
+                  "response_id": f"muse-{role}-{s['section']}",
+                  "started_at": "2026-10-18T18:00:00Z", "finished_at": "2026-10-18T18:01:00Z",
+                  "verdict": "pass", "uncertainties": [],
+                  "usage": {"prompt_tokens": 0, "completion_tokens": 0}, **call_over}
+                 for s in packet["sections"]]
+        out.append({"role": role, "provider": "muse-queue", "model": MUSE_MODEL_ID,
+                    "family": "muse", "call_count": len(calls), "calls": calls})
+    prov = {"schema": MUSE_PROVENANCE_SCHEMA, "lanes": out}
+    if research:
+        prov["research"] = [{"section": s["section"], "item": "voluntate",
+                             "source": "Test lexicon s.v. voluntas",
+                             "sense_relied_on": "by willing, not by force"}
+                            for s in packet["sections"]]
+    return prov
 
 
 class TranslationQATests(unittest.TestCase):
@@ -84,6 +107,41 @@ class TranslationQATests(unittest.TestCase):
                     "covered_source_paragraphs": list(range(1, len(s["source_text"]) + 1)),
                 } for s in packet["sections"]]}
 
+    def muse_receipt(self, packet, **prov_kw):
+        receipt = self.receipt(packet)
+        receipt["reviewer"] = "muse-only: drafter+blind-gloss-critic+research"
+        receipt["review_provenance"] = muse_provenance(packet, **prov_kw)
+        return receipt
+
+    def test_muse_only_lane_passes_and_tampering_fails(self):
+        packet = self.packet()
+        self.assertEqual(validate_audit_receipt(packet, self.muse_receipt(packet)), [])
+        self.assertEqual(model_family(MUSE_MODEL_ID), "muse")
+        # Two Muse lanes are one family: the v1 schema must still refuse them.
+        v1 = self.receipt(packet)
+        v1["review_provenance"] = provenance(packet, lanes=((MUSE_MODEL_ID, "muse"),
+                                                            (MUSE_MODEL_ID, "muse")))
+        self.assertTrue(any("two model families" in e
+                            for e in validate_audit_receipt(packet, v1)))
+        cases = {
+            "blind-gloss": dict(roles=("compare",)),
+            "compare": dict(roles=("blind-gloss",)),
+            "research": dict(research=False),
+            "hash mismatch": dict(english_sha256="0" * 64),
+            "no adjudication": dict(verdict="fail"),
+            "response/request id": dict(response_id=""),
+        }
+        for needle, kw in cases.items():
+            errors = validate_audit_receipt(packet, self.muse_receipt(packet, **kw))
+            self.assertTrue(errors, (needle, errors))
+            self.assertTrue(any(needle in e for e in errors), (needle, errors))
+        thin = self.muse_receipt(packet)
+        thin["review_provenance"]["research"][0]["sense_relied_on"] = " "
+        self.assertTrue(validate_audit_receipt(packet, thin))
+        fake = self.muse_receipt(packet)
+        fake["review_provenance"]["lanes"][0]["model"] = "muse-impostor-9"
+        self.assertTrue(validate_audit_receipt(packet, fake))
+
     def test_scaffold_empty_and_invalid_files_fail(self):
         self.write(self.english, [])
         self.assertTrue(check_excerpts(self.english))
@@ -96,6 +154,17 @@ class TranslationQATests(unittest.TestCase):
         self.assertEqual(pass_main([str(empty)]), 1)
         for text in ("Rem early: Unit 1; lemma and argument toward the thesis.",
                      "Lemma-led open — ΑΓΑΘΙΟΥ", "(Rufinus; see working file)", ""):
+            j = self.justification()
+            j["pass_b_english"] = [text]
+            self.assertTrue(check_record(j))
+
+    def test_scaffold_word_as_ordinary_vocabulary_passes(self):
+        # Perpetua V: catasta is honestly "scaffold"; the gate must only
+        # catch operational scaffold compounds, never the bare word.
+        j = self.justification()
+        j["pass_b_english"] = ["Upon that scaffold only what God wills shall come to pass."]
+        self.assertEqual(check_record(j), [])
+        for text in ("scaffold reading for review", "scaffold draft pending"):
             j = self.justification()
             j["pass_b_english"] = [text]
             self.assertTrue(check_record(j))

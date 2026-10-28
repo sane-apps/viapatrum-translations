@@ -192,6 +192,16 @@ def reviewer_model_families(reviewer: str) -> list[str]:
 # passed the free-text two-family rule either (0 of 738 on 2026-10-09), so no
 # historical approval is withdrawn.
 PROVENANCE_SCHEMA = "review-provenance-v1"
+# Muse-only lane (owner 2026-10-18): drafter + blind-gloss critic + recorded
+# research replaces the two-family rule for Muse drafts only. Its receipts
+# use a distinct schema so they can never read as two-family evidence.
+MUSE_PROVENANCE_SCHEMA = "review-provenance-muse-v1"
+# Family-level claim only. The Muse queue runner does not record which
+# Muse model served a call (its records carry model null), so receipts
+# must not stamp a version such as Wonder or Spark; the serving model
+# changes with the operator's session. Family 'muse' is the claim.
+MUSE_MODEL_ID = "muse"
+MUSE_ROLES = ("blind-gloss", "compare")
 # Prefix of every two-family failure. Downstream gates match this phrase.
 FAMILY_ERROR = "reviewer is not two model families"
 
@@ -219,6 +229,7 @@ MODEL_FAMILY = {
     "@cf/zai-org/glm-5.2": "glm",
     "@cf/zai-org/glm-4.7-flash": "glm",
     "@cf/openai/gpt-oss-20b": "gpt-oss",
+    MUSE_MODEL_ID: "muse",
 }
 MODEL_RELATED = {"mistralai/mistral-nemotron": frozenset({"mistral"})}
 
@@ -266,6 +277,95 @@ def independent_family_count(lanes) -> int:
     return len(groups)
 
 
+def muse_provenance_errors(receipt: dict, sections) -> list[str]:
+    """Muse-only lane: blind-gloss + compare Muse calls, hash-bound, plus
+    a recorded research entry for every reviewed section. Same model twice
+    is one family by design; the research leg is the second evidence leg,
+    so a missing or thin research block fails closed."""
+    prov = receipt.get("review_provenance") or {}
+    lanes = prov.get("lanes")
+    if not isinstance(lanes, list) or any(not isinstance(x, dict) for x in lanes):
+        return ["muse provenance lanes missing or malformed"]
+    roles = [lane.get("role") for lane in lanes]
+    if sorted(r for r in roles if isinstance(r, str)) != sorted(MUSE_ROLES) or len(lanes) != 2:
+        return [f"muse provenance needs exactly the lanes {MUSE_ROLES} (blind-gloss, compare), got {roles}"]
+    by_section = {s.get("section"): s for s in sections}
+    reviews = {r.get("section"): r for r in receipt.get("reviews") or [] if isinstance(r, dict)}
+    errors, per_section = [], {}
+    for lane in lanes:
+        role, model = lane.get("role"), lane.get("model")
+        if model_family(model) != "muse":
+            errors.append(f"muse lane {role}: model {model!r} is not the muse family")
+            continue
+        if lane.get("family") != "muse":
+            errors.append(f"muse lane {role}: declared family {lane.get('family')!r} is not 'muse'")
+        calls = lane.get("calls")
+        if not isinstance(calls, list) or not calls:
+            errors.append(f"muse lane {role} ({model}): no recorded calls")
+            continue
+        if lane.get("call_count") != len(calls):
+            errors.append(f"muse lane {role} ({model}): call_count does not match calls")
+        for call in calls:
+            if not isinstance(call, dict):
+                errors.append(f"muse lane {role}: call must be an object")
+                continue
+            sid = call.get("section")
+            item = by_section.get(sid)
+            if item is None:
+                errors.append(f"muse lane {role}: call for unselected section {sid!r}")
+                continue
+            if (call.get("source_sha256") != item.get("source_sha256") or
+                    call.get("english_sha256") != item.get("english_sha256")):
+                errors.append(f"{sid}: muse {role} call reviewed other text (hash mismatch)")
+                continue
+            if _response_family(call.get("response_model")) != "muse":
+                errors.append(f"{sid}: muse {role} call response model "
+                              f"{call.get('response_model')!r} is not family 'muse'")
+                continue
+            if not (call.get("response_id") or call.get("request_id")) or not call.get("finished_at"):
+                errors.append(f"{sid}: muse {role} call lacks response/request id or timestamp")
+                continue
+            if call.get("verdict") not in ("pass", "fail"):
+                errors.append(f"{sid}: muse {role} call has no recorded model verdict")
+                continue
+            if call["verdict"] != "pass" or call.get("uncertainties"):
+                adj = [a for a in (reviews.get(sid, {}).get("adjudications") or [])
+                       if isinstance(a, dict) and a.get("model") == model
+                       and str(a.get("resolution") or "").strip()]
+                if not adj:
+                    errors.append(f"{sid}: muse {role} returned {call['verdict']}"
+                                  f"{' with uncertainties' if call.get('uncertainties') else ''}"
+                                  " and no adjudication is recorded")
+                    continue
+            per_section.setdefault(sid, set()).add(role)
+    for sid in by_section:
+        missing = [r for r in MUSE_ROLES if r not in per_section.get(sid, set())]
+        if missing:
+            errors.append(f"{sid}: muse lane missing recorded {', '.join(missing)} call(s)")
+    research = prov.get("research")
+    if not isinstance(research, list) or not research:
+        errors.append("muse provenance research block missing: every section needs a recorded lookup")
+    else:
+        covered = set()
+        for entry in research:
+            if not isinstance(entry, dict):
+                errors.append("muse research entry must be an object")
+                continue
+            sid = entry.get("section")
+            sense = entry.get("sense_relied_on") or entry.get("sense")
+            if sid not in by_section:
+                errors.append(f"muse research entry for unselected section {sid!r}")
+            elif not str(entry.get("item") or "").strip() or not str(entry.get("source") or "").strip() \
+                    or not str(sense or "").strip():
+                errors.append(f"{sid}: muse research entry needs item, source and sense_relied_on")
+            else:
+                covered.add(sid)
+        for sid in by_section:
+            if sid not in covered:
+                errors.append(f"{sid}: muse research missing for this section")
+    return errors
+
+
 def provenance_family_errors(receipt: dict, sections) -> list[str]:
     """Two-family rule from structured provenance, bound to the reviewed text.
 
@@ -274,6 +374,8 @@ def provenance_family_errors(receipt: dict, sections) -> list[str]:
     call made on other text cannot stand in for this review.
     """
     prov = receipt.get("review_provenance")
+    if isinstance(prov, dict) and prov.get("schema") == MUSE_PROVENANCE_SCHEMA:
+        return muse_provenance_errors(receipt, sections)
     if not isinstance(prov, dict) or prov.get("schema") != PROVENANCE_SCHEMA:
         return ["reviewer provenance missing: two model families must come from "
                 "recorded model calls, not the free-text reviewer"]

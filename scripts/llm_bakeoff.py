@@ -377,8 +377,13 @@ def cf_call(
     api: str = "run",
     reasoning_effort: str | None = None,
     timeout: int = 120,
+    extra: dict | None = None,
 ) -> dict:
-    """Workers AI call. See docs/LLM_API_SETUP.md — Gemma/GLM thinking defaults ON."""
+    """Workers AI call. See docs/LLM_API_SETUP.md — Gemma/GLM thinking defaults ON.
+
+    extra: more body kwargs from the model's live schema (top_p, n, logprobs, response_format,
+    reasoning...), merged last. When set, the reply also carries "raw" (the full result, every
+    choice and its logprobs) so callers can score from probabilities or repeat samples."""
     refused = _spend_refused(model, messages, max_tokens)
     if refused:  # spend_guard (2026-10-16): no request leaves, broker or direct
         return {"error": refused, "ms": 0, "spend_refused": True}
@@ -406,6 +411,9 @@ def cf_call(
     # Kimi K2.6 ignores enable_thinking=false; its switch is reasoning_effort "none".
     if reasoning_effort is not None:
         payload["reasoning_effort"] = reasoning_effort
+    if extra:
+        payload.update(extra)
+    raw = (lambda r: {"raw": r}) if extra else (lambda r: {})
     if getattr(_use_batch, "on", False) and batch_route(model, api):
         _use_batch.on = False
         t0 = time.time()
@@ -423,7 +431,7 @@ def cf_call(
                 usage = result.get("usage") or {}
                 return {"content": content, "ms": int((time.time() - t0) * 1000), "batched": True,
                         "pt": usage.get("prompt_tokens") or 0, "ct": usage.get("completion_tokens") or 0,
-                        "neurons": usage.get("neurons") or 0}
+                        "neurons": usage.get("neurons") or 0, **raw(result)}
             if _cf_reasoning_only(result):
                 return {"error": TRUNCATED_REASONING, "ms": int((time.time() - t0) * 1000), "batched": True}
         if "spend guard refused" in str(out.get("error") or ""):
@@ -464,6 +472,7 @@ def cf_call(
                     "pt": usage.get("prompt_tokens") or 0,
                     "ct": usage.get("completion_tokens") or 0,
                     "neurons": usage.get("neurons") or 0,
+                    **raw(data),
                 }
             if not data.get("success"):
                 # Rate / capacity errors go straight back (no internal retry):
@@ -486,6 +495,7 @@ def cf_call(
                 "pt": usage.get("prompt_tokens") or 0,
                 "ct": usage.get("completion_tokens") or 0,
                 "neurons": usage.get("neurons") or 0,
+                **raw(result),
             }
         except urllib.error.HTTPError as e:
             if e.code == 429:
@@ -908,6 +918,7 @@ def _vendor_call_raw(
         api=prof.get("api", "run"),
         reasoning_effort=prof.get("reasoning_effort"),
         timeout=int(prof.get("timeout", 120)),
+        extra=prof.get("extra"),
     )
 
 
