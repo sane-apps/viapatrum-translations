@@ -1,0 +1,106 @@
+{
+  "packet_id": "3fd77b4d782fcb84f52ad575a37f8d51d97f0a9086b5fdd7a7e577671d5eb181",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "9",
+            "source_sha256": "8b5d5b46e958235a7a321a17d78eaebd2f051ef2cb566b2a5023d359f487409a",
+            "english_sha256": "d83955976c7fb7a25181c7798a41e2476792b968080045e7044b326c35658179",
+            "response_model": "muse",
+            "response_id": "20261019T032145_muse-gloss-9_a9cbe8be",
+            "started_at": "2026-10-19T07:21:46+00:00",
+            "finished_at": "2026-10-19T07:22:24+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "9",
+            "source_sha256": "8b5d5b46e958235a7a321a17d78eaebd2f051ef2cb566b2a5023d359f487409a",
+            "english_sha256": "d83955976c7fb7a25181c7798a41e2476792b968080045e7044b326c35658179",
+            "response_model": "muse",
+            "response_id": "20261019T032225_muse-compare-9_1e706048",
+            "started_at": "2026-10-19T07:22:25+00:00",
+            "finished_at": "2026-10-19T07:22:50+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "elogium: (criminal) charge, indictment; elogio honoratos = honored with a charge (ironic)",
+        "source": "Lewis & Short s.v. elogium",
+        "sense_relied_on": "Cirta magistrates forwarding them under formal charge",
+        "section": "9"
+      },
+      {
+        "item": "Lambesitanus carcer: the prison at Lambaesis (Numidian military HQ)",
+        "source": "Contextual (Lambaesis)",
+        "sense_relied_on": "second Lambaesis imprisonment after the transfer",
+        "section": "9"
+      },
+      {
+        "item": "rapuit comitatum: seized/joined so sweet a company (the bystander confessing on the spot)",
+        "source": "Lewis & Short s.v. rapio",
+        "sense_relied_on": "instant confession joining the escort",
+        "section": "9"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "9",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Haec enim sola apud gentiles hospitia iustorum.' matches English 'For such prisons are the only inns the righteous find among the heathen.'; no added/dropped clause or flipped agency/modality/doctrine.\nSource quote (anchor from packet): «Post has ostensiones in carcere etiam diebus paucis commorat»\nEnglish quote (anchor from packet): «After these visions in prison, they remained there a few day»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T032225_muse-compare-9_1e706048"
+        }
+      ]
+    }
+  ]
+}

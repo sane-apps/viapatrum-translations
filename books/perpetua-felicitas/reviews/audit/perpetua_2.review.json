@@ -1,0 +1,100 @@
+{
+  "packet_id": "f2a837b29af85b387cefa70eabb4e015db8fb26f2e3bd93277525570122b6398",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "2",
+            "source_sha256": "b87c06ee3d017f2d162df3198bab6500a54f189fa39253d0caad998e5bc18b59",
+            "english_sha256": "e592aed5ebeea4f1be7bab171e7f8cef0b60ded868a071f5f52c9c4f3cd61810",
+            "response_model": "muse",
+            "response_id": "20261019T015136_muse-gloss-2_586ebfc1",
+            "started_at": "2026-10-19T05:51:37+00:00",
+            "finished_at": "2026-10-19T05:52:10+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "2",
+            "source_sha256": "b87c06ee3d017f2d162df3198bab6500a54f189fa39253d0caad998e5bc18b59",
+            "english_sha256": "e592aed5ebeea4f1be7bab171e7f8cef0b60ded868a071f5f52c9c4f3cd61810",
+            "response_model": "muse",
+            "response_id": "20261019T015212_muse-compare-2_1e32fd08",
+            "started_at": "2026-10-19T05:52:12+00:00",
+            "finished_at": "2026-10-19T05:52:36+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "honeste nata, liberaliter instituta, matronaliter nupta",
+        "source": "Standard Latin; triple adverbial ablatives of circumstance",
+        "sense_relied_on": "well-born, liberally educated, married in matronly honour",
+        "section": "2"
+      },
+      {
+        "item": "conscriptum manu sua et suo sensu",
+        "source": "Contextual",
+        "sense_relied_on": "written in her own hand and her own words — the handover to Perpetua's voice",
+        "section": "2"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "2",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Apprehensi sunt adolescentes catechumini, Reuocatus et Felicitas conserua eius' matches English 'Young catechumens were arrested, Revocatus and Felicitas his fellow slave'; source 'Haec ordinem totum martyrii sui iam hinc ipsa narrauit, sicut conscriptum manu sua' matches English 'She herself narrated from this point the whole course of her martyrdom, just as she left it in writing by her own hand'\nSource quote (anchor from packet): «Apprehensi sunt adolescentes catechumini, Reuocatus et Felic»\nEnglish quote (anchor from packet): «Young catechumens were arrested, Revocatus and Felicitas his»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T015212_muse-compare-2_1e32fd08"
+        }
+      ]
+    }
+  ]
+}

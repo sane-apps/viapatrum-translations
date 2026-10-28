@@ -1,0 +1,106 @@
+{
+  "packet_id": "f4c98aa0a8809d5b206196c0842eac412c944c2dbdd251fddfff7fe6250e20bf",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "8d9bf1aff03fddad4e5b14e83ede775d40c3c5fc80c9d62aa056250c9831406d",
+            "english_sha256": "08cdb2a515774566bc46734757cdef64ad04cf05276c696ccec960ef0c5aed31",
+            "response_model": "muse",
+            "response_id": "20261019T034639_muse-gloss-1_f0f20375",
+            "started_at": "2026-10-19T07:46:40+00:00",
+            "finished_at": "2026-10-19T07:47:21+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "8d9bf1aff03fddad4e5b14e83ede775d40c3c5fc80c9d62aa056250c9831406d",
+            "english_sha256": "08cdb2a515774566bc46734757cdef64ad04cf05276c696ccec960ef0c5aed31",
+            "response_model": "muse",
+            "response_id": "20261019T034721_muse-compare-1_066aa05b",
+            "started_at": "2026-10-19T07:47:21+00:00",
+            "finished_at": "2026-10-19T07:47:47+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "παροικοῦσα/παροικία: sojourning church (resident aliens)",
+        "source": "LSJ s.v. πάροικος; Lampe",
+        "sense_relied_on": "Smyrna to Philomelium and every sojourn",
+        "section": "1"
+      },
+      {
+        "item": "καθολικῆς: universal (early use)",
+        "source": "Lampe s.v. καθολικός",
+        "sense_relied_on": "the holy and catholic church everywhere",
+        "section": "1"
+      },
+      {
+        "item": "μιμηταί + Phil 2:4 (printed cf.)",
+        "source": "Printed apparatus cf. Phil. 2, 4",
+        "sense_relied_on": "imitators looking to neighbors too",
+        "section": "1"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "1",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Ἡ ἐκκλησία τοῦ θεοῦ ἡ παροικοῦσα Σμύρναν, τῇ ἐκκλησίᾳ τοῦ θεοῦ' matches English 'The church of God sojourning in Smyrna to the church of God sojourning in Philomelium'; Jude 1:2 and Philippians 2:4 citations correctly identify the allusions\nSource quote (anchor from packet): «Μαρτύριον τοῦ ἁγίου Πολυκάρπου. Ἡ ἐκκλησία τοῦ θεοῦ ἡ παροικ»\nEnglish quote (anchor from packet): «The Martyrdom of the holy Polycarp. The church of God sojour»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T034721_muse-compare-1_066aa05b"
+        }
+      ]
+    }
+  ]
+}

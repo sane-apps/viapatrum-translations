@@ -1,0 +1,106 @@
+{
+  "packet_id": "f26adbcadc98c9764141af6a6e0a005aecc114aa2057ecf6ef1fa8a38676eb9d",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "18",
+            "source_sha256": "8840c32b72e35cea393b1d337dc1b37ea6b1c3d280a07c7315f17dd08b03cf9f",
+            "english_sha256": "102458eb2346f6002b632f85395252a0fead8abe0914b6c8ceb2b0d04557ecba",
+            "response_model": "muse",
+            "response_id": "20261019T062255_muse-gloss-18_0315e11b",
+            "started_at": "2026-10-19T10:22:56+00:00",
+            "finished_at": "2026-10-19T10:23:37+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "18",
+            "source_sha256": "8840c32b72e35cea393b1d337dc1b37ea6b1c3d280a07c7315f17dd08b03cf9f",
+            "english_sha256": "102458eb2346f6002b632f85395252a0fead8abe0914b6c8ceb2b0d04557ecba",
+            "response_model": "muse",
+            "response_id": "20261019T062339_muse-compare-18_7e9927f2",
+            "started_at": "2026-10-19T10:23:40+00:00",
+            "finished_at": "2026-10-19T10:24:04+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ὁμοιοπαθές: fellow-feeling of shared mortal nature",
+        "source": "LSJ s.v. ὁμοιοπαθής; Acts 14:15",
+        "sense_relied_on": "acknowledge our common mortal lot",
+        "section": "18"
+      },
+      {
+        "item": "κολάζειν vs βιάζεσθαι: punish vs compel",
+        "source": "LSJ s.vv.; context maxim",
+        "sense_relied_on": "you were ordered to punish, not to force",
+        "section": "18"
+      },
+      {
+        "item": "παρὰ τὸν βωμόν + dative ᾧ: set down beside the altar",
+        "source": "Locked row; edition apparatus ᾧ) ὡς cod.",
+        "sense_relied_on": "altar already named; ᾧ resumes it",
+        "section": "18"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "18",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: quote at least 25 characters of the source and at least 25 characters of the English, exactly as written: source 'κολάζειν ἐκελεύσθητε, οὐ βιάζεσθαι.' English 'You were commanded to punish, not to compel.' Rendering 'compel' for βιάζεσθαι against gloss 'to compel by force, to use violence (middle/passive infinitive)' is stylistic weakening, not a major added/dropped/flipped claim.\nSource quote (anchor from packet): «XVI. [Β---] οὖν ἤγαγον αὐτὸν βαστάζοντες καὶ ἔθηκαν χαμαὶ πα»\nEnglish quote (anchor from packet): «So they carried him in and set him on the ground beside the »",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T062339_muse-compare-18_7e9927f2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "packet_id": "a8e70980dec127c11228058c84fa26112046dd5eb182636a1b0d5d32834d2ead",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "0d08076c6af63ad690b80ccadf406e678a7903155c1066b3e67fb2dea8257ae8",
+            "english_sha256": "8229f257905192a599e66069f5488b355129b3015be160543910dbe13c991ef9",
+            "response_model": "muse",
+            "response_id": "20261019T083534_muse-gloss-5_851ea3ec",
+            "started_at": "2026-10-19T12:35:36+00:00",
+            "finished_at": "2026-10-19T12:36:05+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "0d08076c6af63ad690b80ccadf406e678a7903155c1066b3e67fb2dea8257ae8",
+            "english_sha256": "8229f257905192a599e66069f5488b355129b3015be160543910dbe13c991ef9",
+            "response_model": "muse",
+            "response_id": "20261019T083606_muse-compare-5_3f99b6fc",
+            "started_at": "2026-10-19T12:36:06+00:00",
+            "finished_at": "2026-10-19T12:36:31+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "fiscalis: the prison officer",
+        "source": "Late-Roman prison staff",
+        "sense_relied_on": "the officer brings hunger, not bread",
+        "section": "5"
+      },
+      {
+        "item": "velut per duas fialas: vision echo",
+        "source": "Quartillosia phials",
+        "sense_relied_on": "relief through two vessels",
+        "section": "5"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "5",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"ita laboribus nostris refrigerium dominus per Lucianum carissimum nobis praebuit\" matches English \"so the Lord gave relief to our sufferings through our dear Lucianus\"; no added/dropped/flipped major meaning found\nSource quote (anchor from packet): «IX. Altera die post hanc visionem expectantes eramus horam i»\nEnglish quote (anchor from packet): «On the day after this vision we were waiting for that hour w»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T083606_muse-compare-5_3f99b6fc"
+        }
+      ]
+    }
+  ]
+}

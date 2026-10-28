@@ -1,0 +1,100 @@
+{
+  "packet_id": "dd454dcaecac1ff0f161ad0f727c5690df83130ba946c1b5558d82c97b31e71f",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "8",
+            "source_sha256": "5e159cdaa579adef489d14c4e48b3725c986dc12ccccf3baa5571c4afcac19cd",
+            "english_sha256": "28a5a8ae3f8fc6f58c6ea0619218bf3d4df9f2059aba89c7fc727e6106d850e2",
+            "response_model": "muse",
+            "response_id": "20261019T015744_muse-gloss-8_e52efb2f",
+            "started_at": "2026-10-19T05:57:46+00:00",
+            "finished_at": "2026-10-19T05:58:17+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "8",
+            "source_sha256": "5e159cdaa579adef489d14c4e48b3725c986dc12ccccf3baa5571c4afcac19cd",
+            "english_sha256": "28a5a8ae3f8fc6f58c6ea0619218bf3d4df9f2059aba89c7fc727e6106d850e2",
+            "response_model": "muse",
+            "response_id": "20261019T015818_muse-compare-8_7ed02d5e",
+            "started_at": "2026-10-19T05:58:18+00:00",
+            "finished_at": "2026-10-19T05:58:46+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "fiala aurea ... quae fiala non deficiebat",
+        "source": "Contextual (fiala = phiala, bowl)",
+        "sense_relied_on": "the golden bowl that never ran dry",
+        "section": "8"
+      },
+      {
+        "item": "translatum eum esse de poena",
+        "source": "Contextual (transfero of the dead)",
+        "sense_relied_on": "he was translated/carried over out of punishment",
+        "section": "8"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "8",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Et intellexi translatum eum esse de poena.' matches English 'and I understood that he had been brought out of his punishment.'\nSource quote (anchor from packet): «Die quo in neruo mansimus ostensum est mihi hoc. Uideo locum»\nEnglish quote (anchor from packet): «On the day we spent in the stocks, this was shown to me. I s»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T015818_muse-compare-8_7ed02d5e"
+        }
+      ]
+    }
+  ]
+}

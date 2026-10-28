@@ -1,0 +1,106 @@
+{
+  "packet_id": "fdd2b7f3c6941acb76b973f6cb15433a4bf2f1aef4381fe9eeb5ac876400c549",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "dd0529e13600564bba19034fe14921317a84fd4734194b9f19118b0e0436aab1",
+            "english_sha256": "f070170630f2cf10c138ad51e4937e6fc446387f023148a694f1501cece8ceb8",
+            "response_model": "muse",
+            "response_id": "20261019T015427_muse-gloss-5_946ee283",
+            "started_at": "2026-10-19T05:54:28+00:00",
+            "finished_at": "2026-10-19T05:54:56+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "dd0529e13600564bba19034fe14921317a84fd4734194b9f19118b0e0436aab1",
+            "english_sha256": "f070170630f2cf10c138ad51e4937e6fc446387f023148a694f1501cece8ceb8",
+            "response_model": "muse",
+            "response_id": "20261019T015457_muse-compare-5_6f7a04ef",
+            "started_at": "2026-10-19T05:54:58+00:00",
+            "finished_at": "2026-10-19T05:55:27+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "miserere canis meis (canus = white-haired)",
+        "source": "Lewis & Short s.v. canus; contextual",
+        "sense_relied_on": "pity my white hairs",
+        "section": "5"
+      },
+      {
+        "item": "Hoc fiet in illa catasta quod deus uoluerit; non in nostra potestate ... sed in dei",
+        "source": "Contextual (catasta = scaffold for torture/exposure)",
+        "sense_relied_on": "what God wills shall happen on that scaffold; in God's power, not our own",
+        "section": "5"
+      },
+      {
+        "item": "Gate note: two passing drafts were failed by check_pass_ab on the bare word scaffold in Upon that scaffold; narrowed PLACEHOLDER to operational scaffold compounds (pipeline/check_pass_ab.py + regression test test_scaffold_word_as_ordinary_vocabulary_passes), reran the lane, 29 tests OK",
+        "source": "Adjudication 2026-10-19",
+        "sense_relied_on": "catasta honestly rendered scaffold",
+        "section": "5"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "5",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: quote at least 25 characters of the source and at least 25 characters of the English, exactly as written: source 'Et ego dolebam casum patris mei, quod solus de passione mea gauisurus non esset' matches English 'I grieved over my father's affliction, because he alone of all my kin would find no joy' and ending source 'Et recessit a me contristatus.' matches English 'Then he left me, heavy with sorrow.'\nSource quote (anchor from packet): «Post paucos dies rumor cucurrit ut audiremur. Superuenit aut»\nEnglish quote (anchor from packet): «A few days later word went round that our hearing was coming»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T015457_muse-compare-5_6f7a04ef"
+        }
+      ]
+    }
+  ]
+}

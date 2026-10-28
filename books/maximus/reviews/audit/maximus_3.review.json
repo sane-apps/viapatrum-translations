@@ -1,0 +1,100 @@
+{
+  "packet_id": "8f62d5d3339972ceadb14d551463c69f1c59100234b74c9c5d98c1b3e206fa67",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "3",
+            "source_sha256": "94373fdb92683a908a9a9239cbb6f35fa41bf14ea4d4a1ded4b873f92b155d79",
+            "english_sha256": "e481449e327794c4e102815d6e44f762efa812dd6314daf940cb7b84324f2db4",
+            "response_model": "muse",
+            "response_id": "20261019T072912_muse-gloss-3_d1ead390",
+            "started_at": "2026-10-19T11:29:12+00:00",
+            "finished_at": "2026-10-19T11:29:49+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "3",
+            "source_sha256": "94373fdb92683a908a9a9239cbb6f35fa41bf14ea4d4a1ded4b873f92b155d79",
+            "english_sha256": "e481449e327794c4e102815d6e44f762efa812dd6314daf940cb7b84324f2db4",
+            "response_model": "muse",
+            "response_id": "20261019T072950_muse-compare-3_7500f80f",
+            "started_at": "2026-10-19T11:29:52+00:00",
+            "finished_at": "2026-10-19T11:30:21+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "secundo idus Maii: May 14",
+        "source": "Roman dating",
+        "sense_relied_on": "date literal",
+        "section": "3"
+      },
+      {
+        "item": "Passus-amen omission in some MSS",
+        "source": "Apparatus",
+        "sense_relied_on": "closing kept with disclosure",
+        "section": "3"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "3",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'raptus est athleta Christi a ministris diaboli' rendered as English 'And so the athlete of Christ was seized by the ministers of the devil' preserves agency and sense; source 'ductusque foras muros lapidibus caesus reddidit spiritum' rendered as 'and he was led forth beyond the walls, struck with stones, and gave up his spirit' is complete\nSource quote (anchor from packet): «III. et sic raptus est athleta Christi a ministris diaboli, »\nEnglish quote (anchor from packet): «And so the athlete of Christ was seized by the ministers of »",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T072950_muse-compare-3_7500f80f"
+        }
+      ]
+    }
+  ]
+}

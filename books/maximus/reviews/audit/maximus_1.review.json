@@ -1,0 +1,94 @@
+{
+  "packet_id": "26eb9e359eb1397eeb7f57171bfca55719e61d89558e9fc4589256c2499f6d86",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "5c09aa9278a29581b12a00594b1f6055c65595721566d25129cd660d4d4f7c46",
+            "english_sha256": "fc01092913a7651ea75a49019444e622f4ca89fc384d73b44889d6014bd511dc",
+            "response_model": "muse",
+            "response_id": "20261019T072813_muse-gloss-1_3aff189b",
+            "started_at": "2026-10-19T11:28:13+00:00",
+            "finished_at": "2026-10-19T11:28:46+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "5c09aa9278a29581b12a00594b1f6055c65595721566d25129cd660d4d4f7c46",
+            "english_sha256": "fc01092913a7651ea75a49019444e622f4ca89fc384d73b44889d6014bd511dc",
+            "response_model": "muse",
+            "response_id": "20261019T072847_muse-compare-1_5af7f0fa",
+            "started_at": "2026-10-19T11:28:48+00:00",
+            "finished_at": "2026-10-19T11:29:07+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "Ingenuus natus, servus Christi",
+        "source": "Roman status language",
+        "sense_relied_on": "freeborn yet Christ slave",
+        "section": "1"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "1",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"Decius imperator volens opprimere vel superare legem Christianorum, decreta constituit per universum orbem\" and English \"The emperor Decius, wishing to crush and overthrow the law of the Christians, established decrees throughout the whole world\"; final clause source \"ut tandem carens miserabili et temporali vita aeternam reciperem\" matches English \"that at last, rid of this wretched and temporal life, I might receive eternal life\" and gloss \"I might receive\"\nSource quote (anchor from packet): «I. Decius imperator volens opprimere vel superare legem Chri»\nEnglish quote (anchor from packet): «The emperor Decius, wishing to crush and overthrow the law o»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T072847_muse-compare-1_5af7f0fa"
+        }
+      ]
+    }
+  ]
+}

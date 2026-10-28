@@ -1,0 +1,100 @@
+{
+  "packet_id": "67e221309515524b1a06116a2dffae73c2c2f0ff1c004383e5ec1a4ce5851837",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "ff597cd1108d2221d209cee03fcc5f4592d0fdc2257d404359c4f8d4d7a4234d",
+            "english_sha256": "2597d88bd56a7b9590ad5124416f5ebc0282046ef5428469d105b6db1148e9be",
+            "response_model": "muse",
+            "response_id": "20261019T081947_muse-gloss-1_b0439fd1",
+            "started_at": "2026-10-19T12:19:47+00:00",
+            "finished_at": "2026-10-19T12:20:29+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "ff597cd1108d2221d209cee03fcc5f4592d0fdc2257d404359c4f8d4d7a4234d",
+            "english_sha256": "2597d88bd56a7b9590ad5124416f5ebc0282046ef5428469d105b6db1148e9be",
+            "response_model": "muse",
+            "response_id": "20261019T082031_muse-compare-1_35b76f2b",
+            "started_at": "2026-10-19T12:20:33+00:00",
+            "finished_at": "2026-10-19T12:21:04+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "Et nobis est apud vos certamen",
+        "source": "Epistolary paraenesis",
+        "sense_relied_on": "our struggle belongs to you readers too",
+        "section": "1"
+      },
+      {
+        "item": "habita confessio baptizavit",
+        "source": "Blood-baptism doctrine",
+        "sense_relied_on": "confession was his baptism",
+        "section": "1"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "1",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'ut fratribus post futuris et magnificentiae dei fidele testimonium et labores ac tolerantiam nostri pro domino memoriae relinqueremus' English 'so that for the brothers who will come after us we might leave behind both a faithful testimony to the magnificence of God and the memory of our labors and endurance for the Lord'\nSource quote (anchor from packet): «I. Et nobis est apud vos certamen, dilectissimi fratres, ut »\nEnglish quote (anchor from packet): «Beloved brothers, we too are engaged in a contest before you»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T082031_muse-compare-1_35b76f2b"
+        }
+      ]
+    }
+  ]
+}

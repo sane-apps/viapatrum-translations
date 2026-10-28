@@ -1,0 +1,106 @@
+{
+  "packet_id": "6d1556e9918a47779ba65d057267e8abdff1b2160c018be2b3ab926d60d22424",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "10",
+            "source_sha256": "4c7044839455d7d92ec6511097144d2806b2ef50929c3a58f6c1ba6950ab8eb2",
+            "english_sha256": "3f6a2b2f5640952aafee97bad8c7b49cbec8feb6f94be4d43767768ede685137",
+            "response_model": "muse",
+            "response_id": "20261019T054927_muse-gloss-10_1f3bcfc7",
+            "started_at": "2026-10-19T09:49:28+00:00",
+            "finished_at": "2026-10-19T09:50:15+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "10",
+            "source_sha256": "4c7044839455d7d92ec6511097144d2806b2ef50929c3a58f6c1ba6950ab8eb2",
+            "english_sha256": "3f6a2b2f5640952aafee97bad8c7b49cbec8feb6f94be4d43767768ede685137",
+            "response_model": "muse",
+            "response_id": "20261019T055017_muse-compare-10_81571141",
+            "started_at": "2026-10-19T09:50:19+00:00",
+            "finished_at": "2026-10-19T09:50:54+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "written examination",
+        "source": "LSJ",
+        "sense_relied_on": "record, name by name",
+        "section": "10"
+      },
+      {
+        "item": "Theodota cover-name (Politta)",
+        "source": "Printed Greek",
+        "sense_relied_on": "Gordian fetters to freedom",
+        "section": "10"
+      },
+      {
+        "item": "one catholic church thrice",
+        "source": "Printed Greek",
+        "sense_relied_on": "no other with Christ",
+        "section": "10"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "10",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Ἀσκληπιάδης εἶπεν· Οὐχί, ἀλλ᾽ ὃν αὐτὸς ὃν καὶ οὗτοι εἰρήκασι.' exactly as written vs English 'No, but the same one whom these have also confessed.' exactly as written — 'confessed' for εἰρήκασι matches blind gloss 'they have said / spoken of' in referent; full Pionius-Sabina-Asclepiades interrogation preserved without added/dropped doctrine.\nSource quote (anchor from packet): «IX. Εἶτα ἐπηρώτησεν ἐγγράφως λέγων αὐτῷ· Τίς λέγῃ; Γράφοντος»\nEnglish quote (anchor from packet): «Then he put the question to him for the record, with the cle»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T055017_muse-compare-10_81571141"
+        }
+      ]
+    }
+  ]
+}

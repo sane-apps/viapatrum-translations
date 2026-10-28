@@ -1,0 +1,112 @@
+{
+  "packet_id": "76fd05371aa19fdac1c93616550d2f6d58a666b98ffefec6d0af8a61ca5a7703",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "16",
+            "source_sha256": "21da848ec1173ee76e0516eb9bac632a335dd12a812c5f660f817c6034d37d6e",
+            "english_sha256": "892deb70558d57ad56ff494a198bb2075e53bbb583cfefa038daa791a31a4f46",
+            "response_model": "muse",
+            "response_id": "20261019T020647_muse-gloss-16_047a0bd7",
+            "started_at": "2026-10-19T06:06:47+00:00",
+            "finished_at": "2026-10-19T06:07:25+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "16",
+            "source_sha256": "21da848ec1173ee76e0516eb9bac632a335dd12a812c5f660f817c6034d37d6e",
+            "english_sha256": "892deb70558d57ad56ff494a198bb2075e53bbb583cfefa038daa791a31a4f46",
+            "response_model": "muse",
+            "response_id": "20261019T020725_muse-compare-16_e2cad212",
+            "started_at": "2026-10-19T06:07:27+00:00",
+            "finished_at": "2026-10-19T06:07:57+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "castigatius eo tractantur (kept, flagged: harshly handled for that reason)",
+        "source": "Gebhardt p. 86 OCR; contextual",
+        "sense_relied_on": "the tribune handles them the more harshly lest magic chants spirit them away",
+        "section": "16"
+      },
+      {
+        "item": "refrigerare noxiis nobilissimis (kept, flagged)",
+        "source": "Gebhardt p. 86 OCR; contextual",
+        "sense_relied_on": "let us condemned nobles take refreshment before the birthday fight",
+        "section": "16"
+      },
+      {
+        "item": "pinguiores illo producamur (Greek pionoves Hs. vs pleioves cod. — kept printed)",
+        "source": "Gebhardt p. 86 apparatus",
+        "sense_relied_on": "is it not thy glory if we come forth the fatter",
+        "section": "16"
+      },
+      {
+        "item": "ipso optione carceris credente",
+        "source": "Contextual Roman rank (optio = adjutant)",
+        "sense_relied_on": "the very adjutant of the prison now believing",
+        "section": "16"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "16",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Quoniam ergo permisit et permittendo uoluit spiritus sanctus ordinem ipsius muneris conscribi' matches English 'Since the Holy Spirit has permitted the order of her service to be set down, and in permitting it has willed it'; source 'in faciem ei respondit: Quid utique non permittis nobis refrigerare' matches English 'she answered him to his face: Why do you not allow us poor condemned ones to take relief' with negation and agency preserved; source 'iam et ipso optione carceris credente' matches English 'while by now even the prison optio himself was believing'\nSource quote (anchor from packet): «Quoniam ergo permisit et permittendo uoluit spiritus sanctus»\nEnglish quote (anchor from packet): «Since the Holy Spirit has permitted the order of her service»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T020725_muse-compare-16_e2cad212"
+        }
+      ]
+    }
+  ]
+}

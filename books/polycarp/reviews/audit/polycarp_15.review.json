@@ -1,0 +1,106 @@
+{
+  "packet_id": "9e3f53c39f230913f73eec0db7788610f6ef0765e14d4247a350b358f8046b5c",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "15",
+            "source_sha256": "3f7ab692f794546ed327c68e71ba6476ecc1ee38142484ecda026632e21fff87",
+            "english_sha256": "ec3877582dc0fc0a628faa073e668208739d4e9f9947f0d2c082366a476ea70a",
+            "response_model": "muse",
+            "response_id": "20261019T043720_muse-gloss-15_5c611c47",
+            "started_at": "2026-10-19T08:37:22+00:00",
+            "finished_at": "2026-10-19T08:37:55+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "15",
+            "source_sha256": "3f7ab692f794546ed327c68e71ba6476ecc1ee38142484ecda026632e21fff87",
+            "english_sha256": "ec3877582dc0fc0a628faa073e668208739d4e9f9947f0d2c082366a476ea70a",
+            "response_model": "muse",
+            "response_id": "20261019T043756_muse-compare-15_f807400f",
+            "started_at": "2026-10-19T08:37:57+00:00",
+            "finished_at": "2026-10-19T08:38:27+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "vault like a sail",
+        "source": "LSJ",
+        "sense_relied_on": "fire walling round",
+        "section": "15"
+      },
+      {
+        "item": "bread/furnace (literal, uncited)",
+        "source": "Printed Greek, no apparatus",
+        "sense_relied_on": "not burning flesh within",
+        "section": "15"
+      },
+      {
+        "item": "frankincense breathing",
+        "source": "LSJ",
+        "sense_relied_on": "fragrance grasped",
+        "section": "15"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "15",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"ὡς λιβανωτοῦ πνέοντος ἢ ἄλλου τινὸς τῶν τιμίων ἀρωμάτων.\" matches English \"as of frankincense wafting forth or of some other of the costly spices.\"; τιμίων ἀρωμάτων as costly/precious aromatics/spices is legitimate sense, no added/dropped/flipped meaning.\nSource quote (anchor from packet): «XV. Ἀναπέμψαντος δὲ αὐτοῦ τὸ ἀμὴν καὶ πληρώσαντος τὴν εὐχήν,»\nEnglish quote (anchor from packet): «When he had uttered the Amen and finished his prayer, the at»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T043756_muse-compare-15_f807400f"
+        }
+      ]
+    }
+  ]
+}

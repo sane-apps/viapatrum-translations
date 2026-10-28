@@ -1,0 +1,106 @@
+{
+  "packet_id": "71e4cb6a8d25d6e754e9551475648b545282fefc952cedc2e6c5f126793556a1",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "10",
+            "source_sha256": "5dea9ca16311e7f96935b4004bf7178284238bc5d517d775055ff38c641010b7",
+            "english_sha256": "db2eb71ed8fa3630b042fffc997495c8103afb299969d108c07714165f8e67c1",
+            "response_model": "muse",
+            "response_id": "20261019T033008_muse-gloss-10_fddc2a64",
+            "started_at": "2026-10-19T07:30:10+00:00",
+            "finished_at": "2026-10-19T07:30:53+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "10",
+            "source_sha256": "5dea9ca16311e7f96935b4004bf7178284238bc5d517d775055ff38c641010b7",
+            "english_sha256": "db2eb71ed8fa3630b042fffc997495c8103afb299969d108c07714165f8e67c1",
+            "response_model": "muse",
+            "response_id": "20261019T033054_muse-compare-10_6b5ed809",
+            "started_at": "2026-10-19T07:30:56+00:00",
+            "finished_at": "2026-10-19T07:31:25+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "Valerian second edict (258): clergy to death, laity pressured apart — the gradus split",
+        "source": "Cyprian Ep. 80; Eusebius HE 7.10-11",
+        "sense_relied_on": "artful cruelty dividing clergy from laity, hoping the separated laity yield",
+        "section": "10"
+      },
+      {
+        "item": "milites Christi: soldiers of Christ (martyr commonplace)",
+        "source": "Lewis & Short s.v. miles; Tertullian",
+        "sense_relied_on": "dearest and most faithful soldiers of Christ",
+        "section": "10"
+      },
+      {
+        "item": "lenta et sera uictoria: slow and late victory (the delayed crown grieved, not feared)",
+        "source": "Lewis & Short s.v. lentus; serus",
+        "sense_relied_on": "grief that glory is kept waiting, not dread",
+        "section": "10"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "10",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: quote at least 25 characters of the source and at least 25 characters of the English, exactly as written | source: 'Interim per dies plurimos effusione sanguinis transmittebatur ad dominum numerosa fraternitas' | english: 'a great company of the brethren was passing to the Lord by the shedding of blood'\nSource quote (anchor from packet): «Interim per dies plurimos effusione sanguinis transmittebatu»\nEnglish quote (anchor from packet): «Meanwhile, through many days, a great company of the brethre»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T033054_muse-compare-10_6b5ed809"
+        }
+      ]
+    }
+  ]
+}
