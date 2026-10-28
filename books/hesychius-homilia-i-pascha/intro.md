@@ -1,5 +1,5 @@
-Hesychius of Jerusalem (c. 412–450) preached this homily on the holy Pascha. It is Homily I. It is not Homily II on the holy Pascha.
+Hesychius, a presbyter of Jerusalem (active c. 412–450), preached this homily for the holy night of Pascha. It is his first homily on the holy Pascha; the second is a separate work.
 
-The night is brighter for the victory of God and the Savior than for the stars. He says, take courage, for I have overcome the world. With God overcoming the invisible enemy, the hearers gain victory over the demons.
+He begins with the night itself, lit up less by the stars than by joy, because our God and Savior has conquered: "Take courage," he says, "I have overcome the world" (John 16:33). Since God has conquered the invisible enemy, his hearers too will win the victory over the demons, so he calls them to stay beside the saving cross and keep the holy night with torchlight and song.
 
-He tells them to stay with the saving cross and to keep this holy night. The sun of righteousness has enlightened the day. The wood of the cross has opened the doors of heaven.
+He then praises the wood of the cross, which opened the doors of heaven. Rome glories in it, and Paul was not ashamed of it. Moses' rod drove off the plagues of Egypt, but the cross puts an end to the sins of humankind. The thief's prayer, "Remember me, Lord, in your kingdom" (Luke 23:42), becomes the hearers' own. The day itself speaks of the opened tomb and the King ascending, and the homily ends with the risen Lord called to sit at the Father's right hand.

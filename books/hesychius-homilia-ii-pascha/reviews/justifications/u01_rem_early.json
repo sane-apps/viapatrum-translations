@@ -1,44 +1,65 @@
 {
   "anf_compare": {
-    "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "status": "no_pd_reference",
+    "notes": "No ANF or other public-domain English of this homily; translated from the Greek."
   },
   "apparatus": [],
   "bible_refs": [
     {
-      "display": "Matthew 28:1-10",
-      "method": "allusion",
-      "note": "the story of the resurrection"
+      "display": "Job 38:17",
+      "method": "wording",
+      "note": "οἱ πυλωροὶ τοῦ ᾅδου θεωρήσαντες ἔπτηξαν echoes Job 38:17 LXX (πυλωροὶ δὲ ᾅδου ἰδόντες σε ἔπτηξαν); cited inline."
+    },
+    {
+      "display": "Mark 16:6",
+      "method": "wording",
+      "note": "»Ἰησοῦν ζητεῖτε opens the angels' words of Mark 16:6; the quotation runs on into u01-rem-mid, where the citation stands."
     }
   ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "english": "this man",
+      "term": "οὗτος ὡς θεὸς τὸν θάνατον ἐσκύλευσεν",
+      "english": "this same one, as God, stripped death of its spoils",
+      "why": "ὡς marks what he is, not a likeness: he is God, not like God. σκυλεύω is to strip a fallen enemy of his spoils.",
       "rejected": [
-        "the man"
-      ],
-      "term": "ἄνθρωπος οὗτος",
-      "why": "referring to Jesus"
+        "This man, like God, has overcome death"
+      ]
     },
     {
-      "english": "like God",
+      "term": "εἷς γὰρ ὢν ὁ σαρκωθεὶς Λόγος εἰς ἓν ταῦτα κἀκεῖνα ὡς ἠβουλήθη ἀρρήτῳ λόγῳ συνήγαγεν",
+      "english": "For the Word made flesh, being one, brought these things and those together into one, as he willed, in a manner beyond telling",
+      "why": "Keeps every element of the clause: 'being one', 'into one', 'as he willed' and the play on Λόγος / λόγῳ.",
       "rejected": [
-        "as God"
-      ],
-      "term": "ὡς θεὸς",
-      "why": "comparing Jesus to God"
+        "the Logos, who became flesh, has united these things in an ineffable way"
+      ]
     },
     {
-      "english": "has overcome death",
+      "term": "τὴν μὲν σάρκα διακονῆσαι τοῖς πάθεσι δέδωκεν",
+      "english": "He gave his flesh to serve the sufferings",
+      "why": "διακονῆσαι is an infinitive of purpose with the dative τοῖς πάθεσι: the flesh is given over to bear the sufferings.",
       "rejected": [
-        "has robbed death"
-      ],
-      "term": "τὸν θάνατον ἐσκύλευσεν",
-      "why": "using the verb ἐσκύλευσεν to mean overcoming"
+        "giving flesh to passions"
+      ]
+    },
+    {
+      "term": "ἐπεί πως τάφῳ διακονοῦσιν ἄγγελοι",
+      "english": "Otherwise, how do angels minister at a tomb",
+      "why": "Read as ἐπεὶ πῶς, a question in the series πὼς δὲ ... πὼς δὲ: only God's presence explains the angels.",
+      "rejected": [
+        "since angels somehow serve as attendants at the tomb"
+      ]
+    },
+    {
+      "term": "πὼς δὲ λευχείμονες ὡς ἐπὶ νυμφίῳ ταῖς γυναιξὶν ἐμφανίζονται",
+      "english": "how do they appear in white to the women, as for a bridegroom",
+      "why": "λευχείμονες describes the angels, the subject; ταῖς γυναιξὶν is the dative of those to whom they appear.",
+      "rejected": [
+        "the women, like brides, appear to them"
+      ]
     }
   ],
   "confidence": "machine_draft",
@@ -53,44 +74,105 @@
   "excerpt_id": "u01-rem-early",
   "lemmas": [
     {
+      "form": "ἐσκύλευσεν",
+      "lemma": "σκυλεύω",
+      "gloss": "stripped of its spoils"
+    },
+    {
+      "form": "στρατιῶται",
+      "lemma": "στρατιώτης",
+      "gloss": "soldiers"
+    },
+    {
+      "form": "ἐφρούρησαν",
+      "lemma": "φρουρέω",
+      "gloss": "kept guard"
+    },
+    {
+      "form": "πυλωροὶ",
+      "lemma": "πυλωρός",
+      "gloss": "gatekeepers"
+    },
+    {
+      "form": "ἔπτηξαν",
+      "lemma": "πτήσσω",
+      "gloss": "cowered"
+    },
+    {
       "form": "σαρκωθεὶς",
-      "gloss": "having become flesh",
-      "lemma": "σαρκωθεὶς"
+      "lemma": "σαρκόω",
+      "gloss": "made flesh"
     },
     {
-      "form": "Λόγος",
-      "gloss": "Word/Logos",
-      "lemma": "Λόγος"
+      "form": "Λόγος",
+      "lemma": "λόγος",
+      "gloss": "the Word"
     },
     {
-      "form": "ἄρρητος",
-      "gloss": "ineffable",
-      "lemma": "ἄρρητος"
+      "form": "ἀρρήτῳ",
+      "lemma": "ἄρρητος",
+      "gloss": "beyond telling"
     },
     {
-      "form": "θεότης",
-      "gloss": "divinity",
-      "lemma": "θεότης"
+      "form": "συνήγαγεν",
+      "lemma": "συνάγω",
+      "gloss": "brought together"
     },
     {
-      "form": "παθήματα",
-      "gloss": "sufferings",
-      "lemma": "παθήματα"
+      "form": "διακονῆσαι",
+      "lemma": "διακονέω",
+      "gloss": "to serve"
     },
     {
-      "form": "θαύματα",
-      "gloss": "wonders",
-      "lemma": "θαύματα"
+      "form": "θεότητι",
+      "lemma": "θεότης",
+      "gloss": "Godhead"
+    },
+    {
+      "form": "θεμιτὸν",
+      "lemma": "θεμιτός",
+      "gloss": "right, lawful"
+    },
+    {
+      "form": "παθήματα",
+      "lemma": "πάθημα",
+      "gloss": "sufferings"
+    },
+    {
+      "form": "συμπεπλέχθαι",
+      "lemma": "συμπλέκω",
+      "gloss": "to be interwoven"
+    },
+    {
+      "form": "θαύμασιν",
+      "lemma": "θαῦμα",
+      "gloss": "wonders"
+    },
+    {
+      "form": "ἠλευθέρωσεν",
+      "lemma": "ἐλευθερόω",
+      "gloss": "set free"
+    },
+    {
+      "form": "λευχείμονες",
+      "lemma": "λευχείμων",
+      "gloss": "clothed in white"
+    },
+    {
+      "form": "ἐμφανίζονται",
+      "lemma": "ἐμφανίζω",
+      "gloss": "appear"
     }
   ],
-  "pass_a_gloss": "This man, like God, has overcome death; the soldiers treated him as dead, but the gatekeepers of Hades saw him as God; the same Logos, who became flesh, has united these things in an ineffable way, giving flesh to passions and using divinity for signs and wonders, with the necessity of uniting sufferings with wonders\nYou say the same of this and that\nYou seek Jesus\nYou say the soldiers\nnot another and another",
+  "pass_a_gloss": "[continuing from the previous section: but the one buried as] a man, this one as God despoiled (σκυλεύω) death. Again, as dead the soldiers (στρατιῶται) guarded (φρουρέω) [him], and as God the gatekeepers (πυλωροί) of Hades, having beheld, cowered (πτήσσω). The same, this one and that one, you will call [him], not other and other, nor other in other, nor other through other; for being one, the enfleshed (σαρκόω) Word (λόγος) into one these things and those, as he willed, by an unspeakable (ἄρρητος) word brought together (συνάγω); and the flesh on the one hand he has given to serve (διακονέω) the sufferings, the Godhead (θεότης) on the other he has used toward the signs and the wonders; but just as [it is] not lawful (θεμιτός) for the Word to be parted from the flesh, so [it is] necessary for the sufferings (πάθημα) to have been woven together (συμπλέκω) with the wonders (θαῦμα). For the one who as dead went down to Hades, this one as God freed (ἐλευθερόω) the dead; since how do angels serve a tomb, and how do white-robed ones (λευχείμων), as at a bridegroom, show themselves (ἐμφανίζω) to the women, and how did they say to them: 'Jesus you seek' [continues in the next section]",
   "pass_b_english": [
-    "This man, like God, has overcome death. Again, the soldiers guarded him as dead, but the gatekeepers of Hades, seeing him as God, were terrified. You will say that this is the same one, not another and another, not one in another, nor one through another; for the Logos, who became flesh, has united these things in an ineffable way, giving flesh to passions and using divinity for signs and wonders, as it is not fitting to separate the Logos from the flesh, so it is necessary that sufferings be united with wonders. For the one who, like a dead man, descended into Hades, this one, like God, freed the dead, since angels somehow serve as attendants at the tomb, and the women, like brides, appear to them, and they said to them: 'You seek Jesus...'"
+    "…this same one, as God, stripped death of its spoils. Again, the soldiers kept guard over him as one dead, and the gatekeepers of Hades, beholding him as God, cowered (Job 38:17).",
+    "You will say that this one and that one are the same, not one and another, nor one in another, nor one through another. For the Word made flesh, being one, brought these things and those together into one, as he willed, in a manner beyond telling. He gave his flesh to serve the sufferings, and he made use of his Godhead for the signs and wonders; but as it is not right for the Word to be separated from the flesh, so the sufferings must be interwoven with the wonders. For he who went down into Hades as one dead, this same one as God set the dead free. Otherwise, how do angels minister at a tomb, how do they appear in white to the women, as for a bridegroom, and how did they say to them, 'You are looking for Jesus…'"
   ],
   "source_text": "ἄνθρωπος οὗτος ὡς θεὸς τὸν θάνατον ἐσκύ λευσεν. Πάλιν ὡς νεκρὸν οἱ στρατιῶται\nἐφρούρησαν καὶ ὡς θεὸν οἱ πυλωροὶ τοῦ ᾅδου θεωρήσαντες ἔπτηξαν.\n3 Τὸν αὐτὸν δὲ τοῦτον κἀκεῖνον ἐρεῖς, οὐκ ἄλλον καὶ ἄλλον, οὐδὲ ἄλλον ἐν\nἄλλῳ, οὐδὲ ἄλλον δι' ἄλλου· εἷς γὰρ ὢν ὁ σαρκω θεὶς Λόγος εἰς ἓν ταῦτα κἀκεῖνα ὡς\nἠβουλήθη ἀρρήτῳ λόγῳ συνήγαγεν· καὶ τὴν μὲν σάρκα διακονῆσαι τοῖς πάθεσι\nδέδωκεν, τῇ θεότητι δὲ πρὸς τὰ σημεῖα καὶ τὰ θαύματα κέχρηται, ἀλλ' ὥσπερ οὐ\nθεμιτὸν τὸν Λόγον ἐκ τῆς σαρκὸς χωρίζεσθαι, οὕτως ἀνάγκη τὰ παθήματα\nσυμπεπλέχθαι τοῖς θαύμασιν. Ὁ γὰρ ὡς νεκρὸς εἰς ᾅδου καταβάς, οὗτος ὡς θεὸς τοὺς\nνεκροὺς ἠλευθέρωσεν, ἐπεί πως τάφῳ διακονοῦσιν ἄγγελοι, πὼς δὲ λευχείμονες ὡς\nἐπὶ νυμφίῳ ταῖς γυναιξὶν ἐμφανίζονται, πὼς δὲ πρὸς αὐτὰς ἔλεγον· »Ἰησοῦν ζητεῖτε",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash",
+  "reviewer": "claude (Wave A review, clause by clause against the Greek)",
   "draft_agent": "overnight-mini-cf",
   "draft_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:nvidia/nemotron-3-super-120b-a12b+rev:@cf/google/gemma-4-26b-a4b-it",
   "drafted_at": "2026-09-30T16:35:24.334683+00:00",
@@ -108,8 +190,18 @@
       "at": "2026-09-30T16:35:24.346410+00:00",
       "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260930T155723390144Z-hesychius-homilia-ii-pascha--u01-rem-early/summary.json",
       "notes_addressed": 2
+    },
+    {
+      "model": "claude",
+      "agent": "claude-waveA-review",
+      "at": "2026-10-23",
+      "from_receipt": "/Users/stephansmac/SaneApps/websites/fathers.saneapps.com/outputs/waveA-20261023/hesychius-homilia-ii-pascha/rv0.json",
+      "notes_addressed": 5
     }
   ],
   "ai_crosscheck_at": "2026-09-30T16:35:50.107746+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20260930T163525323975Z-hesychius-homilia-ii-pascha--u01-rem-early/summary.json"
+  "ai_crosscheck_receipt": "outputs/ai-promote/20260930T163525323975Z-hesychius-homilia-ii-pascha--u01-rem-early/summary.json",
+  "review_notes": [
+    "pass_b_english is the reviewed English now in translations/hhiip_u01_rem_english.json (Wave A review, 2026-10-23, from rv0.json); Pass A, lemmas, choices and bible_refs rewritten on 2026-10-24 from the Greek source_text to match it. The old machine-draft glosses and choices are in the backup folder."
+  ]
 }

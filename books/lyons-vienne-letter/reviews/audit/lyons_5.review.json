@@ -1,0 +1,108 @@
+{
+  "packet_id": "0d18e6ba9ef0f3c5cba95b059ed360384f200e7e1c83c50239ef1c1550063b78",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "181e0fb3a2c5c31ed65d4a3ecacf73444b02204dc222b7bf3116cbab6f41a057",
+            "english_sha256": "e6f63d7b85b7207f658ec8b36fa21ae86d8c5015df84a96bd26cef3b41508dfb",
+            "response_model": "muse",
+            "response_id": "20261018T215309_muse-gloss-5_7b1cae2f",
+            "started_at": "2026-10-19T01:53:10+00:00",
+            "finished_at": "2026-10-19T01:53:47+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "whether τὸ πνεῦμα τοῦ Ζαχαρίου means the personal spirit/disposition of Zachariah or the prophetic Spirit associated with him"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "5",
+            "source_sha256": "181e0fb3a2c5c31ed65d4a3ecacf73444b02204dc222b7bf3116cbab6f41a057",
+            "english_sha256": "e6f63d7b85b7207f658ec8b36fa21ae86d8c5015df84a96bd26cef3b41508dfb",
+            "response_model": "muse",
+            "response_id": "20261018T215348_muse-compare-5_60591131",
+            "started_at": "2026-10-19T01:53:49+00:00",
+            "finished_at": "2026-10-19T01:54:41+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "παράκλητος Χριστιανῶν / τὸν παράκλητον",
+        "source": "LSJ s.v. παράκλητος; BDAG s.v.",
+        "sense_relied_on": "advocate called to one's side — Vettius becomes the Christians' advocate while carrying the Advocate, the Spirit, within",
+        "section": "5"
+      },
+      {
+        "item": "ἀκολουθῶν τῷ ἀρνίῳ ὅπου ἂν ὑπάγῃ",
+        "source": "Revelation 14:4 wording, noted as wording match",
+        "sense_relied_on": "following the Lamb wherever he goes — the letter closes the episode in the Apocalypse's words",
+        "section": "5"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "5",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"πεπόρευτο γοῦν ἐν πάσαις ταῖς ἐντολαῖς καὶ δικαιώμασι τοῦ κυρίου ἄμεμπτος\" matches English \"for he walked in all the commandments and ordinances of the Lord blameless (Luke 1:6), and was untiring in every service\"; parakletos distinction and Rev 14:4 Lamb clause preserved\nSource quote (anchor from packet): «Μετέπειτα δὲ ἐπὶ τὸν ἡγεμόνα ἀχθέντων αὐτῶν κἀκείνου πάσῃ τῇ»\nEnglish quote (anchor from packet): «Afterward, when they were brought before the governor and he»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T215348_muse-compare-5_60591131"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: παράκλητος Χριστιανῶν / τὸν παράκλητον; ἀκολουθῶν τῷ ἀρνίῳ ὅπου ἂν ὑπάγῃ"
+        }
+      ]
+    }
+  ]
+}

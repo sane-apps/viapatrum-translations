@@ -1,0 +1,109 @@
+{
+  "packet_id": "a7381b26990a406b6c7b4adef0f041ce2990006c64198a46d1c8488c2d9f1f4b",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "7",
+            "source_sha256": "ac9d8e906290f15e4d840ca645b19682735070d671e3a2495f167ef5b6e3ed2f",
+            "english_sha256": "31e360100189dc7fcdb3a3d4c5cff680708dbf256b7d606ea3be8909211287c9",
+            "response_model": "muse",
+            "response_id": "20261018T221149_muse-gloss-7_6798ef67",
+            "started_at": "2026-10-19T02:11:49+00:00",
+            "finished_at": "2026-10-19T02:12:33+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "agreement and precise force of γεγονότα with στῦλον καὶ ἑδραίωμα",
+              "exact antecedent of ἐκείνων in κἂν ἐξ ἐκείνων ῥηθῆναί τι"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "7",
+            "source_sha256": "ac9d8e906290f15e4d840ca645b19682735070d671e3a2495f167ef5b6e3ed2f",
+            "english_sha256": "31e360100189dc7fcdb3a3d4c5cff680708dbf256b7d606ea3be8909211287c9",
+            "response_model": "muse",
+            "response_id": "20261018T221235_muse-compare-7_3662adad",
+            "started_at": "2026-10-19T02:12:35+00:00",
+            "finished_at": "2026-10-19T02:13:06+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ἀπεθηριώθησαν",
+        "source": "LSJ s.v. ἀποθηριόω",
+        "sense_relied_on": "turned beast-like, made savage — the whole city against the Christians once the slander was believed",
+        "section": "7"
+      },
+      {
+        "item": "πᾶς ὁ ἀποκτείνας ὑμᾶς δόξει λατρείαν προσφέρειν τῷ θεῷ",
+        "source": "John 16:2 wording, noted as wording match",
+        "sense_relied_on": "the letter presents the persecution as the Lord's saying fulfilled",
+        "section": "7"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "7",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'πάντες ἀπεθηριώθησαν εἰς ἡμᾶς, ὥστε καὶ εἴ τινες τὸ πρότερον' English 'everyone turned savage against us, so that even those who before had shown restraint'\nSource quote (anchor from packet): «Ταῦτα δὲ φημισθέντα, πάντες ἀπεθηριώθησαν εἰς ἡμᾶς, ὥστε καὶ»\nEnglish quote (anchor from packet): «When these charges were proclaimed, everyone turned savage a»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T221235_muse-compare-7_3662adad"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: ἀπεθηριώθησαν; πᾶς ὁ ἀποκτείνας ὑμᾶς δόξει λατρείαν προσφέρειν τῷ θεῷ"
+        }
+      ]
+    }
+  ]
+}

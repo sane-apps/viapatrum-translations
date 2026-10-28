@@ -1,0 +1,100 @@
+{
+  "packet_id": "abc2630c1cc4778ce551a2e0e33f920b740f69e91a74b96ba7a48225f93a130a",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "fb518daf99fe68b881f238f615354cc13501cb37f885583469205182f64c80ad",
+            "english_sha256": "f1e3cd9d57d834b0214a6814d1fd42078a86dc38bd135fee0be433a7ec3fd100",
+            "response_model": "muse",
+            "response_id": "20261019T080345_muse-gloss-1_72e1c001",
+            "started_at": "2026-10-19T12:03:47+00:00",
+            "finished_at": "2026-10-19T12:04:30+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "1",
+            "source_sha256": "fb518daf99fe68b881f238f615354cc13501cb37f885583469205182f64c80ad",
+            "english_sha256": "f1e3cd9d57d834b0214a6814d1fd42078a86dc38bd135fee0be433a7ec3fd100",
+            "response_model": "muse",
+            "response_id": "20261019T080431_muse-compare-1_d147620a",
+            "started_at": "2026-10-19T12:04:33+00:00",
+            "finished_at": "2026-10-19T12:05:00+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "Qui diis et non deo sacrificat eradicabitur (printed Ex. 22:20)",
+        "source": "Printed apparatus",
+        "sense_relied_on": "kept with bare citation, no formula the source lacks",
+        "section": "1"
+      },
+      {
+        "item": "Sacrifico per bonam confessionem",
+        "source": "Locked row",
+        "sense_relied_on": "sacrifice is the confession itself",
+        "section": "1"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "1",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Sacrifico per bonam confessionem deo meo, cui semper sacrificavi' matches English 'I sacrifice through a faithful confession to my God, to whom I have always sacrificed.'; source 'Qui diis et non deo sacrificat eradicabitur' matches English 'Whoever sacrifices to gods and not to God shall be rooted out (Exodus 22:20)'\nSource quote (anchor from packet): «I. Cum esset persecutio sub Diocletiano et Maximiano imperat»\nEnglish quote (anchor from packet): «There was a persecution under the emperors Diocletian and Ma»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261019T080431_muse-compare-1_d147620a"
+        }
+      ]
+    }
+  ]
+}

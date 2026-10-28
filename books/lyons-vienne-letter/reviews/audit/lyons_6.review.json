@@ -1,0 +1,108 @@
+{
+  "packet_id": "781f0e2521ce9a3717ad64c991a3f382f2ffd7ae8005e9fcef32441539d7e703",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "6",
+            "source_sha256": "11a8c123c24e4de7d38f93fcf2f96cd5631a86452d216480dada301ea913f20f",
+            "english_sha256": "25a81edcca52cf6261ee6fda868c51f0f0befb234c6d6e99953686de792ddc12",
+            "response_model": "muse",
+            "response_id": "20261018T220259_muse-gloss-6_9bf25ea0",
+            "started_at": "2026-10-19T02:03:00+00:00",
+            "finished_at": "2026-10-19T02:03:45+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "blind gloss unparsed or empty"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "6",
+            "source_sha256": "11a8c123c24e4de7d38f93fcf2f96cd5631a86452d216480dada301ea913f20f",
+            "english_sha256": "25a81edcca52cf6261ee6fda868c51f0f0befb234c6d6e99953686de792ddc12",
+            "response_model": "muse",
+            "response_id": "20261018T220347_muse-compare-6_8788761e",
+            "started_at": "2026-10-19T02:03:47+00:00",
+            "finished_at": "2026-10-19T02:04:24+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ἀγῶνος μεγάλου φόβον (scan: φόνον)",
+        "source": "LSJ s.v. φόβος; φόνος",
+        "sense_relied_on": "φόβον (fear) not φόνον (murder): the unready and weak 'unable to bear the fear of a great contest'. Emendation flagged for critic adjudication.",
+        "section": "6"
+      },
+      {
+        "item": "κατεψεύσαντο ἡμῶν Θυέστεια δεῖπνα καὶ Οἰδιποδείους μίξεις",
+        "source": "LSJ s.v. καταψεύδομαι; mythological terms",
+        "sense_relied_on": "they falsely accused us of Thyestean feasts and Oedipodean unions — the stock pagan slanders of cannibalism and incest",
+        "section": "6"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "6",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'ἀγῶνος μεγάλου φόβον ἐνεγκεῖν μὴ δυνάμενοι' matches English 'who could not bear the fear of a great contest'; source 'κατεψεύσαντο ἡμῶν Θυέστεια δεῖπνα καὶ Οἰδιποδείους μίξεις' matches English 'they falsely accused us of Thyestean banquets and Oedipodean unions'\nSource quote (anchor from packet): «Ἐντεῦθεν δὴ διεκρίνοντο οἱ λοιποί, καὶ φανεροὶ καὶ ἕτοιμοι ἐ»\nEnglish quote (anchor from packet): «From this point onward the rest of us were sifted apart, and»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T220347_muse-compare-6_8788761e"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: ἀγῶνος μεγάλου φόβον (scan: φόνον); κατεψεύσαντο ἡμῶν Θυέστεια δεῖπνα καὶ Οἰδιποδείους μίξεις"
+        }
+      ]
+    }
+  ]
+}

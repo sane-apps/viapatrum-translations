@@ -1,33 +1,55 @@
 {
   "anf_compare": {
     "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "notes": "ANF has no text of this homily; translated directly from the PG 93 Greek."
   },
   "apparatus": [],
-  "bible_refs": [],
+  "bible_refs": [
+    {
+      "display": "Matthew 4:19",
+      "method": "allusion",
+      "note": "ἁλιεῖς ἀνθρώπων καταστῆσαι ἐπαγγέλλεται recalls ποιήσω ὑμᾶς ἁλιεῖς ἀνθρώπων."
+    }
+  ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "english": "nonsense",
+      "term": "τῶν ἀποστόλων εὐγνωμοσύνην",
+      "english": "good judgment of the apostles",
       "rejected": [
-        "idle talk"
+        "gratitude"
       ],
-      "term": "λήρους",
-      "why": "The word λήρους is used to describe something as foolish or nonsensical, which fits the context of the apostles' potential skepticism."
+      "why": "εὐγνωμοσύνη can mean gratitude, but the passage praises their sound sense in leaving the nets at the call; it is the object of 'call blessed' at the end of the previous section."
     },
     {
-      "english": "frivolous stories",
+      "term": "οὐκ εἶπον πρὸς ἑαυτούς",
+      "english": "They did not say to themselves",
       "rejected": [
-        "fanciful tales"
+        "They then allowed even these; they did not speak"
       ],
-      "term": "μύθους περιττοὺς",
-      "why": "The phrase μύθους περιττοὺς suggests that the apostles might have viewed Jesus' promises as unnecessary or excessive tales."
+      "why": "The negation governs the whole quoted series of questions: these are doubts they did not voice."
+    },
+    {
+      "term": "λήρους … καὶ μύθους περιττοὺς",
+      "english": "nonsense and idle tales",
+      "rejected": [
+        "frivolous stories"
+      ],
+      "why": "λῆρος is silly talk; μῦθοι περιττοί are tales beyond need, so 'idle'."
+    },
+    {
+      "term": "Ποῦ σαγήνη τοιαῦτα δυναμένη θηρᾶν;",
+      "english": "Where is a dragnet able to catch such a prey?",
+      "rejected": [
+        "capable of hunting beasts"
+      ],
+      "why": "θηράω is to hunt or catch any prey, here men."
     }
   ],
-  "confidence": "machine_draft",
+  "confidence": "source_verified",
   "edition": {
     "id": "hesychius-in-andream",
     "language": "grc",
@@ -40,109 +62,126 @@
   "lemmas": [
     {
       "form": "εὐγνωμοσύνην",
-      "gloss": "gratitude",
-      "lemma": "εὐγνωμοσύνη"
+      "lemma": "εὐγνωμοσύνη",
+      "gloss": "good sense, right-mindedness"
     },
     {
       "form": "ἀφῆκαν",
-      "gloss": "leave behind",
-      "lemma": "ἀφίημι"
+      "lemma": "ἀφίημι",
+      "gloss": "to let go"
     },
     {
       "form": "ἀφορμὴν",
-      "gloss": "means",
-      "lemma": "ἀφορμή"
+      "lemma": "ἀφορμή",
+      "gloss": "means, resource"
     },
     {
-      "form": "τὰ δίκτυα",
-      "gloss": "nets",
-      "lemma": "δίκτυον"
+      "form": "ὑπερεῖδον",
+      "lemma": "ὑπεροράω",
+      "gloss": "to disregard"
+    },
+    {
+      "form": "θησαυρὸς",
+      "lemma": "θησαυρός",
+      "gloss": "treasure"
+    },
+    {
+      "form": "πλοῦτος",
+      "lemma": "πλοῦτος",
+      "gloss": "wealth"
+    },
+    {
+      "form": "δίκτυα",
+      "lemma": "δίκτυον",
+      "gloss": "net"
     },
     {
       "form": "σαγήναις",
-      "gloss": "fishing nets",
-      "lemma": "σαγήνη"
+      "lemma": "σαγήνη",
+      "gloss": "dragnet"
     },
     {
       "form": "ἄγρα",
-      "gloss": "hunt/chase",
-      "lemma": "ἄγρα"
+      "lemma": "ἄγρα",
+      "gloss": "catch"
     },
     {
-      "form": "ἐλπίδας",
-      "gloss": "hopes",
-      "lemma": "ἐλπίς"
+      "form": "ἔτρεφεν",
+      "lemma": "τρέφω",
+      "gloss": "to feed"
+    },
+    {
+      "form": "λήρους",
+      "lemma": "λῆρος",
+      "gloss": "nonsense"
+    },
+    {
+      "form": "μύθους",
+      "lemma": "μῦθος",
+      "gloss": "tale"
+    },
+    {
+      "form": "περιττοὺς",
+      "lemma": "περισσός",
+      "gloss": "superfluous, idle"
     },
     {
       "form": "ἐπαγγέλλεται",
-      "gloss": "promise",
-      "lemma": "ἐπαγγέλλω"
+      "lemma": "ἐπαγγέλλομαι",
+      "gloss": "to promise"
     },
     {
       "form": "καταστῆσαι",
-      "gloss": "establish",
-      "lemma": "καταστήνω"
+      "lemma": "καθίστημι",
+      "gloss": "to make, appoint"
     },
     {
-      "form": "ἀνθρώπων",
-      "gloss": "humans",
-      "lemma": "ἄνθρωπος"
+      "form": "θηρᾶν",
+      "lemma": "θηράω",
+      "gloss": "to hunt, catch"
     },
     {
-      "form": "πίστει",
-      "gloss": "faith",
-      "lemma": "πίστις"
+      "form": "θήρας",
+      "lemma": "θήρα",
+      "gloss": "hunt, catch"
+    },
+    {
+      "form": "χρησόμεθα",
+      "lemma": "χράομαι",
+      "gloss": "to use"
+    },
+    {
+      "form": "προσέχοντες",
+      "lemma": "προσέχω",
+      "gloss": "to give heed"
     },
     {
       "form": "βεβαιωθέντες",
-      "gloss": "confirm",
-      "lemma": "βεβαιοώ"
+      "lemma": "βεβαιόω",
+      "gloss": "to make firm"
     }
   ],
-  "pass_a_gloss": "The apostles' gratitude consisted in leaving behind what they had, which was their means of life, and considering their nets and wealth as nothing, for their life was in their fishing nets and their hopes were sustained by fishing.\nnot I said to ourselves\nBut they let go and these\nThey then allowed even these\nThey did not speak to themselves\nAnd where such a thing is? Where can such a thing be capable of hunting beasts? Who indeed a lake\nnonsense to us this and of myths excessive speaks\nthe nets\nnonsense to us this and myths excessive discourses\nAnd where of such a net\nWhere the hunt after the hunt shall we use?",
+  "pass_a_gloss": "[completing the previous section: 'It is fitting then to call blessed the'] right-mindedness (εὐγνωμοσύνη) of the apostles; for what they had they let go (ἀφίημι); the means (ἀφορμή) of life which they had, this they disregarded (ὑπεροράω). Their whole treasure (θησαυρός) and their whole wealth was the nets; for they had their living in dragnets (σαγήνη); the catch (ἄγρα) of fish fed (τρέφω) the hopes of life. But they let go even these; they did not say to themselves: 'This one talks nonsense (λῆρος) and superfluous tales (μῦθος) to us; he promises (ἐπαγγέλλομαι) to make (καθίστημι) [us] fishers of men. And where [is] such a net? Where [is] a dragnet able to hunt (θηράω) such things? What lake, what sea [is] bringing men to our nets? What will be the profit of the hunting (θήρα)? Where shall we use (χράομαι) the catch after the catching?' But giving heed (προσέχω) to the one calling and made firm (βεβαιόω) by faith and [the sentence continues in the next section].",
   "pass_b_english": [
-    "…They left behind what they had, which was their means of life, and they did not say to themselves, 'This is mere nonsense to us, and he discourses on excessive myths, promising to make us fishers of men' (Matthew 4:19).",
-    "But they let go even of these things, considering their nets and wealth as nothing, for their life was in their fishing nets and their hopes were sustained by the catch of fish.",
-    "Everything was theirs in their nets and all their wealth was in them, for they had their life in their nets; the catch of fish sustained their hopes for life.",
-    "And where such a thing is? Where can such a net be capable of hunting beasts? What lake or what sea brings men to us through nets? And what will be the profit of the hunt? Where will we use the catch after the hunt? But, paying attention to the one calling and having been made firm by faith and…"
+    "…good judgment of the apostles. For they left what they had; the livelihood they had, this they disregarded. Their nets were their whole treasure and their whole wealth, for their living lay in their dragnets; the catch of fish fed their hopes of life. Yet they left even these. They did not say to themselves: 'This man tells us nonsense and idle tales; he promises to make us fishers of men (Matthew 4:19). Where is there such a net? Where is a dragnet able to catch such a prey? What lake, what sea will bring men to our nets? What profit will the catch bring? Where shall we use the catch once it is caught?' But heeding the one who called them, made firm by faith, and…"
   ],
   "source_text": "τῶν ἀποστόλων εὐγνωμοσύνην· ὅπερ γὰρ εἶχον ἀφῆκαν, ἣν εἶχον ἀφορμὴν τοῦ βίου\nταύτην ὑπερεῖδον. Ὅλος ἦν αὐτοῖς ὁ θησαυρὸς καὶ ὅλος ὁ πλοῦτος τὰ δίκτυα· τὴν\nγὰρ ζωὴν ἐν σαγήναις εἶχον· ἡ τῶν ἰχθύων ἄγρα τὰς ἐλπίδας τοῦ βίου ἔτρεφεν. Οἱ δὲ\nἀφῆκαν καὶ ταῦτα, οὐκ εἶπον πρὸς ἑαυτούς· λήρους ἡμῖν οὗτος καὶ μύθους περιττοὺς\nδιαλέγεται, ἁλιεῖς ἀνθρώπων καταστῆσαι ἐπαγγέλλεται. Καὶ ποῦ τοιοῦτον δί κτυον;\nΠοῦ σαγήνη τοιαῦτα δυναμένη θηρᾶν; Τίς δὲ λίμνη, τίς δὲ θάλασσα ἀνθρώπους ἡμῖν\nτοῖς δικτύοις προσφέρουσα; Τί δὲ τὸ κέρδος τῆς θήρας ἔσται; Ποῦ τὴν θήραν μετὰ τὴν\nθήραν χρησόμεθα; Ἀλλὰ τῷ καλοῦντι προσέχοντες καὶ τῇ πίστει βεβαιωθέντες καὶ\n",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash",
-  "draft_agent": "overnight-mini-cf",
-  "draft_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:nvidia/nemotron-3-super-120b-a12b+rev:nvidia/nemotron-3-super-120b-a12b+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it",
-  "drafted_at": "2026-10-02T03:32:44.194125+00:00",
-  "revisions": [
-    {
-      "model": "nvidia/nemotron-3-super-120b-a12b",
-      "agent": "overnight-mini-nv",
-      "at": "2026-10-02T03:25:59.903157+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261002T032518349821Z-hesychius-in-andream--u02-open/summary.json",
-      "notes_addressed": 2
-    },
-    {
-      "model": "nvidia/nemotron-3-super-120b-a12b",
-      "agent": "overnight-mini-nv",
-      "at": "2026-10-02T03:26:30.816535+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261002T032600722917Z-hesychius-in-andream--u02-open/summary.json",
-      "notes_addressed": 2
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-10-02T03:31:43.592162+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261002T032845760607Z-hesychius-in-andream--u02-open/summary.json",
-      "notes_addressed": 2
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-10-02T03:32:44.202556+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261002T033144473791Z-hesychius-in-andream--u02-open/summary.json",
-      "notes_addressed": 5
-    }
+  "reviewer": "claude source review, separate pass (same model family as the drafter)",
+  "notes": [
+    "Opens mid-sentence (object of μακαρίσαι … τήν at the end of the previous section) and ends mid-sentence (…βεβαιωθέντες καί)."
   ],
-  "ai_crosscheck_at": "2026-10-02T03:32:59.744162+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20261002T033245199038Z-hesychius-in-andream--u02-open/summary.json"
+  "review": {
+    "coverage": "every clause glossed against the source",
+    "changes": [
+      "justification rebuilt for the 2026-10-23 retranslation; Pass B equals the current English"
+    ],
+    "verdict": "pass"
+  },
+  "drafter": "claude",
+  "pipeline": "claude_direct",
+  "reviewed": "2026-10-24",
+  "history": "2026-10-24: rebuilt from the English as retranslated on 2026-10-23. The earlier machine-draft justification (drafted 2026-09-30) described English that no longer exists; it is kept in outputs/waveA-20261023/hesychius-in-andream/backup-cleanup/.",
+  "source_sha256": "ba13fd4f021e56c09d05908027d223743b823199fcbfdd60e51b212c0c229e12"
 }

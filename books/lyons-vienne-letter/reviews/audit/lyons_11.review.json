@@ -1,0 +1,110 @@
+{
+  "packet_id": "813315d0235c32c4ad07348b6c1e9608223e0df9e4fdfed73a01339c621969a5",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "11",
+            "source_sha256": "32d6d7bd82b6ea32dc80237f29ef332cd24b3b43eb808a1abffc0e494b895c01",
+            "english_sha256": "1ff0ee66b4897ff69233eb3950d1799a61d6f982cba7179e3677a6bb5ef2adb3",
+            "response_model": "muse",
+            "response_id": "20261018T222608_muse-gloss-11_d78d34e4",
+            "started_at": "2026-10-19T02:26:08+00:00",
+            "finished_at": "2026-10-19T02:26:36+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "exact lemma and sense of προκατήχιστο in ὧν μὴ προκατήχιστο τὰ σώματα",
+              "syntactic force of διατιθέναι with τοὺς ἐγκλειομένους",
+              "referent of ταῦτα in καὶ ταῦτα διαβόλου πλήρεις"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "11",
+            "source_sha256": "32d6d7bd82b6ea32dc80237f29ef332cd24b3b43eb808a1abffc0e494b895c01",
+            "english_sha256": "1ff0ee66b4897ff69233eb3950d1799a61d6f982cba7179e3677a6bb5ef2adb3",
+            "response_model": "muse",
+            "response_id": "20261018T222638_muse-compare-11_cf6954c6",
+            "started_at": "2026-10-19T02:26:38+00:00",
+            "finished_at": "2026-10-19T02:27:00+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ἐν τῷ ξύλῳ διατάσεις; ἐπὶ πέμπτον τρύπημα",
+        "source": "LSJ s.v. ξύλον; τρύπημα",
+        "sense_relied_on": "stretchings on the stocks, feet distended to the fifth hole",
+        "section": "11"
+      },
+      {
+        "item": "προκατήχιστο (scan form, decision recorded)",
+        "source": "Scan form kept; sense from context, unflagged by blind critic",
+        "sense_relied_on": "bodies not previously hardened/inured to suffering",
+        "section": "11"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "11",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Καταργηθέντων δὲ τῶν τυραννικῶν κολαστηρίων ὑπὸ τοῦ Χριστοῦ διὰ τῆς τῶν μακαρίων ὑπομονῆς' matches English 'When Christ had brought the tyrannical instruments of punishment to nothing through the steadfast endurance of the blessed'; source 'ἐπὶ πέμπτον διατεινομένων τρύπημα' matches English 'drawn out as far as the fifth hole'; source 'ὅσους γε ὁ κύριος οὕτως ἐξελθεῖν ἠθέλησεν, ἐπιδεικνὺς τὴν αὐτοῦ δόξαν' matches English 'all those whom the Lord willed to depart in this way, and in them he displayed his own glory'\nSource quote (anchor from packet): «Καταργηθέντων δὲ τῶν τυραννικῶν κολαστηρίων ὑπὸ τοῦ Χριστοῦ »\nEnglish quote (anchor from packet): «When Christ had brought the tyrannical instruments of punish»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T222638_muse-compare-11_cf6954c6"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: ἐν τῷ ξύλῳ διατάσεις; ἐπὶ πέμπτον τρύπημα; προκατήχιστο (scan form, decision recorded)"
+        }
+      ]
+    }
+  ]
+}

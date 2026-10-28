@@ -1,0 +1,112 @@
+{
+  "packet_id": "cc94233089ddb4f5b255ced81a79210bf65bd17f1ba1b3fb68b25ba0bcc93394",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "10",
+            "source_sha256": "04dfb7635fd80ae4df8852c9aa7ba84f3de109959d2439e311b7786d7544957e",
+            "english_sha256": "3c1ac3999da5291277ea73cd599c06a11964ab2846f64146da6a10124b6c6fa4",
+            "response_model": "muse",
+            "response_id": "20261018T222121_muse-gloss-10_6ef43c60",
+            "started_at": "2026-10-19T02:21:21+00:00",
+            "finished_at": "2026-10-19T02:22:28+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "exact subject of στρεβλοῦντες and νομίζοντες — persecutors implied, not named in this stretch",
+              "force of μεθ᾽ ἡμέρας — after some days / after an interval, precise interval not stated",
+              "syntax of ὁπότε ... ἢ ὅτε — whether two alternative motives under νομίζοντες or second an independent fear",
+              "voice/agency of ἀνέστη καὶ ἀνωρθώθη — middle/intransitive rise vs passive restoration",
+              "antecedent of αὐτοῦ in περιέσοιντο αὐτοῦ — the martyr, but grammatical gender/number alone does not prove it"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "10",
+            "source_sha256": "04dfb7635fd80ae4df8852c9aa7ba84f3de109959d2439e311b7786d7544957e",
+            "english_sha256": "3c1ac3999da5291277ea73cd599c06a11964ab2846f64146da6a10124b6c6fa4",
+            "response_model": "muse",
+            "response_id": "20261018T222230_muse-compare-10_7777172f",
+            "started_at": "2026-10-19T02:22:31+00:00",
+            "finished_at": "2026-10-19T02:23:11+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ἴασιν ... τὴν δευτέραν στρέβλωσιν",
+        "source": "LSJ s.v. ἴασις; στρέβλωσις",
+        "sense_relied_on": "the second racking became healing, not punishment — ἴασις against κόλασιν",
+        "section": "10"
+      },
+      {
+        "item": "Πῶς ἂν παιδία φάγοιεν / ἀλόγων ζῴων αἷμα",
+        "source": "Contextual: abstention from blood (cf. Acts 15:29)",
+        "sense_relied_on": "Biblias' reductio: people forbidden even animals' blood could not eat children",
+        "section": "10"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "10",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Ἐπεὶ γὰρ ἀνόμως μεθ᾽ ἡμέρας πάλιν στρεβλοῦντες τὸν μάρτυρα καὶ νομίζοντες' English 'For after an interval of days they again put the witness to the rack in lawless fashion, supposing that' — agency, modality and result clauses match; source 'ὥστε μὴ κόλασιν, ἀλλ᾽ ἴασιν διὰ τῆς χάριτος τοῦ Χριστοῦ' English 'so that the second racking became for him through the grace of Christ not torment but healing'\nSource quote (anchor from packet): «Ἐπεὶ γὰρ ἀνόμως μεθ᾽ ἡμέρας πάλιν στρεβλοῦντες τὸν μάρτυρα κ»\nEnglish quote (anchor from packet): «For after an interval of days they again put the witness to »",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T222230_muse-compare-10_7777172f"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: ἴασιν ... τὴν δευτέραν στρέβλωσιν; Πῶς ἂν παιδία φάγοιεν / ἀλόγων ζῴων αἷμα"
+        }
+      ]
+    }
+  ]
+}

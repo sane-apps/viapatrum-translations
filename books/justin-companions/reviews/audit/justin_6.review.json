@@ -1,0 +1,100 @@
+{
+  "packet_id": "1fd3528579bcaa47d70de5416de7c5e7008377fe0963a8c0765a895a04494d75",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "6",
+            "source_sha256": "bbb34568b66a8f73379ccc3b0acae7e6064d24ab724ce3aff0167961796cd6d3",
+            "english_sha256": "a002ccb11f9b0fdb89c3b273396f9d024af8f34e293ca6c848992bca809d82e1",
+            "response_model": "muse",
+            "response_id": "20261018T233827_muse-gloss-6_13f99746",
+            "started_at": "2026-10-19T03:38:28+00:00",
+            "finished_at": "2026-10-19T03:38:53+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "6",
+            "source_sha256": "bbb34568b66a8f73379ccc3b0acae7e6064d24ab724ce3aff0167961796cd6d3",
+            "english_sha256": "a002ccb11f9b0fdb89c3b273396f9d024af8f34e293ca6c848992bca809d82e1",
+            "response_model": "muse",
+            "response_id": "20261018T233853_muse-compare-6_48c420dc",
+            "started_at": "2026-10-19T03:38:54+00:00",
+            "finished_at": "2026-10-19T03:39:26+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "τὸν συνήθη τόπον",
+        "source": "Contextual",
+        "sense_relied_on": "the customary (execution) place outside the city",
+        "section": "6"
+      },
+      {
+        "item": "ἐτελείωσαν ... τὴν μαρτυρίαν ἐν τῇ τοῦ σωτῆρος ὁμολογίᾳ",
+        "source": "Contextual; τελειόω of martyrdom",
+        "sense_relied_on": "'perfected their martyrdom in the confession of the Saviour'",
+        "section": "6"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "6",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Οἱ ἅγιοι μάρτυρες δοξάσαντες τὸν θεόν, ἐξελθόντες ἐπὶ τὸν συνήθη τόπον' matches English 'After giving glory to God, the holy martyrs went out to the accustomed place and were beheaded'\nSource quote (anchor from packet): «Οἱ ἅγιοι μάρτυρες δοξάσαντες τὸν θεόν, ἐξελθόντες ἐπὶ τὸν συ»\nEnglish quote (anchor from packet): «After giving glory to God, the holy martyrs went out to the »",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T233853_muse-compare-6_48c420dc"
+        }
+      ]
+    }
+  ]
+}

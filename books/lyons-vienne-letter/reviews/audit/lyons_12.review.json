@@ -1,0 +1,108 @@
+{
+  "packet_id": "c4a85588907e4c96f65d059ac96d78fb4300ce9eced7cc4b93f473090fb7d433",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "12",
+            "source_sha256": "1cedf173ec439a061530abbae0e66cbc82f708d4d10c6a5b2098255bc5923ec5",
+            "english_sha256": "f3714be233e7e8490de9e76fb1bf29b4bcda5098ee383abc340784f687679cec",
+            "response_model": "muse",
+            "response_id": "20261018T223024_muse-gloss-12_75ef3503",
+            "started_at": "2026-10-19T02:30:26+00:00",
+            "finished_at": "2026-10-19T02:31:05+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "exact force of ὡς αὐτοῦ ὄντος τοῦ Χριστοῦ: whether 'as if he himself were Christ' or otherwise construing the genitive absolute"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "12",
+            "source_sha256": "1cedf173ec439a061530abbae0e66cbc82f708d4d10c6a5b2098255bc5923ec5",
+            "english_sha256": "f3714be233e7e8490de9e76fb1bf29b4bcda5098ee383abc340784f687679cec",
+            "response_model": "muse",
+            "response_id": "20261018T223106_muse-compare-12_15e0ae36",
+            "started_at": "2026-10-19T02:31:07+00:00",
+            "finished_at": "2026-10-19T02:31:42+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ἵνα δι᾽ αὐτῆς Χριστὸς θριαμβεύσῃ",
+        "source": "2 Cor 2:14 wording, noted as wording match per the apparatus",
+        "sense_relied_on": "that through him Christ might triumph",
+        "section": "12"
+      },
+      {
+        "item": "Ἐὰν ᾖς ἄξιος, γνώσῃ",
+        "source": "Contextual dialogue",
+        "sense_relied_on": "Pothinus' answer: if thou be worthy, thou shalt know",
+        "section": "12"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "12",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"Ὁ δὲ μακάριος Πόθεινος, ὁ τὴν διακονίαν τῆς ἐπισκοπῆς ἐν Λουγδούνῳ πεπιστευμένος\" matches English \"The blessed Pothinus, who had been entrusted with the ministry of oversight at Lyons\"; no added/dropped/flipped major meaning, pronoun and cross-refs preserve sense\nSource quote (anchor from packet): «Ὁ δὲ μακάριος Πόθεινος, ὁ τὴν διακονίαν τῆς ἐπισκοπῆς ἐν Λου»\nEnglish quote (anchor from packet): «The blessed Pothinus, who had been entrusted with the minist»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T223106_muse-compare-12_15e0ae36"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: ἵνα δι᾽ αὐτῆς Χριστὸς θριαμβεύσῃ; Ἐὰν ᾖς ἄξιος, γνώσῃ"
+        }
+      ]
+    }
+  ]
+}

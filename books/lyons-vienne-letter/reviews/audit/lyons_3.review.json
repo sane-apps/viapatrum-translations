@@ -1,0 +1,100 @@
+{
+  "packet_id": "46a74d921de4266e22ad80b0984112422c81f4fb78d4129d3c1142cb6b1486c2",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "3",
+            "source_sha256": "b117ab09ac97520cb5accba6cb0cf4176146461a90c324d281275188fc3502d2",
+            "english_sha256": "1e37f68cb0f24fe5fac9f091033c73c067e28eb6c827236b64f5ec3df2840431",
+            "response_model": "muse",
+            "response_id": "20261018T214148_muse-gloss-3_d8a6ab28",
+            "started_at": "2026-10-19T01:41:49+00:00",
+            "finished_at": "2026-10-19T01:42:23+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "3",
+            "source_sha256": "b117ab09ac97520cb5accba6cb0cf4176146461a90c324d281275188fc3502d2",
+            "english_sha256": "1e37f68cb0f24fe5fac9f091033c73c067e28eb6c827236b64f5ec3df2840431",
+            "response_model": "muse",
+            "response_id": "20261018T214224_muse-compare-3_8a656cbf",
+            "started_at": "2026-10-19T01:42:25+00:00",
+            "finished_at": "2026-10-19T01:42:59+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ἀντεστρατήγει; ἀντιπαρέτασσε",
+        "source": "LSJ s.v. ἀντιστρατηγέω; ἀντιπαρατάσσω",
+        "sense_relied_on": "grace counter-generals / arrays against — military answer to the Adversary's assault",
+        "section": "3"
+      },
+      {
+        "item": "στύλους ἑδραίους",
+        "source": "LSJ s.v. στῦλος; ἑδραῖος",
+        "sense_relied_on": "firm-settled pillars — the steadfast martyrs set against the attack",
+        "section": "3"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "3",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Ἀντεστρατήγει δὲ ἡ χάρις τοῦ θεοῦ, καὶ τοὺς μὲν ἀσθενεῖς ἐρρύετο, ἀντιπαρέτασσε δὲ στύλους ἑδραίους' matches English 'Yet the grace of God was countering him move for move, sheltering the weak and drawing up in battle order firm pillars' with no dropped clause or flipped agency/modality/doctrine\nSource quote (anchor from packet): «Ἀντεστρατήγει δὲ ἡ χάρις τοῦ θεοῦ, καὶ τοὺς μὲν ἀσθενεῖς ἐρρ»\nEnglish quote (anchor from packet): «Yet the grace of God was countering him move for move, shelt»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T214224_muse-compare-3_8a656cbf"
+        }
+      ]
+    }
+  ]
+}

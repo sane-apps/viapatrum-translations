@@ -1,0 +1,110 @@
+{
+  "packet_id": "21bae79c21168acad04a80d59d3a5a48f5dd080a2a811c27fd5f2f653814cb07",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "9",
+            "source_sha256": "8d7f81c0506474cbe05b79e363e5ff78e0455e9bac1bbde92c2e2f91f90a3355",
+            "english_sha256": "af76a8904e987eed32edee0f90c44d317c23f493aaf5e95dbd0c3a4c8f2f7372",
+            "response_model": "muse",
+            "response_id": "20261018T221654_muse-gloss-9_e3c5c416",
+            "started_at": "2026-10-19T02:16:55+00:00",
+            "finished_at": "2026-10-19T02:17:30+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "exact adverbial force of ὑπερβεβλημένως with καὶ ὑπὲρ πάντα ἄνθρωπον",
+              "antecedent of ἐν ᾧ — whether the disfigured body or the suffering circumstance",
+              "sense of ἐπαλλήλως — repeated versus in turn for each heading"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "9",
+            "source_sha256": "8d7f81c0506474cbe05b79e363e5ff78e0455e9bac1bbde92c2e2f91f90a3355",
+            "english_sha256": "af76a8904e987eed32edee0f90c44d317c23f493aaf5e95dbd0c3a4c8f2f7372",
+            "response_model": "muse",
+            "response_id": "20261018T221732_muse-compare-9_cd5a8efd",
+            "started_at": "2026-10-19T02:17:33+00:00",
+            "finished_at": "2026-10-19T02:18:10+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ὕδατος τῆς ζωῆς ἐκ τῆς νηδύος τοῦ Χριστοῦ",
+        "source": "John 7:38 wording, noted as wording match per the apparatus",
+        "sense_relied_on": "the heavenly spring of the water of life flowing from Christ's belly — the letter's image for what sustained Sanctus",
+        "section": "9"
+      },
+      {
+        "item": "ἀνεπίκαμπτος καὶ ἀνένδοτος; στερεός",
+        "source": "LSJ s.v. ἀνεπίκαμπτος; ἀνένδοτος; στερεός",
+        "sense_relied_on": "unbent and unyielding, firm toward the confession",
+        "section": "9"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "9",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"τὸ τελευταῖον χαλκᾶς λεπίδας διαπύρους προσεκόλλων τοῖς τρυφερωτάτοις μέλεσι τοῦ σώματος αὐτοῦ\" matches English \"they finally pressed red-hot plates of bronze against the tenderest parts of his body\"; no added/dropped/flipped major meaning, John 7:38 cf. is correct allusion to water of life from belly\nSource quote (anchor from packet): «Ὁ δὲ Σάγκτος καὶ αὐτὸς ὑπερβεβλημένως καὶ ὑπὲρ πάντα ἄνθρωπο»\nEnglish quote (anchor from packet): «But Sanctus himself also endured nobly every torment men dev»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T221732_muse-compare-9_cd5a8efd"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: ὕδατος τῆς ζωῆς ἐκ τῆς νηδύος τοῦ Χριστοῦ; ἀνεπίκαμπτος καὶ ἀνένδοτος; στερεός"
+        }
+      ]
+    }
+  ]
+}

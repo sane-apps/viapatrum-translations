@@ -1,0 +1,111 @@
+{
+  "packet_id": "42719600e7842441cc1c625e3f304c1574782e700585bb55d09d19fb4de1980f",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "8",
+            "source_sha256": "6147d3408df1fef0a50c573eda637ef7afeccecc5396457b3b8ec05ad38aab66",
+            "english_sha256": "563e3d10248db12a9f73d317e53930b100ba7336dcca22be41d75c41e64e37d3",
+            "response_model": "muse",
+            "response_id": "20261018T221307_muse-gloss-8_0c3dc113",
+            "started_at": "2026-10-19T02:13:09+00:00",
+            "finished_at": "2026-10-19T02:13:49+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "voice and subject of ἐκλυθῆναι καὶ παρεθῆναι — whether the torturers grew faint/gave out or were released, and its exact dependence on ὥστε",
+              "syntactic attachment of the infinitives θαυμάζειν and μαρτυρεῖν — continuation of result or accusative-with-infinitive with the torturers as subject",
+              "exact sense of ἀνάληψις here — recovery/refreshment versus taking up",
+              "genitive τῶν συμβαινόντων — whether parted from ἀναλγησία alone or from all three nouns"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "8",
+            "source_sha256": "6147d3408df1fef0a50c573eda637ef7afeccecc5396457b3b8ec05ad38aab66",
+            "english_sha256": "563e3d10248db12a9f73d317e53930b100ba7336dcca22be41d75c41e64e37d3",
+            "response_model": "muse",
+            "response_id": "20261018T221349_muse-compare-8_b90286f7",
+            "started_at": "2026-10-19T02:13:50+00:00",
+            "finished_at": "2026-10-19T02:14:24+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "στρέβλωσις; στρεβλόω",
+        "source": "LSJ s.v. στρέβλωσις",
+        "sense_relied_on": "torture by twisting/racking — one kind alone sufficed to drive out the soul",
+        "section": "8"
+      },
+      {
+        "item": "ἀνενέαζεν; ἀνάληψις, ἀνάπαυσις, ἀναλγησία",
+        "source": "LSJ s.v. ἀνανεάζω; ἀνάληψις; ἀνάπαυσις; ἀναλγησία",
+        "sense_relied_on": "she was renewed in the confession; her recovery, rest, and insensibility to pain was to say: I am a Christian",
+        "section": "8"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "8",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'παντὸς τοῦ σώματος περιερρωγότος καὶ ἠνεῳγμένου' matches English 'those who tortured her in every way in succession from dawn to evening grew faint and withdrew' with no major meaning change\nSource quote (anchor from packet): «Ἡμῶν γὰρ πάντων δεδιότων καὶ τῆς σαρκίνης δεσποίνης αὐτῆς, ἥ»\nEnglish quote (anchor from packet): «For while we were all afraid, and her mistress according to »",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T221349_muse-compare-8_b90286f7"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: στρέβλωσις; στρεβλόω; ἀνενέαζεν; ἀνάληψις, ἀνάπαυσις, ἀναλγησία"
+        }
+      ]
+    }
+  ]
+}

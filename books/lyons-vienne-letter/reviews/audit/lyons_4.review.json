@@ -1,0 +1,109 @@
+{
+  "packet_id": "900b1336484b163a811a045b15b4cb8b5d02fcb85c5329ee05a45faa1a664e43",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "4",
+            "source_sha256": "7c618e0d08021357acbb5bc1d4e1981354208d90569ccf7f19dc6655597964c9",
+            "english_sha256": "834573f4ce30a0007bc217c7e889057a75eaa1b5b5a9d6710bc64c1e848dc260",
+            "response_model": "muse",
+            "response_id": "20261018T214834_muse-gloss-4_0eb7d6bb",
+            "started_at": "2026-10-19T01:48:34+00:00",
+            "finished_at": "2026-10-19T01:49:01+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "unexpressed plural subject of ὑπέμενον and συνεκλείσθησαν",
+              "syntactic relation of ἐπιβοήσεις καὶ πληγὰς καὶ συρμοὺς καὶ διαρπαγὰς καὶ λίθων βολὰς καὶ συγκλείσεις to τὰ ἐπιφερόμενα"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "4",
+            "source_sha256": "7c618e0d08021357acbb5bc1d4e1981354208d90569ccf7f19dc6655597964c9",
+            "english_sha256": "834573f4ce30a0007bc217c7e889057a75eaa1b5b5a9d6710bc64c1e848dc260",
+            "response_model": "muse",
+            "response_id": "20261018T214902_muse-compare-4_5c2a9605",
+            "started_at": "2026-10-19T01:49:03+00:00",
+            "finished_at": "2026-10-19T01:49:29+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "πανδημεὶ σωρηδόν",
+        "source": "LSJ s.v. πανδημεί; σωρηδόν",
+        "sense_relied_on": "wholesale, by the whole people; heaped up — the mob's violence all at once and in a heap",
+        "section": "4"
+      },
+      {
+        "item": "ἀνακριθέντες; εἱρκτή",
+        "source": "LSJ s.v. ἀνακρίνω; εἱρκτή",
+        "sense_relied_on": "examined judicially before the crowd; shut up in prison until the governor comes",
+        "section": "4"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "4",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source \"τὰ ἀπὸ τοῦ ὄχλου πανδημεὶ σωρηδὸν ἐπιφερόμενα γενναίως ὑπέμενον\" rendered as English \"they nobly bore everything the crowd heaped on them all at once\"; agency and confinement preserved throughout\nSource quote (anchor from packet): «Καὶ πρῶτον μὲν τὰ ἀπὸ τοῦ ὄχλου πανδημεὶ σωρηδὸν ἐπιφερόμενα»\nEnglish quote (anchor from packet): «First, they nobly bore everything the crowd heaped on them a»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T214902_muse-compare-4_5c2a9605"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: πανδημεὶ σωρηδόν; ἀνακριθέντες; εἱρκτή"
+        }
+      ]
+    }
+  ]
+}

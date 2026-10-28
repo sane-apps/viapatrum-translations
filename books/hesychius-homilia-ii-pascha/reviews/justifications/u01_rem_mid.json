@@ -1,41 +1,75 @@
 {
   "anf_compare": {
-    "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "status": "no_pd_reference",
+    "notes": "No ANF or other public-domain English of this homily; translated from the Greek."
   },
   "apparatus": [],
   "bible_refs": [
     {
-      "display": "Hosea 6:1-2",
-      "method": "quotation",
-      "note": "quoted words of Hosea"
+      "display": "Mark 16:6",
+      "method": "wording",
+      "note": "Ἰησοῦν ζητεῖτε τὸν Ναζαρηνὸν τὸν ἐσταυρωμένον (begun in u01-rem-early) follows Mark 16:6."
     },
     {
-      "display": "Isaiah (unknown)",
-      "method": "allusion",
-      "note": "reference to Isaiah's prophecy"
+      "display": "Matthew 28:6",
+      "method": "wording",
+      "note": "οὐκ ἔστιν ὧδε· ἠγέρθη γὰρ καθὼς εἶπεν follows Matthew 28:6. The rest of the angels' speech is Hesychius' expansion and is not cited."
+    },
+    {
+      "display": "Hosea 6:1–2",
+      "method": "wording",
+      "note": "LXX Hosea 6:1–2, with πέπαικεν for LXX ἥρπακεν (set outside the quotation marks in the edition) and without ὑγιάσει; the English follows Hesychius' wording."
+    },
+    {
+      "display": "Isaiah 33:9",
+      "method": "wording",
+      "note": "LXX Isaiah 33:9a (ᾐσχύνθη ὁ Λίβανος, ἕλη ἐγένετο ὁ Σαρων); the quotation runs on into u01-rem-close, which cites Isaiah 33:9–11."
     }
   ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "english": "is not here",
+      "term": "Ὑμῶν ἕνεκα τὸν λίθον ἐκυλίσαμεν",
+      "english": "For your sake we rolled away the stone",
+      "why": "ἐκυλίσαμεν is first person plural active: the angels speak and say what they did.",
       "rejected": [
-        "he is not present"
-      ],
-      "term": "οὐκ ἔστιν ὧδε",
-      "why": "literal translation of the phrase"
+        "The stone was rolled away for your sake"
+      ]
     },
     {
-      "english": "that is",
+      "term": "πρὶν γὰρ ἡμᾶς καταβῆναι, ὁ τάφος ἐκεκένωτο",
+      "english": "for before we came down the tomb had already been emptied",
+      "why": "The pluperfect ἐκεκένωτο: the tomb was empty before the angels came; 'already' carries the tense.",
       "rejected": [
-        "namely"
-      ],
-      "term": "Τουτέστιν",
-      "why": "introducing an explanation"
+        "the tomb was empty before we came down"
+      ]
+    },
+    {
+      "term": "Ὃ ἄγγελος εἶπεν, οὐ χωρεῖ οὐδὲ προφήτης ἑρμηνεῦσαι",
+      "english": "What the angel said not even a prophet could explain",
+      "why": "Ὃ is a relative pronoun, the object of ἑρμηνεῦσαι; οὐδὲ is 'not even'.",
+      "rejected": [
+        "The angel said that no prophet can explain"
+      ]
+    },
+    {
+      "term": "ὅτι αὐτὸς» πέπαικεν «καὶ ἰάσεται ἡμᾶς· πατάξει καὶ μοτώσει ἡμᾶς",
+      "english": "for he has struck us, and he will heal us; he will strike, and he will bind us up",
+      "why": "πέπαικεν is perfect ('has struck'), πατάξει future ('will strike'); Hesychius' wording is followed.",
+      "rejected": [
+        "for he has torn us and will heal us; he has struck us down and will bind us up"
+      ]
+    },
+    {
+      "term": "Ἠισχύνθη ὁ Λίβανος, ἕλη ἐγένετο ὁ Σαρών",
+      "english": "Lebanon has been put to shame; Sharon has become marshland",
+      "why": "The English follows the Septuagint wording Hesychius quotes (αἰσχύνω, ἕλος), not the Hebrew.",
+      "rejected": [
+        "The Lebanon has withered, the Sharon has become like a desert"
+      ]
     }
   ],
   "confidence": "machine_draft",
@@ -51,49 +85,109 @@
   "lemmas": [
     {
       "form": "Ναζαρηνὸν",
-      "gloss": "Nazarene",
-      "lemma": "Ναζαρηνός"
+      "lemma": "Ναζαρηνός",
+      "gloss": "Nazarene"
     },
     {
-      "form": "ἐσταυρωμένον",
-      "gloss": "crucified",
-      "lemma": "σταυρόω"
+      "form": "ἐσταυρωμένον",
+      "lemma": "σταυρόω",
+      "gloss": "crucified"
     },
     {
-      "form": "ἠγέρθη",
-      "gloss": "has risen",
-      "lemma": "ἐγείρω"
+      "form": "ἠγέρθη",
+      "lemma": "ἐγείρω",
+      "gloss": "has risen"
     },
     {
       "form": "οὐρανὸς",
-      "gloss": "heaven",
-      "lemma": "οὐρανός"
+      "lemma": "οὐρανός",
+      "gloss": "heaven"
     },
     {
-      "form": "Ἠσαΐας",
-      "gloss": "Isaiah",
-      "lemma": "Ἠσαΐας"
+      "form": "μύρα",
+      "lemma": "μύρον",
+      "gloss": "myrrh, ointment"
+    },
+    {
+      "form": "ἐκυλίσαμεν",
+      "lemma": "κυλίω",
+      "gloss": "we rolled away"
+    },
+    {
+      "form": "ἐκεκένωτο",
+      "lemma": "κενόω",
+      "gloss": "had been emptied"
+    },
+    {
+      "form": "χωρεῖ",
+      "lemma": "χωρέω",
+      "gloss": "is able"
+    },
+    {
+      "form": "ἑρμηνεῦσαι",
+      "lemma": "ἑρμηνεύω",
+      "gloss": "to explain"
     },
     {
       "form": "Ὡσηὲ",
-      "gloss": "Hosea",
-      "lemma": "Ὡσηέ"
+      "lemma": "Ὡσηέ",
+      "gloss": "Hosea"
     },
     {
-      "form": "ἀναστάσεως",
-      "gloss": "resurrection",
-      "lemma": "ἀνάστασις"
+      "form": "Ἠσαΐας",
+      "lemma": "Ἠσαΐας",
+      "gloss": "Isaiah"
+    },
+    {
+      "form": "ἀναστάσεως",
+      "lemma": "ἀνάστασις",
+      "gloss": "resurrection"
+    },
+    {
+      "form": "ἐπίσταται",
+      "lemma": "ἐπίσταμαι",
+      "gloss": "understands"
+    },
+    {
+      "form": "πέπαικεν",
+      "lemma": "παίω",
+      "gloss": "has struck"
+    },
+    {
+      "form": "πατάξει",
+      "lemma": "πατάσσω",
+      "gloss": "will strike"
+    },
+    {
+      "form": "μοτώσει",
+      "lemma": "μοτόω",
+      "gloss": "will bind up"
+    },
+    {
+      "form": "ἐσάλπισεν",
+      "lemma": "σαλπίζω",
+      "gloss": "sounded on the trumpet"
+    },
+    {
+      "form": "Ἠισχύνθη",
+      "lemma": "αἰσχύνω",
+      "gloss": "has been put to shame"
+    },
+    {
+      "form": "ἕλη",
+      "lemma": "ἕλος",
+      "gloss": "marshland"
     }
   ],
-  "pass_a_gloss": "The Nazarene who was crucified is not here, for he has risen as he said; heaven is his place, send the myrrh there; he has risen, we did not raise him, the stone was rolled away for your sake, the tomb was empty before we came down; the angel said that Hosea and Isaiah spoke of the resurrection but did not understand how it would happen\nLet us go and let us turn back\nwe shall live before him",
+  "pass_a_gloss": "[continuing the angels' words from the previous section] the Nazarene (Ναζαρηνός), the one crucified (σταυρόω); he is not here; for he was raised (ἐγείρω), as he said. That is, heaven [is] a place for him; there send (πέμπω) the myrrh (μύρον). He was raised; not we raised him. On your account the stone we rolled (κυλίω); for before we came down, the tomb had been emptied (κενόω). He was raised, as he himself said. What the angel said, there is no room (χωρέω) even for a prophet to interpret (ἑρμηνεύω): Hosea tells the season (καιρός) of the resurrection, Isaiah knows [it], but the how he does not understand (ἐπίσταμαι). For these are the sayings of the prophecy of Hosea: 'Let us go and let us turn back to the Lord our God, because he himself' has struck (παίω) 'and will heal us; he will smite (πατάσσω) and bind up (μοτόω) us after two days; on the day, the third, we shall stand up again and we shall live before him.' Hear again what things Isaiah trumpeted (σαλπίζω): 'Shamed (αἰσχύνω) was Lebanon, marshes (ἕλος) became Sharon' [the quotation continues in the next section]",
   "pass_b_english": [
-    "The Nazarene who was crucified is not here, for he has risen as he said. That is, heaven is his place, send the myrrh there. He has risen, we did not raise him. The stone was rolled away for your sake, the tomb was empty before we came down; he has risen, just as he said.",
-    "The angel said that no prophet can explain; Hosea speaks of the time of the resurrection, and Isaiah knew it, but he did not understand how. These are indeed the prophecies of Hosea: 'Let us go and return to the Lord our God, for he has torn us and will heal us; he has struck us down and will bind us up after two days; on the third day, we will rise again and live before him' (Hosea 6:1-2). Listen again to what Isaiah proclaimed: 'The Lebanon has withered, the Sharon has become like a desert...'"
+    "'…the Nazarene, who was crucified. He is not here, for he has risen, as he said (Mark 16:6; Matthew 28:6). That is, heaven is his place; send the myrrh there. He has risen; it was not we who raised him. For your sake we rolled away the stone, for before we came down the tomb had already been emptied. He has risen, as he himself said.'",
+    "What the angel said not even a prophet could explain. Hosea tells the time of the resurrection; Isaiah knows it, but how it will be he does not understand. For these are the words of Hosea's prophecy: 'Come, let us go and return to the Lord our God, for he has struck us, and he will heal us; he will strike, and he will bind us up after two days; on the third day we shall rise and live before him' (Hosea 6:1–2). Hear again what Isaiah sounded on the trumpet: 'Lebanon has been put to shame; Sharon has become marshland…' (Isaiah 33:9)"
   ],
   "source_text": "\nτὸν Να ζαρηνὸν τὸν ἐσταυρωμένον· οὐκ ἔστιν ὧδε· ἠγέρθη γὰρ καθὼς εἶπεν.\nΤουτέστιν οὐρανὸς αὐτῷ τόπος, ἐκεῖ τὰ μύρα πέμψατε. Ἠγέρθη, οὐχ ἡμεῖς αὐτὸν\nἠγείραμεν. Ὑμῶν ἕνεκα τὸν λίθον ἐκυ λίσαμεν· πρὶν γὰρ ἡμᾶς καταβῆναι, ὁ τάφος\nἐκεκέ νωτο. Ἠγέρθη, καθὼς εἶπεν αὐτός.»\n4 Ὃ ἄγγελος εἶπεν, οὐ χωρεῖ οὐδὲ προφήτης ἑρμηνεῦσαι· Ὡσηὲ τὸν καιρὸν\nτῆς ἀναστάσεως λέγει, Ἠσαΐας οἶδεν, ἀλλὰ τὸ πῶς οὐκ ἐπίσταται. Ταῦτα μὲν γὰρ\nὩσηὲ προφητείας τὰ ῥή ματα· «Πορευσώμεθα καὶ ἐπιστρέψωμεν πρὸς κύριον τὸν\nθεὸν ἡμῶν, ὅτι αὐτὸς» πέπαικεν «καὶ ἰάσεται ἡμᾶς· πατάξει καὶ μο τώσει ἡμᾶς μετὰ\nδύο ἡμέρας· ἐν τῇ ἡμέρᾳ τῇ τρίτῃ, ἀναστησό μεθα καὶ ζησόμεθα ἐνώπιον αὐτοῦ.»\nἌκουε πάλιν ποῖα Ἠσαΐας ἐσάλπισεν· «Ἠισχύνθη ὁ Λίβανος, ἕλη ἐγένετο ὁ Σαρών.",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash",
+  "reviewer": "claude (Wave A review, clause by clause against the Greek)",
   "draft_agent": "overnight-mini-cf",
   "draft_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:@cf/google/gemma-4-26b-a4b-it",
   "drafted_at": "2026-10-03T07:30:22.043008+00:00",
@@ -104,8 +198,18 @@
       "at": "2026-10-03T07:30:22.058103+00:00",
       "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20261003T072946385278Z-hesychius-homilia-ii-pascha--u01-rem-mid/summary.json",
       "notes_addressed": 3
+    },
+    {
+      "model": "claude",
+      "agent": "claude-waveA-review",
+      "at": "2026-10-23",
+      "from_receipt": "/Users/stephansmac/SaneApps/websites/fathers.saneapps.com/outputs/waveA-20261023/hesychius-homilia-ii-pascha/rv0.json",
+      "notes_addressed": 3
     }
   ],
   "ai_crosscheck_at": "2026-10-03T07:31:17.576593+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20261003T073023274534Z-hesychius-homilia-ii-pascha--u01-rem-mid/summary.json"
+  "ai_crosscheck_receipt": "outputs/ai-promote/20261003T073023274534Z-hesychius-homilia-ii-pascha--u01-rem-mid/summary.json",
+  "review_notes": [
+    "pass_b_english is the reviewed English now in translations/hhiip_u01_rem_english.json (Wave A review, 2026-10-23, from rv0.json); Pass A, lemmas, choices and bible_refs rewritten on 2026-10-24 from the Greek source_text to match it. The old machine-draft glosses and choices are in the backup folder."
+  ]
 }

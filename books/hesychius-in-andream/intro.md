@@ -1,5 +1,5 @@
-Hesychius of Jerusalem (c. 412–450) preached this homily on Saint Andrew. The apostolic trumpet calls the feast, and Andrew dispenses grace.
+Hesychius of Jerusalem (c. 412–450), a priest of the church of Jerusalem, preached this homily in praise of the apostle Andrew. It opens with a call to sound the trumpet for the feast. Andrew, called before all the others, is the apostolic trumpet who gives all a share in grace.
 
-David sought God on the day of his trouble, and Zephaniah says, seek the Lord. Andreas tells Peter that they have found the Messiah. By the sea, the Lord sees Simon and Andrew and calls them.
+Andrew told Peter, "We have found the Messiah" (John 1:41), though he had heard John say only "Behold the Lamb of God." Hesychius asks where the one found had been lost, and answers from the prophets. David took pride in seeking God, and Hosea foretold healing after two days and rising on the third day, fulfilled when Christ rose and the women found him at dawn.
 
-The homily urges repentance, for it is not of the one willing or running, but of the merciful God. The brothers leave what they had. The close asks for the light of heaven.
+Hesychius then turns to Christ's first preaching, "Repent, for the kingdom of heaven has come near" (Matthew 4:17), and to the call of Simon and Andrew by the Sea of Galilee. The fishermen left their nets without doubting the promise to make them fishers of men. The homily closes with a prayer that the apostles' light may shine into our minds, so that we may become fish in their heavenly net, choice fare for the Master's table.

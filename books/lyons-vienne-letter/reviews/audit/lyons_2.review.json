@@ -1,0 +1,110 @@
+{
+  "packet_id": "ff4f22c5ce75ee97fa00d06f471f6abb93be60ae16a1a90ee92593383538df48",
+  "reviewer": "muse-only: drafter+blind-gloss-critic+research",
+  "review_provenance": {
+    "schema": "review-provenance-muse-v1",
+    "lanes": [
+      {
+        "role": "blind-gloss",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "2",
+            "source_sha256": "8da0ce5c41553f97089b51557c63135b94976ff027edfd33c05516cce0cdb664",
+            "english_sha256": "051f590923f6707c3d040f910f0c386e890ea86962aa1283ee35617074dcd39a",
+            "response_model": "muse",
+            "response_id": "20261018T214018_muse-gloss-2_58e140c3",
+            "started_at": "2026-10-19T01:40:19+00:00",
+            "finished_at": "2026-10-19T01:40:57+00:00",
+            "verdict": "fail",
+            "uncertainties": [
+              "scope of διὰ πάντων — persons or things not specified",
+              "syntactic attachment of ἀδεῶς within the παρουσίαν phrase",
+              "agent/infinitive relations in the ὥστε + infinitive exclusion clause"
+            ],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      },
+      {
+        "role": "compare",
+        "provider": "muse-queue",
+        "model": "muse",
+        "family": "muse",
+        "call_count": 1,
+        "calls": [
+          {
+            "section": "2",
+            "source_sha256": "8da0ce5c41553f97089b51557c63135b94976ff027edfd33c05516cce0cdb664",
+            "english_sha256": "051f590923f6707c3d040f910f0c386e890ea86962aa1283ee35617074dcd39a",
+            "response_model": "muse",
+            "response_id": "20261018T214058_muse-compare-2_15aa9b8b",
+            "started_at": "2026-10-19T01:40:59+00:00",
+            "finished_at": "2026-10-19T01:41:46+00:00",
+            "verdict": "pass",
+            "uncertainties": [],
+            "usage": {
+              "prompt_tokens": 0,
+              "completion_tokens": 0
+            }
+          }
+        ]
+      }
+    ],
+    "research": [
+      {
+        "item": "ἀντικείμενος",
+        "source": "LSJ s.v. ἀντίκειμαι (participle)",
+        "sense_relied_on": "the Adversary — the opponent lying against, the devil as the besetting enemy",
+        "section": "2"
+      },
+      {
+        "item": "προοιμιαζόμενος; προγυμνάζων",
+        "source": "LSJ s.v. προοιμιάζομαι; προγυμνάζω",
+        "sense_relied_on": "making a prelude/preparing the way; training beforehand — the Adversary rehearses his servants against God's servants",
+        "section": "2"
+      }
+    ]
+  },
+  "verdict": "pass",
+  "reviews": [
+    {
+      "section": "2",
+      "verdict": "pass",
+      "checks": {
+        "source_identity": true,
+        "completeness": true,
+        "negation": true,
+        "agency": true,
+        "modality": true,
+        "doctrine": true,
+        "scripture": true
+      },
+      "uncertainties": [],
+      "covered_source_paragraphs": [
+        1
+      ],
+      "notes": "[muse compare muse] verdict=pass; model notes: evidence: source 'Τὸ μὲν οὖν μέγεθος τῆς ἐνθάδε θλίψεως καὶ τὴν τοσαύτην' matches English 'The greatness of the suffering here, the immense fury of the pagans'\nSource quote (anchor from packet): «Τὸ μὲν οὖν μέγεθος τῆς ἐνθάδε θλίψεως καὶ τὴν τοσαύτην τῶν ἐ»\nEnglish quote (anchor from packet): «The greatness of the suffering here, the immense fury of the»",
+      "lanes": [
+        {
+          "model": "muse",
+          "family": "muse",
+          "verdict": "pass",
+          "response_id": "20261018T214058_muse-compare-2_15aa9b8b"
+        }
+      ],
+      "adjudications": [
+        {
+          "model": "muse",
+          "resolution": "Blind-gloss uncertainty covered by recorded research: ἀντικείμενος; προοιμιαζόμενος; προγυμνάζων"
+        }
+      ]
+    }
+  ]
+}

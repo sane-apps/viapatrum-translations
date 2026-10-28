@@ -1,56 +1,85 @@
 {
   "anf_compare": {
-    "status": "not_checked",
-    "notes": "Machine draft from the supplied Greek; independent review pending."
+    "status": "no_pd_reference",
+    "notes": "No ANF or other public-domain English of this homily; translated from the Greek."
   },
   "apparatus": [],
   "bible_refs": [
     {
       "display": "John 16:33",
-      "method": "quote",
-      "note": "Jesus says 'I have overcome the world'"
+      "method": "wording",
+      "note": "«Θαρσεῖτε … ἐγὼ νενίκηκα τὸν κόσμον» matches John 16:33 (θαρσεῖτε, ἐγὼ νενίκηκα τὸν κόσμον); φησίν is Christ."
+    },
+    {
+      "display": "Malachi 4:2",
+      "method": "wording",
+      "note": "«Ὁ τῆς δικαιοσύνης ἥλιος» is marked as a quotation in the edition: LXX Malachi 3:20 (ἀνατελεῖ … ἥλιος δικαιοσύνης), English Malachi 4:2; ἀνέτειλεν echoes ἀνατελεῖ. LXX numbering converted."
     },
     {
       "display": "Matthew 5:15",
-      "method": "allusion",
-      "note": "reference to the parable of the lamp under a basket"
+      "method": "wording",
+      "note": "«καίουσι λύχνον καὶ ὑπὸ τὸν μόδιον τιθέασιν … ἀλλ' ἐπὶ τὴν λυχνίαν» follows Matthew 5:15 (οὐδὲ καίουσιν λύχνον καὶ τιθέασιν αὐτὸν ὑπὸ τὸν μόδιον ἀλλ' ἐπὶ τὴν λυχνίαν); Hesychius breaks the verse with his own glosses on 'basket' (the Law) and 'lamp' (the Word). Cited once at the first part of the quotation."
     }
   ],
   "checks": {
-    "lemma_constraint": "pending",
+    "lemma_constraint": "pass",
     "placeholders": "pass"
   },
   "choices": [
     {
-      "english": "The sky is bright",
+      "term": "φαιδρότερα δὲ τὰ σύμπαντα ἑωσφόρου ἀνατέλλοντος",
+      "english": "the whole universe is brighter still when the morning star rises",
+      "why": "τὰ σύμπαντα ('all things together') is the subject of the comparative, not the sky; ἑωσφόρος is the morning star.",
       "rejected": [
-        "The heaven is bright"
-      ],
-      "term": "Φαιδρὸς ὁ οὐρανὸς",
-      "why": " literal translation of the phrase"
+        "it is even brighter with the rising of the dawn-bringer"
+      ]
     },
     {
-      "english": "I have overcome the world",
+      "term": "οὐ τοσοῦτον ἄστροις καταυγάζεται",
+      "english": "is lit up not so much by the stars",
+      "why": "ἄστροις is the instrument of καταυγάζεται ('is lit up by'), set against ἀγάλλεται.",
       "rejected": [
-        "I have conquered the world"
-      ],
-      "term": "νενίκηκα τὸν κόσμον",
-      "why": "quote from Jesus"
+        "does not gleam so much for the stars"
+      ]
     },
     {
-      "english": "cross",
+      "term": "ἀπενεγκώμεθα",
+      "english": "win",
+      "why": "Middle of ἀποφέρω, 'carry off (as a prize), win'; the hearers receive the gifts, they do not offer them. The same verb in the future (ἀποισόμεθα) is 'shall win'.",
       "rejected": [
-        "crucifix"
-      ],
-      "term": "σταυρῷ",
-      "why": "instrument of salvation"
+        "offer"
+      ]
+    },
+    {
+      "term": "δᾳδουχίαις ἱεραῖς",
+      "english": "with holy torchlight",
+      "why": "δᾳδουχία is a carrying of torches, the lights of the paschal night.",
+      "rejected": [
+        "with sacred services"
+      ]
+    },
+    {
+      "term": "καὶ τοῖς τοῦ σταυροῦ συμβόλοις τοῦ θύρας οὐρανοῦ ἡμῖν ἀνοίξαντος",
+      "english": "and the emblems of the cross that opened the doors of heaven to us",
+      "why": "The second dative is a further object of προσκυνείτω, which takes the dative, and τοῦ ἀνοίξαντος agrees with σταυροῦ, so no verb is supplied.",
+      "rejected": [
+        "which has opened the doors of heaven to us (said of the wood)"
+      ]
+    },
+    {
+      "term": "ἐπὶ τὴν λυχνίαν",
+      "english": "on the lampstand",
+      "why": "λυχνία is the stand, λύχνος the lamp; Hesychius keeps them apart (the lamp is the Word).",
+      "rejected": [
+        "upon the lamp"
+      ]
     }
   ],
   "confidence": "machine_draft",
   "edition": {
     "id": "hesychius-homilia-i-pascha",
     "language": "grc",
-    "locus": "U 01 opening",
+    "locus": "U 01 opening (superscription and §§1-2 to τότε τῷ τῆς οἰκουμένης)",
     "path": "translations/hhip_u01_open_source.json",
     "sha256": "56d805024c6c5c0080543aa608240348fe50ea275b9eb4956439e80b05bb62da",
     "checks": []
@@ -59,145 +88,224 @@
   "lemmas": [
     {
       "form": "Φαιδρὸς",
-      "gloss": "bright",
-      "lemma": "φαῖδρος"
+      "lemma": "φαιδρός",
+      "gloss": "bright"
     },
     {
-      "form": "ἑωσφόρου",
-      "gloss": "dawn-bringer",
-      "lemma": "ἑωσφόρος"
+      "form": "χορείᾳ",
+      "lemma": "χορεία",
+      "gloss": "dance"
     },
     {
-      "form": "νενίκηκα",
-      "gloss": "I have overcome",
-      "lemma": "νικάω"
+      "form": "σύμπαντα",
+      "lemma": "σύμπας",
+      "gloss": "the whole universe"
+    },
+    {
+      "form": "ἑωσφόρου",
+      "lemma": "ἑωσφόρος",
+      "gloss": "morning star"
+    },
+    {
+      "form": "καταυγάζεται",
+      "lemma": "καταυγάζω",
+      "gloss": "is lit up"
+    },
+    {
+      "form": "ἀγάλλεται",
+      "lemma": "ἀγάλλομαι",
+      "gloss": "exults"
+    },
+    {
+      "form": "Θαρσεῖτε",
+      "lemma": "θαρσέω",
+      "gloss": "take courage"
+    },
+    {
+      "form": "νενίκηκα",
+      "lemma": "νικάω",
+      "gloss": "I have overcome"
+    },
+    {
+      "form": "ἀόρατον",
+      "lemma": "ἀόρατος",
+      "gloss": "invisible"
+    },
+    {
+      "form": "εἰκότως",
+      "lemma": "εἰκότως",
+      "gloss": "rightly"
+    },
+    {
+      "form": "ἀποισόμεθα",
+      "lemma": "ἀποφέρω",
+      "gloss": "we shall win"
+    },
+    {
+      "form": "Παραμείνωμεν",
+      "lemma": "παραμένω",
+      "gloss": "let us stay beside"
+    },
+    {
+      "form": "σωτηριώδει",
+      "lemma": "σωτηριώδης",
+      "gloss": "saving"
     },
     {
       "form": "σταυρῷ",
-      "gloss": "cross",
-      "lemma": "σταυρός"
+      "lemma": "σταυρός",
+      "gloss": "cross"
+    },
+    {
+      "form": "ἀπαρχὰς",
+      "lemma": "ἀπαρχή",
+      "gloss": "first fruits"
+    },
+    {
+      "form": "ἀπενεγκώμεθα",
+      "lemma": "ἀποφέρω",
+      "gloss": "we may win"
+    },
+    {
+      "form": "δᾳδουχίαις",
+      "lemma": "δᾳδουχία",
+      "gloss": "torchlight"
     },
     {
       "form": "ἱεραῖς",
-      "gloss": "sacred",
-      "lemma": "ἱερός"
+      "lemma": "ἱερός",
+      "gloss": "holy"
     },
     {
-      "form": "πανηγυρίσωμεν",
-      "gloss": "let us celebrate",
-      "lemma": "πανηγυρίζω"
+      "form": "πανηγυρίσωμεν",
+      "lemma": "πανηγυρίζω",
+      "gloss": "let us keep as a festival"
     },
     {
-      "form": "ἡλίος",
-      "gloss": "sun",
-      "lemma": "ἥλιος"
+      "form": "ἔνθεον",
+      "lemma": "ἔνθεος",
+      "gloss": "inspired by God"
     },
     {
-      "form": "δικαιοσύνης",
-      "gloss": "righteousness",
-      "lemma": "δικαιοσύνη"
+      "form": "ἥλιος",
+      "lemma": "ἥλιος",
+      "gloss": "sun"
     },
     {
-      "form": "ξύλον",
-      "gloss": "wood",
-      "lemma": "ξύλον"
+      "form": "δικαιοσύνης",
+      "lemma": "δικαιοσύνη",
+      "gloss": "righteousness"
     },
     {
-      "form": "θύρας",
-      "gloss": "door",
-      "lemma": "θύρα"
+      "form": "κατεφώτισεν",
+      "lemma": "καταφωτίζω",
+      "gloss": "has lit up"
     },
     {
-      "form": "οὐρανοῦ",
-      "gloss": "heaven",
-      "lemma": "οὐρανός"
+      "form": "ἀνέτειλεν",
+      "lemma": "ἀνατέλλω",
+      "gloss": "rose"
     },
     {
-      "form": "Λόγον",
-      "gloss": "Word",
-      "lemma": "λόγος"
+      "form": "διέσωσεν",
+      "lemma": "διασῴζω",
+      "gloss": "saved"
     },
     {
-      "form": "Νόμον",
-      "gloss": "Law",
-      "lemma": "νόμος"
+      "form": "ἀπιστείτω",
+      "lemma": "ἀπιστέω",
+      "gloss": "let him distrust"
+    },
+    {
+      "form": "συμβόλοις",
+      "lemma": "σύμβολον",
+      "gloss": "emblems"
+    },
+    {
+      "form": "τρισμακάριον",
+      "lemma": "τρισμακάριος",
+      "gloss": "thrice-blessed"
+    },
+    {
+      "form": "ξύλον",
+      "lemma": "ξύλον",
+      "gloss": "wood"
+    },
+    {
+      "form": "προσκυνείτω",
+      "lemma": "προσκυνέω",
+      "gloss": "let him worship"
+    },
+    {
+      "form": "θύρας",
+      "lemma": "θύρα",
+      "gloss": "doors"
+    },
+    {
+      "form": "λύχνον",
+      "lemma": "λύχνος",
+      "gloss": "lamp"
+    },
+    {
+      "form": "μόδιον",
+      "lemma": "μόδιος",
+      "gloss": "basket"
+    },
+    {
+      "form": "λυχνίαν",
+      "lemma": "λυχνία",
+      "gloss": "lampstand"
+    },
+    {
+      "form": "Νόμον",
+      "lemma": "νόμος",
+      "gloss": "Law"
+    },
+    {
+      "form": "Λόγον",
+      "lemma": "λόγος",
+      "gloss": "Word"
+    },
+    {
+      "form": "ἐκρύπτετο",
+      "lemma": "κρύπτω",
+      "gloss": "was hidden"
+    },
+    {
+      "form": "οἰκουμένης",
+      "lemma": "οἰκουμένη",
+      "gloss": "the world"
     }
   ],
-  "pass_a_gloss": "The sky is bright with the dance of the stars, but now it rejoices more in the victory of our God and Savior, who says 'I have overcome the world'; with God overcoming the invisible enemy, we will also gain victory over the demons; let us remain with the saving cross and offer the first fruits of Jesus' gifts; let us celebrate this holy night with sacred services, singing a divine song and hymning a heavenly hymn; our Lord Jesus Christ, the sun of righteousness, has enlightened the present day and saved the faithful through the cross\nLet no one then disbelieve\nLet no one then disbelieve the symbols of the cross\nthe present of the night state not so much by stars is illuminated\nnot let anyone therefore believe\nof heaven to us having opened\nand they burn a lamp and under the modulus they gaze\ndawn-bringer\nblessed and thrice-blessed wood of the cross",
+  "pass_a_gloss": "[Heading] Of the blessed Hesychius, presbyter of Jerusalem, into the holy Pascha. [The Latin catalogue line above it is an editor's heading and is not glossed.] Bright is the heaven, being lit up by the choral dance of the stars, and brighter are all things together when the dawn-bringer is rising; but the present state of the night is shone upon not so much by stars as now it exults, our God and Savior having conquered. 'Take heart,' for, he says, 'I have conquered the world.' And God having conquered the unseen enemy, fittingly we ourselves also shall carry off the victory against demons. Let us stay, therefore, by the saving cross, so that we may carry off the first first-fruits of the gifts of Jesus. This holy night let us keep festival with holy torch processions, raising a God-filled song and singing out a heavenly hymn. 'The sun of righteousness', the Lord of us Jesus Christ, both lit up the present day for the circle of the inhabited world, rose up through cross, saved through the faithful. Let no one, then, disbelieve the symbols of the cross, but let him bow in worship to the blessed and thrice-blessed wood of the cross, and to the symbols of the cross which opened doors of heaven for us. No longer 'they kindle a lamp and under the measure-basket they set it', and basket I call the Law, 'but upon the lampstand', and lamp the Word; and under the Law was the Word and was hidden from the faithless, as under the basket; but when he came upon cross and upon the lampstand was set, then to the of the inhabited world [continues in u01-rem-early: circle he shone upon].",
   "pass_b_english": [
-    "The sky is bright with the dance of the stars, but it is even brighter with the rising of the dawn-bringer; yet the present state of the night does not gleam so much for the stars as it now rejoices in the victory of our God and Savior, who says, 'Take courage, for I have overcome the world' (John 16:33).",
-    "With God overcoming the invisible enemy, we will also gain victory over the demons.",
-    "Let us remain with the saving cross, so that we may offer the first fruits of Jesus' gifts.",
-    "Let us celebrate this holy night with sacred services, singing a divine song and hymning a heavenly hymn.",
-    "Our Lord Jesus Christ, the sun of righteousness, has enlightened the present day and saved the faithful through the cross.",
-    "Let no one then disbelieve the symbols of the cross, but let him worship the blessed and thrice-blessed wood of the cross, which has opened the doors of heaven to us.",
-    "No longer 'do they light a lamp and put it under a basket' (Matthew 5:15), for I say the basket is the Law, but the lamp is the Word; for the Word was under the Law and was hidden to the unbelieving as if under a basket; but when he came upon the cross and was placed upon the lamp, then to the..."
+    "Of the blessed Hesychius, presbyter of Jerusalem, on the Holy Pascha.",
+    "The sky is bright, lit up by the dance of the stars, and the whole universe is brighter still when the morning star rises. Yet this present night is lit up not so much by the stars as it now exults because our God and Savior has conquered. For 'Take courage,' he says, 'I have overcome the world' (John 16:33). And since God has conquered the invisible enemy, we too shall rightly win the victory over the demons. Let us, then, stay beside the saving cross, so that we may win the first fruits of the gifts of Jesus. Let us keep this holy night as a festival with holy torchlight, raising a song inspired by God and singing out a heavenly hymn. 'The sun of righteousness' (Malachi 4:2), our Lord Jesus Christ, has lit up this present day for the whole circle of the world; he rose through the cross; he saved the faithful.",
+    "Let no one, then, distrust the emblems of the cross; rather, let him worship the blessed and thrice-blessed wood of the cross, and the emblems of the cross that opened the doors of heaven to us. No longer do 'they light a lamp and put it under the basket' (Matthew 5:15), and by the basket I mean the Law, 'but on the lampstand', and by the lamp I mean the Word. For the Word was under the Law and was hidden from unbelievers, as under the basket; but when he came to the cross and was set on the lampstand, then across the world's…"
   ],
   "source_text": "Homilia i in sanctum pascha (homilia 3) (e cod. Sinaitico gr. 492)\nΤοῦ μακαρίου Ἡσυχίου, πρεσβυτέρου Ἱεροσολύμων, εἰς τὸ ἅγιον πάσχα\n1 Φαιδρὸς ὁ οὐρανὸς τῇ τῶν ἄστρων χορείᾳ καταλαμπόμε νος, φαιδρότερα δὲ\nτὰ σύμπαντα ἑωσφόρου ἀνατέλλοντος, ἀλλ' ἡ παροῦσα τῆς νυκτὸς κατάστασις οὐ\nτοσοῦτον ἄστροις καταυ γάζεται ὁπόσον νῦν ἀγάλλεται τοῦ θεοῦ καὶ σωτῆρος ἡμῶν\nνε νικηκότος· «Θαρσεῖτε» γάρ, φησίν, «ἐγὼ νενίκηκα τὸν κό σμον»· θεοῦ δὲ\nνικήσαντος τὸν ἀόρατον πολέμιον, εἰκότως καὶ αὐτοὶ τὴν κατὰ δαιμόνων νίκην\nἀποισόμεθα. Παραμείνωμεν τοί νυν τῷ σωτηριώδει σταυρῷ, ἵνα τὰς πρώτας ἀπαρχὰς\nτῶν Ἰησοῦ δώρων ἀπενεγκώμεθα. Τὴν ἱερὰν ταύτην νύκτα δᾳ δουχίαις ἱεραῖς\nπανηγυρίσωμεν, μέλος ἔνθεον ἐγείροντες καὶ ὕ μνον οὐράνιον ἐξᾴδοντες. «Ὁ τῆς\nδικαιοσύνης ἥλιος», ὁ κύριος ἡμῶν Ἰησοῦς Χριστός, καὶ τὴν παροῦσαν ἡμέραν τῷ\nκύκλῳ τῆς οἰκουμένης κατεφώτισεν, διὰ σταυροῦ ἀνέτειλεν, τοὺς πιστοὺς διέσωσεν.\n2 Μή τις τοίνυν ἀπιστείτω τοῖς τοῦ σταυροῦ συμβόλοις, ἀλλὰ τὸ μακάριον\nκαὶ τρισμακάριον ξύλον τοῦ σταυροῦ προσκυνείτω, καὶ τοῖς τοῦ σταυροῦ συμβόλοις\nτοῦ θύρας οὐρανοῦ ἡμῖν ἀνοί ξαντος. Οὐκέτι «καίουσι λύχνον καὶ ὑπὸ τὸν μόδιον\nτιθέασιν», μόδιον δέ φημι τὸν Νόμον, «ἀλλ' ἐπὶ τὴν λυχνίαν», λύχνον δὲ τὸν Λόγον·\nὑπὸ τὸν Νόμον δὲ ἐτύγχανεν καὶ ἐκρύπτετο τοῖς ἀπίστοις ὁ Λόγος ὡς ὑπὸ τὸν\nμόδιον· ὅτε δὲ ἦλθεν ἐπὶ σταυροῦ καὶ ἐπὶ τὴν λυχνίαν ἐτέθη, τότε τῷ τῆς οἰκουμένης\n",
   "variants": [],
-  "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/zai-org/glm-4.7-flash",
-  "draft_agent": "overnight-mini-cf",
-  "draft_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:@cf/meta/llama-3.3-70b-instruct-fp8-fast+rev:nvidia/nemotron-3-super-120b-a12b+rev:nvidia/nemotron-3-super-120b-a12b+rev:nvidia/nemotron-3-super-120b-a12b+rev:nvidia/nemotron-3-super-120b-a12b+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it+rev:@cf/google/gemma-4-26b-a4b-it",
-  "drafted_at": "2026-09-30T00:20:20.295398+00:00",
+  "source_normalizations": [
+    "Line-break splits joined (καταλαμπόμε νος, καταυ γάζεται, νε νικηκότος, κό σμον, τοί νυν, δᾳ δουχίαις, ὕ μνον, ἀνοί ξαντος); no letters added.",
+    "The Latin catalogue line 'Homilia i in sanctum pascha (homilia 3) (e cod. Sinaitico gr. 492)' is an editor's heading and is not translated; the section numbers 1 and 2 are kept as paragraph breaks."
+  ],
+  "reviewer": "claude (Wave A review, clause by clause against the Greek)",
+  "draft_agent": "claude-waveA-review",
+  "draft_model": "claude",
+  "drafted_at": "2026-10-23",
   "revisions": [
     {
-      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-      "agent": "overnight-mini-nv",
-      "at": "2026-09-29T23:14:19.690881+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260929T231342531470Z-hesychius-homilia-i-pascha--u01-open/summary.json",
-      "notes_addressed": 3
-    },
-    {
-      "model": "nvidia/nemotron-3-super-120b-a12b",
-      "agent": "overnight-mini-nv",
-      "at": "2026-09-29T23:14:56.629314+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260929T231421006364Z-hesychius-homilia-i-pascha--u01-open/summary.json",
-      "notes_addressed": 2
-    },
-    {
-      "model": "nvidia/nemotron-3-super-120b-a12b",
-      "agent": "overnight-mini-nv",
-      "at": "2026-09-29T23:40:17.020553+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260929T231457848612Z-hesychius-homilia-i-pascha--u01-open/summary.json",
-      "notes_addressed": 2
-    },
-    {
-      "model": "nvidia/nemotron-3-super-120b-a12b",
-      "agent": "overnight-mini-nv",
-      "at": "2026-09-29T23:41:08.521340+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260929T234018214523Z-hesychius-homilia-i-pascha--u01-open/summary.json",
-      "notes_addressed": 1
-    },
-    {
-      "model": "nvidia/nemotron-3-super-120b-a12b",
-      "agent": "overnight-mini-nv",
-      "at": "2026-09-29T23:42:21.561677+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260929T234109661998Z-hesychius-homilia-i-pascha--u01-open/summary.json",
-      "notes_addressed": 1
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-09-29T23:44:27.078038+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260929T234222668166Z-hesychius-homilia-i-pascha--u01-open/summary.json",
-      "notes_addressed": 4
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-09-30T00:19:14.234942+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260930T001824904358Z-hesychius-homilia-i-pascha--u01-open/summary.json",
-      "notes_addressed": 1
-    },
-    {
-      "model": "@cf/google/gemma-4-26b-a4b-it",
-      "agent": "overnight-mini-cf",
-      "at": "2026-09-30T00:20:20.314533+00:00",
-      "from_receipt": "/Users/stephansmac/SaneApps/clients/translations/outputs/ai-promote/20260930T001915564935Z-hesychius-homilia-i-pascha--u01-open/summary.json",
-      "notes_addressed": 1
+      "model": "claude",
+      "agent": "claude-waveA-review",
+      "at": "2026-10-23",
+      "from_receipt": "/Users/stephansmac/SaneApps/websites/fathers.saneapps.com/outputs/waveA-20261023/hesychius-homilia-i-pascha/rv0.json",
+      "notes_addressed": 10
     }
   ],
-  "ai_crosscheck_at": "2026-09-30T00:22:43.731756+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20260930T002217930285Z-hesychius-homilia-i-pascha--u01-open/summary.json"
+  "review_notes": [
+    "The English is the reviewer's retranslation from rv0.json; it replaces the earlier machine draft, whose wording, gloss and checks no longer apply (backup in outputs/waveA-20261023/hesychius-homilia-i-pascha/backup-cleanup/).",
+    "Row begins at the start of the homily (the Greek superscription is translated as the first paragraph) and closes mid-sentence ('then across the world's…'), joined by '…whole circle he shone out.' at the start of u01-rem-early.",
+    "Every clause checked against the Greek: the bright sky and the morning star, the night exulting in God's victory, the call to stay by the cross and keep the night with torchlight and song, the sun of righteousness, the worship of the wood and emblems of the cross, and the lamp and lampstand read as the Law and the Word.",
+    "Scripture checked: John 16:33, Malachi 4:2 (LXX Malachi 3:20, numbering converted), Matthew 5:15."
+  ]
 }
