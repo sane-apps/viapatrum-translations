@@ -392,6 +392,11 @@ def agy_reset(text: str, now: datetime) -> datetime | None:
             return datetime.fromisoformat(m.group(1).replace("Z", "+00:00"))
         except ValueError:
             pass
+    # "Resets in 0s" / "Resets in 5m30s" is a short per-model window, not a spent plan (2026-10-29: it was read as +1 h)
+    rel = re.search(r"[Rr]esets in\s+(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?\s*(?:(\d+)\s*s)?", text)
+    if rel and any(rel.groups()):
+        h, mi, se = (int(x or 0) for x in rel.groups())
+        return now + timedelta(seconds=max(30, h * 3600 + mi * 60 + se))
     return now + timedelta(seconds=DEFAULT_PAUSE_S)
 
 
