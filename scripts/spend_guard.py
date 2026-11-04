@@ -149,7 +149,9 @@ CF_AI_ALLOW = Path(os.environ.get("SANE_CF_AI_ALLOW_FILE", str(Path.home() / ".s
 
 
 def cf_ai_allowed(caller: str) -> bool:
-    """True when the owner named this exact caller in CF_AI_ALLOW, with their words."""
+    """True when the owner named this exact caller, or "*" (every caller), in CF_AI_ALLOW, with their words.
+    The "*" line (owner, 4 Nov 2026: "permission granted to use cf as needed. ill pay it.") still leaves the owner
+    hold file and every daily or job budget in force; it only lifts the CLOUDFLARE_AI_OFF switch."""
     if not caller:
         return False
     try:
@@ -160,7 +162,7 @@ def cf_ai_allowed(caller: str) -> bool:
         if not line.strip() or line.lstrip().startswith("#"):
             continue
         parts = [x.strip() for x in line.split("\t")]
-        if len(parts) >= 2 and parts[0] == caller and parts[1]:
+        if len(parts) >= 2 and parts[0] in (caller, "*") and parts[1]:
             return True
     return False
 

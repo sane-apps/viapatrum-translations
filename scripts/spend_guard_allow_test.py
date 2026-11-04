@@ -38,6 +38,18 @@ class Allow(unittest.TestCase):
         G.CF_AI_ALLOW.write_text("search_sync.ai\n# search_sync.ai\tcomment\nsearch_sync.ai\t\t2026-11-04\n")
         self.assertIn("switched off", G.hold_reason("search_sync.ai"))
 
+    def test_star_line_allows_every_named_caller_but_not_a_blank_one(self):
+        G.CF_AI_ALLOW.write_text("*\tpermission granted to use cf as needed. ill pay it.\t2026-11-04\n")
+        self.assertEqual(G.hold_reason("cf_tts"), "")
+        self.assertEqual(G.hold_reason("search_sync.ai"), "")
+        self.assertIn("switched off", G.hold_reason(""))
+        G.HOLD.write_text("owner says stop")
+        self.assertIn("owner hold", G.hold_reason("cf_tts"))
+
+    def test_star_line_without_owner_words_does_not_count(self):
+        G.CF_AI_ALLOW.write_text("*\t\t2026-11-04\n")
+        self.assertIn("switched off", G.hold_reason("cf_tts"))
+
     def test_owner_hold_still_applies_to_an_allowed_caller(self):
         G.CF_AI_ALLOW.write_text("search_sync.ai\tYes it's Pennys\t2026-11-04\n")
         G.HOLD.write_text("owner says stop")
