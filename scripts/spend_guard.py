@@ -142,12 +142,34 @@ def decide(day: dict, hour: dict, cap: float) -> tuple[bool, str]:
 
 
 CF_AI_OFF = Path(os.environ.get("SANE_CF_AI_OFF_FILE", str(Path.home() / ".sane" / "CLOUDFLARE_AI_OFF")))
+# Owner exceptions to the switch (owner 2026-11-04: "Yes it's Pennys", for the Via Patrum search index). One line
+# per caller: "<caller>\t<owner's words>\t<date>". A line without the owner's words does not count. Delete the
+# file (or the line) to revoke. Listed callers still pass the daily cap and the owner hold below.
+CF_AI_ALLOW = Path(os.environ.get("SANE_CF_AI_ALLOW_FILE", str(Path.home() / ".sane" / "CLOUDFLARE_AI_ALLOW")))
 
 
-def hold_reason() -> str:
+def cf_ai_allowed(caller: str) -> bool:
+    """True when the owner named this exact caller in CF_AI_ALLOW, with their words."""
+    if not caller:
+        return False
+    try:
+        lines = CF_AI_ALLOW.read_text(errors="replace").splitlines()
+    except OSError:
+        return False
+    for line in lines:
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        parts = [x.strip() for x in line.split("\t")]
+        if len(parts) >= 2 and parts[0] == caller and parts[1]:
+            return True
+    return False
+
+
+def hold_reason(caller: str = "") -> str:
     # Global Cloudflare AI switch (owner 2026-10-23): our Startup tier covers only $2,500 of Workers AI; once
-    # used, every call bills the owner's card. While the file exists, every gated call refuses.
-    if CF_AI_OFF.exists():
+    # used, every call bills the owner's card. While the file exists, every gated call refuses, except a caller
+    # the owner named in CF_AI_ALLOW.
+    if CF_AI_OFF.exists() and not cf_ai_allowed(caller):
         return "Cloudflare AI switched off (" + str(CF_AI_OFF) + ")"
     try:
         return "owner hold (outputs/spend/hold): " + (HOLD.read_text(errors="replace").strip()[:200] or "set")
@@ -185,7 +207,7 @@ def _status(caller: str = "") -> dict:
 
 def allow(caller: str = "") -> tuple[bool, str]:
     """The per-call gate (no reservation). Owner hold first; never raises."""
-    held = hold_reason()
+    held = hold_reason(caller)
     if held:
         return False, held
     c = _status(caller)
@@ -205,7 +227,7 @@ def reserve(caller: str, usd: float, now: float | None = None) -> tuple[bool, st
     reach the daily cap or the hourly ceiling. Never raises."""
     import threading
     import time
-    held = hold_reason()
+    held = hold_reason(caller)
     if held:
         return False, held
     c = _status(caller)
