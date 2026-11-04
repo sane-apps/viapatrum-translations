@@ -78,7 +78,7 @@ def overlap_with_kjv(clause: str, proposed) -> int:
     return verse_overlap(clause, kjv_lookup.verse_window(*proposed))
 
 
-SITE_BIBLES = Path.home() / "SaneApps/websites/fathers.saneapps.com/data/bibles"
+SITE_BIBLES = Path.home() / "SaneApps/websites/viapatrum.org/data/bibles"
 SEARCH_VERSIONS = ("web", "bsb")
 SEARCH_TOP = 3
 _search_index = None

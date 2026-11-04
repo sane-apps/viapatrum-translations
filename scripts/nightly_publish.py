@@ -5,7 +5,7 @@
 2. If zero ok claims: print SKIP, exit 0.
 3. For each promoted claim's book: rebuild the Logos source docx
    (build_pbb_docx.py --book slug --out books/slug/<docx from book.yml>).
-4. Run websites/fathers.saneapps.com/scripts/ship.sh (its own gates decide;
+4. Run websites/viapatrum.org/scripts/ship.sh (its own gates decide;
    gate failure = no deploy, old site stays).
 
 Always exits 0: publish trouble must not trip the burn fuse. The 10am
@@ -23,7 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com"
+SITE = Path.home() / "SaneApps/websites/viapatrum.org"
 
 
 def latest_summary() -> dict:

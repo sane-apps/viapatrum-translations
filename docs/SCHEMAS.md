@@ -139,7 +139,7 @@ Produced by `build_book.py`:
 ## Explore stance layer (viapatrum.org)
 
 Editorial tags for the public **Explore** timeline (`/explore/`). Stored under
-`websites/fathers.saneapps.com/data/explore/` and merged at site build into
+`websites/viapatrum.org/data/explore/` and merged at site build into
 `dist/data/explore-index.json`. These are **readings of the English/source**, not
 infallible dogma scores. Do not invent numeric “orthodoxy” rankings.
 

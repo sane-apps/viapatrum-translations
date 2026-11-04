@@ -579,7 +579,7 @@ def catchup(dry_run: bool = False) -> int:
     cr = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(cr)
     queue = json.loads((ROOT / "outputs/work-pipeline/queue.json").read_text())
-    dates_path = Path.home() / "SaneApps/websites/fathers.saneapps.com/data/author-dates.json"
+    dates_path = Path.home() / "SaneApps/websites/viapatrum.org/data/author-dates.json"
     dates = json.loads(dates_path.read_text(encoding="utf-8")) if dates_path.is_file() else {}
     linker = BibleLinker()
     built, rebuilt, skipped, failed, plan = [], [], [], [], []
@@ -702,7 +702,7 @@ def catchup(dry_run: bool = False) -> int:
 def _site_words() -> dict[str, int]:
     """Reader-column word counts from the built site, when it is on disk."""
     import html as html_mod
-    root = Path.home() / "SaneApps/websites/fathers.saneapps.com/dist/works"
+    root = Path.home() / "SaneApps/websites/viapatrum.org/dist/works"
     out: dict[str, int] = {}
     if not root.is_dir():
         return out
@@ -779,7 +779,7 @@ def shelf(limit: int) -> int:
     queue = json.loads((ROOT / "outputs/work-pipeline/queue.json").read_text(encoding="utf-8"))
     running = {slug for slug, row in queue.items() if row.get("result") == "running"}
     words = _site_words()
-    dates_path = Path.home() / "SaneApps/websites/fathers.saneapps.com/data/author-dates.json"
+    dates_path = Path.home() / "SaneApps/websites/viapatrum.org/data/author-dates.json"
     author_dates = json.loads(dates_path.read_text(encoding="utf-8"))
 
     def author_is_dated(author: str) -> bool:
@@ -868,13 +868,13 @@ def shelf(limit: int) -> int:
                 "check_research", ROOT / "scripts" / "check_research.py")
             cr = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(cr)
-            dates_path = Path.home() / "SaneApps/websites/fathers.saneapps.com/data/author-dates.json"
+            dates_path = Path.home() / "SaneApps/websites/viapatrum.org/data/author-dates.json"
             dates = json.loads(dates_path.read_text(encoding="utf-8"))
             brief_path = ROOT / "books" / slug / "work_brief.json"
             title_en = ""
             if brief_path.is_file():
                 title_en = str(json.loads(brief_path.read_text(encoding="utf-8")).get("title_en") or "").strip()
-            page = Path.home() / f"SaneApps/websites/fathers.saneapps.com/dist/works/{slug}/index.html"
+            page = Path.home() / f"SaneApps/websites/viapatrum.org/dist/works/{slug}/index.html"
             if page.is_file():
                 import html as html_mod
                 found = re.search(r"<h1>(.*?)</h1>", page.read_text(encoding="utf-8", errors="replace"))

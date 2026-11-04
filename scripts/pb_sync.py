@@ -46,7 +46,7 @@ from pipeline.verify_docx import logos_file_problems  # noqa: E402
 # The site build's list of published works. A Logos description links to the
 # work page only when the page exists (an unpublished slug is a 404).
 SITE_CATALOG = os.path.expanduser(
-    "~/SaneApps/websites/fathers.saneapps.com/dist/app/v1/catalog.json")
+    "~/SaneApps/websites/viapatrum.org/dist/app/v1/catalog.json")
 WORK_URL = "https://viapatrum.org/works/{slug}/"
 
 

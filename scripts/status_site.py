@@ -28,7 +28,7 @@ from datetime import datetime
 from pathlib import Path
 
 HOME = Path.home()
-SITE = HOME / "SaneApps/websites/fathers.saneapps.com"
+SITE = HOME / "SaneApps/websites/viapatrum.org"
 TR = HOME / "SaneApps/clients/translations"
 OUT = TR / "outputs" / "status-site"
 sys.path.insert(0, str(SITE / "scripts"))

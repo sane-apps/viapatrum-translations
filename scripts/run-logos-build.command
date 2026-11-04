@@ -13,7 +13,7 @@ set -u
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 export SANE_TRANSLATIONS_ROOT="$HOME/SaneApps/clients/translations"
 ROOT="$HOME/SaneApps/clients/translations"
-SITE="$HOME/SaneApps/websites/fathers.saneapps.com"
+SITE="$HOME/SaneApps/websites/viapatrum.org"
 LOG="$HOME/Library/Logs/SaneApps/fathers-logos-build.out.log"
 STATUS="$ROOT/outputs/logos_runs/last-exit"
 mkdir -p "$(dirname "$STATUS")"

@@ -804,7 +804,7 @@ def inventory():
     return inv
 
 
-SITE = os.path.expanduser("~/SaneApps/websites/fathers.saneapps.com")
+SITE = os.path.expanduser("~/SaneApps/websites/viapatrum.org")
 
 
 def published_slugs():

@@ -3,7 +3,7 @@
 
 One work in (site slug), EPUB 3 + PDF out. Reads the same English the site
 reads, through the site builder's own loaders and helpers (read-only import of
-~/SaneApps/websites/fathers.saneapps.com/scripts/build_site.py), and groups
+~/SaneApps/websites/viapatrum.org/scripts/build_site.py), and groups
 sections into passages with the site's chunking rule so Contents match the
 reader page.
 
@@ -31,7 +31,7 @@ import zipfile
 from pathlib import Path
 from xml.dom import minidom
 
-SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com"
+SITE = Path.home() / "SaneApps/websites/viapatrum.org"
 PUBLISHER = "SaneApps · Via Patrum"
 SITE_URL = "https://viapatrum.org"
 # Book ids are uuid5 of the original site URL. Keep this seed so a rebuilt edition keeps its id (rename, 26 Oct 2026).

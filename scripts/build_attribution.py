@@ -75,7 +75,7 @@ for pre, entry in PREFIX.items():
         print(f"prefix {pre}: {len(hits)} matches; skipped")
         continue
     passages[hits[0]] = entry
-out = Path.home() / "SaneApps/websites/fathers.saneapps.com/data/explore/attribution.json"
+out = Path.home() / "SaneApps/websites/viapatrum.org/data/explore/attribution.json"
 out.write_text(json.dumps({"source": "Claude audit of the beliefs map, 2026-10-03", "books": books,
                            "passages": passages}, ensure_ascii=False, indent=1))
 print(f"attribution: {len(books)} books ({len(catena)} catena), {len(passages)} passages")

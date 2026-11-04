@@ -1281,7 +1281,7 @@ Keep this file lean: when a claim closes, move its row to the archive instead of
 | cyr-isa-tomos2-open | done | book2-tomos2-open | 2026-09-22 | AI cross-check (verify); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260923T034046048669Z-cyr-isa-tomos2-open |
 ## Do not claim these (owner / blocked)
 
-- Website deploy / Cloudflare Pages / edits under `websites/fathers.saneapps.com`
+- Website deploy / Cloudflare Pages / edits under `websites/viapatrum.org`
 - Logos Personal Book compile; `build_book.py` unless owner asked
 - Inventing a new book slug without `docs/WORKS_QUEUE.md` + charter
 - Any modern or ANF English as the reading text

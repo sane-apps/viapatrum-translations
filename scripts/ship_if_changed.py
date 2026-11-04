@@ -57,7 +57,7 @@ import time
 from pathlib import Path
 
 T = Path(__file__).resolve().parents[1]
-SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com"
+SITE = Path.home() / "SaneApps/websites/viapatrum.org"
 OUT = T / "outputs/ship-auto"
 STATE = OUT / "state.json"
 RUN_LOCK = OUT / "run.lock"  # a directory; its "pid" file holds "<pid> <start epoch>"

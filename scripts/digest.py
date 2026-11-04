@@ -13,7 +13,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com"
+SITE = Path.home() / "SaneApps/websites/viapatrum.org"
 OUT = Path.home() / "SaneApps/outputs/fathers-overnight"
 
 

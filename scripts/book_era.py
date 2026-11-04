@@ -10,7 +10,7 @@ from functools import lru_cache
 from pathlib import Path
 
 T = Path.home() / "SaneApps/clients/translations"
-DATES = json.loads((Path.home() / "SaneApps/websites/fathers.saneapps.com/data/author-dates.json").read_text())
+DATES = json.loads((Path.home() / "SaneApps/websites/viapatrum.org/data/author-dates.json").read_text())
 # Writers missing from the site's date list, by death (or floruit) year.
 EXTRA = {"Cyril of Jerusalem": 386, "Macarius the Egyptian": 391,
          "Origen (anthology by Basil & Gregory)": 254}

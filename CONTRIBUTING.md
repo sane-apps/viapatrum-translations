@@ -1,6 +1,6 @@
 # Contributing
 
-Same four ways as https://fathers.saneapps.com/contribute/
+Same four ways as https://viapatrum.org/contribute/
 
 1. [Donate](https://github.com/sponsors/MrSaneApps)
 2. [Buy a Mac app](https://saneapps.com) — one-time purchase, no subscription
@@ -30,7 +30,7 @@ Per book (`books/<slug>/`):
 Enforcement (automatic, not advisory):
 
 - `python3 scripts/check_research.py` fails the site ship
-  (`websites/fathers.saneapps.com scripts/ship.sh`) and the Logos
+  (`websites/viapatrum.org scripts/ship.sh`) and the Logos
   driver preflight (`scripts/logos_build.py`) on any violation:
   missing/unsourced files, unsourced dates, or intro/dates drift.
 - When sources conflict (it happens — Le Blanc's birth year was wrong

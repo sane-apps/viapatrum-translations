@@ -1,7 +1,7 @@
 # Beliefs map: where did this belief come from?
 
 Owner-approved 2026-10-03. Code: `scripts/doctrine_map.py`. Data:
-`websites/fathers.saneapps.com/data/explore/doctrines.json` (definitions) and
+`websites/viapatrum.org/data/explore/doctrines.json` (definitions) and
 `doctrine_map.json` (results). This file is the spec; change it before
 changing the method.
 

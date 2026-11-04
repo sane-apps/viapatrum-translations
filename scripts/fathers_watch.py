@@ -36,7 +36,7 @@ from pathlib import Path
 
 HOME = Path.home()
 REPO = HOME / "SaneApps/clients/translations"
-SITE = HOME / "SaneApps/websites/fathers.saneapps.com"
+SITE = HOME / "SaneApps/websites/viapatrum.org"
 LA = HOME / "Library/LaunchAgents"
 LOGS = HOME / "Library/Logs/SaneApps"
 WP = REPO / "outputs/work-pipeline"

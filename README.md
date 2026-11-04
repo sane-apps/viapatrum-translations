@@ -1,12 +1,12 @@
 # Church Fathers Translation Project
 
-New English from locked public-domain Greek and Latin for private study and for the free public library at [fathers.saneapps.com](https://fathers.saneapps.com).
+New English from locked public-domain Greek and Latin for private study and for the free public library at [viapatrum.org](https://viapatrum.org).
 
 **License:** [MIT](LICENSE).
 
 ## How to use
 
-- Browse the public library: [fathers.saneapps.com](https://fathers.saneapps.com)
+- Browse the public library: [viapatrum.org](https://viapatrum.org)
 - Clone this repo to inspect sources, translation JSON, claims, and tooling
 - Point an AI at a claim slice via [docs/START_HERE.md](docs/START_HERE.md)
 - Spot-check Greek/Latin and open a correction: [new issue](https://github.com/sane-apps/translations/issues/new?template=correction.yml)
@@ -17,7 +17,7 @@ This repo does **not** claim every treatise is complete. It is **not** permissio
 
 ## Help
 
-This library is free. Pick one. None of these is required to read. Same list: https://fathers.saneapps.com/contribute/
+This library is free. Pick one. None of these is required to read. Same list: https://viapatrum.org/contribute/
 
 1. [Donate](https://github.com/sponsors/MrSaneApps)
 2. [Buy a Mac app](https://saneapps.com) — one-time purchase, no subscription
@@ -37,8 +37,8 @@ Heavy edition PDFs are gitignored. Locked Greek/Latin lives in `books/*/translat
 
 ## Legal stance (usage notes)
 
-Private study by default. New English from allowed public-domain / permitted source text. Public mirror: fathers.saneapps.com. No paywall on the library; support via [GitHub Sponsors](https://github.com/sponsors/MrSaneApps).
+Private study by default. New English from allowed public-domain / permitted source text. Public mirror: viapatrum.org. No paywall on the library; support via [GitHub Sponsors](https://github.com/sponsors/MrSaneApps).
 
 ## Fathers site UX gate
 
-When shipping books to fathers.saneapps.com, agents must read `websites/fathers.saneapps.com/AGENTS.md` → Standing UX rules and acknowledge them before UI/tip work.
+When shipping books to viapatrum.org, agents must read `websites/viapatrum.org/AGENTS.md` → Standing UX rules and acknowledge them before UI/tip work.

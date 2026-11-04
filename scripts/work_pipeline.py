@@ -1737,7 +1737,7 @@ def real_flags(items: list) -> list:
     return [u for u in items if isinstance(u, dict) and not _APPROVAL.search(str(u.get("why", "")))]
 
 
-SITE_DATES = Path.home() / "SaneApps/websites/fathers.saneapps.com/data/author-dates.json"
+SITE_DATES = Path.home() / "SaneApps/websites/viapatrum.org/data/author-dates.json"
 
 
 def author_dates(slug: str) -> tuple[str, str]:
@@ -2274,7 +2274,7 @@ def promote_applied(slug: str, written: list[Path]) -> None:
 
 # ---------------------------------------------------------------- library queue
 
-SITE_SCRIPTS = Path.home() / "SaneApps/websites/fathers.saneapps.com/scripts"
+SITE_SCRIPTS = Path.home() / "SaneApps/websites/viapatrum.org/scripts"
 QUEUE_LOG = STAGE / "queue.json"
 # Finish list (owner 2026-10-15 "nothing new until sales"; 2026-10-16 "isnt
 # burning tokens for no reason"). While STAGE/finish_only.json exists, lanes take only the

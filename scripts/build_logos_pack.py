@@ -10,7 +10,7 @@ English; rebuild it with build_pbb_docx.py --catchup. Only works
 the site build published go in (--app-dir, required): the pack never carries
 a withheld or retired work.
 
-  python3 scripts/build_logos_pack.py --app-dir ~/SaneApps/websites/fathers.saneapps.com/dist/app/v1
+  python3 scripts/build_logos_pack.py --app-dir ~/SaneApps/websites/viapatrum.org/dist/app/v1
 """
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ sys.path.insert(0, str(ROOT))
 from pipeline.book_meta import unquote_scalar  # noqa: E402
 from pipeline.verify_docx import logos_file_problems  # noqa: E402
 BOOKS = ROOT / "books"
-SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com/dist/works"
+SITE = Path.home() / "SaneApps/websites/viapatrum.org/dist/works"
 OUT = ROOT / "outputs" / "logos-share"
 # Cloudflare Pages rejects a single file over 25 MB. Each part stays under this.
 PART_LIMIT = 18 * 1024 * 1024

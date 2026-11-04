@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com"
+SITE = Path.home() / "SaneApps/websites/viapatrum.org"
 DAYS = 14
 
 

@@ -33,7 +33,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com"
+SITE = Path.home() / "SaneApps/websites/viapatrum.org"
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(SITE / "scripts"))
 import book_era  # noqa: E402

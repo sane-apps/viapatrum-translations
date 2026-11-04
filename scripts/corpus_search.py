@@ -32,7 +32,7 @@ import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = Path.home() / "SaneApps/websites/fathers.saneapps.com"
+SITE = Path.home() / "SaneApps/websites/viapatrum.org"
 INDEX = ROOT / "outputs" / "corpus-index" / "sections.jsonl"
 RAW_INDEX = ROOT / "outputs" / "corpus-index" / "raw.jsonl"
 RAW_CHUNK = 3000

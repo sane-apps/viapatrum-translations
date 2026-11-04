@@ -14,7 +14,7 @@ Rules (see CONTRIBUTING.md "Research SOP"):
      SKIP_AUTHORS are exempt from rule 4 only.
 
 Exit 0 when clean, 1 with messages otherwise. Wired into
-websites/fathers.saneapps.com scripts/ship.sh and the Logos
+websites/viapatrum.org scripts/ship.sh and the Logos
 driver preflight, so neither output ships unsourced words.
 """
 from __future__ import annotations
@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from pb_sync import load_yml  # noqa: E402
 
 SITE_DATES = os.path.expanduser(
-    "~/SaneApps/websites/fathers.saneapps.com/data/author-dates.json")
+    "~/SaneApps/websites/viapatrum.org/data/author-dates.json")
 SKIP_AUTHORS = {"ante-nicene-topics"}  # multi-author volumes
 ERRORS: list[str] = []
 

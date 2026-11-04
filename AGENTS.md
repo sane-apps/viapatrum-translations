@@ -26,11 +26,11 @@ Owner / deep work:
 5. Multi-agent coordination: `docs/CLAIMS.md` + `docs/START_HERE.md` (do not invent a second queue).
 6. AI promote → `done` (no standing human review gate): `docs/AI_CROSSCHECK.md`. Overnight burn is **Mini only**, calendar 21:10 local, flock locks — do not start a second burn while global/claim locks are held (promote exit `3`).
 
-## Fathers site standing UX (when shipping to fathers.saneapps.com)
+## Fathers site standing UX (when shipping to viapatrum.org)
 
 Before any Fathers reader/UI work or tip ship, read and acknowledge in working notes:
 
-`~/SaneApps/websites/fathers.saneapps.com/AGENTS.md` → **Standing UX rules**.
+`~/SaneApps/websites/viapatrum.org/AGENTS.md` → **Standing UX rules**.
 
 Summary (full text lives on the site repo):
 
@@ -67,7 +67,7 @@ books/<slug>/      one corpus per book (sources, translations, build)
 - Translator notes use **Headword TN marks** (`[[ⁿ >> Headword:TN n]]` + notes section). **Never Word footnotes** — Logos PBB does not compile them; hover falls back to the book blurb. `verify_docx` fails if `word/footnotes.xml` is present.
 - `[[@Headword:…]]` must be its **own paragraph** after a clean heading — never glued into the heading text (pollutes ArticleCache TOC titles).
 - Headings keep PLAIN dot-form verse refs (`Jeremiah 1.1`) — never `[[… >> Bible:…]]` in a heading (proven 2026-09-17: one orphan-milestone warning per linked heading). `pipeline.bible_links.link_heading_verses` strips heading markup to display text. `[[… >> …]]` is native PB markup in body text — never “fix” it away and never add Word hyperlinks for Bible links.
-- **Fathers site reader (permanent):** when a book ships to `fathers.saneapps.com`, presentation follows `~/SaneApps/websites/fathers.saneapps.com/AGENTS.md` → *Works reader SOP*. Section `title` / `head` must name the **thought**, not a bare edition locus (`1.5.16`, `Against Julian 1.5.16`). Gospel-fragment works are the exception for *biblical* loci: use plain English (`Matthew 1:16`) as the reader title/TOC label, sort Contents by chapter then verse, and keep `CPG … fr.N` only in `scholar_label` / About / apparatus. Consecutive sections that share one editorial thought title are one passage on the site; Contents lists each thought once. Do not invent a one-click-per-section browsing UX.
+- **Fathers site reader (permanent):** when a book ships to `viapatrum.org`, presentation follows `~/SaneApps/websites/viapatrum.org/AGENTS.md` → *Works reader SOP*. Section `title` / `head` must name the **thought**, not a bare edition locus (`1.5.16`, `Against Julian 1.5.16`). Gospel-fragment works are the exception for *biblical* loci: use plain English (`Matthew 1:16`) as the reader title/TOC label, sort Contents by chapter then verse, and keep `CPG … fr.N` only in `scholar_label` / About / apparatus. Consecutive sections that share one editorial thought title are one passage on the site; Contents lists each thought once. Do not invent a one-click-per-section browsing UX.
 - **Two-pass translation (permanent):** `books/ante-nicene-topics/docs/TRANSLATION_QA.md` and `books/ante-nicene-topics/docs/STYLE.md`. Pass A is a complete English sense gloss of every clause in the locked source plus key lemmas (**accuracy**). Pass B is modern literary English a reader can say aloud, lemma-constrained by A (**beautiful prose**). Do not copy B into A; do not ship a near-copy gloss, hyphen interlinear, genitive calque, or archaic King James diction as B; do not add or drop a claim while polishing. A `source_verified` receipt with A==B is not a pass. Gate: `pipeline/check_pass_ab.py`.
 - **Muse-only lane (permanent, owner 2026-10-18):** when Muse drafts directly, hard sections get a fresh subagent critic that glosses the locked source blind before seeing the draft, plus a recorded lexicon/grammar lookup for every unsure construction. That pair may promote Muse drafts only; it never edits files and never claims two model families. Easy sections skip the critic. Full lane: `docs/AI_CROSSCHECK.md` → “Muse-only lane”. **Superseded for new work (owner 2026-10-19):** the work_pipeline lanes now run on the plans profile (Muse drafts; Claude Sonnet + Grok check; limit-aware via `scripts/plan_calls.py`), because Muse's own critic passed real meaning errors. See `docs/AI_CROSSCHECK.md` → “Plans lanes”.
 - **Densify self-check (permanent):** after writing each new justification, run `python3 pipeline/check_pass_ab.py path/to/justification.json` on Mini and fix before the next section. On FAIL (near-copy, short Pass A, Latin-note A, hyphen gloss, archaic KJ outside quotes, calques, missing sentence shape), rewrite Pass A and/or Pass B in place — do not leave failures for the parent. Also run `--tip-ready` on the english/source pair before claiming the slice done. Free/scribe agents must not ask the parent to repair gate failures they can fix.
@@ -77,7 +77,7 @@ books/<slug>/      one corpus per book (sources, translations, build)
 - Never claim Bible-link success from click-return alone. Re-read live UI (screenshot/AX) or get owner confirmation; name what the surface shows.
 - After Logos Build, hover a TN mark: it must open `TN n`, not the resource description.
 - Do not purchase sources or publish publicly unless the owner asks.
-- Public site for these corpora: `~/SaneApps/websites/fathers.saneapps.com` (Topics + Works). Extend books here, then rebuild/deploy the site.
+- Public site for these corpora: `~/SaneApps/websites/viapatrum.org` (Topics + Works). Extend books here, then rebuild/deploy the site.
 - **One book per work (permanent, owner 2026-09-17):** never merge into a mega-volume. Single Author field, single cover/description, all-or-nothing rebuilds, and compile size limits all punish merging. Shelf unity comes from a Logos **Collection** grouping the books, not from combining files.
 - **Two-machine sync (permanent, owner 2026-09-17):** Mini `main` holds the full corpus (~400 works); Air holds a narrow shipping branch (8 books). Same slugs exist on both with divergent content. Before ANY sync/copy/commit/merge discussion: report `hostname`, branch, `git status --short`, and `books/` dir count on BOTH machines plus merge-base to `origin/main`. Reconcile via git merge through origin — never rsync/copy trees across machines, never delete working trees or `git clean` either side. Uncommitted work on either machine is presumed valuable.
 
@@ -92,9 +92,9 @@ python3 -m pipeline.check_pbb_guards                  # optional standalone
 # On Air, after Logos Build:
 python3 -m pipeline.verify_logos_db --title-substr "Julian"
 # Public library (after English is ready):
-cd ~/SaneApps/websites/fathers.saneapps.com && python3 scripts/build_site.py
+cd ~/SaneApps/websites/viapatrum.org && python3 scripts/build_site.py
 ```
 
 ## Done means
 
-DOCX receipt green + Logos Build 0 errors/0 warnings + clean ArticleCache titles + TN hover opens `TN n` (not the book blurb) + owner- or screenshot-confirmed Bible-link navigation. When the corpus is public-ready, fathers.saneapps.com lists the work with topic cross-refs.
+DOCX receipt green + Logos Build 0 errors/0 warnings + clean ArticleCache titles + TN hover opens `TN n` (not the book blurb) + owner- or screenshot-confirmed Bible-link navigation. When the corpus is public-ready, viapatrum.org lists the work with topic cross-refs.
