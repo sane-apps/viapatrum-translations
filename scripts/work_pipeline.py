@@ -70,7 +70,8 @@ STAGE = ROOT / "outputs" / "work-pipeline"
 RECEIPTS = Path.home() / "SaneApps/infra/SaneProcess/outputs/llm-api-research"
 
 def _drafter_family(model: str) -> str:
-    for name in ("gpt-oss", "deepseek", "kimi", "glm", "llama", "mistral", "gemma", "nemotron", "qwen", "muse", "claude", "grok"):
+    for name in ("gpt-oss", "deepseek", "kimi", "glm", "llama", "mistral", "gemma", "nemotron", "qwen", "muse", "claude", "grok",
+                 "gemini"):
         if name in model.lower():
             return name
     return model.rsplit("/", 1)[-1]
@@ -134,8 +135,60 @@ FOLLOW_BAR = 4          # legacy single bar (kept for reports)
 # confirmed garbled / meaning / Scripture / speaker finding left. The two
 # reader models routinely differ by a point on the same text, so "both >= 4"
 # stalled every work.
-FOLLOW_MIN = 3
-FOLLOW_AVG = 3.5
+# WP_FOLLOW_MIN / WP_FOLLOW_AVG: a reader pair calibrated on another scale sets its own bar
+# (free lanes 2026-11-06, outputs/plan-limits/FREE_READER_CALIBRATION_20261106.md). The
+# defaults are the bar set on Kimi + GLM.
+FOLLOW_MIN = float(os.environ.get("WP_FOLLOW_MIN", "3"))
+FOLLOW_AVG = float(os.environ.get("WP_FOLLOW_AVG", "3.5"))
+CF_AI_OFF = Path(os.environ.get("SANE_CF_AI_OFF_FILE", str(Path.home() / ".sane" / "CLOUDFLARE_AI_OFF")))
+# Web search for intro facts is the Cloudflare AI Gateway search (billed). WP_WEBSEARCH=0 turns it
+# off, and it is off while ~/.sane/CLOUDFLARE_AI_OFF exists.
+WEBSEARCH_ON = os.environ.get("WP_WEBSEARCH", "1") != "0"
+
+
+def websearch_enabled() -> bool:
+    return WEBSEARCH_ON and not CF_AI_OFF.exists()
+
+
+def uses_cloudflare() -> bool:
+    """True when any configured role or the intro web search would call Cloudflare."""
+    models = [DRAFTER, FALLBACK, *CHECKERS, *JUDGES, *REFEREES]
+    return websearch_enabled() or any(str(m).startswith("@cf/") for m in models if m)
+
+
+def family_problems() -> list[str]:
+    """No model checks its own draft: the drafter (who also repairs) shares no family with a
+    checker or the referee, and the two checkers are two families. Readers never see the
+    source, so they are not part of this rule."""
+    fam = _drafter_family
+    out = []
+    checkers = [fam(m) for m in CHECKERS if m]
+    if len(checkers) != 2 or len(set(checkers)) != 2:
+        out.append(f"checkers must be two different families: {CHECKERS}")
+    if fam(DRAFTER) in checkers:
+        out.append(f"drafter {DRAFTER} shares a family with a checker {CHECKERS}")
+    for r in REFEREES:
+        if fam(r) == fam(DRAFTER):
+            out.append(f"referee {r} shares a family with the drafter {DRAFTER}")
+        if fam(r) in checkers:
+            out.append(f"referee {r} shares a family with a checker {CHECKERS}")
+    return out
+
+
+def drafter_paused() -> str:
+    """Why the drafter cannot answer for longer than a call may wait ('' when it can). Drafting
+    and repair need it; a book whose sections all passed does not."""
+    try:
+        import plan_calls
+        plan = plan_calls.plan_of(DRAFTER)
+        if not plan:
+            return ""
+        until = plan_calls.paused_until(plan)
+        if until and (until - plan_calls._now()).total_seconds() > plan_calls.MAX_WAIT_S:
+            return f"drafter {DRAFTER} paused until {until.isoformat()}"
+    except Exception:  # noqa: BLE001  an unreadable plan state is not a pause
+        return ""
+    return ""
 
 
 FRAGMENT_WORDS = 1000   # under this, readers lack context; require min only
@@ -1263,6 +1316,24 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
             tries.write_text("2")
             log(slug, f"{sec['id']}: hold fallback model is not a certified pass")
             return j
+        if j.get("_status") == "pass" and needs_recheck(j):
+            # Re-check, do not redraft: the staged English goes through the current checker pair
+            # (repair and referee as usual) and passes only on their verdict.
+            log(slug, f"{sec['id']}: re-check of a pass by {(j.get('checks') or {}).get('checkers')} with {CHECKERS}")
+            j = {**j, "_status": "recheck", "previous_checks": j.get("checks"),
+                 "previous_check_history": j.get("check_history")}
+            j.pop("checks", None)
+            j.pop("check_history", None)
+            before = jpath.read_text()
+            out = check_rounds(slug, sec, j, brief, langname, jpath)
+            if out.get("_status") != "pass" and str(out.get("_why", "")).startswith("checker unavailable") \
+                    and not out.get("check_history", [{}])[0].get("confirmed"):
+                # A checker that did not answer (plan budget, outage) is no verdict: keep the old
+                # pass for the next run instead of a hold that would buy a redraft.
+                jpath.write_text(before)
+                log(slug, f"{sec['id']}: re-check deferred (checker unavailable); earlier pass kept")
+                return json.loads(before)
+            return out
         if j.get("_status") == "pass" or (j.get("_status") == "hold" and n >= 2):
             return j
         if j.get("_status") == "hold":
@@ -1328,6 +1399,25 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
                 j = fixed
     if j is None:
         return {"section": sec["id"], "_status": "hold", "_why": "drafter failed"}
+    return check_rounds(slug, sec, j, brief, langname, jpath)
+
+
+# Free lanes 2026-11-06: a staged pass from an earlier checker pair is re-checked by the current
+# pair when WP_RECHECK_PASSES=1 (a probe found a real agency error in an October Kimi + GLM pass,
+# outputs/work-pipeline/free-lane-checker-probe-20261106.log).
+RECHECK_PASSES = os.environ.get("WP_RECHECK_PASSES", "0") == "1"
+
+
+def needs_recheck(j: dict) -> bool:
+    """A pass the current checker pair did not give (only while WP_RECHECK_PASSES=1)."""
+    if not RECHECK_PASSES or j.get("_status") != "pass":
+        return False
+    by = (j.get("checks") or {}).get("checkers") if isinstance(j.get("checks"), dict) else None
+    return sorted(by or []) != sorted(CHECKERS)
+
+
+def check_rounds(slug: str, sec: dict, j: dict, brief: dict, langname: str, jpath: Path) -> dict:
+    """Blind two-family checks, repairs and referee on one section's English; writes its verdict."""
     history = []
     for rnd in range(MAX_REPAIR_ROUNDS + 1):
         if section_gate(j, brief):
@@ -1853,7 +1943,10 @@ RESEARCH_CHECK_SYS = """For each numbered claim, is it clearly stated by the quo
 
 
 def websearch(query: str, limit: int = 6) -> list[dict]:
-    """Cloudflare Web Search API (AI Gateway 'default'; owner 2026-10-02: use CF credits)."""
+    """Cloudflare Web Search API (AI Gateway 'default'; owner 2026-10-02: use CF credits).
+    No call while it is switched off (websearch_enabled)."""
+    if not websearch_enabled():
+        return []
     import urllib.request
     acct = os.environ.get("CLOUDFLARE_ACCOUNT_ID", "2c267ab06352ba2522114c3081a8c5fa")
     body = json.dumps({"query": query, "provider": WEBSEARCH_PROVIDER, "limit": limit,
@@ -1876,6 +1969,11 @@ def research(slug: str, brief: dict) -> dict:
     path = STAGE / slug / "research.json"
     if path.exists():
         return json.loads(path.read_text())
+    if not websearch_enabled():
+        # Nothing cached: the intro uses the brief alone, and a later run with search on can
+        # still add sourced facts (an empty file here would stop that for good).
+        log(slug, "research: web search off (WP_WEBSEARCH=0 or Cloudflare AI off); intro from the brief only")
+        return {}
     meta = book_meta(slug)
     author, dates = author_dates(slug)
     title_en, title_src = brief.get("title_en") or meta.get("title", slug), meta.get("title_latin") or meta.get("title", "")
@@ -2050,6 +2148,7 @@ def held_with_retries(slug: str, pairs: list[dict]) -> int:
 
 
 BUDGET_PAUSED = 4  # run() stopped between sections for the daily spending cap
+DRAFTER_PAUSED = 5  # run() did not start: the drafter's plan is paused and the work needs it
 
 
 def budget_stop() -> bool:
@@ -2062,6 +2161,10 @@ def budget_stop() -> bool:
         pass
     try:  # daily cap + hourly ceiling, cached 60 s (spend_guard.allow)
         import spend_guard
+        if not uses_cloudflare():
+            # Plan and NVIDIA calls only (free lanes 2026-11-06): no Cloudflare spend to cap, so
+            # the Cloudflare switch and usage read do not apply. An owner spend hold still stops.
+            return spend_guard.HOLD.exists()
         return not spend_guard.allow("work_pipeline")[0]
     except Exception:  # noqa: BLE001  fail closed
         return True
@@ -2077,6 +2180,12 @@ def run(slug: str, attempt: int | None = None) -> int:
     lang = detect_lang(pairs, meta)
     langname = LANGNAME.get(lang, "Greek")
     moves = rebalance(slug, pairs)
+    paused = drafter_paused()
+    if paused and not finish_ready(slug, pairs):  # after rebalance: staged hashes are of moved sources
+        # A held section's retry is spent before its redraft, so drafting into a long plan
+        # pause would use up retries for nothing. Only a book that needs no drafter goes on.
+        log(slug, f"skipped: {paused}; this work still needs drafting or repair")
+        return DRAFTER_PAUSED
     log(slug, f"segments: moved {len(moves)} boundaries to sentence/paragraph ends")
     log(slug, f"start: {len(pairs)} sections, {lang}, {sum(len(' '.join(p['source']).split()) for p in pairs)} source words")
     brief = make_brief(slug, pairs, lang, meta)
@@ -2190,6 +2299,9 @@ def apply(slug: str, force_partial: bool = False) -> int:
                "boundary_moves": moves,
                "brief_sha256": sha(brief_text(json.loads((STAGE / slug / 'brief.json').read_text()))),
                "followability": st["followability"], "reader_bar": reader_bar(), "applied": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+               # Who read and who refereed in this run. A resumed work keeps sections an earlier
+               # run passed, so each section names the checkers that passed it.
+               "readers": JUDGES, "referee": REFEREE,
                "sections": []}
     jdir = BOOKS / slug / "reviews" / "justifications"
     jdir.mkdir(parents=True, exist_ok=True)
@@ -2212,9 +2324,12 @@ def apply(slug: str, force_partial: bool = False) -> int:
             jname = re.sub(r"[^A-Za-z0-9_.-]", "_", p["id"]) + ".json"
             (jdir / jname).write_text(json.dumps(jj, indent=1, ensure_ascii=False))
             written.append(jdir / jname)
+            checks = j.get("checks") if isinstance(j.get("checks"), dict) else {}
             receipt["sections"].append({"section": p["id"], "source_sha256": sha("\n".join(p["source"])),
                                         "english_sha256": sha("\n".join(j["pass_b_english"])),
-                                        "justification": f"reviews/justifications/{jname}"})
+                                        "justification": f"reviews/justifications/{jname}",
+                                        "checkers": checks.get("checkers"), "drafter": j.get("drafter"),
+                                        **({"referee": checks["referee"]} if checks.get("referee") else {})})
         Path(ef).write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
         written.append(Path(ef))
         sf = rows[0][0]["src_file"]
@@ -2624,6 +2739,11 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
         prev = log_rows.get(book, {})
         if term_queue_blocked(book, prev):
             continue
+        if drafter_paused():
+            moved = [dict(p) for p in pairs]
+            rebalance(book, moved)
+            if not finish_ready(book, moved):
+                continue  # needs the drafter; run() would only skip it (no row, no attempt counted)
         if claim(book) is None:
             continue  # another lane took it between our read and now
         t0 = time.time()
@@ -2636,7 +2756,8 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
             rc = 99
             log(book, f"queue: CRASH {type(e).__name__}: {e}")
         st = status(book) if rc == 0 else {}
-        result = {3: "needs-term-decision", 2: "no-sections", 99: "crash", BUDGET_PAUSED: "paused"}.get(rc, "checked")
+        result = {3: "needs-term-decision", 2: "no-sections", 99: "crash", BUDGET_PAUSED: "paused",
+                  DRAFTER_PAUSED: "paused"}.get(rc, "checked")
         if rc == 0:
             ok = (set(st.get("sections", {})) == {"pass"} and st.get("intro_ok") and follow_ok(st.get("followability"), words))
             result = "certified" if ok and apply(book) == 0 else "held"
@@ -2789,11 +2910,18 @@ def main() -> int:
     a = ap.parse_args()
     if a.cmd != "queue" and not a.slug:
         ap.error("--slug is required")
+    if a.cmd in ("run", "queue", "intro", "brief"):
+        bad = family_problems()
+        if bad:
+            print("refusing: " + "; ".join(bad), file=sys.stderr)
+            return 2
+        # Readers call models too: an @cf/ reader is refused here while Workers AI is off.
+        receipts_ok(JUDGES, "translation-qa")
     if a.cmd == "queue":
         receipts_ok([DRAFTER], "translate")
         receipts_ok(CHECKERS + [FALLBACK], "translation-qa")
         TOKENS["cf"], TOKENS["nv"] = secret("CLOUDFLARE_API_TOKEN"), secret("NV_API_KEY")
-        if not TOKENS["cf"]:
+        if uses_cloudflare() and not TOKENS["cf"]:
             print("no Cloudflare token: load ~/.config/nv/env first", file=sys.stderr)
             return 2
         return queue(a.limit, a.max_words, a.min_words, a.unpublished)
@@ -2805,7 +2933,7 @@ def main() -> int:
     receipts_ok([DRAFTER], "translate")
     receipts_ok(CHECKERS + [FALLBACK], "translation-qa")
     TOKENS["cf"], TOKENS["nv"] = secret("CLOUDFLARE_API_TOKEN"), secret("NV_API_KEY")
-    if not TOKENS["cf"]:
+    if uses_cloudflare() and not TOKENS["cf"]:
         print("no Cloudflare token: load ~/.config/nv/env first", file=sys.stderr)
         return 2
     if a.cmd == "intro":

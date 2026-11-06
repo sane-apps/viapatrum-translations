@@ -63,7 +63,33 @@ fi
 PROFILE="$(head -1 "$OUT/lane-profile" 2>/dev/null | tr -d '[:space:]')"
 PROFILE="${PROFILE:-plans}"
 echo "$(date +%T) lane profile: $PROFILE ($(python3 scripts/plan_calls.py status 2>/dev/null))"
-if [ "$PROFILE" = plans ]; then
+# "plans-free" (owner 2026-11-06: "Free lanes", $0, smallest works first): subscription plans and
+# free NVIDIA only. No Workers AI (any @cf/ id is refused while ~/.sane/CLOUDFLARE_AI_OFF exists),
+# no Muse (account restricted 2026-11-05), no paid fallback, no Cloudflare web search for intros.
+# Families: Gemini (Antigravity, Google sign-in) drafts and repairs; Claude Sonnet + Grok build-fast
+# check (the 2026-10-19 checker bench pair); Nemotron Ultra on NVIDIA referees; the readers and
+# their bar come from outputs/plan-limits/FREE_READER_CALIBRATION_20261106.md. work_pipeline refuses
+# to start when the drafter shares a family with a checker or the referee. While the drafter's
+# plan is paused, lanes take only works whose sections all passed (read + intro + receipt).
+# Override any role with PLANS_FREE_DRAFTER / _CHECKERS / _READERS / _REFEREE / _FOLLOW_MIN / _FOLLOW_AVG.
+if [ "$PROFILE" = plans-free ]; then
+  export WP_DRAFTER="${PLANS_FREE_DRAFTER:-agy/gemini-3.8-flash-high}"
+  export WP_JUDGES="${PLANS_FREE_READERS:-claude-sonnet-5-5,grok-4.7-build-fast}"
+  # Calibration 2026-11-06 (13 books Kimi + GLM had scored): Sonnet gave 3-4 to all 10 they passed and
+  # 2 to all 3 they failed; Grok build-fast 3 to 9 of 10 passed, 2 to all 3 failed. So the live bar
+  # (no reader below 3) keeps its meaning on this pair. The mean bar (used only with WP_READ_EDITS=1)
+  # is 3.0 on their scale: the pair's means on passed books run 2.5-3.5, on failed books 2.0.
+  export WP_FOLLOW_MIN="${PLANS_FREE_FOLLOW_MIN:-3}" WP_FOLLOW_AVG="${PLANS_FREE_FOLLOW_AVG:-3.0}"
+  export WP_REFEREE="${PLANS_FREE_REFEREE:-nvidia/nemotron-3-ultra-550b-a55b}"
+  export WP_FALLBACK="" WP_WEBSEARCH=0
+  # Published works: staged passes from the old Workers AI pair are re-checked by this pair, never
+  # redrafted (a 2026-11-06 probe found a real agency error in one October Kimi + GLM pass).
+  export WP_RECHECK_PASSES=1
+  DRAFTER="$WP_DRAFTER"
+  # An NVIDIA drafter (PLANS_FREE_DRAFTER=nvidia/...) needs its own smoked "translate" receipt.
+  case "$WP_DRAFTER" in nvidia/*) NOTES="work_pipeline drafter via llm_bakeoff.vendor_call" \
+    refresh "$WP_DRAFTER" translate '{"reasoning_effort":"none"}' nvidia "$WP_DRAFTER" ;; esac
+elif [ "$PROFILE" = plans ]; then
   # Readers stay on the Workers AI pair the reader bar was set on: Sonnet + Haiku read the same
   # books 0.5 and 1 point lower and failed every book Kimi + GLM had passed (reader calibration
   # 2026-10-19, outputs/plan-limits/reader-runs.jsonl). One whole-work read per reader costs
@@ -101,6 +127,7 @@ PAIRS=("@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2")
 # and emptied the X plan's Grok Build pool, which the owner's own Grok, Grokbot and Cursor work
 # shares. Its small pool is kept for short calls (a referee candidate), capped in budgets.json.
 [ "$PROFILE" = plans ] && PAIRS=("claude-sonnet-5-5,muse")
+[ "$PROFILE" = plans-free ] && PAIRS=("${PLANS_FREE_CHECKERS:-claude-sonnet-5-5,grok-4.7-build-fast}")
 NLANE=0
 # NVIDIA referee (third family): same 3 h rule, NIM provider. Purpose-aware
 # since the beliefs job also smokes a doctrine-grade Nemotron receipt nightly.
@@ -130,11 +157,15 @@ lane() {  # name args...
 # Owner 2026-10-03 evening: spend cut from 15 lanes to 6 (~$600/day of credits
 # bought 45 small certifications). One lane per size/state group, two for small
 # unpublished works; reopened books go first (work_pipeline.queue).
+# plans-free (2026-11-06): published works only, smallest first, two lanes. Plan budgets and
+# slots (plan_calls.py: Claude 3, Grok 2 at once) bind long before lanes do, and new works wait.
+if [ "$PROFILE" != plans-free ]; then
 for n in 1 2; do lane C$n --unpublished --limit 500 --max-words 20000; done
 for n in 1; do lane E$n --unpublished --limit 500 --min-words 20000; done
+fi
 for n in 1; do lane A$n --limit 500 --max-words 2000; done
 for n in 1; do lane B$n --limit 500 --min-words 2000 --max-words 20000; done
-for n in 1; do lane D$n --limit 500 --min-words 20000; done
+[ "$PROFILE" != plans-free ] && for n in 1; do lane D$n --limit 500 --min-words 20000; done
 
 # Owner status site (private Pages project viapatrum-status behind Cloudflare
 # Access, owner email only): rebuild from the audit log each tick, deploy only

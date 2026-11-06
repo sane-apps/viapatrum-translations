@@ -1706,5 +1706,184 @@ class CrashLoopGuards(unittest.TestCase):
         self.assertFalse(W.crash_parked({"result": "held", "attempts": 60}))
         self.assertFalse(W.crash_parked({}))
 
+class FreeLaneTests(unittest.TestCase):
+    """Free lanes (2026-11-06): plan + NVIDIA models only, no Cloudflare, family rules."""
+
+    def roles(self, drafter, checkers, referees=("nvidia/nemotron-3-ultra-550b-a55b",)):
+        return [mock.patch.object(W, "DRAFTER", drafter), mock.patch.object(W, "CHECKERS", list(checkers)),
+                mock.patch.object(W, "REFEREES", list(referees))]
+
+    def problems(self, *a, **k):
+        ps = self.roles(*a, **k)
+        for p in ps:
+            p.start()
+        try:
+            return W.family_problems()
+        finally:
+            for p in ps:
+                p.stop()
+
+    def test_free_profile_families_pass(self):
+        self.assertEqual(self.problems("agy/gemini-3.8-flash-high", ["claude-sonnet-5-5", "grok-4.7-build-fast"]), [])
+
+    def test_workers_ai_profile_families_pass(self):
+        self.assertEqual(self.problems("@cf/deepseek-ai/deepseek-v4-pro-0813",
+                                       ["@cf/moonshotai/kimi-k2.6", "@cf/zai-org/glm-5.2"]), [])
+
+    def test_drafter_checking_its_own_family_refused(self):
+        bad = self.problems("muse", ["claude-sonnet-5-5", "muse"])
+        self.assertTrue(any("drafter" in b for b in bad), bad)
+        bad = self.problems("agy/claude-sonnet-4-6", ["claude-sonnet-5-5", "grok-4.7-build-fast"])
+        self.assertTrue(any("drafter" in b for b in bad), bad)
+
+    def test_same_family_checkers_refused(self):
+        bad = self.problems("agy/gemini-3.8-flash-high", ["claude-sonnet-5-5", "claude-haiku-5-5"])
+        self.assertTrue(any("two different families" in b for b in bad), bad)
+
+    def test_referee_family_rules(self):
+        bad = self.problems("nvidia/nemotron-3-ultra-550b-a55b", ["claude-sonnet-5-5", "grok-4.7-build-fast"])
+        self.assertTrue(any("referee" in b and "drafter" in b for b in bad), bad)
+        bad = self.problems("agy/gemini-3.8-flash-high", ["claude-sonnet-5-5", "grok-4.7-build-fast"],
+                            referees=["grok-4.7"])
+        self.assertTrue(any("referee" in b and "checker" in b for b in bad), bad)
+
+    def test_websearch_off_makes_no_call_and_caches_nothing(self):
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), \
+                mock.patch.object(W, "WEBSEARCH_ON", False), mock.patch.object(W, "log"), \
+                mock.patch("urllib.request.urlopen", side_effect=AssertionError("network")):
+            (Path(d) / "s").mkdir()
+            self.assertEqual(W.websearch("anything"), [])
+            self.assertEqual(W.research("s", {}), {})
+            self.assertFalse((Path(d) / "s" / "research.json").exists())
+
+    def test_cloudflare_off_file_turns_search_off(self):
+        with tempfile.TemporaryDirectory() as d:
+            off = Path(d) / "OFF"
+            with mock.patch.object(W, "CF_AI_OFF", off), mock.patch.object(W, "WEBSEARCH_ON", True):
+                self.assertTrue(W.websearch_enabled())
+                off.write_text("off")
+                self.assertFalse(W.websearch_enabled())
+
+    def test_uses_cloudflare(self):
+        ps = self.roles("agy/gemini-3.8-flash-high", ["claude-sonnet-5-5", "grok-4.7-build-fast"])
+        ps += [mock.patch.object(W, "JUDGES", ["claude-sonnet-5-5", "grok-4.7-build-fast"]),
+               mock.patch.object(W, "FALLBACK", ""), mock.patch.object(W, "WEBSEARCH_ON", False)]
+        for p in ps:
+            p.start()
+        try:
+            self.assertFalse(W.uses_cloudflare())
+            with mock.patch.object(W, "JUDGES", ["@cf/moonshotai/kimi-k2.6", "claude-sonnet-5-5"]):
+                self.assertTrue(W.uses_cloudflare())
+            with mock.patch.object(W, "FALLBACK", "@cf/qwen/qwen3.8-27b"):
+                self.assertTrue(W.uses_cloudflare())
+        finally:
+            for p in ps:
+                p.stop()
+
+    def test_budget_stop_without_cloudflare_ignores_cf_guard_but_keeps_owner_hold(self):
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), \
+                mock.patch.object(W, "uses_cloudflare", return_value=False), \
+                mock.patch.object(spend_guard, "allow", return_value=(False, "Cloudflare AI switched off")), \
+                mock.patch.object(spend_guard, "HOLD", Path(d) / "hold"):
+            self.assertFalse(W.budget_stop())
+            (Path(d) / "hold").write_text("owner")
+            self.assertTrue(W.budget_stop())
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "STAGE", Path(d)), \
+                mock.patch.object(W, "uses_cloudflare", return_value=True), \
+                mock.patch.object(spend_guard, "allow", return_value=(False, "cap")):
+            self.assertTrue(W.budget_stop())
+
+    def test_drafter_paused_only_past_max_wait(self):
+        import plan_calls
+        from datetime import timedelta
+        now = plan_calls._now()
+        with mock.patch.object(W, "DRAFTER", "agy/gemini-3.8-flash-high"), \
+                mock.patch.object(plan_calls, "paused_until", return_value=now + timedelta(days=4)):
+            self.assertIn("paused until", W.drafter_paused())
+        with mock.patch.object(W, "DRAFTER", "agy/gemini-3.8-flash-high"), \
+                mock.patch.object(plan_calls, "paused_until", return_value=now + timedelta(minutes=20)):
+            self.assertEqual(W.drafter_paused(), "")
+        with mock.patch.object(W, "DRAFTER", "@cf/deepseek-ai/deepseek-v4-pro-0813"):
+            self.assertEqual(W.drafter_paused(), "")
+
+    def test_run_skips_drafting_work_while_drafter_paused(self):
+        pairs = [{"id": "1", "source": ["λόγος"], "english": ["word"], "lang": "grc", "src_file": "", "eng_file": "",
+                  "sid": "1"}]
+        with mock.patch.object(W, "book_meta", return_value={}), mock.patch.object(W, "load_pairs", return_value=pairs), \
+                mock.patch.object(W, "drafter_paused", return_value="drafter x paused until later"), \
+                mock.patch.object(W, "finish_ready", return_value=False), mock.patch.object(W, "log"), \
+                mock.patch.object(W, "process_section", side_effect=AssertionError("drafted")), \
+                mock.patch.object(W, "make_brief", side_effect=AssertionError("brief")):
+            self.assertEqual(W.run("s"), W.DRAFTER_PAUSED)
+
+    def test_needs_recheck_only_when_on_and_pair_differs(self):
+        old = {"_status": "pass", "checks": {"checkers": ["@cf/moonshotai/kimi-k2.6", "@cf/zai-org/glm-5.2"]}}
+        cur = {"_status": "pass", "checks": {"checkers": ["grok-4.7-build-fast", "claude-sonnet-5-5"]}}
+        with mock.patch.object(W, "CHECKERS", ["claude-sonnet-5-5", "grok-4.7-build-fast"]):
+            with mock.patch.object(W, "RECHECK_PASSES", False):
+                self.assertFalse(W.needs_recheck(old))
+            with mock.patch.object(W, "RECHECK_PASSES", True):
+                self.assertTrue(W.needs_recheck(old))
+                self.assertFalse(W.needs_recheck(cur))
+                self.assertFalse(W.needs_recheck({**old, "_status": "hold"}))
+
+    def test_recheck_checks_staged_english_without_drafting(self):
+        with tempfile.TemporaryDirectory() as d:
+            stage = Path(d)
+            sdir = stage / "s" / "sections"
+            sdir.mkdir(parents=True)
+            src = ["λόγος ἐστίν"]
+            staged = {"section": "1", "_status": "pass", "pass_b_english": ["It is the Word."],
+                      "source_sha256": W.sha("\n".join(src)), "checks": {"checkers": ["@cf/a-kimi", "@cf/b-glm"]}}
+            (sdir / "1.json").write_text(json.dumps(staged))
+            pairs = [{"id": "1", "source": src, "english": ["old"], "lang": "grc"}]
+            seen = {}
+
+            def fake_rounds(slug, sec, j, brief, langname, jpath):
+                seen["j"] = j
+                return {**j, "_status": "pass"}
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "RECHECK_PASSES", True), \
+                    mock.patch.object(W, "CHECKERS", ["claude-sonnet-5-5", "grok-4.7-build-fast"]), \
+                    mock.patch.object(W, "log"), mock.patch.object(W, "source_problems", return_value=[]), \
+                    mock.patch.object(W, "draft_section", side_effect=AssertionError("drafted")), \
+                    mock.patch.object(W, "check_rounds", side_effect=fake_rounds):
+                W.process_section("s", 0, pairs, {}, "Greek")
+            self.assertEqual(seen["j"]["pass_b_english"], ["It is the Word."])
+            self.assertEqual(seen["j"]["previous_checks"], {"checkers": ["@cf/a-kimi", "@cf/b-glm"]})
+            self.assertNotIn("checks", seen["j"])
+
+    def test_recheck_with_checker_down_keeps_old_pass(self):
+        with tempfile.TemporaryDirectory() as d:
+            stage = Path(d)
+            sdir = stage / "s" / "sections"
+            sdir.mkdir(parents=True)
+            src = ["λόγος ἐστίν"]
+            staged = {"section": "1", "_status": "pass", "pass_b_english": ["It is the Word."],
+                      "source_sha256": W.sha("\n".join(src)), "checks": {"checkers": ["@cf/a-kimi", "@cf/b-glm"]}}
+            (sdir / "1.json").write_text(json.dumps(staged))
+            pairs = [{"id": "1", "source": src, "english": ["old"], "lang": "grc"}]
+
+            def down(slug, sec, j, brief, langname, jpath):
+                out = {**j, "_status": "hold", "_why": "checker unavailable",
+                       "check_history": [{"round": 0, "confirmed": 0, "error": "checker unavailable"}]}
+                jpath.write_text(json.dumps(out))
+                return out
+            with mock.patch.object(W, "STAGE", stage), mock.patch.object(W, "RECHECK_PASSES", True), \
+                    mock.patch.object(W, "CHECKERS", ["claude-sonnet-5-5", "grok-4.7-build-fast"]), \
+                    mock.patch.object(W, "log"), mock.patch.object(W, "source_problems", return_value=[]), \
+                    mock.patch.object(W, "check_rounds", side_effect=down):
+                got = W.process_section("s", 0, pairs, {}, "Greek")
+            self.assertEqual(got["_status"], "pass")
+            self.assertEqual(json.loads((sdir / "1.json").read_text()), staged)
+            self.assertFalse((sdir / "1.retries").exists())
+
+    def test_follow_bar_reads_env(self):
+        import subprocess
+        out = subprocess.run([sys.executable, "-c", "import sys; sys.path.insert(0, 'scripts'); import work_pipeline as W; "
+                              "print(W.FOLLOW_MIN, W.FOLLOW_AVG)"], cwd=str(ROOT), capture_output=True, text=True,
+                             env={**os.environ, "WP_FOLLOW_MIN": "2.5", "WP_FOLLOW_AVG": "3", "WP_FALLBACK": ""})
+        self.assertEqual(out.stdout.strip().splitlines()[-1], "2.5 3.0", out.stderr[-500:])
+
+
 if __name__ == "__main__":
     unittest.main()
