@@ -20,7 +20,7 @@ mismatches route to lane owners.
 
 - agree: second verdict matches the recorded review.
 - unconfirmed: one model disputes; logged, not routed.
-- mismatch: both dispute; routed to the owning lane (`docs/OWNERSHIP.md`).
+- mismatch: both dispute; routed to the owning lane.
 - escalated: mismatch unresolved when the next weekly run lands
   (resolution = any receipt in the book reworked).
 - error: API/parse failure; never a finding, never filed.

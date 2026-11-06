@@ -22,7 +22,7 @@ two things Logos *does* allow, automatically, for every book:
 which is what makes it appear in the owner's library on *every* device
 (Mini, Air, phone, web). A built-but-not-uploaded book exists only locally.
 
-It runs by itself every Sunday at 04:00 on the Mini (LaunchAgent
+It runs by itself every Sunday at 04:00 on the build machine (LaunchAgent
 `com.saneapps.fathers-logos-build`). Nobody clicks anything.
 
 ## What a new book needs before the pipeline will take it

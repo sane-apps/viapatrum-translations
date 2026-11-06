@@ -9,7 +9,7 @@ Owner's words: "each work should have one voice. It does NOT matter if each sepa
 - **One narrator voice per work.** Every section, chapter and part of a work (site read-along audio, downloadable audiobook, YouTube read-along) uses the same narrator voice from start to finish. Never mix narrators inside one work.
 - **Different works may use different voices.** That is fine and expected.
 - **Never require one site-wide voice.** Do not re-voice a finished, internally consistent work just to match other works or a newer default.
-- **Choose per work, in this order:** best quality, then fastest, then cheapest among Cloudflare Workers AI Aura-2 voices (and local Kokoro only if a work already records it). Muse stays available on the Mini for translation review / tie-breaks while prepaid through Nov 2, 2026, but is not a Via Patrum audiobook candidate (owner 2026-10-09: Cloudflare only; Muse too manual).
+- **Choose per work, in this order:** best quality, then fastest, then cheapest among Cloudflare Workers AI Aura-2 voices (and local Kokoro only if a work already records it). Muse stays available on the build machine for translation review / tie-breaks while prepaid through Nov 2, 2026, but is not a Via Patrum audiobook candidate (owner 2026-10-09: Cloudflare only; Muse too manual).
 - **Record the choice.** The chosen voice is written into the work's audio metadata (`outputs/audio/<work>/manifest.json` → `"voice"`, and every passage's `"voice"`). Re-runs, fixes and new sections read that recorded voice and reuse it; they do not fall back to the current global default.
 - If a fix needs a voice the work does not use (for example its engine is gone), re-voice that whole work in one new voice; never patch it in a second voice.
 - The separate Scripture-quotation voice (`CF_TTS_QUOTE_VOICE`, decided 2026-10-07) predates this rule; Owner confirmed 2026-10-09: keep the separate Scripture-quotation voice; each work uses one narrator voice plus one quote voice, both consistent throughout that work.
@@ -80,7 +80,7 @@ Full bar: `books/ante-nicene-topics/docs/TRANSLATION_QA.md`.
 - The website consumer independently checks evidence. A claim marked `done`, two model names, a nonempty file or `source_verified` alone is insufficient. The site's provisional legacy hash baseline is not certification and must never be refreshed to bypass review.
 - Preserve held files. Repair one source/translation family at a time and review changes before release. Never expand the catalogue to meet a volume target.
 
-Example packet generation (run on Mini; use actual paths):
+Example packet generation (run on the build machine; use actual paths):
 
 ```bash
 python3 -m pipeline.verify_translation_qa --english <english.json> --source <source.json> \
@@ -122,7 +122,7 @@ python3 -m pipeline.verify_logos_db --title-substr "<Title fragment>"
 ```
 
 Manual fallback (only if the driver reports a per-book failure it cannot
-clear): open `logos4:PersonalBooks` on the Mini, click the row, check the
+clear): open `logos4:PersonalBooks` on the build machine, click the row, check the
 body file, click **Build book**, wait for `LastCompiled` to flip, then
 click **Upload** and wait for `Upload successful.` Never type metadata
 into the GUI — `books/*/book.yml` is the source of truth and
@@ -135,7 +135,7 @@ Update `books/<slug>/SESSION_HANDOFF.md` and repo `SESSION_HANDOFF.md` with Last
 
 ## Mini GUI verification path
 
-AX over SSH works on the Mini (proven 2026-09-23): System Events can
+AX over SSH works on the build machine (proven 2026-09-23): System Events can
 enumerate Logos windows and click by button description, and `cliclick`
 handles row clicks. Screen capture is NOT needed — verify by outcome:
 `LastCompiled` flips in `PersonalBookManager.db` for builds,
@@ -220,7 +220,7 @@ scheduled pieces replace the manual watch:
   logos lock older than 30 min. Never touches gates, books, or deploys.
 - The watch cannot see its own unload. Two things can: the Air notifier
   below (alert `watch:stale` when status.json is over 30 min old) and
-  the Mini nightly report (`infra/SaneProcess/scripts/mini/mini-nightly.sh`,
+  the build machine nightly report (`infra/SaneProcess/scripts/mini/mini-nightly.sh`,
   08:45, one "Fathers watch" line: loaded, stale or NOT LOADED).
   `python3 scripts/status_site.py --now` prints the one pipeline block
   (live vs built vs waiting, paid shelf, last auto run and skip, git,
@@ -240,7 +240,7 @@ scheduled pieces replace the manual watch:
   `~/.local/state/fathers_watch_notified.json`. Until 2026-10-06 the Air
   ran an untracked copy of this file (no `watch:stale`). The repo copy
   with `watch:stale` is the source but, as of 2026-10-06, is untracked on
-  the Mini too: commit and push it from the Mini, then on the Air move
+  the build machine too: commit and push it from the build machine, then on the maintainer's laptop move
   the old untracked file aside and pull. No reload is needed (the Air
   plist already points at that path). Until then a stale watch shows
   only in the 08:45 nightly report and `status_site.py --now`.

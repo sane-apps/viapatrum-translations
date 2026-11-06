@@ -52,7 +52,7 @@ backward; do not decorate first.
   standard coexist.
 - A passage with no Scripture honestly has no Bible links
   (tip exemption); the book waits rather than padding.
-- Free compute is supervised compute (`docs/SUPERVISED_COMPUTE.md`).
+- Free compute is supervised compute.
 
 ## Lanes and priority governance (operational addendum, 2026-09-23)
 

@@ -64,7 +64,7 @@ Replace YourName with a real name. That takes the next free slice and prints wha
 
 Then:
 
-- Read the book’s `books/<slug>/SESSION_HANDOFF.md`.
+- If the book folder has a `SESSION_HANDOFF.md`, read it.
 - Translate only the sections on that claim.
 - **Pass A:** literal gloss + lemmas in `reviews/justifications/<id>.json` (`pass_a_gloss`). Copy an existing file in that folder for the shape.
 - **Pass B:** reading English in `translations/*_english.json` → `english[]`. Same meaning as A, in the author’s voice. Do not paste A as B. Clear Scripture quotes/allusions need **inline parenthetical refs** in that English (not only `added_allusions` / `bible_refs`).

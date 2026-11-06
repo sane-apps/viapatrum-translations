@@ -150,7 +150,7 @@ CF_AI_ALLOW = Path(os.environ.get("SANE_CF_AI_ALLOW_FILE", str(Path.home() / ".s
 
 def cf_ai_allowed(caller: str) -> bool:
     """True when the owner named this exact caller, or "*" (every caller), in CF_AI_ALLOW, with their words.
-    The "*" line (owner, 4 Nov 2026: "permission granted to use cf as needed. ill pay it.") still leaves the owner
+    The "*" line still leaves the owner
     hold file and every daily or job budget in force; it only lifts the CLOUDFLARE_AI_OFF switch."""
     if not caller:
         return False
@@ -168,8 +168,7 @@ def cf_ai_allowed(caller: str) -> bool:
 
 
 def hold_reason(caller: str = "") -> str:
-    # Global Cloudflare AI switch (owner 2026-10-23): our Startup tier covers only $2,500 of Workers AI; once
-    # used, every call bills the owner's card. While the file exists, every gated call refuses, except a caller
+    # Global Cloudflare AI switch (2026-10-23). While the file exists, every gated call refuses, except a caller
     # the owner named in CF_AI_ALLOW.
     if CF_AI_OFF.exists() and not cf_ai_allowed(caller):
         return "Cloudflare AI switched off (" + str(CF_AI_OFF) + ")"

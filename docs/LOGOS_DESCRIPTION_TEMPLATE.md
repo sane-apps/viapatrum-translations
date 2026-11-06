@@ -27,7 +27,7 @@ English was copied. Disclose if a PD English already exists.
   asks for at compile time. No cover, no upload.
 - No logosres: assets. After Build: TN hover must open TN n, not this blurb.
 
-## Compile checklist (owner on Air)
+## Compile checklist (maintainer)
 
 1. Close open panels of this personal book.
 2. Tools → Utilities → Personal Books (never Cmd+K).

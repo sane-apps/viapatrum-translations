@@ -1275,7 +1275,7 @@ Then do only that slice. Finish with `python3 scripts/ai_promote.py --claim <id>
 
 ## Done / closed
 
-Archived: older done rows now live in `docs/CLAIMS_ARCHIVE.md` (1871 rows, full commit history preserved). Do not read the archive for routine work.
+Archived: older done rows have moved out of this file.
 Keep this file lean: when a claim closes, move its row to the archive instead of letting this section grow.
 
 | cyr-isa-tomos2-open | done | book2-tomos2-open | 2026-09-22 | AI cross-check (verify); @cf/google/gemma-4-26b-a4b-it+@cf/meta/llama-3.3-70b-instruct-fp8-fast; receipt 20260923T034046048669Z-cyr-isa-tomos2-open |

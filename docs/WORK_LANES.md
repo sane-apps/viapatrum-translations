@@ -63,4 +63,3 @@ Edit `docs/work-lanes.json` (owner or lane owner). Shares should total 100
 across active lanes; the runner normalizes regardless. Record the reason in
 `docs/WORKS_QUEUE.md`.
 
-Owners and collision rules: docs/OWNERSHIP.md.

@@ -123,7 +123,7 @@ Rank-1 Origen OET queue exhausted after `origen-nt-fragments` SERIES `af9c9531` 
 
 ## Topics interest (parallel)
 
-Archived: finished series rows now live in `docs/WORKS_QUEUE_ARCHIVE.md` (394 rows, commit hashes preserved). Do not read the archive for routine work.
+Archived: finished series rows have moved out of this file.
 Keep this file lean: when a series closes out, move its row to the archive instead of letting this file grow.
 
 - **Gifts and Order** (`gifts-and-order`): keep well stocked — charismata, testing prophets, ordered ministry, Montanism as labeled debate. Prefer locked Greek/Latin + new English over ANF seed dumps.
