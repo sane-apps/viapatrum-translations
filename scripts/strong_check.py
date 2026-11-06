@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Strong source check: Claude reads the source and the English, then a
-skeptic Claude tries to refute every finding. Runs before apply() certifies.
+skeptic Claude tries to refute every finding. Run it by hand: it is not wired
+into apply(), so it does not gate certification yet.
 
 Why (re-audit 2026-10-07): the blind Kimi + GLM pair with a Nemotron referee
 passed about 1.6 real errors per section. A Claude check of 14 works it had
@@ -19,9 +20,9 @@ Results are cached per section under outputs/work-pipeline/<slug>/strong/,
 keyed by the sha256 of the source and the English, so a re-run of apply() pays
 only for sections whose text changed.
 
-The gate fails closed: if Claude is unavailable, apply() refuses.
+gate() fails closed: if Claude is unavailable, it reports failure.
 
-Usage (Mini, translations root):
+Usage (translations root):
   python3 scripts/strong_check.py check --slug <book>            # staged English, report only
   python3 scripts/strong_check.py bench [--limit N] [--workers 3] # released-14 benchmark
   python3 scripts/strong_check.py score --dir outputs/strong-check-bench/<run>
@@ -41,7 +42,8 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CLAUDE = os.environ.get("CLAUDE_BIN", str(Path.home() / ".local/bin/claude"))
+_HEADLESS = Path.home() / ".local/bin/claude-headless"  # wrapper with a long-lived login, where a machine has one
+CLAUDE = os.environ.get("CLAUDE_BIN", str(_HEADLESS if _HEADLESS.exists() else Path.home() / ".local/bin/claude"))
 MODEL = os.environ.get("STRONG_CHECK_MODEL", "opus")
 NO_TOOLS = ["Bash", "Edit", "Write", "Read", "Glob", "Grep", "WebFetch", "WebSearch", "Agent", "NotebookEdit"]
 TIMEOUT_S = 1500
