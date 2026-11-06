@@ -10,6 +10,7 @@ readers see changed since the last good auto ship:
            rebuild the shelf)
 
 Never ships when:
+  - the site repo is not on main (a branch holds staged work, not approved work),
   - the site repo has uncommitted code in scripts/, assets/ or functions/
     (unreviewed work, e.g. an agent mid-change), or git status fails,
   - another ship, build, e2e or Logos compile holds outputs/build.lock for
@@ -232,6 +233,11 @@ def site_code_gate() -> str | None:
     out: ship.sh itself rewrites those share cards on every ship, so they
     were dirty after each ship and kept auto-ship off (2026-10-07 re-audit)."""
     try:
+        head = subprocess.run(["git", "-C", str(SITE), "rev-parse", "--abbrev-ref", "HEAD"],
+                              capture_output=True, text=True, timeout=120)
+        branch = head.stdout.strip()
+        if head.returncode == 0 and branch and branch != "main":
+            return f"site repo is on {branch}, not main"
         r = subprocess.run(["git", "-C", str(SITE), "status", "--porcelain", "--", "scripts", "assets", "functions",
                             ":(exclude)assets/og"],
                            capture_output=True, text=True, timeout=120)

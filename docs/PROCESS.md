@@ -33,7 +33,7 @@ python3 scripts/work_pipeline.py status --slug <book-slug>
 python3 scripts/work_pipeline.py apply --slug <book-slug>
 ```
 
-The script reads `CLOUDFLARE_API_TOKEN` and `NV_API_KEY` from the environment. Choose your own models with `WP_DRAFTER`, `WP_CHECKERS`, `WP_JUDGES`, `WP_FALLBACK` and `WP_REFEREE`. The checker and judge defaults today are Kimi K2.6 and GLM-5.2. Keep the drafter and the checkers from different makers.
+The script reads `CLOUDFLARE_API_TOKEN` and `NV_API_KEY` from the environment. Set `CLOUDFLARE_ACCOUNT_ID` to your own account too, because the code falls back to ours. Choose your own models with `WP_DRAFTER`, `WP_CHECKERS`, `WP_JUDGES`, `WP_FALLBACK` and `WP_REFEREE`. The checker and judge defaults today are Kimi K2.6 and GLM-5.2. Keep the drafter and the checkers from different makers.
 
 **This is working code, not a packaged tool.** It was built for one setup. Before a run it checks for a model research receipt (`receipts_ok` in the script) and a spending limit ([`scripts/spend_guard.py`](../scripts/spend_guard.py)). Expect to adapt both.
 

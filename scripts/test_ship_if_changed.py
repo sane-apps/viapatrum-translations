@@ -45,7 +45,9 @@ class AutoShipTestBase(unittest.TestCase):
             p = mock.patch.object(S, k, v)
             p.start()
             self.addCleanup(p.stop)
-        p = mock.patch.object(S.subprocess, "run", lambda *a, **k: self.git)
+        on_main = subprocess.CompletedProcess([], 0, "main\n", "")
+        p = mock.patch.object(S.subprocess, "run",
+                              lambda cmd, *a, **k: on_main if "--abbrev-ref" in cmd else self.git)
         p.start()
         self.addCleanup(p.stop)
         p = mock.patch.object(S, "log", lambda msg: None)
@@ -250,7 +252,7 @@ class SiteCodeGateTests(unittest.TestCase):
             (self.site / rel).parent.mkdir(parents=True, exist_ok=True)
             (self.site / rel).write_text("v1")
         git = lambda *a: REAL_RUN(["git", "-C", str(self.site), *a], capture_output=True, check=True)  # noqa: E731
-        git("init", "-q")
+        git("init", "-q", "-b", "main")
         git("add", ".")
         git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "init")
         for k, v in {"SITE": self.site, "free_gb": lambda: 100}.items():
@@ -267,6 +269,16 @@ class SiteCodeGateTests(unittest.TestCase):
         (self.site / "assets/og/a.png").write_text("v2")
         (self.site / "assets/site.css").write_text("v2")
         self.assertEqual(S.site_code_gate(), "uncommitted site code (1 paths: assets/site.css)")
+
+    def test_staged_branch_blocks(self):
+        """A commit on a branch is staged work: the 2026-11-06 quote was one commit from auto-ship."""
+        git = ["git", "-C", str(self.site)]
+        REAL_RUN(git + ["checkout", "-q", "-B", "main"], check=True)
+        self.assertIsNone(S.site_code_gate())
+        REAL_RUN(git + ["checkout", "-q", "-b", "staged-quote"], check=True)
+        self.assertEqual(S.site_code_gate(), "site repo is on staged-quote, not main")
+        REAL_RUN(git + ["checkout", "-q", "main"], check=True)
+        self.assertIsNone(S.site_code_gate())
 
 
 if __name__ == "__main__":
