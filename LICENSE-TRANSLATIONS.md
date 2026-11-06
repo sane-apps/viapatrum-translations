@@ -7,7 +7,7 @@ The English translations in this repository, and the introductions and notes wri
 https://creativecommons.org/licenses/by/4.0/ (full legal text: https://creativecommons.org/licenses/by/4.0/legalcode).
 
 You may share and adapt them, even commercially, as long as you give credit. Please credit them as
-"Via Patrum (SaneApps)" and link to https://viapatrum.org, ideally to the passage you use.
+"Via Patrum" and link to https://viapatrum.org, ideally to the passage you use.
 
 This licence does not cover:
 

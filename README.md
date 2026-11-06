@@ -4,7 +4,7 @@ Fresh English translations from locked public-domain Greek and Latin for private
 
 **License:** two licences, by kind of file.
 
-- **The English translations** (and the introductions and notes written for them): [CC BY 4.0](LICENSE-TRANSLATIONS.md). Free to share and adapt, even commercially, as long as you credit Via Patrum (SaneApps) and link to [viapatrum.org](https://viapatrum.org).
+- **The English translations** (and the introductions and notes written for them): [CC BY 4.0](LICENSE-TRANSLATIONS.md). Free to share and adapt, even commercially, as long as you credit Via Patrum and link to [viapatrum.org](https://viapatrum.org).
 - **Code and tooling** (`pipeline/`, `scripts/`, and the rest): [MIT](LICENSE).
 - **Greek and Latin source texts** in `books/*/sources/` keep the terms of the editions and digital files they come from.
 
