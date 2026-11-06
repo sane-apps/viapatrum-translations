@@ -1,3 +1,5 @@
+> **Dated snapshot from October 5, 2026.** This describes the process as it stood that day. It is not a current status report. The process it led to is in [PROCESS.md](PROCESS.md).
+
 # Certified-translation quality audit, Oct 5 2026
 
 Read-only audit (owner: "we need to get to a provable quality level and sustainable spend"). 13 certified works stratified by language, length and author; about 1,500 words of contiguous sections each (19,031 English words). Each work: two independent Claude reviewers against the Greek/Latin (A: meaning, negation, agency, terms; B: omissions, additions, Scripture, garbled English, divine names), then an adversarial adjudicator per work (default: not an error). Workflow run wf_eca4a5cc-d22.

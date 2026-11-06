@@ -3,11 +3,9 @@
 Private study corpora for **Logos Personal Books** (PBB). Not a SaneApps product.
 English reading text only in the compiled book; Latin/source files stay in `sources/`.
 
-## Canonical host
+## Maintainer notes
 
-- **Corpus + pipeline:** `~/SaneApps/clients/translations` on Air and Mini (same relative path).
-- **Logos GUI / compile / click-test:** **MacBook Air only** (owner’s Logos library). Explicit Mini-first exception.
-- Screen Recording for remote agents on Air: run Peekaboo/`screencapture` via **Terminal.app `do script`** (direct SSH fails `CGPreflightScreenCaptureAccess`).
+Maintainers: read `AGENTS.local.md` beside this file if it exists. It holds machine and lane rules and is not in the public repo.
 
 ## Start here
 
@@ -24,7 +22,7 @@ Owner / deep work:
 3. Read `docs/SCHEMAS.md` before writing translation JSON.
 4. For an existing book, read `books/<slug>/SESSION_HANDOFF.md`.
 5. Multi-agent coordination: `docs/CLAIMS.md` + `docs/START_HERE.md` (do not invent a second queue).
-6. AI promote → `done` (no standing human review gate): `docs/AI_CROSSCHECK.md`. Overnight burn is **Mini only**, calendar 21:10 local, flock locks — do not start a second burn while global/claim locks are held (promote exit `3`).
+6. AI promote → `done` (no standing human review gate): `docs/AI_CROSSCHECK.md`. Do not start a second burn while global/claim locks are held (promote exit `3`).
 
 ## Fathers site standing UX (when shipping to viapatrum.org)
 
@@ -69,8 +67,7 @@ books/<slug>/      one corpus per book (sources, translations, build)
 - Headings keep PLAIN dot-form verse refs (`Jeremiah 1.1`) — never `[[… >> Bible:…]]` in a heading (proven 2026-09-17: one orphan-milestone warning per linked heading). `pipeline.bible_links.link_heading_verses` strips heading markup to display text. `[[… >> …]]` is native PB markup in body text — never “fix” it away and never add Word hyperlinks for Bible links.
 - **Fathers site reader (permanent):** when a book ships to `viapatrum.org`, presentation follows `~/SaneApps/websites/viapatrum.org/AGENTS.md` → *Works reader SOP*. Section `title` / `head` must name the **thought**, not a bare edition locus (`1.5.16`, `Against Julian 1.5.16`). Gospel-fragment works are the exception for *biblical* loci: use plain English (`Matthew 1:16`) as the reader title/TOC label, sort Contents by chapter then verse, and keep `CPG … fr.N` only in `scholar_label` / About / apparatus. Consecutive sections that share one editorial thought title are one passage on the site; Contents lists each thought once. Do not invent a one-click-per-section browsing UX.
 - **Two-pass translation (permanent):** `books/ante-nicene-topics/docs/TRANSLATION_QA.md` and `books/ante-nicene-topics/docs/STYLE.md`. Pass A is a complete English sense gloss of every clause in the locked source plus key lemmas (**accuracy**). Pass B is modern literary English a reader can say aloud, lemma-constrained by A (**beautiful prose**). Do not copy B into A; do not ship a near-copy gloss, hyphen interlinear, genitive calque, or archaic King James diction as B; do not add or drop a claim while polishing. A `source_verified` receipt with A==B is not a pass. Gate: `pipeline/check_pass_ab.py`.
-- **Muse-only lane (permanent, owner 2026-10-18):** when Muse drafts directly, hard sections get a fresh subagent critic that glosses the locked source blind before seeing the draft, plus a recorded lexicon/grammar lookup for every unsure construction. That pair may promote Muse drafts only; it never edits files and never claims two model families. Easy sections skip the critic. Full lane: `docs/AI_CROSSCHECK.md` → “Muse-only lane”. **Superseded for new work (owner 2026-10-19):** the work_pipeline lanes now run on the plans profile (Muse drafts; Claude Sonnet + Grok check; limit-aware via `scripts/plan_calls.py`), because Muse's own critic passed real meaning errors. See `docs/AI_CROSSCHECK.md` → “Plans lanes”.
-- **Densify self-check (permanent):** after writing each new justification, run `python3 pipeline/check_pass_ab.py path/to/justification.json` on Mini and fix before the next section. On FAIL (near-copy, short Pass A, Latin-note A, hyphen gloss, archaic KJ outside quotes, calques, missing sentence shape), rewrite Pass A and/or Pass B in place — do not leave failures for the parent. Also run `--tip-ready` on the english/source pair before claiming the slice done. Free/scribe agents must not ask the parent to repair gate failures they can fix.
+- **Densify self-check (permanent):** after writing each new justification, run `python3 pipeline/check_pass_ab.py path/to/justification.json` and fix before the next section. On FAIL (near-copy, short Pass A, Latin-note A, hyphen gloss, archaic KJ outside quotes, calques, missing sentence shape), rewrite Pass A and/or Pass B in place — do not leave failures for the parent. Also run `--tip-ready` on the english/source pair before claiming the slice done. Free/scribe agents must not ask the parent to repair gate failures they can fix.
 - **Original language is the lock (owner, 2026-10-10):** translate when the Greek or Latin can be read. A Migne scan, an older print, or a typed transcription of that print is enough. The catalog or edition is not a reason to wait. Unreadable OCR and English translations are not a lock. Name the page that was read. A copyrighted modern edition stays a history note when an older printing of the same words can be read. Check any further witness already in hand. Do not silently merge recensions or call the reading text a manuscript. See `docs/SOP.md` §1. Reader-facing: name the copy-text, the checks, and any supplied stretches in `text_history` (site “About this text”).
 - Before Logos **Build**: close other open panels of that personal book. Rebuild fails with “Could not remove existing book / close all other open panels.”
 - Personal Books fast path (permanent, 2026-09-17 — GUI setup is banned): metadata comes from `books/*/book.yml` via `python3 scripts/pb_sync.py --apply` with Logos QUIT (Cmd+Q; script refuses while Logos runs). Open the tool with `open 'logos4:PersonalBooks'` (gallery clicks silently fail; do not use Cmd+K — opens Study Assistant). In the GUI use cursor-verified clicks ONLY for **Build book**; never type into Edit fields (a selection + keystroke destroys text — observed 2026-09-17). `pb_type` uses the `text.monograph.` prefix form (`text.monograph.ancient.manuscript.translation`, `text.monograph.encyclopedia`); the prefixless form renders raw and is invalid.
@@ -79,8 +76,6 @@ books/<slug>/      one corpus per book (sources, translations, build)
 - Do not purchase sources or publish publicly unless the owner asks.
 - Public site for these corpora: `~/SaneApps/websites/viapatrum.org` (Topics + Works). Extend books here, then rebuild/deploy the site.
 - **One book per work (permanent, owner 2026-09-17):** never merge into a mega-volume. Single Author field, single cover/description, all-or-nothing rebuilds, and compile size limits all punish merging. Shelf unity comes from a Logos **Collection** grouping the books, not from combining files.
-- **Two-machine sync (permanent, owner 2026-09-17):** Mini `main` holds the full corpus (~400 works); Air holds a narrow shipping branch (8 books). Same slugs exist on both with divergent content. Before ANY sync/copy/commit/merge discussion: report `hostname`, branch, `git status --short`, and `books/` dir count on BOTH machines plus merge-base to `origin/main`. Reconcile via git merge through origin — never rsync/copy trees across machines, never delete working trees or `git clean` either side. Uncommitted work on either machine is presumed valuable.
-
 ## Commands
 
 ```bash
@@ -89,7 +84,7 @@ python3 -m pipeline.new_book --slug my-author --title "Title"
 python3 books/<slug>/build_book.py
 python3 -m pipeline.verify_docx books/<slug>/*.docx   # includes check_pbb_guards
 python3 -m pipeline.check_pbb_guards                  # optional standalone
-# On Air, after Logos Build:
+# After Logos Build:
 python3 -m pipeline.verify_logos_db --title-substr "Julian"
 # Public library (after English is ready):
 cd ~/SaneApps/websites/viapatrum.org && python3 scripts/build_site.py

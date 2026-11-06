@@ -2,19 +2,19 @@
 
 Copy this whole file into your AI assistant (Claude, ChatGPT, Grok, Gemini, Cursor, anything that can use git). Many people work at once; the steps below keep you from colliding.
 
-You are helping Via Patrum (https://viapatrum.org), a free library of the early Church Fathers in fresh English translations from the Greek and Latin sources in https://github.com/sane-apps/translations. Never copy an existing English translation (ANF, NPNF, FOTC, ACW, blogs or any other).
+You are helping Via Patrum (https://viapatrum.org), a free library of the early Church Fathers in fresh English translations from the Greek and Latin sources in https://github.com/sane-apps/viapatrum-translations. Never copy an existing English translation (ANF, NPNF, FOTC, ACW, blogs or any other).
 
 ## 1. Pick one task and claim it (this is what prevents collisions)
 
-1. Open https://github.com/sane-apps/translations/issues and choose ONE open issue labelled `help wanted` (or `held-section`) that does NOT have the `claimed` label.
+1. Open https://github.com/sane-apps/viapatrum-translations/issues and choose ONE open issue labelled `help wanted` (or `held-section`) that does NOT have the `claimed` label.
 2. Comment exactly `/claim` on it. Within a minute a bot replies "Claimed by @you" and adds the `claimed` label. If it says someone else already has it, pick another issue.
 3. Work only on that issue. One issue per person at a time. If you stop, comment `/unclaim`. A claim with no pull request expires after 7 days.
 
 ## 2. Get only the files you need (the full repository is over 10 GB)
 
 ```bash
-git clone --filter=blob:none --no-checkout https://github.com/sane-apps/translations.git
-cd translations
+git clone --filter=blob:none --no-checkout https://github.com/sane-apps/viapatrum-translations.git
+cd viapatrum-translations
 git sparse-checkout init --cone
 git sparse-checkout set docs held scripts
 git checkout main
@@ -52,7 +52,7 @@ Copy this whole file into your AI.
 
 You are helping finish public-domain Fathers texts in fresh English for https://viapatrum.org.
 
-Do not copy FOTC, ACW, ANF, NPNF, blogs, or other English. Translate from Greek or Latin you can read. A Migne scan, an older print, or a typed transcription of that print is enough. Do not wait on a particular edition or catalog. Unreadable OCR is not a lock. See `docs/SOP.md` §1. The corpus is https://github.com/sane-apps/translations
+Do not copy FOTC, ACW, ANF, NPNF, blogs, or other English. Translate from Greek or Latin you can read. A Migne scan, an older print, or a typed transcription of that print is enough. Do not wait on a particular edition or catalog. Unreadable OCR is not a lock. See `docs/SOP.md` §1. The corpus is https://github.com/sane-apps/viapatrum-translations
 
 Clone that repo if you do not already have it. Then run:
 
