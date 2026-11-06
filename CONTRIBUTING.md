@@ -36,3 +36,8 @@ Enforcement (automatic, not advisory):
 - When sources conflict (it happens — Le Blanc's birth year was wrong
   in our own data until ESTC corrected it), record the stronger source
   and fix every consumer, not just the file in front of you.
+
+## Licence of contributions
+
+By contributing, you agree that translation text, introductions and notes you add are licensed under CC BY 4.0
+([LICENSE-TRANSLATIONS.md](LICENSE-TRANSLATIONS.md)) and code under MIT ([LICENSE](LICENSE)).
