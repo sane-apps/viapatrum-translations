@@ -53,7 +53,8 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[1]
 STATE = Path(os.environ.get("PLAN_STATE", ROOT / "outputs" / "plan-limits" / "state.json"))
 SLOTS = Path(os.environ.get("PLAN_SLOTS", "/tmp/plan-claude-slots"))
-CLAUDE = os.environ.get("CLAUDE_BIN", str(Path.home() / ".local/bin/claude"))
+_HEADLESS = Path.home() / ".local/bin/claude-headless"  # wrapper with a long-lived login, where a machine has one
+CLAUDE = os.environ.get("CLAUDE_BIN", str(_HEADLESS if _HEADLESS.exists() else Path.home() / ".local/bin/claude"))
 NO_TOOLS = ["Bash", "Edit", "Write", "Read", "Glob", "Grep", "WebFetch", "WebSearch", "Agent", "NotebookEdit"]
 CLAUDE_MODELS = {"claude-sonnet-5-5", "claude-haiku-5-5", "claude-opus-5-5"}
 MUSE_MODEL = "muse"

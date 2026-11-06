@@ -45,7 +45,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import work_pipeline as W  # noqa: E402
 from regate_held import ARCHIVED, load_brief  # noqa: E402
 
-CLAUDE = os.environ.get("CLAUDE_BIN", str(Path.home() / ".local/bin/claude"))
+_HEADLESS = Path.home() / ".local/bin/claude-headless"  # wrapper with a long-lived login, where a machine has one
+CLAUDE = os.environ.get("CLAUDE_BIN", str(_HEADLESS if _HEADLESS.exists() else Path.home() / ".local/bin/claude"))
 MODEL = os.environ.get("HELD_REVIEW_MODEL", "opus")
 CHUNK = 15  # findings per Claude call
 NO_TOOLS = ["Bash", "Edit", "Write", "Read", "Glob", "Grep", "WebFetch", "WebSearch", "Agent", "NotebookEdit"]
