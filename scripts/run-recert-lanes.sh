@@ -66,21 +66,25 @@ echo "$(date +%T) lane profile: $PROFILE ($(python3 scripts/plan_calls.py status
 # "plans-free" (owner 2026-11-06: "Free lanes", $0, smallest works first): subscription plans and
 # free NVIDIA only. No Workers AI (any @cf/ id is refused while ~/.sane/CLOUDFLARE_AI_OFF exists),
 # no Muse (account restricted 2026-11-05), no paid fallback, no Cloudflare web search for intros.
-# Families: Gemini (Antigravity, Google sign-in) drafts and repairs; Claude Sonnet + Grok build-fast
-# check (the 2026-10-19 checker bench pair); Nemotron Ultra on NVIDIA referees; the readers and
-# their bar come from outputs/plan-limits/FREE_READER_CALIBRATION_20261106.md. work_pipeline refuses
-# to start when the drafter shares a family with a checker or the referee. While the drafter's
-# plan is paused, lanes take only works whose sections all passed (read + intro + receipt).
+# Families: Nemotron Ultra on free NVIDIA NIM drafts and repairs (drafter bench 2026-11-06,
+# outputs/drafter-bench-20261106: 10 of 10 blind drafts gate-clean, 6 of 10 passed both checkers
+# within one repair, against 3 of 10 October DeepSeek passes the same pair found clean). Antigravity
+# Gemini cannot carry drafting (its weekly quota ran out after about 35 calls on 4 Nov), so it
+# referees, a third family; while it is paused, disputed findings get no ruling and the section
+# waits for the held review. Claude Sonnet + Grok build-fast check (the 2026-10-19 bench pair); the
+# readers and their bar come from outputs/plan-limits/FREE_READER_CALIBRATION_20261106.md.
+# work_pipeline refuses to start when the drafter shares a family with a checker or the referee.
+# While a plan drafter is paused, lanes take only works whose sections all passed.
 # Override any role with PLANS_FREE_DRAFTER / _CHECKERS / _READERS / _REFEREE / _FOLLOW_MIN / _FOLLOW_AVG.
 if [ "$PROFILE" = plans-free ]; then
-  export WP_DRAFTER="${PLANS_FREE_DRAFTER:-agy/gemini-3.8-flash-high}"
+  export WP_DRAFTER="${PLANS_FREE_DRAFTER:-nvidia/nemotron-3-ultra-550b-a55b}"
   export WP_JUDGES="${PLANS_FREE_READERS:-claude-sonnet-5-5,grok-4.7-build-fast}"
   # Calibration 2026-11-06 (13 books Kimi + GLM had scored): Sonnet gave 3-4 to all 10 they passed and
   # 2 to all 3 they failed; Grok build-fast 3 to 9 of 10 passed, 2 to all 3 failed. So the live bar
   # (no reader below 3) keeps its meaning on this pair. The mean bar (used only with WP_READ_EDITS=1)
   # is 3.0 on their scale: the pair's means on passed books run 2.5-3.5, on failed books 2.0.
   export WP_FOLLOW_MIN="${PLANS_FREE_FOLLOW_MIN:-3}" WP_FOLLOW_AVG="${PLANS_FREE_FOLLOW_AVG:-3.0}"
-  export WP_REFEREE="${PLANS_FREE_REFEREE:-nvidia/nemotron-3-ultra-550b-a55b}"
+  export WP_REFEREE="${PLANS_FREE_REFEREE:-agy/gemini-3.8-flash-high}"
   export WP_FALLBACK="" WP_WEBSEARCH=0
   # Published works: staged passes from the old Workers AI pair are re-checked by this pair, never
   # redrafted (a 2026-11-06 probe found a real agency error in one October Kimi + GLM pass).
