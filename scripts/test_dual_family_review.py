@@ -10,10 +10,15 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import _testenv  # noqa: E402
 import dual_family_review as D  # noqa: E402
-
-D.spend_allow = lambda: (True, "test stub")  # gate tested in test_spend_guard.py
 from pipeline.verify_translation_qa import provenance_family_errors  # noqa: E402
+
+
+def setUpModule():
+    # gate tested in test_spend_guard.py
+    _testenv.stub_for_module(D, spend_allow=lambda messages=None: (True, "test stub"))
+
 
 SRC = ["Non necessitate sed voluntate. " * 40, "Deus est lux et non tenebrae."]
 ENG = ["Not by necessity but by will. " * 40, "God is light and not darkness."]

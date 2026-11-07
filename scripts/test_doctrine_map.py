@@ -10,12 +10,20 @@ from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+try:
+    import numpy  # noqa: F401
+except ImportError:
+    raise unittest.SkipTest("doctrine_map needs numpy; run with ~/Models/kokoro/.venv/bin/python") from None
+import _testenv  # noqa: E402
 import doctrine_map as D  # noqa: E402
 
 import spend_guard as _spend_guard  # noqa: E402
-# Offline: every gated call may spend (the gate itself is tested in test_spend_guard.py).
-_spend_guard.reserve = lambda caller, usd, now=None: (True, "test stub")
-_spend_guard.allow = lambda caller="": (True, "test stub")
+
+
+def setUpModule():
+    # Offline: every gated call may spend (the gate itself is tested in test_spend_guard.py).
+    _testenv.stub_for_module(_spend_guard, reserve=lambda caller, usd, now=None: (True, "test stub"),
+                             allow=lambda caller="": (True, "test stub"))
 
 
 def row(i, year, book="b", text="t", section="1", para=0):

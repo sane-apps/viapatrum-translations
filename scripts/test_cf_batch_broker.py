@@ -16,10 +16,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import _testenv  # noqa: E402
 import cf_batch_broker as B  # noqa: E402
 
-# The spend gate is tested in test_spend_guard.py; here every batch may spend.
-B.spend_allow = lambda: (True, "test stub")
+
+def setUpModule():
+    # The spend gate is tested in test_spend_guard.py; here every batch may spend.
+    _testenv.stub_for_module(B, spend_allow=lambda: (True, "test stub"))
 
 
 def _reset() -> None:

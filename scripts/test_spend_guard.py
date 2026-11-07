@@ -9,16 +9,25 @@ from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _testenv  # noqa: E402,F401  finds llm_vendor_gate under any HOME
 import spend_guard as G  # noqa: E402
+
+
+def state_patches(d: Path) -> list:
+    """Every file the guard reads or writes, and its reservation list, under d. The owner's real
+    ~/.sane switch files and outputs/spend must not decide or receive anything in a test."""
+    paths = {"SPEND": "spend", "TODAY": "spend/today.json", "CAP_FILE": "spend/cap.json",
+             "ALLOW_CACHE": "spend/allow.json", "HOLD": "spend/hold", "PAUSED": "lanes.paused",
+             "RESTART": "lanes.restart", "CF_AI_OFF": "CLOUDFLARE_AI_OFF", "CF_AI_ALLOW": "CLOUDFLARE_AI_ALLOW"}
+    return [mock.patch.object(G, name, d / leaf) for name, leaf in paths.items()] + [
+        mock.patch.object(G, "_reserved", [])]
 
 
 class SpendGuard(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         d = Path(self.tmp.name)
-        self.patches = [mock.patch.object(G, name, d / leaf) for name, leaf in
-                        (("SPEND", "spend"), ("TODAY", "spend/today.json"), ("CAP_FILE", "spend/cap.json"),
-                         ("PAUSED", "lanes.paused"), ("RESTART", "lanes.restart"))]
+        self.patches = state_patches(d)
         for p in self.patches:
             p.start()
 
@@ -84,10 +93,7 @@ class PerCallGate(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         d = Path(self.tmp.name)
-        self.patches = [mock.patch.object(G, "SPEND", d / "spend"),
-                        mock.patch.object(G, "ALLOW_CACHE", d / "spend/allow.json"),
-                        mock.patch.object(G, "CAP_FILE", d / "spend/cap.json"),
-                        mock.patch.dict("os.environ", {"FATHERS_DAILY_CAP_USD": "150"})]
+        self.patches = state_patches(d) + [mock.patch.dict("os.environ", {"FATHERS_DAILY_CAP_USD": "150"})]
         for p in self.patches:
             p.start()
 
@@ -202,12 +208,7 @@ class HoldAndReservation(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         d = Path(self.tmp.name)
-        self.patches = [mock.patch.object(G, "SPEND", d / "spend"),
-                        mock.patch.object(G, "ALLOW_CACHE", d / "spend/allow.json"),
-                        mock.patch.object(G, "CAP_FILE", d / "spend/cap.json"),
-                        mock.patch.object(G, "HOLD", d / "spend/hold"),
-                        mock.patch.dict("os.environ", {"FATHERS_DAILY_CAP_USD": "150"}),
-                        mock.patch.object(G, "_reserved", [])]
+        self.patches = state_patches(d) + [mock.patch.dict("os.environ", {"FATHERS_DAILY_CAP_USD": "150"})]
         for p in self.patches:
             p.start()
         (d / "spend").mkdir()

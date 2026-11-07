@@ -1,6 +1,7 @@
 """Latin intake in scripts/intake_first1k.py. Run: python3 -m unittest scripts.test_intake_latin -q
-The live test dry-runs one known work (Cyprian, Ad Donatum, CSEL 3.1) and
-skips when GitHub cannot be reached."""
+The live tests dry-run known works from GitHub, so they change with GitHub and the network. They run only with
+TRANSLATIONS_LIVE_TESTS=1, and skip when GitHub cannot be reached."""
+import os
 import subprocess
 import sys
 import unittest
@@ -8,6 +9,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import intake_first1k as m  # noqa: E402
+
+live = unittest.skipUnless(os.environ.get("TRANSLATIONS_LIVE_TESTS"), "live: reads GitHub; set TRANSLATIONS_LIVE_TESTS=1")
 
 TEI = """<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc><sourceDesc><biblStruct><monogr>
 <title>Opera</title><imprint><date>{year}</date></imprint></monogr></biblStruct></sourceDesc></fileDesc></teiHeader>
@@ -29,6 +32,7 @@ class LatinIntakeTests(unittest.TestCase):
         self.assertEqual(m.edition_year(m.xml_fromstring(TEI.format(year=1868))), 1868)
         self.assertGreater(m.edition_year(m.xml_fromstring(TEI.format(year=1931))), m.LAST_PD_YEAR)
 
+    @live
     def test_live_dry_run_ad_donatum(self):
         cmd = [sys.executable, str(Path(m.__file__)), "--urn", "stoa0104a.stoa001", "--slug", "zz-test-ad-donatum",
                "--author", "Cyprian of Carthage", "--title", "Cyprian: To Donatus", "--dry-run"]
@@ -53,6 +57,7 @@ class LatinIntakeTests(unittest.TestCase):
             self.skipTest("GitHub not reachable")
         return p
 
+    @live
     def test_live_dry_run_greek_edition_choice(self):
         base = ["--urn", "tlg2018.tlg002", "--slug", "zz-test-eus-he", "--author", "Eusebius of Caesarea",
                 "--title", "Eusebius: Church History"]
@@ -65,6 +70,7 @@ class LatinIntakeTests(unittest.TestCase):
         self.assertIn("(1st1K): 10 units", p.stdout)
         self.assertFalse((m.BOOKS / "zz-test-eus-he").exists())
 
+    @live
     def test_live_dry_run_greek_skip_units(self):
         base = ["--urn", "tlg2115.tlg060", "--slug", "zz-test-refutatio", "--author", "Hippolytus of Rome",
                 "--title", "Hippolytus: Refutation"]

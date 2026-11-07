@@ -217,6 +217,7 @@ class LogosRows(unittest.TestCase):
             "scroll_area_count": lambda: 3 if state["open"] else 2,
             "body_file": lambda: state["open"],
             "click_edit_if_present": lambda: False,
+            "pb_book_count": lambda: 300,
             "log": lambda msg: None,
         }
         with mock.patch.multiple(L, **fakes), mock.patch.object(L.time, "sleep", lambda s: None):
@@ -426,6 +427,7 @@ class LostClick(unittest.TestCase):
             "scroll_area_count": lambda: 3 if state["open"] else 2,
             "body_file": lambda: state["open"],
             "click_edit_if_present": lambda: False,
+            "pb_book_count": lambda: 300,
             "log": lambda msg: None,
         }
         with mock.patch.multiple(L, **fakes), mock.patch.object(L.time, "sleep", lambda s: None):

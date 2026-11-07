@@ -165,6 +165,8 @@ class PromotionTests(unittest.TestCase):
             stack.enter_context(patch.object(promote, 'load_section_bundle', side_effect=[original, changed]))
             stack.enter_context(patch.object(promote.time, 'sleep'))
             stack.enter_context(patch.object(promote, 'run_checker_chain', side_effect=[entry(original)['checker_a'], entry(original)['checker_b']]))
+            # CF_TOKEN above is fake; without this the citation step really posts it to Cloudflare.
+            stack.enter_context(patch.object(promote, 'jev_citation_gate', return_value=None))
             marked = stack.enter_context(patch.object(promote, 'mark_claim_done'))
             self.assertEqual(promote.main(), 1)
             summary = json.loads(next(Path(tmp).glob('*/summary.json')).read_text())

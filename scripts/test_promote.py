@@ -17,6 +17,7 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import _testenv  # noqa: E402,F401  finds llm_vendor_gate under any HOME
 import promote as P  # noqa: E402
 import work_pipeline as W  # noqa: E402
 

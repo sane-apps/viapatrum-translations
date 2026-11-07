@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Offline regressions for the Jev citation correction loop. Mocks API calls."""
+import gzip
 import json
 import sys
 import tempfile
@@ -10,7 +11,27 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+import _testenv
 import jev_cite_correct as cc
+
+# The modern wording these tests search for, in the shape of the site's data/bibles/*.json.gz. KJV alone does not
+# match it, which is why the search also reads WEB and BSB.
+SEARCH_VERSES = {"lev": {"7": [[17, "but what remains of the meat of the sacrifice on the third day shall be "
+                                    "burned with fire."]]},
+                 "john": {"15": [[15, "No longer do I call you servants, for the servant does not know what "
+                                      "his master does."]]},
+                 "2cor": {"12": [[9, "My grace is sufficient for you, for my power is made perfect in "
+                                     "weakness."]]}}
+
+
+def setUpModule():
+    """Point the verse search at a small fixture instead of the live site under HOME."""
+    tmp = tempfile.TemporaryDirectory()
+    unittest.addModuleCleanup(tmp.cleanup)
+    books = {book: SEARCH_VERSES.get(book, {}) for book in cc.kjv_lookup.CANONICAL_IDS}
+    with gzip.open(Path(tmp.name) / "web.json.gz", "wt", encoding="utf-8") as f:
+        json.dump({"books": books}, f)
+    _testenv.stub_for_module(cc, SITE_BIBLES=Path(tmp.name), _search_index=None)
 
 
 SENT = "Bind the tares (Leviticus 14:40) and burn them."

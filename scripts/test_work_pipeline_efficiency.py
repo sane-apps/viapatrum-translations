@@ -11,6 +11,7 @@ import json
 import os
 import sys
 import tempfile
+import types
 import unittest
 import urllib.error
 from pathlib import Path
@@ -19,14 +20,17 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import _testenv  # noqa: E402  finds llm_vendor_gate under any HOME
 import llm_bakeoff as LB  # noqa: E402
 import work_pipeline as W  # noqa: E402
 import spend_guard  # noqa: E402
-
-# The live per-call gate is tested in test_spend_guard.py; offline it would fail closed.
-spend_guard.allow = lambda caller="": (True, "test stub")
-spend_guard.reserve = lambda caller, usd, now=None: (True, "test stub")
 import work_read as R  # noqa: E402
+
+
+def setUpModule():
+    # The live per-call gate is tested in test_spend_guard.py; offline it would fail closed.
+    _testenv.stub_for_module(spend_guard, allow=lambda caller="": (True, "test stub"),
+                             reserve=lambda caller, usd, now=None: (True, "test stub"))
 
 
 def gate_only(j, brief):
@@ -1261,6 +1265,13 @@ class RetryContextTests(unittest.TestCase):
 
 
 class ParkAndQueueTests(unittest.TestCase):
+    def setUp(self):
+        # queue() imports book_era, which reads the live site's author dates at import.
+        era = types.SimpleNamespace(is_early=lambda book: False, book_year=lambda book: None)
+        patcher = mock.patch.dict(sys.modules, {"book_era": era})
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_parked_only_when_last_attempt_changed_nothing(self):
         self.assertFalse(W.parked({"result": "held", "attempts": 1, "stalled": True}))
         self.assertTrue(W.parked({"result": "held", "attempts": 2}), "old rows stay parked")
@@ -1881,7 +1892,8 @@ class FreeLaneTests(unittest.TestCase):
         import subprocess
         out = subprocess.run([sys.executable, "-c", "import sys; sys.path.insert(0, 'scripts'); import work_pipeline as W; "
                               "print(W.FOLLOW_MIN, W.FOLLOW_AVG)"], cwd=str(ROOT), capture_output=True, text=True,
-                             env={**os.environ, "WP_FOLLOW_MIN": "2.5", "WP_FOLLOW_AVG": "3", "WP_FALLBACK": ""})
+                             env={**os.environ, "WP_FOLLOW_MIN": "2.5", "WP_FOLLOW_AVG": "3", "WP_FALLBACK": "",
+                                  "PYTHONPATH": str(_testenv.SANEPROCESS_SCRIPTS)})
         self.assertEqual(out.stdout.strip().splitlines()[-1], "2.5 3.0", out.stderr[-500:])
 
 

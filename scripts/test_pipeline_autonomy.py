@@ -251,7 +251,10 @@ class ChunkedSourceTests(unittest.TestCase):
 
 class AdapterTests(unittest.TestCase):
     def test_unknown_book_refuses(self):
-        with self.assertRaises(SystemExit):
+        # In an empty books folder: a slug picked from the real library stops being unknown once its book arrives
+        # (augustine-confessions did on 2026-10-03).
+        with tempfile.TemporaryDirectory() as tmp, patch.object(adapters, "ROOT", Path(tmp)), \
+                patch.dict(adapters._ADAPTERS, clear=True), self.assertRaises(SystemExit):
             adapters.get_adapter("augustine-confessions")
 
     def test_jeremiah_parity(self):
@@ -307,10 +310,24 @@ class AdapterTests(unittest.TestCase):
             c.load_source_row("nope-nothing")
 
 
-class JsonBookTests(unittest.TestCase):
-    def test_severianus_fragment_and_earliest_queue(self):
-        import overnight_quota as quota
+SCAFFOLD_EN = "TODO"
+GREEK_A = "Ἐν πολλαῖς ἐπιστολαῖς ξένον τίθησι ῥῆμα τοῦ μέλλοντος εἰσάγεσθαι λόγου."
+GREEK_B = "καὶ νῦν ἐπειδὴ ἔμελλεν ἀξιοῦν ὑπὲρ Ὀνησίμου τῇ ἑαυτοῦ ἀξίᾳ δείκνυσιν."
 
+
+def queue_book(root, slug, sections, language="Greek"):
+    """A book whose sections are (section, source, english) rows, in the layout JsonBookAdapter reads."""
+    trans = root / "books" / slug / "translations"
+    trans.mkdir(parents=True)
+    (root / "books" / slug / "book.yml").write_text(f"slug: {slug}\nlanguage: {language}\n", encoding="utf-8")
+    (trans / "x_source.json").write_text(json.dumps(
+        [{"section": s, "greek": src} for s, src, _ in sections], ensure_ascii=False), encoding="utf-8")
+    (trans / "x_english.json").write_text(json.dumps(
+        [{"section": s, "english": [en]} for s, _, en in sections]), encoding="utf-8")
+
+
+class JsonBookTests(unittest.TestCase):
+    def test_severianus_fragment(self):
         adapter = adapters.get_adapter("severianus-fragmentum-philemonem")
         fix = adapter.load_source_row("u01-open")
         greek = " ".join(fix["greek"])
@@ -321,15 +338,37 @@ class JsonBookTests(unittest.TestCase):
         self.assertIsNone(adapter.manifest_path())
         claim = "severianus-fragmentum-philemonem--u01-open"
         self.assertTrue(__import__("re").fullmatch(adapter.claim_re, claim))
-        rows = quota.earliest_scaffold_candidates(4)
-        ids = [row[0] for row in rows]
-        self.assertEqual(ids[0], claim)
-        self.assertEqual(sum(item.startswith("severianus-fragmentum-philemonem--") for item in ids), 1)
-        self.assertEqual([row[3] for row in rows], sorted(row[3] for row in rows))
-        self.assertLessEqual(len(rows), 4)
-        for _claim, slug, _section, _year in rows:
-            self.assertNotIn("melito", slug)
-            self.assertNotIn(slug, ("cyril-alexandria-isaiah", "origen-jeremiah-samuel"))
+
+    def test_earliest_queue(self):
+        """On a fixture library. It used to read the real one and expect Severianus first, which stopped being
+        true when his English was finished."""
+        import overnight_quota as quota
+
+        get_adapter, errors, placeholder, betacode, _year = quota._queue_helpers()
+        years = {"melito-early": 90, "cyril-alexandria-isaiah": 91, "zz-latin": 92, "zz-betacode": 93, "zz-done": 94,
+                 "zz-claimed": 95, "zz-short": 96, "zz-fragment": 100, "zz-later": 300, "zz-latest": 400}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for slug in ("melito-early", "cyril-alexandria-isaiah", "zz-claimed"):
+                queue_book(root, slug, [("u01-open", GREEK_A, SCAFFOLD_EN)])
+            queue_book(root, "zz-latin", [("u01-open", GREEK_A, SCAFFOLD_EN)], language="Latin")
+            queue_book(root, "zz-betacode", [("u01-open", "e)n pollai=s e)pistolai=s ce/non ti/qhsi r(h=ma tou= me/llontos", SCAFFOLD_EN)])
+            queue_book(root, "zz-done", [("u01-open", GREEK_A, "In many letters Paul sets an unusual word first.")])
+            queue_book(root, "zz-short", [("u01-open", "Ἐν πολλαῖς", SCAFFOLD_EN)])
+            # Two sections with one source are one claim, and the -open section is the one queued.
+            queue_book(root, "zz-fragment", [("u01-rem", GREEK_A, SCAFFOLD_EN), ("u01-open", GREEK_A, SCAFFOLD_EN)])
+            queue_book(root, "zz-later", [("u01-open", GREEK_B, SCAFFOLD_EN)])
+            queue_book(root, "zz-latest", [("u01-open", GREEK_B, SCAFFOLD_EN)])
+            (root / "CLAIMS.md").write_text("| zz-claimed--u01-open | taken |\n", encoding="utf-8")
+            with patch.object(adapters, "ROOT", root), patch.object(quota, "ROOT", root), \
+                    patch.object(quota, "CLAIMS", root / "CLAIMS.md"), patch.dict(adapters._ADAPTERS), \
+                    patch.object(quota, "_queue_helpers", lambda: (get_adapter, errors, placeholder, betacode, years.__getitem__)):
+                rows = quota.earliest_scaffold_candidates(4)
+                capped = quota.earliest_scaffold_candidates(1)
+        self.assertEqual(rows, [("zz-fragment--u01-open", "zz-fragment", "u01-open", 100),
+                                ("zz-later--u01-open", "zz-later", "u01-open", 300),
+                                ("zz-latest--u01-open", "zz-latest", "u01-open", 400)])
+        self.assertEqual(capped, rows[:1])
 
 
 class CompletionTests(unittest.TestCase):

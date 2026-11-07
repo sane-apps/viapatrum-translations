@@ -10,6 +10,7 @@ from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _testenv  # noqa: E402,F401  finds llm_vendor_gate under any HOME
 import held_review as H  # noqa: E402
 
 

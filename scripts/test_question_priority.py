@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _testenv  # noqa: E402,F401  finds llm_vendor_gate under any HOME
 import work_pipeline as W  # noqa: E402
 
 
