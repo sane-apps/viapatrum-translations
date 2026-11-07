@@ -396,13 +396,18 @@ def grok_probe() -> None:
 
 def check_plans() -> tuple[str, str, dict]:
     """Muse / Claude plan state for the plans lanes. A short pause is normal; a pause over
-    a day (a weekly limit) is worth a warning so the owner knows the lanes are parked."""
+    a day (a weekly limit) is worth a warning so the owner knows the lanes are parked.
+    A pause beyond any plan's limit window is an owner hold, set on purpose: it stays in the
+    summary but raises no warning (Muse, paused to 2099 on 5 Nov 2026, warned for days)."""
     grok_probe()
     st = plan_status()
     if not st:
         return "ok", "plan status unread", {}
-    long_waits = [p for p in ("muse", "claude", "grok") if (st.get(p) or {}).get("paused_until")
-                  and datetime.fromisoformat(st[p]["paused_until"]).timestamp() - time.time() > 86400]
+    long_waits = []
+    for p in ("muse", "claude", "grok"):
+        until = (st.get(p) or {}).get("paused_until")
+        if until and 86400 < datetime.fromisoformat(until).timestamp() - time.time() <= 30 * 86400:
+            long_waits.append(p)
     summary = "; ".join(f"{p}: {(st.get(p) or {}).get('calls_last_day', 0)} calls today"
                         + (f", paused until {st[p]['paused_until']}" if (st.get(p) or {}).get("paused_until") else "")
                         for p in ("muse", "claude", "grok"))

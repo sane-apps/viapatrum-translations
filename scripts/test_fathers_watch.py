@@ -8,6 +8,7 @@ import os
 import sys
 import tempfile
 import time
+from datetime import datetime
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -406,6 +407,28 @@ class HeldJobs(unittest.TestCase):
             self.assertFalse(W.job_off("fathers-e2e"))  # unreadable registry keeps alerting
         finally:
             W.JOBS_REGISTRY = old
+
+
+
+class PlanHolds(unittest.TestCase):
+    def status(self, days):
+        until = datetime.fromtimestamp(time.time() + days * 86400).isoformat()
+        return {"muse": {"calls_last_day": 0, "paused_until": until}, "claude": {"calls_last_day": 3}, "grok": {}}
+
+    def check(self, days):
+        with mock.patch.object(W, "grok_probe"), mock.patch.object(W, "plan_status", return_value=self.status(days)):
+            return W.check_plans()
+
+    def test_weekly_limit_warns(self):
+        self.assertEqual(self.check(5)[0], "warn")
+
+    def test_short_pause_is_ok(self):
+        self.assertEqual(self.check(0.5)[0], "ok")
+
+    def test_owner_hold_is_ok_and_still_shown(self):
+        level, summary, _ = self.check(365)
+        self.assertEqual(level, "ok")
+        self.assertIn("muse: 0 calls today, paused until", summary)
 
 
 if __name__ == "__main__":
