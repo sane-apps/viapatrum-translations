@@ -52,6 +52,26 @@ TIMEOUT = 25
 _fallback_noted = False
 
 
+class JevSpendRefused(RuntimeError):
+    """spend_guard refused this Workers AI call. Don't fall back to another paid path."""
+
+
+def _spend_gate(state, questions):
+    """Owner hold, daily cap and hourly ceiling before a Workers AI call; fails closed. This path had no gate until
+    Nov 7, 2026, so the off switch and caps didn't cover it."""
+    try:
+        here = str(Path(__file__).resolve().parent)  # jev_sweep_all imports this module as scripts.jev_review
+        if here not in sys.path:
+            sys.path.insert(0, here)
+        import spend_guard
+        chars = len(json.dumps([state, questions], default=str))
+        ok, why = spend_guard.reserve("jev_review", spend_guard.estimate_usd(chars, 1000))
+    except Exception as e:  # noqa: BLE001
+        ok, why = False, f"spend guard unavailable: {type(e).__name__}: {e}"[:200]
+    if not ok:
+        raise JevSpendRefused(f"cf spend guard refused: {why}")
+
+
 def _post(url, payload, token):
     req = urllib.request.Request(
         url,
@@ -67,6 +87,7 @@ def _cf_jev(state, questions, model=None):
     account = os.environ.get("CLOUDFLARE_ACCOUNT_ID", DEFAULT_ACCOUNT)
     if not token or not account:
         raise RuntimeError("CF Jev credentials missing")
+    _spend_gate(state, questions)
     body = _post(
         "https://api.cloudflare.com/client/v4/accounts/%s/ai/run" % account,
         {"model": model or CF_MODEL, "input": {"state": state, "questions": questions}},
@@ -101,10 +122,13 @@ def jev(state, questions, model=None):
     global _fallback_noted
     try:
         return _cf_jev(state, questions, model)
+    except JevSpendRefused:
+        raise
     except Exception as e:  # noqa: BLE001 - CF path may lack balance/scopes
         cf_err = e
     if not os.environ.get("TYPESAFE_API_KEY"):
-        raise SystemExit("CF Jev failed (%s); TYPESAFE_API_KEY not set" % cf_err)
+        # A normal error, so an advisory caller can record it. SystemExit got past ai_promote's jev_citation_gate.
+        raise RuntimeError("CF Jev failed (%s); TYPESAFE_API_KEY not set" % cf_err)
     if not _fallback_noted:
         print("JEV-DIRECT-FALLBACK: %s" % cf_err, file=sys.stderr)
         _fallback_noted = True

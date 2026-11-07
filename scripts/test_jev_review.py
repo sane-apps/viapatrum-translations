@@ -31,6 +31,11 @@ class FakeResp:
 
 
 class JevRoutingTests(unittest.TestCase):
+    def setUp(self):  # routing only; the spend gate has test_jev_review_spend_gate.py
+        gate = patch.object(jr, "_spend_gate")
+        gate.start()
+        self.addCleanup(gate.stop)
+
     def test_cf_first_unwraps_result(self):
         seen = {}
 
@@ -91,7 +96,7 @@ class JevRoutingTests(unittest.TestCase):
         env = {"CF_TOKEN": "", "CLOUDFLARE_API_TOKEN": "",
                "TYPESAFE_API_KEY": ""}
         with patch.dict("os.environ", env, clear=False):
-            with self.assertRaises(SystemExit):
+            with self.assertRaises(RuntimeError):
                 jr.jev({"s": 1}, {"v": {}})
 
 
