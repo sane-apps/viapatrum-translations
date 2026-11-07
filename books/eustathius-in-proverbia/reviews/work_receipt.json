@@ -1,0 +1,81 @@
+{
+ "slug": "eustathius-in-proverbia",
+ "pipeline": "work_pipeline",
+ "drafter": "nvidia/nemotron-3-ultra-550b-a55b",
+ "checkers": [
+  "claude-sonnet-5-5",
+  "grok-4.7-build-fast"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-open",
+   "to": "frag-rem-early",
+   "moved_chars": 231,
+   "moved_start": "77 Ὁ μὲν γὰρ στρατηγὸς πόλιν ἅπαξ ἑλὼν ὡς ἠβουλήθη διέθηκεν,"
+  },
+  {
+   "from": "frag-rem-early",
+   "to": "frag-rem-mid",
+   "moved_chars": 74,
+   "moved_start": "78 Οὐ μόνον περὶ πόρνης εἴρηται, ἀλλὰ καὶ περὶ πονηρᾶς ἐπιθυ"
+  }
+ ],
+ "brief_sha256": "d1f2a72cdb6e2e090ffa634d36bf21deb311909599273177c1862437c0b36f2e",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-07T03:41:52Z",
+ "readers": [
+  "claude-sonnet-5-5",
+  "grok-4.7-build-fast"
+ ],
+ "referee": "agy/gemini-3.8-flash-high",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "0889a6ff7fd7532352fb3c2bebd633fbbdf23b40226a86238855a72355838e67",
+   "english_sha256": "3763c0a89752728eb04a8ac0d4b1c5e1e679f94bbc97a23ba8b1cd28f460cce3",
+   "justification": "reviews/justifications/frag-open.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "nvidia/nemotron-3-ultra-550b-a55b"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "997aafded31b2e3a424f16099e5f5f6559587cc658942e4ef222a96a101c95cd",
+   "english_sha256": "0ee65acb8b3e42113ed6c38334902866d6fd26c30a0ac59e0fad3fabd5522cc7",
+   "justification": "reviews/justifications/frag-rem-early.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "798b51591e64fe6d861627eaa40d0893ad636bd060678b4dc3031c32a87611bf",
+   "english_sha256": "438851c0eeb5fd52566d62e96f39658f43ddc4b7fef96e742e20f96edc99c25f",
+   "justification": "reviews/justifications/frag-rem-mid.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "nvidia/nemotron-3-ultra-550b-a55b"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "775bf0a8d74e030c713b77b1cd0caec714bf0600a7f4765ad26e23553ccba257",
+   "english_sha256": "baec44d814f645adc3d6528913ef148e4ad657a74c856d332f447bb5dc99ad7c",
+   "justification": "reviews/justifications/frag-rem-close.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ]
+}
