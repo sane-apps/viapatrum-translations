@@ -2732,18 +2732,19 @@ def queue(limit: int, max_words: int, min_words: int = 0, unpublished: bool = Fa
                                   "at": time.strftime("%Y-%m-%dT%H:%M:%S")})
                 print(f"queue {book}: needs-source ({len(no_src)} sections)", flush=True)
             continue
-        if parked(log_rows.get(book, {}), book, pairs) or crash_parked(log_rows.get(book, {})):
+        # parked() and finish_ready() compare staged hashes, which are of the re-cut sources: read
+        # them on a rebalanced copy, or a book with moved boundaries looks stale and stays parked.
+        moved = [dict(p) for p in pairs]
+        rebalance(book, moved)
+        if parked(log_rows.get(book, {}), book, moved) or crash_parked(log_rows.get(book, {})):
             continue  # waits for the held review (or a fix, after repeated crashes), lanes move on
         if certified(book):
             continue
         prev = log_rows.get(book, {})
         if term_queue_blocked(book, prev):
             continue
-        if drafter_paused():
-            moved = [dict(p) for p in pairs]
-            rebalance(book, moved)
-            if not finish_ready(book, moved):
-                continue  # needs the drafter; run() would only skip it (no row, no attempt counted)
+        if drafter_paused() and not finish_ready(book, moved):
+            continue  # needs the drafter; run() would only skip it (no row, no attempt counted)
         if claim(book) is None:
             continue  # another lane took it between our read and now
         t0 = time.time()
