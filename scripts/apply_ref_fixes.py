@@ -101,7 +101,7 @@ def dump_like(orig: str, data) -> str:
     return json.dumps(data, ensure_ascii=False, indent=2) + "\n"
 
 
-def new_para(para: str, sentence: str, printed: str, action: str, new_ref: str | None) -> str | None:
+def new_para(para: str, sentence: str, printed: str, action: str, new_ref: str | None, times: int = 1) -> str | None:
     """The paragraph with the reference changed, or None when it can't be placed exactly."""
     if para.count(sentence) != 1 and strip_markup(para).count(sentence) != 1:
         return None
@@ -112,17 +112,21 @@ def new_para(para: str, sentence: str, printed: str, action: str, new_ref: str |
         st = strip_markup(para)
         i0 = st.index(sentence)
         j = sentence.find(printed)
-        if j < 0 or sentence.count(printed) != 1:
+        if j < 0 or sentence.count(printed) != times:
             return None
         ctx = sentence[max(0, j - 30):j + len(printed)]
         if para.count(ctx) != 1:
             return None
         s0 = para.index(ctx)
         seg = ctx
-    if seg.count(printed) != 1:
+    if seg.count(printed) != times:
         return None
     i = seg.rindex(printed)
-    if action == "replace":
+    if action == "replace" and times > 1:  # every occurrence judged, all to the same reference
+        seg2 = re.sub(re.escape(printed) + r"(?![\w:])", lambda _m: new_ref, seg)
+        if seg2.count(new_ref) - seg.count(new_ref) != times:
+            return None
+    elif action == "replace":
         seg2 = seg[:i] + new_ref + seg[i + len(printed):]
     else:
         seg2 = seg[:i] + seg[i + len(printed):]
@@ -188,8 +192,9 @@ def main(argv=None) -> int:
             if alt:
                 bdir, sid = alt
         def done(d, result, **kw):
-            outcome[result] += 1
-            receipts.append({**d, "result": result, **kw})
+            for x in [d] + list(d.get("_with", [])):
+                outcome[result] += 1
+                receipts.append({**{k: v for k, v in x.items() if not k.startswith("_")}, "result": result, **kw})
         if bdir is None:
             for d in ds:
                 done(d, "skip-no-book-folder")
@@ -212,14 +217,40 @@ def main(argv=None) -> int:
         before = list(row.get("english") or [])
         paras = list(before)
         applied = []
+        # The same printed reference judged at every place it occurs in a sentence, all to one new reference:
+        # apply them together (one decision carries them; the others are marked applied with it).
+        same = defaultdict(list)
         for d in ds:
-            hits = [k for k, p in enumerate(paras) if new_para(p, d["sentence"], d["printed"], d["action"], d.get("new_ref"))]
+            same[(d["sentence"], d["printed"])].append(d)
+        merged = []
+        for (sent, pr), group in same.items():
+            if (len(group) > 1 and sent.count(pr) == len(group) and len({g["action"] for g in group}) == 1
+                    and group[0]["action"] == "replace" and len({g.get("new_ref") for g in group}) == 1):
+                group[0]["_times"] = len(group)
+                group[0]["_with"] = group[1:]
+                merged.append(group[0])
+            else:
+                merged.extend(group)
+        ds = merged
+        for d in ds:
+            t = d.get("_times", 1)
+            hits = [k for k, p in enumerate(paras) if new_para(p, d["sentence"], d["printed"], d["action"], d.get("new_ref"), t)]
             if len(hits) != 1:
                 done(d, "skip-not-placed", book=bdir.name, hits=len(hits))
                 continue
             k = hits[0]
-            paras[k] = new_para(paras[k], d["sentence"], d["printed"], d["action"], d.get("new_ref"))
+            cand = new_para(paras[k], d["sentence"], d["printed"], d["action"], d.get("new_ref"), t)
+            if not CA.citation_only([paras[k]], [cand]):  # judge each fix alone; one bad fix must not block the rest
+                done(d, "skip-not-citation-only", book=bdir.name)
+                continue
+            paras[k] = cand
             applied.append(d)
+            # Later fixes in the same sentence must look for the sentence as it now reads.
+            s_new = new_para(d["sentence"], d["sentence"], d["printed"], d["action"], d.get("new_ref"), t)
+            if s_new:
+                for d2 in ds:
+                    if d2 is not d and d2 not in applied and d2["sentence"] == d["sentence"]:
+                        d2["sentence"] = s_new
         if not applied:
             continue
         if not CA.citation_only(before, paras):

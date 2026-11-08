@@ -32,7 +32,8 @@ _BOOKS = (
     r"Micah|Mic|Nahum|Nah|Habakkuk|Hab|Zephaniah|Zeph|Haggai|Hag|Zechariah|Zech|Malachi|Mal|"
     r"Matthew|Matt|Mt|Mark|Mk|Luke|Lk|John|Jn|Acts|Romans|Rom|(?:1|2|I|II) ?(?:Corinthians|Cor|Thessalonians|Thess|"
     r"Timothy|Tim|Peter|Pet)|Galatians|Gal|Ephesians|Eph|Philippians|Phil|Colossians|Col|Titus|Tit|Philemon|Phlm|"
-    r"Hebrews|Heb|James|Jas|(?:1|2|3|I|II|III) ?(?:John|Jn)|Jude|Revelation|Rev|Apocalypse"
+    r"Hebrews|Heb|James|Jas|(?:1|2|3|I|II|III) ?(?:John|Jn)|Jude|Revelation|Rev|Apocalypse|"
+    r"Susanna|Sus|Bel and the Dragon|Prayer of Azariah|Song of the Three(?: Young Men| Holy Children)?|Prayer of Manasseh"
 )
 _LOC = r"\d+(?::\d+[a-c]?(?:\s*[-–]\s*\d+(?::\d+)?[a-c]?)?(?:\s*,\s*\d+[a-c]?(?:\s*[-–]\s*\d+[a-c]?)?)*)?"
 _ONE = rf"(?:(?:cf\.|see|compare|LXX|Greek|Vulgate)\s+)?(?:{_BOOKS})\.?\s+{_LOC}(?:\s+(?:LXX|Greek|Vulgate))?"
@@ -40,7 +41,7 @@ _ONE = rf"(?:(?:cf\.|see|compare|LXX|Greek|Vulgate)\s+)?(?:{_BOOKS})\.?\s+{_LOC}
 # "(Isaiah 5:30 (cf.)". They are reference notes, not the author's words.
 _TAG = r"(?:prophetic allusion|allusion|echo|cf\.)"
 # A parenthesis that holds nothing but Bible references (one or more, ; or , separated), or a placeholder tag.
-REF_PAREN = re.compile(rf"\s*\(\s*(?:{_ONE}(?:\s*[;,]\s*(?:{_ONE}|{_LOC}))*(?:\s*\({_TAG}\)?)?|{_TAG})\s*\)")
+REF_PAREN = re.compile(rf"\s*\(\s*(?:{_ONE}(?:\s*[;,]\s*(?:{_ONE}|(?:LXX\s+)?{_LOC}))*(?:\s*\({_TAG}\)?)?|{_TAG})\s*\)")
 # A bare reference outside parentheses, as in a commentary's lemma heading ("Ps 9:18-19: 'Let the sinners...'").
 BARE_REF = re.compile(rf"\b{_ONE}(?:\s*[;,]\s*{_LOC}(?![\w:]))*")
 

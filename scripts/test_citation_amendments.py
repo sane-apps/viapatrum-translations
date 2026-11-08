@@ -21,6 +21,11 @@ class CitationOnly(unittest.TestCase):
         self.assertTrue(CA.citation_only(["humbled.' (Isaiah 5:30 (cf.) And the"], ["humbled.' (Luke 14:11) And the"]))
         self.assertTrue(CA.citation_only(["me.' (Lamentations 1:16 (echo)) I take"], ["me.' (Jeremiah 15:7) I take"]))
 
+    def test_dual_psalm_numbering_and_deuterocanon(self):
+        self.assertTrue(CA.citation_only(["a support in the land (Ps 71:16a)."], ["a support in the land (Psalm 72:16; LXX 71:16a)."]))
+        self.assertTrue(CA.citation_only(["'Put your feet into its feet' (Proverbs 4:26)."], ["'Put your feet into its feet' (Sirach 6:24)."]))
+        self.assertTrue(CA.citation_only(["did not endure (Daniel 9:7)."], ["did not endure (Susanna 1:56)."]))
+
     def test_ordinary_parenthesis_with_tag_word_is_text(self):
         self.assertFalse(CA.citation_only(["the echo (of a voice) came"], ["the echo came"]))
         self.assertFalse(CA.citation_only(["an echo (echo of Christ) here"], ["an echo here"]))
