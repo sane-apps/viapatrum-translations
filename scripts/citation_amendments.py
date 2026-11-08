@@ -35,7 +35,7 @@ _BOOKS = (
     r"Hebrews|Heb|James|Jas|(?:1|2|3|I|II|III) ?(?:John|Jn)|Jude|Revelation|Rev|Apocalypse|"
     r"Susanna|Sus|Bel and the Dragon|Prayer of Azariah|Song of the Three(?: Young Men| Holy Children)?|Prayer of Manasseh"
 )
-_LOC = r"\d+(?::\d+[a-c]?(?:\s*[-–]\s*\d+(?::\d+)?[a-c]?)?(?:\s*,\s*\d+[a-c]?(?:\s*[-–]\s*\d+[a-c]?)?)*)?"
+_LOC = r"\d+(?::\d+[a-c]{0,3}(?:\.\d+[a-c]{0,3})*(?:\s*[-–]\s*\d+(?::\d+)?[a-c]{0,3})?(?:\s*,\s*\d+[a-c]{0,3}(?:\s*[-–]\s*\d+[a-c]{0,3})?)*)?"
 _ONE = rf"(?:(?:cf\.|see|compare|LXX|Greek|Vulgate)\s+)?(?:{_BOOKS})\.?\s+{_LOC}(?:\s+(?:LXX|Greek|Vulgate))?"
 # Translator placeholders found in the sweep: "(prophetic allusion)", "(Lamentations 1:16 (echo))",
 # "(Isaiah 5:30 (cf.)". They are reference notes, not the author's words.

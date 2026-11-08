@@ -26,6 +26,10 @@ class CitationOnly(unittest.TestCase):
         self.assertTrue(CA.citation_only(["'Put your feet into its feet' (Proverbs 4:26)."], ["'Put your feet into its feet' (Sirach 6:24)."]))
         self.assertTrue(CA.citation_only(["did not endure (Daniel 9:7)."], ["did not endure (Susanna 1:56)."]))
 
+    def test_psalm_line_numbers(self):
+        self.assertTrue(CA.citation_only(["the face of evil (Psalm 18:39.41). For"], ["the face of evil (Psalm 18:39-40). For"]))
+        self.assertTrue(CA.citation_only(["the bad-minded (Psalm 49:10.12ab); and"], ["the bad-minded (Psalm 49:10-11); and"]))
+
     def test_ordinary_parenthesis_with_tag_word_is_text(self):
         self.assertFalse(CA.citation_only(["the echo (of a voice) came"], ["the echo came"]))
         self.assertFalse(CA.citation_only(["an echo (echo of Christ) here"], ["an echo here"]))
