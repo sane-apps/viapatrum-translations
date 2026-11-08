@@ -37,5 +37,24 @@ class Placement(unittest.TestCase):
             self.assertEqual(A.dump_like(text, data), text)
 
 
+class ShipLock(unittest.TestCase):
+    def test_held_lock_means_ship_running(self):
+        import fcntl
+        import os
+        import tempfile
+        with tempfile.TemporaryDirectory() as t:
+            lock = Path(t) / "ship.lock"
+            self.assertFalse(A.ship_running(lock))
+            lock.write_text("")
+            self.assertFalse(A.ship_running(lock))
+            fd = os.open(lock, os.O_WRONLY)
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            try:
+                self.assertTrue(A.ship_running(lock))
+            finally:
+                os.close(fd)
+            self.assertFalse(A.ship_running(lock))
+
+
 if __name__ == "__main__":
     unittest.main()

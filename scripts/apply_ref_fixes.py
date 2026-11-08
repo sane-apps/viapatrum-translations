@@ -90,6 +90,24 @@ def strip_markup(text: str) -> str:
         return re.sub(r"\[\[(.*?)\s*>>\s*[^\]]*\]\]", r"\1", text)
 
 
+def ship_running(lock: Path = Path.home() / "SaneApps/websites/viapatrum.org/outputs/ship.lock") -> bool:
+    """True while a site ship holds its lock. Writing the English mid-ship made the ship's own reference ratchet
+    read half-applied files and fail (2026-11-08 12:16 PM)."""
+    import fcntl
+    import os
+    if not lock.exists():
+        return False
+    fd = os.open(lock, os.O_RDONLY)
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fcntl.flock(fd, fcntl.LOCK_UN)
+        return False
+    except BlockingIOError:
+        return True
+    finally:
+        os.close(fd)
+
+
 def dump_like(orig: str, data) -> str:
     """Serialise data in the file's own JSON style (indent, ASCII escaping, final newline) so the diff is the change."""
     parsed = json.loads(orig)
@@ -178,6 +196,10 @@ def main(argv=None) -> int:
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--books", default="")
     a = ap.parse_args(argv)
+    if a.apply and ship_running():
+        print("refusing: a viapatrum.org ship is running (outputs/ship.lock held); its gates read these files. "
+              "Wait for it to finish.")
+        return 2
     only = set(filter(None, a.books.split(",")))
     decisions = [json.loads(l) for l in Path(a.decisions).read_text().splitlines() if l.strip()]
     claims, running = active_claims(), running_books()
