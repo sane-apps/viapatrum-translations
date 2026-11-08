@@ -2303,6 +2303,19 @@ def apply(slug: str, force_partial: bool = False) -> int:
                # run passed, so each section names the checkers that passed it.
                "readers": JUDGES, "referee": REFEREE,
                "sections": []}
+    # Reference gate (Nov 8, 2026 sweep: 25.5% of published references were wrong). Every Bible reference in the
+    # passing English is judged against the verse text; confident fixes are applied citation-only, and the work is
+    # not certified while the judge cannot answer. See scripts/ref_gate.py.
+    import ref_gate
+    passing = {p["id"]: s["_j"]["pass_b_english"] for p, s in zip(pairs, secs)
+               if (s.get("_j") or {}).get("_status") == "pass" and p["id"] not in bad}
+    fixed, receipt["ref_gate"] = ref_gate.gate(passing)
+    if fixed is None and not force_partial:
+        print(f"refusing: {receipt['ref_gate'].get('error')}")
+        return 1
+    for p, s in zip(pairs, secs):
+        if fixed and p["id"] in fixed:
+            s["_j"]["pass_b_english"] = fixed[p["id"]]
     jdir = BOOKS / slug / "reviews" / "justifications"
     jdir.mkdir(parents=True, exist_ok=True)
     written: list[Path] = []  # committed below when the book certifies (promote)
