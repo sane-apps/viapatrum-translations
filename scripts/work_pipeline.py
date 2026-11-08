@@ -2416,7 +2416,11 @@ def certified(book: str) -> bool:
     rebalance(book, pairs)
     if not pairs or {p["id"] for p in pairs} != set(want):
         return False
-    return all(want[p["id"]] == (sha("\n".join(p["source"])), sha("\n".join(p["english"]))) for p in pairs)
+    # A proved citation-only change (reviews/citation_amendments.jsonl, Nov 8, 2026) keeps a section certified.
+    import citation_amendments as _ca
+    amend = _ca.load(BOOKS / book)
+    return all(want[p["id"]][0] == sha("\n".join(p["source"]))
+               and _ca.chain_ok(amend, p["id"], want[p["id"]][1], sha("\n".join(p["english"]))) for p in pairs)
 
 
 class CatalogueUnavailable(RuntimeError):
