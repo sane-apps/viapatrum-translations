@@ -31,6 +31,11 @@ import ref_gate as G  # noqa: E402
 TAG = re.compile(r"\((?:prophetic allusion|allusion|echo|cf\.)\)")
 
 
+def greek_addition(book: str, ch: int, v: int | None) -> bool:
+    """Real verses of the Greek (and Catholic) Daniel: the Song of the Three (3:24-90), Susanna (13), Bel (14)."""
+    return book == "Daniel" and ((ch == 3 and v is not None and 31 <= v <= 100) or ch in (13, 14))
+
+
 def english_rows(path: Path):
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -50,7 +55,7 @@ def count_book(book_dir: Path) -> tuple[int, list[str]]:
     for ef in sorted((book_dir / "translations").glob("*_english.json")):
         for paras in english_rows(ef):
             for _pi, _s, _e, printed, book, ch, v, _ve in G.refs_in(paras):
-                if not G.exists(book, ch, v):
+                if not G.exists(book, ch, v) and not greek_addition(book, ch, v):
                     n += 1
                     if len(examples) < 3:
                         examples.append(printed)

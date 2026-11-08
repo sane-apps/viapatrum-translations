@@ -20,6 +20,7 @@ class Ratchet(unittest.TestCase):
     def test_counts_impossible_and_placeholders_only(self):
         with tempfile.TemporaryDirectory() as t:
             b = self.book(Path(t), "w", ["Loved the world (John 3:16).", "Sing (Psalm 151:2) and (Ps 183:4).",
+                                         "Bless the Lord, O angels (Daniel 3:58); seed of Canaan (Daniel 13:56).",
                                          "As the prophet said (prophetic allusion); the echo (of a voice)."])
             n, ex = R.count_book(b)
             self.assertEqual(n, 3)
