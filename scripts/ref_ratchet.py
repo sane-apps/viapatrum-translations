@@ -32,8 +32,10 @@ TAG = re.compile(r"\((?:prophetic allusion|allusion|echo|cf\.)\)")
 
 
 def greek_addition(book: str, ch: int, v: int | None) -> bool:
-    """Real verses of the Greek (and Catholic) Daniel: the Song of the Three (3:24-90), Susanna (13), Bel (14)."""
-    return book == "Daniel" and ((ch == 3 and v is not None and 31 <= v <= 100) or ch in (13, 14))
+    """Real verses of the Greek (and Catholic) Bible: Daniel's Song of the Three (3:24-90), Susanna (13), Bel (14);
+    the additions to Esther (Vulgate 10:4-16:24)."""
+    return ((book == "Daniel" and ((ch == 3 and v is not None and 31 <= v <= 100) or ch in (13, 14)))
+            or (book == "Esther" and 11 <= ch <= 16))
 
 
 def english_rows(path: Path):

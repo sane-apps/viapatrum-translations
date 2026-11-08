@@ -203,16 +203,24 @@ def main(argv=None) -> int:
     only = set(filter(None, a.books.split(",")))
     decisions = [json.loads(l) for l in Path(a.decisions).read_text().splitlines() if l.strip()]
     claims, running = active_claims(), running_books()
+    # Resolve each decision to its folder and section on its own: a site slug can name a folder differently
+    # (cyril-adoration-6 lives in cyril-alexandria-adoration-1), and one section's decisions may not all share
+    # the first one's sentence.
     by_sec = defaultdict(list)
+    dir_cache: dict[str, Path | None] = {}
     for d in decisions:
-        by_sec[(d["work"], str(d["section"]))].append(d)
-    outcome, receipts = Counter(), []
-    for (work, sid), ds in by_sec.items():
-        bdir = work_book_dir(work)
+        work, sid = d["work"], str(d["section"])
+        if work not in dir_cache:
+            dir_cache[work] = work_book_dir(work)
+        bdir = dir_cache[work]
         if bdir is None or len(list(section_rows(bdir, sid))) != 1:
-            alt = find_by_sentence(ds[0]["sentence"])
+            alt = find_by_sentence(d["sentence"])
             if alt:
                 bdir, sid = alt
+        by_sec[(str(bdir) if bdir else "", sid, work)].append(d)
+    outcome, receipts = Counter(), []
+    for (bkey, sid, work), ds in by_sec.items():
+        bdir = Path(bkey) if bkey else None
         def done(d, result, **kw):
             for x in [d] + list(d.get("_with", [])):
                 outcome[result] += 1
