@@ -2430,6 +2430,12 @@ def certified(book: str) -> bool:
     # A proved citation-only change (reviews/citation_amendments.jsonl, Nov 8, 2026) keeps a section certified.
     import citation_amendments as _ca
     amend = _ca.load(BOOKS / book)
+    ids = {p["id"] for p in pairs}
+    if not pairs or ids - set(want):
+        return False
+    # A section missing from the files is accepted only as a recorded duplicate of a kept section (same file).
+    if ids != set(want) and not _ca.removal_ok(amend, set(want) - ids, pairs):
+        return False
     return all(want[p["id"]][0] == sha("\n".join(p["source"]))
                and _ca.chain_ok(amend, p["id"], want[p["id"]][1], sha("\n".join(p["english"]))) for p in pairs)
 
