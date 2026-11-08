@@ -28,6 +28,15 @@ class CitationOnly(unittest.TestCase):
     def test_non_reference_parenthesis_is_not(self):
         self.assertFalse(CA.citation_only(["He came (as he said) at once."], ["He came at once."]))
 
+    def test_lemma_heading_reference(self):
+        self.assertTrue(CA.citation_only(["Ps 9:18–19: 'Let the sinners be turned away.'"],
+                                         ["Psalm 9:17: 'Let the sinners be turned away.'"]))
+        self.assertTrue(CA.citation_only(["Regarding Psalm 104:12a, 'brief' instead of 'few.'"],
+                                         ["Regarding Psalm 105:12, 'brief' instead of 'few.'"]))
+
+    def test_book_name_in_prose_is_not_a_reference(self):
+        self.assertFalse(CA.citation_only(["As John says in his Gospel."], ["As Mark says in his Gospel."]))
+
     def test_multi_ref_paren(self):
         self.assertTrue(CA.citation_only(["Words (Isaiah 43:26; Luke 6:28) here."], ["Words (Isaiah 66:5) here."]))
 

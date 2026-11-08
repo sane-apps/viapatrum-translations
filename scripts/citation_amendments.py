@@ -10,7 +10,7 @@ So a reference fix is recorded in reviews/citation_amendments.jsonl, one row per
   {"section", "before_sha256", "after_sha256", "before": [paras], "after": [paras], "tool", "at", "why"}
 certified() accepts a section whose English no longer matches its receipt only when a chain of rows leads from the
 receipt's hash to the current English and EVERY row is proved citation-only: the before and after texts are identical
-once Bible references inside parentheses are removed. Any other change in a row voids the chain, so the work goes
+once Bible references (in parentheses, or bare as in a lemma heading) are removed. Any other change in a row voids the chain, so the work goes
 back to the normal re-check.
 """
 from __future__ import annotations
@@ -38,6 +38,8 @@ _LOC = r"\d+(?::\d+[a-c]?(?:\s*[-–]\s*\d+(?::\d+)?[a-c]?)?(?:\s*,\s*\d+[a-c]?(
 _ONE = rf"(?:(?:cf\.|see|compare|LXX|Greek|Vulgate)\s+)?(?:{_BOOKS})\.?\s+{_LOC}(?:\s+(?:LXX|Greek|Vulgate))?"
 # A parenthesis that holds nothing but Bible references (one or more, ; or , separated).
 REF_PAREN = re.compile(rf"\s*\(\s*{_ONE}(?:\s*[;,]\s*(?:{_ONE}|{_LOC}))*\s*\)")
+# A bare reference outside parentheses, as in a commentary's lemma heading ("Ps 9:18-19: 'Let the sinners...'").
+BARE_REF = re.compile(rf"\b{_ONE}(?:\s*[;,]\s*{_LOC}(?![\w:]))*")
 
 
 def sha(s: str) -> str:
@@ -48,6 +50,7 @@ def strip_refs(paras: list[str]) -> str:
     """The English with every reference-only parenthesis removed, whitespace normalised."""
     text = "\n".join(paras)
     text = REF_PAREN.sub("", text)
+    text = BARE_REF.sub("", text)
     return re.sub(r"[ \t]+", " ", re.sub(r" +([,.;:!?])", r"\1", text)).strip()
 
 

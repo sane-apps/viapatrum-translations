@@ -97,11 +97,20 @@ def new_para(para: str, sentence: str, printed: str, action: str, new_ref: str |
     if para.count(sentence) == 1:
         s0 = para.index(sentence)
         seg = para[s0:s0 + len(sentence)]
-    else:
-        return None  # sentence only matches once markup is stripped: leave for a hand fix
+    else:  # the sentence carries Logos markup in the file: place by the words just before the reference
+        st = strip_markup(para)
+        i0 = st.index(sentence)
+        j = sentence.find(printed)
+        if j < 0 or sentence.count(printed) != 1:
+            return None
+        ctx = sentence[max(0, j - 30):j + len(printed)]
+        if para.count(ctx) != 1:
+            return None
+        s0 = para.index(ctx)
+        seg = ctx
     if seg.count(printed) != 1:
         return None
-    i = seg.index(printed)
+    i = seg.rindex(printed)
     if action == "replace":
         seg2 = seg[:i] + new_ref + seg[i + len(printed):]
     else:
@@ -110,7 +119,7 @@ def new_para(para: str, sentence: str, printed: str, action: str, new_ref: str |
         seg2 = re.sub(r"\s*[;,]\s*\)", ")", seg2)
         seg2 = re.sub(r"\s*\(\s*\)", "", seg2)
         seg2 = re.sub(r" {2,}", " ", seg2)
-    return para[:s0] + seg2 + para[s0 + len(sentence):]
+    return para[:s0] + seg2 + para[s0 + len(seg):]
 
 
 def section_rows(book_dir: Path, sid: str):
@@ -123,6 +132,28 @@ def section_rows(book_dir: Path, sid: str):
         for row in rows:
             if isinstance(row, dict) and str(row.get("section")) == sid:
                 yield ef, data, row
+
+
+_INDEX: dict | None = None
+
+
+def find_by_sentence(sentence: str):
+    """(book dir, section id) of the one English row whose text holds this exact sentence, else None.
+    For site works whose loader names them differently from their folder (Cyril, Julian, Origen batches)."""
+    global _INDEX
+    if _INDEX is None:
+        _INDEX = []
+        for ef in BOOKS.glob("*/translations/*_english.json"):
+            try:
+                data = json.loads(ef.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            rows = data if isinstance(data, list) else data.get("sections", [])
+            for row in rows:
+                if isinstance(row, dict) and isinstance(row.get("english"), list):
+                    _INDEX.append((ef.parents[1], str(row.get("section")), strip_markup("\n".join(map(str, row["english"])))))
+    hits = {(b, s) for b, s, txt in _INDEX if sentence in txt}
+    return hits.pop() if len(hits) == 1 else None
 
 
 def main(argv=None) -> int:
@@ -141,6 +172,10 @@ def main(argv=None) -> int:
     outcome, receipts = Counter(), []
     for (work, sid), ds in by_sec.items():
         bdir = work_book_dir(work)
+        if bdir is None or len(list(section_rows(bdir, sid))) != 1:
+            alt = find_by_sentence(ds[0]["sentence"])
+            if alt:
+                bdir, sid = alt
         def done(d, result, **kw):
             outcome[result] += 1
             receipts.append({**d, "result": result, **kw})
@@ -155,6 +190,9 @@ def main(argv=None) -> int:
                 done(d, "skip-busy", book=bdir.name)
             continue
         found = list(section_rows(bdir, sid))
+        if len(found) > 1:  # section ids repeat across slices: keep the row that holds the sentence
+            found = [f for f in found if any(d["sentence"] in strip_markup("\n".join(map(str, f[2].get("english") or [])))
+                                             for d in ds)]
         if len(found) != 1:
             for d in ds:
                 done(d, f"skip-section-rows-{len(found)}", book=bdir.name)
