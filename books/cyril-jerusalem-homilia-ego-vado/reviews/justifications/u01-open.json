@@ -152,50 +152,7 @@
  "pipeline": "work_pipeline",
  "brief_sha256": "eaf63b89aff764d1d4c08f0e5f2dd5cbd303e55eb97314b255ab5a8805af38a7",
  "source_sha256": "9395ec8d20d0a0b865c9aadc73bf04fdd08d9c7913558920c47d6309493a7e25",
- "checks": {
-  "checkers": [
-   "@cf/moonshotai/kimi-k2.6",
-   "@cf/zai-org/glm-5.2"
-  ],
-  "rounds": [
-   {
-    "round": 0,
-    "confirmed": 0,
-    "rejected": 1,
-    "error": null
-   }
-  ],
-  "last_rejected": [
-   {
-    "class": "glossary",
-    "severity": "major",
-    "quote": "the \"I\"",
-    "source_quote": "τὸ ἐγώ",
-    "why": "Glossary mandates \"I\" not \"the 'I'\" for ἐγώ.",
-    "fix": "he places I, so that the meaning",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "τὸ ἐγώ has article; 'the I' reflects it. Normal rendering, not a glossary-breaking error."
-   }
-  ]
- },
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 0,
-   "rejected": 1,
-   "error": null
-  },
-  {
-   "round": "read0",
-   "confirmed": 0
-  },
-  {
-   "round": "read0",
-   "confirmed": 0
-  }
- ],
- "reviewer": "work_pipeline:kimi+glm",
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
  "confidence": "source_verified",
  "repairs": [
   {
@@ -330,6 +287,72 @@
    "undone": 4,
    "confirmed_before": 0,
    "confirmed_after": 0
+  }
+ ],
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "the \"I\"",
+    "source_quote": "τὸ ἐγώ",
+    "why": "Glossary mandates \"I\" not \"the 'I'\" for ἐγώ.",
+    "fix": "he places I, so that the meaning",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "τὸ ἐγώ has article; 'the I' reflects it. Normal rendering, not a glossary-breaking error."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }
