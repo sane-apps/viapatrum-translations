@@ -31,6 +31,12 @@ class Placement(unittest.TestCase):
         s = "the earth is a tent (Ps 103:29), and"
         self.assertEqual(A.new_para(s, s, "Ps 103:29", "remove", None), "the earth is a tent, and")
 
+    def test_remove_leaves_no_space_before_stop(self):
+        s = "'Who is holy like you, Lord?' (Ps 85:8). For"
+        self.assertEqual(A.new_para(s, s, "Ps 85:8", "remove", None), "'Who is holy like you, Lord?'. For")
+        s = "whom Cain killed” (Genesis 4:25) (Ps 3:4)."
+        self.assertEqual(A.new_para(s, s, "Ps 3:4", "remove", None), "whom Cain killed” (Genesis 4:25).")
+
     def test_dump_like_keeps_style(self):
         for text in ('[\n {\n  "a": "é"\n }\n]', '[\n  {\n    "a": "\\u00e9"\n  }\n]\n'):
             data = json.loads(text)

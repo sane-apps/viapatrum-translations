@@ -152,6 +152,7 @@ def new_para(para: str, sentence: str, printed: str, action: str, new_ref: str |
         seg2 = re.sub(r"\s*[;,]\s*\)", ")", seg2)
         seg2 = re.sub(r"\s*\(\s*\)", "", seg2)
         seg2 = re.sub(r" {2,}", " ", seg2)
+        seg2 = re.sub(r"(?<=[\w’'\"”)?!]) +(?=[.,;:](?:\s|$))", "", seg2)  # no stray space before punctuation
     return para[:s0] + seg2 + para[s0 + len(seg):]
 
 
