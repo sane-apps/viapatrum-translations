@@ -90,6 +90,17 @@ def strip_markup(text: str) -> str:
         return re.sub(r"\[\[(.*?)\s*>>\s*[^\]]*\]\]", r"\1", text)
 
 
+def dump_like(orig: str, data) -> str:
+    """Serialise data in the file's own JSON style (indent, ASCII escaping, final newline) so the diff is the change."""
+    parsed = json.loads(orig)
+    end = "\n" if orig.endswith("\n") else ""
+    for indent in (1, 2, 4, None, 3):
+        for asc in (False, True):
+            if json.dumps(parsed, ensure_ascii=asc, indent=indent) + end == orig:
+                return json.dumps(data, ensure_ascii=asc, indent=indent) + end
+    return json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+
+
 def new_para(para: str, sentence: str, printed: str, action: str, new_ref: str | None) -> str | None:
     """The paragraph with the reference changed, or None when it can't be placed exactly."""
     if para.count(sentence) != 1 and strip_markup(para).count(sentence) != 1:
@@ -228,7 +239,7 @@ def main(argv=None) -> int:
                             else:
                                 al.remove(x)
             tmp = ef.with_suffix(".json.tmp")
-            tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            tmp.write_text(dump_like(ef.read_text(encoding="utf-8"), data), encoding="utf-8")
             tmp.rename(ef)
             why = "; ".join(f'{d["printed"]} -> {d.get("new_ref") or "removed"}' for d in applied)
             CA.record(bdir, sid, before, paras, tool=TOOL, why=why[:900])

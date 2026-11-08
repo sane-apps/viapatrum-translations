@@ -36,8 +36,11 @@ _BOOKS = (
 )
 _LOC = r"\d+(?::\d+[a-c]?(?:\s*[-–]\s*\d+(?::\d+)?[a-c]?)?(?:\s*,\s*\d+[a-c]?(?:\s*[-–]\s*\d+[a-c]?)?)*)?"
 _ONE = rf"(?:(?:cf\.|see|compare|LXX|Greek|Vulgate)\s+)?(?:{_BOOKS})\.?\s+{_LOC}(?:\s+(?:LXX|Greek|Vulgate))?"
-# A parenthesis that holds nothing but Bible references (one or more, ; or , separated).
-REF_PAREN = re.compile(rf"\s*\(\s*{_ONE}(?:\s*[;,]\s*(?:{_ONE}|{_LOC}))*\s*\)")
+# Translator placeholders found in the sweep: "(prophetic allusion)", "(Lamentations 1:16 (echo))",
+# "(Isaiah 5:30 (cf.)". They are reference notes, not the author's words.
+_TAG = r"(?:prophetic allusion|allusion|echo|cf\.)"
+# A parenthesis that holds nothing but Bible references (one or more, ; or , separated), or a placeholder tag.
+REF_PAREN = re.compile(rf"\s*\(\s*(?:{_ONE}(?:\s*[;,]\s*(?:{_ONE}|{_LOC}))*(?:\s*\({_TAG}\)?)?|{_TAG})\s*\)")
 # A bare reference outside parentheses, as in a commentary's lemma heading ("Ps 9:18-19: 'Let the sinners...'").
 BARE_REF = re.compile(rf"\b{_ONE}(?:\s*[;,]\s*{_LOC}(?![\w:]))*")
 

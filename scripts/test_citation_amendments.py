@@ -16,6 +16,15 @@ AFTER = ["John said no; he was called Elijah by the Lord (Matthew 11:14).",
 
 
 class CitationOnly(unittest.TestCase):
+    def test_placeholder_tags_count_as_references(self):
+        self.assertTrue(CA.citation_only(["came to be' (prophetic allusion); therefore"], ["came to be' (Isaiah 43:10); therefore"]))
+        self.assertTrue(CA.citation_only(["humbled.' (Isaiah 5:30 (cf.) And the"], ["humbled.' (Luke 14:11) And the"]))
+        self.assertTrue(CA.citation_only(["me.' (Lamentations 1:16 (echo)) I take"], ["me.' (Jeremiah 15:7) I take"]))
+
+    def test_ordinary_parenthesis_with_tag_word_is_text(self):
+        self.assertFalse(CA.citation_only(["the echo (of a voice) came"], ["the echo came"]))
+        self.assertFalse(CA.citation_only(["an echo (echo of Christ) here"], ["an echo here"]))
+
     def test_reference_swap_is_citation_only(self):
         self.assertTrue(CA.citation_only(BEFORE, AFTER))
 
