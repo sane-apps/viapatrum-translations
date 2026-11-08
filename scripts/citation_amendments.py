@@ -105,3 +105,43 @@ def record(book_dir: Path, section: str, before: list[str], after: list[str], *,
     with path.open("a", encoding="utf-8") as f:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
     return row
+
+
+# ---- Duplicate sections (Nov 8, 2026) ----------------------------------------------------------------------------
+# Cyril of Jerusalem's homily on John 14:12-13 was segmented with u01-open holding the whole homily and three more
+# sections repeating parts of it, so the site printed the text twice. Dropping the repeats changes the section set,
+# which the receipt pins. A row {"kind": "remove_duplicate_section", "section", "source", "english", "contained_in"}
+# lets certified() accept a missing section only when its whole source text lies inside a kept section's source
+# (named in contained_in) and that kept section is itself certified. Nothing new is certified by it.
+REMOVE = "remove_duplicate_section"
+
+
+def _norm_src(lines: list[str]) -> str:
+    return re.sub(r"\s+", " ", " ".join(str(x) for x in lines)).strip()
+
+
+def removal_ok(rows: list[dict], missing: set, pairs: list[dict]) -> bool:
+    """True when every section id in missing has a removal row whose source is contained in a kept section."""
+    kept = {str(p["id"]): _norm_src(p["source"]) for p in pairs}
+    for sid in missing:
+        row = next((r for r in rows if r.get("kind") == REMOVE and str(r.get("section")) == str(sid)), None)
+        if not row:
+            return False
+        part, whole = _norm_src(row.get("source") or []), kept.get(str(row.get("contained_in")))
+        if not part or not whole or part not in whole:
+            return False
+    return True
+
+
+def record_removal(book_dir: Path, section: str, source: list[str], english: list[str], contained_in: str,
+                   kept_source: list[str], *, tool: str, why: str) -> dict:
+    """Append a removal row. Raises ValueError unless the removed source lies inside the kept section's source."""
+    if not _norm_src(source) or _norm_src(source) not in _norm_src(kept_source):
+        raise ValueError(f"{book_dir.name} §{section}: source is not contained in §{contained_in}")
+    row = {"kind": REMOVE, "section": str(section), "contained_in": str(contained_in), "source": source,
+           "english": english, "tool": tool, "why": why, "at": time.strftime("%Y-%m-%dT%H:%M:%S")}
+    path = book_dir / "reviews" / FILE
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, ensure_ascii=False) + "\n")
+    return row

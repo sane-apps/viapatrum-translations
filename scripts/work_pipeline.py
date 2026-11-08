@@ -2427,8 +2427,6 @@ def certified(book: str) -> bool:
         return False
     pairs = load_pairs(book)
     rebalance(book, pairs)
-    if not pairs or {p["id"] for p in pairs} != set(want):
-        return False
     # A proved citation-only change (reviews/citation_amendments.jsonl, Nov 8, 2026) keeps a section certified.
     import citation_amendments as _ca
     amend = _ca.load(BOOKS / book)
@@ -2438,6 +2436,12 @@ def certified(book: str) -> bool:
 
 class CatalogueUnavailable(RuntimeError):
     """dist/works is missing, so this tick cannot tell live books from unpublished ones."""
+    ids = {p["id"] for p in pairs}
+    if not pairs or ids - set(want):
+        return False
+    # A section missing from the files is accepted only as a recorded duplicate of a kept section (same file).
+    if ids != set(want) and not _ca.removal_ok(amend, set(want) - ids, pairs):
+        return False
 
 
 def site_books(unpublished: bool = False) -> list[tuple[int, str]]:

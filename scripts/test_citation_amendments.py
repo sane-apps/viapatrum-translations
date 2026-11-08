@@ -107,5 +107,25 @@ class Chain(unittest.TestCase):
         self.assertTrue(CA.chain_ok([], "1", "abc", "abc"))
 
 
+class DuplicateSections(unittest.TestCase):
+    PAIRS = [{"id": "u01-open", "source": ["Title. First half of the homily.", "Second half."]}]
+
+    def test_contained_section_may_go(self):
+        rows = [{"kind": CA.REMOVE, "section": "u01-rem-mid", "contained_in": "u01-open", "source": ["First half of the homily."]}]
+        self.assertTrue(CA.removal_ok(rows, {"u01-rem-mid"}, self.PAIRS))
+
+    def test_unrecorded_or_new_text_may_not(self):
+        self.assertFalse(CA.removal_ok([], {"u01-rem-mid"}, self.PAIRS))
+        rows = [{"kind": CA.REMOVE, "section": "u01-rem-mid", "contained_in": "u01-open", "source": ["Text found nowhere else."]}]
+        self.assertFalse(CA.removal_ok(rows, {"u01-rem-mid"}, self.PAIRS))
+        rows = [{"kind": CA.REMOVE, "section": "u01-rem-mid", "contained_in": "u09", "source": ["Second half."]}]
+        self.assertFalse(CA.removal_ok(rows, {"u01-rem-mid"}, self.PAIRS))
+
+    def test_record_refuses_uncontained(self):
+        with tempfile.TemporaryDirectory() as t:
+            with self.assertRaises(ValueError):
+                CA.record_removal(Path(t), "x", ["Other text."], [], "u01-open", ["Title."], tool="t", why="w")
+
+
 if __name__ == "__main__":
     unittest.main()
