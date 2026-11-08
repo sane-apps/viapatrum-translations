@@ -56,7 +56,10 @@ def count_book(book_dir: Path) -> tuple[int, list[str]]:
     n, examples = 0, []
     for ef in sorted((book_dir / "translations").glob("*_english.json")):
         for paras in english_rows(ef):
-            for _pi, _s, _e, printed, book, ch, v, _ve in G.refs_in(paras):
+            for r in G.refs_in(paras):
+                printed, book, ch, v = r[3], r[4], r[5], r[6]
+                if G.labelled_greek(r):
+                    continue  # marked LXX/Greek/Vulgate: not English numbering
                 if not G.exists(book, ch, v) and not greek_addition(book, ch, v):
                     n += 1
                     if len(examples) < 3:

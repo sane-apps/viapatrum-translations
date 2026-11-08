@@ -21,6 +21,7 @@ class Ratchet(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             b = self.book(Path(t), "w", ["Loved the world (John 3:16).", "Sing (Psalm 151:2) and (Ps 183:4).",
                                          "Bless the Lord, O angels (Daniel 3:58); seed of Canaan (Daniel 13:56).",
+                                         "Delivered to the saints (Jude 3); fellow-helper (3 John 8); rather than in man (Psalm 117:8 LXX).",
                                          "As the prophet said (prophetic allusion); the echo (of a voice)."])
             n, ex = R.count_book(b)
             self.assertEqual(n, 3)

@@ -87,5 +87,13 @@ class Gate(unittest.TestCase):
         self.assertEqual(fixed, {"a": ["No references here."]})
 
 
+class SingleChapterAndLabels(unittest.TestCase):
+    def test_jude_verse_and_lxx_label(self):
+        got = G.refs_in(["kept for judgment (Jude 6) and (Psalm 117:8 LXX) and (Psalm 118:8)."])
+        self.assertEqual([(r[4], r[5], r[6]) for r in got], [("Jude", 1, 6), ("Psalm", 117, 8), ("Psalm", 118, 8)])
+        self.assertTrue(G.exists("Jude", 1, 6))
+        self.assertEqual([G.labelled_greek(r) for r in got], [False, True, False])
+
+
 if __name__ == "__main__":
     unittest.main()

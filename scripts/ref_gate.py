@@ -86,9 +86,22 @@ def refs_in(paras: list[str]):
                 if not book:
                     continue
                 s = inner_start + m.start()
-                out.append((pi, s, inner_start + m.end(), m.group(0), book, int(m.group("ch")),
-                            int(m.group("v")) if m.group("v") else None, int(m.group("ve")) if m.group("ve") else None))
+                ch, v = int(m.group("ch")), int(m.group("v")) if m.group("v") else None
+                ve = int(m.group("ve")) if m.group("ve") else None
+                if book in SINGLE_CHAPTER and v is None:  # "Jude 6" is verse 6 of the one chapter
+                    ch, v = 1, ch
+                rest = inner[m.end():m.end() + 8]
+                labelled = bool(re.match(r"\s*(?:\(\s*)?(?:LXX|Greek|Vulg)", rest)) or inner[max(0, m.start() - 6):m.start()].rstrip().endswith("LXX")
+                out.append((pi, s, inner_start + m.end(), m.group(0), book, ch, v, ve) + ((True,) if labelled else ()))
     return out
+
+
+SINGLE_CHAPTER = {"Obadiah", "Philemon", "2 John", "3 John", "Jude"}
+
+
+def labelled_greek(ref: tuple) -> bool:
+    """True when refs_in found the reference marked LXX/Greek/Vulgate (its numbering is not the English one)."""
+    return len(ref) > 8 and ref[8]
 
 
 def exists(book: str, ch: int, v: int | None) -> bool:
@@ -123,13 +136,15 @@ def items_for(sections: dict[str, list[str]]):
     items, where = [], {}
     for sid, paras in sections.items():
         for r in refs_in(paras):
-            pi, s, e, printed, book, ch, v, ve = r
+            pi, s, e, printed, book, ch, v, ve = r[:8]
             para = paras[pi]
             iid = f"G{len(items):05d}"
             item = {"id": iid, "printed": printed, "parsed_as": f"{book} {ch}" + (f":{v}" if v else "") + (f"-{ve}" if ve else ""),
                     "context": para[max(0, s - 700):e + 300],
                     "kjv_cited_and_neighbours": kjv(book, ch, (v or 1) - 2, (ve or v or 3) + 2),
                     "exists_in_english_numbering": exists(book, ch, v)}
+            if labelled_greek(r):
+                item["labelled_greek_numbering"] = True
             if book == "Psalm" and v:
                 alt = [x for c2 in lxx_to_english(ch) if c2 != ch for x in kjv("Psalm", c2, v - 3, (ve or v) + 1)]
                 if alt:
