@@ -1,0 +1,87 @@
+{
+ "slug": "theophilus-alex-fragmenta-matthaeum",
+ "pipeline": "work_pipeline",
+ "drafter": "nvidia/nemotron-3-ultra-550b-a55b",
+ "checkers": [
+  "claude-sonnet-5-5",
+  "grok-4.7-build-fast"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 87,
+   "moved_start": "τοῦ δὲ πρώτου\nπαραιτησαμένου προσῆλθεν ὁ πατὴρ τῷ δευτέρῳ, τ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 74,
+   "moved_start": "3 μτ 21, 28–32 Τοῦτο βούλεται εἰπεῖν ἡ παραβολή, ὅτι οἱ μὲν "
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 92,
+   "moved_start": "οἱ δὲ λέγοντες\nτηρεῖν τὸν νόμον Φαρισαῖοι ἐν μόνοις ῥήμασιν "
+  }
+ ],
+ "brief_sha256": "5c425550ddb688a86b6c3d53ad0f3f30b489c57cf5b53da2d6a5202a5d69ccef",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-08T03:23:09Z",
+ "readers": [
+  "claude-sonnet-5-5",
+  "grok-4.7-build-fast"
+ ],
+ "referee": "agy/gemini-3.8-flash-high",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "aa4dff29aeb8a9ba678bc1020086173f601b04767b763636506a2f5a551b8948",
+   "english_sha256": "e73797aac3a215d4a9bb4127c21e11277df69dd086166d5847ef022a77b76acc",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "ca76aa790e2879fc75c1763088194f81d817c9886ca4b3bba0d8e00293d09d69",
+   "english_sha256": "b12a6a6631fb2981a660ac5e4da439be75224fa5e38a20f19b44fee2923c2585",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "dcc648ae020156ec4ec6f837790d38cc0f7386324d8bcd5135d6893385b9b980",
+   "english_sha256": "afd08e2da074bcfc7b395cf308f48fdc70f55b5ffb121f14d5f9475ae4b6cd86",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "f30debb5f1dbc6b08e6fb791d6c3991fcade8f89a02e24ee6ca79c540d36075e",
+   "english_sha256": "2c760f7ad24474f026ddd96062b87814ceb06dbbaf8f5dc54d2fa42f891b8b62",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ]
+}
