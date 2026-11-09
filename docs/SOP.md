@@ -64,7 +64,7 @@ Full bar: `books/ante-nicene-topics/docs/TRANSLATION_QA.md`.
 - English paragraphs only in `english[]` (this is Pass B). No Latin in the reading text.
 - Justification receipt required: `reviews/justifications/<id>.json` with `pass_a_gloss` ≠ joined Pass B.
 - Use `kind` / `translator_notes` / `added_allusions` for editorial material.
-- **Inline scripture refs (hard gate):** whenever the Father quotes or clearly alludes to Scripture, Pass B `english[]` must carry a parenthetical citation beside the clause (full book name + chapter:verse, Julian pattern). `added_allusions` / justification `bible_refs` alone do **not** pass — readers and Logos PBB both need the ref in the reading text. See `docs/LOGOS_MARKUP.md` and Project store `docs/scripture-refs-inline.md`.
+- **Inline scripture refs (verified only, owner 9 Nov 2026):** a parenthetical citation goes beside a quoted or alluded clause in Pass B `english[]` (full book name, English/KJV chapter:verse) only when the verse is confirmed: its text says what the clause quotes or points to. `scripts/ref_gate.py` checks every reference against the verse text at apply. If the verse can't be confirmed, leave the citation out of the reading text and record the candidate in `added_allusions` with a note: no reference beats a wrong one. Greek and Latin Psalm numbers (LXX/Vulgate) are converted to English numbering, never copied. Why: the old hard gate (12 Sep 2026: every quote or allusion must carry a ref) pushed models to cite from memory, and the 8 Nov sweep found about 1 in 4 published references wrong (`outputs/viapatrum/references-20261108/`).
 - Forbid placeholders: no `TODO`, `YYYY`, or raw `[n12]` footnote junk in English.
 
 ### 3. Review

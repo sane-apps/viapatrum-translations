@@ -23,7 +23,11 @@ FULL_NAMES = sorted(set(ABBREV.values()), key=len, reverse=True)
 
 def expand_ref(raw: str) -> str | None:
     if not raw: return None
-    raw = re.sub(r'\s+LXX.*$', '', raw.strip()).split('/')[0].strip()
+    # A Greek-numbered (LXX) reference is not English numbering; copying its number printed wrong Psalms
+    # (8 Nov 2026 sweep). Leave it out rather than guess the English verse (SOP: verified refs only, 9 Nov 2026).
+    if re.search(r'\bLXX\b', raw):
+        return None
+    raw = raw.strip().split('/')[0].strip()
     m = re.match(r'^([1-3]?\s*[A-Za-z][A-Za-z.]*(?:\s+[A-Za-z.]+)*)\s+(\d+[:.].*)$', raw)
     if not m: return None
     book, loc = m.group(1).strip(), m.group(2).strip().replace('-', '–')
