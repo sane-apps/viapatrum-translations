@@ -334,6 +334,13 @@ def line(row: dict) -> str:
 
 
 def main(argv: list[str]) -> int:
+    # "--caller NAME" names the job, so the owner's CLOUDFLARE_AI_ALLOW lines can lift the switch for it
+    # (9 Nov 2026: the narration drain); without it the check stays unnamed and the switch holds.
+    caller = ""
+    if "--caller" in argv:
+        i = argv.index("--caller")
+        caller = argv[i + 1] if i + 1 < len(argv) else ""
+        argv = argv[:i] + argv[i + 2:]
     cmd = argv[1] if len(argv) > 1 else "check"
     if cmd == "status":
         try:
@@ -341,8 +348,8 @@ def main(argv: list[str]) -> int:
         except (OSError, ValueError):
             print("spend: no reading yet")
         return 0
-    if cmd in ("check", "allow", "gate-lanes") and hold_reason():
-        print(f"refused: {hold_reason()}")
+    if cmd in ("check", "allow", "gate-lanes") and hold_reason(caller):
+        print(f"refused: {hold_reason(caller)}")
         if cmd == "gate-lanes":
             return 1
         return OVER
