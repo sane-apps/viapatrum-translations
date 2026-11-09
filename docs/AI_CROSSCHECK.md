@@ -16,7 +16,7 @@ Site readers can later **submit a correction** (see `/contribute/#corrections`).
 For every section in the claim:
 
 1. **Draft model** produces Pass A (`pass_a_gloss` + lemmas) + Pass B (`english[]`) + thought title from locked Greek/Latin only.
-   Default: `@cf/qwen/qwen3-30b-a3b-fp8` (see `LLM_API_SETUP.md` / shared SOP).
+   Default: `@cf/qwen/qwen3.8-27b` (see `LLM_API_SETUP.md` / shared SOP).
 2. **Structural gate** (local, deterministic): parse JSON, section id, thought title, Pass A ≠ Pass B, length floors, no ANF/archaic smell, no fence leak in fields. Same checks as `llm_bakeoff.py` scorer.
 3. **Checker model A** (different family from draft): given locked Greek + Pass A + Pass B, returns a verdict JSON (`pass` / `fail` + reasons). Must not share the draft's model family.
    Selection follows configured fallback order, skipping the draft family. Every required semantic flag must explicitly pass with evidence and full source-paragraph coverage; missing, false or uncertain flags fail closed.

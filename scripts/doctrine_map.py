@@ -232,12 +232,12 @@ def rerank(tok: str, query: str, texts: list[str]) -> list[float]:
 
 QUESTIONS = SITE / "data" / "explore" / "doctrine_questions.json"
 VERDICTS = ("states", "compatible", "excludes")
-# Graders from two labs: Kimi (also a lanes checker) and gpt-oss; GLM-5.2 is
-# left to the lanes after it hit 429s when shared (2026-10-03). Nemotron
+# Graders from two labs: Qwen 3.8 (Kimi until its 20 Nov 2026 retirement) and
+# gpt-oss. Nemotron
 # (NVIDIA) referees. Both checkers are batch-capable: grading sends them
 # through the batch broker only (DM_BATCH_ONLY, default on), so it never takes
 # the lanes' direct per-model slots.
-CHECKERS = os.environ.get("DM_CHECKERS", "@cf/moonshotai/kimi-k2.6,@cf/openai/gpt-oss-120b").split(",")
+CHECKERS = os.environ.get("DM_CHECKERS", "@cf/qwen/qwen3.8-27b,@cf/openai/gpt-oss-120b").split(",")
 BATCH_ONLY = os.environ.get("DM_BATCH_ONLY", "1") != "0"
 
 Q_SYS = """You read one passage from an early Christian writer and compare it with several competing positions on one question.

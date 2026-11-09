@@ -48,7 +48,7 @@ source "$ROOT/scripts/receipt_refresh.sh" || { echo "$(date +%T) receipt_refresh
 # The scout writes promoted_drafter.json when a new model wins the bakeoff.
 # A lane that is already running keeps the id it imported. This refresh is
 # for the next start only.
-DEFAULT_DRAFTER="@cf/deepseek-ai/deepseek-v4-pro-0813"
+DEFAULT_DRAFTER="@cf/deepseek-ai/deepseek-v4.1-flash-1017"
 DRAFTER="$(python3 -c 'import sys; sys.path.insert(0, "'"$HOME"'/SaneApps/infra/SaneProcess/scripts/automation"); from cf_capability_scout import resolve_drafter; print(resolve_drafter())')" || DRAFTER=""
 if [ -z "${DRAFTER:-}" ]; then
   DRAFTER="$DEFAULT_DRAFTER"
@@ -94,16 +94,17 @@ if [ "$PROFILE" = plans-free ]; then
   case "$WP_DRAFTER" in nvidia/*) NOTES="work_pipeline drafter via llm_bakeoff.vendor_call" \
     refresh "$WP_DRAFTER" translate '{"reasoning_effort":"none"}' nvidia "$WP_DRAFTER" ;; esac
 elif [ "$PROFILE" = plans ]; then
-  # Readers stay on the Workers AI pair the reader bar was set on: Sonnet + Haiku read the same
+  # The reader bar was set on Kimi + GLM-5.2, both gone on 20 Nov 2026; Qwen 3.8 + Gemma 4 stand in
+# until someone scores them as readers. Sonnet + Haiku read the same
   # books 0.5 and 1 point lower and failed every book Kimi + GLM had passed (reader calibration
   # 2026-10-19, outputs/plan-limits/reader-runs.jsonl). One whole-work read per reader costs
   # about $0.07 for the pair, and it keeps Claude free for checking and the held review.
-  export WP_DRAFTER=muse WP_JUDGES=@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2 WP_FALLBACK=""
-  for m in @cf/moonshotai/kimi-k2.6 @cf/zai-org/glm-5.2; do refresh "$m" translation-qa; done
+  export WP_DRAFTER=muse WP_JUDGES=@cf/qwen/qwen3.8-27b,@cf/google/gemma-4-26b-a4b-it WP_FALLBACK=""
+  for m in @cf/qwen/qwen3.8-27b @cf/google/gemma-4-26b-a4b-it; do refresh "$m" translation-qa; done
   DRAFTER=muse
 else
   refresh "$DRAFTER" translate
-  for m in @cf/moonshotai/kimi-k2.6 @cf/zai-org/glm-5.2 @cf/qwen/qwen3.8-27b; do refresh "$m" translation-qa; done
+  for m in @cf/qwen/qwen3.8-27b @cf/google/gemma-4-26b-a4b-it; do refresh "$m" translation-qa; done
   refresh @cf/openai/gpt-oss-120b translation-qa '{}'
 fi
 # Checker pairs rotate across lanes (2026-10-03). Workers AI caps paid-access
@@ -118,9 +119,11 @@ fi
 # failed call fell back to an unbenched model or counted a finding as confirmed.
 # GPT-OSS out (quality audit 2026-10-05, docs/QUALITY_AUDIT_20261005.md): it
 # raised the false finding or voted down the true one in 13 of 24 traced errors.
-# Kimi + GLM are the benched pair; rate_acquire paces lanes under their caps,
-# so fewer lanes run at full speed.
-PAIRS=("@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2")
+# Kimi + GLM-5.2 were the benched pair; both stop answering on 20 Nov 2026. Qwen 3.8 +
+# Gemma 4 replace them. Defect bench 7 Nov 2026 (outputs/cf-model-retirement-20261120/bench):
+# Qwen 3.8 caught 11 of 12 seeded defects, Gemma 4 8, the pair 11. No reader calibration
+# yet: score the pair as readers before these lanes certify anything.
+PAIRS=("@cf/qwen/qwen3.8-27b,@cf/google/gemma-4-26b-a4b-it")
 # Plans checkers: Sonnet (precise) + Grok build-fast on the X plan login (best recall in the
 # 2026-10-19 bench, 62 s a section). A finding counts only when both agree or the other
 # upholds it, so Grok's nitpicks are filtered and Sonnet's misses are covered. Haiku stays a

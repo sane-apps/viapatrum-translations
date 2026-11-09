@@ -37,7 +37,7 @@ def main() -> int:
     print("6.1 nv", json.dumps({k: r1.get(k) for k in ("ok", "error", "ocr_flags", "ms")}, default=str), flush=True)
     r2 = draft_section(
         "7.3",
-        "@cf/qwen/qwen3-30b-a3b-fp8",
+        "@cf/qwen/qwen3.8-27b",
         cf,
         nv,
         acct,

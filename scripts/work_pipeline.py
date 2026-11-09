@@ -77,7 +77,7 @@ def _drafter_family(model: str) -> str:
     return model.rsplit("/", 1)[-1]
 
 
-_DEFAULT_DRAFTER = "@cf/deepseek-ai/deepseek-v4-pro-0813"
+_DEFAULT_DRAFTER = "@cf/deepseek-ai/deepseek-v4.1-flash-1017"
 # The scout promotes a model by writing outputs/cf-scout/promoted_drafter.json.
 # This process keeps whatever it read here. A later lane start reads the file.
 try:
@@ -96,14 +96,15 @@ if os.environ.get("WP_DRAFTER"):
     DRAFTER, DRAFTER_PROFILE = os.environ["WP_DRAFTER"], {}
 # Two blind checkers from different families; override with WP_CHECKERS=a,b
 # for bench A/B (keep the pipeline default on the bench winner).
-CHECKERS = os.environ.get("WP_CHECKERS", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2").split(",")
+# Kimi and GLM-5.2 stop answering on 20 Nov 2026 (Cloudflare 5 Nov notice).
+CHECKERS = os.environ.get("WP_CHECKERS", "@cf/qwen/qwen3.8-27b,@cf/google/gemma-4-26b-a4b-it").split(",")
 # Readers, brief fact check and glossary votes (2026-10-03): GPT-OSS-120B
 # scored readability 2 in 20 of 21 rounds and stalled certification; it stays a
 # source checker only. Override with WP_JUDGES=a,b.
-JUDGES = os.environ.get("WP_JUDGES", "@cf/moonshotai/kimi-k2.6,@cf/zai-org/glm-5.2").split(",")
+JUDGES = os.environ.get("WP_JUDGES", "@cf/qwen/qwen3.8-27b,@cf/google/gemma-4-26b-a4b-it").split(",")
 # Used only when a checker errors out. WP_FALLBACK="" turns it off (plans lane: a paid
 # stand-in would spend Workers AI credit, and its verdict never certifies anyway).
-FALLBACK = os.environ.get("WP_FALLBACK", "@cf/qwen/qwen3.8-27b")
+FALLBACK = os.environ.get("WP_FALLBACK", "@cf/openai/gpt-oss-120b")
 # Readers never see the source, so their notes must not edit the translation
 # until each edit is judged against the text it replaces (quality audit
 # 2026-10-05: reader-fix and polish edits made 14 of 94 confirmed errors, e.g.
@@ -123,9 +124,9 @@ REFEREE = os.environ.get("WP_REFEREE", "nvidia/nemotron-3-ultra-550b-a55b")
 # REPORT.md), so the chain is Ultra alone (owner: "if they just suck we can skip it").
 REFEREES = [REFEREE] + [m for m in os.environ.get("WP_REFEREE_BACKUPS", "").split(",")
                         if m and m != REFEREE]
-FAMILY = {DRAFTER: _drafter_family(DRAFTER), FALLBACK: "qwen"}
+FAMILY = {DRAFTER: _drafter_family(DRAFTER), FALLBACK: _drafter_family(FALLBACK)}
 for _m in CHECKERS + JUDGES:
-    FAMILY[_m] = next((f for f in ("kimi", "glm", "gpt-oss", "llama", "mistral", "gemma", "nemotron", "qwen") if f in _m), _m)
+    FAMILY[_m] = _drafter_family(_m)
 MAX_REPAIR_ROUNDS = 3
 MAX_FULL_REDRAFTS = 3   # full redrafts after the first draft for structural gate failures
 STRUCTURAL = ("near-copies", "copies", "too short", "Latin note")  # gate errors that need a redraft

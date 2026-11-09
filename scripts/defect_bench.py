@@ -862,7 +862,7 @@ def main() -> int:
     sp.add_parser("build")
     r = sp.add_parser("run")
     r.add_argument("--detector", default="all", choices=["lint", "read", "source", "all"])
-    r.add_argument("--models", default="@cf/deepseek-ai/deepseek-v4-pro-0813,@cf/moonshotai/kimi-k2.6")
+    r.add_argument("--models", default="@cf/deepseek-ai/deepseek-v4.1-flash-1017,@cf/qwen/qwen3.8-27b")
     r.add_argument("--force", action="store_true")
     sp.add_parser("score")
     a = ap.parse_args()

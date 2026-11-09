@@ -39,7 +39,10 @@ Sources checked 2026-09-11:
 | Model | Setup | Failure mode we hit |
 |-------|--------|---------------------|
 | `@cf/meta/llama-3.*` | Plain `messages` + `max_tokens` | — |
-| `@cf/qwen/qwen3-30b-a3b-fp8` | Plain messages; robust JSON extract | Malformed JSON until extractor fixed |
+| `@cf/qwen/qwen3-30b-a3b-fp8` | RETIRED by Cloudflare 2026-11-20 (HTTP 410, code 5028). Use `@cf/qwen/qwen3.8-27b`. | Malformed JSON until extractor fixed |
+| `@cf/qwen/qwen3.8-27b` | `chat_template_kwargs.enable_thinking: false`; `reasoning_effort` allows only low, medium, xhigh, so never send "none". Smoke `{"ok":true}` 2026-11-07. | `/no_think` was the old 30B habit; do not append it |
+| `@cf/deepseek-ai/deepseek-v4.1-flash-1017` | `enable_thinking: false` plus `reasoning_effort: "none"`, `max_completion_tokens`. No batch. Smoke `{"ok":true}` 2026-11-07. | Thinking defaults to high |
+| `@cf/zai-org/glm-5.3` | Reasoning cannot be off: `enable_thinking` is enum [true], and `reasoning_effort: "none"` MAPS TO MAX. Send `"low"`. Smoke `{"ok":true}` 2026-11-07. Not a default: spend audit 2026-10-03 found 27% of billed calls returned nothing. | "Thinking off" kwargs buy the most thinking |
 | `@cf/zai-org/glm-4.7-flash` | `chat_template_kwargs.enable_thinking: false` | `null` with thinking on → **PASS** once off |
 | `@cf/google/gemma-4-26b-a4b-it` | Same: thinking **defaults true**. With thinking on, `response` is reasoning prose (looks “wrong”). With off + `max_completion_tokens`: smoke `{"ok":true}` | First bake “empty” / unusable JSON |
 | `@cf/openai/gpt-oss-20b` | Schema default `max_tokens: 256`, `temperature: 0.6`. Prefer `/ai/run` or `/ai/v1/chat/completions`. Responses API returns reasoning objects — extract text carefully. | Invented `enable_thinking` / temp 0 |

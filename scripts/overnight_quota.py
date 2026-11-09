@@ -42,7 +42,7 @@ NV_DRAFT_DEFAULT = "nvidia/nemotron-3-super-120b-a12b"
 NV_CHECKER_A_DEFAULT = "mistralai/mistral-nemotron"
 NV_CHECKER_B_DEFAULT = "mistralai/mistral-nemotron"
 
-CF_DRAFT_DEFAULT = "@cf/qwen/qwen3-30b-a3b-fp8"
+CF_DRAFT_DEFAULT = "@cf/qwen/qwen3.8-27b"
 CF_CHECKER_A_DEFAULT = "@cf/google/gemma-4-26b-a4b-it"
 CF_CHECKER_B_DEFAULT = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 

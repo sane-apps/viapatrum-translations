@@ -57,11 +57,11 @@ CLAIMS = ROOT / "docs" / "CLAIMS.md"
 OUT = ROOT / "outputs" / "ai-promote"
 LOCKS = ROOT / "docs" / "claim-locks"
 
-DRAFT_DEFAULT = "@cf/qwen/qwen3-30b-a3b-fp8"
+DRAFT_DEFAULT = "@cf/qwen/qwen3.8-27b"
 CHECKER_A_DEFAULT = "@cf/google/gemma-4-26b-a4b-it"
 CHECKER_B_DEFAULT = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 ARBITER_DEFAULTS = [
-    "@cf/qwen/qwen3-30b-a3b-fp8",
+    "@cf/qwen/qwen3.8-27b",
     "@cf/google/gemma-4-26b-a4b-it",
     "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "@cf/meta/llama-3.1-8b-instruct-fp8-fast",

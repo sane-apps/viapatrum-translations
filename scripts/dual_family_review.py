@@ -5,8 +5,9 @@ Reviews the packet's SELECTED sections in two lanes from different model
 families. Two profiles (--profile):
 
   aligned (default since 2026-10-09)
-    kimi    Cloudflare Workers AI @cf/moonshotai/kimi-k2.6   (kimi)
-    glm     Cloudflare Workers AI @cf/zai-org/glm-5.2        (glm)
+    qwen    Cloudflare Workers AI @cf/qwen/qwen3.8-27b         (qwen)
+    gemma   Cloudflare Workers AI @cf/google/gemma-4-26b-a4b-it  (gemma)
+    Kimi K2.6 and GLM-5.2 held these lanes until their 20 Nov 2026 retirement.
     Clause-aligned prompt: the source is cut into sentence chunks of <= 900
     characters; for each chunk the model writes its own literal gloss of the
     source FIRST, quotes the English that renders it, and lists only major
@@ -89,17 +90,17 @@ LANES = {
     "gemini": {"provider": "google-ai-studio", "endpoint": GEMINI_URL.replace("{model}", "<model>"),
                "tier": "free (AI Studio free tier)", "model": "gemini-3.5-flash-lite",
                "min_interval": 4.5},
-    "kimi": {"provider": "cloudflare-workers-ai", "endpoint": CF_URL.replace("{account}", "<account>").replace("{model}", "<model>"),
-             "tier": "Workers AI on startup credits ($0 cash)", "model": "@cf/moonshotai/kimi-k2.6",
+    "qwen": {"provider": "cloudflare-workers-ai", "endpoint": CF_URL.replace("{account}", "<account>").replace("{model}", "<model>"),
+             "tier": "Workers AI on startup credits ($0 cash)", "model": "@cf/qwen/qwen3.8-27b",
              "min_interval": 3.0, "key": "CLOUDFLARE_API_TOKEN", "caller": "cf"},
-    "glm": {"provider": "cloudflare-workers-ai", "endpoint": CF_URL.replace("{account}", "<account>").replace("{model}", "<model>"),
-            "tier": "Workers AI on startup credits ($0 cash)", "model": "@cf/zai-org/glm-5.2",
+    "gemma": {"provider": "cloudflare-workers-ai", "endpoint": CF_URL.replace("{account}", "<account>").replace("{model}", "<model>"),
+            "tier": "Workers AI on startup credits ($0 cash)", "model": "@cf/google/gemma-4-26b-a4b-it",
             "min_interval": 3.0, "key": "CLOUDFLARE_API_TOKEN", "caller": "cf"},
 }
 LANES["nim"].update({"key": "NV_API_KEY", "caller": "nim"})
 LANES["gemini"].update({"key": "GEMINI_API_KEY", "caller": "gemini"})
 PROFILES = {
-    "aligned": {"lanes": ("kimi", "glm"), "prompt": "aligned"},
+    "aligned": {"lanes": ("qwen", "gemma"), "prompt": "aligned"},
     "legacy": {"lanes": ("nim", "gemini"), "prompt": "independent"},
 }
 DEFAULT_PROFILE = "aligned"
@@ -212,10 +213,14 @@ def call_cf(model: str, messages: list[dict], key: str) -> dict:
     ok, why = spend_allow(messages)
     if not ok:  # every Workers AI review call, densify packets included
         raise QuotaPause(f"cf spend guard refused: {why}")
-    # Thinking off, as scripts/llm_bakeoff.cf_profile sets for kimi-k2.6 / glm-5.2:
-    # with thinking on, kimi spends the whole budget reasoning and returns no answer.
+    # Thinking off, as scripts/llm_bakeoff.cf_profile sets: with thinking on, a model can
+    # spend the whole budget reasoning and return no answer. reasoning_effort "none" goes
+    # only where the live schema allows it (Qwen 3.8 takes low, medium, xhigh; Gemma 4 has
+    # no such field).
     body = {"messages": messages, "temperature": 0.2, "max_completion_tokens": 4000,
-            "chat_template_kwargs": {"enable_thinking": False}, "reasoning_effort": "none"}
+            "chat_template_kwargs": {"enable_thinking": False}}
+    if any(k in model for k in ("kimi", "deepseek", "glm-5.2")):
+        body["reasoning_effort"] = "none"
     status, hdr, data = _post(CF_URL.format(account=CF_ACCOUNT, model=model), body,
                               {"Authorization": f"Bearer {key}"}, 600)
     res = data.get("result") or {}
@@ -561,8 +566,8 @@ def main(argv=None) -> int:
                     help=f"lane pair and prompt (default {DEFAULT_PROFILE}; 'legacy' = nemotron + gemini, independent_review prompt)")
     ap.add_argument("--nim-model", default=LANES["nim"]["model"])
     ap.add_argument("--gemini-model", default=LANES["gemini"]["model"])
-    ap.add_argument("--kimi-model", default=LANES["kimi"]["model"])
-    ap.add_argument("--glm-model", default=LANES["glm"]["model"])
+    ap.add_argument("--qwen-model", default=LANES["qwen"]["model"])
+    ap.add_argument("--gemma-model", default=LANES["gemma"]["model"])
     ap.add_argument("--scope-note", default="")
     ap.add_argument("--max-new-calls", type=int, default=0, help="Stop after N new calls (0 = no limit)")
     ap.add_argument("--muse-tiebreak", action="store_true",
@@ -579,7 +584,7 @@ def main(argv=None) -> int:
         return 2
     profile = PROFILES[args.profile]
     lane_names = profile["lanes"]
-    every = {"nim": args.nim_model, "gemini": args.gemini_model, "kimi": args.kimi_model, "glm": args.glm_model}
+    every = {"nim": args.nim_model, "gemini": args.gemini_model, "qwen": args.qwen_model, "gemma": args.gemma_model}
     models = {lane: every[lane] for lane in lane_names}
     for lane, model in models.items():
         if model_family(model) is None:

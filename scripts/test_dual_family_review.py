@@ -52,7 +52,7 @@ class DualFamilyProfileTests(unittest.TestCase):
         self.pk = self.dir / "p.packet.json"
         self.pk.write_text(json.dumps(packet()))
         self.out = self.dir / "p.review.json"
-        for lane in ("kimi", "glm", "nim", "gemini"):
+        for lane in ("qwen", "gemma", "nim", "gemini"):
             D.LANES[lane]["min_interval"] = 0
 
     def tearDown(self):
@@ -69,7 +69,7 @@ class DualFamilyProfileTests(unittest.TestCase):
         rec = json.loads(self.out.read_text())
         prov = rec["review_provenance"]
         self.assertEqual(prov["profile"], "aligned")
-        self.assertEqual({l["family"] for l in prov["lanes"]}, {"kimi", "glm"})
+        self.assertEqual({l["family"] for l in prov["lanes"]}, {"qwen", "gemma"})
         chunks = len(D.source_chunks(SRC))
         self.assertGreater(chunks, 1)
         for lane in prov["lanes"]:
@@ -111,7 +111,7 @@ class DualFamilyProfileTests(unittest.TestCase):
         self.assertEqual(D.LANES["gemini"]["model"], "gemini-3.5-flash-lite")
 
     def test_same_family_pair_refused(self):
-        self.assertEqual(self.run_main("--glm-model", "@cf/moonshotai/kimi-k2.6"), 2)
+        self.assertEqual(self.run_main("--gemma-model", "@cf/qwen/qwen3.8-27b"), 2)
 
 
 if __name__ == "__main__":

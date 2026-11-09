@@ -43,7 +43,7 @@ if ! timeout 120 python3 scripts/spend_guard.py check >/dev/null; then
   echo "$(date +%T) beliefs run skipped for today: $(python3 scripts/spend_guard.py status)"; exit 0
 fi
 grade_ok=1
-NOTES="doctrine_map grade via llm_bakeoff.vendor_call, thinking off" refresh @cf/moonshotai/kimi-k2.6 doctrine-grade "$KW" || grade_ok=0
+NOTES="doctrine_map grade via llm_bakeoff.vendor_call, thinking off" refresh @cf/qwen/qwen3.8-27b doctrine-grade "$KW" || grade_ok=0
 NOTES="doctrine_map grade via llm_bakeoff.vendor_call" refresh @cf/openai/gpt-oss-120b doctrine-grade '{}' || grade_ok=0
 NOTES="doctrine_map referee via llm_bakeoff.vendor_call" refresh nvidia/nemotron-3-ultra-550b-a55b \
   doctrine-grade '{"reasoning_effort":"none"}' nvidia nemotron-3-ultra || grade_ok=0

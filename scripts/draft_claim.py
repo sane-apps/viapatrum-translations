@@ -49,7 +49,7 @@ SOURCE = ROOT / "books/origen-jeremiah-samuel/translations/jeremiah_source.json"
 RAW_SOURCE = ROOT / "books/origen-jeremiah-samuel/sources/origeneswerke03orig.pdf"
 XML_SOURCE = RAW_SOURCE.parent / "first1k/tlg2042.tlg009.opp-grc1.xml"
 SOURCE_MANIFEST = RAW_SOURCE.parent / "manifest.json"
-DRAFT_DEFAULT = "@cf/qwen/qwen3-30b-a3b-fp8"
+DRAFT_DEFAULT = "@cf/qwen/qwen3.8-27b"
 DRAFT_FALLBACK_DEFAULTS = "@cf/meta/llama-3.3-70b-instruct-fp8-fast,@cf/zai-org/glm-4.7-flash"
 
 

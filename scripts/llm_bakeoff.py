@@ -6,7 +6,7 @@ Fixture: Origen Jeremiah §6.1 → Pass A + Pass B JSON. Scores SOP shape, not v
   source ~/.config/nv/env
   export CF_TOKEN="$CLOUDFLARE_API_TOKEN"
   python3 scripts/llm_bakeoff.py
-  python3 scripts/llm_bakeoff.py --models '@cf/qwen/qwen3-30b-a3b-fp8'
+  python3 scripts/llm_bakeoff.py --models '@cf/qwen/qwen3.8-27b'
   python3 scripts/llm_bakeoff.py --ollama gemma3:4b   # only if ollama is up
 
 Receipts: outputs/llm-bakeoff/<timestamp>/
@@ -38,7 +38,7 @@ OUT_ROOT = ROOT / "outputs" / "llm-bakeoff"
 DEFAULT_ACCOUNT = "2c267ab06352ba2522114c3081a8c5fa"
 
 TIER_A = [
-    "@cf/qwen/qwen3-30b-a3b-fp8",
+    "@cf/qwen/qwen3.8-27b",
     "@cf/google/gemma-4-26b-a4b-it",
     "@cf/zai-org/glm-4.7-flash",
     "@cf/openai/gpt-oss-20b",
@@ -943,10 +943,11 @@ THINKING_ALWAYS_ON = ("glm-5.3", "gpt-oss-120b")  # never below the profile's ma
 def cf_profile(model: str) -> dict:
     """Per-model Workers AI kwargs from live schemas + docs/LLM_API_SETUP.md."""
     m = model.lower()
-    if any(k in m for k in ("deepseek-v4", "kimi-k2", "glm-5.2", "qwen3.8", "nemotron-3-120b")):
-        # Live schemas 2026-10-02: chat_template_kwargs.enable_thinking defaults
-        # true on all five; false turns reasoning off. (glm-5.3 cannot disable
-        # thinking and is excluded.) Long-context work-level reads need room.
+    if any(k in m for k in ("deepseek-v4", "kimi-k2", "glm-5.2", "qwen3.8", "gemma-4", "nemotron-3-120b")):
+        # Live schemas 2026-10-02 and 2026-11-07: chat_template_kwargs.enable_thinking
+        # defaults true on all of these; false turns reasoning off. Long-context
+        # work-level reads need room. reasoning_effort goes only where the schema allows
+        # "none": Qwen 3.8 takes low, medium, xhigh and Gemma 4 has no such field.
         return {
             "enable_thinking": False,
             "reasoning_effort": "none" if ("kimi" in m or "deepseek" in m or "glm-5.2" in m) else None,
@@ -956,9 +957,11 @@ def cf_profile(model: str) -> dict:
             "timeout": 600,
         }
     if "glm-5.3" in m:
-        # Thinking cannot be disabled on glm-5.3 (live schema 2026-10-02):
-        # leave it on and give room so reasoning does not truncate the JSON.
-        return {"temperature": 0.2, "max_tokens": 16000, "use_max_completion_tokens": True, "timeout": 900}
+        # Thinking cannot be disabled on glm-5.3 (live schema 2026-11-07), and
+        # reasoning_effort "none" maps to "max", so never send it. Low is the cheapest
+        # level; give room so reasoning does not truncate the JSON.
+        return {"reasoning_effort": "low", "temperature": 0.2, "max_tokens": 16000,
+                "use_max_completion_tokens": True, "timeout": 900}
     if "glm" in m or "gemma" in m:
         # Live schema: chat_template_kwargs.enable_thinking default true
         return {
