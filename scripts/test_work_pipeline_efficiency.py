@@ -226,8 +226,16 @@ class CallRetryTests(unittest.TestCase):
     def test_unparseable_logs_completion_tokens(self):
         err = io.StringIO()
         with mock.patch.object(W.sys, "stderr", err):
-            self.run_call([{"content": "{\"a\": [", "ct": 6000}, {"content": "{\"a\": [", "ct": 6000}], max_tokens=6000)
+            self.run_call([{"content": "not json", "ct": 6000}, {"content": "not json", "ct": 6000}], max_tokens=6000)
         self.assertIn("unparseable (6000 of 6000 tokens)", err.getvalue())
+
+    def test_unclosed_json_without_error_grows_budget(self):
+        # 2026-11-08: a Grok reply cut off mid-object came back with no "truncated" error.
+        out, seen, sleeps = self.run_call([{"content": '{"findings": [{"a": 1}, {"b"'}, {"content": '{"findings": []}'}],
+                                          max_tokens=6000)
+        self.assertEqual(out, {"findings": []})
+        self.assertEqual(self.budgets, [6000, 12000])
+        self.assertEqual(seen, ["user", "user"], "no nudge: the budget was the problem")
 
     def test_rate_error_backs_off(self):
         out, seen, sleeps = self.run_call([{"error": "HTTP 429 rate limited"}, {"error": '[{"code": 3040, "message": "Capacity temporarily exceeded"}]'},

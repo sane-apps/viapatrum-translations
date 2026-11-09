@@ -303,6 +303,14 @@ def call(model: str, system: str, user: str, max_tokens: int = 8000, expect: tup
             max_tokens = min(MAX_TOKENS_CAP, max_tokens * 2)
             continue
         if not err:
+            # A reply that opens JSON and never closes it was cut off even when the vendor did not say so
+            # (2026-11-08: Grok checker findings stopped mid-object, "? of 6000 tokens", and the section was held
+            # "checker unavailable"). Treat it like a flagged cut-off: one retry with the budget doubled.
+            body = str(r.get("content", "")).strip().strip("`").strip()
+            if (body[:1] in "{[" and body[-1:] not in "}]" and not grown and max_tokens < MAX_TOKENS_CAP):
+                grown = True
+                max_tokens = min(MAX_TOKENS_CAP, max_tokens * 2)
+                continue
             if nudged:
                 break
             nudged = True
