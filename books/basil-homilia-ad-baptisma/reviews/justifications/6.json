@@ -139,7 +139,7 @@
   }
  ],
  "pass_b_english": [
-  "Who has fixed the limit of your life? Who has defined the deadline of your old age? Who is such a trustworthy guarantor to you of what is to come? Do you not see infants being snatched away, those in their prime being carried off? Life has no single deadline. Why do you wait for baptism to come to you as a gift of fever—when you will not be able to utter the saving words, and perhaps will not even be permitted to hear clearly, with the sickness dwelling in your very head? You will not be able to raise your hands to heaven, or stand up on your feet, or bend the knee in worship, or be taught usefully, or confess securely, or make your covenant with God, or renounce the enemy—perhaps not even to follow the initiation with understanding, yourself uncertain whether you have perceived the grace or are insensible to what is happening. And even if you do receive the grace with awareness, then you have the talent but you bring no work to it. Imitate the eunuch. He found the one who instructed him, and he did not despise the teaching. The rich man brought the poor man up onto his chariot—the dignified and exalted man brought up the ordinary and despised man. And when he was taught the gospel of the kingdom, he received the faith in his heart, but he did not postpone the seal of the Spirit. For when they came upon water, he said, 'Look, water!' The word came from overflowing joy: 'Look—the thing I was seeking! What prevents me from being baptized?' Where the will is ready, nothing prevents. For the one who calls is loving toward humanity, the minister is prepared, the grace is abundant. Let eagerness be present, and there will be no obstacle. There is one who prevents, one who blocks our roads to salvation—let us overcome him by understanding. He produces hesitation in us; let us rise up to the work. He deceives our hearts with empty promises; let us not be ignorant of his schemes. For does he not suggest that we commit sin today, and persuade us to store up righteousness for tomorrow? This is why the Lord, dismantling his wicked counsels, says, 'Today, if you hear my voice' (Psalm 94:7 (95:7)). That one says: 'Give today to me, and tomorrow to God.' The Lord cries out in answer: 'Today, hear my voice.' Understand the enemy: he does not dare to advise abandoning God altogether—he knows that is hard for Christians to hear—but he schemes against the undertaking with deceptive arts. He is clever at doing evil. He observes that we human beings live in the present, and every action is carried out in the present moment. So by stealing our today through his scheming, he leaves us the hopes of tomorrow. Then, when tomorrow comes, the wicked divider comes again, claiming today for himself and tomorrow for the Lord. And so, always snatching away the present through pleasure and attaching the future to our hopes, he secretly leads us astray from life. I once saw such cunning in a clever bird. Since her chicks were easy to catch because of their softness, she offered herself as ready prey, turning about in the hands of the hunters. She was neither easily caught by them, nor did she make them despair of the hunt. Instead, holding them with varied hopes by keeping them occupied with herself, she won her chicks the chance to escape—and then at last she herself was caught."
+  "Who has fixed the limit of your life? Who has defined the deadline of your old age? Who is such a trustworthy guarantor to you of what is to come? Do you not see infants being snatched away, those in their prime being carried off? Life has no single deadline. Why do you wait for baptism to come to you as a gift of fever—when you will not be able to utter the saving words, and perhaps will not even be permitted to hear clearly, with the sickness dwelling in your very head? You will not be able to raise your hands to heaven, or stand up on your feet, or bend the knee in worship, or be taught usefully, or confess securely, or make your covenant with God, or renounce the enemy—perhaps not even to follow the initiation with understanding, yourself uncertain whether you have perceived the grace or are insensible to what is happening. And even if you do receive the grace with awareness, then you have the talent but you bring no work to it. Imitate the eunuch. He found the one who instructed him, and he did not despise the teaching. The rich man brought the poor man up onto his chariot—the dignified and exalted man brought up the ordinary and despised man. And when he was taught the gospel of the kingdom, he received the faith in his heart, but he did not postpone the seal of the Spirit. For when they came upon water, he said, 'Look, water!' The word came from overflowing joy: 'Look—the thing I was seeking! What prevents me from being baptized?' Where the will is ready, nothing prevents. For the one who calls is loving toward humanity, the minister is prepared, the grace is abundant. Let eagerness be present, and there will be no obstacle. There is one who prevents, one who blocks our roads to salvation—let us overcome him by understanding. He produces hesitation in us; let us rise up to the work. He deceives our hearts with empty promises; let us not be ignorant of his schemes. For does he not suggest that we commit sin today, and persuade us to store up righteousness for tomorrow? This is why the Lord, dismantling his wicked counsels, says, 'Today, if you hear my voice' (Psalm 94:7 (95:7)). That one says: 'Give today to me, and tomorrow to God.' The Lord cries out in answer: 'Today, hear my voice.' Understand the enemy: he does not dare to advise abandoning God altogether—he knows that is hard for Christians to hear—but with deceptive arts he carries out his own attempt. He is clever at doing evil. He observes that we human beings live in the present, and every action is carried out in the present moment. So by stealing our today through his scheming, he leaves us the hopes of tomorrow. Then, when tomorrow comes, the wicked divider comes again, claiming today for himself and tomorrow for the Lord. And so, always snatching away the present through pleasure and attaching the future to our hopes, he secretly leads us astray from life. I once saw such cunning in a clever bird. Since her chicks were easy to catch because of their softness, she offered herself as ready prey, turning about in the hands of the hunters. She was neither easily caught by them, nor did she make them despair of the hunt. Instead, holding them with varied hopes by keeping them occupied with herself, she won her chicks the chance to escape—and then at last she herself flew off with them."
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
@@ -358,35 +358,51 @@
     "Basil quotes LXX Psalm 94:7, which corresponds to Hebrew Psalm 95:7; the citation should reflect the LXX numbering Basil used.",
     "The Greek πυρετοῦ σοι δῶρον γενέσθαι τὸ βάπτισμα means baptism becomes a gift brought by fever, not that baptism becomes a gift of fever; the English word order misstated the relationship."
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "and then at last she herself was caught.",
+     "source_quote": "εἶτα τὸ τελευταῖον καὶ αὐτὴ συναπέπτη",
+     "why": "συναπέπτη means she flew away too. The English says she was caught, which reverses the point that the cunning bird escaped.",
+     "fix": "and then at last she herself flew off with them.",
+     "model": "claude-sonnet-5-5",
+     "agreed_by": [
+      "claude-sonnet-5-5",
+      "grok-4.7-build-fast"
+     ]
+    },
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "but he schemes against the undertaking with deceptive arts",
+     "source_quote": "ἀλλὰ τέχναις ἀπατηλαῖς μεθοδεύει τὴν ἐπιχείρησιν",
+     "why": "The enterprise is the devil's own attempt, which he conducts by deceit. 'Against the undertaking' makes it an attack on the hearer's project.",
+     "fix": "but with deceptive arts he carries out his own attempt.",
+     "model": "grok-4.7-build-fast",
+     "upheld_by": "claude-sonnet-5-5",
+     "ruling": "μεθοδεύει τὴν ἐπιχείρησιν has the enemy contriving his own attempt by craft. 'Schemes against the undertaking' adds 'against' and turns the object into the hearer's project."
+    }
+   ],
+   "edits": [
+    {
+     "old": "and then at last she herself was caught.",
+     "new": "and then at last she herself flew off with them."
+    },
+    {
+     "old": "but he schemes against the undertaking with deceptive arts.",
+     "new": "but with deceptive arts he carries out his own attempt."
+    }
+   ],
+   "fixed": [
+    "Fixed the bird's fate: 'συναπέπτη' means she flew away (with them), not that she was caught. The English reversed the point of the illustration.",
+    "Fixed the devil's action: 'μεθοδεύει τὴν ἐπιχείρησιν' means he carries out/conducts his own attempt by deceit, not that he schemes against the hearer's undertaking."
+   ]
   }
  ],
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 4,
-   "rejected": 2,
-   "error": null
-  },
-  {
-   "round": 1,
-   "confirmed": 5,
-   "rejected": 2,
-   "error": null
-  },
-  {
-   "round": 2,
-   "confirmed": 3,
-   "rejected": 5,
-   "error": null
-  },
-  {
-   "round": 3,
-   "confirmed": 3,
-   "rejected": 4,
-   "error": null
-  }
- ],
- "reviewer": "work_pipeline:kimi+glm+claude held review 2026-10-19-plans",
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
  "confidence": "source_verified",
  "sweep": {
   "by": "claude held review 2026-10-19-plans",
@@ -413,5 +429,90 @@
     "note": "ἀποβουκολέω means to lead astray or beguile, and λανθάνει is covered by 'secretly'; the English is accurate."
    }
   ]
- }
+ },
+ "previous_checks": null,
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 4,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 5,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 3,
+   "rejected": 5,
+   "error": null
+  },
+  {
+   "round": 3,
+   "confirmed": 3,
+   "rejected": 4,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 2,
+    "rejected": 2,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 2,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "agency",
+    "severity": "major",
+    "quote": "yourself uncertain whether you have perceived the grace or are insensible to what is happening",
+    "source_quote": "ἀμφίβολος ὢν τοῖς παροῦσιν, ἆρα ᾔσθου τῆς χάριτος, ἢ ἀναισθήτως ἔχεις τῶν γινομένων",
+    "why": "The doubt belongs to those present about the dying person, not to the person about himself.",
+    "fix": "leaving those present in doubt whether you have perceived the grace or are insensible of what is happening",
+    "model": "grok-4.7-build-fast",
+    "rejected_by": "claude-sonnet-5-5",
+    "ruling": "ἀμφίβολος is nominative, agreeing with the initiate. 'Uncertain' about 'τοῖς παροῦσιν' is within range, and the 'ἆρα ᾔσθου…' question is conveyed adequately."
+   },
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "(Psalm 94:7 (95:7))",
+    "source_quote": "Σήμερον, φησίν, ἐὰν τῆς φωνῆς μου ἀκούσητε",
+    "why": "Modern Psalm 94:7 is a different text. The line is Psalm 95:7; LXX is Psalm 94:8.",
+    "fix": "'Today, if you hear my voice' (Psalm 95:7).",
+    "model": "grok-4.7-build-fast",
+    "rejected_by": "claude-sonnet-5-5",
+    "ruling": "The LXX numbers 'Σήμερον ἐὰν τῆς φωνῆς' as Ps 94:7, and the Hebrew and modern numbering is 95:7. So 'Psalm 94:7 (95:7)' is correct."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 2,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 2,
+   "error": null
+  }
+ ]
 }

@@ -158,10 +158,10 @@
   "But since not only forgiveness of the past has been proclaimed beforehand, but also gifts of the future, you are wronging yourself in ways not even one of your enemies would have spitefully done to you, and yet you think you have planned well and reasoned profitably about yourself. You refuse the forgiveness and die in your debts. And you know this: the debtor of ten thousand talents would have received forgiveness, if he had not renewed the demand for payment against himself by his cruelty toward his fellow servant (Matthew 18:23-35). We must be careful not to suffer the same thing once we have received grace, by not forgiving our own debtors, so that the gift may remain secure for us.",
   "Enter the inner chamber of your soul, and stir up the memory of what you have done. If your sins are many, do not be discouraged by their number. For where sin increased, grace increased all the more (Romans 5:20), if you accept the grace. The one who owes much will have much forgiven, so that he may love more (Luke 7:47). But if your sins are small and trivial, and not leading to death, why are you anxious about the future, when you bore the past not ignobly, and that without yet being trained by the law?",
   "Now consider your soul as standing on a balance, pulled from one side by angels and from the other by demons. To which will you give the weight of your heart? What will win in you: pleasure of the flesh, or holiness of the soul? Enjoyment of present things, or desire for the things to come? Will angels receive you, or will those who hold you keep their grip?",
-  "In battle, generals distribute a watchword to their troops, so that friends can easily call to one another, and so that when they are mixed with the enemy in close combat, the separation can be clearly made. No one will recognize whether you are one of ours or one of the enemy, unless you show your allegiance through the mystical symbols, unless the light of the Lord's face is marked upon you (Numbers 6:25). How will the angel claim you? How will he snatch you from the enemy, if he does not recognize the seal? How will you say, \"I belong to God,\" if you do not carry the marks of identification?",
+  "In battle, generals distribute a watchword to their troops, so that friends can easily call to one another, and so that when they are mixed with the enemy in close combat, the separation can be clearly made. No one will recognize whether you are one of ours or one of the enemy, unless you show your allegiance through the mystical symbols, unless the light of the Lord's face is marked upon you (Psalm 4:6). How will the angel claim you? How will he snatch you from the enemy, if he does not recognize the seal? How will you say, \"I belong to God,\" if you do not carry the marks of identification?",
   "Or do you not know that the destroyer passed over the houses that were sealed, but in the unsealed houses he slaughtered the firstborn (Exodus 12:23)? An unsealed treasure is easy prey for thieves; an unmarked sheep is plotted against without risk.",
   "Are you young? Secure your youth with the bridle of baptism. Has your prime passed? Do not be deprived of the provisions for the journey; do not lose the amulet; do not think about the eleventh hour as if it were the first. For it is fitting even for the one beginning life to keep the end before his eyes.",
-  "If one of the doctors promised you that by some devices and contrivances he would make you young from old, would you not long for that day to come, when you were about to see yourself returning to your prime? But when baptism promises to make your soul flourish again—the soul you have made old, and which it promises to rescue from lawlessness, though you have shown it stained—you despise your benefactor and do not run to the promise.",
+  "If one of the doctors promised you that by some devices and contrivances he would make you young from old, would you not long for that day to come, when you were about to see yourself returning to your prime? But when baptism promises to make your soul flourish again—the soul you have made old, wrinkled and stained by your lawless deeds—you despise your benefactor and do not run to the promise.",
   "Do you not desire to see what the great wonder of the promise is? How is a person reborn without a mother? How does the one who is growing old and being corrupted according to the desires of deceit become vigorous again, and return to youth, and come back to the true flower of young manhood?",
   "Baptism is ransom for captives, forgiveness of debts, death of sin, regeneration of the soul, a garment of light, a seal that cannot be assailed, a vehicle to heaven, the means of gaining the kingdom, the gift of adoption."
  ],
@@ -318,9 +318,76 @@
    "fixed": [
     "Changed 'the kingdom's patron' to 'the guarantor of the kingdom' because πρόξενος means guarantor/mediator, not patron."
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "unless the light of the Lord's face is marked upon you (Numbers 6:25)",
+     "source_quote": "ἐὰν μὴ σημειωθῇ ἐπὶ σὲ τὸ φῶς τοῦ προσώπου Κυρίου",
+     "why": "The 'light of the face marked upon us' with σημειόω is Psalm 4:6 (LXX 4:7), not the Aaronic blessing in Numbers 6:25.",
+     "fix": "unless the light of the Lord's face is marked upon you (Psalm 4:6)",
+     "model": "claude-sonnet-5-5",
+     "agreed_by": [
+      "claude-sonnet-5-5",
+      "grok-4.7-build-fast"
+     ]
+    },
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "which it promises to rescue from lawlessness, though you have shown it stained",
+     "source_quote": "καὶ ῥυσὴν αὐτὴν ἐκ τῶν ἀνομιῶν, καὶ ἐσπιλωμένην ἀπέδειξας",
+     "why": "ῥυσήν means 'wrinkled', and the verb is ἀπέδειξας ('you made it'). It is not 'rescue'. The soul was made wrinkled and stained by lawlessness, which fits the aging image.",
+     "fix": "the soul you have made old, wrinkled and stained by your lawless deeds",
+     "model": "claude-sonnet-5-5",
+     "agreed_by": [
+      "claude-sonnet-5-5",
+      "grok-4.7-build-fast"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "unless the light of the Lord's face is marked upon you (Numbers 6:25)",
+     "new": "unless the light of the Lord's face is marked upon you (Psalm 4:6)"
+    },
+    {
+     "old": "But when baptism promises to make your soul flourish again—the soul you have made old, and which it promises to rescue from lawlessness, though you have shown it stained—you despise your benefactor and do not run to the promise.",
+     "new": "But when baptism promises to make your soul flourish again—the soul you have made old, wrinkled and stained by your lawless deeds—you despise your benefactor and do not run to the promise."
+    }
+   ],
+   "fixed": [
+    "Fixed scripture reference from Numbers 6:25 to Psalm 4:6 per the Greek source and LXX numbering.",
+    "Corrected the translation of 'ῥυσὴν αὐτὴν ἐκ τῶν ἀνομιῶν, καὶ ἐσπιλωμένην ἀπέδειξας' to reflect that the soul was made wrinkled and stained by lawless deeds, not that baptism rescues it from lawlessness."
+   ]
   }
  ],
- "check_history": [
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
+ "confidence": "source_verified",
+ "sweep": {
+  "by": "claude held review 2026-10-19-plans",
+  "held_why": "2 confirmed problems after 3 repairs",
+  "fixed": [
+   {
+    "quote": "the guarantor of the kingdom",
+    "fix": "the means of gaining the kingdom",
+    "class": "mistranslation",
+    "note": "πρόξενος here means the one who procures or brings something about, not a surety; 'guarantor' changes the claim, and the suggested fix does not fit the list."
+   }
+  ],
+  "dismissed": [
+   {
+    "quote": "renewed the demand for payment against himself",
+    "class": "mistranslation",
+    "why": "Subject is wrong: the debtor renewed collection against his fellow servant, not himself.",
+    "note": "αὐτὸς ἑαυτῷ means he brought the demand back on himself through his cruelty to his fellow servant; the English is already correct and the checker misread the agent."
+   }
+  ]
+ },
+ "previous_checks": null,
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 5,
@@ -346,26 +413,39 @@
    "error": null
   }
  ],
- "reviewer": "work_pipeline:kimi+glm+claude held review 2026-10-19-plans",
- "confidence": "source_verified",
- "sweep": {
-  "by": "claude held review 2026-10-19-plans",
-  "held_why": "2 confirmed problems after 3 repairs",
-  "fixed": [
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
    {
-    "quote": "the guarantor of the kingdom",
-    "fix": "the means of gaining the kingdom",
-    "class": "mistranslation",
-    "note": "πρόξενος here means the one who procures or brings something about, not a surety; 'guarantor' changes the claim, and the suggested fix does not fit the list."
+    "round": 0,
+    "confirmed": 2,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
    }
   ],
-  "dismissed": [
-   {
-    "quote": "renewed the demand for payment against himself",
-    "class": "mistranslation",
-    "why": "Subject is wrong: the debtor renewed collection against his fellow servant, not himself.",
-    "note": "αὐτὸς ἑαυτῷ means he brought the demand back on himself through his cruelty to his fellow servant; the English is already correct and the checker misread the agent."
-   }
-  ]
- }
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 2,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
 }

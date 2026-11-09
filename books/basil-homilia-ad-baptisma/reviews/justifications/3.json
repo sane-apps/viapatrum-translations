@@ -142,7 +142,9 @@
  "pipeline": "work_pipeline",
  "brief_sha256": "de6e7457dbdf790e5368798e78a16e907e17d5c0fb9fcb460b2d0158c70ccbf6",
  "source_sha256": "774d4206d06f09865ffdea575b78b82ea886fe412d0876a0774ff1552676b123",
- "checks": {
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
+ "confidence": "source_verified",
+ "previous_checks": {
   "checkers": [
    "@cf/moonshotai/kimi-k2.6",
    "@cf/zai-org/glm-5.2"
@@ -180,7 +182,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 0,
@@ -188,6 +190,27 @@
    "error": null
   }
  ],
- "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified"
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
 }

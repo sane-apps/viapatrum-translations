@@ -143,7 +143,7 @@
   "Be afraid that you too may suffer something similar, surrendering what is clear in hopes about what is uncertain. Come then, transfer your whole self to the Lord. Give your name. Be enrolled with the Church. The soldier is counted in the muster rolls; the athlete competes after being registered; the citizen, once enrolled as a citizen, is counted among his tribesmen. You are liable to all these things: as a soldier of Christ, as an athlete of godliness, as one having citizenship in the heavens. Be registered in this book, so that you may be transferred to the one above. Learn, be taught the gospel way of life: precision of the eyes, restraint of the tongue, enslavement of the body, a humble mindset, purity of thoughts, the destruction of anger. When pressed into service, add more; when robbed, do not go to court; when hated, love; when persecuted, endure; when reviled, speak kindly. Be put to death to sin; be crucified with Christ; transfer your whole love to the Lord.",
   "But these things are hard. What good thing is easy? Who has set up a trophy while sleeping? Who has been adorned with the crowns of endurance while living in luxury and being serenaded by flutes? No one has taken the prize without running. Labors give birth to glory; toils procure crowns. “Through many tribulations we must enter the kingdom of heaven” (Acts 14:22), I say too. But these tribulations are awaited by the blessedness in the kingdom of heaven, while the painful and gloomy toil of Gehenna awaits the toils of sin.",
   "And yet, for one who examines carefully, not even the works of the devil come to the workers of lawlessness without toil. What are the sweats of self-control? But the fornicator is drenched in sweat, as pleasure wastes him away. Does self-control take away as much from the body as foul and raging licentiousness destroys? The nights of those who pass the night in prayers are sleepless; but far harsher are the nights of those who stay awake in injustices. For the fear of being caught and the frenzy of pleasures drive away all rest completely.",
-  "But if, fleeing the narrowness of the road that leads to salvation, you pursue the broad way of sin, I fear that, having traveled the wide road to the end, you may find the lodging that matches the road. So the treasure is hard to guard. Keep watch, brother. You have helpers, if you wish: prayer keeping the night watch, fasting staying at home, psalmody refreshing the soul. Take these along with you. Let them keep watch with you over the guarding of what is precious. What is better, tell me: for us to be rich and to strive on behalf of the guarding of what is precious, or not to have from the start what we would guard? No one pushes away good things out of fear of being deprived of them. For in that way nothing human would have been established, if we calculated the failures for each of our pursuits. For farming has barrenness lying beside it, trade has shipwrecks, marriages have widowhoods, child-rearing has childlessness. But nevertheless we set our hands to the works, leaning on the better hopes, and we entrust the outcome of what we hoped for to the God who orders our affairs.",
+  "But if, fleeing the narrowness of the road that leads to salvation, you pursue the broad way of sin, I fear that, having traveled the wide road to the end, you may find the lodging that matches the road. But the treasure is hard to guard. Keep watch, brother. You have helpers, if you wish: prayer keeping the night watch, fasting staying at home, psalmody refreshing the soul. Take these along with you. Let them keep watch with you over the guarding of what is precious. What is better, tell me: for us who are rich to be anxious about guarding what is precious, or not to have from the start what we would guard? No one pushes away good things out of fear of being deprived of them. For in that way nothing human would have been established, if we calculated the failures for each of our pursuits. For farming has barrenness lying beside it, trade has shipwrecks, marriages have widowhoods, child-rearing has childlessness. But nevertheless we set our hands to the works, leaning on the better hopes, and we entrust the outcome of what we hoped for to the God who orders our affairs.",
   "But you praise sanctification in word, yet in deed you linger in condemned things. See to it that you never regret your evil counsels, when regret will be of no use to you. Let the example of the virgins correct you. They did not have oil in their vessels, and when they needed to enter with the bridegroom, then they perceived that they lacked what was necessary (Matthew 25:1-13)."
  ],
  "notes": [
@@ -344,72 +344,49 @@
     "What sweats belong to self-control? — source: Ποῖοι ἱδρὼτες τῆς σωφροσύνης; The rhetorical question asks what kind of sweats self-control involves, implying it has none. Changed to 'What are the sweats of self-control?'",
     "But you honor sanctification in word — source: Σὺ δὲ λόγῳ μὲν ἀποσεμνύνεις τὸν ἁγιασμόν. ἀποσεμνύνεις means 'you disparage/despise', not 'honor'. Changed to 'But you despise sanctification in word'."
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "for us to be rich and to strive on behalf of the guarding of what is precious",
+     "source_quote": "πλουτοῦντας ἡμᾶς ὑπὲρ τῆς φυλακῆς τῶν τιμίων ἀγωνιᾷν",
+     "why": "ἀγωνιᾷν is ἀγωνιάω, “be anxious,” not ἀγωνίζομαι, “strive.” The point is anxious care, not effort.",
+     "fix": "for us who are rich to be anxious about guarding what is precious",
+     "model": "grok-4.7-build-fast",
+     "upheld_by": "claude-sonnet-5-5",
+     "ruling": "ἀγωνιᾷν is ἀγωνιάω, 'be anxious/distressed'. 'Strive' turns anxious care over guarding (ὑπὲρ τῆς φυλακῆς) into effort, which weakens the contrast with not having anything."
+    },
+    {
+     "class": "speaker",
+     "severity": "major",
+     "quote": "So the treasure is hard to guard.",
+     "source_quote": "Ἀλλὰ δυσφύλακτος ὁ θησαυρός.",
+     "why": "Ἀλλά marks the hearer’s objection, answered by “Keep watch.” “So” makes it Basil’s conclusion.",
+     "fix": "But the treasure is hard to guard.",
+     "model": "grok-4.7-build-fast",
+     "upheld_by": "claude-sonnet-5-5",
+     "ruling": "Ἀλλά is adversative ('But'). 'So' makes the treasure's being hard to guard Basil's conclusion, when it is an objection answered by 'Καὶ ἐπαγρύπνησον'. The logic is misled."
+    }
+   ],
+   "edits": [
+    {
+     "old": "What is better, tell me: for us to be rich and to strive on behalf of the guarding of what is precious, or not to have from the start what we would guard?",
+     "new": "What is better, tell me: for us who are rich to be anxious about guarding what is precious, or not to have from the start what we would guard?"
+    },
+    {
+     "old": "So the treasure is hard to guard. Keep watch, brother.",
+     "new": "But the treasure is hard to guard. Keep watch, brother."
+    }
+   ],
+   "fixed": [
+    "Changed 'for us to be rich and to strive on behalf of the guarding of what is precious' to 'for us who are rich to be anxious about guarding what is precious' (source: πλουτοῦντας ἡμᾶς ὑπὲρ τῆς φυλακῆς τῶν τιμίων ἀγωνιᾷν; ἀγωνιᾷν = ἀγωνιάω 'be anxious', not ἀγωνίζομαι 'strive').",
+    "Changed 'So the treasure is hard to guard' to 'But the treasure is hard to guard' (source: Ἀλλὰ δυσφύλακτος ὁ θησαυρός; ἀλλά marks the hearer's objection, not Basil's conclusion)."
+   ]
   }
  ],
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 7,
-   "rejected": 4,
-   "error": null,
-   "fallback": [
-    "@cf/moonshotai/kimi-k2.6"
-   ]
-  },
-  {
-   "round": 1,
-   "confirmed": 1,
-   "rejected": 2,
-   "error": null,
-   "fallback": [
-    "@cf/moonshotai/kimi-k2.6"
-   ]
-  },
-  {
-   "round": 2,
-   "confirmed": 2,
-   "rejected": 2,
-   "error": null,
-   "fallback": [
-    "@cf/moonshotai/kimi-k2.6"
-   ]
-  },
-  {
-   "round": 3,
-   "confirmed": 10,
-   "rejected": 8,
-   "error": null
-  }
- ],
- "checks": {
-  "fallback": [
-   {
-    "round": 0,
-    "replaced": [
-     "@cf/moonshotai/kimi-k2.6"
-    ],
-    "checker": "fallback",
-    "model": "@cf/qwen/qwen3.8-27b"
-   },
-   {
-    "round": 1,
-    "replaced": [
-     "@cf/moonshotai/kimi-k2.6"
-    ],
-    "checker": "fallback",
-    "model": "@cf/qwen/qwen3.8-27b"
-   },
-   {
-    "round": 2,
-    "replaced": [
-     "@cf/moonshotai/kimi-k2.6"
-    ],
-    "checker": "fallback",
-    "model": "@cf/qwen/qwen3.8-27b"
-   }
-  ]
- },
- "reviewer": "work_pipeline:kimi+glm+claude held review 2026-10-19-plans",
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
  "confidence": "source_verified",
  "sweep": {
   "by": "claude held review 2026-10-19-plans",
@@ -478,5 +455,103 @@
     "note": "Acts 14:22 is the right source (same words, διὰ πολλῶν θλίψεων δεῖ ἡμᾶς εἰσελθεῖν); Basil's 'of heaven' for 'of God' is a small adaptation, and Matthew 7:14 does not fit."
    }
   ]
- }
+ },
+ "previous_checks": {
+  "fallback": [
+   {
+    "round": 0,
+    "replaced": [
+     "@cf/moonshotai/kimi-k2.6"
+    ],
+    "checker": "fallback",
+    "model": "@cf/qwen/qwen3.8-27b"
+   },
+   {
+    "round": 1,
+    "replaced": [
+     "@cf/moonshotai/kimi-k2.6"
+    ],
+    "checker": "fallback",
+    "model": "@cf/qwen/qwen3.8-27b"
+   },
+   {
+    "round": 2,
+    "replaced": [
+     "@cf/moonshotai/kimi-k2.6"
+    ],
+    "checker": "fallback",
+    "model": "@cf/qwen/qwen3.8-27b"
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 7,
+   "rejected": 4,
+   "error": null,
+   "fallback": [
+    "@cf/moonshotai/kimi-k2.6"
+   ]
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 2,
+   "error": null,
+   "fallback": [
+    "@cf/moonshotai/kimi-k2.6"
+   ]
+  },
+  {
+   "round": 2,
+   "confirmed": 2,
+   "rejected": 2,
+   "error": null,
+   "fallback": [
+    "@cf/moonshotai/kimi-k2.6"
+   ]
+  },
+  {
+   "round": 3,
+   "confirmed": 10,
+   "rejected": 8,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 2,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 2,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
 }

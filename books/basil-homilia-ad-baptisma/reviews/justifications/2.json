@@ -278,7 +278,29 @@
    ]
   }
  ],
- "check_history": [
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
+ "confidence": "source_verified",
+ "sweep": {
+  "by": "claude held review 2026-10-19-plans",
+  "held_why": "2 confirmed problems after 3 repairs",
+  "fixed": [],
+  "dismissed": [
+   {
+    "quote": "even though you have heard the Lord Himself say",
+    "class": "omission",
+    "why": "Source says 'having heard the Lord Himself' — a participle of means/cause, not concession. 'Even though' adds concessive sense not in source.",
+    "note": "In this rebuke the participle carries a concessive force (you delay although you have heard the Lord), so 'even though' is a fair reading."
+   },
+   {
+    "quote": "Experience is clearer than any word for making a proof",
+    "class": "mistranslation",
+    "why": "πρὸς πεῖραν means 'for/toward experience/trial,' not 'for making a proof.' The Greek says 'sense-perception is clearer than any word for [gaining] experience.' The English 'making a proof' is wrong—πεῖρα is 'experience/trial,' not 'proof' in the sense of logical demonstration.",
+    "note": "Here πεῖρα means proof gained by trying something, which fits 'taste and see'; 'for making a proof' is fair, and the suggested fix is no better."
+   }
+  ]
+ },
+ "previous_checks": null,
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 2,
@@ -304,25 +326,39 @@
    "error": null
   }
  ],
- "reviewer": "work_pipeline:kimi+glm+claude held review 2026-10-19-plans",
- "confidence": "source_verified",
- "sweep": {
-  "by": "claude held review 2026-10-19-plans",
-  "held_why": "2 confirmed problems after 3 repairs",
-  "fixed": [],
-  "dismissed": [
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
    {
-    "quote": "even though you have heard the Lord Himself say",
-    "class": "omission",
-    "why": "Source says 'having heard the Lord Himself' — a participle of means/cause, not concession. 'Even though' adds concessive sense not in source.",
-    "note": "In this rebuke the participle carries a concessive force (you delay although you have heard the Lord), so 'even though' is a fair reading."
-   },
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
    {
-    "quote": "Experience is clearer than any word for making a proof",
-    "class": "mistranslation",
-    "why": "πρὸς πεῖραν means 'for/toward experience/trial,' not 'for making a proof.' The Greek says 'sense-perception is clearer than any word for [gaining] experience.' The English 'making a proof' is wrong—πεῖρα is 'experience/trial,' not 'proof' in the sense of logical demonstration.",
-    "note": "Here πεῖρα means proof gained by trying something, which fits 'taste and see'; 'for making a proof' is fair, and the suggested fix is no better."
+    "class": "modality",
+    "severity": "major",
+    "quote": "so that, loosed from the yoke and living without restraint, you may not be easy prey for wild beasts",
+    "source_quote": "ἵνα μὴ, ἀφειμένος τῆς ζεύγλης, μηδὲ ἐλευθεριάζων τῷ βίῳ, εὐεπιχείρητος ᾖς τοῖς θηρίοις",
+    "why": "The purpose is to avoid being prey by staying yoked. English makes the unyoked, unrestrained life the setting in which one is safe.",
+    "fix": "Become a beast of burden for Christ, lest, let loose from the yoke and living without restraint, you be easy prey for wild beasts.",
+    "model": "grok-4.7-build-fast",
+    "rejected_by": "claude-sonnet-5-5",
+    "ruling": "Source 'ἵνα μὴ, ἀφειμένος τῆς ζεύγλης, μηδὲ ἐλευθεριάζων τῷ βίῳ, εὐεπιχείρητος ᾖς' — English 'so that, loosed... you may not be easy prey' is faithful; the claimed reversal is not present."
    }
   ]
- }
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ]
 }

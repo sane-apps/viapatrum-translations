@@ -150,7 +150,7 @@
   }
  ],
  "pass_b_english": [
-  "Wretched one, do you really rank pleasure above goods so many and so great? I understand your postponement, even if you cover it over with words. The facts themselves cry out, even if your voice is silent. \"Let me use my flesh for the enjoyment of shameful things; let me wallow in the mire of pleasures; let me stain my hands with blood, take what belongs to others, walk in deceit, swear falsely, lie—and then, when I finally stop doing evil, I will receive baptism.\" If sin is good, then keep it to the end. But if it harms the one who does it, why do you persist in what destroys you? No one who wants to vomit up bile first gathers more of it into himself through a bad and dissolute diet. You should cleanse the body of what troubles it, not make the disease greater than your strength. A ship shows how much weight of cargo it can bear; anything beyond that sinks it. Be afraid that you may suffer the same thing—that by making your sins greater than the forgiveness, you may suffer shipwreck before the hoped-for harbor. Does God not see what happens? Does He not understand your thoughts? Does He cooperate with you in your lawless deeds? You thought that I would be just like you, He says (Psalm 49:21). When you seek the friendship of a mortal man, you win him over with good deeds, saying and doing the things you know please him. But when you are drawing near to God and hoping to be received into the rank of a son, you do what is hostile to God and dishonor Him by breaking the law—and from the very things that most offend Him, you hope for closeness? Watch out: if you pile up a mass of evils for yourself in hope of redemption, you may gather sin and yet miss the forgiveness. God is not mocked (Galatians 6:7). Do not trade in the grace. Do not say, \"The law is good, but sin is sweeter.\" Pleasure is the devil's fishhook, dragging you to destruction. Pleasure is the mother of sin, and sin is the sting of death (1 Corinthians 15:56). Pleasure is the nurse of the eternal worm: for a time it soothes the one who enjoys it, but afterward it produces a bitterness sharper than gall. Your postponement cries out nothing other than this: \"Let sin reign in me first, and then one day the Lord will reign. Let me present my members as weapons of unrighteousness to lawlessness, and then one day I will present them as weapons of righteousness to God.\" That is how Cain offered his sacrifices: the first things to his own enjoyment, the second to God who created and gave them. While you are strong in deeds, you spend your youth on sins. When your organs are worn out, then you bring them to God—when they are good for nothing, when they must lie idle because their strength has been paralyzed by the decay of time. Self-control in old age is not self-control; it is inability for licentiousness. A corpse is not crowned. No one is righteous merely through being unable to do evil. As long as you have strength, master sin by your will. For this is virtue: turning away from evil and doing good. But mere inactivity in wickedness deserves neither praise nor punishment on its own. If you stop sinning because of age, the credit belongs to weakness. We praise those who are good by choice, not those who are kept from evil by some necessity."
+  "Wretched one, do you really rank pleasure above goods so many and so great? I understand your postponement, even if you cover it over with words. The facts themselves cry out, even if your voice is silent. \"Let me use my flesh for the enjoyment of shameful things; let me wallow in the mire of pleasures; let me stain my hands with blood, take what belongs to others, walk in deceit, swear falsely, lie—and then, when I finally stop doing evil, I will receive baptism.\" If sin is good, then keep it to the end. But if it harms the one who does it, why do you persist in what destroys you? No one who wants to vomit up bile first gathers more of it into himself through a bad and dissolute diet. You should cleanse the body of what troubles it, not make the disease greater than your strength. A ship shows how much weight of cargo it can bear; anything beyond that sinks it. Be afraid that you may suffer the same thing—that by making your sins greater than the forgiveness, you may suffer shipwreck before the hoped-for harbor. Does God not see what happens? Does He not understand your thoughts? Does He cooperate with you in your lawless deeds? You supposed a lawlessness, He says—that I would be like you (Psalm 50:21). When you seek the friendship of a mortal man, you win him over with good deeds, saying and doing the things you know please him. But when you are drawing near to God and hoping to be received into the rank of a son, you do what is hostile to God and dishonor Him by breaking the law—and from the very things that most offend Him, you hope for closeness? Watch out: if you pile up a mass of evils for yourself in hope of redemption, you may gather sin and yet miss the forgiveness. God is not mocked (Galatians 6:7). Do not trade in the grace. Do not say, \"The law is good, but sin is sweeter.\" Pleasure is the devil's fishhook, dragging you to destruction. Pleasure is the mother of sin, and sin is the sting of death (1 Corinthians 15:56). Pleasure is the nurse of the eternal worm: for a time it soothes the one who enjoys it, but afterward it produces a bitterness sharper than gall. Your postponement cries out nothing other than this: \"Let sin reign in me first, and then one day the Lord will reign. Let me present my members as weapons of unrighteousness to lawlessness, and then one day I will present them as weapons of righteousness to God.\" That is how Cain offered his sacrifices: the first things to his own enjoyment, the second to God who created and gave them. While you are strong in deeds, you spend your youth on sins. When your organs are worn out, then you bring them to God—when they are good for nothing, when they must lie idle because their strength has been paralyzed by the decay of time. Self-control in old age is not self-control; it is inability for licentiousness. A corpse is not crowned. No one is righteous merely through being unable to do evil. As long as you have strength, master sin by your will. For this is virtue: turning away from evil and doing good. But mere inactivity in wickedness deserves neither praise nor punishment on its own. If you stop sinning because of age, the credit belongs to weakness. We praise those who are good by choice, not those who are kept from evil by some necessity."
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
@@ -181,9 +181,61 @@
    "fixed": [
     "Corrected Psalm 50:21 to Psalm 49:21; source is LXX Psalm 49:21 (Ὑπέλαβες ἀνομίαν, φησὶν, ὅτι ἔσομαί σοι ὅμοιος), which in Hebrew numbering is Psalm 49:21."
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "wrong_scripture",
+     "severity": "major",
+     "quote": "(Psalm 49:21)",
+     "source_quote": "Ὑπέλαβες ἀνομίαν, φησὶν, ὅτι ἔσομαί σοι ὅμοιος",
+     "why": "The words are LXX Psalm 49:21, which is Hebrew Psalm 50:21. The brief says to convert to Hebrew numbering, so the citation is wrong.",
+     "fix": "You thought that I would be just like you, He says (Psalm 50:21).",
+     "model": "claude-sonnet-5-5",
+     "agreed_by": [
+      "claude-sonnet-5-5",
+      "grok-4.7-build-fast"
+     ]
+    }
+   ],
+   "edits": [
+    {
+     "old": "You thought that I would be just like you, He says (Psalm 49:21).",
+     "new": "You thought that I would be just like you, He says (Psalm 50:21)."
+    }
+   ],
+   "fixed": [
+    "Fixed Psalm citation: LXX Psalm 49:21 corresponds to Hebrew Psalm 50:21 per work brief scripture guidelines."
+   ]
+  },
+  {
+   "problems": [
+    {
+     "class": "omission",
+     "severity": "major",
+     "quote": "You thought that I would be just like you, He says (Psalm 50:21).",
+     "source_quote": "Ὑπέλαβες ἀνομίαν, φησὶν, ὅτι ἔσομαί σοι ὅμοιος.",
+     "why": "The quotation drops ἀνομίαν: the thought itself is called lawlessness, answering the charge that God shares in lawless deeds.",
+     "fix": "You supposed a lawlessness, He says—that I would be like you (Psalm 50:21).",
+     "model": "grok-4.7-build-fast",
+     "upheld_by": "claude-sonnet-5-5",
+     "ruling": "Ὑπέλαβες ἀνομίαν: 'You supposed lawlessness, that I will be like you'. English drops ἀνομίαν, losing the link to the preceding 'cooperates in lawless deeds' charge."
+    }
+   ],
+   "edits": [
+    {
+     "old": "You thought that I would be just like you, He says (Psalm 50:21).",
+     "new": "You supposed a lawlessness, He says—that I would be like you (Psalm 50:21)."
+    }
+   ],
+   "fixed": [
+    "Restored the omitted 'lawlessness' (ἀνομίαν) as the direct object of 'supposed', showing that the thought itself is called lawlessness in answer to the charge that God shares in lawless deeds. Psalm numbering left at 50:21 per the brief's instruction to use Hebrew numbering (LXX Psalm 50 = Hebrew Psalm 50)."
+   ]
   }
  ],
- "checks": {
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
+ "confidence": "source_verified",
+ "previous_checks": {
   "checkers": [
    "@cf/moonshotai/kimi-k2.6",
    "@cf/zai-org/glm-5.2"
@@ -249,7 +301,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 1,
@@ -263,6 +315,63 @@
    "error": null
   }
  ],
- "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified"
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 2,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 2,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "master sin by your will",
+    "source_quote": "λόγῳ κράτει τῆς ἁμαρτίας",
+    "why": "λόγῳ means by reason. The will or choice is προαίρεσις, which appears only in the next sentences.",
+    "fix": "As long as you have strength, master sin by reason.",
+    "model": "grok-4.7-build-fast",
+    "rejected_by": "claude-sonnet-5-5",
+    "ruling": "λόγῳ κράτει = 'master by reason/word'; 'by your will' shifts nuance but conveys self-directed mastery, contrasts with necessity; not meaning-changing enough. Minor preference."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 2,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 2,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ]
 }

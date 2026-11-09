@@ -173,7 +173,7 @@
   "Why this change? Because he was speaking about things that come into being and pass away, following bodily nature, and so he placed birth before death—for no one can experience death without first being born. But I am about to speak of spiritual rebirth, and so I place death before life. For by dying to the flesh we gain birth in the Spirit, as the Lord also says: \"I kill, and I make alive\" (Deuteronomy 32:39). Let us die, then, so that we may live. Let us put to death the sinful nature, which cannot submit to God's law, so that the mindset of the Spirit may grow strong in us—the mindset through which life and peace naturally come. Let us be buried with Christ, who died for us, so that we may also rise with Him who secured our resurrection.",
   "Different times suit different things: there is a time for sleep and a time for waking, a time for war and a time for peace. But for baptism, the entire life of human beings is the time. A body cannot live without breathing, and a soul cannot hold together without knowing its Creator. Ignorance of God is the death of the soul. And the unbaptized person has not been enlightened. Without light, an eye cannot see what belongs to it, nor can a soul receive the contemplation of God.",
   "Every moment, then, offers the opportunity for salvation through baptism—whether you name night or day, an hour or an instant, or the very briefest point of time. But surely the moment most closely related to baptism is the most fitting. What could be more akin to baptism than the day of Easter? That day is the memorial of the resurrection, and baptism is the power that leads to resurrection. On the day of resurrection, then, let us receive the grace of the resurrection. This is why the Church calls her nurslings together from afar with a loud proclamation, so that those for whom she long labored in birth she may bring forth on that day—and having weaned them from the words of instruction, she may give them a taste of the solid food of the teachings.",
-  "John the Baptist preached a baptism of repentance, and all Judea went out to him. The Lord preaches a baptism of adoption—and who among those who have hoped in Him will not obey? That baptism was introductory; this one brings to completion. That one was a withdrawal from sin; this one is a kinship with God. John the Baptist's preaching was that of one man, and it drew everyone to repentance. But you—taught through the prophets, \"Wash yourselves; become clean\" (Isaiah 1:16); admonished through the psalms, \"Come to Him, and be enlightened\" (Psalm 34:6); evangelized through the apostles, \"Repent, and let each of you be baptized in the name of the Lord Jesus Christ for the forgiveness of sins, and you will receive the promise of the Holy Spirit\" (Acts 2:38); welcomed by the Lord Himself, who says, \"Come to me, all you who labor and are heavy laden, and I will give you rest\" (Matthew 11:28)—for all these readings have come together today—do you still hesitate, deliberate, and keep delaying?",
+  "John the Baptist preached a baptism of repentance, and all Judea went out to him. The Lord preaches a baptism of adoption—and who among those who have hoped in Him will not obey? That baptism was introductory; this one brings to completion. That one was a withdrawal from sin; this one is a kinship with God. John the Baptist's preaching was that of one man, and it drew everyone to repentance. But you—taught through the prophets, \"Wash yourselves; become clean\" (Isaiah 1:16); admonished through the psalms, \"Come to Him, and be enlightened\" (Psalm 34:5); evangelized through the apostles, \"Repent, and let each of you be baptized in the name of the Lord Jesus Christ for the forgiveness of sins, and you will receive the promise of the Holy Spirit\" (Acts 2:38); welcomed by the Lord Himself, who says, \"Come to me, all you who labor and are heavy laden, and I will give you rest\" (Matthew 11:28)—for all these readings have come together today—do you still hesitate, deliberate, and keep delaying?",
   "You have been instructed in the word since infancy, and you have not yet committed yourself to the truth? Always learning, and you have not yet come to knowledge? A tester your whole life, a spy until old age—when will you become a Christian? When will we recognize you as one of us? Last year you were waiting for this present season; now you are waiting again for the next one."
  ],
  "notes": [],
@@ -247,7 +247,9 @@
    ]
   }
  ],
- "checks": {
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
+ "confidence": "source_verified",
+ "previous_checks": {
   "checkers": [
    "@cf/moonshotai/kimi-k2.6",
    "@cf/zai-org/glm-5.2"
@@ -308,7 +310,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 2,
@@ -328,6 +330,39 @@
    "error": null
   }
  ],
- "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified"
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "wrong_scripture",
+    "severity": "major",
+    "quote": "\"Come to Him, and be enlightened\" (Psalm 34:6)",
+    "source_quote": "Προσέλθετε πρὸς αὐτὸν, καὶ φωτίσθητε",
+    "why": "LXX Psalm 33:6 is Hebrew Psalm 34:5; 34:6 is the poor man who cried.",
+    "fix": "\"Come to Him, and be enlightened\" (Psalm 34:5)",
+    "model": "grok-4.7-build-fast",
+    "rejected_by": "claude-sonnet-5-5",
+    "ruling": "Citation numbering: LXX Ps 33:6 (Προσέλθετε πρὸς αὐτὸν, καὶ φωτίσθητε) equals Hebrew/English 34:5; the English's 34:6 is off by one but is a verse-numbering convention, so it doesn't mislead."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ]
 }
