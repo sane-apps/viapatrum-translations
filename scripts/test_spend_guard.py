@@ -241,7 +241,36 @@ class HoldAndReservation(unittest.TestCase):
             with mock.patch("builtins.print"):
                 self.assertEqual(G.main(["x", "check"]), G.OVER)
                 self.assertEqual(G.main(["x", "allow"]), G.OVER)
-                self.assertEqual(G.main(["x", "gate-lanes"]), 1)
+
+    def _gate_lanes_under_hold(self, usage):
+        """gate-lanes with the hold set and today.json holding the 2026-10-22 "ok" seen on 2026-11-07."""
+        self.hold()
+        G.TODAY.write_text('{"date": "2026-10-22", "cap_usd": 150.0, "at": "2026-10-22T00:22:07+00:00", '
+                           '"neurons": 145, "usd": 0.0, "state": "ok"}')
+        with mock.patch.object(G, "read_usage", return_value=usage) as r, mock.patch("builtins.print"):
+            rc = G.main(["x", "gate-lanes"])
+        self.assertEqual(r.call_count, 1)
+        return rc, G.json.loads(G.TODAY.read_text())
+
+    def test_hold_still_blocks_lanes_but_records_todays_reading(self):
+        rc, row = self._gate_lanes_under_hold({"neurons": 1_010_000, "usd": 11.0})
+        self.assertEqual(rc, 1)
+        self.assertEqual(row["date"], G.datetime.now(G.timezone.utc).strftime("%Y-%m-%d"))
+        self.assertEqual((row["usd"], row["state"]), (11.0, "ok"))
+        self.assertFalse(G.PAUSED.exists())
+
+    def test_hold_over_cap_records_over_but_touches_no_pause_file(self):
+        rc, row = self._gate_lanes_under_hold({"neurons": 0, "usd": 200.0})
+        self.assertEqual((rc, row["state"]), (1, "over"))
+        self.assertFalse(G.PAUSED.exists())
+        self.assertFalse(G.RESTART.exists())
+
+    def test_hold_unreadable_usage_replaces_old_ok_with_todays_unknown(self):
+        rc, row = self._gate_lanes_under_hold({"error": "no Cloudflare token in the environment"})
+        self.assertEqual(rc, 1)
+        self.assertEqual(row["date"], G.datetime.now(G.timezone.utc).strftime("%Y-%m-%d"))
+        self.assertEqual(row["state"], "unknown")
+        self.assertEqual(row["error"], "no Cloudflare token in the environment")
 
     def test_reservations_add_up_against_the_hourly_ceiling_and_expire(self):
         ps = self.usage(100.0, 10.0)
@@ -329,6 +358,42 @@ class HoldAndReservation(unittest.TestCase):
             finally:
                 B.queues.clear()
         self.assertTrue(fin.call_args.kwargs["error"].startswith(G.REFUSED_TAG))
+
+class StaleReadingIsAWarning(unittest.TestCase):
+    """2026-11-07: the morning report printed a 2026-10-22 "ok" as current for two weeks."""
+    NOW = G.datetime(2026, 11, 8, 11, 0, tzinfo=G.timezone.utc)
+    OLD = {"date": "2026-10-22", "cap_usd": 150.0, "at": "2026-10-22T00:22:07+00:00", "neurons": 145,
+           "usd": 0.0, "state": "ok"}
+    FRESH = {"date": "2026-11-08", "cap_usd": 150.0, "at": "2026-11-08T10:50:00+00:00", "neurons": 0,
+             "usd": 0.0, "state": "ok"}
+
+    def test_old_date_is_stale_in_report_and_status(self):
+        self.assertEqual(G.report_line(self.OLD, self.NOW),
+                         "- **Workers AI spend reading is stale**: reading is for 2026-10-22, not today "
+                         "(2026-11-08 UTC); last read 2026-10-22T00:22:07+00:00 said ok. "
+                         "spend_guard.py gate-lanes has stopped recording")
+        self.assertTrue(G.line(self.OLD, self.NOW).startswith("spend STALE (reading is for 2026-10-22"))
+        self.assertNotIn("(ok)", G.report_line(self.OLD, self.NOW))
+
+    def test_same_day_but_hours_old_is_stale(self):
+        row = {**self.FRESH, "at": "2026-11-08T07:00:00+00:00"}
+        self.assertIn("reading is 4 h old", G.report_line(row, self.NOW))
+
+    def test_fresh_ok_line_is_unchanged(self):
+        self.assertEqual(G.report_line(self.FRESH, self.NOW),
+                         "- Workers AI spend 2026-11-08 (UTC day): $0.00 of the $150 cap (ok)")
+        self.assertEqual(G.line(self.FRESH, self.NOW), "spend 2026-11-08: $0.00 of $150 cap (ok)")
+
+    def test_unknown_and_over_and_missing_are_warnings(self):
+        unknown = {**self.FRESH, "state": "unknown", "error": "HTTP 502"}
+        del unknown["usd"]
+        self.assertEqual(G.report_line(unknown, self.NOW),
+                         "- **Workers AI spend unknown** at 2026-11-08T10:50:00+00:00: HTTP 502")
+        over = {**self.FRESH, "usd": 151.0, "state": "over"}
+        self.assertEqual(G.report_line(over, self.NOW),
+                         "- **Workers AI spend over cap** 2026-11-08 (UTC day): $151.00 of the $150 cap (over)")
+        self.assertTrue(G.report_line(None, self.NOW).startswith("- **Workers AI spend: no reading**"))
+
 
 class UsageReadRetries(unittest.TestCase):
     """2026-10-18: one GraphQL 502 refused a grade call and killed a 2 h

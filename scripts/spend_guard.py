@@ -327,10 +327,43 @@ def gate_lanes(row: dict) -> int:
     return 1 if PAUSED.exists() else 0
 
 
-def line(row: dict) -> str:
+STALE_AFTER_S = 2 * 3600  # gate-lanes records every 30 min; older than this means it stopped recording
+
+
+def stale_why(row: dict, now: datetime | None = None) -> str:
+    """Why a today.json row is not a current reading, or "" when it is (2026-11-07: a 2026-10-22 "ok"
+    was reported as current for two weeks)."""
+    now = now or datetime.now(timezone.utc)
+    if row.get("date") != now.strftime("%Y-%m-%d"):
+        return f"reading is for {row.get('date')}, not today ({now:%Y-%m-%d} UTC)"
+    try:
+        age = (now - datetime.fromisoformat(str(row.get("at")))).total_seconds()
+    except (TypeError, ValueError):
+        return "reading has no valid time"
+    return f"reading is {age / 3600:.0f} h old" if age > STALE_AFTER_S else ""
+
+
+def line(row: dict, now: datetime | None = None) -> str:
+    stale = stale_why(row, now)
+    if stale:
+        return f"spend STALE ({stale}; last read {row.get('at')}, state {row.get('state')})"
     if row.get("state") == "unknown":
         return f"spend unknown at {row.get('at')}: {row.get('error')}"
     return f"spend {row.get('date')}: ${row.get('usd', 0):.2f} of ${row.get('cap_usd', 0):.0f} cap ({row.get('state')})"
+
+
+def report_line(row: dict | None, now: datetime | None = None) -> str:
+    """The morning report's bullet (SaneProcess morning-report.sh). A stale or unknown reading is a warning."""
+    if row is None:
+        return "- **Workers AI spend: no reading** (spend_guard.py has not run)"
+    stale = stale_why(row, now)
+    if stale:
+        return (f"- **Workers AI spend reading is stale**: {stale}; last read {row.get('at')} said "
+                f"{row.get('state')}. spend_guard.py gate-lanes has stopped recording")
+    if row.get("state") == "unknown":
+        return f"- **Workers AI spend unknown** at {row.get('at')}: {row.get('error')}"
+    out = f"- Workers AI spend {row['date']} (UTC day): ${row['usd']:.2f} of the ${row['cap_usd']:.0f} cap ({row['state']})"
+    return out if row.get("state") == "ok" else out.replace("- Workers AI spend", "- **Workers AI spend over cap**", 1)
 
 
 def main(argv: list[str]) -> int:
@@ -351,6 +384,9 @@ def main(argv: list[str]) -> int:
     if cmd in ("check", "allow", "gate-lanes") and hold_reason(caller):
         print(f"refused: {hold_reason(caller)}")
         if cmd == "gate-lanes":
+            # Still record today's reading (a free analytics read, no inference) so today.json and the
+            # morning report stay current while the hold is set. Lanes and lanes.paused are not touched.
+            record(evaluate(read_usage(), cap_usd(), datetime.now(timezone.utc).strftime("%Y-%m-%d")))
             return 1
         return OVER
     if cmd == "allow":

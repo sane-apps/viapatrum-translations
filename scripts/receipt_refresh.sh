@@ -18,10 +18,12 @@ refresh() {  # model purpose [kwargs] [provider] [label]; returns 1 when the smo
     return 1
   fi
   if timeout 400 ruby "$GATE" --provider "${4:-cf}" --model "$1" --purpose "$2" \
-    --notes "${NOTES:-work_pipeline via llm_bakeoff.vendor_call, thinking off}" --kwargs "${3:-$KW}" --smoke >/dev/null 2>&1; then
+    --notes "${NOTES:-work_pipeline via llm_bakeoff.vendor_call, thinking off}" --kwargs "${3:-$KW}" --smoke \
+    >"${TMPDIR:-/tmp}/receipt-smoke.$$" 2>&1; then
     echo "$(date +%T) receipt refreshed ${5:-$1}"
   else
-    echo "$(date +%T) receipt FAILED ${5:-$1}"
+    # Keep the gate's reason: without it a FAILED line can't be diagnosed (7 Nov 2026).
+    echo "$(date +%T) receipt FAILED ${5:-$1} -- $(grep -v -E '^\s+[0-9]+: ' "${TMPDIR:-/tmp}/receipt-smoke.$$" | tr '\n' ' ' | cut -c1-600)"
     return 1
   fi
 }

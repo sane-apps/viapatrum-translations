@@ -1,6 +1,8 @@
 """Unit tests for pipeline/work_lint.py. Run: python3 -m unittest pipeline.test_work_lint -q
 (also collected by pytest if installed)."""
 import unittest
+from pathlib import Path
+from unittest import mock
 
 from pipeline import work_lint as wl
 
@@ -150,7 +152,11 @@ class WorkLintTests(unittest.TestCase):
         self.assertIsInstance(secs[0]["text"], str)
 
     def test_eustathius_expected_flags(self):
-        secs = wl.load_work("eustathius-engastrimytho")
+        # A frozen copy of the English as it stood on 2026-10-02 (commit 74187877f), with the
+        # defects this test expects; the live book was since corrected (2026-11-07, F6).
+        with mock.patch.object(wl, "BOOKS", Path(__file__).resolve().parent / "tests" / "fixtures" / "work_lint"):
+            secs = wl.load_work("eustathius-engastrimytho")
+        self.assertEqual(len(secs), 24)  # the fixture loaded, not an empty folder
         found = wl.lint_work(secs)
         drift = [f for f in found if f["rule"] == "term_drift" and "belly-" in f["why"]]
         self.assertTrue(drift)

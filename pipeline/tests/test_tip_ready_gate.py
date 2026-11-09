@@ -3,11 +3,17 @@
 from __future__ import annotations
 
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-from pipeline.check_pass_ab import (
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "scripts"))
+import _testenv  # noqa: E402,F401  finds llm_vendor_gate under any HOME
+
+from pipeline.check_pass_ab import (  # noqa: E402
     _failed_greek_scan,
     PLACEHOLDER,
     check_record,
@@ -15,7 +21,7 @@ from pipeline.check_pass_ab import (
     content_errors,
     repeated_paragraph,
 )
-from llm_bakeoff import score
+from llm_bakeoff import score  # noqa: E402
 
 
 class TipReadyGateTest(unittest.TestCase):

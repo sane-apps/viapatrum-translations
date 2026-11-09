@@ -167,6 +167,23 @@ class QueueTests(WatchTestBase):
         (self.wp / "lane-C1.pid").write_text(str(os.getpid()))
         self.assertEqual(W.check_lanes()[:2], ("warn", "only 1/3 lanes alive"))
 
+    def test_lane_count_follows_the_profile(self):
+        """2026-11-07: plans-free starts A1 and B1 only; the count expected 5 and warned."""
+        (self.wp.parent.parent / "scripts/run-recert-lanes.sh").write_text(
+            'if [ "$PROFILE" = plans ]; then\n  x\nelse\n  y\nfi\n'
+            'if [ "$PROFILE" != plans-free ]; then\n'
+            "for n in 1 2; do lane C$n --x; done\n"
+            'if [ -f z ]; then\n  w\nfi\n'
+            "for n in 1; do lane E$n --y; done\nfi\n"
+            "for n in 1; do lane A$n --a; done\nfor n in 1; do lane B$n --b; done\n"
+            '[ "$PROFILE" != plans-free ] && for n in 1; do lane D$n --d; done\n')
+        self.assertEqual(W.expected_lanes(), 6)  # no profile file: plans, every lane
+        (self.wp / "lane-profile").write_text("plans-free\n")
+        self.assertEqual(W.expected_lanes(), 2)
+        for name in ("A1", "B1"):
+            (self.wp / f"lane-{name}.pid").write_text(str(os.getpid()))
+        self.assertEqual(W.check_lanes()[:2], ("ok", "2/2 lanes alive"))
+
 
 class JobHealthTests(WatchTestBase):
     """2026-10-14: every launchd job on both machines is checked (job_health.py)."""

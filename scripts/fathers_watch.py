@@ -310,13 +310,46 @@ def check_holds() -> tuple[str, str, dict]:
     return "ok", f"{len(open_holds)} uncleared ({len(fresh)} fresh)", info
 
 
+PROFILE_TEST = re.compile(r'\[ "\$PROFILE" (!?=) ([\w-]+) \]')
+
+
 def expected_lanes() -> int:
-    """Lane count from run-recert-lanes.sh (`for n in 1 2; do lane C$n ...`)."""
+    """Lane count from run-recert-lanes.sh (`for n in 1 2; do lane C$n ...`) for the
+    current lane profile. 2026-11-07: plans-free starts two lanes, but the count ignored
+    the `if [ "$PROFILE" != plans-free ]` block and expected 5, so it warned every tick."""
     try:
         src = (REPO / "scripts/run-recert-lanes.sh").read_text(encoding="utf-8")
     except OSError:
         return 6
-    n = sum(len(m.split()) for m in re.findall(r"^for n in ([0-9 ]+); do lane ", src, re.M))
+    try:
+        profile = (WP / "lane-profile").read_text().strip() or "plans"
+    except OSError:
+        profile = "plans"
+
+    def holds(op: str, name: str) -> bool:
+        return (profile == name) == (op == "=")
+
+    n, skip = 0, []
+    for line in src.splitlines():
+        s = line.strip()
+        block = re.match(r'if ' + PROFILE_TEST.pattern + r'; then$', s)
+        if block:
+            skip.append(not holds(*block.groups()))
+            continue
+        if s.startswith("if ") and s.endswith("then"):  # any other block, so its fi pairs with it
+            skip.append(False)
+            continue
+        if s == "fi" and skip:
+            skip.pop()
+            continue
+        guard = re.match(PROFILE_TEST.pattern + r" && (.*)$", s)
+        if guard:
+            if not holds(*guard.groups()[:2]):
+                continue
+            s = guard.group(3)
+        m = re.match(r"for n in ([0-9 ]+); do lane ", s)
+        if m and not any(skip):
+            n += len(m.group(1).split())
     return n or 6
 
 

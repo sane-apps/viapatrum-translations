@@ -2291,6 +2291,12 @@ def apply(slug: str, force_partial: bool = False) -> int:
     if fallback_ids and not force_partial:
         print(f"refusing: unbenched fallback model in {len(fallback_ids)} section(s): {', '.join(fallback_ids[:5])}")
         return 1
+    # 2026-11-07 review: a re-check deferred because the current checkers did not answer keeps the earlier pair's
+    # pass, and the receipt below would name CHECKERS. Certify only on the current pair's verdict.
+    stale_ids = [s["id"] for s in secs if needs_recheck(s.get("_j") or {})]
+    if stale_ids and not force_partial:
+        print(f"refusing: {len(stale_ids)} section(s) still carry an earlier checker pair's pass: {', '.join(stale_ids[:5])}")
+        return 1
     if not force_partial and (set(st["sections"]) != {"pass"} or not st["intro_ok"]
                               or not follow_ok(st["followability"], sum(len(" ".join(p["source"]).split()) for p in pairs))):
         print("refusing: not every section passed, intro unchecked, or followability below bar")
@@ -2551,7 +2557,10 @@ def reap_dead_rows() -> list[str]:
                 if r.get("result") == "running" and r.get("pid") and r["pid"] != os.getpid() and pid_dead(r["pid"])]
         for b in dead:
             r = rows[b]
+            # "crashes" counts only these kills (2026-11-07: without it crash_parked fell back to attempts, so one
+            # lane restart after two normal runs parked a work whose sections all passed).
             rows[b] = {**r, "result": "crash", "attempts": (r.get("attempts") or 0) + 1,
+                       "crashes": (r.get("crashes") or 0) + 1,
                        "why": f"lane process {r['pid']} died mid-run (claimed {r.get('at', '?')})",
                        "at": time.strftime("%Y-%m-%dT%H:%M:%S")}
         if dead:

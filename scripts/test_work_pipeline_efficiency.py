@@ -1288,6 +1288,38 @@ class ParkAndQueueTests(unittest.TestCase):
         self.assertTrue(W.parked({"result": "held", "attempts": W.PARK_MAX, "stalled": False}), "bounded")
         self.assertFalse(W.parked({"result": "reopened", "attempts": 0}))
 
+    def test_one_restart_kill_does_not_park_a_work(self):
+        """2026-11-07: the dead-pid sweep raised attempts but not crashes, so crash_parked fell back to
+        attempts and one lane restart after two normal runs parked origen-de-resurrectione-scrap."""
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(W, "QUEUE_LOG", Path(d) / "queue.json"), \
+                mock.patch.object(W, "pid_dead", return_value=True):
+            W.QUEUE_LOG.write_text(json.dumps({"bk": {"result": "running", "pid": 999999, "attempts": 2, "crashes": 0}}))
+            self.assertEqual(W.reap_dead_rows(), ["bk"])
+            row = json.loads(W.QUEUE_LOG.read_text())["bk"]
+        self.assertEqual((row["result"], row["attempts"], row["crashes"]), ("crash", 3, 1))
+        self.assertFalse(W.crash_parked(row), "one kill is not three crashes in a row")
+        self.assertTrue(W.crash_parked({**row, "crashes": W.CRASH_MAX}))
+
+    def test_apply_refuses_a_pass_from_an_earlier_checker_pair(self):
+        """2026-11-07: a deferred re-check keeps the old pair's pass; apply must not certify it under CHECKERS."""
+        old = {"_status": "pass", "checks": {"checkers": ["@cf/old-a", "@cf/old-b"]}}
+        new = {"_status": "pass", "checks": {"checkers": list(W.CHECKERS)}}
+        st = {"sections": {"pass": 1}, "intro_ok": True, "followability": {}}  # status counts, as status() returns
+        for j, want_refusal in ((old, True), (new, False)):
+            with mock.patch.object(W, "RECHECK_PASSES", True), mock.patch.object(W, "status", return_value=st), \
+                    mock.patch.object(W, "load_pairs", return_value=[{"id": "1", "source": ["x"], "eng_file": "e"}]), \
+                    mock.patch.object(W, "rebalance", return_value=[]), \
+                    mock.patch.object(W, "staged_sections", return_value=[{"id": "1", "_j": j}]), \
+                    mock.patch.object(W, "follow_ok", return_value=True), \
+                    mock.patch.object(W, "source_problems", side_effect=RuntimeError("past the checker gate")), \
+                    mock.patch("builtins.print") as out:
+                if want_refusal:
+                    self.assertEqual(W.apply("bk"), 1)
+                    self.assertIn("earlier checker pair", out.call_args[0][0])
+                else:
+                    with self.assertRaises(RuntimeError):  # got past the new gate to the next check
+                        W.apply("bk")
+
     def test_old_row_stays_parked_and_can_move_is_ready(self):
         """Red team 2026-10-06 (P3): releasing old-format parked rows waits for
         the owner, so they stay parked; can_move() is the ready-made test for

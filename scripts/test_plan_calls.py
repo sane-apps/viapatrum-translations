@@ -190,6 +190,17 @@ class Waiting(unittest.TestCase):
         self.assertEqual(r["content"], "drafted")
         self.assertGreaterEqual(self.clock.t - NOW.timestamp(), 600)
 
+    def test_auth_failure_pauses_briefly_and_spends_no_budget(self):
+        # 2026-11-07: OAuth failures in the launchd lanes were counted against Claude's hourly budget.
+        replies = iter([("Failed to authenticate: OAuth session expired and could not be refreshed", True),
+                        ("checked", False)])
+        with mock.patch.object(pc, "_run_claude", lambda *a: next(replies)):
+            r = pc.chat("claude-sonnet-5-5", [{"role": "user", "content": "x"}])
+        self.assertEqual(r["content"], "checked")
+        self.assertEqual(json.loads(pc.STATE.read_text())["claude"]["calls_total"], 1)  # only the real call
+        self.assertGreaterEqual(self.clock.t - NOW.timestamp(), pc.AUTH_PAUSE_S)
+        self.assertLess(self.clock.t - NOW.timestamp(), pc.AUTH_PAUSE_S + 60)
+
     def test_non_limit_error_is_returned_not_waited(self):
         with mock.patch.object(pc, "_run_claude", lambda *a: ("overloaded", True)):
             r = pc.chat("claude-haiku-5-5", [{"role": "user", "content": "x"}])

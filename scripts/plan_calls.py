@@ -335,6 +335,10 @@ def _run_claude(model: str, system: str, user: str) -> tuple[str, bool]:
 
 RUNNER_DOWN_S = 600  # heartbeat silent this long = runner really down, not just busy
 RUNNER_DOWN = "muse runner down"
+# A login that failed never reached the plan: pause briefly, spend no budget (2026-11-07: about
+# 25 "OAuth session expired and could not be refreshed" failures used up Claude's 15/h).
+AUTH_FAIL = re.compile(r"failed to authenticate|oauth session expired|could not be refreshed", re.I)
+AUTH_PAUSE_S = 300
 
 
 def _runner_heartbeat_age() -> float:
@@ -564,12 +568,15 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
             reset = muse_reset(text, _now()) if is_err else None
             if is_err and text.startswith(RUNNER_DOWN):  # launchd restarts it; wait, don't fail
                 reset = _now() + timedelta(minutes=10)
-        if not (is_err and text.startswith(RUNNER_DOWN)):
+        auth = is_err and bool(AUTH_FAIL.search(text))
+        if auth:
+            reset = _now() + timedelta(seconds=AUTH_PAUSE_S)
+        if not (is_err and text.startswith(RUNNER_DOWN)) and not auth:
             _record_call(plan, _now())  # soft budget: concurrent callers may overshoot by a few
         if reset:
             pause(plan, reset, text)
-            print(f"plan_calls: {plan} usage window spent; waiting until {reset.isoformat()}",
-                  file=sys.stderr, flush=True)
+            print(f"plan_calls: {plan} {'login failed' if auth else 'usage window spent'}; waiting until "
+                  f"{reset.isoformat()}", file=sys.stderr, flush=True)
             continue
         ms = int((time.time() - t0) * 1000)
         if is_err:
