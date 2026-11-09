@@ -12,6 +12,7 @@ import sys
 import threading
 import time
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -154,8 +155,12 @@ def main() -> int:
                test_batch_stuck_counts_a_queue_that_does_not_drain, test_full_disk_log_does_not_kill_threads,
                test_throttle_write_failure_still_requeues, test_abandon_between_check_and_requeue,
                test_rate_acquire_gives_up_without_a_slot, test_gpt_oss_batch_uses_responses_shape):
-        fn()
+        # These are plain functions run from here, so no runner calls setUpModule: apply its stub around each one
+        # (9 Nov 2026: without it the live spend gate refused the fake batch and the timing test failed 3 of 3).
+        with mock.patch.object(B, "spend_allow", lambda: (True, "test stub")):
+            fn()
         print("ok", fn.__name__)
+    assert B.spend_allow.__module__ == B.__name__, "the spend-gate stub leaked out of the test run"
     print("ALL PASS")
     return 0
 
