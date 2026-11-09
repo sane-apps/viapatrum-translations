@@ -400,6 +400,20 @@ class SelfAndJobTruthTests(WatchTestBase):
             self.assertEqual(state, "warn")
             self.assertIn("last auto ship exit 3", detail)
             self.assertIn("paid shelf refresh failed (audiobooks rc=1)", detail)
+            # 9 Nov 2026: a ship that verified AFTER the failed run means the failure is over (last_run is only
+            # rewritten when the newer run ends, and its shelf step can take hours).
+            base.pop("shelf_pending")
+            base["last_run"] = {"at": "2026-11-09T11:54:39", "exit": 1, "why": "ship did not verify"}
+            base["last_ship"] = {"at": "2026-11-09T13:19:21", "rc": 0, "verified": True}
+            (sa / "state.json").write_text(json.dumps(base))
+            with mock.patch.object(W.time, "time", lambda: W.local_ts("2026-11-09T15:00:00")):
+                state, detail, _ = W.check_ship_auto()
+                self.assertEqual(state, "ok", detail)
+                base["last_ship"] = {"at": "2026-11-09T10:00:00", "rc": 0, "verified": True}  # older ship: still a warning
+                (sa / "state.json").write_text(json.dumps(base))
+                state, detail, _ = W.check_ship_auto()
+                self.assertEqual(state, "warn")
+                self.assertIn("last auto ship exit 1", detail)
 
     def test_e2e_names_failed_line_and_log(self):
         (self.site / "outputs/e2e/LATEST.json").write_text(json.dumps(

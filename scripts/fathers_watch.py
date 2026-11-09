@@ -879,6 +879,18 @@ def check_queue_depth() -> tuple[str, str, dict]:
     return "ok", f"jev corrections open: {info['jev_open']}", info
 
 
+def _shipped_since(last_ship, last_run: dict) -> bool:
+    """A ship that verified after the failed run ends that failure. last_run is rewritten only when the newer
+    run exits, and its shelf step can take hours (9 Nov 2026: warned for 3 h after a good 1:19 PM ship)."""
+    ship = last_ship if isinstance(last_ship, dict) else {}
+    if not (ship.get("verified") and ship.get("rc") == 0 and ship.get("at") and last_run.get("at")):
+        return False
+    try:
+        return local_ts(ship["at"]) > local_ts(last_run["at"])
+    except (ValueError, TypeError):
+        return False
+
+
 def check_ship_auto() -> tuple[str, str, dict]:
     """P16 (2026-10-06): certified text, audio or library changes waiting for
     the change-gated auto ship longer than 6 h."""
@@ -902,7 +914,7 @@ def check_ship_auto() -> tuple[str, str, dict]:
         hours = (time.time() - local_ts(since)) / 3600
         why = last_run.get("why") or (st.get("last_skip") or {}).get("why") or "last ship did not verify"
         problems.append(f"{', '.join(st.get('pending') or [])} changes not shipped for {hours:.0f} h ({why})")
-    elif last_run.get("exit") not in (None, 0, 75):
+    elif last_run.get("exit") not in (None, 0, 75) and not _shipped_since(st.get("last_ship"), last_run):
         problems.append(f"last auto ship exit {last_run.get('exit')} at {last_run.get('at')}: {last_run.get('why')}")
     if shelf.get("error"):
         problems.append(f"paid shelf refresh failed ({shelf['error']}); the next auto ship resumes it")
