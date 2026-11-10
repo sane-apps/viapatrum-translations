@@ -354,6 +354,12 @@ def expected_lanes() -> int:
 
 
 LANE_IDLE_MARK = "nothing to start in this lane"  # work_pipeline.IDLE_MARK
+LANE_WAIT_MARK = "exiting until dist/works is back"  # work_pipeline queue exit
+
+
+def site_build_running() -> bool:
+    """A ship is running or the site's build lock is held."""
+    return bool(ship_ps()) or (SITE / "outputs" / "build.lock").exists()
 
 
 def lane_idle(name: str, within_s: int = 3600) -> bool:
@@ -368,7 +374,14 @@ def lane_idle(name: str, within_s: int = 3600) -> bool:
             tail = fh.read().decode("utf-8", "replace").strip().splitlines()
     except OSError:
         return False
-    return bool(tail) and LANE_IDLE_MARK in tail[-1]
+    if not tail:
+        return False
+    if LANE_IDLE_MARK in tail[-1]:
+        return True
+    # A site build empties dist/works for a while, so a lane that starts then
+    # exits at once and the next tick restarts it. Not a failure while a build
+    # runs (2026-11-09: lanes:down fired on six ships with nothing broken).
+    return LANE_WAIT_MARK in tail[-1] and site_build_running()
 
 
 def check_lanes() -> tuple[str, str, dict]:

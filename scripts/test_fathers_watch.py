@@ -162,6 +162,21 @@ class QueueTests(WatchTestBase):
         (self.wp / "lane-E1.pid").write_text(str(os.getpid()))
         self.assertEqual(W.check_progress()[0], "warn")
 
+    def test_lane_waiting_for_a_site_build_is_not_down(self):
+        """2026-11-09: a ship empties dist/works, lanes exit "until dist/works
+        is back", and lanes:down fired on six ships with nothing broken."""
+        line = "queue: /x/dist/works is missing; exiting until dist/works is back\n"
+        for n in ("A1", "B1"):
+            (self.wp / f"lane-{n}.pid").write_text("999999")
+            (self.wp / f"lane{n}.out").write_text(line)
+        with mock.patch.object(W, "expected_lanes", return_value=2), \
+                mock.patch.object(W, "lanes_paused", return_value=False):
+            with mock.patch.object(W, "site_build_running", return_value=True):
+                self.assertEqual(W.check_lanes()[0], "ok")
+            # No build running: dist/works really is gone, keep the alert.
+            with mock.patch.object(W, "site_build_running", return_value=False):
+                self.assertEqual(W.check_lanes()[0], "fail")
+
     def test_lanes_count_from_runner(self):
         self.assertEqual(W.expected_lanes(), 3)
         (self.wp / "lane-C1.pid").write_text(str(os.getpid()))
