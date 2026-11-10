@@ -199,6 +199,22 @@ class QueueTests(WatchTestBase):
             (self.wp / f"lane-{name}.pid").write_text(str(os.getpid()))
         self.assertEqual(W.check_lanes()[:2], ("ok", "2/2 lanes alive"))
 
+    def test_plans_free_counts_its_finish_list_lane(self):
+        """2026-11-09: plans-free also starts C1 for the unpublished works on the finish
+        list. The guard inside lane() that keeps it off without a list is not a lane."""
+        (self.wp.parent.parent / "scripts/run-recert-lanes.sh").write_text(
+            'lane() {\n  case " $* " in *" --unpublished "*)\n'
+            '    [ "$PROFILE" = plans-free ] && [ ! -f "$OUT/finish_only.json" ] && { return 0; } ;;\n'
+            '  esac\n}\n'
+            'if [ "$PROFILE" != plans-free ]; then\n'
+            "for n in 1 2; do lane C$n --x; done\nfor n in 1; do lane E$n --y; done\nfi\n"
+            '[ "$PROFILE" = plans-free ] && for n in 1; do lane C$n --x; done\n'
+            "for n in 1; do lane A$n --a; done\nfor n in 1; do lane B$n --b; done\n"
+            '[ "$PROFILE" != plans-free ] && for n in 1; do lane D$n --d; done\n')
+        self.assertEqual(W.expected_lanes(), 6)  # plans: C1, C2, E1, A1, B1, D1
+        (self.wp / "lane-profile").write_text("plans-free\n")
+        self.assertEqual(W.expected_lanes(), 3)  # C1, A1, B1
+
 
 class JobHealthTests(WatchTestBase):
     """2026-10-14: every launchd job on both machines is checked (job_health.py)."""

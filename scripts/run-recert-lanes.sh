@@ -148,6 +148,12 @@ lane() {  # name args...
   local name="$1"; shift
   local pidf="$OUT/lane-$name.pid"
   if [ -f "$pidf" ] && kill -0 "$(cat "$pidf")" 2>/dev/null; then return 0; fi
+  # plans-free takes unpublished works only from the finish list (owner 2026-11-09: finish
+  # certifying the pending commentaries). Without finish_only.json that lane stays off, so
+  # lifting the list never starts brand-new translation.
+  case " $* " in *" --unpublished "*)
+    [ "$PROFILE" = plans-free ] && [ ! -f "$OUT/finish_only.json" ] && { echo "$(date +%T) lane $name off: no finish list"; return 0; } ;;
+  esac
   local ck="${PAIRS[$((NLANE % ${#PAIRS[@]}))]}"; NLANE=$((NLANE + 1))
   WP_CHECKERS="$ck" WORK_PIPELINE_WORKERS=8 nohup nice -n 10 python3 scripts/work_pipeline.py queue "$@" >> "$OUT/lane$name.out" 2>&1 &
   echo $! > "$pidf"
@@ -164,12 +170,14 @@ lane() {  # name args...
 # Owner 2026-10-03 evening: spend cut from 15 lanes to 6 (~$600/day of credits
 # bought 45 small certifications). One lane per size/state group, two for small
 # unpublished works; reopened books go first (work_pipeline.queue).
-# plans-free (2026-11-06): published works only, smallest first, two lanes. Plan budgets and
+# plans-free (2026-11-06): published works, smallest first, two lanes (plus C1 below). Plan budgets and
 # slots (plan_calls.py: Claude 3, Grok 2 at once) bind long before lanes do, and new works wait.
 if [ "$PROFILE" != plans-free ]; then
 for n in 1 2; do lane C$n --unpublished --limit 500 --max-words 20000; done
 for n in 1; do lane E$n --unpublished --limit 500 --min-words 20000; done
 fi
+# plans-free, 2026-11-09: one lane for the unpublished works on finish_only.json (to 20,000 words).
+[ "$PROFILE" = plans-free ] && for n in 1; do lane C$n --unpublished --limit 500 --max-words 20000; done
 for n in 1; do lane A$n --limit 500 --max-words 2000; done
 for n in 1; do lane B$n --limit 500 --min-words 2000 --max-words 20000; done
 [ "$PROFILE" != plans-free ] && for n in 1; do lane D$n --limit 500 --min-words 20000; done
