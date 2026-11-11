@@ -39,7 +39,23 @@ Limits are handled, not fought:
 - A call waits at most PLAN_MAX_WAIT_S (default 6 h) for a window; past that it returns
   an error with "plan paused" in it and the caller decides.
 
+Second doors (owner 2026-11-11: each model family runs on its own subscription, "no need to very run
+claude or gemini models through cursor ... same for claude models via agy"; then, shown the agy Opus
+checker lane: "thats a good exception rule ... monitor usage across plans ... route accordinly. no need to
+leave usage on teh table"). DOORS names the same model on another plan. A call goes to its own plan first.
+It takes the second door only when its own plan would make it wait PLAN_SPILL_AFTER_S (5 min) or more, or
+a meter says the plan is nearly spent, and the other door has room now. A door never spills onto a plan
+whose meter is high. PLAN_SPILL=0 turns this off.
+
+Meters: a plan that can report its real usage writes ~/.sane/plan-usage/<plan>.json
+({"at": epoch, "windows": {"five_hour": {"used_percentage": 42, "resets_at": epoch}, ...}}). Claude's comes
+from the Claude Code status line (infra/SaneProcess/scripts/plan_usage_statusline.py), so it counts the
+owner's own sessions too. The other plans publish no meter: for them the signals are the plan's own "limit
+reached" message and our call counts.
+
   python3 scripts/plan_calls.py status          # pauses + budget, one JSON line
+  python3 scripts/plan_calls.py table           # the same in plain English, with meters and second doors
+  python3 scripts/plan_calls.py route <model>   # which door would answer now
   python3 scripts/plan_calls.py smoke [model]   # one tiny call per plan
 """
 from __future__ import annotations
@@ -129,6 +145,84 @@ MUSE_EFFORT = os.environ.get("PLAN_MUSE_EFFORT", "medium")
 CALL_TIMEOUT_S = int(os.environ.get("PLAN_CALL_TIMEOUT_S", "900"))
 DEFAULT_PAUSE_S = 3600  # a limit message whose reset time cannot be read
 PAUSED = "plan paused"
+
+
+# The same model on another plan. Own subscription first; see "Second doors" at the top.
+DOORS = {"claude-opus-5-5": ("agy/claude-opus-5-5-medium",),
+         "claude-sonnet-5-5": ("agy/claude-sonnet-5-5-medium",)}
+for _lvl in ("low", "medium", "high"):
+    DOORS[f"agy/claude-opus-5-5-{_lvl}"] = ("claude-opus-5-5",)
+    DOORS[f"agy/claude-sonnet-5-5-{_lvl}"] = ("claude-sonnet-5-5",)
+SPILL = os.environ.get("PLAN_SPILL", "1") != "0"
+SPILL_AFTER_S = float(os.environ.get("PLAN_SPILL_AFTER_S", "300"))
+METER_DIR = Path(os.environ.get("PLAN_METER_DIR") or Path.home() / ".sane" / "plan-usage")
+TIGHT_PCT = float(os.environ.get("PLAN_TIGHT_PCT", "85"))
+
+
+def meter(plan: str, now: datetime | None = None) -> dict:
+    """Live usage windows a plan reported about itself: {name: {"used_percentage", "resets_at"}}.
+    A window past its reset time is dropped. No file, or a broken one, is no meter, never an error."""
+    now = now or _now()
+    try:
+        d = json.loads((METER_DIR / f"{plan}.json").read_text())
+        out = {}
+        for name, w in (d.get("windows") or {}).items():
+            pct, reset = float(w["used_percentage"]), float(w.get("resets_at") or 0)
+            if not reset or reset > now.timestamp():
+                out[name] = {"used_percentage": pct, "resets_at": reset}
+        if out:
+            out["_at"] = float(d.get("at") or 0)
+        return out
+    except (OSError, ValueError, TypeError, KeyError, AttributeError):
+        return {}
+
+
+def tight(plan: str, now: datetime | None = None) -> bool:
+    """True when a live meter window of the plan is at or over PLAN_TIGHT_PCT."""
+    return any(w["used_percentage"] >= TIGHT_PCT for k, w in meter(plan, now).items() if k != "_at")
+
+
+def door_open(model: str, now: datetime | None = None) -> bool:
+    """A door that would answer now: known, not paused, inside its soft budget, meter not high."""
+    now = now or _now()
+    plan = plan_of(model)
+    return bool(plan) and not paused_until(pause_key(model), now) and not _budget_wait(plan, now) and not tight(plan, now)
+
+
+def route(model: str, now: datetime | None = None) -> tuple[str, str]:
+    """(door, why) for a call made now. Does not call anything."""
+    now = now or _now()
+    plan = plan_of(model)
+    if plan is None:
+        return model, "not a plan model"
+    until, over = paused_until(pause_key(model), now), _budget_wait(plan, now)
+    wait = ((until - now).total_seconds() if until else 0) or over
+    if not (SPILL and (wait >= SPILL_AFTER_S or tight(plan, now))):
+        return model, "own plan" + (f", after a wait of {wait:.0f} s" if wait else "")
+    why = "its plan is nearly spent" if not wait else f"its plan would wait {wait:.0f} s"
+    for alt in DOORS.get(model, ()):
+        if door_open(alt, now):
+            return alt, why
+    return model, f"own plan ({why}; no second door has room)"
+
+
+def _second_door(model: str, messages: list, max_tokens, wait: float, tried: set) -> dict | None:
+    """Answer through another plan's door to the same model, or None to keep waiting on the own plan."""
+    if not SPILL or not (wait >= SPILL_AFTER_S or tight(plan_of(model) or "")):
+        return None
+    for alt in DOORS.get(model, ()):
+        if alt in tried or not door_open(alt):
+            continue
+        tried.add(alt)
+        print(f"plan_calls: {model} would wait {wait:.0f} s; second door {alt}", file=sys.stderr, flush=True)
+        r = chat(alt, messages, max_tokens, _spill=False, _max_wait=max(60.0, wait))
+        if "content" in r:
+            r["door"] = alt
+            with _state() as s:
+                d = s.setdefault("second_door", {})
+                d[f"{model} -> {alt}"] = int(d.get(f"{model} -> {alt}", 0)) + 1
+            return r
+    return None
 
 
 def is_plan_model(model: str) -> bool:
@@ -637,28 +731,42 @@ def _run_muse(prompt: str) -> tuple[str, bool]:
     return str(res.get("answer") or ""), False
 
 
-def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
-    """vendor_call-shaped result: {"content", "ms"} or {"error", "ms"}.
+def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool = True,
+         _max_wait: float | None = None) -> dict:
+    """vendor_call-shaped result: {"content", "ms"} or {"error", "ms"}; "door" names another plan's
+    door when that one answered.
 
-    Waits out a spent usage window (and the soft Claude budget) instead of failing."""
+    Waits out a spent usage window (and the soft Claude budget) instead of failing, unless a second
+    door to the same model has room (see "Second doors" at the top)."""
     plan = plan_of(model)
     if plan is None:
         return {"error": f"not a plan model: {model}", "ms": 0}
     system, user = _split(messages)
     key = pause_key(model)
     t0 = time.time()
-    deadline = t0 + MAX_WAIT_S
+    deadline = t0 + (MAX_WAIT_S if _max_wait is None else _max_wait)
+    tried: set = set()
+    if _spill and tight(plan):  # the plan's own meter is high: leave what is left to the owner
+        r = _second_door(model, messages, max_tokens, 0.0, tried)
+        if r:
+            return r
     while True:
         now = _now()
         until = paused_until(key, now)
         if until:
             wait = (until - now).total_seconds() + 30
+            r = _second_door(model, messages, max_tokens, wait, tried) if _spill else None
+            if r:
+                return r
             if time.time() + wait > deadline:
                 return {"error": f"{PAUSED}: {key} until {until.isoformat()}", "ms": int((time.time() - t0) * 1000)}
             _sleep(wait)
             continue
         wait = _budget_wait(plan, now)
         if wait:
+            r = _second_door(model, messages, max_tokens, wait, tried) if _spill else None
+            if r:
+                return r
             if time.time() + wait > deadline:
                 return {"error": f"{PAUSED}: {plan} budget", "ms": int((time.time() - t0) * 1000)}
             _sleep(wait)
@@ -738,13 +846,66 @@ def status() -> dict:
                   and v.get("paused_until") and datetime.fromisoformat(v["paused_until"]) > now}
         if groups:
             out[plan]["model_pauses"] = groups  # e.g. agy/gemini spent while agy/claude still answers
+        m = meter(plan, now)
+        if m:
+            out[plan]["meter"] = m
+    if snap.get("second_door"):
+        out["second_door_calls"] = snap["second_door"]
     return out
+
+
+def _clock(ts: float) -> str:
+    d = datetime.fromtimestamp(ts, ZoneInfo("America/New_York"))
+    day = "" if d.date() == datetime.now(ZoneInfo("America/New_York")).date() else d.strftime("%a ")
+    return day + d.strftime("%I:%M %p").lstrip("0")
+
+
+def table() -> str:
+    """status() in plain English: one line per plan, then where each second door would send a call now."""
+    now = _now()
+    st = status()
+    lines = ["Plans at " + _clock(now.timestamp()) + " ET"]
+    for plan in PLANS:
+        p = st[plan]
+        hour, day = p["budget_hour_day"]
+        over = _budget_wait(plan, now)
+        if p["paused_until"]:
+            state = "spent until " + _clock(datetime.fromisoformat(p["paused_until"]).timestamp())
+        elif over:
+            state = "at our own limit until " + _clock(now.timestamp() + over)
+        else:
+            state = "room now"
+        bits = [f"{plan:7s} {state}", f"{p['calls_last_hour']} of {hour} calls this hour, {p['calls_last_day']} of {day} today"]
+        for k, w in sorted((p.get("meter") or {}).items()):
+            if k != "_at":
+                bits.append(f"plan meter {k.replace('_', ' ')} {w['used_percentage']:.0f}% used"
+                            + (f", resets {_clock(w['resets_at'])}" if w["resets_at"] else ""))
+        if p.get("meter"):
+            bits.append(f"meter read {_clock(p['meter']['_at'])}" + (" (HIGH: background calls take a second door)" if tight(plan, now) else ""))
+        else:
+            bits.append("no meter: this plan reports only when it is spent")
+        for k, v in sorted((p.get("model_pauses") or {}).items()):
+            bits.append(f"{k} spent until {_clock(datetime.fromisoformat(v).timestamp())}")
+        lines.append("; ".join(bits))
+    lines.append("Second doors (same model on another plan; used only when the own plan would wait or its meter is high):")
+    for m in sorted(DOORS):
+        door, why = route(m, now)
+        lines.append(f"  {m:28s} -> {door}  ({why})")
+    for k, v in sorted((st.get("second_door_calls") or {}).items()):
+        lines.append(f"  answered through a second door so far: {k}: {v}")
+    return "\n".join(lines)
 
 
 def main(argv: list[str]) -> int:
     cmd = argv[1] if len(argv) > 1 else "status"
     if cmd == "status":
         print(json.dumps(status()))
+        return 0
+    if cmd == "table":
+        print(table())
+        return 0
+    if cmd == "route" and len(argv) > 2:
+        print("%s (%s)" % route(argv[2]))
         return 0
     if cmd == "probe":
         print(probe(argv[2] if len(argv) > 2 else "grok"))

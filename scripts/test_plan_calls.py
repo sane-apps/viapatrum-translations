@@ -11,6 +11,8 @@ from unittest import mock
 TMP = tempfile.mkdtemp()
 os.environ["PLAN_STATE"] = str(Path(TMP) / "state.json")
 os.environ["PLAN_SLOTS"] = str(Path(TMP) / "slots")
+os.environ["PLAN_SPILL"] = "0"  # second doors off unless a test turns them on: an older test that pauses a plan must never reach a real CLI
+os.environ["PLAN_METER_DIR"] = str(Path(TMP) / "no-meters")  # never read this Mac's real plan meters
 os.environ["PLAN_CLAUDE_CALLS_PER_HOUR"] = "2"
 os.environ["PLAN_MUSE_CALLS_PER_HOUR"] = "50"
 os.environ["PLAN_MUSE_CALLS_PER_DAY"] = "3"
@@ -246,6 +248,71 @@ class Waiting(unittest.TestCase):
             self.assertEqual(pc.chat("agy/claude-opus-5-5-medium", [{"role": "user", "content": "x"}])["content"], "ruled")
         pc.pause("agy", NOW + pc.timedelta(days=2), "whole plan")  # a whole-plan pause still covers every family
         self.assertIsNotNone(pc.paused_until("agy/claude"))
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_second_door_when_own_plan_would_wait(self):
+        # Owner 2026-11-11: own subscription first; the same model on another plan only when the own
+        # plan would wait and the other has room.
+        msg = [{"role": "user", "content": "x"}]
+        with mock.patch.object(pc, "_run_claude", lambda *a: ("own", False)), mock.patch.object(pc, "_run_agy", lambda *a: ("second", False)):
+            r = pc.chat("claude-opus-5-5", msg)
+            self.assertEqual((r["content"], r.get("door")), ("own", None))          # room on its own plan: no second door
+            pc.pause("claude", NOW + pc.timedelta(hours=3), "weekly limit")
+            self.assertEqual(pc.route("claude-opus-5-5")[0], "agy/claude-opus-5-5-medium")
+            r = pc.chat("claude-opus-5-5", msg)
+            self.assertEqual((r["content"], r["door"]), ("second", "agy/claude-opus-5-5-medium"))
+            self.assertEqual(pc.status()["second_door_calls"], {"claude-opus-5-5 -> agy/claude-opus-5-5-medium": 1})
+            self.assertEqual(pc.chat("claude-haiku-5-5", msg, _max_wait=60).get("door"), None)   # no door listed: it waits
+            pc.pause("agy/claude", NOW + pc.timedelta(hours=4), "quota")            # both doors shut: wait on the own plan
+            self.assertEqual(pc.route("claude-opus-5-5")[0], "claude-opus-5-5")
+            r = pc.chat("claude-opus-5-5", msg)
+            self.assertEqual((r["content"], r.get("door")), ("own", None))
+            self.assertGreaterEqual(self.clock.t - NOW.timestamp(), 3 * 3600)
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_second_door_short_wait_and_switch_off(self):
+        msg = [{"role": "user", "content": "x"}]
+        with mock.patch.object(pc, "_run_claude", lambda *a: ("own", False)), mock.patch.object(pc, "_run_agy", lambda *a: ("second", False)):
+            pc.pause("claude", NOW + pc.timedelta(seconds=120), "short")           # under 5 min: wait, do not switch
+            self.assertEqual(pc.chat("claude-sonnet-5-5", msg).get("door"), None)
+            pc.pause("claude", self.clock.now() + pc.timedelta(hours=2), "long")
+            with mock.patch.object(pc, "SPILL", False):
+                self.assertEqual(pc.route("claude-sonnet-5-5")[0], "claude-sonnet-5-5")
+                self.assertEqual(pc.chat("claude-sonnet-5-5", msg).get("door"), None)
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_second_door_failure_falls_back_to_waiting(self):
+        msg = [{"role": "user", "content": "x"}]
+        with mock.patch.object(pc, "_run_claude", lambda *a: ("own", False)), mock.patch.object(pc, "_run_agy", lambda *a: ("agy crashed", True)):
+            pc.pause("agy/claude", NOW + pc.timedelta(hours=1), "quota")
+            r = pc.chat("agy/claude-opus-5-5-medium", msg)                          # the reverse door: the Claude plan
+            self.assertEqual((r["content"], r["door"]), ("own", "claude-opus-5-5"))
+            pc.pause("claude", self.clock.now() + pc.timedelta(hours=1), "limit")
+        with mock.patch.object(pc, "_run_claude", lambda *a: ("own", False)), mock.patch.object(pc, "_run_agy", lambda *a: ("agy crashed", True)):
+            fresh()
+            pc.pause("claude", self.clock.now() + pc.timedelta(hours=1), "limit")
+            r = pc.chat("claude-opus-5-5", msg)                                     # second door errors: own plan after the wait
+            self.assertEqual((r["content"], r.get("door")), ("own", None))
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_meter_high_sends_background_calls_to_the_second_door(self):
+        msg = [{"role": "user", "content": "x"}]
+        mdir = Path(TMP) / "meters"
+        mdir.mkdir(exist_ok=True)
+        with mock.patch.object(pc, "METER_DIR", mdir), mock.patch.object(pc, "_run_claude", lambda *a: ("own", False)), \
+                mock.patch.object(pc, "_run_agy", lambda *a: ("second", False)):
+            t = self.clock.t
+            (mdir / "claude.json").write_text(json.dumps({"at": t, "windows": {"five_hour": {"used_percentage": 40, "resets_at": t + 3600},
+                                                                                "seven_day": {"used_percentage": 91, "resets_at": t + 86400}}}))
+            self.assertTrue(pc.tight("claude"))
+            self.assertEqual(pc.chat("claude-opus-5-5", msg)["door"], "agy/claude-opus-5-5-medium")
+            pc.pause("agy/claude", self.clock.now() + pc.timedelta(hours=1), "quota")
+            self.assertEqual(pc.route("agy/claude-opus-5-5-medium")[0], "agy/claude-opus-5-5-medium")   # never onto a plan whose meter is high
+            (mdir / "claude.json").write_text(json.dumps({"at": t, "windows": {"seven_day": {"used_percentage": 91, "resets_at": t - 5}}}))
+            self.assertFalse(pc.tight("claude"))                                    # the window has reset: the reading is dead
+            (mdir / "claude.json").write_text("not json")
+            self.assertEqual(pc.meter("claude"), {})
+            self.assertIn("no meter", pc.table())
 
     def test_lane_refusal_spends_no_budget(self):
         with mock.patch.object(pc, "_run_cursor", lambda *a: ("cursor lane folder /x is not private to this user; refusing", True)):
