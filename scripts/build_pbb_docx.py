@@ -60,6 +60,16 @@ _SCAFFOLD_LEADS = (
 # Production notes travel with the English JSON. A Logos reader should not
 # get "True OET", copy-text lines, or the stock "may be fragmented" remark.
 _NOTE_BOILER = (
+    # Workroom marks found printing as Logos translator's notes (2026-11-11 audit: 2,342 notes in the corpus):
+    # unit closeouts, tip/promotion stamps, lane names, reviewer holds and dated fix records.
+    "closeout",
+    "opening tip",
+    "promoted 2026-",
+    "muse-lane",
+    "reviewer hold:",
+    "claude-sumfix",
+    "(claude-",
+    "(tesseract)",
     "true oet",
     "pass a ≠",
     "pass a !=",
@@ -106,6 +116,8 @@ def _reader_note(note: str) -> str:
         return ""
     low = text.lower()
     if any(mark in low for mark in _NOTE_BOILER) or worksheet_hits(text):
+        return ""
+    if re.search(r"\bSERIES\b", text):   # the capitalised SERIES tag of the densify lanes, not a word in a note
         return ""
     return text
 

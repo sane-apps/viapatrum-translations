@@ -116,5 +116,23 @@ class ScaffoldTests(unittest.TestCase):
             self.assertEqual(verify_docx(good), [])
 
 
+
+class WorkroomNoteFilterTests(unittest.TestCase):
+    """2026-11-11 audit: 2,342 workroom notes (CLOSEOUT, SERIES tags, lane and agent names) printed as Logos TNs."""
+
+    def test_workroom_marks_are_filtered(self):
+        import build_pbb_docx as P
+        for t in ("U24 CLOSEOUT.", "After Philocalia SERIES 18ba1926.", "Promoted 2026-10-19: passing Muse-lane draft",
+                  "Reviewer hold: cursor-held-o1c", "2026-11-11 (claude-sumfix2-e-u06): retranslated",
+                  "PG 13 Latin Series (tesseract); no Heine."):
+            self.assertEqual(P._reader_note(t), "", t)
+
+    def test_real_notes_still_print(self):
+        import build_pbb_docx as P
+        for t in ("Augustine inserts these short fragments into a series of rhetorical questions.",
+                  "κατευανθέν ita cod.: the editor marks the codex reading as doubtful.",
+                  "The print marks a gap after Job 24:6."):
+            self.assertTrue(P._reader_note(t), t)
+
 if __name__ == "__main__":
     unittest.main()
