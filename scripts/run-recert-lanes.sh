@@ -65,7 +65,7 @@ PROFILE="${PROFILE:-plans}"
 echo "$(date +%T) lane profile: $PROFILE ($(python3 scripts/plan_calls.py status 2>/dev/null))"
 # "plans-free" (owner 2026-11-06: "Free lanes", $0, smallest works first): subscription plans and
 # free NVIDIA only. No Workers AI (any @cf/ id is refused while ~/.sane/CLOUDFLARE_AI_OFF exists),
-# no Muse (account restricted 2026-11-05), no paid fallback, no Cloudflare web search for intros.
+# Muse drafts since 2026-11-11 (its 2026-11-05 restriction was cleared 9 Nov), no paid fallback, no Cloudflare web search for intros.
 # Families: Nemotron Ultra on free NVIDIA NIM drafts and repairs (drafter bench 2026-11-06,
 # outputs/drafter-bench-20261106: 10 of 10 blind drafts gate-clean, 6 of 10 passed both checkers
 # within one repair, against 3 of 10 October DeepSeek passes the same pair found clean). Antigravity
@@ -77,7 +77,11 @@ echo "$(date +%T) lane profile: $PROFILE ($(python3 scripts/plan_calls.py status
 # While a plan drafter is paused, lanes take only works whose sections all passed.
 # Override any role with PLANS_FREE_DRAFTER / _CHECKERS / _READERS / _REFEREE / _FOLLOW_MIN / _FOLLOW_AVG.
 if [ "$PROFILE" = plans-free ]; then
-  export WP_DRAFTER="${PLANS_FREE_DRAFTER:-nvidia/nemotron-3-ultra-550b-a55b}"
+  # Owner 2026-11-11 ("go ahead with muse"): Muse drafts and repairs. Nemotron Ultra on NVIDIA NIM began
+  # answering with garbled text that morning (recert smoke: HTTP 200, "Use。 3 Centro性 ofNA"), so no lane
+  # could draft; Muse is a fourth family (checkers Claude + Grok, referee Gemini via agy). The Muse runner
+  # was turned back on for this (jobs.json muse-runner). Set PLANS_FREE_DRAFTER=nvidia/... to go back.
+  export WP_DRAFTER="${PLANS_FREE_DRAFTER:-muse}"
   export WP_JUDGES="${PLANS_FREE_READERS:-claude-sonnet-5-5,grok-4.7-build-fast}"
   # Calibration 2026-11-06 (13 books Kimi + GLM had scored): Sonnet gave 3-4 to all 10 they passed and
   # 2 to all 3 they failed; Grok build-fast 3 to 9 of 10 passed, 2 to all 3 failed. So the live bar
