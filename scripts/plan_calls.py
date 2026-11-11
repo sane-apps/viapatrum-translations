@@ -125,6 +125,12 @@ AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
 # empty owner-only folder. The owner's own ~/.gemini settings are untouched.
 AGY_HOME = Path(os.environ.get("PLAN_AGY_HOME") or Path.home() / ".cache" / "agy-lane-home")
 AGY_CWD = AGY_HOME / "work"
+# The lane HOME has no keychain, so when agy refreshed its hourly login it ran /usr/bin/security to save it and
+# macOS showed the owner a "Keychain Not Found" box (11 Nov 2026). agy has no setting to skip the keychain on macOS.
+# Each lane call runs in a sandbox that may not start /usr/bin/security: the save fails at once with no box and agy
+# keeps the token in its own file, as it already did after the box timed out. No keychain is created or changed.
+SANDBOX_EXEC = "/usr/bin/sandbox-exec"
+AGY_SANDBOX = '(version 1)(allow default)(deny process-exec (literal "/usr/bin/security"))'
 AGY_DENY_ALL = {"command(*)", "read_file(*)", "write_file(*)", "mcp(*)", "read_url(*)", "execute_url(*)"}
 BUDGETS["agy"] = (int(os.environ.get("PLAN_AGY_CALLS_PER_HOUR", "60")),
                   int(os.environ.get("PLAN_AGY_CALLS_PER_DAY", "600")))
@@ -743,6 +749,9 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     prompt = f"{rule}\n\n{body}"
     cmd = [AGY, "-p", prompt, "--model", model[len(AGY_PREFIX):], "--output-format", "json",
            "--print-timeout", f"{CALL_TIMEOUT_S}s"]
+    if not os.access(SANDBOX_EXEC, os.X_OK):
+        return f"{SANDBOX_EXEC} missing: agy would raise keychain boxes on the owner's screen; refusing", True
+    cmd = [SANDBOX_EXEC, "-p", AGY_SANDBOX] + cmd
     try:
         env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
         env["HOME"] = str(AGY_HOME)

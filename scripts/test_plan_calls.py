@@ -490,3 +490,40 @@ class CursorLane(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AgyKeychainSandboxTest(unittest.TestCase):
+    """11 Nov 2026: agy's hourly login save raised a "Keychain Not Found" box on the owner's screen."""
+
+    def test_sandbox_blocks_security_tool_only(self):
+        import subprocess as sp
+        ok = sp.run([pc.SANDBOX_EXEC, "-p", pc.AGY_SANDBOX, "/bin/echo", "hi"], capture_output=True, text=True)
+        self.assertEqual(ok.stdout.strip(), "hi")
+        blocked = sp.run([pc.SANDBOX_EXEC, "-p", pc.AGY_SANDBOX, "/usr/bin/security", "help"],
+                         capture_output=True, text=True)
+        self.assertNotEqual(blocked.returncode, 0)
+        self.assertIn("Operation not permitted", blocked.stderr)
+
+    def test_every_agy_call_runs_in_the_sandbox(self):
+        import tempfile
+        from pathlib import Path
+        seen = {}
+
+        class R:
+            returncode, stdout, stderr = 0, '{"status": "SUCCESS", "response": "ok"}', ""
+
+        def fake_run(cmd, **kw):
+            seen["cmd"] = cmd
+            return R()
+
+        with tempfile.TemporaryDirectory() as d:
+            home = Path(d) / "home"
+            cfg = home / ".gemini" / "antigravity-cli"
+            cfg.mkdir(parents=True)
+            (cfg / "settings.json").write_text(json.dumps({"permissions": {"deny": sorted(pc.AGY_DENY_ALL)}}))
+            with mock.patch.object(pc, "AGY_HOME", home), mock.patch.object(pc, "AGY_CWD", home / "work"), \
+                    mock.patch.object(pc.subprocess, "run", fake_run):
+                text, err = pc._run_agy("agy/gemini-4-argon-low", "", "hello")
+        self.assertEqual((text, err), ("ok", False))
+        self.assertEqual(seen["cmd"][:3], [pc.SANDBOX_EXEC, "-p", pc.AGY_SANDBOX])
+        self.assertEqual(seen["cmd"][3], pc.AGY)
