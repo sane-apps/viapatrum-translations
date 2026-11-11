@@ -1,0 +1,90 @@
+{
+ "slug": "origen-de-resurrectione-scrap",
+ "pipeline": "work_pipeline",
+ "drafter": "nvidia/nemotron-3-ultra-550b-a55b",
+ "checkers": [
+  "claude-sonnet-5-5",
+  "grok-4.7-build-fast"
+ ],
+ "boundary_moves": [
+  {
+   "from": "frag-open",
+   "to": "frag-rem-early",
+   "moved_chars": 68,
+   "moved_start": "Καὶ τάχα τὸ τῆς ψυχῆς ἅμα τῇ ἀπαλλαγῇ σχῆμα ὁμοειδὲς ὂν τῷ π"
+  },
+  {
+   "from": "frag-rem-early",
+   "to": "frag-rem-mid",
+   "moved_chars": 38,
+   "moved_start": "Ἀλλὰ καὶ ὁ κολαζόμενος πλούσιος, καὶ ὁ"
+  },
+  {
+   "from": "frag-rem-mid",
+   "to": "frag-rem-close",
+   "moved_chars": 17,
+   "moved_start": "Φράσας (Ὠριγένης)"
+  }
+ ],
+ "brief_sha256": "c79a57736dbbc9182489400875da128eab80d9666340b9f655ab7a8749a34496",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-11T04:01:34Z",
+ "readers": [
+  "claude-sonnet-5-5",
+  "grok-4.7-build-fast"
+ ],
+ "referee": "agy/gemini-3.8-flash-high",
+ "sections": [
+  {
+   "section": "frag-open",
+   "source_sha256": "bd3f0dbb22c2464e98c48612285aa6f46e524f0d390c56125e5c56620dd0f5c3",
+   "english_sha256": "a4e193714586eed8f1227e9064dd2bf2d8b2864591f7c065b4e462939cdbd756",
+   "justification": "reviews/justifications/frag-open.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "frag-rem-early",
+   "source_sha256": "4b2c4fabb497747b26af46145ec90372a27e70859b0c42d8e6ec7a108ca17ec8",
+   "english_sha256": "050726b8b629547602829243a026196f11453dd4fb9840f336c63de2e255beeb",
+   "justification": "reviews/justifications/frag-rem-early.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "frag-rem-mid",
+   "source_sha256": "dc4b0c979142ed054fb3d90306e1df754c491c3d9b436802d372d1e1a3ff6fbe",
+   "english_sha256": "252ecd1f66818fe5a01ac3c19dd14d891d6b4aebc681fa56c760e6de07b61ff7",
+   "justification": "reviews/justifications/frag-rem-mid.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "frag-rem-close",
+   "source_sha256": "56993e68de1375c8592b0486b4291df66d02e87ba422643a651e6f037610d332",
+   "english_sha256": "dffdcf75d1ca80298de0945bfda84fdb89ff59004bb0c9c4e168ac26197b3880",
+   "justification": "reviews/justifications/frag-rem-close.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ],
+ "ref_gate": {
+  "references": 0
+ }
+}
