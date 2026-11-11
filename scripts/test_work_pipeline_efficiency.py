@@ -1937,5 +1937,88 @@ class FreeLaneTests(unittest.TestCase):
         self.assertEqual(out.stdout.strip().splitlines()[-1], "2.5 3.0", out.stderr[-500:])
 
 
+class LaneRotationTests(unittest.TestCase):
+    """run-recert-lanes.sh pair and reader rotation (2026-11-11 second plans-free pair), run in the real
+    /bin/bash 3.2 on the script's own PAIRS block and lane() with a fake nohup that records each lane's env."""
+
+    SCRIPT = ROOT / "scripts" / "run-recert-lanes.sh"
+
+    def lanes(self, profile: str, extra_env: dict | None = None) -> dict:
+        import re
+        import subprocess
+        text = self.SCRIPT.read_text()
+        start = text.index('PAIRS=("@cf/')
+        fn = text.index("lane() {", start)
+        block = text[start:text.index("\n}\n", fn) + 3]
+        judges = re.search(r'WP_JUDGES="\$\{PLANS_FREE_READERS:-([^}]*)\}"', text).group(1)
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            (d / "bin").mkdir()
+            rec = d / "rec.txt"
+            (d / "bin" / "nohup").write_text(
+                '#!/bin/bash\necho "$LANE_NAME|$WP_CHECKERS|${WP_JUDGES-UNSET}|$WP_PEER_PAIRS" >> "$REC"\n')
+            (d / "bin" / "nohup").chmod(0o755)
+            (d / "finish_only.json").write_text("[]")
+            prelude = ("set -u\nrefresh() { :; }\ntimeout() { :; }\n"
+                       + (f'export WP_JUDGES="${{PLANS_FREE_READERS:-{judges}}}"\n' if profile == "plans-free" else ""))
+            calls = "".join(f"LANE_NAME={n} lane {n} {a}\n" for n, a in
+                            (("C1", "--unpublished --limit 500"), ("A1", "--limit 500"), ("B1", "--limit 500")))
+            env = {"PATH": f"{d / 'bin'}:/usr/bin:/bin", "HOME": str(d), "PROFILE": profile, "OUT": str(d),
+                   "REC": str(rec), **(extra_env or {})}
+            r = subprocess.run(["/bin/bash", "-c", prelude + block + "export LANE_NAME\n" + calls + "wait\n"], env=env,
+                               capture_output=True, text=True, timeout=60, cwd=d)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            rows = [l.split("|") for l in rec.read_text().splitlines()]
+        return {n: {"checkers": c, "readers": j, "peers": p} for n, c, j, p in rows}
+
+    def test_plans_free_rotates_two_pairs_by_lane_position(self):
+        got = self.lanes("plans-free")
+        self.assertEqual(got["C1"]["checkers"], "claude-sonnet-5-5,grok-4.7-build-fast")
+        self.assertEqual(got["A1"]["checkers"], "agy/claude-opus-5-5-medium,cursor/composer-2.5")
+        self.assertEqual(got["B1"]["checkers"], "claude-sonnet-5-5,grok-4.7-build-fast")
+        self.assertEqual(got["C1"]["readers"], "claude-sonnet-5-5,grok-4.7-build-fast")
+        self.assertEqual(got["A1"]["readers"], "claude-sonnet-5-5,cursor/composer-2.5")
+        self.assertEqual(got["A1"]["peers"],
+                         "claude-sonnet-5-5,grok-4.7-build-fast;agy/claude-opus-5-5-medium,cursor/composer-2.5")
+
+    def test_every_rotated_pair_keeps_the_family_rules_and_stays_on_plans(self):
+        import plan_calls
+        got = self.lanes("plans-free")
+        for lane in got.values():
+            checkers, readers = lane["checkers"].split(","), lane["readers"].split(",")
+            for m in checkers + readers:
+                self.assertTrue(plan_calls.is_plan_model(m), m)  # no Cloudflare, no paid id
+            with mock.patch.object(W, "DRAFTER", "muse"), mock.patch.object(W, "CHECKERS", checkers), \
+                    mock.patch.object(W, "REFEREES", ["agy/gemini-3.8-flash-high"]):
+                self.assertEqual(W.family_problems(), [], lane)
+
+    def test_override_sets_one_pair_and_reader_pair_for_every_lane(self):
+        got = self.lanes("plans-free", {"PLANS_FREE_CHECKERS": "claude-sonnet-5-5,grok-4.7-build-fast",
+                                        "PLANS_FREE_READERS": "claude-sonnet-5-5,grok-4.7-build-fast"})
+        self.assertEqual({v["checkers"] for v in got.values()}, {"claude-sonnet-5-5,grok-4.7-build-fast"})
+        self.assertEqual({v["readers"] for v in got.values()}, {"claude-sonnet-5-5,grok-4.7-build-fast"})
+
+    def test_other_profiles_leave_readers_unset(self):
+        got = self.lanes("workers-ai")
+        self.assertEqual({v["readers"] for v in got.values()}, {"UNSET"})  # never WP_JUDGES="" (empty reader list)
+
+    def test_pass_from_a_peer_pair_is_not_rechecked(self):
+        mine = ["agy/claude-opus-5-5-medium", "cursor/composer-2.5"]
+        peer = ["claude-sonnet-5-5", "grok-4.7-build-fast"]
+        old = {"_status": "pass", "checks": {"checkers": ["@cf/moonshotai/kimi-k2.6", "@cf/zai-org/glm-5.2"]}}
+        by_peer = {"_status": "pass", "checks": {"checkers": list(reversed(peer))}}
+        with mock.patch.object(W, "CHECKERS", mine), mock.patch.object(W, "RECHECK_PASSES", True), \
+                mock.patch.object(W, "PEER_PAIRS", [peer, mine]):
+            self.assertFalse(W.needs_recheck(by_peer))
+            self.assertTrue(W.needs_recheck(old))
+        with mock.patch.object(W, "CHECKERS", mine), mock.patch.object(W, "RECHECK_PASSES", True), \
+                mock.patch.object(W, "PEER_PAIRS", []):
+            self.assertTrue(W.needs_recheck(by_peer))  # without the rotation list, the old rule holds
+
+    def test_composer_is_its_own_family(self):
+        self.assertEqual(W._drafter_family("cursor/composer-2.5"), "composer")
+        self.assertEqual(W._drafter_family("agy/claude-opus-5-5-medium"), "claude")
+
+
 if __name__ == "__main__":
     unittest.main()

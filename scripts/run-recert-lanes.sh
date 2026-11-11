@@ -139,6 +139,29 @@ PAIRS=("@cf/qwen/qwen3.8-27b,@cf/google/gemma-4-26b-a4b-it")
 # shares. Its small pool is kept for short calls (a referee candidate), capped in budgets.json.
 [ "$PROFILE" = plans ] && PAIRS=("claude-sonnet-5-5,muse")
 [ "$PROFILE" = plans-free ] && PAIRS=("${PLANS_FREE_CHECKERS:-claude-sonnet-5-5,grok-4.7-build-fast}")
+# Readers per lane, same rotation as PAIRS; empty = every lane keeps the exported WP_JUDGES.
+READERS=()
+# 2026-11-11 second plans-free pair, from plans with spare room (Grok was over its daily budget, Claude
+# near its own; owner: "any unused resources put to use"). outputs/checker-bench-20261111/REPORT.md:
+#   19 Oct bench (4 known errors, 10 clean sections, same prompt): agy Opus 5.5 medium caught 4/4 and
+#   flagged 2/10 clean, Cursor Composer 2.5 caught 4/4 and flagged 4/10; Sonnet 3/4 and 3/10, Grok 4/4
+#   and 7/10. Pair, both flag / either flags: Opus + Composer 4/4 with 1/10 clean, 4/4 with 5/10; Sonnet +
+#   Grok 3/4 with 2/10, 4/4 with 8/10. Production prompt, 14 real errors Sonnet answered on 19 Oct:
+#   Opus 10/14 (every one Sonnet caught), Composer 5/11 answered, Sonnet 6/14.
+#   Readers (12 unchanged books, live bar no reader below 3): Sonnet + Composer agree with Kimi + GLM on
+#   11/11, 0 false passes, 0 false fails (Sonnet + Grok 9/10, 1 false fail); pair means 3.0-3.5 on
+#   passed books, 2.0 on failed, so WP_FOLLOW_AVG 3.0 holds.
+#   Limits: agy's Claude models have a short quota (spent after about 47 calls, "Resets in 3h59m") and
+#   pause apart from the Gemini referee (plan_calls.pause_key); Cursor runs at 20 calls an hour.
+# PLANS_FREE_CHECKERS / PLANS_FREE_READERS set one pair for every lane.
+if [ "$PROFILE" = plans-free ] && [ -z "${PLANS_FREE_CHECKERS:-}" ]; then
+  PAIRS+=("agy/claude-opus-5-5-medium,cursor/composer-2.5")
+  if [ -z "${PLANS_FREE_READERS:-}" ]; then
+    READERS=("$WP_JUDGES" "claude-sonnet-5-5,cursor/composer-2.5")
+  fi
+fi
+# A pass any pair in rotation gave is not re-checked by another (work_pipeline.PEER_PAIRS).
+WP_PEER_PAIRS="$(IFS=';'; echo "${PAIRS[*]}")"; export WP_PEER_PAIRS
 NLANE=0
 # NVIDIA referee (third family): same 3 h rule, NIM provider. Purpose-aware
 # since the beliefs job also smokes a doctrine-grade Nemotron receipt nightly.
@@ -151,6 +174,11 @@ timeout 300 python3 scripts/regate_held.py >> "$OUT/regate.log" 2>&1 || true
 lane() {  # name args...
   local name="$1"; shift
   local pidf="$OUT/lane-$name.pid"
+  # Pairs go by lane position, not by how many lanes started this tick (2026-11-11: a lane that
+  # restarted alone always drew PAIRS[0], so a second pair would almost never run).
+  local i=$NLANE; NLANE=$((NLANE + 1))
+  local ck="${PAIRS[$((i % ${#PAIRS[@]}))]}" rd="${WP_JUDGES:-}"
+  [ "${#READERS[@]}" -gt 0 ] && rd="${READERS[$((i % ${#READERS[@]}))]}"
   if [ -f "$pidf" ] && kill -0 "$(cat "$pidf")" 2>/dev/null; then return 0; fi
   # plans-free takes unpublished works only from the finish list (owner 2026-11-09: finish
   # certifying the pending commentaries). Without finish_only.json that lane stays off, so
@@ -158,10 +186,9 @@ lane() {  # name args...
   case " $* " in *" --unpublished "*)
     [ "$PROFILE" = plans-free ] && [ ! -f "$OUT/finish_only.json" ] && { echo "$(date +%T) lane $name off: no finish list"; return 0; } ;;
   esac
-  local ck="${PAIRS[$((NLANE % ${#PAIRS[@]}))]}"; NLANE=$((NLANE + 1))
-  WP_CHECKERS="$ck" WORK_PIPELINE_WORKERS=8 nohup nice -n 10 python3 scripts/work_pipeline.py queue "$@" >> "$OUT/lane$name.out" 2>&1 &
+  env ${rd:+"WP_JUDGES=$rd"} WP_CHECKERS="$ck" WORK_PIPELINE_WORKERS=8 nohup nice -n 10 python3 scripts/work_pipeline.py queue "$@" >> "$OUT/lane$name.out" 2>&1 &
   echo $! > "$pidf"
-  echo "$(date +%T) lane $name started pid $! checkers $ck"
+  echo "$(date +%T) lane $name started pid $! checkers $ck readers ${rd:-default}"
 }
 # Cost was not a constraint (owner 2026-10-02, CF grant); since 2026-10-14 the
 # daily cap in spend_guard.py bounds it (above). Work is

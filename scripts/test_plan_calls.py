@@ -85,6 +85,25 @@ class ResetParsing(unittest.TestCase):
     def test_agy_ordinary_error_is_not_a_limit(self):
         self.assertIsNone(pc.agy_reset("agy timeout after 900s", NOW))
 
+    def test_new_agy_models_route_to_agy(self):
+        for m in ("gemini-4-argon-high", "claude-sonnet-5-5-medium", "claude-opus-5-5-low"):
+            self.assertEqual(pc.plan_of("agy/" + m), "agy")
+
+    def test_cursor_ids_route_to_cursor_plan(self):
+        self.assertEqual(pc.plan_of("cursor/composer-2.5"), "cursor")
+        # Models the plan does not include (2026-11-11) are not plan models: they would need bought credits.
+        self.assertIsNone(pc.plan_of("cursor/gpt-5.5-low"))
+        self.assertIsNone(pc.plan_of("cursor/claude-sonnet-5-5-low"))
+        self.assertIn("cursor", pc.PLANS)
+
+    def test_cursor_limit_pauses_one_hour_or_until_iso(self):
+        msg = ("ActionRequiredError: GPT-5.5 is not included in your weekly usage Buy credits or switch to a "
+               "Grok model to continue.")
+        self.assertEqual(pc.cursor_reset(msg, NOW), NOW + pc.timedelta(hours=1))
+        got = pc.cursor_reset("usage limit reached; resets at 2026-10-20T00:00:00Z", NOW)
+        self.assertEqual(got, datetime(2026, 10, 20, 0, 0, tzinfo=timezone.utc))
+        self.assertIsNone(pc.cursor_reset("cursor timeout after 900s", NOW))
+
     def test_grok_ids_route_to_the_grok_plan(self):
         self.assertEqual(pc.plan_of("grok-4.7-build-fast"), "grok")
         self.assertIsNone(pc.plan_of("@cf/zai-org/glm-5.2"))
@@ -201,11 +220,112 @@ class Waiting(unittest.TestCase):
         self.assertGreaterEqual(self.clock.t - NOW.timestamp(), pc.AUTH_PAUSE_S)
         self.assertLess(self.clock.t - NOW.timestamp(), pc.AUTH_PAUSE_S + 60)
 
+    def test_cursor_limit_pauses_cursor_only_then_retries(self):
+        replies = iter([("ActionRequiredError: Composer 2.5 is not included in your weekly usage Buy credits", True),
+                        ('{"ok": true}', False)])
+        with mock.patch.object(pc, "_run_cursor", lambda *a: next(replies)):
+            r = pc.chat("cursor/composer-2.5", [{"role": "user", "content": "x"}])
+        self.assertEqual(r["content"], '{"ok": true}')
+        self.assertGreaterEqual(self.clock.t - NOW.timestamp(), 3600)
+        self.assertIsNone(pc.paused_until("agy"))
+
+    def test_agy_quota_pauses_only_that_model_family(self):
+        # 2026-11-11: the 4 Nov "Individual quota reached" stop was Gemini alone; a spent Gemini
+        # referee must not stop an agy Claude checker, while the plan budget stays shared.
+        self.assertEqual(pc.pause_key("agy/gemini-3.8-flash-high"), "agy/gemini")
+        self.assertEqual(pc.pause_key("agy/claude-opus-5-5-medium"), "agy/claude")
+        self.assertEqual(pc.pause_key("claude-sonnet-5-5"), "claude")
+        replies = iter([("Individual quota reached. Please upgrade your subscription. Resets in 167h35m32s.", True)])
+        with mock.patch.object(pc, "_run_agy", lambda *a: next(replies)), mock.patch.object(pc, "MAX_WAIT_S", 60):
+            r = pc.chat("agy/gemini-3.8-flash-high", [{"role": "user", "content": "x"}])
+        self.assertIn(pc.PAUSED, r["error"])
+        self.assertIsNotNone(pc.paused_until("agy/gemini"))
+        self.assertIsNone(pc.paused_until("agy/claude"))
+        self.assertIn("agy/gemini", pc.status()["agy"]["model_pauses"])
+        with mock.patch.object(pc, "_run_agy", lambda *a: ("ruled", False)):
+            self.assertEqual(pc.chat("agy/claude-opus-5-5-medium", [{"role": "user", "content": "x"}])["content"], "ruled")
+        pc.pause("agy", NOW + pc.timedelta(days=2), "whole plan")  # a whole-plan pause still covers every family
+        self.assertIsNotNone(pc.paused_until("agy/claude"))
+
+    def test_lane_refusal_spends_no_budget(self):
+        with mock.patch.object(pc, "_run_cursor", lambda *a: ("cursor lane folder /x is not private to this user; refusing", True)):
+            r = pc.chat("cursor/composer-2.5", [{"role": "user", "content": "x"}])
+        self.assertIn("call failed", r["error"])
+        self.assertEqual(json.loads(pc.STATE.read_text()).get("cursor", {}).get("calls_total", 0), 0)
+
     def test_non_limit_error_is_returned_not_waited(self):
         with mock.patch.object(pc, "_run_claude", lambda *a: ("overloaded", True)):
             r = pc.chat("claude-haiku-5-5", [{"role": "user", "content": "x"}])
         self.assertIn("call failed", r["error"])
         self.assertLess(self.clock.t - NOW.timestamp(), 5)
+
+
+class CursorLane(unittest.TestCase):
+    """The lane folder: outside HOME, private, every tool denied (tested against the real CLI 2026-11-11)."""
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp(dir=os.confstr(65537))  # per-user temp, outside HOME like the real lane
+        self.dir = Path(self.tmp) / "lane"
+        self.p = mock.patch.object(pc, "CURSOR_DIR", self.dir)
+        self.p.start()
+
+    def tearDown(self):
+        self.p.stop()
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_first_use_writes_deny_all_settings(self):
+        self.assertEqual(pc._cursor_lane(), "")
+        cfg = json.loads((self.dir / ".cursor" / "cli.json").read_text())
+        self.assertEqual(cfg["permissions"]["allow"], [])
+        self.assertTrue(set(pc.CURSOR_DENY_ALL) <= set(cfg["permissions"]["deny"]))
+        self.assertEqual(self.dir.stat().st_mode & 0o077, 0)
+
+    def test_refuses_a_folder_under_home(self):
+        with mock.patch.object(pc, "CURSOR_DIR", Path.home() / ".cache" / "never-made-cursor-lane"):
+            self.assertIn("under HOME", pc._cursor_lane())
+        self.assertFalse((Path.home() / ".cache" / "never-made-cursor-lane").exists())
+
+    def test_refuses_weakened_settings_or_extra_files(self):
+        pc._cursor_lane()
+        cfg = self.dir / ".cursor" / "cli.json"
+        cfg.write_text(json.dumps({"permissions": {"allow": ["Read(**)"], "deny": pc.CURSOR_DENY_ALL}}))
+        self.assertIn("deny every tool", pc._cursor_lane())
+        cfg.write_text(json.dumps({"permissions": {"allow": [], "deny": ["Shell(*)"]}}))
+        self.assertIn("deny every tool", pc._cursor_lane())
+        cfg.write_text(json.dumps({"permissions": {"allow": [], "deny": pc.CURSOR_DENY_ALL}}))
+        (self.dir / "AGENTS.md").write_text("do things")
+        self.assertIn("must hold only", pc._cursor_lane())
+
+    def test_refuses_a_shared_folder(self):
+        pc._cursor_lane()
+        os.chmod(self.dir, 0o755)
+        self.assertIn("not private", pc._cursor_lane())
+
+    def test_run_reads_result_and_passes_no_tool_flags(self):
+        seen = {}
+
+        def fake_run(cmd, **kw):
+            seen["cmd"], seen["input"] = cmd, kw.get("input")
+            return mock.Mock(stdout=json.dumps({"type": "result", "is_error": False, "result": '{"ok": true}'}),
+                             stderr="", returncode=0)
+        with mock.patch.object(pc.subprocess, "run", fake_run):
+            text, err = pc._run_cursor("cursor/composer-2.5", "SYS", "USER")
+        self.assertEqual((text, err), ('{"ok": true}', False))
+        cmd = seen["cmd"]
+        self.assertEqual(cmd[cmd.index("--mode") + 1], "ask")
+        self.assertEqual(cmd[cmd.index("--model") + 1], "composer-2.5")
+        for flag in ("--force", "--yolo", "-f", "--approve-mcps"):
+            self.assertNotIn(flag, cmd)
+        self.assertIn("SYS", seen["input"])
+        self.assertIn("USER", seen["input"])
+
+    def test_run_plain_text_error_is_an_error(self):
+        out = mock.Mock(stdout="ActionRequiredError: GPT-5.5 is not included in your weekly usage", stderr="", returncode=1)
+        with mock.patch.object(pc.subprocess, "run", lambda *a, **k: out):
+            text, err = pc._run_cursor("cursor/composer-2.5", "", "x")
+        self.assertTrue(err)
+        self.assertIsNotNone(pc.cursor_reset(text, NOW))
 
 
 if __name__ == "__main__":

@@ -14,7 +14,13 @@ Four plans, called through their own CLIs so no per-token bill is involved:
            `agy models`: agy/gemini-3.8-flash-{high,medium,low}, agy/claude-sonnet-4-6,
            agy/claude-opus-4-6-thinking, agy/gpt-oss-120b-medium. Paid AI-credit overages are
            off in the owner's account settings (confirmed 2026-10-24); agy drops unknown
-           settings keys, so this is not checked from a file.
+           settings keys, so this is not checked from a file. `agy models` on 2026-11-11 also
+           lists gemini-4-argon-{low,medium,high}, claude-sonnet-5-5-* and claude-opus-5-5-*.
+  cursor   Cursor CLI headless (`cursor-agent -p --mode ask`), the owner's Cursor login (added
+           2026-11-11, owner: "cursor also available"). Model ids "cursor/<model>". Only models
+           the plan includes: on 2026-11-11 it refused GPT-5.5 and Claude Sonnet 5.5 ("not
+           included in your weekly usage. Buy credits or switch to a Grok model") and answered on
+           composer-2.5. Its Grok models draw on the X plan pool, so they stay out.
 
 llm_bakeoff.vendor_call routes these ids here, so every work_pipeline call (draft,
 check, repair, referee, readers) can run on the plans with no other change.
@@ -28,7 +34,8 @@ Limits are handled, not fought:
 - Each plan keeps a soft budget per hour and per rolling day (PLAN_<PLAN>_CALLS_PER_HOUR /
   _PER_DAY; Claude 60 / 500, Muse 120 / 600, Grok 30 / 200), because the owner's own Claude
   Code, Muse Spark and Cursor use share these limits (Grok's pool is shared with Cursor).
-  At most 3 Claude, 4 Muse and 2 Grok calls run at once across every lane.
+  At most 3 Claude, 4 Muse and 2 Grok calls run at once across every lane. Cursor: 20 / 200,
+  2 at once.
 - A call waits at most PLAN_MAX_WAIT_S (default 6 h) for a window; past that it returns
   an error with "plan paused" in it and the caller decides.
 
@@ -84,7 +91,11 @@ GROK_CONCURRENT = int(os.environ.get("PLAN_GROK_MAX_CONCURRENT", "2"))
 AGY = os.environ.get("AGY_BIN", "/opt/homebrew/bin/agy")
 AGY_PREFIX = "agy/"
 AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-flash-low",
-              "claude-sonnet-4-6", "claude-opus-4-6-thinking", "gpt-oss-120b-medium"}
+              "claude-sonnet-4-6", "claude-opus-4-6-thinking", "gpt-oss-120b-medium",
+              # `agy models`, 2026-11-11
+              "gemini-4-argon-low", "gemini-4-argon-medium", "gemini-4-argon-high",
+              "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",
+              "claude-opus-5-5-low", "claude-opus-5-5-medium", "claude-opus-5-5-high"}
 AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
 # Headless agy still runs shell commands and fetches URLs (tested 2026-10-24), so lane calls
 # run under their own HOME, signed in separately, whose settings deny every tool, from an
@@ -94,7 +105,21 @@ AGY_CWD = AGY_HOME / "work"
 AGY_DENY_ALL = {"command(*)", "read_file(*)", "write_file(*)", "mcp(*)", "read_url(*)", "execute_url(*)"}
 BUDGETS["agy"] = (int(os.environ.get("PLAN_AGY_CALLS_PER_HOUR", "60")),
                   int(os.environ.get("PLAN_AGY_CALLS_PER_DAY", "600")))
-PLANS = ("muse", "claude", "grok", "agy")
+# Cursor: the weekly allowance is not published, and the owner's own Cursor work shares it, so a
+# small slice. No paid credits: a model the plan does not include is refused, never bought.
+CURSOR = os.environ.get("CURSOR_BIN", str(Path.home() / ".local/bin/cursor-agent"))
+CURSOR_PREFIX = "cursor/"
+CURSOR_MODELS = {"composer-2.5"}
+CURSOR_CONCURRENT = int(os.environ.get("PLAN_CURSOR_MAX_CONCURRENT", "2"))
+BUDGETS["cursor"] = (int(os.environ.get("PLAN_CURSOR_CALLS_PER_HOUR", "20")),
+                     int(os.environ.get("PLAN_CURSOR_CALLS_PER_DAY", "200")))
+# Lane folder, tested 2026-11-11: a workspace under HOME made Cursor load ~/AGENTS.md from a parent
+# folder, so it lives in the per-user temp folder. Ask mode refused shell and file writes but still
+# read any file by path, and its WebFetch tool exists; the project .cursor/cli.json below denies
+# reads, writes, shell, MCP and fetches ("Permission denied" / "User Rejected" in the same test).
+CURSOR_DIR = Path(os.environ.get("PLAN_CURSOR_DIR") or Path(os.confstr(65537) or "/tmp") / "plan-cursor-lane")  # 65537: DARWIN_USER_TEMP_DIR
+CURSOR_DENY_ALL = ["Read(**)", "Write(**)", "Shell(*)", "Mcp(*:*)", "WebFetch(*)"]
+PLANS = ("muse", "claude", "grok", "agy", "cursor")
 CLAUDE_CONCURRENT = int(os.environ.get("PLAN_CLAUDE_MAX_CONCURRENT", "3"))
 # Muse jobs in flight across every lane; the runner itself works MUSE_WORKERS (2) at once,
 # so this keeps its queue short and each call's wait bounded.
@@ -120,6 +145,8 @@ def plan_of(model: str) -> str | None:
         return "grok"
     if m.startswith(AGY_PREFIX) and m[len(AGY_PREFIX):] in AGY_MODELS:
         return "agy"
+    if m.startswith(CURSOR_PREFIX) and m[len(CURSOR_PREFIX):] in CURSOR_MODELS:
+        return "cursor"
     return None
 
 
@@ -215,14 +242,26 @@ def pause(plan: str, until: datetime, why: str) -> None:
                                           why=why[:300], since=_now().isoformat(timespec="seconds"))
 
 
+def pause_key(model: str) -> str | None:
+    """Where a spent window is recorded. Antigravity quotas are per model family: the 29 Oct and
+    4 Nov "Individual quota reached" stops were gemini-3.8-flash-high alone (agy lane logs), so a
+    spent Gemini referee must not stop an agy Claude checker, or the reverse (2026-11-11). Budgets
+    stay per plan."""
+    plan = plan_of(model)
+    if plan == "agy":
+        name = model[len(AGY_PREFIX):]
+        return "agy/" + next((g for g in ("gemini", "claude", "gpt-oss") if g in name), name)
+    return plan
+
+
 def paused_until(plan: str, now: datetime | None = None) -> datetime | None:
+    """Live pause for a plan, or for a pause_key ("agy/claude"), which a pause of its whole plan also covers."""
     now = now or _now()
+    keys = [plan] + ([plan.split("/", 1)[0]] if "/" in plan else [])
     with _state() as s:
-        raw = s.get(plan, {}).get("paused_until")
-    if not raw:
-        return None
-    until = datetime.fromisoformat(raw)
-    return until if until > now else None
+        raws = [s.get(k, {}).get("paused_until") for k in keys]
+    live = [u for u in (datetime.fromisoformat(r) for r in raws if r) if u > now]
+    return max(live) if live else None
 
 
 def budgets(plan: str, now: datetime | None = None) -> tuple[int, int]:
@@ -337,7 +376,7 @@ RUNNER_DOWN_S = 600  # heartbeat silent this long = runner really down, not just
 RUNNER_DOWN = "muse runner down"
 # A login that failed never reached the plan: pause briefly, spend no budget (2026-11-07: about
 # 25 "OAuth session expired and could not be refreshed" failures used up Claude's 15/h).
-AUTH_FAIL = re.compile(r"failed to authenticate|oauth session expired|could not be refreshed", re.I)
+AUTH_FAIL = re.compile(r"failed to authenticate|oauth session expired|could not be refreshed|\bnot logged in\b", re.I)
 AUTH_PAUSE_S = 300
 
 
@@ -446,6 +485,80 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     return (out or r.stderr.strip() or f"agy exit {r.returncode} with no output")[:2000], True
 
 
+# "ActionRequiredError: GPT-5.5 is not included in your weekly usage Buy credits or switch to a Grok
+# model to continue." (2026-11-11). Credits are never bought: the plan waits, then the caller decides.
+CURSOR_LIMIT = re.compile(r"not included in your (?:weekly )?usage|usage limit|rate limit|limit reached|quota|"
+                          r"too many requests|\b429\b|buy credits|out of (?:usage|credits)", re.I)
+
+
+def cursor_reset(text: str, now: datetime) -> datetime | None:
+    """Reset time for a spent Cursor allowance: an ISO time when given, else +1 h."""
+    if not CURSOR_LIMIT.search(text or ""):
+        return None
+    m = ISO_TIME.search(text)
+    if m:
+        try:
+            return datetime.fromisoformat(m.group(1).replace("Z", "+00:00"))
+        except ValueError:
+            pass
+    return now + timedelta(seconds=DEFAULT_PAUSE_S)
+
+
+def _cursor_lane() -> str:
+    """Check (and on first use make) the Cursor lane folder; '' when it is safe to run in."""
+    d = CURSOR_DIR
+    if str(d.resolve()).startswith(str(Path.home().resolve()) + os.sep):
+        return f"cursor lane folder {d} is under HOME (Cursor would load ~/AGENTS.md); refusing"
+    d.parent.mkdir(parents=True, exist_ok=True)
+    d.mkdir(mode=0o700, exist_ok=True)
+    (d / ".cursor").mkdir(mode=0o700, exist_ok=True)
+    for p in (d, d / ".cursor"):
+        st = p.stat()
+        if st.st_uid != os.getuid() or st.st_mode & 0o077:
+            return f"cursor lane folder {p} is not private to this user; refusing"
+    cfg_path = d / ".cursor" / "cli.json"
+    if not cfg_path.exists():
+        fd = os.open(cfg_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(fd, "w") as fh:
+            json.dump({"permissions": {"allow": [], "deny": CURSOR_DENY_ALL}}, fh)
+    try:
+        perms = json.loads(cfg_path.read_text()).get("permissions") or {}
+    except (OSError, ValueError):
+        perms = {}
+    if perms.get("allow") or not set(CURSOR_DENY_ALL) <= set(perms.get("deny") or []):
+        return "cursor lane settings must deny every tool and allow none; refusing"
+    if {p.name for p in d.iterdir()} != {".cursor"} or {p.name for p in (d / ".cursor").iterdir()} != {"cli.json"}:
+        return f"cursor lane folder {d} must hold only .cursor/cli.json; refusing"
+    return ""
+
+
+def _run_cursor(model: str, system: str, user: str) -> tuple[str, bool]:
+    """(text, is_error) from one headless Cursor call in ask mode, every tool denied, prompt on stdin."""
+    why = _cursor_lane()
+    if why:
+        return why, True
+    rule = "Answer only from the text in this prompt. Do not use any tools, search, or browse."
+    body = f"{system}\n\n---\n\n{user}" if system else user
+    cmd = [CURSOR, "-p", "--output-format", "json", "--mode", "ask", "--sandbox", "enabled", "--trust",
+           "--model", model[len(CURSOR_PREFIX):], "--workspace", str(CURSOR_DIR)]
+    try:
+        r = subprocess.run(cmd, input=f"{rule}\n\n{body}", capture_output=True, text=True, timeout=CALL_TIMEOUT_S,
+                           cwd=str(CURSOR_DIR))
+    except subprocess.TimeoutExpired:
+        return f"cursor timeout after {CALL_TIMEOUT_S}s", True
+    out = r.stdout.strip()
+    if out.startswith("{"):
+        try:
+            env = json.loads(out)
+            text = str(env.get("result") or "")
+            if not env.get("is_error") and text.strip():
+                return text, False
+            return (text or out)[:2000], True
+        except ValueError:
+            pass
+    return (out or r.stderr.strip() or f"cursor exit {r.returncode} with no output")[:2000], True
+
+
 _GROK_USAGE = threading.local()
 GROK_SESSIONS = Path.home() / ".grok" / "sessions"
 
@@ -532,15 +645,16 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
     if plan is None:
         return {"error": f"not a plan model: {model}", "ms": 0}
     system, user = _split(messages)
+    key = pause_key(model)
     t0 = time.time()
     deadline = t0 + MAX_WAIT_S
     while True:
         now = _now()
-        until = paused_until(plan, now)
+        until = paused_until(key, now)
         if until:
             wait = (until - now).total_seconds() + 30
             if time.time() + wait > deadline:
-                return {"error": f"{PAUSED}: {plan} until {until.isoformat()}", "ms": int((time.time() - t0) * 1000)}
+                return {"error": f"{PAUSED}: {key} until {until.isoformat()}", "ms": int((time.time() - t0) * 1000)}
             _sleep(wait)
             continue
         wait = _budget_wait(plan, now)
@@ -562,6 +676,10 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
             with _slot("agy", AGY_CONCURRENT):
                 text, is_err = _run_agy(model, system, user)
             reset = agy_reset(text, _now()) if is_err and "refusing" not in text else None
+        elif plan == "cursor":
+            with _slot("cursor", CURSOR_CONCURRENT):
+                text, is_err = _run_cursor(model, system, user)
+            reset = cursor_reset(text, _now()) if is_err and "refusing" not in text else None
         else:
             prompt = f"{system}\n\n---\n\n{user}" if system else user
             text, is_err = _run_muse(prompt)
@@ -571,11 +689,12 @@ def chat(model: str, messages: list, max_tokens: int | None = None) -> dict:
         auth = is_err and bool(AUTH_FAIL.search(text))
         if auth:
             reset = _now() + timedelta(seconds=AUTH_PAUSE_S)
-        if not (is_err and text.startswith(RUNNER_DOWN)) and not auth:
+        refused_locally = is_err and text.endswith("; refusing")  # lane folder check: the plan never ran it
+        if not (is_err and text.startswith(RUNNER_DOWN)) and not auth and not refused_locally:
             _record_call(plan, _now())  # soft budget: concurrent callers may overshoot by a few
         if reset:
-            pause(plan, reset, text)
-            print(f"plan_calls: {plan} {'login failed' if auth else 'usage window spent'}; waiting until "
+            pause(plan if auth else key, reset, text)  # a failed login stops the whole plan
+            print(f"plan_calls: {plan if auth else key} {'login failed' if auth else 'usage window spent'}; waiting until "
                   f"{reset.isoformat()}", file=sys.stderr, flush=True)
             continue
         ms = int((time.time() - t0) * 1000)
@@ -615,6 +734,10 @@ def status() -> dict:
                      "calls_last_hour": sum(t > now.timestamp() - 3600 for t in calls),
                      "calls_last_day": sum(t > now.timestamp() - 86400 for t in calls),
                      "budget_hour_day": list(budgets(plan)), "calls_total": p.get("calls_total", 0)}
+        groups = {k: v.get("paused_until") for k, v in snap.items() if k.startswith(plan + "/") and isinstance(v, dict)
+                  and v.get("paused_until") and datetime.fromisoformat(v["paused_until"]) > now}
+        if groups:
+            out[plan]["model_pauses"] = groups  # e.g. agy/gemini spent while agy/claude still answers
     return out
 
 

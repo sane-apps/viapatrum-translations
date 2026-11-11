@@ -71,7 +71,7 @@ RECEIPTS = Path.home() / "SaneApps/infra/SaneProcess/outputs/llm-api-research"
 
 def _drafter_family(model: str) -> str:
     for name in ("gpt-oss", "deepseek", "kimi", "glm", "llama", "mistral", "gemma", "nemotron", "qwen", "muse", "claude", "grok",
-                 "gemini"):
+                 "gemini", "composer"):
         if name in model.lower():
             return name
     return model.rsplit("/", 1)[-1]
@@ -184,7 +184,7 @@ def drafter_paused() -> str:
         plan = plan_calls.plan_of(DRAFTER)
         if not plan:
             return ""
-        until = plan_calls.paused_until(plan)
+        until = plan_calls.paused_until(plan_calls.pause_key(DRAFTER))  # agy pauses are per model family
         if until and (until - plan_calls._now()).total_seconds() > plan_calls.MAX_WAIT_S:
             return f"drafter {DRAFTER} paused until {until.isoformat()}"
     except Exception:  # noqa: BLE001  an unreadable plan state is not a pause
@@ -1415,14 +1415,17 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
 # pair when WP_RECHECK_PASSES=1 (a probe found a real agency error in an October Kimi + GLM pass,
 # outputs/work-pipeline/free-lane-checker-probe-20261106.log).
 RECHECK_PASSES = os.environ.get("WP_RECHECK_PASSES", "0") == "1"
+# The other benched pairs the lanes rotate (run-recert-lanes.sh PAIRS, "a,b;c,d"), 2026-11-11: a pass one of
+# them gave is not re-checked by another, or two lanes would re-check each other's passes back and forth.
+PEER_PAIRS = [p.split(",") for p in os.environ.get("WP_PEER_PAIRS", "").split(";") if p.strip()]
 
 
 def needs_recheck(j: dict) -> bool:
-    """A pass the current checker pair did not give (only while WP_RECHECK_PASSES=1)."""
+    """A pass no benched pair in rotation gave (only while WP_RECHECK_PASSES=1)."""
     if not RECHECK_PASSES or j.get("_status") != "pass":
         return False
     by = (j.get("checks") or {}).get("checkers") if isinstance(j.get("checks"), dict) else None
-    return sorted(by or []) != sorted(CHECKERS)
+    return sorted(by or []) not in [sorted(CHECKERS)] + [sorted(p) for p in PEER_PAIRS]
 
 
 def check_rounds(slug: str, sec: dict, j: dict, brief: dict, langname: str, jpath: Path) -> dict:
