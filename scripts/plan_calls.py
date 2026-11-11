@@ -50,13 +50,19 @@ whose meter is high. PLAN_SPILL=0 turns this off.
 Meters: a plan that can report its real usage writes ~/.sane/plan-usage/<plan>.json
 ({"at": epoch, "windows": {"five_hour": {"used_percentage": 42, "resets_at": epoch}, ...}}). Claude's comes
 from the Claude Code status line (infra/SaneProcess/scripts/plan_usage_statusline.py), so it counts the
-owner's own sessions too. A meter at or over PLAN_TIGHT_PCT (85) sends background calls to a second door;
+owner's own sessions too. Muse's comes from `muse usage --json` and Antigravity's from `agy -p "/usage"`
+(both found 2026-11-11; neither runs a model turn), read at most every PLAN_METER_REFRESH_S (10 min) by
+whichever process calls next; Antigravity has one meter per model group (agy-gemini, agy-claude, agy-gpt-oss,
+agy-argon). Grok and Cursor: `grok usage` answers only on Grok's daemon route, which this account is not on
+(2026-11-11: "can't show your plan's usage here yet"), and cursor-agent has no usage command, so those two
+still report only when spent. A meter at or over PLAN_TIGHT_PCT (85) sends background calls to a second door;
 a fresh meter well under an even pace (spare()) raises that plan's background budget. The other plans publish no meter: for them the signals are the plan's own "limit
 reached" message and our call counts.
 
   python3 scripts/plan_calls.py status          # pauses + budget, one JSON line
   python3 scripts/plan_calls.py table           # the same in plain English, with meters and second doors
   python3 scripts/plan_calls.py route <model>   # which door would answer now
+  python3 scripts/plan_calls.py meters          # read the Muse and Antigravity meters now
   python3 scripts/plan_calls.py smoke [model]   # one tiny call per plan
 """
 from __future__ import annotations
@@ -203,16 +209,135 @@ def spare(plan: str, now: datetime | None = None) -> bool:
     return True
 
 
-def tight(plan: str, now: datetime | None = None) -> bool:
-    """True when a live meter window of the plan is at or over PLAN_TIGHT_PCT."""
-    return any(w["used_percentage"] >= TIGHT_PCT for k, w in meter(plan, now).items() if k != "_at")
+def meter_keys(name: str) -> list[str]:
+    """Meter files that govern a model (or a plan name). Antigravity meters are per model group, and Gemini 4
+    Argon has a weekly limit of its own on top of the Gemini group's."""
+    plan = plan_of(name)
+    if plan == "agy":
+        key = (pause_key(name) or "agy").replace("/", "-")
+        return ["agy-argon", key] if "argon" in name else [key]
+    return [plan or name]
+
+
+def tight(name: str, now: datetime | None = None) -> bool:
+    """True when a live meter window that governs this model (or plan) is at or over PLAN_TIGHT_PCT."""
+    return any(w["used_percentage"] >= TIGHT_PCT for key in meter_keys(name)
+               for k, w in meter(key, now).items() if k != "_at")
+
+
+METER_REFRESH_S = float(os.environ.get("PLAN_METER_REFRESH_S", "600"))
+MUSE_BIN = os.environ.get("MUSE_BIN", str(Path.home() / ".local/bin/muse"))
+AGY_GROUPS = (("gemini 4 argon", ("agy-argon",)), ("claude", ("agy-claude", "agy-gpt-oss")), ("gemini", ("agy-gemini",)))
+
+
+def _put_meter(key: str, windows: dict, now: float) -> None:
+    METER_DIR.mkdir(parents=True, exist_ok=True)
+    tmp = METER_DIR / f"{key}.json.tmp{os.getpid()}"
+    tmp.write_text(json.dumps({"at": now, "windows": windows, "source": "plan_calls"}))
+    tmp.replace(METER_DIR / f"{key}.json")
+
+
+def parse_muse_usage(text: str) -> dict:
+    """{"muse": windows} from `muse usage --json`: allowance.window (the short window) and allowance.weekly, each
+    with usedPercent and resetsAtMs. {} when it is not signed in or the shape is not this one."""
+    try:
+        al = json.loads(text)["allowance"]
+        out = {}
+        for src, name in (("window", "five_hour"), ("weekly", "seven_day")):
+            if isinstance(al.get(src), dict):
+                out[name] = {"used_percentage": float(al[src]["usedPercent"]), "resets_at": float(al[src].get("resetsAtMs") or 0) / 1000}
+        return {"muse": out} if out else {}
+    except (ValueError, TypeError, KeyError, AttributeError):
+        return {}
+
+
+def parse_agy_usage(text: str) -> dict:
+    """{meter key: windows} from the `/usage` panel agy prints headless, one tab-separated row per limit:
+    "Claude and GPT models<TAB>Weekly Limit Remaining<TAB>18%<TAB>2026-11-17T21:41:20Z". Remaining becomes used."""
+    out: dict = {}
+    for row in text.splitlines():
+        cells = [c.strip() for c in row.split("\t")]
+        if len(cells) < 4 or not cells[2].endswith("%"):
+            continue
+        try:
+            used = 100.0 - float(cells[2].rstrip("%"))
+            reset = datetime.fromisoformat(cells[3].replace("Z", "+00:00")).timestamp()
+        except ValueError:
+            continue
+        label = cells[1].lower()
+        window = "five_hour" if "five hour" in label else "seven_day" if "week" in label else None
+        keys = next((k for g, k in AGY_GROUPS if g in cells[0].lower()), None)
+        if window and keys and 0 <= used <= 100:
+            for k in keys:
+                out.setdefault(k, {})[window] = {"used_percentage": used, "resets_at": reset}
+    return out
+
+
+def _read_muse_usage() -> str:
+    r = subprocess.run([MUSE_BIN, "usage", "--json"], stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=45)
+    return r.stdout
+
+
+def _read_agy_usage() -> str:
+    AGY_CWD.mkdir(mode=0o700, parents=True, exist_ok=True)
+    env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
+    env["HOME"] = str(AGY_HOME)
+    r = subprocess.run([AGY, "-p", "/usage", "--output-format", "json", "--print-timeout", "60s"], stdin=subprocess.DEVNULL,
+                       capture_output=True, text=True, timeout=90, cwd=str(AGY_CWD), env=env)
+    d = json.loads(r.stdout)
+    # the panel costs no model turn; anything else means agy treated "/usage" as a prompt, so trust nothing
+    return str(d.get("response") or "") if d.get("status") == "SUCCESS" and not d.get("num_turns") else ""
+
+
+def refresh_meters(force: bool = False) -> dict:
+    """Read the Muse and Antigravity meters when the last try is older than PLAN_METER_REFRESH_S. One process at a
+    time; a reader that fails leaves the old file alone. Returns {source: keys written}. PLAN_METER_REFRESH=0: off."""
+    if os.environ.get("PLAN_METER_REFRESH", "1") == "0" and not force:
+        return {}
+    METER_DIR.mkdir(parents=True, exist_ok=True)
+    mark = METER_DIR / ".refresh"
+    now = time.time()
+    if not force and mark.exists() and now - mark.stat().st_mtime < METER_REFRESH_S:
+        return {}
+    done: dict = {}
+    with open(METER_DIR / ".refresh.lock", "w") as lk:
+        try:
+            fcntl.flock(lk, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            return {}
+        mark.write_text(str(now))
+        for src, read, parse in (("muse", _read_muse_usage, parse_muse_usage), ("agy", _read_agy_usage, parse_agy_usage)):
+            try:
+                found = parse(read())
+            except Exception as e:  # noqa: BLE001 - a meter is advice; a missing CLI or a locked keychain is not an error here
+                found = {}
+                done[src + "_error"] = f"{type(e).__name__}: {e}"[:160]
+            for key, windows in found.items():
+                _put_meter(key, windows, now)
+            done[src] = sorted(found)
+        done["grok"] = _grok_usage_note()
+    return done
+
+
+def _grok_usage_note() -> str:
+    """`grok usage --json` prints the plan limit only on Grok daemon route, which this account was not on when this
+    was written (2026-11-11). Tried on every refresh: the day it answers, the raw JSON is kept as grok.raw.json so
+    a parser can be written from a real sample (none is guessed here)."""
+    try:
+        r = subprocess.run([GROK, "usage", "--json"], stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=30)
+    except Exception as e:  # noqa: BLE001
+        return f"not read: {type(e).__name__}"
+    if r.returncode == 0 and r.stdout.strip().startswith("{"):
+        (METER_DIR / "grok.raw.json").write_text(r.stdout)
+        return "ANSWERED: raw JSON saved as grok.raw.json; write parse_grok_usage from it"
+    return "no meter yet: " + (r.stderr or r.stdout).strip().splitlines()[0][:140] if (r.stderr or r.stdout).strip() else "no meter yet"
 
 
 def door_open(model: str, now: datetime | None = None) -> bool:
     """A door that would answer now: known, not paused, inside its soft budget, meter not high."""
     now = now or _now()
     plan = plan_of(model)
-    return bool(plan) and not paused_until(pause_key(model), now) and not _budget_wait(plan, now) and not tight(plan, now)
+    return bool(plan) and not paused_until(pause_key(model), now) and not _budget_wait(plan, now) and not tight(model, now)
 
 
 def route(model: str, now: datetime | None = None) -> tuple[str, str]:
@@ -223,7 +348,7 @@ def route(model: str, now: datetime | None = None) -> tuple[str, str]:
         return model, "not a plan model"
     until, over = paused_until(pause_key(model), now), _budget_wait(plan, now)
     wait = ((until - now).total_seconds() if until else 0) or over
-    if not (SPILL and (wait >= SPILL_AFTER_S or tight(plan, now))):
+    if not (SPILL and (wait >= SPILL_AFTER_S or tight(model, now))):
         return model, "own plan" + (f", after a wait of {wait:.0f} s" if wait else "")
     why = "its plan is nearly spent" if not wait else f"its plan would wait {wait:.0f} s"
     for alt in DOORS.get(model, ()):
@@ -234,7 +359,7 @@ def route(model: str, now: datetime | None = None) -> tuple[str, str]:
 
 def _second_door(model: str, messages: list, max_tokens, wait: float, tried: set) -> dict | None:
     """Answer through another plan's door to the same model, or None to keep waiting on the own plan."""
-    if not SPILL or not (wait >= SPILL_AFTER_S or tight(plan_of(model) or "")):
+    if not SPILL or not (wait >= SPILL_AFTER_S or tight(model)):
         return None
     for alt in DOORS.get(model, ()):
         if alt in tried or not door_open(alt):
@@ -779,7 +904,8 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
     t0 = time.time()
     deadline = t0 + (MAX_WAIT_S if _max_wait is None else _max_wait)
     tried: set = set()
-    if _spill and tight(plan):  # the plan's own meter is high: leave what is left to the owner
+    refresh_meters()
+    if _spill and tight(model):  # the plan's own meter is high: leave what is left to the owner
         r = _second_door(model, messages, max_tokens, 0.0, tried)
         if r:
             return r
@@ -882,6 +1008,13 @@ def status() -> dict:
         m = meter(plan, now)
         if m:
             out[plan]["meter"] = m
+        try:
+            names = sorted(f.stem for f in METER_DIR.glob(f"{plan}-*.json"))
+        except OSError:
+            names = []
+        groups = {k: meter(k, now) for k in names}
+        if any(groups.values()):
+            out[plan]["group_meters"] = {k: v for k, v in groups.items() if v}
     if snap.get("second_door"):
         out["second_door_calls"] = snap["second_door"]
     return out
@@ -913,7 +1046,12 @@ def table() -> str:
             if k != "_at":
                 bits.append(f"plan meter {k.replace('_', ' ')} {w['used_percentage']:.0f}% used"
                             + (f", resets {_clock(w['resets_at'])}" if w["resets_at"] else ""))
-        if p.get("meter"):
+        for g, m in sorted((p.get("group_meters") or {}).items()):
+            bits.append(g + " " + ", ".join(f"{k.replace('_', ' ')} {w['used_percentage']:.0f}% used (resets {_clock(w['resets_at'])})"
+                                            for k, w in sorted(m.items()) if k != "_at") + (" HIGH" if tight(g, now) else ""))
+        if p.get("group_meters") and not p.get("meter"):
+            bits.append("meters read " + _clock(max(m["_at"] for m in p["group_meters"].values())))
+        elif p.get("meter"):
             bits.append(f"meter read {_clock(p['meter']['_at'])}" + (" (HIGH: background calls take a second door)" if tight(plan, now)
                                                                     else " (well under pace: background budget raised)" if spare(plan, now) else ""))
         else:
@@ -936,7 +1074,11 @@ def main(argv: list[str]) -> int:
         print(json.dumps(status()))
         return 0
     if cmd == "table":
+        refresh_meters()
         print(table())
+        return 0
+    if cmd == "meters":
+        print(json.dumps(refresh_meters(force=True)))
         return 0
     if cmd == "route" and len(argv) > 2:
         print("%s (%s)" % route(argv[2]))

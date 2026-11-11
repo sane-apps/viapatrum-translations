@@ -11,6 +11,7 @@ from unittest import mock
 TMP = tempfile.mkdtemp()
 os.environ["PLAN_STATE"] = str(Path(TMP) / "state.json")
 os.environ["PLAN_SLOTS"] = str(Path(TMP) / "slots")
+os.environ["PLAN_METER_REFRESH"] = "0"  # never run the real muse or agy usage commands from a test
 os.environ["PLAN_SPILL"] = "0"  # second doors off unless a test turns them on: an older test that pauses a plan must never reach a real CLI
 os.environ["PLAN_METER_DIR"] = str(Path(TMP) / "no-meters")  # never read this Mac's real plan meters
 os.environ["PLAN_CLAUDE_CALLS_PER_HOUR"] = "2"
@@ -337,6 +338,56 @@ class Waiting(unittest.TestCase):
             put(20, 3, at=t - 7 * 3600)                  # a reading 7 hours old is not trusted
             self.assertFalse(pc.spare("claude"))
             self.assertFalse(pc.spare("grok"))           # no meter, no extra
+
+    def test_muse_and_agy_usage_are_parsed_into_meters(self):
+        # Real outputs, 2026-11-11 (Mini).
+        muse = ('{"schemaVersion":1,"allowance":{"tier":"Muse Code High Usage","window":{"usedPercent":0,"resetsAtMs":1794426654000},'
+                '"weekly":{"usedPercent":1,"resetsAtMs":1794787200000},"asOfMs":1794424826858,"source":"mint"},"reason":null,"hint":null}')
+        self.assertEqual(pc.parse_muse_usage(muse), {"muse": {"five_hour": {"used_percentage": 0.0, "resets_at": 1794426654.0},
+                                                              "seven_day": {"used_percentage": 1.0, "resets_at": 1794787200.0}}})
+        self.assertEqual(pc.parse_muse_usage("muse usage: not logged in: run `muse login` first"), {})
+        self.assertEqual(pc.parse_muse_usage('{"allowance": null, "reason": "locked"}'), {})
+        agy = ("Gemini Models\tWeekly Limit Remaining\t97%\t2026-11-17T21:30:57Z\n"
+               "Gemini Models\tFive Hour Limit Remaining\t100%\t2026-11-12T00:21:31Z\n"
+               "Claude and GPT models\tWeekly Limit Remaining\t18%\t2026-11-17T21:41:20Z\n"
+               "Claude and GPT models\tFive Hour Limit Remaining\t0%\t2026-11-11T20:12:32Z\n"
+               "Gemini 4 Argon\tGemini 4 Argon Weekly Limit\t24%\t2026-11-17T21:30:51Z\n")
+        got = pc.parse_agy_usage(agy)
+        self.assertEqual(sorted(got), ["agy-argon", "agy-claude", "agy-gemini", "agy-gpt-oss"])
+        self.assertEqual(got["agy-claude"]["seven_day"]["used_percentage"], 82.0)
+        self.assertEqual(got["agy-claude"]["five_hour"]["used_percentage"], 100.0)
+        self.assertEqual(got["agy-gpt-oss"], got["agy-claude"])
+        self.assertEqual(got["agy-gemini"]["seven_day"]["used_percentage"], 3.0)
+        self.assertEqual(got["agy-argon"], {"seven_day": {"used_percentage": 76.0, "resets_at": 1794951051.0}})
+        self.assertEqual(pc.parse_agy_usage("I cannot show usage.\nSome\ttext\twithout\tnumbers"), {})
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_group_meters_steer_only_their_own_models(self):
+        mdir = Path(TMP) / "meters3"
+        mdir.mkdir(exist_ok=True)
+        t = self.clock.t
+        with mock.patch.object(pc, "_grok_usage_note", lambda: "no meter yet"), mock.patch.object(pc, "METER_DIR", mdir), mock.patch.object(pc, "_read_muse_usage", lambda: ""), \
+                mock.patch.object(pc, "_read_agy_usage", lambda: "Claude and GPT models\tWeekly Limit Remaining\t8%\t2030-01-01T00:00:00Z\n"
+                                                                 "Gemini Models\tWeekly Limit Remaining\t97%\t2030-01-01T00:00:00Z\n"
+                                                                 "Gemini 4 Argon\tGemini 4 Argon Weekly Limit\t5%\t2030-01-01T00:00:00Z\n"):
+            self.assertEqual(pc.refresh_meters(force=True), {"muse": [], "agy": ["agy-argon", "agy-claude", "agy-gemini", "agy-gpt-oss"], "grok": "no meter yet"})
+            self.assertEqual(pc.meter_keys("agy/gemini-4-argon-high"), ["agy-argon", "agy-gemini"])
+            self.assertTrue(pc.tight("agy/claude-opus-5-5-medium"))        # 92% of its week used
+            self.assertTrue(pc.tight("agy/gemini-4-argon-high"))           # Argon's own weekly limit
+            self.assertFalse(pc.tight("agy/gemini-3.8-flash-high"))
+            self.assertFalse(pc.tight("claude-opus-5-5"))
+            self.assertEqual(pc.route("agy/claude-opus-5-5-medium")[0], "claude-opus-5-5")   # nearly spent there: the Claude plan
+            self.assertEqual(pc.route("claude-opus-5-5")[0], "claude-opus-5-5")
+            pc.pause("claude", self.clock.now() + pc.timedelta(hours=2), "limit")
+            self.assertEqual(pc.route("claude-opus-5-5")[0], "claude-opus-5-5")              # never onto a door whose meter is high
+            self.assertIn("agy-claude", pc.status()["agy"]["group_meters"])
+            self.assertIn("HIGH", pc.table())
+            self.assertEqual(pc.refresh_meters(), {})                       # off in tests unless forced
+        with mock.patch.object(pc, "_grok_usage_note", lambda: "no meter yet"), mock.patch.object(pc, "METER_DIR", mdir), mock.patch.object(pc, "_read_muse_usage", side_effect=OSError("no muse")), \
+                mock.patch.object(pc, "_read_agy_usage", lambda: ""):
+            got = pc.refresh_meters(force=True)                             # a failing reader is not an error
+            self.assertIn("muse_error", got)
+            self.assertTrue((mdir / "agy-claude.json").exists())            # and the last good reading stays
 
     def test_lane_refusal_spends_no_budget(self):
         with mock.patch.object(pc, "_run_cursor", lambda *a: ("cursor lane folder /x is not private to this user; refusing", True)):
