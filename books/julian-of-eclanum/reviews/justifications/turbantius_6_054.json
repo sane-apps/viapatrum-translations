@@ -6,33 +6,35 @@
     "path": "sources/contra_julianum_6.json",
     "locus": "6.22.69"
   },
-  "source_text": "Tota disputatione tua contrivisti - sicut te iactas - assertionem meam, de malo carnalis concupiscentiae originalisque peccati conspiratio perditorum",
-  "pass_a_gloss": "Whole in-disputation your contrivisti - as you iactas - assertionem my, about/from to-evil carnal of-desire original-and of-sin conspiracy of-the-lost.",
+  "source_text": "Non igitur: \"Tota disputatione tua contrivisti - sicut te iactas - assertionem meam, de malo carnalis concupiscentiae originalisque peccati\"; … De testimoniis etiam tractatorum catholicorum sancti Basilii Caesareensis et sancti Ioannis Constantinopolitani, quorum dixisti sensum vestris convenire sententiis, in primo huius mei operis libro, tibi sufficientissima et certissima veritate respondi … In secundo quoque libro satis egimus, ut appareat quam non sit, quemadmodum conviciaris, \"conspiratio perditorum\" … Unde etiam \"populi murmur, quod solum vobis a nobis - dicis - opponi\", nec solum est, quia tantorum nititur auctoritate doctorum",
+  "pass_a_gloss": "Not therefore: 'By your whole disputation you have crushed, as you boast, my assertion about the evil of carnal concupiscence and of original sin'. About the testimonies also of the catholic treatise-writers Saint Basil of Caesarea and Saint John of Constantinople, whose sense you said to agree with your (plural) opinions, in the first book of this work of mine I answered you with most sufficient and most certain truth. In the second book also we did enough, so that it appears how it is not, as you revile, 'a conspiracy of the lost'. Whence also 'the murmur of the people, which alone, you say, is opposed to you by us', is not alone, because it rests on the authority of such great doctors.",
   "lemmas": [
     {
-      "form": "peccati",
-      "lemma": "peccatum",
-      "gloss": "sin / fault",
-      "lexica": "LS peccatum=fault, error; Blaise Christian sin"
+      "form": "contrivisti",
+      "lemma": "contero",
+      "gloss": "you crushed, ground down"
     },
     {
-      "form": "concupiscentiae",
-      "lemma": "concupiscentia",
-      "gloss": "desire; sexual appetite",
-      "lexica": "LS concupiscentia=eager desire; Blaise Christian usage often sexual desire vs nuptiae"
+      "form": "conviciaris",
+      "lemma": "convicior",
+      "gloss": "you revile, call abusively"
     },
     {
-      "form": "malo",
-      "lemma": "malum",
-      "gloss": "an evil / the evil",
-      "lexica": "LS malum; Blaise malum naturale vs malum voluntatis"
+      "form": "conspiratio perditorum",
+      "lemma": "conspiratio, perditus",
+      "gloss": "conspiracy of lost/abandoned men"
+    },
+    {
+      "form": "murmur",
+      "lemma": "murmur",
+      "gloss": "murmur, grumbling"
     }
   ],
   "pass_b_english": [
-    "Throughout my argument I have crushed your assertion about the evil of sexual desire and original sin.",
-    "Augustine reports that Julian claims the teaching of Basil of Caesarea and John of Constantinople agrees with his party’s views.",
-    "‘A conspiracy of lost men.’",
-    "‘The people’s murmuring’ is the only thing you set against us."
+    "Augustine reports, speaking to Julian: “So you have not, by your whole argument, crushed, as you boast, my assertion about the evil of fleshly desire and of original sin.”",
+    "“About the testimonies of the catholic writers Saint Basil of Caesarea and Saint John of Constantinople, whose meaning you said agrees with your views, I answered you in the first book of this work of mine with truth entirely sufficient and certain.”",
+    "“In the second book too we did enough to make it plain that it is not, as you abusively call it, ‘a conspiracy of lost men’ …”",
+    "“Hence also ‘the murmur of the people, which alone,’ you say, ‘is set against you by us,’ is not alone, since it rests on the authority of such great teachers …”"
   ],
   "choices": [
     {
@@ -52,6 +54,14 @@
         "lust as original sin itself",
         "concupiscence (unexplained jargon)"
       ]
+    },
+    {
+      "issue": "Speaker of the first sentence",
+      "choice": "The old English printed 'Throughout your whole argument you have crushed — as you boast — my assertion…' on its own as Julian's words. The Latin opens 'Non igitur:', and 'assertionem meam de malo carnalis concupiscentiae' is Augustine's own thesis, so the sentence is Augustine denying Julian's boast; now translated in Augustine's voice."
+    },
+    {
+      "issue": "Summary replaced",
+      "choice": "2026-11-11 (claude-sumfix2-d): the old English summarised Augustine's report ('Augustine reports that Julian ...') instead of translating it. Now a translation of the Latin clause(s) that carry Julian's words or Augustine's report of them, with Augustine named as speaker where the words are his; nothing added that the Latin does not say. Omitted stretches inside a paragraph are marked with an ellipsis."
     }
   ],
   "anf_compare": {
@@ -65,7 +75,7 @@
     "lemma_constraint": "pass"
   },
   "confidence": "source_verified",
-  "reviewer": "pending-human",
-  "speaker": "Julian of Eclanum (words preserved in Augustine, Contra Iulianum / Against Julian), including authorities Julian quoted; Augustine's reply at this locus is excluded. This row is Augustine's report; Pass A glosses only the Julian words recoverable here.",
+  "reviewer": "claude-sumfix2-d-2026-11-11 (source-backed, every clause)",
+  "speaker": "Julian of Eclanum (words preserved in Augustine, Contra Iulianum / Against Julian), including authorities Julian quoted; Augustine's reply at this locus is excluded. This row is Augustine's report; Pass A glosses only the Julian words recoverable here. This row translates Augustine's report addressed to Julian, with Augustine named as speaker; Julian's words are the quoted parts.",
   "kind": "report"
 }

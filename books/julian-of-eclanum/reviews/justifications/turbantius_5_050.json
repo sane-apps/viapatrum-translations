@@ -6,30 +6,27 @@
     "path": "sources/contra_julianum_5.json",
     "locus": "5.15.56"
   },
-  "source_text": "Regeneratos sub necessitate criminum, Deo largiente dona virtutum",
-  "pass_a_gloss": "Regeneratos under by-necessity criminum, to-God largiente gifts virtutum.",
+  "source_text": "\"Regeneratos\" autem absit \"ut redigamus\" sicut calumniaris, \"sub necessitate criminum, Deo largiente dona virtutum\".",
+  "pass_a_gloss": "'The regenerated' however far be it 'that we bring back', as you slander, 'under the necessity of crimes, God bestowing the gifts of virtues'.",
   "lemmas": [
+    {
+      "form": "redigamus",
+      "lemma": "redigo",
+      "gloss": "we bring back, reduce"
+    },
+    {
+      "form": "largiente",
+      "lemma": "largior",
+      "gloss": "bestowing, granting"
+    },
     {
       "form": "necessitate",
       "lemma": "necessitas",
-      "gloss": "necessity",
-      "lexica": "LS necessitas; Blaise vs free choice"
-    },
-    {
-      "form": "virtutum",
-      "lemma": "virtus",
-      "gloss": "virtue / power",
-      "lexica": "LS virtus; Blaise moral virtue"
-    },
-    {
-      "form": "Deo",
-      "lemma": "deus",
-      "gloss": "God",
-      "lexica": "LS/Blaise Deus"
+      "gloss": "necessity, compulsion"
     }
   ],
   "pass_b_english": [
-    "Augustine reports Julian accused him of placing ‘those regenerated back under the necessity of crimes, while God bestows gifts of virtues.’"
+    "Augustine reports, speaking to Julian: “But far be it from us, as you falsely charge, ‘to bring the reborn back under the necessity of crimes, while God bestows the gifts of virtues.’”"
   ],
   "choices": [
     {
@@ -40,6 +37,10 @@
         "need (too weak)",
         "fate"
       ]
+    },
+    {
+      "issue": "Summary replaced",
+      "choice": "2026-11-11 (claude-sumfix2-d): the old English summarised Augustine's report ('Augustine reports that Julian ...') instead of translating it. Now a translation of the Latin clause(s) that carry Julian's words or Augustine's report of them, with Augustine named as speaker where the words are his; nothing added that the Latin does not say. Omitted stretches inside a paragraph are marked with an ellipsis."
     }
   ],
   "anf_compare": {
@@ -53,7 +54,7 @@
     "lemma_constraint": "pass"
   },
   "confidence": "source_verified",
-  "reviewer": "pending-human",
-  "speaker": "Julian of Eclanum (words preserved in Augustine, Contra Iulianum / Against Julian), including authorities Julian quoted; Augustine's reply at this locus is excluded. This row is Augustine's report; Pass A glosses only the Julian words recoverable here.",
+  "reviewer": "claude-sumfix2-d-2026-11-11 (source-backed, every clause)",
+  "speaker": "Julian of Eclanum (words preserved in Augustine, Contra Iulianum / Against Julian), including authorities Julian quoted; Augustine's reply at this locus is excluded. This row is Augustine's report; Pass A glosses only the Julian words recoverable here. This row translates Augustine's report addressed to Julian, with Augustine named as speaker; Julian's words are the quoted parts.",
   "kind": "report"
 }
