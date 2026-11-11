@@ -11,6 +11,7 @@ from unittest import mock
 TMP = tempfile.mkdtemp()
 os.environ["PLAN_STATE"] = str(Path(TMP) / "state.json")
 os.environ["PLAN_SLOTS"] = str(Path(TMP) / "slots")
+os.environ["PLAN_TUI_METERS"] = "0"  # never open the real Grok or Cursor apps from a test
 os.environ["PLAN_METER_PUSH"] = "0"  # never copy test meters to the other Mac
 os.environ["PLAN_METER_REFRESH"] = "0"  # never run the real muse or agy usage commands from a test
 os.environ["PLAN_SPILL"] = "0"  # second doors off unless a test turns them on: an older test that pauses a plan must never reach a real CLI
@@ -371,7 +372,7 @@ class Waiting(unittest.TestCase):
                 mock.patch.object(pc, "_read_agy_usage", lambda: "Claude and GPT models\tWeekly Limit Remaining\t8%\t2030-01-01T00:00:00Z\n"
                                                                  "Gemini Models\tWeekly Limit Remaining\t97%\t2030-01-01T00:00:00Z\n"
                                                                  "Gemini 4 Argon\tGemini 4 Argon Weekly Limit\t5%\t2030-01-01T00:00:00Z\n"):
-            self.assertEqual(pc.refresh_meters(force=True), {"muse": [], "agy": ["agy-argon", "agy-claude", "agy-gemini", "agy-gpt-oss"], "grok": "no meter yet"})
+            self.assertEqual(pc.refresh_meters(force=True), {"muse": [], "agy": ["agy-argon", "agy-claude", "agy-gemini", "agy-gpt-oss"], "grok": [], "cursor": [], "grok_json": "no meter yet"})
             self.assertEqual(pc.meter_keys("agy/gemini-4-argon-high"), ["agy-argon", "agy-gemini"])
             self.assertTrue(pc.tight("agy/claude-opus-5-5-medium"))        # 92% of its week used
             self.assertTrue(pc.tight("agy/gemini-4-argon-high"))           # Argon's own weekly limit
@@ -406,6 +407,24 @@ class Waiting(unittest.TestCase):
             self.assertFalse(pc.agy_signed_in())                        # no work folder yet: still not a lane
             (home / "lane" / "work").mkdir()
             self.assertTrue(pc.agy_signed_in())
+
+    def test_grok_and_cursor_usage_panels_are_parsed(self):
+        # Panel text as captured on the Mini, 2026-11-11 3:11 PM ET.
+        now = datetime(2026, 11, 11, 20, 11, tzinfo=timezone.utc)
+        grok = "Context usage\nUsage limit\nSession info\n│────│\nWeekly limit (SuperGrok Plus)\n█████████\n░░░░░░░░░░░░░\n31%\nResets: November 14, 11:10\nLoading session usage…\n"
+        got = pc.parse_grok_panel(grok, now)["grok"]["seven_day"]
+        self.assertEqual(got["used_percentage"], 31.0)
+        self.assertEqual(datetime.fromtimestamp(got["resets_at"]).strftime("%Y-%m-%d %H:%M"), "2026-11-14 11:10")
+        cursor = ("Loading usage data...\nUsage\n•\nSuper\nResets Nov 14\nMonthly plan and on-demand usage\nCategory\nCurrent\n"
+                  "Included 31% used\n████\n░░░░\nAuto\n31% used\nAPI\n0% used\nOn-Demand $0\nNo monthly limit\n")
+        got = pc.parse_cursor_panel(cursor, now)["cursor"]["plan"]
+        self.assertEqual(got["used_percentage"], 31.0)
+        self.assertEqual(datetime.fromtimestamp(got["resets_at"]).strftime("%Y-%m-%d %H:%M"), "2026-11-14 23:59")
+        self.assertEqual(pc.parse_grok_panel("❯ /usage\nSign in to Grok\n", now), {})
+        self.assertEqual(pc.parse_cursor_panel("Loading usage data...\n", now), {})
+        jan = pc.parse_grok_panel("Weekly limit (X)\n90%\nResets: January 2, 09:00\n", datetime(2026, 12, 30, 12, tzinfo=timezone.utc))
+        self.assertEqual(datetime.fromtimestamp(jan["grok"]["seven_day"]["resets_at"]).year, 2027)   # the panel prints no year
+        self.assertEqual(pc._tui_panel(["/bin/echo"], Path(TMP)), "")                               # off in tests
 
     def test_lane_refusal_spends_no_budget(self):
         with mock.patch.object(pc, "_run_cursor", lambda *a: ("cursor lane folder /x is not private to this user; refusing", True)):

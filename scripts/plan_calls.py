@@ -53,9 +53,12 @@ from the Claude Code status line (infra/SaneProcess/scripts/plan_usage_statuslin
 owner's own sessions too. Muse's comes from `muse usage --json` and Antigravity's from `agy -p "/usage"`
 (both found 2026-11-11; neither runs a model turn), read at most every PLAN_METER_REFRESH_S (10 min) by
 whichever process calls next; Antigravity has one meter per model group (agy-gemini, agy-claude, agy-gpt-oss,
-agy-argon). Grok and Cursor: `grok usage` answers only on Grok's daemon route, which this account is not on
-(2026-11-11: "can't show your plan's usage here yet"), and cursor-agent has no usage command, so those two
-still report only when spent. A meter at or over PLAN_TIGHT_PCT (85) sends background calls to a second door;
+agy-argon). Grok and Cursor have no usage command that works headless here (`grok usage` answers only on
+Grok's daemon route, which this account is not on; cursor-agent has none), so scripts/tui_usage.py opens each
+app in a pseudo-terminal, types /usage and reads the panel (owner 2026-11-11: "upgrade the service modes or
+whatever is needed"); no model turn; at most every PLAN_TUI_METER_REFRESH_S (30 min); PLAN_TUI_METERS=0 turns
+it off. Both need the login keychain, so they read inside launchd lanes or gui-run.sh, not plain ssh. The two
+panels show one shared allowance (both 31% used, reset 14 Nov, on 2026-11-11). A meter at or over PLAN_TIGHT_PCT (85) sends background calls to a second door;
 a fresh meter well under an even pace (spare()) raises that plan's background budget. The other plans publish no meter: for them the signals are the plan's own "limit
 reached" message and our call counts.
 
@@ -279,6 +282,76 @@ def parse_agy_usage(text: str) -> dict:
     return out
 
 
+TUI_REFRESH_S = float(os.environ.get("PLAN_TUI_METER_REFRESH_S", "1800"))
+GROK_TUI = os.environ.get("GROK_TUI_BIN", str(Path.home() / ".local/bin/grok"))
+
+
+def _next_date(month: str, day: int, hour: int, minute: int, now: datetime) -> float:
+    """Epoch of the next local "Nov 14, 11:10" at or after yesterday (the panels print no year)."""
+    local = now.astimezone()
+    d = local.replace(month=MONTHS[month[:3].title()], day=day, hour=hour, minute=minute, second=0, microsecond=0)
+    if d < local - timedelta(days=1):
+        d = d.replace(year=d.year + 1)
+    return d.timestamp()
+
+
+def parse_grok_panel(text: str, now: datetime | None = None) -> dict:
+    """{"grok": windows} from Grok Build's /usage panel, "Usage limit" tab:
+    "Weekly limit (SuperGrok Plus)" ... "31%" ... "Resets: November 14, 11:10". The figure is the share used."""
+    now = now or _now()
+    m = re.search(r"Weekly limit[^\n]*\n(?:[^\n]*\n){0,4}?\s*(\d{1,3})%", text)
+    r = re.search(r"Resets:\s*([A-Z][a-z]+)\s+(\d{1,2}),\s*(\d{1,2}):(\d\d)", text)
+    if not m or not 0 <= int(m.group(1)) <= 100:
+        return {}
+    try:
+        reset = _next_date(r.group(1), int(r.group(2)), int(r.group(3)), int(r.group(4)), now) if r else 0.0
+    except (KeyError, ValueError):
+        reset = 0.0
+    return {"grok": {"seven_day": {"used_percentage": float(m.group(1)), "resets_at": reset}}}
+
+
+def parse_cursor_panel(text: str, now: datetime | None = None) -> dict:
+    """{"cursor": windows} from cursor-agent's /usage panel: "Resets Nov 14" ... "Included 31% used". The panel
+    gives no hour, so the reset is taken as the end of that day."""
+    now = now or _now()
+    m = re.search(r"Included\s+(\d{1,3})%\s+used", text)
+    r = re.search(r"Resets\s+([A-Z][a-z]{2})\s+(\d{1,2})\b", text)
+    if not m or not 0 <= int(m.group(1)) <= 100:
+        return {}
+    try:
+        reset = _next_date(r.group(1), int(r.group(2)), 23, 59, now) if r else 0.0
+    except (KeyError, ValueError):
+        reset = 0.0
+    return {"cursor": {"plan": {"used_percentage": float(m.group(1)), "resets_at": reset}}}
+
+
+def _tui_panel(cmd: list, cwd: Path) -> str:
+    """What the app's /usage panel showed, or "" (scripts/tui_usage.py does the typing)."""
+    if os.environ.get("PLAN_TUI_METERS", "1") == "0":
+        return ""
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        out = Path(tmp) / "panel.txt"
+        r = subprocess.run([sys.executable, str(Path(__file__).with_name("tui_usage.py")), str(out), "--", *cmd],
+                           stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=120, cwd=str(cwd))
+        if r.returncode != 0:   # a missing or broken reader must show up in `plan_calls.py meters`, not read as "no meter"
+            raise RuntimeError("tui_usage.py exit %d: %s" % (r.returncode, (r.stderr or r.stdout).strip()[-120:]))
+        text = out.read_text(errors="replace") if out.exists() else ""
+    return text.split("##### panel", 1)[1] if "##### panel" in text else ""
+
+
+def _read_grok_panel() -> str:
+    cwd = STATE.with_name("meter-cwd")   # one fixed, empty folder, so Grok asks to trust it once
+    cwd.mkdir(mode=0o700, parents=True, exist_ok=True)
+    return _tui_panel([GROK_TUI], cwd)
+
+
+def _read_cursor_panel() -> str:
+    if _cursor_lane():                   # same private, deny-all folder as the Cursor lane; a refusal reads nothing
+        return ""
+    return _tui_panel([CURSOR], CURSOR_DIR)
+
+
 def _read_muse_usage() -> str:
     r = subprocess.run([MUSE_BIN, "usage", "--json"], stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=45)
     return r.stdout
@@ -329,8 +402,21 @@ def refresh_meters(force: bool = False) -> dict:
             for key, windows in found.items():
                 _put_meter(key, windows, now)
             done[src] = sorted(found)
-        done["grok"] = _grok_usage_note()
-    _share_meters([k for src in ("muse", "agy") for k in done.get(src, [])])
+        tui_mark = METER_DIR / ".refresh-tui"
+        if force or not tui_mark.exists() or now - tui_mark.stat().st_mtime >= TUI_REFRESH_S:
+            tui_mark.write_text(str(now))
+            for src, read, parse in (("grok", _read_grok_panel, parse_grok_panel), ("cursor", _read_cursor_panel, parse_cursor_panel)):
+                try:
+                    found = parse(read())
+                except Exception as e:  # noqa: BLE001
+                    found = {}
+                    done[src + "_error"] = f"{type(e).__name__}: {e}"[:160]
+                for key, windows in found.items():
+                    _put_meter(key, windows, now)
+                done[src] = sorted(found)
+            if not done.get("grok"):
+                done["grok_json"] = _grok_usage_note()
+    _share_meters([k for src in ("muse", "agy", "grok", "cursor") for k in done.get(src, [])])
     return done
 
 
