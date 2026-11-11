@@ -6,55 +6,81 @@
   "apparatus": [],
   "bible_refs": [
     {
+      "display": "Acts 14:14",
+      "method": "quotation_or_allusion",
+      "note": "inline reference; verse text checked against data/en_kjv.json (sumfix2-a)"
+    },
+    {
       "display": "Joel 2:12-13",
-      "method": "wording",
-      "note": "Return to me with all your heart, in fasting and weeping and lamentation; tear your hearts, not your garments"
+      "method": "quotation_or_allusion",
+      "note": "inline reference; verse text checked against data/en_kjv.json (sumfix2-a)"
     },
     {
-      "display": "Matthew 11:28-30",
-      "method": "wording",
-      "note": "Come to me, all who labor and are burdened; take my yoke upon you; I am gentle and lowly in heart; you will find rest for your souls"
+      "display": "Acts 15:10",
+      "method": "quotation_or_allusion",
+      "note": "inline reference; verse text checked against data/en_kjv.json (sumfix2-a)"
     },
     {
-      "display": "Amos 9:11",
-      "method": "wording",
-      "note": "After these things I will return and rebuild the tent of David that has fallen"
+      "display": "Matthew 11:28-29",
+      "method": "quotation_or_allusion",
+      "note": "inline reference; verse text checked against data/en_kjv.json (sumfix2-a)"
+    },
+    {
+      "display": "Acts 15:15-16",
+      "method": "quotation_or_allusion",
+      "note": "inline reference; verse text checked against data/en_kjv.json (sumfix2-a)"
+    },
+    {
+      "display": "2 Corinthians 5:17",
+      "method": "quotation_or_allusion",
+      "note": "inline reference; verse text checked against data/en_kjv.json (sumfix2-a)"
+    },
+    {
+      "display": "Acts 17:23",
+      "method": "quotation_or_allusion",
+      "note": "inline reference; verse text checked against data/en_kjv.json (sumfix2-a)"
     }
   ],
   "checks": {
     "lemma_constraint": "pending",
-    "placeholders": "pass"
+    "placeholders": "pass",
+    "pass_a_ne_pass_b": "pass",
+    "source_lock": "pass",
+    "check_pass_ab": "see sumfix2 record"
   },
   "choices": [
     {
-      "term": "δυσφημία",
-      "english": "ill repute",
-      "why": "The noun δυσφημία literally means 'evil-speaking' or 'bad reputation'; in context it describes the action as socially disgraceful, so 'ill repute' captures the nuance better than mere 'disgrace' or 'shame'.",
+      "term": "Ἔτι διαβέβληται τὸ ἔθος, ὡς οὐκ ὂν ἐκ νόμου καὶ ἀνόνητον παντελῶς",
+      "english": "Yet the custom has been condemned as not coming from the law and as wholly useless",
+      "why": "ἀνόνητος is 'useless'; the old English made it 'altogether lawless' and said the custom is 'slandered', as if wrongly.",
       "rejected": [
-        "disgrace",
-        "shame",
-        "infamy"
+        "the custom itself is slandered as ... altogether lawless"
       ]
     },
     {
-      "term": "διαβέβληται",
-      "english": "is slandered",
-      "why": "The perfect passive διαβεβλήται indicates a state resulting from slander; 'is slandered' reflects the ongoing accusation against the custom, while 'is spoken against' is weaker and 'is blasphemed' too strong for context.",
-      "rejected": [
-        "is spoken against",
-        "is blasphemed",
-        "is condemned"
-      ]
+      "term": "πλαττομένους τὰ τοιάδε",
+      "english": "who put on such shows",
+      "why": "πλάττομαι, feign or fabricate: the outward tearing of garments that Joel sets against tearing the heart."
     },
     {
-      "term": "πε praï̀s",
-      "english": "gentle",
-      "why": "The variant spelling πραΰς (with iota subscript) is the poetic/formal form of πραΰς, meaning 'gentle, meek'; 'gentle' is the standard New Testament rendering (cf. Matt 11:29), while 'meek' overemphasizes humility and 'kind' omits the specific nuance of mildness under burden.",
-      "rejected": [
-        "meek",
-        "kind",
-        "mild"
-      ]
+      "term": "ὡς οὐκ ἔχοντος τοῦτο τοῦ νόμου",
+      "english": "because the law did not have that quality",
+      "why": "Genitive absolute giving the reason Christ calls himself gentle; the old English 'not claiming this quality comes from the law' lost the contrast."
+    },
+    {
+      "term": "Κυρίλλου. / Τοῦ αὐτοῦ. / Καὶ μετ' ὀλίγα",
+      "english": "From Cyril: / From the same: / And a little further on:",
+      "why": "Catena tags as lead-ins (round-1 convention for this book); the old English printed 'Cyril.' and 'This is the same point', and dropped the tag before the Acts 15:16 note."
+    },
+    {
+      "term": "κατὰ τὰς ἡμέρας τοῦ αἰῶνος, τουτέστιν εἰς ἡμέρας πολλὰς καὶ χρόνους μακρούς",
+      "english": "“as in the days of the age,” that is, for many days and long years",
+      "why": "Cyril glosses the Amos phrase himself; 'of the age' keeps the word his gloss explains."
+    },
+    {
+      "term": "κ. τ. λ. / καὶ τὰ ἑξῆς",
+      "english": "and so on / and what follows",
+      "why": "The catena abbreviates its lemmas; kept, not completed (the old English printed '. . .')."
     }
   ],
   "confidence": "machine_draft",
@@ -69,78 +95,98 @@
   "excerpt_id": "u02-rem-mid",
   "lemmas": [
     {
-      "form": "δυσφημία",
+      "form": "δυσφημία",
       "lemma": "δυσφημία",
-      "gloss": "ill repute"
+      "gloss": "blasphemy, ill-omened speech"
     },
     {
-      "form": "ἱμάτια",
-      "lemma": "ἱμάτιον",
-      "gloss": "garments"
+      "form": "ἐγγράφοις",
+      "lemma": "ἔγγραφος",
+      "gloss": "written"
     },
     {
-      "form": "διαβέβληται",
-      "lemma": "διαβλασφημέω",
-      "gloss": "is slandered"
+      "form": "διαβέβληται",
+      "lemma": "διαβάλλω",
+      "gloss": "to censure, discredit"
     },
     {
-      "form": "ἔθος",
-      "lemma": "ἔθος",
-      "gloss": "custom"
+      "form": "ἀνόνητον",
+      "lemma": "ἀνόνητος",
+      "gloss": "useless, unprofitable"
     },
     {
-      "form": "ἔφη",
-      "lemma": "φημί",
-      "gloss": "said"
+      "form": "πλαττομένους",
+      "lemma": "πλάσσω",
+      "gloss": "(middle) to feign, fabricate"
     },
     {
-      "form": "Ἐπιστρέψατε",
-      "lemma": "ἐπιστρέφω",
-      "gloss": "Return"
+      "form": "ἀποφοιτῶντας",
+      "lemma": "ἀποφοιτάω",
+      "gloss": "to go away from, desert"
     },
     {
-      "form": "διαῤῥήξατε",
-      "lemma": "διαρρήγνυμι",
-      "gloss": "tear"
+      "form": "φορτικὸς",
+      "lemma": "φορτικός",
+      "gloss": "burdensome"
     },
     {
-      "form": "πειράζετε",
-      "lemma": "πειράζω",
-      "gloss": "trying"
+      "form": "δύσοιστος",
+      "lemma": "δύσοιστος",
+      "gloss": "hard to bear"
     },
     {
-      "form": "ζυγὸν",
-      "lemma": "ζυγός",
-      "gloss": "yoke"
+      "form": "ἐπιπλήττοντες",
+      "lemma": "ἐπιπλήσσω",
+      "gloss": "to rebuke"
     },
     {
-      "form": "πραΰς",
+      "form": "πραΰς",
       "lemma": "πραΰς",
       "gloss": "gentle"
     },
     {
-      "form": "ταπεινὸς",
-      "lemma": "ταπεινός",
-      "gloss": "lowly"
+      "form": "πληροφορία",
+      "lemma": "πληροφορία",
+      "gloss": "full assurance"
     },
     {
-      "form": "ἀνάπαυσιν",
-      "lemma": "ἀνάπαυσις",
-      "gloss": "rest"
+      "form": "ἀνεβίω",
+      "lemma": "ἀναβιόω",
+      "gloss": "to come back to life"
+    },
+    {
+      "form": "κατεῤῥιμμένα",
+      "lemma": "καταρρίπτω",
+      "gloss": "to throw down"
+    },
+    {
+      "form": "κατέσκαψε",
+      "lemma": "κατασκάπτω",
+      "gloss": "to raze, tear down"
     }
   ],
-  "pass_a_gloss": "Since moreover the thing being done was a kind of ill repute, they tore their garments, following Jewish traditions and written customs. Moreover the custom is slandered, as not being from law and altogether lawless. And indeed he said to the Jews, the God of all things, those forming such things, and departing far from true piety: Return to me with all your heart, in fasting and weeping and lamentation; and tear your hearts, and not your garments. 74.772 Now then what are you trying, to put a yoke upon the neck of the disciples? . . . Cyril. And moreover since the law is burdensome and hard to bear, the godly disciples have confessed truly, reproaching certain ignorances. For they said: Now then what are you trying? and the following things. Of the same. For the law is admittedly burdensome to those from Israel; and they agreed to this also, the godly disciples. And this he taught us, the Savior, addressing and saying: Come to me, all who labor and are burdened; and I will give you rest. Take my yoke upon you, and learn from me, that I am gentle and lowly in heart; and you will find rest for your souls. But laboring and burdened under the law he says they are, yet he himself calls himself gentle, as not having this from the law. As it is written, after these things I will return and rebuild the tent of David that has fallen, . . . Cyril. The tent of David signifies the race of the Jews.\n\nIt must be known that when Cyrus of the captivity brought back Israel, they returned again to Judea, and they built the divine temple, having fortified the deserted cities, they dwelt in them securely according to the days of the age, that is, for many days and long times, and a sign and full assurance came to be to the other nations, that it remains to turn back to God, and after a little, the word of history in these things, but the inner and truer would be in Christ, since if he raised to life again from the dead his tabernacle fallen into death, that is, the flesh from the earth, having raised by God and Father, then indeed all human things toward the ancient form rose up, and all our things cast down toward a new appearance were brought back, for if anyone in Christ is a new creation according to the Scriptures, for we were raised together with him, and death indeed covered the tabernacles of all, but God and Father built up in Christ, therefore whom you worship in ignorance, this I proclaim to you, Cyril's, that is, the God the Most High, for the cowardly Greeks think they worship and the truly existing God, if they grant reverence to the other gods, not knowing that they will be worthy of greater punishment, comparing the light to the darkness, and the base to the good, and the irrational to the rational, and the cheap to the divine, therefore",
+  "pass_a_gloss": "And since the thing being done was a blasphemy (ill-omened speech), they tore their garments, following Jewish traditions and written customs. Yet the custom has been censured as not being from the law and altogether useless. And indeed the God of all said to the Jews, (who were) feigning (fabricating) such things and departing far from true piety: 'Turn to me from your whole heart, in fasting and weeping and in mourning; and tear your hearts and not your garments.' [PG column 74.772] 'Now therefore why do you test God, to put a yoke on the neck of the disciples', etc. [Tag: Of Cyril.] And indeed that (if) the law is burdensome and hard to bear, the inspired disciples truly agreed, rebuking the ignorances of some. For they were saying: 'Now therefore why do you test?' and the things following. [Tag: Of the same.] For the law was admittedly burdensome to those from Israel; and the inspired disciples also admitted this. And the Savior himself also taught us this, addressing and saying: 'Come to me all who labor and are burdened, and I will give you rest. Take my yoke upon you, and learn from me, that I am gentle and humble in heart; and you will find rest for your souls.' And he says that those who labor and are burdened are those under law, and he named himself gentle, as the law not having this. 'As it is written: after these things I will return and rebuild the tent of David that has fallen', etc. [Tag: Of Cyril.] Tent of David signifies the race of the Jews. And one must know that, Cyrus having released Israel from the captivity, they went down again into Judea, and built the divine temple, having walled the desolated cities, they dwelt in them safely according to the days of the age, that is, for many days and long times. And they became an example and full assurance to the other nations, that it is necessary henceforth to turn to God. And after a little: The account of the history, then, (is) in these things; but the more inward and truer (account) would be in Christ. For when he came back to life from the dead, God and Father having raised his tent that fell into death, that is, the flesh from earth, then indeed, then all human things rose up to the ancient form, and all our things thrown down have been brought to a new appearance. For if anyone (is) in Christ, (he is) a new creation, according to the Scriptures; for we have been raised together with him; and death dug down the tents of all, but God and Father rebuilt (them) in Christ. 'Whom therefore not knowing you revere, this one I announce to you.' [Tag: Of Cyril.] That is, God the Most High. For the wretched Greeks think to revere also the truly existing God, if they should hold his reverence with the rest of the gods; not knowing that they will be deemed worthy of greater punishment, comparing the light with the darkness, and the good with the base, and the rational with the irrational, and the divine with the cheap. Whence [continues: he also called them fools ...]. [Printed page number 5 not translated.]",
   "pass_b_english": [
-    "Since the action undertaken was regarded as a kind of disgrace, they tore their garments, following Jewish traditions and written customs. Moreover, the custom itself is slandered as not deriving from the law and being altogether lawless. Indeed, the God of all things spoke to those who were shaping such practices and turning far from true piety, saying to the Jews: 'Return to me with all your heart, in fasting and weeping and lamentation; tear your hearts, and not your garments.'",
-    "Now then, what are you trying to do, placing a yoke upon the neck of the disciples? . . . Cyril. Furthermore, since the law is burdensome and hard to bear, the godly disciples have truly confessed this, reproaching certain forms of ignorance. For they said: 'Now then, what are you trying? And the following things.' This is the same point: the law is admittedly burdensome to those of Israel, and the godly disciples agreed to this as well. The Savior himself taught us this, saying: 'Come to me, all who labor and are burdened, and I will give you rest. Take my yoke upon you, and learn from me, for I am gentle and lowly in heart; and you will find rest for your souls.' Yet he describes those who labor and are burdened under the law as such, while he himself calls himself gentle, not claiming this quality comes from the law. As it is written, after these things I will return and rebuild the tent of David that has fallen. . . . Cyril. The tent of David signifies the race of the Jews."
+    "Since what was being done amounted to blasphemy, they tore their garments (Acts 14:14), following Jewish traditions and written customs. Yet the custom has been condemned as not coming from the law and as wholly useless. Indeed, the God of all said to the Jews, who put on such shows and wandered far from true piety: “Turn to me with all your heart, with fasting and weeping and mourning; and tear your hearts, and not your garments” (Joel 2:12-13).",
+    "“Now therefore, why do you test God by putting a yoke on the neck of the disciples,” and so on (Acts 15:10).",
+    "From Cyril: And indeed the inspired disciples truly admitted that the law is burdensome and hard to bear, when they rebuked the ignorance of certain people. For they said, “Now therefore, why do you test…?” and what follows.",
+    "From the same: The law was admittedly burdensome to those of Israel, and the inspired disciples admitted it too. The Savior himself taught us this when he called out and said: “Come to me, all you who labor and are heavy laden, and I will give you rest. Take my yoke upon you, and learn from me, for I am gentle and lowly in heart; and you will find rest for your souls” (Matthew 11:28-29). Those who labor and are heavy laden, he says, are those under the law; and he called himself gentle, because the law did not have that quality.",
+    "“As it is written: After this I will return and rebuild the tent of David that has fallen,” and so on (Acts 15:15-16).",
+    "From Cyril: “The tent of David” means the race of the Jews. It should be known that when Cyrus let Israel go from captivity, they went back to Judea and built the divine temple; and when they had walled the desolate cities, they lived in them in safety “as in the days of the age,” that is, for many days and long years. They became a sign and an assurance to the other nations that from then on they too must turn to God.",
+    "And a little further on: That, then, is the sense of the history in these words; the deeper and truer sense would be found in Christ. For when he came back to life from the dead, God the Father raising his tent that had fallen into death, that is, the flesh taken from the earth, then, yes then, all that is human rose up to its ancient form, and all in us that had been thrown down has been brought to a new appearance. For “if anyone is in Christ, he is a new creation” (2 Corinthians 5:17), as the Scriptures say; for we have been raised together with him. Death tore down the tents of all, but God the Father rebuilt them in Christ.",
+    "“The one whom you worship without knowing him, him I proclaim to you” (Acts 17:23).",
+    "From Cyril: That is, God Most High. For the wretched Greeks think that they worship the God who truly is as well, if they give him reverence along with the rest of their gods. They do not know that they will be judged worthy of greater punishment, for putting light on a level with darkness, the good with the worthless, the rational with the irrational, and the divine with the cheap. That is why …"
   ],
   "source_text": "\nἘπειδὴ δὲ τὸ δρώμενον δυσφημία τις ἦν, διέῤῥηξαν τὰ ἱμάτια ἑαυτῶν, παραδόσεσι\nἸουδαϊκαῖς καὶ ἐγγράφοις ἔθεσιν ἀκολουθοῦντες. Ἔτι διαβέβληται τὸ ἔθος, ὡς οὐκ\nὂν ἐκ νόμου καὶ ἀνόνητον παντελῶς. Καὶ γοῦν ἔφη πρὸς Ἰουδαίους ὁ τῶν ὅλων\nΘεὸς, πλαττομένους τὰ τοιάδε, καὶ τῆς ἀληθοῦς εὐσεβείας ἀποφοιτῶντας μακράν·\nἘπιστρέψατε πρός με ἐξ ὅλης τῆς καρδίας ὑμῶν, ἐν νηστείᾳ καὶ κλαυθμῷ καὶ ἐν\nκοπετῷ· καὶ διαῤῥήξατε τὰς καρδίας ὑμῶν, καὶ μὴ τὰ ἱμάτια ὑμῶν. 74.772 Νῦν οὖν τί\nπειράζετε τὸν Θεὸν, ἐπιθεῖναι ζυγὸν ἐπὶ τὸν τράχηλον τῶν μαθητῶν, κ. τ. λ.\nΚυρίλλου. Καὶ γοῦν ὅτι τε εἰ φορτικὸς καὶ δύσοιστος ὁ νόμος,\nδιωμολογήκασιν ἀληθῶς οἱ θεσπέσιοι μαθηταὶ, ταῖς τινων ἀμαθίαις ἐπιπλήττοντες.\nἜφασκον γάρ· Νῦν οὖν τί πειράζετε; καὶ τὰ ἑξῆς.\nΤοῦ αὐτοῦ. Φορτικὸς μὲν γὰρ ὁμολογουμένως ὁ νόμος ἦν τοῖς ἐξ Ἰσραήλ·\nὡμολόγουν δὲ τοῦτο καὶ οἱ θεσπέσιοι μαθηταί. Καὶ αὐτὸς δὲ τοῦτο ἡμᾶς ἐδίδαξεν ὁ\nΣωτὴρ προσφωνῶν καὶ λέγων· ∆εῦτε πρός με πάντες οἱ κοπιῶντες καὶ\nπεφορτισμένοι· κἀγὼ ἀναπαύσω ὑμᾶς. Ἄρατε τὸν ζυγόν μου ἐφ' ὑμᾶς, καὶ μάθετε\nἀπ' ἐμοῦ, ὅτι πραΰς εἰμι καὶ ταπεινὸς τῇ καρδίᾳ· καὶ εὑρήσετε ἀνάπαυσιν ταῖς ψυχαῖς\nὑμῶν. Κοπιῶντας δὲ καὶ πεφορτισμένους τοὺς ὑπὸ νόμον εἶναί φησιν, ἑαυτὸν δὲ\nπρᾶον ὠνόμαζεν, ὡς οὐκ ἔχοντος τοῦτο τοῦ νόμου. Καθὼς γέγραπται, μετὰ ταῦτα\nἀναστρέψω καὶ ἀνοικοδομήσω τὴν σκηνὴν ∆αβὶδ τὴν πεπτωκυῖαν, κ. τ. λ.\nΚυρίλλου. Σκηνὴν ∆αβὶδ τὸ τῶν Ἰουδαίων σημαίνει γένος. Ἰστέον δὲ ὅτι\nΚύρου τῆς αἰχμαλωσίας ἀνέντος τὸν Ἰσραὴλ, κατῆλθον πάλιν εἰς τὴν Ἰουδαίαν, καὶ\nᾠκοδόμησαν τὸν θεῖον ναὸν, τειχίσαντες τὰς ἠρημωμένας πόλεις, ᾤκουν ἐν αὐταῖς\nἀσφαλῶς κατὰ τὰς ἡμέρας τοῦ αἰῶνος, τουτέστιν εἰς ἡμέρας πολλὰς καὶ χρόνους\nμακρούς. ∆εῖγμά τε καὶ πληροφορία γεγόνασι τοῖς ἄλλοις ἔθνεσι, τοῦ χρῆναι λοιπὸν\nἐπιστρέφειν πρὸς τὸν Θεόν. Καὶ μετ' ὀλίγα· Ὁ μὲν οὖν τῆς ἱστορίας ἐν τούτοις λόγος·\nὁ δὲ ἐσωτέρω καὶ ἀληθέστερος εἴη ἂν ἐν Χριστῷ. Ἐπειδὴ γὰρ ἐκ νεκρῶν ἀνεβίω τὴν\nεἰς θάνατον αὐτοῦ πεσοῦσαν σκηνὴν, τουτέστι, τὴν ἀπὸ γῆς σάρκα ἐγείραντος τοῦ\n\n5\n\nΘεοῦ καὶ Πατρὸς, τότε δὴ, τότε πάντα τὰ ἀνθρώπινα πρὸς τὸ ἀρχαῖον ἀνέστη σχῆμα,\nκαὶ πάντα ἡμῶν τὰ κατεῤῥιμμένα πρὸς νέαν ὄψιν ἐνήνεκται. Εἴ τις γὰρ ἐν Χριστῷ\nκαινὴ κτίσις, κατὰ τὰς Γραφάς· συνεγηγέρμεθα γὰρ αὐτῷ· καὶ κατέσκαψε μὲν ὁ\nθάνατος τὰς ἁπάντων σκηνὰς, ἀνῳκοδόμησε δὲ ὁ Θεὸς καὶ Πατὴρ ἐν Χριστῷ. Ὃν\nοὖν ἀγνοοῦντες εὐσεβεῖτε, τοῦτον ἐγὼ καταγγέλλω ὑμῖν.\nΚυρίλλου. Τουτέστι τὸν Θεὸν τὸν ὕψιστον. Οἱ γὰρ δείλαιοι Ἕλληνες οἴονται\nεὐσεβεῖν καὶ τὸν ὄντως ὄντα Θεὸν, ἐὰν τοῖς λοιποῖς θεοῖς σχοῖεν τὸ σέβας αὐτοῦ·\nἀγνοοῦντες ὅτι μείζονος τιμωρίας ἀξιωθήσονται, τὸ φῶς τῷ σκότει συγκρίνοντες,\nκαὶ τῷ φαύλῳ τὸ ἀγαθὸν, καὶ τῷ ἀλόγῳ τὸ νοερὸν, καὶ τῷ εὐτελεῖ τὸ θεῖον. Ὅθεν",
   "variants": [],
   "source_normalizations": [],
-  "reviewer": "ai-crosscheck:@cf/qwen/qwen3-30b-a3b-fp8+@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "reviewer": "claude-sumfix2-a (Claude Opus, 2026-11-11): retranslated from the locked source; summary-not-translation fix, round 2",
   "draft_agent": "overnight-mini-nv",
   "draft_model": "nvidia/nemotron-3-super-120b-a12b",
   "drafted_at": "2026-10-02T04:30:20.535222+00:00",
   "ai_crosscheck_at": "2026-10-02T04:30:35.976792+00:00",
-  "ai_crosscheck_receipt": "outputs/ai-promote/20261002T043021388154Z-cyril-alexandria-fragmenta-acta-catholicas--u02-rem-mid/summary.json"
+  "ai_crosscheck_receipt": "outputs/ai-promote/20261002T043021388154Z-cyril-alexandria-fragmenta-acta-catholicas--u02-rem-mid/summary.json",
+  "notes": [
+    "sumfix2-a 2026-11-11: the earlier English was a loose paraphrase (262 words for 528 Greek; it stopped after 'The tent of David signifies the race of the Jews' and dropped the Cyrus history, the reading in Christ, the Acts 17:23 lemma and its note); translated again clause by clause from source_text (BRIEF2, summary-fixes-20261111)."
+  ]
 }
