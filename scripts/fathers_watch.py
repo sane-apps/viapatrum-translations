@@ -614,7 +614,17 @@ def check_audio() -> tuple[str, str, dict]:
         if not isinstance(backlog, int) or isinstance(backlog, bool):
             backlog = sum(v for k, v in counts.items() if "fail" not in k)
         info["backlog"] = backlog
-        if backlog and now - audio_t > 5400:
+        # A spent daily budget (NARRATION_USD_PER_DAY, run-audio-drain.sh) stops the drain by design until the
+        # next day; the last "audio drain:" line says so. That is a pause, not a stall (10 Nov 2026: it was
+        # reported as "rendered nothing for 90 min" every day).
+        # One run writes several "audio drain:" lines with the same time stamp (the budget line, then a summary of
+        # zeros), so read every line of the last run.
+        drain_lines = [ln for ln in text.splitlines() if " audio drain: " in ln]
+        last_run = [ln for ln in drain_lines if drain_lines and ln.split(" ", 1)[0] == drain_lines[-1].split(" ", 1)[0]]
+        spent_line = next((ln for ln in last_run if "narration budget is spent" in ln), None)
+        if spent_line:
+            info["budget_spent"] = spent_line.split("audio drain: ", 1)[1][:160]
+        elif backlog and now - audio_t > 5400:
             problems.append(f"narration rendered nothing for 90 min with {backlog} items waiting")
         failed = sum(v for k, v in counts.items() if "fail" in k)
         if failed:
@@ -623,6 +633,8 @@ def check_audio() -> tuple[str, str, dict]:
         pass
     if problems:
         return "warn", "; ".join(problems), info
+    if info.get("budget_spent"):
+        return "ok", f"paused: {info['budget_spent']}; {info.get('backlog', 0)} items wait", info
     return "ok", f"drain ran {age_h:.1f} h ago, {rendered} renders logged", info
 
 

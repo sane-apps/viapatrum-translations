@@ -355,6 +355,36 @@ class SelfAndJobTruthTests(WatchTestBase):
         self.assertEqual(state, "warn")
         self.assertIn("silent 35 min", detail)
 
+    def test_spent_daily_budget_is_a_pause_not_a_stall(self):
+        # 10 Nov 2026: the drain stopped because NARRATION_USD_PER_DAY was spent, by design, and the watch called it
+        # "rendered nothing for 90 min" every day. A spent budget is a pause; real failures still warn.
+        (self.site / "outputs/audio").mkdir(parents=True)
+        status = self.site / "outputs/audio/drain-status.json"
+        log = self.logs / "fathers-audio-next.out.log"
+        W.PRIOR = {"checks": {"audio": {"info": {"rendered": 0, "audio_t": time.time() - 3 * 3600}}}}
+        spent = ("2026-11-10T22:15:23-05:00 audio drain: today's narration budget is spent ($6.19 of $5.00, "
+                 "NARRATION_USD_PER_DAY); resumes tomorrow\n")
+        status.write_text(json.dumps({"backlog": 571, "counts": {"stale_current_voice": 571, "failures": 0}}))
+        # as written live: the budget line, then that run's summary line with the same time stamp
+        log.write_text(spent + "2026-11-10T22:15:23-05:00 audio drain: 0 stale works re-read, 0 new audiobooks\n")
+        state, detail, info = W.check_audio()
+        self.assertEqual(state, "ok", detail)
+        self.assertIn("budget", detail)
+        self.assertIn("571", detail)
+        self.assertTrue(info.get("budget_spent"))
+        # failures still warn while paused
+        status.write_text(json.dumps({"backlog": 571, "counts": {"stale_current_voice": 571, "failures": 2}}))
+        state, detail, _ = W.check_audio()
+        self.assertEqual(state, "warn")
+        self.assertIn("2 audio items failing", detail)
+        self.assertNotIn("rendered nothing", detail)
+        # an older "spent" line followed by a normal run is not a pause: the stall check is back
+        status.write_text(json.dumps({"backlog": 571, "counts": {"stale_current_voice": 571, "failures": 0}}))
+        log.write_text(spent + "2026-11-11T00:15:00-05:00 audio drain: 0 stale works re-read, 0 new audiobooks\n")
+        state, detail, _ = W.check_audio()
+        self.assertEqual(state, "warn")
+        self.assertIn("rendered nothing for 90 min", detail)
+
     def test_audio_drift_has_its_own_alert_and_counts_last_ship_only(self):
         (self.site / "outputs/audio").mkdir(parents=True)
         (self.site / "outputs/audio/drain-status.json").write_text(json.dumps(

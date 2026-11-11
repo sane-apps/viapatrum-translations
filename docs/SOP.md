@@ -15,6 +15,18 @@ Owner's words: "each work should have one voice. It does NOT matter if each sepa
 - The separate Scripture-quotation voice (`CF_TTS_QUOTE_VOICE`, decided 2026-10-07) predates this rule; Owner confirmed 2026-10-09: keep the separate Scripture-quotation voice; each work uses one narrator voice plus one quote voice, both consistent throughout that work.
 - **Defaults for new works:** Cloudflare Aura-2 `arcas` narrates and Aura-2 `mars` reads the Scripture quotations (chosen by the owner 2026-10-09; Muse rejected as too manual). Recorded works keep their own voices; the defaults never re-voice anything.
 - This supersedes any earlier "one voice for the whole site/corpus" or "re-voice every work into the current voice" wording (2026-10-07 VISION A.3, GPU_RENDER_COSTS "breaks corpus consistency").
+- **There is no site voice** (owner, 11 Nov 2026). Each book has its own voice. Never call any voice "the site voice" or "the usual voice".
+
+## Never re-record what we have (owner, 11 Nov 2026)
+
+Owner's words: "Our sop is never to re-record anything unless absolutely needed and even then only the broken parts." and "Never do this again."
+
+- **Recorded audio is kept.** A passage that already has a recording is not re-recorded unless the recording is truly broken or no longer matches the page.
+- **Only the broken parts.** When page text changes, only the changed sentences are spoken again; every unchanged sentence is cut from the old recording (`reuse_plan` in `build_audio.py`). That needs the old mp3 on this machine in the book's own voice. Every published recording is in the R2 bucket `viapatrum-audio` (keys `narration/<work>/<stem>.<hash>.mp3`, listed in `outputs/audio-r2-ledger.json`, public at `https://audio.viapatrum.org/<key>`); download it there first. Never say a recording is missing without checking that ledger.
+- **Enforced in code.** `build_audio.py` refuses to re-read a recorded passage when its old mp3 is missing or the voice differs (`reread_block`, tests in `build_audio_test.py`). Only a signed spend proof (`AUDIO_REREAD_PROOF`, below) with a stated reason no part can be reused unlocks a full re-read, and only after the owner approves.
+- **Money asks need hard proof.** Before asking the owner about any spend, make a proof with `~/SaneApps/infra/SaneProcess/scripts/spend_proof.rb`. It runs the commands that show the spend is needed and what already exists, and records the free paths checked, the minimum scope and its cost; a redo names how many parts are redone out of how many. Cite it as `Spend proof: <path>`. The Stop hook and the question-tool guard block a money ask without a valid proof (`scripts/hooks/core/spend_proof.rb`, tests in `spend_proof_test.rb`).
+- **Say what it is.** Every narration ask states whether it is new audio or a re-read, how many sentences changed, and the cost of re-speaking only those.
+- Cause (10 Nov 2026): two recorded works (cyril-alexandria-matthew-fragments, origen-prayer-martyrdom) were asked about as "two narration items", then re-spoken whole for $10.31 because their old mp3s were not on the Mini, so no sentence could be reused.
 
 ## Phases
 
