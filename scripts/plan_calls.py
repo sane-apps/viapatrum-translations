@@ -65,7 +65,13 @@ reached" message and our call counts.
   python3 scripts/plan_calls.py status          # pauses + budget, one JSON line
   python3 scripts/plan_calls.py table           # the same in plain English, with meters and second doors
   python3 scripts/plan_calls.py route <model>   # which door would answer now
-  python3 scripts/plan_calls.py meters          # read the Muse and Antigravity meters now
+  python3 scripts/plan_calls.py meters          # read every plan's meter now
+  python3 scripts/plan_calls.py pick <model> <model> ...   # the given lanes, most room first
+
+Hold (owner 2026-11-11: "build whats needed ... so you can coordinate properly"): once a meter that governs a
+model reaches PLAN_HOLD_PCT (90), background calls for it stop until that window resets, so the last tenth of
+every plan stays for the owner's own use. A second door is tried first. PLAN_HOLD=0 turns the hold off for a
+run the owner asked for.
   python3 scripts/plan_calls.py smoke [model]   # one tiny call per plan
 """
 from __future__ import annotations
@@ -232,6 +238,53 @@ def tight(name: str, now: datetime | None = None) -> bool:
     """True when a live meter window that governs this model (or plan) is at or over PLAN_TIGHT_PCT."""
     return any(w["used_percentage"] >= TIGHT_PCT for key in meter_keys(name)
                for k, w in meter(key, now).items() if k != "_at")
+
+
+HOLD = os.environ.get("PLAN_HOLD", "1") != "0"
+HOLD_PCT = float(os.environ.get("PLAN_HOLD_PCT", "90"))
+HOLD_RECHECK_S = 1800.0   # a nearly full window that names no reset time is read again after this long
+
+
+def hold_until(name: str, now: datetime | None = None) -> datetime | None:
+    """When background calls for this model (or plan) may start again: the latest reset among the meter windows
+    at or over PLAN_HOLD_PCT, or None when none is that full."""
+    if not HOLD:
+        return None
+    now = now or _now()
+    resets = [w["resets_at"] or now.timestamp() + HOLD_RECHECK_S for key in meter_keys(name)
+              for k, w in meter(key, now).items() if k != "_at" and w["used_percentage"] >= HOLD_PCT]
+    return datetime.fromtimestamp(max(resets), timezone.utc) if resets else None
+
+
+def blocked_until(model: str, now: datetime | None = None) -> datetime | None:
+    """The later of the plan's own "limit reached" pause and the meter hold."""
+    now = now or _now()
+    times = [t for t in (paused_until(pause_key(model) or model, now), hold_until(model, now)) if t]
+    return max(times) if times else None
+
+
+def headroom(model: str, now: datetime | None = None) -> float | None:
+    """Share of the tightest live meter window still unused (0 to 100), or None when the plan has no meter."""
+    now = now or _now()
+    used = [w["used_percentage"] for key in meter_keys(model) for k, w in meter(key, now).items() if k != "_at"]
+    return 100.0 - max(used) if used else None
+
+
+def pick(models: list, now: datetime | None = None) -> list:
+    """The given lanes, best first: [(model, open_now, room, note)]. Open lanes before waiting ones, then by
+    meter room (a lane with no meter counts as 50), then by the order given."""
+    now = now or _now()
+    rows = []
+    for i, m in enumerate(models):
+        plan = plan_of(m)
+        if plan is None:
+            rows.append((m, False, None, "not a plan model", i))
+            continue
+        until, over, room = blocked_until(m, now), _budget_wait(plan, now), headroom(m, now)
+        note = ("waits until " + _clock(until.timestamp())) if until else ("our own limit, %d min" % (over // 60 + 1)) if over else "room now"
+        rows.append((m, not until and not over, room, note, i))
+    rows.sort(key=lambda r: (r[3] == "not a plan model", not r[1], -(50.0 if r[2] is None else r[2]), r[4]))
+    return [r[:4] for r in rows]
 
 
 METER_REFRESH_S = float(os.environ.get("PLAN_METER_REFRESH_S", "600"))
@@ -455,7 +508,7 @@ def door_open(model: str, now: datetime | None = None) -> bool:
     """A door that would answer now: known, not paused, inside its soft budget, meter not high."""
     now = now or _now()
     plan = plan_of(model)
-    return bool(plan) and not paused_until(pause_key(model), now) and not _budget_wait(plan, now) and not tight(model, now)
+    return bool(plan) and not blocked_until(model, now) and not _budget_wait(plan, now) and not tight(model, now)
 
 
 def route(model: str, now: datetime | None = None) -> tuple[str, str]:
@@ -464,7 +517,7 @@ def route(model: str, now: datetime | None = None) -> tuple[str, str]:
     plan = plan_of(model)
     if plan is None:
         return model, "not a plan model"
-    until, over = paused_until(pause_key(model), now), _budget_wait(plan, now)
+    until, over = blocked_until(model, now), _budget_wait(plan, now)
     wait = ((until - now).total_seconds() if until else 0) or over
     if not (SPILL and (wait >= SPILL_AFTER_S or tight(model, now))):
         return model, "own plan" + (f", after a wait of {wait:.0f} s" if wait else "")
@@ -1032,14 +1085,15 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
             return r
     while True:
         now = _now()
-        until = paused_until(key, now)
+        until = blocked_until(model, now)
         if until:
             wait = (until - now).total_seconds() + 30
             r = _second_door(model, messages, max_tokens, wait, tried) if _spill else None
             if r:
                 return r
             if time.time() + wait > deadline:
-                return {"error": f"{PAUSED}: {key} until {until.isoformat()}", "ms": int((time.time() - t0) * 1000)}
+                why = "" if paused_until(key, now) else f" (meter at {HOLD_PCT:.0f}% or more: the rest is kept for the owner)"
+                return {"error": f"{PAUSED}: {key} until {until.isoformat()}{why}", "ms": int((time.time() - t0) * 1000)}
             _sleep(wait)
             continue
         wait = _budget_wait(plan, now)
@@ -1156,8 +1210,11 @@ def table() -> str:
         p = st[plan]
         hour, day = p["budget_hour_day"]
         over = _budget_wait(plan, now)
+        held = hold_until(plan, now)
         if p["paused_until"]:
             state = "spent until " + _clock(datetime.fromisoformat(p["paused_until"]).timestamp())
+        elif held:
+            state = f"HELD until {_clock(held.timestamp())} (meter at {HOLD_PCT:.0f}% or more; the rest is kept for you)"
         elif over:
             state = "at our own limit until " + _clock(now.timestamp() + over)
         else:
@@ -1169,7 +1226,8 @@ def table() -> str:
                             + (f", resets {_clock(w['resets_at'])}" if w["resets_at"] else ""))
         for g, m in sorted((p.get("group_meters") or {}).items()):
             bits.append(g + " " + ", ".join(f"{k.replace('_', ' ')} {w['used_percentage']:.0f}% used (resets {_clock(w['resets_at'])})"
-                                            for k, w in sorted(m.items()) if k != "_at") + (" HIGH" if tight(g, now) else ""))
+                                            for k, w in sorted(m.items()) if k != "_at")
+                        + (" HELD" if hold_until(g, now) else " HIGH" if tight(g, now) else ""))
         if p.get("group_meters") and not p.get("meter"):
             bits.append("meters read " + _clock(max(m["_at"] for m in p["group_meters"].values())))
         elif p.get("meter"):
@@ -1197,6 +1255,11 @@ def main(argv: list[str]) -> int:
     if cmd == "table":
         refresh_meters()
         print(table())
+        return 0
+    if cmd == "pick" and len(argv) > 2:
+        refresh_meters()
+        for m, is_open, room, note in pick(argv[2:]):
+            print("%-30s %-9s %-22s %s" % (m, "open" if is_open else "waiting", "no meter" if room is None else "%.0f%% of its window left" % room, note))
         return 0
     if cmd == "meters":
         print(json.dumps(refresh_meters(force=True)))

@@ -1,0 +1,8 @@
+live check 11 Nov 3:42 PM ET
+HOLD  grok at 95%: PASS | plan paused: grok until 2026-11-13T20:42:38.469067+00:00 (meter at 90% or more: the rest is kept for the owner)
+      route says: ('grok-4.7', 'own plan (its plan would wait 172800 s; no second door has room)')
+OWN   agy Gemini at 3%: PASS | {"content": "OK\n", "ms": 3860}
+plan_calls: agy/claude-sonnet-5-5-medium would wait 0 s; second door claude-sonnet-5-5
+      route says: ('claude-sonnet-5-5', 'its plan would wait 360000 s')
+DOOR  agy Claude at 93% -> Claude plan: PASS | {"content": "OK", "ms": 4914, "door": "claude-sonnet-5-5"}
+      second-door count: {'agy/claude-sonnet-5-5-medium -> claude-sonnet-5-5': 1}

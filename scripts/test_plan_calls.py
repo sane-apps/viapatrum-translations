@@ -383,7 +383,7 @@ class Waiting(unittest.TestCase):
             pc.pause("claude", self.clock.now() + pc.timedelta(hours=2), "limit")
             self.assertEqual(pc.route("claude-opus-5-5")[0], "claude-opus-5-5")              # never onto a door whose meter is high
             self.assertIn("agy-claude", pc.status()["agy"]["group_meters"])
-            self.assertIn("HIGH", pc.table())
+            self.assertIn("HELD", pc.table())                       # 92% and 95% used: past the hold line
             self.assertEqual(pc.refresh_meters(), {})                       # off in tests unless forced
         with mock.patch.object(pc, "_grok_usage_note", lambda: "no meter yet"), mock.patch.object(pc, "METER_DIR", mdir), mock.patch.object(pc, "_read_muse_usage", side_effect=OSError("no muse")), \
                 mock.patch.object(pc, "_read_agy_usage", lambda: ""):
@@ -425,6 +425,72 @@ class Waiting(unittest.TestCase):
         jan = pc.parse_grok_panel("Weekly limit (X)\n90%\nResets: January 2, 09:00\n", datetime(2026, 12, 30, 12, tzinfo=timezone.utc))
         self.assertEqual(datetime.fromtimestamp(jan["grok"]["seven_day"]["resets_at"]).year, 2027)   # the panel prints no year
         self.assertEqual(pc._tui_panel(["/bin/echo"], Path(TMP)), "")                               # off in tests
+
+    def _meters(self, name):
+        mdir = Path(TMP) / name
+        mdir.mkdir(exist_ok=True)
+        for f in mdir.glob("*.json"):
+            f.unlink()
+        return mdir
+
+    def _put(self, mdir, key, used, hours_left, window="seven_day"):
+        t = self.clock.t
+        (mdir / f"{key}.json").write_text(json.dumps({"at": t, "windows": {window: {"used_percentage": used, "resets_at": (t + hours_left * 3600) if hours_left else 0}}}))
+
+    def test_nearly_full_meter_holds_background_calls_until_the_window_resets(self):
+        msg = [{"role": "user", "content": "x"}]
+        mdir = self._meters("hold1")
+        with mock.patch.object(pc, "METER_DIR", mdir), mock.patch.object(pc, "_run_grok", lambda *a: ("ok", False)), \
+                mock.patch.object(pc, "_grok_ledger", lambda **k: None):
+            self._put(mdir, "grok", 89, 3)
+            self.assertIsNone(pc.hold_until("grok-4.7"))
+            self.assertEqual(pc.chat("grok-4.7", msg)["content"], "ok")
+            self.assertLess(self.clock.t - NOW.timestamp(), 5)             # under 90%: no wait
+            self._put(mdir, "grok", 92, 3)
+            self.assertIn("HELD", pc.table())
+            self.assertIn("own plan", pc.route("grok-4.7")[1])             # Grok has no second door
+            self.assertEqual(pc.chat("grok-4.7", msg)["content"], "ok")    # waits for the reset, then runs
+            self.assertGreaterEqual(self.clock.t - NOW.timestamp(), 3 * 3600)
+            self._put(mdir, "grok", 97, 9)                                 # past the longest wait: the caller is told why
+            r = pc.chat("grok-4.7", msg)
+            self.assertIn(pc.PAUSED, r["error"])
+            self.assertIn("kept for the owner", r["error"])
+            with mock.patch.object(pc, "HOLD", False):                     # a run the owner asked for
+                self.assertEqual(pc.chat("grok-4.7", msg)["content"], "ok")
+            self._put(mdir, "grok", 95, 0)                                 # no reset time given: read again later, never forever
+            with mock.patch.object(pc, "MAX_WAIT_S", 3 * 3600):
+                self.assertIn(pc.PAUSED, pc.chat("grok-4.7", msg)["error"])
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_hold_takes_a_second_door_first_and_group_meters_hold_only_their_models(self):
+        msg = [{"role": "user", "content": "x"}]
+        mdir = self._meters("hold2")
+        with mock.patch.object(pc, "METER_DIR", mdir), mock.patch.object(pc, "_run_claude", lambda *a: ("own", False)), \
+                mock.patch.object(pc, "_run_agy", lambda *a: ("agy", False)):
+            self._put(mdir, "agy-claude", 93, 40)
+            r = pc.chat("agy/claude-opus-5-5-medium", msg)
+            self.assertEqual((r["content"], r["door"]), ("own", "claude-opus-5-5"))
+            self.assertEqual(pc.chat("agy/gemini-3.8-flash-high", msg)["content"], "agy")      # another group: not held
+            self.assertLess(self.clock.t - NOW.timestamp(), 5)
+            self._put(mdir, "agy-argon", 96, 2)
+            self.assertIsNotNone(pc.hold_until("agy/gemini-4-argon-high"))
+            self.assertIsNone(pc.hold_until("agy/gemini-3.8-flash-high"))
+
+    def test_pick_ranks_lanes_by_room(self):
+        mdir = self._meters("pick")
+        with mock.patch.object(pc, "METER_DIR", mdir):
+            self._put(mdir, "grok", 31, 60)
+            self._put(mdir, "muse", 1, 90)
+            self._put(mdir, "agy-gemini", 3, 100)
+            self._put(mdir, "agy-claude", 95, 100)
+            got = pc.pick(["grok-4.7", "agy/claude-opus-5-5-medium", "cursor/composer-2.5", "muse", "agy/gemini-3.8-flash-high", "nope"])
+            self.assertEqual([g[0] for g in got], ["muse", "agy/gemini-3.8-flash-high", "grok-4.7", "cursor/composer-2.5",
+                                                   "agy/claude-opus-5-5-medium", "nope"])
+            self.assertEqual([g[1] for g in got], [True, True, True, True, False, False])
+            self.assertEqual(got[0][2], 99.0)
+            self.assertIsNone(got[3][2])                                   # Cursor: no meter file here
+            pc.pause("muse", self.clock.now() + pc.timedelta(hours=1), "quota")
+            self.assertEqual(pc.pick(["muse", "grok-4.7"])[0][0], "grok-4.7")
 
     def test_lane_refusal_spends_no_budget(self):
         with mock.patch.object(pc, "_run_cursor", lambda *a: ("cursor lane folder /x is not private to this user; refusing", True)):
