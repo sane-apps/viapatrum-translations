@@ -278,8 +278,16 @@ def _read_muse_usage() -> str:
     return r.stdout
 
 
+def agy_signed_in() -> bool:
+    """The lane has its own Antigravity sign-in (the token file exists; it is never read here)."""
+    return (AGY_HOME / ".gemini" / "antigravity-cli" / "antigravity-oauth-token").is_file() and AGY_CWD.is_dir()
+
+
 def _read_agy_usage() -> str:
-    AGY_CWD.mkdir(mode=0o700, parents=True, exist_ok=True)
+    # 2026-11-11: on the Air, which has no lane sign-in, this call made agy create the lane home and open a Google
+    # sign-in window in front of the owner. A meter read must never start a sign-in or create the lane: no token, no call.
+    if not agy_signed_in():
+        return ""
     env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
     env["HOME"] = str(AGY_HOME)
     r = subprocess.run([AGY, "-p", "/usage", "--output-format", "json", "--print-timeout", "60s"], stdin=subprocess.DEVNULL,
@@ -316,7 +324,25 @@ def refresh_meters(force: bool = False) -> dict:
                 _put_meter(key, windows, now)
             done[src] = sorted(found)
         done["grok"] = _grok_usage_note()
+    _share_meters([k for src in ("muse", "agy") for k in done.get(src, [])])
     return done
+
+
+def _share_meters(keys: list) -> None:
+    """Send fresh meter files to the other Mac so both hold the same picture (owner 2026-11-11: "make sure mini
+    and air have the same setup"). Detached, 5-second connect limit, never an error. PLAN_METER_PUSH=0: off."""
+    keys = [k for k in keys if re.fullmatch(r"[a-z0-9-]+", k)]
+    if not keys or os.environ.get("PLAN_METER_PUSH", "1") == "0":
+        return
+    import socket
+    other = os.environ.get("PLAN_METER_PUSH_HOST") or ("Stephans-MacBook-Air.local" if "mini" in socket.gethostname().lower() else "mini")
+    files = " ".join(f"{k}.json" for k in keys)
+    try:
+        subprocess.Popen(["/bin/sh", "-c", f'cd "$1" && tar -cf - {files} | ssh -o BatchMode=yes -o ConnectTimeout=5 "$2" '
+                          '"mkdir -p .sane/plan-usage && tar -C .sane/plan-usage -xf -"', "share", str(METER_DIR), other],
+                         stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+    except OSError:
+        pass
 
 
 def _grok_usage_note() -> str:

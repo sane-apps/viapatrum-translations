@@ -11,6 +11,7 @@ from unittest import mock
 TMP = tempfile.mkdtemp()
 os.environ["PLAN_STATE"] = str(Path(TMP) / "state.json")
 os.environ["PLAN_SLOTS"] = str(Path(TMP) / "slots")
+os.environ["PLAN_METER_PUSH"] = "0"  # never copy test meters to the other Mac
 os.environ["PLAN_METER_REFRESH"] = "0"  # never run the real muse or agy usage commands from a test
 os.environ["PLAN_SPILL"] = "0"  # second doors off unless a test turns them on: an older test that pauses a plan must never reach a real CLI
 os.environ["PLAN_METER_DIR"] = str(Path(TMP) / "no-meters")  # never read this Mac's real plan meters
@@ -388,6 +389,23 @@ class Waiting(unittest.TestCase):
             got = pc.refresh_meters(force=True)                             # a failing reader is not an error
             self.assertIn("muse_error", got)
             self.assertTrue((mdir / "agy-claude.json").exists())            # and the last good reading stays
+
+    def test_meter_read_never_starts_an_agy_sign_in(self):
+        # 2026-11-11: a meter read on a Mac with no lane sign-in opened a Google sign-in window. No token, no call.
+        home = Path(tempfile.mkdtemp())
+        ran = []
+        with mock.patch.object(pc, "AGY_HOME", home / "lane"), mock.patch.object(pc, "AGY_CWD", home / "lane" / "work"), \
+                mock.patch.object(pc.subprocess, "run", lambda *a, **k: ran.append(a) or mock.Mock(stdout="{}")):
+            self.assertFalse(pc.agy_signed_in())
+            self.assertEqual(pc._read_agy_usage(), "")
+            self.assertEqual(ran, [])                                   # agy was not started
+            self.assertFalse((home / "lane").exists())                  # and the lane home was not created
+            tok = home / "lane" / ".gemini" / "antigravity-cli"
+            tok.mkdir(parents=True)
+            (tok / "antigravity-oauth-token").write_text("x")
+            self.assertFalse(pc.agy_signed_in())                        # no work folder yet: still not a lane
+            (home / "lane" / "work").mkdir()
+            self.assertTrue(pc.agy_signed_in())
 
     def test_lane_refusal_spends_no_budget(self):
         with mock.patch.object(pc, "_run_cursor", lambda *a: ("cursor lane folder /x is not private to this user; refusing", True)):
