@@ -17,7 +17,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
-| sumfix-origen-ephesians-fragments | free | origen-ephesians-fragments | u04-open (Eph 4:3 slip) + u05-open..u07-rem-close retranslate from Greek (summary, not translation) |  |  | wip/sumfix-origen-ephesians-fragments | agent-alerts viapatrum-summary-not-translation-20261110 items 1,3 |
+| sumfix-origen-ephesians-fragments | free | origen-ephesians-fragments | u05-open..u07-rem-close retranslate from Greek (summary, not translation); u04-open Eph 4:3 slip FIXED 11 Nov |  |  | wip/sumfix-origen-ephesians-fragments | agent-alerts viapatrum-summary-not-translation-20261110 items 1,3 |
 | sumfix-cyril-fragmenta-hebraeos | free | cyril-alexandria-fragmenta-hebraeos | u02-rem-mid, u04-rem-early, u04-rem-mid, u04-rem-close retranslate from Greek (paraphrase) |  |  | wip/sumfix-cyril-fragmenta-hebraeos | agent-alerts viapatrum-summary-not-translation-20261110 items 2,5 |
 | sumfix-cyril-adoration-17 | free | cyril-alexandria-adoration-1 | adoration17 sections 1-33 check and retranslate from Greek (digests) |  |  | wip/sumfix-cyril-adoration-17 | agent-alerts viapatrum-summary-not-translation-20261110 item 8 |
 | cyril-alexandria-twelve-prophets--zechariah-t2-rem-early | free | cyril-alexandria-twelve-prophets | zechariah-t2-rem-early |  |  | wip/cyril-alexandria-twelve-prophets--zechariah-t2-rem-early | earliest scaffold |
