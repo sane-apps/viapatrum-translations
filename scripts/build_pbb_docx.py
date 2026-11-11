@@ -119,6 +119,8 @@ def _reader_note(note: str) -> str:
         return ""
     if re.search(r"\bSERIES\b", text):   # the capitalised SERIES tag of the densify lanes, not a word in a note
         return ""
+    if re.match(r"\d{4}-\d{2}-\d{2}\b", text):   # a dated change record ('2026-11-11: retranslated ...'), not a reader note
+        return ""
     return text
 
 

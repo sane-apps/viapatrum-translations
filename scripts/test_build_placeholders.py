@@ -124,7 +124,8 @@ class WorkroomNoteFilterTests(unittest.TestCase):
         import build_pbb_docx as P
         for t in ("U24 CLOSEOUT.", "After Philocalia SERIES 18ba1926.", "Promoted 2026-10-19: passing Muse-lane draft",
                   "Reviewer hold: cursor-held-o1c", "2026-11-11 (claude-sumfix2-e-u06): retranslated",
-                  "PG 13 Latin Series (tesseract); no Heine."):
+                  "PG 13 Latin Series (tesseract); no Heine.",
+                  "2026-11-11: retranslated in full from Koetschau (GCS 2, ch. 29)."):
             self.assertEqual(P._reader_note(t), "", t)
 
     def test_real_notes_still_print(self):
