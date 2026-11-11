@@ -314,6 +314,30 @@ class Waiting(unittest.TestCase):
             self.assertEqual(pc.meter("claude"), {})
             self.assertIn("no meter", pc.table())
 
+    def test_meter_well_under_pace_raises_the_background_budget(self):
+        mdir = Path(TMP) / "meters2"
+        mdir.mkdir(exist_ok=True)
+        t = self.clock.t
+        week = 7 * 86400
+
+        def put(used, days_left, at=t):
+            (mdir / "claude.json").write_text(json.dumps({"at": at, "windows": {"seven_day": {"used_percentage": used, "resets_at": t + days_left * 86400}}}))
+        with mock.patch.object(pc, "METER_DIR", mdir):
+            base = pc.budgets("claude")
+            put(20, 3)                                   # 4 of 7 days gone (57%), 20% used: 37 points under pace
+            self.assertTrue(pc.spare("claude"))
+            self.assertEqual(pc.budgets("claude"), (base[0], int(base[1] * 1.5)))
+            put(50, 3)                                   # 7 points under pace: not enough
+            self.assertFalse(pc.spare("claude"))
+            self.assertEqual(pc.budgets("claude"), base)
+            put(5, 6.9)                                  # the window has only just begun
+            self.assertFalse(pc.spare("claude"))
+            put(62, 0.5)                                 # under pace but over 60% used
+            self.assertFalse(pc.spare("claude"))
+            put(20, 3, at=t - 7 * 3600)                  # a reading 7 hours old is not trusted
+            self.assertFalse(pc.spare("claude"))
+            self.assertFalse(pc.spare("grok"))           # no meter, no extra
+
     def test_lane_refusal_spends_no_budget(self):
         with mock.patch.object(pc, "_run_cursor", lambda *a: ("cursor lane folder /x is not private to this user; refusing", True)):
             r = pc.chat("cursor/composer-2.5", [{"role": "user", "content": "x"}])

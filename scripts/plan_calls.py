@@ -50,7 +50,8 @@ whose meter is high. PLAN_SPILL=0 turns this off.
 Meters: a plan that can report its real usage writes ~/.sane/plan-usage/<plan>.json
 ({"at": epoch, "windows": {"five_hour": {"used_percentage": 42, "resets_at": epoch}, ...}}). Claude's comes
 from the Claude Code status line (infra/SaneProcess/scripts/plan_usage_statusline.py), so it counts the
-owner's own sessions too. The other plans publish no meter: for them the signals are the plan's own "limit
+owner's own sessions too. A meter at or over PLAN_TIGHT_PCT (85) sends background calls to a second door;
+a fresh meter well under an even pace (spare()) raises that plan's background budget. The other plans publish no meter: for them the signals are the plan's own "limit
 reached" message and our call counts.
 
   python3 scripts/plan_calls.py status          # pauses + budget, one JSON line
@@ -175,6 +176,31 @@ def meter(plan: str, now: datetime | None = None) -> dict:
         return out
     except (OSError, ValueError, TypeError, KeyError, AttributeError):
         return {}
+
+
+WINDOW_S = {"five_hour": 5 * 3600.0, "seven_day": 7 * 86400.0}
+SPARE_MARGIN = float(os.environ.get("PLAN_SPARE_MARGIN", "15"))       # points under an even pace
+SPARE_MAX_USED = float(os.environ.get("PLAN_SPARE_MAX_USED", "60"))
+SPARE_DAY_FACTOR = float(os.environ.get("PLAN_SPARE_DAY_FACTOR", "1.5"))
+METER_FRESH_S = 6 * 3600.0
+
+
+def spare(plan: str, now: datetime | None = None) -> bool:
+    """True when a fresh meter shows every known window of the plan well under an even pace: used at least
+    PLAN_SPARE_MARGIN points below the share of the window that has passed, and under PLAN_SPARE_MAX_USED.
+    Then the plan would end its window with usage left over, so background work may take more (budgets())."""
+    now = now or _now()
+    m = meter(plan, now)
+    if not m or now.timestamp() - m["_at"] > METER_FRESH_S:
+        return False
+    known = [(k, w) for k, w in m.items() if k in WINDOW_S and w["resets_at"]]
+    if not known:
+        return False
+    for k, w in known:
+        passed = 100.0 * (1 - (w["resets_at"] - now.timestamp()) / WINDOW_S[k])
+        if w["used_percentage"] >= SPARE_MAX_USED or w["used_percentage"] > passed - SPARE_MARGIN:
+            return False
+    return True
 
 
 def tight(plan: str, now: datetime | None = None) -> bool:
@@ -366,20 +392,27 @@ def budgets(plan: str, now: datetime | None = None) -> tuple[int, int]:
     A "night" block ({"hours": [22, 8], "claude": [100, 900]}) applies between those local hours,
     so background work takes most of a plan while the owner is not using it (owner 2026-10-19:
     "muse and grok do most of this work so claude is free to be my main on other projects")."""
+    spare_now = spare(plan, now)
     try:
         cfg = json.loads(STATE.with_name("budgets.json").read_text())
         night = cfg.get("night") or {}
         hours = night.get("hours")
         if isinstance(hours, list) and len(hours) == 2 and plan in night:
             h, (a, b) = (now or datetime.now(timezone.utc)).astimezone().hour, hours
-            if (a <= h < b) if a < b else (h >= a or h < b):
+            if spare_now or ((a <= h < b) if a < b else (h >= a or h < b)):
                 cfg = night
         v = cfg.get(plan)
         if isinstance(v, list) and len(v) == 2:
-            return int(v[0]), int(v[1])
+            return _with_spare(int(v[0]), int(v[1]), spare_now)
     except (OSError, ValueError, TypeError):
         pass
-    return BUDGETS[plan]
+    return _with_spare(*BUDGETS[plan], spare_now)
+
+
+def _with_spare(per_hour: int, per_day: int, spare_now: bool) -> tuple[int, int]:
+    """A plan whose own meter shows usage going spare (spare()): the night rate all day, and half as much again
+    per day (owner 2026-11-11: "no need to leave usage on teh table")."""
+    return (per_hour, int(per_day * SPARE_DAY_FACTOR)) if spare_now else (per_hour, per_day)
 
 
 def _budget_wait(plan: str, now: datetime) -> float:
@@ -881,7 +914,8 @@ def table() -> str:
                 bits.append(f"plan meter {k.replace('_', ' ')} {w['used_percentage']:.0f}% used"
                             + (f", resets {_clock(w['resets_at'])}" if w["resets_at"] else ""))
         if p.get("meter"):
-            bits.append(f"meter read {_clock(p['meter']['_at'])}" + (" (HIGH: background calls take a second door)" if tight(plan, now) else ""))
+            bits.append(f"meter read {_clock(p['meter']['_at'])}" + (" (HIGH: background calls take a second door)" if tight(plan, now)
+                                                                    else " (well under pace: background budget raised)" if spare(plan, now) else ""))
         else:
             bits.append("no meter: this plan reports only when it is spent")
         for k, v in sorted((p.get("model_pauses") or {}).items()):
