@@ -589,6 +589,38 @@ class AgyKeychainSandboxTest(unittest.TestCase):
         self.assertNotEqual(blocked.returncode, 0)
         self.assertIn("Operation not permitted", blocked.stderr)
 
+    def test_meter_read_runs_in_the_sandbox(self):
+        # 12 Nov 2026: the usage-meter read ran agy outside the sandbox; 12 keychain boxes came back.
+        import tempfile
+        from pathlib import Path
+        seen = {}
+
+        class R:
+            returncode, stdout, stderr = 0, '{"status": "SUCCESS", "response": "panel"}', ""
+
+        def fake_run(cmd, **kw):
+            seen["cmd"] = cmd
+            return R()
+
+        with tempfile.TemporaryDirectory() as d:
+            home = Path(d) / "home"
+            (home / ".gemini" / "antigravity-cli").mkdir(parents=True)
+            (home / ".gemini" / "antigravity-cli" / "antigravity-oauth-token").write_text("x")
+            (home / "work").mkdir()
+            with mock.patch.object(pc, "AGY_HOME", home), mock.patch.object(pc, "AGY_CWD", home / "work"), \
+                    mock.patch.object(pc.subprocess, "run", fake_run):
+                self.assertEqual(pc._read_agy_usage(), "panel")
+        self.assertEqual(seen["cmd"][:4], [pc.SANDBOX_EXEC, "-p", pc.AGY_SANDBOX, pc.AGY])
+
+    def test_no_agy_start_outside_the_helper(self):
+        # Any new code that starts agy must use agy_cmd(), so it cannot skip the sandbox.
+        import re
+        from pathlib import Path
+        src = Path(pc.__file__).read_text()
+        body = src.split("def agy_cmd(", 1)[1].split("\ndef ", 1)
+        rest = src.split("def agy_cmd(", 1)[0] + (body[1] if len(body) > 1 else "")
+        self.assertEqual(re.findall(r"\[\s*AGY\b", rest), [])
+
     def test_every_agy_call_runs_in_the_sandbox(self):
         import tempfile
         from pathlib import Path

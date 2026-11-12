@@ -140,6 +140,14 @@ AGY_CWD = AGY_HOME / "work"
 # keeps the token in its own file, as it already did after the box timed out. No keychain is created or changed.
 SANDBOX_EXEC = "/usr/bin/sandbox-exec"
 AGY_SANDBOX = '(version 1)(allow default)(deny process-exec (literal "/usr/bin/security"))'
+def agy_cmd(args: list[str]) -> list[str] | None:
+    """Every agy start goes through here, inside the keychain sandbox; None when sandbox-exec is missing (no call).
+    12 Nov 2026: the meter read ran agy outside the sandbox and brought back 12 'Keychain Not Found' boxes."""
+    if not os.access(SANDBOX_EXEC, os.X_OK):
+        return None
+    return [SANDBOX_EXEC, "-p", AGY_SANDBOX, AGY] + list(args)
+
+
 AGY_DENY_ALL = {"command(*)", "read_file(*)", "write_file(*)", "mcp(*)", "read_url(*)", "execute_url(*)"}
 BUDGETS["agy"] = (int(os.environ.get("PLAN_AGY_CALLS_PER_HOUR", "60")),
                   int(os.environ.get("PLAN_AGY_CALLS_PER_DAY", "600")))
@@ -422,7 +430,10 @@ def _read_agy_usage() -> str:
         return ""
     env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
     env["HOME"] = str(AGY_HOME)
-    r = subprocess.run([AGY, "-p", "/usage", "--output-format", "json", "--print-timeout", "60s"], stdin=subprocess.DEVNULL,
+    cmd = agy_cmd(["-p", "/usage", "--output-format", "json", "--print-timeout", "60s"])
+    if cmd is None:
+        return ""
+    r = subprocess.run(cmd, stdin=subprocess.DEVNULL,
                        capture_output=True, text=True, timeout=90, cwd=str(AGY_CWD), env=env)
     d = json.loads(r.stdout)
     # the panel costs no model turn; anything else means agy treated "/usage" as a prompt, so trust nothing
@@ -886,11 +897,10 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     rule = "Answer only from the text in this prompt. Do not use any tools, search, or browse."
     body = f"{system}\n\n---\n\n{user}" if system else user
     prompt = f"{rule}\n\n{body}"
-    cmd = [AGY, "-p", prompt, "--model", model[len(AGY_PREFIX):], "--output-format", "json",
-           "--print-timeout", f"{CALL_TIMEOUT_S}s"]
-    if not os.access(SANDBOX_EXEC, os.X_OK):
+    cmd = agy_cmd(["-p", prompt, "--model", model[len(AGY_PREFIX):], "--output-format", "json",
+                   "--print-timeout", f"{CALL_TIMEOUT_S}s"])
+    if cmd is None:
         return f"{SANDBOX_EXEC} missing: agy would raise keychain boxes on the owner's screen; refusing", True
-    cmd = [SANDBOX_EXEC, "-p", AGY_SANDBOX] + cmd
     try:
         env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
         env["HOME"] = str(AGY_HOME)
