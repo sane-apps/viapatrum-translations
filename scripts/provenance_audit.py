@@ -38,7 +38,10 @@ WITNESS_CHARS = 2_000_000
 
 def witness_text(path, text):
     if str(path).lower().endswith(".xml"):
-        text = re.sub(r"<note\b.*?</note>", " ", text, flags=re.S)
+        # Same editorial skips as intake_first1k.SKIP: notes and apparatus
+        # sit inside sentences and must not break the linkage substring check.
+        for tag in ("note", "del", "app", "rdg", "bibl", "ref"):
+            text = re.sub(rf"<{tag}\b.*?</{tag}>", " ", text, flags=re.S)
         text = re.sub(r"<[^>]+>", " ", text)
     return text
 
