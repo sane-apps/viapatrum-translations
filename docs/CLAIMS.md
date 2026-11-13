@@ -17,6 +17,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| intake-severian-in-cosmogoniam-homilia-4 | done | severian-in-cosmogoniam-homilia-4 | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged PTA PG 56 / Voicu, CC BY-SA 4.0; ingested locally, not pushed |
 | intake-methodius-fragmenta-incerta | done | methodius-fragmenta-incerta | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged First1K Bonwetsch 1917 [Sp.] fragments; ingested locally, not pushed |
 | intake-origen-commentarii-joannis | done | origen-commentarii-joannis | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged First1K Preuschen 1903, early books only; skipped 13,19,20,28,32 already in origen-john-later; local, not pushed |
 | intake-ambrosiaster-quaestiones | done | ambrosiaster-quaestiones | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Souter 1908, CC BY-SA 4.0; ingested locally, not pushed |
