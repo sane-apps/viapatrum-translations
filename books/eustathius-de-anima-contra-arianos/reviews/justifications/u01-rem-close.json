@@ -120,7 +120,7 @@
  ],
  "bible_refs": [],
  "pass_b_english": [
-  "But if through the appearing of Christ the human race is being brought into paradise, and if at the hour he was crucified he foretold that he would bring the thief there that very day while his body still lay cast into the tomb, then it is established that the soul of Christ, dwelling together properly with the Word and God who encompasses all created things at once, brought the kindred soul of the man into paradise. For it is nowhere written that before the resurrection of the holy body the thief's body went ahead and received the promise. It follows, then, to think sensibly that the soul, kindly guiding the kindred soul, since it indeed possessed the greater authority, was bringing the promise to fulfillment that very day, and was leading it into the special inheritance, opening paradise."
+  "But if through the appearing of Christ the human race is being brought into paradise, and if at the hour he was crucified he foretold that he would bring the thief there that very day while his body still lay cast into the tomb, then it is established that the soul of Christ, dwelling together properly with the Word and God who encompasses all created things at once, brought the kindred soul of the man into paradise. For it is nowhere written that the thief's body was raised before the resurrection of the holy body and so received the promise. It follows, then, to think sensibly that the soul, kindly guiding the kindred soul, since it indeed possessed the greater authority, was bringing the promise to fulfillment that very day, and was leading it into the special inheritance, opening paradise."
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
@@ -336,9 +336,43 @@
     "The glossary problem about 'tabernacle' is not present in this section; the English uses 'body' and 'holy body,' not 'tabernacle.'",
     "The glossary problem about 'the Spirit' is not present in this section; the English uses 'Word and God.'"
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "the thief's body went ahead and received the promise",
+     "source_quote": "τὸ τοῦ λῃστοῦ προηγέρθη σῶμα τὴν ἐπαγγελίαν ἀπολαβόν",
+     "why": "προηγέρθη means 'was raised beforehand'. 'Went ahead' drops the resurrection, which the argument depends on: the thief's body was not raised before Christ's.",
+     "fix": "For it is nowhere written that the thief's body was raised before the resurrection of the holy body and so received the promise.",
+     "model": "agy/claude-opus-5-5-medium",
+     "upheld_by": "cursor/composer-2.5",
+     "ruling": "προηγέρθη is passive 'was raised before'; 'went ahead' omits ἐγείρω, weakening the bodily-resurrection contrast the author needs."
+    }
+   ],
+   "edits": [
+    {
+     "old": "before the resurrection of the holy body the thief's body went ahead and received the promise",
+     "new": "the thief's body was raised before the resurrection of the holy body and so received the promise"
+    }
+   ],
+   "fixed": [
+    "mistranslation confirmed: προηγέρθη + πρὸ τῆς ἀναστάσεως means raised beforehand; fixed 'went ahead' to 'was raised before'"
+   ]
   }
  ],
- "checks": {
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T19:42:33Z",
+   "undone": 3,
+   "confirmed_before": 2,
+   "confirmed_after": 1
+  }
+ ],
+ "previous_checks": {
   "checkers": [
    "@cf/moonshotai/kimi-k2.6",
    "@cf/zai-org/glm-5.2"
@@ -393,7 +427,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 3,
@@ -415,14 +449,39 @@
    "confirmed": 0
   }
  ],
- "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified",
- "reverted_reader_edits": [
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
   {
-   "at": "2026-10-05T19:42:33Z",
-   "undone": 3,
-   "confirmed_before": 2,
-   "confirmed_after": 1
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }

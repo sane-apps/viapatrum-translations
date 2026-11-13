@@ -128,68 +128,7 @@
  "pipeline": "work_pipeline",
  "brief_sha256": "a8902ed241c40b72c5595a9134cd5632f91ada15333fa204ac4525a729f3906e",
  "source_sha256": "ef893548a75b396b18cce38076653e7d2e93b702db03e01a09a4fd6557a175fa",
- "checks": {
-  "checkers": [
-   "@cf/moonshotai/kimi-k2.6",
-   "@cf/zai-org/glm-5.2"
-  ],
-  "rounds": [
-   {
-    "round": 0,
-    "confirmed": 0,
-    "rejected": 3,
-    "error": null
-   }
-  ],
-  "last_rejected": [
-   {
-    "class": "glossary",
-    "severity": "major",
-    "quote": "nourishings",
-    "source_quote": "ἀνατροφὰς",
-    "why": "Glossary fixes 'ψυχή' as 'soul', but 'ἀνατροφὰς' here means 'nurture/feeding up'; 'nourishings' is archaic and obscure.",
-    "fix": "What could they say when they look at the infant's nurture",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "ἀνατροφὰς = nourishings/nurture; archaic but within normal range, meaning not changed or lost."
-   },
-   {
-    "class": "glossary",
-    "severity": "major",
-    "quote": "revivals",
-    "source_quote": "ἀναβιώσεις",
-    "why": "Glossary fixes 'ἀνάστασις' as 'resurrection'; 'ἀναβιώσεις' here means restorations to life, but 'revivals' is weak and clinical.",
-    "fix": "the restorations of the dead to life",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "ἀναβιώσεις = revivals/restorations to life; 'revivals' within normal range, meaning preserved."
-   },
-   {
-    "class": "glossary",
-    "severity": "major",
-    "quote": "symbols",
-    "source_quote": "σύμβολα",
-    "why": "'Symbols' suggests abstract signs; τὰ τοῦ πάθους σύμβολα are the tangible tokens/proofs of the passion.",
-    "fix": "the tokens of the passion",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "σύμβολα = symbols/tokens/signs; 'symbols' within normal range, meaning not changed or lost."
-   }
-  ]
- },
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 0,
-   "rejected": 3,
-   "error": null
-  },
-  {
-   "round": "read1",
-   "confirmed": 0
-  }
- ],
- "reviewer": "work_pipeline:kimi+glm",
+ "reviewer": "work_pipeline:claude+composer",
  "confidence": "source_verified",
  "repairs": [
   {
@@ -273,6 +212,90 @@
    "undone": 1,
    "confirmed_before": 0,
    "confirmed_after": 0
+  }
+ ],
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 3,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "nourishings",
+    "source_quote": "ἀνατροφὰς",
+    "why": "Glossary fixes 'ψυχή' as 'soul', but 'ἀνατροφὰς' here means 'nurture/feeding up'; 'nourishings' is archaic and obscure.",
+    "fix": "What could they say when they look at the infant's nurture",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἀνατροφὰς = nourishings/nurture; archaic but within normal range, meaning not changed or lost."
+   },
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "revivals",
+    "source_quote": "ἀναβιώσεις",
+    "why": "Glossary fixes 'ἀνάστασις' as 'resurrection'; 'ἀναβιώσεις' here means restorations to life, but 'revivals' is weak and clinical.",
+    "fix": "the restorations of the dead to life",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἀναβιώσεις = revivals/restorations to life; 'revivals' within normal range, meaning preserved."
+   },
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "symbols",
+    "source_quote": "σύμβολα",
+    "why": "'Symbols' suggests abstract signs; τὰ τοῦ πάθους σύμβολα are the tangible tokens/proofs of the passion.",
+    "fix": "the tokens of the passion",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "σύμβολα = symbols/tokens/signs; 'symbols' within normal range, meaning not changed or lost."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 3,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }
