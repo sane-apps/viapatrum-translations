@@ -135,14 +135,16 @@
   }
  ],
  "pass_b_english": [
-  "But in your time, most pious master king, you surpass your ancestors' piety with still greater reverence toward the divine, and the wonders come no longer from earth but from the heavens. The trophy of victory over death of our Lord and Savior Jesus Christ, the only Son of God—I mean the blessed cross—was seen in Jerusalem, flashing with gleams of light. For during these holy days of holy Pentecost, on the Nones of May, around the third hour, a huge cross made of light appeared in the sky, stretched above holy Golgotha as far as the holy Mount of Olives. It did not appear to one and a second only, but was shown most clearly to the whole multitude of the city. Nor did it pass quickly by as one might suppose in a fleeting vision, but for many hours it was seen with the eyes above the earth, and its flashing gleams surpassed the rays of the sun—for the sun would have been overcome and hidden by them, had the cross not offered beams stronger than the sun to those who saw it. So the whole multitude of the city at once ran together into the holy church, seized with fear of the heavenly vision together with joy—young and old, men and women, people of every age, even young women shut up in their rooms, locals and strangers, Christians and pagans visiting from elsewhere alike. With one accord, as from a single mouth, they all sang hymns to Christ Jesus our Lord, the only Son of God, the wonderworker, having learned by deed and experience that the most pious teaching of Christians rests not in persuasive words of wisdom but in demonstration"
+  "But in your time, most pious master king, you surpass your ancestors' piety with still greater reverence toward the divine, and the wonders come no longer from earth but from the heavens. The trophy of victory over death of our Lord and Savior Jesus Christ, the only Son of God—I mean the blessed cross—was seen in Jerusalem, flashing with gleams of light. For during these holy days of holy Pentecost, on the Nones of May, around the third hour, a huge cross made of light appeared in the sky, stretched above holy Golgotha as far as the holy Mount of Olives. It did not appear to one and a second only, but was shown most clearly to the whole multitude of the city. Nor did it pass quickly by as one might suppose in a fleeting vision, but for many hours it was seen with the eyes above the earth, and its flashing gleams surpassed the rays of the sun—for the cross would have been overcome and hidden by the sun's rays, had it not offered those who saw it beams stronger than the sun. So the whole multitude of the city at once ran together into the holy church, seized with fear of the heavenly vision together with joy—young and old, men and women, people of every age, even young women shut up in their rooms, locals and strangers, Christians and pagans visiting from elsewhere alike. With one accord, as from a single mouth, they all sang hymns to Christ Jesus our Lord, the only Son of God, the wonderworker, having learned by deed and experience that the most pious teaching of Christians rests not in persuasive words of wisdom but in demonstration"
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
  "pipeline": "work_pipeline",
  "brief_sha256": "3b984d7d7aa93f3ac732b730063682af38a2bbea73d94e679f6dea9049d43d69",
  "source_sha256": "06457e157e1dc5571eb46040c66d1cfa2c7b3533bb24c5306b327c46bed84dfd",
- "checks": {
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "previous_checks": {
   "checkers": [
    "@cf/openai/gpt-oss-120b",
    "@cf/moonshotai/kimi-k2.6"
@@ -367,7 +369,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 0,
@@ -375,6 +377,65 @@
    "error": null
   }
  ],
- "reviewer": "work_pipeline:gpt-oss+kimi",
- "confidence": "source_verified"
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "agency",
+     "severity": "major",
+     "quote": "for the sun would have been overcome and hidden by them, had the cross not offered beams stronger than the sun",
+     "source_quote": "ἦ γὰρ ἂν ὑπ' αὐτῶν νικώμενος ἐκαλύπτετο, εἰ μὴ δυνατωτέρας ἡλίου τοῖς ὁρῶσι παρεῖχε τὰς λαμπηδόνας",
+     "why": "In the Greek the cross would have been overcome and hidden by the sun's rays. The English makes the sun the one overcome, which reverses who acts on whom.",
+     "fix": "for the cross would have been overcome and hidden by the sun's rays, had it not offered those who saw it beams stronger than the sun.",
+     "model": "agy/claude-opus-5-5-medium",
+     "upheld_by": "cursor/composer-2.5",
+     "ruling": "Greek ὑπ' αὐτῶν νικώμενος ἐκαλύπτετο: cross/light overcome by sun's rays; English has sun overcome by gleams."
+    }
+   ],
+   "edits": [
+    {
+     "old": "for the sun would have been overcome and hidden by them, had the cross not offered beams stronger than the sun to those who saw it",
+     "new": "for the cross would have been overcome and hidden by the sun's rays, had it not offered those who saw it beams stronger than the sun"
+    }
+   ],
+   "fixed": [
+    "agency: English reversed agent/patient; fixed to cross overcome/hidden by sun's rays per ἦ γὰρ ὂν ὑπ' αὐτῶν νικώμενος ἐκαλύπτετο"
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
 }

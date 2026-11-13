@@ -131,7 +131,7 @@
  "pass_b_english": [
   "Take up that divine book of the Gospel into your hands as you habitually do, and you will find written there the predictive testimonies laid down about this. I urge you, my lord, to give these your closer and more frequent attention, because of the rest of what is written there in sequence—the things proclaimed beforehand by our Savior—which demand much reverent observation, so that you may suffer no harm from any opposing activity.",
   "These first fruits of my words, most God-loving emperor, I offer to you. These are the first voices I utter from Jerusalem, to you who with us are the truest and most pious worshipper of Christ, the only Son of God and our Savior, who accomplished the saving dispensation in Jerusalem according to the divine Scriptures, who trampled death here, who wiped away human sins with his own precious blood, and who granted life and incorruption and spiritual heavenly grace to all who believe.",
-  "May the King of all God himself, the provider of every goodness, guard you by his power and grace, adorned with ever more brilliant and greater achievements of piety, increasing your royal offspring, and preserve your whole household through many peaceful cycles of years, as the boast of Christians and for the whole world.",
+  "May the King of all God himself, the provider of every goodness, guard you by his power and grace, adorned with ever more brilliant and greater achievements of piety, glorying in the royal offspring of legitimate sons, and preserve your whole household through many peaceful cycles of years, as the boast of Christians and for the whole world.",
   "May the God of all things grant you to us, Augustus, most God-loving emperor, strengthened and adorned with every virtue, showing your accustomed benevolence toward the holy churches and the Roman commonwealth, and glorying in ever greater prizes of piety, through many peaceful cycles of years, with your whole household."
  ],
  "notes": [
@@ -373,9 +373,62 @@
     "All variants address Constantius; the English already makes this clear through context, and no change is needed.",
     "The Greek 'τῆς ῥωμαίων ἀρχῆς' means 'the rule/dominion of the Romans,' which is better rendered 'the Roman commonwealth' than 'the Roman empire' to avoid the modern sense of 'empire.'"
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "increasing your royal offspring",
+     "source_quote": "υἱῶν τε γνησίων βασιλικοῖς ἐναβρυνόμενον βλαστήμασιν",
+     "why": "The participle describes the emperor taking pride in the royal offspring of his legitimate sons. The English turns this into an increase of offspring and drops 'legitimate sons'.",
+     "fix": "glorying in the royal offshoots of true-born sons",
+     "model": "agy/claude-opus-5-5-medium",
+     "upheld_by": "cursor/composer-2.5",
+     "ruling": "ἐναβρυνόμενον is delighting in, not multiplying; γνησίων υἱῶν links βασιλικοῖς βλαστήμασιν and is omitted."
+    }
+   ],
+   "edits": [
+    {
+     "old": "increasing your royal offspring",
+     "new": "glorying in the royal offspring of legitimate sons"
+    }
+   ],
+   "fixed": [
+    "Fixed 'increasing your royal offspring': source ὑὶῶν τε γνησίων βασιλικοῖς ἐναβρυνόμενον βλαστήμασιν means exulting in the royal offspring of legitimate sons, not increasing offspring."
+   ]
   }
  ],
- "check_history": [
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "sweep": {
+  "by": "claude held review 2026-10-04",
+  "held_why": "5 confirmed problems after 3 repairs",
+  "fixed": [
+   {
+    "quote": "May the God of all things grant us, strengthened and adorned with every virtue, Augustus, most God-loving emperor",
+    "fix": "May the God of all things grant you to us, Augustus, most God-loving emperor, strengthened and adorned with every virtue",
+    "class": "agency",
+    "note": "σε is the object God grants to us (ἡμῖν); the English drops 'you' and makes 'us' the ones strengthened."
+   },
+   {
+    "quote": "increasing in ever greater prizes of piety",
+    "fix": "glorying in ever greater prizes of piety",
+    "class": "mistranslation",
+    "note": "ἐναβρύνομαι means 'glory in' or 'take pride in', not 'increase in'."
+   }
+  ],
+  "dismissed": [
+   {
+    "quote": "preserve your whole household through many peaceful cycles of years",
+    "class": "addition",
+    "why": "Greek mentions only brighter achievements, increased royal offspring, and God guarding you completely; no reference to the emperor’s whole household.",
+    "note": "πανέστιον means 'with all one's household', so 'whole household' is correct."
+   }
+  ]
+ },
+ "previous_checks": null,
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 3,
@@ -405,32 +458,39 @@
    "confirmed": 0
   }
  ],
- "reviewer": "work_pipeline:gpt-oss+kimi+claude held review 2026-10-04",
- "confidence": "source_verified",
- "sweep": {
-  "by": "claude held review 2026-10-04",
-  "held_why": "5 confirmed problems after 3 repairs",
-  "fixed": [
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
    {
-    "quote": "May the God of all things grant us, strengthened and adorned with every virtue, Augustus, most God-loving emperor",
-    "fix": "May the God of all things grant you to us, Augustus, most God-loving emperor, strengthened and adorned with every virtue",
-    "class": "agency",
-    "note": "σε is the object God grants to us (ἡμῖν); the English drops 'you' and makes 'us' the ones strengthened."
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
    },
    {
-    "quote": "increasing in ever greater prizes of piety",
-    "fix": "glorying in ever greater prizes of piety",
-    "class": "mistranslation",
-    "note": "ἐναβρύνομαι means 'glory in' or 'take pride in', not 'increase in'."
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
    }
   ],
-  "dismissed": [
-   {
-    "quote": "preserve your whole household through many peaceful cycles of years",
-    "class": "addition",
-    "why": "Greek mentions only brighter achievements, increased royal offspring, and God guarding you completely; no reference to the emperor’s whole household.",
-    "note": "πανέστιον means 'with all one's household', so 'whole household' is correct."
-   }
-  ]
- }
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
 }
