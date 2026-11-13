@@ -127,68 +127,7 @@
  "pipeline": "work_pipeline",
  "brief_sha256": "e3cb911ea08b8f42ccf6ca3ff004afe0740d2b87b24e6fe6e91fdeb9362f9c8f",
  "source_sha256": "8228bfe91a5c6efa42e0aeb3374324d24c2ea9c9a1009933a94b70fa1aafcd5a",
- "checks": {
-  "checkers": [
-   "@cf/moonshotai/kimi-k2.6",
-   "@cf/zai-org/glm-5.2"
-  ],
-  "rounds": [
-   {
-    "round": 0,
-    "confirmed": 0,
-    "rejected": 3,
-    "error": null
-   }
-  ],
-  "last_rejected": [
-   {
-    "class": "glossary",
-    "severity": "major",
-    "quote": "renowned",
-    "source_quote": "ἀοίδιμον",
-    "why": "Glossary requires 'voluntary' for ἑκούσιον; ἀοίδιμον is 'renowned/immortal' but 'renowned' alone misses the death's glorious/immortal character.",
-    "fix": "his voluntary, glorious, and life-giving death for us",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "ἀοίδιμον means 'renowned/famous'; 'renowned' is within normal range. No meaning lost."
-   },
-   {
-    "class": "glossary",
-    "severity": "major",
-    "quote": "to his holy ones",
-    "source_quote": "τοῖς μαθηταῖς αὐτοῦ τοῖς ἁγίοις",
-    "why": "Glossary maps μαθηταῖς to 'disciples'; 'holy ones' obscures that these are the disciples/apostles.",
-    "fix": "to his holy disciples",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "Both μαθηταῖς and ἁγίοις rendered: 'disciples' and 'holy ones.' Nothing obscured."
-   },
-   {
-    "class": "mistranslation",
-    "severity": "major",
-    "quote": "presented it to you, God and Father",
-    "source_quote": "ἀναδείξας σοι τῷ Θεῷ καὶ Πατρί",
-    "why": "ἀναδείξας means 'showing forth/displaying,' not 'presented'; Christ shows the bread to God, not offers it to God as recipient.",
-    "fix": "showed it to you, God and Father",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "ἀναδείξας ranges 'show/display/present'; 'presented' fits liturgical context adequately."
-   }
-  ]
- },
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 0,
-   "rejected": 3,
-   "error": null
-  },
-  {
-   "round": "read1",
-   "confirmed": 0
-  }
- ],
- "reviewer": "work_pipeline:kimi+glm",
+ "reviewer": "work_pipeline:claude+composer",
  "confidence": "source_verified",
  "repairs": [
   {
@@ -323,6 +262,90 @@
    "undone": 1,
    "confirmed_before": 1,
    "confirmed_after": 0
+  }
+ ],
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 3,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "renowned",
+    "source_quote": "ἀοίδιμον",
+    "why": "Glossary requires 'voluntary' for ἑκούσιον; ἀοίδιμον is 'renowned/immortal' but 'renowned' alone misses the death's glorious/immortal character.",
+    "fix": "his voluntary, glorious, and life-giving death for us",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἀοίδιμον means 'renowned/famous'; 'renowned' is within normal range. No meaning lost."
+   },
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "to his holy ones",
+    "source_quote": "τοῖς μαθηταῖς αὐτοῦ τοῖς ἁγίοις",
+    "why": "Glossary maps μαθηταῖς to 'disciples'; 'holy ones' obscures that these are the disciples/apostles.",
+    "fix": "to his holy disciples",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Both μαθηταῖς and ἁγίοις rendered: 'disciples' and 'holy ones.' Nothing obscured."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "presented it to you, God and Father",
+    "source_quote": "ἀναδείξας σοι τῷ Θεῷ καὶ Πατρί",
+    "why": "ἀναδείξας means 'showing forth/displaying,' not 'presented'; Christ shows the bread to God, not offers it to God as recipient.",
+    "fix": "showed it to you, God and Father",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἀναδείξας ranges 'show/display/present'; 'presented' fits liturgical context adequately."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 3,
+   "error": null
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }

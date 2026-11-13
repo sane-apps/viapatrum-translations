@@ -319,7 +319,37 @@
    ]
   }
  ],
- "check_history": [
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "sweep": {
+  "by": "claude-opus held sweep 2026-10-03",
+  "held_why": "2 confirmed problems after 3 repairs",
+  "fixed": [],
+  "dismissed": [
+   {
+    "quote": "was perfectly made flesh",
+    "class": "mistranslation",
+    "why": "βρωθείς means 'eaten/devoured,' not 'made flesh'; nonsensical rendering.",
+    "note": "brotheis (\"eaten\") is a plain corruption of sarkotheis; \"was perfectly made flesh\" is the sensible reading."
+   },
+   {
+    "quote": "one king, one Christ, one",
+    "class": "omission",
+    "why": "Missing 'Lord' (Κύριος) at end of source clause.",
+    "note": "The section source ends at \"heis\" because the chunk boundary splits \"heis | Kyrios\"; the English mirrors the cut. Fix the segmentation (or join across sections), not this translation."
+   }
+  ]
+ },
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T19:34:18Z",
+   "undone": 1,
+   "confirmed_before": 2,
+   "confirmed_after": 0
+  }
+ ],
+ "previous_checks": null,
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 2,
@@ -349,33 +379,27 @@
    "confirmed": 0
   }
  ],
- "reviewer": "work_pipeline:kimi+glm+claude-opus held sweep 2026-10-03",
- "confidence": "source_verified",
- "sweep": {
-  "by": "claude-opus held sweep 2026-10-03",
-  "held_why": "2 confirmed problems after 3 repairs",
-  "fixed": [],
-  "dismissed": [
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
    {
-    "quote": "was perfectly made flesh",
-    "class": "mistranslation",
-    "why": "βρωθείς means 'eaten/devoured,' not 'made flesh'; nonsensical rendering.",
-    "note": "brotheis (\"eaten\") is a plain corruption of sarkotheis; \"was perfectly made flesh\" is the sensible reading."
-   },
-   {
-    "quote": "one king, one Christ, one",
-    "class": "omission",
-    "why": "Missing 'Lord' (Κύριος) at end of source clause.",
-    "note": "The section source ends at \"heis\" because the chunk boundary splits \"heis | Kyrios\"; the English mirrors the cut. Fix the segmentation (or join across sections), not this translation."
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
    }
-  ]
+  ],
+  "last_rejected": []
  },
- "reverted_reader_edits": [
+ "check_history": [
   {
-   "at": "2026-10-05T19:34:18Z",
-   "undone": 1,
-   "confirmed_before": 2,
-   "confirmed_after": 0
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }

@@ -190,7 +190,17 @@
    ]
   }
  ],
- "checks": {
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T19:34:18Z",
+   "undone": 2,
+   "confirmed_before": 1,
+   "confirmed_after": 0
+  }
+ ],
+ "previous_checks": {
   "checkers": [
    "@cf/openai/gpt-oss-120b",
    "@cf/zai-org/glm-5.2"
@@ -211,7 +221,7 @@
   ],
   "last_rejected": []
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 1,
@@ -229,14 +239,39 @@
    "confirmed": 0
   }
  ],
- "reviewer": "work_pipeline:gpt-oss+glm",
- "confidence": "source_verified",
- "reverted_reader_edits": [
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "modality",
+    "severity": "major",
+    "quote": "And may what has been mixed in this cup into one reality become the blood of Christ",
+    "source_quote": "καὶ τὸ ἐν τῷ ποτηρίῳ τούτῳ κερασθὲν ἐπὶ τὸ αὐτὸ αἷμα Χριστοῦ, αἷμα καινῆς διαθήκης, αἷμα σωτήριόν ἐστιν ἡμῖν",
+    "why": "Greek states the mixture is blood (ἐστιν); English makes it a wish to become.",
+    "fix": "And what is mixed in this cup into one is Christ’s blood, new-covenant blood, saving blood for us.",
+    "model": "cursor/composer-2.5",
+    "rejected_by": "agy/claude-opus-5-5-medium",
+    "ruling": "The ἵνα + γένηται clause governs both bread and cup, so 'may…become' fits. ἐστιν ἡμῖν only marks the blood as 'saving for us', not a separate claim."
+   }
+  ]
+ },
+ "check_history": [
   {
-   "at": "2026-10-05T19:34:18Z",
-   "undone": 2,
-   "confirmed_before": 1,
-   "confirmed_after": 0
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
   }
  ]
 }

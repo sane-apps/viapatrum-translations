@@ -155,58 +155,7 @@
  "pipeline": "work_pipeline",
  "brief_sha256": "e3cb911ea08b8f42ccf6ca3ff004afe0740d2b87b24e6fe6e91fdeb9362f9c8f",
  "source_sha256": "a1052f84710379f01524f51749ab79a1680385c760d81810e2ec7123fdccfac2",
- "checks": {
-  "checkers": [
-   "@cf/moonshotai/kimi-k2.6",
-   "@cf/zai-org/glm-5.2"
-  ],
-  "rounds": [
-   {
-    "round": 0,
-    "confirmed": 0,
-    "rejected": 1,
-    "error": null
-   }
-  ],
-  "last_rejected": [
-   {
-    "class": "glossary",
-    "severity": "major",
-    "quote": "sealed",
-    "source_quote": "ἐσφράγισε",
-    "why": "Glossary requires 'cup of immortality' but 'sealed' is not the fixed term; however, ἐσφράγισε means 'sealed/signed', not in glossary. The real issue: 'sealed the cup of immortality' uses 'sealed' which is not glossary-fixed, but more critically the glossary term is 'cup of immortality'—this is used correctly. Wait: checking again—'sealed' is translation of ἐσφράγισε, not a glossary term. No glossary violation. But checking 'cup of immortality'—yes, matches glossary. Re-checking: actually no glossary error. Let me re-verify... The glossary says 'ποτήριον ἀθανασίας' = 'cup of immortality'. English has 'cup of immortality'—correct. No finding.",
-    "fix": "",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "ἐσφράγισε means 'sealed'; ποτήριον ἀθανασίας correctly rendered 'cup of immortality'. No glossary violation."
-   }
-  ]
- },
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 0,
-   "rejected": 1,
-   "error": null
-  },
-  {
-   "round": "read0",
-   "confirmed": 0
-  },
-  {
-   "round": "read1",
-   "confirmed": 0
-  },
-  {
-   "round": "read1",
-   "confirmed": 0
-  },
-  {
-   "round": "read0",
-   "confirmed": 0
-  }
- ],
- "reviewer": "work_pipeline:kimi+glm",
+ "reviewer": "work_pipeline:claude+composer",
  "confidence": "source_verified",
  "repairs": [
   {
@@ -565,6 +514,80 @@
    "undone": 6,
    "confirmed_before": 0,
    "confirmed_after": 0
+  }
+ ],
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "sealed",
+    "source_quote": "ἐσφράγισε",
+    "why": "Glossary requires 'cup of immortality' but 'sealed' is not the fixed term; however, ἐσφράγισε means 'sealed/signed', not in glossary. The real issue: 'sealed the cup of immortality' uses 'sealed' which is not glossary-fixed, but more critically the glossary term is 'cup of immortality'—this is used correctly. Wait: checking again—'sealed' is translation of ἐσφράγισε, not a glossary term. No glossary violation. But checking 'cup of immortality'—yes, matches glossary. Re-checking: actually no glossary error. Let me re-verify... The glossary says 'ποτήριον ἀθανασίας' = 'cup of immortality'. English has 'cup of immortality'—correct. No finding.",
+    "fix": "",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἐσφράγισε means 'sealed'; ποτήριον ἀθανασίας correctly rendered 'cup of immortality'. No glossary violation."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }
