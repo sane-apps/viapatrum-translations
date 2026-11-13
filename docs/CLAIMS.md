@@ -17,6 +17,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| intake-augustine-on-the-grace-of-christ | done | augustine-on-the-grace-of-christ | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Urba-Zycha 1904, CC BY-SA 4.0; book 1 of De gratia Christi et de peccato originali, ingested locally, not pushed |
 | intake-athanasius-de-decretis | done | athanasius-de-decretis | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged First1KGreek GCS 1918; chapters 41-42 only from Gelasius, 2 sections ingested locally, not pushed; complete De decretis still needs a source |
 | intake-augustine-letters | done | augustine-letters | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Goldbacher 1895-1911, CC BY-SA 4.0; 276 letters, 2230 sections ingested locally, not pushed |
 | intake-augustine-city-of-god | done | augustine-city-of-god | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Hoffmann 1899-1900, CC BY-SA 4.0; 22 books, 664 sections ingested locally, not pushed |
