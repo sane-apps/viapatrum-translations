@@ -1,10 +1,10 @@
 {
  "slug": "evagrius-de-magistris",
  "pipeline": "work_pipeline",
- "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "drafter": "muse",
  "checkers": [
-  "@cf/moonshotai/kimi-k2.6",
-  "@cf/zai-org/glm-5.2"
+  "agy/claude-opus-5-5-medium",
+  "cursor/composer-2.5"
  ],
  "boundary_moves": [
   {
@@ -29,34 +29,62 @@
  "brief_sha256": "b4f5b6b4f3aa6e34766aafdec0e01bb1b366514f2c5c5df63aadc43bbce226cd",
  "followability": [
   3,
-  4
+  3
  ],
- "reader_bar": "min>=3; mean waived (reader edits off, owner 2026-10-06)",
- "applied": "2026-10-09T18:48:55Z",
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-13T16:06:06Z",
+ "readers": [
+  "claude-sonnet-5-5",
+  "cursor/composer-2.5"
+ ],
+ "referee": "agy/gemini-3.8-flash-high",
  "sections": [
   {
    "section": "u01-open",
    "source_sha256": "8f9f2d68b346d5e9adfd41e6557e201e54b06f2876b3a8a83f58e8a208a62bb7",
-   "english_sha256": "fb5b85d158b1b1c17cc08b1e5ce66cdf7be299bee9c736909d29b20621879225",
-   "justification": "reviews/justifications/u01-open.json"
+   "english_sha256": "469a197afbdd1bd7cb28ec9a5ac6c5cd9ce819717e591490d66f7a795db8b986",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
   },
   {
    "section": "u01-rem-early",
    "source_sha256": "66191d0e57313a3b07fb6be11c35d8731bc7b5f74aeb091b38e89dccd5f3f32d",
    "english_sha256": "0af0551c6472cf101e6043af136fdd684ed2004e5ea3442b6a7f6a0b2fa86f85",
-   "justification": "reviews/justifications/u01-rem-early.json"
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
   },
   {
    "section": "u01-rem-mid",
    "source_sha256": "e2f6bedda0335633d0097e0d2b06592287dffe37ef34c2ba0d70f530a9e40a06",
-   "english_sha256": "b4f0aff01674294cea751fdb58e7c04ae06e7d7db5b2b09358c2a8e184dab292",
-   "justification": "reviews/justifications/u01-rem-mid.json"
+   "english_sha256": "417fc1e7abdedff117fd4957136ecf8611c1b697696ba132621857775764b03c",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
   },
   {
    "section": "u01-rem-close",
    "source_sha256": "885f86da3be7d7d0eb6e2cba3475654cda290fa2686ac4f907a939eb77b8d5e6",
-   "english_sha256": "8ebf567ac71f571ac364187aa0cde7554be29df2e173e385c4f2c97bed5291f2",
-   "justification": "reviews/justifications/u01-rem-close.json"
+   "english_sha256": "e47321a91791eac5a4f8e6b92d96776ed926db25f85689a1070da8f99a311564",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
   }
- ]
+ ],
+ "ref_gate": {
+  "references": 0
+ }
 }

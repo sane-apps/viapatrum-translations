@@ -132,7 +132,7 @@
  ],
  "bible_refs": [],
  "pass_b_english": [
-  "An unskilled pilot is a shipwreck waiting to happen, and an ignorant leader is the destruction of his disciples. An inexperienced shepherd has twisted the ankles of his sheep, and a leader twists the paths of his disciples. An ignorant shepherd will not discern among sheep in the fog, nor will an inexperienced teacher say anything useful in a time of trial. A skilled leader is a general in war and a physician of the passions: he will either keep a man from being wounded or heal him quickly once he is wounded. A disobedient disciple is a warped piece of wood, and he will never be straightened no matter how often he is reproved. A discordant brother is a string on an out-of-tune lyre, and by his discord he is cut off from the common melody. A drone eats the labors of the bees, and a careless brother diminishes the virtuous practice of the community."
+  "An unskilled pilot is a shipwreck waiting to happen, and an ignorant leader is the destruction of his disciples. An inexperienced shepherd has twisted the ankles of his sheep, and an inexperienced leader twists the paths of his disciples. An ignorant shepherd will not discern among sheep in the fog, nor will an inexperienced teacher say anything useful in a time of trial. A skilled leader is a general in war and a physician of the passions: he will either keep a man from being wounded or heal him quickly once he is wounded. A disobedient disciple is a warped piece of wood, and he will never be straightened no matter how often he is reproved. A discordant brother is a string on an out-of-tune lyre, and by his discord he is cut off from the common melody. A drone eats the labors of the bees, and a careless brother diminishes the virtuous practice of the community."
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
@@ -774,9 +774,35 @@
     "The 'careless brother' and 'brother' glossary items are not translation errors; 'brother' is the standard rendering for a fellow monk in this context.",
     "The mistranslation of 'by the fellowship' is real; the source's τῇ κοινωνίᾳ is dative of means, but the sense is that the discordant brother is cut off from the common melody by his own discord, not by the fellowship itself."
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "omission",
+     "severity": "major",
+     "quote": "and a leader twists the paths of his disciples",
+     "source_quote": "καὶ ἡγούμενος ὁδοὺς μαθητῶν",
+     "why": "In the Greek, 'inexperienced' (ἄπειρος) carries over from the shepherd to the leader. Without it, the English claims that every leader twists his disciples' paths.",
+     "fix": "and an inexperienced leader twists the paths of his disciples.",
+     "model": "agy/claude-opus-5-5-medium",
+     "upheld_by": "cursor/composer-2.5",
+     "ruling": "Ἄπειρος with ποιμὴν parallels ἡγοὺμενος; omitting 'inexperienced' makes every leader twist disciples' paths."
+    }
+   ],
+   "edits": [
+    {
+     "old": "and a leader twists the paths of his disciples",
+     "new": "and an inexperienced leader twists the paths of his disciples"
+    }
+   ],
+   "fixed": [
+    "Added `inexperienced`: ἄπειρος carries over to ἡγούμενος (καὶ ἡγούμενος ὁδοὺς μαθητῶν with ἐξέστρεψεν understood); without it the English wrongly condemns every leader."
+   ]
   }
  ],
- "checks": {
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "previous_checks": {
   "checkers": [
    "@cf/moonshotai/kimi-k2.6",
    "@cf/zai-org/glm-5.2"
@@ -832,7 +858,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 1,
@@ -870,6 +896,39 @@
    "confirmed": 0
   }
  ],
- "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified"
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
 }
