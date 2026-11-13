@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import json
 import re
+import os
 import sys
 from pathlib import Path
 
@@ -30,7 +31,11 @@ ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 import citation_amendments as CA  # noqa: E402
 
-MODEL = "claude-opus-5-5"
+# The judge model, and an optional second judge that must agree before any text changes (12 Nov 2026: the Mini
+# Claude route was down; owner: "use gemini and our other ais that are included in plans"). Bench a model on
+# the 8 Nov truth set before naming it (outputs/viapatrum/commentary-editions/ref-judge-bench-20261112/).
+MODEL = os.environ.get("REF_GATE_MODEL") or "claude-opus-5-5"
+SECOND = os.environ.get("REF_GATE_SECOND") or None
 FIX_CONF = 0.8
 BATCH = 80
 BRIEF = ROOT / "docs" / "REFERENCE_JUDGE_BRIEF.md"
@@ -154,8 +159,34 @@ def items_for(sections: dict[str, list[str]]):
     return items, where
 
 
-def judge(items: list[dict], chat=None) -> dict[str, dict] | None:
-    """{id: verdict} for every item, or None when the judge could not run for all of them."""
+def judge(items: list[dict], chat=None, model: str | None = None, second: str | None = None) -> dict[str, dict] | None:
+    """{id: verdict} for every item, or None when a judge could not run for all of them.
+
+    With a second judge (argument or REF_GATE_SECOND), an item keeps the first verdict only when both judges reach
+    the same action (decide()) and agree on whether the reference is correct; otherwise it becomes 'unclear', so no
+    text changes on one judge's word."""
+    model = model or MODEL
+    second = SECOND if second is None else (second or None)
+    if not second:
+        return _judge_one(items, chat, model)
+    from concurrent.futures import ThreadPoolExecutor  # two plans, two queues: ask both at once
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        fa, fb = pool.submit(_judge_one, items, chat, model), pool.submit(_judge_one, items, chat, second)
+        first, other = fa.result(), fb.result()
+    if first is None or other is None:
+        return None
+    out = {}
+    for k, v in first.items():
+        w = other[k]
+        if decide(v) == decide(w) and (v["verdict"] == "correct") == (w["verdict"] == "correct"):
+            out[k] = {**v, "second": {"model": second, "verdict": w["verdict"], "correct_ref": w.get("correct_ref")}}
+        else:
+            out[k] = {"id": k, "verdict": "unclear", "correct_ref": None, "confidence": 0.0,
+                      "reason": f"judges disagree: {model} {v['verdict']}, {second} {w['verdict']}"}
+    return out
+
+
+def _judge_one(items: list[dict], chat, model: str) -> dict[str, dict] | None:
     if chat is None:
         import plan_calls
         chat = plan_calls.chat
@@ -165,7 +196,7 @@ def judge(items: list[dict], chat=None) -> dict[str, dict] | None:
         part = items[i:i + BATCH]
         user = (f"Judge all {len(part)} items below. Output ONLY the JSON lines, one per item, in input order.\n\nITEMS:\n"
                 + json.dumps(part, ensure_ascii=False))
-        res = chat(MODEL, [{"role": "system", "content": brief}, {"role": "user", "content": user}])
+        res = chat(model, [{"role": "system", "content": brief}, {"role": "user", "content": user}])
         if "error" in res:
             return None
         got = {}
