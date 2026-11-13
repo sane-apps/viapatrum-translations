@@ -17,6 +17,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| intake-augustine-harmony-of-the-gospels | done | augustine-harmony-of-the-gospels | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Weihrich 1904, CC BY-SA 4.0; toc units skipped in sections, ingested locally, not pushed |
 | intake-augustine-memorandum | done | augustine-memorandum | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Zycha 1892, CC BY-SA 4.0; ingested locally, not pushed |
 | intake-augustine-summary-of-the-conference | done | augustine-summary-of-the-conference | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Petschenig 1910, CC BY-SA 4.0; retractationes skipped in sections, ingested locally, not pushed |
 | intake-augustine-on-original-sin | done | augustine-on-original-sin | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Urba-Zycha 1904, CC BY-SA 4.0; book 2 of De gratia Christi et de peccato originali, ingested locally, not pushed |
