@@ -17,6 +17,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| intake-augustine-on-original-sin | done | augustine-on-original-sin | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Urba-Zycha 1904, CC BY-SA 4.0; book 2 of De gratia Christi et de peccato originali, ingested locally, not pushed |
 | intake-augustine-on-nature-and-grace | done | augustine-on-nature-and-grace | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Urba-Zycha 1913 opp-lat1 only, CC BY-SA 4.0; ingested locally, not pushed; leftover intake-stage not touched |
 | intake-augustine-on-the-grace-of-christ | done | augustine-on-the-grace-of-christ | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Urba-Zycha 1904, CC BY-SA 4.0; book 1 of De gratia Christi et de peccato originali, ingested locally, not pushed |
 | intake-athanasius-de-decretis | done | athanasius-de-decretis | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged First1KGreek GCS 1918; chapters 41-42 only from Gelasius, 2 sections ingested locally, not pushed; complete De decretis still needs a source |
