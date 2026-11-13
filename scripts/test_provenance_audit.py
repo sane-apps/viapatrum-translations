@@ -83,6 +83,16 @@ class ProvenanceAuditTests(unittest.TestCase):
             kinds = [f["check"] for f in rep["flags"] if f["slug"] == "zz-test-ah"]
             self.assertIn("unlinked", kinds, rep["flags"])
 
+    def test_long_witness_is_not_cut_off_before_a_late_unit_head(self):
+        # Augustine Letters is ~2.30 million letters after norm; a 2e6 cap
+        # flagged letters 210-270 as unlinked even though the heads are in the file.
+        late = "Sicut parata est seueritas peccata quae iuuenerit uindicare."
+        raw = "Irenaeus of Lyons Against Heresies " + ("x" * 2_100_000) + " " + late
+        wnorm = p.norm(p.witness_text("copy.txt", raw))
+        probe = p.norm(late)[:120]
+        self.assertGreater(p.WITNESS_CHARS, 2_300_000)
+        self.assertIn(probe, wnorm[:p.WITNESS_CHARS])
+
 
 if __name__ == "__main__":
     unittest.main()

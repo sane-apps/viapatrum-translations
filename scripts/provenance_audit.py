@@ -33,7 +33,7 @@ def delatinize(s):
 # linkage check compared against tags and apparatus and flagged genuine
 # sources (Hermas, Tatian, Theophilus book 3). Read XML as text without tags
 # or notes, and read the whole witness.
-WITNESS_CHARS = 2_000_000
+WITNESS_CHARS = 20_000_000  # Letters (Goldbacher) alone is ~2.30e6 letters after norm
 
 
 def witness_text(path, text):
