@@ -37,6 +37,7 @@ import argparse
 import collections
 import difflib
 import hashlib
+import html.entities
 import json
 import os
 import re
@@ -48,9 +49,9 @@ import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 try:  # refuse entity tricks in downloaded XML when defusedxml is installed
-    from defusedxml.ElementTree import fromstring as xml_fromstring
+    from defusedxml.ElementTree import fromstring as _et_fromstring
 except ImportError:  # stdlib expat does not fetch external entities
-    xml_fromstring = ET.fromstring
+    _et_fromstring = ET.fromstring
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,6 +68,80 @@ LATIN_REPOS = {
 }
 LAST_PD_YEAR = 1929  # later printed editions may still be in copyright
 SKIP = {"note", "bibl", "ref", "head", "label", "del", "app", "rdg", "milestone", "figure"}
+_NAMED_ENT = re.compile(r"&([A-Za-z][A-Za-z0-9]+);")
+_XML_PREDEFINED = {"amp", "lt", "gt", "apos", "quot"}
+
+
+def _resolve_html_entities_for_parse(raw):
+    """Parse-only copy: turn HTML named entities into numeric character
+    references. The original bytes (the copy-text) are not modified."""
+    if isinstance(raw, bytes):
+        text = raw.decode("utf-8")
+        is_bytes = True
+    else:
+        text = raw
+        is_bytes = False
+    def repl(m):
+        name = m.group(1)
+        if name in _XML_PREDEFINED:
+            return m.group(0)
+        cp = html.entities.name2codepoint.get(name)
+        return f"&#{cp};" if cp is not None else m.group(0)
+    out = _NAMED_ENT.sub(repl, text)
+    if out == text:
+        return raw
+    return out.encode("utf-8") if is_bytes else out
+
+
+def xml_fromstring(raw):
+    """Parse TEI. If the file uses an HTML entity such as &mdash; (not
+    defined in XML), resolve it only for this parse and leave raw alone."""
+    try:
+        return _et_fromstring(raw)
+    except ET.ParseError as e:
+        resolved = _resolve_html_entities_for_parse(raw)
+        if resolved == raw:
+            raise
+        try:
+            return _et_fromstring(resolved)
+        except ET.ParseError:
+            raise e from None
+
+
+def unique_labels(divs):
+    """A unique label for each div in a sibling list.
+
+    Prefer a unique @n. If @n is missing, use a unique @subtype
+    (preface, toc, ...). Otherwise take the next integer that is not
+    already used as an explicit or assigned label. Duplicate @n values
+    also get a fresh integer so section ids never collide.
+    """
+    reserved = {d.get("n") for d in divs if d.get("n")}
+    used: set[str] = set()
+    nxt = 1
+    labels: list[str] = []
+
+    def fresh() -> str:
+        nonlocal nxt
+        while str(nxt) in reserved or str(nxt) in used:
+            nxt += 1
+        lab = str(nxt)
+        nxt += 1
+        return lab
+
+    for d in divs:
+        n = d.get("n")
+        if n and n not in used:
+            used.add(n)
+            labels.append(n)
+            continue
+        sub = d.get("subtype") or ""
+        if not n and sub and sub not in used and sub not in reserved:
+            used.add(sub)
+            labels.append(sub)
+            continue
+        labels.append(fresh())
+    return labels
 
 
 def gh_json(url: str):
@@ -181,12 +256,13 @@ def flat_units(root, skip=()):
     edition = root.find(f".//{TEI}div[@type='edition']")
     if edition is None:
         edition = root.find(f".//{TEI}body")
+    tops = top_divs(edition, skip)
     secs = []
-    for k, top in enumerate(top_divs(edition, skip), 1):
+    for top, n in zip(tops, unique_labels(tops)):
         lines = [clean(text_of(p)) for p in top.iter() if p.tag in (f"{TEI}p", f"{TEI}l")]
         lines = [x for x in lines if x] or [clean(text_of(top))]
         if lines[0]:
-            secs.append((top.get("n") or str(k), lines))
+            secs.append((n, lines))
     return [("1", "", secs)] if secs else []
 
 
@@ -200,19 +276,19 @@ def units(root, skip=()):
     if not tops:
         tops = [edition]
     out = []
-    for top in tops:
-        n = top.get("n") or str(len(out) + 1)
+    for top, n in zip(tops, unique_labels(tops)):
         head = top.find(f"{TEI}head")
         title = clean("".join(head.itertext())) if head is not None else ""
         kids = [d for d in top if d.tag == f"{TEI}div"]
         secs = []
-        for k, kid in enumerate(kids or [top], 1):
+        sec_divs = kids or [top]
+        for kid, sn in zip(sec_divs, unique_labels(sec_divs)):
             lines = [clean(text_of(p)) for p in kid.iter() if p.tag in (f"{TEI}p", f"{TEI}l")]
             lines = [x for x in lines if x]
             if not lines:
                 lines = [clean(text_of(kid))]
             if lines and lines[0]:
-                secs.append((kid.get("n") or str(k), lines))
+                secs.append((sn, lines))
         if secs:
             out.append((n, title, secs))
     return out
@@ -240,6 +316,8 @@ def main() -> int:
                     "when the item name does not)")
     ap.add_argument("--pg-anchors", default="", help="PG mode without Khazarzar: 'first words|last words' "
                     "of the work in the scan OCR")
+    ap.add_argument("--tei-file", default="", help="local TEI file to use as copy-text (kept byte for byte); skips GitHub fetch")
+    ap.add_argument("--source-url", default="", help="provenance URL recorded for --tei-file")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     if a.pg_khazarzar or a.pg_anchors:
@@ -250,15 +328,35 @@ def main() -> int:
     dest = BOOKS / a.slug
     if dest.exists():
         raise SystemExit(f"already exists: {dest} (one book per work; extend it by hand)")
-    latin = not a.urn.startswith(("tlg", "ogl"))  # ogl* urns in First1KGreek are Greek
+    latin = not a.urn.startswith(("tlg", "ogl", "pta"))  # ogl* and pta* Greek/TEI urns
+    if a.urn.startswith("pta") and a.tei_file:
+        # PTA files can be Greek or Latin; prefer the filename, then xml:lang later if needed
+        fn = Path(a.tei_file).name.lower()
+        if "-grc" in fn or "grc" in fn:
+            latin = False
+        elif "-lat" in fn or "lat" in fn:
+            latin = True
     lang, key = ("Latin", "latin") if latin else ("Greek", "greek")
-    if latin:
+    if a.tei_file:
+        path = Path(a.tei_file)
+        if not path.is_file():
+            raise SystemExit(f"--tei-file not found: {path}")
+        raw = path.read_bytes()
+        name = path.name
+        repo = "local"
+        root = xml_fromstring(raw)
+        year = edition_year(root)
+        if year and year > LAST_PD_YEAR:
+            raise SystemExit(f"{name}: edition printed {year}, after {LAST_PD_YEAR}")
+        eds, refused = [(name, raw, repo, year)], []
+    elif latin:
         eds, refused = fetch_latin(a.urn, a.edition)
         name, raw, repo, _ = eds[0]
+        root = xml_fromstring(raw)
     else:
         name, raw, repo = fetch(a.urn, a.edition)
         eds, refused = [(name, raw, repo, 0)], []
-    root = xml_fromstring(raw)
+        root = xml_fromstring(raw)
     if not latin and edition_year(root) > LAST_PD_YEAR:
         raise SystemExit(f"{name}: edition printed {edition_year(root)}, after {LAST_PD_YEAR}; "
                          "choose a public-domain file with --edition")
@@ -296,14 +394,29 @@ def main() -> int:
     witnesses = []  # every edition kept byte for byte; the first is copy-text
     for k, (n, r_bytes, r, _) in enumerate(eds):
         (dest / "sources" / n).write_bytes(r_bytes)
-        g, w = a.urn.split(".")[:2]
-        src_url = (f"{REPOS[r]}/{g}/{w}/{n}" if not latin
-                   else f"https://raw.githubusercontent.com/{LATIN_REPOS[r][0]}/master/data/{g}/{w}/{n}")
+        g, w = (a.urn.split(".")[:2] + ["", ""])[:2]
+        if r == "local":
+            src_url = a.source_url or f"file:{n}"
+        elif not latin:
+            src_url = f"{REPOS[r]}/{g}/{w}/{n}"
+        else:
+            src_url = f"https://raw.githubusercontent.com/{LATIN_REPOS[r][0]}/master/data/{g}/{w}/{n}"
         lab = edition if k == 0 else edition_label(xml_fromstring(r_bytes))
         witnesses.append({"name": lab or n, "language": lang,
                           "role": "copy-text" if k == 0 else "comparison witness (not aligned to the sections)",
                           "path": f"sources/{n}", "urn": f"urn:cts:{key}Lit:{a.urn}", "source": src_url})
-    origin = (LATIN_REPOS[repo][1] if latin else ("First1KGreek" if repo == "1st1K" else "Perseus") + " TEI")
+    if repo == "local":
+        url = a.source_url
+        if "First1KGreek" in url:
+            origin = "First1KGreek TEI"
+        elif "csel-dev" in url:
+            origin = "OGL CSEL TEI"
+        elif "pta_data" in url or "PatristicTextArchive" in url:
+            origin = "Patristic Text Archive TEI"
+        else:
+            origin = "local TEI"
+    else:
+        origin = (LATIN_REPOS[repo][1] if latin else ("First1KGreek" if repo == "1st1K" else "Perseus") + " TEI")
     (dest / "book.yml").write_text(
         f'title: "{a.title}"\nauthor: "{a.author}"\nslug: "{a.slug}"\nlanguage: {lang}\nstatus: available\n'
         + (f'original_title: "{a.original_title}"\n' if a.original_title else "")
