@@ -17,6 +17,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| intake-severian-de-incarnatione | done | severian-de-incarnatione | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged PTA Aucher 1827 Latin from Armenian, CC BY 4.0; ingested locally, not pushed |
 | intake-severian-in-cosmogoniam-homilia-6 | done | severian-in-cosmogoniam-homilia-6 | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged PTA PG 56 / Voicu, CC BY-SA 4.0; ingested locally, not pushed |
 | intake-severian-in-cosmogoniam-homilia-5 | done | severian-in-cosmogoniam-homilia-5 | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged PTA PG 56 / Voicu, CC BY-SA 4.0; ingested locally, not pushed |
 | intake-severian-in-cosmogoniam-homilia-4 | done | severian-in-cosmogoniam-homilia-4 | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged PTA PG 56 / Voicu, CC BY-SA 4.0; ingested locally, not pushed |
