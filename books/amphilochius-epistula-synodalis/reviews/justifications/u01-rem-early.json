@@ -136,10 +136,35 @@
  "pipeline": "work_pipeline",
  "brief_sha256": "a01831bb12ed6080b0349a737e0de13d3fa13fa0e5d1c3d1de57e4bcbe3b03e0",
  "source_sha256": "7453f237905e6851c615864cf7933d4dcad51c9ff2f8d1955d526ce30729aee2",
- "checks": {
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "previous_checks": {
   "checkers": [
    "@cf/openai/gpt-oss-120b",
    "@cf/moonshotai/kimi-k2.6"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
   ],
   "rounds": [
    {
@@ -158,7 +183,5 @@
    "rejected": 0,
    "error": null
   }
- ],
- "reviewer": "work_pipeline:gpt-oss+kimi",
- "confidence": "source_verified"
+ ]
 }

@@ -141,50 +141,7 @@
  "pipeline": "work_pipeline",
  "brief_sha256": "a01831bb12ed6080b0349a737e0de13d3fa13fa0e5d1c3d1de57e4bcbe3b03e0",
  "source_sha256": "aec04efe654aa4dd764f191f2613a49c372e01375cb78cafa6e3b284fbab6718",
- "checks": {
-  "checkers": [
-   "@cf/openai/gpt-oss-120b",
-   "@cf/moonshotai/kimi-k2.6"
-  ],
-  "rounds": [
-   {
-    "round": 0,
-    "confirmed": 0,
-    "rejected": 1,
-    "error": null
-   }
-  ],
-  "last_rejected": [
-   {
-    "class": "mistranslation",
-    "severity": "major",
-    "quote": "how can he be joined in baptism",
-    "source_quote": "πῶς δυνατὸν ἐν τῷ βαπτίσματι μιχθῆναι",
-    "why": "μιχθῆναι means 'mixed' or 'mingled,' not 'joined'; baptism's coherence is lost.",
-    "fix": "how can he be mixed in baptism",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/openai/gpt-oss-120b",
-    "ruling": "Greek μιχθῆναι = 'to be mixed'; 'joined' is a looser but acceptable rendering, not a major loss of meaning."
-   }
-  ]
- },
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 0,
-   "rejected": 1,
-   "error": null
-  },
-  {
-   "round": "read0",
-   "confirmed": 0
-  },
-  {
-   "round": "read1",
-   "confirmed": 0
-  }
- ],
- "reviewer": "work_pipeline:gpt-oss+kimi",
+ "reviewer": "work_pipeline:claude+composer",
  "confidence": "source_verified",
  "repairs": [
   {
@@ -369,6 +326,72 @@
    "undone": 3,
    "confirmed_before": 1,
    "confirmed_after": 0
+  }
+ ],
+ "previous_checks": {
+  "checkers": [
+   "@cf/openai/gpt-oss-120b",
+   "@cf/moonshotai/kimi-k2.6"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "how can he be joined in baptism",
+    "source_quote": "πῶς δυνατὸν ἐν τῷ βαπτίσματι μιχθῆναι",
+    "why": "μιχθῆναι means 'mixed' or 'mingled,' not 'joined'; baptism's coherence is lost.",
+    "fix": "how can he be mixed in baptism",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/openai/gpt-oss-120b",
+    "ruling": "Greek μιχθῆναι = 'to be mixed'; 'joined' is a looser but acceptable rendering, not a major loss of meaning."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }

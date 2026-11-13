@@ -336,7 +336,17 @@
    ]
   }
  ],
- "checks": {
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T19:18:09Z",
+   "undone": 4,
+   "confirmed_before": 1,
+   "confirmed_after": 1
+  }
+ ],
+ "previous_checks": {
   "checkers": [
    "@cf/openai/gpt-oss-120b",
    "@cf/moonshotai/kimi-k2.6"
@@ -419,7 +429,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 1,
@@ -447,14 +457,27 @@
    "confirmed": 0
   }
  ],
- "reviewer": "work_pipeline:gpt-oss+kimi",
- "confidence": "source_verified",
- "reverted_reader_edits": [
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
   {
-   "at": "2026-10-05T19:18:09Z",
-   "undone": 4,
-   "confirmed_before": 1,
-   "confirmed_after": 1
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }
