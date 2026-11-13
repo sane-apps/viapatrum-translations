@@ -17,6 +17,7 @@ If a `claimed` row is older than 48 hours with no handoff, anyone may set it bac
 
 | Claim ID | Status | Book slug | Slice (sections) | Agent | Started | Branch | Notes |
 |----------|--------|-----------|------------------|-------|---------|--------|-------|
+| intake-origen-commentarii-joannis | done | origen-commentarii-joannis | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged First1K Preuschen 1903, early books only; skipped 13,19,20,28,32 already in origen-john-later; local, not pushed |
 | intake-ambrosiaster-quaestiones | done | ambrosiaster-quaestiones | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Souter 1908, CC BY-SA 4.0; ingested locally, not pushed |
 | intake-jerome-letters | done | jerome-letters | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Hilberg 1910-1918, CC BY-SA 4.0; ingested locally, not pushed |
 | intake-augustine-retractations | done | augustine-retractations | intake (source text) | densify | 2026-11-13 | wip/col-intake-20261113 | COL staged CSEL Knöll 1902, CC BY-SA 4.0; toc skipped in sections, ingested locally, not pushed |
