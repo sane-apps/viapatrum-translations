@@ -334,11 +334,17 @@ def stale_why(row: dict, now: datetime | None = None) -> str:
     """Why a today.json row is not a current reading, or "" when it is (2026-11-07: a 2026-10-22 "ok"
     was reported as current for two weeks)."""
     now = now or datetime.now(timezone.utc)
-    if row.get("date") != now.strftime("%Y-%m-%d"):
-        return f"reading is for {row.get('date')}, not today ({now:%Y-%m-%d} UTC)"
     try:
         age = (now - datetime.fromisoformat(str(row.get("at")))).total_seconds()
     except (TypeError, ValueError):
+        age = None
+    if row.get("date") != now.strftime("%Y-%m-%d"):
+        # A reading taken just before 00:00 UTC is still current (2026-11-13: the 7:00 PM ET report,
+        # at 00:00:08 UTC, called a 12-second-old reading stale because its UTC date was yesterday).
+        if age is None or age > STALE_AFTER_S:
+            return f"reading is for {row.get('date')}, not today ({now:%Y-%m-%d} UTC)"
+        return ""
+    if age is None:
         return "reading has no valid time"
     return f"reading is {age / 3600:.0f} h old" if age > STALE_AFTER_S else ""
 

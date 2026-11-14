@@ -379,6 +379,14 @@ class StaleReadingIsAWarning(unittest.TestCase):
         row = {**self.FRESH, "at": "2026-11-08T07:00:00+00:00"}
         self.assertIn("reading is 4 h old", G.report_line(row, self.NOW))
 
+    def test_reading_just_before_utc_midnight_is_current(self):
+        # 2026-11-13 7:00 PM ET report (00:00:08 UTC) called a 12-second-old reading stale.
+        now = G.datetime(2026, 11, 14, 0, 0, 8, tzinfo=G.timezone.utc)
+        row = {**self.FRESH, "date": "2026-11-13", "at": "2026-11-13T23:59:56+00:00"}
+        self.assertEqual(G.stale_why(row, now), "")
+        late = G.datetime(2026, 11, 14, 3, 0, 0, tzinfo=G.timezone.utc)
+        self.assertIn("reading is for 2026-11-13, not today", G.stale_why(row, late))
+
     def test_fresh_ok_line_is_unchanged(self):
         self.assertEqual(G.report_line(self.FRESH, self.NOW),
                          "- Workers AI spend 2026-11-08 (UTC day): $0.00 of the $150 cap (ok)")
