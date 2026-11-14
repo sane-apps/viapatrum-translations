@@ -342,7 +342,12 @@ def refresh_library(st: dict) -> int:
 
 
 def ship(st: dict, now: dict, changed: list[str]) -> int:
-    audio_only = changed == ["audio"] and (SITE / "outputs/ship-last/receipt.json").is_file()
+    # After an audio-only ship that found nothing newer than the last ship (a manifest removed, or
+    # rewritten with an old mtime), the next run ships in full (12 Nov 2026: the fingerprint changed,
+    # --audio-only said "nothing recorded", and the job re-ran it every 30 min).
+    after_noop = changed == ["audio"] and bool(st.get("audio_noop"))
+    audio_only = (changed == ["audio"] and (SITE / "outputs/ship-last/receipt.json").is_file()
+                  and not after_noop)
     cmd = ["scripts/ship.sh"] + (["--audio-only"] if audio_only else [])
     receipt = SITE / "outputs/ship-last/receipt.json"
     before = receipt.stat().st_mtime if receipt.is_file() else 0
@@ -353,17 +358,23 @@ def ship(st: dict, now: dict, changed: list[str]) -> int:
     verified = deployed and json.loads(receipt.read_text()).get("verified")
     st["last_ship"] = {"at": now_ts(), "rc": rc, "mode": "audio-only" if audio_only else "full",
                        "verified": bool(verified), "changed": changed}
+    if audio_only and rc == 0 and not deployed:
+        st["audio_noop"] = now_ts()
+        save_state(st)
+        log("audio-only ship found nothing newer than the last ship; the next run ships in full")
+        return EXIT_SKIPPED
     if not (rc == 0 and verified):
         save_state(st)
         log(f"ship did not verify (rc={rc}); inputs stay pending")
         return EXIT_FAILED
     st["shipped"] = now  # inputs as read before the ship; later edits ship next run
+    st.pop("audio_noop", None)
     st.pop("pending_since", None)
     st.pop("pending", None)
     # New text needs a new shelf. Audio alone waits for the next text ship
     # (owner 2026-10-06). The shelf's own library.json, and a committed site
     # revision, do not: rebuilding on those would ship and rebuild forever.
-    if "text" in changed or ("audio" in changed and not audio_only):
+    if "text" in changed or ("audio" in changed and not audio_only and not after_noop):
         st["shelf_pending"] = {"since": now_ts(), "for_ship": shipped_at(), "done": []}
     save_state(st)
     log("ship verified")

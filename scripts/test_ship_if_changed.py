@@ -182,6 +182,31 @@ class ExitCodeTests(AutoShipTestBase):
         self.assertTrue(any("ship.sh" in c for c in self.cmds))
         self.assertNotIn("ships", self.state())
 
+    def test_audio_only_noop_is_followed_by_one_full_ship(self):
+        # 12 Nov 2026: a removed manifest changed the audio fingerprint; --audio-only found nothing
+        # newer than the last ship (rc 0, no deploy) and the job re-ran it every 30 min.
+        self.now = {"text": "t1", "audio": "a2", "library": "l1"}
+        self.ship_verifies = False
+        real = self.fake_run
+
+        def noop_run(cmd, timeout, cwd=None):
+            text = cmd if isinstance(cmd, str) else " ".join(cmd)
+            if "--audio-only" in text:
+                self.cmds.append(text)
+                return 0  # "Nothing recorded since the last ship"
+            return real(cmd, timeout, cwd)
+        with mock.patch.object(S, "run", noop_run):
+            self.assertEqual(S.main(), S.EXIT_SKIPPED)
+            self.assertIn("audio_noop", self.state())
+            self.assertTrue(self.cmds[-1].endswith("--audio-only"))
+            self.ship_verifies = True
+            self.assertEqual(S.main(), S.EXIT_OK)
+        self.assertEqual(self.cmds[-1], "scripts/ship.sh")
+        st = self.state()
+        self.assertNotIn("audio_noop", st)
+        self.assertEqual(st["shipped"]["audio"], "a2")
+        self.assertNotIn("shelf_pending", st)  # audio alone still waits for the next text ship
+
     def test_no_change_exits_0(self):
         self.now = {"text": "t1", "audio": "a1", "library": "l1"}
         self.assertEqual(S.main(), S.EXIT_OK)
