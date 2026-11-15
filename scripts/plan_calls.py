@@ -1190,6 +1190,12 @@ def status() -> dict:
                   and v.get("paused_until") and datetime.fromisoformat(v["paused_until"]) > now}
         if groups:
             out[plan]["model_pauses"] = groups  # e.g. agy/gemini spent while agy/claude still answers
+        # Watchers read these before calling flat calls a stall (Spark's babysitter, 15 Nov 2026: claude calls_total
+        # flat for 5 h was the 90% meter hold and the spent daily budget, not a fault).
+        held = hold_until(plan, now)
+        out[plan]["held_until"] = held.isoformat(timespec="seconds") if held else None
+        out[plan]["hold_pct"] = HOLD_PCT
+        out[plan]["budget_wait_s"] = round(_budget_wait(plan, now))
         m = meter(plan, now)
         if m:
             out[plan]["meter"] = m

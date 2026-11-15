@@ -437,6 +437,25 @@ class Waiting(unittest.TestCase):
         t = self.clock.t
         (mdir / f"{key}.json").write_text(json.dumps({"at": t, "windows": {window: {"used_percentage": used, "resets_at": (t + hours_left * 3600) if hours_left else 0}}}))
 
+    def test_status_names_the_hold_so_watchers_do_not_call_it_a_stall(self):
+        # Spark's babysitter, 15 Nov 2026: claude calls_total flat for 5 h read as a stall; it was the 90% hold.
+        mdir = self._meters("hold-status")
+        with mock.patch.object(pc, "METER_DIR", mdir):
+            self._put(mdir, "claude", 89, 3)
+            st = pc.status()["claude"]
+            self.assertIsNone(st["held_until"])
+            self.assertEqual(st["budget_wait_s"], 0)
+            self.assertEqual(st["hold_pct"], 90.0)
+            self._put(mdir, "claude", 92, 3)
+            held = datetime.fromisoformat(pc.status()["claude"]["held_until"])
+            self.assertLess(abs(held.timestamp() - (self.clock.t + 3 * 3600)), 2)
+
+    def test_status_names_a_spent_daily_budget(self):
+        with mock.patch.object(pc, "_run_muse", lambda *a: ("fine", False)):
+            for _ in range(3):
+                pc.chat("muse", [{"role": "user", "content": "x"}])
+        self.assertGreater(pc.status()["muse"]["budget_wait_s"], 3600)
+
     def test_nearly_full_meter_holds_background_calls_until_the_window_resets(self):
         msg = [{"role": "user", "content": "x"}]
         mdir = self._meters("hold1")
