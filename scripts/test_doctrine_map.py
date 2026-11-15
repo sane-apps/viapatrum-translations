@@ -54,10 +54,11 @@ class SlotTests(unittest.TestCase):
 
 
 class BrokerTests(unittest.TestCase):
-    def test_payload_kimi_and_gpt_oss(self):
-        p = D.broker_payload("@cf/moonshotai/kimi-k2.6", "s", "u", 3000)
+    def test_payload_qwen_and_gpt_oss(self):
+        # Kimi K2.6 retires 20 Nov 2026; Qwen 3.8 is its batch successor. Its schema rejects reasoning_effort "none".
+        p = D.broker_payload("@cf/qwen/qwen3.8-27b", "s", "u", 3000)
         self.assertEqual(p["max_completion_tokens"], 3000)
-        self.assertEqual(p["reasoning_effort"], "none")
+        self.assertNotIn("reasoning_effort", p)
         self.assertEqual(p["chat_template_kwargs"], {"enable_thinking": False})
         g = D.broker_payload("@cf/openai/gpt-oss-120b", "s", "u", 3000)
         self.assertEqual(g["max_tokens"], 3000)
@@ -69,7 +70,7 @@ class BrokerTests(unittest.TestCase):
         with mock.patch.object(D.LB, "_broker_up", return_value=True), \
                 mock.patch.object(D.LB, "_broker_run", return_value=res) as br, \
                 mock.patch.object(D.W, "call") as direct:
-            self.assertEqual(D.grade_call("@cf/moonshotai/kimi-k2.6", "s", "u"),
+            self.assertEqual(D.grade_call("@cf/qwen/qwen3.8-27b", "s", "u"),
                              {"on_question": True, "verdicts": {}})
             br.assert_called_once()
             direct.assert_not_called()
@@ -77,7 +78,7 @@ class BrokerTests(unittest.TestCase):
     def test_falls_back_direct(self):
         with mock.patch.object(D.LB, "_broker_up", return_value=False), \
                 mock.patch.object(D.W, "call", return_value={"x": 1}) as direct:
-            self.assertEqual(D.grade_call("@cf/moonshotai/kimi-k2.6", "s", "u"), {"x": 1})
+            self.assertEqual(D.grade_call("@cf/qwen/qwen3.8-27b", "s", "u"), {"x": 1})
             direct.assert_called_once()
         with mock.patch.object(D.LB, "_broker_up", return_value=True), \
                 mock.patch.object(D.LB, "_broker_run", return_value={"error": "boom"}) as br, \
@@ -374,7 +375,7 @@ class SpendGate(unittest.TestCase):
                 mock.patch.object(D.LB, "_broker_run", side_effect=AssertionError("broker")), \
                 mock.patch.object(D.W, "call", side_effect=AssertionError("direct")):
             with self.assertRaises(_spend_guard.SpendRefused):
-                D.grade_call("@cf/moonshotai/kimi-k2.6", "s", "u")
+                D.grade_call("@cf/qwen/qwen3.8-27b", "s", "u")
 
     def test_broker_refusal_never_goes_direct(self):
         with mock.patch.object(D, "BATCH_ONLY", True), mock.patch.object(D, "_spend_gate"), \
@@ -382,7 +383,7 @@ class SpendGate(unittest.TestCase):
                 mock.patch.object(D.LB, "_broker_run", return_value={"error": "spend guard refused: over"}), \
                 mock.patch.object(D.W, "call", side_effect=AssertionError("direct")):
             with self.assertRaises(_spend_guard.SpendRefused):
-                D.grade_call("@cf/moonshotai/kimi-k2.6", "s", "u")
+                D.grade_call("@cf/qwen/qwen3.8-27b", "s", "u")
 
     def test_nim_referee_is_not_gated(self):
         with mock.patch.object(D, "_spend_gate", side_effect=AssertionError("gated")), \

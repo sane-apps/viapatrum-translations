@@ -40,6 +40,11 @@ class Retirement(unittest.TestCase):
         self.assertEqual({W.FAMILY[m] for m in W.CHECKERS}, {"qwen", "gemma"})
         self.assertEqual(W.FAMILY[W.FALLBACK], "gpt-oss")
 
+    def test_no_batch_key_names_only_a_retired_model(self):
+        for model in RETIRED:
+            self.assertFalse([k for k in LB.BATCH_MODELS if k in model], model)
+        self.assertTrue(any(k in "@cf/qwen/qwen3.8-27b" for k in LB.BATCH_MODELS))  # successors still batch
+
     def test_grader_defaults_are_live_and_can_batch(self):
         try:
             import doctrine_map as DM

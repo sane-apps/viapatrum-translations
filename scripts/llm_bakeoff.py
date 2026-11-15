@@ -315,8 +315,9 @@ def _cf_pick_content(result: dict) -> str | None:
 # go through the local batch broker (scripts/cf_batch_broker.py), which turns
 # many calls into a few ?queueRequest=true batches under the per-model caps.
 # CF_BATCH=0 forces direct calls. If the broker is down, calls go direct.
-BATCH_MODELS = ("kimi-k2.6", "gpt-oss-120b", "gpt-oss-20b", "qwen3.8-27b", "gemma-4-26b", "deepseek-v4-flash",
-                "llama-3.3-70b", "qwen3-30b-a3b", "llama-4-scout")
+# 15 Nov 2026: kimi-k2.6, qwen3-30b-a3b and deepseek-v4-flash (0731) dropped; Cloudflare retires them on 20 Nov
+# (HTTP 410, code 5028). Their successors qwen3.8-27b and gemma-4-26b are here; deepseek-v4.1-flash has no batch.
+BATCH_MODELS = ("gpt-oss-120b", "gpt-oss-20b", "qwen3.8-27b", "gemma-4-26b", "llama-3.3-70b", "llama-4-scout")
 BROKER = "http://127.0.0.1:" + os.environ.get("CF_BATCH_PORT", "8799")
 import threading as _threading
 _use_batch = _threading.local()  # per-thread flag: vendor_call sets it when the model is at its cap
