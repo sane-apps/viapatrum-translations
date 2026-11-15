@@ -51,6 +51,7 @@ class WatchTestBase(unittest.TestCase):
                    # job_health and the broker restart look at the real machine; stub them.
                    "_job_health": lambda args: {"issues": [], "jobs": []},
                    "broker_runs_old_code": lambda: False,
+                   "queue_runners": lambda: [],
                    # plan pauses come from the live plan_calls state; tests start with none.
                    "plan_status": lambda: {}, "grok_probe": lambda: None}
         for k, v in patches.items():
@@ -521,6 +522,40 @@ class PlanHolds(unittest.TestCase):
         level, summary, _ = self.check(365)
         self.assertEqual(level, "ok")
         self.assertIn("muse: 0 calls today, paused until", summary)
+
+
+
+class StaleLaneTests(WatchTestBase):
+    """14 Nov 2026: queue runners kept pre-fix plan_calls.py for days; the watch asks them to restart."""
+
+    def code(self, mtime: float):
+        for f in W.LANE_CODE:
+            path = W.REPO / f
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("x")
+            os.utime(path, (mtime, mtime))
+
+    def test_runner_older_than_lane_code_gets_restart_flag_once(self):
+        now = time.time()
+        self.code(now - 600)
+        with mock.patch.object(W, "queue_runners", lambda: [(111, now - 7200), (222, now - 60)]):
+            heals = []
+            W.heal_lanes(heals)
+            self.assertTrue((self.wp / "lanes.restart").exists())
+            self.assertIn("111", heals[0])
+            self.assertNotIn("222", heals[0])
+            again = []
+            W.heal_lanes(again)          # same code: not asked twice
+            self.assertEqual(again, [])
+
+    def test_current_runners_are_left_alone(self):
+        now = time.time()
+        self.code(now - 7200)
+        with mock.patch.object(W, "queue_runners", lambda: [(111, now - 600)]):
+            heals = []
+            W.heal_lanes(heals)
+        self.assertEqual(heals, [])
+        self.assertFalse((self.wp / "lanes.restart").exists())
 
 
 if __name__ == "__main__":

@@ -1084,6 +1084,7 @@ def self_heal(results: dict, prior: dict, heals: list[str]) -> None:
                  "--kill"], capture_output=True, text=True, timeout=60).returncode
             heals.append(f"kill hung burn (rc={rc})")
     heal_broker(heals)
+    heal_lanes(heals)
     heal_jobs(results, heals)
     # PID-dead logos lock -> remove (logos_build.py has no stale detection).
     if results["logos_lock"]["state"] == "fail":
@@ -1135,6 +1136,51 @@ def heal_broker(heals: list[str]) -> None:
     rc = subprocess.run(["launchctl", "kickstart", "-k", f"gui/{os.getuid()}/{BROKER_LABEL}"],
                         capture_output=True, timeout=30).returncode
     heals.append(f"restarted batch broker onto current code (rc={rc})")
+
+
+# Lane code a queue runner imports once and then keeps for days. 14 Nov 2026: two runners started 11-12 Nov
+# kept the pre-fix plan_calls.py, so agy ran outside its keychain sandbox and the owner got a "Keychain Not
+# Found ... antigravity" box every hour for two days after the fix was committed.
+LANE_CODE = ("scripts/plan_calls.py", "scripts/work_pipeline.py")
+
+
+def queue_runners() -> list[tuple[int, float]]:
+    """(pid, start time) of every `work_pipeline.py queue` runner."""
+    try:
+        out = subprocess.check_output(["ps", "-axo", "pid=,lstart=,command="], text=True, timeout=20)
+    except (OSError, subprocess.SubprocessError):
+        return []
+    runners = []
+    for line in out.splitlines():
+        if "work_pipeline.py queue" not in line:
+            continue
+        parts = line.split(None, 6)
+        try:
+            runners.append((int(parts[0]), datetime.strptime(" ".join(parts[1:6]), "%a %b %d %H:%M:%S %Y").timestamp()))
+        except (ValueError, IndexError):
+            continue
+    return runners
+
+
+def heal_lanes(heals: list[str]) -> None:
+    """A queue runner older than the lane code gets the graceful restart (lanes.restart: it finishes its
+    current work, exits, and the recert tick starts it on current code). Never killed. Once per code change."""
+    try:
+        code_ts = max((REPO / f).stat().st_mtime for f in LANE_CODE)
+    except (OSError, ValueError):
+        return
+    stale = [pid for pid, started in queue_runners() if code_ts > started + 60]
+    if not stale:
+        return
+    flag = WP / "lanes.restart"
+    try:
+        if flag.exists() and flag.stat().st_mtime >= code_ts:
+            return  # already asked for this code; the runners exit between works
+        flag.touch()
+    except OSError:
+        return
+    heals.append(f"lane runner(s) {', '.join(map(str, stale))} run lane code older than its last change; "
+                 "asked them to restart between works (lanes.restart)")
 
 
 def disabled_labels() -> set[str]:
