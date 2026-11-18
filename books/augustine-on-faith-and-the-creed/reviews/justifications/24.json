@@ -236,5 +236,31 @@
   }
  ],
  "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified"
+ "confidence": "source_verified",
+ "corrections": [
+  {
+   "at": "2026-11-18T09:02:04Z",
+   "by": "Claude, spot check against ANF/NPNF (outputs/viapatrum/translation-spotcheck-20261118)",
+   "fixes": [
+    [
+     "And so what he says does not contradict the resurrection of the body:",
+     "And so what he says does not contradict the resurrection of the flesh:"
+    ],
+    [
+     "are often used to resist the resurrection of the body,",
+     "are often used to resist the resurrection of the flesh,"
+    ]
+   ],
+   "before_sha256": "9eb9e4ac58dee58424ceceebfd0d31572c9c30982db50ef09239d1339f8cfc63",
+   "after_sha256": "0ac4c70987b877c9cb064e13532e0688df5870aa869a7d04d3fa3a5d5e598f48",
+   "blind_check": {
+    "checkers": [
+     "muse",
+     "agy/gemini-3.8-flash-high"
+    ],
+    "confirmed": 0,
+    "rejected": 0
+   }
+  }
+ ]
 }

@@ -284,5 +284,27 @@
   }
  ],
  "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified"
+ "confidence": "source_verified",
+ "corrections": [
+  {
+   "at": "2026-11-18T09:02:04Z",
+   "by": "Claude, spot check against ANF/NPNF (outputs/viapatrum/translation-spotcheck-20261118)",
+   "fixes": [
+    [
+     "And therefore we believe also in the resurrection of the body—",
+     "And therefore we believe also in the resurrection of the flesh—"
+    ]
+   ],
+   "before_sha256": "3b28f2250d47a1959e53dd7cd123306f499c59f1acce00297d2b6355134a4713",
+   "after_sha256": "87babb91a63590694f74050c8edb2c757465ac834f1219033e06b5473fc627f9",
+   "blind_check": {
+    "checkers": [
+     "muse",
+     "agy/gemini-3.8-flash-high"
+    ],
+    "confirmed": 0,
+    "rejected": 0
+   }
+  }
+ ]
 }
