@@ -83,8 +83,13 @@
   {
    "section": "12",
    "source_sha256": "61a7ab790b49ec1768ab6f3b32ef7e8557713252b74cf13631c99d5a97f788f7",
-   "english_sha256": "5eb01dd5543988b995051d3fe2bff5f02b8832679048fb8ba55e90b5b46afd18",
-   "justification": "reviews/justifications/12.json"
+   "english_sha256": "9304bfeb39ced6aa4bbf944a969e68985e9c546037903c77ca06b8de417e64cd",
+   "justification": "reviews/justifications/12.json",
+   "checkers": [
+    "muse",
+    "agy/gemini-3.8-flash-high"
+   ],
+   "corrected": "2026-11-18T09:02:04Z"
   }
  ],
  "revisions": [
@@ -100,6 +105,17 @@
    "edits_undone": 11,
    "rule": "blind two-family source check: reverted text has no more confirmed problems than the edited text",
    "evidence": "docs/QUALITY_AUDIT_20261005.md (reader edits: 38 worse, 23 better, 39 equal of 100)"
+  }
+ ],
+ "corrections": [
+  {
+   "section": "12",
+   "at": "2026-11-18T09:02:04Z",
+   "checkers": [
+    "muse",
+    "agy/gemini-3.8-flash-high"
+   ],
+   "note": "phrase-level correction from the 18 Nov 2026 spot check; blind check clean"
   }
  ]
 }
