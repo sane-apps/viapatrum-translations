@@ -288,3 +288,30 @@ becomes an audiobook, so English that is easy to hear saves rework at the audio 
 - The whole-work readers score `followability` as a first-time listener (scripts/work_read.py) and report
   `hard_to_hear` sentences; those go back for repair like other confirmed findings (scripts/work_pipeline.py).
 - Hand tuning (for example Hermas, 17 Nov 2026) reads each section aloud, or through the narrator voice, before release.
+
+## Check against an independent translation (owner, 18 Nov 2026)
+
+Why: our own blind checkers passed errors that reverse the meaning. A comparison with the old published English (ANF/NPNF) found them on 18 Nov 2026, in a 9% sample:
+- Martyrdom of Polycarp 2: "bound to stakes" where the Greek says they were laid on sharp shells, and "kept before their eyes the eternal life" where it says escaping the eternal fire.
+- Tertullian, On the Flesh of Christ 13: soul and flesh swapped four times, so the argument contradicted itself.
+- Didache 1: "let your alms remain in your hands" where the Greek says "sweat".
+
+The rule:
+- Before a book is released, compare our English with an independent translation of the same source. Use the old ANF/NPNF English where one exists; otherwise a fresh translation by a model of another family.
+- Two judges of different families list every meaning difference. A ruling model reads our Greek or Latin and quotes the words that decide each one, and a script checks the quote is really in our source.
+- Every ruling against us is read by Claude or a person before anything changes.
+- Look hardest at: who does what to whom; negation; a dropped verb (such as "escape"); an image flattened ("sweat" to "remain"); an invented name; gaps in the source crossed without a mark.
+- Tools: `~/SaneApps/outputs/viapatrum/translation-check-all-20261118/scripts/` (`full_run.py` for whole books against the old English, `phase2.py` for a fresh independent translation). The whole library is being checked this way from 18 Nov 2026.
+
+## Correcting a live book (18 Nov 2026)
+
+- Fix the live English (the book's `translations/*_english.json`) phrase by phrase.
+- Never run `work_pipeline apply` from a staged copy that is older than the live text. For several books the staged copy predates the October review wording and the Scripture citations, so apply would undo both.
+- Tool: `~/SaneApps/outputs/viapatrum/translation-spotcheck-20261118/spotfix/spotfix.py`. Run `stage`, then `check` (a blind check on exactly the fixed English), then `certify`, which re-certifies that section in `reviews/work_receipt.json` and records the fix. Then `promote.py commit <slug>`.
+- Audio: only the changed sentences are re-recorded, and only when the book's narrator voice still exists (`outputs/audio/stale-old-voice.json` lists those waiting for the owner).
+
+## When a provider refuses or blanks an input (18 Nov 2026)
+
+- `plan_calls.chat()` now screens inputs before sending. Passages that describe harm to children never go to agy Gemini or Muse, and biomedical text never goes to Muse. Such a call comes back "screened ...; refusing": send it to Claude or Composer instead.
+- A refused or empty reply quarantines that input for that provider, so it is never resent. It also writes an alert in `outputs/agent-alerts/`.
+- Then find out why, the same day, so we are never blocked: read the input locally, name the trigger, add it to the screen with a test, and tell the owner in one line. Full steps: SaneProcess `docs/AI_RESOURCES.md`.
