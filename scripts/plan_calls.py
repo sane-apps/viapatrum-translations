@@ -129,25 +129,21 @@ AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-fl
               "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",
               "claude-opus-5-5-low", "claude-opus-5-5-medium", "claude-opus-5-5-high"}
 AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
-# Headless agy still runs shell commands and fetches URLs (tested 2026-10-24), so lane calls
-# run under their own HOME, signed in separately, whose settings deny every tool, from an
-# empty owner-only folder. The owner's own ~/.gemini settings are untouched.
-AGY_HOME = Path(os.environ.get("PLAN_AGY_HOME") or Path.home() / ".cache" / "agy-lane-home")
+# Headless agy still runs shell commands and fetches URLs (tested 2026-10-24), so every lane call denies every tool
+# for that session only (`--settings`, never saved) and runs from an empty owner-only folder.
+# 18 Nov 2026: lane calls used to run under a second HOME with its own sign-in. That sign-in broke (a 14-byte token
+# file) and every call fell back to "interactive OAuth", opening Google sign-in tabs in the owner's Brave (13 piled
+# up). Now lane calls use the owner's own agy sign-in (his keychain), which he keeps signed in, so there is no second
+# sign-in to break. His keychain is reachable only from the Mini desktop session: run agy jobs under gui-run.sh.
+AGY_HOME = Path(os.environ.get("PLAN_AGY_HOME") or Path.home() / ".cache" / "agy-lane-home")  # work folder + start lock
 AGY_CWD = AGY_HOME / "work"
-# The lane HOME has no keychain, so when agy refreshed its hourly login it ran /usr/bin/security to save it and
-# macOS showed the owner a "Keychain Not Found" box (11 Nov 2026). agy has no setting to skip the keychain on macOS.
-# Each lane call runs in a sandbox that may not start /usr/bin/security: the save fails at once with no box and agy
-# keeps the token in its own file, as it already did after the box timed out. No keychain is created or changed.
 SANDBOX_EXEC = "/usr/bin/sandbox-exec"
-# 18 Nov 2026: the lane's saved sign-in broke (a 14-byte token file) and every headless call fell back to
-# "interactive OAuth": it opened a Google sign-in tab in the owner's Brave and waited. 13 tabs piled up. The sandbox
-# also may not start `open` or `osascript`, so a lane call can never put a browser window in front of the owner.
-AGY_SANDBOX = ('(version 1)(allow default)(deny process-exec (literal "/usr/bin/security"))'
-               '(deny process-exec (literal "/usr/bin/open"))(deny process-exec (literal "/usr/bin/osascript"))')
-# Starts are spaced out so two calls never renew the sign-in and save it at the same moment (suspected cause of the
-# broken token file, 18 Nov 2026). agy renews at start-up, within about 2 seconds.
+# The sandbox may not start `open` or `osascript`, so a lane call can never put a browser window in front of the owner.
+AGY_SANDBOX = '(version 1)(allow default)(deny process-exec (literal "/usr/bin/open"))(deny process-exec (literal "/usr/bin/osascript"))'
+AGY_DENY_ALL = {"command(*)", "read_file(*)", "write_file(*)", "mcp(*)", "read_url(*)", "execute_url(*)"}
+AGY_SETTINGS = json.dumps({"permissions": {"deny": sorted(AGY_DENY_ALL)}})
+# Starts are spaced out so two calls never renew the sign-in and save it at the same moment. agy renews at start-up.
 AGY_START_GAP_S = float(os.environ.get("PLAN_AGY_START_GAP_S", "6"))
-AGY_TOKEN_MIN_BYTES = 100  # a real saved sign-in is far larger; the broken one was 14 bytes
 
 
 def agy_wait_turn() -> None:
@@ -168,14 +164,17 @@ def agy_wait_turn() -> None:
         stamp.touch()
         fcntl.flock(lk, fcntl.LOCK_UN)
 def agy_cmd(args: list[str]) -> list[str] | None:
-    """Every agy start goes through here, inside the keychain sandbox; None when sandbox-exec is missing (no call).
-    12 Nov 2026: the meter read ran agy outside the sandbox and brought back 12 'Keychain Not Found' boxes."""
+    """Every agy start goes through here: in the no-browser sandbox, every tool denied; None when sandbox-exec is
+    missing (no call)."""
     if not os.access(SANDBOX_EXEC, os.X_OK):
         return None
-    return [SANDBOX_EXEC, "-p", AGY_SANDBOX, AGY] + list(args)
+    return [SANDBOX_EXEC, "-p", AGY_SANDBOX, AGY, "--settings", AGY_SETTINGS] + list(args)
 
 
-AGY_DENY_ALL = {"command(*)", "read_file(*)", "write_file(*)", "mcp(*)", "read_url(*)", "execute_url(*)"}
+def agy_env() -> dict:
+    env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
+    env["HOME"] = str(Path.home())  # the owner's own sign-in
+    return env
 BUDGETS["agy"] = (int(os.environ.get("PLAN_AGY_CALLS_PER_HOUR", "60")),
                   int(os.environ.get("PLAN_AGY_CALLS_PER_DAY", "600")))
 # Cursor: the weekly allowance is not published, and the owner's own Cursor work shares it, so a
@@ -522,15 +521,19 @@ def _read_muse_usage() -> str:
     return r.stdout
 
 
-def agy_signed_in() -> bool:
-    """The lane has its own Antigravity sign-in: the token file exists and is not a broken stub (only its size is
-    checked; it is never read here)."""
-    tok = AGY_HOME / ".gemini" / "antigravity-cli" / "antigravity-oauth-token"
+def desktop_session() -> bool:
+    """True inside the Mini desktop session (launchd "Aqua"), where the owner's keychain and so his agy sign-in are
+    reachable. From plain ssh or nohup it is "Background" and agy answers "authentication required"."""
     try:
-        big = tok.stat().st_size >= AGY_TOKEN_MIN_BYTES
-    except OSError:
+        r = subprocess.run(["/bin/launchctl", "managername"], capture_output=True, text=True, timeout=10)
+        return r.stdout.strip() == "Aqua"
+    except (OSError, subprocess.SubprocessError):
         return False
-    return big and tok.is_file() and AGY_CWD.is_dir()
+
+
+def agy_signed_in() -> bool:
+    """agy may be called: the desktop session (the owner's sign-in) and the lane work folder exist."""
+    return AGY_CWD.is_dir() and desktop_session()
 
 
 def _read_agy_usage() -> str:
@@ -538,8 +541,7 @@ def _read_agy_usage() -> str:
     # sign-in window in front of the owner. A meter read must never start a sign-in or create the lane: no token, no call.
     if not agy_signed_in():
         return ""
-    env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
-    env["HOME"] = str(AGY_HOME)
+    env = agy_env()
     cmd = agy_cmd(["-p", "/usage", "--output-format", "json", "--print-timeout", "60s"])
     if cmd is None:
         return ""
@@ -993,20 +995,13 @@ def agy_reset(text: str, now: datetime) -> datetime | None:
 def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     """(text, is_error) from one headless Antigravity call. Exit codes are not trusted:
     only status SUCCESS with a non-empty response counts."""
-    if not agy_signed_in():
-        # No call: without a sign-in agy asks for one. The text matches AUTH_FAIL, so the plan pauses.
-        return "agy lane not logged in (sign-in file missing or broken); refusing", True
+    if not desktop_session():
+        # Not an auth failure (no plan pause): another job in the desktop session may still use agy.
+        return "agy needs the Mini desktop session for the owner's sign-in (run the job under gui-run.sh); refusing", True
     AGY_CWD.mkdir(mode=0o700, parents=True, exist_ok=True)
     st = AGY_CWD.stat()
     if st.st_uid != os.getuid() or st.st_mode & 0o077 or any(AGY_CWD.iterdir()):
         return f"agy cwd {AGY_CWD} is not a private, empty folder owned by this user; refusing", True
-    try:
-        cfg = json.loads((AGY_HOME / ".gemini" / "antigravity-cli" / "settings.json").read_text())
-    except (OSError, ValueError):
-        cfg = {}
-    deny = set((cfg.get("permissions") or {}).get("deny") or [])
-    if not AGY_DENY_ALL <= deny:
-        return "agy lane settings must deny every tool; refusing", True
     # search_web cannot be denied by a permission rule (agy 1.4.7 rejects the action name);
     # it only sends a query to Google. Shell, files, URLs and MCP are denied in settings.
     rule = "Answer only from the text in this prompt. Do not use any tools, search, or browse."
@@ -1017,8 +1012,7 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     if cmd is None:
         return f"{SANDBOX_EXEC} missing: agy would raise keychain boxes on the owner's screen; refusing", True
     try:
-        env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
-        env["HOME"] = str(AGY_HOME)
+        env = agy_env()
         agy_wait_turn()
         r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True,
                            timeout=CALL_TIMEOUT_S + 60, cwd=str(AGY_CWD), env=env)
