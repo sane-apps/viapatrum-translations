@@ -592,6 +592,22 @@ class CursorLane(unittest.TestCase):
         self.assertIsNotNone(pc.cursor_reset(text, NOW))
 
 
+class OutsideResourcesTest(unittest.TestCase):
+    """Owner 18 Nov 2026: agents kept missing the free Gemini key because the inventory table did not list it."""
+
+    def test_table_lists_gemini_key_and_desktop_rule(self):
+        lines = "\n".join(pc.outside_lines())
+        self.assertIn("gemini-api", lines)
+        self.assertIn("AI_RESOURCES.md", lines)
+        self.assertIn("gui-run.sh", lines)
+
+    def test_unreadable_guard_still_prints_a_line(self):
+        with mock.patch.dict(sys.modules, {"provider_guard.gate": None}):
+            lines = "\n".join(pc.outside_lines())
+        self.assertIn("gemini-api", lines)
+        self.assertIn("unreadable", lines)
+
+
 if __name__ == "__main__":
     unittest.main()
 

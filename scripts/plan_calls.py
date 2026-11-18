@@ -1260,7 +1260,28 @@ def table() -> str:
         lines.append(f"  {m:28s} -> {door}  ({why})")
     for k, v in sorted((st.get("second_door_calls") or {}).items()):
         lines.append(f"  answered through a second door so far: {k}: {v}")
+    lines += outside_lines()
     return "\n".join(lines)
+
+
+def outside_lines() -> list[str]:
+    """Resources this file does not route, so a model-work inventory never misses them (owner 18 Nov 2026: "why I have
+    to continually remind you what tools we have"). How to call each: SaneProcess docs/AI_RESOURCES.md."""
+    out = ["Outside these plans (how to call each: ~/SaneApps/infra/SaneProcess/docs/AI_RESOURCES.md):"]
+    try:
+        sys.path.insert(0, str(Path.home() / "SaneApps/infra/SaneProcess/scripts"))
+        from provider_guard.gate import Gate, build_state
+        g = Gate("gemini:owner")
+        stops = g.active_stops(build_state(g.ledger.read()))
+        state = ("STOPPED by the provider guard (" + "; ".join(f"{x.get('stop_id')}: {str(x.get('why'))[:80]}" for x in stops)
+                 + "); only the owner clears it, so ask him in one line") if stops else "room now"
+    except Exception as e:  # noqa: BLE001  the table must still print
+        state = f"guard state unreadable ({type(e).__name__})"
+    out.append(f"  gemini-api  free GEMINI_API_KEY (sane-env), model gemini-3.8-flash, every call through provider_guard "
+               f"account gemini:owner: {state}")
+    out.append("  From ssh, claude and cursor calls need the Mini desktop session: run the job under "
+               "SaneProcess scripts/mini/gui-run.sh. agy and muse work from plain ssh or nohup.")
+    return out
 
 
 def main(argv: list[str]) -> int:
