@@ -592,6 +592,51 @@ class CursorLane(unittest.TestCase):
         self.assertIsNotNone(pc.cursor_reset(text, NOW))
 
 
+class ProviderSafety(unittest.TestCase):
+    """Owner 18 Nov 2026: learn from a refusal so we are never blocked. Screen known triggers; never resend a refused input."""
+    CHILD = ("Then the devil struck the house and killed all of Job's sons and daughters at their feast. "
+             "The children were crushed under the roof, and the house became a tomb for the children.")
+
+    def setUp(self):
+        fresh()
+
+    def test_child_harm_never_reaches_agy_gemini_or_muse(self):
+        sent = []
+        with mock.patch.object(pc, "_run_agy", lambda *a: sent.append(a) or ("{}", False)), \
+             mock.patch.object(pc, "_run_muse", lambda *a: sent.append(a) or ("{}", False)):
+            for m in ("agy/gemini-3.8-flash-high", "muse"):
+                r = pc.chat(m, [{"role": "user", "content": self.CHILD}])
+                self.assertIn("screened", r["error"])
+                self.assertTrue(r["error"].endswith("; refusing"))
+        self.assertEqual(sent, [])
+
+    def test_ordinary_text_still_goes(self):
+        with mock.patch.object(pc, "_run_agy", lambda *a: ('{"ok": true}', False)):
+            r = pc.chat("agy/gemini-3.8-flash-high", [{"role": "user", "content": "Blessed are the peacemakers."}])
+        self.assertEqual(r.get("content"), '{"ok": true}')
+
+    def test_a_refused_input_is_quarantined_and_never_resent(self):
+        calls = []
+
+        def agy(*a):
+            calls.append(a)
+            return ("Error: response blocked: PROHIBITED_CONTENT", True)
+        with mock.patch.object(pc, "_run_agy", agy):
+            r1 = pc.chat("agy/gemini-3.8-flash-high", [{"role": "user", "content": "some passage"}])
+            r2 = pc.chat("agy/gemini-3.8-flash-high", [{"role": "user", "content": "some passage"}])
+        self.assertIn("quarantined", r1["error"])
+        self.assertIn("never resent", r2["error"])
+        self.assertEqual(len(calls), 1)
+
+    def test_an_empty_reply_is_quarantined_too(self):
+        calls = []
+        with mock.patch.object(pc, "_run_muse", lambda *a: calls.append(a) or ("", False)):
+            pc.chat("muse", [{"role": "user", "content": "a paper"}])
+            r = pc.chat("muse", [{"role": "user", "content": "a paper"}])
+        self.assertIn("never resent", r["error"])
+        self.assertEqual(len(calls), 1)
+
+
 class OutsideResourcesTest(unittest.TestCase):
     """Owner 18 Nov 2026: agents kept missing the free Gemini key because the inventory table did not list it."""
 

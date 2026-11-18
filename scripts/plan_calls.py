@@ -176,6 +176,83 @@ CALL_TIMEOUT_S = int(os.environ.get("PLAN_CALL_TIMEOUT_S", "900"))
 DEFAULT_PAUSE_S = 3600  # a limit message whose reset time cannot be read
 PAUSED = "plan paused"
 
+# ---- Provider safety (owner, 18 Nov 2026). Two lessons:
+#  5 Nov 2026: the owner's Muse CLI account was restricted for "repeated policy violations" after one input (a
+#   SARS-CoV-2 paper) came back blank 11 times and was resent. 12 Nov 2026: Gemini refused (prohibited_content) a
+#   sermon where Job's children are killed (provider guard gemini:owner account-922).
+#  1. SCREEN: inputs that look like a topic a provider has refused never go to that provider's lanes; the call fails
+#     locally ("...; refusing") so the caller routes it to another family. Topic lists: provider_guard similarity.py.
+#  2. QUARANTINE: an input a provider refused or answered with nothing is never sent to that provider again, and an
+#     alert asks for the cause (read the input, name the trigger, add it to the topic lists with a test).
+SCREEN_RISK = {"harm_to_children": ("agy/gemini", "muse"), "biomedical": ("muse",)}
+REFUSAL = re.compile(r"prohibited[_ ]content|PROHIBITED_CONTENT|blocked by (?:the )?(?:safety|content)|safety (?:filter|block|system)"
+                     r"|content (?:filter|policy)|usage polic(?:y|ies)|violat(?:es|ion of) (?:our|the) (?:policy|policies|terms)"
+                     r"|finish_?reason\W+SAFETY|\bRECITATION\b", re.I)
+
+
+def _family(model: str) -> str:
+    return "agy/gemini" if model.startswith("agy/gemini") else plan_of(model) or model
+
+
+def _input_hash(system: str, user: str) -> str:
+    import hashlib
+    return hashlib.sha256((system or "").encode() + b"\x00" + (user or "").encode()).hexdigest()
+
+
+def _quarantine_path() -> Path:
+    return STATE.with_name("state-quarantine.json")  # beside state.json; the tests' fresh() clears state*
+
+
+def _quarantined(family: str, h: str) -> dict | None:
+    try:
+        return json.loads(_quarantine_path().read_text()).get(f"{family}:{h}")
+    except (OSError, ValueError):
+        return None
+
+
+def _quarantine(family: str, h: str, model: str, why: str, user: str) -> None:
+    path = _quarantine_path()
+    with open(str(path) + ".lock", "w") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        try:
+            q = json.loads(path.read_text())
+        except (OSError, ValueError):
+            q = {}
+        q[f"{family}:{h}"] = {"model": model, "why": why[:300], "at": _now().isoformat(), "words": len(user.split()),
+                              "start": user[:160]}
+        path.write_text(json.dumps(q, indent=1, ensure_ascii=False))
+    if os.environ.get("PLAN_ALERTS", "1") == "1" and "PLAN_STATE" not in os.environ:
+        alerts = Path.home() / "SaneApps/outputs/agent-alerts"
+        try:
+            (alerts / f"provider-refusal-{family.replace('/', '-')}-{h[:12]}.md").write_text(
+                f"# {model} refused or blanked one input (quarantined for {family})\n\n{_now().isoformat()}\n\n"
+                f"- What came back: {why[:300]}\n- Input fingerprint {h[:16]}, {len(user.split())} words, starting: {user[:160]!r}\n"
+                "- It will not be sent to this provider again (plan_calls quarantine, outputs/plan-limits/state-quarantine.json).\n\n"
+                "**To do (owner, 18 Nov 2026: find out why, so we are not blocked):** read the input locally (do not resend it), "
+                "name the likely trigger, and add it to the provider guard's topic screen "
+                "(SaneProcess scripts/provider_guard/similarity.py) and SCREEN_RISK in plan_calls.py, with a test.\n")
+        except OSError:
+            pass
+
+
+def _screen(model: str, system: str, user: str) -> str | None:
+    """Why this input must not go to this model's lane, or None."""
+    fam = _family(model)
+    h = _input_hash(system, user)
+    q = _quarantined(fam, h)
+    if q:
+        return f"this input was refused or blanked by {fam} on {q.get('at', '?')[:10]} ({q.get('why', '')[:80]}); never resent"
+    risky = [t for t, fams in SCREEN_RISK.items() if fam in fams]
+    if not risky:
+        return None
+    try:
+        sys.path.insert(0, str(Path.home() / "SaneApps/infra/SaneProcess/scripts"))
+        from provider_guard.similarity import topic_check
+    except Exception:  # noqa: BLE001  without the screen, fail closed for the risky lanes
+        return "the provider guard topic screen could not be loaded"
+    tags = [t for t in topic_check(((system or "") + "\n" + (user or "")).encode()) if t in risky]
+    return f"input looks like {', '.join(tags)} content, which {fam} has refused before; send it to another family" if tags else None
+
 
 # The same model on another plan. Own subscription first; see "Second doors" at the top.
 DOORS = {"claude-opus-5-5": ("agy/claude-opus-5-5-medium",),
@@ -1084,6 +1161,9 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
     if plan is None:
         return {"error": f"not a plan model: {model}", "ms": 0}
     system, user = _split(messages)
+    why = _screen(model, system, user)
+    if why:
+        return {"error": f"screened: {why}; refusing", "ms": 0}
     key = pause_key(model)
     t0 = time.time()
     deadline = t0 + (MAX_WAIT_S if _max_wait is None else _max_wait)
@@ -1150,6 +1230,9 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
                   f"{reset.isoformat()}", file=sys.stderr, flush=True)
             continue
         ms = int((time.time() - t0) * 1000)
+        if (is_err and REFUSAL.search(text or "")) or (not is_err and not (text or "").strip()):
+            _quarantine(_family(model), _input_hash(system, user), model, text or "empty reply", user)
+            return {"error": f"{plan} refused or blanked this input; quarantined, never resent: {(text or 'empty reply')[:200]}; refusing", "ms": ms}
         if is_err:
             return {"error": f"{plan} call failed: {text[:300]}", "ms": ms}
         return {"content": text, "ms": ms}
