@@ -246,5 +246,31 @@
   }
  ],
  "reviewer": "work_pipeline:gpt-oss+glm",
- "confidence": "source_verified"
+ "confidence": "source_verified",
+ "corrections": [
+  {
+   "at": "2026-11-18T09:11:22Z",
+   "by": "Claude, spot check against ANF/NPNF (outputs/viapatrum/translation-spotcheck-20261118)",
+   "fixes": [
+    [
+     "toward the rich, toward those who are invited,",
+     "toward the rich, toward their hosts,"
+    ],
+    [
+     "It is not, of course, the pagan patience of the peoples of the earth, which is false and shameful.",
+     "It is Christian patience, of course, not the patience of the peoples of the earth, which is false and shameful."
+    ]
+   ],
+   "before_sha256": "69484e2a3e1008b340a2684b2f8d7c3f567cce26107d148a03e5578980036796",
+   "after_sha256": "7a8b08abc49559c7ba736342666c7294e17f59ff9a5cc49127eff41eef215237",
+   "blind_check": {
+    "checkers": [
+     "muse",
+     "agy/gemini-3.8-flash-high"
+    ],
+    "confirmed": 0,
+    "rejected": 0
+   }
+  }
+ ]
 }
