@@ -17,6 +17,7 @@ os.environ["PLAN_METER_REFRESH"] = "0"  # never run the real muse or agy usage c
 os.environ["PLAN_SPILL"] = "0"  # second doors off unless a test turns them on: an older test that pauses a plan must never reach a real CLI
 os.environ["PLAN_METER_DIR"] = str(Path(TMP) / "no-meters")  # never read this Mac's real plan meters
 os.environ["PLAN_CLAUDE_CALLS_PER_HOUR"] = "2"
+os.environ["PLAN_AGY_START_GAP_S"] = "0"
 os.environ["PLAN_MUSE_CALLS_PER_HOUR"] = "50"
 os.environ["PLAN_MUSE_CALLS_PER_DAY"] = "3"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -403,7 +404,11 @@ class Waiting(unittest.TestCase):
             self.assertFalse((home / "lane").exists())                  # and the lane home was not created
             tok = home / "lane" / ".gemini" / "antigravity-cli"
             tok.mkdir(parents=True)
-            (tok / "antigravity-oauth-token").write_text("x")
+            (tok / "antigravity-oauth-token").write_text("x" * 14)
+            (home / "lane" / "work").mkdir()
+            self.assertFalse(pc.agy_signed_in())                        # 18 Nov: a 14-byte broken token is no sign-in
+            (home / "lane" / "work").rmdir()
+            (tok / "antigravity-oauth-token").write_text("x" * 200)
             self.assertFalse(pc.agy_signed_in())                        # no work folder yet: still not a lane
             (home / "lane" / "work").mkdir()
             self.assertTrue(pc.agy_signed_in())
@@ -657,6 +662,44 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class AgyNoBrowserTest(unittest.TestCase):
+    """18 Nov 2026: with a broken lane sign-in, headless agy opened 13 Google sign-in tabs in the owner's Brave."""
+
+    def test_sandbox_blocks_open_and_osascript(self):
+        import subprocess as sp
+        for tool, arg in (("/usr/bin/open", "-h"), ("/usr/bin/osascript", "-e")):
+            r = sp.run([pc.SANDBOX_EXEC, "-p", pc.AGY_SANDBOX, tool, arg, "return 1"], capture_output=True, text=True)
+            self.assertNotEqual(r.returncode, 0, tool)
+            self.assertIn("Operation not permitted", r.stderr, tool)
+
+    def test_broken_token_means_no_call_and_a_plan_pause(self):
+        ran = []
+        with tempfile.TemporaryDirectory() as d:
+            home = Path(d) / "home"
+            cfg = home / ".gemini" / "antigravity-cli"
+            cfg.mkdir(parents=True)
+            (cfg / "antigravity-oauth-token").write_text("x" * 14)
+            (home / "work").mkdir()
+            with mock.patch.object(pc, "AGY_HOME", home), mock.patch.object(pc, "AGY_CWD", home / "work"), \
+                    mock.patch.object(pc.subprocess, "run", lambda *a, **k: ran.append(a)):
+                text, err = pc._run_agy("agy/gemini-3.8-flash-high", "", "hello")
+        self.assertTrue(err)
+        self.assertEqual(ran, [])
+        self.assertTrue(pc.AUTH_FAIL.search(text))
+        self.assertTrue(pc.AUTH_FAIL.search("Error: authentication required. Run 'agy' to log in, then retry."))
+        self.assertTrue(pc.AUTH_FAIL.search("authentication failed or timed out"))
+
+    def test_starts_are_spaced(self):
+        import time as tm
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(pc, "AGY_HOME", Path(d)), \
+                mock.patch.object(pc, "AGY_START_GAP_S", 0.5):
+            t0 = tm.time()
+            pc.agy_wait_turn()
+            pc.agy_wait_turn()
+            pc.agy_wait_turn()
+            self.assertGreaterEqual(tm.time() - t0, 0.95)
+
+
 class AgyKeychainSandboxTest(unittest.TestCase):
     """11 Nov 2026: agy's hourly login save raised a "Keychain Not Found" box on the owner's screen."""
 
@@ -685,7 +728,7 @@ class AgyKeychainSandboxTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             home = Path(d) / "home"
             (home / ".gemini" / "antigravity-cli").mkdir(parents=True)
-            (home / ".gemini" / "antigravity-cli" / "antigravity-oauth-token").write_text("x")
+            (home / ".gemini" / "antigravity-cli" / "antigravity-oauth-token").write_text("x" * 200)
             (home / "work").mkdir()
             with mock.patch.object(pc, "AGY_HOME", home), mock.patch.object(pc, "AGY_CWD", home / "work"), \
                     mock.patch.object(pc.subprocess, "run", fake_run):
@@ -718,6 +761,8 @@ class AgyKeychainSandboxTest(unittest.TestCase):
             cfg = home / ".gemini" / "antigravity-cli"
             cfg.mkdir(parents=True)
             (cfg / "settings.json").write_text(json.dumps({"permissions": {"deny": sorted(pc.AGY_DENY_ALL)}}))
+            (cfg / "antigravity-oauth-token").write_text("x" * 200)
+            (home / "work").mkdir(mode=0o700)
             with mock.patch.object(pc, "AGY_HOME", home), mock.patch.object(pc, "AGY_CWD", home / "work"), \
                     mock.patch.object(pc.subprocess, "run", fake_run):
                 text, err = pc._run_agy("agy/gemini-4-argon-low", "", "hello")

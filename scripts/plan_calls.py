@@ -139,7 +139,34 @@ AGY_CWD = AGY_HOME / "work"
 # Each lane call runs in a sandbox that may not start /usr/bin/security: the save fails at once with no box and agy
 # keeps the token in its own file, as it already did after the box timed out. No keychain is created or changed.
 SANDBOX_EXEC = "/usr/bin/sandbox-exec"
-AGY_SANDBOX = '(version 1)(allow default)(deny process-exec (literal "/usr/bin/security"))'
+# 18 Nov 2026: the lane's saved sign-in broke (a 14-byte token file) and every headless call fell back to
+# "interactive OAuth": it opened a Google sign-in tab in the owner's Brave and waited. 13 tabs piled up. The sandbox
+# also may not start `open` or `osascript`, so a lane call can never put a browser window in front of the owner.
+AGY_SANDBOX = ('(version 1)(allow default)(deny process-exec (literal "/usr/bin/security"))'
+               '(deny process-exec (literal "/usr/bin/open"))(deny process-exec (literal "/usr/bin/osascript"))')
+# Starts are spaced out so two calls never renew the sign-in and save it at the same moment (suspected cause of the
+# broken token file, 18 Nov 2026). agy renews at start-up, within about 2 seconds.
+AGY_START_GAP_S = float(os.environ.get("PLAN_AGY_START_GAP_S", "6"))
+AGY_TOKEN_MIN_BYTES = 100  # a real saved sign-in is far larger; the broken one was 14 bytes
+
+
+def agy_wait_turn() -> None:
+    """Space agy starts across every process on this Mac by at least AGY_START_GAP_S (a lock file and its time)."""
+    if AGY_START_GAP_S <= 0:
+        return
+    import fcntl
+    AGY_HOME.mkdir(mode=0o700, parents=True, exist_ok=True)
+    stamp = AGY_HOME / ".last-start"
+    with open(AGY_HOME / ".start.lock", "a") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        try:
+            since = time.time() - stamp.stat().st_mtime
+        except OSError:
+            since = AGY_START_GAP_S
+        if 0 <= since < AGY_START_GAP_S:
+            time.sleep(AGY_START_GAP_S - since)
+        stamp.touch()
+        fcntl.flock(lk, fcntl.LOCK_UN)
 def agy_cmd(args: list[str]) -> list[str] | None:
     """Every agy start goes through here, inside the keychain sandbox; None when sandbox-exec is missing (no call).
     12 Nov 2026: the meter read ran agy outside the sandbox and brought back 12 'Keychain Not Found' boxes."""
@@ -496,8 +523,14 @@ def _read_muse_usage() -> str:
 
 
 def agy_signed_in() -> bool:
-    """The lane has its own Antigravity sign-in (the token file exists; it is never read here)."""
-    return (AGY_HOME / ".gemini" / "antigravity-cli" / "antigravity-oauth-token").is_file() and AGY_CWD.is_dir()
+    """The lane has its own Antigravity sign-in: the token file exists and is not a broken stub (only its size is
+    checked; it is never read here)."""
+    tok = AGY_HOME / ".gemini" / "antigravity-cli" / "antigravity-oauth-token"
+    try:
+        big = tok.stat().st_size >= AGY_TOKEN_MIN_BYTES
+    except OSError:
+        return False
+    return big and tok.is_file() and AGY_CWD.is_dir()
 
 
 def _read_agy_usage() -> str:
@@ -510,6 +543,7 @@ def _read_agy_usage() -> str:
     cmd = agy_cmd(["-p", "/usage", "--output-format", "json", "--print-timeout", "60s"])
     if cmd is None:
         return ""
+    agy_wait_turn()
     r = subprocess.run(cmd, stdin=subprocess.DEVNULL,
                        capture_output=True, text=True, timeout=90, cwd=str(AGY_CWD), env=env)
     d = json.loads(r.stdout)
@@ -887,7 +921,8 @@ RUNNER_DOWN_S = 600  # heartbeat silent this long = runner really down, not just
 RUNNER_DOWN = "muse runner down"
 # A login that failed never reached the plan: pause briefly, spend no budget (2026-11-07: about
 # 25 "OAuth session expired and could not be refreshed" failures used up Claude's 15/h).
-AUTH_FAIL = re.compile(r"failed to authenticate|oauth session expired|could not be refreshed|\bnot logged in\b", re.I)
+AUTH_FAIL = re.compile(r"failed to authenticate|oauth session expired|could not be refreshed|\bnot logged in\b"
+                       r"|authentication (?:failed|required|interrupted)", re.I)
 AUTH_PAUSE_S = 300
 
 
@@ -958,6 +993,9 @@ def agy_reset(text: str, now: datetime) -> datetime | None:
 def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     """(text, is_error) from one headless Antigravity call. Exit codes are not trusted:
     only status SUCCESS with a non-empty response counts."""
+    if not agy_signed_in():
+        # No call: without a sign-in agy asks for one. The text matches AUTH_FAIL, so the plan pauses.
+        return "agy lane not logged in (sign-in file missing or broken); refusing", True
     AGY_CWD.mkdir(mode=0o700, parents=True, exist_ok=True)
     st = AGY_CWD.stat()
     if st.st_uid != os.getuid() or st.st_mode & 0o077 or any(AGY_CWD.iterdir()):
@@ -981,6 +1019,7 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     try:
         env = {k: os.environ[k] for k in ("PATH", "USER", "LOGNAME", "LANG", "TMPDIR", "SHELL") if k in os.environ}
         env["HOME"] = str(AGY_HOME)
+        agy_wait_turn()
         r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True,
                            timeout=CALL_TIMEOUT_S + 60, cwd=str(AGY_CWD), env=env)
     except subprocess.TimeoutExpired:
