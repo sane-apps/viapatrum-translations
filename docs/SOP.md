@@ -276,3 +276,15 @@ beliefs and held-review locks live in /tmp, which a reboot clears. The auto ship
 text; an `--audio-only` ship starts no shelf, so new narration reaches
 the paid audiobooks with the next text change (open owner call). Nice 10; logs under each repo's `outputs/`. Unload:
 `launchctl bootout gui/$(id -u)/<label>` on the owning machine.
+
+
+## Readability means the ear
+
+Owner, 17 Nov 2026: readability is judged by how the English sounds read aloud: its flow and rhythm. Every book
+becomes an audiobook, so English that is easy to hear saves rework at the audio stage.
+- Write for a listener who cannot glance back: vary sentence length, keep most sentences short enough to hold in
+  the ear, put the main verb early, keep asides out of the middle of a thought, and keep each pronoun close to its noun.
+- Faithfulness still comes first: recast for the ear, but never drop, add or soften a claim.
+- The whole-work readers score `followability` as a first-time listener (scripts/work_read.py) and report
+  `hard_to_hear` sentences; those go back for repair like other confirmed findings (scripts/work_pipeline.py).
+- Hand tuning (for example Hermas, 17 Nov 2026) reads each section aloud, or through the narrator voice, before release.
