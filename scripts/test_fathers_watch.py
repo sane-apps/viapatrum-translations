@@ -456,12 +456,12 @@ class SelfAndJobTruthTests(WatchTestBase):
             self.assertEqual(state, "ok")
             self.assertIn("text changed since the last auto ship", detail)
             base["shelf_pending"] = {"since": base["last_run"]["at"], "done": ["ebooks"], "error": "audiobooks rc=1"}
-            base["last_run"].update(exit=3, why="paid shelf: audiobooks rc=1")
+            base["last_run"].update(exit=3, why="downloads shelf: audiobooks rc=1")
             (sa / "state.json").write_text(json.dumps(base))
             state, detail, _ = W.check_ship_auto()
             self.assertEqual(state, "warn")
             self.assertIn("last auto ship exit 3", detail)
-            self.assertIn("paid shelf refresh failed (audiobooks rc=1)", detail)
+            self.assertIn("downloads shelf refresh failed (audiobooks rc=1)", detail)
             # 9 Nov 2026: a ship that verified AFTER the failed run means the failure is over (last_run is only
             # rewritten when the newer run ends, and its shelf step can take hours).
             base.pop("shelf_pending")

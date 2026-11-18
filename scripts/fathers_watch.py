@@ -746,7 +746,7 @@ def check_ship() -> tuple[str, str, dict]:
     if ship:
         return "ok", "ship running", info
     if shelf:
-        return "ok", f"paid shelf running: {info['shelf']} for {info['shelf_secs'] // 60} min", info
+        return "ok", f"downloads shelf running: {info['shelf']} for {info['shelf_secs'] // 60} min", info
     return "ok", "no ship running", info
 
 
@@ -942,16 +942,16 @@ def check_ship_auto() -> tuple[str, str, dict]:
     elif last_run.get("exit") not in (None, 0, 75) and not _shipped_since(st.get("last_ship"), last_run):
         problems.append(f"last auto ship exit {last_run.get('exit')} at {last_run.get('at')}: {last_run.get('why')}")
     if shelf.get("error"):
-        problems.append(f"paid shelf refresh failed ({shelf['error']}); the next auto ship resumes it")
+        problems.append(f"downloads shelf refresh failed ({shelf['error']}); the next auto ship resumes it")
     elif shelf and (time.time() - local_ts(shelf.get("since", ""))) / 3600 > autoship.ALERT_HOURS \
             and not shelf_ps():
-        problems.append(f"paid shelf pending since {shelf.get('since')} and not running")
+        problems.append(f"downloads shelf pending since {shelf.get('since')} and not running")
     if last_run.get("at") and (time.time() - local_ts(last_run["at"])) / 3600 > 18:
         problems.append(f"auto ship has not run since {last_run['at']} (job unloaded?)")
     if problems:
         return "warn", "; ".join(problems)[:300], info
     if shelf:
-        return "ok", f"paid shelf in progress (done: {', '.join(shelf.get('done') or []) or 'nothing yet'})", info
+        return "ok", f"downloads shelf in progress (done: {', '.join(shelf.get('done') or []) or 'nothing yet'})", info
     if waiting:
         return "ok", f"{', '.join(waiting)} changed since the last auto ship; the next run ships it", info
     return "ok", "site matches certified work", info

@@ -9,7 +9,7 @@ the content changed. The build time appears only in index.html, inside
 <span data-built>, which the tick leaves out of its change hash.
 
 It also prints the one "Pipeline now" block: live vs built vs waiting to ship,
-the paid shelf, the auto ship's last run and skip, git ahead/dirty, disk free,
+the downloads shelf, the auto ship's last run and skip, git ahead/dirty, disk free,
 whether fathers-watch is current, and the owner calls already in the site
 handoff. `status_site.py --now` prints only that block (no site build). The
 page shows the parts that change on events, not every tick, so the tick's
@@ -85,7 +85,7 @@ def ops_facts() -> list[tuple[str, str, str]]:
              + (f"; ERROR {shelf['error']}" if shelf.get("error") else ""))
     else:
         s = f"up to date (last refresh {(st.get('last_shelf') or {}).get('at', 'before state was kept')})"
-    rows.append(("Paid shelf", s, s))
+    rows.append(("Downloads shelf", s, s))
     lr = st.get("last_run") or {}
     run = f"exit {lr.get('exit')} at {lr.get('at')}: {lr.get('why')}" if lr else "no run recorded yet"
     rows.append(("Auto ship last run", run, run))
@@ -337,7 +337,7 @@ def main() -> int:
     recent = "".join(event_html(ev, True) for ev in list(reversed(events))[:60])
     scout_html = scout_section()
     facts = ops_facts()
-    ops_html = ('<h2>Pipeline now</h2><p class="sub">Live site, waiting changes, paid shelf, jobs and open owner calls. '
+    ops_html = ('<h2>Pipeline now</h2><p class="sub">Live site, waiting changes, downloads shelf, jobs and open owner calls. '
                 'Run <code>scripts/status_site.py --now</code> on the Mini for the minute-by-minute view.</p>'
                 '<div class="feed">' + "".join(
                     f'<div class="ev"><time>{E(label)}</time><p>{E(steady)}</p></div>' for label, _, steady in facts)

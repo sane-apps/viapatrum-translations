@@ -5,7 +5,7 @@ Run by com.saneapps.fathers-ship-auto every 30 minutes. Ships only when what
 readers see changed since the last good auto ship:
   text     certified English, book.yml, work receipts, topic records
   audio    narration manifests (audio-only changes use ship.sh --audio-only)
-  library  outputs/downloads/library.json (the paid shelf)
+  library  outputs/downloads/library.json (the downloads shelf; every download is free)
   site     the site repo's committed revision (a code-only change does not
            rebuild the shelf)
 
@@ -299,7 +299,7 @@ RESUME_MAX = 5
 
 
 def refresh_library(st: dict) -> int:
-    """Build and upload the paid shelf from the shipped build, resuming from
+    """Build and upload the downloads shelf from the shipped build, resuming from
     st["shelf_pending"]["done"]. Returns 0 only when every step returned 0."""
     shelf = st.setdefault("shelf_pending", {"since": now_ts(), "for_ship": shipped_at(), "done": []})
     if shelf.get("for_ship") != shipped_at():
@@ -420,7 +420,7 @@ def _main() -> int:
         st.setdefault("pending_since", now_ts())
         st["pending"] = changed
     if shelf:
-        log(f"paid shelf still pending since {shelf.get('since')} (done: {', '.join(shelf.get('done', [])) or 'nothing'}"
+        log(f"downloads shelf still pending since {shelf.get('since')} (done: {', '.join(shelf.get('done', [])) or 'nothing'}"
             f"{'; last error: ' + shelf['error'] if shelf.get('error') else ''})")
 
     why = site_code_gate()
@@ -438,9 +438,9 @@ def _main() -> int:
     if shelf and "assemble" in shelf.get("done", []):
         rc = refresh_library(st)
         if rc != 0:
-            return finish(st, EXIT_SHELF, f"paid shelf: {st['shelf_pending'].get('error')}; nothing shipped")
+            return finish(st, EXIT_SHELF, f"downloads shelf: {st['shelf_pending'].get('error')}; nothing shipped")
         if st.get("shelf_pending"):  # paused at a time limit: uploads still come first
-            return finish(st, EXIT_OK, "paid shelf paused at its time limit; nothing shipped until it finishes")
+            return finish(st, EXIT_OK, "downloads shelf paused at its time limit; nothing shipped until it finishes")
         shelf = None
         now = inputs()
         changed = [k for k in now if now[k] != last.get(k)]
@@ -456,9 +456,9 @@ def _main() -> int:
     if shelf:
         rc = refresh_library(st)
         if rc != 0:
-            return finish(st, EXIT_SHELF, f"paid shelf: {st['shelf_pending'].get('error')}")
+            return finish(st, EXIT_SHELF, f"downloads shelf: {st['shelf_pending'].get('error')}")
         if st.get("shelf_pending"):
-            return finish(st, EXIT_OK, ("shipped; " if changed else "") + "paid shelf paused at its time limit, resumes next run")
+            return finish(st, EXIT_OK, ("shipped; " if changed else "") + "downloads shelf paused at its time limit, resumes next run")
     return finish(st, EXIT_OK, "shipped" if changed else "shelf finished")
 
 
