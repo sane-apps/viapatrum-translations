@@ -14,6 +14,7 @@ os.environ["PLAN_SLOTS"] = str(Path(TMP) / "slots")
 os.environ["PLAN_TUI_METERS"] = "0"  # never open the real Grok or Cursor apps from a test
 os.environ["PLAN_METER_PUSH"] = "0"  # never copy test meters to the other Mac
 os.environ["PLAN_METER_REFRESH"] = "0"  # never run the real muse or agy usage commands from a test
+os.environ["PLAN_GEMKEY"] = "0"  # never call the real Gemini key from a test
 os.environ["PLAN_SPILL"] = "0"  # second doors off unless a test turns them on: an older test that pauses a plan must never reach a real CLI
 os.environ["PLAN_METER_DIR"] = str(Path(TMP) / "no-meters")  # never read this Mac's real plan meters
 os.environ["PLAN_CLAUDE_CALLS_PER_HOUR"] = "2"
@@ -543,6 +544,66 @@ class Waiting(unittest.TestCase):
             self._put(mdir, "agy-argon", 96, 2)
             self.assertIsNotNone(pc.hold_until("agy/gemini-4-argon-high"))
             self.assertIsNone(pc.hold_until("agy/gemini-3.8-flash-high"))
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_gemini_key_calls_go_to_the_subscription_first(self):
+        # Owner 19 Nov 2026: "default to the sub and not rely on the key until we hit limits".
+        msg = [{"role": "user", "content": "x"}]
+        mdir = self._meters("gemkey1")
+        key_calls = []
+        with mock.patch.object(pc, "METER_DIR", mdir), mock.patch.object(pc, "desktop_session", lambda: True), \
+                mock.patch.object(pc, "_run_agy", lambda *a: ("sub", False)), \
+                mock.patch.object(pc, "_run_gemkey", lambda *a: key_calls.append(a) or ("key", False, None)):
+            r = pc.chat("gemini-api/gemini-3.8-flash", msg)
+            self.assertEqual(r["content"], "sub")
+            self.assertNotIn("door", r)
+            self.assertEqual(key_calls, [])
+            self.assertEqual(pc.chat("agy/gemini-3.8-flash-high", msg)["content"], "sub")
+            self.assertEqual(key_calls, [])
+            # The subscription's Gemini is held (meter at 95%): the key takes the call.
+            self._put(mdir, "agy-gemini", 95, 20)
+            r = pc.chat("gemini-api/gemini-3.8-flash", msg)
+            self.assertEqual((r["content"], r["door"]), ("key", "gemini-api/gemini-3.8-flash"))
+            r = pc.chat("agy/gemini-3.8-flash-high", msg)
+            self.assertEqual((r["content"], r["door"]), ("key", "gemini-api/gemini-3.8-flash"))
+            self.assertEqual(len(key_calls), 2)
+            self.assertLess(self.clock.t - NOW.timestamp(), 5)              # no waiting on the held plan
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_gemini_key_direct_and_outside_the_desktop_session(self):
+        msg = [{"role": "user", "content": "x"}]
+        self._meters("gemkey2")
+        with mock.patch.object(pc, "METER_DIR", Path(TMP) / "gemkey2"), \
+                mock.patch.object(pc, "_run_agy", lambda *a: self.fail("the subscription must not be tried")), \
+                mock.patch.object(pc, "_run_gemkey", lambda *a: ("key", False, None)):
+            with mock.patch.object(pc, "desktop_session", lambda: True):
+                self.assertEqual(pc.chat("gemini-api/gemini-3.8-flash", msg, direct=True)["content"], "key")
+            with mock.patch.object(pc, "desktop_session", lambda: False):   # no agy sign-in here: the key at once
+                r = pc.chat("agy/gemini-3.8-flash-high", msg)
+                self.assertEqual((r["content"], r["door"]), ("key", "gemini-api/gemini-3.8-flash"))
+        self.assertEqual(pc.plan_of("gemini-api/gemini-3.8-flash"), "gemkey")
+        self.assertIsNone(pc.plan_of("gemini-api/gemini-9-unknown"))
+        self.assertEqual(pc._family("gemini-api/gemini-3.8-flash"), "agy/gemini")   # one quarantine for Google's filter
+
+    @mock.patch.object(pc, "SPILL", True)
+    def test_full_gemini_key_day_pauses_only_the_key_and_the_subscription_waits(self):
+        msg = [{"role": "user", "content": "x"}]
+        mdir = self._meters("gemkey3")
+        tomorrow = NOW + pc.timedelta(hours=10)
+        with mock.patch.object(pc, "METER_DIR", mdir), mock.patch.object(pc, "desktop_session", lambda: True), \
+                mock.patch.object(pc, "_run_agy", lambda *a: ("sub", False)), \
+                mock.patch.object(pc, "_run_gemkey", lambda *a: ("Gemini key: today's batch of 50 is used (over_plan)", True, tomorrow)):
+            self._put(mdir, "agy-gemini", 95, 2)
+            r = pc.chat("agy/gemini-3.8-flash-high", msg)
+            self.assertEqual(r["content"], "sub")                           # key closed: waited 2 h for the subscription
+            self.assertIsNotNone(pc.paused_until("gemkey"))
+            self.assertIsNone(pc.paused_until("agy/gemini"))
+
+    def test_gemini_key_lane_off_in_tests_never_calls_out(self):
+        text, err, until = pc._run_gemkey("gemini-api/gemini-3.8-flash", "", "hello", 10)
+        self.assertTrue(err)
+        self.assertIn("refusing", text)
+        self.assertIsNone(until)
 
     def test_pick_ranks_lanes_by_room(self):
         mdir = self._meters("pick")

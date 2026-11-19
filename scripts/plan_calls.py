@@ -132,6 +132,23 @@ AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-fl
               "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",
               "claude-opus-5-5-low", "claude-opus-5-5-medium", "claude-opus-5-5-high"}
 AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
+
+# Gemini API key (paid tier on Google Developer Program credits, hard cap $45 a month in AI Studio; SaneProcess
+# docs/GOOGLE_DRIVE_BACKUP.md). Owner, 19 Nov 2026: "default to the sub and not rely on the key until we hit limits".
+# So a call that names the key goes to the same model on the subscription first (GEMKEY_SUB), and the key is that
+# model's second door: used only when the subscription would wait SPILL_AFTER_S or more, or when this process cannot
+# reach the owner's agy sign-in (no Mini desktop session). chat(..., direct=True) goes to the key itself, for work
+# that needs it: exact JSON or thinking settings, or reruns that must match. Every key call passes the provider guard
+# (account gemini:owner), one batch a day of at most GEMKEY_BATCH calls (the guard's limit without the owner's yes).
+GEMKEY_PREFIX = "gemini-api/"
+GEMKEY_MODELS = {"gemini-3.8-flash"}
+GEMKEY_SUB = {"gemini-api/gemini-3.8-flash": "agy/gemini-3.8-flash-high"}
+GEMKEY_ACCOUNT = "gemini:owner"
+GEMKEY_ON = os.environ.get("PLAN_GEMKEY", "1") != "0"
+GEMKEY_CONCURRENT = int(os.environ.get("PLAN_GEMKEY_MAX_CONCURRENT", "4"))
+GEMKEY_BATCH = int(os.environ.get("PLAN_GEMKEY_BATCH", "50"))
+GEMKEY_URL = "https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent"
+BUDGETS["gemkey"] = (int(os.environ.get("PLAN_GEMKEY_CALLS_PER_HOUR", "50")), GEMKEY_BATCH)
 # Headless agy still runs shell commands and fetches URLs (tested 2026-10-24), so every lane call denies every tool
 # for that session only (`--settings`, never saved) and runs from an empty owner-only folder.
 # 18 Nov 2026: lane calls used to run under a second HOME with its own sign-in. That sign-in broke (a 14-byte token
@@ -213,14 +230,15 @@ PAUSED = "plan paused"
 #     locally ("...; refusing") so the caller routes it to another family. Topic lists: provider_guard similarity.py.
 #  2. QUARANTINE: an input a provider refused or answered with nothing is never sent to that provider again, and an
 #     alert asks for the cause (read the input, name the trigger, add it to the topic lists with a test).
-SCREEN_RISK = {"harm_to_children": ("agy/gemini", "muse"), "biomedical": ("muse",)}
+SCREEN_RISK = {"harm_to_children": ("agy/gemini", "gemini-api/", "muse"), "biomedical": ("muse",)}
 REFUSAL = re.compile(r"prohibited[_ ]content|PROHIBITED_CONTENT|blocked by (?:the )?(?:safety|content)|safety (?:filter|block|system)"
                      r"|content (?:filter|policy)|usage polic(?:y|ies)|violat(?:es|ion of) (?:our|the) (?:policy|policies|terms)"
                      r"|finish_?reason\W+SAFETY|\bRECITATION\b", re.I)
 
 
 def _family(model: str) -> str:
-    return "agy/gemini" if model.startswith("agy/gemini") else plan_of(model) or model
+    # The key and agy Gemini share Google's filter: an input one refused is quarantined for both.
+    return "agy/gemini" if model.startswith(("agy/gemini", GEMKEY_PREFIX)) else plan_of(model) or model
 
 
 def _input_hash(system: str, user: str) -> str:
@@ -289,6 +307,7 @@ DOORS = {"claude-opus-5-5": ("agy/claude-opus-5-5-medium",),
 for _lvl in ("low", "medium", "high"):
     DOORS[f"agy/claude-opus-5-5-{_lvl}"] = ("claude-opus-5-5",)
     DOORS[f"agy/claude-sonnet-5-5-{_lvl}"] = ("claude-sonnet-5-5",)
+    DOORS[f"agy/gemini-3.8-flash-{_lvl}"] = ("gemini-api/gemini-3.8-flash",)   # the key: overflow only
 SPILL = os.environ.get("PLAN_SPILL", "1") != "0"
 SPILL_AFTER_S = float(os.environ.get("PLAN_SPILL_AFTER_S", "300"))
 METER_DIR = Path(os.environ.get("PLAN_METER_DIR") or Path.home() / ".sane" / "plan-usage")
@@ -720,7 +739,7 @@ def _second_door(model: str, messages: list, max_tokens, wait: float, tried: set
             continue
         tried.add(alt)
         print(f"plan_calls: {model} would wait {wait:.0f} s; second door {alt}", file=sys.stderr, flush=True)
-        r = chat(alt, messages, max_tokens, _spill=False, _max_wait=max(60.0, wait))
+        r = chat(alt, messages, max_tokens, _spill=False, _max_wait=max(60.0, min(wait, MAX_WAIT_S)))
         if "content" in r:
             r["door"] = alt
             with _state() as s:
@@ -746,6 +765,8 @@ def plan_of(model: str) -> str | None:
         return "agy"
     if m.startswith(CURSOR_PREFIX) and m[len(CURSOR_PREFIX):] in CURSOR_MODELS:
         return "cursor"
+    if m.startswith(GEMKEY_PREFIX) and m[len(GEMKEY_PREFIX):] in GEMKEY_MODELS:
+        return "gemkey"
     return None
 
 
@@ -1226,6 +1247,73 @@ def grok_report() -> dict:
     return {"windows": windows, "since_reset": None if limited else cur, "limited_now": limited}
 
 
+def _local_midnight(now: datetime) -> datetime:
+    local = now.astimezone()
+    return (local + timedelta(days=1)).replace(hour=0, minute=5, second=0, microsecond=0)
+
+
+def _run_gemkey(model: str, system: str, user: str, max_tokens: int | None) -> tuple[str, bool, datetime | None]:
+    """(text, is_error, pause the key until) from one Gemini API call through the provider guard. The guard decides
+    whether the call may go at all; a full daily batch or an account stop pauses the key lane, never the subscription."""
+    if not GEMKEY_ON:
+        return "the Gemini key lane is off (PLAN_GEMKEY=0); refusing", True, None
+    key = os.environ.get("GEMINI_API_KEY", "")
+    if not key:
+        return "GEMINI_API_KEY is not loaded (source ~/.config/nv/env first); refusing", True, None
+    import urllib.error
+    import urllib.request
+    sys.path.insert(0, str(Path.home() / "SaneApps/infra/SaneProcess/scripts"))
+    from provider_guard import Denied, Gate, LedgerError, Reply, Wait
+    now = _now()
+    run = "plan-calls-gemkey-" + now.astimezone().strftime("%Y-%m-%d")
+    name = model[len(GEMKEY_PREFIX):]
+    try:
+        gate = Gate(GEMKEY_ACCOUNT)
+        gate.open_batch(run, planned=GEMKEY_BATCH, max_parallel=GEMKEY_CONCURRENT)
+        body_text = f"{system}\n\n---\n\n{user}" if system else user
+        ticket = gate.reserve(body_text.encode(), "pc-" + _input_hash(system, user)[:16], setting=f"plan-calls/{name}", run=run)
+    except Wait as w:
+        return f"Gemini key: provider guard says wait ({w.code})", True, now + timedelta(seconds=max(30.0, float(w.retry_after or 30)))
+    except Denied as d:
+        code = getattr(d, "code", "")
+        if code in ("over_plan", "no_batch"):
+            return f"Gemini key: today's batch of {GEMKEY_BATCH} is used ({code})", True, _local_midnight(now)
+        if code in ("stopped", "account_stopped"):
+            return f"Gemini key: provider guard stop ({d}); only the owner clears it", True, now + timedelta(hours=6)
+        return f"Gemini key: provider guard refused this input ({code}: {str(d)[:160]}); refusing", True, None
+    except LedgerError as e:
+        return f"Gemini key: provider guard ledger unreadable ({e}); refusing", True, now + timedelta(hours=1)
+    body = {"contents": [{"role": "user", "parts": [{"text": user}]}],
+            "generationConfig": {"maxOutputTokens": int(max_tokens or 8192)}}
+    if system:
+        body["systemInstruction"] = {"parts": [{"text": system}]}
+    req = urllib.request.Request(GEMKEY_URL.format(name), data=json.dumps(body).encode(),
+                                 headers={"x-goog-api-key": key, "Content-Type": "application/json"})
+    t = time.time()
+    try:
+        with urllib.request.urlopen(req, timeout=CALL_TIMEOUT_S) as r:
+            reply = Reply(http_status=r.status, body=json.load(r), headers=dict(r.headers), seconds=time.time() - t)
+    except urllib.error.HTTPError as e:
+        try:
+            b = json.loads(e.read().decode() or "{}")
+        except ValueError:
+            b = None
+        reply = Reply(http_status=e.code, body=b, headers=dict(e.headers), seconds=time.time() - t)
+    except Exception as e:  # noqa: BLE001  network or timeout: the guard records it as technical
+        reply = Reply(timed_out=True, stderr=f"{type(e).__name__}: {str(e)[:200]}", seconds=time.time() - t)
+    res = gate.settle(ticket, reply)
+    if res.cls == "ok":
+        return res.text or "", False, None
+    if res.cls == "blank":
+        return "", False, None                      # chat() quarantines a blank
+    if res.cls in ("refusal", "refused", "policy"):
+        return f"prohibited_content (Gemini key, provider guard: {res.cause})", True, None
+    if getattr(res, "account_stopped", False) or getattr(res, "run_stopped", False):
+        return f"Gemini key: provider guard stopped after technical errors ({res.cause})", True, now + timedelta(hours=6)
+    wait = float(res.retry_after or 60)
+    return f"Gemini key: {res.cls} {res.cause}", True, (now + timedelta(seconds=wait)) if res.may_retry else None
+
+
 def _run_muse(prompt: str) -> tuple[str, bool]:
     """One Muse job through the runner queue. A busy runner is waited on, never failed:
     the call waits up to an hour for its queued job (MUSE_WORKERS run at once)."""
@@ -1243,7 +1331,7 @@ def _run_muse(prompt: str) -> tuple[str, bool]:
 
 
 def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool = True,
-         _max_wait: float | None = None) -> dict:
+         _max_wait: float | None = None, direct: bool = False) -> dict:
     """vendor_call-shaped result: {"content", "ms"} or {"error", "ms"}; "door" names another plan's
     door when that one answered.
 
@@ -1252,6 +1340,9 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
     plan = plan_of(model)
     if plan is None:
         return {"error": f"not a plan model: {model}", "ms": 0}
+    if plan == "gemkey" and not direct and _spill and model in GEMKEY_SUB:
+        # Owner 19 Nov 2026: the subscription first; its second door brings the call back to the key when needed.
+        return chat(GEMKEY_SUB[model], messages, max_tokens, _max_wait=_max_wait)
     system, user = _split(messages)
     why = _screen(model, system, user)
     if why:
@@ -1261,6 +1352,11 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
     deadline = t0 + (MAX_WAIT_S if _max_wait is None else _max_wait)
     tried: set = set()
     refresh_meters()
+    if (_spill and plan == "agy" and any(a.startswith(GEMKEY_PREFIX) for a in DOORS.get(model, ()))
+            and not desktop_session()):  # the owner's agy sign-in is out of reach here: Gemini goes to the key
+        r = _second_door(model, messages, max_tokens, float("inf"), tried)
+        if r:
+            return r
     if _spill and tight(model):  # the plan's own meter is high: leave what is left to the owner
         r = _second_door(model, messages, max_tokens, 0.0, tried)
         if r:
@@ -1304,6 +1400,9 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
             with _slot("cursor", CURSOR_CONCURRENT):
                 text, is_err = _run_cursor(model, system, user)
             reset = cursor_reset(text, _now()) if is_err and "refusing" not in text else None
+        elif plan == "gemkey":
+            with _slot("gemkey", GEMKEY_CONCURRENT):
+                text, is_err, reset = _run_gemkey(model, system, user, max_tokens)
         else:
             prompt = f"{system}\n\n---\n\n{user}" if system else user
             text, is_err = _run_muse(prompt)
@@ -1453,9 +1552,10 @@ def outside_lines() -> list[str]:
     except Exception as e:  # noqa: BLE001  the table must still print
         state = f"guard state unreadable ({type(e).__name__})"
     out.append(f"  gemini-api  GEMINI_API_KEY (sane-env; paid tier on Google credits, hard cap $45 a month), model gemini-3.8-flash, every call through provider_guard "
-               f"account gemini:owner: {state}")
-    out.append("  From ssh, claude and cursor calls need the Mini desktop session: run the job under "
-               "SaneProcess scripts/mini/gui-run.sh. agy and muse work from plain ssh or nohup.")
+               f"account gemini:owner: {state}. Routed as the overflow door of agy/gemini-3.8-flash-*: chat('gemini-api/gemini-3.8-flash') "
+               f"tries the subscription first; direct=True only for exact settings")
+    out.append("  From ssh, claude, cursor and agy calls need the Mini desktop session: run the job under "
+               "SaneProcess scripts/mini/gui-run.sh (an agy Gemini call outside it goes to the key). muse works from plain ssh or nohup.")
     return out
 
 
