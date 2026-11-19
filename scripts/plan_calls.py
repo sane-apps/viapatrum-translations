@@ -428,6 +428,7 @@ def parse_agy_usage(text: str) -> dict:
     """{meter key: windows} from the `/usage` panel agy prints headless, one tab-separated row per limit:
     "Claude and GPT models<TAB>Weekly Limit Remaining<TAB>18%<TAB>2026-11-17T21:41:20Z". Remaining becomes used."""
     out: dict = {}
+    argon_row = False
     for row in text.splitlines():
         cells = [c.strip() for c in row.split("\t")]
         if len(cells) < 4 or not cells[2].endswith("%"):
@@ -443,6 +444,11 @@ def parse_agy_usage(text: str) -> dict:
         if window and keys and 0 <= used <= 100:
             for k in keys:
                 out.setdefault(k, {})[window] = {"used_percentage": used, "resets_at": reset}
+            argon_row = argon_row or keys == ("agy-argon",)
+    # Google AI Ultra (owner upgrade, 19 Nov 2026): the panel has no Argon row; Argon shares the Gemini group's
+    # limits. Without this the agy-argon file kept its last Pro-tier reading and held Argon for days.
+    if "agy-gemini" in out and not argon_row:
+        out["agy-argon"] = json.loads(json.dumps(out["agy-gemini"]))
     return out
 
 
@@ -579,6 +585,10 @@ def refresh_meters(force: bool = False) -> dict:
             for key, windows in found.items():
                 _put_meter(key, windows, now)
             done[src] = sorted(found)
+            if src == "agy" and found:
+                cleared = _clear_agy_pauses_with_room(found)
+                if cleared:
+                    done["agy_pauses_cleared"] = cleared
         tui_mark = METER_DIR / ".refresh-tui"
         if force or not tui_mark.exists() or now - tui_mark.stat().st_mtime >= TUI_REFRESH_S:
             tui_mark.write_text(str(now))
@@ -595,6 +605,27 @@ def refresh_meters(force: bool = False) -> dict:
                 done["grok_json"] = _grok_usage_note()
     _share_meters([k for src in ("muse", "agy", "grok", "cursor") for k in done.get(src, [])])
     return done
+
+
+def _clear_agy_pauses_with_room(found: dict) -> list:
+    """Drop an agy group's "limit reached" pause when a fresh panel shows every window of that group under
+    PLAN_HOLD_PCT. The panel is Google's own count; the pause was our guess from an error message. After the owner's
+    Ultra upgrade (19 Nov 2026) the panel read 100% left while agy/claude stayed paused for five more days."""
+    now = _now()
+    cleared = []
+    with _state() as s:
+        for group in ("gemini", "claude", "gpt-oss"):
+            windows = found.get("agy-" + group) or {}
+            entry = s.get("agy/" + group)
+            if not windows or not isinstance(entry, dict) or not entry.get("paused_until"):
+                continue
+            if datetime.fromisoformat(entry["paused_until"]) <= now:
+                continue
+            if all(w["used_percentage"] < HOLD_PCT for w in windows.values()):
+                entry["paused_until"] = None
+                entry["why"] = "cleared " + now.isoformat(timespec="seconds") + ": Google usage panel shows room"
+                cleared.append("agy/" + group)
+    return cleared
 
 
 def _share_meters(keys: list) -> None:

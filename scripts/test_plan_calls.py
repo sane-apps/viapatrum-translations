@@ -4,7 +4,7 @@ import os
 import sys
 import tempfile
 import unittest
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest import mock
 
@@ -363,6 +363,31 @@ class Waiting(unittest.TestCase):
         self.assertEqual(got["agy-gemini"]["seven_day"]["used_percentage"], 3.0)
         self.assertEqual(got["agy-argon"], {"seven_day": {"used_percentage": 76.0, "resets_at": 1794951051.0}})
         self.assertEqual(pc.parse_agy_usage("I cannot show usage.\nSome\ttext\twithout\tnumbers"), {})
+
+    def test_ultra_panel_without_argon_row_updates_argon_from_gemini(self):
+        # Real panel after the owner's Google AI Ultra upgrade, 2026-11-19 (Mini): two groups, no Argon row.
+        agy = ("Gemini Models\tWeekly Limit Remaining\t100%\t2026-11-26T16:26:28Z\n"
+               "Gemini Models\tFive Hour Limit Remaining\t100%\t2026-11-19T21:26:28Z\n"
+               "Claude and GPT models\tWeekly Limit Remaining\t100%\t2026-11-26T16:26:28Z\n"
+               "Claude and GPT models\tFive Hour Limit Remaining\t100%\t2026-11-19T21:26:28Z\n")
+        got = pc.parse_agy_usage(agy)
+        self.assertEqual(sorted(got), ["agy-argon", "agy-claude", "agy-gemini", "agy-gpt-oss"])
+        self.assertEqual(got["agy-argon"], got["agy-gemini"])
+        self.assertEqual(got["agy-argon"]["seven_day"]["used_percentage"], 0.0)
+        # A panel that still has its own Argon row keeps Argon's own reading (Pro tier).
+        pro = agy + "Gemini 4 Argon\tGemini 4 Argon Weekly Limit\t24%\t2026-11-17T21:30:51Z\n"
+        self.assertEqual(pc.parse_agy_usage(pro)["agy-argon"]["seven_day"]["used_percentage"], 76.0)
+
+    def test_fresh_panel_with_room_clears_a_stale_agy_pause(self):
+        far = (pc._now() + timedelta(days=5)).isoformat()
+        with pc._state() as s:
+            s["agy/claude"] = {"paused_until": far, "why": "Individual quota reached"}
+            s["agy/gemini"] = {"paused_until": far, "why": "Individual quota reached"}
+        room = {"seven_day": {"used_percentage": 0.0, "resets_at": 0}, "five_hour": {"used_percentage": 0.0, "resets_at": 0}}
+        full = {"seven_day": {"used_percentage": 95.0, "resets_at": 0}}
+        self.assertEqual(pc._clear_agy_pauses_with_room({"agy-claude": room, "agy-gemini": full}), ["agy/claude"])
+        self.assertIsNone(pc.paused_until("agy/claude"))
+        self.assertIsNotNone(pc.paused_until("agy/gemini"))      # still over the hold line: the pause stands
 
     @mock.patch.object(pc, "SPILL", True)
     def test_group_meters_steer_only_their_own_models(self):
