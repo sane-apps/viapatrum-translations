@@ -506,6 +506,28 @@ class Waiting(unittest.TestCase):
             with mock.patch.object(pc, "MAX_WAIT_S", 3 * 3600):
                 self.assertIn(pc.PAUSED, pc.chat("grok-4.7", msg)["error"])
 
+    def test_weekly_meter_far_ahead_of_pace_holds_until_the_clock_catches_up(self):
+        # 19 Nov 2026: agy Claude/GPT week at 52% used about 3 hours after its weekly reset.
+        mdir = self._meters("pace")
+        with mock.patch.object(pc, "METER_DIR", mdir):
+            week = 7 * 24
+            self._put(mdir, "agy-claude", 52, week - 3)                 # 3 h into the week, 52% used
+            held = pc.hold_until("agy/claude-opus-5-5-medium")
+            self.assertIsNotNone(held)
+            start = self.clock.t - 3 * 3600
+            self.assertLess(abs(held.timestamp() - (start + 0.37 * week * 3600)), 2)   # 52 - 15 = 37% of the week
+            self.assertIsNone(pc.hold_until("agy/gemini-3.8-flash-high"))             # other group untouched
+            self._put(mdir, "agy-claude", 30, week - 48)               # 2 days in (28.6%), 30% used: on pace
+            self.assertIsNone(pc.hold_until("agy/claude-opus-5-5-medium"))
+            self._put(mdir, "agy-claude", 20, week - 1)                # early but under PLAN_PACE_MIN_USED
+            self.assertIsNone(pc.hold_until("agy/claude-opus-5-5-medium"))
+            self._put(mdir, "agy-claude", 60, 3, window="five_hour")   # five-hour windows: only the 90% rule
+            self.assertIsNone(pc.hold_until("agy/claude-opus-5-5-medium"))
+            self._put(mdir, "agy-claude", 52, week - 3)
+            self.assertIn("agy-claude seven day 52% used (resets Mon 9:00 AM) HELD", pc.table())
+            with mock.patch.object(pc, "HOLD", False):                 # the owner's own run is never held
+                self.assertIsNone(pc.hold_until("agy/claude-opus-5-5-medium"))
+
     @mock.patch.object(pc, "SPILL", True)
     def test_hold_takes_a_second_door_first_and_group_meters_hold_only_their_models(self):
         msg = [{"role": "user", "content": "x"}]

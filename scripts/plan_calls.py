@@ -72,6 +72,9 @@ Hold (owner 2026-11-11: "build whats needed ... so you can coordinate properly")
 model reaches PLAN_HOLD_PCT (90), background calls for it stop until that window resets, so the last tenth of
 every plan stays for the owner's own use. A second door is tried first. PLAN_HOLD=0 turns the hold off for a
 run the owner asked for.
+Pace hold (19 Nov 2026: agy's Claude/GPT week went 52% used in its first 3 hours): a weekly meter more than
+PLAN_PACE_MARGIN (15) points ahead of the share of the week that has passed (and at least PLAN_PACE_MIN_USED, 25%,
+used) also holds background calls, until the clock catches up. The week then lasts the week. Same off switch.
   python3 scripts/plan_calls.py smoke [model]   # one tiny call per plan
 """
 from __future__ import annotations
@@ -356,14 +359,39 @@ HOLD_PCT = float(os.environ.get("PLAN_HOLD_PCT", "90"))
 HOLD_RECHECK_S = 1800.0   # a nearly full window that names no reset time is read again after this long
 
 
+PACE_MARGIN = float(os.environ.get("PLAN_PACE_MARGIN", "15"))     # points a weekly meter may run ahead of the clock
+PACE_MIN_USED = float(os.environ.get("PLAN_PACE_MIN_USED", "25"))
+
+
+def pace_until(used: float, resets_at: float, window: str, now_ts: float) -> float | None:
+    """When a weekly window that is ahead of an even pace is back within PLAN_PACE_MARGIN points of it (a time),
+    or None when it is not ahead. Only seven-day windows with a reset time; five-hour windows just use the 90% hold."""
+    if window != "seven_day" or not resets_at or used < PACE_MIN_USED:
+        return None
+    span = WINDOW_S[window]
+    passed = 100.0 * (1 - (resets_at - now_ts) / span)
+    if used <= passed + PACE_MARGIN:
+        return None
+    return resets_at - span * (1 - (used - PACE_MARGIN) / 100.0)
+
+
 def hold_until(name: str, now: datetime | None = None) -> datetime | None:
-    """When background calls for this model (or plan) may start again: the latest reset among the meter windows
-    at or over PLAN_HOLD_PCT, or None when none is that full."""
+    """When background calls for this model (or plan) may start again: the latest of the resets of meter windows
+    at or over PLAN_HOLD_PCT and the times weekly windows ahead of pace catch up (pace_until), or None."""
     if not HOLD:
         return None
     now = now or _now()
-    resets = [w["resets_at"] or now.timestamp() + HOLD_RECHECK_S for key in meter_keys(name)
-              for k, w in meter(key, now).items() if k != "_at" and w["used_percentage"] >= HOLD_PCT]
+    resets = []
+    for key in meter_keys(name):
+        for k, w in meter(key, now).items():
+            if k == "_at":
+                continue
+            if w["used_percentage"] >= HOLD_PCT:
+                resets.append(w["resets_at"] or now.timestamp() + HOLD_RECHECK_S)
+            else:
+                t = pace_until(w["used_percentage"], w["resets_at"], k, now.timestamp())
+                if t:
+                    resets.append(t)
     return datetime.fromtimestamp(max(resets), timezone.utc) if resets else None
 
 
@@ -1246,7 +1274,7 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
             if r:
                 return r
             if time.time() + wait > deadline:
-                why = "" if paused_until(key, now) else f" (meter at {HOLD_PCT:.0f}% or more: the rest is kept for the owner)"
+                why = "" if paused_until(key, now) else f" (meter at {HOLD_PCT:.0f}% or more, or a weekly meter ahead of an even pace: the rest is kept for the owner)"
                 return {"error": f"{PAUSED}: {key} until {until.isoformat()}{why}", "ms": int((time.time() - t0) * 1000)}
             _sleep(wait)
             continue
@@ -1377,7 +1405,7 @@ def table() -> str:
         if p["paused_until"]:
             state = "spent until " + _clock(datetime.fromisoformat(p["paused_until"]).timestamp())
         elif held:
-            state = f"HELD until {_clock(held.timestamp())} (meter at {HOLD_PCT:.0f}% or more; the rest is kept for you)"
+            state = f"HELD until {_clock(held.timestamp())} (meter at {HOLD_PCT:.0f}% or more, or the week used faster than it passes; the rest is kept for you)"
         elif over:
             state = "at our own limit until " + _clock(now.timestamp() + over)
         else:
@@ -1424,7 +1452,7 @@ def outside_lines() -> list[str]:
                  + "); only the owner clears it, so ask him in one line") if stops else "room now"
     except Exception as e:  # noqa: BLE001  the table must still print
         state = f"guard state unreadable ({type(e).__name__})"
-    out.append(f"  gemini-api  free GEMINI_API_KEY (sane-env), model gemini-3.8-flash, every call through provider_guard "
+    out.append(f"  gemini-api  GEMINI_API_KEY (sane-env; paid tier on Google credits, hard cap $45 a month), model gemini-3.8-flash, every call through provider_guard "
                f"account gemini:owner: {state}")
     out.append("  From ssh, claude and cursor calls need the Mini desktop session: run the job under "
                "SaneProcess scripts/mini/gui-run.sh. agy and muse work from plain ssh or nohup.")
