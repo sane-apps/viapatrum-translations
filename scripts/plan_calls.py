@@ -11,8 +11,8 @@ Four plans, called through their own CLIs so no per-token bill is involved:
            grok-4.7-build-fast (low effort), grok-4.7.
   agy      Antigravity CLI headless (`agy -p`), the owner's Google sign-in (added 2026-10-24;
            Gemini CLI's Google login ended 18 Jun 2026). Model ids "agy/<model>" from
-           `agy models`: agy/gemini-3.8-flash-{high,medium,low}, agy/claude-sonnet-4-6,
-           agy/claude-opus-4-6-thinking, agy/gpt-oss-120b-medium. Paid AI-credit overages are
+           `agy models`: agy/gemini-3.8-flash-{high,medium,low}, agy/gpt-oss-120b-medium and the rest of AGY_MODELS
+           (the Claude 4.6 ids left `agy models` on 19 Nov 2026 and were removed). Paid AI-credit overages are
            off in the owner's account settings (confirmed 2026-10-24); agy drops unknown
            settings keys, so this is not checked from a file. `agy models` on 2026-11-11 also
            lists gemini-4-argon-{low,medium,high}, claude-sonnet-5-5-* and claude-opus-5-5-*.
@@ -126,7 +126,7 @@ GROK_CONCURRENT = int(os.environ.get("PLAN_GROK_MAX_CONCURRENT", "2"))
 AGY = os.environ.get("AGY_BIN", "/opt/homebrew/bin/agy")
 AGY_PREFIX = "agy/"
 AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-flash-low",
-              "claude-sonnet-4-6", "claude-opus-4-6-thinking", "gpt-oss-120b-medium",
+              "gpt-oss-120b-medium",   # claude-sonnet-4-6 and claude-opus-4-6-thinking: gone from agy 19 Nov 2026
               # `agy models`, 2026-11-11
               "gemini-4-argon-low", "gemini-4-argon-medium", "gemini-4-argon-high",
               "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",

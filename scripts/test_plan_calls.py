@@ -78,7 +78,8 @@ class ResetParsing(unittest.TestCase):
         self.assertIsNone(pc.grok_reset("grok timeout after 900s", NOW))
 
     def test_agy_ids_route_to_agy_plan(self):
-        self.assertEqual(pc.plan_of("agy/claude-opus-4-6-thinking"), "agy")
+        self.assertEqual(pc.plan_of("agy/claude-opus-5-5-medium"), "agy")
+        self.assertIsNone(pc.plan_of("agy/claude-opus-4-6-thinking"))   # left agy 19 Nov 2026: refused, not sent
         self.assertEqual(pc.plan_of("agy/gemini-3.8-flash-high"), "agy")
         self.assertIsNone(pc.plan_of("agy/not-a-model"))
         self.assertEqual(pc.plan_of("claude-opus-5-5"), "claude")
