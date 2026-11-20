@@ -170,6 +170,45 @@ class ResetParsing(unittest.TestCase):
         self.assertEqual(pc._undouble("@@LIST .\n@@LIST ."), "@@LIST .")
         self.assertEqual(pc._undouble("one answer"), "one answer")
 
+    def test_will_not_send_names_a_local_refusal_before_any_guard_ticket(self):
+        msgs = [{"role": "user", "content": "hello"}]
+        self.assertIn("not a plan model", pc.will_not_send("agy/not-a-model", msgs))
+        later = NOW + timedelta(hours=3)
+        with mock.patch.object(pc, "_screen", lambda m, s, u: None), mock.patch.object(pc, "desktop_session", lambda: True):
+            with mock.patch.object(pc, "blocked_until", lambda m, n=None: later):
+                self.assertIn("held or paused", pc.will_not_send("agy/gemini-4-carbon-medium", msgs))
+            with mock.patch.object(pc, "blocked_until", lambda m, n=None: None):
+                self.assertIsNone(pc.will_not_send("agy/gemini-4-carbon-medium", msgs))
+        with mock.patch.object(pc, "_screen", lambda m, s, u: "input looks like biomedical content"):
+            self.assertIn("screened", pc.will_not_send("muse", msgs))
+        with mock.patch.object(pc, "_screen", lambda m, s, u: None), mock.patch.object(pc, "blocked_until", lambda m, n=None: None), \
+                mock.patch.object(pc, "desktop_session", lambda: False):
+            self.assertIn("desktop session", pc.will_not_send("cursor/composer-2.5", msgs))
+            self.assertIsNone(pc.will_not_send("muse", msgs))
+
+    def test_claude_and_grok_take_an_effort_per_call(self):
+        self.assertEqual(pc.base_effort("claude-opus-5-5@high"), ("claude-opus-5-5", "high"))
+        self.assertEqual(pc.base_effort("grok-4.7"), ("grok-4.7", ""))
+        self.assertEqual(pc.base_effort("muse/muse-wonder-full-1.0@high"), ("muse/muse-wonder-full-1.0@high", ""))
+        self.assertEqual(pc.plan_of("claude-opus-5-5@high"), "claude")
+        self.assertEqual(pc.plan_of("grok-4.7@xhigh"), "grok")
+        self.assertIsNone(pc.plan_of("grok-4.7@ludicrous"))
+        self.assertIsNone(pc.plan_of("agy/gemini-4-carbon-medium@high"))    # agy names carry their own effort
+        seen = []
+        def fake_run(cmd, **kw):
+            seen.append(cmd)
+            return mock.Mock(stdout='{"result": "ok", "is_error": false, "text": "ok"}', stderr="", returncode=0)
+        with mock.patch.object(pc.subprocess, "run", fake_run):
+            pc._run_claude("claude-opus-5-5@high", "", "hi")
+            pc._run_claude("claude-opus-5-5", "", "hi")
+            pc._run_grok("grok-4.7@high", "", "hi")
+            pc._run_grok("grok-4.7", "", "hi")
+        self.assertEqual(seen[0][seen[0].index("--model") + 1], "claude-opus-5-5")
+        self.assertEqual(seen[0][seen[0].index("--effort") + 1], "high")
+        self.assertNotIn("--effort", seen[1])
+        self.assertEqual((seen[2][seen[2].index("-m") + 1], seen[2][seen[2].index("--reasoning-effort") + 1]), ("grok-4.7", "high"))
+        self.assertEqual(seen[3][seen[3].index("--reasoning-effort") + 1], pc.GROK_EFFORT)
+
     def test_cursor_ids_route_to_cursor_plan(self):
         self.assertEqual(pc.plan_of("cursor/composer-2.5"), "cursor")
         # Models the plan does not include (2026-11-11) are not plan models: they would need bought credits.

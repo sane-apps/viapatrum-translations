@@ -768,8 +768,26 @@ def is_plan_model(model: str) -> bool:
     return plan_of(model) is not None
 
 
+EFFORTS = {"low", "medium", "high", "xhigh", "max"}   # `claude --effort` and `grok --reasoning-effort` (their help, 20 Nov 2026)
+
+
+def base_effort(model: str) -> tuple[str, str]:
+    """("claude-opus-5-5", "high") from "claude-opus-5-5@high"; ("grok-4.7", "") when no effort is named.
+    Claude and Grok models take "@<effort>" since 20 Nov 2026. Before that every Grok call ran at low effort
+    (measured best for one job, the section checker, on 19 Oct) and every Claude call at the program's default,
+    whatever the job. Pick effort per job: low for sorting and short checks, high for judging and long reasoning."""
+    m = (model or "").strip()
+    name, _, effort = m.partition("@")
+    return (name, effort) if name in CLAUDE_MODELS | GROK_MODELS else (m, "")
+
+
 def plan_of(model: str) -> str | None:
     m = (model or "").strip()
+    name, effort = base_effort(m)
+    if effort:
+        if effort not in EFFORTS:
+            return None
+        m = name
     if m == MUSE_MODEL:
         return "muse"
     if m.startswith(MUSE_PREFIX):
@@ -998,8 +1016,11 @@ def _split(messages: list) -> tuple[str, str]:
 
 def _run_claude(model: str, system: str, user: str) -> tuple[str, bool]:
     """(text, is_error) from one `claude -p` call."""
+    model, effort = base_effort(model)
     cmd = [CLAUDE, "-p", "--model", model, "--output-format", "json", "--no-session-persistence",
            "--disallowedTools", *NO_TOOLS]
+    if effort:
+        cmd += ["--effort", effort]
     if system:
         cmd += ["--system-prompt", system]
     try:
@@ -1043,8 +1064,9 @@ def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
     fd = os.open(pf, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
     with os.fdopen(fd, "w", encoding="utf-8") as fh:
         fh.write(user)
+    model, effort = base_effort(model)
     cmd = [GROK, "--prompt-file", str(pf), "-m", model, "--output-format", "json", "--disable-web-search",
-           "--disallowed-tools", GROK_NO_TOOLS, "--reasoning-effort", GROK_EFFORT]
+           "--disallowed-tools", GROK_NO_TOOLS, "--reasoning-effort", effort or GROK_EFFORT]
     if system:
         cmd += ["--system-prompt-override", system]
     t0 = time.time()
@@ -1435,6 +1457,26 @@ def _run_muse_named(model: str, prompt: str) -> tuple[str, bool]:
             return muse_exec.ask_muse(name, effort or MUSE_NAMED_EFFORT, timeout_s=CALL_TIMEOUT_S, screen=False)(prompt), False
     except Exception as e:  # noqa: BLE001  muse_exec raises on every failure; the router reports it as an error reply
         return str(e)[:2000], True
+
+
+def will_not_send(model: str, messages: list) -> str | None:
+    """Why chat() would answer with a refusal made on this Mac, sending nothing, or None when it would send.
+    For callers that wrap chat() in the provider guard: ask this BEFORE reserving a guard ticket. A local refusal
+    ("plan paused", "screened", "not a plan model") handed to the guard as if the provider had said it is filed as an
+    unrecognised reply and the input is set aside (19 Nov 2026: one SaneCite text on agy:owner; and four real Muse
+    answers were filed as blank the same evening for a like reason). Nothing here calls a model."""
+    if plan_of(model) is None:
+        return f"not a plan model: {model}"
+    system, user = _split(messages)
+    why = _screen(model, system, user)
+    if why:
+        return f"screened: {why}"
+    until = blocked_until(model, _now())
+    if until:
+        return f"plan held or paused until {until.isoformat()}"
+    if plan_of(model) in ("agy", "claude", "cursor") and not desktop_session():
+        return "needs the Mini desktop session (run the job under gui-run.sh)"
+    return None
 
 
 def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool = True,
