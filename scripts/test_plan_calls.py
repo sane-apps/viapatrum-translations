@@ -97,6 +97,28 @@ class ResetParsing(unittest.TestCase):
         for m in ("gemini-4-argon-high", "claude-sonnet-5-5-medium", "claude-opus-5-5-low"):
             self.assertEqual(pc.plan_of("agy/" + m), "agy")
 
+    def test_gemini_4_carbon_neon_hydrogen_route_to_agy_gemini_group(self):
+        # 19 Nov 2026: listed by `agy models`; they share the Gemini group's meter and pause, not Argon's own.
+        self.assertEqual(pc.plan_of("agy/gemini-4-carbon-high"), "agy")
+        for m in ("gemini-4-carbon-low", "gemini-4-carbon-medium", "gemini-4-neon-low", "gemini-4-neon-medium",
+                  "gemini-4-neon-high", "gemini-4-neon-xhigh", "gemini-4-hydrogen-low", "gemini-4-hydrogen-medium",
+                  "gemini-4-hydrogen-high", "gemini-4-hydrogen-xhigh"):
+            self.assertEqual(pc.plan_of("agy/" + m), "agy")
+            self.assertEqual(pc.pause_key("agy/" + m), "agy/gemini")
+            self.assertEqual(pc.meter_keys("agy/" + m), ["agy-gemini"])
+        self.assertIsNone(pc.plan_of("agy/gemini-4-carbon-xhigh"))   # not listed: refused, not sent
+
+    def test_gemini_4_carbon_neon_hydrogen_route_to_agy_gemini_group(self):
+        # Added 19 Nov 2026: `agy models` lists them; before this chat() refused them as unknown.
+        for m in ("gemini-4-carbon-low", "gemini-4-carbon-medium", "gemini-4-carbon-high",
+                  "gemini-4-neon-low", "gemini-4-neon-medium", "gemini-4-neon-high", "gemini-4-neon-xhigh",
+                  "gemini-4-hydrogen-low", "gemini-4-hydrogen-medium", "gemini-4-hydrogen-high",
+                  "gemini-4-hydrogen-xhigh"):
+            self.assertEqual(pc.plan_of("agy/" + m), "agy")
+            self.assertEqual(pc.meter_keys("agy/" + m), ["agy-gemini"])    # the Gemini group's meter, not Argon's
+            self.assertEqual(pc._family("agy/" + m), "agy/gemini")        # shares Google's content screen
+        self.assertIsNone(pc.plan_of("agy/gemini-4-carbon-xhigh"))        # not offered: refused, not sent
+
     def test_cursor_ids_route_to_cursor_plan(self):
         self.assertEqual(pc.plan_of("cursor/composer-2.5"), "cursor")
         # Models the plan does not include (2026-11-11) are not plan models: they would need bought credits.

@@ -129,6 +129,18 @@ AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-fl
               "gpt-oss-120b-medium",   # claude-sonnet-4-6 and claude-opus-4-6-thinking: gone from agy 19 Nov 2026
               # `agy models`, 2026-11-11
               "gemini-4-argon-low", "gemini-4-argon-medium", "gemini-4-argon-high",
+              # `agy models`, 2026-11-19 (model-watch snapshot 2026-11-19.json): Gemini 4 Carbon, Neon and Hydrogen,
+              # all in Google's Gemini usage group
+              "gemini-4-carbon-low", "gemini-4-carbon-medium", "gemini-4-carbon-high",
+              "gemini-4-neon-low", "gemini-4-neon-medium", "gemini-4-neon-high", "gemini-4-neon-xhigh",
+              "gemini-4-hydrogen-low", "gemini-4-hydrogen-medium", "gemini-4-hydrogen-high",
+              "gemini-4-hydrogen-xhigh",
+              # `agy models`, 2026-11-19 (model-watch snapshot 2026-11-19.json): Carbon, Neon and Hydrogen, same
+              # Gemini usage group. Owner 19 Nov 2026: "try carbon or neon, whichever one is up to the task".
+              "gemini-4-carbon-low", "gemini-4-carbon-medium", "gemini-4-carbon-high",
+              "gemini-4-neon-low", "gemini-4-neon-medium", "gemini-4-neon-high", "gemini-4-neon-xhigh",
+              "gemini-4-hydrogen-low", "gemini-4-hydrogen-medium", "gemini-4-hydrogen-high",
+              "gemini-4-hydrogen-xhigh",
               "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",
               "claude-opus-5-5-low", "claude-opus-5-5-medium", "claude-opus-5-5-high"}
 AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
