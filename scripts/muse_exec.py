@@ -75,7 +75,7 @@ def undouble(text: str) -> str:
     return text
 
 
-def ask_muse(model: str, effort: str = "high", timeout_s: int = 1800):
+def ask_muse(model: str, effort: str = "high", timeout_s: int = 1800, screen: bool = True):
     if model not in MODELS:
         raise ValueError(f"not a Muse model we call: {model}")
     if effort not in EFFORTS:
@@ -86,7 +86,7 @@ def ask_muse(model: str, effort: str = "high", timeout_s: int = 1800):
     import plan_calls   # for its topic screen only
 
     def ask(prompt: str) -> str:
-        why = plan_calls._screen("muse", "", prompt)
+        why = plan_calls._screen("muse", "", prompt) if screen else None   # screen=False only when the router has screened already
         if why:
             raise RuntimeError(f"{model}: screened: {why}; refusing")
         ws = WORK / "ws"

@@ -100,6 +100,14 @@ CLAUDE = os.environ.get("CLAUDE_BIN", str(_HEADLESS if _HEADLESS.exists() else P
 NO_TOOLS = ["Bash", "Edit", "Write", "Read", "Glob", "Grep", "WebFetch", "WebSearch", "Agent", "NotebookEdit"]
 CLAUDE_MODELS = {"claude-sonnet-5-5", "claude-haiku-5-5", "claude-opus-5-5"}
 MUSE_MODEL = "muse"
+# Named Muse models (`muse exec --list-models`, 20 Nov 2026; the owner upgraded the Muse plan on 19 Nov 2026 so that
+# Wonder Full, Meta's strongest, is served). "muse" alone is the runner queue, which names no model and so runs the
+# program's default (Spark 1.3) at PLAN_MUSE_EFFORT. A named model is "muse/<id>" or "muse/<id>@<effort>" and goes
+# through muse_exec.py (same plan, same budgets, same topic screen). Until 20 Nov the router had no way to name one.
+MUSE_PREFIX = "muse/"
+MUSE_MODELS = {"muse-wonder-full-1.0", "muse-wonder-1.0", "muse-spark-1.3", "muse-ember-1.0"}
+MUSE_EFFORTS = {"minimal", "low", "medium", "high", "xhigh", "max"}
+MUSE_NAMED_EFFORT = os.environ.get("PLAN_MUSE_NAMED_EFFORT", "high")   # Meta's own default for the Muse program
 # Grok on the owner's X subscription login, never XAI_API_KEY (per-use billing; owner
 # 2026-10-19). build-fast at low effort: 62 s a section and the best recall in the checker
 # bench (outputs/checker-bench-20261019: 4 real catches no other checker made).
@@ -764,6 +772,9 @@ def plan_of(model: str) -> str | None:
     m = (model or "").strip()
     if m == MUSE_MODEL:
         return "muse"
+    if m.startswith(MUSE_PREFIX):
+        name, _, effort = m[len(MUSE_PREFIX):].partition("@")
+        return "muse" if name in MUSE_MODELS and (not effort or effort in MUSE_EFFORTS) else None
     if m in CLAUDE_MODELS:
         return "claude"
     if m in GROK_MODELS:
@@ -1404,7 +1415,26 @@ def _run_muse(prompt: str) -> tuple[str, bool]:
     err = str(res.get("error") or "")
     if err:
         return (err + " " + str(res.get("stderr_tail") or ""))[:2000], True
-    return str(res.get("answer") or ""), False
+    return _undouble(str(res.get("answer") or "")), False
+
+
+def _undouble(text: str) -> str:
+    """Muse models often send a short answer twice in one turn and the program prints both (20 Nov 2026). An answer
+    that is exactly the same text twice is cut to one copy; anything else is returned untouched."""
+    from muse_exec import undouble
+    return undouble(text)
+
+
+def _run_muse_named(model: str, prompt: str) -> tuple[str, bool]:
+    """(text, is_error) from one call to a named Muse model ("muse/<id>[@effort]") through muse_exec.py."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import muse_exec
+    name, _, effort = model[len(MUSE_PREFIX):].partition("@")
+    try:
+        with _slot("muse", MUSE_CONCURRENT):
+            return muse_exec.ask_muse(name, effort or MUSE_NAMED_EFFORT, timeout_s=CALL_TIMEOUT_S, screen=False)(prompt), False
+    except Exception as e:  # noqa: BLE001  muse_exec raises on every failure; the router reports it as an error reply
+        return str(e)[:2000], True
 
 
 def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool = True,
@@ -1482,7 +1512,7 @@ def chat(model: str, messages: list, max_tokens: int | None = None, _spill: bool
                 text, is_err, reset = _run_gemkey(model, system, user, max_tokens)
         else:
             prompt = f"{system}\n\n---\n\n{user}" if system else user
-            text, is_err = _run_muse(prompt)
+            text, is_err = _run_muse_named(model, prompt) if model.startswith(MUSE_PREFIX) else _run_muse(prompt)
             reset = muse_reset(text, _now()) if is_err else None
             if is_err and text.startswith(RUNNER_DOWN):  # launchd restarts it; wait, don't fail
                 reset = _now() + timedelta(minutes=10)

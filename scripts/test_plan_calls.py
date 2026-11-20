@@ -151,6 +151,25 @@ class ResetParsing(unittest.TestCase):
         text, is_err, _, _ = self._long(good[:-1])
         self.assertTrue(is_err)                             # a missing last turn is an error, not an answer
 
+    def test_named_muse_models_route_to_the_muse_plan(self):
+        # 20 Nov 2026: the queue ("muse") runs Spark 1.3; Wonder Full and the rest had no route at all.
+        for m in ("muse/muse-wonder-full-1.0", "muse/muse-wonder-full-1.0@high", "muse/muse-wonder-1.0@max",
+                  "muse/muse-spark-1.3", "muse/muse-ember-1.0@low"):
+            self.assertEqual(pc.plan_of(m), "muse")
+            self.assertEqual(pc._family(m), "muse")           # same topic screen as the queue
+        for m in ("muse/muse-wonder-9", "muse/muse-wonder-full-1.0@ludicrous", "muse/", "muse-wonder-full-1.0"):
+            self.assertIsNone(pc.plan_of(m))
+        calls = []
+        fake = mock.Mock(ask_muse=lambda name, effort, timeout_s=0, screen=True: (calls.append((name, effort, screen)) or (lambda p: "ok")))
+        with mock.patch.dict(sys.modules, {"muse_exec": fake}), mock.patch.object(pc, "_slot", lambda *a: mock.MagicMock()):
+            self.assertEqual(pc._run_muse_named("muse/muse-wonder-full-1.0", "hi"), ("ok", False))
+            self.assertEqual(pc._run_muse_named("muse/muse-ember-1.0@low", "hi"), ("ok", False))
+        self.assertEqual(calls, [("muse-wonder-full-1.0", pc.MUSE_NAMED_EFFORT, False), ("muse-ember-1.0", "low", False)])
+
+    def test_a_doubled_muse_answer_from_the_queue_is_cut_to_one_copy(self):
+        self.assertEqual(pc._undouble("@@LIST .\n@@LIST ."), "@@LIST .")
+        self.assertEqual(pc._undouble("one answer"), "one answer")
+
     def test_cursor_ids_route_to_cursor_plan(self):
         self.assertEqual(pc.plan_of("cursor/composer-2.5"), "cursor")
         # Models the plan does not include (2026-11-11) are not plan models: they would need bought credits.
