@@ -138,6 +138,7 @@ AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-fl
               "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",
               "claude-opus-5-5-low", "claude-opus-5-5-medium", "claude-opus-5-5-high"}
 AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
+AGY_PROMPT_MAX = int(os.environ.get("PLAN_AGY_PROMPT_MAX", "180000"))   # bytes; agy silently cuts at about 192,000 (19 Nov 2026)
 
 # Gemini API key (paid tier on Google Developer Program credits, hard cap $45 a month in AI Studio; SaneProcess
 # docs/GOOGLE_DRIVE_BACKUP.md). Owner, 19 Nov 2026: "default to the sub and not rely on the key until we hit limits".
@@ -1093,6 +1094,12 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     rule = "Answer only from the text in this prompt. Do not use any tools, search, or browse."
     body = f"{system}\n\n---\n\n{user}" if system else user
     prompt = f"{rule}\n\n{body}"
+    if len(prompt.encode()) > AGY_PROMPT_MAX:
+        # 19 Nov 2026: agy passed the model only about the first 192,000 bytes of a 336,000 to 563,000 byte prompt,
+        # with no warning. Five SaneCite second readings were made on cut-off material; the readers said so
+        # themselves ("the prompt text was truncated inside ..."). A long prompt is refused here, never sent short.
+        return (f"agy prompt too long: {len(prompt.encode())} bytes, over the {AGY_PROMPT_MAX} this lane sends "
+                "(agy cuts a prompt at about 192,000 bytes without saying so); split it or use a model that takes a prompt file"), True
     cmd = agy_cmd(["-p", prompt, "--model", model[len(AGY_PREFIX):], "--output-format", "json",
                    "--print-timeout", f"{CALL_TIMEOUT_S}s"])
     if cmd is None:

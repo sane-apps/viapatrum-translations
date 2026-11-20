@@ -584,6 +584,9 @@ FORMAT_REMINDER = ("Your reply must hold exactly one action: @@WRITE path ... @@
                    "Use END=SOMEWORD on the opening line when the body has a line '@@END'.")
 
 PROMPT_LIMIT = 700_000
+# Pass prompt_limit to work_loop for a model whose route takes less: Google's command-line tool cuts a prompt at
+# about 192,000 bytes without saying so (19 Nov 2026), so loops on agy models use AGY_LOOP_LIMIT.
+AGY_LOOP_LIMIT = 170_000
 READ_DEFAULT_LINES = 400
 LIST_CAP = 200
 MAX_LOOKS = 4   # look-only actions (READ, LIST) allowed in one reply
@@ -927,7 +930,8 @@ def _open_log(path: str):
 
 
 def work_loop(ask, task: str, job_dir, ro_roots=(), max_turns: int = 40, interpreter: str | None = None,
-              log_path=None, timeout_s: int = 300, max_output_bytes: int = 60000) -> dict:
+              log_path=None, timeout_s: int = 300, max_output_bytes: int = 60000,
+              prompt_limit: int = PROMPT_LIMIT) -> dict:
     """Turn loop. ask(prompt) -> reply text. Returns {"final", "turns", "stopped", "transcript_path"}; stopped is
     "done", "max_turns", "model_error", "bad_format" (three unreadable replies in a row) or "stray_process" (a
     process from a run could not be killed)."""
@@ -960,7 +964,7 @@ def work_loop(ask, task: str, job_dir, ro_roots=(), max_turns: int = 40, interpr
 
         for turn in range(1, max_turns + 1):
             count = turn
-            prompt = build_prompt(task, ro, turns)
+            prompt = build_prompt(task, ro, turns, prompt_limit)
             row = {"turn": turn, "at": time.time(), "prompt_bytes": len(prompt.encode())}
             try:
                 answer = ask(prompt)

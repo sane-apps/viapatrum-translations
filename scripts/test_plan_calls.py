@@ -109,6 +109,19 @@ class ResetParsing(unittest.TestCase):
             self.assertEqual(pc._family("agy/" + m), "agy/gemini")   # shares Google's content screen
         self.assertIsNone(pc.plan_of("agy/gemini-4-carbon-xhigh"))   # not listed: refused, not sent
 
+    def test_agy_refuses_a_prompt_it_would_cut_short(self):
+        # 19 Nov 2026: agy passed on only about the first 192,000 bytes of long prompts, silently.
+        calls = []
+        with tempfile.TemporaryDirectory() as td, \
+                mock.patch.object(pc, "desktop_session", lambda: True), \
+                mock.patch.object(pc, "AGY_CWD", Path(td) / "work"), \
+                mock.patch.object(pc.subprocess, "run", side_effect=lambda *a, **k: calls.append(a) or None), \
+                mock.patch.object(pc, "agy_wait_turn", lambda: None):
+            text, is_err = pc._run_agy("agy/gemini-4-carbon-high", "", "x" * (pc.AGY_PROMPT_MAX + 1))
+        self.assertTrue(is_err)
+        self.assertIn("too long", text)
+        self.assertEqual(calls, [])          # nothing was sent
+
     def test_cursor_ids_route_to_cursor_plan(self):
         self.assertEqual(pc.plan_of("cursor/composer-2.5"), "cursor")
         # Models the plan does not include (2026-11-11) are not plan models: they would need bought credits.
