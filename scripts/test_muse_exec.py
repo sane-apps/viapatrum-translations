@@ -26,6 +26,22 @@ class FinalText(unittest.TestCase):
         self.assertEqual(me.final_text(out), "two")
 
 
+class Undouble(unittest.TestCase):
+    def test_exact_doubles_become_one(self):
+        self.assertEqual(me.undouble("@@LIST .\n@@LIST ."), "@@LIST .")
+        self.assertEqual(me.undouble("@@LIST /a/b@@LIST /a/b"), "@@LIST /a/b")
+        self.assertEqual(me.undouble("@@READ x 1 9\n\n@@READ x 1 9"), "@@READ x 1 9")
+        body = "@@WRITE a.py\nprint(1)\n@@END"
+        self.assertEqual(me.undouble(body + "\n" + body), body)
+
+    def test_everything_else_is_untouched(self):
+        for s in ("@@LIST .", "@@LIST .\n@@LIST ws", "aa", "abab ", '{"ok": true}', "@@LIST a@@LIST b", ""):
+            self.assertEqual(me.undouble(s), s if s.strip() != "abab" else "ab")
+
+    def test_final_text_undoubles(self):
+        self.assertEqual(me.final_text(ev("run_terminal", terminal="completed", text="@@LIST .\n@@LIST .")), "@@LIST .")
+
+
 class Refusals(unittest.TestCase):
     def test_unknown_model_and_effort_are_refused_before_any_call(self):
         with self.assertRaises(ValueError):

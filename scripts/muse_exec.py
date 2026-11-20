@@ -53,8 +53,26 @@ def final_text(events: str) -> str | None:
             continue
         pl = e.get("payload") or {}
         if isinstance(pl, dict) and pl.get("kind") == "run_terminal" and pl.get("terminal") == "completed":
-            out = pl.get("text") or ""
+            out = undouble(pl.get("text") or "")
     return out
+
+
+def undouble(text: str) -> str:
+    """Muse models often send a short answer twice in one turn (a first message and then the same words as the final
+    one), and the program hands back both, joined with a line break or with nothing: "@@LIST .\n@@LIST ." or
+    "@@LIST /a@@LIST /a" (seen in every code-trial run on 19 Nov 2026, Spark and Wonder Full alike). When a reply is
+    exactly the same text twice, keep one copy. Anything else is returned untouched."""
+    t = text.strip()
+    n = len(t)
+    if n >= 4 and n % 2 == 0 and t[:n // 2] == t[n // 2:]:
+        return t[:n // 2].strip()
+    if n >= 5 and n % 2 == 1 and t[n // 2] == "\n" and t[:n // 2] == t[n // 2 + 1:]:
+        return t[:n // 2].strip()
+    for sep in ("\n\n", "\n \n"):
+        k = (n - len(sep)) // 2
+        if n > len(sep) and (n - len(sep)) % 2 == 0 and t[k:k + len(sep)] == sep and t[:k] == t[k + len(sep):]:
+            return t[:k].strip()
+    return text
 
 
 def ask_muse(model: str, effort: str = "high", timeout_s: int = 1800):
