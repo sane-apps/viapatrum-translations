@@ -214,13 +214,43 @@ def event_html(ev: dict, show_book: bool) -> str:
     return f'<div class="ev"><time>{E(when)}</time><p>{chip}{book} {E(ev["summary"])}{ref}</p></div>'
 
 
-def scout_section(path=None) -> str:
-    """Cloudflare capability scout (SaneProcess outputs/cf-scout/latest.json)."""
+SCOUT_STALE_H = 48  # the scan ran nightly; two missed nights means it is not running
+JOBS = HOME / "SaneApps/infra/SaneProcess/scripts/automation/jobs.json"
+
+
+def _scout_job_state(jobs_path=None) -> str:
+    """'on', 'off' or '' (unknown) for the cf-scout job on the Mini."""
+    try:
+        return str(json.loads((jobs_path or JOBS).read_text()).get("mini", {}).get("cf-scout", {}).get("state", ""))
+    except (OSError, ValueError, AttributeError):
+        return ""
+
+
+def scout_section(path=None, drafter: str = "", jobs_path=None, now: float | None = None) -> str:
+    """Cloudflare capability scout (SaneProcess outputs/cf-scout/latest.json).
+
+    20 Nov 2026: the scout has been off since 23 Oct, but the page kept showing
+    its last scan as "nightly" and its old drafter pick. When the job is off or
+    the scan is older than SCOUT_STALE_H, say so and hide the old rows. The
+    drafter line always comes from what work_pipeline resolves now, never from
+    the scan file."""
     path = path or (HOME / "SaneApps/infra/SaneProcess/outputs/cf-scout/latest.json")
+    drafter_html = (f'<p class="sub">New drafts use <code>{E(drafter)}</code> '
+                    '(what the translation pipeline resolves now).</p>') if drafter else ""
     try:
         r = json.loads(path.read_text())
     except (OSError, ValueError):
-        return ""
+        r = {}
+    state = _scout_job_state(jobs_path)
+    try:
+        age_h = ((now or time.time()) - path.stat().st_mtime) / 3600
+    except OSError:
+        age_h = None
+    if state == "off" or age_h is None or age_h > SCOUT_STALE_H:
+        why = "the scan job is off" if state == "off" else "the scan has not run in over two days"
+        last = f"Last scan {E(str(r.get('run', 'unknown')))}" if r else "No scan on file"
+        return (f'<h2>Cloudflare: what\'s new</h2><p class="sub">{last}; {why}, so its old results are hidden.</p>'
+                + drafter_html)
     rows = []
     for m in r.get("in_use_deprecating", []):
         rows.append(f'<div class="ev"><time>deprecating</time><p><span class="chip bad">We use it</span> '
@@ -242,34 +272,54 @@ def scout_section(path=None) -> str:
         rows.append(f'<div class="ev"><time>trial</time><p><span class="chip {chip_for.get(verdict, "idle")}">'
                     f'{E(label_for.get(verdict, verdict or "trial"))}</span> <code>{E(str(t.get("model") or ""))}</code> '
                     f'against <code>{E(str(t.get("incumbent") or ""))}</code>: {E(str(t.get("reason") or ""))}</p></div>')
-    drafter = r.get("drafter")
-    if drafter:
-        rows.append(f'<div class="ev"><time>drafter</time><p>Next lane start drafts with <code>{E(str(drafter))}</code>. '
-                    f'Lanes already running keep the model they started with.</p></div>')
     if not rows:
         rows.append('<div class="ev"><time>&nbsp;</time><p>Nothing new that touches our work since the last scan.</p></div>')
     untried = r.get("not_tried_text_models") or []
     extra = (f'<p class="sub">Text models available that we have not tried: {len(untried)} '
              f'(weekly list in SaneProcess outputs/cf-scout).</p>') if untried else ""
     return (f'<h2>Cloudflare: what\'s new</h2><p class="sub">Scanned {E(r.get("run", ""))}, nightly at 06:15.</p>'
-            f'<div class="feed">{"".join(rows)}</div>{extra}')
+            f'{drafter_html}<div class="feed">{"".join(rows)}</div>{extra}')
 
 
-def drain_section() -> str:
+WAITING_LABEL = {  # drain-status.json "waiting": work the drain does not do by itself
+    "sentence_drift": "sections waiting for a re-read (the recording no longer matches the page)",
+    "stale_old_voice": "works still in an old voice",
+    "page_not_english": "pages not in English",
+    "unmapped_works": "works the audio cannot map to a page",
+    "retrying": "items retrying",
+    "revoice_works": "works waiting for a new voice",
+}
+
+
+def _tiles(counts: dict, labels: dict | None = None) -> str:
+    return "".join(f'<div class="tile"><b>{v:,}</b><span>{E((labels or {}).get(k) or str(k).replace("_", " "))}</span></div>'
+                   for k, v in counts.items() if isinstance(v, int) and not isinstance(v, bool))
+
+
+def drain_section(path=None) -> str:
     """Audio backlog by reason from build_audio.py --drain (outputs/audio/
     drain-status.json). Counts only: its run time changes every 15 min and
-    would force a deploy each tick."""
+    would force a deploy each tick.
+
+    20 Nov 2026: the page showed only "counts" (audio to make), so 2,379
+    sections waiting on a re-read looked like an empty backlog. The "waiting"
+    counts now show beside them."""
     try:
-        d = json.loads((SITE / "outputs/audio/drain-status.json").read_text())
+        d = json.loads((path or SITE / "outputs/audio/drain-status.json").read_text())
     except (OSError, ValueError):
         return ""
     counts = d.get("counts") if isinstance(d.get("counts"), dict) else d
-    tiles = "".join(f'<div class="tile"><b>{v:,}</b><span>{E(str(k).replace("_", " "))}</span></div>'
-                    for k, v in counts.items() if isinstance(v, int) and not isinstance(v, bool))
-    if not tiles:
+    waiting = d.get("waiting") if isinstance(d.get("waiting"), dict) else {}
+    tiles = _tiles(counts)
+    wait_tiles = _tiles(waiting, WAITING_LABEL)
+    if not tiles and not wait_tiles:
         return ""
-    return ('<h2>Audio backlog</h2><p class="sub">Audio still to make, counted by reason '
-            f'(from the 15-minute audio drain).</p><section class="sum">{tiles}</section>')
+    out = ('<h2>Audio backlog</h2><p class="sub">Audio still to make, counted by reason '
+           f'(from the 15-minute audio drain).</p><section class="sum">{tiles}</section>')
+    if wait_tiles:
+        out += ('<p class="sub">Waiting on a re-read or a fix. The drain does not make these by itself, '
+                f'so they are not in the counts above.</p><section class="sum">{wait_tiles}</section>')
+    return out
 
 
 def main() -> int:
@@ -335,7 +385,7 @@ def main() -> int:
     data = json.dumps({"works": rows}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     pct = round(100 * totals["certified"] / max(1, totals["live"]))
     recent = "".join(event_html(ev, True) for ev in list(reversed(events))[:60])
-    scout_html = scout_section()
+    scout_html = scout_section(drafter=str(getattr(wp, "DRAFTER", "") or ""))
     facts = ops_facts()
     ops_html = ('<h2>Pipeline now</h2><p class="sub">Live site, waiting changes, downloads shelf, jobs and open owner calls. '
                 'Run <code>scripts/status_site.py --now</code> on the Mini for the minute-by-minute view.</p>'
@@ -347,7 +397,7 @@ def main() -> int:
 <section class="sum">
   <div class="tile"><b>{totals['certified']} / {totals['live']}</b><span>live works certified</span><div class="bar"><i style="width:{pct}%"></i></div></div>
   <div class="tile"><b>{totals['held']}</b><span>held for a second look</span></div>
-  <div class="tile"><b>{totals['audio_full']}</b><span>works with full audio</span></div>
+  <div class="tile"><b>{totals['audio_full']}</b><span>works with every sentence recorded</span></div>
   <div class="tile"><b>{totals['new_certified']}</b><span>new translations certified</span></div>
   <div class="tile"><b>{totals['events']:,}</b><span>recorded changes</span></div>
 </section>
@@ -393,7 +443,7 @@ function render() {{
     const chip = s === 'certified' ? '<span class="chip good">Certified</span>' : s === 'held' ? '<span class="chip warn">Held</span>'
       : s === 'running' ? '<span class="chip warn">Checking now</span>' : '<span class="chip idle">Waiting</span>';
     const fol = (w.followability || []).length ? `<small>readers ${{w.followability.join(' / ')}} of 5</small>` : '';
-    const au = w.audio_missing === 0 ? '<span class="chip good">Full</span>' : w.audio_missing == null ? '<span class="chip bad">None</span>'
+    const au = w.audio_missing === 0 ? '<span class="chip good">Full</span>' : w.audio_missing == null ? '<span class="chip idle">Not counted yet</span>'
       : `<span class="chip warn">${{w.audio_missing}} missing</span>`;
     const h = w.events ? `${{w.events}} changes<small>last ${{w.last}}</small>` : '<small>none yet</small>';
     return `<tr><td><a href="works/${{w.book}}.html">${{w.title}}</a><small>${{w.slug}}</small></td><td>${{chip}}${{fol}}</td><td>${{au}}</td><td class="n">${{h}}</td></tr>`;
