@@ -109,18 +109,47 @@ class ResetParsing(unittest.TestCase):
             self.assertEqual(pc._family("agy/" + m), "agy/gemini")   # shares Google's content screen
         self.assertIsNone(pc.plan_of("agy/gemini-4-carbon-xhigh"))   # not listed: refused, not sent
 
-    def test_agy_refuses_a_prompt_it_would_cut_short(self):
-        # 19 Nov 2026: agy passed on only about the first 192,000 bytes of long prompts, silently.
-        calls = []
+    def _long(self, replies, size=None):
+        """Run _run_agy with a prompt over the cut; `replies` are the fake tool's result events, one per message."""
+        sent = {}
+
+        def fake_run(cmd, **kw):
+            sent["cmd"], sent["input"] = cmd, kw.get("input")
+            out = "\n".join(json.dumps({"event": "result", "result": r}) for r in replies)
+            return mock.Mock(stdout=out, stderr="", returncode=0)
+        prompt = "\n".join(f"LINE {i:06d} some words to fill the line up to a fair length" for i in range(1, 8001))
         with tempfile.TemporaryDirectory() as td, \
                 mock.patch.object(pc, "desktop_session", lambda: True), \
                 mock.patch.object(pc, "AGY_CWD", Path(td) / "work"), \
-                mock.patch.object(pc.subprocess, "run", side_effect=lambda *a, **k: calls.append(a) or None), \
+                mock.patch.object(pc.subprocess, "run", side_effect=fake_run), \
                 mock.patch.object(pc, "agy_wait_turn", lambda: None):
-            text, is_err = pc._run_agy("agy/gemini-4-carbon-high", "", "x" * (pc.AGY_PROMPT_MAX + 1))
+            self.assertGreater(len(prompt.encode()), pc.AGY_PROMPT_MAX)
+            text, is_err = pc._run_agy("agy/gemini-4-carbon-medium", "", prompt)
+        return text, is_err, sent, prompt
+
+    def test_agy_sends_a_long_prompt_in_parts_and_never_short(self):
+        # 20 Nov 2026: agy cuts one message at about 192,000 bytes; several messages in one conversation arrive whole.
+        msgs = pc.agy_long_messages("x" * 10 + "\n" + "y" * 400000)
+        self.assertTrue(all(len(m.encode()) < 190000 for m in msgs))
+        n = len(msgs) - 1
+        ok = [{"status": "SUCCESS", "response": f"OK {k}"} for k in range(1, n + 1)]
+        text, is_err, sent, prompt = self._long([{"status": "SUCCESS", "response": "OK 1"}] * 0 + [])   # no replies at all
         self.assertTrue(is_err)
-        self.assertIn("too long", text)
-        self.assertEqual(calls, [])          # nothing was sent
+        lines = [json.loads(l) for l in sent["input"].splitlines()]
+        parts = len(lines) - 1
+        self.assertGreaterEqual(parts, 2)
+        self.assertIn("-p=", sent["cmd"])
+        joined = "".join(l["message"]["content"].split("-----\n", 1)[1] for l in lines[:-1])
+        self.assertIn(prompt, joined)                       # every byte of the prompt went out, in order
+        good = [{"status": "SUCCESS", "response": f"OK {k}"} for k in range(1, parts + 1)] + [{"status": "SUCCESS", "response": "the answer"}]
+        text, is_err, _, _ = self._long(good)
+        self.assertEqual((text, is_err), ("the answer", False))
+        bad = list(good); bad[0] = {"status": "SUCCESS", "response": "I will summarize"}
+        text, is_err, _, _ = self._long(bad)
+        self.assertTrue(is_err)
+        self.assertIn("part 1 was not acknowledged", text)
+        text, is_err, _, _ = self._long(good[:-1])
+        self.assertTrue(is_err)                             # a missing last turn is an error, not an answer
 
     def test_cursor_ids_route_to_cursor_plan(self):
         self.assertEqual(pc.plan_of("cursor/composer-2.5"), "cursor")

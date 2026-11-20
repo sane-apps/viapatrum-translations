@@ -1096,10 +1096,11 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
     prompt = f"{rule}\n\n{body}"
     if len(prompt.encode()) > AGY_PROMPT_MAX:
         # 19 Nov 2026: agy passed the model only about the first 192,000 bytes of a 336,000 to 563,000 byte prompt,
-        # with no warning. Five SaneCite second readings were made on cut-off material; the readers said so
-        # themselves ("the prompt text was truncated inside ..."). A long prompt is refused here, never sent short.
-        return (f"agy prompt too long: {len(prompt.encode())} bytes, over the {AGY_PROMPT_MAX} this lane sends "
-                "(agy cuts a prompt at about 192,000 bytes without saying so); split it or use a model that takes a prompt file"), True
+        # with no warning (five SaneCite second readings were made on cut-off material; the readers said so). The cut
+        # is per message, not per conversation: 20 Nov 2026, a 400,000-byte text sent as several messages on standard
+        # input (agy's documented stream-json mode) was read whole (first line, last line and a planted word found).
+        # So a long prompt goes in parts, each under the cut, in one conversation; it is never sent short.
+        return _run_agy_long(model, prompt)
     cmd = agy_cmd(["-p", prompt, "--model", model[len(AGY_PREFIX):], "--output-format", "json",
                    "--print-timeout", f"{CALL_TIMEOUT_S}s"])
     if cmd is None:
@@ -1122,6 +1123,69 @@ def _run_agy(model: str, system: str, user: str) -> tuple[str, bool]:
         except ValueError:
             pass
     return (out or r.stderr.strip() or f"agy exit {r.returncode} with no output")[:2000], True
+
+
+AGY_PART_BYTES = int(os.environ.get("PLAN_AGY_PART_BYTES", "150000"))
+AGY_LONG_MAX = int(os.environ.get("PLAN_AGY_LONG_MAX", "1500000"))   # bytes; about a third of the model's stated context
+
+
+def agy_long_messages(prompt: str) -> list[str]:
+    """A long prompt as several messages for one agy conversation: each part under the per-message cut, split at a
+    line break where there is one, each asking only for "OK <k>", then one message asking for the answer."""
+    parts, rest = [], prompt
+    while rest:
+        if len(rest.encode()) <= AGY_PART_BYTES:
+            parts.append(rest)
+            break
+        cut = len(rest.encode()[:AGY_PART_BYTES].decode("utf-8", "ignore"))
+        nl = rest.rfind("\n", cut // 2, cut)
+        cut = nl + 1 if nl > 0 else cut
+        parts.append(rest[:cut])
+        rest = rest[cut:]
+    n = len(parts)
+    msgs = [f"This request is long, so it comes in {n} parts. This is part {k} of {n}. Do not act on it yet and do not use "
+            f"any tools; reply with exactly: OK {k}\n\n----- PART {k} OF {n} -----\n{part}" for k, part in enumerate(parts, 1)]
+    msgs.append(f"That was all {n} parts. Put them together in order as one request and now answer it in full, following the "
+                "instructions it gives. Answer only from that text. Do not use any tools, search, or browse.")
+    return msgs
+
+
+def _run_agy_long(model: str, prompt: str) -> tuple[str, bool]:
+    """(text, is_error) for a prompt over AGY_PROMPT_MAX: sent as several messages on standard input (stream-json).
+    Every part must be acknowledged with its own "OK k"; otherwise the answer is an error, never a guess."""
+    size = len(prompt.encode())
+    if size > AGY_LONG_MAX:
+        return f"agy prompt too long even in parts: {size} bytes, over {AGY_LONG_MAX}", True
+    msgs = agy_long_messages(prompt)
+    stdin = "".join(json.dumps({"event": "user", "message": {"content": m}}) + "\n" for m in msgs)
+    cmd = agy_cmd(["--model", model[len(AGY_PREFIX):], "--input-format", "stream-json", "--output-format", "stream-json",
+                   "--print-timeout", f"{CALL_TIMEOUT_S}s", "-p="])
+    if cmd is None:
+        return f"{SANDBOX_EXEC} missing: agy would raise keychain boxes on the owner's screen; refusing", True
+    try:
+        agy_wait_turn()
+        r = subprocess.run(cmd, input=stdin, capture_output=True, text=True, timeout=CALL_TIMEOUT_S + 120,
+                           cwd=str(AGY_CWD), env=agy_env())
+    except subprocess.TimeoutExpired:
+        return f"agy timeout after {CALL_TIMEOUT_S}s", True
+    results = []
+    for line in (r.stdout or "").splitlines():
+        try:
+            e = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(e, dict) and e.get("event") == "result":
+            results.append(e.get("result") or {})
+    if len(results) != len(msgs):
+        return (f"agy long prompt: {len(results)} turns answered of {len(msgs)} sent; " + (r.stderr or "").strip()[-600:])[:2000], True
+    for k, res in enumerate(results[:-1], 1):
+        if res.get("status") != "SUCCESS" or f"OK {k}" not in str(res.get("response") or ""):
+            return f"agy long prompt: part {k} was not acknowledged ({res.get('status')}: {str(res.get('response') or res.get('error'))[:300]})", True
+    last = results[-1]
+    text = str(last.get("response") or "")
+    if last.get("status") == "SUCCESS" and text.strip():
+        return text, False
+    return (str(last.get("error") or last.get("status") or "") + " " + text)[:2000].strip() or "agy long prompt: empty answer", True
 
 
 # "ActionRequiredError: GPT-5.5 is not included in your weekly usage Buy credits or switch to a Grok
