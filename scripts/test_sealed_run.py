@@ -745,9 +745,16 @@ class T14Parser(unittest.TestCase):
         with self.assertRaises(sr.ActionError):
             sr.parse_action("@@WRITE a.py\nx\n@@END\n@@RUN python b.py")
 
-    def test_two_actions_refused(self):
-        with self.assertRaises(sr.ActionError):
-            sr.parse_action("@@LIST .\n@@READ a.txt")
+    def test_look_only_actions_may_be_batched(self):
+        acts = sr.parse_action("@@LIST .\n@@READ a.txt")
+        self.assertEqual([a["kind"] for a in acts], ["LIST", "READ"])
+        self.assertEqual(len(sr.parse_action("@@LIST .\n@@LIST ws\n@@READ a.txt 1 9\n@@READ b.txt")), 4)
+
+    def test_mixed_or_too_many_actions_refused(self):
+        for bad in ("@@LIST .\n@@RUN python x.py", "@@RUN python x.py\n@@LIST .", "@@READ a.txt\n@@DONE\nok\n@@END",
+                    "@@LIST a\n@@LIST b\n@@LIST c\n@@LIST d\n@@LIST e"):
+            with self.assertRaises(sr.ActionError, msg=bad):
+                sr.parse_action(bad)
 
     def test_code_fence_wrapping_tolerated(self):
         acts = sr.parse_action("```\n@@READ a.txt 2 5\n```")

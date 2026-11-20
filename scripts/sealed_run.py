@@ -580,11 +580,13 @@ Write nothing after the action. Text before the first @@ line is ignored."""
 
 FORMAT_REMINDER = ("Your reply must hold exactly one action: @@WRITE path ... @@END (optionally followed by one "
                    "@@RUN of that file), @@RUN python|sh|R path [args], @@READ path [first last], @@LIST path, or "
-                   "@@DONE ... @@END. Use END=SOMEWORD on the opening line when the body has a line '@@END'.")
+                   "@@DONE ... @@END. The one exception: up to four @@READ or @@LIST lines may share a reply. "
+                   "Use END=SOMEWORD on the opening line when the body has a line '@@END'.")
 
 PROMPT_LIMIT = 700_000
 READ_DEFAULT_LINES = 400
 LIST_CAP = 200
+MAX_LOOKS = 4   # look-only actions (READ, LIST) allowed in one reply
 
 
 class ActionError(ValueError):
@@ -671,6 +673,13 @@ def parse_action(text: str) -> list[dict]:
             raise ActionError("a RUN after a WRITE must run the file just written")
         acts.append(run)
         rest = rest[1:]
+    # Several look-only actions in one reply are carried out in order (19 Nov 2026: Muse sent two @@LIST lines in
+    # each of three replies and the run stopped on format; reading and listing change nothing, so batching is safe).
+    if acts[0]["kind"] in ("READ", "LIST") and rest and all(l.startswith(("@@READ", "@@LIST")) for _, l in rest):
+        if len(rest) > MAX_LOOKS - 1:
+            raise ActionError(f"at most {MAX_LOOKS} @@READ or @@LIST actions in one reply")
+        acts += [_simple(l) for _, l in rest]
+        rest = []
     if rest:
         raise ActionError(f"text after the action (line {rest[0][0] + 1}: {rest[0][1][:60]!r}); if your file has a "
                           "line '@@END', use END=SOMEWORD")
