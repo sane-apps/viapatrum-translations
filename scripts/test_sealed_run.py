@@ -33,13 +33,24 @@ HOME = sr.HOME
 SCRATCH = os.path.realpath(tempfile.mkdtemp(prefix="sealed-test-"))  # mode 0700, ours alone
 
 
+MADE: list[str] = []  # every folder this module made, so their harness folders can be removed too
+
+
 def tearDownModule():
+    for p in MADE:  # only the harness folders of our own test job folders
+        try:
+            sd = sr.state_dir(p, create=False)
+        except sr.SealError:
+            sd = None
+        if sd:
+            shutil.rmtree(sd, ignore_errors=True)
     shutil.rmtree(SCRATCH, ignore_errors=True)  # only the folder this module made
 
 
 def mkdir700(name: str) -> str:
     p = os.path.join(SCRATCH, f"{name}-{uuid.uuid4().hex[:8]}")
     os.mkdir(p, 0o700)
+    MADE.append(os.path.realpath(p))
     return p
 
 
@@ -428,7 +439,7 @@ class T11Loop(unittest.TestCase):
     def test_d_max_turns(self):
         job, fake, res = self.loop(["@@LIST ."] * 5, max_turns=2)
         self.assertEqual((res["stopped"], res["turns"]), ("max_turns", 2))
-        self.assertIn("transcript.jsonl", fake.prompts[1])
+        self.assertIn(".home/", fake.prompts[1])
 
     def test_e_end_marker_inside_body(self):
         body = "s = '''\n@@END\n'''\nprint('BODY', s.strip())\n"
@@ -471,15 +482,19 @@ class T11Loop(unittest.TestCase):
         self.assertEqual((res["stopped"], res["turns"]), ("model_error", 1))
         self.assertIn("plan paused", log_rows(res["transcript_path"])[0]["error"])
 
-    def test_log_protected_from_code(self):
+    def test_log_out_of_reach_of_code(self):
+        job = mkdir700("job")
+        log = os.path.join(sr.state_dir(job), "transcript.jsonl")
         job, fake, res = self.loop([
-            "@@WRITE evil.py\ntry:\n    open('transcript.jsonl', 'w').write('gone')\n    print('LEAK')\n"
+            f"@@WRITE evil.py\ntry:\n    open({log!r}, 'w').write('gone')\n    print('LEAK')\n"
             "except PermissionError:\n    print('DENIED')\n@@END\n@@RUN python evil.py",
-            "@@WRITE transcript.jsonl\nx\n@@END",
-            "@@DONE\nx\n@@END"])
+            "@@WRITE transcript.jsonl\nx\n@@END",  # a file of that name in the job folder is just a file now
+            "@@DONE\nx\n@@END"], job=job)
+        self.assertEqual(res["transcript_path"], log)
+        self.assertFalse(sr._inside(log, sr.check_job_dir(job)))
         self.assertIn("DENIED", fake.prompts[1])
-        self.assertIn("refused", fake.prompts[2].split("## Turn 2")[1])
-        self.assertEqual(len(log_rows(res["transcript_path"])), 3)
+        self.assertIn("wrote transcript.jsonl", fake.prompts[2])
+        self.assertEqual(len(log_rows(log)), 3)
 
     def test_stray_that_cannot_be_killed_stops_loop(self):
         with mock.patch.object(sr, "sweep_strays", return_value={"killed": [], "survivors": [999999]}):
@@ -613,21 +628,116 @@ class T13StrayFinderPrecision(unittest.TestCase):
     def test_no_false_matches(self):
         """19 Nov 2026: a file-based fingerprint matched 7 macOS services. With no run alive, nothing matches."""
         job = mkdir700("job")
-        sr._prepare_job(sr.check_job_dir(job))
+        sr._token(sr.check_job_dir(job), create=True)
         self.assertEqual(sr.find_strays(job), [])
         # and a live run is found, alone
-        p = subprocess.Popen([sr.SANDBOX_EXEC, "-p", sr.build_profile(sr.check_job_dir(job), [], (),
+        p = subprocess.Popen([sr.SANDBOX_EXEC, "-p", sr.build_profile(sr.check_job_dir(job), [],
                                                                        sr.job_token(job)), "/bin/sleep", "30"],
                              cwd=job, stdin=subprocess.DEVNULL)
         try:
             time.sleep(0.5)
             self.assertEqual(sr.find_strays(job), [p.pid])
             other = mkdir700("job2")
-            sr._prepare_job(sr.check_job_dir(other))
+            sr._token(sr.check_job_dir(other), create=True)
             self.assertEqual(sr.find_strays(other), [], "another job folder's finder must not claim it")
         finally:
             p.kill()
             p.wait()
+
+
+class T15HarnessWritesOutsideJob(unittest.TestCase):
+    """Second security review, 19 Nov 2026: the harness writes nothing in a job folder that code may have
+    prepared (think of a second run in a job folder an earlier run touched)."""
+
+    def setUp(self):
+        self.job, self.other = mkdir700("job"), mkdir700("other")
+        self.canary = os.path.join(self.other, "canary.txt")
+        self.secret = "CANARY-" + uuid.uuid4().hex + "\n"
+        Path(self.canary).write_text(self.secret)
+
+    def test_a_planted_links_change_nothing(self):
+        os.link(self.canary, os.path.join(self.job, "transcript.jsonl"))  # hard link to the outside canary
+        canary2 = os.path.join(self.other, "canary2.txt")
+        Path(canary2).write_text(self.secret)
+        os.symlink(canary2, os.path.join(self.job, ".sealed-probe"))       # old fingerprint name, as a link
+        outdir = mkdir700("outdir")
+        os.symlink(outdir, os.path.join(self.job, ".home"))                # folder link named .home
+        before = (os.stat(self.canary).st_nlink, os.stat(canary2).st_nlink)
+        self.assertEqual(before[0], 2, "control: the hard link really is there")
+        fake = Fake(["@@WRITE h.py\nimport os\ntry:\n    open(os.path.join(os.environ['HOME'], 'x'), 'w')\n"
+                     "    print('LEAK')\nexcept PermissionError:\n    print('DENIED')\n@@END\n@@RUN python h.py",
+                     "@@LIST .", "@@DONE\nx\n@@END"])
+        res = sr.work_loop(fake, "t", self.job, timeout_s=30)
+        self.assertEqual(res["stopped"], "done")
+        self.assertIn("DENIED", fake.prompts[1])
+        self.assertEqual(Path(self.canary).read_text(), self.secret)
+        self.assertEqual(Path(canary2).read_text(), self.secret)
+        self.assertEqual((os.stat(self.canary).st_nlink, os.stat(canary2).st_nlink), before)
+        self.assertEqual(os.listdir(outdir), [])
+        self.assertTrue(res["transcript_path"].startswith(sr.STATE_ROOT + "/"))
+        self.assertEqual(len(log_rows(res["transcript_path"])), 3)
+
+    def test_b_log_inside_job_or_ro_refused(self):
+        ro = mkdir700("ro")
+        job_link = os.path.join(SCRATCH, "joblink-" + uuid.uuid4().hex[:6])
+        ro_link = os.path.join(SCRATCH, "rolink-" + uuid.uuid4().hex[:6])
+        os.symlink(self.job, job_link)
+        os.symlink(ro, ro_link)
+        for bad in (os.path.join(self.job, "log.jsonl"), os.path.join(ro, "log.jsonl"),
+                    os.path.join(job_link, "log.jsonl"), os.path.join(ro_link, "log.jsonl"),
+                    os.path.join(job_link, "sub", "..", "log.jsonl")):
+            with self.assertRaises(sr.SealError, msg=bad):
+                sr.work_loop(Fake(["@@DONE\nx\n@@END"]), "t", self.job, ro_roots=[ro], log_path=bad)
+            self.assertFalse(os.path.exists(os.path.join(self.job, "log.jsonl")))
+        ok = os.path.join(self.other, "log.jsonl")  # control: outside both, accepted
+        res = sr.work_loop(Fake(["@@DONE\nx\n@@END"]), "t", self.job, ro_roots=[ro], log_path=ok)
+        self.assertEqual((res["stopped"], res["transcript_path"]), ("done", ok))
+
+    def test_c_log_with_two_links_refused(self):
+        log = os.path.join(self.other, "two.jsonl")
+        Path(log).write_text("")
+        os.link(log, os.path.join(self.other, "two-again.jsonl"))
+        with self.assertRaises(sr.SealError):
+            sr.work_loop(Fake(["@@DONE\nx\n@@END"]), "t", self.job, log_path=log)
+        link = os.path.join(self.other, "link.jsonl")
+        os.symlink(self.canary, link)
+        with self.assertRaises(sr.SealError):  # a link as the last name is refused too
+            sr.work_loop(Fake(["@@DONE\nx\n@@END"]), "t", self.job, log_path=link)
+        self.assertEqual(Path(self.canary).read_text(), self.secret)
+
+    def test_d_state_folder_out_of_sight(self):
+        sr.run_sealed(["/usr/bin/true"], self.job)  # makes the token
+        sd = sr.state_dir(self.job)
+        token_file = os.path.join(sd, "token")
+        self.assertTrue(os.path.isfile(token_file))
+        self.assertFalse(os.path.exists(os.path.join(self.job, ".sealed-probe")))
+        items = [("list", sd), ("read", token_file), ("list", sr.STATE_ROOT), ("write", os.path.join(sd, "w"))]
+        control = words(outside_py(PROBE, args=[json.dumps(items[:3])]))
+        for _, p in items[:3]:
+            self.assertEqual(control[p], "LEAK", f"control: {p} readable outside")
+        inside = words(sealed_py(self.job, PROBE, args=[json.dumps(items)])["output"])
+        for _, p in items:
+            self.assertEqual(inside[p], "DENIED", p)
+        self.assertFalse(os.path.exists(os.path.join(sd, "w")))
+
+    def test_e_stray_found_by_token_in_state_folder(self):
+        script = ("import os, time\n"
+                  "if os.fork() == 0:\n"
+                  "    os.setsid()\n"
+                  "    if os.fork() == 0:\n"
+                  "        open('stray.pid', 'w').write(str(os.getpid()))\n"
+                  "        time.sleep(200)\n"
+                  "    os._exit(0)\n"
+                  "os.wait()\n")
+        r = sr.run_sealed([PY, "-I", "-c", script], self.job, timeout_s=20)
+        self.assertEqual(r["rc"], 0, r["output"])
+        deadline = time.time() + 5
+        while not os.path.exists(os.path.join(self.job, "stray.pid")) and time.time() < deadline:
+            time.sleep(0.05)
+        pid = int(Path(self.job, "stray.pid").read_text())
+        # as if the harness had restarted: nothing in memory, only the token in the harness folder
+        self.assertIsNotNone(sr.job_token(self.job))
+        kill_exact(self, self.job, pid)
 
 
 class T14Parser(unittest.TestCase):

@@ -35,6 +35,7 @@ survives the kill. Such a process stays sealed meanwhile (no network, no writes 
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -93,6 +94,11 @@ SECRET_DIRS = [os.path.join(HOME, d) for d in
                (".ssh", ".gnupg", ".config", ".gemini", ".claude", ".codex", ".sane", ".sanemaster", "Library",
                 ".aws", ".docker", ".kube", ".netrc")]
 REFUSED_RO_ROOTS = {"/", "/Users", "/Volumes", "/private", "/System/Volumes", HOME}
+# Harness-owned state, outside every job folder (second security review, 19 Nov 2026): one sub-folder per job
+# folder holds its fingerprint token and, by default, its audit log. The harness writes only here, never in a job
+# folder, so code in a job folder cannot plant a hard link or a link for the harness to write through. Sandboxed
+# code cannot see it: the home folder is denied.
+STATE_ROOT = os.path.join(HOME, ".cache", "sealed-run-state")
 
 
 class SealError(ValueError):
@@ -134,9 +140,9 @@ def check_job_dir(job_dir) -> str:
         raise SealError(f"job folder mode must be 0700, is {oct(stat.S_IMODE(st.st_mode))}: {job_dir}")
     if _inside(HOME, real):
         raise SealError(f"job folder is the home folder or above it: {job_dir}")
-    for s in SECRET_DIRS:
+    for s in SECRET_DIRS + [STATE_ROOT]:
         if _inside(real, s) or _inside(s, real):
-            raise SealError(f"job folder touches a secret folder ({s}): {job_dir}")
+            raise SealError(f"job folder touches a secret or harness folder ({s}): {job_dir}")
     return real
 
 
@@ -148,9 +154,9 @@ def check_ro_roots(ro_roots) -> list[str]:
             raise SealError(f"read-only folder too broad: {r}")
         if os.path.dirname(real) == "/Volumes":
             raise SealError(f"read-only folder is a whole volume; name a folder on it: {r}")
-        for s in SECRET_DIRS:
+        for s in SECRET_DIRS + [STATE_ROOT]:
             if _inside(real, s) or _inside(s, real):
-                raise SealError(f"read-only folder touches a secret folder ({s}): {r}")
+                raise SealError(f"read-only folder touches a secret or harness folder ({s}): {r}")
         if not os.path.exists(real):
             raise SealError(f"read-only folder missing: {r}")
         out.append(real)
@@ -171,7 +177,7 @@ def _developer_dir() -> list[str]:
     return [m.group(1)] if m else [d]
 
 
-def build_profile(job: str, ro: list[str], protect: tuple = (), token: str | None = None) -> str:
+def build_profile(job: str, ro: list[str], token: str | None = None) -> str:
     """The sandbox profile text. In this language the LAST matching rule wins, so every deny comes after the
     allow it narrows."""
     for name in ALLOWED_MACH:
@@ -207,8 +213,6 @@ def build_profile(job: str, ro: list[str], protect: tuple = (), token: str | Non
             raise SealError("bad fingerprint token")
         L.append(f'(allow mach-lookup (global-name "{token_service(token)}"))')
     # Narrowing denies, after the allows.
-    for p in protect:  # files inside the job folder that code there may read but never change (the audit log)
-        L.append(f"(deny file-write* (literal {_quote(p)}))")
     L.append("(deny process-exec " + " ".join(f"(literal {_quote(p)})" for p in DENY_EXEC) + ")")
     # Nothing written in the job folder may itself be started as a program: a copy of /usr/bin/security there
     # would otherwise slip past the list above. Scripts still run, because sh or python is what starts.
@@ -256,57 +260,86 @@ def cut_marker(n: int) -> str:
     return f"\n[cut: {n} more bytes]\n"
 
 
-PROBE_NAME = ".sealed-probe"  # fingerprint file in every job folder; see find_strays
-
-
-def _prepare_job(job: str) -> str:
-    """Make the fingerprint file and the .home/.tmp folders without ever following a link (code from an earlier
-    run may have left links in the job folder). Returns the fingerprint path."""
-    dfd = os.open(job, os.O_RDONLY | os.O_DIRECTORY)
-    try:
-        for d in (".home", ".tmp"):
-            try:
-                os.mkdir(d, 0o700, dir_fd=dfd)
-            except FileExistsError:
-                pass  # a link or a file there only hurts that run's own code; it is still sealed
+def _owned_dir(path: str, create: bool) -> bool:
+    """A harness folder: a real folder (never a link), ours, mode 0700. False when missing and not created."""
+    if create:
         try:
-            fd = os.open(PROBE_NAME, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600, dir_fd=dfd)
-        except OSError as e:
-            raise SealError(f"fingerprint file in the job folder is not a plain file: {e}") from None
-        try:
-            if not stat.S_ISREG(os.fstat(fd).st_mode):
-                raise SealError("fingerprint file in the job folder is not a plain file")
-            token = os.read(fd, 64).decode("ascii", "replace").strip()
-            if not re.fullmatch(r"[0-9a-f]{32}", token):
-                if token:
-                    raise SealError("fingerprint file in the job folder was changed")
-                token = secrets.token_hex(16)
-                os.write(fd, token.encode())
-        finally:
-            os.close(fd)
-    finally:
-        os.close(dfd)
-    return token
-
-
-def job_token(job_dir) -> str | None:
-    """This job folder's fingerprint token, read by descriptor (None when there is none yet)."""
+            os.mkdir(path, 0o700)
+        except FileExistsError:
+            pass
     try:
-        fd = os.open(os.path.join(os.path.realpath(os.fspath(job_dir)), PROBE_NAME), os.O_RDONLY | os.O_NOFOLLOW)
-    except OSError:
+        st = os.lstat(path)
+    except FileNotFoundError:
+        return False
+    if not stat.S_ISDIR(st.st_mode) or st.st_uid != os.getuid() or stat.S_IMODE(st.st_mode) != 0o700:
+        raise SealError(f"harness folder is not a private folder of ours: {path}")
+    return True
+
+
+def state_dir(job_dir, create: bool = True) -> str | None:
+    """This job folder's harness folder: STATE_ROOT/<first 16 hex digits of sha256(realpath(job))>."""
+    job = os.path.realpath(os.fspath(job_dir))
+    if create:
+        os.makedirs(os.path.dirname(STATE_ROOT), mode=0o700, exist_ok=True)
+    if not _owned_dir(STATE_ROOT, create):
         return None
+    sub = os.path.join(STATE_ROOT, hashlib.sha256(job.encode()).hexdigest()[:16])
+    return sub if _owned_dir(sub, create) else None
+
+
+def _check_fd(fd: int, what: str) -> None:
+    """Refuse a harness file unless it is a plain file of ours with exactly one name (no planted hard link)."""
+    st = os.fstat(fd)
+    if not stat.S_ISREG(st.st_mode) or st.st_uid != os.getuid() or st.st_nlink != 1:
+        os.close(fd)
+        raise SealError(f"{what} is not a plain single-link file of ours")
+
+
+def _token(job: str, create: bool) -> str | None:
+    """The job folder's fingerprint token (see find_strays), kept in its harness folder, read by descriptor."""
+    sd = state_dir(job, create)
+    if sd is None:
+        return None
+    path = os.path.join(sd, "token")
+    if create:
+        try:
+            fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+        except FileExistsError:
+            pass
+        else:
+            _check_fd(fd, "token file")
+            token = secrets.token_hex(16)
+            try:
+                os.write(fd, token.encode())
+            finally:
+                os.close(fd)
+            return token
+    try:
+        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    except FileNotFoundError:
+        return None
+    except OSError as e:
+        raise SealError(f"token file unusable: {e}") from None
+    _check_fd(fd, "token file")
     try:
         token = os.read(fd, 64).decode("ascii", "replace").strip()
     finally:
         os.close(fd)
-    return token if re.fullmatch(r"[0-9a-f]{32}", token) else None
+    if not re.fullmatch(r"[0-9a-f]{32}", token):
+        raise SealError("token file was changed")
+    return token
+
+
+def job_token(job_dir) -> str | None:
+    """This job folder's fingerprint token, or None when no run has made one yet. Never creates anything."""
+    return _token(os.path.realpath(os.fspath(job_dir)), create=False)
 
 
 def token_service(token: str) -> str:
     return f"com.saneapps.sealed-run.{token}"
 
 
-def run_sealed(argv, job_dir, ro_roots=(), timeout_s=300, max_output_bytes=60000, protect=(),
+def run_sealed(argv, job_dir, ro_roots=(), timeout_s=300, max_output_bytes=60000,
                stdin_bytes: bytes | None = None, on_start=None) -> dict:
     """Run argv in the sandbox with cwd = job_dir. Returns {"rc", "output", "timed_out", "truncated", "pgid"}.
     Output is stdout and stderr together; past max_output_bytes the middle is cut (the start and the end, where
@@ -317,14 +350,15 @@ def run_sealed(argv, job_dir, ro_roots=(), timeout_s=300, max_output_bytes=60000
         raise SealError(f"{SANDBOX_EXEC} missing: refusing to run code unsealed")
     job = check_job_dir(job_dir)
     ro = check_ro_roots(ro_roots)
-    token = _prepare_job(job)
-    prot = tuple(os.path.join(job, os.path.relpath(os.path.abspath(p), job)) for p in protect)
-    prot += (os.path.join(job, PROBE_NAME),)
-    profile = build_profile(job, ro, prot, token)
+    token = _token(job, create=True)
+    profile = build_profile(job, ro, token)
     home, tmp = os.path.join(job, ".home"), os.path.join(job, ".tmp")
     env = {"PATH": "/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin", "LANG": "en_US.UTF-8", "HOME": home,
            "TMPDIR": tmp + "/", "MPLBACKEND": "Agg"}
-    proc = subprocess.Popen([SANDBOX_EXEC, "-p", profile] + [os.fspath(a) for a in argv], cwd=job, env=env,
+    # .home and .tmp are made by the sandboxed process itself, so the harness writes nothing in the job folder.
+    # A link planted there only points that run's own HOME at a place it may not write.
+    wrap = ["/bin/sh", "-c", 'mkdir -p .home .tmp 2>/dev/null; exec "$@"', "sealed-run"]
+    proc = subprocess.Popen([SANDBOX_EXEC, "-p", profile] + wrap + [os.fspath(a) for a in argv], cwd=job, env=env,
                             stdin=subprocess.DEVNULL if stdin_bytes is None else subprocess.PIPE,
                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                             start_new_session=True, close_fds=True)
@@ -404,8 +438,8 @@ def run_sealed(argv, job_dir, ro_roots=(), timeout_s=300, max_output_bytes=60000
 #
 # macOS `ps` shows 0 for every session, and a process that calls setsid() leaves our process group, so groups
 # alone miss it. The kernel can tell us instead: sandbox_check(pid, op, filter, value) answers whether that
-# process's sandbox allows op. Each job folder has a random token (in .sealed-probe, which code in the job may read
-# but not change), and its profile allows a lookup of the made-up service name built from it. See find_strays.
+# process's sandbox allows op. Each job folder has a random token (in its harness folder under STATE_ROOT, out of
+# the sandbox's sight), and its profile allows a lookup of the made-up service name built from it. See find_strays.
 # A first version (19 Nov 2026) used "may read a file in the job folder, may not read the home folder" instead;
 # in its first real run it matched and killed 7 macOS user services (cfprefsd, sharingd, CoreDeviceService,
 # callservicesd and others; launchd restarted them), because their sandboxes read temp folders and not the home
@@ -757,10 +791,10 @@ except OSError as e:
 
 
 def file_action(job: str, ro: list[str], mode: str, args: list[str], body: bytes | None = None,
-                cap: int = 60000, protect=(), on_start=None) -> str:
+                cap: int = 60000, on_start=None) -> str:
     """Carry out READ, LIST or WRITE through HELPER inside the sandbox. Returns the text to show the model."""
     argv = [DEFAULT_PYTHON, "-I", "-S", "-c", HELPER, mode, job, str(len(ro))] + list(ro) + [str(a) for a in args]
-    r = run_sealed(argv, job, ro, timeout_s=60, max_output_bytes=cap, protect=protect,
+    r = run_sealed(argv, job, ro, timeout_s=60, max_output_bytes=cap,
                    stdin_bytes=body if mode == "write" else None, on_start=on_start)
     text = r["output"] or "(no output)"
     if r["timed_out"]:
@@ -858,12 +892,28 @@ def _ranges(nums: list[int]) -> str:
     return ", ".join(out)
 
 
+def resolve_log_path(log_path, job: str, ro: list[str]) -> str:
+    """A caller's log path, resolved (real parent folder + base name); SealError unless it lies outside the job
+    folder and every read-only folder."""
+    raw = os.path.abspath(os.path.expanduser(os.fspath(log_path)))
+    base = os.path.basename(raw)
+    if base in ("", ".", ".."):
+        raise SealError(f"log path has no file name: {log_path}")
+    log = os.path.join(os.path.realpath(os.path.dirname(raw)), base)
+    for r in [job] + ro:
+        if _inside(log, r):
+            raise SealError(f"log path is inside the job folder or a read-only folder: {log_path}")
+    return log
+
+
 def _open_log(path: str):
-    """The audit log, opened once by descriptor: never through a link a run may have left."""
-    fd = os.open(path, os.O_WRONLY | os.O_APPEND | os.O_CREAT | os.O_NOFOLLOW, 0o600)
-    if not stat.S_ISREG(os.fstat(fd).st_mode):
-        os.close(fd)
-        raise SealError(f"log path is not a plain file: {path}")
+    """The audit log, opened once by descriptor and kept open for the whole loop (never reopened by name): no link
+    as the last name, a plain file of ours, exactly one name."""
+    try:
+        fd = os.open(path, os.O_WRONLY | os.O_APPEND | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    except OSError as e:
+        raise SealError(f"log path unusable: {path} ({e})") from None
+    _check_fd(fd, f"log file {path}")
     return os.fdopen(fd, "a", encoding="utf-8")
 
 
@@ -875,18 +925,15 @@ def work_loop(ask, task: str, job_dir, ro_roots=(), max_turns: int = 40, interpr
     job = check_job_dir(job_dir)
     ro = check_ro_roots(ro_roots)
     interpreter = interpreter or DEFAULT_PYTHON
-    log = os.path.abspath(os.fspath(log_path)) if log_path else os.path.join(job, "transcript.jsonl")
-    # Code in the job folder must not rewrite the audit log (the profile denies writes to it) and a WRITE must not
-    # name it.
-    protect = (log,) if _inside(log, job) else ()
-    reserved = {os.path.relpath(log, job)} if protect else set()
+    # The log lives outside the job folder: by default in the job's harness folder, which sandboxed code cannot see.
+    log = (resolve_log_path(log_path, job, ro) if log_path
+           else os.path.join(state_dir(job, create=True), "transcript.jsonl"))
     pgids: list[int] = []  # every process group any run of this loop started
     turns: list[dict] = []
     bad_streak = 0
     final = None
     stopped = "max_turns"
     count = 0
-    _prepare_job(job)
     with _open_log(log) as lf:
         def record(row):
             lf.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -946,23 +993,21 @@ def work_loop(ask, task: str, job_dir, ro_roots=(), max_turns: int = 40, interpr
                 try:
                     if a["kind"] == "WRITE":
                         rel = _rel_path(a["path"])
-                        if rel in reserved:
-                            raise ActionError(f"refused: {a['path']} is kept by the harness")
                         results.append(file_action(job, ro, "write", [rel], a["body"].encode("utf-8"),
-                                                   max_output_bytes, protect, pgids.append))
+                                                   max_output_bytes, pgids.append))
                     elif a["kind"] == "RUN":
                         r = run_sealed(_run_args(job, a, interpreter) + a["args"], job, ro, timeout_s=timeout_s,
-                                       max_output_bytes=max_output_bytes, protect=protect, on_start=pgids.append)
+                                       max_output_bytes=max_output_bytes, on_start=pgids.append)
                         results.append(f"exit code {r['rc']}"
                                        + (f"; stopped: ran past {timeout_s} s" if r["timed_out"] else "")
                                        + "\n" + (r["output"] or "(no output)"))
                     elif a["kind"] == "READ":
                         results.append(file_action(job, ro, "read", [_view_arg(job, ro, a["path"]), a["first"],
-                                                   a["last"], max_output_bytes], None, max_output_bytes, protect,
+                                                   a["last"], max_output_bytes], None, max_output_bytes,
                                                    pgids.append))
                     else:
                         results.append(file_action(job, ro, "list", [_view_arg(job, ro, a["path"]), LIST_CAP],
-                                                   None, max_output_bytes, protect, pgids.append))
+                                                   None, max_output_bytes, pgids.append))
                 except ActionError as e:
                     results.append(str(e) if str(e).startswith("refused") else f"refused: {e}")
                     break
