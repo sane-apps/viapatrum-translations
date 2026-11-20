@@ -135,12 +135,6 @@ AGY_MODELS = {"gemini-3.8-flash-high", "gemini-3.8-flash-medium", "gemini-3.8-fl
               "gemini-4-neon-low", "gemini-4-neon-medium", "gemini-4-neon-high", "gemini-4-neon-xhigh",
               "gemini-4-hydrogen-low", "gemini-4-hydrogen-medium", "gemini-4-hydrogen-high",
               "gemini-4-hydrogen-xhigh",
-              # `agy models`, 2026-11-19 (model-watch snapshot 2026-11-19.json): Carbon, Neon and Hydrogen, same
-              # Gemini usage group. Owner 19 Nov 2026: "try carbon or neon, whichever one is up to the task".
-              "gemini-4-carbon-low", "gemini-4-carbon-medium", "gemini-4-carbon-high",
-              "gemini-4-neon-low", "gemini-4-neon-medium", "gemini-4-neon-high", "gemini-4-neon-xhigh",
-              "gemini-4-hydrogen-low", "gemini-4-hydrogen-medium", "gemini-4-hydrogen-high",
-              "gemini-4-hydrogen-xhigh",
               "claude-sonnet-5-5-low", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-high",
               "claude-opus-5-5-low", "claude-opus-5-5-medium", "claude-opus-5-5-high"}
 AGY_CONCURRENT = int(os.environ.get("PLAN_AGY_MAX_CONCURRENT", "3"))
