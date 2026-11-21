@@ -91,7 +91,7 @@ def _text(x) -> str:
 
 def claude(system: str, user: str, timeout: int = TIMEOUT_S) -> str | None:
     """One headless Claude call with no tools. The reply text, or None."""
-    cmd = [CLAUDE, "-p", "--model", MODEL, "--output-format", "json", "--no-session-persistence",
+    cmd = [CLAUDE, "-p", "--safe-mode", "--model", MODEL, "--output-format", "json", "--no-session-persistence",
            "--system-prompt", system, "--disallowedTools", *NO_TOOLS]
     try:
         r = subprocess.run(cmd, input=user, capture_output=True, text=True, timeout=timeout,

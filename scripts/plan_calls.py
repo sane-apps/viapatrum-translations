@@ -174,7 +174,26 @@ AGY_HOME = Path(os.environ.get("PLAN_AGY_HOME") or Path.home() / ".cache" / "agy
 AGY_CWD = AGY_HOME / "work"
 SANDBOX_EXEC = "/usr/bin/sandbox-exec"
 # The sandbox may not start `open` or `osascript`, so a lane call can never put a browser window in front of the owner.
-AGY_SANDBOX = '(version 1)(allow default)(deny process-exec (literal "/usr/bin/open"))(deny process-exec (literal "/usr/bin/osascript"))'
+# 21 Nov 2026: agy loads ~/.gemini/GEMINI.md (a link to our 14 KB agent rulebook, for people using agy by hand) into
+# every call as rules it "MUST ALWAYS FOLLOW", ahead of the job's own prompt: about 3,800 extra tokens a call, and
+# "Speak in plain English. Keep it short" on checker and judge work. The sandbox may not read the global rule files,
+# so lane calls carry only the job's prompt (tested: the model quotes the rulebook without this, answers NO with it).
+AGY_RULE_FILES = [Path.home() / ".gemini" / n for n in ("GEMINI.md", "AGENTS.md")] + \
+    [Path.home() / ".gemini" / "config" / n for n in ("GEMINI.md", "AGENTS.md")]
+
+
+def _rule_paths() -> list[str]:
+    out = []
+    for f in AGY_RULE_FILES:
+        out.append(str(f))
+        if f.is_symlink() or f.exists():
+            out.append(str(f.resolve()))
+    return sorted(set(out))
+
+
+AGY_SANDBOX = ('(version 1)(allow default)(deny process-exec (literal "/usr/bin/open"))'
+               '(deny process-exec (literal "/usr/bin/osascript"))'
+               '(deny file-read* ' + " ".join(f'(literal "{x}")' for x in _rule_paths()) + ')')
 AGY_DENY_ALL = {"command(*)", "read_file(*)", "write_file(*)", "mcp(*)", "read_url(*)", "execute_url(*)"}
 AGY_SETTINGS = json.dumps({"permissions": {"deny": sorted(AGY_DENY_ALL)}})
 # Starts are spaced out so two calls never renew the sign-in and save it at the same moment. agy renews at start-up.
@@ -1017,7 +1036,10 @@ def _split(messages: list) -> tuple[str, str]:
 def _run_claude(model: str, system: str, user: str) -> tuple[str, bool]:
     """(text, is_error) from one `claude -p` call."""
     model, effort = base_effort(model)
-    cmd = [CLAUDE, "-p", "--model", model, "--output-format", "json", "--no-session-persistence",
+    # --safe-mode (its help, 21 Nov 2026): no CLAUDE.md, AGENTS.md, skills, plugins or hooks; sign-in, model and
+    # permissions as normal. Without it every call carried ~/.claude/CLAUDE.md, ~/AGENTS.md and the project's
+    # AGENTS.md (the model named all three, 21 Nov). --bare also drops them but cannot use the plan sign-in.
+    cmd = [CLAUDE, "-p", "--safe-mode", "--model", model, "--output-format", "json", "--no-session-persistence",
            "--disallowedTools", *NO_TOOLS]
     if effort:
         cmd += ["--effort", effort]

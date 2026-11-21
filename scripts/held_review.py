@@ -177,7 +177,7 @@ def claude_judge(chunk: list[dict], model: str = "") -> dict[str, dict]:
         todo = [f for f in chunk if f["id"] not in got]
         if not todo:
             break
-        cmd = [CLAUDE, "-p", "--model", MODEL, "--output-format", "json", "--no-session-persistence",
+        cmd = [CLAUDE, "-p", "--safe-mode", "--model", MODEL, "--output-format", "json", "--no-session-persistence",
                "--system-prompt", JUDGE_SYS, "--disallowedTools", *NO_TOOLS]
         try:
             r = subprocess.run(cmd, input="FINDINGS (JSON):\n" + payload(todo) + "\n\nOutput the JSON lines now.",
@@ -192,7 +192,7 @@ def claude_judge(chunk: list[dict], model: str = "") -> dict[str, dict]:
 
 def preflight() -> str:
     try:
-        r = subprocess.run([CLAUDE, "-p", "--model", MODEL, "--no-session-persistence", "--disallowedTools", *NO_TOOLS],
+        r = subprocess.run([CLAUDE, "-p", "--safe-mode", "--model", MODEL, "--no-session-persistence", "--disallowedTools", *NO_TOOLS],
                            input="Reply with exactly: ok", capture_output=True, text=True, timeout=180)
     except (OSError, subprocess.TimeoutExpired) as e:
         return f"claude unavailable: {type(e).__name__}"
