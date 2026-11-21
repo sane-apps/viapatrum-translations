@@ -1318,6 +1318,33 @@ def process_section(slug: str, idx: int, pairs: list[dict], brief: dict, langnam
             log(slug, f"{sec['id']}: source changed since it passed; redrafting")
             jpath.rename(jpath.with_suffix(".stale.json"))
             j = {}
+        edit = book_edit(slug, sec, j)
+        if edit == "amended":
+            # A proved citation-only fix to the book: the staged copy takes it, so apply keeps it.
+            j = {**j, "pass_b_english": list(sec["english"])}
+            jpath.write_text(json.dumps(j, indent=1, ensure_ascii=False))
+            log(slug, f"{sec['id']}: staged copy takes the book's proved citation fix")
+        elif edit == "edited":
+            # The book was corrected after this section passed. Check the corrected English with the
+            # current pair; never re-apply the old staged English over the correction.
+            log(slug, f"{sec['id']}: book corrected after its pass; checking the corrected English")
+            before = jpath.read_text()
+            j = adopt_book_english(slug, sec, j)
+            j = {**j, "_status": "recheck", "previous_checks": j.get("checks"),
+                 "previous_check_history": j.get("check_history"),
+                 "book_edit": "English corrected in the book after the pipeline applied it"}
+            j.pop("checks", None)
+            j.pop("check_history", None)
+            out = check_rounds(slug, sec, j, brief, langname, jpath)
+            if out.get("_status") != "pass" and str(out.get("_why", "")).startswith("checker unavailable") \
+                    and not out.get("check_history", [{}])[0].get("confirmed"):
+                # No verdict: leave the file as it was; staged_sections still reports it stale, so
+                # nothing applies until a checker answers on the next run.
+                jpath.write_text(before)
+                log(slug, f"{sec['id']}: check of the corrected English deferred (checker unavailable)")
+                return {**json.loads(before), "_status": "stale",
+                        "_why": "the book's English was corrected after this section passed"}
+            return out
         if j.get("_status") == "pass" and used_fallback(j):
             # Keep the English. Do not buy a redraft of a pass the fallback touched.
             j = block_fallback_pass(j)
@@ -1556,11 +1583,61 @@ def block_fallback_pass(j: dict) -> dict:
     return j
 
 
+def receipt_english(slug: str) -> dict[str, str]:
+    """Section id -> the English hash this pipeline last applied to the book ({} when never applied)."""
+    try:
+        rec = json.loads((BOOKS / slug / "reviews" / "work_receipt.json").read_text())
+        return {str(s["section"]): s["english_sha256"] for s in rec.get("sections", [])}
+    except (OSError, ValueError, KeyError, TypeError):
+        return {}
+
+
+def book_edit(slug: str, sec: dict, j: dict, applied: dict[str, str] | None = None) -> str:
+    """How the book's English for a passed staged section relates to the staged copy.
+
+    "" when there is nothing to reconcile: the book still carries what was applied (a newer
+    staged draft is the normal state before apply), or the section was never applied.
+    "amended" when the book changed by a proved citation-only amendment (citation_amendments).
+    "edited" when someone corrected the book after apply (2026-11-20: 38 sections in 15 works,
+    e.g. Basil Hexaemeron 21 and 43 of 11 Nov). Applying the staged copy would put the old
+    English back, so the corrected English must be checked instead.
+    """
+    if j.get("_status") != "pass" or not j.get("pass_b_english") or not sec.get("english"):
+        return ""
+    if j["pass_b_english"] == sec["english"]:
+        return ""
+    want = (receipt_english(slug) if applied is None else applied).get(str(sec["id"]))
+    cur = sha("\n".join(sec["english"]))
+    if not want or cur == want:
+        return ""
+    import citation_amendments as _ca
+    return "amended" if _ca.chain_ok(_ca.load(BOOKS / slug), sec["id"], want, cur) else "edited"
+
+
+def adopt_book_english(slug: str, sec: dict, j: dict) -> dict:
+    """The staged record with the book's current English (and the book's own justification
+    record for it, which holds the matching gloss and notes, when that record agrees)."""
+    jf = BOOKS / slug / "reviews" / "justifications" / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', sec['id'])}.json"
+    try:
+        bj = json.loads(jf.read_text()) if jf.exists() else {}
+    except ValueError:
+        bj = {}
+    base = {**j, **bj} if bj.get("pass_b_english") == sec["english"] else dict(j)
+    base["pass_b_english"] = list(sec["english"])
+    return base
+
+
 def staged_sections(slug: str, pairs: list[dict]) -> list[dict]:
     out = []
+    applied = receipt_english(slug)
     for p in pairs:
         f = STAGE / slug / "sections" / f"{re.sub(r'[^A-Za-z0-9_.-]', '_', p['id'])}.json"
         j = json.loads(f.read_text()) if f.exists() else {}
+        edit = book_edit(slug, p, j, applied)
+        if edit == "amended":
+            j = {**j, "pass_b_english": list(p["english"])}  # keep the proved citation fix on re-apply
+        elif edit == "edited":
+            j = {**j, "_status": "stale", "_why": "the book's English was corrected after this section passed"}
         if is_stale(j, p):
             j = {**j, "_status": "stale", "_why": "source changed after this section passed"}
         out.append({"id": p["id"], "title": j.get("thought_title") or p.get("title") or "",
