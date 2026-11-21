@@ -29,6 +29,22 @@ class LatinIntakeTests(unittest.TestCase):
         self.assertEqual([s for s, _ in secs], ["1", "2"])
         self.assertEqual(m.dehyphen(secs[0][1][0]), "Bene admones, Donate carissime: nam et promisisse")
 
+    def test_nested_keeps_sections_of_chapter_tops(self):
+        nested = TEI.replace('<p>Ceterum quale uel quantum est</p>',
+                             '<div n="1" subtype="section" type="textpart"><p>Ceterum</p></div>'
+                             '<div n="2" subtype="section" type="textpart"><p>quale uel quantum est</p></div>')
+        root = m.xml_fromstring(nested.format(year=1850))
+        self.assertTrue(m.choose_flat(True, root))
+        self.assertFalse(m.choose_flat(True, root, nested=True))
+        self.assertTrue(m.choose_flat(True, root, flat=True, nested=True))
+        self.assertFalse(m.choose_flat(False, root))
+        self.assertEqual([len(secs) for _, _, secs in m.units(root)], [1, 2])
+
+    def test_soft_hyphen_line_breaks_join(self):
+        self.assertEqual(m.dehyphen("sine aliqua prae\u00ad nuntiatione futurorum"), "sine aliqua praenuntiatione futurorum")
+        self.assertEqual(m.dehyphen("re\u00adgnat"), "regnat")
+        self.assertEqual(m.dehyphen("Moyses - servus"), "Moyses - servus")
+
     def test_edition_year_gate(self):
         self.assertEqual(m.edition_year(m.xml_fromstring(TEI.format(year=1868))), 1868)
         self.assertGreater(m.edition_year(m.xml_fromstring(TEI.format(year=1931))), m.LAST_PD_YEAR)

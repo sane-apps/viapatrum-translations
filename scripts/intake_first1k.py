@@ -230,7 +230,9 @@ def clean(s: str) -> str:
 
 
 def dehyphen(s: str) -> str:
-    """Join words the printed page broke at a line end ("ple- num", "ple-num")."""
+    """Join words the printed page broke at a line end ("ple- num", "ple-num", and the soft hyphen of the OGL
+    Patrologia Latina files, "prae\u00ad nuntiatione")."""
+    s = re.sub(r"(\w)\u00ad\s*(?=\w)", r"\1", s)
     return re.sub(r"(\w)- ?(?=[a-zæœ])", r"\1", s)
 
 
@@ -241,6 +243,15 @@ def chapters_only(root) -> bool:
     tops = [d for d in (edition if edition is not None else []) if d.tag == f"{TEI}div"]
     return bool(tops) and (tops[0].get("subtype") in ("chapter", "section", "caput")
                            or not any(k.tag == f"{TEI}div" for t in tops for k in t))
+
+
+def choose_flat(latin: bool, root, flat: bool = False, nested: bool = False) -> bool:
+    """One section per top-level part (flat) or files of sections. A Latin work whose tops are chapters is flat
+    unless --nested asks for the tops as files (2026-11-20: Isidore's Quaestiones, one top per Bible book of
+    up to 18,000 words, would be one section per book)."""
+    if flat:
+        return True
+    return latin and chapters_only(root) and not nested
 
 
 def edition_label(root) -> str:
@@ -303,6 +314,8 @@ def main() -> int:
     ap.add_argument("--stem", default="", help="file stem prefix (default: slug initials)")
     ap.add_argument("--unit-names", default="", help="comma list naming each top-level unit for file stems")
     ap.add_argument("--flat", action="store_true", help="one file, one section per top-level chapter")
+    ap.add_argument("--nested", action="store_true", help="Latin: top-level chapters as files, their sections as "
+                    "sections, even when the tops are chapters (a work in books, e.g. Isidore's Quaestiones by Bible book)")
     ap.add_argument("--year", type=int, default=0, help="writer year from docs/early-inventory.json")
     ap.add_argument("--original-title", default="", help="Latin/Greek title for book.yml original_title")
     ap.add_argument("--edition", default="", help="edition file name to use as copy-text "
@@ -362,7 +375,7 @@ def main() -> int:
                          "choose a public-domain file with --edition")
     edition = edition_label(root)
     skip = tuple(x.strip() for x in a.skip_units.split(",") if x.strip())
-    flat = a.flat or (latin and chapters_only(root))
+    flat = choose_flat(latin, root, a.flat, a.nested)
     parts = flat_units(root, skip) if flat else units(root, skip)
     if latin:
         parts = [(n, t, [(sn, [dehyphen(x) for x in lines]) for sn, lines in secs]) for n, t, secs in parts]
