@@ -89,5 +89,56 @@ class MuseInstructionFilesTest(unittest.TestCase):
         self.assertIn("--preset", seen["cmd"])
 
 
+class GrokLaneSetupTest(unittest.TestCase):
+    """grok inspect (no model call) in the lane folder with the lane settings: nothing but the prompt goes in."""
+
+    def inspect(self):
+        import os
+        pc._grok_lane_folder()
+        env = dict(os.environ, **pc.GROK_LANE_ENV)
+        r = subprocess.run([pc.GROK, "inspect"], capture_output=True, text=True, cwd=str(pc.GROK_CWD), env=env,
+                           timeout=90)
+        return r.stdout
+
+    def section(self, out, title):
+        lines, keep = [], False
+        for ln in out.splitlines():
+            if ln.strip().startswith(title):
+                keep = True
+                continue
+            if keep and ln.strip() and not ln.strip().startswith("\u2514"):
+                break
+            if keep and ln.strip():
+                lines.append(ln)
+        return lines
+
+    def test_lane_env_turns_off_memory_compat_and_inbox_hook(self):
+        self.assertEqual(pc.GROK_LANE_ENV["GROK_MEMORY"], "0")
+        self.assertEqual(pc.GROK_LANE_ENV["AGENT_COMMS_OFF"], "1")
+        for k in ("AGENTS", "RULES", "SKILLS", "MCPS", "HOOKS"):
+            self.assertEqual(pc.GROK_LANE_ENV[f"GROK_CLAUDE_{k}_ENABLED"], "0")
+
+    def test_lane_config_names_every_user_server(self):
+        with tempfile.TemporaryDirectory() as d:
+            cfg = Path(d) / "config.toml"
+            cfg.write_text('[mcp_servers.alpha]\ncommand = "x"\n[mcp_servers.beta]\nurl = "https://e"\n')
+            text = pc.grok_lane_config(cfg)
+        import tomllib
+        got = tomllib.loads(text)["mcp_servers"]
+        self.assertFalse(got["alpha"]["enabled"])
+        self.assertFalse(got["beta"]["enabled"])
+
+    def test_live_inspect_shows_no_rules_servers_or_plugins(self):
+        if not Path(pc.GROK).exists():
+            self.skipTest("no grok on this Mac")
+        out = self.inspect()
+        for ln in self.section(out, "Project Instructions"):
+            self.assertIn("[disabled]", ln, ln)
+        for ln in self.section(out, "MCP Servers"):
+            self.assertIn("[disabled]", ln, ln)
+        for ln in self.section(out, "Plugins"):
+            self.assertTrue("disabled" in ln, ln)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

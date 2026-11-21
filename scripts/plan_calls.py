@@ -1075,13 +1075,51 @@ def _runner_heartbeat_age() -> float:
     return time.time() - hb.stat().st_mtime if hb.exists() else float("inf")
 
 
+# 21 Nov 2026: a headless Grok call loaded ~/.claude/Claude.md, Grok's saved memory, 119 skills, 9 plugins, the 13
+# MCP servers in ~/.grok/config.toml, and our agent-inbox hook, whose Stop step handed the model the inbox and a
+# second turn ("I will not work those six inbox notes...", 227 s for a two-line answer). Grok's own switches (its
+# docs: 05-configuration "Harness compatibility", 13-memory, 07-mcp-servers) turn them off for lane calls only.
+GROK_LANE_ENV = {"GROK_MEMORY": "0", "AGENT_COMMS_OFF": "1",
+                 **{f"GROK_{v}_{k}_ENABLED": "0" for v in ("CLAUDE", "CURSOR")
+                    for k in ("AGENTS", "RULES", "SKILLS", "MCPS", "HOOKS")}}
+GROK_LANE_PLUGINS = ["cloudflare", "code-review", "context7", "feature-dev", "frontend-design", "hookify",
+                     "security-guidance", "swift-lsp", "serena"]
+GROK_PLUGIN_MCPS = ["cloudflare-docs", "context7"]
+
+
+def grok_lane_config(user_cfg: Path | None = None) -> str:
+    """The lane folder's .grok/config.toml: every MCP server off, every plugin off. A project entry needs a transport
+    to be valid, so /usr/bin/false stands in (never run while enabled = false)."""
+    import tomllib
+    user_cfg = user_cfg or Path.home() / ".grok" / "config.toml"
+    try:
+        names = list((tomllib.loads(user_cfg.read_text()).get("mcp_servers") or {}))
+    except (OSError, ValueError):
+        names = []
+    lines = ["# Written by plan_calls.grok_lane_config (lane calls only). Every MCP server and plugin is off here.", ""]
+    for n in sorted(set(names + GROK_PLUGIN_MCPS)):
+        lines += [f'[mcp_servers."{n}"]', 'command = "/usr/bin/false"', "enabled = false", ""]
+    lines += ["[plugins]", "disabled = [" + ", ".join(f'"{x}"' for x in GROK_LANE_PLUGINS) + "]", ""]
+    return "\n".join(lines)
+
+
+def _grok_lane_folder() -> None:
+    cfg = GROK_CWD / ".grok" / "config.toml"
+    text = grok_lane_config()
+    if not cfg.exists() or cfg.read_text() != text:
+        cfg.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+        cfg.write_text(text)
+
+
 def _run_grok(model: str, system: str, user: str) -> tuple[str, bool]:
     """(text, is_error) from one headless Grok call on the subscription login."""
     GROK_CWD.mkdir(mode=0o700, parents=True, exist_ok=True)
     st = GROK_CWD.stat()
     if st.st_uid != os.getuid() or st.st_mode & 0o077:
         return f"grok cwd {GROK_CWD} is not a private folder owned by this user; refusing", True
+    _grok_lane_folder()
     env = {k: v for k, v in os.environ.items() if k != "XAI_API_KEY"}
+    env.update(GROK_LANE_ENV)
     pf = GROK_CWD / f"prompt-{os.getpid()}-{time.time_ns()}.txt"
     fd = os.open(pf, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
     with os.fdopen(fd, "w", encoding="utf-8") as fh:
