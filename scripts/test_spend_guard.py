@@ -300,6 +300,67 @@ class HoldAndReservation(unittest.TestCase):
             for p in ps:
                 p.stop()
 
+    def test_released_ticket_makes_room_and_release_is_idempotent(self):
+        """2026-11-20 audit: 11 small passages held $11.36 for 5 minutes, so a $3.51 one was refused
+        although every one of them had failed without spending. A released hold no longer counts."""
+        ps = self.usage(0.0, 0.0)
+        for p in ps:
+            p.start()
+        try:
+            with mock.patch("time.time", return_value=1000.0):  # fixed clock
+                ticket = G.gate("cf_tts.passage", 11.36)
+                self.assertEqual(ticket, (1000.0, 11.36))
+                with self.assertRaises(G.SpendRefused) as cm:
+                    G.gate("cf_tts.passage", 3.51)          # $11.36 + $3.51 reaches $12.50
+                self.assertIn("$11.36 reserved", str(cm.exception))
+                self.assertTrue(G.release(ticket))
+                self.assertFalse(G.release(ticket))          # second release: no-op
+                self.assertFalse(G.release(None))
+                self.assertIsNotNone(G.gate("cf_tts.passage", 3.51))
+                self.assertAlmostEqual(sum(u for _, u in G._reserved), 3.51)
+        finally:
+            for p in ps:
+                p.stop()
+
+    def test_release_takes_back_only_its_own_hold(self):
+        ps = self.usage(0.0, 0.0)
+        for p in ps:
+            p.start()
+        try:
+            self.assertTrue(G.reserve("a", 1.0, now=1000.0)[0])
+            a = G._reserved[-1]
+            self.assertTrue(G.reserve("b", 1.0, now=1000.0)[0])   # same time and amount: a twin
+            b = G._reserved[-1]
+            self.assertTrue(G.release(b))
+            self.assertEqual(len(G._reserved), 1)
+            self.assertIs(G._reserved[0], a)
+            # Pruning on the next reserve keeps the entries themselves, so a ticket still matches.
+            self.assertTrue(G.reserve("c", 1.0, now=1001.0)[0])
+            self.assertTrue(G.release(a))
+        finally:
+            for p in ps:
+                p.stop()
+
+    def test_refused_gate_holds_nothing_and_stub_gate_returns_none(self):
+        ps = self.usage(0.0, 12.0)
+        for p in ps:
+            p.start()
+        try:
+            with self.assertRaises(G.SpendRefused):
+                G.gate("t", 1.0)
+            self.assertEqual(G._reserved, [])
+        finally:
+            for p in ps:
+                p.stop()
+        with mock.patch.object(G, "reserve", lambda caller, usd, now=None: (True, "test stub")):
+            self.assertIsNone(G.gate("t", 1.0))
+
+    def test_is_refusal(self):
+        self.assertTrue(G.is_refusal(G.SpendRefused(G.REFUSED_TAG + " (x): hourly ceiling")))
+        self.assertTrue(G.is_refusal(RuntimeError("spend guard refused (cf_tts.passage): guard unavailable")))
+        self.assertTrue(G.is_refusal("spend guard refused (cf_tts.passage): daily cap"))
+        self.assertFalse(G.is_refusal(RuntimeError("narrator job j1 failed: Deepgram HTTP 402")))
+
     def test_estimate(self):
         self.assertAlmostEqual(G.estimate_usd(4000, 1000), 0.001 + 0.004)
         self.assertAlmostEqual(G.estimate_usd(tts_chars=1000), 0.03)

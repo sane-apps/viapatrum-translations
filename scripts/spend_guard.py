@@ -237,7 +237,8 @@ def reserve(caller: str, usd: float, now: float | None = None) -> tuple[bool, st
     now = time.time() if now is None else now
     lock = globals().setdefault("_RES_LOCK", threading.Lock())
     with lock:
-        _reserved[:] = [(t, u) for t, u in _reserved if now - t < RESERVE_WINDOW_S]
+        # Keep the entries themselves (not copies): release() finds a ticket by identity.
+        _reserved[:] = [e for e in _reserved if now - e[0] < RESERVE_WINDOW_S]
         pending = sum(u for _, u in _reserved)
         cap = float(c.get("cap") or DEFAULT_CAP_USD)
         day, hour = float(c.get("day") or 0), float(c.get("hour") or 0)
@@ -248,15 +249,49 @@ def reserve(caller: str, usd: float, now: float | None = None) -> tuple[bool, st
         if hour + pending + usd >= ceiling:
             return False, (f"hourly ceiling: ${hour:.2f} this hour + ${pending:.2f} reserved + ${usd:.3f} "
                            f"this call reaches ${ceiling:.2f}")
-        _reserved.append((now, usd))
+        entry = (now, usd)
+        _reserved.append(entry)
+        _TICKET.last = entry
     return True, "reserved"
 
 
-def gate(caller: str, usd: float) -> None:
-    """reserve() or raise SpendRefused (message starts with REFUSED_TAG)."""
+# The entry the last successful reserve() in this thread added, so gate() can hand it back as a ticket
+# (2026-11-20 audit: a passage whose job failed or spoke nothing kept its hold for the whole
+# RESERVE_WINDOW_S and crowded out the passages after it).
+import threading as _threading  # noqa: E402
+_TICKET = _threading.local()
+
+
+def gate(caller: str, usd: float):
+    """reserve() or raise SpendRefused (message starts with REFUSED_TAG).
+
+    Returns a ticket for release(), or None when nothing was held (a stubbed reserve)."""
+    _TICKET.last = None
     ok, why = reserve(caller, usd)
     if not ok:
         raise SpendRefused(f"{REFUSED_TAG} ({caller}): {why}")
+    ticket, _TICKET.last = getattr(_TICKET, "last", None), None
+    return ticket
+
+
+def release(ticket) -> bool:
+    """Give a reservation back early: its call failed before spending, or found the work already done.
+    True when the hold was still counted. Never raises; an unknown or expired ticket is a no-op."""
+    if ticket is None:
+        return False
+    import threading
+    lock = globals().setdefault("_RES_LOCK", threading.Lock())
+    with lock:
+        for k, e in enumerate(_reserved):
+            if e is ticket:
+                del _reserved[k]
+                return True
+    return False
+
+
+def is_refusal(err) -> bool:
+    """True for a spend-guard refusal (SpendRefused, or a caller's message that starts with REFUSED_TAG)."""
+    return isinstance(err, SpendRefused) or str(err).startswith(REFUSED_TAG)
 
 
 def cap_usd() -> float:
