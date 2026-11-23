@@ -1,0 +1,87 @@
+{
+ "slug": "cyril-alexandria-in-parabolam-vineae",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "claude-sonnet-5-5",
+  "grok-4.7-build-fast"
+ ],
+ "boundary_moves": [
+  {
+   "from": "hom-rem-early",
+   "to": "hom-rem-mid",
+   "moved_chars": 11,
+   "moved_start": "Ἄκουσον τοῦ"
+  },
+  {
+   "from": "hom-rem-mid",
+   "to": "hom-rem-close",
+   "moved_chars": 33,
+   "moved_start": "Οἱ ἀργοὶ, τότε ἐργάται γεγόνασιν·"
+  }
+ ],
+ "brief_sha256": "6b7fbcbfca078bfafbd9cd90cac6213891e1b56c3360338237730bb1025ec761",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-23T17:28:47Z",
+ "readers": [
+  "claude-sonnet-5-5",
+  "grok-4.7-build-fast"
+ ],
+ "referee": "agy/gemini-3.8-flash-high",
+ "sections": [
+  {
+   "section": "hom-open",
+   "source_sha256": "53d2ce1e4ad20caa0bc0cdf5361f68aa30cf8d844e6bb7eeec030488b9ebe427",
+   "english_sha256": "bfa7aa4c81d30927b2e3bdf235b5493fd1d1054a899002d9cd8534168d9b1d1c",
+   "justification": "reviews/justifications/hom-open.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "hom-rem-early",
+   "source_sha256": "3f5831909d1b6c574ea44d7d2b0236d7bcfb978430503838d609dcf65a498548",
+   "english_sha256": "ab97bf32d9ad33114b0387f1f95c784b7002d688e702247ba71ec9e6029d0610",
+   "justification": "reviews/justifications/hom-rem-early.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "hom-rem-mid",
+   "source_sha256": "dc88505aeb49467eafd10732f4950cefcac2113362b27f71943d672c3cda7cbc",
+   "english_sha256": "aef6b5ccd3cb925424bf7f94bec5bbae80bf3bf3d650c3fce53335bf25c17eff",
+   "justification": "reviews/justifications/hom-rem-mid.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "hom-rem-close",
+   "source_sha256": "ada571837a7f76dc39e347f3c35c3da95105ee697c8cb1ef0a2d5bf26a41db1c",
+   "english_sha256": "e566fa1b4a7e2aeb4e5a9ba903ba7b9cfb01929d2e19408a34c9d134924d7659",
+   "justification": "reviews/justifications/hom-rem-close.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 6,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
