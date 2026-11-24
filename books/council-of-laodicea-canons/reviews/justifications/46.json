@@ -1,0 +1,162 @@
+{
+ "excerpt_id": "council-of-laodicea-canons:46",
+ "section": "46",
+ "edition": {
+  "language": "grc",
+  "path": "books/council-of-laodicea-canons/translations/colc_source.json"
+ },
+ "source_text": "Ὅτι δεῖ τοὺς φωτιζομένους τὴν πίστιν ἐκμανθάνειν, καὶ τῇ πέμπτῃ της ἑβδομάδος ἀπαγγέλειν τῷ ἐπισκόπῳ ἢ τοῖς πρεσβυτέροις.",
+ "thought_title": "Catechumens must learn and recite the creed",
+ "orientation": "The council is legislating baptismal preparation, just after limiting reception into baptism to before the last two weeks of Lent.",
+ "pass_a_gloss": "That [it is] necessary [for] the [ones] being enlightened the faith to learn thoroughly, and on the fifth [day] of the week to report to the bishop or to the elders.",
+ "lemmas": [
+  {
+   "form": "φωτιζομένους",
+   "lemma": "φωτίζω",
+   "gloss": "those being baptized"
+  },
+  {
+   "form": "ἐκμανθάνειν",
+   "lemma": "ἐκμανθάνω",
+   "gloss": "to learn thoroughly"
+  },
+  {
+   "form": "πίστιν",
+   "lemma": "πίστις",
+   "gloss": "the faith"
+  },
+  {
+   "form": "πέμπτῃ",
+   "lemma": "πέμπτος",
+   "gloss": "fifth"
+  },
+  {
+   "form": "ἑβδομάδος",
+   "lemma": "ἑβδομάς",
+   "gloss": "of the week"
+  },
+  {
+   "form": "ἀπαγγέλειν",
+   "lemma": "ἀπαγγέλλω",
+   "gloss": "to report"
+  },
+  {
+   "form": "ἐπισκόπῳ",
+   "lemma": "ἐπίσκοπος",
+   "gloss": "to the bishop"
+  },
+  {
+   "form": "πρεσβυτέροις",
+   "lemma": "πρεσβύτερος",
+   "gloss": "to the presbyters"
+  }
+ ],
+ "choices": [
+  {
+   "term": "φωτιζομένους",
+   "english": "those being baptized",
+   "why": "The brief's glossary mandates this rendering for candidates for baptism.",
+   "rejected": [
+    "the enlightened",
+    "those being illuminated"
+   ]
+  },
+  {
+   "term": "ἐκμανθάνειν",
+   "english": "to learn thoroughly",
+   "why": "The compound verb conveys intensive learning, not mere acquaintance.",
+   "rejected": [
+    "to learn",
+    "to memorize"
+   ]
+  },
+  {
+   "term": "ἀπαγγέλειν",
+   "english": "to report",
+   "why": "The verb means to declare or report back, fitting a formal recitation to clergy.",
+   "rejected": [
+    "to recite",
+    "to announce"
+   ]
+  },
+  {
+   "term": "τῇ πέμπτῃ τῆς ἑβδομάδος",
+   "english": "on the fifth day of the week",
+   "why": "Literal rendering of the Greek ordinal and genitive construction, preserving the weekday reference.",
+   "rejected": [
+    "on Thursday",
+    "on the fifth day"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Those being baptized must learn the faith thoroughly, and on the fifth day of the week they are to report to the bishop or to the presbyters."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "0fd7312f72e82e15e469e596843d7c41d3e88af21d15d9c6987140175d874b07",
+ "source_sha256": "a71db072615b1dd805bb7d951b612514341d9c2d2983289471a13feb5b5ac8ac",
+ "pass_a_redone": 1,
+ "reviewer": "work_pipeline:claude+grok",
+ "confidence": "source_verified",
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "they are to report to the bishop or to the presbyters",
+    "source_quote": "τὴν πίστιν ἐκμανθάνειν, καὶ τῇ πέμπτῃ της ἑβδομάδος ἀπαγγέλειν τῷ ἐπισκόπῳ ἢ τοῖς πρεσβυτέροις",
+    "why": "ἀπαγγέλειν here means recite the faith already learned, not merely present themselves or make a report.",
+    "fix": "Those being baptized must learn the faith thoroughly and, on the fifth day of the week, recite it to the bishop or the presbyters.",
+    "model": "grok-4.7-build-fast",
+    "rejected_by": "claude-sonnet-5-5",
+    "ruling": "ἀπαγγέλλειν means to report/announce; 'report to the bishop' is within range. Context (ἐκμανθάνειν) implies recitation, but 'report' is acceptable, not a major meaning change."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ]
+}

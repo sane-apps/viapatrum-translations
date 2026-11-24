@@ -1,0 +1,199 @@
+{
+ "excerpt_id": "council-of-laodicea-canons:31",
+ "section": "31",
+ "edition": {
+  "language": "grc",
+  "path": "books/council-of-laodicea-canons/translations/colc_source.json"
+ },
+ "source_text": "Ὅτι οὐ δεῖ πρὸς πάντας αἱρετικοὺς ἐπιγαμίας ποιεῖν, ἤ διδόναι υἱούς, ἢ θυγατέρας, ἀλλὰ μᾶλλον λαμβάνειν, εἴγε ἐπαγγέλοιντο Χριστιανοὶ γίνεσθαι.",
+ "thought_title": "No marriage alliances with heretics",
+ "orientation": "The Council of Laodicea is issuing its own decrees, and this canon forbids Christians from giving their children in marriage to heretics.",
+ "pass_a_gloss": "That it is not necessary to make marriage alliances with all heretics, or to give sons, or daughters, but rather to take, if indeed they should promise to become Christians.",
+ "lemmas": [
+  {
+   "form": "ἐπιγαμίας",
+   "lemma": "ἐπιγαμία",
+   "gloss": "marriage alliance"
+  },
+  {
+   "form": "ποιεῖν",
+   "lemma": "ποιέω",
+   "gloss": "to make"
+  },
+  {
+   "form": "διδόναι",
+   "lemma": "δίδωμι",
+   "gloss": "to give"
+  },
+  {
+   "form": "υἱούς",
+   "lemma": "υἱός",
+   "gloss": "sons"
+  },
+  {
+   "form": "θυγατέρας",
+   "lemma": "θυγάτηρ",
+   "gloss": "daughters"
+  },
+  {
+   "form": "λαμβάνειν",
+   "lemma": "λαμβάνω",
+   "gloss": "to take"
+  },
+  {
+   "form": "ἐπαγγέλοιντο",
+   "lemma": "ἐπαγγέλλομαι",
+   "gloss": "they should promise"
+  },
+  {
+   "form": "γίνεσθαι",
+   "lemma": "γίνομαι",
+   "gloss": "to become"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἐπιγαμίας ποιεῖν",
+   "english": "make marriage alliances",
+   "why": "The noun ἐπιγαμία means intermarriage or marriage alliance between groups; the verb ποιεῖν with it means to contract such alliances.",
+   "rejected": [
+    "intermarry",
+    "contract marriages"
+   ]
+  },
+  {
+   "term": "ἀλλὰ μᾶλλον λαμβάνειν",
+   "english": "but rather to take",
+   "why": "The contrast is between giving one's own children to heretics and taking a heretic's child as a spouse, provided they promise to become Christians.",
+   "rejected": [
+    "but rather to receive",
+    "but rather to accept"
+   ]
+  },
+  {
+   "term": "εἴγε ἐπαγγέλοιντο",
+   "english": "if indeed they should promise",
+   "why": "The optative with εἴγε expresses a condition that is possible but not assumed; the promise is the condition for taking rather than giving.",
+   "rejected": [
+    "if they promise",
+    "provided that they promise"
+   ]
+  },
+  {
+   "term": "Χριστιανοὶ γίνεσθαι",
+   "english": "to become Christians",
+   "why": "The infinitive γίνεσθαι with the predicate adjective Χριστιανοί indicates a change of state, not merely a claim of being Christian.",
+   "rejected": [
+    "to be Christians",
+    "to turn Christian"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Christians must not make marriage alliances with any heretics, giving them sons or daughters in marriage. Rather, they should receive them in marriage, if indeed those heretics promise to become Christians."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "0fd7312f72e82e15e469e596843d7c41d3e88af21d15d9c6987140175d874b07",
+ "source_sha256": "b0efacf7f64e5b5a5ccf83789787996bf4a36c43e36a5dc4a6815d511d109371",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "agency",
+     "severity": "major",
+     "quote": "Rather, they should take spouses from among them",
+     "source_quote": "ἀλλὰ μᾶλλον λαμβάνειν",
+     "why": "Subject reversed: source says heretics should marry Christians, not Christians take heretics.",
+     "fix": "Rather, they should receive them in marriage, if indeed they promise to become Christians.",
+     "model": "@cf/moonshotai/kimi-k2.6",
+     "upheld_by": "@cf/zai-org/glm-5.2",
+     "ruling": "λαμβάνειν parallels διδόναι: Christians shouldn't give children to heretics but may receive them, if heretics promise to become Christians."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Rather, they should take spouses from among them",
+     "new": "Rather, they should receive them in marriage"
+    }
+   ],
+   "fixed": [
+    "Agency: source 'ἀλλὰ μᾶλλον λαμβάνειν' means 'but rather to take [them]', i.e., to receive the heretics in marriage, not for Christians to take spouses from among heretics. Changed to 'Rather, they should receive them in marriage'."
+   ]
+  }
+ ],
+ "reviewer": "work_pipeline:claude+grok",
+ "confidence": "source_verified",
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "agency",
+    "severity": "major",
+    "quote": "they should receive them in marriage",
+    "source_quote": "ἀλλὰ μᾶλλον λαμβάνειν",
+    "why": "Subject of 'receive' is ambiguous; source means Christians should take heretics' children as spouses, not receive heretics into marriage.",
+    "fix": "Rather, they should take sons or daughters from them in marriage, if indeed those heretics promise to become Christians.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "λαμβάνειν means 'take/receive in marriage'; English 'receive them' reasonably conveys taking heretics' children as spouses, not heretics themselves."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
+}

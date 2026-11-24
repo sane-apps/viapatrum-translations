@@ -1,0 +1,167 @@
+{
+ "excerpt_id": "council-of-laodicea-canons:32",
+ "section": "32",
+ "edition": {
+  "language": "grc",
+  "path": "books/council-of-laodicea-canons/translations/colc_source.json"
+ },
+ "source_text": "Ὅτι οὐ δεῖ αἱρετικῶν εὐλογίας λαμβάνειν, αἵτινές εἰσιν ἀλογίαι μᾶλλον, ἢ εὐλογίαι.",
+ "thought_title": "Heretics' blessings are not blessings",
+ "orientation": "The council continues its rules on avoiding heretics, now forbidding Christians to receive blessings from them.",
+ "pass_a_gloss": "That it is not necessary to receive blessings of heretics, which are rather non-blessings, than blessings.",
+ "lemmas": [
+  {
+   "form": "εὐλογίας",
+   "lemma": "εὐλογία",
+   "gloss": "blessings"
+  },
+  {
+   "form": "λαμβάνειν",
+   "lemma": "λαμβάνω",
+   "gloss": "to receive"
+  },
+  {
+   "form": "αἱρετικῶν",
+   "lemma": "αἱρετικός",
+   "gloss": "of heretics"
+  },
+  {
+   "form": "ἀλογίαι",
+   "lemma": "ἀλογία",
+   "gloss": "non-blessings, words without blessing"
+  },
+  {
+   "form": "μᾶλλον",
+   "lemma": "μᾶλλον",
+   "gloss": "rather"
+  },
+  {
+   "form": "εἰσιν",
+   "lemma": "εἰμί",
+   "gloss": "they are"
+  },
+  {
+   "form": "αἵτινες",
+   "lemma": "ὅστις",
+   "gloss": "which (qualitative)"
+  },
+  {
+   "form": "δεῖ",
+   "lemma": "δεῖ",
+   "gloss": "it is necessary"
+  },
+  {
+   "form": "οὐ",
+   "lemma": "οὐ",
+   "gloss": "not"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἀλογίαι",
+   "english": "non-blessings",
+   "why": "The council plays on εὐλογία/ἀλογία: what heretics call blessings are literally 'wordless' or 'without logos', hence not blessings at all. 'Non-blessings' preserves the wordplay and the negation.",
+   "rejected": [
+    "curses",
+    "foolish words",
+    "empty words"
+   ]
+  },
+  {
+   "term": "εὐλογίας",
+   "english": "blessings",
+   "why": "Standard rendering of εὐλογία as spoken blessings or benedictions, matching the liturgical context of receiving a blessing from a religious figure.",
+   "rejected": [
+    "eulogies",
+    "benedictions"
+   ]
+  },
+  {
+   "term": "λαμβάνειν",
+   "english": "to receive",
+   "why": "The infinitive with δεῖ expresses the prohibition: it is not necessary (i.e., one must not) receive. 'Receive' keeps the active sense of taking a blessing from someone.",
+   "rejected": [
+    "to accept",
+    "to take"
+   ]
+  },
+  {
+   "term": "αἵτινες",
+   "english": "which",
+   "why": "The qualitative relative pronoun introduces the explanatory clause about what these blessings really are; 'which' is the natural English equivalent.",
+   "rejected": [
+    "such as",
+    "the very ones that"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Christians must not receive blessings from heretics, for these are not blessings at all but rather non-blessings."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "0fd7312f72e82e15e469e596843d7c41d3e88af21d15d9c6987140175d874b07",
+ "source_sha256": "1fdd50b292264c09ae017cd60cea65e9cdaa360e6e208045c109d3bc195ead5f",
+ "reviewer": "work_pipeline:claude+grok",
+ "confidence": "source_verified",
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "these are not blessings at all but rather non-blessings",
+    "source_quote": "αἵτινές εἰσιν ἀλογίαι μᾶλλον, ἢ εὐλογίαι",
+    "why": "ἀλογίαι means absurdities or follies, set against blessings; “non-blessings” drops that sense.",
+    "fix": "for these are absurdities rather than blessings.",
+    "model": "grok-4.7-build-fast",
+    "rejected_by": "claude-sonnet-5-5",
+    "ruling": "ἀλογίαι is a wordplay with εὐλογίαι; 'non-blessings' preserves the pun and contrast (ἀλογία = irrationality/lack of reason). Rendering is within range, not a meaning loss."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ]
+}

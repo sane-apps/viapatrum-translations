@@ -1,0 +1,151 @@
+{
+ "excerpt_id": "council-of-laodicea-canons:43",
+ "section": "43",
+ "edition": {
+  "language": "grc",
+  "path": "books/council-of-laodicea-canons/translations/colc_source.json"
+ },
+ "source_text": "Ὅτι οὐ δεῖ ὑπηρέτας, κἂν βραχύ, τὰς θύρας ἐγκαταλείπειν, καὶ τῇ εὐχῇ σχολάζειν.",
+ "thought_title": "Servants must not leave the doors",
+ "orientation": "The council is issuing a rule about the conduct of servants during worship.",
+ "pass_a_gloss": "That it is not necessary for servants, even briefly, to abandon the doors, and to devote themselves to prayer.",
+ "lemmas": [
+  {
+   "form": "ὑπηρέτας",
+   "lemma": "ὑπηρέτης",
+   "gloss": "servants"
+  },
+  {
+   "form": "βραχύ",
+   "lemma": "βραχύς",
+   "gloss": "briefly"
+  },
+  {
+   "form": "θύρας",
+   "lemma": "θύρα",
+   "gloss": "doors"
+  },
+  {
+   "form": "ἐγκαταλείπειν",
+   "lemma": "ἐγκαταλείπω",
+   "gloss": "to abandon"
+  },
+  {
+   "form": "εὐχῇ",
+   "lemma": "εὐχή",
+   "gloss": "prayer"
+  },
+  {
+   "form": "σχολάζειν",
+   "lemma": "σχολάζω",
+   "gloss": "to devote oneself"
+  }
+ ],
+ "choices": [
+  {
+   "term": "οὐ δεῖ",
+   "english": "it is not necessary",
+   "why": "The impersonal δεῖ with οὐ expresses prohibition of obligation; rendered literally as 'it is not necessary' to preserve the canonical force.",
+   "rejected": [
+    "it is not permitted",
+    "they must not"
+   ]
+  },
+  {
+   "term": "κἂν βραχύ",
+   "english": "even briefly",
+   "why": "The concessive κἂν with the adverb βραχύ emphasizes that no duration of absence is allowed.",
+   "rejected": [
+    "even a little",
+    "if only briefly"
+   ]
+  },
+  {
+   "term": "ἐγκαταλείπειν",
+   "english": "to abandon",
+   "why": "The compound verb means to leave behind or forsake; 'abandon' captures the sense of deserting a post.",
+   "rejected": [
+    "to leave",
+    "to forsake"
+   ]
+  },
+  {
+   "term": "σχολάζειν",
+   "english": "to devote themselves",
+   "why": "The verb σχολάζω with the dative τῇ εὐχῇ means to give oneself to prayer; 'devote themselves' preserves the dative construction.",
+   "rejected": [
+    "to be at leisure for",
+    "to occupy themselves with"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Servants must not abandon the doors, even briefly, to devote themselves to prayer."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "0fd7312f72e82e15e469e596843d7c41d3e88af21d15d9c6987140175d874b07",
+ "source_sha256": "da7769705b5694cc8e3ccae9ed15b7fc19dfef02ad9c1e3840ea0ff3f6d03ef4",
+ "reviewer": "work_pipeline:claude+grok",
+ "confidence": "source_verified",
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "to devote themselves to prayer",
+    "source_quote": "καὶ τῇ εὐχῇ σχολάζειν",
+    "why": "Source says servants must not abandon the doors AND devote themselves to prayer (two things not to do, i.e., not leave doors to pray). English subordinates it as purpose, which is a plausible reading; however 'even briefly' is fine. Sense: leaving doors to pray.",
+    "fix": "Servants must not leave the doors, even briefly, to give themselves to prayer.",
+    "model": "claude-sonnet-5-5",
+    "rejected_by": "grok-4.7-build-fast",
+    "ruling": "καί joins σχολάζειν to ἐγκαταλείπειν under οὐ δεῖ; purpose “to devote themselves to prayer” keeps not leaving the doors to pray."
+   }
+  ]
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ]
+}

@@ -1,0 +1,162 @@
+{
+ "excerpt_id": "council-of-laodicea-canons:20",
+ "section": "20",
+ "edition": {
+  "language": "grc",
+  "path": "books/council-of-laodicea-canons/translations/colc_source.json"
+ },
+ "source_text": "Ὅτι οὐ δεῖ διάκονον ἔμπροσθεν πρεσβυτέρου καθέζεσθαι, ἀλλὰ μετὰ κελεύσεως τοῦ πρεσβυτέρου καθέζεσθαι. Ὁμοίως δὲ ἔχειν τιμὴν καὶ τοὺς διακόνους ὑπὸ τῶν ὑπηρετῶν καὶ πάντων τῶν κληρικῶν.",
+ "thought_title": "Deacons' seating and honor",
+ "orientation": "The council is issuing a rule about the seating order and honor of deacons relative to presbyters and other clergy.",
+ "pass_a_gloss": "That not [it] is necessary [for] a deacon before [an] elder to sit down, but with [the] command [of] the elder to sit down. Likewise [it] is necessary [for them] to have honor also the deacons from the servants and all the clerics.",
+ "lemmas": [
+  {
+   "form": "διάκονον",
+   "lemma": "διάκονος",
+   "gloss": "deacon"
+  },
+  {
+   "form": "ἔμπροσθεν",
+   "lemma": "ἔμπροσθεν",
+   "gloss": "in front of"
+  },
+  {
+   "form": "πρεσβυτέρου",
+   "lemma": "πρεσβύτερος",
+   "gloss": "presbyter"
+  },
+  {
+   "form": "καθέζεσθαι",
+   "lemma": "καθέζομαι",
+   "gloss": "to sit"
+  },
+  {
+   "form": "κελεύσεως",
+   "lemma": "κέλευσις",
+   "gloss": "permission, command"
+  },
+  {
+   "form": "τιμήν",
+   "lemma": "τιμή",
+   "gloss": "honor"
+  },
+  {
+   "form": "ὑπηρετῶν",
+   "lemma": "ὑπηρέτης",
+   "gloss": "servants"
+  },
+  {
+   "form": "κληρικῶν",
+   "lemma": "κληρικός",
+   "gloss": "clergy"
+  }
+ ],
+ "choices": [
+  {
+   "term": "μετὰ κελεύσεως τοῦ πρεσβυτέρου",
+   "english": "with the permission of the presbyter",
+   "why": "κέλευσις here means authorization or leave, not a direct command; 'permission' captures the deacon's subordinate seating.",
+   "rejected": [
+    "at the command of the presbyter",
+    "when ordered by the presbyter"
+   ]
+  },
+  {
+   "term": "ἔχειν τιμήν",
+   "english": "should have honor",
+   "why": "The infinitive with δεῖ understood carries a prescriptive force; 'should have honor' keeps the deontic sense.",
+   "rejected": [
+    "are to be honored",
+    "must receive honor"
+   ]
+  },
+  {
+   "term": "ὑπηρετῶν",
+   "english": "servants",
+   "why": "The brief identifies ὑπηρέται as attendants ranked below deacons; 'servants' matches the cast list.",
+   "rejected": [
+    "subdeacons",
+    "ministers"
+   ]
+  },
+  {
+   "term": "πάντων τῶν κληρικῶν",
+   "english": "all the clergy",
+   "why": "The phrase includes every clerical rank; 'all the clergy' is the plain collective rendering.",
+   "rejected": [
+    "all clerics",
+    "every clergyman"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "A deacon must not sit in front of a presbyter, but may sit only with the presbyter's permission. Likewise, the deacons should receive honor from the servants and from all the clergy."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "0fd7312f72e82e15e469e596843d7c41d3e88af21d15d9c6987140175d874b07",
+ "source_sha256": "3008d140b9be4760a0106c595f00530105d28bfa5b680606b07084cfa1c88007",
+ "pass_a_redone": 1,
+ "reviewer": "work_pipeline:claude+grok",
+ "confidence": "source_verified",
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "omission",
+    "severity": "major",
+    "quote": "Likewise, the deacons should receive honor from the servants and from all the clergy.",
+    "source_quote": "Ὁμοίως δὲ ἔχειν τιμὴν καὶ τοὺς διακόνους ὑπὸ τῶν ὑπηρετῶν καὶ πάντων τῶν κληρικῶν",
+    "why": "Source says deacons are to receive honor FROM servants and all clergy; 'ὑπό' marks servants/clergy as those giving honor, not receiving it.",
+    "fix": "Likewise, the deacons are to receive honor from the servants and from all the clergy.",
+    "model": "@cf/zai-org/glm-5.2",
+    "rejected_by": "@cf/moonshotai/kimi-k2.6",
+    "ruling": "English 'from' correctly renders ὑπό + genitive as agent: honor received FROM servants/clergy. No error."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
+}

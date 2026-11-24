@@ -1,0 +1,180 @@
+{
+ "excerpt_id": "council-of-laodicea-canons:45",
+ "section": "45",
+ "edition": {
+  "language": "grc",
+  "path": "books/council-of-laodicea-canons/translations/colc_source.json"
+ },
+ "source_text": "Ὅτι οὐ δεῖ μετὰ δυὸ ἑβδομάδας τῆς Τεσσαρακοστῆς δέχεσθαι εἰς τὸ φώτισμα.",
+ "thought_title": "No baptismal enrollment after the second week of Lent",
+ "orientation": "The Council of Laodicea is issuing its own decrees, and this canon sets a deadline for admitting candidates to baptism during Lent.",
+ "pass_a_gloss": "That it is not necessary after two weeks of Lent to receive into the baptism.",
+ "lemmas": [
+  {
+   "form": "Ὅτι",
+   "lemma": "ὅτι",
+   "gloss": "that"
+  },
+  {
+   "form": "οὐ",
+   "lemma": "οὐ",
+   "gloss": "not"
+  },
+  {
+   "form": "δεῖ",
+   "lemma": "δεῖ",
+   "gloss": "it is necessary"
+  },
+  {
+   "form": "μετὰ",
+   "lemma": "μετά",
+   "gloss": "after"
+  },
+  {
+   "form": "δυὸ",
+   "lemma": "δύο",
+   "gloss": "two"
+  },
+  {
+   "form": "ἑβδομάδας",
+   "lemma": "ἑβδομάς",
+   "gloss": "weeks"
+  },
+  {
+   "form": "τῆς",
+   "lemma": "ὁ",
+   "gloss": "the"
+  },
+  {
+   "form": "Τεσσαρακοστῆς",
+   "lemma": "Τεσσαρακοστή",
+   "gloss": "Lent"
+  },
+  {
+   "form": "δέχεσθαι",
+   "lemma": "δέχομαι",
+   "gloss": "to receive"
+  },
+  {
+   "form": "εἰς",
+   "lemma": "εἰς",
+   "gloss": "into"
+  },
+  {
+   "form": "τὸ",
+   "lemma": "ὁ",
+   "gloss": "the"
+  },
+  {
+   "form": "φώτισμα",
+   "lemma": "φώτισμα",
+   "gloss": "baptism"
+  }
+ ],
+ "choices": [
+  {
+   "term": "εἰς τὸ φώτισμα",
+   "english": "into the baptism",
+   "why": "The noun φώτισμα means baptism as the act of enlightening; the glossary maps φωτιζόμενοι to 'those being baptized', so the related noun is rendered 'baptism' to keep the same English family.",
+   "rejected": [
+    "into the enlightenment",
+    "for illumination"
+   ]
+  },
+  {
+   "term": "Τεσσαρακοστῆς",
+   "english": "Lent",
+   "why": "The glossary requires 'Lent' for Τεσσαρακοστή, the forty-day fast before Pascha.",
+   "rejected": [
+    "Quadragesima",
+    "the Forty Days"
+   ]
+  },
+  {
+   "term": "δέχεσθαι",
+   "english": "to receive",
+   "why": "The infinitive is passive in form but active in sense here, meaning to admit or accept someone as a candidate; 'receive' preserves the verb's basic sense.",
+   "rejected": [
+    "to accept",
+    "to welcome"
+   ]
+  },
+  {
+   "term": "δυὸ ἑβδομάδας",
+   "english": "two weeks",
+   "why": "The numeral and noun are straightforward; 'two weeks' is the natural English equivalent.",
+   "rejected": [
+    "a fortnight"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "No one is to be received into the baptism after two weeks of Lent."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "0fd7312f72e82e15e469e596843d7c41d3e88af21d15d9c6987140175d874b07",
+ "source_sha256": "e5351a0e4f7142fb4dfd8a873e5869cd29f35f25feac3c4accecb5d8ca14fbbe",
+ "reviewer": "work_pipeline:claude+grok",
+ "confidence": "source_verified",
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "after two weeks of Lent",
+    "source_quote": "μετὰ δυὸ ἑβδομάδας τῆς Τεσσαρακοστῆς",
+    "why": "μετα + accusative means 'after' in time, but context demands 'within/after the first two weeks'—the canon limits when baptism may begin, not when it ends. 'After two weeks' misreads as permission after that point.",
+    "fix": "No one is to be received for baptism once two weeks of Lent have passed.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "μετὰ + acc. means 'after'; 'after two weeks of Lent' is literal. The claim disputes canon interpretation, not translation accuracy."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
+}

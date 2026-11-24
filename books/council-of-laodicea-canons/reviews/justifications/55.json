@@ -1,0 +1,151 @@
+{
+ "excerpt_id": "council-of-laodicea-canons:55",
+ "section": "55",
+ "edition": {
+  "language": "grc",
+  "path": "books/council-of-laodicea-canons/translations/colc_source.json"
+ },
+ "source_text": "Ὅτι οὐ δεῖ ἱερατικοὺς ἢ κληρικοὺς ἐκ συμβολῆς συμπόσια ἐπιτελεῖν, ἀλλ᾽ οὐδὲ λαϊκούς.",
+ "thought_title": "No shared-cost banquets for clergy or laity",
+ "orientation": "The council is issuing a short disciplinary canon about banquets, following the previous canon on clergy leaving wedding and dinner entertainments.",
+ "pass_a_gloss": "That priests or clergy must not hold banquets from a common contribution, but neither must lay people.",
+ "lemmas": [
+  {
+   "form": "ἱερατικοὺς",
+   "lemma": "ἱερατικός",
+   "gloss": "priestly, priests"
+  },
+  {
+   "form": "κληρικοὺς",
+   "lemma": "κληρικός",
+   "gloss": "clergy"
+  },
+  {
+   "form": "συμβολῆς",
+   "lemma": "συμβολή",
+   "gloss": "contribution, shared cost"
+  },
+  {
+   "form": "συμπόσια",
+   "lemma": "συμπόσιον",
+   "gloss": "banquet, drinking party"
+  },
+  {
+   "form": "ἐπιτελεῖν",
+   "lemma": "ἐπιτελέω",
+   "gloss": "to hold, to perform"
+  },
+  {
+   "form": "λαϊκούς",
+   "lemma": "λαϊκός",
+   "gloss": "lay people"
+  }
+ ],
+ "choices": [
+  {
+   "term": "ἐκ συμβολῆς",
+   "english": "from a common contribution",
+   "why": "The phrase means each participant contributes a share to fund the banquet; 'common contribution' preserves the pooling sense.",
+   "rejected": [
+    "by subscription",
+    "at a collection"
+   ]
+  },
+  {
+   "term": "συμπόσια ἐπιτελεῖν",
+   "english": "hold banquets",
+   "why": "ἐπιτελεῖν means to carry out or perform an event; 'hold banquets' is the natural English for organizing such a meal.",
+   "rejected": [
+    "perform symposia",
+    "celebrate drinking parties"
+   ]
+  },
+  {
+   "term": "ἱερατικοὺς ἢ κληρικοὺς",
+   "english": "priests or clergy",
+   "why": "The canon distinguishes ἱερατικοί (priestly persons) from κληρικοί (clergy in general); rendering both terms keeps the distinction.",
+   "rejected": [
+    "priests and clerics",
+    "sacerdotal or clerical persons"
+   ]
+  },
+  {
+   "term": "λαϊκούς",
+   "english": "lay people",
+   "why": "The standard term for non-clergy; 'lay people' is clear and matches the glossary's cast of the faithful.",
+   "rejected": [
+    "laity",
+    "laymen"
+   ]
+  }
+ ],
+ "bible_refs": [],
+ "pass_b_english": [
+  "Priests or clergy must not hold banquets funded by a common contribution, and neither may lay people."
+ ],
+ "notes": [],
+ "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "0fd7312f72e82e15e469e596843d7c41d3e88af21d15d9c6987140175d874b07",
+ "source_sha256": "b5c0989f5ddb6206bf1b92da6a07fcc4939db5189323163c354c1ecdeef3f1c8",
+ "reviewer": "work_pipeline:claude+grok",
+ "confidence": "source_verified",
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "funded by a common contribution",
+    "source_quote": "ἐκ συμβολῆς",
+    "why": "ἐκ συμβολῆς means 'by subscription/contribution' but 'funded by a common contribution' overcomplicates and slightly misrepresents the Greek idiom for shared-cost drinking parties.",
+    "fix": "Priests or clergy must not hold subscription banquets, and neither may lay people.",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἐκ συμβολῆς means 'by contribution/subscription'; 'funded by a common contribution' accurately renders it without changing meaning."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
+}
