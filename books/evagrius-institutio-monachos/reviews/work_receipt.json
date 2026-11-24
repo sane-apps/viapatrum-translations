@@ -1,0 +1,87 @@
+{
+ "slug": "evagrius-institutio-monachos",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/claude-opus-5-5-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 258,
+   "moved_start": "Ὡς οὐκ ἔστιν ἴσος ὁ ζυγὸς, βαροῦντος\nτοῦ ἑνὸς μέρους, οὕτως "
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 121,
+   "moved_start": "Ὥσπερ ἄμπελος, μὴ ποιοῦσα καρποὺς καλοὺς,\nἐκκόπτεται ἵνα μὴ "
+  }
+ ],
+ "brief_sha256": "4fbdf09b8fcc8b4dc375df354c8f9ebe322adc92a7e279b46ec2f8c40198d136",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-24T02:52:22Z",
+ "readers": [
+  "claude-sonnet-5-5",
+  "cursor/composer-2.5"
+ ],
+ "referee": "agy/gemini-3.8-flash-high",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "35e2dfef90f9c472e5dbd03eda3ff98b20e6c04bee4f985e26448e1ee034473d",
+   "english_sha256": "a5cb6ef4d64a20b6eca2076f8b098c0274f9b775d17fbd4bb26d9c0ff3d514bb",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "c3138427907504e32e4c70b8de9be700662ea5137f0a0d44a45268418471e896",
+   "english_sha256": "2c0e8381a7c1ee4c2364d418b453c64afff08bbe8a107760801c2d3f1e978d10",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "7ddeac2ef0d03f54b6ec8dff4b3e91a7c23639e123a6466d6d5ab048670ae575",
+   "english_sha256": "fa300d068b4156fc1b19c7da23e603ee5d39afbaf964b6c4ed104550ebbc3c5f",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "e0a20b19759c9a7d37025763197c2aa9707ab64435c84b71f977d4adc88c4686",
+   "english_sha256": "da880f65f2dffdb512b703b0ff593af39a475a1bdd0900ea52e4d6ccb0932cfb",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ],
+ "ref_gate": {
+  "references": 2,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
