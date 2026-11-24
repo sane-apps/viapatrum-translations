@@ -150,7 +150,7 @@
   }
  ],
  "pass_b_english": [
-  "Foods do not defile us, holy pope, if the captives ate what their masters placed before them—especially since everyone agrees that the barbarians who overran our regions did not sacrifice to idols. The apostle says, “Foods are for the belly, and the belly for foods, and God will abolish both this and those” (1 Corinthians 6:13). And the Savior, who cleanses all foods, says, “It is not what enters that defiles a person, but what comes out” (Matthew 15:11). And as for the captive women being corrupted, with the barbarians committing violation against their bodies: But if a woman’s life had already been condemned before, because she walked after the eyes of fornicators, as it is written, then clearly her immoral disposition is suspect even in the time of captivity, and such women should not readily share in the prayers. If, however, a woman who had lived in extreme chastity and had shown her former life to be clean and beyond all suspicion has now fallen into violation through force and necessity, we have the example in Deuteronomy concerning the young woman whom a man found in the open country and, after forcing her, slept with her: “You shall do nothing to the young woman; there is no capital sin for the young woman, because just as if a man rises up against his neighbor and takes his life, so is this matter. The young woman cried out, and there was no one to help her” (Deuteronomy 22:25–27). These things, then, are so."
+  "Foods do not trouble us, holy pope, if the captives ate what their masters placed before them—especially since everyone agrees that the barbarians who overran our regions did not sacrifice to idols. The apostle says, “Foods are for the belly, and the belly for foods, and God will abolish both this and those” (1 Corinthians 6:13). And the Savior, who cleanses all foods, says, “It is not what enters that defiles a person, but what comes out” (Matthew 15:11). And as for the captive women being corrupted, with the barbarians committing violation against their bodies: But if a woman’s life had already been condemned before, because she walked after the eyes of fornicators, as it is written, then clearly her immoral disposition is suspect even in the time of captivity, and such women should not readily share in the prayers. If, however, a woman who had lived in extreme chastity and had shown her former life to be clean and beyond all suspicion has now fallen into violation through force and necessity, we have the example in Deuteronomy concerning the young woman whom a man found in the open country and, after forcing her, slept with her: “You shall do nothing to the young woman; there is no capital sin for the young woman, because just as if a man rises up against his neighbor and takes his life, so is this matter. The young woman cried out, and there was no one to help her” (Deuteronomy 22:25–27). These things, then, are so."
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
@@ -289,9 +289,50 @@
     "The scripture reference 1 Corinthians 6:13 is correct for the quoted words; Gregory's quotation is loose but the citation is not wrong.",
     "The English already says 'violation' for the act in the intro and now 'violated' for the women, so the glossary issue is resolved."
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "Foods do not defile us, holy pope",
+     "source_quote": "Οὐ τὰ βρώματα ἡμᾶς βαρεῖ, ἱερὲ πάπα",
+     "why": "βαρεῖ means 'weighs on' or 'troubles', not 'defiles'. Gregory means the bishops are not worried about the foods; he is not saying the foods fail to defile 'us'.",
+     "fix": "It is not the foods that trouble us, holy pope, if the captives ate what their masters placed before them",
+     "model": "agy/claude-opus-5-5-medium",
+     "upheld_by": "cursor/composer-2.5",
+     "ruling": "βαρεῖ is βαρέω, burden/trouble us—not κοινοῦν; Gregory tells the pope foods need not weigh on bishops, not that food cannot defile."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Foods do not defile us, holy pope",
+     "new": "Foods do not trouble us, holy pope"
+    }
+   ],
+   "fixed": [
+    "mistranslation barei: source 'Ou ta bromata hemas barei' means trouble/weigh on, not defile (koinoi) - changed 'defile' to 'trouble'",
+    "earlier 'weigh us down'->'defile us': 'defile' was wrong for barei, corrected to 'trouble' - not retained",
+    "earlier 'Nor does the fact...corrupted' repeat: current 'And as for...' correctly renders 'kai to...diaphtharenai' as new topic, not second object of barei - no edit",
+    "earlier Deut 22:26-27->22:25-27: kept 22:25-27 because 'en to pedio...biasamenos' (v25) plus quote (vv26-27) are both used - no edit",
+    "earlier 'Nor does...'->'And as for...': kept 'And as for...' since violation needs discernment per 'ei men...ei mentoi', not dismissal - no edit",
+    "earlier 'being corrupted...committing vio'->'being violated...committing viol': kept 'being corrupted' for diaphtharenai vs 'violation' for exybrizonton/hybrei per glossary - no edit",
+    "earlier insertion 'someone objects': absent in 'All' ei men...' source, omission kept - no edit",
+    "earlier 'abolish'->'destroy' for katargesei: kept 'abolish' faithful to katargesei and gloss - no edit"
+   ]
   }
  ],
- "checks": {
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "reverted_reader_edits": [
+  {
+   "at": "2026-10-05T20:47:42Z",
+   "undone": 3,
+   "confirmed_before": 2,
+   "confirmed_after": 1
+  }
+ ],
+ "previous_checks": {
   "checkers": [
    "@cf/moonshotai/kimi-k2.6",
    "@cf/zai-org/glm-5.2"
@@ -363,7 +404,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 2,
@@ -387,14 +428,39 @@
    "confirmed": 0
   }
  ],
- "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified",
- "reverted_reader_edits": [
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
   {
-   "at": "2026-10-05T20:47:42Z",
-   "undone": 3,
-   "confirmed_before": 2,
-   "confirmed_after": 1
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }
