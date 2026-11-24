@@ -1,10 +1,10 @@
 {
  "slug": "eustathius-in-proverbia",
  "pipeline": "work_pipeline",
- "drafter": "nvidia/nemotron-3-ultra-550b-a55b",
+ "drafter": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
  "checkers": [
-  "claude-sonnet-5-5",
-  "grok-4.7-build-fast"
+  "@cf/qwen/qwen3.8-27b",
+  "@cf/google/gemma-4-26b-a4b-it"
  ],
  "boundary_moves": [
   {
@@ -26,12 +26,12 @@
   3
  ],
  "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
- "applied": "2026-11-07T03:41:52Z",
+ "applied": "2026-11-24T02:40:56Z",
  "readers": [
-  "claude-sonnet-5-5",
-  "grok-4.7-build-fast"
+  "@cf/qwen/qwen3.8-27b",
+  "@cf/google/gemma-4-26b-a4b-it"
  ],
- "referee": "agy/gemini-3.8-flash-high",
+ "referee": "nvidia/nemotron-3-ultra-550b-a55b",
  "sections": [
   {
    "section": "frag-open",
@@ -77,5 +77,8 @@
    ],
    "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
   }
- ]
+ ],
+ "ref_gate": {
+  "references": 0
+ }
 }
