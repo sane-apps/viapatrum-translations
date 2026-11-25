@@ -160,101 +160,14 @@
   }
  ],
  "pass_b_english": [
-  "Thus says Solomon, son of David the king and prophet, to the whole Church of God—the most honored king among all people, and the wisest prophet. How empty and useless are all human affairs and pursuits, everything that belongs to human life. For no one can point to any benefit attached to these things that people, crawling about the earth, are eager to accomplish with body and soul. They are defeated by temporal things, and they do not wish to see anything at all above the stars with the noble eye of the soul. Human life wears away day by day, through the cycles of hours and years and the fixed courses of the sun, as some things arrive and others slip away. The matter is like the passing of winter torrents that pour into the boundless deep of the sea with great turmoil. What God has established for human life remains fixed: being born from the earth, departing into the earth, the earth itself standing firm, the sun traveling around the whole earth and returning again to the same boundary, the winds likewise, and the rivers pouring into the sea—so many of them—and the winds that rush upon it, yet do not force it to overflow its limits, nor do they themselves transgress. These things that contribute to our life here have been fixed in this way. But the words and deeds devised by human beings have no measure. There is a great crowd of words, yet no benefit comes from this wandering idle talk. The human race is insatiable, both in speaking and in listening to another who speaks; and still more, it longs to gaze with careless eyes at everything that happens to come along. What could happen later that has not already been accomplished, or done by human beings? What new thing has not yet come to experience, that would be worth remembering? For I think there is nothing. Whatever someone might call recent or new, he will find upon reflection that it was not unknown even to the ancients. Just as former things are hidden in forgetfulness, so also present things will be dimmed in time for those who come after. And I am not improvising these things now as I address the Church; rather, having been entrusted with the kingdom of the Hebrews in Jerusalem, I have thought through all these things sufficiently."
+  "Thus says Solomon, son of David the king and prophet, the most honored king among all people and the wisest prophet, to the whole Church of God. How empty and useless are all human affairs and pursuits, everything that belongs to human life. For no one can point to any benefit attached to these things that people, crawling about the earth, are eager to accomplish with body and soul. They are defeated by temporal things, and they do not wish to see anything at all above the stars with the noble eye of the soul. Human life wears away day by day, through the cycles of hours and years and the fixed courses of the sun, as some things arrive and others slip away. The matter is like the passing of winter torrents that pour into the boundless deep of the sea with great turmoil. What God has established for human life remains fixed: being born from the earth, departing into the earth, the earth itself standing firm, the sun traveling around the whole earth and returning again to the same boundary, the winds likewise, and the rivers pouring into the sea—so many of them—and the winds that rush upon it, yet do not force it to overflow its limits, nor do they themselves transgress. These things that contribute to our life here have been fixed in this way. But the words and deeds devised by human beings have no measure. There is a great crowd of words, yet no benefit comes from this wandering idle talk. The human race is insatiable, both in speaking and in listening to another who speaks; and still more, it longs to gaze with careless eyes at everything that happens to come along. What could happen later that has not already been accomplished, or done by human beings? What new thing has not yet come to experience, that would be worth remembering? For I think there is nothing. Whatever someone might call recent or new, he will find upon reflection that it was not unknown even to the ancients. Just as former things are hidden in forgetfulness, so also present things will be dimmed in time for those who come after. And I am not improvising these things now as I address the Church; rather, having been entrusted with the kingdom of the Hebrews in Jerusalem, I have thought through all these things sufficiently."
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
  "pipeline": "work_pipeline",
  "brief_sha256": "60c2600b2e5bf0a2397a5fcb8894ea06ebdbdc495ea71a0df1daee98af9b2a94",
  "source_sha256": "d95f7615cf2dda49322444b440773012a8cc23bf87bb6a7c6e01ec0e8082c09c",
- "checks": {
-  "checkers": [
-   "@cf/moonshotai/kimi-k2.6",
-   "@cf/zai-org/glm-5.2"
-  ],
-  "rounds": [
-   {
-    "round": 0,
-    "confirmed": 0,
-    "rejected": 5,
-    "error": null
-   }
-  ],
-  "last_rejected": [
-   {
-    "class": "glossary",
-    "severity": "major",
-    "quote": "careless eyes",
-    "source_quote": "ὄμμασιν εἰκαίοις",
-    "why": "Glossary requires 'noble eye of the soul' for ὄμμα; 'careless' contradicts the noble/valiant sense of γενναῖος used earlier.",
-    "fix": "restless eyes or wandering eyes (but note εἰκαῖος means random/vain, not careless)",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "ὄμμασιν εἰκαίοις is a different phrase from τῷ γενναίῳ τῆς ψυχῆς ὄμματι; glossary need not conflate them."
-   },
-   {
-    "class": "mistranslation",
-    "severity": "major",
-    "quote": "careless eyes",
-    "source_quote": "ὄμμασιν εἰκαίοις",
-    "why": "εἰκαῖος means 'random, aimless, vain' not 'careless'; the human race longs to gaze at random things with random/vain eyes.",
-    "fix": "restless eyes or idle eyes",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "εἰκαῖος can mean 'casual/random'; 'careless eyes' is within acceptable range for εἰκαίοις ὄμμασιν."
-   },
-   {
-    "class": "speaker",
-    "severity": "major",
-    "quote": "For I think there is nothing",
-    "source_quote": "Ἐγὼ μὲν γὰρ οἶμαι οὐδέν",
-    "why": "This is Solomon speaking (reported by Gregory), but 'I' here blurs with Gregory's own 'I' at section end; however context makes clear.",
-    "fix": "For he thinks there is nothing",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "Context clearly identifies Solomon as speaker; no real confusion with Gregory's voice."
-   },
-   {
-    "class": "mistranslation",
-    "severity": "major",
-    "quote": "being born from the earth",
-    "source_quote": "τὸ ἀπὸ γῆς γεννᾶσθαι",
-    "why": "γεννᾶσθαι here means 'to be born' but in context of Ecclesiastes LXX it refers to human generation/birth from earth (dust); 'born from the earth' is slightly off.",
-    "fix": "born of the earth",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "τὸ ἀπὸ γῆς γεννᾶσθαι = 'being born from the earth'; rendering is accurate and natural."
-   },
-   {
-    "class": "mistranslation",
-    "severity": "major",
-    "quote": "departing into the earth",
-    "source_quote": "τὸ εἰς γῆν ἀπιέναι",
-    "why": "ἀπιέναι means 'to go away, depart, return'; 'departing into the earth' captures returning to dust/death.",
-    "fix": "returning to the earth",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "ἀπιέναι = 'go away/depart'; 'departing into the earth' correctly captures returning to dust."
-   }
-  ]
- },
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 0,
-   "rejected": 5,
-   "error": null
-  },
-  {
-   "round": "read0",
-   "confirmed": 0
-  },
-  {
-   "round": "read1",
-   "confirmed": 0
-  }
- ],
- "reviewer": "work_pipeline:kimi+glm",
+ "reviewer": "work_pipeline:claude-sonnet-5-5+grok-4.7-build-fast",
  "confidence": "source_verified",
  "repairs": [
   {
@@ -357,6 +270,30 @@
     "The Greek 'εἰκαίοις' means 'idle' or 'random', so 'idle eyes' is more accurate than 'careless eyes'.",
     "The speaker issue is resolved by removing the inserted name 'Solomon' from the final sentence, allowing the voice to remain Gregory's as in the source."
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "agency",
+     "severity": "major",
+     "quote": "to the whole Church of God—the most honored king among all people, and the wisest prophet.",
+     "source_quote": "Σαλομὼν, ὁ τοῦ Δαβὶδ βασιλέως καὶ προφήτου παῖς ἁπάσῃ τῇ τοῦ Θεοῦ Ἐκκλησίᾳ, παρὰ πάντας ἀνθρώπους βασιλεὺς ἐντιμότατος, καὶ προφήτης σοφώτατος",
+     "why": "The king and prophet phrase describes Solomon. The English dash makes it read as if it describes the Church.",
+     "fix": "Thus says Solomon, son of David the king and prophet, the most honored king among all people and the wisest prophet, to the whole Church of God.",
+     "model": "claude-sonnet-5-5",
+     "upheld_by": "grok-4.7-build-fast",
+     "ruling": "Nominatives βασιλεὺς ἐντιμότατος and προφήτης σοφώτατος modify Σαλομών, not dative Ἐκκλησίᾳ; the dash misattaches them to the Church."
+    }
+   ],
+   "edits": [
+    {
+     "old": "Thus says Solomon, son of David the king and prophet, to the whole Church of God—the most honored king among all people, and the wisest prophet.",
+     "new": "Thus says Solomon, son of David the king and prophet, the most honored king among all people and the wisest prophet, to the whole Church of God."
+    }
+   ],
+   "fixed": [
+    "agency: The Greek appositives παρὰ πάντας ἀνθρώπους βασιλεὺς ἐντιμότατος, καὶ προφήτης σοφώτατος modify Σαλομὼν (Solomon), not τῇ Ἐκκλησίᾳ (the Church). The dash in the English misattributed the titles to the Church; restructuring the sentence places the descriptions with Solomon as the source requires."
+   ]
   }
  ],
  "reverted_reader_edits": [
@@ -365,6 +302,128 @@
    "undone": 5,
    "confirmed_before": 0,
    "confirmed_after": 0
+  }
+ ],
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 5,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "glossary",
+    "severity": "major",
+    "quote": "careless eyes",
+    "source_quote": "ὄμμασιν εἰκαίοις",
+    "why": "Glossary requires 'noble eye of the soul' for ὄμμα; 'careless' contradicts the noble/valiant sense of γενναῖος used earlier.",
+    "fix": "restless eyes or wandering eyes (but note εἰκαῖος means random/vain, not careless)",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ὄμμασιν εἰκαίοις is a different phrase from τῷ γενναίῳ τῆς ψυχῆς ὄμματι; glossary need not conflate them."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "careless eyes",
+    "source_quote": "ὄμμασιν εἰκαίοις",
+    "why": "εἰκαῖος means 'random, aimless, vain' not 'careless'; the human race longs to gaze at random things with random/vain eyes.",
+    "fix": "restless eyes or idle eyes",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "εἰκαῖος can mean 'casual/random'; 'careless eyes' is within acceptable range for εἰκαίοις ὄμμασιν."
+   },
+   {
+    "class": "speaker",
+    "severity": "major",
+    "quote": "For I think there is nothing",
+    "source_quote": "Ἐγὼ μὲν γὰρ οἶμαι οὐδέν",
+    "why": "This is Solomon speaking (reported by Gregory), but 'I' here blurs with Gregory's own 'I' at section end; however context makes clear.",
+    "fix": "For he thinks there is nothing",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Context clearly identifies Solomon as speaker; no real confusion with Gregory's voice."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "being born from the earth",
+    "source_quote": "τὸ ἀπὸ γῆς γεννᾶσθαι",
+    "why": "γεννᾶσθαι here means 'to be born' but in context of Ecclesiastes LXX it refers to human generation/birth from earth (dust); 'born from the earth' is slightly off.",
+    "fix": "born of the earth",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "τὸ ἀπὸ γῆς γεννᾶσθαι = 'being born from the earth'; rendering is accurate and natural."
+   },
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "departing into the earth",
+    "source_quote": "τὸ εἰς γῆν ἀπιέναι",
+    "why": "ἀπιέναι means 'to go away, depart, return'; 'departing into the earth' captures returning to dust/death.",
+    "fix": "returning to the earth",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "ἀπιέναι = 'go away/depart'; 'departing into the earth' correctly captures returning to dust."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 5,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "claude-sonnet-5-5",
+   "grok-4.7-build-fast"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 1,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }
