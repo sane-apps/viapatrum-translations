@@ -1,0 +1,177 @@
+{
+ "excerpt_id": "origen-nt-fragments:luke-catena-2",
+ "section": "luke-catena-2",
+ "edition": {
+  "language": "grc",
+  "path": "books/origen-nt-fragments/translations/ntfrag_luke_catena_source.json"
+ },
+ "source_text": "Ἐπεὶ δὲ ἀρετὴν εἶναι τὴν φρόνησιν expl. οὐρανοὺς ἡτοίμασεν ὁ κύριος.",
+ "thought_title": "Prudence as virtue and the preparing of the heavens",
+ "orientation": "Origen is still commenting on Luke before the argument moves to Matthew's opening.",
+ "pass_a_gloss": "But since prudence is a virtue expl. the Lord prepared heavens.",
+ "lemmas": [
+  {
+   "form": "Ἐπεὶ",
+   "lemma": "ἐπεί",
+   "gloss": "since"
+  },
+  {
+   "form": "δὲ",
+   "lemma": "δέ",
+   "gloss": "but"
+  },
+  {
+   "form": "ἀρετὴν",
+   "lemma": "ἀρετή",
+   "gloss": "virtue"
+  },
+  {
+   "form": "εἶναι",
+   "lemma": "εἰμί",
+   "gloss": "to be"
+  },
+  {
+   "form": "φρόνησιν",
+   "lemma": "φρόνησις",
+   "gloss": "prudence here"
+  },
+  {
+   "form": "οὐρανοὺς",
+   "lemma": "οὐρανός",
+   "gloss": "heavens"
+  },
+  {
+   "form": "ἡτοίμασεν",
+   "lemma": "ἑτοιμάζω",
+   "gloss": "prepared"
+  },
+  {
+   "form": "ὁ",
+   "lemma": "ὁ",
+   "gloss": "the"
+  },
+  {
+   "form": "κύριος",
+   "lemma": "κύριος",
+   "gloss": "Lord"
+  }
+ ],
+ "choices": [
+  {
+   "term": "φρόνησιν",
+   "english": "prudence",
+   "why": "keeps the cognitive moral sense required by the following clause about preparing heavens",
+   "rejected": [
+    "wisdom",
+    "understanding"
+   ]
+  },
+  {
+   "term": "ἀρετὴν",
+   "english": "virtue",
+   "why": "literal moral term in the since clause, not a particular virtue",
+   "rejected": [
+    "excellence",
+    "goodness"
+   ]
+  },
+  {
+   "term": "ἡτοίμασεν",
+   "english": "prepared",
+   "why": "literal past act of making ready, keeps tense and agency of the Lord",
+   "rejected": [
+    "founded",
+    "created"
+   ]
+  },
+  {
+   "term": "οὐρανοὺς",
+   "english": "heavens",
+   "why": "plural object as written, not singular sky",
+   "rejected": [
+    "sky",
+    "heaven"
+   ]
+  }
+ ],
+ "bible_refs": [
+  {
+   "display": "Proverbs 3:19",
+   "method": "wording",
+   "note": "φρόνησιν ... οὐρανοὺς ἡτοίμασεν"
+  }
+ ],
+ "pass_b_english": [
+  "But since prudence is a virtue … [text omitted in the edition] … \"the Lord prepared the heavens\" (Proverbs 3:19)."
+ ],
+ "notes": [
+  "The token expl. is left untranslated as an unexplained abbreviation or editorial marker; the sentence is fragmentary and its connection is uncertain, so only what is present is glossed."
+ ],
+ "drafter": "muse",
+ "pipeline": "work_pipeline",
+ "brief_sha256": "67a33eea98576bfc7a28f2ed22588a14875c746b89792dabdf1f5042e1516177",
+ "source_sha256": "73f7041c684f4343d6d142b5403275891f741cd98e73a36ac4caf3c68a063c5d",
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ],
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "repairs": [
+  {
+   "problems": [
+    {
+     "class": "addition",
+     "severity": "major",
+     "quote": "But since prudence is a virtue, \"the Lord prepared the heavens\" (Proverbs 3:19).",
+     "source_quote": "Ἐπεὶ δὲ ἀρετὴν εἶναι τὴν φρόνησιν expl. οὐρανοὺς ἡτοίμασεν ὁ κύριος.",
+     "why": "The source gives only the fragment's opening and closing words, with 'expl.' marking omitted text. The English drops the gap and joins them, inventing a causal claim the source doesn't make.",
+     "fix": "But since prudence is a virtue … [text omitted in the edition] … \"the Lord prepared the heavens\" (Proverbs 3:19).",
+     "model": "agy/claude-opus-5-5-medium",
+     "upheld_by": "cursor/composer-2.5",
+     "ruling": "Source 'expl.' marks omitted text between τὴν φρόνησιν and οὐρανοὺς; English links Ἐπεί δὲ clause directly to the citation, implying uninterrupted causal sense."
+    }
+   ],
+   "edits": [
+    {
+     "old": "But since prudence is a virtue, \"the Lord prepared the heavens\" (Proverbs 3:19).",
+     "new": "But since prudence is a virtue … [text omitted in the edition] … \"the Lord prepared the heavens\" (Proverbs 3:19)."
+    }
+   ],
+   "fixed": [
+    "Marked the gap between τὴν φρόνησιν and οὐρανοὺς marked by expl. with an omission marker instead of joining them as one causal claim."
+   ]
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ }
+}

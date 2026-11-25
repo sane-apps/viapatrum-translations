@@ -1,0 +1,143 @@
+{
+ "slug": "origen-nt-fragments",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "john-catena-1",
+   "to": "john-catena-2",
+   "moved_chars": 41,
+   "moved_start": "ἀλλ᾿ ἐπεὶ ὁ λόγος τοῦ θεοῦ ἀίδιός ἐστι, …"
+  },
+  {
+   "from": "john-catena-2",
+   "to": "john-catena-mid",
+   "moved_chars": 13,
+   "moved_start": "καὶ ὁ Λουκᾶς…"
+  },
+  {
+   "from": "john-catena-mid",
+   "to": "john-catena-close",
+   "moved_chars": 220,
+   "moved_start": "ὅθεν οὐ μάχεται τὸ »Ὁ λαβὼν αὐτοῦ τὴν μαρτυρίαν« τῷ μηδένα α"
+  },
+  {
+   "from": "matt-scholia",
+   "to": "luke-scholia-series",
+   "moved_chars": 110,
+   "moved_start": "Ὁ οὖν Κύρος, τῆς μὲν γενέσεως τὸ ἀναμάρτητον φυσικῶς λαβὼν, "
+  }
+ ],
+ "brief_sha256": "67a33eea98576bfc7a28f2ed22588a14875c746b89792dabdf1f5042e1516177",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-25T02:51:14Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "john-catena-1",
+   "source_sha256": "0cefa4c2f41561d4e38ceefc48f6afab920b747e48c844261ab09152fe669b7c",
+   "english_sha256": "616b2fd1f2825b57473f8c90204cb7857b35d4d7b5374997c31a4603ead5847f",
+   "justification": "reviews/justifications/john-catena-1.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "john-catena-2",
+   "source_sha256": "30f146f15dc8e2aa37507c6b050b40913b5245decef9ffbaca6a802a6dea40b7",
+   "english_sha256": "b8684e9be566f27c2a7bd53a32198b7c9826bb999f107c4dd900a8436d91c987",
+   "justification": "reviews/justifications/john-catena-2.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "john-catena-mid",
+   "source_sha256": "aa161ddb6e5a679e1260e83b03d385d6dae490efe20ae090c5ea11ed74ff9f7f",
+   "english_sha256": "3b1b03baad625b48cb225f8e1b624d0aa3e75713b2a5ce5875fbb3a2441de0fc",
+   "justification": "reviews/justifications/john-catena-mid.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "john-catena-close",
+   "source_sha256": "4bb259fbc407c15cded36d991c0a717ae5a49763ba5b55794e40f5a293436825",
+   "english_sha256": "5881cb09a027bb4a8c0ac2a80e3acf361fbeb9a7b30853308754ad86f7d9cc27",
+   "justification": "reviews/justifications/john-catena-close.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "luke-catena-1",
+   "source_sha256": "85d06b8f9ead9e1496adc51f885545e7f366d16e3d159fd6b8edd47e4fb40e89",
+   "english_sha256": "8363998399430a17674c4a517133aa186e14b9aee96e8b3fcb0c2c968bf2bfcc",
+   "justification": "reviews/justifications/luke-catena-1.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "luke-catena-2",
+   "source_sha256": "73f7041c684f4343d6d142b5403275891f741cd98e73a36ac4caf3c68a063c5d",
+   "english_sha256": "e77b9f7c8217acab0d828bfd648d8a59a4549e40a8332e7f48ff0d3ba53c0898",
+   "justification": "reviews/justifications/luke-catena-2.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "matt-scholia",
+   "source_sha256": "e138349228a6ebc902ad6c2273fe53ac60e9b8adab96d7183730f0f0138144d0",
+   "english_sha256": "7e205cef1a41a56fdc0c368228c771deff07907808e4b5049bae10adaed6beb7",
+   "justification": "reviews/justifications/matt-scholia.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "luke-scholia-series",
+   "source_sha256": "4d6682b1ae6e4e5d9a22c32646b06ba2380dc832f53da946c8bb07763357a55c",
+   "english_sha256": "8bafabf7c586028cd8dbca2e661af0d77a5ae05af3602edb20eb97da78a8a187",
+   "justification": "reviews/justifications/luke-scholia-series.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ],
+ "ref_gate": {
+  "references": 14,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
