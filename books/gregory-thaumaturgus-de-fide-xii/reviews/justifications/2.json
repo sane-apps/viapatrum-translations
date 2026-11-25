@@ -134,57 +134,14 @@
   }
  ],
  "pass_b_english": [
-  "If anyone says that the flesh of Christ is consubstantial with the divinity, and does not confess that he himself was in the form of God and was God before the ages, and that he emptied himself and took the form of a servant, as it is written, let him be anathema. For how can flesh that exists after time be called consubstantial with the sempiternal divinity? What is consubstantial is what is the same in nature and in sempiternity, without change."
+  "If anyone says that the flesh of Christ is consubstantial with the divinity, and does not confess that he himself was in the form of God and was God before the ages, and that he emptied himself and took the form of a servant, as it is written, let him be anathema. For how can flesh that came into being in time be called consubstantial with the sempiternal divinity? What is consubstantial is what is the same in nature and in sempiternity, without change."
  ],
  "notes": [],
  "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813",
  "pipeline": "work_pipeline",
  "brief_sha256": "27ac9c6138ed4973b4bb8fa41f68c71051f7f2f1659e4365f7352fffbe69e8e8",
  "source_sha256": "1a15571edc1c3c864be19dd2c2bd5df80a7fca62764327a9a2db55a6423d5249",
- "checks": {
-  "checkers": [
-   "@cf/moonshotai/kimi-k2.6",
-   "@cf/zai-org/glm-5.2"
-  ],
-  "rounds": [
-   {
-    "round": 0,
-    "confirmed": 0,
-    "rejected": 1,
-    "error": null
-   }
-  ],
-  "last_rejected": [
-   {
-    "class": "mistranslation",
-    "severity": "major",
-    "quote": "flesh that exists after time",
-    "source_quote": "caro post tempus",
-    "why": "\"post tempus\" means \"after a time/after some time\" (temporal, created), not \"after time\" (metaphysical/atemporal).",
-    "fix": "flesh that exists in time or after a beginning",
-    "model": "@cf/moonshotai/kimi-k2.6",
-    "rejected_by": "@cf/zai-org/glm-5.2",
-    "ruling": "Latin 'post tempus' literally means 'after time'; rendering as 'exists after time' captures the source's temporal-vs-sempiternal contrast adequately."
-   }
-  ]
- },
- "check_history": [
-  {
-   "round": 0,
-   "confirmed": 0,
-   "rejected": 1,
-   "error": null
-  },
-  {
-   "round": "read0",
-   "confirmed": 0
-  },
-  {
-   "round": "read1",
-   "confirmed": 0
-  }
- ],
- "reviewer": "work_pipeline:kimi+glm",
+ "reviewer": "work_pipeline:gemini+composer",
  "confidence": "source_verified",
  "repairs": [
   {
@@ -352,6 +309,30 @@
     "The glossary problems about 'the uncreated God the Word' and 'was made man' refer to text not present in the supplied English passage, so no edit is possible here.",
     "The English already says 'flesh that exists in time,' which matches the source's 'caro post tempus' in sense."
    ]
+  },
+  {
+   "problems": [
+    {
+     "class": "mistranslation",
+     "severity": "major",
+     "quote": "flesh that exists after time",
+     "source_quote": "caro post tempus",
+     "why": "In English, 'exists after time' suggests existing after time ends; Latin 'post tempus' means coming into being after a lapse of time, i.e., temporally rather than eternally.",
+     "fix": "flesh that came into being in time",
+     "model": "agy/gemini-4-neon-medium",
+     "upheld_by": "cursor/composer-2.5",
+     "ruling": "'Exists after time' misreads caro post tempus; Latin contrasts temporally arising flesh with sempiterna divinitate, not post-temporal existence."
+    }
+   ],
+   "edits": [
+    {
+     "old": "flesh that exists after time",
+     "new": "flesh that came into being in time"
+    }
+   ],
+   "fixed": [
+    "\"flesh that exists after time\" fixed to \"flesh that came into being in time\": Latin \"caro post tempus\" means temporal and posterior, not existing after time ends."
+   ]
   }
  ],
  "reverted_reader_edits": [
@@ -360,6 +341,84 @@
    "undone": 3,
    "confirmed_before": 0,
    "confirmed_after": 0
+  }
+ ],
+ "previous_checks": {
+  "checkers": [
+   "@cf/moonshotai/kimi-k2.6",
+   "@cf/zai-org/glm-5.2"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 1,
+    "error": null
+   }
+  ],
+  "last_rejected": [
+   {
+    "class": "mistranslation",
+    "severity": "major",
+    "quote": "flesh that exists after time",
+    "source_quote": "caro post tempus",
+    "why": "\"post tempus\" means \"after a time/after some time\" (temporal, created), not \"after time\" (metaphysical/atemporal).",
+    "fix": "flesh that exists in time or after a beginning",
+    "model": "@cf/moonshotai/kimi-k2.6",
+    "rejected_by": "@cf/zai-org/glm-5.2",
+    "ruling": "Latin 'post tempus' literally means 'after time'; rendering as 'exists after time' captures the source's temporal-vs-sempiternal contrast adequately."
+   }
+  ]
+ },
+ "previous_check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 1,
+   "error": null
+  },
+  {
+   "round": "read0",
+   "confirmed": 0
+  },
+  {
+   "round": "read1",
+   "confirmed": 0
+  }
+ ],
+ "checks": {
+  "checkers": [
+   "agy/gemini-4-neon-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 1,
+    "rejected": 0,
+    "error": null
+   },
+   {
+    "round": 1,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 1,
+   "rejected": 0,
+   "error": null
+  },
+  {
+   "round": 1,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
   }
  ]
 }

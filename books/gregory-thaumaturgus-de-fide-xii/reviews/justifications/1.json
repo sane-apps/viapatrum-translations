@@ -127,7 +127,9 @@
  "pipeline": "work_pipeline",
  "brief_sha256": "27ac9c6138ed4973b4bb8fa41f68c71051f7f2f1659e4365f7352fffbe69e8e8",
  "source_sha256": "e0b955e70f29569f8cd5741f25df6223624dd55cdf57bc1b93e8eed627cc093c",
- "checks": {
+ "reviewer": "work_pipeline:claude+composer",
+ "confidence": "source_verified",
+ "previous_checks": {
   "checkers": [
    "@cf/moonshotai/kimi-k2.6",
    "@cf/zai-org/glm-5.2"
@@ -154,7 +156,7 @@
    }
   ]
  },
- "check_history": [
+ "previous_check_history": [
   {
    "round": 0,
    "confirmed": 0,
@@ -162,6 +164,27 @@
    "error": null
   }
  ],
- "reviewer": "work_pipeline:kimi+glm",
- "confidence": "source_verified"
+ "checks": {
+  "checkers": [
+   "agy/claude-opus-5-5-medium",
+   "cursor/composer-2.5"
+  ],
+  "rounds": [
+   {
+    "round": 0,
+    "confirmed": 0,
+    "rejected": 0,
+    "error": null
+   }
+  ],
+  "last_rejected": []
+ },
+ "check_history": [
+  {
+   "round": 0,
+   "confirmed": 0,
+   "rejected": 0,
+   "error": null
+  }
+ ]
 }
