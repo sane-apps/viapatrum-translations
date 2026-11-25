@@ -1,0 +1,94 @@
+{
+ "slug": "severianus-fragmenta-galatas",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 88,
+   "moved_start": "Gal 2,18 Πρὸς τὸν\nΠέτρον ὁ λόγος· σὺ κατέλυσας αὐτὰ δόγματι "
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 6,
+   "moved_start": "καὶ οὐ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 15,
+   "moved_start": "νῦν οὖν τὴν δι'"
+  }
+ ],
+ "brief_sha256": "e082a67de18809cc1531f0ad78d844efbc5099a40a65fa759a11d0a1fb839a2d",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-25T09:36:27Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "5d16064c0f879491b82b1a1dc65823c13a0c115eafa451174f04d3eab7496f61",
+   "english_sha256": "d54886783d98ba4e7410cf476645f084d4d5afccbf419dd8d69d06facc8fa4d5",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse",
+   "referee": "grok-4.7-build-fast"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "c507969e534b3a25f68247b358aac59ce12b70f892dbc1dbb720985f51fc0a72",
+   "english_sha256": "8c484201b9f259b48f4420b5f6c1585dd5bd535408069514870d0307a4957056",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "fc74ce8fd7fa2ac2e6a813bb92bc3c99841876785de3d4c19a075600dd2b39aa",
+   "english_sha256": "c7b144e6c3f0a8c1b6f99c976ec61af16763c3d1c1a6478689b16b50022437d0",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "b42c005c1371e9fc694c451e92d8e77402bb352e10e3616e5e50a888b513735a",
+   "english_sha256": "be9297acdfb2aa7c0780f548e2883d1f46194df0f1764122f53f5cb56bbf9dfb",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 18,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
