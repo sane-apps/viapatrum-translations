@@ -1,0 +1,90 @@
+{
+ "slug": "evagrius-spiritales-sententiae",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 12,
+   "moved_start": "21 Φιλόπονος"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 24,
+   "moved_start": "40 Πάντας μὲν εὐεργετεῖν"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 6,
+   "moved_start": "58Ὅταν"
+  }
+ ],
+ "brief_sha256": "cd7475a799a620646faad5fa3c6f3630269b128539e11c752eff0ecda61acd70",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-25T06:11:30Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "b597eec5ceadfbba209db0edfa4b5d0653940432f07b34d345be37fd28224058",
+   "english_sha256": "7551d195c477f5c38bdfa2ed5f7a5aa2b841b52789340382e2206aafe86f1022",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "49916e256175eb5916a9ad10fa2bdcef41e1699bb9411ae6a458cdcc2451f046",
+   "english_sha256": "f6fe9af2e3f4e1dc5ee7dcdada6203d4aec465545994f59066ffdd930e34c4fb",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "4bf631fead1927482b6bc7a697c4dd0e3a4c72662850536b911487dbbd8c1435",
+   "english_sha256": "69e0e7b30764e9164d283f88ca516b44b49973c05c0b58e9a02e2f779ea484e3",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "d03f7641e760eaaaa965eea57292f80139b34473138b7f39ea55983230869eb1",
+   "english_sha256": "40949ab1e241fbbbe893362b925d7a7d7a91429401ef71af62b15787acd33cb9",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 0
+ }
+}
