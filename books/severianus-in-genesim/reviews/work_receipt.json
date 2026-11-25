@@ -1,0 +1,93 @@
+{
+ "slug": "severianus-in-genesim",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 35,
+   "moved_start": "Οὐκ ἐδιδάξαμέν σε ῥητῶς ἀπὸ μὲν τοῦ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 165,
+   "moved_start": "Ὅτε γὰρ ἔμελλε\nσυμβάλλειν τῷ ἀδελφῷ αὐτοῦ Ἡσαὺ κακίας γέμοντ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 87,
+   "moved_start": "Οὕτω\nκαὶ τὸν δίκαιον καὶ τὸν ἀσεβῆ διὰ μιᾶς εἰκόνος σχηματίζ"
+  }
+ ],
+ "brief_sha256": "ec6aa5d29fb3ab07fe26330bf3d209bf29600d655b0b4fa0595c296dddc33e6e",
+ "followability": [
+  4,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-25T17:03:13Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "1f843dd470e70bc532d22fd0fd88b1bffa0b4a27abccf23077ef4fe30d1e45c1",
+   "english_sha256": "8a334d86fb8cb04d7bc389c61681ee1af6f3abc02ec41063597e93155cbac28b",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "744f2deb45bd2fa5224c82a7fedc776bf9c14680bc7e8000e153872567d14e44",
+   "english_sha256": "416653ea825f0d987f5acbc40f8544c268d1891743f6e88697aea960380bde23",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "c79742009539a313829749c906186f0057272c257e5b75bf66d847831d0503aa",
+   "english_sha256": "23a2530fde854fce7436319a527da7cdfb5b1913b1283845684df9dc76ab0eab",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "1e6fdca3bf422b8d4617b0e88c3351c429658694d3ebf1bd4527adab95159c44",
+   "english_sha256": "e7f2521500d6714b648d77f5d17f09dfe304e2796da81391813ccc4b8f6bddc6",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 22,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
