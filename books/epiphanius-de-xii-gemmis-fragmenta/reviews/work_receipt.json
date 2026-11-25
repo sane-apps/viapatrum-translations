@@ -1,0 +1,87 @@
+{
+ "slug": "epiphanius-de-xii-gemmis-fragmenta",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 42,
+   "moved_start": "Οἱ δὲ κατάδικοι σκοπήσαντες, ποῦ ἀνήχθησαν"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 69,
+   "moved_start": "Σομορὼν μὲν οὖν ἐκλήθη τὸ ὄρος, καὶ τὰ ὁμοροῦντα, ἀπὸ Σεμὴρ "
+  }
+ ],
+ "brief_sha256": "40d45f9129afc97d4c49c634e07ee9b0acdf79095b99fdf65456f72db98a00ba",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-25T17:44:01Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "8757376a61b7ba1a0223b31eb284d7c8414dde09480834c63bcc11ea556ab243",
+   "english_sha256": "74e5b185d19bf71b1e54b37f49a461656a4d2f5e9a863989a109788158e81b5b",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "abcf8b900306f6437fb52b3f366cb42ec07d2322798b24c5f757f1b82f62ddba",
+   "english_sha256": "33c8b84d7d74aa7e8ddcfcc3539494d818252180bea2188f35f1e9ee7f50c8ca",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "f32aefc5d1d2a6a7cc48cbcff042af6bb4fcfb4f93d29d3b8ca138134017e9cd",
+   "english_sha256": "589a5a87248e8ac256a651412104ed9d598bd1841ea7725ea81e4541b7fdfdca",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "e9f2aafacece0e6b25fa991c2716090f20dc0a5db08022b430c12ed6106e7fe0",
+   "english_sha256": "9f1c4a920655be3eceff3a8421a26bf2f2de925d8170007c27908fcaea664be2",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 2,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
