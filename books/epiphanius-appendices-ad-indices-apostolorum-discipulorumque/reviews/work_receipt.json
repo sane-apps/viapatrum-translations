@@ -1,0 +1,93 @@
+{
+ "slug": "epiphanius-appendices-ad-indices-apostolorum-discipulorumque",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 253,
+   "moved_start": "Ἐκ τῶν ἀποστόλων τοῦ σωτῆρος\nτῶν οʹ γεγόνασιν, ὡς ἱστορεῖ Κλ"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 91,
+   "moved_start": "Τοῦ δὲ κατὰ Λουκᾶν\nὑπὸ Λουκᾶ μαθητοῦ ὑπάρχοντος τοῦ ἀποστόλο"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 61,
+   "moved_start": "Ματθαῖος δὲ τὴν κατὰ ἄνθρωπον αὐτοῦ γένεσιν ἐξηγεῖται, βίβλο"
+  }
+ ],
+ "brief_sha256": "e87752c4059462ece7301bb7b38a0f39c8c19f14449653991128bbc052359fe5",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-25T17:18:21Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "3a9eef3398c80608379821982b95a270392cd82e9e90541994a4a61ce486ca58",
+   "english_sha256": "832cdde4f130ecdf121a6f9a980f5817e48b45ba713995e7e3a2238eb7b24bd2",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "c71183b64c27204d2d989db806fca017ccbd23f4fc3fe06952f2fa81a0080add",
+   "english_sha256": "4276c89c46f05ab5f466531338d986e0da8dbe836204e62a9ea42612d11396bd",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "c43617f184b4d40a84f3734a6aaaa0da0ec31bb71fa2d3a428ef9d6ec197d3ff",
+   "english_sha256": "a4f6f1ccac4898fc5cb8260a8e5647521d382fad480468a7aeff0110b16d46ce",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "41cebab79f5143d78cb77f5726d45e8cb254a0986e355671550a54b3c7861c76",
+   "english_sha256": "846740cfeaf776eb9f968d8bb1e69e3733e6e0cd1c295e387c00efcb373f506c",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 8,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
