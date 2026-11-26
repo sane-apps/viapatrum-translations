@@ -1,0 +1,87 @@
+{
+ "slug": "hesychius-homilia-i-maria-deipara",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 63,
+   "moved_start": "«Ἀνάστηθι, κύριε, εἰς τὴν ἀνάπαυσίν σου», ἣν ἐπὶ τῆς γῆς ὥρι"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 98,
+   "moved_start": "Μὴ τοίνυν θεὸς ἀπὸ\nγάμου καὶ φθορᾶς συλλαμ βάνεται, καὶ ἐξ ἀ"
+  }
+ ],
+ "brief_sha256": "8232b229aa3da00f6d57c58079bb28f41a54dc524a1f85489c0562e16cdd812b",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-26T03:52:00Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "e52046d89a5652675b894b5a50d1d048d32c19b489a29b497c13a723eb4d7345",
+   "english_sha256": "09de5cb2531b8d57001581341e78f02dd757a18a28be11a50b25e73e32a7ecec",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "92885acaaac1f2c8fc5b162cc854995096c8b44c3f644fbe464e6699cb7ecf57",
+   "english_sha256": "4818aaacd020b116a4cf799968815105d3ef37114638c43fa384877e04a0ddcb",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "f68b80d6d9396d46ad98c16ec0dc3c4701c9f1a177b0a1885f06e2f93e9edef0",
+   "english_sha256": "4aae3b4502984352a9f0a66210a6a835bf4f6af18bd2a9cccca72d6d9618b085",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "e6deaff9293912a3978bceb5e9b4acf6eefcc1b74b1dc9fdeece1767b3d94536",
+   "english_sha256": "d05f4187d25d2e217664733bfde42012af6162bc495c62ed1f3b4ac7e95663f7",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ],
+ "ref_gate": {
+  "references": 11,
+  "replaced": 3,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
