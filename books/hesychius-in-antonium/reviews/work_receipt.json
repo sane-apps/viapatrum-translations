@@ -1,0 +1,87 @@
+{
+ "slug": "hesychius-in-antonium",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 150,
+   "moved_start": "6 Λεγέσθω περὶ Ἀντωνίου καὶ ταῦτα τῆς Ἰερεμίου προφητείας τὰ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 224,
+   "moved_start": "8 Ἀλλὰ μὴν καὶ «ἐτυμπανίσθη», «ἐν φόνῳ μαχαίρας ἀπέθανε», «δ"
+  }
+ ],
+ "brief_sha256": "3ee4502739db1d5c2c2d791c273d8d33a7f998cc59a11f3fc1febb1906a31c58",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-26T06:46:28Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "697e739fae29646206b384a5cb3183159fd98440f632ff0790d78a05da4b0df7",
+   "english_sha256": "b742a4d37f73cfcdb92ffdadba685de42f78391933b98872e8ee27b0c8526da0",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "71bb3ec1569bebf15ce52442d5e615171440f83fffb65790fc9fa6c4eb46b928",
+   "english_sha256": "f9931e1120314e32255eddd68bf1b423d257961b9325e56a3f10758ebb8bb096",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "2a5e3c0a0e5c44e4640189ea2c6e245b09e70c8f39d15b016dd8aa54f1f84bd3",
+   "english_sha256": "c6378e428b4234769707175f645fad7a443bf6cdc3a9731a996fe65e9f062245",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "d8c435b98a423fd170cd956527ae0b929920112b12f44d4cf053236a69ba87d3",
+   "english_sha256": "3176247d1db3beebe5824a478fc9e6ae6aa94b79bf6e3bac3724ea6961b7ffb6",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 18,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
