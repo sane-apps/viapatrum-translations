@@ -1,0 +1,87 @@
+{
+ "slug": "hesychius-in-petrum-paulum",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 36,
+   "moved_start": "Τί με τοῖς ἐμοῖς πολεμεῖς, τοῦ νόμου"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 4,
+   "moved_start": "Ποία"
+  }
+ ],
+ "brief_sha256": "31932e627ba89ad7b3165abfbf3da420f723e4dc9a370e354a18fac4d659890c",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-26T03:33:41Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "cdef010426b0d9472b4865926cde8aaf985c1190cf1d7ebd893e347411922cf6",
+   "english_sha256": "624c2c36636c0d6757b106fa948c0d719d71146264cec6e7967a926294432776",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "9436959cf0d7744480fd88537bd48318e599072bf61f285b0016523503b78a5d",
+   "english_sha256": "44bdf2317a97eb305ad2b98c4613a9d1742d0a17652dc41eeedd79a702819c97",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "ad89b7d7ae4c04e83889e2f17159d79bb58bef9ef2a591cb70945786693aef43",
+   "english_sha256": "775ad1c97e1a3eb8fcf244ff4ea3f8a45b7c768d0b98ef4c33ebe76da1cf076d",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "247a7c91cfd68c930d8ee0c86cfbe30e1b7e653b883ffeedf2f3a52e458cee82",
+   "english_sha256": "b5a6e2fd48a4e4f45e3c163c674c18532e220e74ca3ba70dd90459e595e14043",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ],
+ "ref_gate": {
+  "references": 24,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
