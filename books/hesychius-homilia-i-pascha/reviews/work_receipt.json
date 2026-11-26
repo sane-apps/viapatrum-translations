@@ -1,0 +1,87 @@
+{
+ "slug": "hesychius-homilia-i-pascha",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 72,
+   "moved_start": "Μιμησώμεθα τοῦ ἀνδροφόνου τὴν ἀγαθὴν γνώμην, μᾶλλον δὲ τοῦ π"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 23,
+   "moved_start": "Οὗτος γὰρ ἐκρύβη πρῶτον"
+  }
+ ],
+ "brief_sha256": "89ae5b65fe04846822abcef1a1bf0c1e8a4fcece80e2e6c31e89a66409c4c009",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-26T02:06:43Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "d55cda0330cd68cb0ca501809dd75256fecf4acf7c08b0fa590005260a647c6b",
+   "english_sha256": "9f76802f8df11b238e7951443f64c275ef1dfc1975d30d2d5babc3182c4e1fc9",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "nvidia/nemotron-3-ultra-550b-a55b"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "02e2f7f6de2871de3350ca74e5cb59b5af65e91da9a00550d867a914ab6cbfd9",
+   "english_sha256": "6792239f41674b2e7e64a899a345f4f2b5d1c3eba9d6c7ed187fd34213cec77b",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "nvidia/nemotron-3-ultra-550b-a55b"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "a1b8cd99df718bcf4861cf64ee9c171576af51eb48fd7ce9e90939de1cb9bb41",
+   "english_sha256": "873c50496dec9fc7ce1c057b60d23405c65fc58f29dd61066047026492d68574",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "11f065833e906220b32fd98e1f91a9e505c76dd3c2db6058ceea775a613cd68e",
+   "english_sha256": "67dc73bcac8dd18c50207df6317e8a23a5831a466e731b250fa36ad9a40d5448",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 9,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
