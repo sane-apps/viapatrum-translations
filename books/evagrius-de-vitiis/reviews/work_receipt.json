@@ -1,0 +1,93 @@
+{
+ "slug": "evagrius-de-vitiis",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 56,
+   "moved_start": "Ἔστιν οὖν γαστριμαργία, πορνείας μήτηρ, τροφὸς λογισμῶν,"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 11,
+   "moved_start": "Ἀκτημοσύνη,"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 126,
+   "moved_start": "Ἀκηδία, φιλία ἀερικὴ, βημάτων περιαγωγὸς, φιλεργίας μῖσος, ἡ"
+  }
+ ],
+ "brief_sha256": "012b92e5b17d16f9331724b53ec2d9f984c15eac16828472e0da3b333e2791d8",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-26T05:46:57Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "c1a0e4f4e4dc1443315f004dac673c61edf98966da87f11b4f7b933fa97a6b72",
+   "english_sha256": "156089dd024d3f5f5509d5328c4115a9dfeccf2334c0710b96f1f7e744d75b2d",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "b2ddf64f193de21f41e4373c5ab1d3f396c3382d652c4f99bde3de5e8a49cb75",
+   "english_sha256": "36465171247f5c834fac4660adc4a7e684833f5b19b9d503d16c6ca05e7722d2",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "85ea4527a5418f38513660df788312b93ab1ac6e57ed3501d49c31d61cf1ce0b",
+   "english_sha256": "e2dfb5e2fd75621a3733b7ec21b0f60826deca7fbbed5b172abcf4a662237eee",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "9717b08ad6495872f0d4461b219726f34408750712cd82e1c077df7306b31550",
+   "english_sha256": "5b6cf8ddd7cdf1e6c035703dc3184c395ed0c3d35283ddfa2d3ce486c82e00c4",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 3,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
