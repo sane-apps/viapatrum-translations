@@ -1,0 +1,161 @@
+{
+ "slug": "origen-job-selecta",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "grok-4.7-build-fast"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 7,
+   "moved_start": "Πλοῦτος"
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 47,
+   "moved_start": "Ἐὰν μέντοιγε χιτῶνα ἔχῃ τις ἕνα, καὶ τοῦτον τὸν"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 12,
+   "moved_start": "Φοβηθεὶς τοῦ"
+  },
+  {
+   "from": "u01-rem-close",
+   "to": "u02-open",
+   "moved_chars": 128,
+   "moved_start": "Κατὰ μὲν οὖν τὸν λόγον τῆς δημιουργίας διωρίσμεθα ἀπὸ\nπάντων"
+  },
+  {
+   "from": "u02-open",
+   "to": "u02-rem-early",
+   "moved_chars": 84,
+   "moved_start": "Τούτου\nτοῦ ῥητοῦ, ὡς χρησίμου μνημονεύωμεν, ὅταν ὁ Θεὸς παθε"
+  },
+  {
+   "from": "u02-rem-early",
+   "to": "u02-rem-mid",
+   "moved_chars": 284,
+   "moved_start": "Μεγάλης καὶ ἐῤῥωμένης καὶ τελείας ψυχῆς διαγράφει τὸ τέλος,\n"
+  },
+  {
+   "from": "u02-rem-mid",
+   "to": "u02-rem-close",
+   "moved_chars": 42,
+   "moved_start": "Οἱ ὀφθαλμοὶ γοῦν αὐτοῦ οὐκ εἰσὶν Ἑωσφόροι,"
+  }
+ ],
+ "brief_sha256": "faf38f70e618a78eb2b99c1a7f75eec3f960dbb5381d907fb9f7d4b228c3d9c8",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-26T01:28:53Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "grok-4.7-build-fast"
+ ],
+ "referee": "cursor/composer-2.5",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "5c417dc3671cd48b048479c356406fc9e6606d154b148ac8f58a989619bbdc0e",
+   "english_sha256": "8363e269b3773f6d04455db365ae96d6a43d89ec5b732d9758ec36a64b0ec86d",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "4eb9a1621333bbdda6b79f2f9f9f1ac394712136cb41905fe030a3bf1ae32e39",
+   "english_sha256": "e8c32040221522740a9f506e7dbdebd59fd8adc1f1b64e5d9f9a90ab913ef6a5",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "13ce9c97b209d18d7461eea5c436014b8866e021abe828e0e047225503b30aec",
+   "english_sha256": "30c0c9c0edd263679748069a1296a8939d4f4a8ec732706b1b38729dfebd1ecf",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "6f66ba376d2b4950cc4dff1facbbe501342e31dca6de4051923f7e1cfbda2df7",
+   "english_sha256": "24f65d832547fb77c4ba488818c09f1c449615941ce96dc13399233f3a68f873",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u02-open",
+   "source_sha256": "3c5c015991df5490949ee6562f8021724ce0e0f0018aeae816d1514d459a0a39",
+   "english_sha256": "e068c676476334aa512f213941fdcd87764ea27809947b85455ff0e385a0b1d0",
+   "justification": "reviews/justifications/u02-open.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u02-rem-early",
+   "source_sha256": "cdc3a007116752cf61852bb0ed45a1beb84cf75ccfb1a7418e05e6dbd75ffd50",
+   "english_sha256": "7d6a95578567fcc92272c62c82a71ce31c5e8c853aa8dde0dca44234d2565831",
+   "justification": "reviews/justifications/u02-rem-early.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u02-rem-mid",
+   "source_sha256": "dc83d34f13413ee323fedc06b996912c73dbaf1aed1f2b5deae87ec192aeb8cd",
+   "english_sha256": "45cb02ef96f17645e73bf93ba054f6f6592ae1c83415a35421708879c90d29b1",
+   "justification": "reviews/justifications/u02-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "nvidia/nemotron-3-ultra-550b-a55b"
+  },
+  {
+   "section": "u02-rem-close",
+   "source_sha256": "d0c0671c986a75ebb901b9eba80d3bce663a975ea576b60d6e3916b84512e8f6",
+   "english_sha256": "ab254074b513fa36c5915aa9494c33de757a7f342273d4ee252a8f10e29de308",
+   "justification": "reviews/justifications/u02-rem-close.json",
+   "checkers": [
+    "claude-sonnet-5-5",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ],
+ "ref_gate": {
+  "references": 40,
+  "replaced": 4,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
