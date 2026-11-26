@@ -1,5 +1,5 @@
-Hesychius of Jerusalem (c. 412–450) is named at the start of this eulogy for Saint Luke. It is a homily in his praise, not a commentary on the Gospel.
+Hesychius of Jerusalem (fl. c. 412–450) wrote this homily for a congregation celebrating the feast of Saint Luke. He speaks from love for the feast to praise Luke as evangelist and physician and to defend the mystery of Christ's birth from the Virgin Mary.
 
-He speaks of Luke's death at Thebes and of his witness to Mary, the mother of Christ. The homily then turns to divine wisdom, the birth that had no witness, and the incarnation.
+He presents Luke as the physician chosen by Christ who beheld both the eternal generation of the Son and the incarnation in the cave, and contrasts Luke's full account with Matthew, Mark and John the Evangelist. The reader also meets Paul, Gabriel, Mary, Isaiah with Elizabeth and John the Baptist, Peter, Adam and Eve, Sarah, Rebecca and Hannah. Paul, Matthew, Mark, Gabriel and Isaiah are quoted directly, and Luke is shown speaking words taken from Paul's letters.
 
-A reader needs Luke's place among the evangelists and the prophet's words about the virgin. The citations use the old names of the biblical books.
+Here evangelist means one who proclaims the good news, physician means Luke's profession and his healing of souls, mystery means the incarnation revealed to faith, plan of salvation means God's saving plan in Christ's earthly life, and flesh refers to human descent. The John called the voice is John the Baptist, distinct from John the Evangelist, and his cry is his leaping in the womb. Quotations follow the Septuagint, and Psalms follow its numbering, with Hebrew numbering noted where it differs.
