@@ -1,0 +1,87 @@
+{
+ "slug": "hesychius-homilia-ii-hypapante",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 75,
+   "moved_start": "9 «Καὶ εἶπεν πρὸς Μαριὰμ τὴν μητέρα αὐτοῦ· ἰδοὺ οὗτος κεῖται"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 84,
+   "moved_start": "Ἀνεκαλύφθη καὶ τῆς\nΜαγδαληνῆς Μαρίας ὁ λογισμὸς ἀσθενὴς ὤν· "
+  }
+ ],
+ "brief_sha256": "d49baea00e298eafa7afd04ed80ed5737ab847f2cb0f6449ed5828f4a3eae1aa",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-26T04:21:37Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "2c465636de345e627e6ef6968ee48a8c67e7403dfb5cd2c0de5aa2bf5767367f",
+   "english_sha256": "e229591a365426f0feab2f753bf50911c8c663dac3d0f8f43f5f8b916a99c4c1",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "c3ef739cf31df7d8302b105760db5d5ffffa18743e2801be30e287602add34bc",
+   "english_sha256": "65d3e5ecdaa00fa5fcb76f7786f31188667485b5cd3abb9abb1352c2401abaa7",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "152ebba0580798b3fde1c0fb99935462f48820949eb4de41c687aafc4f49d0ae",
+   "english_sha256": "1360652d41df3d10ff5638a93253de4f831510cbcd910c99eeaf86ba6ffa12d0",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "6f58036c517ebfd738e78dc0aa11be76a659f352cc6c764efb0f538f08e7e095",
+   "english_sha256": "d745fc291a5ec1f41218534159fb9095ff76fe056779cf49626d12c8c4fc0988",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 33,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
