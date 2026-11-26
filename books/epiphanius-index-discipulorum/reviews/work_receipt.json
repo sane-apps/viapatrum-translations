@@ -1,0 +1,87 @@
+{
+ "slug": "epiphanius-index-discipulorum",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 66,
+   "moved_start": "Τέρτιος ὁ κατ' αὐτὴν τὴν πρὸς Ῥωμαίους ἐπιστολὴν τοῦ Παύλου "
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 56,
+   "moved_start": "Εὔοδος, οὗ καὶ αὐτοῦ ὁ Παῦλος μέμνηται, πρῶτος ἐπίσκοπος"
+  }
+ ],
+ "brief_sha256": "91f8475568310b54590f28095e2479e5271ace58ac32880488729cb0c273c5fd",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-26T06:19:31Z",
+ "readers": [
+  "agy/gemini-4-neon-medium",
+  "cursor/composer-2.5"
+ ],
+ "referee": "grok-4.7-build-fast",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "402d83ef0af45f75adf118bac57b3da15e2dd0f739c1953924c90fb462d070b7",
+   "english_sha256": "70e346997e9b92371c7725ff5c3ac31ef14b996d1c5daa6b5658ef82052776f8",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "dc52afd1d373e47e6b51b350f615c2a7f06eea045db18fd0c3b338a1f17d8ea3",
+   "english_sha256": "cc527bdeebe252f17a1aed67db1af8a72608fb9a81de401931a3f1a75ed477dd",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "627aaa04e6da2d48399ffbd959aad23f5204656cc42a6df57ae7dbe783a5a839",
+   "english_sha256": "2eb0016a8b5ce6d28fecdcb66cf7f45b9b495c4a0135dbbe3ec2d0f7c02e59ec",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "29d2dac7125bca441653320dbdf64c8b62a05743f0b54999fcbe96873958f0e3",
+   "english_sha256": "020b1cbc56e0faad64938f7858432aa48836b8dff2da969533c18ba993cd2105",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  }
+ ],
+ "ref_gate": {
+  "references": 3,
+  "replaced": 0,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
