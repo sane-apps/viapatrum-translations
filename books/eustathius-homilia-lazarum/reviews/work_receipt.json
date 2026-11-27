@@ -1,0 +1,155 @@
+{
+ "slug": "eustathius-homilia-lazarum",
+ "pipeline": "work_pipeline",
+ "drafter": "muse",
+ "checkers": [
+  "agy/claude-opus-5-5-medium",
+  "cursor/composer-2.5"
+ ],
+ "boundary_moves": [
+  {
+   "from": "u01-open",
+   "to": "u01-rem-early",
+   "moved_chars": 138,
+   "moved_start": "2 Καλῶς ὁ τῆς ἀληθείας τρόφιμος τὸν πρὸ βραχέος εἱρκτῇ ᾅδου "
+  },
+  {
+   "from": "u01-rem-early",
+   "to": "u01-rem-mid",
+   "moved_chars": 344,
+   "moved_start": "∆ιά τοι τοῦτο καὶ συνδειπνοῦντα τῷ Κυρίῳ δείκνυσι, καὶ ἀφαντ"
+  },
+  {
+   "from": "u01-rem-mid",
+   "to": "u01-rem-close",
+   "moved_chars": 599,
+   "moved_start": "4 Ἔπρεπε γὰρ τῷ πάντα εὐπόρῳ καὶ ἐκ θελήματος ὡς ἐκ πηγῆς ἀε"
+  },
+  {
+   "from": "u02-open",
+   "to": "u02-rem-early",
+   "moved_chars": 286,
+   "moved_start": "10 Οὕτω καὶ ὁ Κύριος ἡμῶν μέλλων ἐγείρειν ἐξ ᾅδου τὸν Λάζαρο"
+  },
+  {
+   "from": "u02-rem-early",
+   "to": "u02-rem-mid",
+   "moved_chars": 336,
+   "moved_start": "Βαβαὶ τῆς ἐντρίτου ἀγαπῆς τὸ ἀρραγὲς σπαρτίον· οὐδὲν τούτους"
+  },
+  {
+   "from": "u02-rem-mid",
+   "to": "u02-rem-close",
+   "moved_chars": 80,
+   "moved_start": "«Μαρία γὰρ, φησὶ, τὴν ἀγαθὴν μερίδα ἐξελέξατο, ἥτις οὐκ ἀφαι"
+  }
+ ],
+ "brief_sha256": "9eba3c94df49d168124787ecf5e6588813b10c0b5c88e4243a1bdde76f7580a5",
+ "followability": [
+  3,
+  3
+ ],
+ "reader_bar": "min>=3.0; mean waived (reader edits off, owner 2026-10-06)",
+ "applied": "2026-11-27T03:49:42Z",
+ "readers": [
+  "claude-sonnet-5-5",
+  "cursor/composer-2.5"
+ ],
+ "referee": "agy/gemini-3.8-flash-high",
+ "sections": [
+  {
+   "section": "u01-open",
+   "source_sha256": "2b65e389288c2ccfb1bfa6f354e2fadea5f2cc5834c22e22f175f6d19644edc3",
+   "english_sha256": "dfd8b16d97ea5804543ae5b130a22ab84ce5c9283cddf76a833c8eb4de3f1f31",
+   "justification": "reviews/justifications/u01-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-early",
+   "source_sha256": "22dc680063716098ca1242b88567e874430b7f510b03c5b2da3c17ab52b3f71f",
+   "english_sha256": "424f4d501963f04c11b4cff51ffa61d6a23927a49578a0d1c0de1e1645cb55bc",
+   "justification": "reviews/justifications/u01-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u01-rem-mid",
+   "source_sha256": "b276794b6881961fb137b87e4c37f1654355071a313cc87020e92e1cda4f1f7e",
+   "english_sha256": "07b254b115c391954ae5bba9d13447ce0674094601390f10cc765eef831de4a1",
+   "justification": "reviews/justifications/u01-rem-mid.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u01-rem-close",
+   "source_sha256": "1dac7368a71b10228e5b3c7fe4ab2d4817feb993b5fa96c211f9e4457d35257e",
+   "english_sha256": "6ffb15a7c9412a9238ae0a80bd7e0035652558388f362be88738698aaa0dc9b4",
+   "justification": "reviews/justifications/u01-rem-close.json",
+   "checkers": [
+    "agy/claude-opus-5-5-medium",
+    "cursor/composer-2.5"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u02-open",
+   "source_sha256": "dd418e7be21a3b5d8df2b76435adcf31817d6caf52fb87506ea693fa98012ecb",
+   "english_sha256": "1e998085ba9f5b2cf98cea00aecf45179070c23f819f9c05af1b232fd56d7457",
+   "justification": "reviews/justifications/u02-open.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u02-rem-early",
+   "source_sha256": "9734765555392a575409c3a65a2fdd6e2bd75bbec19be2e9980f8bbf698a32eb",
+   "english_sha256": "f2627a7f017a518c8d2d83209d6da9f7c8187df7212deb64f695b59a156de57f",
+   "justification": "reviews/justifications/u02-rem-early.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "muse"
+  },
+  {
+   "section": "u02-rem-mid",
+   "source_sha256": "f54bb90aea9b20198effbc22bf05a20a25b6717364bcd043bd6dd2f141d63abd",
+   "english_sha256": "2adfca42a1afc5e8905d31cce3b2d2b61037552ee60d9d447c05ccfbbe791185",
+   "justification": "reviews/justifications/u02-rem-mid.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  },
+  {
+   "section": "u02-rem-close",
+   "source_sha256": "046cb2a247dfafa4ce47454e22b5b94cd429d1f4d006e45debe986b54cbd1c59",
+   "english_sha256": "60aef654111949129bf2ed6b913e74d227435edaed806e9f8749c1a9295109ef",
+   "justification": "reviews/justifications/u02-rem-close.json",
+   "checkers": [
+    "agy/gemini-4-neon-medium",
+    "grok-4.7-build-fast"
+   ],
+   "drafter": "@cf/deepseek-ai/deepseek-v4-pro-0813"
+  }
+ ],
+ "ref_gate": {
+  "references": 30,
+  "replaced": 1,
+  "removed": 0,
+  "kept_flagged": 0
+ }
+}
